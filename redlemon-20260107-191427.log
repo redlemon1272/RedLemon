@@ -1,0 +1,928 @@
+2026-01-07 19:14:34.965 RedLemon[20915:192341] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-07 19:14:34.965 RedLemon[20915:192341] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-07 19:14:35.042 RedLemon[20915:192341] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-07 19:14:35.057 RedLemon[20915:192416] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-07 19:14:35.081 RedLemon[20915:192341] ✅ Playback state reset complete - starting in browse view
+2026-01-07 19:14:35.081 RedLemon[20915:192341] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-07 19:14:35.081 RedLemon[20915:192341] 🧪 Testing Profile: debug
+2026-01-07 19:14:35.081 RedLemon[20915:192413] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-07 19:14:35.116 RedLemon[20915:192341] ✅ Keychain: Found stored username: ursinho
+2026-01-07 19:14:35.116 RedLemon[20915:192341] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-07 19:14:35.116 RedLemon[20915:192416] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-07 19:14:35.456 RedLemon[20915:192409] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-07 19:14:35.461 RedLemon[20915:192409] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-07 19:14:35.461 RedLemon[20915:192409] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 19:14:35.490 RedLemon[20915:192341] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 19:14:35.491 RedLemon[20915:192341] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-07 19:14:35.491 RedLemon[20915:192341] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-07 19:14:35.491 RedLemon[20915:192341] 🚀 RedLemon: Starting HTTP server...
+2026-01-07 19:14:35.491 RedLemon[20915:192341] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-07 19:14:35.513 RedLemon[20915:192341] ✅ RedLemon: HTTPServer instance created
+2026-01-07 19:14:35.513 RedLemon[20915:192416] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 5 credential(s) from cache
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"4812E486-5810-4D6A-817E-209302CA0BD1","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-07 19:14:35.796 RedLemon[20915:192341] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 19:14:37.576 RedLemon[20915:192341] ✅ RedLemon: Server marked as ready
+2026-01-07 19:14:37.616 RedLemon[20915:192341] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-07 19:14:37.616 RedLemon[20915:192341] 🔍 Performing startup checks...
+2026-01-07 19:14:37.616 RedLemon[20915:192341] ✅ Username-based authentication ready
+2026-01-07 19:14:38.385 RedLemon[20915:192341] 🔍 Performing startup checks...
+2026-01-07 19:14:38.385 RedLemon[20915:192341] ✅ Username-based authentication ready
+2026-01-07 19:14:38.909 RedLemon[20915:192341] 🔄 Checking for app updates...
+2026-01-07 19:14:43.672 RedLemon[20915:192415] 📡 StreamService: Fetching metadata for tt0162222...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+✅ [EventsView] Loaded 411 movies from config version 1486
+🗓 AppState: Updated schedule epoch to 2026-01-04 23:43:30 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 2035 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0162222/img (866194 bytes)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 2034 seconds
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"6FB97D90-0BB9-4F37-8FF5-DE7A17C1093F","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"ece6b0f8-ec26-11f0-91cc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZKZNQHYg6AiAC","phx_ref_prev":"GIiZJOvk5EU6Ah6i","last_seen":"2026-01-08T00:14:17.385Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"04756520-ec27-11f0-b52c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZLh-mFkc6AiIi","last_seen":"2026-01-08T00:14:36.937Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":"A9429AD2-E204-4454-ADF4-F420ADC58158","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+🔄 SocialService: Syncing 36 items to cloud...
+🔄 SocialService: Syncing 36 items to cloud (serial)...
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ece6b0f8-ec26-11f0-91cc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZLjunJcY6AiMi","phx_ref_prev":"GIiZKZNQHYg6AiAC","last_seen":"2026-01-08T00:14:37.386Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"ece6b0f8-ec26-11f0-91cc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZKZNQHYg6AiAC","phx_ref_prev":"GIiZJOvk5EU6Ah6i","last_seen":"2026-01-08T00:14:17.385Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":91183,"eth":3159.185},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":91183,"eth":3159.185},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.118s (RTT: 131ms)
+   Local:  2026-01-08 00:14:39 +0000
+   Server: 2026-01-08 00:14:39 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+[2026-01-08T00:14:43Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Cast Away (Live: true)
+   Event start time: 2026-01-07 22:15:30 +0000
+   Event duration: 9180.0s
+   Current time: 2026-01-08 00:14:43 +0000
+   Is Live: true
+   Is In Lobby: false
+📝 Creating new event room: event_tt0162222
+⚡️ Resolving stream for system event creation...
+[2026-01-08T00:14:43Z] [INFO] [StreamService.swift:47] 🎬 StreamService: Starting resolution for: Cast Away
+[ INFO ] GET /api/metadata/meta/movie/tt0162222 [request-id: 9538B412-5726-490B-82B4-423DD84B9FE7]
+2026-01-07 19:14:43.871 RedLemon[20915:192409] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-07 19:14:43.871 RedLemon[20915:192409] ✅ StreamService: Metadata loaded: Cast Away
+2026-01-07 19:14:43.871 RedLemon[20915:192409] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-07 19:14:43.872 RedLemon[20915:192409] ⚡️ StreamResolver: Resolving streams for tt0162222 (S0E0)
+2026-01-07 19:14:44.001 RedLemon[20915:192414]    📅 Filtering by year: 2000
+2026-01-07 19:14:44.133 RedLemon[20915:192415] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-07 19:14:44.133 RedLemon[20915:192415] 🔍 ProviderManager: Fetching streams for tt0162222...
+2026-01-07 19:14:44.136 RedLemon[20915:192415] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-07 19:14:44.136 RedLemon[20915:192416] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-07 19:14:44.136 RedLemon[20915:192415] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A222      0/stream/movie/tt0162222.json
+2026-01-07 19:14:44.137 RedLemon[20915:192416] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-07 19:14:44.137 RedLemon[20915:192416] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0162222.json...
+2026-01-07 19:14:44.137 RedLemon[20915:192415] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA27D/stream/movie/tt0162222.json
+2026-01-07 19:14:44.137 RedLemon[20915:192416] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0162222.json
+2026-01-07 19:14:44.146 RedLemon[20915:192409] 🔍 Zilean: Searching for "Cast Away"
+2026-01-07 19:14:44.165 RedLemon[20915:192409] ❌ Provider zilean failed: httpError(statusCode: 404)
+2026-01-07 19:14:44.273 RedLemon[20915:192558] 📡 Torrentio: HTTP 200, received 22738 bytes
+2026-01-07 19:14:44.291 RedLemon[20915:192558] ✅ Torrentio: Parsed 44 streams from 44 raw
+2026-01-07 19:14:48.202 RedLemon[20915:192558] ✅ DebridSearch: Parsed 2 streams
+2026-01-07 19:14:48.203 RedLemon[20915:192558] ✅ ProviderManager: Fetched 46 raw, returning 37 unique streams
+2026-01-07 19:14:48.204 RedLemon[20915:192558] 📦 StreamResolver: Received 37 raw streams, bucketing...
+2026-01-07 19:14:49.738 RedLemon[20915:192414] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-07 19:14:49.739 RedLemon[20915:192414] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-07 19:14:49.739 RedLemon[20915:192416] 🔍 DEBUG: Processing subtitle URL: /subtitle/3500219-8422638.zip
+2026-01-07 19:14:49.739 RedLemon[20915:192415] 🔍 DEBUG: Processing subtitle URL: /subtitle/1968608-2227863.zip
+2026-01-07 19:14:49.739 RedLemon[20915:192409] 🔍 DEBUG: Processing subtitle URL: /subtitle/3527027-8448771.zip
+2026-01-07 19:14:49.739 RedLemon[20915:192414] 🔍 DEBUG: Processing subtitle URL: /subtitle/3500216-8422637.zip
+2026-01-07 19:14:49.739 RedLemon[20915:192415] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-07 19:14:49.739 RedLemon[20915:192409] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-07 19:14:49.739 RedLemon[20915:192416] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-07 19:14:49.739 RedLemon[20915:192414] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-07 19:14:49.740 RedLemon[20915:192409] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MjcwMjctODQ0ODc3MS56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+2026-01-07 19:14:49.740 RedLemon[20915:192416] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTktODQyMjYzOC56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+2026-01-07 19:14:49.740 RedLemon[20915:192414] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTYtODQyMjYzNy56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+2026-01-07 19:14:49.740 RedLemon[20915:192415] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE5Njg2MDgtMjIyNzg2My56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+2026-01-07 19:14:49.740 RedLemon[20915:192416] 🔍 DEBUG: Processing subtitle URL: /subtitle/2995651-2992707.zip
+2026-01-07 19:14:49.740 RedLemon[20915:192416] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-07 19:14:49.741 RedLemon[20915:192416] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5OTU2NTEtMjk5MjcwNy56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+2026-01-07 19:14:49.743 RedLemon[20915:192416] 🎬 SupabaseClient: createRoom called for id: event_tt0162222 - ENTRY
+2026-01-07 19:14:49.744 RedLemon[20915:192416] 🎬 SupabaseClient: Creating room 'event_tt0162222' for host 'RedLemon Events'...
+2026-01-07 19:14:49.747 RedLemon[20915:192416] 🔐 Signed request to /rooms
+2026-01-07 19:14:50.190 RedLemon[20915:192414] ✅ SupabaseClient: Room creation request completed (received response)
+2026-01-07 19:14:50.556 RedLemon[20915:192341] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0162222/img
+2026-01-07 19:14:50.557 RedLemon[20915:192341] ⏳ Background art loading...
+2026-01-07 19:14:50.557 RedLemon[20915:192341] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0162222/img
+2026-01-07 19:14:50.557 RedLemon[20915:192341] ⏳ Logo loading...
+2026-01-07 19:14:50.623 RedLemon[20915:192341] ✅ Background art loaded successfully
+2026-01-07 19:14:50.624 RedLemon[20915:192341] ✅ Logo loaded successfully
+2026-01-07 19:14:50.626 RedLemon[20915:192341]    Quality: 1080p
+2026-01-07 19:14:50.626 RedLemon[20915:192341]    Mode: watchParty
+2026-01-07 19:14:50.626 RedLemon[20915:192341] 📡 Fetching metadata for tt0162222...
+2026-01-07 19:14:50.752 RedLemon[20915:192416] ✅ StreamService: Using provided metadata: Cast Away
+2026-01-07 19:14:50.752 RedLemon[20915:192416] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-07 19:14:50.752 RedLemon[20915:192416] ⚡️ StreamResolver: Resolving streams for tt0162222 (S0E0)
+2026-01-07 19:14:50.878 RedLemon[20915:192416]    📅 Filtering by year: 2000
+2026-01-07 19:14:51.010 RedLemon[20915:192416] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-07 19:14:51.010 RedLemon[20915:192416] 🔍 ProviderManager: Fetching streams for tt0162222...
+2026-01-07 19:14:51.010 RedLemon[20915:192416] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-07 19:14:51.010 RedLemon[20915:192414] 🔍 Zilean: Searching for "Cast Away"
+2026-01-07 19:14:51.010 RedLemon[20915:192416] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A222      0/stream/movie/tt0162222.json
+2026-01-07 19:14:51.010 RedLemon[20915:192416] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA27D/stream/movie/tt0162222.json
+2026-01-07 19:14:51.011 RedLemon[20915:192414] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-07 19:14:51.011 RedLemon[20915:192414] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-07 19:14:51.012 RedLemon[20915:192414] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0162222.json...
+2026-01-07 19:14:51.012 RedLemon[20915:192414] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0162222.json
+2026-01-07 19:14:51.013 RedLemon[20915:192416] ❌ Provider zilean failed: httpError(statusCode: 404)
+2026-01-07 19:14:51.014 RedLemon[20915:192414] ✅ DebridSearch: Parsed 2 streams
+2026-01-07 19:14:51.123 RedLemon[20915:192414] 📡 Torrentio: HTTP 200, received 22738 bytes
+2026-01-07 19:14:51.141 RedLemon[20915:192414] ✅ Torrentio: Parsed 44 streams from 44 raw
+2026-01-07 19:14:51.236 RedLemon[20915:192415] ✅ ProviderManager: Fetched 46 raw, returning 37 unique streams
+2026-01-07 19:14:51.236 RedLemon[20915:192415] 📦 StreamResolver: Received 37 raw streams, bucketing...
+2026-01-07 19:14:52.656 RedLemon[20915:192415] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-07 19:14:52.656 RedLemon[20915:192415] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-07 19:14:52.657 RedLemon[20915:192413] 🔍 DEBUG: Processing subtitle URL: /subtitle/3500219-8422638.zip
+2026-01-07 19:14:52.657 RedLemon[20915:192415] 🔍 DEBUG: Processing subtitle URL: /subtitle/3500216-8422637.zip
+2026-01-07 19:14:52.657 RedLemon[20915:192414] 🔍 DEBUG: Processing subtitle URL: /subtitle/1968608-2227863.zip
+2026-01-07 19:14:52.657 RedLemon[20915:192413] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-07 19:14:52.657 RedLemon[20915:192559] 🔍 DEBUG: Processing subtitle URL: /subtitle/3527027-8448771.zip
+2026-01-07 19:14:52.657 RedLemon[20915:192414] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-07 19:14:52.657 RedLemon[20915:192415] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-07 19:14:52.657 RedLemon[20915:192559] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-07 19:14:52.657 RedLemon[20915:192413] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTktODQyMjYzOC56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+2026-01-07 19:14:52.657 RedLemon[20915:192414] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE5Njg2MDgtMjIyNzg2My56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+2026-01-07 19:14:52.657 RedLemon[20915:192415] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTYtODQyMjYzNy56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+2026-01-07 19:14:52.657 RedLemon[20915:192413] 🔍 DEBUG: Processing subtitle URL: /subtitle/2995651-2992707.zip
+2026-01-07 19:14:52.657 RedLemon[20915:192413] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-07 19:14:52.657 RedLemon[20915:192559] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MjcwMjctODQ0ODc3MS56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+2026-01-07 19:14:52.658 RedLemon[20915:192413] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5OTU2NTEtMjk5MjcwNy56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+2026-01-07 19:14:52.670 RedLemon[20915:192341] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/C, subtitles: 5
+2026-01-07 19:14:52.752 RedLemon[20915:192341] ✅ Stream ready, starting playback...
+2026-01-07 19:14:52.752 RedLemon[20915:192341] 🖥️ WindowManager: enterFullscreen() called
+2026-01-07 19:14:52.753 RedLemon[20915:192341]    Window: <SwiftUI.SwiftUIWindow: 0x7ff267751e10>
+2026-01-07 19:14:52.753 RedLemon[20915:192341]    Is fullscreen: 0
+2026-01-07 19:14:52.753 RedLemon[20915:192341]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-07 19:14:52.833 RedLemon[20915:192341] 🖼️ Setting up MPV with native macOS video output...
+2026-01-07 19:14:52.839 RedLemon[20915:192341] ✅ MPV initialized with native GPU rendering
+2026-01-07 19:14:52.851 RedLemon[20915:192341] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-07 19:14:52.851 RedLemon[20915:192341] 🎉 Starting watch party sync - Room: event_tt0162222, Host: NO
+2026-01-07 19:14:52.852 RedLemon[20915:192341] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+💾 Cache SET: Metadata[meta_movie_tt0162222]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt0162222.json
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0162222.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Metadata fetched from Cinemeta for tt0162222: Cast Away (2000)
+⚠️ MediaFusion: HTTP 418
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+⚠️ Comet: Skipping invalid redirect URL: https://www.reddit.com/r/StremioAddons/comments/1plsqv7/elfh...
+✅ Comet: Parsed 0 valid streams
+✅ Metadata cache hit for tt0162222: Cast Away
+🎯 Target title for matching: Cast Away
+   📅 Year filter (2000): 37 → 33 streams
+   🚫 RESOLVER BLOCKING AV1: Cast Away 2000 Bluray 1080p AV1 OPUS 5.1-UH [UserHEVC]
+👤 1 💾 6.31 GB ⚙️ TorrentGalaxy
+   🚫 RESOLVER FILTERED AV1: 33 → 32 streams
+   🚫 RESOLVER BLOCKING non-English audio: Seul.Au.Monde.2000.MULTi.VFF.BluRay.1080p.x264.AC3-PopHD.mkv
+👤 18 💾 2.7 GB ⚙️ Torrent9
+Multi Audio / 🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Cast Away-Poza swiatem/Cast Away (2000) [1080p] [BRRip] [H264] [AC3-d11] [Lektor PL]
+👤 2 💾 3.66 GB ⚙️ BestTorrents
+🇵🇱 (Audio)
+   🎵 RESOLVER FILTERED audio language: 32 → 30 streams
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt0162222 (movie)
+   ℹ️ Fallback Name: Cast Away (2000)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.2160p.WEB-DL.DV...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) UpScaled 2160...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 BluRay 2160p AI...': Cast.Away.2000.BluRay.1080p.RE...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 2160p DTS.mkv
+👤...': Cast.Away.2000.BluRay.1080p.RE...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 1080p BrRip x...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 1080p WEBRip
+👤 ...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.x2...': Cast.Away.2000.1080p.BluRay.H2...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) (1080p BluRay...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 BluRay 1080p DD...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.Re...': Cast.Away.2000.BluRay.1080p.RE...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.H2...': Cast.Away.2000.1080p.BluRay.H2...
+✅ StreamResolver: Attached best sub for 'Walt Disney - Intégrale de 95 ...': Cast.Away.2000.ALL BluRay_DvDR...
+✅ StreamResolver: Attached best sub for 'Tom Hanks Movie Collection
+Cas...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Veliki.paket.titlovanih.filmov...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 1080p WEBRip ...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 REPACK 1080p Bl...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 1080p Blu-Ray H...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.x2...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 1080p Blu-Ray H...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 1080p H265 Bl...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 1080p ITV WEB-D...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.AV...': Cast.Away.2000.BluRay.1080p.RE...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 1080p H264 IT...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Изгой / Cast Away (2000) BDRip...': Cast.Away.2000.iNTERNAL.BDRip....
+✅ StreamResolver: Attached best sub for 'Изгой / Cast Away [2000 BDRip ...': Cast.Away.2000.iNTERNAL.BDRip....
+✅ StreamResolver: Attached best sub for 'Dual Japanese dubbed English m...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 720p BrRip x2...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 720p BluRay x...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.H2...': Cast.Away.2000.1080p.BluRay.H2...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.WEBRip.x2...': Cast.Away.2000.WEBRip.Amazon...
+   --- Processing Bucket: 2160p (Input: 4) ---
+   ✅ Bucket 2160p Final Count: 4
+   --- Processing Bucket: 1080p (Input: 22) ---
+   ✅ Bucket 1080p Final Count: 22
+   --- Processing Bucket: 720p (Input: 3) ---
+   ✅ Bucket 720p Final Count: 3
+   --- Processing Bucket: 480p (Input: 1) ---
+   ✅ Bucket 480p Final Count: 1
+📦 2160p Primary: Cast Away 2000 2160p DTS.mkv
+👤 6 💾 12.98 GB ⚙️ ThePirateBay
+📦 1080p Primary: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+💾 2.74 GB
+📦 720p Primary: Cast Away (2000) 720p BluRay x264 Dual Audio [Hindi DD5.1 English DD5.1] ESubs ~ BATMAN
+👤 1 💾 1.46 GB ⚙️ 1337x
+Dual Audio / 🇬🇧 / 🇮🇳
+✅ StreamResolver: Quality buckets ready
+   🚫 StreamService: Skipping 720p backup streams (Event Mode - Strict 1080p)
+   🚫 StreamService: Skipping 480p backup streams (Event Mode - Strict 1080p)
+[2026-01-08T00:14:48Z] [INFO] [StreamService.swift:211] 📦 StreamService: Found 11 total streams to try (across all qualities)
+✅ StreamService: Found 8 H.264 streams (Tier 1)
+🚫 StreamService: Applying Extended Cut Filter (Event Mode)
+✅ StreamService: Found 7 'Clean' English streams. Deprioritizing 1 localized/dual streams.
+⚠️ StreamService: Skipping large file (1080p limit): Cast.Away.2000.1080p.BluRay.AVC.DTS-HD.MA.5.1-FGT
+👤 3 💾 43.26 GB ⚙️ RARBG (43.26 GB)
+📦 StreamService: 6 streams remain after size filter
+🔄 StreamService: Trying stream 1/6: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+💾 2.74 GB
+🔍 StreamService: Resolving redirect URL: https://68d69db7dc40-debrid-search.baby-beamup.club/resolve/RealDebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/HBODCOCHXDDZ2/https%3A%2F%2Freal-debrid.com%2Fd%2FDMUD3I4LTH2JQD01
+✅ StreamService: Resolved to: https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG.mp4
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+💾 2.74 GB
+📊 Stream Size: 2.74 GB
+📦 StreamService: Appending 5 fallback streams (alternate codecs)
+📦 StreamService: Returning 10 candidate streams for fallback
+✅ Selected seed subtitle: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTktODQyMjYzOC56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+✅ Stream resolved for system event: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+💾 2.74 GB
+   Hash: nil
+   URL: https://chi5-4.download.real-d...
+🎬 Live event - calculating position: 7160.5953224897385 seconds
+   Event start time: 2026-01-07 22:15:30 +0000
+   Current time: 2026-01-08 00:14:50 +0000
+   Room createdAt: 2026-01-07 22:15:30 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 7160.5953224897385
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Cast Away
+✅ Cache HIT: Metadata[meta_movie_tt0162222]
+[2026-01-08T00:14:50Z] [INFO] [StreamService.swift:47] 🎬 StreamService: Starting resolution for: Cast Away
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+✅ Metadata cache hit for tt0162222: Cast Away
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0162222.json
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+⚠️ Comet: Skipping invalid redirect URL: https://www.reddit.com/r/StremioAddons/comments/1plsqv7/elfh...
+✅ Comet: Parsed 0 valid streams
+⚠️ MediaFusion: HTTP 418
+✅ Metadata cache hit for tt0162222: Cast Away
+🎯 Target title for matching: Cast Away
+   📅 Year filter (2000): 37 → 33 streams
+   🚫 RESOLVER BLOCKING AV1: Cast Away 2000 Bluray 1080p AV1 OPUS 5.1-UH [UserHEVC]
+👤 1 💾 6.31 GB ⚙️ TorrentGalaxy
+   🚫 RESOLVER FILTERED AV1: 33 → 32 streams
+   🚫 RESOLVER BLOCKING non-English audio: Seul.Au.Monde.2000.MULTi.VFF.BluRay.1080p.x264.AC3-PopHD.mkv
+👤 18 💾 2.7 GB ⚙️ Torrent9
+Multi Audio / 🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Cast Away-Poza swiatem/Cast Away (2000) [1080p] [BRRip] [H264] [AC3-d11] [Lektor PL]
+👤 2 💾 3.66 GB ⚙️ BestTorrents
+🇵🇱 (Audio)
+   🎵 RESOLVER FILTERED audio language: 32 → 30 streams
+🔍 Searching SubDL: tt0162222 (movie)
+   ℹ️ Fallback Name: Cast Away (2000)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.H2...': Cast.Away.2000.1080p.BluRay.H2...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.WEBRip.x2...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.2160p.WEB-DL.DV...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) UpScaled 2160...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 BluRay 2160p AI...': Cast.Away.2000.BluRay.1080p.RE...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 2160p DTS.mkv
+👤...': Cast.Away.2000.BluRay.1080p.RE...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 1080p BrRip x...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 1080p WEBRip
+👤 ...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.x2...': Cast.Away.2000.1080p.BluRay.H2...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) (1080p BluRay...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 BluRay 1080p DD...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.Re...': Cast.Away.2000.BluRay.1080p.RE...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.H2...': Cast.Away.2000.1080p.BluRay.H2...
+✅ StreamResolver: Attached best sub for 'Walt Disney - Intégrale de 95 ...': Cast.Away.2000.ALL BluRay_DvDR...
+✅ StreamResolver: Attached best sub for 'Tom Hanks Movie Collection
+Cas...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Veliki.paket.titlovanih.filmov...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 1080p WEBRip ...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 REPACK 1080p Bl...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 1080p Blu-Ray H...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.x2...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 1080p Blu-Ray H...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 1080p H265 Bl...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away 2000 1080p ITV WEB-D...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Cast.Away.2000.1080p.BluRay.AV...': Cast.Away.2000.BluRay.1080p.RE...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 1080p H264 IT...': Cast.Away.2000.WEBRip.Amazon...
+✅ StreamResolver: Attached best sub for 'Изгой / Cast Away (2000) BDRip...': Cast.Away.2000.iNTERNAL.BDRip....
+✅ StreamResolver: Attached best sub for 'Изгой / Cast Away [2000 BDRip ...': Cast.Away.2000.iNTERNAL.BDRip....
+✅ StreamResolver: Attached best sub for 'Dual Japanese dubbed English m...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 720p BrRip x2...': Cast.Away.2000.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Cast Away (2000) 720p BluRay x...': Cast.Away.2000.1080p.BluRay.x2...
+   --- Processing Bucket: 2160p (Input: 4) ---
+   ✅ Bucket 2160p Final Count: 4
+   --- Processing Bucket: 1080p (Input: 22) ---
+   ✅ Bucket 1080p Final Count: 22
+   --- Processing Bucket: 720p (Input: 3) ---
+   ✅ Bucket 720p Final Count: 3
+   --- Processing Bucket: 480p (Input: 1) ---
+   ✅ Bucket 480p Final Count: 1
+📦 2160p Primary: Cast Away 2000 2160p DTS.mkv
+👤 6 💾 12.98 GB ⚙️ ThePirateBay
+📦 1080p Primary: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+💾 2.74 GB
+📦 720p Primary: Cast Away (2000) 720p BluRay x264 Dual Audio [Hindi DD5.1 English DD5.1] ESubs ~ BATMAN
+👤 1 💾 1.46 GB ⚙️ 1337x
+Dual Audio / 🇬🇧 / 🇮🇳
+✅ StreamResolver: Quality buckets ready
+   ➕ Added 3 720p streams as backup
+   ➕ Added 1 480p streams as backup
+[2026-01-08T00:14:51Z] [INFO] [StreamService.swift:211] 📦 StreamService: Found 15 total streams to try (across all qualities)
+✅ StreamService: Found 12 H.264 streams (Tier 1)
+✅ StreamService: Found 9 'Clean' English streams. Deprioritizing 3 localized/dual streams.
+⚠️ StreamService: Skipping large file (1080p limit): Cast.Away.2000.1080p.BluRay.AVC.DTS-HD.MA.5.1-FGT
+👤 3 💾 43.26 GB ⚙️ RARBG (43.26 GB)
+📦 StreamService: 8 streams remain after size filter
+🔄 StreamService: Trying stream 1/8: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+💾 2.74 GB
+🔍 StreamService: Resolving redirect URL: https://68d69db7dc40-debrid-search.baby-beamup.club/resolve/RealDebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/HBODCOCHXDDZ2/https%3A%2F%2Freal-debrid.com%2Fd%2FDMUD3I4LTH2JQD01
+✅ StreamService: Resolved to: https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG.mp4
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+💾 2.74 GB
+📊 Stream Size: 2.74 GB
+📦 StreamService: Appending 7 fallback streams (alternate codecs)
+📦 StreamService: Returning 14 candidate streams for fallback
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/C
+   Display Title: Cast Away
+   Subtitle URLs: 5
+      [0] Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng
+      [1] Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+      [2] Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH
+      [3] Cast.Away.2000.1080p.BluRay.x265 (Corrected, No HI)
+      [4] Cast.Away.2000.BluRay.1080p.REMUX.AVC.DTS-HD.MA.5.1-LEGi0N
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt0162222, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt0162222
+   R2026-01-07 19:14:52.919 RedLemon[20915:192341] 🔄 Starting chat polling for room: event_tt0162222
+2026-01-07 19:14:52.919 RedLemon[20915:192341] 💓 Started playback heartbeat loop
+2026-01-07 19:14:52.920 RedLemon[20915:192341] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-07 19:14:52.920 RedLemon[20915:192341] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-07 19:14:52.920 RedLemon[20915:192341] 🎬🎬🎬 Subtitles: 5
+2026-01-07 19:14:52.920 RedLemon[20915:192341] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Cast Away
+2026-01-07 19:14:52.920 RedLemon[20915:192341] 🎬🎬🎬 streamURL: https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/C
+2026-01-07 19:14:52.920 RedLemon[20915:192341] 🎬🎬🎬 subtitles: 5
+2026-01-07 19:14:52.921 RedLemon[20915:192341] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-07 19:14:52.933 RedLemon[20915:192415] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-07 19:14:52.933 RedLemon[20915:192415] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTktODQyMjYzOC56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+2026-01-07 19:14:52.936 RedLemon[20915:192559] 🎬 MPV: Current video filename set to: 
+2026-01-07 19:14:52.937 RedLemon[20915:192559] 🎬 MPV loadVideo called with URL: https://chi5-4.download.real-debrid.com/d/NIK73QIK (Encoded: https://chi5-4.download.real-debrid.com/d/NIK73QIK), autoplay: false, expectedSubs: 3
+2026-01-07 19:14:52.937 RedLemon[20915:192559] 🎬 MPV executing: loadfile "https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG.mp4"
+2026-01-07 19:14:52.937 RedLemon[20915:192559] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+ole: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt0162222
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Cast Away
+   IMDB: tt0162222
+   URL: https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/C...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Fetching metadata for tt0162222 as movie...
+📝 Pre-loading external subtitles (Top 3)...
+✅ Cache HIT: Metadata[meta_movie_tt0162222]
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTktODQyMjYzOC56aXA= [request-id: 94B76688-ABCC-4ED9-BC91-40734B9DE682]
+2026-01-07 19:14:53.119 RedLemon[20915:192341] 💓 Playback heartbeat sent for room: event_tt0162222
+2026-01-07 19:14:53.345 RedLemon[20915:192415] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_E50C4EF1-9E44-4B56-862C-D30AC1341BE1.vtt
+2026-01-07 19:14:53.345 RedLemon[20915:192415] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_E50C4EF1-9E44-4B56-862C-D30
+2026-01-07 19:14:53.365 RedLemon[20915:192415] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 19:14:53.365 RedLemon[20915:192415] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE5Njg2MDgtMjIyNzg2My56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+📄 Subtitle request: L3N1YnRpdGxlLzM1MDAy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3500219-8422638.zip
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+📨 Received: {"ref":"06AB7538-D8C8-4CCB-88E4-5860CD3C03B4","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt0162222"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt0162222"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0162222"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0dfbb554-ec27-11f0-bb76-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZMdfpZxnpQCQC","is_host":false,"joined_at":1767831292.9151502,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0162222"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+✅ Got background: https://images.metahub.space/background/medium/tt0162222/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0162222/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0162222/img...
+📡 SocialService: Updated status - online: Cast Away
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIiZMdfpZxnpQCQC)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"04756520-ec27-11f0-b52c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZMdjIxtw6AiQi","phx_ref_prev":"GIiZLh-mFkc6AiIi","last_seen":"2026-01-08T00:14:52.927Z","room_id":"event_tt0162222","started_at":"2026-01-08T00:14:52.928Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}},"leaves":{"04756520-ec27-11f0-b52c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZLh-mFkc6AiIi","last_seen":"2026-01-08T00:14:36.937Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 2017 seconds
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Download complete: 21235 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng.srt
+📦 Extracting specific file: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzE5Njg2MDgtMjIyNzg2My56aXA= [request-id: 553B5F94-C159-4BB9-83F8-36DD2C93973C]
+2026-01-07 19:14:53.787 RedLemon[20915:192560] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_4A74E974-5258-4DED-B248-35812D5161F6.vtt
+2026-01-07 19:14:53.787 RedLemon[20915:192560] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_4A74E974-5258-4DED-B248-358
+2026-01-07 19:14:53.796 RedLemon[20915:192560] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 19:14:53.798 RedLemon[20915:192560] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTYtODQyMjYzNy56aXA=?token=412E96E7-711D-4178-B32C-124DEA87FC92
+📄 Subtitle request: L3N1YnRpdGxlLzE5Njg2... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/1968608-2227863.zip
+✅ Download complete: 23708 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG.srt
+📦 Extracting specific file: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTYtODQyMjYzNy56aXA= [request-id: AE2F0BF8-2887-41A6-8E1A-54258E2AB91E]
+2026-01-07 19:14:54.150 RedLemon[20915:192560] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_C4466A4D-9DF2-4CC6-BD7E-BA39F3B14D12.vtt
+2026-01-07 19:14:54.150 RedLemon[20915:192560] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_C4466A4D-9DF2-4CC6-BD7E-BA3
+2026-01-07 19:14:54.157 RedLemon[20915:192560] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 19:14:54.157 RedLemon[20915:192560] 🔍 MPV track-list/count: 3
+2026-01-07 19:14:54.157 RedLemon[20915:192560] 🔍 Track 0 type: sub
+2026-01-07 19:14:54.158 RedLemon[20915:192560] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 19:14:54.158 RedLemon[20915:192560] 🔍 Track 1 type: sub
+2026-01-07 19:14:54.158 RedLemon[20915:192560] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 19:14:54.158 RedLemon[20915:192560] 🔍 Track 2 type: sub
+2026-01-07 19:14:54.158 RedLemon[20915:192560] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 19:14:54.158 RedLemon[20915:192560] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 19:14:54.158 RedLemon[20915:192560]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 19:14:54.158 RedLemon[20915:192560]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 19:14:54.158 RedLemon[20915:192560]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 19:14:54.159 RedLemon[20915:192560]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 19:14:54.159 RedLemon[20915:192560] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 19:14:54.159 RedLemon[20915:192560]    Track: ID=0, Title=Off, External=0
+2026-01-07 19:14:54.159 RedLemon[20915:192560]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 19:14:54.160 RedLemon[20915:192560]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 19:14:54.160 RedLemon[20915:192560]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 19:14:55.244 RedLemon[20915:192415] 🔍 MPV track-list/count: 3
+2026-01-07 19:14:55.244 RedLemon[20915:192415] 🔍 Track 0 type: sub
+2026-01-07 19:14:55.244 RedLemon[20915:192415] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 19:14:55.244 RedLemon[20915:192415] 🔍 Track 1 type: sub
+2026-01-07 19:14:55.245 RedLemon[20915:192415] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 19:14:55.245 RedLemon[20915:192415] 🔍 Track 2 type: sub
+2026-01-07 19:14:55.245 RedLemon[20915:192415] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 19:14:55.245 RedLemon[20915:192415] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 19:14:55.246 RedLemon[20915:192415]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 19:14:55.246 RedLemon[20915:192415]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 19:14:55.246 RedLemon[20915:192415]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 19:14:55.246 RedLemon[20915:192415]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 19:14:55.246 RedLemon[20915:192415] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 19:14:55.247 RedLemon[20915:192415]    Track: ID=0, Title=Off, External=0
+2026-01-07 19:14:55.247 RedLemon[20915:192415]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 19:14:55.247 RedLemon[20915:192415]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 19:14:55.247 RedLemon[20915:192415]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 19:14:55.598 RedLemon[20915:192341] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-07 19:14:55.607 RedLemon[20915:192416] 🔍 MPV track-list/count: 5
+2026-01-07 19:14:55.607 RedLemon[20915:192416] 🔍 Track 0 type: sub
+2026-01-07 19:14:55.607 RedLemon[20915:192416] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 19:14:55.607 RedLemon[20915:192416] 🔍 Track 1 type: sub
+2026-01-07 19:14:55.608 RedLemon[20915:192416] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 19:14:55.608 RedLemon[20915:192416] 🔍 Track 2 type: sub
+2026-01-07 19:14:55.608 RedLemon[20915:192416] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 19:14:55.608 RedLemon[20915:192416] 🔍 Track 3 type: video
+2026-01-07 19:14:55.608 RedLemon[20915:192416] 🔍 Track 4 type: audio
+2026-01-07 19:14:55.608 RedLemon[20915:192416] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 19:14:55.608 RedLemon[20915:192416]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 19:14:55.608 RedLemon[20915:192416]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 19:14:55.608 RedLemon[20915:192416]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 19:14:55.608 RedLemon[20915:192416]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 19:14:55.609 RedLemon[20915:192416] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 19:14:55.609 RedLemon[20915:192416]    Track: ID=0, Title=Off, External=0
+2026-01-07 19:14:55.609 RedLemon[20915:192416]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 19:14:55.609 RedLemon[20915:192416]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 19:14:55.609 RedLemon[20915:192416]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 19:14:56.344 RedLemon[20915:192560] 🔍 MPV track-list/count: 5
+2026-01-07 19:14:56.344 RedLemon[20915:192560] 🔍 Track 0 type: sub
+2026-01-07 19:14:56.345 RedLemon[20915:192560] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 19:14:56.346 RedLemon[20915:192560] 🔍 Track 1 type: sub
+2026-01-07 19:14:56.346 RedLemon[20915:192560] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 19:14:56.346 RedLemon[20915:192560] 🔍 Track 2 type: sub
+2026-01-07 19:14:56.346 RedLemon[20915:192560] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 19:14:56.346 RedLemon[20915:192560] 🔍 Track 3 type: video
+2026-01-07 19:14:56.347 RedLemon[20915:192560] 🔍 Track 4 type: audio
+2026-01-07 19:14:56.347 RedLemon[20915:192560] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 19:14:56.347 RedLemon[20915:192560]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 19:14:56.347 RedLemon[20915:192560]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 19:14:56.347 RedLemon[20915:192560]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 19:14:56.347 RedLemon[20915:192560]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 19:14:56.348 RedLemon[20915:192560] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 19:14:56.348 RedLemon[20915:192560]    Track: ID=0, Title=Off, External=0
+2026-01-07 19:14:56.348 RedLemon[20915:192560]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 19:14:56.349 RedLemon[20915:192560]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 19:14:56.349 RedLemon[20915:192560]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 19:14:56.635 RedLemon[20915:192415] 🔍 MPV track-list/count: 5
+2026-01-07 19:14:56.635 RedLemon[20915:192415] 🔍 Track 0 type: sub
+2026-01-07 19:14:56.636 RedLemon[20915:192415] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 19:14:56.636 RedLemon[20915:192415] 🔍 Track 1 type: sub
+2026-01-07 19:14:56.636 RedLemon[20915:192415] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 19:14:56.636 RedLemon[20915:192415] 🔍 Track 2 type: sub
+2026-01-07 19:14:56.636 RedLemon[20915:192415] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 19:14:56.637 RedLemon[20915:192415] 🔍 Track 3 type: video
+2026-01-07 19:14:56.637 RedLemon[20915:192415] 🔍 Track 4 type: audio
+2026-01-07 19:14:56.637 RedLemon[20915:192415] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 19:14:56.637 RedLemon[20915:192415]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 19:14:56.637 RedLemon[20915:192415]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 19:14:56.637 RedLemon[20915:192415]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 19:14:56.638 RedLemon[20915:192415]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 19:14:56.638 RedLemon[20915:192415] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 19:14:56.638 RedLemon[20915:192415]    Track: ID=0, Title=Off, External=0
+2026-01-07 19:14:56.639 RedLemon[20915:192415]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 19:14:56.639 RedLemon[20915:192415]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 19:14:56.639 RedLemon[20915:192415]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 19:14:57.435 RedLemon[20915:192409] 🔍 MPV track-list/count: 5
+2026-01-07 19:14:57.443 RedLemon[20915:192409] 🔍 Track 0 type: sub
+2026-01-07 19:14:57.447 RedLemon[20915:192409] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 19:14:57.565 RedLemon[20915:192409] 🔍 Track 1 type: sub
+2026-01-07 19:14:57.573 RedLemon[20915:192409] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 19:14:57.573 RedLemon[20915:192409] 🔍 Track 2 type: sub
+2026-01-07 19:14:57.574 RedLemon[20915:192409] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 19:14:57.574 RedLemon[20915:192409] 🔍 Track 3 type: video
+2026-01-07 19:14:57.574 RedLemon[20915:192409] 🔍 Track 4 type: audio
+2026-01-07 19:14:57.574 RedLemon[20915:192409] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 19:14:57.574 RedLemon[20915:192409]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 19:14:57.574 RedLemon[20915:192409]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 19:14:57.574 RedLemon[20915:192409]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 19:14:57.574 RedLemon[20915:192409]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 19:14:57.574 RedLemon[20915:192409] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 19:14:57.575 RedLemon[20915:192409]    Track: ID=0, Title=Off, External=0
+2026-01-07 19:14:57.575 RedLemon[20915:192409]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 19:14:57.575 RedLemon[20915:192409]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 19:14:57.575 RedLemon[20915:192409]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 19:14:57.640 RedLemon[20915:192414] 🔍 MPV track-list/count: 5
+2026-01-07 19:14:57.640 RedLemon[20915:192414] 🔍 Track 0 type: sub
+2026-01-07 19:14:57.640 RedLemon[20915:192414] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 19:14:57.640 RedLemon[20915:192414] 🔍 Track 1 type: sub
+2026-01-07 19:14:57.640 RedLemon[20915:192414] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 19:14:57.641 RedLemon[20915:192414] 🔍 Track 2 type: sub
+2026-01-07 19:14:57.641 RedLemon[20915:192414] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 19:14:57.641 RedLemon[20915:192414] 🔍 Track 3 type: video
+2026-01-07 19:14:57.641 RedLemon[20915:192414] 🔍 Track 4 type: audio
+2026-01-07 19:14:57.641 RedLemon[20915:192414] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 19:14:57.641 RedLemon[20915:192414]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 19:14:57.641 RedLemon[20915:192414]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 19:14:57.642 RedLemon[20915:192414]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 19:14:57.642 RedLemon[20915:192414]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 19:14:57.642 RedLemon[20915:192414] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 19:14:57.642 RedLemon[20915:192414]    Track: ID=0, Title=Off, External=0
+2026-01-07 19:14:57.643 RedLemon[20915:192414]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 19:14:57.643 RedLemon[20915:192414]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 19:14:57.643 RedLemon[20915:192414]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 19:14:58.661 RedLemon[20915:192409] 🔍 MPV track-list/count: 5
+2026-01-07 19:14:58.661 RedLemon[20915:192409] 🔍 Track 0 type: sub
+2026-01-07 19:14:58.661 RedLemon[20915:192409] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 19:14:58.661 RedLemon[20915:192409] 🔍 Track 1 type: sub
+2026-01-07 19:14:58.661 RedLemon[20915:192409] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 19:14:58.662 RedLemon[20915:192409] 🔍 Track 2 type: sub
+2026-01-07 19:14:58.662 RedLemon[20915:192409] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 19:14:58.662 RedLemon[20915:192409] 🔍 Track 3 type: video
+2026-01-07 19:14:58.662 RedLemon[20915:192409] 🔍 Track 4 type: audio
+2026-01-07 19:14:58.662 RedLemon[20915:192409] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 19:14:58.662 RedLemon[20915:192409]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 19:14:58.662 RedLemon[20915:192409]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 19:14:58.663 RedLemon[20915:192409]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 19:14:58.663 RedLemon[20915:192409]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 19:14:58.663 RedLemon[20915:192409] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 19:14:58.663 RedLemon[20915:192409]    Track: ID=0, Title=Off, External=0
+2026-01-07 19:14:58.663 RedLemon[20915:192409]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 19:14:58.664 RedLemon[20915:192409]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 19:14:58.664 RedLemon[20915:192409]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 19:14:58.665 RedLemon[20915:192409] 🔍 MPV track-list/count: 5
+2026-01-07 19:14:58.665 RedLemon[20915:192409] 🔍 Track 0 type: sub
+2026-01-07 19:14:58.665 RedLemon[20915:192409] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 19:14:58.665 RedLemon[20915:192409] 🔍 Track 1 type: sub
+2026-01-07 19:14:58.665 RedLemon[20915:192409] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 19:14:58.665 RedLemon[20915:192409] 🔍 Track 2 type: sub
+2026-01-07 19:14:58.666 RedLemon[20915:192409] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 19:14:58.666 RedLemon[20915:192409] 🔍 Track 3 type: video
+2026-01-07 19:14:58.667 RedLemon[20915:192409] 🔍 Track 4 type: audio
+2026-01-07 19:14:58.667 RedLemon[20915:192409] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 19:14:58.667 RedLemon[20915:192409]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 19:14:58.667 RedLemon[20915:192409]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 19:14:58.668 RedLemon[20915:192409]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 19:14:58.668 RedLemon[20915:192409]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 19:14:58.669 RedLemon[20915:192409] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 19:14:58.670 RedLemon[20915:192409]    Track: ID=0, Title=Off, External=0
+2026-01-07 19:14:58.670 RedLemon[20915:192409]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 19:14:58.670 RedLemon[20915:192409]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 19:14:58.670 RedLemon[20915:192409]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 19:14:59.768 RedLemon[20915:192416] 🔍 MPV track-list/count: 5
+2026-01-07 19:14:59.768 RedLemon[20915:192416] 🔍 Track 0 type: sub
+2026-01-07 19:14:59.768 RedLemon[20915:192416] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 19:14:59.768 RedLemon[20915:192416] 🔍 Track 1 type: sub
+2026-01-07 19:14:59.769 RedLemon[20915:192416] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 19:14:59.769 RedLemon[20915:192416] 🔍 Track 2 type: sub
+2026-01-07 19:14:59.769 RedLemon[20915:192416] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 19:14:59.770 RedLemon[20915:192416] 🔍 Track 3 type: video
+2026-01-07 19:14:59.771 RedLemon[20915:192416] 🔍 Track 4 type: audio
+2026-01-07 19:14:59.771 RedLemon[20915:192416] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 19:14:59.771 RedLemon[20915:192416]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 19:14:59.771 RedLemon[20915:192416]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 19:14:59.771 RedLemon[20915:192416]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 19:14:59.771 RedLemon[20915:192416]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 19:14:59.772 RedLemon[20915:192416] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 19:14:59.772 RedLemon[20915:192416]    Track: ID=0, Title=Off, External=0
+2026-01-07 19:14:59.772 RedLemon[20915:192416]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 19:14:59.773 RedLemon[20915:192416]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 19:14:59.773 RedLemon[20915:192416]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 19:15:02.729 RedLemon[20915:192341] 🖱️ Mouse: x=808/1366 y=168/768 | Exit: 0 Controls: 1 Chat: 0
+2026-01-07 19:15:03.026 RedLemon[20915:192341] 🖱️ Mouse: x=816/1366 y=207/768 | Exit: 0 Controls: 1 Chat: 0
+2026-01-07 19:15:23.333 RedLemon[20915:192341] 💓 Playback heartbeat sent for room: event_tt0162222
+📄 Subtitle request: L3N1YnRpdGxlLzM1MDAy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3500216-8422637.zip
+📊 AppState: Polled participant counts - Active: ["tt0162222": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 2017 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Download complete: 23107 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH.srt
+📦 Extracting specific file: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+[MPV] (+) Video --vid=1 (*) (h264 1920x1040 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] File tags:
+[MPV] Comment: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+[MPV] Title: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎉 EVENT: File loaded/Duration ready (8626.613s), preparing to seek...
+   Seeking to live edge: 7165s
+🎉 EVENT: File loaded/Duration ready (8626.613s), preparing to seek...
+   Seeking to live edge: 7165s
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+🎉 EVENT: File loaded/Duration ready (8626.613s), preparing to seek...
+   Seeking to live edge: 7165s
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', forced: false, default: false, HI: false, Ext: true
+📊 Current subtitle track: 3
+✅ Auto-selecting BEST English subtitle: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 250 (Embedded: 0, Match: 0, Clean: 0, SDH: 250)
+ MPV Event: 20
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 1920x1040 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.14s), skipping redundant seek
+📝 Started watch history tracking
+⚠️ onVideoReady called again - ignoring to prevent loops
+🎬 DisplayLink: reportSwap() (throttled)
+ MPV Event: 20
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"04756520-ec27-11f0-b52c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZMseVdCk6AiRC","phx_ref_prev":"GIiZMdjIxtw6AiQi","last_seen":"2026-01-08T00:14:56.940Z","room_id":"event_tt0162222","started_at":"2026-01-08T00:14:52.928Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}},"leaves":{"04756520-ec27-11f0-b52c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZMdjIxtw6AiQi","phx_ref_prev":"GIiZLh-mFkc6AiIi","last_seen":"2026-01-08T00:14:52.927Z","room_id":"event_tt0162222","started_at":"2026-01-08T00:14:52.928Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+[MPV] Using hardware decoding (videotoolbox).
+ MPV Event: 17
+[MPV] VO: [libmpv] 1920x1040 videotoolbox[nv12]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+ MPV Event: 18
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ece6b0f8-ec26-11f0-91cc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZMuQWa3Q6AiRi","phx_ref_prev":"GIiZLjunJcY6AiMi","last_seen":"2026-01-08T00:14:57.386Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"ece6b0f8-ec26-11f0-91cc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZLjunJcY6AiMi","phx_ref_prev":"GIiZKZNQHYg6AiAC","last_seen":"2026-01-08T00:14:37.386Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📊 Current subtitle track: 3
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 250 (Embedded: 0, Match: 0, Clean: 0, SDH: 250)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ece6b0f8-ec26-11f0-91cc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZNnlEvfI6AiUi","phx_ref_prev":"GIiZMuQWa3Q6AiRi","last_seen":"2026-01-08T00:15:12.769Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"ece6b0f8-ec26-11f0-91cc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZMuQWa3Q6AiRi","phx_ref_prev":"GIiZLjunJcY6AiMi","last_seen":"2026-01-08T00:14:57.386Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ece6b0f8-ec26-11f0-91cc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZNtFao3A6AiVi","phx_ref_prev":"GIiZNnlEvfI6AiUi","last_seen":"2026-01-08T00:15:14.254Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"ece6b0f8-ec26-11f0-91cc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZNnlEvfI6AiUi","phx_ref_prev":"GIiZMuQWa3Q6AiRi","last_seen":"2026-01-08T00:15:12.769Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"04756520-ec27-11f0-b52c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZN3Le7706AiXC","phx_ref_prev":"GIiZMseVdCk6AiRC","last_seen":"2026-01-08T00:15:16.993Z","room_id":"event_tt0162222","started_at":"2026-01-08T00:14:52.928Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}},"leaves":{"04756520-ec27-11f0-b52c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZMseVdCk6AiRC","phx_ref_prev":"GIiZMdjIxtw6AiQi","last_seen":"2026-01-08T00:14:56.940Z","room_id":"event_tt0162222","started_at":"2026-01-08T00:14:52.928Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ece6b0f8-ec26-11f0-91cc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZN4vkfbQ6AiXi","phx_ref_prev":"GIiZNtFao3A6AiVi","last_seen":"2026-01-08T00:15:17.387Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"ece6b0f8-ec26-11f0-91cc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiZNtFao3A6AiVi","phx_ref_prev":"GIiZNnlEvfI6AiUi","last_seen":"2026-01-08T00:15:14.254Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💾 Saved to watch history: Cast Away at 7193s
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)

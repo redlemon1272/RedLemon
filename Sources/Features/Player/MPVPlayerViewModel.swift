@@ -1870,16 +1870,22 @@ class MPVPlayerViewModel: ObservableObject {
         // ✅ STEP 4: Disconnect realtime FIRST and await completion
         // Fix: Use captured state instead of potentially cleared 'isInWatchParty'
         if wasInWatchParty {
-            // CRITICAL: Leave room in database BEFORE disconnecting realtime
-            // This ensures participants_count decrements correctly
-            // Use CAPTURED values since self.currentRoomId was already cleared in MainActor block
-            if let roomId = capturedRoomId, 
-               let userId = capturedUserId, 
-               let userUUID = UUID(uuidString: userId) {
-                try? await SupabaseClient.shared.leaveRoom(roomId: roomId, userId: userUUID)
-                print("✅ Left room in database: \(roomId)")
+            // CRITICAL FIX: When returning to lobby, do NOT leave room_participants.
+            // This keeps the room alive so the cron job doesn't delete it as "orphaned".
+            // Guests will reconnect to the same room in the lobby.
+            if !returningToLobby {
+                // Only leave room in database if NOT returning to lobby
+                // Use CAPTURED values since self.currentRoomId was already cleared in MainActor block
+                if let roomId = capturedRoomId, 
+                   let userId = capturedUserId, 
+                   let userUUID = UUID(uuidString: userId) {
+                    try? await SupabaseClient.shared.leaveRoom(roomId: roomId, userId: userUUID)
+                    print("✅ Left room in database: \(roomId)")
+                } else {
+                    print("⚠️ Could not leave room - capturedRoomId: \(capturedRoomId ?? "nil"), capturedUserId: \(capturedUserId ?? "nil")")
+                }
             } else {
-                print("⚠️ Could not leave room - capturedRoomId: \(capturedRoomId ?? "nil"), capturedUserId: \(capturedUserId ?? "nil")")
+                print("🏠 Returning to lobby - keeping host in room_participants to preserve room")
             }
             
             // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected

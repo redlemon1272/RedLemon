@@ -526,22 +526,52 @@ struct SettingsView: View {
                                             .background(tx.chain == "btc" ? Color.orange : Color.blue)
                                             .cornerRadius(4)
                                         
-                                        Text(tx.currency)
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
+                                        // Status Badge
+                                        Text("COMPLETED")
+                                            .font(.caption2)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.green)
+                                            .padding(.horizontal, 4)
+                                            .padding(.vertical, 2)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 4)
+                                                    .stroke(Color.green.opacity(0.5), lineWidth: 1)
+                                            )
                                     }
                                     
-                                    Text(tx.txHash.prefix(20) + "...")
-                                        .font(.system(.caption2, design: .monospaced))
-                                        .foregroundColor(.secondary)
+                                    HStack(spacing: 6) {
+                                        if let url = getExplorerUrl(chain: tx.chain, hash: tx.txHash) {
+                                            Link(destination: url) {
+                                                Text(tx.txHash.prefix(12) + "..." + tx.txHash.suffix(4))
+                                                    .font(.system(.caption2, design: .monospaced))
+                                                    .foregroundColor(.blue)
+                                                    .underline()
+                                            }
+                                        } else {
+                                            Text(tx.txHash.prefix(20) + "...")
+                                                .font(.system(.caption2, design: .monospaced))
+                                                .foregroundColor(.secondary)
+                                        }
+                                        
+                                        Button(action: {
+                                            NSPasteboard.general.clearContents()
+                                            NSPasteboard.general.setString(tx.txHash, forType: .string)
+                                        }) {
+                                            Image(systemName: "doc.on.doc")
+                                                .font(.caption2)
+                                                .foregroundColor(.secondary)
+                                        }
+                                        .buttonStyle(.plain)
+                                        .help("Copy Transaction Hash")
+                                    }
                                 }
                                 
                                 Spacer()
                                 
                                 VStack(alignment: .trailing, spacing: 2) {
-                                    Text(String(format: "%.6f", tx.amount))
+                                    Text(String(format: "%.6f %@", tx.amount, tx.currency))
                                         .fontWeight(.medium)
-                                        .foregroundColor(.green)
+                                        .foregroundColor(.primary)
                                     
                                     Text(tx.createdAt, style: .date)
                                         .font(.caption2)
@@ -576,6 +606,16 @@ struct SettingsView: View {
         }
     }
 
+    private func getExplorerUrl(chain: String, hash: String) -> URL? {
+        if chain == "btc" {
+            return URL(string: "https://mempool.space/tx/\(hash)")
+        } else if chain == "evm" || chain == "base" {
+            // Ensure 0x prefix for EVM transactions
+            let formattedHash = hash.hasPrefix("0x") ? hash : "0x" + hash
+            return URL(string: "https://basescan.org/tx/\(formattedHash)")
+        }
+        return nil
+    }
 
     private var usernameSection: some View {
         VStack(alignment: .leading, spacing: 24) {

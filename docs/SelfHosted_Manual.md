@@ -185,6 +185,14 @@ This script sets up:
 1. Public RLS for App Logs (no credentials needed to report crashes).
 2. Secure Admin RPCs (`get_admin_logs`) that check your Public Key and Signature to allow viewing logs.
 
+### Room Creation History Migration (01/09/2026)
+**Migration:** `20260109000000_room_creation_history.sql`
+
+Fixes the free user room limit bypass. Previously, the 72-hour limit didn't work because rooms are deleted when hosts leave, resetting the counter. This migration:
+1. Creates `room_creation_history` table to persistently track room creation events
+2. Updates `check_room_creation_limits()` trigger to check history table instead of ephemeral `rooms` table
+3. Enables RLS and adds cleanup function for old records
+
 ---
 
 ## 8. Production Wallet Secrets

@@ -869,22 +869,23 @@ class SupabaseClient: RoomManager, UserManager {
     }
 
     /// Get the creation time of the last room hosted by the user
+    /// Uses room_creation_history table for accurate tracking (rooms are ephemeral)
     func getLastRoomCreatedAt(userId: UUID) async throws -> Date? {
         let data = try await makeRequest(
-            path: "/rooms",
+            path: "/room_creation_history",
             query: [
-                "host_user_id": "eq.\(userId.uuidString)",
+                "user_id": "eq.\(userId.uuidString)",
                 "select": "created_at",
                 "order": "created_at.desc",
                 "limit": "1"
             ]
         )
 
-        struct RoomDate: Decodable {
+        struct HistoryDate: Decodable {
             let created_at: Date
         }
 
-        let result = try jsonDecoder.decode([RoomDate].self, from: data)
+        let result = try jsonDecoder.decode([HistoryDate].self, from: data)
         return result.first?.created_at
     }
 

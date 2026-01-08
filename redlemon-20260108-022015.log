@@ -1,0 +1,134 @@
+2026-01-08 02:20:22.924 RedLemon[36061:366028] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-08 02:20:22.924 RedLemon[36061:366028] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-08 02:20:23.017 RedLemon[36061:366028] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-08 02:20:23.024 RedLemon[36061:366141] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-08 02:20:23.055 RedLemon[36061:366028] ✅ Playback state reset complete - starting in browse view
+2026-01-08 02:20:23.055 RedLemon[36061:366028] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-08 02:20:23.055 RedLemon[36061:366028] 🧪 Testing Profile: debug
+2026-01-08 02:20:23.056 RedLemon[36061:366129] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-08 02:20:23.090 RedLemon[36061:366028] ✅ Keychain: Found stored username: ursinho
+2026-01-08 02:20:23.090 RedLemon[36061:366028] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-08 02:20:23.090 RedLemon[36061:366129] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-08 02:20:23.434 RedLemon[36061:366125] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-08 02:20:23.444 RedLemon[36061:366125] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-08 02:20:23.445 RedLemon[36061:366125] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 02:20:23.472 RedLemon[36061:366028] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 02:20:23.472 RedLemon[36061:366028] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 02:20:23.472 RedLemon[36061:366028] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 02:20:23.472 RedLemon[36061:366028] 🚀 RedLemon: Starting HTTP server...
+2026-01-08 02:20:23.472 RedLemon[36061:366028] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-08 02:20:23.488 RedLemon[36061:366028] ✅ RedLemon: HTTPServer instance created
+2026-01-08 02:20:23.488 RedLemon[36061:366123] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 5 credential(s) from cache
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"66775F01-6218-458C-8CF5-7CF061A88BF8","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-08 02:20:23.680 RedLemon[36061:366028] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 02:20:25.493 RedLemon[36061:366028] ✅ RedLemon: Server marked as ready
+2026-01-08 02:20:25.532 RedLemon[36061:366028] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-08 02:20:25.532 RedLemon[36061:366028] 🔍 Performing startup checks...
+2026-01-08 02:20:25.532 RedLemon[36061:366028] ✅ Username-based authentication ready
+2026-01-08 02:20:25.941 RedLemon[36061:366028] 🔍 Performing startup checks...
+2026-01-08 02:20:25.941 RedLemon[36061:366028] ✅ Username-based authentication ready
+2026-01-08 02:20:26.092 RedLemon[36061:366028] 🔄 Checking for app updates...
+2026-01-08 02:20:26.961 RedLemon[36061:366215] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-08 02:20:26.962 RedLemon[36061:366215] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+✅ [EventsView] Loaded 411 movies from config version 1486
+🗓 AppState: Updated schedule epoch to 2026-01-04 23:43:30 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 09:30:30 +0000
+⏰ AppState: Scheduling update in 7807 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt4881806/img (930754 bytes)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 09:30:30 +0000
+⏰ AppState: Scheduling update in 7806 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 09:30:30 +0000
+⏰ AppState: Scheduling update in 7806 seconds
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"06B62239-EDFC-44F0-B5C5-54B67BA5F328","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"18033b18-ec62-11f0-81ca-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiwZxpYP5g6AnqB","phx_ref_prev":"GIiwYnIiGHk6AnoB","last_seen":"2026-01-08T07:20:10.465Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"803c44ae-ec62-11f0-8043-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiwankZlj86Anxh","last_seen":"2026-01-08T07:20:24.932Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":"31D865BB-C7A4-489A-9861-CFBE30ABEB2C","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+🔄 SocialService: Syncing 40 items to cloud...
+🔄 SocialService: Syncing 40 items to cloud (serial)...
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.091s (RTT: 132ms)
+   Local:  2026-01-08 07:20:26 +0000
+   Server: 2026-01-08 07:20:26 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+⚠️ Zilean Health Check returned status: 404
+🎉 Subscription updated! Expires: 2026-02-07 06:21:24 +0000
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"18033b18-ec62-11f0-81ca-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiwa8KHdvw6An3h","phx_ref_prev":"GIiwZxpYP5g6AnqB","last_seen":"2026-01-08T07:20:30.466Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"18033b18-ec62-11f0-81ca-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiwZxpYP5g6AnqB","phx_ref_prev":"GIiwYnIiGHk6AnoB","last_seen":"2026-01-08T07:20:10.465Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 09:30:30 +0000
+⏰ AppState: Scheduling update in 7796 seconds

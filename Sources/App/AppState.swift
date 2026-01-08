@@ -179,6 +179,7 @@ class AppState: ObservableObject {
     // Source of truth for all available event movies (shuffled daily order)
     @Published var allMovies: [MediaItem] = []
     private var scheduleTimer: Timer?
+    private var participantCountTimer: Timer? // Dedicated timer for participant count polling
     private var participantCounts: [String: Int] = [:] // Local cache of counts
     private var lastCountFetch: Date = .distantPast
 
@@ -197,6 +198,19 @@ class AppState: ObservableObject {
         // Initial fetch of participant counts
         Task {
             await fetchParticipantCounts()
+        }
+        
+        // Start dedicated participant count polling (every 10 seconds)
+        startParticipantCountPolling()
+    }
+    
+    /// Start a timer that polls participant counts every 10 seconds
+    private func startParticipantCountPolling() {
+        participantCountTimer?.invalidate()
+        participantCountTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                await self?.fetchParticipantCounts()
+            }
         }
     }
     
@@ -390,6 +404,12 @@ class AppState: ObservableObject {
             }
             return counts
         }.value
+        
+        // Only log if there are non-zero counts (avoid spam)
+        let activeRooms = newCounts.filter { $0.value > 0 }
+        if !activeRooms.isEmpty {
+            print("📊 AppState: Polled participant counts - Active: \(activeRooms)")
+        }
         
         self.participantCounts = newCounts
         

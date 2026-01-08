@@ -536,50 +536,181 @@ struct LoadingIndicatorView: View {
 struct StreamErrorView: View {
     let error: String
     @ObservedObject var appState: AppState
+    
+    /// Parse error string to extract StreamError info if available
+    private var errorInfo: (title: String, message: String, solution: String, icon: String, showSettings: Bool) {
+        // Check for known error patterns and return actionable info
+        let errorLower = error.lowercased()
+        
+        // No Real-Debrid key
+        if errorLower.contains("no realdebrid token") || errorLower.contains("realdebrid not configured") {
+            return (
+                title: "Real-Debrid Not Configured",
+                message: "RedLemon requires a Real-Debrid account to stream content.",
+                solution: "Go to Settings and add your Real-Debrid API key.",
+                icon: "key.fill",
+                showSettings: true
+            )
+        }
+        
+        // Invalid/expired key
+        if errorLower.contains("401") || errorLower.contains("unauthorized") || errorLower.contains("invalid") && errorLower.contains("key") {
+            return (
+                title: "Invalid API Key",
+                message: "Your Real-Debrid API key appears to be invalid or revoked.",
+                solution: "Go to Settings and add a fresh API key from real-debrid.com.",
+                icon: "key.fill",
+                showSettings: true
+            )
+        }
+        
+        // Expired subscription
+        if errorLower.contains("expired") {
+            return (
+                title: "Subscription Expired",
+                message: "Your Real-Debrid subscription has expired.",
+                solution: "Renew at real-debrid.com, then try again.",
+                icon: "creditcard.trianglebadge.exclamationmark",
+                showSettings: false
+            )
+        }
+        
+        // All streams fake/blocked
+        if errorLower.contains("invalid file type") || errorLower.contains("all streams") && errorLower.contains("fake") {
+            return (
+                title: "No Valid Streams",
+                message: "All available streams were blocked as suspicious.",
+                solution: "This title may have fake uploads. Try again in a few days.",
+                icon: "film.fill",
+                showSettings: false
+            )
+        }
+        
+        // No streams found
+        if errorLower.contains("no streams") {
+            return (
+                title: "No Streams Available",
+                message: "No streams were found for this title.",
+                solution: "It may not be available yet. Try again later.",
+                icon: "film.fill",
+                showSettings: false
+            )
+        }
+        
+        // Torrent not cached
+        if errorLower.contains("not cached") {
+            return (
+                title: "Stream Not Ready",
+                message: "This stream is not cached on Real-Debrid.",
+                solution: "Try a different stream or wait for caching.",
+                icon: "icloud.slash.fill",
+                showSettings: false
+            )
+        }
+        
+        // Network/timeout errors
+        if errorLower.contains("timeout") || errorLower.contains("timed out") {
+            return (
+                title: "Connection Timeout",
+                message: "The connection timed out while loading.",
+                solution: "Check your connection and retry.",
+                icon: "wifi.exclamationmark",
+                showSettings: false
+            )
+        }
+        
+        if errorLower.contains("network") || errorLower.contains("connection") {
+            return (
+                title: "Connection Error",
+                message: "A network error occurred.",
+                solution: "Check your internet connection and try again.",
+                icon: "wifi.exclamationmark",
+                showSettings: false
+            )
+        }
+        
+        // Fallback for unknown errors
+        return (
+            title: "Playback Error",
+            message: error,
+            solution: "Try again or select a different stream.",
+            icon: "exclamationmark.triangle.fill",
+            showSettings: false
+        )
+    }
 
     var body: some View {
         VStack(spacing: 24) {
-            Image(systemName: "exclamationmark.triangle.fill")
+            Image(systemName: errorInfo.icon)
                 .font(.system(size: 72))
-                .foregroundColor(.red)
-                .shadow(color: .red.opacity(0.3), radius: 10)
+                .foregroundColor(errorInfo.showSettings ? .yellow : .red)
+                .shadow(color: (errorInfo.showSettings ? Color.yellow : Color.red).opacity(0.3), radius: 10)
 
             VStack(spacing: 8) {
-                Text("Stream Error")
+                Text(errorInfo.title)
                     .font(.largeTitle.bold())
                     .foregroundColor(.white)
 
-                Text(error)
+                Text(errorInfo.message)
                     .font(.body)
                     .foregroundColor(.white.opacity(0.8))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
+                
+                // Actionable solution
+                Text(errorInfo.solution)
+                    .font(.callout)
+                    .foregroundColor(.yellow.opacity(0.9))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                    .padding(.top, 4)
             }
 
             VStack(spacing: 16) {
-                Button(action: {
-                    retryPlayback()
-                }) {
-                    HStack {
-                        Image(systemName: "arrow.clockwise")
-                        Text("Retry Connection")
+                // Primary action button
+                if errorInfo.showSettings {
+                    Button(action: {
+                        appState.player.streamError = nil
+                        appState.currentView = .settings
+                    }) {
+                        HStack {
+                            Image(systemName: "gearshape.fill")
+                            Text("Go to Settings")
+                        }
+                        .font(.headline.weight(.semibold))
+                        .foregroundColor(.black)
+                        .frame(width: 220, height: 50)
+                        .background(Color.yellow)
+                        .cornerRadius(12)
                     }
-                    .font(.headline.weight(.semibold))
-                    .foregroundColor(.black)
-                    .frame(width: 220, height: 50)
-                    .background(Color.yellow)
-                    .cornerRadius(12)
+                    .buttonStyle(.plain)
+                    .shadow(radius: 5)
+                } else {
+                    Button(action: {
+                        retryPlayback()
+                    }) {
+                        HStack {
+                            Image(systemName: "arrow.clockwise")
+                            Text("Retry Connection")
+                        }
+                        .font(.headline.weight(.semibold))
+                        .foregroundColor(.black)
+                        .frame(width: 220, height: 50)
+                        .background(Color.yellow)
+                        .cornerRadius(12)
+                    }
+                    .buttonStyle(.plain)
+                    .shadow(radius: 5)
+                    
+                    Text("Retrying can improve stream reliability")
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.5))
                 }
-                .buttonStyle(.plain)
-                .shadow(radius: 5)
-                
-                Text("Hint: reattempting can improve stream reliability")
-                    .font(.caption)
-                    .foregroundColor(.white.opacity(0.5))
             }
             .padding(.top, 10)
 
             Button("Go Back") {
+                appState.player.streamError = nil
                 appState.currentView = .mediaDetail
             }
             .buttonStyle(.plain)
@@ -587,7 +718,7 @@ struct StreamErrorView: View {
             .padding(.top, 10)
         }
         .padding(40)
-        .background(Color.black.opacity(0.8))
+        .background(Color.black.opacity(0.85))
         .cornerRadius(20)
     }
 
@@ -595,8 +726,6 @@ struct StreamErrorView: View {
         guard let item = appState.player.selectedMediaItem else { return }
         
         Task {
-            // Re-trigger playback
-            // Use stored state from PlayerViewModel
             let quality = appState.player.selectedQuality
             let mode = appState.player.currentWatchMode
             let roomId = appState.player.currentRoomId

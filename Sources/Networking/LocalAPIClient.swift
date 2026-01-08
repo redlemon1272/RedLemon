@@ -1256,6 +1256,121 @@ enum APIError: LocalizedError {
         }
     }
 }
+
+// MARK: - Actionable Stream Errors
+
+/// Rich error type with user-friendly messages and solutions
+enum StreamError: LocalizedError {
+    case noRealDebridKey
+    case invalidRealDebridKey
+    case realDebridExpired
+    case noStreamsAvailable
+    case allStreamsFake       // All streams were blocked (.iso, malware, etc)
+    case torrentNotCached
+    case networkError(underlying: Error)
+    case timeout
+    case unknownError(message: String)
+    
+    /// User-friendly error title
+    var title: String {
+        switch self {
+        case .noRealDebridKey:
+            return "Real-Debrid Not Configured"
+        case .invalidRealDebridKey:
+            return "Invalid API Key"
+        case .realDebridExpired:
+            return "Real-Debrid Subscription Expired"
+        case .noStreamsAvailable:
+            return "No Streams Available"
+        case .allStreamsFake:
+            return "No Valid Streams"
+        case .torrentNotCached:
+            return "Stream Not Ready"
+        case .networkError:
+            return "Connection Error"
+        case .timeout:
+            return "Connection Timeout"
+        case .unknownError:
+            return "Playback Error"
+        }
+    }
+    
+    /// Detailed explanation for the user
+    var errorDescription: String? {
+        switch self {
+        case .noRealDebridKey:
+            return "RedLemon requires a Real-Debrid account to stream content."
+        case .invalidRealDebridKey:
+            return "Your Real-Debrid API key appears to be invalid or revoked."
+        case .realDebridExpired:
+            return "Your Real-Debrid subscription has expired."
+        case .noStreamsAvailable:
+            return "No streams were found for this title. It may not be available yet."
+        case .allStreamsFake:
+            return "All available streams were blocked as suspicious or malware."
+        case .torrentNotCached:
+            return "This stream is not cached on Real-Debrid and cannot be played instantly."
+        case .networkError(let error):
+            return "Network error: \(error.localizedDescription)"
+        case .timeout:
+            return "The connection timed out while trying to load the stream."
+        case .unknownError(let message):
+            return message
+        }
+    }
+    
+    /// Actionable solution for the user
+    var solution: String {
+        switch self {
+        case .noRealDebridKey:
+            return "Go to Settings and add your Real-Debrid API key."
+        case .invalidRealDebridKey:
+            return "Go to Settings, remove the old key, and add a fresh API key from real-debrid.com."
+        case .realDebridExpired:
+            return "Renew your subscription at real-debrid.com, then try again."
+        case .noStreamsAvailable:
+            return "Try again later when the title becomes available."
+        case .allStreamsFake:
+            return "This title may have been targeted by fake uploads. Try again in a few days."
+        case .torrentNotCached:
+            return "Try a different stream or wait for caching to complete."
+        case .networkError:
+            return "Check your internet connection and try again."
+        case .timeout:
+            return "Check your connection and retry."
+        case .unknownError:
+            return "Try again or select a different stream."
+        }
+    }
+    
+    /// SF Symbol icon for the error type
+    var icon: String {
+        switch self {
+        case .noRealDebridKey, .invalidRealDebridKey:
+            return "key.fill"
+        case .realDebridExpired:
+            return "creditcard.trianglebadge.exclamationmark"
+        case .noStreamsAvailable, .allStreamsFake:
+            return "film.fill"
+        case .torrentNotCached:
+            return "icloud.slash.fill"
+        case .networkError, .timeout:
+            return "wifi.exclamationmark"
+        case .unknownError:
+            return "exclamationmark.triangle.fill"
+        }
+    }
+    
+    /// Whether Settings button should be shown
+    var showSettingsButton: Bool {
+        switch self {
+        case .noRealDebridKey, .invalidRealDebridKey:
+            return true
+        default:
+            return false
+        }
+    }
+}
 // MARK: - Array Extension for Chunking
 extension Array {
     func chunked(into size: Int) -> [[Element]] {

@@ -70,6 +70,13 @@ actor StreamService: StreamResolving {
 
     func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata? = nil, preferredInfoHash: String? = nil, filterExtended: Bool = false) async throws -> StreamResolutionResult {
         LogManager.shared.info("🎬 StreamService: Starting resolution for: \(item.name)")
+        
+        // Step 0: Early validation - Check for Real-Debrid API key
+        let rdKey = await KeychainManager.shared.get(service: "realdebrid")
+        if rdKey == nil || rdKey?.isEmpty == true {
+            LogManager.shared.warning("❌ StreamService: No Real-Debrid key configured")
+            throw StreamError.noRealDebridKey
+        }
 
         // Step 1: Load metadata
         let finalMetadata: MediaMetadata

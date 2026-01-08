@@ -540,7 +540,13 @@ struct SettingsView: View {
                                     }
                                     
                                     HStack(spacing: 6) {
-                                        if let url = getExplorerUrl(chain: tx.chain, hash: tx.txHash) {
+                                        if tx.txHash.hasPrefix("detected_") {
+                                            Text("Payment Detected")
+                                                .font(.caption2)
+                                                .fontWeight(.medium)
+                                                .foregroundColor(.secondary)
+                                                .help("Payment detected automatically via balance check (Hash not available)")
+                                        } else if let url = getExplorerUrl(chain: tx.chain, hash: tx.txHash) {
                                             Link(destination: url) {
                                                 Text(tx.txHash.prefix(12) + "..." + tx.txHash.suffix(4))
                                                     .font(.system(.caption2, design: .monospaced))
@@ -553,16 +559,18 @@ struct SettingsView: View {
                                                 .foregroundColor(.secondary)
                                         }
                                         
-                                        Button(action: {
-                                            NSPasteboard.general.clearContents()
-                                            NSPasteboard.general.setString(tx.txHash, forType: .string)
-                                        }) {
-                                            Image(systemName: "doc.on.doc")
-                                                .font(.caption2)
-                                                .foregroundColor(.secondary)
+                                        if !tx.txHash.hasPrefix("detected_") {
+                                            Button(action: {
+                                                NSPasteboard.general.clearContents()
+                                                NSPasteboard.general.setString(tx.txHash, forType: .string)
+                                            }) {
+                                                Image(systemName: "doc.on.doc")
+                                                    .font(.caption2)
+                                                    .foregroundColor(.secondary)
+                                            }
+                                            .buttonStyle(.plain)
+                                            .help("Copy Transaction Hash")
                                         }
-                                        .buttonStyle(.plain)
-                                        .help("Copy Transaction Hash")
                                     }
                                 }
                                 
@@ -607,6 +615,9 @@ struct SettingsView: View {
     }
 
     private func getExplorerUrl(chain: String, hash: String) -> URL? {
+        // Ignore internal system detection IDs
+        if hash.hasPrefix("detected_") { return nil }
+        
         if chain == "btc" {
             return URL(string: "https://mempool.space/tx/\(hash)")
         } else if chain == "evm" || chain == "base" {

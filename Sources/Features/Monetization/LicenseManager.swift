@@ -110,8 +110,6 @@ class LicenseManager: ObservableObject {
     @Published var timeUntilNextFreeRoom: TimeInterval = 0
     
     func checkHostingLimit() async {
-        guard let userId = SupabaseClient.shared.auth.currentUser?.id else { return }
-        
         // Premium users have no limit
         if isPremium {
             await MainActor.run { self.timeUntilNextFreeRoom = 0 }
@@ -119,19 +117,11 @@ class LicenseManager: ObservableObject {
         }
         
         do {
-            if let lastCreated = try await SupabaseClient.shared.getLastRoomCreatedAt(userId: userId) {
-                 // Use trusted server time from TimeService
-                 let now = TimeService.shared.now
-                 
-                 let diff = now.timeIntervalSince(lastCreated)
-                 let cooldown: TimeInterval = 72 * 3600
-                 let remaining = cooldown - diff
-                 
-                 await MainActor.run {
-                     self.timeUntilNextFreeRoom = max(0, remaining)
-                 }
-            } else {
-                 await MainActor.run { self.timeUntilNextFreeRoom = 0 }
+            // Use unified check from SupabaseClient (queries room_creation_history)
+            let remaining = try await SupabaseClient.shared.checkFreeTierLimit()
+            
+            await MainActor.run {
+                self.timeUntilNextFreeRoom = remaining
             }
         } catch {
             print("Error checking hosting limit: \(error)")

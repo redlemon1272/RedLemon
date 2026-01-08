@@ -178,8 +178,33 @@ expect -c 'spawn ssh root@151.243.109.243 "cat /root/migration.sql | docker exec
 
 
 
+
 ### Security Migration (01/2026)
 To fix the Security Audit issues (Hardcoded Secrets), you must run the `database-migration-fix-logs-rls.sql` migration.
 This script sets up:
 1. Public RLS for App Logs (no credentials needed to report crashes).
 2. Secure Admin RPCs (`get_admin_logs`) that check your Public Key and Signature to allow viewing logs.
+
+---
+
+## 8. Production Wallet Secrets
+> [!CAUTION]
+> **CRITICAL SECURITY INFORMATION**
+> These keys control the funds collected by the application.
+> **DO NOT SHARE THIS SEED PHRASE.**
+> Store it safely offline (Paper/Metal backup). The server only needs the XPUBs (Public Keys) to generate addresses; it does NOT need the Private Key or Seed Phrase.
+
+**Seed Phrase (Mnemonic):**
+`moment absent unfair song unusual neck panther asset clock conduct doll voice`
+
+**Derivation Paths:**
+*   **BTC:** `m/84'/0'/0'` (Native Segwit / BIP84)
+*   **EVM (ETH/Base):** `m/44'/60'/0'` (Standard BIP44)
+
+**Extended Public Keys (XPUBs) - Injected into Server:**
+*   **XPUB_BTC:** `xpub6CNJnaQ1bu7oLQH4g8ZGSJUbVtRLqu3ikYm9PhiFohEb9LdFCsz4QTK1aWob5nR1P7uzDmRR7GKm5aJvKgzrrWmh6CahF95K5Vtb3TgzLoq`
+*   **XPUB_EVM:** `xpub6CUocXeQEa3MZ7QWXn4uwjcaXS2y84MAN1KTQRq9TscPvJk5kMj4fSKYxNC1ooyAf9ysT15cwJW3UP6HEcCPUKVu67wwoKqsyJNAeWQ6i1y`
+
+**Usage:**
+*   **Importing to Wallet:** Use the Seed Phrase in MetaMask, electrum, or Ledger to access funds.
+*   **Server Config:** These XPUBs are set in `/root/supabase/docker/docker-compose.yml` (injected via `.env`).

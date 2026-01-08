@@ -710,7 +710,7 @@ class SupabaseClient: RoomManager, UserManager {
         let queryData = try await makeRequest(
             path: "/room_creation_history",
             query: [
-                "user_id": "eq.\(userId.lowercased())",
+                "user_id": "eq.\(userId.uuidString.lowercased())",
                 "order": "created_at.desc",
                 "limit": "1",
                 "select": "created_at"

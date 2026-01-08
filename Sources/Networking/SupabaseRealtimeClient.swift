@@ -156,20 +156,25 @@ actor SupabaseRealtimeClient {
         print("📡 Joined channel: \(topic)")
     }
 
-    func leaveChannel() async throws {
-        guard let topic = realtimeTopic else { return }
+    func leaveChannel(topic: String? = nil) async throws {
+        // Use provided topic or fall back to current
+        guard let targetTopic = topic ?? realtimeTopic else { return }
 
         let message: [String: Any] = [
-            "topic": topic,
+            "topic": targetTopic,
             "event": "phx_leave",
             "payload": [:],
             "ref": nextRef()
         ]
 
         try await sendMessage(message)
-        self.channelName = nil
-        self.realtimeTopic = nil
-        self.joinRef = nil
+        
+        // Only clear local state if we left the currently tracked channel
+        if targetTopic == self.realtimeTopic {
+            self.channelName = nil
+            self.realtimeTopic = nil
+            self.joinRef = nil
+        }
     }
 
     func isJoined(to channel: String) -> Bool {
@@ -221,13 +226,14 @@ actor SupabaseRealtimeClient {
         try await sendMessage(message)
     }
 
-    func untrack() async throws {
-        guard let topic = realtimeTopic else {
+    func untrack(topic: String? = nil) async throws {
+        // Use provided topic or fall back to current
+        guard let targetTopic = topic ?? realtimeTopic else {
             throw RealtimeError.notJoined
         }
 
         let message: [String: Any] = [
-            "topic": topic,
+            "topic": targetTopic,
             "event": "presence",
             "payload": [
                 "type": "presence",

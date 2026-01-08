@@ -362,6 +362,8 @@ actor RealtimeChannelManager: RealtimeService {
             return
         }
         
+        let capturedRoomId = self.roomId
+        
         // If we are not connected and not just trying to disconnect the client, we might be able to skip
         // But we should be careful. The safest is to check if we have anything to clean up.
         if !isConnected && !disconnectClient {
@@ -370,19 +372,32 @@ actor RealtimeChannelManager: RealtimeService {
         }
 
         isDisconnecting = true
-        print("🧹 Cleaning up Realtime channel for room: \(roomId ?? "unknown")")
+        print("🧹 Cleaning up Realtime channel for room: \(capturedRoomId ?? "unknown")")
+
+        // Construct topic for scoped cleanup
+        let topic: String? = capturedRoomId.map { "realtime:watch-party:\($0)" }
 
         do {
             // Only untrack if we are connected
             if isConnected {
                 print("🔄 Untracking presence...")
-                try await realtimeClient.untrack()
+                // CRITICAL FIX: explicit topic to avoid untracking global presence if topic changed
+                if let t = topic {
+                    try await realtimeClient.untrack(topic: t)
+                } else {
+                    try await realtimeClient.untrack()
+                }
                 print("✅ Presence untracked")
             }
 
             if leaveChannel {
                 print("🔄 Leaving channel...")
-                try await realtimeClient.leaveChannel()
+                // CRITICAL FIX: explicit topic to avoid leaving wrong channel
+                if let t = topic {
+                    try await realtimeClient.leaveChannel(topic: t)
+                } else {
+                    try await realtimeClient.leaveChannel()
+                }
                 print("✅ Channel left")
             } else {
                 print("ℹ️ Keeping channel joined (leaveChannel=false)")

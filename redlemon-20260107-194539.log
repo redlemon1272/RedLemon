@@ -1,0 +1,260 @@
+2026-01-07 19:45:46.283 RedLemon[23307:209579] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-07 19:45:46.283 RedLemon[23307:209579] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-07 19:45:46.354 RedLemon[23307:209579] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-07 19:45:46.369 RedLemon[23307:209650] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-07 19:45:46.391 RedLemon[23307:209579] ✅ Playback state reset complete - starting in browse view
+2026-01-07 19:45:46.391 RedLemon[23307:209579] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-07 19:45:46.391 RedLemon[23307:209579] 🧪 Testing Profile: debug
+2026-01-07 19:45:46.391 RedLemon[23307:209650] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-07 19:45:46.420 RedLemon[23307:209579] ✅ Keychain: Found stored username: ursinho
+2026-01-07 19:45:46.420 RedLemon[23307:209579] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-07 19:45:46.420 RedLemon[23307:209646] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-07 19:45:46.836 RedLemon[23307:209650] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-07 19:45:46.849 RedLemon[23307:209650] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-07 19:45:46.849 RedLemon[23307:209650] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 19:45:46.873 RedLemon[23307:209579] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 19:45:46.873 RedLemon[23307:209579] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 19:45:46.874 RedLemon[23307:209579] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-07 19:45:46.874 RedLemon[23307:209579] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-07 19:45:46.874 RedLemon[23307:209579] 🚀 RedLemon: Starting HTTP server...
+2026-01-07 19:45:46.874 RedLemon[23307:209579] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-07 19:45:46.890 RedLemon[23307:209579] ✅ RedLemon: HTTPServer instance created
+2026-01-07 19:45:46.891 RedLemon[23307:209651] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 5 credential(s) from cache
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"D8C24198-F56D-43E3-8791-AC657AA94E98","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-07 19:45:48.898 RedLemon[23307:209579] ✅ RedLemon: Server marked as ready
+2026-01-07 19:45:48.935 RedLemon[23307:209579] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-07 19:45:48.936 RedLemon[23307:209579] 🔍 Performing startup checks...
+2026-01-07 19:45:48.936 RedLemon[23307:209579] ✅ Username-based authentication ready
+2026-01-07 19:45:49.847 RedLemon[23307:209579] 🔍 Performing startup checks...
+2026-01-07 19:45:49.847 RedLemon[23307:209579] ✅ Username-based authentication ready
+2026-01-07 19:45:50.385 RedLemon[23307:209579] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+✅ [EventsView] Loaded 411 movies from config version 1486
+🗓 AppState: Updated schedule epoch to 2026-01-04 23:43:30 +0000
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 163 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0162222/img (866194 bytes)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📊 AppState: Polled participant counts - Active: ["tt0167404": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 162 seconds
+📡 Joined channel: realtime:global-presence
+📊 AppState: Polled participant counts - Active: ["tt0167404": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 162 seconds
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"83A231B4-13B9-48FA-9DF2-2E86752285FD","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"12803cf4-ec2b-11f0-a225-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia34ysYSU6AmaC","phx_ref_prev":"GIia2uSkcVQ6AmZC","last_seen":"2026-01-08T00:45:38.449Z","room_id":"event_tt0167404","started_at":"2026-01-08T00:43:49.936Z","status":"In Lobby: The Sixth Sense","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0167404","watching_title":"The Sixth Sense","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"5fc6c514-ec2b-11f0-b989-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia4c2pYIA6AgHB","last_seen":"2026-01-08T00:45:48.209Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"F97C6F81-0521-4801-9344-D3FD07370BED","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 36 items to cloud...
+🔄 SocialService: Syncing 36 items to cloud (serial)...
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":91100,"eth":3166.07},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","base eth_getBalance: 0xf6957e925","poly eth_getBalance: undefined","eth eth_getBalance: undefined","opt eth_getBalance: undefined","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":91100,"eth":3167.285},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.070s (RTT: 134ms)
+   Local:  2026-01-08 00:45:50 +0000
+   Server: 2026-01-08 00:45:50 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📊 AppState: Polled participant counts - Active: ["tt0167404": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 152 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"12803cf4-ec2b-11f0-a225-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia5DR7pO06AmbC","phx_ref_prev":"GIia34ysYSU6AmaC","last_seen":"2026-01-08T00:45:58.449Z","room_id":"event_tt0167404","started_at":"2026-01-08T00:43:49.936Z","status":"In Lobby: The Sixth Sense","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0167404","watching_title":"The Sixth Sense","watching_type":"movie"}]}},"leaves":{"12803cf4-ec2b-11f0-a225-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia34ysYSU6AmaC","phx_ref_prev":"GIia2uSkcVQ6AmZC","last_seen":"2026-01-08T00:45:38.449Z","room_id":"event_tt0167404","started_at":"2026-01-08T00:43:49.936Z","status":"In Lobby: The Sixth Sense","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0167404","watching_title":"The Sixth Sense","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0167404/img (912485 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt2872732/img (1017650 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt10545296/img (770130 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt4881806/img (930754 bytes)
+📊 AppState: Polled participant counts - Active: ["tt0167404": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 142 seconds
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"5fc6c514-ec2b-11f0-b989-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia5nWf5nY6AgQh","phx_ref_prev":"GIia4c2pYIA6AgHB","last_seen":"2026-01-08T00:46:08.211Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"5fc6c514-ec2b-11f0-b989-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia4c2pYIA6AgHB","last_seen":"2026-01-08T00:45:48.209Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[2026-01-08T00:46:08Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: The Sixth Sense (Live: false)
+   Event start time: 2026-01-08 00:48:30 +0000
+   Event duration: 7020.0s
+   Current time: 2026-01-08 00:46:08 +0000
+   Is Live: false
+   Is In Lobby: true
+✅ Event room already exists: event_tt0167404
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑
+   UnlockedURL: https://chi7-4.downl...
+   Hash: cf4b469f86b9fbf31660431bdf6b451182486b19
+   Quality: nil
+   FileIdx: -1
+   🔗 Locking to server-provided stream hash: cf4b469f86b9fbf31660431bdf6b451182486b19
+
+🎭 Upcoming event - position: 0
+   Room createdAt: 2026-01-08 00:48:30 +0000
+   Room state: lobby
+🎭 Upcoming event - going to lobby
+🎭 Lobby: Connecting to room event_tt0167404...
+🚦 Lobby State: connecting
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Setting up Realtime channel: watch-party:event_tt0167404
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+📡 SocialService: Updated status - In Lobby: The Sixth Sense: The Sixth Sense
+📡 Joined channel: realtime:watch-party:event_tt0167404
+📡 Connection state: connected
+✅ Realtime channel setup complete
+[ INFO ] GET /api/metadata/meta/movie/tt0167404 [request-id: BCE741EC-42CC-4151-9F37-536AF08DD81C]
+2026-01-07 19:46:09.316 RedLemon[23307:209862] ⚠️ SupabaseClient: User already in room (409), proceeding...
+2026-01-07 19:46:09.317 RedLemon[23307:209579] ✅ Guest joined room event_tt0167404 in database
+2026-01-07 19:46:09.581 RedLemon[23307:209824] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-07 19:46:09.583 RedLemon[23307:209824]    Payload keys: senderId, timestamp, position, chatText, type, chatUsername
+2026-01-07 19:46:09.584 RedLemon[23307:209824] ✅ Realtime: Message broadcast complete
+2026-01-07 19:46:09.700 RedLemon[23307:209664] 📨 Realtime: Received broadcast message
+2026-01-07 19:46:09.700 RedLemon[23307:209664]    Payload keys: chatUsername, chatText, type, position, senderId, timestamp
+2026-01-07 19:46:09.701 RedLemon[23307:209664] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-07 19:46:09.701 RedLemon[23307:209664] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-07 19:46:09.701 RedLemon[23307:209664] ✅ Realtime: syncCallback invoked successfully
+2026-01-07 19:46:09.703 RedLemon[23307:209579] 👋 Received: Guest 'ursinho' joined room event_tt0167404
+2026-01-07 19:46:09.910 RedLemon[23307:209579] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-07 19:46:09.910 RedLemon[23307:209579] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-07 19:46:15.286 RedLemon[23307:209579] ❌ Lobby: Room deleted by host (Postgres Event)
+2026-01-07 19:46:15.286 RedLemon[23307:209579] ⚠️ Ignoring Room DELETE signal for event room: event_tt0167404
+2026-01-07 19:46:15.286 RedLemon[23307:209579] ❌ Lobby: Room deleted by host (Postgres Event)
+2026-01-07 19:46:15.286 RedLemon[23307:209579] ⚠️ Ignoring Room DELETE signal for event room: event_tt0167404
+2026-01-07 19:46:17.249 RedLemon[23307:209579] 👋 ursinho left room (confirmed by DB polling)
+✅ Lobby: Connected to Realtime
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"5fc6c514-ec2b-11f0-b989-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia5q8nIac6AmcC","phx_ref_prev":"GIia5nWf5nY6AgQh","last_seen":"2026-01-08T00:46:09.178Z","room_id":"event_tt0167404","started_at":"2026-01-08T00:46:09.179Z","status":"In Lobby: The Sixth Sense","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0167404","watching_title":"The Sixth Sense","watching_type":"movie"}]}},"leaves":{"5fc6c514-ec2b-11f0-b989-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia5nWf5nY6AgQh","phx_ref_prev":"GIia4c2pYIA6AgHB","last_seen":"2026-01-08T00:46:08.211Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"7577A587-C4DE-4573-A5C8-A9D76AEBF91D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":3623021,"event":"*","filter":"id=eq.event_tt0167404","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:event_tt0167404"}
+❌ Supabase error (409): {"code":"23505","details":null,"hint":null,"message":"duplicate key value violates unique constraint \"room_participants_pkey\""}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:event_tt0167404"},"topic":"realtime:watch-party:event_tt0167404"}
+✅ Lobby: Synced playlist with 0 items
+📨 Received: {"ref":null,"event":"presence_state","payload":{"195a9c68-ec2b-11f0-be9c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiaxlkYq746AmPC","phx_ref_prev":"GIiaxkmI0HQ6AuID","is_host":false,"joined_at":1767833030.215047,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt0167404"}
+✅ Lobby: Synced playlist index to 0
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0167404"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6c4cdea4-ec2b-11f0-933a-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia5rAt2UY6AgUB","is_host":false,"joined_at":1767833169.183671,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0167404"}
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt0167404
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: The Sixth Sense
+🔍 [DEBUG] Successfully created MediaItem from meta: The Sixth Sense
+✅ Lobby: Loaded metadata for The Sixth Sense
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+🎬 Event room detected - auto-starting playback
+🤖 Lobby: Checking auto-start for system event
+   Room ID: event_tt0167404
+   Room createdAt: 2026-01-08 00:48:30 +0000
+   Current time: 2026-01-08 00:46:09 +0000
+   Time until start: 140.54867494106293s
+⏳ Lobby: Event starts in 140s. Waiting...
+🔌 Setting up Realtime channel: watch-party:event_tt0167404
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:event_tt0167404, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0167404"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6c4cdea4-ec2b-11f0-933a-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia5sW7tXo6AgUh","phx_ref_prev":"GIia5rAt2UY6AgUB","is_host":false,"joined_at":1767833169.56208,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"6c4cdea4-ec2b-11f0-933a-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia5rAt2UY6AgUB","is_host":false,"joined_at":1767833169.183671,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt0167404"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0167404"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "event_tt0167404", "name": "The Sixth Sense", "season": null, "episode": null, "imdb_id": "tt0167404", "playlist": [], "is_public": true, "created_at": "2026-01-08T00:43:49.41802", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt0167404/img", "description": null, "stream_hash": "cf4b469f86b9fbf31660431bdf6b451182486b19", "backdrop_url": "https://images.metahub.space/background/medium/tt0167404/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": "http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI0Njg4NDktMTA2Mzkuemlw?token=C77AF270-E77A-40B1-B2CE-2A89812216CB", "host_username": "RedLemon Events", "last_activity": "2026-01-08T00:46:09.729668", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi7-4.download.real-debrid.com/d/PDEMFJ42LG4FA42/The.Sixth.Sense.1999.1080p.BluRay.x264.DTS-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-08T00:46:09.735Z","old_record":{"id": "event_tt0167404"}},"ids":[3623021]},"topic":"realtime:watch-party:event_tt0167404"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced playlist with 0 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 0 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"195a9c68-ec2b-11f0-be9c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiaxlkYq746AmPC","phx_ref_prev":"GIiaxkmI0HQ6AuID","is_host":false,"joined_at":1767833030.215047,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:event_tt0167404"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"12803cf4-ec2b-11f0-a225-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia6As4-Vo6Amci","phx_ref_prev":"GIia5DR7pO06AmbC","last_seen":"2026-01-08T00:46:14.928Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"12803cf4-ec2b-11f0-a225-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia5DR7pO06AmbC","phx_ref_prev":"GIia34ysYSU6AmaC","last_seen":"2026-01-08T00:45:58.449Z","room_id":"event_tt0167404","started_at":"2026-01-08T00:43:49.936Z","status":"In Lobby: The Sixth Sense","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0167404","watching_title":"The Sixth Sense","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"DELETE","columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-08T00:46:15.161Z","old_record":{"id": "event_tt0167404"}},"ids":[3623021]},"topic":"realtime:watch-party:event_tt0167404"}
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"12803cf4-ec2b-11f0-a225-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia6Jk2mzw6AmdC","phx_ref_prev":"GIia6As4-Vo6Amci","last_seen":"2026-01-08T00:46:17.315Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"12803cf4-ec2b-11f0-a225-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia6As4-Vo6Amci","phx_ref_prev":"GIia5DR7pO06AmbC","last_seen":"2026-01-08T00:46:14.928Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 132 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"12803cf4-ec2b-11f0-a225-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia6NzNEy46AgXh","phx_ref_prev":"GIia6Jk2mzw6AmdC","last_seen":"2026-01-08T00:46:18.450Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"12803cf4-ec2b-11f0-a225-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia6Jk2mzw6AmdC","phx_ref_prev":"GIia6As4-Vo6Amci","last_seen":"2026-01-08T00:46:17.315Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 122 seconds
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"5fc6c514-ec2b-11f0-b989-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia6x2BXDM6AgaB","phx_ref_prev":"GIia5q8nIac6AmcC","last_seen":"2026-01-08T00:46:28.212Z","room_id":"event_tt0167404","started_at":"2026-01-08T00:46:09.179Z","status":"In Lobby: The Sixth Sense","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0167404","watching_title":"The Sixth Sense","watching_type":"movie"}]}},"leaves":{"5fc6c514-ec2b-11f0-b989-9ee62e3b7bba":{"metas":[{"phx_ref":"GIia5q8nIac6AmcC","phx_ref_prev":"GIia5nWf5nY6AgQh","last_seen":"2026-01-08T00:46:09.178Z","room_id":"event_tt0167404","started_at":"2026-01-08T00:46:09.179Z","status":"In Lobby: The Sixth Sense","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0167404","watching_title":"The Sixth Sense","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}

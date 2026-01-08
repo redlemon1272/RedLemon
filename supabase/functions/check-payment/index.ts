@@ -1,25 +1,19 @@
-
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-// APIs
 const MEMPOOL_API = 'https://mempool.space/api/address'
-const ETH_RPC = 'https://rpc.ankr.com/eth'
-const SOL_RPC = 'https://api.mainnet-beta.solana.com'
 
-serve(async (req: Request) => {
+export const handler = async (req: Request) => {
     if (req.method === 'OPTIONS') {
         return new Response('ok', { headers: corsHeaders })
     }
 
     try {
-        // 1. Auth & Setup
-        // Fallback: If no Auth Token (Client doesn't have one), check for explicit user_id in body
         const reqBody = await req.json().catch(() => ({}))
         let userId = ''
 
@@ -166,6 +160,7 @@ serve(async (req: Request) => {
 
         let totalNewUsdValue = 0
         const newTransactionsToLog: any[] = []
+        const paymentDetectedPools = new Set<string>()
 
         // For each current asset, subtract what we've already seen
         for (const asset of currentAssets) {
@@ -175,7 +170,6 @@ serve(async (req: Request) => {
                 .reduce((sum: number, t: any) => sum + Number(t.amount), 0) || 0
 
             const newAmount = asset.amountFloat - prevSum // Compare Floats logic.
-            // Note: storing Floats in 'amount' column (Numeric) is fine.
 
             if (newAmount > 0.000001) { // Epsilon check
                 let usdVal = 0
@@ -192,6 +186,12 @@ serve(async (req: Request) => {
                     amount: newAmount, // Log the DELTA
                     tx_hash: `detected_${Date.now()}_${asset.chain}_${asset.currency}`
                 })
+
+                if (asset.currency === 'BTC') {
+                    paymentDetectedPools.add('btc')
+                } else {
+                    paymentDetectedPools.add('evm')
+                }
             }
         }
 
@@ -228,6 +228,15 @@ serve(async (req: Request) => {
                     })
                     .eq('id', userId)
 
+                // Archive used pools used to force rotation
+                if (paymentDetectedPools.size > 0) {
+                    await supabaseAdmin
+                        .from('payment_pools')
+                        .update({ status: 'used' })
+                        .eq('assigned_to_user_id', userId)
+                        .in('chain', Array.from(paymentDetectedPools))
+                }
+
                 return new Response(JSON.stringify({
                     success: true,
                     premium: true,
@@ -263,4 +272,4 @@ serve(async (req: Request) => {
             status: 400,
         })
     }
-})
+}

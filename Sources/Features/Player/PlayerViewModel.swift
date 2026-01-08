@@ -1194,8 +1194,47 @@ class PlayerViewModel: ObservableObject {
         do {
             let roomState = try await roomManager.getRoomState(roomId: roomId)
 
-            guard let room = roomState else {
-                NSLog("❌ Room not found: \(roomId)")
+            var room = roomState
+
+            // REVIVAL LOGIC: If Event Room is missing, recreate it JIT so friend can join
+            if room == nil, roomId.hasPrefix("event_") {
+                 NSLog("👻 Room \(roomId) not found - Attempting REVIVAL for Event Join...")
+                 let imdbId = roomId.replacingOccurrences(of: "event_", with: "")
+                 if !imdbId.isEmpty {
+                     // 1. Fetch Metadata
+                     if let meta = try? await metadataProvider.fetchMetadata(type: "movie", id: imdbId) { // Try movie first
+                         // 2. Recreate Room
+                         let mediaItem = MediaItem(
+                             id: meta.id,
+                             type: meta.type,
+                             name: meta.title,
+                             poster: meta.posterURL,
+                             background: meta.backgroundURL,
+                             logo: meta.logoURL, description: meta.description, releaseInfo: meta.releaseInfo, year: meta.year, imdbRating: String(meta.imdbRating ?? 0), genres: meta.genres, runtime: meta.runtime
+                         )
+                         
+                         // Re-use creation logic (this creates it in DB)
+                         if let newRoom = try? await performRoomCreation(
+                             roomManager: roomManager,
+                             roomId: roomId,
+                             roomName: meta.title,
+                             userId: appState.currentUserId ?? UUID(),
+                             hostUsername: "RedLemon Events", // System Host Name
+                             mediaItem: mediaItem,
+                             finalSeason: nil,
+                             finalEpisode: nil,
+                             isPublic: true,
+                             description: "System Event"
+                         ) {
+                             NSLog("✨ REVIVAL SUCCESS: Room \(roomId) restored!")
+                             room = newRoom
+                         }
+                     }
+                 }
+            }
+
+            guard let room = room else {
+                NSLog("❌ Room not found (and revival failed): \(roomId)")
                 await MainActor.run { appState.isLoadingRoom = false }
                 return
             }

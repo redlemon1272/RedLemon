@@ -41,6 +41,21 @@ This document clarifies the fundamental distinction between **User Hosted Watch 
 
 **Use Case**: "Friday Night Horror Marathon" or "24/7 Action Channel".
 
+## 3. Joinability & "Dead Rooms"
+
+A critical distinction exists in how joining is handled when the "Host" is missing or the event is "Finished":
+
+### User Hosted "Dead Rooms"
+*   **Definition**: A room where the original Host has left the session.
+*   **Behavior**: The room is considered "Dead". The system **blocks** new users from joining to prevent them from entering an empty, standardless state.
+*   **Logic**: `SocialService` checks if `host_user_id` is present in the participant list. If missing -> Join blocked.
+
+### System Hosted Events (Always Joinable)
+*   **Definition**: A persistent event room (e.g., `event_tt12345`).
+*   **Behavior**: These rooms are **Always Joinable**, even if the "Event Finished" badge is shown in the UI.
+*   **Logic**: The system bypasses the "Host Check" for any room ID starting with `event_`.
+*   **Use Case**: You can always join a friend who is lingering in an event lobby, even if the scheduled movie has ended.
+
 ## Confusion Avoidance
 
 *   **Variables**: Avoid generic names like `event` or `session`. Use `room` for watch parties and `eventSlot` or `broadcast` for system events.

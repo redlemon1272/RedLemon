@@ -1,0 +1,682 @@
+2026-01-08 16:41:37.182 RedLemon[9321:123449] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-08 16:41:37.182 RedLemon[9321:123449] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-08 16:41:37.279 RedLemon[9321:123523] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-08 16:41:37.279 RedLemon[9321:123449] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-08 16:41:37.341 RedLemon[9321:123449] ✅ Playback state reset complete - starting in browse view
+2026-01-08 16:41:37.341 RedLemon[9321:123449] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-08 16:41:37.341 RedLemon[9321:123449] 🧪 Testing Profile: debug
+2026-01-08 16:41:37.341 RedLemon[9321:123524] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-08 16:41:37.342 RedLemon[9321:123449] ✅ Keychain: Found stored username: ursinho
+2026-01-08 16:41:37.342 RedLemon[9321:123449] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-08 16:41:37.342 RedLemon[9321:123520] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-08 16:41:37.932 RedLemon[9321:123523] 📡 SupabaseClient: User lookup response received (332 bytes)
+2026-01-08 16:41:37.942 RedLemon[9321:123523] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-08 16:41:37.942 RedLemon[9321:123523] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 16:41:37.990 RedLemon[9321:123449] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 16:41:37.991 RedLemon[9321:123449] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:41:37.991 RedLemon[9321:123449] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:41:37.991 RedLemon[9321:123449] 🚀 RedLemon: Starting HTTP server...
+2026-01-08 16:41:37.991 RedLemon[9321:123449] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-08 16:41:38.016 RedLemon[9321:123449] ✅ RedLemon: HTTPServer instance created
+2026-01-08 16:41:38.017 RedLemon[9321:123523] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📂 Loaded 5 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"B0C7F0B5-3FE0-4F7A-BD5F-D2A25894E68F","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-08 16:41:38.280 RedLemon[9321:123449] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 16:41:40.036 RedLemon[9321:123449] ✅ RedLemon: Server marked as ready
+2026-01-08 16:41:40.083 RedLemon[9321:123449] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-08 16:41:40.083 RedLemon[9321:123449] 🔍 Performing startup checks...
+2026-01-08 16:41:40.083 RedLemon[9321:123449] ✅ Username-based authentication ready
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+✅ [EventsView] Loaded 411 movies from config version 1486
+🗓 AppState: Updated schedule epoch to 2026-01-04 23:43:30 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 2092 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt3065204/img (841877 bytes)
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 2091 seconds
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"D159C73D-F90E-4CF3-ADE2-E182AC24789C","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfaGOO3Bc6Ak9C","phx_ref_prev":"GIjfY7sib9c6Ak5i","last_seen":"2026-01-08T21:41:32.992Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 2091 seconds
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"d0b28d94-ecda-11f0-9d83-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfaeeUodg6AlHC","last_seen":"2026-01-08T21:41:39.504Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"2259AE0B-0307-4248-BE42-6B52CCF5AD01","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+💰 LicenseManager: Checking for background crypto payments...
+🔄 SocialService: Syncing 43 items to cloud...
+🔄 SocialService: Syncing 43 items to cloud (serial)...
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: D1571399-5C84-425A-9601-B70F400EF45D]
+2026-01-08 16:41:41.448 RedLemon[9321:123449] 🔍 Performing startup checks...
+2026-01-08 16:41:41.448 RedLemon[9321:123449] ✅ Username-based authentication ready
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+📡 SocialService: Updated status - Browsing: 
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"d0b28d94-ecda-11f0-9d83-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfakqfUpY6AlMC","phx_ref_prev":"GIjfaeeUodg6AlHC","last_seen":"2026-01-08T21:41:41.162Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"d0b28d94-ecda-11f0-9d83-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfaeeUodg6AlHC","last_seen":"2026-01-08T21:41:39.504Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[],"prices":{"btc":91061,"eth":3115.915},"logs":[],"rpc_logs":["Scanning evm address: 0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4","base eth_getBalance: 0x0","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","arb eth_getBalance: 0x0"]}}
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31495504
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Der Tiger
+🔍 [DEBUG] Successfully created MediaItem: Der Tiger
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1757678
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Avatar: Fire and Ash
+🔍 [DEBUG] Successfully created MediaItem: Avatar: Fire and Ash
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32820897
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Successfully created MediaItem: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt10799690
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Trap House
+🔍 [DEBUG] Successfully created MediaItem: Trap House
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30254719
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Successfully created MediaItem: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29927663
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Great Flood
+🔍 [DEBUG] Successfully created MediaItem: The Great Flood
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt13186306
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: War of the Worlds
+🔍 [DEBUG] Successfully created MediaItem: War of the Worlds
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt4712810
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Now You See Me: Now You Don't
+🔍 [DEBUG] Successfully created MediaItem: Now You See Me: Now You Don't
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29538620
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Bang
+🔍 [DEBUG] Successfully created MediaItem: Bang
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27543632
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Housemaid
+🔍 [DEBUG] Successfully created MediaItem: The Housemaid
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt34610311
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Shadow's Edge
+🔍 [DEBUG] Successfully created MediaItem: The Shadow's Edge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt19847976
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Wicked: For Good
+🔍 [DEBUG] Successfully created MediaItem: Wicked: For Good
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32395062
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Muzzle: City of Wolves
+🔍 [DEBUG] Successfully created MediaItem: Muzzle: City of Wolves
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+✅ Loaded 15 movies
+🧹 Deduplication: 43 → 42 items
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0114369/img (23575 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt5622412/img (30779 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0381707/img (31688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1104001/img (11618 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0209163/img (32061 bytes)
+🖼️ [CACHE] Cached image data for key: https://m.media-amazon.com/images/M/MV5BMzcwMjkxMzQ3NV5BMl5BanBnXkFtZTgwMzgyNDA5MDI@._V1_SX250.jpg (25509 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2333784/img (28486 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2872732/img (16390 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0162222/img (38190 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0167404/img (16366 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2404435/img (31114 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10545296/img (37667 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4881806/img (15928 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3065204/img (12736 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0172156/img (32093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (53296 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30254719/img (39370 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0462538/img (39518 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🚀 Quick batch loaded: 7 items for trending
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29927663/img (36770 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[],"prices":{"btc":91061,"eth":3115.915},"logs":[],"rpc_logs":["Scanning evm address: 0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0x0","arb eth_getBalance: 0x0"]}}
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301552189/s332/img (59500 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/88761237/s332/img (60727 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331126481/s332/img (53646 bytes)
+🖼️ [CACHE] Cached image data for key: https://image2026-01-08 16:41:42.670 RedLemon[9321:123449] 🔄 Checking for app updates...
+2026-01-08 16:41:49.501 RedLemon[9321:123449] 🎬 Creating Watch Party for: Tron: Legacy
+2026-01-08 16:41:49.502 RedLemon[9321:123633] Background: ⏳ Starting room creation (Unstructured Race)...
+2026-01-08 16:41:49.503 RedLemon[9321:123633] Background: ▶️ createRoom task started (Direct Singleton Access)
+2026-01-08 16:41:49.503 RedLemon[9321:123633] 🎬 SupabaseClient: createRoom called for id: SDH2 - ENTRY
+2026-01-08 16:41:49.504 RedLemon[9321:123633] 🎬 SupabaseClient: Creating room 'SDH2' for host 'ursinho'...
+2026-01-08 16:41:49.506 RedLemon[9321:123633] 🔐 Signed request to /rooms
+2026-01-08 16:41:50.033 RedLemon[9321:123524] Background: ❌ createRoom task failed: userMessage("Free User Limit Reached: You can host 1 item every 72 hours. Unlock in 23 hours 47 minutes.")
+2026-01-08 16:41:50.033 RedLemon[9321:123449] ❌ Creation failed or timed out: userMessage("Free User Limit Reached: You can host 1 item every 72 hours. Unlock in 23 hours 47 minutes.")
+2026-01-08 16:41:50.033 RedLemon[9321:123449] ❌ Failed to create room: userMessage("Free User Limit Reached: You can host 1 item every 72 hours. Unlock in 23 hours 47 minutes.")
+2026-01-08 16:41:58.278 RedLemon[9321:123680] Background: ⏰ Timeout fired! Attempting to fail continuation...
+2026-01-08 16:42:09.172 RedLemon[9321:123524] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-08 16:42:09.172 RedLemon[9321:123524] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+s.justwatch.com/poster/275806222/s332/img (48443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/245030423/s332/img (72818 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332277457/s332/img (66967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/333077339/s332/img (29437 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309786652/s332/img (45440 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335063930/s332/img (28802 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328602380/s332/img (48174 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327223699/s332/img (31103 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/132935108/s332/img (72135 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/173938174/s332/img (31756 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340614766/s332/img (62961 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315638406/s332/img (49093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175817145/s332/img (34253 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336295680/s332/img (36731 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330298309/s332/img (59242 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243656762/s332/img (42262 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336243710/s332/img (29619 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302449148/s332/img (66514 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/241779763/s332/img (48752 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331994893/s332/img (37258 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301592778/s332/img (49084 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176275502/s332/img (71523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8730058/s332/img (44044 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331244585/s332/img (35639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321552009/s332/img (34807 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320977032/s332/img (29350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331327178/s332/img (38639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243951303/s332/img (42607 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176677346/s332/img (63974 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331924998/s332/img (45255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312291378/s332/img (26090 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315672113/s332/img (80512 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338962154/s332/img (51864 bytes)
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12300742/img (13162 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29567915/img (28516 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31193180/img (27098 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (19894 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+✅ TimeService: Synced! Offset: 0.126s (RTT: 126ms)
+   Local:  2026-01-08 21:41:43 +0000
+   Server: 2026-01-08 21:41:43 +0000
+📼 Resume playback called - mode: watchParty, shouldResume: false, timestamp: 7506.15376236725s
+✅ Cleared resumeFromTimestamp - starting from beginning
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+❌ Supabase API Error: Free User Limit Reached: You can host 1 item every 72 hours. Unlock in 23 hours 47 minutes.
+✅ checkFreeTierLimit: No history found
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 2080 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfbQtdDTU6AlPC","phx_ref_prev":"GIjfaGOO3Bc6Ak9C","last_seen":"2026-01-08T21:41:52.992Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfaGOO3Bc6Ak9C","phx_ref_prev":"GIjfY7sib9c6Ak5i","last_seen":"2026-01-08T21:41:32.992Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 2071 seconds
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"d0b28d94-ecda-11f0-9d83-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfbo_Jzek6AlPi","phx_ref_prev":"GIjfakqfUpY6AlMC","last_seen":"2026-01-08T21:41:59.507Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"d0b28d94-ecda-11f0-9d83-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfakqfUpY6AlMC","phx_ref_prev":"GIjfaeeUodg6AlHC","last_seen":"2026-01-08T21:41:41.162Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+⚠️ Zilean Health Check returned status: 404
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 2061 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✅ checkFreeTierLimit: No history found
+🚫 Subscription revoked or inactive.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfcbOr1EM6AlTi","phx_ref_prev":"GIjfbQtdDTU6AlPC","last_seen":"2026-01-08T21:42:12.993Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfbQtdDTU6AlPC","phx_ref_prev":"GIjfaGOO3Bc6Ak9C","last_seen":"2026-01-08T21:41:52.992Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+[2026-01-08T21:42:16Z] [INFO] [PremiumPaymentView.swift:329] ✅ Address assigned for evm: 0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4
+[2026-01-08T21:42:16Z] [DEBUG] [PremiumPaymentView.swift:415] 📱 Generating QR for URI: 0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4
+[2026-01-08T21:42:16Z] [DEBUG] [PremiumPaymentView.swift:415] 📱 Generating QR for URI: ethereum:0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4?value=1283835072127459&amount=0.00128384
+✅ checkFreeTierLimit: No history found
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 2051 seconds
+[2026-01-08T21:42:19Z] [DEBUG] [PremiumPaymentView.swift:415] 📱 Generating QR for URI: ethereum:0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4?value=1283835072127459&amount=0.00128384
+[2026-01-08T21:42:20Z] [DEBUG] [PremiumPaymentView.swift:415] 📱 Generating QR for URI: ethereum:0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4?value=1283835072127459&amount=0.00128384
+[2026-01-08T21:42:20Z] [DEBUG] [PremiumPaymentView.swift:415] 📱 Generating QR for URI: ethereum:0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4?value=1283835072127459&amount=0.00128384
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"d0b28d94-ecda-11f0-9d83-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfc2qdrZM6AlVC","phx_ref_prev":"GIjfbo_Jzek6AlPi","last_seen":"2026-01-08T21:42:20.356Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"d0b28d94-ecda-11f0-9d83-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfbo_Jzek6AlPi","phx_ref_prev":"GIjfakqfUpY6AlMC","last_seen":"2026-01-08T21:41:59.507Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🚫 Subscription revoked or inactive.
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+✅ Cache HIT: Catalog[popular_movies_fixed]
+✅ Loaded 15 movies
+🧹 Deduplication: 43 → 42 items
+📡 SocialService: Updated status - Browsing: 
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"d0b28d94-ecda-11f0-9d83-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfc34qBkQ6AlVi","phx_ref_prev":"GIjfc2qdrZM6AlVC","last_seen":"2026-01-08T21:42:20.684Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"d0b28d94-ecda-11f0-9d83-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfc2qdrZM6AlVC","phx_ref_prev":"GIjfbo_Jzek6AlPi","last_seen":"2026-01-08T21:42:20.356Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0462538/img (39518 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1104001/img (11618 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt5622412/img (30779 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0381707/img (31688 bytes)
+🖼️ [CACHE] Cached image data for key: https://m.media-amazon.com/images/M/MV5BMzcwMjkxMzQ3NV5BMl5BanBnXkFtZTgwMzgyNDA5MDI@._V1_SX250.jpg (25509 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0209163/img (32061 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2333784/img (28486 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0114369/img (23575 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0162222/img (38190 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0167404/img (16366 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2872732/img (16390 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10545296/img (37667 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4881806/img (15928 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0172156/img (32093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3065204/img (12736 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (53296 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30254719/img (39370 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2404435/img (31114 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+✅ Cache HIT: Catalog[quick_movie_stz.json_7]
+✅ Cache HIT: Catalog[quick_movie_atp.json_7]
+✅ Cache HIT: Catalog[quick_movie_amp.json_7]
+✅ Cache HIT: Catalog[quick_movie_nfx.json_7]
+✅ Cache HIT: Catalog[quick_movie_top.json_7]
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29927663/img (36770 bytes)
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+✅ Cache HIT: Catalog[catalog_movie_stz.json]
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+✅ Cache HIT: Catalog[catalog_movie_atp.json]
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for netflix
+✅ Cache HIT: Catalog[catalog_movie_amp.json]
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+✅ Cache HIT: Catalog[catalog_movie_nfx.json]
+🚀 Quick batch loaded: 7 items for trending
+✅ Cache HIT: Catalog[catalog_movie_top.json]
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/333077339/s332/img (29437 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331126481/s332/img (53646 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336243710/s332/img (29619 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330298309/s332/img (59242 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336295680/s332/img (36731 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331327178/s332/img (38639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320977032/s332/img (29350 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243951303/s332/img (42607 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331924998/s332/img (45255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176677346/s332/img (63974 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312291378/s332/img (26090 bytes)
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327223699/s332/img (31103 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335063930/s332/img (28802 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328602380/s332/img (48174 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/275806222/s332/img (48443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309786652/s332/img (45440 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301552189/s332/img (59500 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/245030423/s332/img (72818 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/88761237/s332/img (60727 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340614766/s332/img (62961 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/132935108/s332/img (72135 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/173938174/s332/img (31756 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175817145/s332/img (34253 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243656762/s332/img (42262 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331244585/s332/img (35639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315638406/s332/img (49093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8730058/s332/img (44044 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/241779763/s332/img (48752 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331994893/s332/img (37258 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301592778/s332/img (49084 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302449148/s332/img (66514 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176275502/s332/img (71523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321552009/s332/img (34807 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332277457/s332/img (66967 bytes)

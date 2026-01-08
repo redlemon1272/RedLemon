@@ -1,0 +1,1587 @@
+2026-01-08 16:47:39.960 RedLemon[9712:126623] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-08 16:47:39.960 RedLemon[9712:126623] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-08 16:47:40.035 RedLemon[9712:126623] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-08 16:47:40.037 RedLemon[9712:126685] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-08 16:47:40.075 RedLemon[9712:126623] ✅ Playback state reset complete - starting in browse view
+2026-01-08 16:47:40.076 RedLemon[9712:126623] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-08 16:47:40.076 RedLemon[9712:126623] 🧪 Testing Profile: debug
+2026-01-08 16:47:40.076 RedLemon[9712:126681] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-08 16:47:40.110 RedLemon[9712:126623] ✅ Keychain: Found stored username: ursinho
+2026-01-08 16:47:40.110 RedLemon[9712:126623] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-08 16:47:40.110 RedLemon[9712:126706] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-08 16:47:40.669 RedLemon[9712:126681] 📡 SupabaseClient: User lookup response received (332 bytes)
+2026-01-08 16:47:40.677 RedLemon[9712:126681] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-08 16:47:40.678 RedLemon[9712:126681] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 16:47:40.720 RedLemon[9712:126623] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 16:47:40.720 RedLemon[9712:126623] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:47:40.720 RedLemon[9712:126623] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:47:40.720 RedLemon[9712:126623] 🚀 RedLemon: Starting HTTP server...
+2026-01-08 16:47:40.721 RedLemon[9712:126623] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-08 16:47:40.742 RedLemon[9712:126623] ✅ RedLemon: HTTPServer instance created
+2026-01-08 16:47:40.743 RedLemon[9712:126681] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+📂 Loaded 5 credential(s) from cache
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"D599C954-5BAE-4E8F-83AB-16A342441632","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-08 16:47:41.029 RedLemon[9712:126623] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 16:47:42.884 RedLemon[9712:126623] ✅ RedLemon: Server marked as ready
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+✅ [EventsView] Loaded 411 movies from config version 1486
+🗓 AppState: Updated schedule epoch to 2026-01-04 23:43:30 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 1729 seconds
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt3065204/img (841877 bytes)
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 1729 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 1729 seconds
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"B6D34057-5624-4B06-8880-96CC9773B6E7","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfvDWqxC46AluC","phx_ref_prev":"GIjft413bf46Alti","last_seen":"2026-01-08T21:47:33.000Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfvll3_tA6AvDD","last_seen":"2026-01-08T21:47:42.179Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 SocialService: Updated status - Browsing: 
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfvmdgmUQ6AvDj","phx_ref_prev":"GIjfvll3_tA6AvDD","last_seen":"2026-01-08T21:47:42.418Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfvll3_tA6AvDD","last_seen":"2026-01-08T21:47:42.179Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"A9952D07-80DF-421E-84F8-D22AD137FA0E","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+🔄 SocialService: Syncing 43 items to cloud...
+🔄 SocialService: Syncing 43 items to cloud (serial)...
+🚀 Quick batch loaded: 7 items for trending
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: 8F884E65-2041-48EA-8FA3-CE220AB0706E]
+2026-01-08 16:47:42.993 RedLemon[9712:126623] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-08 16:47:42.993 RedLemon[9712:126623] 🔍 Performing startup checks...
+2026-01-08 16:47:42.993 RedLemon[9712:126623] ✅ Username-based authentication ready
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+💰 LicenseManager: Checking for background crypto payments...
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31495504
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Der Tiger
+🔍 [DEBUG] Successfully created MediaItem: Der Tiger
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1757678
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Avatar: Fire and Ash
+🔍 [DEBUG] Successfully created MediaItem: Avatar: Fire and Ash
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32820897
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Successfully created MediaItem: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt10799690
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Trap House
+🔍 [DEBUG] Successfully created MediaItem: Trap House
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30254719
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Successfully created MediaItem: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29927663
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Great Flood
+🔍 [DEBUG] Successfully created MediaItem: The Great Flood
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt13186306
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: War of the Worlds
+🔍 [DEBUG] Successfully created MediaItem: War of the Worlds
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt4712810
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Now You See Me: Now You Don't
+🔍 [DEBUG] Successfully created MediaItem: Now You See Me: Now You Don't
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29538620
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Bang
+🔍 [DEBUG] Successfully created MediaItem: Bang
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27543632
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Housemaid
+🔍 [DEBUG] Successfully created MediaItem: The Housemaid
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt34610311
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Shadow's Edge
+🔍 [DEBUG] Successfully created MediaItem: The Shadow's Edge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt19847976
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Wicked: For Good
+🔍 [DEBUG] Successfully created MediaItem: Wicked: For Good
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32395062
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Muzzle: City of Wolves
+🔍 [DEBUG] Successfully created MediaItem: Muzzle: City of Wolves
+📊 Using fixed catalog size: 15 items
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+✅ Loaded 15 movies
+🧹 Deduplication: 43 → 42 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301552189/s332/img (59500 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309786652/s332/img (45440 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/245030423/s332/img (72818 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/88761237/s332/img (60727 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/275806222/s332/img (48443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327223699/s332/img (31103 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340614766/s332/img (62961 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335063930/s332/img (28802 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332277457/s332/img (66967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328602380/s332/img (48174 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/132935108/s332/img (72135 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315638406/s332/img (49093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175817145/s332/img (34253 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/173938174/s332/img (31756 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243656762/s332/img (42262 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302449148/s332/img (66514 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/241779763/s332/img (48752 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8730058/s332/img (44044 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331244585/s332/img (35639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301592778/s332/img (49084 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176275502/s332/img (71523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331994893/s332/img (37258 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321552009/s332/img (34807 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12300742/img (13162 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29567915/img (28516 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0114369/img (23575 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2333784/img (28486 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (19894 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31193180/img (27098 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1104001/img (11618 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (53296 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt5622412/img (30779 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2872732/img (16390 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0381707/img (31688 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4881806/img (15928 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3065204/img (12736 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0167404/img (16366 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2404435/img (31114 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0209163/img (32061 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0462538/img (39518 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0172156/img (32093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30254719/img (39370 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10545296/img (37667 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0162222/img (38190 bytes)
+🖼️ [CACHE] Cached image data for key: https://m.media-amazon.com/images/M/MV5BMzcwMjkxMzQ3NV5BMl5BanBnXkFtZTgwMzgyNDA5MDI@._V1_SX250.jpg (25509 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/333077339/s332/img (29437 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331126481/s332/img (53646 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320977032/s332/img (29350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243951303/s332/img (42607 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312291378/s332/img (26090 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331924998/s332/img (45255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331327178/s332/img (38639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338962154/s332/img (51864 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CAC2026-01-08 16:47:44.549 RedLemon[9712:126623] 🔍 Performing startup checks...
+2026-01-08 16:47:44.549 RedLemon[9712:126623] ✅ Username-based authentication ready
+2026-01-08 16:47:45.211 RedLemon[9712:126623] 🔄 Checking for app updates...
+2026-01-08 16:47:50.039 RedLemon[9712:126623] 🎬 Creating Watch Party for: Tron: Legacy
+2026-01-08 16:47:50.039 RedLemon[9712:126782] Background: ⏳ Starting room creation (Unstructured Race)...
+2026-01-08 16:47:50.040 RedLemon[9712:126782] Background: ▶️ createRoom task started (Direct Singleton Access)
+2026-01-08 16:47:50.040 RedLemon[9712:126782] 🎬 SupabaseClient: createRoom called for id: DG8D - ENTRY
+2026-01-08 16:47:50.042 RedLemon[9712:126782] 🎬 SupabaseClient: Creating room 'DG8D' for host 'ursinho'...
+2026-01-08 16:47:50.043 RedLemon[9712:126782] 🔐 Signed request to /rooms
+2026-01-08 16:47:50.599 RedLemon[9712:126706] ✅ SupabaseClient: Room creation request completed (received response)
+2026-01-08 16:47:50.602 RedLemon[9712:126706] Background: ✅ createRoom task finished
+HE] Cached image data for key: https://images.justwatch.com/poster/315672113/s332/img (80512 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176677346/s332/img (63974 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29927663/img (36770 bytes)
+⏭️ Skipping load for showtime - already loaded 15 items
+⏭️ Skipping load for starz - already loaded 15 items
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+⏭️ Skipping load for peacock - already loaded 15 items
+⏭️ Skipping load for hulu - already loaded 15 items
+⏭️ Skipping load for paramount - already loaded 15 items
+⏭️ Skipping load for hbo - already loaded 15 items
+⏭️ Skipping load for disney - already loaded 15 items
+⏭️ Skipping load for prime - already loaded 15 items
+⏭️ Skipping load for netflix - already loaded 15 items
+⏭️ Skipping load for trending - already loaded 15 items
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[],"prices":{"btc":91206,"eth":3113.885},"logs":[],"rpc_logs":["Scanning evm address: 0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4","base eth_getBalance: 0x0","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","arb eth_getBalance: 0x0"]}}
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+✅ Cache HIT: Catalog[quick_movie_atp.json_7]
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336243710/s332/img (29619 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336295680/s332/img (36731 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330298309/s332/img (59242 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[],"prices":{"btc":91206,"eth":3114.175},"logs":[],"rpc_logs":["Scanning evm address: 0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0x0","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.183s (RTT: 227ms)
+   Local:  2026-01-08 21:47:45 +0000
+   Server: 2026-01-08 21:47:45 +0000
+📼 Resume playback called - mode: watchParty, shouldResume: false, timestamp: 7506.15376236725s
+✅ Cleared resumeFromTimestamp - starting from beginning
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+🎭 Lobby: Connecting to room DG8D...
+🚦 Lobby State: connecting
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+🔌 Setting up Realtime channel: watch-party:DG8D
+   Role: Host
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 SocialService: Updated status - In Lobby: Tron: Legacy: Tron: Legacy
+📡 Connection state: connecting
+[ INFO ] GET /api/metadata/meta/movie/tt1104001 [request-id: CEA75D16-24B5-4CED-92E2-CD47DEAD60BB]
+📡 Joined channel: realtime:watch-party:DG8D
+[ INFO ] GET /api/metadata/meta/movie/tt1104001 [request-id: 788809A7-13FD-4638-BAE7-BFC37B019FB5]
+2026-01-08 16:47:51.048 RedLemon[9712:126706] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-08 16:47:51.214 RedLemon[9712:126706] 📡 SupabaseClient: updateRoomPlaylist called for room DG8D with 1 items, index: 0
+2026-01-08 16:47:51.358 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:47:51.358 RedLemon[9712:126623] ✅ Host re-joined room DG8D in database (refreshing presence)
+2026-01-08 16:47:51.463 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:47:51.464 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:47:51.477 RedLemon[9712:126782] ✅ SupabaseClient: Playlist updated successfully
+2026-01-08 16:47:51.691 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:47:51.691 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:47:57.660 RedLemon[9712:126623] 🎬 Host: Starting movie for 1 participants
+2026-01-08 16:47:57.784 RedLemon[9712:126838] ✅ StreamService: Using provided metadata: Tron: Legacy
+2026-01-08 16:47:57.784 RedLemon[9712:126838] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-08 16:47:57.785 RedLemon[9712:126838] ⚡️ StreamResolver: Resolving streams for tt1104001 (S0E0)
+2026-01-08 16:47:58.066 RedLemon[9712:126710] Background: ⏰ Timeout fired! Attempting to fail continuation...
+2026-01-08 16:47:58.068 RedLemon[9712:126685]    📅 Filtering by year: 2010
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+💾 Cache SET: Metadata[meta_movie_tt1104001]
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt1104001
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: Tron: Legacy
+🔍 [DEBUG] Successfully created MediaItem from meta: Tron: Legacy
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfwGbjOZY6AvKj","phx_ref_prev":"GIjfvmdgmUQ6AvDj","last_seen":"2026-01-08T21:47:50.999Z","room_id":"DG8D","started_at":"2026-01-08T21:47:50.999Z","status":"In Lobby: Tron: Legacy","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfvmdgmUQ6AvDj","phx_ref_prev":"GIjfvll3_tA6AvDD","last_seen":"2026-01-08T21:47:42.418Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Lobby: Loaded metadata for Tron: Legacy
+📨 Received: {"ref":"023FF4C4-F6BA-4C33-BF07-F43FE81CFFB0","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":80987160,"event":"*","filter":"id=eq.DG8D","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:DG8D"}
+✅ Lobby: Synced playlist with 0 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🆕 Lobby: Auto-adding initial item to playlist: Tron: Legacy
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:DG8D"},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ae238af2-ecdb-11f0-836b-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfwGm8oJZF_T9h","is_host":true,"joined_at":1767908871.00705,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DG8D", "name": "Tron: Legacy", "season": null, "episode": null, "imdb_id": "tt1104001", "playlist": [], "is_public": true, "created_at": "2026-01-08T21:47:50.650479", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt1104001/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt1104001/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-08T21:47:51", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-08T21:47:51.328Z","old_record":{"id": "DG8D"}},"ids":[80987160]},"topic":"realtime:watch-party:DG8D"}
+❌ Supabase API Error: duplicate key value violates unique constraint "room_participants_pkey"
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Setting up Realtime channel: watch-party:DG8D
+   Role: Host
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:DG8D, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DG8D", "name": "Tron: Legacy", "season": null, "episode": null, "imdb_id": "tt1104001", "playlist": [{"id": "13FF1720-47AB-497D-B17C-8F3E484E3A10", "mediaItem": {"id": "tt1104001", "logo": "https://images.metahub.space/logo/medium/tt1104001/img", "name": "Tron: Legacy", "type": "movie", "year": "2010", "genres": ["Action", "Adventure", "Sci-Fi"], "poster": "https://images.metahub.space/poster/small/tt1104001/img", "runtime": "126 min", "background": "https://images.metahub.space/background/medium/tt1104001/img", "imdbRating": "6.8", "description": "The son of a computer programmer goes looking for his father and ends up inside the digital world that his father designed. He meets his father's corrupted creation and a unique ally who was born inside the digital world.", "releaseInfo": "2010"}}], "is_public": true, "created_at": "2026-01-08T21:47:50.650479", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt1104001/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt1104001/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-08T21:47:51", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-08T21:47:51.420Z","old_record":{"id": "DG8D"}},"ids":[80987160]},"topic":"realtime:watch-party:DG8D"}
+🚦 Lobby State: connected
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+✅ Lobby: Persisted initial playlist item
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ae238af2-ecdb-11f0-836b-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfwHw9IqdF_fLD","phx_ref_prev":"GIjfwGm8oJZF_T9h","is_host":true,"joined_at":1767908871.359414,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"ae238af2-ecdb-11f0-836b-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfwGm8oJZF_T9h","is_host":true,"joined_at":1767908871.00705,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:DG8D"}
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DG8D", "name": "Tron: Legacy", "season": null, "episode": null, "imdb_id": "tt1104001", "playlist": [{"id": "13FF1720-47AB-497D-B17C-8F3E484E3A10", "mediaItem": {"id": "tt1104001", "logo": "https://images.metahub.space/logo/medium/tt1104001/img", "name": "Tron: Legacy", "type": "movie", "year": "2010", "genres": ["Action", "Adventure", "Sci-Fi"], "poster": "https://images.metahub.space/poster/small/tt1104001/img", "runtime": "126 min", "background": "https://images.metahub.space/background/medium/tt1104001/img", "imdbRating": "6.8", "description": "The son of a computer programmer goes looking for his father and ends up inside the digital world that his father designed. He meets his father's corrupted creation and a unique ally who was born inside the digital world.", "releaseInfo": "2010"}}], "is_public": true, "created_at": "2026-01-08T21:47:50.650479", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt1104001/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt1104001/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-08T21:47:51.681843", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-08T21:47:51.684Z","old_record":{"id": "DG8D"}},"ids":[80987160]},"topic":"realtime:watch-party:DG8D"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 1718 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfwN4aTUM6AlxC","phx_ref_prev":"GIjfvDWqxC46AluC","last_seen":"2026-01-08T21:47:53.000Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfvDWqxC46AluC","phx_ref_prev":"GIjft413bf46Alti","last_seen":"2026-01-08T21:47:33.000Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+[2026-01-08T21:47:54Z] [INFO] [PremiumPaymentView.swift:329] ✅ Address assigned for evm: 0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4
+[2026-01-08T21:47:54Z] [DEBUG] [PremiumPaymentView.swift:415] 📱 Generating QR for URI: 0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4
+[2026-01-08T21:47:54Z] [DEBUG] [PremiumPaymentView.swift:415] 📱 Generating QR for URI: 0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4
+[2026-01-08T21:47:54Z] [DEBUG] [PremiumPaymentView.swift:415] 📱 Generating QR for URI: ethereum:0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4?value=1284449332487738&amount=0.00128445
+✅ checkFreeTierLimit: No history found
+[2026-01-08T21:47:56Z] [DEBUG] [PremiumPaymentView.swift:415] 📱 Generating QR for URI: ethereum:0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4?value=1284449332487738&amount=0.00128445
+[2026-01-08T21:47:56Z] [DEBUG] [PremiumPaymentView.swift:415] 📱 Generating QR for URI: ethereum:0xB2bD160d7a06e505DbC84627Ec32AEb8A5514DA4?value=1284449332487738&amount=0.00128445
+🎬 Resolving & Persisting stream for Watch Party Room: DG8D
+✅ Cache HIT: Metadata[meta_movie_tt1104001]
+[2026-01-08T21:47:57Z] [INFO] [StreamService.swift:72] 🎬 StreamService: Starting resolution for: Tron: Legacy
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+⚡️ StreamResolver: Found Community Verified stream with 1 votes!
+   ℹ️ Hash: 38d7c6358c1bfb522b1c78125c5cf84931f79764
+   ℹ️ Last Verified: 2026-01-07 18:10:15 +0000
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt1104001 (movie)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Attached best sub for 'Community Verified Stream (108...': Tron.Legacy.2010.OPEN.MATTE.10...
+⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.
+⚡️ StreamService: Testing verified stream viability...
+🔓 StreamService: Unlocking with infoHash: 38d7c6358c1b...
+[ INFO ] POST /api/streams/unlock [request-id: 096E7BE9-AE77-4D4B-B49B-DCD9130870C5]
+2026-01-08 16:47:58.438 RedLemon[9712:126838] 🔓 Unlock request: infoHash=38d7c6358c1b..., fileIdx=0
+2026-01-08 16:47:58.438 RedLemon[9712:126838] ✅ Token found, attempting unlock...
+2026-01-08 16:48:00.184 RedLemon[9712:126710] ✅ Unlocked successfully: TRON.Legacy.2010.1080p.BluRay.x264.AAC5.1-[YTS.MX].mp4
+2026-01-08 16:48:00.187 RedLemon[9712:126685] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles...
+2026-01-08 16:48:00.187 RedLemon[9712:126685] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-08 16:48:00.189 RedLemon[9712:126710] 🔍 DEBUG: Processing subtitle URL: /subtitle/3129882-3143267.zip
+2026-01-08 16:48:00.189 RedLemon[9712:126819] 🔍 DEBUG: Processing subtitle URL: /subtitle/3149010-3163360.zip
+2026-01-08 16:48:00.189 RedLemon[9712:126685] 🔍 DEBUG: Processing subtitle URL: /subtitle/3129881-3143268.zip
+2026-01-08 16:48:00.189 RedLemon[9712:126838] 🔍 DEBUG: Processing subtitle URL: /subtitle/3149009-3163361.zip
+2026-01-08 16:48:00.189 RedLemon[9712:126819] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-08 16:48:00.189 RedLemon[9712:126838] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-08 16:48:00.189 RedLemon[9712:126685] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-08 16:48:00.189 RedLemon[9712:126710] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-08 16:48:00.190 RedLemon[9712:126710] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjk4ODItMzE0MzI2Ny56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+2026-01-08 16:48:00.190 RedLemon[9712:126819] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMTAtMzE2MzM2MC56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+2026-01-08 16:48:00.190 RedLemon[9712:126710] 🔍 DEBUG: Processing subtitle URL: /subtitle/3149008-3163362.zip
+2026-01-08 16:48:00.190 RedLemon[9712:126685] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjk4ODEtMzE0MzI2OC56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+2026-01-08 16:48:00.190 RedLemon[9712:126710] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-08 16:48:00.191 RedLemon[9712:126838] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMDktMzE2MzM2MS56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+2026-01-08 16:48:00.191 RedLemon[9712:126710] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMDgtMzE2MzM2Mi56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+2026-01-08 16:48:00.194 RedLemon[9712:126710] 📥 StreamService: Pre-downloading 5 (capped from 5) subtitles for direct stream...
+2026-01-08 16:48:00.194 RedLemon[9712:126710] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-08 16:48:00.195 RedLemon[9712:126838] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjk4ODItMzE0MzI2Ny56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+2026-01-08 16:48:00.195 RedLemon[9712:126819] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMDktMzE2MzM2MS56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+2026-01-08 16:48:00.195 RedLemon[9712:126710] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjk4ODEtMzE0MzI2OC56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+2026-01-08 16:48:00.195 RedLemon[9712:126710] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2026-01-08 16:48:00.195 RedLemon[9712:126685] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMTAtMzE2MzM2MC56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+2026-01-08 16:48:00.195 RedLemon[9712:126838] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2026-01-08 16:48:00.195 RedLemon[9712:126710] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMDgtMzE2MzM2Mi56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+2026-01-08 16:48:00.195 RedLemon[9712:126685] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2026-01-08 16:48:00.195 RedLemon[9712:126710] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2026-01-08 16:48:00.195 RedLemon[9712:126819] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2026-01-08 16:48:00.259 RedLemon[9712:126838] 🔄 SupabaseClient: Resetting playback state for room DG8D
+2026-01-08 16:48:00.555 RedLemon[9712:126819] ✅ Persisted stream selection to room DG8D
+2026-01-08 16:48:00.555 RedLemon[9712:126623] ✅ Host: Stream resolved and persisted OK
+2026-01-08 16:48:00.579 RedLemon[9712:126685] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-08 16:48:00.582 RedLemon[9712:126685]    Payload keys: timestamp, type, chatText, senderId, chatUsername, position
+2026-01-08 16:48:00.583 RedLemon[9712:126838] ✅ Realtime: Message broadcast complete
+2026-01-08 16:48:00.629 RedLemon[9712:126623] ✅ Host: Successfully broadcast LOBBY_START_COUNTDOWN via Realtime
+2026-01-08 16:48:00.629 RedLemon[9712:126623] 📡 Realtime delivery confirmed for 1 guests
+2026-01-08 16:48:00.629 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:48:00.629 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:48:00.708 RedLemon[9712:126710] 📨 Realtime: Received broadcast message
+2026-01-08 16:48:00.708 RedLemon[9712:126710]    Payload keys: chatUsername, position, timestamp, chatText, type, senderId
+2026-01-08 16:48:00.709 RedLemon[9712:126710] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-08 16:48:00.709 RedLemon[9712:126710] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-08 16:48:00.709 RedLemon[9712:126710] ✅ Realtime: syncCallback invoked successfully
+2026-01-08 16:48:00.907 RedLemon[9712:126623] ✅ Host: Set room playback state in database as fallback
+2026-01-08 16:48:00.955 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:48:00.955 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:48:03.562 RedLemon[9712:126623] 🎬 Host: Launching player for Tron: Legacy
+2026-01-08 16:48:03.563 RedLemon[9712:126623] 🖥️ WindowManager: enterFullscreen() called
+2026-01-08 16:48:03.563 RedLemon[9712:126623]    Window: <SwiftUI.SwiftUIWindow: 0x7faf1d206a20>
+2026-01-08 16:48:03.563 RedLemon[9712:126623]    Is fullscreen: 0
+2026-01-08 16:48:03.563 RedLemon[9712:126623]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-08 16:48:03.633 RedLemon[9712:126623] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi4-4.download.real-debrid.com/d/KE3XGHA7NERZU43/TR, subtitles: 5
+2026-01-08 16:48:03.957 RedLemon[9712:126623] 🖼️ Setting up MPV with native macOS video output...
+2026-01-08 16:48:03.964 RedLemon[9712:126623] ✅ MPV initialized with native GPU rendering
+2026-01-08 16:48:03.978 RedLemon[9712:126623] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-08 16:48:03.978 RedLemon[9712:126623] 🎉 Starting watch party sync - Room: DG8D, Host: YES
+2026-01-08 16:48:03.978 RedLemon[9712:126623] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-08 16:48:04.001 RedLemon[9712:126623] 🔄 Starting chat polling for room: DG8D
+2026-01-08 16:48:04.001 RedLemon[9712:126623] 💓 Started playback heartbeat loop
+2026-01-08 16:48:04.001 RedLemon[9712:126623] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-08 16:48:04.001 RedLemon[9712:126623] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-08 16:48:04.001 RedLemon[9712:126623] 🎬🎬🎬 Subtitles: 5
+2026-01-08 16:48:04.002 RedLemon[9712:126623] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Tron: Legacy
+2026-01-08 16:48:04.002 RedLemon[9712:126623] 🎬🎬🎬 streamURL: https://chi4-4.download.real-debrid.com/d/KE3XGHA7NERZU43/TR
+2026-01-08 16:48:04.002 RedLemon[9712:126623] 🎬🎬🎬 subtitles: 5
+2026-01-08 16:48:04.003 RedLemon[9712:126623] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-08 16:48:04.076 RedLemon[9712:126782] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-08 16:48:04.076 RedLemon[9712:126782] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjk4ODEtMzE0MzI2OC56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+2026-01-08 16:48:04.079 RedLemon[9712:126680] 🎬 MPV: Current video filename set to: 
+2026-01-08 16:48:04.080 RedLemon[9712:126680] 🎬 MPV loadVideo called with URL: https://chi4-4.download.real-debrid.com/d/KE3XGHA7 (Encoded: https://chi4-4.download.real-debrid.com/d/KE3XGHA7), autoplay: true, expectedSubs: 3
+2026-01-08 16:48:04.080 RedLemon[9712:126680] 🎬 MPV executing: loadfile "https://chi4-4.download.real-debrid.com/d/KE3XGHA7NERZU43/TRON.Legacy.2010.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4"
+2026-01-08 16:48:04.080 RedLemon[9712:126680] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+✅ RD addMagnet: NBZ7PG4M6KWKG
+🎬 Movie: Found matching file for title 'Tron: Legacy': /TRON.Legacy.2010.1080p.BluRay.x264.AAC5.1-[YTS.MX].mp4
+📝 RD: Selecting file ID 1 for torrent NBZ7PG4M6KWKG
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/VAB2MUYPX6JLQ67A
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Verified stream is VIABLE. Returning immediately.
+📊 Watch Party Queue: Loaded 0 candidate streams for failover
+🎬 Stream Resolution (Attempt 1): Found 1 streams to attempt unlock...
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ Successfully unlocked stream on attempt 1 (Candidate #0)
+📡 Persisting resolved stream to room DG8D...
+✅ Stream persisted! Hash: 38d7c6358c1bfb522b1c78125c5cf84931f79764
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DG8D", "name": "Tron: Legacy", "season": null, "episode": null, "imdb_id": "tt1104001", "playlist": [{"id": "13FF1720-47AB-497D-B17C-8F3E484E3A10", "mediaItem": {"id": "tt1104001", "logo": "https://images.metahub.space/logo/medium/tt1104001/img", "name": "Tron: Legacy", "type": "movie", "year": "2010", "genres": ["Action", "Adventure", "Sci-Fi"], "poster": "https://images.metahub.space/poster/small/tt1104001/img", "runtime": "126 min", "background": "https://images.metahub.space/background/medium/tt1104001/img", "imdbRating": "6.8", "description": "The son of a computer programmer goes looking for his father and ends up inside the digital world that his father designed. He meets his father's corrupted creation and a unique ally who was born inside the digital world.", "releaseInfo": "2010"}}], "is_public": true, "created_at": "2026-01-08T21:47:50.650479", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt1104001/img", "description": null, "stream_hash": "38d7c6358c1bfb522b1c78125c5cf84931f79764", "backdrop_url": "https://images.metahub.space/background/medium/tt1104001/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-08T21:48:00", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": "https://chi4-4.download.real-debrid.com/d/KE3XGHA7NERZU43/TRON.Legacy.2010.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-08T21:48:00.621Z","old_record":{"id": "DG8D"}},"ids":[80987160]},"topic":"realtime:watch-party:DG8D"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DG8D"}
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DG8D", "name": "Tron: Legacy", "season": null, "episode": null, "imdb_id": "tt1104001", "playlist": [{"id": "13FF1720-47AB-497D-B17C-8F3E484E3A10", "mediaItem": {"id": "tt1104001", "logo": "https://images.metahub.space/logo/medium/tt1104001/img", "name": "Tron: Legacy", "type": "movie", "year": "2010", "genres": ["Action", "Adventure", "Sci-Fi"], "poster": "https://images.metahub.space/poster/small/tt1104001/img", "runtime": "126 min", "background": "https://images.metahub.space/background/medium/tt1104001/img", "imdbRating": "6.8", "description": "The son of a computer programmer goes looking for his father and ends up inside the digital world that his father designed. He meets his father's corrupted creation and a unique ally who was born inside the digital world.", "releaseInfo": "2010"}}], "is_public": true, "created_at": "2026-01-08T21:47:50.650479", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt1104001/img", "description": null, "stream_hash": "38d7c6358c1bfb522b1c78125c5cf84931f79764", "backdrop_url": "https://images.metahub.space/background/medium/tt1104001/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-08T21:48:00", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": "https://chi4-4.download.real-debrid.com/d/KE3XGHA7NERZU43/TRON.Legacy.2010.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-08T21:48:00.938Z","old_record":{"id": "DG8D"}},"ids":[80987160]},"topic":"realtime:watch-party:DG8D"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 1708 seconds
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfwwHLr786AvNj","phx_ref_prev":"GIjfwGbjOZY6AvKj","last_seen":"2026-01-08T21:48:02.183Z","room_id":"DG8D","started_at":"2026-01-08T21:47:50.999Z","status":"In Lobby: Tron: Legacy","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfwGbjOZY6AvKj","phx_ref_prev":"GIjfvmdgmUQ6AvDj","last_seen":"2026-01-08T21:47:50.999Z","room_id":"DG8D","started_at":"2026-01-08T21:47:50.999Z","status":"In Lobby: Tron: Legacy","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🛑 LobbyPresence: Polling stopped
+🛑 LobbyDatabase: Polling stopped
+🛑 Lobby: Polling stopped (chat via Realtime only)
+✅ Host: Synced playlist state to AppState (Index: 0)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi4-4.download.real-debrid.com/d/KE3XGHA7NERZU43/TR
+   Display Title: Tron: Legacy
+   Subtitle URLs: 5
+      [0] Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL
+      [1] Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL
+      [2] Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR
+      [3] Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR
+      [4] Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=DG8D, isHost=true
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+☠️ LobbyViewModel deinit
+🔌 Setting up Realtime channel: watch-party:DG8D
+   Role: Host
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:DG8D, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Tron: Legacy
+   IMDB: tt1104001
+   URL: https://chi4-4.download.real-debrid.com/d/KE3XGHA7NERZU43/TR...
+🧹 Clearing previous event state (Non-Event Load)
+   Hash: 38d7c635...
+   Source: BluRay
+💬 Added mock chat messages for testing
+👥 WATCH PARTY (SOLO HOST): Bypass Start Paused - Autoplaying
+🎬 DisplayLink: reportSwap() (throttled)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Fetching metadata for tt1104001 as movie...
+📝 Pre-loading external subtitles (Top 3)...
+✅ Cache HIT: Metadata[meta_movie_tt1104001]
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMjk4ODEtMzE0MzI2OC56aXA= [request-id: 3E4034EF-5D65-4CAB-8DC3-E12C7F19C6EF]
+2026-01-08 16:48:04.481 RedLemon[9712:126623] 💓 Playback heartbeat sent for room: DG8D
+2026-01-08 16:48:04.561 RedLemon[9712:126838] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_95334940-7692-4C4A-BDD7-FB8693FE3CF4.vtt
+2026-01-08 16:48:04.561 RedLemon[9712:126838] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_95334940-7692-4C4A-BDD7-FB8
+2026-01-08 16:48:04.587 RedLemon[9712:126838] ✅ External subtitle added to track list (not auto-selected)
+2026-01-08 16:48:04.587 RedLemon[9712:126838] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjk4ODItMzE0MzI2Ny56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+📄 Subtitle request: L3N1YnRpdGxlLzMxMjk4... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3129881-3143268.zip
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ae238af2-ecdb-11f0-836b-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfw21NCf9F_fPD","phx_ref_prev":"GIjfwHw9IqdF_fLD","is_host":true,"joined_at":1767908883.9903831,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"ae238af2-ecdb-11f0-836b-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfwHw9IqdF_fLD","phx_ref_prev":"GIjfwGm8oJZF_T9h","is_host":true,"joined_at":1767908871.359414,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfw3J4btM6AvPj","phx_ref_prev":"GIjfwwHLr786AvNj","last_seen":"2026-01-08T21:48:04.070Z","room_id":"DG8D","started_at":"2026-01-08T21:48:04.071Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfwwHLr786AvNj","phx_ref_prev":"GIjfwGbjOZY6AvKj","last_seen":"2026-01-08T21:48:02.183Z","room_id":"DG8D","started_at":"2026-01-08T21:47:50.999Z","status":"In Lobby: Tron: Legacy","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt1104001/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1104001/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1104001/img...
+📡 SocialService: Updated status - online: Tron: Legacy
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIjfw21NCf9F_fPD)
+⏳ Participant leaving (grace period started): 656daa91-33b4-4688-9135-c982ea52d7c9
+✅ Download complete: 29521 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL.10bit.x265.HEVC.AC3.6CH.srt
+📦 Extracting specific file: Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL.10bit.x265.HEVC.AC3.6CH.srt
+✅ Extraction successful
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 1706 seconds
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DG8D", "name": "Tron: Legacy", "season": null, "episode": null, "imdb_id": "tt1104001", "playlist": [{"id": "13FF1720-47AB-497D-B17C-8F3E484E3A10", "mediaItem": {"id": "tt1104001", "logo": "https://images.metahub.space/logo/medium/tt1104001/img", "name": "Tron: Legacy", "type": "movie", "year": "2010", "genres": ["Action", "Adventure", "Sci-Fi"], "poster": "https://images.metahub.space/poster/small/tt1104001/img", "runtime": "126 min", "background": "https://images.metahub.space/background/medium/tt1104001/img", "imdbRating": "6.8", "description": "The son of a computer programmer goes looking for his father and ends up inside the digital world that his father designed. He meets his father's corrupted creation and a unique ally who was born inside the digital world.", "releaseInfo": "2010"}}], "is_public": true, "created_at": "2026-01-08T21:47:50.650479", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt1104001/img", "description": null, "stream_hash": "38d7c6358c1bfb522b1c78125c5cf84931f79764", "backdrop_url": "https://images.metahub.space/background/medium/tt1104001/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-08T21:48:04.412474", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": "https://chi4-4.download.real-debrid.com/d/KE3XGHA7NERZU43/TRON.Legacy.2010.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-08T21:48:04.414Z","old_record":{"id": "DG8D"}},"ids":[80987160]},"topic":"realtime:watch-party:DG8D"}
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMjk4ODItMzE0MzI2Ny56aXA= [request-id: DD812619-A47F-46E8-942A-9E10A437842C]
+2026-01-08 16:48:05.040 RedLemon[9712:126680] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_3C4B91E9-648D-4E81-97C3-C3BB91DCBAE5.vtt
+2026-01-08 16:48:05.040 RedLemon[9712:126680] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_3C4B91E9-648D-4E81-97C3-C3B
+2026-01-08 16:48:05.049 RedLemon[9712:126680] ✅ External subtitle added to track list (not auto-selected)
+2026-01-08 16:48:05.049 RedLemon[9712:126680] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMTAtMzE2MzM2MC56aXA=?token=A668EFFF-05FE-4D0F-B519-24DF016CA583
+📄 Subtitle request: L3N1YnRpdGxlLzMxMjk4... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3129882-3143267.zip
+✅ Download complete: 32952 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL.10bit.x265.HEVC.AC3.6CH-SDH.srt
+📦 Extracting specific file: Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL.10bit.x265.HEVC.AC3.6CH-SDH.srt
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMTAtMzE2MzM2MC56aXA= [request-id: C360C499-4021-4D59-B271-DB47E212A27C]
+📄 Subtitle request: L3N1YnRpdGxlLzMxNDkw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3149010-3163360.zip
+[ WARNING ] Abort.503: SubDL download failed [request-id: C360C499-4021-4D59-B271-DB47E212A27C]
+2026-01-08 16:48:05.404 RedLemon[9712:126681] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_41AB2BB1-7D24-4149-B6BE-13627558B0F0.vtt
+2026-01-08 16:48:05.404 RedLemon[9712:126681] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_41AB2BB1-7D24-4149-B6BE-136
+2026-01-08 16:48:05.409 RedLemon[9712:126681] ✅ External subtitle added to track list (not auto-selected)
+2026-01-08 16:48:05.409 RedLemon[9712:126681] 🔍 MPV track-list/count: 3
+2026-01-08 16:48:05.410 RedLemon[9712:126681] 🔍 Track 0 type: sub
+2026-01-08 16:48:05.410 RedLemon[9712:126681] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:05.410 RedLemon[9712:126681] 🔍 Track 1 type: sub
+2026-01-08 16:48:05.410 RedLemon[9712:126681] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:05.411 RedLemon[9712:126681] 🔍 Track 2 type: sub
+2026-01-08 16:48:05.411 RedLemon[9712:126681] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-08 16:48:05.411 RedLemon[9712:126681] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-08 16:48:05.412 RedLemon[9712:126681]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 16:48:05.412 RedLemon[9712:126681]    Start[1]: ID=1, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:05.412 RedLemon[9712:126681]    Start[2]: ID=2, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:05.412 RedLemon[9712:126681]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-08 16:48:05.413 RedLemon[9712:126681] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-08 16:48:05.417 RedLemon[9712:126681]    Track: ID=0, Title=Off, External=0
+2026-01-08 16:48:05.417 RedLemon[9712:126681]    Track: ID=1, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:05.417 RedLemon[9712:126681]    Track: ID=2, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:05.418 RedLemon[9712:126681]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-08 16:48:05.923 RedLemon[9712:126623] ⏱️ Watch Party: Duration available (7508.6s), triggering ready signal
+2026-01-08 16:48:05.923 RedLemon[9712:126623] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2026-01-08 16:48:05.923 RedLemon[9712:126623] 🔍 DEBUG: checkIfAllGuestsReady called
+2026-01-08 16:48:05.923 RedLemon[9712:126623] 🔍 DEBUG: hasSentReadySignal = true
+2026-01-08 16:48:05.924 RedLemon[9712:126623] 🔍 DEBUG: connectedGuestIds = 
+2026-01-08 16:48:05.924 RedLemon[9712:126623] 🔍 DEBUG: readyGuestIds = 
+2026-01-08 16:48:05.924 RedLemon[9712:126623] ✅ All guests reported READY
+2026-01-08 16:48:05.924 RedLemon[9712:126623] ⏳ No guests connected yet (waiting for presence updates)
+2026-01-08 16:48:06.312 RedLemon[9712:126681] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:48:06.313 RedLemon[9712:126681]    Payload keys: isPlaying, position, senderId, timestamp, type
+2026-01-08 16:48:06.314 RedLemon[9712:126681] ✅ Realtime: Message broadcast complete
+2026-01-08 16:48:06.472 RedLemon[9712:126681] 📨 Realtime: Received broadcast message
+2026-01-08 16:48:06.474 RedLemon[9712:126681]    Payload keys: position, timestamp, senderId, type, isPlaying
+2026-01-08 16:48:06.475 RedLemon[9712:126681] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:48:06.475 RedLemon[9712:126681] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-08 16:48:06.475 RedLemon[9712:126681] ✅ Realtime: syncCallback invoked successfully
+2026-01-08 16:48:06.506 RedLemon[9712:126681] 🔍 MPV track-list/count: 5
+2026-01-08 16:48:06.715 RedLemon[9712:126681] 🔍 Track 0 type: sub
+2026-01-08 16:48:06.729 RedLemon[9712:126681] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:06.729 RedLemon[9712:126681] 🔍 Track 1 type: sub
+2026-01-08 16:48:06.729 RedLemon[9712:126681] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:06.729 RedLemon[9712:126681] 🔍 Track 2 type: sub
+2026-01-08 16:48:06.730 RedLemon[9712:126681] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-08 16:48:06.730 RedLemon[9712:126681] 🔍 Track 3 type: video
+2026-01-08 16:48:06.730 RedLemon[9712:126681] 🔍 Track 4 type: audio
+2026-01-08 16:48:06.730 RedLemon[9712:126681] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-08 16:48:06.730 RedLemon[9712:126681]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 16:48:06.730 RedLemon[9712:126681]    Start[1]: ID=1, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:06.730 RedLemon[9712:126681]    Start[2]: ID=2, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:06.730 RedLemon[9712:126681]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-08 16:48:06.730 RedLemon[9712:126681] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-08 16:48:06.730 RedLemon[9712:126681]    Track: ID=0, Title=Off, External=0
+2026-01-08 16:48:06.731 RedLemon[9712:126681]    Track: ID=1, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:06.731 RedLemon[9712:126681]    Track: ID=2, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:06.731 RedLemon[9712:126681]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-08 16:48:06.731 RedLemon[9712:126681] 🔍 MPV track-list/count: 5
+2026-01-08 16:48:06.731 RedLemon[9712:126681] 🔍 Track 0 type: sub
+2026-01-08 16:48:06.731 RedLemon[9712:126681] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:06.732 RedLemon[9712:126681] 🔍 Track 1 type: sub
+2026-01-08 16:48:06.732 RedLemon[9712:126681] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:06.732 RedLemon[9712:126681] 🔍 Track 2 type: sub
+2026-01-08 16:48:06.732 RedLemon[9712:126681] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-08 16:48:06.732 RedLemon[9712:126681] 🔍 Track 3 type: video
+2026-01-08 16:48:06.732 RedLemon[9712:126681] 🔍 Track 4 type: audio
+2026-01-08 16:48:06.732 RedLemon[9712:126681] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-08 16:48:06.732 RedLemon[9712:126681]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 16:48:06.732 RedLemon[9712:126681]    Start[1]: ID=1, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:06.732 RedLemon[9712:126681]    Start[2]: ID=2, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:06.732 RedLemon[9712:126681]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-08 16:48:06.733 RedLemon[9712:126681] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-08 16:48:06.733 RedLemon[9712:126681]    Track: ID=0, Title=Off, External=0
+2026-01-08 16:48:06.733 RedLemon[9712:126681]    Track: ID=1, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:06.733 RedLemon[9712:126681]    Track: ID=2, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:06.733 RedLemon[9712:126681]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-08 16:48:06.739 RedLemon[9712:126623] ✅ Watch Party: READY signal sent successfully
+2026-01-08 16:48:06.739 RedLemon[9712:126681] 📤 Realtime: Sending message type: playbackState, sender: DG8D
+2026-01-08 16:48:06.739 RedLemon[9712:126681]    Payload keys: position, type, isPlaying, timestamp, senderId
+2026-01-08 16:48:06.739 RedLemon[9712:126623] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:48:06.739 RedLemon[9712:126623] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9 (normalized: 656daa91-33b4-4688-9135-c982ea52d7c9)
+2026-01-08 16:48:06.740 RedLemon[9712:126623] ⚠️ Adding 656daa91-33b4-4688-9135-c982ea52d7c9 to connectedGuestIds (presence fallback)
+2026-01-08 16:48:06.740 RedLemon[9712:126623] 🔍 DEBUG: checkIfAllGuestsReady called
+2026-01-08 16:48:06.740 RedLemon[9712:126623] 🔍 DEBUG: hasSentReadySignal = true
+2026-01-08 16:48:06.740 RedLemon[9712:126623] 🔍 DEBUG: connectedGuestIds = 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-08 16:48:06.740 RedLemon[9712:126623] 🔍 DEBUG: readyGuestIds = 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-08 16:48:06.740 RedLemon[9712:126681] ✅ Realtime: Message broadcast complete
+2026-01-08 16:48:06.741 RedLemon[9712:126623] ✅ All guests reported READY
+2026-01-08 16:48:06.741 RedLemon[9712:126623] 🔍 DEBUG: allReady = true
+2026-01-08 16:48:06.741 RedLemon[9712:126623] 🚀 All guests ready! Starting playback in 1s...
+2026-01-08 16:48:06.858 RedLemon[9712:126838] 📨 Realtime: Received broadcast message
+2026-01-08 16:48:06.858 RedLemon[9712:126838]    Payload keys: type, senderId, position, isPlaying, timestamp
+2026-01-08 16:48:06.859 RedLemon[9712:126838] ✅ Realtime: Decoded message type: playbackState, sender: DG8D
+2026-01-08 16:48:06.859 RedLemon[9712:126838] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-08 16:48:06.859 RedLemon[9712:126838] ✅ Realtime: syncCallback invoked successfully
+2026-01-08 16:48:07.074 RedLemon[9712:126623] 🔍 DEBUG: Received sync message - type: playbackState, sender: DG8D
+2026-01-08 16:48:07.075 RedLemon[9712:126623] 🚫 DEBUG: Host filtering out message type: playbackState
+2026-01-08 16:48:07.822 RedLemon[9712:126680] 🔍 MPV track-list/count: 5
+2026-01-08 16:48:07.822 RedLemon[9712:126680] 🔍 Track 0 type: sub
+2026-01-08 16:48:07.827 RedLemon[9712:126623] 🎬 Host: Initiating synchronized start
+2026-01-08 16:48:07.838 RedLemon[9712:126680] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:07.838 RedLemon[9712:126680] 🔍 Track 1 type: sub
+2026-01-08 16:48:07.838 RedLemon[9712:126680] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:07.838 RedLemon[9712:126680] 🔍 Track 2 type: sub
+2026-01-08 16:48:07.838 RedLemon[9712:126680] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-08 16:48:07.838 RedLemon[9712:126680] 🔍 Track 3 type: video
+2026-01-08 16:48:07.839 RedLemon[9712:126680] 🔍 Track 4 type: audio
+2026-01-08 16:48:07.839 RedLemon[9712:126680] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-08 16:48:07.839 RedLemon[9712:126680]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 16:48:07.840 RedLemon[9712:126680]    Start[1]: ID=1, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:07.840 RedLemon[9712:126680]    Start[2]: ID=2, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:07.840 RedLemon[9712:126680]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-08 16:48:07.840 RedLemon[9712:126680] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-08 16:48:07.840 RedLemon[9712:126680]    Track: ID=0, Title=Off, External=0
+2026-01-08 16:48:07.840 RedLemon[9712:126680]    Track: ID=1, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:07.841 RedLemon[9712:126680]    Track: ID=2, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:07.841 RedLemon[9712:126680]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-08 16:48:07.841 RedLemon[9712:126680] 🔍 MPV track-list/count: 5
+2026-01-08 16:48:07.841 RedLemon[9712:126680] 🔍 Track 0 type: sub
+2026-01-08 16:48:07.841 RedLemon[9712:126680] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:07.841 RedLemon[9712:126680] 🔍 Track 1 type: sub
+2026-01-08 16:48:07.841 RedLemon[9712:126680] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:07.841 RedLemon[9712:126680] 🔍 Track 2 type: sub
+2026-01-08 16:48:07.842 RedLemon[9712:126680] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-08 16:48:07.842 RedLemon[9712:126680] 🔍 Track 3 type: video
+2026-01-08 16:48:07.842 RedLemon[9712:126680] 🔍 Track 4 type: audio
+2026-01-08 16:48:07.842 RedLemon[9712:126680] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-08 16:48:07.842 RedLemon[9712:126680]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 16:48:07.842 RedLemon[9712:126680]    Start[1]: ID=1, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:07.842 RedLemon[9712:126680]    Start[2]: ID=2, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:07.842 RedLemon[9712:126680]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-08 16:48:07.842 RedLemon[9712:126680] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-08 16:48:07.842 RedLemon[9712:126680]    Track: ID=0, Title=Off, External=0
+2026-01-08 16:48:07.843 RedLemon[9712:126680]    Track: ID=1, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:07.843 RedLemon[9712:126680]    Track: ID=2, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:07.843 RedLemon[9712:126680]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-08 16:48:07.870 RedLemon[9712:126680] 📤 Realtime: Sending message type: play, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:48:07.873 RedLemon[9712:126680]    Payload keys: timestamp, type, position, isPlaying, senderId
+2026-01-08 16:48:07.876 RedLemon[9712:126782] ✅ Realtime: Message broadcast complete
+2026-01-08 16:48:07.993 RedLemon[9712:126782] 📨 Realtime: Received broadcast message
+2026-01-08 16:48:07.993 RedLemon[9712:126782]    Payload keys: position, isPlaying, senderId, timestamp, type
+2026-01-08 16:48:07.994 RedLemon[9712:126782] ✅ Realtime: Decoded message type: play, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:48:07.994 RedLemon[9712:126782] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-08 16:48:07.994 RedLemon[9712:126782] ✅ Realtime: syncCallback invoked successfully
+2026-01-08 16:48:08.010 RedLemon[9712:126623] 🔍 DEBUG: Received sync message - type: play, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:48:08.010 RedLemon[9712:126623] 🚫 DEBUG: Host filtering out message type: play
+2026-01-08 16:48:08.124 RedLemon[9712:126782] 📤 Realtime: Sending message type: playbackState, sender: DG8D
+2026-01-08 16:48:08.125 RedLemon[9712:126782]    Payload keys: position, timestamp, type, senderId, isPlaying
+2026-01-08 16:48:08.126 RedLemon[9712:126782] ✅ Realtime: Message broadcast complete
+2026-01-08 16:48:08.246 RedLemon[9712:126710] 📨 Realtime: Received broadcast message
+2026-01-08 16:48:08.246 RedLemon[9712:126710]    Payload keys: isPlaying, senderId, type, timestamp, position
+2026-01-08 16:48:08.247 RedLemon[9712:126710] ✅ Realtime: Decoded message type: playbackState, sender: DG8D
+2026-01-08 16:48:08.247 RedLemon[9712:126710] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-08 16:48:08.247 RedLemon[9712:126710] ✅ Realtime: syncCallback invoked successfully
+2026-01-08 16:48:08.249 RedLemon[9712:126623] 🔍 DEBUG: Received sync message - type: playbackState, sender: DG8D
+2026-01-08 16:48:08.249 RedLemon[9712:126623] 🚫 DEBUG: Host filtering out message type: playbackState
+2026-01-08 16:48:08.854 RedLemon[9712:126680] 🔍 MPV track-list/count: 5
+2026-01-08 16:48:08.854 RedLemon[9712:126680] 🔍 Track 0 type: sub
+2026-01-08 16:48:08.855 RedLemon[9712:126680] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:08.855 RedLemon[9712:126680] 🔍 Track 1 type: sub
+2026-01-08 16:48:08.855 RedLemon[9712:126680] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:08.856 RedLemon[9712:126680] 🔍 Track 2 type: sub
+2026-01-08 16:48:08.856 RedLemon[9712:126680] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-08 16:48:08.856 RedLemon[9712:126680] 🔍 Track 3 type: video
+2026-01-08 16:48:08.857 RedLemon[9712:126680] 🔍 Track 4 type: audio
+2026-01-08 16:48:08.857 RedLemon[9712:126680] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-08 16:48:08.857 RedLemon[9712:126680]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 16:48:08.857 RedLemon[9712:126680]    Start[1]: ID=1, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:08.857 RedLemon[9712:126680]    Start[2]: ID=2, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:08.857 RedLemon[9712:126680]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-08 16:48:08.858 RedLemon[9712:126680] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-08 16:48:08.858 RedLemon[9712:126680]    Track: ID=0, Title=Off, External=0
+2026-01-08 16:48:08.858 RedLemon[9712:126680]    Track: ID=1, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:08.858 RedLemon[9712:126680]    Track: ID=2, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:08.859 RedLemon[9712:126680]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-08 16:48:08.859 RedLemon[9712:126680] 🔍 MPV track-list/count: 5
+2026-01-08 16:48:08.859 RedLemon[9712:126680] 🔍 Track 0 type: sub
+2026-01-08 16:48:08.859 RedLemon[9712:126680] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:08.860 RedLemon[9712:126680] 🔍 Track 1 type: sub
+2026-01-08 16:48:08.860 RedLemon[9712:126680] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:08.861 RedLemon[9712:126680] 🔍 Track 2 type: sub
+2026-01-08 16:48:08.861 RedLemon[9712:126680] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-08 16:48:08.861 RedLemon[9712:126680] 🔍 Track 3 type: video
+2026-01-08 16:48:08.861 RedLemon[9712:126680] 🔍 Track 4 type: audio
+2026-01-08 16:48:08.862 RedLemon[9712:126680] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-08 16:48:08.862 RedLemon[9712:126680]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 16:48:08.862 RedLemon[9712:126680]    Start[1]: ID=1, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:08.862 RedLemon[9712:126680]    Start[2]: ID=2, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:08.862 RedLemon[9712:126680]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-08 16:48:08.862 RedLemon[9712:126680] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-08 16:48:08.863 RedLemon[9712:126680]    Track: ID=0, Title=Off, External=0
+2026-01-08 16:48:08.863 RedLemon[9712:126680]    Track: ID=1, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:08.863 RedLemon[9712:126680]    Track: ID=2, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:08.864 RedLemon[9712:126680]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-08 16:48:09.863 RedLemon[9712:126838] 🔍 MPV track-list/count: 5
+2026-01-08 16:48:09.863 RedLemon[9712:126838] 🔍 Track 0 type: sub
+2026-01-08 16:48:09.863 RedLemon[9712:126838] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:09.863 RedLemon[9712:126838] 🔍 Track 1 type: sub
+2026-01-08 16:48:09.864 RedLemon[9712:126838] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:09.864 RedLemon[9712:126838] 🔍 Track 2 type: sub
+2026-01-08 16:48:09.864 RedLemon[9712:126838] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-08 16:48:09.864 RedLemon[9712:126838] 🔍 Track 3 type: video
+2026-01-08 16:48:09.864 RedLemon[9712:126838] 🔍 Track 4 type: audio
+2026-01-08 16:48:09.864 RedLemon[9712:126838] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-08 16:48:09.864 RedLemon[9712:126838]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 16:48:09.865 RedLemon[9712:126838]    Start[1]: ID=1, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:09.865 RedLemon[9712:126838]    Start[2]: ID=2, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:09.865 RedLemon[9712:126838]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-08 16:48:09.866 RedLemon[9712:126838] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-08 16:48:09.866 RedLemon[9712:126838]    Track: ID=0, Title=Off, External=0
+2026-01-08 16:48:09.866 RedLemon[9712:126838]    Track: ID=1, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:09.867 RedLemon[9712:126838]    Track: ID=2, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:09.868 RedLemon[9712:126838]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-08 16:48:09.869 RedLemon[9712:126680] 🔍 MPV track-list/count: 5
+2026-01-08 16:48:09.869 RedLemon[9712:126680] 🔍 Track 0 type: sub
+2026-01-08 16:48:09.869 RedLemon[9712:126680] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:09.869 RedLemon[9712:126680] 🔍 Track 1 type: sub
+2026-01-08 16:48:09.870 RedLemon[9712:126680] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:09.870 RedLemon[9712:126680] 🔍 Track 2 type: sub
+2026-01-08 16:48:09.870 RedLemon[9712:126680] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-08 16:48:09.870 RedLemon[9712:126680] 🔍 Track 3 type: video
+2026-01-08 16:48:09.870 RedLemon[9712:126680] 🔍 Track 4 type: audio
+2026-01-08 16:48:09.870 RedLemon[9712:126680] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-08 16:48:09.871 RedLemon[9712:126680]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 16:48:09.871 RedLemon[9712:126680]    Start[1]: ID=1, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:09.871 RedLemon[9712:126680]    Start[2]: ID=2, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:09.871 RedLemon[9712:126680]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-08 16:48:09.871 RedLemon[9712:126680] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-08 16:48:09.872 RedLemon[9712:126680]    Track: ID=0, Title=Off, External=0
+2026-01-08 16:48:09.872 RedLemon[9712:126680]    Track: ID=1, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:09.872 RedLemon[9712:126680]    Track: ID=2, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:09.872 RedLemon[9712:126680]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-08 16:48:10.088 RedLemon[9712:126710] 📤 Realtime: Sending message type: playbackState, sender: DG8D
+2026-01-08 16:48:10.089 RedLemon[9712:126710]    Payload keys: position, type, timestamp, senderId, isPlaying
+2026-01-08 16:48:10.090 RedLemon[9712:126710] ✅ Realtime: Message broadcast complete
+2026-01-08 16:48:10.130 RedLemon[9712:126623] 🖱️ Mouse: x=358/1366 y=578/768 | Exit: 0 Controls: 0 Chat: 0
+2026-01-08 16:48:10.213 RedLemon[9712:126710] 📨 Realtime: Received broadcast message
+2026-01-08 16:48:10.214 RedLemon[9712:126710]    Payload keys: timestamp, isPlaying, senderId, type, position
+2026-01-08 16:48:10.214 RedLemon[9712:126623] ✅ Exit button triggered! x=225 <= 342, y=699 >= 576
+2026-01-08 16:48:10.214 RedLemon[9712:126710] ✅ Realtime: Decoded message type: playbackState, sender: DG8D
+2026-01-08 16:48:10.214 RedLemon[9712:126710] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-08 16:48:10.215 RedLemon[9712:126710] ✅ Realtime: syncCallback invoked successfully
+2026-01-08 16:48:10.233 RedLemon[9712:126623] ✅ Exit button triggered! x=211 <= 342, y=712 >= 576
+2026-01-08 16:48:10.235 RedLemon[9712:126623] 🔍 DEBUG: Received sync message - type: playbackState, sender: DG8D
+2026-01-08 16:48:10.235 RedLemon[9712:126623] 🚫 DEBUG: Host filtering out message type: playbackState
+2026-01-08 16:48:10.236 RedLemon[9712:126623] ✅ Exit button triggered! x=207 <= 342, y=716 >= 576
+2026-01-08 16:48:10.297 RedLemon[9712:126623] ✅ Exit button triggered! x=200 <= 342, y=720 >= 576
+2026-01-08 16:48:10.462 RedLemon[9712:126623] ✅ Exit button triggered! x=187 <= 342, y=720 >= 576
+2026-01-08 16:48:10.505 RedLemon[9712:126623] ✅ Exit button triggered! x=169 <= 342, y=718 >= 576
+2026-01-08 16:48:10.545 RedLemon[9712:126623] ✅ Exit button triggered! x=163 <= 342, y=717 >= 576
+2026-01-08 16:48:10.547 RedLemon[9712:126623] ✅ Exit button triggered! x=142 <= 342, y=717 >= 576
+2026-01-08 16:48:10.550 RedLemon[9712:126623] ✅ Exit button triggered! x=137 <= 342, y=717 >= 576
+2026-01-08 16:48:10.630 RedLemon[9712:126623] ✅ Exit button triggered! x=120 <= 342, y=722 >= 576
+2026-01-08 16:48:10.631 RedLemon[9712:126623] ✅ Exit button triggered! x=119 <= 342, y=723 >= 576
+2026-01-08 16:48:10.671 RedLemon[9712:126623] ✅ Exit button triggered! x=119 <= 342, y=723 >= 576
+2026-01-08 16:48:10.674 RedLemon[9712:126623] ✅ Exit button triggered! x=118 <= 342, y=723 >= 576
+2026-01-08 16:48:10.685 RedLemon[9712:126623] ✅ Exit button triggered! x=118 <= 342, y=723 >= 576
+2026-01-08 16:48:10.880 RedLemon[9712:126623] ✅ Exit button triggered! x=117 <= 342, y=723 >= 576
+2026-01-08 16:48:10.894 RedLemon[9712:126680] 🔍 MPV track-list/count: 5
+2026-01-08 16:48:10.894 RedLemon[9712:126680] 🔍 Track 0 type: sub
+2026-01-08 16:48:10.895 RedLemon[9712:126680] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:10.895 RedLemon[9712:126680] 🔍 Track 1 type: sub
+2026-01-08 16:48:10.895 RedLemon[9712:126680] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, external=1
+2026-01-08 16:48:10.895 RedLemon[9712:126680] 🔍 Track 2 type: sub
+2026-01-08 16:48:10.895 RedLemon[9712:126680] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-08 16:48:10.895 RedLemon[9712:126680] 🔍 Track 3 type: video
+2026-01-08 16:48:10.895 RedLemon[9712:126680] 🔍 Track 4 type: audio
+2026-01-08 16:48:10.896 RedLemon[9712:126680] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-08 16:48:10.896 RedLemon[9712:126680]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 16:48:10.896 RedLemon[9712:126680]    Start[1]: ID=1, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:10.896 RedLemon[9712:126680]    Start[2]: ID=2, Title='Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', Lang='en', Ext=1
+2026-01-08 16:48:10.896 RedLemon[9712:126680]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-08 16:48:10.896 RedLemon[9712:126680] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-08 16:48:10.896 RedLemon[9712:126680]    Track: ID=0, Title=Off, External=0
+2026-01-08 16:48:10.897 RedLemon[9712:126680]    Track: ID=1, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:10.897 RedLemon[9712:126680]    Track: ID=2, Title=Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL, External=1
+2026-01-08 16:48:10.897 RedLemon[9712:126680]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-08 16:48:10.925 RedLemon[9712:126623] ✅ Exit button triggered! x=110 <= 342, y=727 >= 576
+2026-01-08 16:48:10.932 RedLemon[9712:126623] ✅ Exit button triggered! x=109 <= 342, y=728 >= 576
+2026-01-08 16:48:10.935 RedLemon[9712:126623] ✅ Exit button triggered! x=108 <= 342, y=729 >= 576
+2026-01-08 16:48:10.963 RedLemon[9712:126623] ✅ Exit button triggered! x=107 <= 342, y=730 >= 576
+2026-01-08 16:48:10.966 RedLemon[9712:126623] ✅ Exit button triggered! x=104 <= 342, y=732 >= 576
+2026-01-08 16:48:10.972 RedLemon[9712:126623] 🖱️ Mouse: x=103/1366 y=732/768 | Exit: 1 Controls: 0 Chat: 0
+2026-01-08 16:48:10.972 RedLemon[9712:126623] ✅ Exit button triggered! x=103 <= 342, y=732 >= 576
+2026-01-08 16:48:10.975 RedLemon[9712:126623] ✅ Exit button triggered! x=103 <= 342, y=733 >= 576
+2026-01-08 16:48:10.985 RedLemon[9712:126623] ✅ Exit button triggered! x=102 <= 342, y=734 >= 576
+2026-01-08 16:48:11.005 RedLemon[9712:126623] ✅ Exit button triggered! x=101 <= 342, y=735 >= 576
+2026-01-08 16:48:11.007 RedLemon[9712:126623] ✅ Exit button triggered! x=101 <= 342, y=735 >= 576
+2026-01-08 16:48:11.009 RedLemon[9712:126623] ✅ Exit button triggered! x=101 <= 342, y=735 >= 576
+2026-01-08 16:48:11.015 RedLemon[9712:126623] ✅ Exit button triggered! x=100 <= 342, y=736 >= 576
+2026-01-08 16:48:11.047 RedLemon[9712:126623] ✅ Exit button triggered! x=100 <= 342, y=736 >= 576
+2026-01-08 16:48:11.049 RedLemon[9712:126623] ✅ Exit button triggered! x=99 <= 342, y=737 >= 576
+2026-01-08 16:48:11.130 RedLemon[9712:126623] ✅ Exit button triggered! x=99 <= 342, y=738 >= 576
+2026-01-08 16:48:11.172 RedLemon[9712:126623] ✅ Exit button triggered! x=99 <= 342, y=738 >= 576
+2026-01-08 16:48:11.178 RedLemon[9712:126623] ✅ Exit button triggered! x=99 <= 342, y=738 >= 576
+2026-01-08 16:48:11.338 RedLemon[9712:126623] 🖱️ Mouse: x=99/1366 y=739/768 | Exit: 1 Controls: 0 Chat: 0
+2026-01-08 16:48:11.338 RedLemon[9712:126623] ✅ Exit button triggered! x=99 <= 342, y=739 >= 576
+2026-01-08 16:48:11.380 RedLemon[9712:126623] ✅ Exit button triggered! x=99 <= 342, y=739 >= 576
+2026-01-08 16:48:12.091 RedLemon[9712:126680] 📤 Realtime: Sending message type: returnToLobby, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:48:12.092 RedLemon[9712:126680]    Payload keys: position, type, timestamp, senderId, isPlaying
+2026-01-08 16:48:12.093 RedLemon[9712:126782] ✅ Realtime: Message broadcast complete
+2026-01-08 16:48:12.132 RedLemon[9712:126623] ✅ Exit button triggered! x=102 <= 342, y=736 >= 576
+2026-01-08 16:48:12.175 RedLemon[9712:126623] ✅ Exit button triggered! x=113 <= 342, y=727 >= 576
+2026-01-08 16:48:12.181 RedLemon[9712:126623] ✅ Exit button triggered! x=154 <= 342, y=689 >= 576
+2026-01-08 16:48:12.183 RedLemon[9712:126623] ✅ Exit button triggered! x=177 <= 342, y=666 >= 576
+2026-01-08 16:48:12.185 RedLemon[9712:126623] ✅ Exit button triggered! x=203 <= 342, y=642 >= 576
+2026-01-08 16:48:12.212 RedLemon[9712:126681] 📨 Realtime: Received broadcast message
+2026-01-08 16:48:12.213 RedLemon[9712:126681]    Payload keys: timestamp, position, isPlaying, senderId, type
+2026-01-08 16:48:12.214 RedLemon[9712:126681] ✅ Realtime: Decoded message type: returnToLobby, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:48:12.214 RedLemon[9712:126681] 📞 Realtime: Invoking syncCallback for message type: returnToLobby
+2026-01-08 16:48:12.214 RedLemon[9712:126681] ✅ Realtime: syncCallback invoked successfully
+2026-01-08 16:48:12.263 RedLemon[9712:126623] 🔍 DEBUG: Received sync message - type: returnToLobby, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 16:48:12.264 RedLemon[9712:126623] 🚫 DEBUG: Host filtering out message type: returnToLobby
+2026-01-08 16:48:12.771 RedLemon[9712:126623] 🛑 Stopped playback heartbeat loop
+2026-01-08 16:48:12.798 RedLemon[9712:126623] 🖥️ WindowManager: exitFullscreen() called
+2026-01-08 16:48:12.799 RedLemon[9712:126623]    ✅ WindowManager: Toggling fullscreen OFF
+2026-01-08 16:48:12.857 RedLemon[9712:126623] 🪟 WindowManager: restoreWindowSize() called - restoring to expanded size
+2026-01-08 16:48:12.857 RedLemon[9712:126623]    📐 WindowManager: Restoring to expanded size: (0.0, 0.0, 1366.0, 743.0)
+2026-01-08 16:48:13.088 RedLemon[9712:126623]    ✅ WindowManager: Window restored to expanded size
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+[MPV] (+) Video --vid=1 (*) (h264 1920x816 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1767908885.923593,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:DG8D"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+[MPV] Using hardware decoding (videotoolbox).
+📊 Current subtitle track: 3
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+🚫 Ignoring stale LEAVE event for 656daa91-33b4-4688-9135-c982ea52d7c9 (Tracked: GIjfw21NCf9F_fPD != Leaving: GIjfwHw9IqdF_fLD)
+ MPV Event: 18
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+▶️ SMART-LOAD: Resuming playback (Autoplay requested)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"DG8D","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DG8D"}
+ MPV Event: 17
+🎬 DisplayLink: reportSwap() (throttled)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+ MPV Event: 17
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+✅ Video ready - hiding poster
+📝 Started watch history tracking
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x816 videotoolbox[nv12]
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0.6256240355813742,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1767908887.827606,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:DG8D"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DG8D","timestamp":0.9175819188526821,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DG8D"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DG8D","timestamp":2.66932921848053,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DG8D"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+💓 Heartbeat sent
+🏠 Host triggering return to lobby...
+🛑 Host stopped sync broadcast timer before returnToLobby
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Host cleared DB playback state before exit
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DG8D", "name": "Tron: Legacy", "season": null, "episode": null, "imdb_id": "tt1104001", "playlist": [{"id": "13FF1720-47AB-497D-B17C-8F3E484E3A10", "mediaItem": {"id": "tt1104001", "logo": "https://images.metahub.space/logo/medium/tt1104001/img", "name": "Tron: Legacy", "type": "movie", "year": "2010", "genres": ["Action", "Adventure", "Sci-Fi"], "poster": "https://images.metahub.space/poster/small/tt1104001/img", "runtime": "126 min", "background": "https://images.metahub.space/background/medium/tt1104001/img", "imdbRating": "6.8", "description": "The son of a computer programmer goes looking for his father and ends up inside the digital world that his father designed. He meets his father's corrupted creation and a unique ally who was born inside the digital world.", "releaseInfo": "2010"}}], "is_public": true, "created_at": "2026-01-08T21:47:50.650479", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt1104001/img", "description": null, "stream_hash": "38d7c6358c1bfb522b1c78125c5cf84931f79764", "backdrop_url": "https://images.metahub.space/background/medium/tt1104001/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-08T21:48:11", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": "https://chi4-4.download.real-debrid.com/d/KE3XGHA7NERZU43/TRON.Legacy.2010.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-08T21:48:12.146Z","old_record":{"id": "DG8D"}},"ids":[80987160]},"topic":"realtime:watch-party:DG8D"}
+✅ Host sent returnToLobby message to guests
+💓 Heartbeat sent
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1767908892.09122,"type":"returnToLobby"},"type":"broadcast"},"topic":"realtime:watch-party:DG8D"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 1698 seconds
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🧹 Cleaning up MPV player...
+🗑️ Invalidated all active timers
+🏠 Returning to lobby - keeping host in room_participants to preserve room
+🧹 Cleaning up Realtime channel for room: DG8D
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+⚡️ PlaybackService: releasing sleep assertion
+🛑 Event polling task cancelled cleanly
+✅ MPV stop completed with clean event loop exit
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"ae238af2-ecdb-11f0-836b-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfw21NCf9F_fPD","phx_ref_prev":"GIjfwHw9IqdF_fLD","is_host":true,"joined_at":1767908883.9903831,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:DG8D"}
+📨 Unknown event: phx_close
+🎬 DisplayLink: reportSwap() (throttled)
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfxYYERYI6AvRD","phx_ref_prev":"GIjfwN4aTUM6AlxC","last_seen":"2026-01-08T21:48:13.001Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfwN4aTUM6AlxC","phx_ref_prev":"GIjfvDWqxC46AluC","last_seen":"2026-01-08T21:47:53.000Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+⚠️ Cleanup already performed, skipping
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+🔔 Lobby: Displaying pending message: You returned the group to the lobby.
+🎭 Lobby: Connecting to room DG8D...
+🚦 Lobby State: connecting
+🗑️ MPVPlayerViewModel deinit
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+[ INFO ] GET /api/metadata/meta/movie/tt1104001 [request-id: 4F96C2FD-4081-42FE-B0CF-4847ED7C13D7]
+2026-01-08 16:48:13.683 RedLemon[9712:126623] ✅ Host re-joined room DG8D in database (refreshing presence)
+2026-01-08 16:48:13.746 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:48:13.747 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:48:14.032 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:48:14.032 RedLemon[9712:126623] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-08 16:48:15.210 RedLemon[9712:126623] 🪟 restoreWindowFromLobby() called - no action needed (window stays expanded)
+2026-01-08 16:48:15.335 RedLemon[9712:126706] 📤 Realtime: Sending message type: roomClosed, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-08 16:48:15.335 RedLemon[9712:126706]    Payload keys: chatUsername, senderId, type, timestamp, position, chatText
+2026-01-08 16:48:15.336 RedLemon[9712:126680] ✅ Realtime: Message broadcast complete
+2026-01-08 16:48:15.460 RedLemon[9712:126782] 📨 Realtime: Received broadcast message
+2026-01-08 16:48:15.460 RedLemon[9712:126782]    Payload keys: chatText, timestamp, chatUsername, position, type, senderId
+2026-01-08 16:48:15.461 RedLemon[9712:126782] ✅ Realtime: Decoded message type: roomClosed, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-08 16:48:15.461 RedLemon[9712:126782] 📞 Realtime: Invoking syncCallback for message type: roomClosed
+2026-01-08 16:48:15.461 RedLemon[9712:126782] ✅ Realtime: syncCallback invoked successfully
+2026-01-08 16:48:15.636 RedLemon[9712:126623] 🔒 Received Room Closed signal from Host
+✅ MPV instance destroyed
+📡 SocialService: Updated status - In Lobby: Tron: Legacy: Tron: Legacy
+🔌 Setting up Realtime channel: watch-party:DG8D
+   Role: Host
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:DG8D
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt1104001
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: Tron: Legacy
+🔍 [DEBUG] Successfully created MediaItem from meta: Tron: Legacy
+✅ Lobby: Loaded metadata for Tron: Legacy
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfxZ59Wv06AvRj","phx_ref_prev":"GIjfw3J4btM6AvPj","last_seen":"2026-01-08T21:48:13.406Z","room_id":"DG8D","started_at":"2026-01-08T21:48:13.406Z","status":"In Lobby: Tron: Legacy","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfw3J4btM6AvPj","phx_ref_prev":"GIjfwwHLr786AvNj","last_seen":"2026-01-08T21:48:04.070Z","room_id":"DG8D","started_at":"2026-01-08T21:48:04.071Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"AA2E39F6-692B-40D0-BFD7-FB82CDAFFC98","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":80987160,"event":"*","filter":"id=eq.DG8D","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:DG8D"}
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:DG8D"},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bb81e6da-ecdb-11f0-854d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfxaEiypFF_UBh","is_host":true,"joined_at":1767908893.435628,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:DG8D"}
+❌ Supabase API Error: duplicate key value violates unique constraint "room_participants_pkey"
+🔌 Setting up Realtime channel: watch-party:DG8D
+   Role: Host
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:DG8D, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DG8D", "name": "Tron: Legacy", "season": null, "episode": null, "imdb_id": "tt1104001", "playlist": [{"id": "13FF1720-47AB-497D-B17C-8F3E484E3A10", "mediaItem": {"id": "tt1104001", "logo": "https://images.metahub.space/logo/medium/tt1104001/img", "name": "Tron: Legacy", "type": "movie", "year": "2010", "genres": ["Action", "Adventure", "Sci-Fi"], "poster": "https://images.metahub.space/poster/small/tt1104001/img", "runtime": "126 min", "background": "https://images.metahub.space/background/medium/tt1104001/img", "imdbRating": "6.8", "description": "The son of a computer programmer goes looking for his father and ends up inside the digital world that his father designed. He meets his father's corrupted creation and a unique ally who was born inside the digital world.", "releaseInfo": "2010"}}], "is_public": true, "created_at": "2026-01-08T21:47:50.650479", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt1104001/img", "description": null, "stream_hash": "38d7c6358c1bfb522b1c78125c5cf84931f79764", "backdrop_url": "https://images.metahub.space/background/medium/tt1104001/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-08T21:48:13", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": "https://chi4-4.download.real-debrid.com/d/KE3XGHA7NERZU43/TRON.Legacy.2010.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-08T21:48:13.732Z","old_record":{"id": "DG8D"}},"ids":[80987160]},"topic":"realtime:watch-party:DG8D"}
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":"15","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bb81e6da-ecdb-11f0-854d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfxa--B8pF_UCB","phx_ref_prev":"GIjfxaEiypFF_UBh","is_host":true,"joined_at":1767908893.696988,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"bb81e6da-ecdb-11f0-854d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfxaEiypFF_UBh","is_host":true,"joined_at":1767908893.435628,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:DG8D"}
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DG8D", "name": "Tron: Legacy", "season": null, "episode": null, "imdb_id": "tt1104001", "playlist": [{"id": "13FF1720-47AB-497D-B17C-8F3E484E3A10", "mediaItem": {"id": "tt1104001", "logo": "https://images.metahub.space/logo/medium/tt1104001/img", "name": "Tron: Legacy", "type": "movie", "year": "2010", "genres": ["Action", "Adventure", "Sci-Fi"], "poster": "https://images.metahub.space/poster/small/tt1104001/img", "runtime": "126 min", "background": "https://images.metahub.space/background/medium/tt1104001/img", "imdbRating": "6.8", "description": "The son of a computer programmer goes looking for his father and ends up inside the digital world that his father designed. He meets his father's corrupted creation and a unique ally who was born inside the digital world.", "releaseInfo": "2010"}}], "is_public": true, "created_at": "2026-01-08T21:47:50.650479", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt1104001/img", "description": null, "stream_hash": "38d7c6358c1bfb522b1c78125c5cf84931f79764", "backdrop_url": "https://images.metahub.space/background/medium/tt1104001/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-08T21:48:13.9805", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": "https://chi4-4.download.real-debrid.com/d/KE3XGHA7NERZU43/TRON.Legacy.2010.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-08T21:48:13.983Z","old_record":{"id": "DG8D"}},"ids":[80987160]},"topic":"realtime:watch-party:DG8D"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🚪 Lobby: Explicit leave initiated. isHost=true, roomId=DG8D, hostId=656DAA91-33B4-4688-9135-C982EA52D7C9
+🔒 Host closing room, notifying guests...
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+✅ Cache HIT: Catalog[popular_movies_fixed]
+✅ Loaded 15 movies
+🧹 Deduplication: 43 → 42 items
+📡 SocialService: Updated status - Browsing: 
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfxhFZHQk6AvTD","phx_ref_prev":"GIjfxZ59Wv06AvRj","last_seen":"2026-01-08T21:48:15.335Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfxZ59Wv06AvRj","phx_ref_prev":"GIjfw3J4btM6AvPj","last_seen":"2026-01-08T21:48:13.406Z","room_id":"DG8D","started_at":"2026-01-08T21:48:13.406Z","status":"In Lobby: Tron: Legacy","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"Room Closed","chatUsername":"Host","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":1767908895.335079,"type":"roomClosed"},"type":"broadcast"},"topic":"realtime:watch-party:DG8D"}
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0114369/img (23575 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt5622412/img (30779 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1104001/img (11618 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0381707/img (31688 bytes)
+🖼️ [CACHE] Cached image data for key: https://m.media-amazon.com/images/M/MV5BMzcwMjkxMzQ3NV5BMl5BanBnXkFtZTgwMzgyNDA5MDI@._V1_SX250.jpg (25509 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0209163/img (32061 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2333784/img (28486 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0162222/img (38190 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0462538/img (39518 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2872732/img (16390 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0167404/img (16366 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10545296/img (37667 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2404435/img (31114 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4881806/img (15928 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0172156/img (32093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3065204/img (12736 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (53296 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30254719/img (39370 bytes)
+✅ Cache HIT: Catalog[quick_movie_pcp.json_7]
+✅ Cache HIT: Catalog[quick_movie_pmp.json_7]
+✅ Cache HIT: Catalog[quick_movie_atp.json_7]
+✅ Cache HIT: Catalog[quick_movie_hbm.json_7]
+✅ Cache HIT: Catalog[quick_movie_amp.json_7]
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for paramount
+✅ Cache HIT: Catalog[catalog_movie_pcp.json]
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+✅ Cache HIT: Catalog[catalog_movie_pmp.json]
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+✅ Cache HIT: Catalog[catalog_movie_atp.json]
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+✅ Cache HIT: Catalog[catalog_movie_hbm.json]
+🚀 2026-01-08 16:48:16.950 RedLemon[9712:126623] ✅ Host DELETED room DG8D
+2026-01-08 16:48:19.838 RedLemon[9712:126623] 🎬 Creating Watch Party for: The Conjuring 2
+2026-01-08 16:48:19.838 RedLemon[9712:126846] Background: ⏳ Starting room creation (Unstructured Race)...
+2026-01-08 16:48:19.839 RedLemon[9712:126846] Background: ▶️ createRoom task started (Direct Singleton Access)
+2026-01-08 16:48:19.839 RedLemon[9712:126846] 🎬 SupabaseClient: createRoom called for id: 5WCE - ENTRY
+2026-01-08 16:48:19.840 RedLemon[9712:126846] 🎬 SupabaseClient: Creating room '5WCE' for host 'ursinho'...
+2026-01-08 16:48:19.841 RedLemon[9712:126846] 🔐 Signed request to /rooms
+2026-01-08 16:48:20.349 RedLemon[9712:126838] Background: ❌ createRoom task failed: userMessage("Free User Limit Reached: You can host 1 item every 72 hours. Unlock in 23 hours 59 minutes.")
+2026-01-08 16:48:20.349 RedLemon[9712:126623] ❌ Creation failed or timed out: userMessage("Free User Limit Reached: You can host 1 item every 72 hours. Unlock in 23 hours 59 minutes.")
+2026-01-08 16:48:20.349 RedLemon[9712:126623] ❌ Failed to create room: userMessage("Free User Limit Reached: You can host 1 item every 72 hours. Unlock in 23 hours 59 minutes.")
+2026-01-08 16:48:28.602 RedLemon[9712:126680] Background: ⏰ Timeout fired! Attempting to fail continuation...
+2026-01-08 16:48:29.183 RedLemon[9712:127158] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-08 16:48:29.183 RedLemon[9712:127158] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+✅ Cache HIT: Catalog[catalog_movie_amp.json]
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/245030423/s332/img (72818 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/275806222/s332/img (48443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309786652/s332/img (45440 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/173938174/s332/img (31756 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175817145/s332/img (34253 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332277457/s332/img (66967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336295680/s332/img (36731 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330298309/s332/img (59242 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315638406/s332/img (49093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336243710/s332/img (29619 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302449148/s332/img (66514 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/241779763/s332/img (48752 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243656762/s332/img (42262 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320977032/s332/img (29350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331327178/s332/img (38639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243951303/s332/img (42607 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+✅ Cache HIT: Catalog[catalog_movie_sst.json]
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for trending
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301552189/s332/img (59500 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/88761237/s332/img (60727 bytes)
+🛑 LobbyPresence: Polling stopped
+🛑 LobbyDatabase: Polling stopped
+🛑 Lobby: Polling stopped (chat via Realtime only)
+🚦 Lobby State: closed
+🎭 Lobby: Disconnected from room DG8D
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+🧹 Cleaning up Realtime channel for room: DG8D
+🔄 Untracking presence...
+🙈 Host leaving explicitly: Deleting room DG8D
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+📨 Received: {"ref":"17","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":"18","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DG8D"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:DG8D"}
+📨 Unknown event: phx_close
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/333077339/s332/img (29437 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327223699/s332/img (31103 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331126481/s332/img (53646 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328602380/s332/img (48174 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340614766/s332/img (62961 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/132935108/s332/img (72135 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335063930/s332/img (28802 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331994893/s332/img (37258 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301592778/s332/img (49084 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8730058/s332/img (44044 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331244585/s332/img (35639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176275502/s332/img (71523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321552009/s332/img (34807 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338962154/s332/img (51864 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312291378/s332/img (26090 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176677346/s332/img (63974 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331924998/s332/img (45255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (19894 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31193180/img (27098 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12300742/img (13162 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29567915/img (28516 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315672113/s332/img (80512 bytes)
+☠️ LobbyViewModel deinit
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+📼 Resume playback called - mode: watchParty, shouldResume: false, timestamp: 1339.7154814708829s
+✅ Cleared resumeFromTimestamp - starting from beginning
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+❌ Supabase API Error: Free User Limit Reached: You can host 1 item every 72 hours. Unlock in 23 hours 59 minutes.
+✅ checkFreeTierLimit: No history found
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 1688 seconds
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfx6mZcS86AvTj","phx_ref_prev":"GIjfxhFZHQk6AvTD","last_seen":"2026-01-08T21:48:22.183Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"a8e10e98-ecdb-11f0-885c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfxhFZHQk6AvTD","phx_ref_prev":"GIjfxZ59Wv06AvRj","last_seen":"2026-01-08T21:48:15.335Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🗑️ MPVViewLayer deinit
+⚠️ Zilean Health Check returned status: 404
+✅ checkFreeTierLimit: No history found
+🚫 Subscription revoked or inactive.
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 22:16:30 +0000
+⏰ AppState: Scheduling update in 1678 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfyi56Cpw6AlyC","phx_ref_prev":"GIjfxYYERYI6AvRD","last_seen":"2026-01-08T21:48:33.001Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"6d7130a0-ecda-11f0-955e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjfxYYERYI6AvRD","phx_ref_prev":"GIjfwN4aTUM6AlxC","last_seen":"2026-01-08T21:48:13.001Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}

@@ -12,6 +12,7 @@ struct RoomListView: View {
     @State private var hasMore = true
     @State private var isLoadingMore = false
     @State private var searchText = ""
+    @State private var participantPollingTimer: Timer? // Polls participant counts every 10s
     private let pageSize = 20
 
     var body: some View {
@@ -136,8 +137,12 @@ struct RoomListView: View {
             Task {
                 await setupRealtimeSubscription()
             }
+            // Start participant count polling
+            startParticipantCountPolling()
         }
         .onDisappear {
+            // Stop polling when view disappears
+            stopParticipantCountPolling()
             Task {
                 await disconnectRealtime()
             }
@@ -633,6 +638,11 @@ struct RoomListView: View {
                 room.lastActivity = lastActivity
             }
         }
+        
+        // NEW: Update participant count if changed (Realtime)
+        if let count = newRecord["participants_count"] as? Int {
+             room.participantCount = count
+        }
 
         // NEW: Update media info (for playlist progression)
         if let mediaItemData = newRecord["media_item"] as? [String: Any] {
@@ -665,7 +675,63 @@ struct RoomListView: View {
         // But for now, just having the number is good
 
         appState.activeRooms[index] = room
-        print("🔄 RoomListView: Updated room \(roomId) - Media: \(room.mediaItem?.name ?? "nil"), S\(room.season ?? 0)E\(room.episode ?? 0), state: \(room.state)")
+    }
+
+    // MARK: - Participant Count Polling
+    
+    private func startParticipantCountPolling() {
+        participantPollingTimer?.invalidate()
+        // Poll every 10 seconds
+        participantPollingTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak appState] _ in
+            Task { @MainActor [weak appState] in
+                guard let appState = appState, !appState.activeRooms.isEmpty else { return }
+                
+                // Fetch counts for all active rooms concurrently
+                await withTaskGroup(of: (String, Int?).self) { group in
+                    for room in appState.activeRooms {
+                        group.addTask {
+                            if let state = try? await SupabaseClient.shared.getRoomState(roomId: room.id) {
+                                return (room.id, state.participantsCount)
+                            }
+                            return (room.id, nil)
+                        }
+                    }
+                    
+                    // Collect results
+                    var updates: [String: Int] = [:]
+                    for await (roomId, count) in group {
+                        if let count = count {
+                            updates[roomId] = count
+                        }
+                    }
+                    
+                    // Update state on MainActor
+                    await MainActor.run {
+                        var updatedRooms = appState.activeRooms
+                        var hasChanges = false
+                        
+                        for (roomId, count) in updates {
+                            if let index = updatedRooms.firstIndex(where: { $0.id == roomId }) {
+                                if updatedRooms[index].participantCount != count {
+                                    updatedRooms[index].participantCount = count
+                                    hasChanges = true
+                                }
+                            }
+                        }
+                        
+                        if hasChanges {
+                            appState.activeRooms = updatedRooms
+                            // print("📊 RoomListView: Polled participant counts updated")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func stopParticipantCountPolling() {
+        participantPollingTimer?.invalidate()
+        participantPollingTimer = nil
     }
 }
 

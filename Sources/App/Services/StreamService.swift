@@ -43,12 +43,26 @@ actor StreamService: StreamResolving {
     // MARK: - File Extension Validation
     
     /// Block suspicious file extensions that indicate fake/malware torrents
+    /// Also blocks known error placeholder videos from providers
     private func isBlockedFileExtension(url: String) -> Bool {
         let urlLower = url.lowercased()
         // Remove query params for extension check
         let path = urlLower.components(separatedBy: "?").first ?? urlLower
+        
+        // Block malware/non-video extensions
         let blockedExtensions = [".iso", ".exe", ".dll", ".bat", ".cmd", ".msi", ".scr", ".vbs"]
-        return blockedExtensions.contains { path.hasSuffix($0) }
+        if blockedExtensions.contains(where: { path.hasSuffix($0) }) {
+            return true
+        }
+        
+        // Block Torrentio error placeholder videos
+        // These indicate Real-Debrid couldn't provide the stream
+        if path.contains("/videos/failed_") || path.contains("torrentio.strem.fun/videos/") {
+            print("🚫 StreamService: Detected Torrentio error placeholder video")
+            return true
+        }
+        
+        return false
     }
 
     // MARK: - Stream Resolution

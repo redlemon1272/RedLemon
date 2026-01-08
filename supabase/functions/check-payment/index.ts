@@ -177,6 +177,11 @@ export const handler = async (req: Request) => {
                 else if (asset.currency === 'ETH') usdVal = newAmount * ethPrice
                 else usdVal = newAmount * 1.0 // Stablecoins
 
+                // Calculate Duration Tier based on USD Value
+                let durationDays = 30 // Default 30
+                if (usdVal >= 9.80) durationDays = 90
+                else if (usdVal >= 6.80) durationDays = 60
+
                 totalNewUsdValue += usdVal
 
                 newTransactionsToLog.push({
@@ -184,6 +189,7 @@ export const handler = async (req: Request) => {
                     chain: asset.chain,
                     currency: asset.currency,
                     amount: newAmount, // Log the DELTA
+                    duration_days: durationDays,
                     tx_hash: `detected_${Date.now()}_${asset.chain}_${asset.currency}`
                 })
 

@@ -537,24 +537,41 @@ struct SettingsView: View {
                                                 RoundedRectangle(cornerRadius: 4)
                                                     .stroke(Color.green.opacity(0.5), lineWidth: 1)
                                             )
+                                        
+                                        // Duration Badge
+                                        if let days = tx.durationDays {
+                                            Text("\(days) DAYS")
+                                                .font(.caption2)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(.cyan)
+                                                .padding(.horizontal, 4)
+                                                .padding(.vertical, 2)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 4)
+                                                        .stroke(Color.cyan.opacity(0.5), lineWidth: 1)
+                                                )
+                                        }
                                     }
                                     
                                     HStack(spacing: 6) {
-                                        if tx.txHash.hasPrefix("detected_") {
-                                            Text("Payment Detected")
-                                                .font(.caption2)
-                                                .fontWeight(.medium)
-                                                .foregroundColor(.secondary)
-                                                .help("Payment detected automatically via balance check (Hash not available)")
-                                        } else if let url = getExplorerUrl(chain: tx.chain, hash: tx.txHash) {
+                                        if let url = getExplorerUrl(chain: tx.chain, hash: tx.txHash) {
                                             Link(destination: url) {
-                                                Text(tx.txHash.prefix(12) + "..." + tx.txHash.suffix(4))
-                                                    .font(.system(.caption2, design: .monospaced))
-                                                    .foregroundColor(.blue)
-                                                    .underline()
+                                                if tx.txHash.hasPrefix("detected_") {
+                                                    Text("View Wallet History")
+                                                        .font(.caption2)
+                                                        .fontWeight(.medium)
+                                                        .foregroundColor(.blue)
+                                                        .underline()
+                                                } else {
+                                                    Text(tx.txHash.prefix(12) + "..." + tx.txHash.suffix(4))
+                                                        .font(.system(.caption2, design: .monospaced))
+                                                        .foregroundColor(.blue)
+                                                        .underline()
+                                                }
                                             }
+                                            .help(tx.txHash.hasPrefix("detected_") ? "Payment detected via balance check. Click to view address history." : "View Transaction on Explorer")
                                         } else {
-                                            Text(tx.txHash.prefix(20) + "...")
+                                            Text(tx.txHash.hasPrefix("detected_") ? "Payment Detected" : (tx.txHash.prefix(20) + "..."))
                                                 .font(.system(.caption2, design: .monospaced))
                                                 .foregroundColor(.secondary)
                                         }
@@ -615,8 +632,20 @@ struct SettingsView: View {
     }
 
     private func getExplorerUrl(chain: String, hash: String) -> URL? {
-        // Ignore internal system detection IDs
-        if hash.hasPrefix("detected_") { return nil }
+        // Handle internal system detection IDs: "detected_ADDRESS_..."
+        if hash.hasPrefix("detected_") {
+            // Extract address segments (detected_0x123..._timestamp)
+            let parts = hash.components(separatedBy: "_")
+            if parts.count >= 2 {
+                let address = parts[1]
+                if chain == "btc" {
+                    return URL(string: "https://mempool.space/address/\(address)")
+                } else {
+                    return URL(string: "https://basescan.org/address/\(address)")
+                }
+            }
+            return nil
+        }
         
         if chain == "btc" {
             return URL(string: "https://mempool.space/tx/\(hash)")

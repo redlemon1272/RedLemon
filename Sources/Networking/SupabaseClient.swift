@@ -1621,12 +1621,14 @@ struct ReportedStream: Identifiable, Codable {
             let amount: Double
             let txHash: String
             let createdAt: Date
+            let durationDays: Int?
             
             enum CodingKeys: String, CodingKey {
                 case id, username, chain, currency, amount
                 case userId = "user_id"
                 case txHash = "tx_hash"
                 case createdAt = "created_at"
+                case durationDays = "duration_days"
             }
         }
         
@@ -1649,7 +1651,8 @@ struct ReportedStream: Identifiable, Codable {
                 currency: tx.currency,
                 amount: tx.amount,
                 txHash: tx.txHash,
-                createdAt: tx.createdAt
+                createdAt: tx.createdAt,
+                durationDays: tx.durationDays
             )
             paymentTx.username = tx.username
             return paymentTx
@@ -1973,6 +1976,7 @@ struct PaymentTransaction: Codable, Identifiable {
     let amount: Double
     let txHash: String
     let createdAt: Date
+    let durationDays: Int?
     
     // Joined username (optional, populated for admin views)
     var username: String?
@@ -1982,6 +1986,7 @@ struct PaymentTransaction: Codable, Identifiable {
         case userId = "user_id"
         case txHash = "tx_hash"
         case createdAt = "created_at"
+        case durationDays = "duration_days"
     }
 }
 

@@ -765,6 +765,18 @@ struct AdminPaymentsView: View {
                                     Text(tx.currency)
                                         .font(.caption2)
                                         .foregroundColor(.secondary)
+
+                                    // Duration badge
+                                    if let days = tx.durationDays {
+                                        Text("\(days)D")
+                                            .font(.caption2)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.cyan)
+                                            .padding(.horizontal, 4)
+                                            .padding(.vertical, 2)
+                                            .background(Color.cyan.opacity(0.1))
+                                            .cornerRadius(4)
+                                    }
                                 }
                                 
                                 Text(tx.txHash.prefix(16) + "...")

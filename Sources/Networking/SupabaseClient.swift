@@ -1589,6 +1589,101 @@ struct ReportedStream: Identifiable, Codable {
 
         return (result.premium ?? false, nil)
     }
+    
+    // MARK: - Payment Transaction History
+    
+    /// Get current user's own payment transactions (uses RLS policy)
+    func getMyPaymentTransactions() async throws -> [PaymentTransaction] {
+        guard let userId = auth.currentUser?.id else {
+            return []
+        }
+        
+        let data = try await makeRequest(
+            path: "/payment_transactions",
+            query: [
+                "user_id": "eq.\(userId.uuidString)",
+                "select": "*",
+                "order": "created_at.desc"
+            ]
+        )
+        return try jsonDecoder.decode([PaymentTransaction].self, from: data)
+    }
+    
+    /// Admin: Get all payment transactions with joined username
+    /// Uses direct query (admin has service_role access via RPC pattern)
+    func getAllPaymentTransactions(limit: Int = 50, offset: Int = 0) async throws -> [PaymentTransaction] {
+        // Fetch transactions with a separate user lookup
+        let txData = try await makeRequest(
+            path: "/payment_transactions",
+            query: [
+                "select": "*",
+                "order": "created_at.desc",
+                "limit": String(limit),
+                "offset": String(offset)
+            ]
+        )
+        
+        var transactions = try jsonDecoder.decode([PaymentTransaction].self, from: txData)
+        
+        // Batch fetch usernames for all unique user IDs
+        let userIds = Array(Set(transactions.map { $0.userId }))
+        if !userIds.isEmpty {
+            let idsString = userIds.map { $0.uuidString }.joined(separator: ",")
+            let usersData = try await makeRequest(
+                path: "/users",
+                query: [
+                    "id": "in.(\(idsString))",
+                    "select": "id,username"
+                ]
+            )
+            
+            struct UserLookup: Decodable { let id: UUID; let username: String }
+            let users = try jsonDecoder.decode([UserLookup].self, from: usersData)
+            let userMap = Dictionary(uniqueKeysWithValues: users.map { ($0.id, $0.username) })
+            
+            // Attach usernames to transactions
+            for i in 0..<transactions.count {
+                transactions[i].username = userMap[transactions[i].userId]
+            }
+        }
+        
+        return transactions
+    }
+    
+    /// Admin: Get payment statistics (total revenue, 30-day, 90-day)
+    func getPaymentStats() async throws -> PaymentStats {
+        // Fetch all transactions and calculate stats client-side
+        // This avoids needing a new RPC deployment
+        let data = try await makeRequest(
+            path: "/payment_transactions",
+            query: ["select": "amount,created_at"]
+        )
+        
+        struct TxSummary: Decodable {
+            let amount: Double
+            let createdAt: Date
+            enum CodingKeys: String, CodingKey {
+                case amount
+                case createdAt = "created_at"
+            }
+        }
+        
+        let transactions = try jsonDecoder.decode([TxSummary].self, from: data)
+        let now = Date()
+        let thirtyDaysAgo = now.addingTimeInterval(-30 * 24 * 60 * 60)
+        let ninetyDaysAgo = now.addingTimeInterval(-90 * 24 * 60 * 60)
+        
+        let totalRevenue = transactions.reduce(0) { $0 + $1.amount }
+        let revenue30d = transactions.filter { $0.createdAt > thirtyDaysAgo }.reduce(0) { $0 + $1.amount }
+        let revenue90d = transactions.filter { $0.createdAt > ninetyDaysAgo }.reduce(0) { $0 + $1.amount }
+        
+        return PaymentStats(
+            totalTransactions: transactions.count,
+            totalRevenueUsd: totalRevenue,
+            revenue30d: revenue30d,
+            revenue90d: revenue90d
+        )
+    }
 
     // MARK: - Feedback & Logging System
 
@@ -1879,6 +1974,43 @@ struct PaymentCheckResult: Codable {
     let success: Bool
     let premium: Bool?
     let message: String?
+}
+
+/// Represents a payment transaction from the `payment_transactions` table.
+/// Referenced in CRYPTO_PAYMENTS.md - logs every detected incoming payment.
+struct PaymentTransaction: Codable, Identifiable {
+    let id: UUID
+    let userId: UUID
+    let chain: String      // "btc", "evm" (matches key_derivation_indices)
+    let currency: String   // "BTC", "ETH", "USDC", "USDT"
+    let amount: Double
+    let txHash: String
+    let createdAt: Date
+    
+    // Joined username (optional, populated for admin views)
+    var username: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, chain, currency, amount, username
+        case userId = "user_id"
+        case txHash = "tx_hash"
+        case createdAt = "created_at"
+    }
+}
+
+/// Payment statistics for admin dashboard
+struct PaymentStats: Codable {
+    let totalTransactions: Int
+    let totalRevenueUsd: Double
+    let revenue30d: Double
+    let revenue90d: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case totalTransactions = "total_transactions"
+        case totalRevenueUsd = "total_revenue_usd"
+        case revenue30d = "revenue_30d"
+        case revenue90d = "revenue_90d"
+    }
 }
 
 extension SupabaseClient {

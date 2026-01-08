@@ -4,6 +4,7 @@ import SwiftUI
 enum AdminCategory: String, CaseIterable, Identifiable {
     case overview = "Overview"
     case users = "Users"
+    case payments = "Payments"
     case events = "Events"
     case server = "Server"
     case logs = "Logs"
@@ -14,6 +15,7 @@ enum AdminCategory: String, CaseIterable, Identifiable {
         switch self {
         case .overview: return "chart.bar.fill"
         case .users: return "person.2.fill"
+        case .payments: return "dollarsign.circle.fill"
         case .events: return "play.tv.fill"
         case .server: return "server.rack"
         case .logs: return "list.bullet.rectangle.portrait"
@@ -666,6 +668,216 @@ struct AdminEventsView: View {
             }
             isDeletingRoom = false
         }
+    }
+}
+
+// MARK: - Admin Payments View
+struct AdminPaymentsView: View {
+    @State private var transactions: [PaymentTransaction] = []
+    @State private var stats: PaymentStats?
+    @State private var isLoading = false
+    @State private var currentPage = 1
+    @State private var selectedUserId: UUID?
+    private let pageSize = 50
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            // Header
+            HStack {
+                Text("Payment Transactions")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                
+                Spacer()
+                
+                Button(action: loadData) {
+                    Image(systemName: "arrow.clockwise")
+                        .foregroundColor(.secondary)
+                }
+                .buttonStyle(.plain)
+                .help("Refresh")
+            }
+            .padding()
+            .background(Color(NSColor.controlBackgroundColor))
+            
+            // Stats Cards
+            if let stats = stats {
+                HStack(spacing: 16) {
+                    PaymentStatCard(
+                        title: "Total Revenue",
+                        value: String(format: "$%.2f", stats.totalRevenueUsd),
+                        subtitle: "\(stats.totalTransactions) transactions",
+                        color: .green
+                    )
+                    PaymentStatCard(
+                        title: "Last 30 Days",
+                        value: String(format: "$%.2f", stats.revenue30d),
+                        subtitle: "Recent activity",
+                        color: .blue
+                    )
+                    PaymentStatCard(
+                        title: "Last 90 Days",
+                        value: String(format: "$%.2f", stats.revenue90d),
+                        subtitle: "Quarter revenue",
+                        color: .purple
+                    )
+                }
+                .padding()
+            }
+            
+            Divider()
+            
+            // Transaction List
+            if isLoading && transactions.isEmpty {
+                Spacer()
+                ProgressView()
+                Spacer()
+            } else if transactions.isEmpty {
+                Spacer()
+                VStack(spacing: 12) {
+                    Image(systemName: "banknote")
+                        .font(.largeTitle)
+                        .foregroundColor(.secondary)
+                    Text("No transactions yet")
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+            } else {
+                List {
+                    ForEach(transactions) { tx in
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack(spacing: 8) {
+                                    Text("@\(tx.username ?? "Unknown")")
+                                        .fontWeight(.medium)
+                                    
+                                    // Chain badge
+                                    Text(tx.chain.uppercased())
+                                        .font(.caption2)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 6)
+                                        .padding(.vertical, 2)
+                                        .background(tx.chain == "btc" ? Color.orange : Color.blue)
+                                        .cornerRadius(4)
+                                    
+                                    // Currency badge
+                                    Text(tx.currency)
+                                        .font(.caption2)
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                Text(tx.txHash.prefix(16) + "...")
+                                    .font(.system(.caption, design: .monospaced))
+                                    .foregroundColor(.secondary)
+                            }
+                            
+                            Spacer()
+                            
+                            VStack(alignment: .trailing, spacing: 4) {
+                                Text(String(format: "%.6f %@", tx.amount, tx.currency))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.green)
+                                
+                                Text(tx.createdAt, style: .date)
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
+                }
+                .listStyle(InsetListStyle())
+            }
+            
+            // Pagination
+            HStack {
+                Button(action: {
+                    if currentPage > 1 {
+                        currentPage -= 1
+                        loadTransactions()
+                    }
+                }) {
+                    Image(systemName: "chevron.left")
+                }
+                .disabled(currentPage <= 1 || isLoading)
+                
+                Text("Page \(currentPage)")
+                    .monospacedDigit()
+                
+                Button(action: {
+                    if transactions.count == pageSize {
+                        currentPage += 1
+                        loadTransactions()
+                    }
+                }) {
+                    Image(systemName: "chevron.right")
+                }
+                .disabled(transactions.count < pageSize || isLoading)
+            }
+            .padding()
+            .background(Color(NSColor.controlBackgroundColor))
+        }
+        .onAppear {
+            loadData()
+        }
+    }
+    
+    private func loadData() {
+        loadStats()
+        loadTransactions()
+    }
+    
+    private func loadStats() {
+        Task {
+            do {
+                stats = try await SupabaseClient.shared.getPaymentStats()
+            } catch {
+                print("Error loading payment stats: \(error)")
+            }
+        }
+    }
+    
+    private func loadTransactions() {
+        isLoading = true
+        Task {
+            do {
+                let offset = (currentPage - 1) * pageSize
+                transactions = try await SupabaseClient.shared.getAllPaymentTransactions(limit: pageSize, offset: offset)
+            } catch {
+                print("Error loading transactions: \(error)")
+            }
+            isLoading = false
+        }
+    }
+}
+
+// MARK: - Payment Stat Card
+struct PaymentStatCard: View {
+    let title: String
+    let value: String
+    let subtitle: String
+    let color: Color
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.caption)
+                .foregroundColor(.secondary)
+            
+            Text(value)
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(color)
+            
+            Text(subtitle)
+                .font(.caption2)
+                .foregroundColor(.secondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(Color(NSColor.controlBackgroundColor))
+        .cornerRadius(12)
     }
 }
 

@@ -93,6 +93,8 @@ struct AdminDashboardView: View {
                     }
                 case .users:
                     AdminUsersView()
+                case .payments:
+                    AdminPaymentsView()
                 case .events:
                     AdminEventsView()
                 case .server:

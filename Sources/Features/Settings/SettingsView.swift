@@ -77,6 +77,11 @@ struct SettingsView: View {
                 providerStatusSection
 
                 licenseSection
+                
+                // Show payment history for premium users
+                if licenseManager.isPremium {
+                    paymentHistorySection
+                }
 
                 usernameSection
 
@@ -453,6 +458,121 @@ struct SettingsView: View {
             .padding(24)
             .background(Color(NSColor.controlBackgroundColor))
             .cornerRadius(16)
+        }
+    }
+    
+    // MARK: - Payment History Section (for premium users)
+    @State private var myTransactions: [PaymentTransaction] = []
+    @State private var isLoadingPayments = false
+    
+    private var paymentHistorySection: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text("Payment History")
+                .font(.system(size: 28, weight: .semibold))
+            
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Image(systemName: "clock.arrow.circlepath")
+                        .font(.title2)
+                        .foregroundColor(.green)
+                    Text("Your Transactions")
+                        .font(.title3.weight(.semibold))
+                    
+                    Spacer()
+                    
+                    Button(action: loadMyPayments) {
+                        Image(systemName: "arrow.clockwise")
+                            .foregroundColor(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(isLoadingPayments)
+                }
+                
+                Text("All crypto payments made to your account")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                
+                if isLoadingPayments {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                    .padding()
+                } else if myTransactions.isEmpty {
+                    HStack(spacing: 8) {
+                        Image(systemName: "info.circle.fill")
+                            .foregroundColor(.blue)
+                        Text("No transactions found. Premium may have been granted manually.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(12)
+                    .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
+                    .cornerRadius(8)
+                } else {
+                    VStack(spacing: 8) {
+                        ForEach(myTransactions) { tx in
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    HStack(spacing: 8) {
+                                        // Chain badge
+                                        Text(tx.chain.uppercased())
+                                            .font(.caption2)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 6)
+                                            .padding(.vertical, 2)
+                                            .background(tx.chain == "btc" ? Color.orange : Color.blue)
+                                            .cornerRadius(4)
+                                        
+                                        Text(tx.currency)
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    
+                                    Text(tx.txHash.prefix(20) + "...")
+                                        .font(.system(.caption2, design: .monospaced))
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                Spacer()
+                                
+                                VStack(alignment: .trailing, spacing: 2) {
+                                    Text(String(format: "%.6f", tx.amount))
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.green)
+                                    
+                                    Text(tx.createdAt, style: .date)
+                                        .font(.caption2)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .padding(10)
+                            .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
+                            .cornerRadius(8)
+                        }
+                    }
+                }
+            }
+            .padding(24)
+            .background(Color(NSColor.controlBackgroundColor))
+            .cornerRadius(16)
+        }
+        .onAppear {
+            loadMyPayments()
+        }
+    }
+    
+    private func loadMyPayments() {
+        isLoadingPayments = true
+        Task {
+            do {
+                myTransactions = try await SupabaseClient.shared.getMyPaymentTransactions()
+            } catch {
+                print("Error loading payment history: \(error)")
+            }
+            isLoadingPayments = false
         }
     }
 

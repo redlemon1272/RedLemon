@@ -16,7 +16,7 @@ This document contains **everything** you need to manage your new self-hosted ba
 | **SSH User** | `root` |
 | **SSH Password** | `123Scarface123!` |
 | **OS** | Ubuntu 24.04 LTS |
-| **Location** | AnonVM (Netherlands/Panama) |
+| **Location** | AnonVM (Netherlands) |
 
 **To Connect:**
 ```bash

@@ -1610,79 +1610,57 @@ struct ReportedStream: Identifiable, Codable {
     }
     
     /// Admin: Get all payment transactions with joined username
-    /// Uses direct query (admin has service_role access via RPC pattern)
+    /// Uses RPC `get_all_payment_transactions` to bypass RLS and join users
     func getAllPaymentTransactions(limit: Int = 50, offset: Int = 0) async throws -> [PaymentTransaction] {
-        // Fetch transactions with a separate user lookup
-        let txData = try await makeRequest(
-            path: "/payment_transactions",
-            query: [
-                "select": "*",
-                "order": "created_at.desc",
-                "limit": String(limit),
-                "offset": String(offset)
-            ]
-        )
-        
-        var transactions = try jsonDecoder.decode([PaymentTransaction].self, from: txData)
-        
-        // Batch fetch usernames for all unique user IDs
-        let userIds = Array(Set(transactions.map { $0.userId }))
-        if !userIds.isEmpty {
-            let idsString = userIds.map { $0.uuidString }.joined(separator: ",")
-            let usersData = try await makeRequest(
-                path: "/users",
-                query: [
-                    "id": "in.(\(idsString))",
-                    "select": "id,username"
-                ]
-            )
-            
-            struct UserLookup: Decodable { let id: UUID; let username: String }
-            let users = try jsonDecoder.decode([UserLookup].self, from: usersData)
-            let userMap = Dictionary(uniqueKeysWithValues: users.map { ($0.id, $0.username) })
-            
-            // Attach usernames to transactions
-            for i in 0..<transactions.count {
-                transactions[i].username = userMap[transactions[i].userId]
-            }
-        }
-        
-        return transactions
-    }
-    
-    /// Admin: Get payment statistics (total revenue, 30-day, 90-day)
-    func getPaymentStats() async throws -> PaymentStats {
-        // Fetch all transactions and calculate stats client-side
-        // This avoids needing a new RPC deployment
-        let data = try await makeRequest(
-            path: "/payment_transactions",
-            query: ["select": "amount,created_at"]
-        )
-        
-        struct TxSummary: Decodable {
+        struct RPCTransaction: Decodable {
+            let id: UUID
+            let userId: UUID
+            let username: String?
+            let chain: String
+            let currency: String
             let amount: Double
+            let txHash: String
             let createdAt: Date
+            
             enum CodingKeys: String, CodingKey {
-                case amount
+                case id, username, chain, currency, amount
+                case userId = "user_id"
+                case txHash = "tx_hash"
                 case createdAt = "created_at"
             }
         }
         
-        let transactions = try jsonDecoder.decode([TxSummary].self, from: data)
-        let now = Date()
-        let thirtyDaysAgo = now.addingTimeInterval(-30 * 24 * 60 * 60)
-        let ninetyDaysAgo = now.addingTimeInterval(-90 * 24 * 60 * 60)
+        let params = ["p_limit": limit, "p_offset": offset]
+        let data = try await functions.invoke("get_all_payment_transactions", options: .init(body: params))
+        let rpcTransactions = try jsonDecoder.decode([RPCTransaction].self, from: data)
         
-        let totalRevenue = transactions.reduce(0) { $0 + $1.amount }
-        let revenue30d = transactions.filter { $0.createdAt > thirtyDaysAgo }.reduce(0) { $0 + $1.amount }
-        let revenue90d = transactions.filter { $0.createdAt > ninetyDaysAgo }.reduce(0) { $0 + $1.amount }
+        // Map RPC result to PaymentTransaction model
+        return rpcTransactions.map { tx in
+            var paymentTx = PaymentTransaction(
+                id: tx.id,
+                userId: tx.userId,
+                chain: tx.chain,
+                currency: tx.currency,
+                amount: tx.amount,
+                txHash: tx.txHash,
+                createdAt: tx.createdAt
+            )
+            paymentTx.username = tx.username
+            return paymentTx
+        }
+    }
+    
+    /// Admin: Get payment statistics (total revenue, 30-day, 90-day)
+    /// Uses RPC `get_payment_stats` to bypass RLS
+    func getPaymentStats() async throws -> PaymentStats {
+        let data = try await functions.invoke("get_payment_stats", options: .init(body: [:]))
         
-        return PaymentStats(
-            totalTransactions: transactions.count,
-            totalRevenueUsd: totalRevenue,
-            revenue30d: revenue30d,
-            revenue90d: revenue90d
-        )
+        // RPC returns a single object (or array of 1 depending on implementation), but likely array of 1 for standard table return
+        let statsArray = try jsonDecoder.decode([PaymentStats].self, from: data)
+        if let stats = statsArray.first {
+            return stats
+        }
+        throw NSError(domain: "SupabaseClient", code: -1, userInfo: [NSLocalizedDescriptionKey: "No stats returned"])
     }
 
     // MARK: - Feedback & Logging System

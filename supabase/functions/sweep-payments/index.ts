@@ -50,18 +50,18 @@ export async function handler(req: Request): Promise<Response> {
         const masterAddress = masterWallet.address
         console.log(`[Sweep] Master wallet address: ${masterAddress}`)
 
-        // Get all assigned payment pool addresses
+        // Get all payment pool addresses (both 'assigned' and 'used' - payments mark pools as 'used')
         const { data: pools, error: poolsError } = await supabase
             .from('payment_pools')
             .select('id, address, chain, assigned_to_user_id, derivation_path_index')
             .eq('chain', 'evm')
-            .eq('status', 'assigned')
+            .in('status', ['assigned', 'used'])
 
         if (poolsError) {
             throw new Error(`Failed to fetch payment pools: ${poolsError.message}`)
         }
 
-        console.log(`[Sweep] Found ${pools?.length ?? 0} assigned EVM addresses`)
+        console.log(`[Sweep] Found ${pools?.length ?? 0} EVM addresses to check`)
 
         const sweepResults: any[] = []
 

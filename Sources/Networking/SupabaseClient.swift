@@ -12,7 +12,9 @@ enum SupabaseError: Error, LocalizedError {
     case invalidURL
     case invalidResponse
     case userCreationFailed
+
     case serverError(String)
+    case userMessage(String)
 
     var errorDescription: String? {
         switch self {
@@ -34,6 +36,8 @@ enum SupabaseError: Error, LocalizedError {
             return "Failed to create user."
         case .serverError(let message):
             return "Server Error: \(message)"
+        case .userMessage(let message):
+            return message
         }
     }
 }
@@ -284,6 +288,21 @@ class SupabaseClient: RoomManager, UserManager {
 
         guard (200...299).contains(httpResponse.statusCode) else {
             let errorString = String(data: data, encoding: .utf8) ?? "Unknown error"
+            
+            // Attempt to parse clean Postgres error message
+            // Format: {"code": "...", "message": "...", "details": "...", "hint": "..."}
+            struct PostgresError: Decodable {
+                let message: String
+                let details: String?
+                let hint: String?
+            }
+            
+            if let jsonError = try? JSONDecoder().decode(PostgresError.self, from: data) {
+                print("❌ Supabase API Error: \(jsonError.message)")
+                // For PostgreSQL exceptions (which we use for limits), use the raw message
+                throw SupabaseError.userMessage(jsonError.message)
+            }
+            
             print("❌ Supabase error (\(httpResponse.statusCode)): \(errorString)")
             throw SupabaseError.httpError(httpResponse.statusCode, errorString)
         }

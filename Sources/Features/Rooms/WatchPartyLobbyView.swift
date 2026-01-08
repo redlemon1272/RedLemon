@@ -891,7 +891,7 @@ struct WatchPartyLobbyView: View {
             )
         }
         .sheet(isPresented: $showPaymentGate) {
-            PaymentGateView()
+            PremiumPaymentView()
         }
 
     }  // Close lobbyContent function

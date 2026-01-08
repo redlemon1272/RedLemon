@@ -1235,6 +1235,7 @@ enum APIError: LocalizedError {
     case noStreamsFound
     case invalidResponse
     case invalidURL
+    case invalidStream  // URL resolved to non-video file (e.g., .iso, .exe)
     case serverError(statusCode: Int)
     case networkError(Error)
 
@@ -1246,6 +1247,8 @@ enum APIError: LocalizedError {
             return "Invalid response from server"
         case .invalidURL:
             return "Invalid URL"
+        case .invalidStream:
+            return "Stream resolved to invalid file type"
         case .serverError(let statusCode):
             return "Server error with status code: \(statusCode)"
         case .networkError(let error):

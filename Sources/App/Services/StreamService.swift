@@ -40,6 +40,17 @@ actor StreamService: StreamResolving {
         return attemptedHashes[imdbId] ?? []
     }
 
+    // MARK: - File Extension Validation
+    
+    /// Block suspicious file extensions that indicate fake/malware torrents
+    private func isBlockedFileExtension(url: String) -> Bool {
+        let urlLower = url.lowercased()
+        // Remove query params for extension check
+        let path = urlLower.components(separatedBy: "?").first ?? urlLower
+        let blockedExtensions = [".iso", ".exe", ".dll", ".bat", ".cmd", ".msi", ".scr", ".vbs"]
+        return blockedExtensions.contains { path.hasSuffix($0) }
+    }
+
     // MARK: - Stream Resolution
 
 
@@ -571,6 +582,13 @@ actor StreamService: StreamResolving {
                  print("🔍 StreamService: Resolving redirect URL: \(url)")
                  if let resolved = await resolveRedirect(url: url) {
                      print("✅ StreamService: Resolved to: \(resolved)")
+                     
+                     // CRITICAL: Validate resolved URL is a valid video file
+                     if isBlockedFileExtension(url: resolved) {
+                         print("🚫 StreamService: Blocked suspicious file extension in resolved URL. Skipping stream.")
+                         throw APIError.invalidStream
+                     }
+                     
                      finalURL = resolved
                  } else {
                      print("⚠️ StreamService: Failed to resolve URL, using original.")
@@ -657,6 +675,12 @@ actor StreamService: StreamResolving {
         }
 
         let unlockResult = try JSONDecoder().decode(UnlockResponse.self, from: data)
+
+        // CRITICAL: Validate unlocked URL is a valid video file
+        if isBlockedFileExtension(url: unlockResult.url) {
+            print("🚫 StreamService: Unlocked URL has suspicious extension. Skipping stream.")
+            throw APIError.invalidStream
+        }
 
         print("✅ StreamService: Stream unlocked successfully!")
 

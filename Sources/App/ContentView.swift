@@ -542,8 +542,8 @@ struct StreamErrorView: View {
         // Check for known error patterns and return actionable info
         let errorLower = error.lowercased()
         
-        // No Real-Debrid key
-        if errorLower.contains("no realdebrid token") || errorLower.contains("realdebrid not configured") {
+        // No Real-Debrid key (Matches StreamError.noRealDebridKey localized string)
+        if errorLower.contains("requires a real-debrid account") || errorLower.contains("no realdebrid token") || errorLower.contains("realdebrid not configured") {
             return (
                 title: "Real-Debrid Not Configured",
                 message: "RedLemon requires a Real-Debrid account to stream content.",
@@ -554,7 +554,7 @@ struct StreamErrorView: View {
         }
         
         // Invalid/expired key
-        if errorLower.contains("401") || errorLower.contains("unauthorized") || errorLower.contains("invalid") && errorLower.contains("key") {
+        if errorLower.contains("401") || errorLower.contains("unauthorized") || (errorLower.contains("invalid") && errorLower.contains("key")) {
             return (
                 title: "Invalid API Key",
                 message: "Your Real-Debrid API key appears to be invalid or revoked.",
@@ -575,8 +575,8 @@ struct StreamErrorView: View {
             )
         }
         
-        // All streams fake/blocked
-        if errorLower.contains("invalid file type") || errorLower.contains("all streams") && errorLower.contains("fake") {
+        // All streams fake/blocked (Matches StreamError.allStreamsFake localized string)
+        if errorLower.contains("invalid file type") || errorLower.contains("blocked as suspicious") || (errorLower.contains("all streams") && errorLower.contains("fake")) {
             return (
                 title: "No Valid Streams",
                 message: "All available streams were blocked as suspicious.",

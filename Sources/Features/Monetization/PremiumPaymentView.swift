@@ -16,6 +16,7 @@ struct PremiumPaymentView: View {
     @State private var showSuccess = false
     @State private var selectedPlan: String = "$4"
     @State private var exchangeRates: (btc: Double, eth: Double)?
+    @State private var freeLimitSeconds: TimeInterval?
 
     enum Chain: String, CaseIterable, Identifiable {
         case evm = "evm"
@@ -51,9 +52,29 @@ struct PremiumPaymentView: View {
                 VStack(spacing: 0) {
                     ScrollView {
                         VStack(spacing: 20) {
-                    VStack(spacing: 8) {
                         Text("Premium Subscription")
                             .font(.system(size: 28, weight: .bold))
+
+                        if let limit = freeLimitSeconds, limit > 0 {
+                            VStack(spacing: 4) {
+                                Text("Free Limit Reached")
+                                    .font(.headline)
+                                    .foregroundColor(.orange)
+                                Text("You can host again in \(formatDuration(limit))")
+                                    .font(.subheadline)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                                Text("Upgrade now to host immediately.")
+                                    .font(.caption)
+                                    .foregroundColor(.white.opacity(0.8))
+                            }
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.orange.opacity(0.2))
+                            .cornerRadius(12)
+                            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.orange.opacity(0.5), lineWidth: 1))
+                            .padding(.bottom, 8)
+                        }
 
                         Text("Subscribe to host unlimited watch parties. Choose a plan that suits you.")
                             .font(.body)
@@ -85,7 +106,7 @@ struct PremiumPaymentView: View {
                             )
                         }
                         .padding(.top, 4)
-                    }
+
 
                     // Chain Failure Message
                     if let error = errorMessage {
@@ -288,6 +309,7 @@ struct PremiumPaymentView: View {
             Task {
                 await loadAddress()
                 await fetchRates()
+                await checkLimit()
             }
         }
         .onDisappear {
@@ -358,6 +380,26 @@ struct PremiumPaymentView: View {
         } catch {
             LogManager.shared.error("❌ Failed to fetch crypto rates", error: error)
         }
+    }
+
+    private func checkLimit() async {
+        do {
+            let seconds = try await SupabaseClient.shared.checkFreeTierLimit()
+            if seconds > 0 {
+                withAnimation {
+                    freeLimitSeconds = seconds
+                }
+            }
+        } catch {
+            LogManager.shared.error("❌ Failed to check limit", error: error)
+        }
+    }
+    
+    private func formatDuration(_ interval: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.unitsStyle = .full
+        return formatter.string(from: interval) ?? ""
     }
 
     private func calculateCryptoAmount(usd: Double) -> String? {

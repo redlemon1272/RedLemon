@@ -690,6 +690,47 @@ class SupabaseClient: RoomManager, UserManager {
         return try jsonDecoder.decode([SupabaseRoom].self, from: data)
     }
 
+    // MARK: - Free Tier Limits
+
+    /// Checks the remaining cooldown time for free users.
+    /// Returns the number of seconds remaining until the 72-hour limit resets.
+    /// Returns 0 if no limit is active or user is premium.
+    func checkFreeTierLimit() async throws -> TimeInterval {
+        guard let userId = auth.currentUser?.id else { return 0 }
+        // If locally known as premium, return 0 (but verify with DB if needed?)
+        // Let's trust local or auth state for now to avoid extra calls if obviously premium.
+        if auth.currentUser?.isPremium == true { return 0 }
+
+        struct HistoryEntry: Decodable {
+            let created_at: Date
+        }
+
+        // Query last creation time
+        // Note: room_creation_history is protected by RLS (Users can see own)
+        let queryData = try await makeRequest(
+            path: "/room_creation_history",
+            query: [
+                "user_id": "eq.\(userId)",
+                "order": "created_at.desc",
+                "limit": "1",
+                "select": "created_at"
+            ]
+        )
+        
+        let history = try jsonDecoder.decode([HistoryEntry].self, from: queryData)
+
+        if let lastEntry = history.first {
+            let elapsed = Date().timeIntervalSince(lastEntry.created_at)
+            let limitDuration: TimeInterval = 72 * 3600 // 72 Hours
+            
+            if elapsed < limitDuration {
+                return limitDuration - elapsed
+            }
+        }
+
+        return 0
+    }
+
     /// Create a new room
     func createRoom(
         id: String,

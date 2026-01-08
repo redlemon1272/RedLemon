@@ -1,0 +1,1435 @@
+2026-01-08 12:27:58.736 RedLemon[2261:11628] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-08 12:27:58.736 RedLemon[2261:11628] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-08 12:27:58.891 RedLemon[2261:11962] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-08 12:27:58.989 RedLemon[2261:11628] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-08 12:27:59.076 RedLemon[2261:11628] ✅ Playback state reset complete - starting in browse view
+2026-01-08 12:27:59.076 RedLemon[2261:11628] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-08 12:27:59.076 RedLemon[2261:11628] 🧪 Testing Profile: debug
+2026-01-08 12:27:59.076 RedLemon[2261:11970] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-08 12:27:59.076 RedLemon[2261:11628] ✅ Keychain: Found stored username: ursinho
+2026-01-08 12:27:59.077 RedLemon[2261:11628] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-08 12:27:59.077 RedLemon[2261:11970] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-08 12:27:59.512 RedLemon[2261:12004] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-08 12:27:59.526 RedLemon[2261:12004] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-08 12:27:59.526 RedLemon[2261:12004] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 12:27:59.556 RedLemon[2261:11628] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 12:27:59.556 RedLemon[2261:11628] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 12:27:59.556 RedLemon[2261:11628] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-08 12:27:59.556 RedLemon[2261:11628] 🚀 RedLemon: Starting HTTP server...
+2026-01-08 12:27:59.558 RedLemon[2261:11628] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-08 12:27:59.602 RedLemon[2261:11628] ✅ RedLemon: HTTPServer instance created
+2026-01-08 12:27:59.603 RedLemon[2261:11970] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"6A283C52-23B8-42E4-8C0F-44184C41CF95","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+📂 Loaded 5 credential(s) from cache
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-08 12:27:59.879 RedLemon[2261:11628] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-08 12:28:01.709 RedLemon[2261:11628] ✅ RedLemon: Server marked as ready
+2026-01-08 12:28:01.761 RedLemon[2261:11628] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-08 12:28:01.761 RedLemon[2261:11628] 🔍 Performing startup checks...
+2026-01-08 12:28:01.761 RedLemon[2261:11628] ✅ Username-based authentication ready
+2026-01-08 12:28:02.616 RedLemon[2261:11628] 🔍 Performing startup checks...
+2026-01-08 12:28:02.616 RedLemon[2261:11628] ✅ Username-based authentication ready
+2026-01-08 12:28:02.890 RedLemon[2261:11628] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+✅ [EventsView] Loaded 411 movies from config version 1486
+🗓 AppState: Updated schedule epoch to 2026-01-04 23:43:30 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8670 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0172156/img (766152 bytes)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8669 seconds
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"68B4C70B-259F-42FB-B76D-2B5E06286E95","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRkj8pe6o6AkTh","phx_ref_prev":"GIjRjZb7I2w6AkMh","last_seen":"2026-01-08T17:27:59.641Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8669 seconds
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRkqfNajI6AkWh","last_seen":"2026-01-08T17:28:01.325Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+💰 LicenseManager: Checking for background crypto payments...
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"4B5D33AF-F5DD-45FF-8EB5-44B905B072BF","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 41 items to cloud...
+🔄 SocialService: Syncing 41 items to cloud (serial)...
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.211s (RTT: 221ms)
+   Local:  2026-01-08 17:28:03 +0000
+   Server: 2026-01-08 17:28:03 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8659 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8649 seconds
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRl0_pJYk6Akdh","phx_ref_prev":"GIjRkqfNajI6AkWh","last_seen":"2026-01-08T17:28:21.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRkqfNajI6AkWh","last_seen":"2026-01-08T17:28:01.325Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8640 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8629 seconds
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRm_h6TVw6AkhB","phx_ref_prev":"GIjRl0_pJYk6Akdh","last_seen":"2026-01-08T17:28:41.326Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRl0_pJYk6Akdh","phx_ref_prev":"GIjRkqfNajI6AkWh","last_seen":"2026-01-08T17:28:21.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8620 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8610 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRoKBEQuI6Akih","phx_ref_prev":"GIjRm_h6TVw6AkhB","last_seen":"2026-01-08T17:29:01.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRm_h6TVw6AkhB","phx_ref_prev":"GIjRl0_pJYk6Akdh","last_seen":"2026-01-08T17:28:41.326Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRoMNs9Hg6ArtC","phx_ref_prev":"GIjRkj8pe6o6AkTh","last_seen":"2026-01-08T17:29:02.063Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRkj8pe6o6AkTh","phx_ref_prev":"GIjRjZb7I2w6AkMh","last_seen":"2026-01-08T17:27:59.641Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8599 seconds
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8590 seconds
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRpUhQ5G06AklB","phx_ref_prev":"GIjRoKBEQuI6Akih","last_seen":"2026-01-08T17:29:21.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRoKBEQuI6Akih","phx_ref_prev":"GIjRm_h6TVw6AkhB","last_seen":"2026-01-08T17:29:01.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRpXLSUK06Aklh","phx_ref_prev":"GIjRoMNs9Hg6ArtC","last_seen":"2026-01-08T17:29:22.063Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRoMNs9Hg6ArtC","phx_ref_prev":"GIjRkj8pe6o6AkTh","last_seen":"2026-01-08T17:29:02.063Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRphR_mxI6AkqB","phx_ref_prev":"GIjRpXLSUK06Aklh","last_seen":"2026-01-08T17:29:24.894Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRpXLSUK06Aklh","phx_ref_prev":"GIjRoMNs9Hg6ArtC","last_seen":"2026-01-08T17:29:22.063Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8579 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8570 seconds
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRqfBiARs6Aksh","phx_ref_prev":"GIjRpUhQ5G06AklB","last_seen":"2026-01-08T17:29:41.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRpUhQ5G06AklB","phx_ref_prev":"GIjRoKBEQuI6Akih","last_seen":"2026-01-08T17:29:21.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRqho9PhM6AktB","phx_ref_prev":"GIjRphR_mxI6AkqB","last_seen":"2026-01-08T17:29:42.165Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRphR_mxI6AkqB","phx_ref_prev":"GIjRpXLSUK06Aklh","last_seen":"2026-01-08T17:29:24.894Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8560 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8549 seconds
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRrpi5l2E6ArzC","phx_ref_prev":"GIjRqfBiARs6Aksh","last_seen":"2026-01-08T17:30:01.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRqfBiARs6Aksh","phx_ref_prev":"GIjRpUhQ5G06AklB","last_seen":"2026-01-08T17:29:41.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRrsCBWuM6AkyB","phx_ref_prev":"GIjRqho9PhM6AktB","last_seen":"2026-01-08T17:30:02.141Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","2026-01-08 12:31:36.674 RedLemon[2261:11628] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0172156/img
+2026-01-08 12:31:36.674 RedLemon[2261:11628] ⏳ Background art loading...
+2026-01-08 12:31:36.674 RedLemon[2261:11628] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0172156/img
+2026-01-08 12:31:36.675 RedLemon[2261:11628] ⏳ Logo loading...
+2026-01-08 12:31:36.758 RedLemon[2261:11628]    Quality: 1080p
+2026-01-08 12:31:36.759 RedLemon[2261:11628]    Mode: watchParty
+2026-01-08 12:31:36.759 RedLemon[2261:11628] 📡 Fetching metadata for tt0172156...
+2026-01-08 12:31:36.764 RedLemon[2261:11628] ✅ Background art loaded successfully
+username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRqho9PhM6AktB","phx_ref_prev":"GIjRphR_mxI6AkqB","last_seen":"2026-01-08T17:29:42.165Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8540 seconds
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8529 seconds
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRs0EIny06Ak3B","phx_ref_prev":"GIjRrpi5l2E6ArzC","last_seen":"2026-01-08T17:30:21.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRrpi5l2E6ArzC","phx_ref_prev":"GIjRqfBiARs6Aksh","last_seen":"2026-01-08T17:30:01.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRs2dkObw6Ak3h","phx_ref_prev":"GIjRrsCBWuM6AkyB","last_seen":"2026-01-08T17:30:22.119Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRrsCBWuM6AkyB","phx_ref_prev":"GIjRqho9PhM6AktB","last_seen":"2026-01-08T17:30:02.141Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8519 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8510 seconds
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRt-jOMuA6Ak7B","phx_ref_prev":"GIjRs0EIny06Ak3B","last_seen":"2026-01-08T17:30:41.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRs0EIny06Ak3B","phx_ref_prev":"GIjRrpi5l2E6ArzC","last_seen":"2026-01-08T17:30:21.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRuA5JgR86Ak7h","phx_ref_prev":"GIjRs2dkObw6Ak3h","last_seen":"2026-01-08T17:30:42.098Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRs2dkObw6Ak3h","phx_ref_prev":"GIjRrsCBWuM6AkyB","last_seen":"2026-01-08T17:30:22.119Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8500 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8490 seconds
+📨 Received: {"ref":"15","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRvJD-H4s6AlAh","phx_ref_prev":"GIjRt-jOMuA6Ak7B","last_seen":"2026-01-08T17:31:01.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRt-jOMuA6Ak7B","phx_ref_prev":"GIjRs0EIny06Ak3B","last_seen":"2026-01-08T17:30:41.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"16","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRvLpZhxc6AlBB","phx_ref_prev":"GIjRuA5JgR86Ak7h","last_seen":"2026-01-08T17:31:02.159Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRuA5JgR86Ak7h","phx_ref_prev":"GIjRs2dkObw6Ak3h","last_seen":"2026-01-08T17:30:42.098Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8480 seconds
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8469 seconds
+📨 Received: {"ref":"17","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRwTk4S-Q6AlEB","phx_ref_prev":"GIjRvJD-H4s6AlAh","last_seen":"2026-01-08T17:31:21.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRvJD-H4s6AlAh","phx_ref_prev":"GIjRt-jOMuA6Ak7B","last_seen":"2026-01-08T17:31:01.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRwWD7fXg6AlEh","phx_ref_prev":"GIjRvLpZhxc6AlBB","last_seen":"2026-01-08T17:31:22.138Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRvLpZhxc6AlBB","phx_ref_prev":"GIjRuA5JgR86Ak7h","last_seen":"2026-01-08T17:31:02.159Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0800369/img (578915 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt3065204/img (841877 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0330373/img (679788 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt10954984/img (931249 bytes)
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8460 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"18","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+[2026-01-08T17:31:36Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Bad Boys II (Live: true)
+   Event start time: 2026-01-08 17:16:30 +0000
+   Event duration: 9360.0s
+   Current time: 2026-01-08 17:31:36 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt0172156
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑
+   UnlockedURL: https://chi4-4.downl...
+   Hash: 198f88e9a37c9decbb5fd6e516d764692e52cfc5
+   Quality: nil
+   FileIdx: -1
+   🔗 Locking to server-provided stream hash: 198f88e9a37c9decbb5fd6e516d764692e52cfc5
+
+🎬 Live event - calculating position: 906.8059420585632 seconds
+   Event start time: 2026-01-08 17:16:30 +0000
+   Current time: 2026-01-08 17:31:36 +0000
+   Room createdAt: 2026-01-08 17:16:30 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 906.8059420585632
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Bad Boys II
+[ INFO ] GET /api/metadata/meta/movie/tt0172156 [request-id: BA5868B8-5CAB-4689-950C-85BB4525D7B4]
+2026-01-08 12:31:36.826 RedLemon[2261:11628] ✅ Logo loaded successfully
+2026-01-08 12:31:37.014 RedLemon[2261:13964] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-08 12:31:37.050 RedLemon[2261:11628] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-08 12:31:37.050 RedLemon[2261:11628] ⚠️ GUEST: Detected quality from filename: 1080p
+2026-01-08 12:31:37.050 RedLemon[2261:11628] 📝 GUEST: Extracted filename='Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ.mkv' (len=61), sourceQuality=nil, selectedQuality=nil
+💾 Cache SET: Metadata[meta_movie_tt0172156]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 530299B3-99CF-4C0F-B6C9-73684A0051EF]
+2026-01-08 12:31:40.031 RedLemon[2261:11628] ✅ GUEST: Found 10 subtitles
+2026-01-08 12:31:40.041 RedLemon[2261:11628] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi4-4.download.real-debrid.com/d/DVRWZ4BIBJUGO20/Ba, subtitles: 10
+2026-01-08 12:31:40.124 RedLemon[2261:11628] ✅ Stream ready, starting playback...
+2026-01-08 12:31:40.124 RedLemon[2261:11628] 🖥️ WindowManager: enterFullscreen() called
+2026-01-08 12:31:40.124 RedLemon[2261:11628]    Window: <SwiftUI.SwiftUIWindow: 0x7fea09fe76e0>
+2026-01-08 12:31:40.124 RedLemon[2261:11628]    Is fullscreen: 0
+2026-01-08 12:31:40.124 RedLemon[2261:11628]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-08 12:31:40.241 RedLemon[2261:11628] 🖼️ Setting up MPV with native macOS video output...
+2026-01-08 12:31:40.247 RedLemon[2261:11628] ✅ MPV initialized with native GPU rendering
+2026-01-08 12:31:40.266 RedLemon[2261:11628] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-08 12:31:40.267 RedLemon[2261:11628] 🎉 Starting watch party sync - Room: event_tt0172156, Host: NO
+2026-01-08 12:31:40.267 RedLemon[2261:11628] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-08 12:31:40.381 RedLemon[2261:11628] 🔄 Starting chat polling for room: event_tt0172156
+2026-01-08 12:31:40.382 RedLemon[2261:11628] 💓 Started playback heartbeat loop
+2026-01-08 12:31:40.383 RedLemon[2261:11628] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-08 12:31:40.383 RedLemon[2261:11628] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-08 12:31:40.387 RedLemon[2261:11628] 🎬🎬🎬 Subtitles: 10
+2026-01-08 12:31:40.387 RedLemon[2261:11628] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Bad Boys II
+2026-01-08 12:31:40.388 RedLemon[2261:11628] 🎬🎬🎬 streamURL: https://chi4-4.download.real-debrid.com/d/DVRWZ4BIBJUGO20/Ba
+2026-01-08 12:31:40.388 RedLemon[2261:11628] 🎬🎬🎬 subtitles: 10
+2026-01-08 12:31:40.389 RedLemon[2261:11628] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-08 12:31:40.398 RedLemon[2261:13964] 🎬 MPV: Current video filename set to: 
+2026-01-08 12:31:40.398 RedLemon[2261:13969] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-08 12:31:40.399 RedLemon[2261:13964] 🎬 MPV loadVideo called with URL: https://chi4-4.download.real-debrid.com/d/DVRWZ4BI (Encoded: https://chi4-4.download.real-debrid.com/d/DVRWZ4BI), autoplay: false, expectedSubs: 3
+2026-01-08 12:31:40.399 RedLemon[2261:13969] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE5NzgzMDUtMjIyOTM2Ny56aXA=?token=FAC95D4D-DFDB-4166-A518-92D562734D06
+2026-01-08 12:31:40.399 RedLemon[2261:13964] 🎬 MPV executing: loadfile "https://chi4-4.download.real-debrid.com/d/DVRWZ4BIBJUGO20/Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ.mkv"
+2026-01-08 12:31:40.400 RedLemon[2261:13964] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt0172156 (movie)
+   ℹ️ Fallback Name: Bad Boys II (2003)
+✅ Found 10 subtitles from SubDL (Primary)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi4-4.download.real-debrid.com/d/DVRWZ4BIBJUGO20/Ba
+   Display Title: Bad Boys II
+   Subtitle URLs: 10
+      [0] Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG
+      [1] Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG
+      [2] Bad.Boys.II.2003.720p.BluRay.X264.YIFY
+      [3] Bad.Boys.II.2003.720p.BluRay.X264.YIFY
+      [4] Bad.Boys.II.2003.WEBRip.Netflix
+      [5] Bad Boys 2 (2003)
+      [6] Bad Boys II (2003) BRRip
+      [7] Bad Boys II 23.976 FPS
+      [8] Bad Boys 2 KLAXXON
+      [9] x264-uSk
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🧠 StreamService: Marked hash 198f88e9 as attempted for tt0172156
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt0172156, isHost=false
+💓 Heartbeat sent
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt0172156
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt0172156
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📡 Connection state: connected
+✅ Realtime channel setup complete
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Bad Boys II
+   IMDB: tt0172156
+   URL: https://chi4-4.download.real-debrid.com/d/DVRWZ4BIBJUGO20/Ba...
+   Hash: 198f88e9...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+📡 Fetching metadata for tt0172156 as movie...
+📝 Pre-loading external subtitles (Top 3)...
+✅ Cache HIT: Metadata[meta_movie_tt0172156]
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzE5NzgzMDUtMjIyOTM2Ny56aXA= [request-id: 87ED9D43-2070-4F69-BDCE-1AC6BACAD218]
+2026-01-08 12:31:40.693 RedLemon[2261:11628] 💓 Playback heartbeat sent for room: event_tt0172156
+2026-01-08 12:31:41.104 RedLemon[2261:13969] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_47BCDB10-BF36-4B5C-BAA0-EB1095413943.vtt
+2026-01-08 12:31:41.104 RedLemon[2261:13969] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_47BCDB10-BF36-4B5C-BAA0-EB1
+2026-01-08 12:31:41.129 RedLemon[2261:13969] ✅ External subtitle added to track list (not auto-selected)
+2026-01-08 12:31:41.129 RedLemon[2261:13969] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzU0NTk5MC0xMDQwOTM2LnppcA==?token=FAC95D4D-DFDB-4166-A518-92D562734D06
+📄 Subtitle request: L3N1YnRpdGxlLzE5Nzgz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/1978305-2229367.zip
+📨 Received: {"ref":"8D653C5D-D72B-4F94-8911-515709B50957","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt0172156"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"93b524d8-ecb7-11f0-9cb9-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRphRQ7BY6Akph","is_host":false,"joined_at":1767893364.886658,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt0172156"}
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0172156"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e48cae62-ecb7-11f0-88b8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRxaix57M6Ar1i","is_host":false,"joined_at":1767893500.377506,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0172156"}
+📨 Received: {"ref":"19","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRxapGhPE6AlJB","phx_ref_prev":"GIjRwTk4S-Q6AlEB","last_seen":"2026-01-08T17:31:40.398Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRwTk4S-Q6AlEB","phx_ref_prev":"GIjRvJD-H4s6AlAh","last_seen":"2026-01-08T17:31:21.327Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt0172156/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0172156/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0172156/img...
+📡 SocialService: Updated status - online: Bad Boys II
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIjRphRQ7BY6Akph)
+⚠️ Self (656daa91-33b4-4688-9135-c982ea52d7c9) was missing from list - restoring.
+🔄 Updated existing participant 656daa91-33b4-4688-9135-c982ea52d7c9 with Ref: GIjRxaix57M6Ar1i
+✅ Download complete: 57260 bytes
+📦 Detected ZIP archive, extracting...
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8449 seconds
+⚠️ No specific episode match found, using first file: Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG.srt
+📦 Extracting specific file: Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG.srt
+✅ Extraction successful
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzU0NTk5MC0xMDQwOTM2LnppcA== [request-id: E2AC9F23-83DA-4B81-937F-DDFEAB231E6A]
+2026-01-08 12:31:41.634 RedLemon[2261:13819] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_12559199-DFBF-4F90-B473-81D9FB12ABB5.vtt
+2026-01-08 12:31:41.634 RedLemon[2261:13819] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_12559199-DFBF-4F90-B473-81D
+2026-01-08 12:31:41.646 RedLemon[2261:13819] ✅ External subtitle added to track list (not auto-selected)
+2026-01-08 12:31:41.646 RedLemon[2261:13819] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzU0NTk5NS04MzkxMjAuemlw?token=FAC95D4D-DFDB-4166-A518-92D562734D06
+📄 Subtitle request: L3N1YnRpdGxlLzU0NTk5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/545990-1040936.zip
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8449 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Download complete: 57847 bytes
+📦 Detected ZIP archive, extracting...
+📨 Received: {"ref":"20","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRxeFiXa46AlJh","phx_ref_prev":"GIjRxapGhPE6AlJB","last_seen":"2026-01-08T17:31:41.327Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRxapGhPE6AlJB","phx_ref_prev":"GIjRwTk4S-Q6AlEB","last_seen":"2026-01-08T17:31:40.398Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+⚠️ No specific episode match found, using first file: Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG.srt
+📦 Extracting specific file: Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzU0NTk5NS04MzkxMjAuemlw [request-id: BF2AA402-61FD-4E98-8B7A-4325091916DA]
+2026-01-08 12:31:42.235 RedLemon[2261:13969] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_3B79A960-DF55-461E-B303-0894E35C3B94.vtt
+2026-01-08 12:31:42.235 RedLemon[2261:13969] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_3B79A960-DF55-461E-B303-089
+2026-01-08 12:31:42.246 RedLemon[2261:13969] ✅ External subtitle added to track list (not auto-selected)
+2026-01-08 12:31:42.246 RedLemon[2261:13969] 🔍 MPV track-list/count: 3
+2026-01-08 12:31:42.247 RedLemon[2261:13969] 🔍 Track 0 type: sub
+2026-01-08 12:31:42.247 RedLemon[2261:13969] ✅ Found subtitle track: ID=1, lang=en, title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:42.247 RedLemon[2261:13969] 🔍 Track 1 type: sub
+2026-01-08 12:31:42.247 RedLemon[2261:13969] ✅ Found subtitle track: ID=2, lang=en, title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:42.247 RedLemon[2261:13969] 🔍 Track 2 type: sub
+2026-01-08 12:31:42.247 RedLemon[2261:13969] ✅ Found subtitle track: ID=3, lang=en, title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, external=1
+2026-01-08 12:31:42.248 RedLemon[2261:13969] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-08 12:31:42.248 RedLemon[2261:13969]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 12:31:42.248 RedLemon[2261:13969]    Start[1]: ID=1, Title='Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:42.248 RedLemon[2261:13969]    Start[2]: ID=2, Title='Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:42.248 RedLemon[2261:13969]    Start[3]: ID=3, Title='Bad.Boys.II.2003.720p.BluRay.X264.YIFY', Lang='en', Ext=1
+2026-01-08 12:31:42.249 RedLemon[2261:13969] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-08 12:31:42.252 RedLemon[2261:13969]    Track: ID=0, Title=Off, External=0
+2026-01-08 12:31:42.254 RedLemon[2261:13969]    Track: ID=1, Title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:42.254 RedLemon[2261:13969]    Track: ID=2, Title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:42.255 RedLemon[2261:13969]    Track: ID=3, Title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, External=1
+2026-01-08 12:31:43.574 RedLemon[2261:13964] 🔍 MPV track-list/count: 10
+2026-01-08 12:31:43.688 RedLemon[2261:13964] 🔍 Track 0 type: sub
+2026-01-08 12:31:43.688 RedLemon[2261:11628] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-08 12:31:43.929 RedLemon[2261:13964] ✅ Found subtitle track: ID=1, lang=en, title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:43.929 RedLemon[2261:13964] 🔍 Track 1 type: sub
+2026-01-08 12:31:43.930 RedLemon[2261:13964] ✅ Found subtitle track: ID=2, lang=en, title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:43.930 RedLemon[2261:13964] 🔍 Track 2 type: sub
+2026-01-08 12:31:43.930 RedLemon[2261:13964] ✅ Found subtitle track: ID=3, lang=en, title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, external=1
+2026-01-08 12:31:43.930 RedLemon[2261:13964] 🔍 Track 3 type: video
+2026-01-08 12:31:43.933 RedLemon[2261:13964] 🔍 Track 4 type: audio
+2026-01-08 12:31:43.933 RedLemon[2261:13964] 🔍 Track 5 type: sub
+2026-01-08 12:31:43.933 RedLemon[2261:13964] ✅ Found subtitle track: ID=4, lang=eng, title=nil, external=0
+2026-01-08 12:31:43.934 RedLemon[2261:13964] 🔍 Track 6 type: video
+2026-01-08 12:31:43.934 RedLemon[2261:13964] 🔍 Track 7 type: video
+2026-01-08 12:31:43.934 RedLemon[2261:13964] 🔍 Track 8 type: video
+2026-01-08 12:31:43.934 RedLemon[2261:13964] 🔍 Track 9 type: video
+2026-01-08 12:31:43.934 RedLemon[2261:13964] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-08 12:31:43.934 RedLemon[2261:13964]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 12:31:43.935 RedLemon[2261:13964]    Start[1]: ID=1, Title='Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:43.935 RedLemon[2261:13964]    Start[2]: ID=2, Title='Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:43.935 RedLemon[2261:13964]    Start[3]: ID=3, Title='Bad.Boys.II.2003.720p.BluRay.X264.YIFY', Lang='en', Ext=1
+2026-01-08 12:31:43.935 RedLemon[2261:13964]    Start[4]: ID=4, Title='nil', Lang='eng', Ext=0
+2026-01-08 12:31:43.935 RedLemon[2261:13964] ✅ SubtitleService: Scanned 5 tracks (Attempt 2/5)
+2026-01-08 12:31:43.935 RedLemon[2261:13964]    Track: ID=0, Title=Off, External=0
+2026-01-08 12:31:43.936 RedLemon[2261:13964]    Track: ID=1, Title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:43.936 RedLemon[2261:13964]    Track: ID=2, Title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:43.937 RedLemon[2261:13964]    Track: ID=3, Title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, External=1
+2026-01-08 12:31:43.937 RedLemon[2261:13964]    Track: ID=4, Title=English, External=0
+2026-01-08 12:31:43.941 RedLemon[2261:13964] 🔍 MPV track-list/count: 10
+2026-01-08 12:31:43.942 RedLemon[2261:13964] 🔍 Track 0 type: sub
+2026-01-08 12:31:43.942 RedLemon[2261:13964] ✅ Found subtitle track: ID=1, lang=en, title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:43.942 RedLemon[2261:13964] 🔍 Track 1 type: sub
+2026-01-08 12:31:43.942 RedLemon[2261:13964] ✅ Found subtitle track: ID=2, lang=en, title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:43.942 RedLemon[2261:13964] 🔍 Track 2 type: sub
+2026-01-08 12:31:43.947 RedLemon[2261:13964] ✅ Found subtitle track: ID=3, lang=en, title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, external=1
+2026-01-08 12:31:43.948 RedLemon[2261:13964] 🔍 Track 3 type: video
+2026-01-08 12:31:43.948 RedLemon[2261:13964] 🔍 Track 4 type: audio
+2026-01-08 12:31:43.948 RedLemon[2261:13964] 🔍 Track 5 type: sub
+2026-01-08 12:31:43.948 RedLemon[2261:13964] ✅ Found subtitle track: ID=4, lang=eng, title=nil, external=0
+2026-01-08 12:31:43.948 RedLemon[2261:13964] 🔍 Track 6 type: video
+2026-01-08 12:31:43.948 RedLemon[2261:13964] 🔍 Track 7 type: video
+2026-01-08 12:31:43.948 RedLemon[2261:13964] 🔍 Track 8 type: video
+2026-01-08 12:31:43.948 RedLemon[2261:13964] 🔍 Track 9 type: video
+2026-01-08 12:31:43.948 RedLemon[2261:13964] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-08 12:31:43.949 RedLemon[2261:13964]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 12:31:43.949 RedLemon[2261:13964]    Start[1]: ID=1, Title='Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:43.949 RedLemon[2261:13964]    Start[2]: ID=2, Title='Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:43.949 RedLemon[2261:13964]    Start[3]: ID=3, Title='Bad.Boys.II.2003.720p.BluRay.X264.YIFY', Lang='en', Ext=1
+2026-01-08 12:31:43.949 RedLemon[2261:13964]    Start[4]: ID=4, Title='nil', Lang='eng', Ext=0
+2026-01-08 12:31:43.949 RedLemon[2261:13964] ✅ SubtitleService: Scanned 5 tracks (Attempt 1/5)
+2026-01-08 12:31:43.950 RedLemon[2261:13964]    Track: ID=0, Title=Off, External=0
+2026-01-08 12:31:43.951 RedLemon[2261:13964]    Track: ID=1, Title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:43.951 RedLemon[2261:13964]    Track: ID=2, Title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:43.952 RedLemon[2261:13964]    Track: ID=3, Title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, External=1
+2026-01-08 12:31:43.952 RedLemon[2261:13964]    Track: ID=4, Title=English, External=0
+2026-01-08 12:31:45.018 RedLemon[2261:13971] 🔍 MPV track-list/count: 10
+2026-01-08 12:31:45.018 RedLemon[2261:13971] 🔍 Track 0 type: sub
+2026-01-08 12:31:45.018 RedLemon[2261:13971] ✅ Found subtitle track: ID=1, lang=en, title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:45.018 RedLemon[2261:13971] 🔍 Track 1 type: sub
+2026-01-08 12:31:45.018 RedLemon[2261:13971] ✅ Found subtitle track: ID=2, lang=en, title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:45.018 RedLemon[2261:13971] 🔍 Track 2 type: sub
+2026-01-08 12:31:45.019 RedLemon[2261:13971] ✅ Found subtitle track: ID=3, lang=en, title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, external=1
+2026-01-08 12:31:45.019 RedLemon[2261:13971] 🔍 Track 3 type: video
+2026-01-08 12:31:45.019 RedLemon[2261:13971] 🔍 Track 4 type: audio
+2026-01-08 12:31:45.019 RedLemon[2261:13971] 🔍 Track 5 type: sub
+2026-01-08 12:31:45.019 RedLemon[2261:13971] ✅ Found subtitle track: ID=4, lang=eng, title=nil, external=0
+2026-01-08 12:31:45.019 RedLemon[2261:13971] 🔍 Track 6 type: video
+2026-01-08 12:31:45.019 RedLemon[2261:13971] 🔍 Track 7 type: video
+2026-01-08 12:31:45.019 RedLemon[2261:13971] 🔍 Track 8 type: video
+2026-01-08 12:31:45.020 RedLemon[2261:13971] 🔍 Track 9 type: video
+2026-01-08 12:31:45.020 RedLemon[2261:13971] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-08 12:31:45.020 RedLemon[2261:13971]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 12:31:45.020 RedLemon[2261:13971]    Start[1]: ID=1, Title='Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:45.020 RedLemon[2261:13971]    Start[2]: ID=2, Title='Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:45.020 RedLemon[2261:13971]    Start[3]: ID=3, Title='Bad.Boys.II.2003.720p.BluRay.X264.YIFY', Lang='en', Ext=1
+2026-01-08 12:31:45.020 RedLemon[2261:13971]    Start[4]: ID=4, Title='nil', Lang='eng', Ext=0
+2026-01-08 12:31:45.020 RedLemon[2261:13971] ✅ SubtitleService: Scanned 5 tracks (Attempt 3/5)
+2026-01-08 12:31:45.021 RedLemon[2261:13971]    Track: ID=0, Title=Off, External=0
+2026-01-08 12:31:45.021 RedLemon[2261:13971]    Track: ID=1, Title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:45.021 RedLemon[2261:13971]    Track: ID=2, Title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:45.021 RedLemon[2261:13971]    Track: ID=3, Title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, External=1
+2026-01-08 12:31:45.022 RedLemon[2261:13971]    Track: ID=4, Title=English, External=0
+2026-01-08 12:31:45.022 RedLemon[2261:13971] 🔍 MPV track-list/count: 10
+2026-01-08 12:31:45.022 RedLemon[2261:13971] 🔍 Track 0 type: sub
+2026-01-08 12:31:45.022 RedLemon[2261:13971] ✅ Found subtitle track: ID=1, lang=en, title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:45.022 RedLemon[2261:13971] 🔍 Track 1 type: sub
+2026-01-08 12:31:45.023 RedLemon[2261:13971] ✅ Found subtitle track: ID=2, lang=en, title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:45.024 RedLemon[2261:13971] 🔍 Track 2 type: sub
+2026-01-08 12:31:45.024 RedLemon[2261:13971] ✅ Found subtitle track: ID=3, lang=en, title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, external=1
+2026-01-08 12:31:45.024 RedLemon[2261:13971] 🔍 Track 3 type: video
+2026-01-08 12:31:45.024 RedLemon[2261:13971] 🔍 Track 4 type: audio
+2026-01-08 12:31:45.024 RedLemon[2261:13971] 🔍 Track 5 type: sub
+2026-01-08 12:31:45.024 RedLemon[2261:13971] ✅ Found subtitle track: ID=4, lang=eng, title=nil, external=0
+2026-01-08 12:31:45.024 RedLemon[2261:13971] 🔍 Track 6 type: video
+2026-01-08 12:31:45.024 RedLemon[2261:13971] 🔍 Track 7 type: video
+2026-01-08 12:31:45.024 RedLemon[2261:13971] 🔍 Track 8 type: video
+2026-01-08 12:31:45.025 RedLemon[2261:13971] 🔍 Track 9 type: video
+2026-01-08 12:31:45.025 RedLemon[2261:13971] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-08 12:31:45.025 RedLemon[2261:13971]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 12:31:45.025 RedLemon[2261:13971]    Start[1]: ID=1, Title='Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:45.025 RedLemon[2261:13971]    Start[2]: ID=2, Title='Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:45.025 RedLemon[2261:13971]    Start[3]: ID=3, Title='Bad.Boys.II.2003.720p.BluRay.X264.YIFY', Lang='en', Ext=1
+2026-01-08 12:31:45.025 RedLemon[2261:13971]    Start[4]: ID=4, Title='nil', Lang='eng', Ext=0
+2026-01-08 12:31:45.025 RedLemon[2261:13971] ✅ SubtitleService: Scanned 5 tracks (Attempt 2/5)
+2026-01-08 12:31:45.025 RedLemon[2261:13971]    Track: ID=0, Title=Off, External=0
+2026-01-08 12:31:45.026 RedLemon[2261:13971]    Track: ID=1, Title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:45.026 RedLemon[2261:13971]    Track: ID=2, Title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:45.026 RedLemon[2261:13971]    Track: ID=3, Title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, External=1
+2026-01-08 12:31:45.026 RedLemon[2261:13971]    Track: ID=4, Title=English, External=0
+2026-01-08 12:31:46.083 RedLemon[2261:13971] 🔍 MPV track-list/count: 10
+2026-01-08 12:31:46.083 RedLemon[2261:13971] 🔍 Track 0 type: sub
+2026-01-08 12:31:46.083 RedLemon[2261:13971] ✅ Found subtitle track: ID=1, lang=en, title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:46.083 RedLemon[2261:13971] 🔍 Track 1 type: sub
+2026-01-08 12:31:46.083 RedLemon[2261:13971] ✅ Found subtitle track: ID=2, lang=en, title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:46.083 RedLemon[2261:13971] 🔍 Track 2 type: sub
+2026-01-08 12:31:46.084 RedLemon[2261:13971] ✅ Found subtitle track: ID=3, lang=en, title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, external=1
+2026-01-08 12:31:46.084 RedLemon[2261:13971] 🔍 Track 3 type: video
+2026-01-08 12:31:46.084 RedLemon[2261:13971] 🔍 Track 4 type: audio
+2026-01-08 12:31:46.084 RedLemon[2261:13971] 🔍 Track 5 type: sub
+2026-01-08 12:31:46.084 RedLemon[2261:13971] ✅ Found subtitle track: ID=4, lang=eng, title=nil, external=0
+2026-01-08 12:31:46.084 RedLemon[2261:13971] 🔍 Track 6 type: video
+2026-01-08 12:31:46.084 RedLemon[2261:13971] 🔍 Track 7 type: video
+2026-01-08 12:31:46.084 RedLemon[2261:13971] 🔍 Track 8 type: video
+2026-01-08 12:31:46.084 RedLemon[2261:13971] 🔍 Track 9 type: video
+2026-01-08 12:31:46.085 RedLemon[2261:13971] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-08 12:31:46.085 RedLemon[2261:13971]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 12:31:46.085 RedLemon[2261:13971]    Start[1]: ID=1, Title='Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:46.085 RedLemon[2261:13971]    Start[2]: ID=2, Title='Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:46.085 RedLemon[2261:13971]    Start[3]: ID=3, Title='Bad.Boys.II.2003.720p.BluRay.X264.YIFY', Lang='en', Ext=1
+2026-01-08 12:31:46.085 RedLemon[2261:13971]    Start[4]: ID=4, Title='nil', Lang='eng', Ext=0
+2026-01-08 12:31:46.085 RedLemon[2261:13971] ✅ SubtitleService: Scanned 5 tracks (Attempt 4/5)
+2026-01-08 12:31:46.086 RedLemon[2261:13971]    Track: ID=0, Title=Off, External=0
+2026-01-08 12:31:46.086 RedLemon[2261:13971]    Track: ID=1, Title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:46.086 RedLemon[2261:13971]    Track: ID=2, Title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:46.087 RedLemon[2261:13971]    Track: ID=3, Title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, External=1
+2026-01-08 12:31:46.087 RedLemon[2261:13971]    Track: ID=4, Title=English, External=0
+2026-01-08 12:31:46.087 RedLemon[2261:13971] 🔍 MPV track-list/count: 10
+2026-01-08 12:31:46.087 RedLemon[2261:13971] 🔍 Track 0 type: sub
+2026-01-08 12:31:46.087 RedLemon[2261:13971] ✅ Found subtitle track: ID=1, lang=en, title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:46.087 RedLemon[2261:13971] 🔍 Track 1 type: sub
+2026-01-08 12:31:46.087 RedLemon[2261:13971] ✅ Found subtitle track: ID=2, lang=en, title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:46.088 RedLemon[2261:13971] 🔍 Track 2 type: sub
+2026-01-08 12:31:46.088 RedLemon[2261:13971] ✅ Found subtitle track: ID=3, lang=en, title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, external=1
+2026-01-08 12:31:46.088 RedLemon[2261:13971] 🔍 Track 3 type: video
+2026-01-08 12:31:46.088 RedLemon[2261:13971] 🔍 Track 4 type: audio
+2026-01-08 12:31:46.088 RedLemon[2261:13971] 🔍 Track 5 type: sub
+2026-01-08 12:31:46.088 RedLemon[2261:13971] ✅ Found subtitle track: ID=4, lang=eng, title=nil, external=0
+2026-01-08 12:31:46.088 RedLemon[2261:13971] 🔍 Track 6 type: video
+2026-01-08 12:31:46.089 RedLemon[2261:13971] 🔍 Track 7 type: video
+2026-01-08 12:31:46.089 RedLemon[2261:13971] 🔍 Track 8 type: video
+2026-01-08 12:31:46.089 RedLemon[2261:13971] 🔍 Track 9 type: video
+2026-01-08 12:31:46.089 RedLemon[2261:13971] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-08 12:31:46.089 RedLemon[2261:13971]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 12:31:46.089 RedLemon[2261:13971]    Start[1]: ID=1, Title='Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:46.089 RedLemon[2261:13971]    Start[2]: ID=2, Title='Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:46.091 RedLemon[2261:13971]    Start[3]: ID=3, Title='Bad.Boys.II.2003.720p.BluRay.X264.YIFY', Lang='en', Ext=1
+2026-01-08 12:31:46.091 RedLemon[2261:13971]    Start[4]: ID=4, Title='nil', Lang='eng', Ext=0
+2026-01-08 12:31:46.092 RedLemon[2261:13971] ✅ SubtitleService: Scanned 5 tracks (Attempt 3/5)
+2026-01-08 12:31:46.092 RedLemon[2261:13971]    Track: ID=0, Title=Off, External=0
+2026-01-08 12:31:46.092 RedLemon[2261:13971]    Track: ID=1, Title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:46.093 RedLemon[2261:13971]    Track: ID=2, Title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:46.093 RedLemon[2261:13971]    Track: ID=3, Title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, External=1
+2026-01-08 12:31:46.093 RedLemon[2261:13971]    Track: ID=4, Title=English, External=0
+2026-01-08 12:31:47.133 RedLemon[2261:13971] 🔍 MPV track-list/count: 10
+2026-01-08 12:31:47.133 RedLemon[2261:13971] 🔍 Track 0 type: sub
+2026-01-08 12:31:47.133 RedLemon[2261:13971] ✅ Found subtitle track: ID=1, lang=en, title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:47.133 RedLemon[2261:13971] 🔍 Track 1 type: sub
+2026-01-08 12:31:47.135 RedLemon[2261:13971] ✅ Found subtitle track: ID=2, lang=en, title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:47.136 RedLemon[2261:13971] 🔍 Track 2 type: sub
+2026-01-08 12:31:47.136 RedLemon[2261:13971] ✅ Found subtitle track: ID=3, lang=en, title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, external=1
+2026-01-08 12:31:47.136 RedLemon[2261:13971] 🔍 Track 3 type: video
+2026-01-08 12:31:47.136 RedLemon[2261:13971] 🔍 Track 4 type: audio
+2026-01-08 12:31:47.137 RedLemon[2261:13971] 🔍 Track 5 type: sub
+2026-01-08 12:31:47.137 RedLemon[2261:13971] ✅ Found subtitle track: ID=4, lang=eng, title=nil, external=0
+2026-01-08 12:31:47.137 RedLemon[2261:13971] 🔍 Track 6 type: video
+2026-01-08 12:31:47.137 RedLemon[2261:13971] 🔍 Track 7 type: video
+2026-01-08 12:31:47.137 RedLemon[2261:13971] 🔍 Track 8 type: video
+2026-01-08 12:31:47.137 RedLemon[2261:13971] 🔍 Track 9 type: video
+2026-01-08 12:31:47.138 RedLemon[2261:13971] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-08 12:31:47.138 RedLemon[2261:13971]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 12:31:47.138 RedLemon[2261:13971]    Start[1]: ID=1, Title='Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:47.138 RedLemon[2261:13971]    Start[2]: ID=2, Title='Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:47.138 RedLemon[2261:13971]    Start[3]: ID=3, Title='Bad.Boys.II.2003.720p.BluRay.X264.YIFY', Lang='en', Ext=1
+2026-01-08 12:31:47.138 RedLemon[2261:13971]    Start[4]: ID=4, Title='nil', Lang='eng', Ext=0
+2026-01-08 12:31:47.138 RedLemon[2261:13971] ✅ SubtitleService: Scanned 5 tracks (Attempt 5/5)
+2026-01-08 12:31:47.139 RedLemon[2261:13971]    Track: ID=0, Title=Off, External=0
+2026-01-08 12:31:47.139 RedLemon[2261:13971]    Track: ID=1, Title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:47.139 RedLemon[2261:13971]    Track: ID=2, Title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:47.139 RedLemon[2261:13971]    Track: ID=3, Title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, External=1
+2026-01-08 12:31:47.139 RedLemon[2261:13971]    Track: ID=4, Title=English, External=0
+2026-01-08 12:31:47.141 RedLemon[2261:13971] 🔍 MPV track-list/count: 10
+2026-01-08 12:31:47.141 RedLemon[2261:13971] 🔍 Track 0 type: sub
+2026-01-08 12:31:47.141 RedLemon[2261:13971] ✅ Found subtitle track: ID=1, lang=en, title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:47.141 RedLemon[2261:13971] 🔍 Track 1 type: sub
+2026-01-08 12:31:47.141 RedLemon[2261:13971] ✅ Found subtitle track: ID=2, lang=en, title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:47.141 RedLemon[2261:13971] 🔍 Track 2 type: sub
+2026-01-08 12:31:47.142 RedLemon[2261:13971] ✅ Found subtitle track: ID=3, lang=en, title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, external=1
+2026-01-08 12:31:47.142 RedLemon[2261:13971] 🔍 Track 3 type: video
+2026-01-08 12:31:47.142 RedLemon[2261:13971] 🔍 Track 4 type: audio
+2026-01-08 12:31:47.142 RedLemon[2261:13971] 🔍 Track 5 type: sub
+2026-01-08 12:31:47.142 RedLemon[2261:13971] ✅ Found subtitle track: ID=4, lang=eng, title=nil, external=0
+2026-01-08 12:31:47.142 RedLemon[2261:13971] 🔍 Track 6 type: video
+2026-01-08 12:31:47.142 RedLemon[2261:13971] 🔍 Track 7 type: video
+2026-01-08 12:31:47.142 RedLemon[2261:13971] 🔍 Track 8 type: video
+2026-01-08 12:31:47.142 RedLemon[2261:13971] 🔍 Track 9 type: video
+2026-01-08 12:31:47.142 RedLemon[2261:13971] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-08 12:31:47.142 RedLemon[2261:13971]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 12:31:47.142 RedLemon[2261:13971]    Start[1]: ID=1, Title='Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:47.143 RedLemon[2261:13971]    Start[2]: ID=2, Title='Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:47.143 RedLemon[2261:13971]    Start[3]: ID=3, Title='Bad.Boys.II.2003.720p.BluRay.X264.YIFY', Lang='en', Ext=1
+2026-01-08 12:31:47.143 RedLemon[2261:13971]    Start[4]: ID=4, Title='nil', Lang='eng', Ext=0
+2026-01-08 12:31:47.143 RedLemon[2261:13971] ✅ SubtitleService: Scanned 5 tracks (Attempt 4/5)
+2026-01-08 12:31:47.143 RedLemon[2261:13971]    Track: ID=0, Title=Off, External=0
+2026-01-08 12:31:47.143 RedLemon[2261:13971]    Track: ID=1, Title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:47.143 RedLemon[2261:13971]    Track: ID=2, Title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:47.143 RedLemon[2261:13971]    Track: ID=3, Title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, External=1
+2026-01-08 12:31:47.143 RedLemon[2261:13971]    Track: ID=4, Title=English, External=0
+2026-01-08 12:31:48.144 RedLemon[2261:13978] 🔍 MPV track-list/count: 10
+2026-01-08 12:31:48.144 RedLemon[2261:13978] 🔍 Track 0 type: sub
+2026-01-08 12:31:48.144 RedLemon[2261:13978] ✅ Found subtitle track: ID=1, lang=en, title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:48.144 RedLemon[2261:13978] 🔍 Track 1 type: sub
+2026-01-08 12:31:48.145 RedLemon[2261:13978] ✅ Found subtitle track: ID=2, lang=en, title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-08 12:31:48.145 RedLemon[2261:13978] 🔍 Track 2 type: sub
+2026-01-08 12:31:48.145 RedLemon[2261:13978] ✅ Found subtitle track: ID=3, lang=en, title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, external=1
+2026-01-08 12:31:48.146 RedLemon[2261:13978] 🔍 Track 3 type: video
+2026-01-08 12:31:48.146 RedLemon[2261:13978] 🔍 Track 4 type: audio
+2026-01-08 12:31:48.146 RedLemon[2261:13978] 🔍 Track 5 type: sub
+2026-01-08 12:31:48.146 RedLemon[2261:13978] ✅ Found subtitle track: ID=4, lang=eng, title=nil, external=0
+2026-01-08 12:31:48.146 RedLemon[2261:13978] 🔍 Track 6 type: video
+2026-01-08 12:31:48.146 RedLemon[2261:13978] 🔍 Track 7 type: video
+2026-01-08 12:31:48.146 RedLemon[2261:13978] 🔍 Track 8 type: video
+2026-01-08 12:31:48.146 RedLemon[2261:13978] 🔍 Track 9 type: video
+2026-01-08 12:31:48.146 RedLemon[2261:13978] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-08 12:31:48.146 RedLemon[2261:13978]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-08 12:31:48.147 RedLemon[2261:13978]    Start[1]: ID=1, Title='Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:48.147 RedLemon[2261:13978]    Start[2]: ID=2, Title='Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-08 12:31:48.147 RedLemon[2261:13978]    Start[3]: ID=3, Title='Bad.Boys.II.2003.720p.BluRay.X264.YIFY', Lang='en', Ext=1
+2026-01-08 12:31:48.147 RedLemon[2261:13978]    Start[4]: ID=4, Title='nil', Lang='eng', Ext=0
+2026-01-08 12:31:48.147 RedLemon[2261:13978] ✅ SubtitleService: Scanned 5 tracks (Attempt 5/5)
+2026-01-08 12:31:48.147 RedLemon[2261:13978]    Track: ID=0, Title=Off, External=0
+2026-01-08 12:31:48.147 RedLemon[2261:13978]    Track: ID=1, Title=Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:48.148 RedLemon[2261:13978]    Track: ID=2, Title=Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-08 12:31:48.148 RedLemon[2261:13978]    Track: ID=3, Title=Bad.Boys.II.2003.720p.BluRay.X264.YIFY, External=1
+2026-01-08 12:31:48.148 RedLemon[2261:13978]    Track: ID=4, Title=English, External=0
+2026-01-08 12:32:11.021 RedLemon[2261:11628] 💓 Playback heartbeat sent for room: event_tt0172156
+📄 Subtitle request: L3N1YnRpdGxlLzU0NTk5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/545995-839120.zip
+✅ Download complete: 57717 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Bad.Boys.II.2003.720p.BluRay.X264.YIFY.srt
+📦 Extracting specific file: Bad.Boys.II.2003.720p.BluRay.X264.YIFY.srt
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRxgVQegE6AlKB","phx_ref_prev":"GIjRwWD7fXg6AlEh","last_seen":"2026-01-08T17:31:42.076Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRwWD7fXg6AlEh","phx_ref_prev":"GIjRvLpZhxc6AlBB","last_seen":"2026-01-08T17:31:22.138Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[MPV] webvtt: Dropping 2 duplicated subtitle events
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) 'Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ' (h264 1920x802 23.976fps)
+[MPV] Video --vid=2 [P] 'small_cover.jpg' (mjpeg)
+[MPV] Video --vid=3 [P] 'small_cover_land.jpg' (mjpeg)
+[MPV] Video --vid=4 [P] 'cover.jpg' (mjpeg)
+[MPV] Video --vid=5 [P] 'cover_land.jpg' (mjpeg)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ' (dts 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Bad.Boys.II.2003.720p.BluRay.X264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=eng (*) (subrip)
+[MPV] File tags:
+[MPV] Title: Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ
+🎬 DisplayLink: reportSwap() (throttled)
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎉 EVENT: File loaded/Duration ready (8805.824s), preparing to seek...
+   Seeking to live edge: 913s
+🎉 EVENT: File loaded/Duration ready (8805.824s), preparing to seek...
+   Seeking to live edge: 913s
+ MPV Event: 18
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+ MPV Event: 17
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+✅ SMART-LOAD: Found 10 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+🎉 EVENT: File loaded/Duration ready (8805.824s), preparing to seek...
+   Seeking to live edge: 913s
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 10 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Bad.Boys.II.2003.720p.BluRay.X264.YIFY', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'eng', title: 'nil', forced: false, default: true, HI: false, Ext: false
+📊 Current subtitle track: 3
+✅ Auto-selecting BEST English subtitle: eng (ID: 4) [External: false, Forced: false, Default: true, HI: false]
+   🏆 Final Score: 2990 (Embedded: 3000, Match: 0, Clean: 0, SDH: 0)
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 4
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+[MPV] Using hardware decoding (videotoolbox).
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+ MPV Event: 20
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.43s), skipping redundant seek
+📝 Started watch history tracking
+⚠️ onVideoReady called again - ignoring to prevent loops
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x802 videotoolbox[nv12]
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ' (h264 [High] 1920x802 23.976fps)
+[MPV] Video --vid=2 [P] 'small_cover.jpg' (mjpeg)
+[MPV] Video --vid=3 [P] 'small_cover_land.jpg' (mjpeg)
+[MPV] Video --vid=4 [P] 'cover.jpg' (mjpeg)
+[MPV] Video --vid=5 [P] 'cover_land.jpg' (mjpeg)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ' (dts [DTS] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Bad.Boys.II.2003.720p.BluRay.X264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=eng (*) (subrip)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ' (h264 [High] 1920x802 23.976fps)
+[MPV] Video --vid=2 [P] 'small_cover.jpg' (mjpeg)
+[MPV] Video --vid=3 [P] 'small_cover_land.jpg' (mjpeg)
+[MPV] Video --vid=4 [P] 'cover.jpg' (mjpeg)
+[MPV] Video --vid=5 [P] 'cover_land.jpg' (mjpeg)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'Bad.Boys.II.2003.REMASTERED.1080p.BluRay.x264.DTS-SWTYBLZ' (dts [DTS] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Bad.Boys.II.2003.720p.BluRay.X264.YIFY' (webvtt) (external)
+[MPV] (+) Subs  --sid=4 --slang=eng (*) (subrip)
+⚠️ onVideoReady called again - ignoring to prevent loops
+🎬 DisplayLink: reportSwap() (throttled)
+ MPV Event: 20
+📊 Current subtitle track: 4
+📊 Current subtitle track: 4
+🎬 DisplayLink: reportSwap() (throttled)
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 4
+📊 Current subtitle track: 4
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 4
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 10 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Bad.Boys.II.2003.REMASTERED.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Bad.Boys.2.2003.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Bad.Boys.II.2003.720p.BluRay.X264.YIFY', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'eng', title: 'nil', forced: false, default: true, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: eng (ID: 4) [External: false, Forced: false, Default: true, HI: false]
+   🏆 Final Score: 2990 (Embedded: 3000, Match: 0, Clean: 0, SDH: 0)
+📊 Current subtitle track: 4
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 4
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8439 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+🎬 DisplayLink: reportSwap() (throttled)
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8429 seconds
+📨 Received: {"ref":"21","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRyo1vi-06AlNh","phx_ref_prev":"GIjRxeFiXa46AlJh","last_seen":"2026-01-08T17:32:01.386Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRxeFiXa46AlJh","phx_ref_prev":"GIjRxapGhPE6AlJB","last_seen":"2026-01-08T17:31:41.327Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"22","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRyrFdjgc6AlOB","phx_ref_prev":"GIjRxgVQegE6AlKB","last_seen":"2026-01-08T17:32:02.137Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRxgVQegE6AlKB","phx_ref_prev":"GIjRwWD7fXg6AlEh","last_seen":"2026-01-08T17:31:42.076Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8419 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+💾 Saved to watch history: Bad Boys II at 942s
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8409 seconds
+📨 Received: {"ref":"23","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRzzYlOLg6AlTB","phx_ref_prev":"GIjRyo1vi-06AlNh","last_seen":2026-01-08 12:32:30.878 RedLemon[2261:11628] 🖱️ Mouse: x=642/1366 y=98/768 | Exit: 0 Controls: 1 Chat: 0
+2026-01-08 12:32:41.298 RedLemon[2261:11628] 💓 Playback heartbeat sent for room: event_tt0172156
+2026-01-08 12:32:42.809 RedLemon[2261:11628] 🖱️ Mouse: x=460/1366 y=213/768 | Exit: 0 Controls: 1 Chat: 0
+2026-01-08 12:32:44.931 RedLemon[2261:11628] 🖱️ Mouse: x=777/1366 y=515/768 | Exit: 0 Controls: 0 Chat: 0
+2026-01-08 12:33:11.750 RedLemon[2261:11628] 💓 Playback heartbeat sent for room: event_tt0172156
+"2026-01-08T17:32:21.406Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRyo1vi-06AlNh","phx_ref_prev":"GIjRxeFiXa46AlJh","last_seen":"2026-01-08T17:32:01.386Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRz1WL24s6AlTh","phx_ref_prev":"GIjRyrFdjgc6AlOB","last_seen":"2026-01-08T17:32:22.073Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRyrFdjgc6AlOB","phx_ref_prev":"GIjRxgVQegE6AlKB","last_seen":"2026-01-08T17:32:02.137Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8399 seconds
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"24","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8389 seconds
+📨 Received: {"ref":"25","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR09vdv2s6AlYB","phx_ref_prev":"GIjRzzYlOLg6AlTB","last_seen":"2026-01-08T17:32:41.365Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRzzYlOLg6AlTB","phx_ref_prev":"GIjRyo1vi-06AlNh","last_seen":"2026-01-08T17:32:21.406Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR1AE5TDE6AlYh","phx_ref_prev":"GIjRz1WL24s6AlTh","last_seen":"2026-01-08T17:32:42.134Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRz1WL24s6AlTh","phx_ref_prev":"GIjRyrFdjgc6AlOB","last_seen":"2026-01-08T17:32:22.073Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8379 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8369 seconds
+📨 Received: {"ref":"26","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR2IbI5b06Aldh","phx_ref_prev":"GIjR09vdv2s6AlYB","last_seen":"2026-01-08T17:33:01.405Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR09vdv2s6AlYB","phx_ref_prev":"GIjRzzYlOLg6AlTB","last_seen":"2026-01-08T17:32:41.365Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR2KiiZSE6AleB","phx_ref_prev":"GIjR1AE5TDE6AlYh","last_seen":"2026-01-08T17:33:02.115Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR1AE5TDE6AlYh","phx_ref_prev":"GIjRz1WL24s6AlTh","last_seen":"2026-01-08T17:32:42.134Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"27","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8359 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8349 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"28","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR3Sq0gcI6AlgB","phx_ref_prev":"GIjR2IbI5b06Aldh","last_seen":"2026-01-08T17:33:21.341Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR2IbI5b06Aldh","phx_ref_prev":"GIjR09vdv2s6AlYB","last_seen":"2026-01-08T17:33:01.405Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR3VQPM586Algh","phx_ref_prev":"GIjR2KiiZSE6AleB","last_seen":"2026-01-08T17:33:22.177Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR2KiiZSE6AleB","phx_ref_prev":"GIjR1AE5TDE6AlYh","2026-01-08 12:33:42.195 RedLemon[2261:11628] 💓 Playback heartbeat sent for room: event_tt0172156
+2026-01-08 12:34:12.529 RedLemon[2261:11628] 💓 Playback heartbeat sent for room: event_tt0172156
+last_seen":"2026-01-08T17:33:02.115Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8339 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+💓 Heartbeat sent
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"29","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8329 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"30","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR4dRJO5k6Alih","phx_ref_prev":"GIjR3Sq0gcI6AlgB","last_seen":"2026-01-08T17:33:41.361Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR3Sq0gcI6AlgB","phx_ref_prev":"GIjR2IbI5b06Aldh","last_seen":"2026-01-08T17:33:21.341Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR4fvc-yc6AlkB","phx_ref_prev":"GIjR3VQPM586Algh","last_seen":"2026-01-08T17:33:42.165Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR3VQPM586Algh","phx_ref_prev":"GIjR2KiiZSE6AleB","last_seen":"2026-01-08T17:33:22.177Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR4jux71M6Alkh","phx_ref_prev":"GIjR4fvc-yc6AlkB","last_seen":"2026-01-08T17:33:43.242Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR4fvc-yc6AlkB","phx_ref_prev":"GIjR3VQPM586Algh","last_seen":"2026-01-08T17:33:42.165Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:29:24.895Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR4ju76CU6AllB","phx_ref_prev":"GIjR4jux71M6Alkh","last_seen":"2026-01-08T17:33:43.242Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR4jux71M6Alkh","phx_ref_prev":"GIjR4fvc-yc6AlkB","last_seen":"2026-01-08T17:33:43.242Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"93b524d8-ecb7-11f0-9cb9-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjRphRQ7BY6Akph","is_host":false,"joined_at":1767893364.886658,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:event_tt0172156"}
+⏳ Participant leaving (grace period started): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+💾 Saved to watch history: Bad Boys II at 1032s
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+✅ LEAVE MATCHED tracked ref: GIjRphRQ7BY6Akph
+👋 Participant left (confirmed): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8319 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+🎬 DisplayLink: reportSwap() (throttled)
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8309 seconds
+📨 Received: {"ref":"31","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR5n1m5S46AlpB","phx_ref_prev":"GIjR4dRJO5k6Alih","last_seen":"2026-01-08T17:34:01.382Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR4dRJO5k6Alih","phx_ref_prev":"GIjR3Sq0gcI6AlgB","last_seen":"2026-01-08T17:33:41.361Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR5p4DKBY6Alqh","phx_ref_prev":"GIjR4ju76CU6AllB","last_seen":"2026-01-08T17:34:02.063Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR4ju76CU6AllB","phx_ref_prev":"GIjR4jux71M6Alkh","last_seen":"2026-01-08T17:33:43.242Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"32","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8299 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8289 seconds
+📨 Received: {"ref":"33","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR6ybhyhU6Ar6C","phx_ref_prev":"GIjR5n1m5S46AlpB","last_seen":"2026-01-08T17:34:21.401Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR5n1m5S46AlpB","phx_ref_prev":"GIjR4dRJO5k6Alih","last_seen":"2026-01-08T17:34:01.382Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR60XnV6M6Alvh","phx_ref_prev":"GIjR5p4DKBY6Alqh","last_seen":"2026-01-08T17:34:22.063Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR5p4DKBY6Alqh","phx_ref_prev":"GIjR4ju76CU6AllB","last_seen":"2026-01-08T17:34:02.063Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:g2026-01-08 12:34:42.923 RedLemon[2261:11628] 💓 Playback heartbeat sent for room: event_tt0172156
+2026-01-08 12:34:43.060 RedLemon[2261:11628] 🖱️ Mouse: x=349/1366 y=61/768 | Exit: 0 Controls: 1 Chat: 0
+lobal-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8279 seconds
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"34","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4fcc3918-ecb8-11f0-bbca-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR741SdCw6Al1B","is_host":false,"joined_at":1767893680.438365,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0172156"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR742DRGE6Ar8i","phx_ref_prev":"GIjR60XnV6M6Alvh","last_seen":"2026-01-08T17:34:40.443Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:34:40.443Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR60XnV6M6Alvh","phx_ref_prev":"GIjR5p4DKBY6Alqh","last_seen":"2026-01-08T17:34:22.063Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIjR741SdCw6Al1B)
+💓 Heartbeat sent
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8269 seconds
+📨 Received: {"ref":"35","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR79LK-4o6Al1h","phx_ref_prev":"GIjR6ybhyhU6Ar6C","last_seen":"2026-01-08T17:34:41.463Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR6ybhyhU6Ar6C","phx_ref_prev":"GIjR5n1m5S46AlpB","last_seen":"2026-01-08T17:34:21.401Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR7-4LSsc6Al2B","phx_ref_prev":"GIjR742DRGE6Ar8i","last_seen":"2026-01-08T17:34:42.063Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:34:40.443Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR742DRGE6Ar8i","phx_ref_prev":"GIjR60XnV6M6Alvh","last_seen":"2026-01-08T17:34:40.443Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:34:40.443Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8259 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"15","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0172156": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 19:52:30 +0000
+⏰ AppState: Scheduling update in 8249 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"36","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR9IFAHwE6Al3h","phx_ref_prev":"GIjR79LK-4o6Al1h","last_seen":"2026-01-08T17:35:01.567Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"61fae55e-ecb7-11f0-86ee-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR79LK-4o6Al1h","phx_ref_prev":"GIjR6ybhyhU6Ar6C","last_seen":"2026-01-08T17:34:41.463Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:31:40.398Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR9JvRYb06Al4B","phx_ref_prev":"GIjR7-4LSsc6Al2B","last_seen":"2026-01-08T17:35:02.158Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:34:40.443Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR7-4LSsc6Al2B","phx_ref_prev":"GIjR742DRGE6Ar8i","last_seen":"2026-01-08T17:34:42.063Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:34:40.443Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"37","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"e9b89b90-ecb6-11f0-a5fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR9JvRYb06Al4B","phx_ref_prev":"GIjR7-4LSsc6Al2B","last_seen":"2026-01-08T17:35:02.158Z","room_id":"event_tt0172156","started_at":"2026-01-08T17:34:40.443Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0172156","watching_title":"Bad Boys II","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"4fcc3918-ecb8-11f0-bbca-9ee62e3b7bba":{"metas":[{"phx_ref":"GIjR741SdCw6Al1B","is_host":false,"joined_at":1767893680.438365,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:event_tt0172156"}
+📉 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e went offline (No active refs)
+⏳ Participant leaving (grace period started): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+✅ LEAVE MATCHED tracked ref: GIjR741SdCw6Al1B
+👋 Participant left (confirmed): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)

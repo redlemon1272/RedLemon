@@ -727,9 +727,11 @@ class SupabaseClient: RoomManager, UserManager {
                 let remaining = limitDuration - elapsed
                 print("⏳ checkFreeTierLimit: Found limit! Remaining: \(remaining)")
                 return remaining
+            } else {
+                 print("✅ checkFreeTierLimit: Entry found but expired (\(elapsed)s ago).")
             }
         } else {
-             print("✅ checkFreeTierLimit: No history found")
+            print("✅ checkFreeTierLimit: No history found for user \(userId)")
         }
 
         return 0

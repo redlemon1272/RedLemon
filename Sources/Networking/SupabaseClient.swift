@@ -1598,13 +1598,13 @@ struct ReportedStream: Identifiable, Codable {
             return []
         }
         
+        let params = ["p_user_id": userId.uuidString]
+        
+        // Use RPC to bypass RLS since client auth token is missing/invalid
         let data = try await makeRequest(
-            path: "/payment_transactions",
-            query: [
-                "user_id": "eq.\(userId.uuidString)",
-                "select": "*",
-                "order": "created_at.desc"
-            ]
+            path: "/rpc/get_user_payment_history",
+            method: "POST",
+            body: params
         )
         return try jsonDecoder.decode([PaymentTransaction].self, from: data)
     }

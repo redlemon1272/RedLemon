@@ -544,7 +544,7 @@ class MPVPlayerViewModel: ObservableObject {
     private var hasSentReadySignal: Bool = false
 
     // MARK: - Verified Stream Logic
-    private var currentStreamHash: String?
+    @Published var currentStreamHash: String?
     private var currentStreamQuality: String?
     private var currentSourceQuality: String? // NEW: Track source type (CAM, WEB-DL, etc.)
     private var currentSeason: Int? // NEW: Explicitly track season

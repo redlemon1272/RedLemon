@@ -775,7 +775,7 @@ struct MPVPlayerView: View {
                         url: viewModel.videoURL,
                         quality: streamQuality,
                         source: sourceQuality,
-                        hash: streamHash ?? "N/A",
+                        hash: viewModel.currentStreamHash ?? streamHash ?? "N/A",
                         isPresented: $showStreamInfoSheet
                     )
                     Spacer()

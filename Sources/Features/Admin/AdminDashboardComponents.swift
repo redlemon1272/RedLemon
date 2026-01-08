@@ -678,6 +678,7 @@ struct AdminPaymentsView: View {
     @State private var isLoading = false
     @State private var currentPage = 1
     @State private var selectedUserId: UUID?
+    @State private var searchQuery = ""
     private let pageSize = 50
     
     var body: some View {
@@ -724,6 +725,38 @@ struct AdminPaymentsView: View {
                 }
                 .padding()
             }
+            
+            // Search Bar
+            HStack {
+                TextField("Search by username...", text: $searchQuery)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .onSubmit {
+                        currentPage = 1
+                        loadTransactions()
+                    }
+                
+                Button(action: {
+                    currentPage = 1
+                    loadTransactions()
+                }) {
+                    Image(systemName: "magnifyingglass")
+                }
+                .disabled(isLoading)
+                
+                if !searchQuery.isEmpty {
+                    Button(action: {
+                        searchQuery = ""
+                        currentPage = 1
+                        loadTransactions()
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 8)
             
             Divider()
             
@@ -855,7 +888,7 @@ struct AdminPaymentsView: View {
         Task {
             do {
                 let offset = (currentPage - 1) * pageSize
-                transactions = try await SupabaseClient.shared.getAllPaymentTransactions(limit: pageSize, offset: offset)
+                transactions = try await SupabaseClient.shared.getAllPaymentTransactions(limit: pageSize, offset: offset, search: searchQuery.isEmpty ? nil : searchQuery)
             } catch {
                 print("Error loading transactions: \(error)")
             }

@@ -1611,7 +1611,7 @@ struct ReportedStream: Identifiable, Codable {
     
     /// Admin: Get all payment transactions with joined username
     /// Uses RPC `get_all_payment_transactions` to bypass RLS and join users
-    func getAllPaymentTransactions(limit: Int = 50, offset: Int = 0) async throws -> [PaymentTransaction] {
+    func getAllPaymentTransactions(limit: Int = 50, offset: Int = 0, search: String? = nil) async throws -> [PaymentTransaction] {
         struct RPCTransaction: Decodable {
             let id: UUID
             let userId: UUID
@@ -1632,7 +1632,10 @@ struct ReportedStream: Identifiable, Codable {
             }
         }
         
-        let params = ["p_limit": limit, "p_offset": offset]
+        var params: [String: Any] = ["p_limit": limit, "p_offset": offset]
+        if let search = search, !search.isEmpty {
+            params["p_search"] = search
+        }
         
         // Use manual RPC call via PostgREST
         let data = try await makeRequest(

@@ -1631,7 +1631,13 @@ struct ReportedStream: Identifiable, Codable {
         }
         
         let params = ["p_limit": limit, "p_offset": offset]
-        let data = try await functions.invoke("get_all_payment_transactions", options: .init(body: params))
+        
+        // Use manual RPC call via PostgREST
+        let data = try await makeRequest(
+            path: "/rpc/get_all_payment_transactions",
+            method: "POST",
+            body: params
+        )
         let rpcTransactions = try jsonDecoder.decode([RPCTransaction].self, from: data)
         
         // Map RPC result to PaymentTransaction model
@@ -1653,9 +1659,12 @@ struct ReportedStream: Identifiable, Codable {
     /// Admin: Get payment statistics (total revenue, 30-day, 90-day)
     /// Uses RPC `get_payment_stats` to bypass RLS
     func getPaymentStats() async throws -> PaymentStats {
-        let data = try await functions.invoke("get_payment_stats", options: .init(body: [:]))
+        // Use manual RPC call via PostgREST
+        let data = try await makeRequest(
+            path: "/rpc/get_payment_stats",
+            method: "POST"
+        )
         
-        // RPC returns a single object (or array of 1 depending on implementation), but likely array of 1 for standard table return
         let statsArray = try jsonDecoder.decode([PaymentStats].self, from: data)
         if let stats = statsArray.first {
             return stats

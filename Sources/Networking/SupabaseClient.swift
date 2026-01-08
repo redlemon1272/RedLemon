@@ -724,8 +724,12 @@ class SupabaseClient: RoomManager, UserManager {
             let limitDuration: TimeInterval = 72 * 3600 // 72 Hours
             
             if elapsed < limitDuration {
-                return limitDuration - elapsed
+                let remaining = limitDuration - elapsed
+                print("⏳ checkFreeTierLimit: Found limit! Remaining: \(remaining)")
+                return remaining
             }
+        } else {
+             print("✅ checkFreeTierLimit: No history found")
         }
 
         return 0

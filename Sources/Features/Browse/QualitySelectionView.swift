@@ -172,7 +172,9 @@ struct QualitySelectionView: View {
             }
             Button("Cancel", role: .cancel) { }
         } message: {
-            if licenseManager.timeUntilNextFreeRoom > 0 {
+            if let serverMessage = appState.player.premiumLimitMessage {
+                Text(serverMessage)
+            } else if licenseManager.timeUntilNextFreeRoom > 0 {
                 Text("You have reached the free hosting limit (1 room / 72h). Next available slot: \(licenseManager.formattedCooldownTime). Upgrade to Premium for unlimited hosting!")
             } else {
                 Text("Free users can only host one watch party every 72 hours. Upgrade now for unlimited hosting!")

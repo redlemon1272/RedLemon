@@ -27,6 +27,7 @@ class PlayerViewModel: ObservableObject {
     @Published var currentWatchPartyRoom: WatchPartyRoom? // Current lobby/room
 
     @Published var showPremiumLimitAlert: Bool = false // Alert for free user limit logic
+    @Published var premiumLimitMessage: String? = nil // Store specific error message from backend
 
     // Event specific state
     @Published var isPreloading: Bool = false // Track if we are in preload phase (Watch Party)
@@ -1168,21 +1169,26 @@ class PlayerViewModel: ObservableObject {
                 appState.isLoadingRoom = false
             }
 
-        } catch {
-            NSLog("❌ Failed to create room: \(error)")
-            let msg = "\(error)"
-            if msg.contains("Limit Reached") || msg.contains("P0001") || msg.contains("one room every 72 hours") {
-                // Refresh limit status so UI shows correct time
-                await LicenseManager.shared.checkHostingLimit()
+            } catch {
+                NSLog("❌ Failed to create room: \(error)")
+                let msg = "\(error)"
+                // Handle various limit error formats (Postgres P0001 or standard API error)
+                if msg.contains("Limit Reached") || msg.contains("P0001") || msg.contains("one room every 72 hours") {
+                    // Refresh limit status so UI shows correct time
+                    await LicenseManager.shared.checkHostingLimit()
 
-                await MainActor.run {
-                    appState.isLoadingRoom = false
-                    self.showPremiumLimitAlert = true
+                    await MainActor.run {
+                        appState.isLoadingRoom = false
+                        // Extract the user-friendly message if possible, otherwise use the full error
+                        // The backend sends: "Free User Limit Reached: You can host 1 item every 72 hours. Unlock in X hours Y minutes."
+                        // This usually comes in error.localizedDescription or within the userMessage wrapper.
+                        self.premiumLimitMessage = error.localizedDescription
+                        self.showPremiumLimitAlert = true
+                    }
+                } else {
+                    await MainActor.run { appState.isLoadingRoom = false }
                 }
-            } else {
-                await MainActor.run { appState.isLoadingRoom = false }
             }
-        }
     }
 
     func joinRoom(roomId: String) async {

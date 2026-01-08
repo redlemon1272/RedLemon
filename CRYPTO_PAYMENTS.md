@@ -130,3 +130,28 @@ If a user sends funds but claims "it's not in my wallet":
 - **Method**: `assignPaymentAddress(chain:)` -> Returns string.
 - **Method**: `checkPaymentStatus()` -> Returns `(isPremium, expiresAt)`.
 - **Logic**: The client relies entirely on the server to tell it if a payment occurred. It currently trusts the server's `subscription_expires_at` date.
+
+---
+
+## 7. Automatic Fund Sweeping
+
+### Overview
+Funds received at per-user derived addresses are automatically swept to a **master wallet** (Account 0).
+
+### Master Wallet
+- **Address**: `0x33E53714ef5dc4d28A5Ea1FD3df16E86cf6223b9` (Index 0)
+- **Derivation**: `m/44'/60'/0'/0/0`
+- **Purpose**: Single address for fund consolidation and monitoring.
+
+### Edge Function: `sweep-payments`
+- **Endpoint**: `POST /functions/v1/sweep-payments`
+- **Trigger**: Manual or cron job.
+- **Logic**:
+  1. Fetches all assigned EVM addresses from `payment_pools`.
+  2. Checks balances across all chains (Ethereum, Base, Arbitrum, Optimism, Polygon).
+  3. Sweeps funds above threshold (~$1.50) to master wallet.
+  4. Logs sweeps to `payment_sweeps` table.
+
+### Security
+- **XPRV_EVM** secret stored in Docker environment (never exposed).
+- **Dust Threshold**: Only sweeps if balance > 0.0005 ETH.

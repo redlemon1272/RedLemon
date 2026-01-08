@@ -513,99 +513,7 @@ struct SettingsView: View {
                 } else {
                     VStack(spacing: 8) {
                         ForEach(myTransactions) { tx in
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    HStack(spacing: 8) {
-                                        // Chain badge
-                                        Text(tx.chain.uppercased())
-                                            .font(.caption2)
-                                            .fontWeight(.bold)
-                                            .foregroundColor(.white)
-                                            .padding(.horizontal, 6)
-                                            .padding(.vertical, 2)
-                                            .background(tx.chain == "btc" ? Color.orange : Color.blue)
-                                            .cornerRadius(4)
-                                        
-                                        // Status Badge
-                                        Text("COMPLETED")
-                                            .font(.caption2)
-                                            .fontWeight(.bold)
-                                            .foregroundColor(.green)
-                                            .padding(.horizontal, 4)
-                                            .padding(.vertical, 2)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 4)
-                                                    .stroke(Color.green.opacity(0.5), lineWidth: 1)
-                                            )
-                                        
-                                        // Duration Badge
-                                        if let days = tx.durationDays {
-                                            Text("\(days) DAYS")
-                                                .font(.caption2)
-                                                .fontWeight(.bold)
-                                                .foregroundColor(.cyan)
-                                                .padding(.horizontal, 4)
-                                                .padding(.vertical, 2)
-                                                .overlay(
-                                                    RoundedRectangle(cornerRadius: 4)
-                                                        .stroke(Color.cyan.opacity(0.5), lineWidth: 1)
-                                                )
-                                        }
-                                    }
-                                    
-                                    HStack(spacing: 6) {
-                                        if let url = getExplorerUrl(chain: tx.chain, hash: tx.txHash) {
-                                            Link(destination: url) {
-                                                if tx.txHash.hasPrefix("detected_") {
-                                                    Text("View Wallet History")
-                                                        .font(.caption2)
-                                                        .fontWeight(.medium)
-                                                        .foregroundColor(.blue)
-                                                        .underline()
-                                                } else {
-                                                    Text(tx.txHash.prefix(12) + "..." + tx.txHash.suffix(4))
-                                                        .font(.system(.caption2, design: .monospaced))
-                                                        .foregroundColor(.blue)
-                                                        .underline()
-                                                }
-                                            }
-                                            .help(tx.txHash.hasPrefix("detected_") ? "Payment detected via balance check. Click to view address history." : "View Transaction on Explorer")
-                                        } else {
-                                            Text(tx.txHash.hasPrefix("detected_") ? "Payment Detected" : (tx.txHash.prefix(20) + "..."))
-                                                .font(.system(.caption2, design: .monospaced))
-                                                .foregroundColor(.secondary)
-                                        }
-                                        
-                                        if !tx.txHash.hasPrefix("detected_") {
-                                            Button(action: {
-                                                NSPasteboard.general.clearContents()
-                                                NSPasteboard.general.setString(tx.txHash, forType: .string)
-                                            }) {
-                                                Image(systemName: "doc.on.doc")
-                                                    .font(.caption2)
-                                                    .foregroundColor(.secondary)
-                                            }
-                                            .buttonStyle(.plain)
-                                            .help("Copy Transaction Hash")
-                                        }
-                                    }
-                                }
-                                
-                                Spacer()
-                                
-                                VStack(alignment: .trailing, spacing: 2) {
-                                    Text(String(format: "%.6f %@", tx.amount, tx.currency))
-                                        .fontWeight(.medium)
-                                        .foregroundColor(.primary)
-                                    
-                                    Text(tx.createdAt, style: .date)
-                                        .font(.caption2)
-                                        .foregroundColor(.secondary)
-                                }
-                            }
-                            .padding(10)
-                            .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
-                            .cornerRadius(8)
+                            transactionRow(tx)
                         }
                     }
                 }
@@ -617,6 +525,90 @@ struct SettingsView: View {
         .onAppear {
             loadMyPayments()
         }
+    }
+    
+    @ViewBuilder
+    private func transactionRow(_ tx: PaymentTransaction) -> some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 8) {
+                    // Chain badge
+                    Text(tx.chain.uppercased())
+                        .font(.caption2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(tx.chain == "btc" ? Color.orange : Color.blue)
+                        .cornerRadius(4)
+                    
+                    // Status Badge
+                    Text("COMPLETED")
+                        .font(.caption2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.green)
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 2)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 4)
+                                .stroke(Color.green.opacity(0.5), lineWidth: 1)
+                        )
+                    
+                    // Duration Badge
+                    if let days = tx.durationDays {
+                        Text("\(days) DAYS")
+                            .font(.caption2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.cyan)
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 2)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(Color.cyan.opacity(0.5), lineWidth: 1)
+                            )
+                    }
+                }
+                
+                // Only show transaction link for real hashes (not detected_ payments)
+                if !tx.txHash.hasPrefix("detected_"), let url = getExplorerUrl(chain: tx.chain, hash: tx.txHash) {
+                    HStack(spacing: 6) {
+                        Link(destination: url) {
+                            Text(tx.txHash.prefix(12) + "..." + tx.txHash.suffix(4))
+                                .font(.system(.caption2, design: .monospaced))
+                                .foregroundColor(.blue)
+                                .underline()
+                        }
+                        .help("View Transaction on Explorer")
+                        
+                        Button(action: {
+                            NSPasteboard.general.clearContents()
+                            NSPasteboard.general.setString(tx.txHash, forType: .string)
+                        }) {
+                            Image(systemName: "doc.on.doc")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                        .help("Copy Transaction Hash")
+                    }
+                }
+            }
+            
+            Spacer()
+            
+            VStack(alignment: .trailing, spacing: 2) {
+                Text(String(format: "%.6f %@", tx.amount, tx.currency))
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+                
+                Text(tx.createdAt, style: .date)
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .padding(10)
+        .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
+        .cornerRadius(8)
     }
     
     private func loadMyPayments() {

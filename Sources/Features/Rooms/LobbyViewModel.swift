@@ -442,14 +442,18 @@ class LobbyViewModel: ObservableObject {
                             autoStartSystemEvent()
                         }
                     } else {
-                        // Fallback to existing state if fetch fails (rare)
+                        // Room not found in database - likely deleted by host
+                        print("❌ Lobby: Failed to fetch fresh room state (not found)")
+                        
+                        // CRITICAL FIX: Only auto-start for events (system-managed rooms)
+                        // For user rooms, a missing room means the host left/deleted it.
+                        // Do NOT use stale cached state to auto-start playback.
                         if room.type == .event {
                             print("🎬 Event room detected - auto-starting playback")
                             autoStartSystemEvent()
-                        } else if room.state == .playing {
-                            print("▶️ Room already playing - auto-starting playback (cached state)")
-                            autoStartSystemEvent()
                         }
+                        // User rooms: Skip auto-start entirely.
+                        // Guest will stay in lobby and see "room closed" message if applicable.
                     }
                 }
 

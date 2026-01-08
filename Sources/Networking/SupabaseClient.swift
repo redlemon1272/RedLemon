@@ -1591,6 +1591,16 @@ struct ReportedStream: Identifiable, Codable {
         return (result.premium ?? false, nil)
     }
     
+    /// Trigger manual sweep of funds to master wallet
+    func sweepPayments() async throws -> String {
+        let response = try await functions.invoke("sweep-payments", options: .init(body: [:]))
+        
+        if let string = String(data: response, encoding: .utf8) {
+            return string
+        }
+        return "Sweep command sent"
+    }
+    
     // MARK: - Payment Transaction History
     
     /// Get current user's own payment transactions (uses RLS policy)

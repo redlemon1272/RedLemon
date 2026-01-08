@@ -679,6 +679,8 @@ struct AdminPaymentsView: View {
     @State private var currentPage = 1
     @State private var selectedUserId: UUID?
     @State private var searchQuery = ""
+    @State private var isSweeping = false
+    @State private var sweepMessage: String?
     private let pageSize = 50
     
     var body: some View {
@@ -691,6 +693,24 @@ struct AdminPaymentsView: View {
                 
                 Spacer()
                 
+                Button(action: {
+                    sweepFunds()
+                }) {
+                    HStack {
+                        if isSweeping {
+                            ProgressView()
+                                .scaleEffect(0.5)
+                        } else {
+                            Image(systemName: "arrow.triangle.merge")
+                        }
+                        Text(isSweeping ? "Sweeping..." : "Sweep Funds")
+                    }
+                    .foregroundColor(isSweeping ? .secondary : .green)
+                }
+                .buttonStyle(.plain)
+                .disabled(isSweeping)
+                .help("Manually sweep funds to master wallet")
+
                 Button(action: loadData) {
                     Image(systemName: "arrow.clockwise")
                         .foregroundColor(.secondary)
@@ -700,6 +720,14 @@ struct AdminPaymentsView: View {
             }
             .padding()
             .background(Color(NSColor.controlBackgroundColor))
+            
+            if let msg = sweepMessage {
+                Text(msg)
+                    .font(.caption)
+                    .foregroundColor(msg.contains("Error") ? .red : .green)
+                    .padding(.horizontal)
+                    .padding(.bottom, 4)
+            }
             
             // Stats Cards
             if let stats = stats {
@@ -893,6 +921,20 @@ struct AdminPaymentsView: View {
                 print("Error loading transactions: \(error)")
             }
             isLoading = false
+        }
+    }
+    
+    private func sweepFunds() {
+        isSweeping = true
+        sweepMessage = nil
+        Task {
+            do {
+                let result = try await SupabaseClient.shared.sweepPayments()
+                sweepMessage = "✅ Sweep Executed: \(result)"
+            } catch {
+                sweepMessage = "❌ Error: \(error.localizedDescription)"
+            }
+            isSweeping = false
         }
     }
 }

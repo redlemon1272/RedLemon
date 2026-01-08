@@ -227,6 +227,14 @@ class AppState: ObservableObject {
         
         // Recalculate immediately with new data
         calculateDeterministicSchedule()
+        
+        // Start participant count polling (every 10 seconds)
+        startParticipantCountPolling()
+        
+        // Initial fetch
+        Task {
+            await fetchParticipantCounts()
+        }
     }
     
     func updateSingleMovie(_ enrichedMovie: MediaItem) {

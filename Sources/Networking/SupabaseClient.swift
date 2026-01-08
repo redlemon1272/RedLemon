@@ -693,50 +693,35 @@ class SupabaseClient: RoomManager, UserManager {
     // MARK: - Free Tier Limits
 
     /// Checks the remaining cooldown time for free users.
-    /// Returns the number of seconds remaining until the 72-hour limit resets.
-    /// Returns 0 if no limit is active or user is premium.
+    /// Returns the number of seconds remaining    /// Check if the user has reached their free tier limit
+    /// Returns: TimeInterval remaining until they can host again (0 if allowed)
     func checkFreeTierLimit() async throws -> TimeInterval {
-        guard let userId = auth.currentUser?.id else { return 0 }
-        // If locally known as premium, return 0 (but verify with DB if needed?)
-        // Let's trust local or auth state for now to avoid extra calls if obviously premium.
-        if auth.currentUser?.isPremium == true { return 0 }
-
-        struct HistoryEntry: Decodable {
-            let created_at: Date
+        guard let userId = auth.currentUser?.id else {
+            print("⚠️ checkFreeTierLimit: No current user ID")
+            return 0
         }
-
-        // Query last creation time
-        // Note: room_creation_history is protected by RLS (Users can see own)
-        let queryData = try await makeRequest(
-            path: "/room_creation_history",
-            query: [
-                // "user_id": "eq.\(userId.uuidString.lowercased())", // Rely on RLS instead
-                "order": "created_at.desc",
-                "limit": "1",
-                "select": "created_at"
-            ]
-        )
         
-        let history = try jsonDecoder.decode([HistoryEntry].self, from: queryData)
-
-        if let lastEntry = history.first {
-            let elapsed = Date().timeIntervalSince(lastEntry.created_at)
-            let limitDuration: TimeInterval = 72 * 3600 // 72 Hours
-            
-            if elapsed < limitDuration {
-                let remaining = limitDuration - elapsed
-                print("⏳ checkFreeTierLimit: Found limit! Remaining: \(remaining)")
-                return remaining
-            } else {
-                 print("✅ checkFreeTierLimit: Entry found but expired (\(elapsed)s ago).")
-            }
-        } else {
-            print("✅ checkFreeTierLimit: No history found for user \(userId)")
+        struct FreeTierStatus: Decodable {
+            let remaining_seconds: Double
+            let is_locked: Bool
         }
-
-        return 0
+        
+        do {
+            // Use RPC to bypass RLS and get robust server-side calculation
+            let status: FreeTierStatus = try await rpc(
+                fn: "get_free_tier_status",
+                params: ["target_user_id": userId.uuidString.lowercased()]
+            )
+            
+            print("⏳ checkFreeTierLimit (RPC): Locked=\(status.is_locked), Remaining=\(status.remaining_seconds)")
+            return status.remaining_seconds
+            
+        } catch {
+            print("❌ checkFreeTierLimit RPC failed: \(error)")
+            // Fallback to 0 (allow hosting) if check fails, to avoid blocking legitimate users on network error
+            return 0
+        }
     }
-
     /// Create a new room
     func createRoom(
         id: String,

@@ -313,7 +313,13 @@ struct WatchPartyLobbyView: View {
                                     Spacer()
 
                                     if isHost {
-                                        Button(action: { showMediaPicker = true }) {
+                                        Button(action: {
+                                            if !LicenseManager.shared.isPremium && !viewModel.playlist.isEmpty {
+                                                showPaymentGate = true
+                                                return
+                                            }
+                                            showMediaPicker = true
+                                        }) {
                                             HStack(spacing: 4) {
                                                 Image(systemName: "plus.circle.fill")
                                                 Text("Add")

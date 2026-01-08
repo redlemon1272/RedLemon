@@ -60,3 +60,17 @@ A critical distinction exists in how joining is handled when the "Host" is missi
 
 *   **Variables**: Avoid generic names like `event` or `session`. Use `room` for watch parties and `eventSlot` or `broadcast` for system events.
 *   **UI**: "Join Room" implies entering a user session. "Tune In" or "Watch Now" implies viewing a system event.
+
+## 4. Room Code Visibility
+
+The 4-character room code (e.g., "K7M2") is displayed differently based on room type:
+
+### User Hosted Rooms
+*   **Lobby**: Room code is shown inline with year/quality badges, with a copy button.
+*   **Playback Chat**: Room code is **permanently visible** in the chat header (Room tab), allowing users to share the code at any time during playback.
+*   **Files**: `WatchPartyLobbyView.swift`, `ChatOverlayView.swift`
+
+### System Hosted Events
+*   **Lobby**: Room code is **hidden** (events don't use shareable codes).
+*   **Playback Chat**: Room code is **hidden** (the Event tab is shown instead).
+*   **Rationale**: Events are joined via the UI schedule, not via manual room codes.

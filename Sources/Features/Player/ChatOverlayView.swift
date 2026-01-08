@@ -20,6 +20,7 @@ struct ChatOverlayView: View {
     @State private var manualFocus: Bool = false
     @State private var showParticipantsList: Bool = false
     @State private var isAnnouncementMode: Bool = false // Host Announcement Mode
+    @State private var didCopyRoomCode: Bool = false // Room code copy confirmation
 
     // Chat Modes
     enum ChatMode: Equatable {
@@ -168,7 +169,42 @@ struct ChatOverlayView: View {
                 } else {
                     Spacer()
                     
-
+                    // Room Code Display (Only for user-hosted rooms, not events)
+                    if case .room = chatMode,
+                       let room = appState.player.currentWatchPartyRoom,
+                       room.type == .userRoom {
+                        HStack(spacing: 6) {
+                            Text(room.id)
+                                .font(.system(.caption, design: .monospaced))
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(Color.white.opacity(0.15))
+                                .cornerRadius(5)
+                            
+                            Button(action: {
+                                NSPasteboard.general.clearContents()
+                                NSPasteboard.general.setString(room.id, forType: .string)
+                                withAnimation {
+                                    didCopyRoomCode = true
+                                }
+                                // Reset after 2 seconds
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    withAnimation {
+                                        didCopyRoomCode = false
+                                    }
+                                }
+                            }) {
+                                Image(systemName: didCopyRoomCode ? "checkmark.circle.fill" : "doc.on.doc")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(didCopyRoomCode ? .green : .white.opacity(0.7))
+                            }
+                            .buttonStyle(.plain)
+                            .help("Copy Room Code")
+                        }
+                        .padding(.trailing, 8)
+                    }
                     
                     // Reaction Toggle
                     Button(action: {

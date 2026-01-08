@@ -55,26 +55,7 @@ struct PremiumPaymentView: View {
                         Text("Premium Subscription")
                             .font(.system(size: 28, weight: .bold))
 
-                        if let limit = freeLimitSeconds, limit > 0 {
-                            VStack(spacing: 4) {
-                                Text("Free Limit Reached")
-                                    .font(.headline)
-                                    .foregroundColor(.orange)
-                                Text("You can host again in \(formatDuration(limit))")
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                Text("Upgrade now to host immediately.")
-                                    .font(.caption)
-                                    .foregroundColor(.white.opacity(0.8))
-                            }
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.orange.opacity(0.2))
-                            .cornerRadius(12)
-                            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.orange.opacity(0.5), lineWidth: 1))
-                            .padding(.bottom, 8)
-                        }
+
 
                         Text("Subscribe to host unlimited watch parties. Choose a plan that suits you.")
                             .font(.body)

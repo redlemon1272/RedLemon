@@ -84,21 +84,28 @@ export async function handler(req: Request): Promise<Response> {
                             // Connect wallet to provider
                             const connectedWallet = new Wallet(userWallet.privateKey, provider)
 
-                            // Estimate gas
-                            const gasPrice = await provider.getFeeData()
+                            // Estimate gas with EIP-1559 support
+                            const feeData = await provider.getFeeData()
                             const gasLimit = 21000n // Standard ETH transfer
-                            const gasCost = gasLimit * (gasPrice.gasPrice ?? 0n)
 
-                            // Calculate amount to send (balance - gas)
-                            const amountToSend = balance - gasCost
+                            // Use maxFeePerGas for EIP-1559 chains (like Base), fallback to gasPrice
+                            const effectiveGasPrice = feeData.maxFeePerGas ?? feeData.gasPrice ?? 0n
+                            // Add 20% buffer for gas price fluctuations
+                            const gasCostWithBuffer = (gasLimit * effectiveGasPrice * 120n) / 100n
+
+                            // Calculate amount to send (balance - gas with buffer)
+                            const amountToSend = balance - gasCostWithBuffer
+
+                            console.log(`[Sweep] Balance: ${balance}, Gas cost (with 20% buffer): ${gasCostWithBuffer}, Amount to send: ${amountToSend}`)
 
                             if (amountToSend > 0n) {
-                                // Send transaction
+                                // Send transaction using EIP-1559 format for better compatibility
                                 const tx = await connectedWallet.sendTransaction({
                                     to: masterAddress,
                                     value: amountToSend,
                                     gasLimit: gasLimit,
-                                    gasPrice: gasPrice.gasPrice
+                                    maxFeePerGas: feeData.maxFeePerGas ?? feeData.gasPrice,
+                                    maxPriorityFeePerGas: feeData.maxPriorityFeePerGas ?? 0n
                                 })
 
                                 console.log(`[Sweep] TX sent: ${tx.hash}`)

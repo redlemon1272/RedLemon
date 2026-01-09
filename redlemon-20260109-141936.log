@@ -1,0 +1,1891 @@
+2026-01-09 14:19:43.855 RedLemon[7571:89707] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-09 14:19:43.856 RedLemon[7571:89707] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-09 14:19:43.933 RedLemon[7571:89790] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-09 14:19:43.933 RedLemon[7571:89707] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-09 14:19:43.992 RedLemon[7571:89707] ✅ Playback state reset complete - starting in browse view
+2026-01-09 14:19:43.992 RedLemon[7571:89707] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-09 14:19:43.992 RedLemon[7571:89707] 🧪 Testing Profile: debug
+2026-01-09 14:19:43.992 RedLemon[7571:89791] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-09 14:19:43.992 RedLemon[7571:89707] ✅ Keychain: Found stored username: ursinho
+2026-01-09 14:19:43.992 RedLemon[7571:89707] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-09 14:19:43.993 RedLemon[7571:89791] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-09 14:19:44.572 RedLemon[7571:89808] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-09 14:19:44.585 RedLemon[7571:89808] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-09 14:19:44.585 RedLemon[7571:89808] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 14:19:44.615 RedLemon[7571:89707] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 14:19:44.615 RedLemon[7571:89707] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:19:44.615 RedLemon[7571:89707] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:19:44.615 RedLemon[7571:89707] 🚀 RedLemon: Starting HTTP server...
+2026-01-09 14:19:44.615 RedLemon[7571:89707] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-09 14:19:44.634 RedLemon[7571:89707] ✅ RedLemon: HTTPServer instance created
+2026-01-09 14:19:44.636 RedLemon[7571:89790] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+📂 Loaded 5 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"51693A10-D950-4E42-9ED9-F9D2BDA487A8","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-09 14:19:44.930 RedLemon[7571:89707] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 14:19:46.780 RedLemon[7571:89707] ✅ RedLemon: Server marked as ready
+2026-01-09 14:19:46.877 RedLemon[7571:89707] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-09 14:19:46.877 RedLemon[7571:89707] 🔍 Performing startup checks...
+2026-01-09 14:19:46.877 RedLemon[7571:89707] ✅ Username-based authentication ready
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1490 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1490, 412 movies)
+✅ [EventsView] Loaded 412 movies from config version 1490
+🗓 AppState: Updated schedule epoch to 2026-01-09 03:41:37 +0000
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 652 seconds
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1396484/img (1023800 bytes)
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📊 AppState: Polled participant counts - Active: ["tt1663662": 1]
+📡 Joined channel: realtime:global-presence
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 651 seconds
+📊 AppState: Polled participant counts - Active: ["tt1663662": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 651 seconds
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"693DF8BA-E22D-407E-884E-5B8DED9A1699","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"13784be0-ed90-11f0-b300-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmPKSxD5M6AjTB","phx_ref_prev":"GIkmOaDcaGA6AjMh","last_seen":"2026-01-09T19:19:30.296Z","room_id":"event_tt1663662","started_at":"2026-01-09T19:19:17.343Z","status":"In Lobby: Pacific Rim","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1663662","watching_title":"Pacific Rim","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmQE0v8ZM6AjfB","last_seen":"2026-01-09T19:19:46.217Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+📨 Received: {"ref":"C3A56F24-1178-4CE4-97DC-E31CDB4DB9FD","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📡 SocialService: Updated status - Browsing: 
+💰 LicenseManager: Starting hybrid subscription check...
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmQG6GEFE6AjkB","phx_ref_prev":"GIkmQE0v8ZM6AjfB","last_seen":"2026-01-09T19:19:46.780Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmQE0v8ZM6AjfB","last_seen":"2026-01-09T19:19:46.217Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: B039E2CE-78A1-4B6D-BCAC-945339E7AFEC]
+2026-01-09 14:19:47.750 RedLemon[7571:89707] 🔍 Performing startup checks...
+2026-01-09 14:19:47.750 RedLemon[7571:89707] ✅ Username-based authentication ready
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 49 items to cloud...
+🔄 SocialService: Syncing 49 items to cloud (serial)...
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for trending
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+👤 LicenseManager: Profile expiry: Optional(2026-02-08 05:38:35 +0000)
+🎉 Subscription updated! Expires: 2026-02-08 05:38:35 +0000
+💰 LicenseManager: Starting hybrid subscription check...
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31495504
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Tiger
+🔍 [DEBUG] Successfully created MediaItem: The Tiger
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1757678
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Avatar: Fire and Ash
+🔍 [DEBUG] Successfully created MediaItem: Avatar: Fire and Ash
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt10799690
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Trap House
+🔍 [DEBUG] Successfully created MediaItem: Trap House
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30254719
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Successfully created MediaItem: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32820897
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Successfully created MediaItem: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt13186306
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: War of the Worlds
+🔍 [DEBUG] Successfully created MediaItem: War of the Worlds
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt4712810
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Now You See Me: Now You Don't
+🔍 [DEBUG] Successfully created MediaItem: Now You See Me: Now You Don't
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27543632
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Housemaid
+🔍 [DEBUG] Successfully created MediaItem: The Housemaid
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29780866
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Icefall
+🔍 [DEBUG] Successfully created MediaItem: Icefall
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29927663
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Great Flood
+🔍 [DEBUG] Successfully created MediaItem: The Great Flood
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt34610311
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Shadow's Edge
+🔍 [DEBUG] Successfully created MediaItem: The Shadow's Edge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32395062
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Muzzle: City of Wolves
+🔍 [DEBUG] Successfully created MediaItem: Muzzle: City of Wolves
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31227572
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Predator: Badlands
+🔍 [DEBUG] Successfully created MediaItem: Predator: Badlands
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+✅ Loaded 15 movies
+🧹 Deduplication: 49 → 48 items
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+👤 LicenseManager: Profile expiry: Optional(2026-02-08 05:38:35 +0000)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31193180/img (27098 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (19894 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29567915/img (28516 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0162222/img (38190 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0167404/img (16366 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0209163/img (32061 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10374610/img (32670 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2333784/img (28486 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10954984/img (21420 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2872732/img (16390 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4881806/img (15928 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29268110/img (20494 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1396484/img (14825 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12921446/img (42489 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24363 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3065204/img (12736 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24363 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2404435/img (31114 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12300742/img (13162 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0070047/img (16672 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10545296/img (37667 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1781922/img (43043 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0172156/img (32093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30254719/img (39370 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (53296 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327223699/s332/img (31103 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/173938174/s332/img (31756 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175817145/s332/img (34253 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336243710/s332/img (29619 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340706662/s332/img (36313 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320977032/s332/img (29350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338962154/s332/img (51862026-01-09 14:19:48.818 RedLemon[7571:89707] 🔄 Checking for app updates...
+2026-01-09 14:19:54.482 RedLemon[7571:89707] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt12921446/img
+2026-01-09 14:19:54.484 RedLemon[7571:89707] ⏳ Background art loading...
+2026-01-09 14:19:54.484 RedLemon[7571:89707] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt12921446/img
+2026-01-09 14:19:54.485 RedLemon[7571:89707] ⏳ Logo loading...
+2026-01-09 14:19:54.698 RedLemon[7571:89707] ✅ Logo loaded successfully
+2026-01-09 14:19:54.702 RedLemon[7571:89707]    Quality: 1080p
+2026-01-09 14:19:54.703 RedLemon[7571:89707]    Mode: solo
+2026-01-09 14:19:54.703 RedLemon[7571:89707] 📡 Fetching metadata for tt12921446...
+2026-01-09 14:19:54.721 RedLemon[7571:89707] ✅ Background art loaded successfully
+4 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334220721/s332/img (40321 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302976085/s332/img (50443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/62371097/s332/img (36484 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331126481/s332/img (53646 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312291378/s332/img (26090 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340614766/s332/img (62961 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335063930/s332/img (28802 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/275806222/s332/img (48443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328602380/s332/img (48174 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330798000/s332/img (54287 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336295680/s332/img (36731 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315638406/s332/img (49093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331994893/s332/img (37258 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243656762/s332/img (42262 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/241779763/s332/img (48752 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321552009/s332/img (34807 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/249473713/s332/img (40462 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301592778/s332/img (49084 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328819711/s332/img (37494 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176275502/s332/img (71523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330298309/s332/img (59242 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331924998/s332/img (45255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176677346/s332/img (63974 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256070014/s332/img (36505 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243951303/s332/img (42607 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/77205086/s332/img (61880 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309786652/s332/img (45440 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/245030423/s332/img (72818 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315672113/s332/img (80512 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332277457/s332/img (66967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/270724834/s332/img (40466 bytes)
+🎉 Subscription updated! Expires: 2026-02-08 05:38:35 +0000
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+⏭️ Skipping load for showtime - already loaded 15 items
+⏭️ Skipping load for starz - already loaded 15 items
+⏭️ Skipping load for peacock - already loaded 15 items
+⏭️ Skipping load for hulu - already loaded 15 items
+⏭️ Skipping load for paramount - already loaded 15 items
+⏭️ Skipping load for appleTv - already loaded 15 items
+⏭️ Skipping load for hbo - already loaded 15 items
+⏭️ Skipping load for disney - already loaded 15 items
+⏭️ Skipping load for prime - already loaded 15 items
+⏭️ Skipping load for netflix - already loaded 15 items
+⏭️ Skipping load for trending - already loaded 15 items
+✅ TimeService: Synced! Offset: 0.054s (RTT: 133ms)
+   Local:  2026-01-09 19:19:49 +0000
+   Server: 2026-01-09 19:19:49 +0000
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"13784be0-ed90-11f0-b300-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmQU0hNhI6Ajkh","phx_ref_prev":"GIkmPKSxD5M6AjTB","last_seen":"2026-01-09T19:19:50.297Z","room_id":"event_tt1663662","started_at":"2026-01-09T19:19:17.343Z","status":"In Lobby: Pacific Rim","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1663662","watching_title":"Pacific Rim","watching_type":"movie"}]}},"leaves":{"13784be0-ed90-11f0-b300-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmPKSxD5M6AjTB","phx_ref_prev":"GIkmOaDcaGA6AjMh","last_seen":"2026-01-09T19:19:30.296Z","room_id":"event_tt1663662","started_at":"2026-01-09T19:19:17.343Z","status":"In Lobby: Pacific Rim","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1663662","watching_title":"Pacific Rim","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📼 Resume playback called - mode: solo, shouldResume: false, timestamp: 6657.067083333333s
+✅ Cleared resumeFromTimestamp - starting from beginning
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+🎬 PlayerVM: Starting playback for: The Exorcist: Believer
+[ INFO ] GET /api/metadata/meta/movie/tt12921446 [request-id: 0D8A62BF-17D7-4BFB-90E6-DED82CD9A743]
+2026-01-09 14:19:54.966 RedLemon[7571:89791] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-09 14:19:55.015 RedLemon[7571:89791] ✅ StreamService: Using provided metadata: The Exorcist: Believer
+2026-01-09 14:19:55.016 RedLemon[7571:89791] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-09 14:19:55.016 RedLemon[7571:89791] ⚡️ StreamResolver: Resolving streams for tt12921446 (S0E0)
+2026-01-09 14:19:55.146 RedLemon[7571:89808]    📅 Filtering by year: 2023
+💾 Cache SET: Metadata[meta_movie_tt12921446]
+[2026-01-09T19:19:55Z] [INFO] [StreamService.swift:90] 🎬 StreamService: Starting resolution for: The Exorcist: Believer
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+⚡️ StreamResolver: Found Community Verified stream with 0 votes!
+   ℹ️ Hash: 957836f70db702d582c8f5d713881ccb202de0d2
+   ℹ️ Last Verified: 2026-01-09 04:55:43 +0000
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt12921446 (movie)
+✅ Found 10 subtitles from SubDL (Primary)
+🧹 Filtered out 1 mismatched episodes
+✅ StreamResolver: Attached best sub for 'Community Verified Stream (108...': The.Exorcist.Believer.2023.108...
+⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.
+⚡️ StreamService: Testing verified stream viability...
+🔓 StreamService: Unlocking with infoHash: 957836f70db7...
+[ INFO ] POST /api/streams/unlock [request-id: 969F60D1-C7F0-4B3E-BDC5-EB08B1820AD5]
+2026-01-09 14:19:55.905 RedLemon[7571:89791] 🔓 Unlock request: infoHash=957836f70db7..., fileIdx=0
+2026-01-09 14:19:55.905 RedLemon[7571:89791] ✅ Token found, attempting unlock...
+2026-01-09 14:19:57.716 RedLemon[7571:89790] ✅ Unlocked successfully: The.Exorcist.Believer.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4
+2026-01-09 14:19:57.719 RedLemon[7571:89791] 📥 StreamService: Pre-downloading 5 (capped from 9) subtitles...
+2026-01-09 14:19:57.719 RedLemon[7571:89791] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-09 14:19:57.720 RedLemon[7571:89789] 🔍 DEBUG: Processing subtitle URL: /subtitle/3185497-3201314.zip
+2026-01-09 14:19:57.720 RedLemon[7571:89791] 🔍 DEBUG: Processing subtitle URL: /subtitle/3327364-3203902.zip
+2026-01-09 14:19:57.720 RedLemon[7571:89808] 🔍 DEBUG: Processing subtitle URL: /subtitle/3185110-3200922.zip
+2026-01-09 14:19:57.720 RedLemon[7571:89790] 🔍 DEBUG: Processing subtitle URL: /subtitle/3185571-3201379.zip
+2026-01-09 14:19:57.720 RedLemon[7571:89789] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 14:19:57.720 RedLemon[7571:89790] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 14:19:57.721 RedLemon[7571:89791] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 14:19:57.721 RedLemon[7571:89808] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 14:19:57.721 RedLemon[7571:89791] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzMjczNjQtMzIwMzkwMi56aXA=?token=204DC135-0BC1-4352-BAFF-37F3E9D36BB6
+2026-01-09 14:19:57.721 RedLemon[7571:89808] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxODUxMTAtMzIwMDkyMi56aXA=?token=204DC135-0BC1-4352-BAFF-37F3E9D36BB6
+2026-01-09 14:19:57.721 RedLemon[7571:89789] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxODU0OTctMzIwMTMxNC56aXA=?token=204DC135-0BC1-4352-BAFF-37F3E9D36BB6
+2026-01-09 14:19:57.721 RedLemon[7571:89790] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxODU1NzEtMzIwMTM3OS56aXA=?token=204DC135-0BC1-4352-BAFF-37F3E9D36BB6
+2026-01-09 14:19:57.721 RedLemon[7571:89790] 🔍 DEBUG: Processing subtitle URL: /subtitle/3208671-3225358.zip
+2026-01-09 14:19:57.722 RedLemon[7571:89790] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 14:19:57.723 RedLemon[7571:89790] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMyMDg2NzEtMzIyNTM1OC56aXA=?token=204DC135-0BC1-4352-BAFF-37F3E9D36BB6
+2026-01-09 14:19:57.734 RedLemon[7571:89707] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi9-4.download.real-debrid.com/d/QGTCL75UHJ2I645/Th, subtitles: 5
+2026-01-09 14:19:57.811 RedLemon[7571:89707] ✅ Stream ready, starting playback...
+2026-01-09 14:19:57.812 RedLemon[7571:89707] 🖥️ WindowManager: enterFullscreen() called
+2026-01-09 14:19:57.812 RedLemon[7571:89707]    Window: <SwiftUI.SwiftUIWindow: 0x7fdedcae0dc0>
+2026-01-09 14:19:57.812 RedLemon[7571:89707]    Is fullscreen: 0
+2026-01-09 14:19:57.812 RedLemon[7571:89707]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-09 14:19:57.882 RedLemon[7571:89707] 🖼️ Setting up MPV with native macOS video output...
+2026-01-09 14:19:57.889 RedLemon[7571:89707] ✅ MPV initialized with native GPU rendering
+2026-01-09 14:19:57.902 RedLemon[7571:89707] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-09 14:19:57.902 RedLemon[7571:89707] 🎬🎬🎬 About to call loadStream - isInWatchParty: NO
+2026-01-09 14:19:57.902 RedLemon[7571:89707] 🎬🎬🎬 Subtitles: 5
+2026-01-09 14:19:57.903 RedLemon[7571:89707] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: The Exorcist: Believer
+2026-01-09 14:19:57.903 RedLemon[7571:89707] 🎬🎬🎬 streamURL: https://chi9-4.download.real-debrid.com/d/QGTCL75UHJ2I645/Th
+2026-01-09 14:19:57.903 RedLemon[7571:89707] 🎬🎬🎬 subtitles: 5
+2026-01-09 14:19:57.904 RedLemon[7571:89707] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-09 14:19:58.010 RedLemon[7571:89807] 🎬 MPV: Current video filename set to: 
+2026-01-09 14:19:58.010 RedLemon[7571:89791] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-09 14:19:58.010 RedLemon[7571:89791] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxODU1NzEtMzIwMTM3OS56aXA=?token=204DC135-0BC1-4352-BAFF-37F3E9D36BB6
+2026-01-09 14:19:58.010 RedLemon[7571:89807] 🎬 MPV loadVideo called with URL: https://chi9-4.download.real-debrid.com/d/QGTCL75U (Encoded: https://chi9-4.download.real-debrid.com/d/QGTCL75U), autoplay: true, expectedSubs: 3
+2026-01-09 14:19:58.011 RedLemon[7571:89807] 🎬 MPV executing: loadfile "https://chi9-4.download.real-debrid.com/d/QGTCL75UHJ2I645/The.Exorcist.Believer.2023.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4"
+2026-01-09 14:19:58.011 RedLemon[7571:89807] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+📊 AppState: Polled participant counts - Active: ["tt1663662": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 641 seconds
+✅ RD addMagnet: 3BICYJRFE3ME6
+🎬 Movie: Found matching file for title 'The Exorcist: Believer': /The.Exorcist.Believer.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4
+📝 RD: Selecting file ID 1 for torrent 3BICYJRFE3ME6
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/T2DOTZJSCYG6UEB7
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Verified stream is VIABLE. Returning immediately.
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi9-4.download.real-debrid.com/d/QGTCL75UHJ2I645/Th
+   Display Title: The Exorcist: Believer
+   Subtitle URLs: 5
+      [0] The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA
+      [1] The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt
+      [2] The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA
+      [3] The.Exorcist.Believer.2023.1080p.WEBRip.x265.10bit.AAC5.1-[YTS.MX]
+      [4] The.Exorcist.Believer.2023.720p.WEBRip.800MB.x264-GalaxyRG
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🧠 StreamService: Marked hash 957836f7 as attempted for tt12921446
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎬 Loading stream: The Exorcist: Believer
+   IMDB: tt12921446
+   URL: https://chi9-4.download.real-debrid.com/d/QGTCL75UHJ2I645/Th...
+🧹 Clearing previous event state (Non-Event Load)
+🧹 Clearing previous watch party state (Solo Load)
+   Hash: 957836f7...
+   Source: WEBRip
+💬 Added mock chat messages for testing
+👤 SOLO MODE: Autoplaying
+🎬 DisplayLink: reportSwap() (throttled)
+📡 Fetching metadata for tt12921446 as movie...
+📝 Pre-loading external subtitles (Top 3)...
+✅ Cache HIT: Metadata[meta_movie_tt12921446]
+✅ Got background: https://images.metahub.space/background/medium/tt12921446/im...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt12921446/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt12921446/img...
+📡 SocialService: Updated status - online: The Exorcist: Believer
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxODU1NzEtMzIwMTM3OS56aXA= [request-id: E941B6CB-CC37-4B66-8B38-154908376489]
+2026-01-09 14:19:58.581 RedLemon[7571:89807] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_BC9FA6BB-6375-4533-9D81-8330B1E510CF.vtt
+2026-01-09 14:19:58.581 RedLemon[7571:89807] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_BC9FA6BB-6375-4533-9D81-833
+2026-01-09 14:19:58.601 RedLemon[7571:89807] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 14:19:58.601 RedLemon[7571:89807] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzMjczNjQtMzIwMzkwMi56aXA=?token=204DC135-0BC1-4352-BAFF-37F3E9D36BB6
+📄 Subtitle request: L3N1YnRpdGxlLzMxODU1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3185571-3201379.zip
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 639 seconds
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmQwvnV_s6AjnB","phx_ref_prev":"GIkmQG6GEFE6AjkB","last_seen":"2026-01-09T19:19:58.004Z","started_at":"2026-01-09T19:19:58.004Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt12921446","watching_title":"The Exorcist: Believer","watching_type":"movie"}]}},"leaves":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmQG6GEFE6AjkB","phx_ref_prev":"GIkmQE0v8ZM6AjfB","last_seen":"2026-01-09T19:19:46.780Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Download complete: 39360 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA.srt
+📦 Extracting specific file: The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMzMjczNjQtMzIwMzkwMi56aXA= [request-id: D10B748E-2D3D-4889-ADE5-A5DD6611AE7C]
+2026-01-09 14:19:59.032 RedLemon[7571:89791] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_5C10C115-E2E1-464E-A968-BD1267D1F7E0.vtt
+2026-01-09 14:19:59.032 RedLemon[7571:89791] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_5C10C115-E2E1-464E-A968-BD1
+2026-01-09 14:19:59.042 RedLemon[7571:89791] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 14:19:59.042 RedLemon[7571:89791] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxODU0OTctMzIwMTMxNC56aXA=?token=204DC135-0BC1-4352-BAFF-37F3E9D36BB6
+📄 Subtitle request: L3N1YnRpdGxlLzMzMjcz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3327364-3203902.zip
+✅ Download complete: 41773 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt
+📦 Extracting specific file: The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxODU0OTctMzIwMTMxNC56aXA= [request-id: D9433AE7-032D-4DB8-B6F3-50F2D29299B3]
+2026-01-09 14:19:59.518 RedLemon[7571:89791] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_05E910B2-0D6C-47C0-B6DC-E31DF6DDC56C.vtt
+2026-01-09 14:19:59.518 RedLemon[7571:89791] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_05E910B2-0D6C-47C0-B6DC-E31
+2026-01-09 14:19:59.531 RedLemon[7571:89791] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 14:19:59.531 RedLemon[7571:89791] 🔍 MPV track-list/count: 3
+2026-01-09 14:19:59.532 RedLemon[7571:89791] 🔍 Track 0 type: sub
+2026-01-09 14:19:59.532 RedLemon[7571:89791] ✅ Found subtitle track: ID=1, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:19:59.532 RedLemon[7571:89791] 🔍 Track 1 type: sub
+2026-01-09 14:19:59.532 RedLemon[7571:89791] ✅ Found subtitle track: ID=2, lang=en, title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, external=1
+2026-01-09 14:19:59.532 RedLemon[7571:89791] 🔍 Track 2 type: sub
+2026-01-09 14:19:59.533 RedLemon[7571:89791] ✅ Found subtitle track: ID=3, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:19:59.533 RedLemon[7571:89791] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:19:59.533 RedLemon[7571:89791]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:19:59.533 RedLemon[7571:89791]    Start[1]: ID=1, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:19:59.533 RedLemon[7571:89791]    Start[2]: ID=2, Title='The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', Lang='en', Ext=1
+2026-01-09 14:19:59.533 RedLemon[7571:89791]    Start[3]: ID=3, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:19:59.534 RedLemon[7571:89791] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-09 14:19:59.534 RedLemon[7571:89791]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:19:59.535 RedLemon[7571:89791]    Track: ID=1, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:19:59.535 RedLemon[7571:89791]    Track: ID=2, Title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, External=1
+2026-01-09 14:19:59.535 RedLemon[7571:89791]    Track: ID=3, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:00.186 RedLemon[7571:89902] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:00.205 RedLemon[7571:89902] 🔍 Track 0 type: sub
+2026-01-09 14:20:00.206 RedLemon[7571:89902] ✅ Found subtitle track: ID=1, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:00.206 RedLemon[7571:89902] 🔍 Track 1 type: sub
+2026-01-09 14:20:00.206 RedLemon[7571:89902] ✅ Found subtitle track: ID=2, lang=en, title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, external=1
+2026-01-09 14:20:00.206 RedLemon[7571:89902] 🔍 Track 2 type: sub
+2026-01-09 14:20:00.207 RedLemon[7571:89902] ✅ Found subtitle track: ID=3, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:00.207 RedLemon[7571:89902] 🔍 Track 3 type: video
+2026-01-09 14:20:00.207 RedLemon[7571:89902] 🔍 Track 4 type: audio
+2026-01-09 14:20:00.207 RedLemon[7571:89902] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:00.207 RedLemon[7571:89902]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:00.207 RedLemon[7571:89902]    Start[1]: ID=1, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:00.207 RedLemon[7571:89902]    Start[2]: ID=2, Title='The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', Lang='en', Ext=1
+2026-01-09 14:20:00.207 RedLemon[7571:89902]    Start[3]: ID=3, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:00.207 RedLemon[7571:89902] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-09 14:20:00.207 RedLemon[7571:89902]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:00.208 RedLemon[7571:89902]    Track: ID=1, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:00.208 RedLemon[7571:89902]    Track: ID=2, Title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, External=1
+2026-01-09 14:20:00.208 RedLemon[7571:89902]    Track: ID=3, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:00.545 RedLemon[7571:89902] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:00.545 RedLemon[7571:89902] 🔍 Track 0 type: sub
+2026-01-09 14:20:00.545 RedLemon[7571:89902] ✅ Found subtitle track: ID=1, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:00.546 RedLemon[7571:89902] 🔍 Track 1 type: sub
+2026-01-09 14:20:00.546 RedLemon[7571:89902] ✅ Found subtitle track: ID=2, lang=en, title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, external=1
+2026-01-09 14:20:00.546 RedLemon[7571:89902] 🔍 Track 2 type: sub
+2026-01-09 14:20:00.546 RedLemon[7571:89902] ✅ Found subtitle track: ID=3, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:00.546 RedLemon[7571:89902] 🔍 Track 3 type: video
+2026-01-09 14:20:00.547 RedLemon[7571:89902] 🔍 Track 4 type: audio
+2026-01-09 14:20:00.547 RedLemon[7571:89902] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:00.547 RedLemon[7571:89902]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:00.547 RedLemon[7571:89902]    Start[1]: ID=1, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:00.547 RedLemon[7571:89902]    Start[2]: ID=2, Title='The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', Lang='en', Ext=1
+2026-01-09 14:20:00.547 RedLemon[7571:89902]    Start[3]: ID=3, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:00.548 RedLemon[7571:89902] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 14:20:00.548 RedLemon[7571:89902]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:00.548 RedLemon[7571:89902]    Track: ID=1, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:00.548 RedLemon[7571:89902]    Track: ID=2, Title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, External=1
+2026-01-09 14:20:00.548 RedLemon[7571:89902]    Track: ID=3, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:00.807 RedLemon[7571:89707] 🖱️ Mouse: x=1109/1366 y=456/768 | Exit: 0 Controls: 0 Chat: 1
+2026-01-09 14:20:01.212 RedLemon[7571:90042] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:01.213 RedLemon[7571:90042] 🔍 Track 0 type: sub
+2026-01-09 14:20:01.214 RedLemon[7571:90042] ✅ Found subtitle track: ID=1, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:01.214 RedLemon[7571:90042] 🔍 Track 1 type: sub
+2026-01-09 14:20:01.214 RedLemon[7571:90042] ✅ Found subtitle track: ID=2, lang=en, title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, external=1
+2026-01-09 14:20:01.215 RedLemon[7571:90042] 🔍 Track 2 type: sub
+2026-01-09 14:20:01.215 RedLemon[7571:90042] ✅ Found subtitle track: ID=3, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:01.215 RedLemon[7571:90042] 🔍 Track 3 type: video
+2026-01-09 14:20:01.215 RedLemon[7571:90042] 🔍 Track 4 type: audio
+2026-01-09 14:20:01.215 RedLemon[7571:90042] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:01.215 RedLemon[7571:90042]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:01.216 RedLemon[7571:90042]    Start[1]: ID=1, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:01.216 RedLemon[7571:90042]    Start[2]: ID=2, Title='The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', Lang='en', Ext=1
+2026-01-09 14:20:01.216 RedLemon[7571:90042]    Start[3]: ID=3, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:01.216 RedLemon[7571:90042] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 14:20:01.216 RedLemon[7571:90042]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:01.216 RedLemon[7571:90042]    Track: ID=1, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:01.217 RedLemon[7571:90042]    Track: ID=2, Title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, External=1
+2026-01-09 14:20:01.217 RedLemon[7571:90042]    Track: ID=3, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:01.549 RedLemon[7571:89789] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:01.549 RedLemon[7571:89789] 🔍 Track 0 type: sub
+2026-01-09 14:20:01.549 RedLemon[7571:89789] ✅ Found subtitle track: ID=1, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:01.549 RedLemon[7571:89789] 🔍 Track 1 type: sub
+2026-01-09 14:20:01.549 RedLemon[7571:89789] ✅ Found subtitle track: ID=2, lang=en, title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, external=1
+2026-01-09 14:20:01.550 RedLemon[7571:89789] 🔍 Track 2 type: sub
+2026-01-09 14:20:01.550 RedLemon[7571:89789] ✅ Found subtitle track: ID=3, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:01.550 RedLemon[7571:89789] 🔍 Track 3 type: video
+2026-01-09 14:20:01.550 RedLemon[7571:89789] 🔍 Track 4 type: audio
+2026-01-09 14:20:01.550 RedLemon[7571:89789] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:01.550 RedLemon[7571:89789]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:01.550 RedLemon[7571:89789]    Start[1]: ID=1, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:01.550 RedLemon[7571:89789]    Start[2]: ID=2, Title='The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', Lang='en', Ext=1
+2026-01-09 14:20:01.550 RedLemon[7571:89789]    Start[3]: ID=3, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:01.551 RedLemon[7571:89789] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 14:20:01.551 RedLemon[7571:89789]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:01.551 RedLemon[7571:89789]    Track: ID=1, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:01.551 RedLemon[7571:89789]    Track: ID=2, Title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, External=1
+2026-01-09 14:20:01.551 RedLemon[7571:89789]    Track: ID=3, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:02.308 RedLemon[7571:89789] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:02.308 RedLemon[7571:89789] 🔍 Track 0 type: sub
+2026-01-09 14:20:02.308 RedLemon[7571:89789] ✅ Found subtitle track: ID=1, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:02.309 RedLemon[7571:89789] 🔍 Track 1 type: sub
+2026-01-09 14:20:02.309 RedLemon[7571:89789] ✅ Found subtitle track: ID=2, lang=en, title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, external=1
+2026-01-09 14:20:02.310 RedLemon[7571:89789] 🔍 Track 2 type: sub
+2026-01-09 14:20:02.310 RedLemon[7571:89789] ✅ Found subtitle track: ID=3, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:02.310 RedLemon[7571:89789] 🔍 Track 3 type: video
+2026-01-09 14:20:02.311 RedLemon[7571:89789] 🔍 Track 4 type: audio
+2026-01-09 14:20:02.311 RedLemon[7571:89789] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:02.311 RedLemon[7571:89789]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:02.311 RedLemon[7571:89789]    Start[1]: ID=1, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:02.311 RedLemon[7571:89789]    Start[2]: ID=2, Title='The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', Lang='en', Ext=1
+2026-01-09 14:20:02.311 RedLemon[7571:89789]    Start[3]: ID=3, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:02.312 RedLemon[7571:89789] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 14:20:02.312 RedLemon[7571:89789]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:02.312 RedLemon[7571:89789]    Track: ID=1, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:02.312 RedLemon[7571:89789]    Track: ID=2, Title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, External=1
+2026-01-09 14:20:02.313 RedLemon[7571:89789]    Track: ID=3, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:02.552 RedLemon[7571:89902] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:02.552 RedLemon[7571:89902] 🔍 Track 0 type: sub
+2026-01-09 14:20:02.553 RedLemon[7571:89902] ✅ Found subtitle track: ID=1, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:02.554 RedLemon[7571:89902] 🔍 Track 1 type: sub
+2026-01-09 14:20:02.555 RedLemon[7571:89902] ✅ Found subtitle track: ID=2, lang=en, title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, external=1
+2026-01-09 14:20:02.555 RedLemon[7571:89902] 🔍 Track 2 type: sub
+2026-01-09 14:20:02.555 RedLemon[7571:89902] ✅ Found subtitle track: ID=3, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:02.555 RedLemon[7571:89902] 🔍 Track 3 type: video
+2026-01-09 14:20:02.556 RedLemon[7571:89902] 🔍 Track 4 type: audio
+2026-01-09 14:20:02.556 RedLemon[7571:89902] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:02.556 RedLemon[7571:89902]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:02.556 RedLemon[7571:89902]    Start[1]: ID=1, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:02.556 RedLemon[7571:89902]    Start[2]: ID=2, Title='The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', Lang='en', Ext=1
+2026-01-09 14:20:02.556 RedLemon[7571:89902]    Start[3]: ID=3, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:02.557 RedLemon[7571:89902] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 14:20:02.557 RedLemon[7571:89902]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:02.557 RedLemon[7571:89902]    Track: ID=1, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:02.557 RedLemon[7571:89902]    Track: ID=2, Title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, External=1
+2026-01-09 14:20:02.558 RedLemon[7571:89902]    Track: ID=3, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:03.400 RedLemon[7571:90042] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:03.400 RedLemon[7571:90042] 🔍 Track 0 type: sub
+2026-01-09 14:20:03.401 RedLemon[7571:90042] ✅ Found subtitle track: ID=1, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:03.401 RedLemon[7571:90042] 🔍 Track 1 type: sub
+2026-01-09 14:20:03.401 RedLemon[7571:90042] ✅ Found subtitle track: ID=2, lang=en, title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, external=1
+2026-01-09 14:20:03.402 RedLemon[7571:90042] 🔍 Track 2 type: sub
+2026-01-09 14:20:03.403 RedLemon[7571:90042] ✅ Found subtitle track: ID=3, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:03.403 RedLemon[7571:90042] 🔍 Track 3 type: video
+2026-01-09 14:20:03.403 RedLemon[7571:90042] 🔍 Track 4 type: audio
+2026-01-09 14:20:03.403 RedLemon[7571:90042] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:03.403 RedLemon[7571:90042]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:03.403 RedLemon[7571:90042]    Start[1]: ID=1, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:03.403 RedLemon[7571:90042]    Start[2]: ID=2, Title='The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', Lang='en', Ext=1
+2026-01-09 14:20:03.404 RedLemon[7571:90042]    Start[3]: ID=3, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:03.404 RedLemon[7571:90042] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 14:20:03.404 RedLemon[7571:90042]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:03.404 RedLemon[7571:90042]    Track: ID=1, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:03.405 RedLemon[7571:90042]    Track: ID=2, Title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, External=1
+2026-01-09 14:20:03.406 RedLemon[7571:90042]    Track: ID=3, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:03.655 RedLemon[7571:90042] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:03.655 RedLemon[7571:90042] 🔍 Track 0 type: sub
+2026-01-09 14:20:03.655 RedLemon[7571:90042] ✅ Found subtitle track: ID=1, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:03.655 RedLemon[7571:90042] 🔍 Track 1 type: sub
+2026-01-09 14:20:03.656 RedLemon[7571:90042] ✅ Found subtitle track: ID=2, lang=en, title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, external=1
+2026-01-09 14:20:03.656 RedLemon[7571:90042] 🔍 Track 2 type: sub
+2026-01-09 14:20:03.663 RedLemon[7571:90042] ✅ Found subtitle track: ID=3, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:03.663 RedLemon[7571:90042] 🔍 Track 3 type: video
+2026-01-09 14:20:03.663 RedLemon[7571:90042] 🔍 Track 4 type: audio
+2026-01-09 14:20:03.664 RedLemon[7571:90042] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:03.664 RedLemon[7571:90042]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:03.664 RedLemon[7571:90042]    Start[1]: ID=1, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:03.664 RedLemon[7571:90042]    Start[2]: ID=2, Title='The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', Lang='en', Ext=1
+2026-01-09 14:20:03.665 RedLemon[7571:90042]    Start[3]: ID=3, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:03.666 RedLemon[7571:90042] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 14:20:03.666 RedLemon[7571:90042]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:03.666 RedLemon[7571:90042]    Track: ID=1, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:03.667 RedLemon[7571:90042]    Track: ID=2, Title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, External=1
+2026-01-09 14:20:03.667 RedLemon[7571:90042]    Track: ID=3, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:04.411 RedLemon[7571:90042] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:04.411 RedLemon[7571:90042] 🔍 Track 0 type: sub
+2026-01-09 14:20:04.432 RedLemon[7571:90042] ✅ Found subtitle track: ID=1, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:04.432 RedLemon[7571:90042] 🔍 Track 1 type: sub
+2026-01-09 14:20:04.433 RedLemon[7571:90042] ✅ Found subtitle track: ID=2, lang=en, title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, external=1
+2026-01-09 14:20:04.433 RedLemon[7571:90042] 🔍 Track 2 type: sub
+2026-01-09 14:20:04.433 RedLemon[7571:90042] ✅ Found subtitle track: ID=3, lang=en, title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, external=1
+2026-01-09 14:20:04.433 RedLemon[7571:90042] 🔍 Track 3 type: video
+2026-01-09 14:20:04.433 RedLemon[7571:90042] 🔍 Track 4 type: audio
+2026-01-09 14:20:04.433 RedLemon[7571:90042] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:04.434 RedLemon[7571:90042]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:04.434 RedLemon[7571:90042]    Start[1]: ID=1, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:04.434 RedLemon[7571:90042]    Start[2]: ID=2, Title='The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', Lang='en', Ext=1
+2026-01-09 14:20:04.434 RedLemon[7571:90042]    Start[3]: ID=3, Title='The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2026-01-09 14:20:04.434 RedLemon[7571:90042] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 14:20:04.435 RedLemon[7571:90042]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:04.435 RedLemon[7571:90042]    Track: ID=1, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:04.435 RedLemon[7571:90042]    Track: ID=2, Title=The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt, External=1
+2026-01-09 14:20:04.435 RedLemon[7571:90042]    Track: ID=3, Title=The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA, External=1
+2026-01-09 14:20:04.732 RedLemon[7571:89707] 🚪 Joining room: event_tt1663662
+2026-01-09 14:20:06.419 RedLemon[7571:89707] 🗓 Schedule Calc: The Exorcist: Believer | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-09 14:20:06.419 RedLemon[7571:89707] 🗓 Schedule Calc: Five Nights at Freddy's 2 | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-09 14:20:06.419 RedLemon[7571:89707] 🗓 Schedule Calc: Now You See Me: Now You Don't | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-09 14:20:06.419 RedLemon[7571:89707] 🗓 Schedule Calc: Final Destination | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-09 14:20:06.419 RedLemon[7571:89707] 🗓 Schedule Calc: Rush Hour 2 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-09 14:20:06.419 RedLemon[7571:89707] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-09 14:20:06.419 RedLemon[7571:89707] 🗓 Schedule Calc: Black Phone 2 | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: Pacific Rim | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: Harry Potter and the Sorcerer's Stone | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: Deadpool 2 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: The Final Destination | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: Split | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: Pirates of the Caribbean: The Curse of the Black Pearl | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: The Expendables 4 | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: Final Destination 2 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: Captain America: Civil War | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2026-01-09 14:20:06.420 RedLemon[7571:89707] 🗓 Schedule Calc: Avengers: Age of Ultron | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: Doctor Strange in the Multiverse of Madness | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: Kraven the Hunter | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: Thor: Ragnarok | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: Se7en | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: xXx: Return of Xander Cage | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: The Expendables 3 | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: Indiana Jones and the Dial of Destiny | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: Final Destination 5 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: The Simpsons Movie | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: Tron: Legacy | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: The Mummy Returns | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-09 14:20:06.421 RedLemon[7571:89707] 🗓 Schedule Calc: Cast Away | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: The Sixth Sense | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Lucy | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: The Hunger Games: The Ballad of Songbirds & Snakes | RuntimeStr: 157 min -> 157m | Duration: 10020.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Jurassic World: Fallen Kingdom | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Death Race | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Silent Hill | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Monsters, Inc. | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Bad Boys II | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: The Conjuring 2 | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Nope | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Harry Potter and the Goblet of Fire | RuntimeStr: 157 min -> 157m | Duration: 10020.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Thor | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: 28 Years Later | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Despicable Me | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2026-01-09 14:20:06.422 RedLemon[7571:89707] 🗓 Schedule Calc: Black Swan | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: Iron Man 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: Bullet Train | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: The Pacifier | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: Avengers: Endgame | RuntimeStr: 181 min -> 181m | Duration: 11460.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: Harry Potter and the Deathly Hallows: Part 2 | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: 300: Rise of an Empire | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: V for Vendetta | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: The Mummy: Tomb of the Dragon Emperor | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: Hereditary | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: The Amazing Spider-Man 2 | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: Apocalypto | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2026-01-09 14:20:06.423 RedLemon[7571:89707] 🗓 Schedule Calc: Face/Off | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Jurassic World: Rebirth | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Top Gun | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: The Menu | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Terminator Salvation | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Scouts Guide to the Zombie Apocalypse | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Civil War | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: We're the Millers | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Renfield | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Dracula | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Kung Fu Hustle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Colombiana | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Night at the Museum | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: MaXXXine | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-09 14:20:06.424 RedLemon[7571:89707] 🗓 Schedule Calc: Dune: Part Two | RuntimeStr: 167 min -> 167m | Duration: 10620.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: Spider-Man 3 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: Terminator Genisys | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: John Wick: Chapter 2 | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: Final Destination: Bloodlines | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: Pirates of the Caribbean: Dead Men Tell No Tales | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: Prey | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: Shrek | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: Now You See Me | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: Jurassic World | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: Drive | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-09 14:20:06.425 RedLemon[7571:89707] 🗓 Schedule Calc: The Emperor's New Groove | RuntimeStr: 78 min -> 78m | Duration: 5280.0s
+2026-01-09 14:20:06.426 RedLemon[7571:89707] 🗓 Schedule Calc: Venom | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-09 14:20:06.426 RedLemon[7571:89707] 🗓 Schedule Calc: Transformers: Age of Extinction | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+2026-01-09 14:20:06.426 RedLemon[7571:89707] 🗓 Schedule Calc: Shaft | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-09 14:20:06.426 RedLemon[7571:89707] 🗓 Schedule Calc: A Quiet Place: Day One | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-09 14:20:06.426 RedLemon[7571:89707] 🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 1 | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-09 14:20:06.426 RedLemon[7571:89707] 🗓 Schedule Calc: Black Hawk Down | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+2026-01-09 14:20:06.426 RedLemon[7571:89707] 🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-09 14:20:06.426 RedLemon[7571:89707] 🗓 Schedule Calc: The Strangers: Chapter 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-09 14:20:06.426 RedLemon[7571:89707] 🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-09 14:20:06.426 RedLemon[7571:89707] 🗓 Schedule Calc: Fury | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-09 14:20:06.426 RedLemon[7571:89707] 🗓 Schedule Calc: Rush Hour 3 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: Avatar | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: Jumanji: The Next Level | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: The Matrix Reloaded | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: Hostel | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: Gladiator II | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: The Nun II | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: The Conjuring: Last Rites | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: Blade Runner 2049 | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: Deadpool | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: The Lord of the Rings: The Return of the King | RuntimeStr: 201 min -> 201m | Duration: 12660.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: RED | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: Elf | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-09 14:20:06.427 RedLemon[7571:89707] 🗓 Schedule Calc: X | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: The Martian | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Ready Player One | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Blue Streak | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: The Lord of the Rings: The Fellowship of the Ring | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Harry Potter and the Half-Blood Prince | RuntimeStr: 153 min -> 153m | Duration: 9780.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Troy | RuntimeStr: 163 min -> 163m | Duration: 10380.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Fargo | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Final Destination 3 | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Now You See Me 2 | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Ninja Assassin | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Scarface | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Die Hard 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-09 14:20:06.428 RedLemon[7571:89707] 🗓 Schedule Calc: Four Brothers | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: Real Steel | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: The Terminator | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: Psycho | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: Black Phone 2 | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: Baghead | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: Carry-On | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: The Suicide Squad | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: Shutter Island | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: Iron Man | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: Pirates of the Caribbean: At World's End | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-09 14:20:06.429 RedLemon[7571:89707] 🗓 Schedule Calc: District 9 | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Kingdom of the Planet of the Apes | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Nobody | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Edge of Tomorrow | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Karate Kid: Legends | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: The Fall Guy | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Harry Potter and the Chamber of Secrets | RuntimeStr: 161 min -> 161m | Duration: 10260.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Venom: The Last Dance | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Transformers One | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: The Mummy | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Paranormal Activity | RuntimeStr: 86 min -> 86m | Duration: 5760.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: F1: The Movie | RuntimeStr: 156 min -> 156m | Duration: 9960.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: John Wick: Chapter 4 | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Mickey 17 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Despicable Me 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Madagascar: Escape 2 Africa | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2026-01-09 14:20:06.430 RedLemon[7571:89707] 🗓 Schedule Calc: Frankenstein | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Gattaca | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: The Amazing Spider-Man | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Furiosa: A Mad Max Saga | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Nobody 2 | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Everything Everywhere All at Once | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: The Shining | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: The Hobbit: An Unexpected Journey | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Inside Man | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: The Batman | RuntimeStr: 177 min -> 177m | Duration: 11220.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Eyes Wide Shut | RuntimeStr: 159 min -> 159m | Duration: 10140.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Sinners | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Mystery Men | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Kung Fu Panda 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Mission: Impossible - Fallout | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Incredibles 2 | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: The Equalizer 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Tron: Ares | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Jurassic World: Dominion | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: The Negotiator | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2026-01-09 14:20:06.431 RedLemon[7571:89707] 🗓 Schedule Calc: Gladiator | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Training Day | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Harry Potter and the Deathly Hallows: Part 1 | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Constantine | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Annabelle Comes Home | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Kill Bill: The Whole Bloody Affair | RuntimeStr: 247 min -> 247m | Duration: 15420.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: The Usual Suspects | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Mission: Impossible - Dead Reckoning Part One | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Candyman | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Thor: Love and Thunder | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Night at the Museum: Secret of the Tomb | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Dawn of the Planet of the Apes | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Harry Potter and the Prisoner of Azkaban | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Johnny English | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Scream | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Little Man | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Furious 7 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Dune: Part One | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: The Incredible Hulk | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2026-01-09 14:20:06.432 RedLemon[7571:89707] 🗓 Schedule Calc: Batman Begins | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Man of Steel | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: The Conjuring | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Five Nights at Freddy's | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: M3GAN 2.0 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Underworld | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Pirates of the Caribbean: Dead Man's Chest | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Iron Man 3 | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: The Departed | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Mission: Impossible - The Final Reckoning | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Annabelle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Him | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Van Helsing | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: The Conjuring: The Devil Made Me Do It | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: The Fan | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Napoleon | RuntimeStr: 158 min -> 158m | Duration: 10080.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: It: Chapter Two | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: 1917 | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-09 14:20:06.433 RedLemon[7571:89707] 🗓 Schedule Calc: I Am Legend | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: Arrival | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: Joker: Folie à Deux | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: Back to the Future Part II | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: Old | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: The Wolf of Wall Street | RuntimeStr: 180 min -> 180m | Duration: 11400.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: Surrogates | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: The Fifth Element | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: Girls Trip | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: World War Z | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2026-01-09 14:20:06.434 RedLemon[7571:89707] 🗓 Schedule Calc: Heretic | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-09 14:20:06.435 RedLemon[7571:89707] 🗓 Schedule Calc: Inglourious Basterds | RuntimeStr: 153 min -> 153m | Duration: 9780.0s
+2026-01-09 14:20:06.435 RedLemon[7571:89707] 🗓 Schedule Calc: Logan | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-09 14:20:06.435 RedLemon[7571:89707] 🗓 Schedule Calc: Man on Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2026-01-09 14:20:06.435 RedLemon[7571:89707] 🗓 Schedule Calc: Evil Dead Rise | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+2026-01-09 14:20:06.435 RedLemon[7571:89707] 🗓 Schedule Calc: Harry Potter and the Order of the Phoenix | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2026-01-09 14:20:06.435 RedLemon[7571:89707] 🗓 Schedule Calc: Predator 2 | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-09 14:20:06.435 RedLemon[7571:89707] 🗓 Schedule Calc: Saw | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-09 14:20:06.435 RedLemon[7571:89707] 🗓 Schedule Calc: Abigail | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-09 14:20:06.435 RedLemon[7571:89707] 🗓 Schedule Calc: Interstellar | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2026-01-09 14:20:06.435 RedLemon[7571:89707] 🗓 Schedule Calc: Taken | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+2026-01-09 14:20:06.435 RedLemon[7571:89707] 🗓 Schedule Calc: The Drop | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Aquaman | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: The Faculty | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Home Alone 2: Lost in New York | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Cloud Atlas | RuntimeStr: 172 min -> 172m | Duration: 10920.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Avengers: Infinity War | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Scary Movie 2 | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Chronicle | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Back to the Future | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: The Black Phone | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: The Mask | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Meet the Robinsons | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Orphan | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Terminator 2: Judgment Day | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Bad Boys | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: Fast X | RuntimeStr: 142 min -> 142m | Duration: 9120.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: The Matrix | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2026-01-09 14:20:06.436 RedLemon[7571:89707] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Nosferatu | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Transformers: Rise of the Beasts | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: It Follows | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Fight Club | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Jingle All the Way | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: The Super Mario Bros. Movie | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Candyman | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: A Minecraft Movie | RuntimeStr: nil -> 120m | Duration: 7800.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: The Substance | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: War of the Worlds | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Companion | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Spider-Man | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Taken 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Mr. & Mrs. Smith | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: The Maze Runner | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Ballerina | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Hot Fuzz | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: The Nun | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+2026-01-09 14:20:06.437 RedLemon[7571:89707] 🗓 Schedule Calc: Cobweb | RuntimeStr: 88 min -> 88m | Duration: 5880.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: The Matrix Resurrections | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Riddick | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: War 2 | RuntimeStr: 173 min -> 173m | Duration: 10980.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: The Big Lebowski | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: The Lord of the Rings: The Two Towers | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Resident Evil: Red Falls | RuntimeStr: 53 min -> 53m | Duration: 3780.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Inside Out 2 | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Signs | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: The Karate Kid | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Inception | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Avatar: The Way of Water | RuntimeStr: 192 min -> 192m | Duration: 12120.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Code 3 | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: The Hobbit: The Battle of the Five Armies | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Captain America: Brave New World | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Exit Wounds | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Snatch | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Triangle | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Creed | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: The Black Phone | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: The Godfather | RuntimeStr: 175 min -> 175m | Duration: 11100.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: The Godfather Part II | RuntimeStr: 202 min -> 202m | Duration: 12720.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: The Last Samurai | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+2026-01-09 14:20:06.438 RedLemon[7571:89707] 🗓 Schedule Calc: The Dark Knight | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: Guardians of the Galaxy Vol. 3 | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: The Equalizer | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: The Godfather Part III | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: The Imitation Game | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: Joe Dirt | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: X-Men: Days of Future Past | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: Rush Hour | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: Guardians of the Galaxy Vol. 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: The Hunger Games: Catching Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: The Parent Trap | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: The Accountant 2 | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: xXx | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: A Haunted House 2 | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: Blade Runner | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: 2001: A Space Odyssey | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: Léon: The Professional | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: The Long Walk | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: Stuber | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: Sinister | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: A.I. Artificial Intelligence | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2026-01-09 14:20:06.439 RedLemon[7571:89707] 🗓 Schedule Calc: Alien: Romulus | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: The Woman in Cabin 10 | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Wanted | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Ocean's Eight | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Joker | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Catch Me If You Can | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Cargo | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Barbie | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Mad Max: Fury Road | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Batman Returns | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: The Naked Gun | RuntimeStr: 85 min -> 85m | Duration: 5700.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Cool Runnings | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Fractured | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Shooter | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.440 RedLemon[7571:89707] 🗓 Schedule Calc: Road House | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: Deja Vu | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: Southpaw | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: Silent Night | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: Casino Royale | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: The Running Man | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: The Covenant | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: Bad Boys for Life | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: Blade: Trinity | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: Freaky Tales | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: The Fantastic Four: First Steps | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: Fast & Furious Presents: Hobbs & Shaw | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: No Country for Old Men | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-09 14:20:06.441 RedLemon[7571:89707] 🗓 Schedule Calc: Top Gun: Maverick | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2026-01-09 14:20:06.442 RedLemon[7571:89707] 🗓 Schedule Calc: No Escape | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-09 14:20:06.442 RedLemon[7571:89707] 🗓 Schedule Calc: The Exorcist | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-09 14:20:06.442 RedLemon[7571:89707] 🗓 Schedule Calc: Die Hard | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-09 14:20:06.442 RedLemon[7571:89707] 🗓 Schedule Calc: The Smashing Machine | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-09 14:20:06.442 RedLemon[7571:89707] 🗓 Schedule Calc: Fruitvale Station | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+2026-01-09 14:20:06.442 RedLemon[7571:89707] 🗓 Schedule Calc: Playdate | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-09 14:20:06.442 RedLemon[7571:89707] 🗓 Schedule Calc: Presence | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+2026-01-09 14:20:06.442 RedLemon[7571:89707] 🗓 Schedule Calc: Fracture | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Plane | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Venom: Let There Be Carnage | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Pulp Fiction | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Men in Black | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Batman v Superman: Dawn of Justice | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Thir13en Ghosts | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Ma | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: The Prestige | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Bring Her Back | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-09 14:20:06.443 RedLemon[7571:89707] 🗓 Schedule Calc: Tower Heist | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: Pirates of the Caribbean: On Stranger Tides | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: The Dark Knight Rises | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: Escape Room | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: A Bronx Tale | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: It: Chapter Two | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: Kill Bill: Vol. 1 | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: Wonder Woman | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: Her | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: Deadpool & Wolverine | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: Central Intelligence | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: War of the Worlds | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: The Avengers | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: Borderlands | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: The Jacket | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: John Wick: Chapter 3 - Parabellum | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2026-01-09 14:20:06.444 RedLemon[7571:89707] 🗓 Schedule Calc: Gone Girl | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2026-01-09 14:20:06.445 RedLemon[7571:89707] 🗓 Schedule Calc: Taken 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-09 14:20:06.445 RedLemon[7571:89707] ℹ️ Event Join: Joining Lobby (Not currently live)
+2026-01-09 14:20:06.445 RedLemon[7571:89707] 🚪 Room is in lobby
+📄 Subtitle request: L3N1YnRpdGxlLzMxODU0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3185497-3201314.zip
+💬 Chat opened
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+✅ Download complete: 39364 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA.srt
+📦 Extracting specific file: The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+[MPV] mov,mp4,m4a,3gp,3g2,mj2: Referenced QT chapter track not found
+[MPV] (+) Video --vid=1 (*) (h264 1920x1036 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA' (webvtt) (external)
+ MPV Event: 18
+ MPV Event: 18
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+ MPV Event: 18
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x1036 videotoolbox[nv12]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+📊 Current subtitle track: 3
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x1036 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA' (webvtt) (external)
+▶️ SMART-LOAD: Resuming playback (Autoplay requested)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+📊 Current subtitle track: 3
+ℹ️ No resume timestamp set (starting from beginning)
+▶️ Auto-playing solo content from beginning
+📝 Started watch history tracking
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🔓 MPVPlayerViewModel: Time advancing (time: 0.375375) while buffering - Forcing UI unlock
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'The.Exorcist.Believer.2023.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264.srt', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: The.Exorcist.Believer.2023.1080p.10bit.WEBRip.6CH.x265.HEVC-PSA (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ [EventsConfig] Fetched movie_events version 1490 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1490, 412 movies)
+🗓 Schedule Calc: Total Cycle Duration: 3261300.0s
+🗓 Schedule Calc: Time Since Epoch: 63919206.49921608s | Cycle Pos: 1954506.4992160797s
+🗓 Schedule Calc: FOUND -> Inglourious Basterds (tt0361748) starting at 2026-01-09 19:01:00 +0000
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRQE-aEs6Ajph","phx_ref_prev":"GIkmQwvnV_s6AjnB","last_seen":"2026-01-09T19:20:06.419Z","started_at":"2026-01-09T19:19:58.004Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt12921446","watching_title":"The Exorcist: Believer","watching_type":"movie"}]}},"leaves":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmQwvnV_s6AjnB","phx_ref_prev":"GIkmQG6GEFE6AjkB","last_seen":"2026-01-09T19:19:58.004Z","started_at":"2026-01-09T19:19:58.004Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt12921446","watching_title":"The Exorcist: Believer","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎭 Lobby: Connecting to room event_tt1663662...
+🚦 Lobby State: connecting
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+🔄 Lobby: Fetching fresh room state from Supabase...
+📊 AppState: Polled participant counts - Active: ["tt1663662": 2]
+[ INFO ] GET /api/metadata/meta/movie/tt1663662 [request-id: 7DD8D41B-3D97-4B45-B9DD-1DCA83DC992B]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 631 seconds
+[ INFO ] GET /api/metadata/meta/movie/tt1663662 [request-id: D51A60D4-BA25-45AF-B863-DB916C44688E]
+2026-01-09 14:20:06.767 RedLemon[7571:89791] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-09 14:20:06.809 RedLemon[7571:89707] 🔒 Cleanup: Preserving room state (transitioning to different room: nil → event_tt1663662)
+2026-01-09 14:20:06.809 RedLemon[7571:89707] 🛑 Stopped playback heartbeat loop
+2026-01-09 14:20:06.987 RedLemon[7571:89707] ℹ️ Lobby: Join failed with conflict (409/Duplicate) - assuming user already joined. Proceeding...
+2026-01-09 14:20:07.187 RedLemon[7571:89808] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-09 14:20:07.188 RedLemon[7571:89808]    Payload keys: senderId, position, chatText, type, chatUsername, timestamp
+2026-01-09 14:20:07.188 RedLemon[7571:89808] ✅ Realtime: Message broadcast complete
+2026-01-09 14:20:07.201 RedLemon[7571:90042] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-09 14:20:07.312 RedLemon[7571:89789] 📨 Realtime: Received broadcast message
+2026-01-09 14:20:07.312 RedLemon[7571:89789]    Payload keys: chatText, senderId, chatUsername, position, timestamp, type
+2026-01-09 14:20:07.313 RedLemon[7571:89789] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-09 14:20:07.314 RedLemon[7571:89789] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-09 14:20:07.314 RedLemon[7571:89789] ✅ Realtime: syncCallback invoked successfully
+2026-01-09 14:20:07.317 RedLemon[7571:89707] 👋 Received: Guest 'ursinho' joined room event_tt1663662
+2026-01-09 14:20:07.386 RedLemon[7571:89707] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIkmRS0mRAWBpTuh)
+2026-01-09 14:20:07.386 RedLemon[7571:89707] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIkmRS0mRAWBpTuh)
+2026-01-09 14:20:08.818 RedLemon[7571:89707] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1663662/img
+2026-01-09 14:20:08.818 RedLemon[7571:89707] ⏳ Background art loading...
+2026-01-09 14:20:08.877 RedLemon[7571:89707] ✅ Background art loaded successfully
+2026-01-09 14:20:08.878 RedLemon[7571:89707]    Quality: 1080p
+2026-01-09 14:20:08.878 RedLemon[7571:89707]    Mode: watchParty
+2026-01-09 14:20:08.878 RedLemon[7571:89707] 📡 Fetching metadata for tt1663662...
+2026-01-09 14:20:08.880 RedLemon[7571:89707] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1663662/img
+2026-01-09 14:20:08.881 RedLemon[7571:89707] ⏳ Logo loading...
+2026-01-09 14:20:08.952 RedLemon[7571:89707] ✅ Logo loaded successfully
+2026-01-09 14:20:08.953 RedLemon[7571:89707] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-09 14:20:08.954 RedLemon[7571:89707] ⚠️ GUEST: Detected quality from filename: 1080p
+2026-01-09 14:20:08.954 RedLemon[7571:89707] 📝 GUEST: Extracted filename='Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG.mp4' (len=48), sourceQuality=nil, selectedQuality=nil
+💾 Saved to watch history: Pacific Rim at 5s
+🧹 Cleaning up MPV player...
+💾 Cache SET: Metadata[meta_movie_tt1663662]
+ MPV Event: 17
+📡 SocialService: Updated status - In Lobby: Pacific Rim: Pacific Rim
+📡 SocialService: Updated status - Browsing: 
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt1663662
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: Pacific Rim
+🔍 [DEBUG] Successfully created MediaItem from meta: Pacific Rim
+ MPV Event: 17
+[MPV] Video: no video
+🔌 Setting up Realtime channel: watch-party:event_tt1663662
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+🗑️ Invalidated all active timers
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+🗑️ MPVPlayerViewModel deinit
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt1663662
+📡 Connection state: connected
+✅ Realtime channel setup complete
+🛑 Event polling task cancelled cleanly
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+✅ Lobby: Loaded metadata for Pacific Rim
+✅ Lobby: Connected to Realtime
+✅ Lobby: Synced playlist with 0 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRRPd82k6AjqB","phx_ref_prev":"GIkmRQE-aEs6Ajph","last_seen":"2026-01-09T19:20:06.729Z","room_id":"event_tt1663662","started_at":"2026-01-09T19:20:06.729Z","status":"In Lobby: Pacific Rim","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1663662","watching_title":"Pacific Rim","watching_type":"movie"}]}},"leaves":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRQE-aEs6Ajph","phx_ref_prev":"GIkmQwvnV_s6AjnB","last_seen":"2026-01-09T19:20:06.419Z","started_at":"2026-01-09T19:19:58.004Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt12921446","watching_title":"The Exorcist: Believer","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRRRBbJw6Ajqh","phx_ref_prev":"GIkmRRPd82k6AjqB","last_seen":"2026-01-09T19:20:06.741Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRRPd82k6AjqB","phx_ref_prev":"GIkmRQE-aEs6Ajph","last_seen":"2026-01-09T19:20:06.729Z","room_id":"event_tt1663662","started_at":"2026-01-09T19:20:06.729Z","status":"In Lobby: Pacific Rim","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1663662","watching_title":"Pacific Rim","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ MPV stop completed with clean event loop exit
+📨 Received: {"ref":"F9AEA9E8-774A-45C2-A124-B9EDE62AA39B","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":56542857,"event":"*","filter":"id=eq.event_tt1663662","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:event_tt1663662"},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"17ad9d46-ed90-11f0-aa74-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmObq-pQeBpR1C","phx_ref_prev":"GIkmOaM6kUWBpR0i","is_host":false,"joined_at":1767986357.782752,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"35090862-ed90-11f0-acb7-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRRp-O3-BpTuB","is_host":false,"joined_at":1767986406.811407,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt1663662"}
+✅ MPV instance destroyed
+❌ Supabase API Error: duplicate key value violates unique constraint "room_participants_pkey"
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+🎬 Event room detected - auto-starting playback
+🤖 Lobby: Checking auto-start for system event
+   Room ID: event_tt1663662
+   Room createdAt: 2026-01-09 19:19:16 +0000
+   Current time: 2026-01-09 19:20:07 +0000
+   Time until start: -50.17492914199829s
+🤖 Lobby: Auto-starting system event now
+   Elapsed time: 50.17492914199829s
+   Media item: Pacific Rim
+   Set eventStartTime to: 2026-01-09 19:19:16 +0000
+   Current elapsed would be: 50.17492914199829s (will recalculate on video ready)
+🔌 Setting up Realtime channel: watch-party:event_tt1663662
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:event_tt1663662, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"35090862-ed90-11f0-acb7-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRS0mRAWBpTuh","phx_ref_prev":"GIkmRRp-O3-BpTuB","is_host":false,"joined_at":1767986407.157105,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"35090862-ed90-11f0-acb7-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRRp-O3-BpTuB","is_host":false,"joined_at":1767986406.811407,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt1663662"}
+❌ Supabase API Error: No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9
+⚠️ Heartbeat failed: userMessage("No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9")
+🎬 Lobby: Calling playMedia for Pacific Rim
+🛑 LobbyPresence: Polling stopped
+🛑 LobbyDatabase: Polling stopped
+🛑 Lobby: Polling stopped (chat via Realtime only)
+🎬 PlayerVM: Starting playback for: Pacific Rim
+✅ Cache HIT: Metadata[meta_movie_tt1663662]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: A5903C14-2AB2-4765-9D3E-A8795FFF9F5E]
+2026-01-09 14:20:09.185 RedLemon[7571:89707] ✅ GUEST: Found 9 subtitles
+2026-01-09 14:20:09.190 RedLemon[7571:89707] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi4-4.download.real-debrid.com/d/HQA2C4NZKTBMO115/P, subtitles: 9
+2026-01-09 14:20:09.227 RedLemon[7571:89707] ✅ Stream ready, starting playback...
+2026-01-09 14:20:09.227 RedLemon[7571:89707] 🖥️ WindowManager: enterFullscreen() called
+2026-01-09 14:20:09.227 RedLemon[7571:89707]    Window: <SwiftUI.SwiftUIWindow: 0x7fdedcae0dc0>
+2026-01-09 14:20:09.227 RedLemon[7571:89707]    Is fullscreen: 1
+2026-01-09 14:20:09.227 RedLemon[7571:89707]    ⚠️ WindowManager: Already in fullscreen
+2026-01-09 14:20:09.233 RedLemon[7571:89707] 🖼️ Setting up MPV with native macOS video output...
+2026-01-09 14:20:09.237 RedLemon[7571:89707] ✅ MPV initialized with native GPU rendering
+2026-01-09 14:20:09.240 RedLemon[7571:89707] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-09 14:20:09.240 RedLemon[7571:89707] 🎉 Starting watch party sync - Room: event_tt1663662, Host: NO
+2026-01-09 14:20:09.240 RedLemon[7571:89707] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-09 14:20:09.248 RedLemon[7571:89707] 🔄 Starting chat polling for room: event_tt1663662
+2026-01-09 14:20:09.248 RedLemon[7571:89707] 💓 Started playback heartbeat loop
+2026-01-09 14:20:09.248 RedLemon[7571:89707] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-09 14:20:09.248 RedLemon[7571:89707] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-09 14:20:09.248 RedLemon[7571:89707] 🎬🎬🎬 Subtitles: 9
+2026-01-09 14:20:09.248 RedLemon[7571:89707] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Pacific Rim
+2026-01-09 14:20:09.248 RedLemon[7571:89707] 🎬🎬🎬 streamURL: https://chi4-4.download.real-debrid.com/d/HQA2C4NZKTBMO115/P
+2026-01-09 14:20:09.248 RedLemon[7571:89707] 🎬🎬🎬 subtitles: 9
+2026-01-09 14:20:09.249 RedLemon[7571:89707] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-09 14:20:09.252 RedLemon[7571:89808] 🎬 MPV: Current video filename set to: 
+2026-01-09 14:20:09.252 RedLemon[7571:89808] 🎬 MPV loadVideo called with URL: https://chi4-4.download.real-debrid.com/d/HQA2C4NZ (Encoded: https://chi4-4.download.real-debrid.com/d/HQA2C4NZ), autoplay: false, expectedSubs: 3
+2026-01-09 14:20:09.252 RedLemon[7571:89902] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-09 14:20:09.252 RedLemon[7571:89902] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MTQ3OTctODQzNzQxMC56aXA=?token=204DC135-0BC1-4352-BAFF-37F3E9D36BB6
+2026-01-09 14:20:09.253 RedLemon[7571:89790] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-09 14:20:09.254 RedLemon[7571:89808] 🎬 MPV executing: loadfile "https://chi4-4.download.real-debrid.com/d/HQA2C4NZKTBMO115/Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG.mp4"
+2026-01-09 14:20:09.254 RedLemon[7571:89808] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+🔍 Searching SubDL: tt1663662 (movie)
+   ℹ️ Fallback Name: Pacific Rim (No Year)
+✅ Found 10 subtitles from SubDL (Primary)
+🧹 Filtered out 1 mismatched episodes
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi4-4.download.real-debrid.com/d/HQA2C4NZKTBMO115/P
+   Display Title: Pacific Rim
+   Subtitle URLs: 9
+      [0] Pacific Rim.2013.Bluray-1080p-RMXTRAS.en
+      [1] Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD
+      [2] Pacific.Rim.2013.720p.Bluray.X264.Yify
+      [3] Pacific.Rim.2013.720p.BluRay.x264.YIFY
+      [4] Pacific.Rim.2013.720p.BluRay.x264.YIFY
+      [5] Pacific Rim (2013)
+      [6] Pacific.Rim.2013.BRRip.XviD.AC3-SANTi
+      [7] Pacific.Rim.2013.BRRip.XviD.AC3-SANTi
+      [8] Pacific.Rim.2013.HDRip.XviD-AQOS
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🧠 StreamService: Marked hash 0d41e651 as attempted for tt1663662
+☠️ LobbyViewModel deinit
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt1663662, isHost=false
+🔌 Setting up Realtime channel: watch-party:event_tt1663662
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:event_tt1663662, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Pacific Rim
+   IMDB: tt1663662
+   URL: https://chi4-4.download.real-debrid.com/d/HQA2C4NZKTBMO115/P...
+   Hash: 0d41e651...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+📝 Pre-loading external subtitles (Top 3)...
+📡 Fetching metadata for tt1663662 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt1663662]
+🎬 DisplayLink: reportSwap() (throttled)
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MTQ3OTctODQzNzQxMC56aXA= [request-id: AA65D921-E7D3-482E-8944-8312FF026662]
+2026-01-09 14:20:09.513 RedLemon[7571:89707] ⚠️ Playback heartbeat failed: userMessage("No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9")
+2026-01-09 14:20:09.806 RedLemon[7571:90042] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_5858DF9C-504F-4E51-B372-B19E0A2F3BFD.vtt
+2026-01-09 14:20:09.806 RedLemon[7571:90042] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_5858DF9C-504F-4E51-B372-B19
+2026-01-09 14:20:09.825 RedLemon[7571:90042] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 14:20:09.825 RedLemon[7571:90042] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzQ0ODgxLTgwMTk4NS56aXA=?token=204DC135-0BC1-4352-BAFF-37F3E9D36BB6
+📄 Subtitle request: L3N1YnRpdGxlLzM1MTQ3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3514797-8437410.zip
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt1663662/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1663662/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1663662/img...
+📡 SocialService: Updated status - online: Pacific Rim
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"35090862-ed90-11f0-acb7-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRampsdqBpTvB","phx_ref_prev":"GIkmRS0mRAWBpTuh","is_host":false,"joined_at":1767986409.245215,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"35090862-ed90-11f0-acb7-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRS0mRAWBpTuh","phx_ref_prev":"GIkmRRp-O3-BpTuB","is_host":false,"joined_at":1767986407.157105,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRaoGceA6Ajvh","phx_ref_prev":"GIkmRRRBbJw6Ajqh","last_seen":"2026-01-09T19:20:09.252Z","room_id":"event_tt1663662","started_at":"2026-01-09T19:20:09.252Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1663662","watching_title":"Pacific Rim","watching_type":"movie"}]}},"leaves":{"28b9a1a2-ed90-11f0-9a12-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRRRBbJw6Ajqh","phx_ref_prev":"GIkmRRPd82k6AjqB","last_seen":"2026-01-09T19:20:06.741Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 628 seconds
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIkmRampsdqBpTvB)
+⏳ Participant leaving (grace period started): 656daa91-33b4-4688-9135-c982ea52d7c9
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+❌ Supabase API Error: No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9
+✅ Download complete: 42245 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Pacific Rim.2013.Bluray-1080p-RMXTRAS.en.srt
+📦 Extracting specific file: Pacific Rim.2013.Bluray-1080p-RMXTRAS.en.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzQ0ODgxLTgwMTk4NS56aXA= [request-id: A39693EB-E1FD-4623-BBBB-E029C9792807]
+2026-01-09 14:20:10.327 RedLemon[7571:89902] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_7E38984F-95C7-4297-BB46-B4E7A8BB933E.vtt
+2026-01-09 14:20:10.328 RedLemon[7571:89902] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_7E38984F-95C7-4297-BB46-B4E
+2026-01-09 14:20:10.338 RedLemon[7571:89902] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 14:20:10.338 RedLemon[7571:89902] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzQ0ODc3LTc5NDcwNS56aXA=?token=204DC135-0BC1-4352-BAFF-37F3E9D36BB6
+📄 Subtitle request: L3N1YnRpdGxlLzQ0ODgx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/44881-801985.zip
+✅ Download complete: 43984 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: EN Ori.srt
+📦 Extracting specific file: EN Ori.srt
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzQ0ODc3LTc5NDcwNS56aXA= [request-id: 5235E0BE-4E93-4BAE-BE25-815D9CC70596]
+2026-01-09 14:20:10.698 RedLemon[7571:89808] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_1F30E6AB-BC57-46C9-9377-3D0A36060CD1.vtt
+2026-01-09 14:20:10.698 RedLemon[7571:89808] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_1F30E6AB-BC57-46C9-9377-3D0
+2026-01-09 14:20:10.708 RedLemon[7571:89808] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 14:20:10.709 RedLemon[7571:89808] 🔍 MPV track-list/count: 3
+2026-01-09 14:20:10.709 RedLemon[7571:89808] 🔍 Track 0 type: sub
+2026-01-09 14:20:10.709 RedLemon[7571:89808] ✅ Found subtitle track: ID=1, lang=en, title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, external=1
+2026-01-09 14:20:10.709 RedLemon[7571:89808] 🔍 Track 1 type: sub
+2026-01-09 14:20:10.709 RedLemon[7571:89808] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, external=1
+2026-01-09 14:20:10.709 RedLemon[7571:89808] 🔍 Track 2 type: sub
+2026-01-09 14:20:10.709 RedLemon[7571:89808] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2026-01-09 14:20:10.709 RedLemon[7571:89808] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:10.709 RedLemon[7571:89808]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:10.709 RedLemon[7571:89808]    Start[1]: ID=1, Title='Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', Lang='en', Ext=1
+2026-01-09 14:20:10.709 RedLemon[7571:89808]    Start[2]: ID=2, Title='Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', Lang='en', Ext=1
+2026-01-09 14:20:10.710 RedLemon[7571:89808]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2026-01-09 14:20:10.710 RedLemon[7571:89808] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-09 14:20:10.710 RedLemon[7571:89808]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:10.710 RedLemon[7571:89808]    Track: ID=1, Title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, External=1
+2026-01-09 14:20:10.710 RedLemon[7571:89808]    Track: ID=2, Title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, External=1
+2026-01-09 14:20:10.711 RedLemon[7571:89808]    Track: ID=3, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2026-01-09 14:20:11.679 RedLemon[7571:89707] ⏱️ Watch Party: Duration available (7877.9s), triggering ready signal
+2026-01-09 14:20:11.679 RedLemon[7571:89707] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2026-01-09 14:20:11.689 RedLemon[7571:89791] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:20:11.689 RedLemon[7571:89902] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:11.689 RedLemon[7571:89902] 🔍 Track 0 type: sub
+2026-01-09 14:20:11.689 RedLemon[7571:89902] ✅ Found subtitle track: ID=1, lang=en, title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, external=1
+2026-01-09 14:20:11.689 RedLemon[7571:89902] 🔍 Track 1 type: sub
+2026-01-09 14:20:11.689 RedLemon[7571:89791]    Payload keys: type, position, isPlaying, senderId, timestamp
+2026-01-09 14:20:11.689 RedLemon[7571:89902] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, external=1
+2026-01-09 14:20:11.689 RedLemon[7571:89902] 🔍 Track 2 type: sub
+2026-01-09 14:20:11.689 RedLemon[7571:89902] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2026-01-09 14:20:11.690 RedLemon[7571:89902] 🔍 Track 3 type: video
+2026-01-09 14:20:11.690 RedLemon[7571:89902] 🔍 Track 4 type: audio
+2026-01-09 14:20:11.690 RedLemon[7571:89902] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:11.690 RedLemon[7571:89902]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:11.690 RedLemon[7571:89902]    Start[1]: ID=1, Title='Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', Lang='en', Ext=1
+2026-01-09 14:20:11.690 RedLemon[7571:89902]    Start[2]: ID=2, Title='Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', Lang='en', Ext=1
+2026-01-09 14:20:11.690 RedLemon[7571:89902]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2026-01-09 14:20:11.690 RedLemon[7571:90042] ✅ Realtime: Message broadcast complete
+2026-01-09 14:20:11.690 RedLemon[7571:89902] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-09 14:20:11.690 RedLemon[7571:89902]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:11.691 RedLemon[7571:89902]    Track: ID=1, Title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, External=1
+2026-01-09 14:20:11.691 RedLemon[7571:89902]    Track: ID=2, Title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, External=1
+2026-01-09 14:20:11.691 RedLemon[7571:89902]    Track: ID=3, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2026-01-09 14:20:11.695 RedLemon[7571:89707] ✅ Watch Party: READY signal sent successfully
+2026-01-09 14:20:11.711 RedLemon[7571:90042] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:11.711 RedLemon[7571:90042] 🔍 Track 0 type: sub
+2026-01-09 14:20:11.711 RedLemon[7571:90042] ✅ Found subtitle track: ID=1, lang=en, title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, external=1
+2026-01-09 14:20:11.712 RedLemon[7571:90042] 🔍 Track 1 type: sub
+2026-01-09 14:20:11.712 RedLemon[7571:90042] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, external=1
+2026-01-09 14:20:11.712 RedLemon[7571:90042] 🔍 Track 2 type: sub
+2026-01-09 14:20:11.712 RedLemon[7571:90042] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2026-01-09 14:20:11.713 RedLemon[7571:90042] 🔍 Track 3 type: video
+2026-01-09 14:20:11.713 RedLemon[7571:90042] 🔍 Track 4 type: audio
+2026-01-09 14:20:11.713 RedLemon[7571:90042] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:11.713 RedLemon[7571:90042]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:11.713 RedLemon[7571:90042]    Start[1]: ID=1, Title='Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', Lang='en', Ext=1
+2026-01-09 14:20:11.713 RedLemon[7571:90042]    Start[2]: ID=2, Title='Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', Lang='en', Ext=1
+2026-01-09 14:20:11.713 RedLemon[7571:90042]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2026-01-09 14:20:11.714 RedLemon[7571:90042] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 14:20:11.714 RedLemon[7571:90042]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:11.714 RedLemon[7571:90042]    Track: ID=1, Title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, External=1
+2026-01-09 14:20:11.715 RedLemon[7571:90042]    Track: ID=2, Title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, External=1
+2026-01-09 14:20:11.715 RedLemon[7571:90042]    Track: ID=3, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2026-01-09 14:20:11.814 RedLemon[7571:89902] 📨 Realtime: Received broadcast message
+2026-01-09 14:20:11.814 RedLemon[7571:89902]    Payload keys: isPlaying, type, position, senderId, timestamp
+2026-01-09 14:20:11.814 RedLemon[7571:89902] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:20:11.814 RedLemon[7571:89902] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-09 14:20:11.815 RedLemon[7571:89902] ✅ Realtime: syncCallback invoked successfully
+2026-01-09 14:20:11.815 RedLemon[7571:89707] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:20:11.815 RedLemon[7571:89707] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9 (normalized: 656daa91-33b4-4688-9135-c982ea52d7c9)
+2026-01-09 14:20:11.815 RedLemon[7571:89707] ⚠️ Adding 656daa91-33b4-4688-9135-c982ea52d7c9 to connectedGuestIds (presence fallback)
+2026-01-09 14:20:12.736 RedLemon[7571:90042] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:12.736 RedLemon[7571:90042] 🔍 Track 0 type: sub
+2026-01-09 14:20:12.736 RedLemon[7571:90042] ✅ Found subtitle track: ID=1, lang=en, title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, external=1
+2026-01-09 14:20:12.737 RedLemon[7571:90042] 🔍 Track 1 type: sub
+2026-01-09 14:20:12.737 RedLemon[7571:90042] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, external=1
+2026-01-09 14:20:12.737 RedLemon[7571:90042] 🔍 Track 2 type: sub
+2026-01-09 14:20:12.737 RedLemon[7571:90042] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2026-01-09 14:20:12.737 RedLemon[7571:90042] 🔍 Track 3 type: video
+2026-01-09 14:20:12.737 RedLemon[7571:90042] 🔍 Track 4 type: audio
+2026-01-09 14:20:12.738 RedLemon[7571:90042] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:12.738 RedLemon[7571:90042]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:12.738 RedLemon[7571:90042]    Start[1]: ID=1, Title='Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', Lang='en', Ext=1
+2026-01-09 14:20:12.738 RedLemon[7571:90042]    Start[2]: ID=2, Title='Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', Lang='en', Ext=1
+2026-01-09 14:20:12.738 RedLemon[7571:90042]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2026-01-09 14:20:12.738 RedLemon[7571:90042] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 14:20:12.739 RedLemon[7571:90042]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:12.739 RedLemon[7571:90042]    Track: ID=1, Title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, External=1
+2026-01-09 14:20:12.739 RedLemon[7571:90042]    Track: ID=2, Title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, External=1
+2026-01-09 14:20:12.740 RedLemon[7571:90042]    Track: ID=3, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2026-01-09 14:20:12.740 RedLemon[7571:89902] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:12.740 RedLemon[7571:89902] 🔍 Track 0 type: sub
+2026-01-09 14:20:12.741 RedLemon[7571:89902] ✅ Found subtitle track: ID=1, lang=en, title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, external=1
+2026-01-09 14:20:12.741 RedLemon[7571:89902] 🔍 Track 1 type: sub
+2026-01-09 14:20:12.742 RedLemon[7571:89902] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, external=1
+2026-01-09 14:20:12.742 RedLemon[7571:89902] 🔍 Track 2 type: sub
+2026-01-09 14:20:12.742 RedLemon[7571:89902] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2026-01-09 14:20:12.743 RedLemon[7571:89902] 🔍 Track 3 type: video
+2026-01-09 14:20:12.743 RedLemon[7571:89902] 🔍 Track 4 type: audio
+2026-01-09 14:20:12.743 RedLemon[7571:89902] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:12.743 RedLemon[7571:89902]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:12.743 RedLemon[7571:89902]    Start[1]: ID=1, Title='Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', Lang='en', Ext=1
+2026-01-09 14:20:12.744 RedLemon[7571:89902]    Start[2]: ID=2, Title='Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', Lang='en', Ext=1
+2026-01-09 14:20:12.744 RedLemon[7571:89902]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2026-01-09 14:20:12.744 RedLemon[7571:89902] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 14:20:12.744 RedLemon[7571:89902]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:12.744 RedLemon[7571:89902]    Track: ID=1, Title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, External=1
+2026-01-09 14:20:12.745 RedLemon[7571:89902]    Track: ID=2, Title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, External=1
+2026-01-09 14:20:12.745 RedLemon[7571:89902]    Track: ID=3, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2026-01-09 14:20:12.757 RedLemon[7571:89707] 🖱️ Mouse: x=1279/1366 y=398/768 | Exit: 0 Controls: 0 Chat: 1
+2026-01-09 14:20:13.771 RedLemon[7571:89902] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:13.771 RedLemon[7571:89902] 🔍 Track 0 type: sub
+2026-01-09 14:20:13.771 RedLemon[7571:89902] ✅ Found subtitle track: ID=1, lang=en, title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, external=1
+2026-01-09 14:20:13.772 RedLemon[7571:89902] 🔍 Track 1 type: sub
+2026-01-09 14:20:13.772 RedLemon[7571:89902] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, external=1
+2026-01-09 14:20:13.772 RedLemon[7571:89902] 🔍 Track 2 type: sub
+2026-01-09 14:20:13.773 RedLemon[7571:89902] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2026-01-09 14:20:13.773 RedLemon[7571:89902] 🔍 Track 3 type: video
+2026-01-09 14:20:13.774 RedLemon[7571:89902] 🔍 Track 4 type: audio
+2026-01-09 14:20:13.774 RedLemon[7571:89902] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:13.774 RedLemon[7571:89902]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:13.774 RedLemon[7571:89902]    Start[1]: ID=1, Title='Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', Lang='en', Ext=1
+2026-01-09 14:20:13.774 RedLemon[7571:89902]    Start[2]: ID=2, Title='Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', Lang='en', Ext=1
+2026-01-09 14:20:13.774 RedLemon[7571:89902]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2026-01-09 14:20:13.774 RedLemon[7571:89902] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 14:20:13.774 RedLemon[7571:89902]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:13.775 RedLemon[7571:89902]    Track: ID=1, Title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, External=1
+2026-01-09 14:20:13.775 RedLemon[7571:89902]    Track: ID=2, Title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, External=1
+2026-01-09 14:20:13.775 RedLemon[7571:89902]    Track: ID=3, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2026-01-09 14:20:13.775 RedLemon[7571:89902] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:13.775 RedLemon[7571:89902] 🔍 Track 0 type: sub
+2026-01-09 14:20:13.775 RedLemon[7571:89902] ✅ Found subtitle track: ID=1, lang=en, title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, external=1
+2026-01-09 14:20:13.776 RedLemon[7571:89902] 🔍 Track 1 type: sub
+2026-01-09 14:20:13.776 RedLemon[7571:89902] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, external=1
+2026-01-09 14:20:13.776 RedLemon[7571:89902] 🔍 Track 2 type: sub
+2026-01-09 14:20:13.776 RedLemon[7571:89902] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2026-01-09 14:20:13.777 RedLemon[7571:89902] 🔍 Track 3 type: video
+2026-01-09 14:20:13.777 RedLemon[7571:89902] 🔍 Track 4 type: audio
+2026-01-09 14:20:13.777 RedLemon[7571:89902] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:13.777 RedLemon[7571:89902]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:13.777 RedLemon[7571:89902]    Start[1]: ID=1, Title='Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', Lang='en', Ext=1
+2026-01-09 14:20:13.777 RedLemon[7571:89902]    Start[2]: ID=2, Title='Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', Lang='en', Ext=1
+2026-01-09 14:20:13.777 RedLemon[7571:89902]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2026-01-09 14:20:13.777 RedLemon[7571:89902] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 14:20:13.777 RedLemon[7571:89902]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:13.778 RedLemon[7571:89902]    Track: ID=1, Title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, External=1
+2026-01-09 14:20:13.778 RedLemon[7571:89902]    Track: ID=2, Title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, External=1
+2026-01-09 14:20:13.778 RedLemon[7571:89902]    Track: ID=3, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2026-01-09 14:20:14.788 RedLemon[7571:89790] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:14.788 RedLemon[7571:89790] 🔍 Track 0 type: sub
+2026-01-09 14:20:14.788 RedLemon[7571:89790] ✅ Found subtitle track: ID=1, lang=en, title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, external=1
+2026-01-09 14:20:14.789 RedLemon[7571:89790] 🔍 Track 1 type: sub
+2026-01-09 14:20:14.789 RedLemon[7571:89790] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, external=1
+2026-01-09 14:20:14.789 RedLemon[7571:89790] 🔍 Track 2 type: sub
+2026-01-09 14:20:14.789 RedLemon[7571:89790] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2026-01-09 14:20:14.789 RedLemon[7571:89790] 🔍 Track 3 type: video
+2026-01-09 14:20:14.790 RedLemon[7571:89790] 🔍 Track 4 type: audio
+2026-01-09 14:20:14.790 RedLemon[7571:89790] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:14.790 RedLemon[7571:89790]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:14.790 RedLemon[7571:89790]    Start[1]: ID=1, Title='Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', Lang='en', Ext=1
+2026-01-09 14:20:14.790 RedLemon[7571:89790]    Start[2]: ID=2, Title='Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', Lang='en', Ext=1
+2026-01-09 14:20:14.790 RedLemon[7571:89790]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2026-01-09 14:20:14.791 RedLemon[7571:89790] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 14:20:14.791 RedLemon[7571:89790]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:14.791 RedLemon[7571:89790]    Track: ID=1, Title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, External=1
+2026-01-09 14:20:14.791 RedLemon[7571:89790]    Track: ID=2, Title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, External=1
+2026-01-09 14:20:14.792 RedLemon[7571:89790]    Track: ID=3, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2026-01-09 14:20:14.793 RedLemon[7571:89790] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:14.793 RedLemon[7571:89790] 🔍 Track 0 type: sub
+2026-01-09 14:20:14.793 RedLemon[7571:89790] ✅ Found subtitle track: ID=1, lang=en, title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, external=1
+2026-01-09 14:20:14.793 RedLemon[7571:89790] 🔍 Track 1 type: sub
+2026-01-09 14:20:14.794 RedLemon[7571:89790] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, external=1
+2026-01-09 14:20:14.795 RedLemon[7571:89790] 🔍 Track 2 type: sub
+2026-01-09 14:20:14.795 RedLemon[7571:89790] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2026-01-09 14:20:14.796 RedLemon[7571:89790] 🔍 Track 3 type: video
+2026-01-09 14:20:14.796 RedLemon[7571:89790] 🔍 Track 4 type: audio
+2026-01-09 14:20:14.796 RedLemon[7571:89790] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:14.796 RedLemon[7571:89790]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:14.796 RedLemon[7571:89790]    Start[1]: ID=1, Title='Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', Lang='en', Ext=1
+2026-01-09 14:20:14.796 RedLemon[7571:89790]    Start[2]: ID=2, Title='Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', Lang='en', Ext=1
+2026-01-09 14:20:14.796 RedLemon[7571:89790]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2026-01-09 14:20:14.797 RedLemon[7571:89790] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 14:20:14.797 RedLemon[7571:89790]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:14.797 RedLemon[7571:89790]    Track: ID=1, Title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, External=1
+2026-01-09 14:20:14.797 RedLemon[7571:89790]    Track: ID=2, Title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, External=1
+2026-01-09 14:20:14.797 RedLemon[7571:89790]    Track: ID=3, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2026-01-09 14:20:15.808 RedLemon[7571:89790] 🔍 MPV track-list/count: 5
+2026-01-09 14:20:15.808 RedLemon[7571:89790] 🔍 Track 0 type: sub
+2026-01-09 14:20:15.809 RedLemon[7571:89790] ✅ Found subtitle track: ID=1, lang=en, title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, external=1
+2026-01-09 14:20:15.809 RedLemon[7571:89790] 🔍 Track 1 type: sub
+2026-01-09 14:20:15.810 RedLemon[7571:89790] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, external=1
+2026-01-09 14:20:15.810 RedLemon[7571:89790] 🔍 Track 2 type: sub
+2026-01-09 14:20:15.810 RedLemon[7571:89790] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2026-01-09 14:20:15.810 RedLemon[7571:89790] 🔍 Track 3 type: video
+2026-01-09 14:20:15.811 RedLemon[7571:89790] 🔍 Track 4 type: audio
+2026-01-09 14:20:15.811 RedLemon[7571:89790] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:20:15.811 RedLemon[7571:89790]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:20:15.811 RedLemon[7571:89790]    Start[1]: ID=1, Title='Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', Lang='en', Ext=1
+2026-01-09 14:20:15.811 RedLemon[7571:89790]    Start[2]: ID=2, Title='Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', Lang='en', Ext=1
+2026-01-09 14:20:15.811 RedLemon[7571:89790]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2026-01-09 14:20:15.812 RedLemon[7571:89790] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 14:20:15.812 RedLemon[7571:89790]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:20:15.812 RedLemon[7571:89790]    Track: ID=1, Title=Pacific Rim.2013.Bluray-1080p-RMXTRAS.en, External=1
+2026-01-09 14:20:15.813 RedLemon[7571:89790]    Track: ID=2, Title=Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD, External=1
+2026-01-09 14:20:15.813 RedLemon[7571:89790]    Track: ID=3, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+📄 Subtitle request: L3N1YnRpdGxlLzQ0ODc3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/44877-794705.zip
+✅ Download complete: 43537 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Pacific.Rim.2013.720p.BluRay.x264.YIFY.srt
+📦 Extracting specific file: Pacific.Rim.2013.720p.BluRay.x264.YIFY.srt
+✅ Extraction successful
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"13784be0-ed90-11f0-b300-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmRfUT2aE6Ajwh","phx_ref_prev":"GIkmQU0hNhI6Ajkh","last_seen":"2026-01-09T19:20:10.299Z","room_id":"event_tt1663662","started_at":"2026-01-09T19:19:17.343Z","status":"In Lobby: Pacific Rim","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1663662","watching_title":"Pacific Rim","watching_type":"movie"}]}},"leaves":{"13784be0-ed90-11f0-b300-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkmQU0hNhI6Ajkh","phx_ref_prev":"GIkmPKSxD5M6AjTB","last_seen":"2026-01-09T19:19:50.297Z","room_id":"event_tt1663662","started_at":"2026-01-09T19:19:17.343Z","status":"In Lobby: Pacific Rim","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1663662","watching_title":"Pacific Rim","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🚫 Ignoring stale LEAVE event for 656daa91-33b4-4688-9135-c982ea52d7c9 (Tracked: GIkmRampsdqBpTvB != Leaving: GIkmRS0mRAWBpTuh)
+[MPV] (+) Video --vid=1 (*) (h264 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Pacific Rim.2013.Bluray-1080p-RMXTRAS.en' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Pacific.Rim.2013.720p.Bluray.X264.Yify' (webvtt) (external)
+[MPV] File tags:
+[MPV] Comment: Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG
+[MPV] Title: Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎉 EVENT: File loaded/Duration ready (7877.8769999999995s), preparing to seek...
+   Seeking to live edge: 54s
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+🎉 EVENT: File loaded/Duration ready (7877.8769999999995s), preparing to seek...
+   Seeking to live edge: 54s
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Pacific.Rim.2013.720p.Bluray.X264.Yify', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Pacific.Rim.2013.720p.Bluray.X264.Yify (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+🎉 EVENT: File loaded/Duration ready (7877.8769999999995s), preparing to seek...
+   Seeking to live edge: 54s
+📊 Current subtitle track: 3
+ MPV Event: 20
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Pacific Rim.2013.Bluray-1080p-RMXTRAS.en' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Pacific.Rim.2013.720p.Bluray.X264.Yify' (webvtt) (external)
+📊 Current subtitle track: 3
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1767986411.679467,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt1663662"}
+ MPV Event: 20
+🎬 DisplayLink: reportSwap() (throttled)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.67s), skipping redundant seek
+📝 Started watch history tracking
+⚠️ onVideoReady called again - ignoring to prevent loops
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+[MPV] Using hardware decoding (videotoolbox).
+ MPV Event: 17
+[MPV] VO: [libmpv] 1920x1080 videotoolbox[nv12]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+🎬 DisplayLink: reportSwap() (throttled)
+ MPV Event: 18
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+🎬 DisplayLink: reportSwap() (throttled)
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Pacific Rim.2013.Bluray-1080p-RMXTRAS.en', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Pacific.Rim.2013.720p.Bluray.X264.Yify', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Pacific.Rim.2013.720p.Bluray.X264.Yify (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+📊 Current subtitle track: 3
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📊 Current subtitle track: 3
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt1663662": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 621 seconds
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+💓 Heartbeat sent
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)

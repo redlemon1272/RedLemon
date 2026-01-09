@@ -1,0 +1,1620 @@
+2026-01-09 15:45:20.308 RedLemon[49804:280113] 🪟 Set initial window to expanded size: (0.0, 141.0, 1280.0, 634.0)
+2026-01-09 15:45:20.308 RedLemon[49804:280113] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-09 15:45:20.358 RedLemon[49804:280113] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-09 15:45:20.389 RedLemon[49804:280113] ✅ Playback state reset complete - starting in browse view
+2026-01-09 15:45:20.389 RedLemon[49804:280113] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-09 15:45:20.389 RedLemon[49804:280113] 🧪 Testing Profile: debug
+2026-01-09 15:45:20.390 RedLemon[49804:280119] 📂 Loaded 5 credential(s) from cache
+2026-01-09 15:45:20.391 RedLemon[49804:280113] ✅ Keychain: Found stored username: lemontom
+2026-01-09 15:45:20.391 RedLemon[49804:280113] 🔍 Supabase: Looking up user 'lemontom' in database...
+2026-01-09 15:45:20.391 RedLemon[49804:280119] 🔍 SupabaseClient: Looking up user by username 'lemontom'
+2026-01-09 15:45:21.128 RedLemon[49804:280134] 📡 SupabaseClient: User lookup response received (399 bytes)
+2026-01-09 15:45:21.132 RedLemon[49804:280134] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-09 15:45:21.132 RedLemon[49804:280134] 👤 SupabaseClient: Found user - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-09 15:45:21.153 RedLemon[49804:280113] ✅ AUTH SUCCESS: User authenticated - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-09 15:45:21.153 RedLemon[49804:280113] 🎯 AppState: currentUsername=lemontom, currentUserId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 15:45:21.153 RedLemon[49804:280113] 🏁 AUTH COMPLETE: Final state - username=lemontom, userId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 15:45:21.153 RedLemon[49804:280113] 🚀 RedLemon: Starting HTTP server...
+2026-01-09 15:45:21.153 RedLemon[49804:280113] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/RedLemon-Native
+2026-01-09 15:45:21.166 RedLemon[49804:280113] ✅ RedLemon: HTTPServer instance created
+2026-01-09 15:45:21.167 RedLemon[49804:280134] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"F2B128FC-55C2-4934-8B97-FBCB7764C403","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-09 15:45:23.209 RedLemon[49804:280113] ✅ RedLemon: Server marked as ready
+2026-01-09 15:45:23.234 RedLemon[49804:280113] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-09 15:45:23.234 RedLemon[49804:280113] 🔍 Performing startup checks...
+2026-01-09 15:45:23.235 RedLemon[49804:280113] ✅ Username-based authentication ready
+2026-01-09 15:45:24.713 RedLemon[49804:280113] 🔍 Performing startup checks...
+2026-01-09 15:45:24.713 RedLemon[49804:280113] ✅ Username-based authentication ready
+2026-01-09 15:45:26.351 RedLemon[49804:280113] 🔄 Checking for app updates...
+2026-01-09 15:45:33.418 RedLemon[49804:280136] 📡 StreamService: Fetching metadata for tt1591095...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1493 with 411 movies
+🆕 [EventsConfig] Server has newer version 1493 (cached: 1492)
+💾 [EventsConfig] Cached new version 1493
+✅ [EventsView] Loaded 411 movies from config version 1493
+🗓 AppState: Updated schedule epoch to 2026-01-07 16:47:45 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 3924 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1591095/img (651299 bytes)
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 3923 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 3923 seconds
+💰 LicenseManager: Starting hybrid subscription check...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":2,"assets_found":[{"chain":"base","currency":"ETH","amount":86964473127,"amountFloat":8.6964473127e-8}],"prices":{"btc":90400,"eth":3073.965},"logs":[],"rpc_logs":["Scanning btc address: bc1qmlnzfps4fg3lupud249k884zl94u7f569wnt43","BTC Response: {\"address\":\"bc1qmlnzfps4fg3lupud249k884zl94u7f569wnt43\",\"chain_stats\":{\"funded_txo_count\":0,\"funded_...","Scanning evm address: 0x9505FE7C8de86F229CD8F0eE4B79108D3d3471D1","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0x143f7c8d27","arb eth_getBalance: 0x0"]}}
+👤 LicenseManager: Profile expiry: Optional(2026-01-18 17:23:32 +0000)
+🎉 Subscription updated! Expires: 2026-01-18 17:23:32 +0000
+💰 LicenseManager: Starting hybrid subscription check...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":2,"assets_found":[{"chain":"base","currency":"ETH","amount":86964473127,"amountFloat":8.6964473127e-8}],"prices":{"btc":90400,"eth":3074.045},"logs":[],"rpc_logs":["Scanning btc address: bc1qmlnzfps4fg3lupud249k884zl94u7f569wnt43","BTC Response: {\"address\":\"bc1qmlnzfps4fg3lupud249k884zl94u7f569wnt43\",\"chain_stats\":{\"funded_txo_count\":0,\"funded_...","Scanning evm address: 0x9505FE7C8de86F229CD8F0eE4B79108D3d3471D1","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0x143f7c8d27","arb eth_getBalance: 0x0"]}}
+👤 LicenseManager: Profile expiry: Optional(2026-01-18 17:23:32 +0000)
+🎉 Subscription updated! Expires: 2026-01-18 17:23:32 +0000
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.165s (RTT: 141ms)
+   Local:  2026-01-09 20:45:26 +0000
+   Server: 2026-01-09 20:45:26 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt3501632/img (956349 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0114369/img (143272 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1293847/img (1002992 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt2333784/img (942633 bytes)
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 3912 seconds
+[2026-01-09T20:45:33Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Insidious (Live: true)
+   Event start time: 2026-01-09 19:58:45 +0000
+   Event duration: 6720.0s
+   Current time: 2026-01-09 20:45:33 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt1591095
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY - Re-unlocking for fresh URL 🔑
+   Stored Hash: dee2c4ce76d15842090b682dd6f2e4052ccd5f03
+   Cached URL: https://chi7-4.download.real-d...
+[2026-01-09T20:45:33Z] [INFO] [StreamService.swift:90] 🎬 StreamService: Starting resolution for: Insidious
+[ INFO ] GET /api/metadata/meta/movie/tt1591095 [request-id: B76D087F-29AE-4AC8-B2B4-9EFEEF4201ED]
+2026-01-09 15:45:33.579 RedLemon[49804:280134] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-09 15:45:33.579 RedLemon[49804:280134] ✅ StreamService: Metadata loaded: Insidious
+2026-01-09 15:45:33.579 RedLemon[49804:280134] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-09 15:45:33.579 RedLemon[49804:280134] ⚡️ StreamResolver: Resolving streams for tt1591095 (S0E0)
+2026-01-09 15:45:33.723 RedLemon[49804:280136]    📅 Filtering by year: 2010
+2026-01-09 15:45:33.929 RedLemon[49804:280118] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-09 15:45:33.929 RedLemon[49804:280118] 🔍 ProviderManager: Fetching streams for tt1591095...
+2026-01-09 15:45:33.931 RedLemon[49804:280118] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-09 15:45:33.931 RedLemon[49804:280134] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-09 15:45:33.931 RedLemon[49804:280118] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-09 15:45:33.931 RedLemon[49804:280118] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt1591095.json...
+2026-01-09 15:45:33.931 RedLemon[49804:280134] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridApiKey23A222,                     0ebridProvider23A2ealDebrid27D/stream/movie/tt1591095.json
+2026-01-09 15:45:33.932 RedLemon[49804:280118] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt1591095.json
+2026-01-09 15:45:33.932 RedLemon[49804:280134] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA2                     0ebridProvider23A2ealDebrid27D/stream/movie/tt1591095.json
+2026-01-09 15:45:33.940 RedLemon[49804:280243] 📡 Torrentio: HTTP 200, received 20926 bytes
+2026-01-09 15:45:33.951 RedLemon[49804:280243] ✅ Torrentio: Parsed 39 streams from 39 raw
+2026-01-09 15:45:37.924 RedLemon[49804:280243] ✅ DebridSearch: Parsed 3 streams
+2026-01-09 15:45:37.925 RedLemon[49804:280243] ✅ ProviderManager: Fetched 43 raw, returning 43 unique streams
+2026-01-09 15:45:37.925 RedLemon[49804:280243] 📦 StreamResolver: Received 43 raw streams, bucketing...
+2026-01-09 15:45:38.862 RedLemon[49804:280136] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-09 15:45:38.862 RedLemon[49804:280136] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-09 15:45:38.862 RedLemon[49804:280134] 🔍 DEBUG: Processing subtitle URL: /subtitle/3110447-3122314.zip
+2026-01-09 15:45:38.862 RedLemon[49804:280243] 🔍 DEBUG: Processing subtitle URL: /subtitle/3127735-3141017.zip
+2026-01-09 15:45:38.862 RedLemon[49804:280136] 🔍 DEBUG: Processing subtitle URL: /subtitle/3118262-3130618.zip
+2026-01-09 15:45:38.862 RedLemon[49804:280120] 🔍 DEBUG: Processing subtitle URL: /subtitle/2957054-2951218.zip
+2026-01-09 15:45:38.863 RedLemon[49804:280134] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:38.863 RedLemon[49804:280243] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:38.863 RedLemon[49804:280136] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:38.863 RedLemon[49804:280120] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:38.863 RedLemon[49804:280120] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NTcwNTQtMjk1MTIxOC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:38.863 RedLemon[49804:280136] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTgyNjItMzEzMDYxOC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:38.863 RedLemon[49804:280243] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjc3MzUtMzE0MTAxNy56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:38.863 RedLemon[49804:280134] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTA0NDctMzEyMjMxNC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:38.863 RedLemon[49804:280120] 🔍 DEBUG: Processing subtitle URL: /subtitle/2957053-2951219.zip
+2026-01-09 15:45:38.864 RedLemon[49804:280120] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:38.864 RedLemon[49804:280120] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NTcwNTMtMjk1MTIxOS56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:39.253 RedLemon[49804:280136] ✅ Persisted stream selection to room event_tt1591095
+2026-01-09 15:45:39.888 RedLemon[49804:280113] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1591095/img
+2026-01-09 15:45:39.889 RedLemon[49804:280113] ⏳ Background art loading...
+2026-01-09 15:45:39.889 RedLemon[49804:280113] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1591095/img
+2026-01-09 15:45:39.890 RedLemon[49804:280113] ⏳ Logo loading...
+2026-01-09 15:45:39.947 RedLemon[49804:280113] ✅ Background art loaded successfully
+2026-01-09 15:45:39.949 RedLemon[49804:280113]    Quality: 1080p
+2026-01-09 15:45:39.949 RedLemon[49804:280113]    Mode: watchParty
+2026-01-09 15:45:39.949 RedLemon[49804:280113] 📡 Fetching metadata for tt1591095...
+2026-01-09 15:45:40.019 RedLemon[49804:280113] ✅ Logo loaded successfully
+2026-01-09 15:45:40.021 RedLemon[49804:280113] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-09 15:45:40.021 RedLemon[49804:280113] 📝 GUEST: Extracted filename='maxhd-i-1080p.mkv' (len=17), sourceQuality=nil, selectedQuality=1080p
+💾 Cache SET: Metadata[meta_movie_tt1591095]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt1591095.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+⚠️ MediaFusion: HTTP 418
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+✅ Comet: Parsed 1 valid streams
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt1591095.json
+✅ Metadata fetched from Cinemeta for tt1591095: Insidious (2010)
+🎯 Target title for matching: Insidious
+   📅 Year filter (2010): 43 → 42 streams
+   🚫 RESOLVER BLOCKING non-English audio: Insidious.2010.MULTi.VFF.2160p.10bit.4KLight.DV.HDR.BluRay.TrueHD.Atmos.7.1.x265-QTZ.mkv
+👤 0 💾 6.9 GB ⚙️ Torrent9
+Multi Audio / 🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Insidious (2010) [H265.2160p] Lektor PL [AC3 2.0] M80.mkv
+👤 0 💾 4.45 GB ⚙️ BestTorrents
+🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Insidious DVDRIP FRENCH 2011
+👤 1 💾 701.8 MB ⚙️ Torrent9
+🇫🇷 (Audio)
+   🎵 RESOLVER FILTERED audio language: 42 → 39 streams
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt1591095 (movie)
+   ℹ️ Fallback Name: Insidious (2010)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Attached best sub for 'Insidious.2010.UHD.BluRay.2160...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 UHD BluRay 2160...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.REPACK.4K.HDR.D...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 UHD 4K BluRay 2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Астрал / Insidious [2010 UHD B...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious(Sobrenatural).2010.2...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 2160p BluRay
+👤 ...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for 'Kolekcja Naznaczony 2010-2023 ...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.2160p.BDRip.AVC...': Insidious [2011] BDRip...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 1080p UHD BluRa...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious (2010) 1080p BrRip x...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 BluRay 1080p DT...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.1080p.BluRay.x2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious Chapter 1 2 3 4 - Ho...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidius Saga (2010-2023) 1080...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious Complete 5 Movie Col...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.1080p.REMUX.ENG...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 BluRay 1080p DT...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for 'Insidious (2010) 1080p BluRay ...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious (2010) MULTi-VF2.108...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious (2010) 720p BrRip x2...': Insidious.2010.720p.BluRay.10B...
+✅ StreamResolver: Attached best sub for '101 Horror Movies Mega Pack Mi...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious (2010) 2160p BluRay ...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.4K.HDR.DV.2160p...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.2160p.Dolby.Vis...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.2160p.Dolby.Vis...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 1080p UHD BluRa...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 1080p BluRay H2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.1080p.Bluray.x2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 1080p BluRay H2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious 2011 1080p AMZN WEB-...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 1080p BluRay x2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.Collection.NORDiC.10...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.Bluray.1080p.DT...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for '31 Nights Of Halloween Horror ...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.720p.10bit.BluR...': Insidious.2010.720p.BluRay.10B...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.1080p.Bluray.x2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.BluRay.1080p.DT...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 BluRay 1080p DT...': Insidious.2010.1080p.BluRay.Re...
+   --- Processing Bucket: 2160p (Input: 13) ---
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   ✅ Bucket 2160p Final Count: 13
+   --- Processing Bucket: 1080p (Input: 22) ---
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   ✅ Bucket 1080p Final Count: 22
+   --- Processing Bucket: 720p (Input: 3) ---
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 720p BrRip x264 - 650MB - YIFY
+👤 30 💾 650.49 MB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 720p BrRip x264 - 650MB - YIFY
+👤 30 💾 650.49 MB ⚙️ ThePirateBay
+   ✅ Bucket 720p Final Count: 3
+   --- Processing Bucket: 480p (Input: 1) ---
+   ✅ Bucket 480p Final Count: 1
+📦 2160p Primary: Insidious.2010.REPACK.4K.HDR.DV.2160p BDRemux Ita Eng x265-NAHOM
+👤 2 💾 45.07 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+📦 1080p Primary: Insidious Chapter 1 2 3 4 - Horror Eng Ita 2011-2018 1080p
+Insidious Chapter 1, 2, 3, 4, Collection/01 Insidious Chapter 1 - 2011 Eng Ita Multi-Subs 1080p [H264-mp4].mp4
+👤 3 💾 3.27 GB ⚙️ ThePirateBay
+Multi Subs / 🇬🇧 / 🇮🇹
+📦 720p Primary: 31 Nights Of Halloween Horror Pack
+Insidious 1 & 2/Insidious (2010)/Insidious(2010).720p.BrRip.5.1Ch AAC.ArianFX.mp4
+👤 10 💾 726.62 MB ⚙️ MagnetDL
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: dee2c4ce76d15842090b682dd6f2e4052ccd5f03
+✅ StreamService: Found requested stream hash! Locking selection.
+[2026-01-09T20:45:38Z] [INFO] [StreamService.swift:261] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+🚫 StreamService: Applying Extended Cut Filter (Event Mode)
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Insidious.2010.1080p.Bluray.x264-MaxHD
+👤 7 💾 7.94 GB ⚙️ RARBG
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/dee2c4ce76d15842090b682dd6f2e4052ccd5f03/null/2/maxhd-i-1080p.mkv
+✅ StreamService: Resolved to: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/dee2c4ce76d15842090b682dd6f2e4052ccd5f03/null/2/maxhd-i-1080p.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Insidious.2010.1080p.Bluray.x264-MaxHD
+👤 7 💾 7.94 GB ⚙️ RARBG
+📊 Stream Size: 7.94 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+   ✅ Fresh URL obtained: https://torrentio.strem.fun/resolve/real...
+   ✅ Database updated with fresh URL
+
+🎬 Live event - calculating position: 2814.9311357736588 seconds
+   Event start time: 2026-01-09 19:58:45 +0000
+   Current time: 2026-01-09 20:45:39 +0000
+   Room createdAt: 2026-01-09 19:58:45 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 2814.9311357736588
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Insidious
+✅ Cache HIT: Metadata[meta_movie_tt1591095]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 06C26734-DD5B-4A2E-A653-17DD5973DEFC]
+2026-01-09 15:45:40.386 RedLemon[49804:280113] ✅ GUEST: Found 10 subtitles
+2026-01-09 15:45:40.393 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7, subtitles: 10
+2026-01-09 15:45:40.454 RedLemon[49804:280113] ✅ Stream ready, starting playback...
+2026-01-09 15:45:40.454 RedLemon[49804:280113] 🖥️ WindowManager: enterFullscreen() called
+2026-01-09 15:45:40.454 RedLemon[49804:280113]    Window: <SwiftUI.SwiftUIWindow: 0x7f7a3b5fd0e0>
+2026-01-09 15:45:40.454 RedLemon[49804:280113]    Is fullscreen: 0
+2026-01-09 15:45:40.454 RedLemon[49804:280113]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-09 15:45:40.523 RedLemon[49804:280113] 🖼️ Setting up MPV with native macOS video output...
+2026-01-09 15:45:40.527 RedLemon[49804:280113] ✅ MPV initialized with native GPU rendering
+2026-01-09 15:45:40.533 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-09 15:45:40.533 RedLemon[49804:280113] 🎉 Starting watch party sync - Room: event_tt1591095, Host: NO
+2026-01-09 15:45:40.533 RedLemon[49804:280113] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-09 15:45:40.602 RedLemon[49804:280113] 🔄 Starting chat polling for room: event_tt1591095
+2026-01-09 15:45:40.602 RedLemon[49804:280113] 💓 Started playback heartbeat loop
+2026-01-09 15:45:40.602 RedLemon[49804:280113] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-09 15:45:40.602 RedLemon[49804:280113] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-09 15:45:40.602 RedLemon[49804:280113] 🎬🎬🎬 Subtitles: 10
+2026-01-09 15:45:40.603 RedLemon[49804:280113] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Insidious
+2026-01-09 15:45:40.603 RedLemon[49804:280113] 🎬🎬🎬 streamURL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7
+2026-01-09 15:45:40.603 RedLemon[49804:280113] 🎬🎬🎬 subtitles: 10
+2026-01-09 15:45:40.603 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-09 15:45:40.615 RedLemon[49804:280243] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-09 15:45:40.615 RedLemon[49804:280136] 🎬 MPV: Current video filename set to: 
+2026-01-09 15:45:40.615 RedLemon[49804:280243] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjc3MzUtMzE0MTAxNy56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:40.615 RedLemon[49804:280136] 🎬 MPV loadVideo called with URL: https://torrentio.strem.fun/resolve/realdebrid/K67 (Encoded: https://torrentio.strem.fun/resolve/realdebrid/K67), autoplay: false, expectedSubs: 3
+2026-01-09 15:45:40.615 RedLemon[49804:280136] 🎬 MPV executing: loadfile "https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/dee2c4ce76d15842090b682dd6f2e4052ccd5f03/null/2/maxhd-i-1080p.mkv"
+2026-01-09 15:45:40.616 RedLemon[49804:280136] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+2026-01-09 15:45:40.620 RedLemon[49804:280120] 🔐 Signed request to /rpc/room_heartbeat
+🔍 Searching SubDL: tt1591095 (movie)
+   ℹ️ Fallback Name: Insidious (2010)
+✅ Found 10 subtitles from SubDL (Primary)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7
+   Display Title: Insidious
+   Subtitle URLs: 10
+      [0] Insidious.2010.1080p.BluRay.x265-RARBG
+      [1] Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai
+      [2] Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR
+      [3] Insidious.2010.1080p.BluRay.Remux.DTS-HD.MA5.1.AVC-FraMeSToR
+      [4] Insidious.2010.720p.BluRay.10Bit.6CH.HEVC.x265-PSA
+      [5] Insidious [2011] BDRip
+      [6] Insidious 2010 BDRip Xvid-LTRG
+      [7] Insidious 2010 RETAIL BDRip XviD AC3-SANTi
+      [8] Insidious 2011 RETAIL BDRip XviD AC3-SANTi
+      [9] Insidious.2010.REAL.REPACK.BDRip.XviD-TARGET
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🧠 StreamService: Marked hash dee2c4ce as attempted for tt1591095
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt1591095, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt1591095
+   Role: Guest
+   User ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+📡 Connection state: connecting
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Joined channel: realtime:watch-party:event_tt1591095
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Video ready - hiding poster
+✅ Video ready (Watch Party) - Keeping poster visible until Sync Message
+🎉 EVENT: Recalculating seek time at video ready (Drift: 2815.60s)
+   Event started at: 2026-01-09 19:58:45 +0000
+   Current time: 2026-01-09 20:45:40 +0000
+   Elapsed: 2815s
+   Seeking to: 2815s
+🎯 IMMEDIATE RESUME: Seeking to 2815s without delay
+📝 Started watch history tracking
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Insidious
+   IMDB: tt1591095
+   URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7...
+   Hash: dee2c4ce...
+   Source: Unknown
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+⚠️ MPVPlayerViewModel: Buffering finished during Event Blind Seek (Duration 0) - Ignoring Error Trigger
+📝 Pre-loading external subtitles (Top 3)...
+⚡️ PlaybackService: releasing sleep assertion
+📡 Fetching metadata for tt1591095 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt1591095]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMjc3MzUtMzE0MTAxNy56aXA= [request-id: 321E0108-34C4-4BB5-B4BA-74FDC8A764E1]
+2026-01-09 15:45:40.905 RedLemon[49804:280113] ⚠️ Playback heartbeat failed: userMessage("Invalid cryptographic signature")
+2026-01-09 15:45:40.955 RedLemon[49804:280113] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1591095/img
+2026-01-09 15:45:40.957 RedLemon[49804:280113] ⏳ Background art loading...
+2026-01-09 15:45:40.958 RedLemon[49804:280113] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1591095/img
+2026-01-09 15:45:40.959 RedLemon[49804:280113] ⏳ Logo loading...
+2026-01-09 15:45:41.057 RedLemon[49804:280113] ✅ Background art loaded successfully
+2026-01-09 15:45:41.057 RedLemon[49804:280113] ✅ Logo loaded successfully
+2026-01-09 15:45:41.124 RedLemon[49804:280120] ✅ Subtitle 1 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_11EBBBC4-5AAD-44CC-8A3C-1EB168C41274.vtt
+2026-01-09 15:45:41.125 RedLemon[49804:280120] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_11EBBBC4-5AAD-44CC-8A3C-1EB
+2026-01-09 15:45:41.125 RedLemon[49804:280120] ❌ Failed to load subtitle, MPV error code: -12
+2026-01-09 15:45:41.125 RedLemon[49804:280120] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTgyNjItMzEzMDYxOC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+📄 Subtitle request: L3N1YnRpdGxlLzMxMjc3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3127735-3141017.zip
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+📨 Received: {"ref":"6555D090-B1DB-42C2-B23E-54D6B6785907","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"29122d84-ed9c-11f0-a1d4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkq8Gzfjtk6As5D","is_host":false,"joined_at":1767991540.597313,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt1591095"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 3905 seconds
+✅ Got background: https://images.metahub.space/background/medium/tt1591095/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1591095/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1591095/img...
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIkq8Gzfjtk6As5D)
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+[MPV] https: HTTP error 502 Bad Gateway
+[MPV] Failed to open https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/dee2c4ce76d15842090b682dd6f2e4052ccd5f03/null/2/maxhd-i-1080p.mkv.
+❌ Supabase API Error: Invalid cryptographic signature
+[MPV] 
+⚠️ MPV: END_FILE event but not EOF (reason: 4)
+🚨 MPVPlayerViewModel: Critical MPV Error detected: Playback Error (Code: 4) - Triggering Failover
+❌ MPVPlayerView: Playback error detected: Playback Error (Code: 4). Triggering fallback...
+⚠️ PlayerVM: Handling playback error: Playback Error (Code: 4)
+🚫 PlayerVM: No more streams in queue. Playback failed.
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+✅ Download complete: 22879 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Insidious.2010.1080p.BluRay.x265-RARBG.srt
+📦 Extracting specific file: Insidious.2010.1080p.BluRay.x265-RARBG.srt
+[MPV] youtube-dl failed: not found or not enough permissions
+⚠️ MPVPlayerViewModel: Buffering finished during Event Blind Seek (Duration 0) - Ignoring Error Trigger
+✅ Extraction successful
+🧹 Cleaning up MPV player...
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMTgyNjItMzEzMDYxOC56aXA= [request-id: 7B191E03-53C9-49AF-A965-23C71761B7B1]
+2026-01-09 15:45:41.135 RedLemon[49804:280113] 🛑 Stopped playback heartbeat loop
+2026-01-09 15:45:41.153 RedLemon[49804:280120] ⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to 2815.6s
+2026-01-09 15:45:41.798 RedLemon[49804:280120] ✅ Subtitle 2 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_D0B50E84-5A94-49D0-9D22-24F47B13E299.vtt
+2026-01-09 15:45:41.798 RedLemon[49804:280120] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_D0B50E84-5A94-49D0-9D22-24F
+2026-01-09 15:45:41.798 RedLemon[49804:280120] ❌ Failed to load subtitle, MPV error code: -12
+2026-01-09 15:45:41.798 RedLemon[49804:280120] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTA0NDctMzEyMjMxNC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+📄 Subtitle request: L3N1YnRpdGxlLzMxMTgy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3118262-3130618.zip
+🗑️ Invalidated all active timers
+⚠️ Video duration not available yet (0.0s), performing BLIND SEEK to 2815s...
+🎯 Executing immediate seek to 2815s...
+✅ Left room in database: event_tt1591095
+🧹 Cleaning up Realtime channel for room: event_tt1591095
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Resumed playback after seek to 2815s
+🛑 Event polling task cancelled cleanly
+✅ MPV stop completed with clean event loop exit
+✅ Video ready - hiding poster
+🎉 EVENT: Recalculating seek time at video ready (Drift: 2816.38s)
+   Event started at: 2026-01-09 19:58:45 +0000
+   Current time: 2026-01-09 20:45:41 +0000
+   Elapsed: 2816s
+   Seeking to: 2816s
+🎯 IMMEDIATE RESUME: Seeking to 2816s without delay
+📝 Started watch history tracking
+⚡️ PlaybackService: releasing sleep assertion
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"29122d84-ed9c-11f0-a1d4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkq8Gzfjtk6As5D","is_host":false,"joined_at":1767991540.597313,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Unknown event: phx_close
+✅ Download complete: 48123 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai.srt
+📦 Extracting specific file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMTA0NDctMzEyMjMxNC56aXA= [request-id: 2C2CBFD6-F7EA-4A0D-94CB-D5C83910E555]
+2026-01-09 15:45:41.902 RedLemon[49804:280119] ⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to 2816.4s
+2026-01-09 15:45:42.214 RedLemon[49804:280136] ✅ Subtitle 3 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_7E27CDDE-5565-4600-A546-A5A4B293A21B.vtt
+2026-01-09 15:45:42.214 RedLemon[49804:280136] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_7E27CDDE-5565-4600-A546-A5A
+2026-01-09 15:45:42.214 RedLemon[49804:280136] ❌ Failed to load subtitle, MPV error code: -12
+2026-01-09 15:45:42.214 RedLemon[49804:280136] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:42.214 RedLemon[49804:280136] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:42.215 RedLemon[49804:280136]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:42.215 RedLemon[49804:280136] ✅ SubtitleService: Scanned 1 tracks (Attempt 1/5)
+2026-01-09 15:45:42.215 RedLemon[49804:280136]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:43.251 RedLemon[49804:280120] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:43.251 RedLemon[49804:280120] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:43.251 RedLemon[49804:280120]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:43.251 RedLemon[49804:280120] ✅ SubtitleService: Scanned 1 tracks (Attempt 2/5)
+2026-01-09 15:45:43.251 RedLemon[49804:280120]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:44.283 RedLemon[49804:280120] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:44.283 RedLemon[49804:280120] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:44.283 RedLemon[49804:280120]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:44.283 RedLemon[49804:280120] ✅ SubtitleService: Scanned 1 tracks (Attempt 3/5)
+2026-01-09 15:45:44.283 RedLemon[49804:280120]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:44.648 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7, subtitles: 10
+2026-01-09 15:45:44.689 RedLemon[49804:280113] 🖼️ Setting up MPV with native macOS video output...
+2026-01-09 15:45:44.693 RedLemon[49804:280113] ✅ MPV initialized with native GPU rendering
+2026-01-09 15:45:44.696 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-09 15:45:44.696 RedLemon[49804:280113] 🎉 Starting watch party sync - Room: event_tt1591095, Host: NO
+2026-01-09 15:45:44.696 RedLemon[49804:280113] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-09 15:45:44.698 RedLemon[49804:280113] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1591095/img
+2026-01-09 15:45:44.698 RedLemon[49804:280113] ⏳ Background art loading...
+2026-01-09 15:45:44.699 RedLemon[49804:280113] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1591095/img
+2026-01-09 15:45:44.699 RedLemon[49804:280113] ⏳ Logo loading...
+2026-01-09 15:45:44.732 RedLemon[49804:280113] ✅ Background art loaded successfully
+2026-01-09 15:45:44.733 RedLemon[49804:280113]    Quality: 1080p
+2026-01-09 15:45:44.733 RedLemon[49804:280113]    Mode: watchParty
+2026-01-09 15:45:44.733 RedLemon[49804:280113] 📡 Fetching metadata for tt1591095...
+2026-01-09 15:45:44.793 RedLemon[49804:280113] ✅ Logo loaded successfully
+2026-01-09 15:45:44.795 RedLemon[49804:280113] 🛑 Stopped playback heartbeat loop
+2026-01-09 15:45:44.795 RedLemon[49804:280113] 💓 Started playback heartbeat loop
+2026-01-09 15:45:44.795 RedLemon[49804:280113] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-09 15:45:44.795 RedLemon[49804:280113] 🎬🎬🎬 About to call loadStream - isInWatchParty: NO
+2026-01-09 15:45:44.795 RedLemon[49804:280113] 🎬🎬🎬 Subtitles: 10
+2026-01-09 15:45:44.795 RedLemon[49804:280113] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Insidious
+2026-01-09 15:45:44.795 RedLemon[49804:280113] 🎬🎬🎬 streamURL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7
+2026-01-09 15:45:44.795 RedLemon[49804:280113] 🎬🎬🎬 subtitles: 10
+2026-01-09 15:45:44.795 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-09 15:45:44.826 RedLemon[49804:280119] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-09 15:45:44.826 RedLemon[49804:280119] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjc3MzUtMzE0MTAxNy56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:44.826 RedLemon[49804:280419] 🎬 MPV: Current video filename set to: 
+2026-01-09 15:45:44.826 RedLemon[49804:280419] 🎬 MPV loadVideo called with URL: https://torrentio.strem.fun/resolve/realdebrid/K67 (Encoded: https://torrentio.strem.fun/resolve/realdebrid/K67), autoplay: true, expectedSubs: 3
+2026-01-09 15:45:44.827 RedLemon[49804:280419] 🎬 MPV executing: loadfile "https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/dee2c4ce76d15842090b682dd6f2e4052ccd5f03/null/2/maxhd-i-1080p.mkv"
+2026-01-09 15:45:44.827 RedLemon[49804:280118] ✅ StreamService: Using provided metadata: Insidious
+2026-01-09 15:45:44.827 RedLemon[49804:280118] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-09 15:45:44.827 RedLemon[49804:280419] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+2026-01-09 15:45:44.827 RedLemon[49804:280118] ⚡️ StreamResolver: Resolving streams for tt1591095 (S0E0)
+📄 Subtitle request: L3N1YnRpdGxlLzMxMTA0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3110447-3122314.zip
+⚠️ Video duration not available yet (0.0s), performing BLIND SEEK to 2816s...
+🎯 Executing immediate seek to 2816s...
+✅ Download complete: 22872 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai OCR.srt
+📦 Extracting specific file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai OCR.srt
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Resumed playback after seek to 2816s
+⚠️ onVideoReady called again - ignoring to prevent loops
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 3902 seconds
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7
+   Display Title: Insidious
+   Subtitle URLs: 10
+      [0] Insidious.2010.1080p.BluRay.x265-RARBG
+      [1] Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai
+      [2] Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR
+      [3] Insidious.2010.1080p.BluRay.Remux.DTS-HD.MA5.1.AVC-FraMeSToR
+      [4] Insidious.2010.720p.BluRay.10Bit.6CH.HEVC.x265-PSA
+      [5] Insidious [2011] BDRip
+      [6] Insidious 2010 BDRip Xvid-LTRG
+      [7] Insidious 2010 RETAIL BDRip XviD AC3-SANTi
+      [8] Insidious 2011 RETAIL BDRip XviD AC3-SANTi
+      [9] Insidious.2010.REAL.REPACK.BDRip.XviD-TARGET
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt1591095, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+🎬 PlayerVM: Starting playback for: Insidious
+✅ Cache HIT: Metadata[meta_movie_tt1591095]
+🔌 Setting up Realtime channel: watch-party:event_tt1591095
+🧹 Cleaning up MPV player...
+   Role: Guest
+   User ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt1591095
+📡 Connection state: connected
+✅ Realtime channel setup complete
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+🗑️ Invalidated all active timers
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Insidious
+   IMDB: tt1591095
+   URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7...
+🧹 Clearing previous event state (Non-Event Load)
+🧹 Clearing previous watch party state (Solo Load)
+   Hash: dee2c4ce...
+   Source: Unknown
+💬 Added mock chat messages for testing
+👤 SOLO MODE: Autoplaying
+📝 Pre-loading external subtitles (Top 3)...
+📡 Fetching metadata for tt1591095 as movie...
+[2026-01-09T20:45:44Z] [INFO] [StreamService.swift:90] 🎬 StreamService: Starting resolution for: Insidious
+✅ Cache HIT: Metadata[meta_movie_tt1591095]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🧠 StreamService: Exclusion list has 1 previous attempts for tt1591095
+⚡️ PlaybackService: releasing sleep assertion
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 3901 seconds
+✅ Got background: https://images.metahub.space/background/medium/tt1591095/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1591095/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1591095/img...
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMjc3MzUtMzE0MTAxNy56aXA= [request-id: DA52F85B-4D71-4A16-90E6-01E2C484AAF5]
+2026-01-09 15:45:45.144 RedLemon[49804:280118] ✅ Subtitle 1 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_2D25D9EE-7D69-44DA-8A4B-17057FDFDC3D.vtt
+2026-01-09 15:45:45.144 RedLemon[49804:280118] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_2D25D9EE-7D69-44DA-8A4B-170
+2026-01-09 15:45:45.145 RedLemon[49804:280118] ❌ Failed to load subtitle, MPV error code: -12
+2026-01-09 15:45:45.145 RedLemon[49804:280118] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTgyNjItMzEzMDYxOC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+📄 Subtitle request: L3N1YnRpdGxlLzMxMjc3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3127735-3141017.zip
+📨 Received: {"ref":"0C6786CE-159B-46E6-8FF5-0585C76B6505","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2b89eca0-ed9c-11f0-b731-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkq8WPHSW86As7j","is_host":false,"joined_at":1767991544.733907,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt1591095"}
+✅ Left room in database: event_tt1591095
+🧹 Cleaning up Realtime channel for room: event_tt1591095
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+🛑 Event polling task cancelled cleanly
+✅ MPV stop completed with clean event loop exit
+✅ Download complete: 22879 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Insidious.2010.1080p.BluRay.x265-RARBG.srt
+📦 Extracting specific file: Insidious.2010.1080p.BluRay.x265-RARBG.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMTgyNjItMzEzMDYxOC56aXA= [request-id: 09FD7DE6-2112-4418-95EC-FC10A1DEFEE2]
+2026-01-09 15:45:45.350 RedLemon[49804:280118] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:45.350 RedLemon[49804:280118] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:45.350 RedLemon[49804:280118]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:45.351 RedLemon[49804:280118] ✅ SubtitleService: Scanned 1 tracks (Attempt 4/5)
+2026-01-09 15:45:45.351 RedLemon[49804:280118]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:45.590 RedLemon[49804:280119] ✅ Subtitle 2 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_A944D8DF-53FC-447B-B224-0143CB4A9FB8.vtt
+2026-01-09 15:45:45.590 RedLemon[49804:280119] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_A944D8DF-53FC-447B-B224-014
+2026-01-09 15:45:45.590 RedLemon[49804:280119] ❌ Failed to load subtitle, MPV error code: -12
+2026-01-09 15:45:45.590 RedLemon[49804:280119] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTA0NDctMzEyMjMxNC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+📄 Subtitle request: L3N1YnRpdGxlLzMxMTgy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3118262-3130618.zip
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"2b89eca0-ed9c-11f0-b731-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkq8WPHSW86As7j","is_host":false,"joined_at":1767991544.733907,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Unknown event: phx_close
+✅ Download complete: 48123 bytes
+📦 Detected ZIP archive, extracting...
+🗑️ MPVViewLayer deinit
+⚠️ No specific episode match found, using first file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai.srt
+📦 Extracting specific file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMTA0NDctMzEyMjMxNC56aXA= [request-id: F8762010-11E5-45EC-8EDD-CC6E2DCC01BE]
+2026-01-09 15:45:45.909 RedLemon[49804:280118]    📅 Filtering by year: 2010
+2026-01-09 15:45:46.114 RedLemon[49804:280136] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-09 15:45:46.115 RedLemon[49804:280136] 🔍 ProviderManager: Fetching streams for tt1591095...
+2026-01-09 15:45:46.115 RedLemon[49804:280134] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-09 15:45:46.115 RedLemon[49804:280136] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-09 15:45:46.115 RedLemon[49804:280134] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-09 15:45:46.115 RedLemon[49804:280134] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt1591095.json...
+2026-01-09 15:45:46.115 RedLemon[49804:280136] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridApiKey23A222,                     0ebridProvider23A2ealDebrid27D/stream/movie/tt1591095.json
+2026-01-09 15:45:46.115 RedLemon[49804:280134] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt1591095.json
+2026-01-09 15:45:46.115 RedLemon[49804:280136] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA2                     0ebridProvider23A2ealDebrid27D/stream/movie/tt1591095.json
+2026-01-09 15:45:46.117 RedLemon[49804:280421] 📡 Torrentio: HTTP 200, received 20926 bytes
+2026-01-09 15:45:46.118 RedLemon[49804:280119] ✅ DebridSearch: Parsed 3 streams
+2026-01-09 15:45:46.129 RedLemon[49804:280421] ✅ Torrentio: Parsed 39 streams from 39 raw
+2026-01-09 15:45:46.183 RedLemon[49804:280136] ✅ Subtitle 3 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_D29F97B0-B99F-4531-975E-9CD4078BB2E1.vtt
+2026-01-09 15:45:46.183 RedLemon[49804:280136] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_D29F97B0-B99F-4531-975E-9CD
+2026-01-09 15:45:46.184 RedLemon[49804:280136] ❌ Failed to load subtitle, MPV error code: -12
+2026-01-09 15:45:46.184 RedLemon[49804:280136] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:46.184 RedLemon[49804:280136] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:46.184 RedLemon[49804:280136]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:46.184 RedLemon[49804:280136] ✅ SubtitleService: Scanned 1 tracks (Attempt 1/5)
+2026-01-09 15:45:46.184 RedLemon[49804:280136]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:46.329 RedLemon[49804:280243] ✅ ProviderManager: Fetched 43 raw, returning 43 unique streams
+2026-01-09 15:45:46.329 RedLemon[49804:280243] 📦 StreamResolver: Received 43 raw streams, bucketing...
+2026-01-09 15:45:46.351 RedLemon[49804:280136] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:46.351 RedLemon[49804:280136] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:46.351 RedLemon[49804:280136]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:46.351 RedLemon[49804:280136] ✅ SubtitleService: Scanned 1 tracks (Attempt 5/5)
+2026-01-09 15:45:46.351 RedLemon[49804:280136]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:47.077 RedLemon[49804:280136] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-09 15:45:47.077 RedLemon[49804:280136] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-09 15:45:47.078 RedLemon[49804:280136] 🔍 DEBUG: Processing subtitle URL: /subtitle/3127735-3141017.zip
+2026-01-09 15:45:47.078 RedLemon[49804:280243] 🔍 DEBUG: Processing subtitle URL: /subtitle/3118262-3130618.zip
+2026-01-09 15:45:47.078 RedLemon[49804:280118] 🔍 DEBUG: Processing subtitle URL: /subtitle/2957054-2951218.zip
+2026-01-09 15:45:47.078 RedLemon[49804:280421] 🔍 DEBUG: Processing subtitle URL: /subtitle/3110447-3122314.zip
+2026-01-09 15:45:47.078 RedLemon[49804:280136] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:47.078 RedLemon[49804:280243] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:47.078 RedLemon[49804:280118] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:47.078 RedLemon[49804:280421] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:47.078 RedLemon[49804:280118] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NTcwNTQtMjk1MTIxOC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:47.078 RedLemon[49804:280136] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjc3MzUtMzE0MTAxNy56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:47.078 RedLemon[49804:280243] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTgyNjItMzEzMDYxOC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:47.078 RedLemon[49804:280421] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTA0NDctMzEyMjMxNC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:47.078 RedLemon[49804:280118] 🔍 DEBUG: Processing subtitle URL: /subtitle/2957053-2951219.zip
+2026-01-09 15:45:47.078 RedLemon[49804:280118] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:47.079 RedLemon[49804:280118] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NTcwNTMtMjk1MTIxOS56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:47.082 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7, subtitles: 5
+2026-01-09 15:45:47.118 RedLemon[49804:280113] ✅ Stream ready, starting playback...
+2026-01-09 15:45:47.119 RedLemon[49804:280113] 🖥️ WindowManager: enterFullscreen() called
+2026-01-09 15:45:47.119 RedLemon[49804:280113]    Window: <SwiftUI.SwiftUIWindow: 0x7f7a3b5fd0e0>
+2026-01-09 15:45:47.119 RedLemon[49804:280113]    Is fullscreen: 1
+2026-01-09 15:45:47.119 RedLemon[49804:280113]    ⚠️ WindowManager: Already in fullscreen
+2026-01-09 15:45:47.121 RedLemon[49804:280113] 🖼️ Setting up MPV with native macOS video output...
+2026-01-09 15:45:47.124 RedLemon[49804:280113] ✅ MPV initialized with native GPU rendering
+2026-01-09 15:45:47.126 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-09 15:45:47.127 RedLemon[49804:280113] 🎉 Starting watch party sync - Room: event_tt1591095, Host: NO
+2026-01-09 15:45:47.127 RedLemon[49804:280113] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-09 15:45:47.131 RedLemon[49804:280113] 🔄 Starting chat polling for room: event_tt1591095
+2026-01-09 15:45:47.131 RedLemon[49804:280113] 💓 Started playback heartbeat loop
+2026-01-09 15:45:47.131 RedLemon[49804:280113] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-09 15:45:47.131 RedLemon[49804:280113] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-09 15:45:47.131 RedLemon[49804:280113] 🎬🎬🎬 Subtitles: 5
+2026-01-09 15:45:47.132 RedLemon[49804:280113] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Insidious
+2026-01-09 15:45:47.132 RedLemon[49804:280113] 🎬🎬🎬 streamURL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7
+2026-01-09 15:45:47.132 RedLemon[49804:280113] 🎬🎬🎬 subtitles: 5
+2026-01-09 15:45:47.132 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-09 15:45:47.168 RedLemon[49804:280243] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-09 15:45:47.168 RedLemon[49804:280243] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NTcwNTQtMjk1MTIxOC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:47.168 RedLemon[49804:280118] 🎬 MPV: Current video filename set to: 
+2026-01-09 15:45:47.168 RedLemon[49804:280118] 🎬 MPV loadVideo called with URL: https://torrentio.strem.fun/resolve/realdebrid/K67 (Encoded: https://torrentio.strem.fun/resolve/realdebrid/K67), autoplay: false, expectedSubs: 3
+2026-01-09 15:45:47.169 RedLemon[49804:280118] 🎬 MPV executing: loadfile "https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/1a72a38f0de959005178c806442d6c919881f812/null/0/Insidious.2010.1080p.BluRay.H264.AAC-RARBG.mp4"
+2026-01-09 15:45:47.169 RedLemon[49804:280118] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+2026-01-09 15:45:47.169 RedLemon[49804:280120] 🔐 Signed request to /rpc/room_heartbeat
+📄 Subtitle request: L3N1YnRpdGxlLzMxMTA0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3110447-3122314.zip
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt1591095.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Download complete: 22872 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai OCR.srt
+📦 Extracting specific file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai OCR.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+✅ Comet: Parsed 1 valid streams
+⚠️ MediaFusion: HTTP 418
+✅ Metadata cache hit for tt1591095: Insidious
+🎯 Target title for matching: Insidious
+   📅 Year filter (2010): 43 → 42 streams
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 0 total tracks
+ℹ️ No suitable English subtitles found
+   🚫 RESOLVER BLOCKING non-English audio: Insidious.2010.MULTi.VFF.2160p.10bit.4KLight.DV.HDR.BluRay.TrueHD.Atmos.7.1.x265-QTZ.mkv
+👤 0 💾 6.9 GB ⚙️ Torrent9
+Multi Audio / 🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Insidious (2010) [H265.2160p] Lektor PL [AC3 2.0] M80.mkv
+👤 0 💾 4.45 GB ⚙️ BestTorrents
+🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Insidious DVDRIP FRENCH 2011
+👤 1 💾 701.8 MB ⚙️ Torrent9
+🇫🇷 (Audio)
+   🎵 RESOLVER FILTERED audio language: 42 → 39 streams
+🔍 Searching SubDL: tt1591095 (movie)
+   ℹ️ Fallback Name: Insidious (2010)
+⚠️ EVENT/VP Mode: Failsafe triggered - forcing UI release
+🗑️ MPVPlayerViewModel deinit
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+✅ MPV instance destroyed
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Attached best sub for 'Insidious.2010.1080p.Bluray.x2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.BluRay.1080p.DT...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 BluRay 1080p DT...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.UHD.BluRay.2160...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 UHD BluRay 2160...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.REPACK.4K.HDR.D...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 UHD 4K BluRay 2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Астрал / Insidious [2010 UHD B...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious(Sobrenatural).2010.2...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 2160p BluRay
+👤 ...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for 'Kolekcja Naznaczony 2010-2023 ...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.2160p.BDRip.AVC...': Insidious [2011] BDRip...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 1080p UHD BluRa...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious (2010) 1080p BrRip x...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 BluRay 1080p DT...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.1080p.BluRay.x2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious Chapter 1 2 3 4 - Ho...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidius Saga (2010-2023) 1080...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious Complete 5 Movie Col...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.1080p.REMUX.ENG...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 BluRay 1080p DT...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for 'Insidious (2010) 1080p BluRay ...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious (2010) MULTi-VF2.108...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious (2010) 720p BrRip x2...': Insidious.2010.720p.BluRay.10B...
+✅ StreamResolver: Attached best sub for '101 Horror Movies Mega Pack Mi...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious (2010) 2160p BluRay ...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.4K.HDR.DV.2160p...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.2160p.Dolby.Vis...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.2160p.Dolby.Vis...': Insidious.2010.1080p.BluRay.Re...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 1080p UHD BluRa...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 1080p BluRay H2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.1080p.Bluray.x2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 1080p BluRay H2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious 2011 1080p AMZN WEB-...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious 2010 1080p BluRay x2...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.Collection.NORDiC.10...': Insidious.2010.1080p.BluRay.x2...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.Bluray.1080p.DT...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for '31 Nights Of Halloween Horror ...': Insidious.2010.BluRay.1080p.DT...
+✅ StreamResolver: Attached best sub for 'Insidious.2010.720p.10bit.BluR...': Insidious.2010.720p.BluRay.10B...
+   --- Processing Bucket: 2160p (Input: 13) ---
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Insidious 2010 2160p BluRay
+👤 34 💾 4.82 GB ⚙️ YTS
+   ✅ Bucket 2160p Final Count: 13
+   --- Processing Bucket: 1080p (Input: 22) ---
+   🧠 RESOLVER DROP (1080p): Previously Attempted: Insidious.2010.1080p.Bluray.x264-MaxHD
+👤 7 💾 7.94 GB ⚙️ RARBG
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 1080p BrRip x264 - 1.5GB - YIFY
+👤 100 💾 1.5 GB ⚙️ ThePirateBay
+   ✅ Bucket 1080p Final Count: 21
+   --- Processing Bucket: 720p (Input: 3) ---
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 720p BrRip x264 - 650MB - YIFY
+👤 30 💾 650.49 MB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Insidious (2010) 720p BrRip x264 - 650MB - YIFY
+👤 30 💾 650.49 MB ⚙️ ThePirateBay
+   ✅ Bucket 720p Final Count: 3
+   --- Processing Bucket: 480p (Input: 1) ---
+   ✅ Bucket 480p Final Count: 1
+📦 2160p Primary: Insidious.2010.REPACK.4K.HDR.DV.2160p BDRemux Ita Eng x265-NAHOM
+👤 2 💾 45.07 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+📦 1080p Primary: Insidious Chapter 1 2 3 4 - Horror Eng Ita 2011-2018 1080p
+Insidious Chapter 1, 2, 3, 4, Collection/01 Insidious Chapter 1 - 2011 Eng Ita Multi-Subs 1080p [H264-mp4].mp4
+👤 3 💾 3.27 GB ⚙️ ThePirateBay
+Multi Subs / 🇬🇧 / 🇮🇹
+📦 720p Primary: 31 Nights Of Halloween Horror Pack
+Insidious 1 & 2/Insidious (2010)/Insidious(2010).720p.BrRip.5.1Ch AAC.ArianFX.mp4
+👤 10 💾 726.62 MB ⚙️ MagnetDL
+✅ StreamResolver: Quality buckets ready
+   ➕ Added 3 720p streams as backup
+   ➕ Added 1 480p streams as backup
+[2026-01-09T20:45:46Z] [INFO] [StreamService.swift:261] 📦 StreamService: Found 15 total streams to try (across all qualities)
+✅ StreamService: Found 12 H.264 streams (Tier 1)
+🚫 StreamService: Blocking stream with restricted keyword: Insidious.2010.1080p.REMUX.ENG.RUS.ITA.And.ESP.LATINO
+👤 1 💾 25.95 GB ⚙️ ThePirateBay
+Multi Subs / 🇬🇧 / 🇷🇺 / 🇮🇹 / 🇪🇸 / 🇲🇽
+🛡️ StreamService: Allowing restricted keyword for DebridSearch: Insidious.2010.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR.mkv
+💾 19.91 GB
+🛡️ StreamService: Allowing restricted keyword for DebridSearch: Insidious 2010 BluRay 1080p DTS-HD MA 5 1 AVC REMUX-FraMeSToR.mkv
+💾 19.91 GB
+✅ StreamService: Found 9 'Clean' English streams. Deprioritizing 2 localized/dual streams.
+📦 StreamService: 9 streams remain after size filter
+🔄 StreamService: Trying stream 1/9: Insidious 2010 1080p BluRay H264 AAC-RARBG
+👤 13 💾 1.96 GB ⚙️ MagnetDL
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/1a72a38f0de959005178c806442d6c919881f812/null/0/Insidious.2010.1080p.BluRay.H264.AAC-RARBG.mp4
+✅ StreamService: Resolved to: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/1a72a38f0de959005178c806442d6c919881f812/null/0/Insidious.2010.1080p.BluRay.H264.AAC-RARBG.mp4
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Insidious 2010 1080p BluRay H264 AAC-RARBG
+👤 13 💾 1.96 GB ⚙️ MagnetDL
+📊 Stream Size: 1.96 GB
+📦 StreamService: Appending 6 fallback streams (alternate codecs)
+📦 StreamService: Returning 14 candidate streams for fallback
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7
+   Display Title: Insidious
+   Subtitle URLs: 5
+      [0] Insidious.2010.1080p.BluRay.Remux.DTS-HD.MA5.1.AVC-FraMeSToR
+      [1] Insidious.2010.1080p.BluRay.x265-RARBG
+      [2] Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai
+      [3] Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR
+      [4] Insidious.2010.720p.BluRay.10Bit.6CH.HEVC.x265-PSA
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🧠 StreamService: Marked hash 1a72a38f as attempted for tt1591095
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt1591095, isHost=false
+🔌 Setting up Realtime channel: watch-party:event_tt1591095
+   Role: Guest
+   User ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt1591095
+📡 Connection state: connected
+✅ Realtime channel setup complete
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Insidious
+   IMDB: tt1591095
+   URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7...
+🧹 Clearing previous event state (Non-Event Load)
+   Hash: 1a72a38f...
+   Source: BluRay
+💬 Added mock chat messages for testing
+👥 WATCH PARTY MODE: Starting PAUSED for synchronization
+🎬 DisplayLink: reportSwap() (throttled)
+📡 Fetching metadata for tt1591095 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt1591095]
+📝 Pre-loading external subtitles (Top 3)...
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI5NTcwNTQtMjk1MTIxOC56aXA= [request-id: 73215304-5D85-4119-9347-BA1695C21000]
+2026-01-09 15:45:47.185 RedLemon[49804:280118] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:47.185 RedLemon[49804:280118] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:47.185 RedLemon[49804:280118]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:47.185 RedLemon[49804:280118] ✅ SubtitleService: Scanned 1 tracks (Attempt 2/5)
+2026-01-09 15:45:47.186 RedLemon[49804:280118]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:47.431 RedLemon[49804:280113] ⚠️ Playback heartbeat failed: userMessage("Invalid cryptographic signature")
+2026-01-09 15:45:47.628 RedLemon[49804:280119] ✅ Subtitle 1 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_B4557846-7B58-4F12-9F29-D46F770AD255.vtt
+2026-01-09 15:45:47.628 RedLemon[49804:280119] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_B4557846-7B58-4F12-9F29-D46
+2026-01-09 15:45:47.628 RedLemon[49804:280119] ❌ Failed to load subtitle, MPV error code: -12
+2026-01-09 15:45:47.629 RedLemon[49804:280119] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjc3MzUtMzE0MTAxNy56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+📄 Subtitle request: L3N1YnRpdGxlLzI5NTcw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2957054-2951218.zip
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 3898 seconds
+✅ Got background: https://images.metahub.space/background/medium/tt1591095/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1591095/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1591095/img...
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+📨 Received: {"ref":"287946F7-E044-4001-BC36-515AC8F3944E","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2cf70afa-ed9c-11f0-ba22-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkq8fJNgag6As9j","is_host":false,"joined_at":1767991547.129669,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt1591095"}
+⚠️ Room state missing in MPVViewModel - fetching fallback for event_tt1591095
+[MPV] https: HTTP error 502 Bad Gateway
+[MPV] Failed to open https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/1a72a38f0de959005178c806442d6c919881f812/null/0/Insidious.2010.1080p.BluRay.H264.AAC-RARBG.mp4.
+❌ Supabase API Error: Invalid cryptographic signature
+🔄 Updated existing participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e with Ref: GIkq8fJNgag6As9j
+[MPV] 
+⚠️ MPV: END_FILE event but not EOF (reason: 4)
+🚨 MPVPlayerViewModel: Critical MPV Error detected: Playback Error (Code: 4) - Triggering Failover
+❌ MPVPlayerView: Playback error detected: Playback Error (Code: 4). Triggering fallback...
+⚠️ PlayerVM: Handling playback error: Playback Error (Code: 4)
+⏭️ PlayerVM: Falling back to next stream: Insidious.2010.1080p.Bluray.x264-MaxHD
+💾 7.94 GB
+[MPV] youtube-dl failed: not found or not enough permissions
+⚠️ MPVPlayerViewModel: Buffering finished at Watch Party Ready Gate - Ignoring Error Trigger
+🔄 Silently retrying next stream (14 left)
+🔍 StreamService: Resolving redirect URL: https://68d69db7dc40-debrid-search.baby-beamup.club/resolve/RealDebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/JLZMRZQGVAPUE/https%3A%2F%2Freal-debrid.com%2Fd%2FSBRY2BIABOBUEEDA
+✅ Download complete: 25667 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Insidious I (2010).srt
+📦 Extracting specific file: Insidious I (2010).srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMjc3MzUtMzE0MTAxNy56aXA= [request-id: A7D41689-33AA-4860-A4E5-55CC9E857762]
+2026-01-09 15:45:47.946 RedLemon[49804:280243] ✅ Subtitle 2 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_A6F64ECD-74A0-4FB6-AC1B-AF2BB8B3AE07.vtt
+2026-01-09 15:45:47.946 RedLemon[49804:280243] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_A6F64ECD-74A0-4FB6-AC1B-AF2
+2026-01-09 15:45:47.946 RedLemon[49804:280243] ❌ Failed to load subtitle, MPV error code: -12
+2026-01-09 15:45:47.946 RedLemon[49804:280243] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTgyNjItMzEzMDYxOC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+📄 Subtitle request: L3N1YnRpdGxlLzMxMjc3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3127735-3141017.zip
+✅ Download complete: 22879 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Insidious.2010.1080p.BluRay.x265-RARBG.srt
+📦 Extracting specific file: Insidious.2010.1080p.BluRay.x265-RARBG.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMTgyNjItMzEzMDYxOC56aXA= [request-id: 7541D6CC-D804-4243-B311-4D9DDBEC2859]
+2026-01-09 15:45:48.198 RedLemon[49804:280120] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:48.198 RedLemon[49804:280120] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:48.199 RedLemon[49804:280120]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:48.199 RedLemon[49804:280120] ✅ SubtitleService: Scanned 1 tracks (Attempt 3/5)
+2026-01-09 15:45:48.199 RedLemon[49804:280120]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:48.352 RedLemon[49804:280120] ✅ Subtitle 3 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_12B6A565-3AC0-4D2C-B6B4-004BEC8D58B1.vtt
+2026-01-09 15:45:48.353 RedLemon[49804:280120] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_12B6A565-3AC0-4D2C-B6B4-004
+2026-01-09 15:45:48.353 RedLemon[49804:280120] ❌ Failed to load subtitle, MPV error code: -12
+2026-01-09 15:45:48.353 RedLemon[49804:280120] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:48.353 RedLemon[49804:280120] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:48.353 RedLemon[49804:280120]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:48.353 RedLemon[49804:280120] ✅ SubtitleService: Scanned 1 tracks (Attempt 1/5)
+2026-01-09 15:45:48.353 RedLemon[49804:280120]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:49.084 RedLemon[49804:280118] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-09 15:45:49.084 RedLemon[49804:280118] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-09 15:45:49.084 RedLemon[49804:280243] 🔍 DEBUG: Processing subtitle URL: /subtitle/3118262-3130618.zip
+2026-01-09 15:45:49.084 RedLemon[49804:280118] 🔍 DEBUG: Processing subtitle URL: /subtitle/3110447-3122314.zip
+2026-01-09 15:45:49.084 RedLemon[49804:280243] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:49.084 RedLemon[49804:280118] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:49.084 RedLemon[49804:280120] 🔍 DEBUG: Processing subtitle URL: /subtitle/3127735-3141017.zip
+2026-01-09 15:45:49.084 RedLemon[49804:280120] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:49.085 RedLemon[49804:280118] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTA0NDctMzEyMjMxNC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:49.085 RedLemon[49804:280243] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTgyNjItMzEzMDYxOC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:49.085 RedLemon[49804:280118] 🔍 DEBUG: Processing subtitle URL: /subtitle/2957054-2951218.zip
+2026-01-09 15:45:49.085 RedLemon[49804:280120] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjc3MzUtMzE0MTAxNy56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:49.085 RedLemon[49804:280243] 🔍 DEBUG: Processing subtitle URL: /subtitle/2957053-2951219.zip
+2026-01-09 15:45:49.085 RedLemon[49804:280243] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:49.085 RedLemon[49804:280118] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 15:45:49.085 RedLemon[49804:280243] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NTcwNTMtMjk1MTIxOS56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:49.085 RedLemon[49804:280118] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NTcwNTQtMjk1MTIxOC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:49.087 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi2-4.download.real-debrid.com/d/XTC7CUGMP2VMK107/m, subtitles: 5
+2026-01-09 15:45:49.138 RedLemon[49804:280113] 🖼️ Setting up MPV with native macOS video output...
+2026-01-09 15:45:49.141 RedLemon[49804:280113] ✅ MPV initialized with native GPU rendering
+2026-01-09 15:45:49.143 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-09 15:45:49.144 RedLemon[49804:280113] 🎉 Starting watch party sync - Room: event_tt1591095, Host: NO
+2026-01-09 15:45:49.144 RedLemon[49804:280113] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-09 15:45:49.176 RedLemon[49804:280113] 🛑 Stopped playback heartbeat loop
+2026-01-09 15:45:49.176 RedLemon[49804:280113] 🔄 Starting chat polling for room: event_tt1591095
+2026-01-09 15:45:49.176 RedLemon[49804:280113] 💓 Started playback heartbeat loop
+2026-01-09 15:45:49.176 RedLemon[49804:280113] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-09 15:45:49.176 RedLemon[49804:280113] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-09 15:45:49.176 RedLemon[49804:280113] 🎬🎬🎬 Subtitles: 5
+2026-01-09 15:45:49.176 RedLemon[49804:280113] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Insidious
+2026-01-09 15:45:49.176 RedLemon[49804:280113] 🎬🎬🎬 streamURL: https://chi2-4.download.real-debrid.com/d/XTC7CUGMP2VMK107/m
+2026-01-09 15:45:49.176 RedLemon[49804:280113] 🎬🎬🎬 subtitles: 5
+2026-01-09 15:45:49.176 RedLemon[49804:280113] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-09 15:45:49.207 RedLemon[49804:280136] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-09 15:45:49.207 RedLemon[49804:280136] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTA0NDctMzEyMjMxNC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+2026-01-09 15:45:49.208 RedLemon[49804:280134] 🎬 MPV: Current video filename set to: 
+2026-01-09 15:45:49.208 RedLemon[49804:280134] 🎬 MPV loadVideo called with URL: https://chi2-4.download.real-debrid.com/d/XTC7CUGM (Encoded: https://chi2-4.download.real-debrid.com/d/XTC7CUGM), autoplay: false, expectedSubs: 3
+2026-01-09 15:45:49.208 RedLemon[49804:280134] 🎬 MPV executing: loadfile "https://chi2-4.download.real-debrid.com/d/XTC7CUGMP2VMK107/maxhd-i-1080p.mkv"
+2026-01-09 15:45:49.208 RedLemon[49804:280134] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+2026-01-09 15:45:49.208 RedLemon[49804:280118] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-09 15:45:49.209 RedLemon[49804:280134] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:49.209 RedLemon[49804:280134] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:49.209 RedLemon[49804:280134]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:49.209 RedLemon[49804:280134] ✅ SubtitleService: Scanned 1 tracks (Attempt 4/5)
+2026-01-09 15:45:49.209 RedLemon[49804:280134]    Track: ID=0, Title=Off, External=0
+📄 Subtitle request: L3N1YnRpdGxlLzMxMTgy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3118262-3130618.zip
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Download complete: 48123 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai.srt
+📦 Extracting specific file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+✅ StreamService: Resolved to: https://chi2-4.download.real-debrid.com/d/XTC7CUGMP2VMK107/maxhd-i-1080p.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi2-4.download.real-debrid.com/d/XTC7CUGMP2VMK107/m
+   Display Title: Insidious
+   Subtitle URLs: 5
+      [0] Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR
+      [1] Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai
+      [2] Insidious.2010.1080p.BluRay.x265-RARBG
+      [3] Insidious.2010.720p.BluRay.10Bit.6CH.HEVC.x265-PSA
+      [4] Insidious.2010.1080p.BluRay.Remux.DTS-HD.MA5.1.AVC-FraMeSToR
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt1591095, isHost=false
+🧹 Cleaning up MPV player...
+🔌 Setting up Realtime channel: watch-party:event_tt1591095
+   Role: Guest
+   User ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:event_tt1591095, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+🎬 DisplayLink: reportSwap() (throttled)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+🗑️ Invalidated all active timers
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Insidious
+   IMDB: tt1591095
+   URL: https://chi2-4.download.real-debrid.com/d/XTC7CUGMP2VMK107/m...
+🧹 Clearing previous event state (Non-Event Load)
+   Source: BluRay
+💬 Added mock chat messages for testing
+👥 WATCH PARTY MODE: Starting PAUSED for synchronization
+📝 Pre-loading external subtitles (Top 3)...
+📡 Fetching metadata for tt1591095 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt1591095]
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMTA0NDctMzEyMjMxNC56aXA= [request-id: 439B3DB6-BA2C-48E7-9912-80CD7BFCCBCD]
+2026-01-09 15:45:49.354 RedLemon[49804:280243] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:49.354 RedLemon[49804:280243] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:49.354 RedLemon[49804:280243]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:49.354 RedLemon[49804:280243] ✅ SubtitleService: Scanned 1 tracks (Attempt 2/5)
+2026-01-09 15:45:49.354 RedLemon[49804:280243]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:49.434 RedLemon[49804:280113] ⚠️ Playback heartbeat failed: userMessage("Invalid cryptographic signature")
+2026-01-09 15:45:49.966 RedLemon[49804:280120] ✅ Subtitle 1 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_0A73CE15-198F-4190-8985-21A7E3919874.vtt
+2026-01-09 15:45:49.966 RedLemon[49804:280120] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_0A73CE15-198F-4190-8985-21A
+2026-01-09 15:45:49.979 RedLemon[49804:280120] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 15:45:49.980 RedLemon[49804:280120] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMTgyNjItMzEzMDYxOC56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+📄 Subtitle request: L3N1YnRpdGxlLzMxMTA0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3110447-3122314.zip
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 3896 seconds
+✅ Got background: https://images.metahub.space/background/medium/tt1591095/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1591095/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1591095/img...
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2cf70afa-ed9c-11f0-ba22-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkq8movpTg6As-D","phx_ref_prev":"GIkq8fJNgag6As9j","is_host":false,"joined_at":1767991549.146349,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"2cf70afa-ed9c-11f0-ba22-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkq8fJNgag6As9j","is_host":false,"joined_at":1767991547.129669,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:event_tt1591095"}
+⚠️ Room state missing in MPVViewModel - fetching fallback for event_tt1591095
+⚠️ Room state missing in MPVViewModel - fetching fallback for event_tt1591095
+✅ Left room in database: event_tt1591095
+🧹 Cleaning up Realtime channel for room: event_tt1591095
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+🛑 Event polling task cancelled cleanly
+⏳ Participant leaving (grace period started): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+❌ Supabase API Error: Invalid cryptographic signature
+✅ MPV stop completed with clean event loop exit
+🔄 User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e reconnected within grace period - cancelling leave
+🔄 Updated existing participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e with Ref: GIkq8movpTg6As-D
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"2cf70afa-ed9c-11f0-ba22-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkq8movpTg6As-D","phx_ref_prev":"GIkq8fJNgag6As9j","is_host":false,"joined_at":1767991549.146349,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:event_tt1591095"}
+📨 Unknown event: phx_close
+⏹️ Leave task cancelled for 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+⏳ Participant leaving (grace period started): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+✅ Download complete: 22872 bytes
+📦 Detected ZIP archive, extracting...
+🗑️ MPVViewLayer deinit
+⚠️ No specific episode match found, using first file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai OCR.srt
+📦 Extracting specific file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai OCR.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMTgyNjItMzEzMDYxOC56aXA= [request-id: A996F8C5-2756-4B17-8D8D-59A11E543126]
+2026-01-09 15:45:50.223 RedLemon[49804:280118] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:50.223 RedLemon[49804:280118] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:50.223 RedLemon[49804:280118]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:50.224 RedLemon[49804:280118] ✅ SubtitleService: Scanned 1 tracks (Attempt 5/5)
+2026-01-09 15:45:50.224 RedLemon[49804:280118]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:50.365 RedLemon[49804:280136] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:50.365 RedLemon[49804:280136] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:50.365 RedLemon[49804:280136]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:50.365 RedLemon[49804:280136] ✅ SubtitleService: Scanned 1 tracks (Attempt 3/5)
+2026-01-09 15:45:50.365 RedLemon[49804:280136]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:50.368 RedLemon[49804:280118] ✅ Subtitle 2 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_1C684C1E-3534-479B-BDE8-E62E7793D163.vtt
+2026-01-09 15:45:50.368 RedLemon[49804:280118] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_1C684C1E-3534-479B-BDE8-E62
+2026-01-09 15:45:50.493 RedLemon[49804:280113] ⏱️ Watch Party: Duration available (6172.2s), triggering ready signal
+2026-01-09 15:45:50.493 RedLemon[49804:280113] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2026-01-09 15:45:50.494 RedLemon[49804:280118] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 15:45:50.494 RedLemon[49804:280118] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjc3MzUtMzE0MTAxNy56aXA=?token=C1925BA3-5E66-4426-928D-9A1F5979210F
+📄 Subtitle request: L3N1YnRpdGxlLzMxMTgy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3118262-3130618.zip
+💓 Heartbeat sent
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 0 total tracks
+ℹ️ No suitable English subtitles found
+✅ Download complete: 48123 bytes
+📦 Detected ZIP archive, extracting...
+[MPV] (+) Video --vid=1 (*) (h264 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (dts 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR' (webvtt) (external)
+⚠️ No specific episode match found, using first file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai.srt
+📦 Extracting specific file: Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMjc3MzUtMzE0MTAxNy56aXA= [request-id: 255BE7C1-3045-4707-9877-6A4A60467AB0]
+2026-01-09 15:45:50.508 RedLemon[49804:280118] 📤 Realtime: Sending message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 15:45:50.510 RedLemon[49804:280118]    Payload keys: isPlaying, position, type, senderId, timestamp
+2026-01-09 15:45:50.522 RedLemon[49804:280113] ❌ Watch Party: Failed to send READY signal: The operation couldn’t be completed. (RedLemon.RealtimeError error 3.)
+2026-01-09 15:45:50.574 RedLemon[49804:280243] 🔍 MPV track-list/count: 4
+2026-01-09 15:45:50.589 RedLemon[49804:280243] 🔍 Track 0 type: sub
+2026-01-09 15:45:50.589 RedLemon[49804:280243] ✅ Found subtitle track: ID=1, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, external=1
+2026-01-09 15:45:50.589 RedLemon[49804:280243] 🔍 Track 1 type: video
+2026-01-09 15:45:50.589 RedLemon[49804:280243] 🔍 Track 2 type: audio
+2026-01-09 15:45:50.590 RedLemon[49804:280243] 🔍 Track 3 type: sub
+2026-01-09 15:45:50.590 RedLemon[49804:280243] ✅ Found subtitle track: ID=2, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, external=1
+2026-01-09 15:45:50.590 RedLemon[49804:280243] 📊 Total subtitle tracks found: 3 (including Off if needed)
+2026-01-09 15:45:50.590 RedLemon[49804:280243]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:50.590 RedLemon[49804:280243]    Start[1]: ID=1, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', Lang='en', Ext=1
+2026-01-09 15:45:50.590 RedLemon[49804:280243]    Start[2]: ID=2, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', Lang='en', Ext=1
+2026-01-09 15:45:50.590 RedLemon[49804:280243] ✅ SubtitleService: Scanned 3 tracks (Attempt 1/5)
+2026-01-09 15:45:50.590 RedLemon[49804:280243]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:50.591 RedLemon[49804:280243]    Track: ID=1, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, External=1
+2026-01-09 15:45:50.591 RedLemon[49804:280243]    Track: ID=2, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, External=1
+2026-01-09 15:45:51.390 RedLemon[49804:280119] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:51.390 RedLemon[49804:280119] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:51.390 RedLemon[49804:280119]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:51.391 RedLemon[49804:280119] ✅ SubtitleService: Scanned 1 tracks (Attempt 4/5)
+2026-01-09 15:45:51.391 RedLemon[49804:280119]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:51.606 RedLemon[49804:280119] 🔍 MPV track-list/count: 4
+2026-01-09 15:45:51.606 RedLemon[49804:280119] 🔍 Track 0 type: sub
+2026-01-09 15:45:51.606 RedLemon[49804:280119] ✅ Found subtitle track: ID=1, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, external=1
+2026-01-09 15:45:51.606 RedLemon[49804:280119] 🔍 Track 1 type: video
+2026-01-09 15:45:51.606 RedLemon[49804:280119] 🔍 Track 2 type: audio
+2026-01-09 15:45:51.607 RedLemon[49804:280119] 🔍 Track 3 type: sub
+2026-01-09 15:45:51.607 RedLemon[49804:280119] ✅ Found subtitle track: ID=2, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, external=1
+2026-01-09 15:45:51.607 RedLemon[49804:280119] 📊 Total subtitle tracks found: 3 (including Off if needed)
+2026-01-09 15:45:51.607 RedLemon[49804:280119]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:51.607 RedLemon[49804:280119]    Start[1]: ID=1, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', Lang='en', Ext=1
+2026-01-09 15:45:51.607 RedLemon[49804:280119]    Start[2]: ID=2, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', Lang='en', Ext=1
+2026-01-09 15:45:51.607 RedLemon[49804:280119] ✅ SubtitleService: Scanned 3 tracks (Attempt 2/5)
+2026-01-09 15:45:51.607 RedLemon[49804:280119]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:51.608 RedLemon[49804:280119]    Track: ID=1, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, External=1
+2026-01-09 15:45:51.608 RedLemon[49804:280119]    Track: ID=2, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, External=1
+2026-01-09 15:45:51.720 RedLemon[49804:280243] ✅ Subtitle 3 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_C2CAA55A-2CE0-4D24-B450-37EB9A960B91.vtt
+2026-01-09 15:45:51.720 RedLemon[49804:280243] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_C2CAA55A-2CE0-4D24-B450-37E
+2026-01-09 15:45:51.742 RedLemon[49804:280243] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 15:45:51.742 RedLemon[49804:280243] 🔍 MPV track-list/count: 5
+2026-01-09 15:45:51.742 RedLemon[49804:280243] 🔍 Track 0 type: sub
+2026-01-09 15:45:51.742 RedLemon[49804:280243] ✅ Found subtitle track: ID=1, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, external=1
+2026-01-09 15:45:51.742 RedLemon[49804:280243] 🔍 Track 1 type: video
+2026-01-09 15:45:51.742 RedLemon[49804:280243] 🔍 Track 2 type: audio
+2026-01-09 15:45:51.742 RedLemon[49804:280243] 🔍 Track 3 type: sub
+2026-01-09 15:45:51.742 RedLemon[49804:280243] ✅ Found subtitle track: ID=2, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, external=1
+2026-01-09 15:45:51.743 RedLemon[49804:280243] 🔍 Track 4 type: sub
+2026-01-09 15:45:51.743 RedLemon[49804:280243] ✅ Found subtitle track: ID=3, lang=en, title=Insidious.2010.1080p.BluRay.x265-RARBG, external=1
+2026-01-09 15:45:51.743 RedLemon[49804:280243] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 15:45:51.743 RedLemon[49804:280243]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:51.743 RedLemon[49804:280243]    Start[1]: ID=1, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', Lang='en', Ext=1
+2026-01-09 15:45:51.743 RedLemon[49804:280243]    Start[2]: ID=2, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', Lang='en', Ext=1
+2026-01-09 15:45:51.743 RedLemon[49804:280243]    Start[3]: ID=3, Title='Insidious.2010.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2026-01-09 15:45:51.743 RedLemon[49804:280243] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-09 15:45:51.744 RedLemon[49804:280243]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:51.745 RedLemon[49804:280243]    Track: ID=1, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, External=1
+2026-01-09 15:45:51.745 RedLemon[49804:280243]    Track: ID=2, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, External=1
+2026-01-09 15:45:51.745 RedLemon[49804:280243]    Track: ID=3, Title=Insidious.2010.1080p.BluRay.x265-RARBG, External=1
+2026-01-09 15:45:52.424 RedLemon[49804:280134] 🔍 MPV track-list/count: 0
+2026-01-09 15:45:52.424 RedLemon[49804:280134] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 15:45:52.424 RedLemon[49804:280134]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:52.425 RedLemon[49804:280134] ✅ SubtitleService: Scanned 1 tracks (Attempt 5/5)
+2026-01-09 15:45:52.425 RedLemon[49804:280134]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:52.495 RedLemon[49804:280119] 📤 Realtime: Sending message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 15:45:52.495 RedLemon[49804:280119]    Payload keys: position, type, timestamp, senderId, isPlaying
+2026-01-09 15:45:52.495 RedLemon[49804:280113] ❌ Watch Party: Failed to send READY signal: The operation couldn’t be completed. (RedLemon.RealtimeError error 3.)
+2026-01-09 15:45:52.608 RedLemon[49804:280120] 🔍 MPV track-list/count: 5
+2026-01-09 15:45:52.608 RedLemon[49804:280120] 🔍 Track 0 type: sub
+2026-01-09 15:45:52.608 RedLemon[49804:280120] ✅ Found subtitle track: ID=1, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, external=1
+2026-01-09 15:45:52.608 RedLemon[49804:280120] 🔍 Track 1 type: video
+2026-01-09 15:45:52.608 RedLemon[49804:280120] 🔍 Track 2 type: audio
+2026-01-09 15:45:52.608 RedLemon[49804:280120] 🔍 Track 3 type: sub
+2026-01-09 15:45:52.609 RedLemon[49804:280120] ✅ Found subtitle track: ID=2, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, external=1
+2026-01-09 15:45:52.609 RedLemon[49804:280120] 🔍 Track 4 type: sub
+2026-01-09 15:45:52.609 RedLemon[49804:280120] ✅ Found subtitle track: ID=3, lang=en, title=Insidious.2010.1080p.BluRay.x265-RARBG, external=1
+2026-01-09 15:45:52.609 RedLemon[49804:280120] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 15:45:52.609 RedLemon[49804:280120]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:52.609 RedLemon[49804:280120]    Start[1]: ID=1, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', Lang='en', Ext=1
+2026-01-09 15:45:52.609 RedLemon[49804:280120]    Start[2]: ID=2, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', Lang='en', Ext=1
+2026-01-09 15:45:52.609 RedLemon[49804:280120]    Start[3]: ID=3, Title='Insidious.2010.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2026-01-09 15:45:52.609 RedLemon[49804:280120] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 15:45:52.609 RedLemon[49804:280120]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:52.610 RedLemon[49804:280120]    Track: ID=1, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, External=1
+2026-01-09 15:45:52.610 RedLemon[49804:280120]    Track: ID=2, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, External=1
+2026-01-09 15:45:52.610 RedLemon[49804:280120]    Track: ID=3, Title=Insidious.2010.1080p.BluRay.x265-RARBG, External=1
+2026-01-09 15:45:52.746 RedLemon[49804:280136] 🔍 MPV track-list/count: 5
+2026-01-09 15:45:52.746 RedLemon[49804:280136] 🔍 Track 0 type: sub
+2026-01-09 15:45:52.746 RedLemon[49804:280136] ✅ Found subtitle track: ID=1, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, external=1
+2026-01-09 15:45:52.746 RedLemon[49804:280136] 🔍 Track 1 type: video
+2026-01-09 15:45:52.746 RedLemon[49804:280136] 🔍 Track 2 type: audio
+2026-01-09 15:45:52.746 RedLemon[49804:280136] 🔍 Track 3 type: sub
+2026-01-09 15:45:52.747 RedLemon[49804:280136] ✅ Found subtitle track: ID=2, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, external=1
+2026-01-09 15:45:52.747 RedLemon[49804:280136] 🔍 Track 4 type: sub
+2026-01-09 15:45:52.747 RedLemon[49804:280136] ✅ Found subtitle track: ID=3, lang=en, title=Insidious.2010.1080p.BluRay.x265-RARBG, external=1
+2026-01-09 15:45:52.747 RedLemon[49804:280136] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 15:45:52.747 RedLemon[49804:280136]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:52.747 RedLemon[49804:280136]    Start[1]: ID=1, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', Lang='en', Ext=1
+2026-01-09 15:45:52.747 RedLemon[49804:280136]    Start[2]: ID=2, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', Lang='en', Ext=1
+2026-01-09 15:45:52.747 RedLemon[49804:280136]    Start[3]: ID=3, Title='Insidious.2010.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2026-01-09 15:45:52.748 RedLemon[49804:280136] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 15:45:52.748 RedLemon[49804:280136]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:52.748 RedLemon[49804:280136]    Track: ID=1, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, External=1
+2026-01-09 15:45:52.749 RedLemon[49804:280136]    Track: ID=2, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, External=1
+2026-01-09 15:45:52.749 RedLemon[49804:280136]    Track: ID=3, Title=Insidious.2010.1080p.BluRay.x265-RARBG, External=1
+2026-01-09 15:45:53.612 RedLemon[49804:280243] 🔍 MPV track-list/count: 5
+2026-01-09 15:45:53.612 RedLemon[49804:280243] 🔍 Track 0 type: sub
+2026-01-09 15:45:53.613 RedLemon[49804:280243] ✅ Found subtitle track: ID=1, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, external=1
+2026-01-09 15:45:53.613 RedLemon[49804:280243] 🔍 Track 1 type: video
+2026-01-09 15:45:53.613 RedLemon[49804:280243] 🔍 Track 2 type: audio
+2026-01-09 15:45:53.613 RedLemon[49804:280243] 🔍 Track 3 type: sub
+2026-01-09 15:45:53.613 RedLemon[49804:280243] ✅ Found subtitle track: ID=2, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, external=1
+2026-01-09 15:45:53.613 RedLemon[49804:280243] 🔍 Track 4 type: sub
+2026-01-09 15:45:53.613 RedLemon[49804:280243] ✅ Found subtitle track: ID=3, lang=en, title=Insidious.2010.1080p.BluRay.x265-RARBG, external=1
+2026-01-09 15:45:53.614 RedLemon[49804:280243] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 15:45:53.614 RedLemon[49804:280243]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:53.614 RedLemon[49804:280243]    Start[1]: ID=1, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', Lang='en', Ext=1
+2026-01-09 15:45:53.614 RedLemon[49804:280243]    Start[2]: ID=2, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', Lang='en', Ext=1
+2026-01-09 15:45:53.614 RedLemon[49804:280243]    Start[3]: ID=3, Title='Insidious.2010.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2026-01-09 15:45:53.614 RedLemon[49804:280243] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 15:45:53.614 RedLemon[49804:280243]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:53.614 RedLemon[49804:280243]    Track: ID=1, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, External=1
+2026-01-09 15:45:53.614 RedLemon[49804:280243]    Track: ID=2, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, External=1
+2026-01-09 15:45:53.614 RedLemon[49804:280243]    Track: ID=3, Title=Insidious.2010.1080p.BluRay.x265-RARBG, External=1
+2026-01-09 15:45:53.750 RedLemon[49804:280243] 🔍 MPV track-list/count: 5
+2026-01-09 15:45:53.750 RedLemon[49804:280243] 🔍 Track 0 type: sub
+2026-01-09 15:45:53.750 RedLemon[49804:280243] ✅ Found subtitle track: ID=1, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, external=1
+2026-01-09 15:45:53.750 RedLemon[49804:280243] 🔍 Track 1 type: video
+2026-01-09 15:45:53.750 RedLemon[49804:280243] 🔍 Track 2 type: audio
+2026-01-09 15:45:53.751 RedLemon[49804:280243] 🔍 Track 3 type: sub
+2026-01-09 15:45:53.751 RedLemon[49804:280243] ✅ Found subtitle track: ID=2, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, external=1
+2026-01-09 15:45:53.751 RedLemon[49804:280243] 🔍 Track 4 type: sub
+2026-01-09 15:45:53.751 RedLemon[49804:280243] ✅ Found subtitle track: ID=3, lang=en, title=Insidious.2010.1080p.BluRay.x265-RARBG, external=1
+2026-01-09 15:45:53.751 RedLemon[49804:280243] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 15:45:53.751 RedLemon[49804:280243]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:53.751 RedLemon[49804:280243]    Start[1]: ID=1, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', Lang='en', Ext=1
+2026-01-09 15:45:53.752 RedLemon[49804:280243]    Start[2]: ID=2, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', Lang='en', Ext=1
+2026-01-09 15:45:53.752 RedLemon[49804:280243]    Start[3]: ID=3, Title='Insidious.2010.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2026-01-09 15:45:53.752 RedLemon[49804:280243] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 15:45:53.752 RedLemon[49804:280243]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:53.752 RedLemon[49804:280243]    Track: ID=1, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, External=1
+2026-01-09 15:45:53.752 RedLemon[49804:280243]    Track: ID=2, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, External=1
+2026-01-09 15:45:53.753 RedLemon[49804:280243]    Track: ID=3, Title=Insidious.2010.1080p.BluRay.x265-RARBG, External=1
+2026-01-09 15:45:54.495 RedLemon[49804:280243] 📤 Realtime: Sending message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 15:45:54.495 RedLemon[49804:280243]    Payload keys: type, position, isPlaying, senderId, timestamp
+2026-01-09 15:45:54.495 RedLemon[49804:280113] ❌ Watch Party: Failed to send READY signal: The operation couldn’t be completed. (RedLemon.RealtimeError error 3.)
+2026-01-09 15:45:54.615 RedLemon[49804:280243] 🔍 MPV track-list/count: 5
+2026-01-09 15:45:54.615 RedLemon[49804:280243] 🔍 Track 0 type: sub
+2026-01-09 15:45:54.615 RedLemon[49804:280243] ✅ Found subtitle track: ID=1, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, external=1
+2026-01-09 15:45:54.615 RedLemon[49804:280243] 🔍 Track 1 type: video
+2026-01-09 15:45:54.615 RedLemon[49804:280243] 🔍 Track 2 type: audio
+2026-01-09 15:45:54.615 RedLemon[49804:280243] 🔍 Track 3 type: sub
+2026-01-09 15:45:54.616 RedLemon[49804:280243] ✅ Found subtitle track: ID=2, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, external=1
+2026-01-09 15:45:54.616 RedLemon[49804:280243] 🔍 Track 4 type: sub
+2026-01-09 15:45:54.616 RedLemon[49804:280243] ✅ Found subtitle track: ID=3, lang=en, title=Insidious.2010.1080p.BluRay.x265-RARBG, external=1
+2026-01-09 15:45:54.616 RedLemon[49804:280243] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 15:45:54.616 RedLemon[49804:280243]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:54.616 RedLemon[49804:280243]    Start[1]: ID=1, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', Lang='en', Ext=1
+2026-01-09 15:45:54.616 RedLemon[49804:280243]    Start[2]: ID=2, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', Lang='en', Ext=1
+2026-01-09 15:45:54.617 RedLemon[49804:280243]    Start[3]: ID=3, Title='Insidious.2010.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2026-01-09 15:45:54.617 RedLemon[49804:280243] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 15:45:54.618 RedLemon[49804:280243]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:54.618 RedLemon[49804:280243]    Track: ID=1, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, External=1
+2026-01-09 15:45:54.618 RedLemon[49804:280243]    Track: ID=2, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, External=1
+2026-01-09 15:45:54.618 RedLemon[49804:280243]    Track: ID=3, Title=Insidious.2010.1080p.BluRay.x265-RARBG, External=1
+2026-01-09 15:45:54.834 RedLemon[49804:280136] 🔍 MPV track-list/count: 5
+2026-01-09 15:45:54.834 RedLemon[49804:280136] 🔍 Track 0 type: sub
+2026-01-09 15:45:54.835 RedLemon[49804:280136] ✅ Found subtitle track: ID=1, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, external=1
+2026-01-09 15:45:54.835 RedLemon[49804:280136] 🔍 Track 1 type: video
+2026-01-09 15:45:54.836 RedLemon[49804:280136] 🔍 Track 2 type: audio
+2026-01-09 15:45:54.836 RedLemon[49804:280136] 🔍 Track 3 type: sub
+2026-01-09 15:45:54.836 RedLemon[49804:280136] ✅ Found subtitle track: ID=2, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, external=1
+2026-01-09 15:45:54.836 RedLemon[49804:280136] 🔍 Track 4 type: sub
+2026-01-09 15:45:54.836 RedLemon[49804:280136] ✅ Found subtitle track: ID=3, lang=en, title=Insidious.2010.1080p.BluRay.x265-RARBG, external=1
+2026-01-09 15:45:54.837 RedLemon[49804:280136] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 15:45:54.837 RedLemon[49804:280136]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:54.837 RedLemon[49804:280136]    Start[1]: ID=1, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', Lang='en', Ext=1
+2026-01-09 15:45:54.837 RedLemon[49804:280136]    Start[2]: ID=2, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', Lang='en', Ext=1
+2026-01-09 15:45:54.837 RedLemon[49804:280136]    Start[3]: ID=3, Title='Insidious.2010.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2026-01-09 15:45:54.837 RedLemon[49804:280136] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 15:45:54.838 RedLemon[49804:280136]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:54.838 RedLemon[49804:280136]    Track: ID=1, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, External=1
+2026-01-09 15:45:54.838 RedLemon[49804:280136]    Track: ID=2, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, External=1
+2026-01-09 15:45:54.838 RedLemon[49804:280136]    Track: ID=3, Title=Insidious.2010.1080p.BluRay.x265-RARBG, External=1
+2026-01-09 15:45:55.885 RedLemon[49804:280243] 🔍 MPV track-list/count: 5
+2026-01-09 15:45:55.885 RedLemon[49804:280243] 🔍 Track 0 type: sub
+2026-01-09 15:45:55.885 RedLemon[49804:280243] ✅ Found subtitle track: ID=1, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, external=1
+2026-01-09 15:45:55.885 RedLemon[49804:280243] 🔍 Track 1 type: video
+2026-01-09 15:45:55.885 RedLemon[49804:280243] 🔍 Track 2 type: audio
+2026-01-09 15:45:55.886 RedLemon[49804:280243] 🔍 Track 3 type: sub
+2026-01-09 15:45:55.886 RedLemon[49804:280243] ✅ Found subtitle track: ID=2, lang=en, title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, external=1
+2026-01-09 15:45:55.886 RedLemon[49804:280243] 🔍 Track 4 type: sub
+2026-01-09 15:45:55.886 RedLemon[49804:280243] ✅ Found subtitle track: ID=3, lang=en, title=Insidious.2010.1080p.BluRay.x265-RARBG, external=1
+2026-01-09 15:45:55.886 RedLemon[49804:280243] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 15:45:55.886 RedLemon[49804:280243]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 15:45:55.887 RedLemon[49804:280243]    Start[1]: ID=1, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', Lang='en', Ext=1
+2026-01-09 15:45:55.887 RedLemon[49804:280243]    Start[2]: ID=2, Title='Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', Lang='en', Ext=1
+2026-01-09 15:45:55.887 RedLemon[49804:280243]    Start[3]: ID=3, Title='Insidious.2010.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2026-01-09 15:45:55.887 RedLemon[49804:280243] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 15:45:55.887 RedLemon[49804:280243]    Track: ID=0, Title=Off, External=0
+2026-01-09 15:45:55.888 RedLemon[49804:280243]    Track: ID=1, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR, External=1
+2026-01-09 15:45:55.888 RedLemon[49804:280243]    Track: ID=2, Title=Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai, External=1
+2026-01-09 15:45:55.888 RedLemon[49804:280243]    Track: ID=3, Title=Insidious.2010.1080p.BluRay.x265-RARBG, External=1
+2026-01-09 15:45:56.495 RedLemon[49804:280243] 📤 Realtime: Sending message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 15:45:56.495 RedLemon[49804:280243]    Payload keys: position, type, timestamp, isPlaying, senderId
+2026-01-09 15:45:56.495 RedLemon[49804:280113] ❌ Watch Party: Failed to send READY signal: The operation couldn’t be completed. (RedLemon.RealtimeError error 3.)
+2026-01-09 15:45:58.494 RedLemon[49804:280136] 📤 Realtime: Sending message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 15:45:58.494 RedLemon[49804:280136]    Payload keys: position, senderId, isPlaying, timestamp, type
+2026-01-09 15:45:58.495 RedLemon[49804:280113] ❌ Watch Party: Failed to send READY signal: The operation couldn’t be completed. (RedLemon.RealtimeError error 3.)
+2026-01-09 15:46:00.495 RedLemon[49804:280419] 📤 Realtime: Sending message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 15:46:00.495 RedLemon[49804:280419]    Payload keys: type, isPlaying, senderId, timestamp, position
+2026-01-09 15:46:00.495 RedLemon[49804:280113] ❌ Watch Party: Failed to send READY signal: The operation couldn’t be completed. (RedLemon.RealtimeError error 3.)
+📄 Subtitle request: L3N1YnRpdGxlLzMxMjc3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3127735-3141017.zip
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (dts [DTS] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR' (webvtt) (external)
+[MPV] (+) Subs  --sid=2 --slang=en 'Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai' (webvtt) (external)
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+ MPV Event: 18
+ MPV Event: 17
+[MPV] VO: [libmpv] 1920x800 videotoolbox[nv12]
+ MPV Event: 17
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📊 Current subtitle track: 2
+⏳ SMART-LOAD: Waiting for subtitles... (Found 2/3)
+🎬 DisplayLink: reportSwap() (throttled)
+✅ LEAVE MATCHED tracked ref: GIkq8movpTg6As-D
+👋 Participant left (confirmed): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+✅ Download complete: 22879 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Insidious.2010.1080p.BluRay.x265-RARBG.srt
+📦 Extracting specific file: Insidious.2010.1080p.BluRay.x265-RARBG.srt
+📊 Current subtitle track: 2
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x800 23.976fps)
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+[MPV] (+) Audio --aid=1 --alang=eng (*) (dts [DTS] 6ch 48000Hz)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 3 - ID: 2, lang: 'en', title: 'Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 4 - ID: 3, lang: 'en', title: 'Insidious.2010.1080p.BluRay.x265-RARBG', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Insidious.2010.1080p.BluRay.x265-RARBG (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+[MPV] Subs  --sid=1 --slang=en 'Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Insidious.2010.1080p.BluRay.x265-RARBG' (webvtt) (external)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (dts [DTS] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Insidious.2010.1080p.BluRay.x265-RARBG' (webvtt) (external)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 0 total tracks
+ℹ️ No suitable English subtitles found
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 3893 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+⏱️ Soft Timeout: MPV failed to load file in 10s - triggering fallback
+🗑️ MPVPlayerViewModel deinit
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+📊 Current subtitle track: 3
+✅ MPV instance destroyed
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTaiOCR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 3 - ID: 2, lang: 'en', title: 'Insidious.2010.BluRay.1080p.DTS-HD.MA5.1.x265.10bit-BeiTai', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 4 - ID: 3, lang: 'en', title: 'Insidious.2010.1080p.BluRay.x265-RARBG', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Insidious.2010.1080p.BluRay.x265-RARBG (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🗑️ MPVViewLayer deinit
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)

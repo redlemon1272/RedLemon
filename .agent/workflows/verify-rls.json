@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Check Users Table RLS Policy",
+        "description": "Verifies that the RLS policy on the users table allows public select access.",
+        "steps": [
+            {
+                "type": "run_command",
+                "command": "./remote_exec.sh \"docker exec -i supabase-db psql -U postgres postgres -c \\\"SELECT * FROM pg_policies WHERE tablename = 'users';\\\"\""
+            }
+        ]
+    }
+]

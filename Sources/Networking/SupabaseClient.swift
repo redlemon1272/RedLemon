@@ -79,6 +79,7 @@ class SupabaseClient: RoomManager, UserManager {
     // Performance: Cache formatters to avoid expensive initialization
     static let isoFormatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter
     }()
 
@@ -138,8 +139,12 @@ class SupabaseClient: RoomManager, UserManager {
             let container = try decoder.singleValueContainer()
             let dateString = try container.decode(String.self)
 
-            // Try different formats that Supabase might return
-            // Try different formats that Supabase might return
+            // 1. Try robust ISO8601 formatter first (handles fractional microseconds + Z/Offset)
+            if let date = SupabaseClient.isoFormatter.date(from: dateString) {
+                return date
+            }
+
+            // 2. Try legacy formatters
             // Use cached formatters
             for formatter in SupabaseClient.decodingFormatters {
                 if let date = formatter.date(from: dateString) {

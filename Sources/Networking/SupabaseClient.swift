@@ -245,6 +245,14 @@ class SupabaseClient: RoomManager, UserManager {
                     request.setValue(timestamp, forHTTPHeaderField: "x-timestamp")
                     request.setValue(publicKey, forHTTPHeaderField: "x-public-key")
                     
+                    // 🛡️ SECURITY: Identity Proof (Timestamp + UserID + Path)
+                    // This prevents replay attacks across users
+                    if let userId = auth.currentUser?.id {
+                        let identityPayload = "\(timestamp)\(userId.uuidString.lowercased())\(path)"
+                        let identitySig = try CryptoManager.shared.sign(message: identityPayload, privateKeyBase64: privateKey)
+                        request.setValue(identitySig, forHTTPHeaderField: "x-identity-signature")
+                    }
+                    
                     NSLog("🔐 Signed request to \(path)")
                 } catch {
                     NSLog("❌ Failed to sign request: \(error)")
@@ -875,7 +883,9 @@ class SupabaseClient: RoomManager, UserManager {
             body: [
                 "p_room_id": roomId,
                 "p_user_id": userId.uuidString
-            ]
+            ],
+            // 🔐 SECURE: Sign request to prevent IDOR/Spoofing
+            sign: true
         )
     }
 

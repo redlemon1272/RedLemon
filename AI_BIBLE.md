@@ -54,6 +54,21 @@
 - **Constaint**: `AppState` does not exist in the service layer context.
 - **Rule**: NEVER import or rely on `AppState` in Services. Use `SupabaseClient.shared.auth` for user context. Dependencies must flow DOWN, not UP.
 
+### 8. The Date Decoding Trap (Postgres Timestamps)
+- **Problem**: Supabase/Postgres returns dates with variable precision (microseconds `.SSSSSS`) or different timezone formats (`+00`, `Z`).
+- **Symptom**: Silent decoding failures; features (like Friend List) return empty results without error.
+- **Rule**: ALWAYS use a robust `ISO8601DateFormatter` with `.withFractionalSeconds` and `.withInternetDateTime`. NEVER trust a simple fixed format string.
+
+### 9. Implicit RLS Blockers
+- **Problem**: Tables like `users` or `user_blocks` implicitly DENY access if RLS is enabled but no policy exists.
+- **Symptom**: Client requests return empty lists (success 200 OK) but no data.
+- **Rule**: When adding tables, explicitly create policies for `SELECT` access. "Public" tables need `USING (true)` policies.
+
+### 10. Lifecycle Consistency (Auto-Login Disconnect)
+- **Problem**: Features working in development (hot reload) fail in production (app restart) because initialization code is missing from the Auto-Login path.
+- **Example**: `SocialService.connect()` was called in `SignUp` but forgotten in `loadStoredUser`.
+- **Rule**: Critical service connections MUST be called in ALL authentication paths: (1) New Account, (2) Manual Login, (3) Auto-Login/Restore.
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |

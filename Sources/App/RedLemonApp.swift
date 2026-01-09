@@ -69,11 +69,18 @@ struct RedLemonApp: App {
 
 
                     await loadStoredUser()  // Load username from keychain on startup
+
+                    // Show username setup only AFTER auth flow completes
+                    // This prevents race condition where ContentView showed modal prematurely
+                    if appState.currentUserId == nil {
+                        appState.showUsernameSetup = true
+                    }
+
                     await startServer()
                     await performStartupChecks()
                     await performStartupChecks()
                     await checkForUpdates()
-                    
+
                     // Sync clock with server for accurate event timing
                     await TimeService.shared.sync()
                 }
@@ -133,15 +140,15 @@ struct RedLemonApp: App {
             if await KeychainManager.shared.getKeyPair() == nil {
                 NSLog("⚠️ KEYCHAIN ERROR: Username '\(username)' found but Signing Keys are missing!")
                 NSLog("   This results in a 'Zombie' session where presence fails.")
-                
+
                 // Clear the corrupted state
                 try? await KeychainManager.shared.deleteUsername()
                 NSLog("✅ CLEARED: Removed invalid username to force re-authentication.")
-                
+
                 // Stop loading user
                 return
             }
-            
+
             // Verify user exists in database
             do {
                 NSLog("🔍 Supabase: Looking up user '\(username)' in database...")
@@ -150,7 +157,7 @@ struct RedLemonApp: App {
                         appState.currentUsername = username
                         appState.currentUserId = user.id
                     }
-                    
+
                     // CRITICAL FIX: Update SupabaseClient auth context so LicenseManager can access it
                     SupabaseClient.shared.auth.currentUser = AuthUser(
                         id: user.id,
@@ -158,7 +165,7 @@ struct RedLemonApp: App {
                         isAdmin: user.isAdmin ?? false,
                         isPremium: user.isPremium ?? false
                     )
-                    
+
                     NSLog("✅ AUTH SUCCESS: User authenticated - \(username) (ID: \(user.id))")
                     NSLog("🎯 AppState: currentUsername=\(username), currentUserId=\(user.id)")
                 } else {
@@ -233,7 +240,7 @@ struct RedLemonApp: App {
     func performStartupChecks() async {
         NSLog("🔍 Performing startup checks...")
         NSLog("✅ Username-based authentication ready")
-        
+
         // Check for crypto payments in background
         await LicenseManager.shared.refreshSubscription()
     }

@@ -31,11 +31,11 @@ struct ContentView: View {
                         HStack(spacing: 0) {
                             Text("Red")
                                 .font(.system(size: 28, weight: .black, design: .default))
-                                .foregroundColor(DesignSystem.Colors.accent) 
+                                .foregroundColor(DesignSystem.Colors.accent)
                                 .italic()
                             Text("Lemon")
                                 .font(.system(size: 28, weight: .black, design: .default))
-                                .foregroundColor(.red) 
+                                .foregroundColor(.red)
                                 .italic()
                         }
                         .shadow(color: DesignSystem.Colors.accent.opacity(0.3), radius: 10, x: 0, y: 0)
@@ -179,10 +179,10 @@ struct ContentView: View {
 
             // Fullscreen player overlay
             playerOverlay
-            
+
             // Fullscreen lobby overlay (covers sidebar)
             lobbyOverlay
-            
+
             // Schedule Update Overlay (Topmost)
             if appState.showScheduleUpdatePrompt {
                 scheduleUpdateOverlay
@@ -203,21 +203,10 @@ struct ContentView: View {
             // Initialize performance-optimized cache limits
             CacheManager.shared.initializeLimits()
 
-            // Check if user has a username on launch
-            if let username = await KeychainManager.shared.getUsername() {
-                appState.currentUsername = username
-                // Get user from Supabase
-                if let user = try? await SupabaseClient.shared.createOrGetUser(username: username) {
-                    appState.currentUserId = user.id
-                    NSLog("✅ Loaded user: \(username) (ID: \(user.id))")
-                    
-                    // Connect to Social Service (Presence)
-                    await SocialService.shared.connect(userId: user.id.uuidString, username: username)
-                }
-            } else {
-                // Show username setup if no username found
-                appState.showUsernameSetup = true
-            }
+            // NOTE: Authentication is handled by RedLemonApp.loadStoredUser()
+            // Do NOT check username here - it causes a race condition where this
+            // task runs before loadStoredUser() completes, showing the login modal
+            // for existing users. See: Race condition fix (Jan 2026)
         }
     }
 
@@ -257,30 +246,30 @@ struct ContentView: View {
             .ignoresSafeArea() // Ensure it covers the sidebar
         }
     }
-    
+
     @ViewBuilder
     private var scheduleUpdateOverlay: some View {
         ZStack {
             Color.black.opacity(0.8)
                 .ignoresSafeArea()
-            
+
             VStack(spacing: 24) {
                 Image(systemName: "calendar.badge.exclamationmark")
                     .font(.system(size: 60))
                     .foregroundColor(.yellow)
-                
+
                 VStack(spacing: 8) {
                     Text("Schedule Updated")
                         .font(.title.bold())
                         .foregroundColor(.white)
-                    
+
                     Text("A new event schedule has been published.\nPlease restart RedLemon to sync with the new times.")
                         .font(.body)
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                 }
-                
+
                 Button(action: {
                     appState.restartApplication()
                 }) {
@@ -386,7 +375,7 @@ struct StablePlayerContainer: View, Equatable {
         let displayTitle: String = {
             if metadata.type == "series", let season = selectedSeason, let episode = selectedEpisode {
                 var title = "\(metadata.title) - S\(String(format: "%02d", season))E\(String(format: "%02d", episode))"
-                
+
                 // Append episode title if available
                 if let videos = metadata.videos {
                    if let videoEpisode = videos.first(where: { $0.season == season && $0.episode == episode }) {
@@ -398,7 +387,7 @@ struct StablePlayerContainer: View, Equatable {
                 } else {
                     print("⚠️ StablePlayerContainer: metadata.videos is NIL")
                 }
-                
+
                 return title
             }
             return metadata.title
@@ -433,11 +422,11 @@ struct StablePlayerContainer: View, Equatable {
     static func == (lhs: StablePlayerContainer, rhs: StablePlayerContainer) -> Bool {
         let titleChanged = lhs.selectedSeason != rhs.selectedSeason || lhs.selectedEpisode != rhs.selectedEpisode
         let urlChanged = lhs.streamURL != rhs.streamURL
-        
+
         if titleChanged {
              print("♻️ StablePlayerContainer: Recreating due to Season/Episode change (S\(lhs.selectedSeason ?? -1)E\(lhs.selectedEpisode ?? -1) -> S\(rhs.selectedSeason ?? -1)E\(rhs.selectedEpisode ?? -1))")
         }
-        
+
         return !urlChanged && !titleChanged
     }
 }
@@ -536,12 +525,12 @@ struct LoadingIndicatorView: View {
 struct StreamErrorView: View {
     let error: String
     @ObservedObject var appState: AppState
-    
+
     /// Parse error string to extract StreamError info if available
     private var errorInfo: (title: String, message: String, solution: String, icon: String, showSettings: Bool) {
         // Check for known error patterns and return actionable info
         let errorLower = error.lowercased()
-        
+
         // No Real-Debrid key (Matches StreamError.noRealDebridKey localized string)
         if errorLower.contains("requires a real-debrid account") || errorLower.contains("no realdebrid token") || errorLower.contains("realdebrid not configured") {
             return (
@@ -552,7 +541,7 @@ struct StreamErrorView: View {
                 showSettings: true
             )
         }
-        
+
         // Invalid/expired key
         if errorLower.contains("401") || errorLower.contains("unauthorized") || (errorLower.contains("invalid") && errorLower.contains("key")) {
             return (
@@ -563,7 +552,7 @@ struct StreamErrorView: View {
                 showSettings: true
             )
         }
-        
+
         // Expired subscription
         if errorLower.contains("expired") {
             return (
@@ -574,7 +563,7 @@ struct StreamErrorView: View {
                 showSettings: false
             )
         }
-        
+
         // All streams fake/blocked (Matches StreamError.allStreamsFake localized string)
         if errorLower.contains("invalid file type") || errorLower.contains("blocked as suspicious") || (errorLower.contains("all streams") && errorLower.contains("fake")) {
             return (
@@ -585,7 +574,7 @@ struct StreamErrorView: View {
                 showSettings: false
             )
         }
-        
+
         // No streams found
         if errorLower.contains("no streams") {
             return (
@@ -596,7 +585,7 @@ struct StreamErrorView: View {
                 showSettings: false
             )
         }
-        
+
         // Torrent not cached
         if errorLower.contains("not cached") {
             return (
@@ -607,7 +596,7 @@ struct StreamErrorView: View {
                 showSettings: false
             )
         }
-        
+
         // Network/timeout errors
         if errorLower.contains("timeout") || errorLower.contains("timed out") {
             return (
@@ -618,7 +607,7 @@ struct StreamErrorView: View {
                 showSettings: false
             )
         }
-        
+
         if errorLower.contains("network") || errorLower.contains("connection") {
             return (
                 title: "Connection Error",
@@ -628,7 +617,7 @@ struct StreamErrorView: View {
                 showSettings: false
             )
         }
-        
+
         // Fallback for unknown errors
         return (
             title: "Playback Error",
@@ -656,7 +645,7 @@ struct StreamErrorView: View {
                     .foregroundColor(.white.opacity(0.8))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
-                
+
                 // Actionable solution
                 Text(errorInfo.solution)
                     .font(.callout)
@@ -701,7 +690,7 @@ struct StreamErrorView: View {
                     }
                     .buttonStyle(.plain)
                     .shadow(radius: 5)
-                    
+
                     Text("Retrying can improve stream reliability")
                         .font(.caption)
                         .foregroundColor(.white.opacity(0.5))
@@ -724,13 +713,13 @@ struct StreamErrorView: View {
 
     private func retryPlayback() {
         guard let item = appState.player.selectedMediaItem else { return }
-        
+
         Task {
             let quality = appState.player.selectedQuality
             let mode = appState.player.currentWatchMode
             let roomId = appState.player.currentRoomId
             let isHost = appState.player.isWatchPartyHost
-            
+
             await appState.player.playMedia(
                 item,
                 quality: quality,
@@ -786,7 +775,7 @@ struct SidebarButton: View {
                     .foregroundColor(isSelected ? .white : (isHovered ? .white : DesignSystem.Colors.textSecondary))
 
                 Spacer()
-                
+
                 // Active indicator dot
                 if isSelected {
                     Circle()

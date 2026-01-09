@@ -127,6 +127,11 @@ struct RedLemonApp: App {
                 appState.currentUsername = userProfile.displayName
                 appState.currentUserId = userProfile.userId
             }
+            // Connect Social Service for Test Profile
+            await SocialService.shared.connect(
+                userId: userProfile.userId.uuidString,
+                username: userProfile.displayName
+            )
             NSLog("✅ TEST PROFILE: Set username=\(userProfile.displayName), userId=\(userProfile.userId)")
             return
         }
@@ -168,6 +173,12 @@ struct RedLemonApp: App {
 
                     NSLog("✅ AUTH SUCCESS: User authenticated - \(username) (ID: \(user.id))")
                     NSLog("🎯 AppState: currentUsername=\(username), currentUserId=\(user.id)")
+
+                    // Connect Social Service (Realtime, Friends, Presence)
+                    await SocialService.shared.connect(
+                        userId: user.id.uuidString,
+                        username: username
+                    )
                 } else {
                     NSLog("⚠️  DB LOOKUP FAILED: Username '\(username)' not found in database")
                     NSLog("   Clearing stored credentials so user can create a new one")
@@ -193,6 +204,11 @@ struct RedLemonApp: App {
                     appState.currentUserId = uuid
                     appState.currentUsername = "debug_user"
                 }
+                // Connect Social Service for Fallback
+                await SocialService.shared.connect(
+                    userId: uuid.uuidString,
+                    username: "debug_user"
+                )
                 NSLog("✅ FALLBACK SUCCESS: Set currentUserId=\(uuid), currentUsername=debug_user")
             } else {
                 NSLog("❌ NO FALLBACK: No UUID found in UserDefaults either")

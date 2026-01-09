@@ -478,8 +478,42 @@ class SocialService: ObservableObject {
             
         } catch {
             print("❌ SocialService: Failed to load friends: \(error)")
+            
+            // Check for Key Mismatch (Invalid cryptographic signature)
+            // This happens if client keys don't match what server expects (e.g. fresh install vs old account)
+            let errorMsg = error.localizedDescription
+            if errorMsg.contains("Invalid cryptographic signature") || errorMsg.contains("signature verification failed") {
+                print("🔑 SocialService: Detected key mismatch. Attempting auto-repair...")
+                await repairKeys()
+            }
         }
         isLoading = false
+    }
+    
+    /// Auto-repair keys by re-uploading the current public key to the server
+    private func repairKeys() async {
+        guard let currentUsername = currentUsername else { return }
+        
+        do {
+            // 1. Get current keys
+            guard let (_, publicKey) = await KeychainManager.shared.getKeyPair() else {
+                print("❌ SocialService: Cannot repair keys - no local keys found")
+                return
+            }
+            
+            print("🔄 SocialService: Re-registering user \(currentUsername) to update public key...")
+            
+            // 2. Call Secure Registration (updates key if username exists)
+            _ = try await SupabaseClient.shared.registerUserSecure(username: currentUsername, publicKey: publicKey)
+            
+            print("✅ SocialService: Keys repaired successfully! Retrying loadFriends...")
+            
+            // 3. Retry action
+            await loadFriends()
+            
+        } catch {
+            print("❌ SocialService: Key repair failed: \(error)")
+        }
     }
     
     // MARK: - Actions

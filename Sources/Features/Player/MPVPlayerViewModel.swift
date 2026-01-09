@@ -387,7 +387,7 @@ class MPVPlayerViewModel: ObservableObject {
              await self.playbackService.seek(to: seekTime)
              
              // Wait briefly for seek to latch, then play
-             try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+             try? await Task.sleep(nanoseconds: 600_000_000) // 600ms
              await self.playbackService.play()
              self.isPlaying = true
         }

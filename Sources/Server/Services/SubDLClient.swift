@@ -102,12 +102,12 @@ final class SubDLClient {
 
         var request = URLRequest(url: url)
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
-        request.timeoutInterval = 5 // 5s timeout for search
+        request.timeoutInterval = 15 // 15s timeout for search
 
         // Use custom session to enforce timeout (URLSession.shared often ignores request.timeoutInterval)
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 5
-        config.timeoutIntervalForResource = 5
+        config.timeoutIntervalForRequest = 15
+        config.timeoutIntervalForResource = 15
         let session = URLSession(configuration: config)
 
         let (data, response) = try await session.data(for: request)
@@ -226,14 +226,14 @@ final class SubDLClient {
         guard let url = components.url else { return [] }
         var request = URLRequest(url: url)
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
-        request.timeoutInterval = 5
+        request.timeoutInterval = 15
         
         // print("🔍 Retrying URL: \(url)")
         
         // Use custom session to enforce timeout
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 5
-        config.timeoutIntervalForResource = 5
+        config.timeoutIntervalForRequest = 15
+        config.timeoutIntervalForResource = 15
         let session = URLSession(configuration: config)
         
         let (data, _) = try await session.data(for: request)
@@ -265,11 +265,11 @@ final class SubDLClient {
 
         var request = URLRequest(url: url)
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
-        request.timeoutInterval = 5
+        request.timeoutInterval = 15
 
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 5
-        config.timeoutIntervalForResource = 5
+        config.timeoutIntervalForRequest = 15
+        config.timeoutIntervalForResource = 15
         let session = URLSession(configuration: config)
 
         let (data, _) = try await session.data(for: request)
@@ -409,13 +409,13 @@ final class SubDLClient {
         print("📥 Downloading subtitle from SubDL CDN: \(downloadPath)")
 
         var request = URLRequest(url: url)
-        request.timeoutInterval = 5 // Explicitly set request timeout
+        request.timeoutInterval = 15 // Explicitly set request timeout
 
         // request.timeoutInterval is sometimes ignored by shared session, so we use a custom config
 
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 5 // 5s timeout for download (fail fast)
-        config.timeoutIntervalForResource = 5
+        config.timeoutIntervalForRequest = 15 // 15s timeout for download (fail fast)
+        config.timeoutIntervalForResource = 15
         let session = URLSession(configuration: config)
 
         let (data, response) = try await session.data(for: request)

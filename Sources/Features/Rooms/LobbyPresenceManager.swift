@@ -150,6 +150,25 @@ class LobbyPresenceManager: ObservableObject {
                         if let index = viewModel.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
                             // Double-check they're actually gone by verifying no recent join
                             let participant = viewModel.participants[index]
+                            
+                            // PHX_REF CHECK:
+                            // If the leave event is for an old connection ID (phx_ref), but the user
+                            // has a newer phx_ref in the list (from a recent join/update), IGNORE the leave.
+                            // This handles the "Disconnect Old -> Connect New" race condition.
+                            // The `userId` in the callback IS the phx_ref (connection ID) if not overridden,
+                            // but Supabase SDK passes the connection ref as the second arg usually?
+                            // Actually, in our `LobbyPresenceManager` wrapper, `userId` is the connection ref.
+                           
+                            // Let's get the ref that represents THIS leave event
+                            let leavingPhxRef = userId // The raw ID passed from Supabase is the presence ref
+                            
+                            // If the participant in the list has a DIFFERENT phxRef, they have already re-connected/updated.
+                            // So this leave is for their OLD session.
+                            if let currentPhxRef = participant.phxRef, currentPhxRef != leavingPhxRef {
+                                NSLog("🛡️ Ignoring stale LEAVE for \(participant.name) (Ref mismatch: Old=\(leavingPhxRef), New=\(currentPhxRef))")
+                                return
+                            }
+
                             let timeSinceJoin = Date().timeIntervalSince(participant.joinedAt)
 
                             // If they joined recently (< 1 second), it's a metadata update, not a real leave

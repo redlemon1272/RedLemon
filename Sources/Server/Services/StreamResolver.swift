@@ -348,7 +348,7 @@ actor StreamResolver {
         let beforeAudioFilter = filteredStreams.count
         filteredStreams = filteredStreams.filter { stream in
             let combinedText = getExtendedSearchText(for: stream)
-            let hasAcceptableAudio = hasAcceptableAudioLanguage(combinedText)
+            let hasAcceptableAudio = hasAcceptableAudioLanguage(combinedText, targetTitle: targetTitle)
             if !hasAcceptableAudio {
                 let audioDesc = getAudioLanguageDescription(combinedText)
                 print("   🚫 RESOLVER BLOCKING non-English audio: \(stream.title) (\(audioDesc))")
@@ -846,7 +846,7 @@ actor StreamResolver {
         return text.lowercased()
     }
 
-    private func hasAcceptableAudioLanguage(_ title: String) -> Bool {
+    private func hasAcceptableAudioLanguage(_ title: String, targetTitle: String? = nil) -> Bool {
         let lower = title.lowercased()
 
         // 0. Explicit Whitelist for known Multi-Audio groups
@@ -871,33 +871,29 @@ actor StreamResolver {
         if hasEnglish { return true }
 
         // 2. Explicit foreign language indicators (primary audio is NOT English)
-        let isForeign = lower.contains("french") ||
-                       lower.contains("german") ||
-                       lower.contains("spanish") ||
-                       lower.contains("latino") ||
-                       lower.contains("castellano") ||
-                       lower.contains("italian") ||
-                       lower.contains("portuguese") ||
-                       lower.contains("dublado") ||  // Portuguese: dubbed
-                       lower.contains("doblado") ||  // Spanish: dubbed (masculine)
-                       lower.contains("doblada") ||  // Spanish: dubbed (feminine)
-                       lower.contains("doppiato") || // Italian: dubbed
-                       lower.contains("doublé") ||   // French: doubled/dubbed
-                       lower.contains("dablyazh") || // Russian: dubbing (romanized)
-                       lower.contains("russian") ||
-                       lower.contains("japanese") ||
-                       lower.contains("korean") ||
-                       lower.contains("chinese") ||
-                       lower.contains("国粤") || // Mandarin/Cantonese
-                       lower.contains("中文字幕") || // Chinese Subs
-                       lower.contains("韓文") || // Korean
-                       lower.contains("polish") ||
-                       lower.contains("lektor") || // Polish voiceover
-                       lower.contains("polski") ||
-                       lower.contains(" pl ") || // Polish flag (spaces)
-                       lower.contains("-pl-") ||
-                       lower.contains(".pl.") ||
-                       lower.contains("swha") // Spanish release group/tag
+        
+        let targetLower = targetTitle?.lowercased() ?? ""
+        
+        let foreignKeywords = [
+             "french", "german", "spanish", "latino", "castellano", "italian", "portuguese",
+             "dublado", "doblado", "doblada", "doppiato", "doublé", "dablyazh", "russian",
+             "japanese", "korean", "chinese", "国粤", "中文字幕", "韓文", "polish", "lektor", "polski",
+             "swha"
+        ]
+        
+        // Special case for Polish flag patterns
+        let polishFlags = [" pl ", "-pl-", ".pl."]
+
+        let isForeign = foreignKeywords.contains { kw in
+             if lower.contains(kw) {
+                 // Optimization: If the keyword is in the movie title (e.g. "Italian Job"), ignore it
+                 if !targetLower.isEmpty && targetLower.contains(kw) {
+                     return false
+                 }
+                 return true
+             }
+             return false
+        } || polishFlags.contains { lower.contains($0) }
 
         // Check for Multi/Dual audio
         // Moved up to allow exceptions for Russian Multi releases

@@ -651,21 +651,56 @@ struct RoomListView: View {
              room.participantCount = count
         }
 
-        // NEW: Update media info (for playlist progression)
-        if let mediaItemData = newRecord["media_item"] as? [String: Any] {
-            // Parse MediaItem from JSON
-            if let data = try? JSONSerialization.data(withJSONObject: mediaItemData),
-               let mediaItem = try? JSONDecoder().decode(MediaItem.self, from: data) {
-                room.mediaItem = mediaItem
-                // Update poster if available
-                if let poster = mediaItem.poster {
-                     room.posterURL = poster
+        // NEW: Update media info (for playlist progression) from flat columns
+        // The DB uses flat columns (imdb_id, name, poster_url, etc.) not a nested media_item JSON
+        if let imdbId = newRecord["imdb_id"] as? String {
+            let name = newRecord["name"] as? String ?? room.mediaItem?.name ?? "Unknown Title"
+            let poster = newRecord["poster_url"] as? String
+            let backdrop = newRecord["backdrop_url"] as? String
+            
+            // Reconstruct MediaItem with updated data
+            // We use the existing type if possible, or infer from season/episode
+            let currentType = room.mediaItem?.type ?? ((newRecord["season"] != nil || newRecord["episode"] != nil) ? "series" : "movie")
+            
+            let updatedMedia = MediaItem(
+                id: imdbId,
+                type: currentType,
+                name: name,
+                poster: (poster?.isEmpty == false) ? poster : room.mediaItem?.poster,
+                background: (backdrop?.isEmpty == false) ? backdrop : room.mediaItem?.background,
+                logo: room.mediaItem?.logo, // Preserve logo if we have it
+                description: newRecord["description"] as? String ?? room.mediaItem?.description,
+                releaseInfo: room.mediaItem?.releaseInfo,
+                year: room.mediaItem?.year,
+                imdbRating: room.mediaItem?.imdbRating,
+                genres: room.mediaItem?.genres,
+                runtime: room.mediaItem?.runtime
+            )
+            
+            // Check if identity changed (triggering fresh metadata load)
+            let isNewMedia = room.mediaItem?.id != imdbId
+            room.mediaItem = updatedMedia
+            
+            if let poster = updatedMedia.poster {
+                room.posterURL = poster
+            }
+            
+            // If it's a new media item, trigger a background metadata enrichment
+            if isNewMedia {
+                NSLog("%@", "🆕 RoomListView: Detected media change to \(name) (\(imdbId)) - Triggering enrichment")
+                let state = appState
+                Task { @MainActor in
+                    let (_, enrichedRoom) = await RoomListView.fetchPosterForRoom(room: room)
+                    if let enriched = enrichedRoom {
+                        if let idx = state.activeRooms.firstIndex(where: { $0.id == roomId }) {
+                            state.activeRooms[idx] = enriched
+                        }
+                    }
                 }
             }
         }
 
         // Update Season/Episode (Only if Series)
-        // Verify against the *current* media item type (updated above)
         if let type = room.mediaItem?.type, type == "series" {
             if let season = newRecord["season"] as? Int {
                  room.season = season
@@ -673,8 +708,9 @@ struct RoomListView: View {
             if let episode = newRecord["episode"] as? Int {
                  room.episode = episode
             }
-        } else {
-            // For movies, ensure these are cleared if the update payload implies a change (or just to be safe)
+        } else if let type = room.mediaItem?.type, type == "movie" {
+            // For movies, ensure these are cleared (NULL in DB maps to NSNull in JSON/Dictionary if present, but usually just missing)
+            // If they are missing or nulled in DB, we should clear them
             room.season = nil
             room.episode = nil
         }

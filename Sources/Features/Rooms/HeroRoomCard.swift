@@ -123,18 +123,6 @@ struct HeroRoomCardContent: View {
 
                     Spacer()
 
-                    // Language Badge (Mocked for now)
-                    HStack(spacing: 4) {
-                        Text("🇺🇸") // Placeholder flag
-                        Text("EN")
-                            .font(.system(size: 11, weight: .bold))
-                            .foregroundColor(.white)
-                    }
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 5)
-                    .background(Material.thinMaterial)
-                    .clipShape(Capsule())
-
                     HStack(spacing: 4) {
                         Image(systemName: "person.2.fill")
                             .font(.system(size: 10))

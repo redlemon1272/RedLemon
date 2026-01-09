@@ -117,12 +117,8 @@ struct RoomListView: View {
         .navigationTitle("Watch Party Rooms")
         .toolbar {
             ToolbarItem(placement: .automatic) {
-                Button(action: {
-                    loadRooms(reset: true)
-                }) {
-                    Label("Refresh", systemImage: "arrow.clockwise")
-                }
-                .disabled(isLoading)
+                // Manual refresh removed as Realtime auto-update handles this
+                EmptyView()
             }
         }
         .sheet(isPresented: $showJoinDialog) {

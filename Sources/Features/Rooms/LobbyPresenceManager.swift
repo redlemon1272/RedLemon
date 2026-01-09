@@ -422,6 +422,18 @@ class LobbyPresenceManager: ObservableObject {
                     continue
                 }
 
+                // REALTIME PROTECTION:
+                // If the user was added via Realtime (has phxRef) and Realtime is currently active,
+                // do NOT remove them via DB Polling. Trust the Realtime `.leave` event instead.
+                // This prevents "Ghost Leaves" during refresh race conditions where DB row is gone
+                // but Realtime is just switching connection IDs.
+                let isRealtimeActive = await viewModel.realtimeManager?.isRealtimeConnected() ?? false
+                if localP.phxRef != nil && isRealtimeActive {
+                     // NSLog("🛡️ Preserving Realtime participant '\(localP.name)' despite missing from DB poll (Trusting Realtime)")
+                     finalParticipants.append(localP)
+                     continue
+                }
+
                 let timeSinceJoin = Date().timeIntervalSince(localP.joinedAt)
                 if timeSinceJoin < 3.0 {
                     // KEEP THEM: They joined less than 3 seconds ago (Grace Period)

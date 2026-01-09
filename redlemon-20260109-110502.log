@@ -1,0 +1,1158 @@
+2026-01-09 11:05:15.821 RedLemon[2222:11744] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-09 11:05:15.821 RedLemon[2222:11744] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-09 11:05:15.995 RedLemon[2222:11831] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-09 11:05:16.017 RedLemon[2222:11744] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-09 11:05:16.099 RedLemon[2222:11744] ✅ Playback state reset complete - starting in browse view
+2026-01-09 11:05:16.099 RedLemon[2222:11744] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-09 11:05:16.099 RedLemon[2222:11744] 🧪 Testing Profile: debug
+2026-01-09 11:05:16.099 RedLemon[2222:11860] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-09 11:05:16.100 RedLemon[2222:11744] ✅ Keychain: Found stored username: ursinho
+2026-01-09 11:05:16.100 RedLemon[2222:11744] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-09 11:05:16.100 RedLemon[2222:11860] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-09 11:05:16.642 RedLemon[2222:11835] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-09 11:05:16.660 RedLemon[2222:11835] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-09 11:05:16.660 RedLemon[2222:11835] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 11:05:16.689 RedLemon[2222:11744] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 11:05:16.689 RedLemon[2222:11744] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 11:05:16.689 RedLemon[2222:11744] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 11:05:16.689 RedLemon[2222:11744] 🚀 RedLemon: Starting HTTP server...
+2026-01-09 11:05:16.690 RedLemon[2222:11744] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-09 11:05:16.743 RedLemon[2222:11744] ✅ RedLemon: HTTPServer instance created
+2026-01-09 11:05:16.744 RedLemon[2222:11831] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"633463E5-BA0F-41C3-BAC7-3D382863588D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+📂 Loaded 5 credential(s) from cache
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-09 11:05:16.993 RedLemon[2222:11744] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 11:05:18.857 RedLemon[2222:11744] ✅ RedLemon: Server marked as ready
+2026-01-09 11:05:18.902 RedLemon[2222:11744] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-09 11:05:18.902 RedLemon[2222:11744] 🔍 Performing startup checks...
+2026-01-09 11:05:18.902 RedLemon[2222:11744] ✅ Username-based authentication ready
+2026-01-09 11:05:19.669 RedLemon[2222:11744] 🔍 Performing startup checks...
+2026-01-09 11:05:19.669 RedLemon[2222:11744] ✅ Username-based authentication ready
+2026-01-09 11:05:19.940 RedLemon[2222:11744] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1490 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1490, 412 movies)
+✅ [EventsView] Loaded 412 movies from config version 1490
+🗓 AppState: Updated schedule epoch to 2026-01-09 03:41:37 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3620 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt29644189/img (793673 bytes)
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3619 seconds
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3619 seconds
+📨 Received: {"ref":"B164F2D1-42E3-42FA-8560-4652335B79C7","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbo7X6ifE6AujC","phx_ref_prev":"GIkbnxRYLU06Ameh","last_seen":"2026-01-09T16:05:18.462Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbo7sCuK86Auji","last_seen":"2026-01-09T16:05:18.583Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+💰 LicenseManager: Checking for background crypto payments...
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"74C57998-D6E8-41B9-9BC2-DAC8638C4EF5","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 49 items to cloud...
+🔄 SocialService: Syncing 49 items to cloud (serial)...
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.140s (RTT: 209ms)
+   Local:  2026-01-09 16:05:20 +0000
+   Server: 2026-01-09 16:05:20 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3609 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3599 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbqGHtG-o6Amuh","phx_ref_prev":"GIkbo7X6ifE6AujC","last_seen":"2026-01-09T16:05:38.523Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbo7X6ifE6AujC","phx_ref_prev":"GIkbnxRYLU06Ameh","last_seen":"2026-01-09T16:05:18.462Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbqGLwq886AmvB","phx_ref_prev":"GIkbo7sCuK86Auji","last_seen":"2026-01-09T16:05:38.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbo7sCuK86Auji","last_seen":"2026-01-09T16:05:18.583Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3589 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3579 seconds
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbrQr-OAM6Amwh","phx_ref_prev":"GIkbqGLwq886AmvB","last_seen":"2026-01-09T16:05:58.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbqGLwq886AmvB","phx_ref_prev":"GIkbo7sCuK86Auji","last_seen":"2026-01-09T16:05:38.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbrQ22o8w6AmxB","phx_ref_prev":"GIkbqGHtG-o6Amuh","last_seen":"2026-01-09T16:05:58.584Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbqGHtG-o6Amuh","phx_ref_prev":"GIkbo7X6ifE6AujC","last_seen":"2026-01-09T16:05:38.523Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3569 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+💓 Heartbeat sent
+✅ [EventsConfig] Fetched movie_events version 1490 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1490, 412 movies)
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3559 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbsbKcntk6Am0B","phx_ref_prev":"GIkbrQ22o8w6AmxB","last_seen":"2026-01-09T16:06:18.524Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbrQ22o8w6AmxB","phx_ref_prev":"GIkbqGHtG-o6Amuh","last_seen":"2026-01-09T16:05:58.584Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbsbMQMXo6Am0h","phx_ref_prev":"GIkbrQr-OAM6Amwh","last_seen":"2026-01-09T16:06:18.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbrQr-OAM6Amwh","phx_ref_prev":"GIkbqGLwq886AmvB","last_seen":"2026-01-09T16:05:58.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3549 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3539 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbtldN8M06Am4h","phx_ref_prev":"GIkbsbKcntk6Am0B","last_seen":"2026-01-09T16:06:38.471Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbsbKcntk6Am0B","phx_ref_prev":"GIkbrQ22o8w6AmxB","last_seen":"2026-01-09T16:06:18.524Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbtltjmhc6Am5B","phx_ref_prev":"GIkbsbMQMXo6Am0h","last_seen":"2026-01-09T16:06:38.587Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbsbMQMXo6Am0h","phx_ref_prev":"GIkbrQr-OAM6Amwh","last_seen":"2026-01-09T16:06:18.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3529 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3519 seconds
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbuwNaU8A6Am8h","phx_ref_prev":"GIkbtltjmhc6Am5B","last_seen":"2026-01-09T16:06:58.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbtltjmhc6Am5B","phx_ref_prev":"GIkbsbMQMXo6Am0h","last_seen":"2026-01-09T16:06:38.587Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbuwdNyr06Am9B","phx_ref_prev":"GIkbtldN8M06Am4h","last_seen":"2026-01-09T16:06:58.603Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbtldN8M06Am4h","phx_ref_prev":"GIkbsbKcntk6Am0B","last_seen":"2026-01-09T16:06:38.471Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3509 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1490 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1490, 412 movies)
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3499 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbv6bhw046AnB2026-01-09 11:08:44.204 RedLemon[2222:13425] 📡 StreamService: Fetching metadata for tt29644189...
+B","phx_ref_prev":"GIkbuwdNyr06Am9B","last_seen":"2026-01-09T16:07:18.457Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbuwdNyr06Am9B","phx_ref_prev":"GIkbtldN8M06Am4h","last_seen":"2026-01-09T16:06:58.603Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbv6uAS-w6AnBh","phx_ref_prev":"GIkbuwNaU8A6Am8h","last_seen":"2026-01-09T16:07:18.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbuwNaU8A6Am8h","phx_ref_prev":"GIkbtltjmhc6Am5B","last_seen":"2026-01-09T16:06:58.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3489 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3479 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbxFKGwDg6AnEh","phx_ref_prev":"GIkbv6bhw046AnBB","last_seen":"2026-01-09T16:07:38.519Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbv6bhw046AnBB","phx_ref_prev":"GIkbuwdNyr06Am9B","last_seen":"2026-01-09T16:07:18.457Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbxFPNhWo6AnFB","phx_ref_prev":"GIkbv6uAS-w6AnBh","last_seen":"2026-01-09T16:07:38.586Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbv6uAS-w6AnBh","phx_ref_prev":"GIkbuwNaU8A6Am8h","last_seen":"2026-01-09T16:07:18.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3469 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3459 seconds
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbyPu7RCU6AnIh","phx_ref_prev":"GIkbxFPNhWo6AnFB","last_seen":"2026-01-09T16:07:58.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbxFPNhWo6AnFB","phx_ref_prev":"GIkbv6uAS-w6AnBh","last_seen":"2026-01-09T16:07:38.586Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbyP5PPWs6AnJB","phx_ref_prev":"GIkbxFKGwDg6AnEh","last_seen":"2026-01-09T16:07:58.581Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbxFKGwDg6AnEh","phx_ref_prev":"GIkbv6bhw046AnBB","last_seen":"2026-01-09T16:07:38.519Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3449 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1490 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1490, 412 movies)
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3439 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbzaInDw86AnOB","phx_ref_prev":"GIkbyP5PPWs6AnJB","last_seen":"2026-01-09T16:08:18.505Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbyP5PPWs6AnJB","phx_ref_prev":"GIkbxFKGwDg6AnEh","last_seen":"2026-01-09T16:07:58.581Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"15","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbzaPoGBY6AnOh","phx_ref_prev":"GIkbyPu7RCU6AnIh","last_seen":"2026-01-09T16:08:18.584Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbyPu7RCU6AnIh","phx_ref_prev":"GIkbxFPNhWo6AnFB","last_seen":"2026-01-09T16:07:58.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"16","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3429 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3419 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb0kb1xuU6Au3i","phx_ref_prev":"GIkbzaInDw86AnOB","last_seen":"2026-01-09T16:08:38.455Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbzaInDw86AnOB","phx_ref_prev":"GIkbyP5PPWs6AnJB","last_seen":"2026-01-09T16:08:18.505Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb0mMDVhE6AnTB","phx_ref_prev":"GIkbzaPoGBY6AnOh","last_seen":"2026-01-09T16:08:38.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbzaPoGBY6AnOh","phx_ref_prev":"GIkbyPu7RCU6AnIh","last_seen":"2026-01-09T16:08:18.584Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"17","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+[2026-01-09T16:08:44Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Black Phone 2 (Live: true)
+   Event start time: 2026-01-09 15:01:37 +0000
+   Event duration: 7440.0s
+   Current time: 2026-01-09 16:08:44 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt29644189
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY - Re-unlocking for fresh URL 🔑
+   Stored Hash: b605e93d1d16f1202a595046e3f682110e95003a
+   Cached URL: https://chi6-4.download.real-d...
+[2026-01-09T16:08:44Z] [INFO] [StreamService.swift:90] 🎬 StreamService: Starting resolution for: Black Phone 2
+[ INFO ] GET /api/metadata/meta/movie/tt29644189 [request-id: C28653E6-1E15-4DFE-B520-A2E2B022C6D3]
+2026-01-09 11:08:44.434 RedLemon[2222:13425] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-09 11:08:44.434 RedLemon[2222:13425] ✅ StreamService: Metadata loaded: Black Phone 2
+2026-01-09 11:08:44.434 RedLemon[2222:13425] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-09 11:08:44.435 RedLemon[2222:13425] ⚡️ StreamResolver: Resolving streams for tt29644189 (S0E0)
+2026-01-09 11:08:44.565 RedLemon[2222:13584]    📅 Filtering by year: 2025
+2026-01-09 11:08:44.693 RedLemon[2222:13493] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-09 11:08:44.694 RedLemon[2222:13493] 🔍 ProviderManager: Fetching streams for tt29644189...
+2026-01-09 11:08:44.696 RedLemon[2222:13582] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-09 11:08:44.697 RedLemon[2222:13584] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-09 11:08:44.697 RedLemon[2222:13584] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridApiKey23A222,                     0ebridProvider23A2ealDebrid27D/stream/movie/tt29644189.json
+2026-01-09 11:08:44.697 RedLemon[2222:13582] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-09 11:08:44.697 RedLemon[2222:13584] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA2                     0ebridProvider23A2ealDebrid27D/stream/movie/tt29644189.json
+2026-01-09 11:08:44.697 RedLemon[2222:13582] 🔗 Torrentio URL (length: 120): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt29644189.json...
+2026-01-09 11:08:44.697 RedLemon[2222:13582] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt29644189.json
+2026-01-09 11:08:44.835 RedLemon[2222:13425] 📡 Torrentio: HTTP 200, received 61207 bytes
+2026-01-09 11:08:44.876 RedLemon[2222:13425] ✅ Torrentio: Parsed 116 streams from 116 raw
+2026-01-09 11:08:47.949 RedLemon[2222:13425] ✅ DebridSearch: Parsed 1 streams
+2026-01-09 11:08:47.949 RedLemon[2222:13425] ✅ ProviderManager: Fetched 117 raw, returning 117 unique streams
+2026-01-09 11:08:47.949 RedLemon[2222:13425] 📦 StreamResolver: Received 117 raw streams, bucketing...
+💾 Cache SET: Metadata[meta_movie_tt29644189]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt29644189.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+⚠️ MediaFusion: HTTP 418
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+⚠️ Comet: Skipping invalid redirect URL: https://www.reddit.com/r/StremioAddons/comments/1plsqv7/elfh...
+✅ Comet: Parsed 0 valid streams
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3409 seconds
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt29644189.json
+✅ Metadata fetched from Cinemeta for tt29644189: Black Phone 2 (2025)
+🎯 Target title for matching: Black Phone 2
+   📅 Year filter (2025): 117 → 117 streams
+   🚫 RESOLVER BLOCKING Spam/Watermark: Black.Phone.2.2025.1080p.CAMRip.LAT.ENG.DUB.1XBET.mp4
+👤 0 💾 2.01 GB ⚙️ Cinecalidad
+🇬🇧 / 🇲🇽
+   🚫 RESOLVER FILTERED Spam/Watermarks: 117 → 116 streams
+   🚫 RESOLVER BLOCKING non-English audio: The.Black.Phone.2.2025.MULTi.FRENCH.2160p.HDR.DV.WEB-DL.H265-Slay3R
+👤 13 💾 20.21 GB ⚙️ ThePirateBay
+Multi Audio / 🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black Phone 2 (2025) [MULTi] [2160p] [iT] [WEB-DL] [DV] [HDR10] [DDP5.1.Atmos-R22] [Lektor PL i napisy PL]
+👤 2 💾 20.21 GB ⚙️ BestTorrents
+Multi Audio / 🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Чёрный телефон 2 / Black Phone 2 [2025 WEB-DL 2160p HDR10 Dolby Vision] [Hybrid] Dub (Dragon Studio) + 3x MVO (TVShows GoLTFilm LineFilm) + VO (Чадов) + MVO (Ukr) + Original (Eng) + Sub (Rus Ukr Eng)
+👤 0 💾 22.28 GB ⚙️ Rutracker
+🇬🇧 / 🇷🇺 / 🇺🇦 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black Phone 2 (2025) [MULTi] [1080p] [AMZN] [WEB-DL] [x264] [AC3-KiT] [Lektor PL & Napisy PL]
+👤 2 💾 7.18 GB ⚙️ BestTorrents
+Multi Audio / 🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black Phone 2 (2025) [WEB-DL 1080p X265 10bits]
+👤 1 💾 5.45 GB ⚙️ ThePirateBay
+🇬🇧 / 🇪🇸 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black Phone 2 (2025) [PLSUB] [AI] [1080p] [AMZN] [WEB-DL] [DDP5.1] [H.264-KyoGo] [Napisy PL (AI)]
+👤 1 💾 6.88 GB ⚙️ BestTorrents
+🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black Phone 2 (2025) [MULTi] [1080p] [MA] [WEB-DL] [DDP5.1.Atmos.H.264-R22] [Lektor PL i napisy PL]
+👤 0 💾 9.59 GB ⚙️ BestTorrents
+Multi Audio / 🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black Phone 2 (2025) [MULTi] [2160p] [iT] [WEB-DL] [DV] [HDR10] [DDP5.1.Atmos-R22] [Lektor PL i napisy PL]
+👤 1 💾 20.21 GB ⚙️ BestTorrents
+Multi Audio / 🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Чёрный телефон 2 / Black Phone 2 (2025) WEB-DL 1080p от селезень | D | Movie Dubbing
+👤 4 💾 7.23 GB ⚙️ Rutor
+🇬🇧 / 🇷🇺 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black Phone 2 (2025) [MULTi] [1080p] [MA] [WEB-DL] [DDP5.1.Atmos.H.264-R22] [Lektor PL i napisy PL]
+👤 1 💾 9.59 GB ⚙️ BestTorrents
+Multi Audio / 🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black.Phone.2.2025.1080p.WEBRip.Dublado.mkv
+👤 1 💾 2.22 GB ⚙️ Comando
+🇬🇧 / 🇵🇹 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black Phone 2 (2025) [PL] [720p] [WEB-DL] [XviD] [AC3-OzW] [Lektor PL]
+👤 16 💾 2.48 GB ⚙️ BestTorrents
+🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Чёрный телефон 2 / Black Phone 2 (2025) BDRip 720p от DoMiNo & селезень | D | Movie Dubbing
+👤 4 💾 4.91 GB ⚙️ Rutor
+🇬🇧 / 🇷🇺 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black.Phone.2.2025.PL.720p.WEB-DL.XviD.AC3-OzW
+👤 1 💾 2.48 GB ⚙️ BestTorrents
+🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black.Phone.2.2025.PL.480p.WEB-DL.XviD.AC3-OzW
+👤 1 💾 1.68 GB ⚙️ BestTorrents
+🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Чёрный телефон 2 / Black Phone 2 (2025) BDRip от MegaPeer | D | Movie Dubbing
+👤 19 💾 1.46 GB ⚙️ Rutor
+🇷🇺 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black Phone 2 (2025) [PL] [WEB-DL] [XviD-OzW] [Lektor PL]
+👤 7 💾 700.38 MB ⚙️ BestTorrents
+🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Black.Phone.2.2025.PL.WEB-DL.XviD-OzW
+👤 3 💾 700.38 MB ⚙️ BestTorrents
+🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Чёрный телефон 2 / Black Phone 2 (2025) WEB-DLRip-AVC от DoMiNo & селезень | D | Movie Dubbing
+👤 1 💾 2.18 GB ⚙️ Rutor
+🇬🇧 / 🇷🇺 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: [nicollubin] Czarny telefon 2 (2025) ]WEB-DL.XviD-A ZQ] [ Napisy PL AI]
+👤 1 💾 700.02 MB ⚙️ BestTorrents
+🇵🇱 (Audio)
+   🎵 RESOLVER FILTERED audio language: 116 → 96 streams
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt29644189 (movie)
+   ℹ️ Fallback Name: Black Phone 2 (2025)
+💓 Heartbeat sent
+📨 Received: {"ref":"18","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+❌ StreamResolver: Subtitle error: Error Domain=NSURLErrorDomain Code=-1001 "The request timed out." UserInfo={_kCFStreamErrorCodeKey=-2103, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <5580B07C-3E7F-4B9A-B55C-04AA5E817F64>.<1>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <5580B07C-3E7F-4B9A-B55C-04AA5E817F64>.<1>"
+), NSLocalizedDescription=The request timed out., NSErrorFailingURLStringKey=https://api.subdl.com/api/v1/subtitles?api_key=aGS2S1FTQ3441_1JAJaATPtgNVrcEhr7&imdb_id=tt29644189&languages=en&type=movie, NSErrorFailingURLKey=https://api.subdl.com/api/v1/subtitles?api_key=aGS2S1FTQ3441_1JAJaATPtgNVrcEhr7&imdb_id=tt29644189&languages=en&type=movie, _kCFStreamErrorDomainKey=4}
+   --- Processing Bucket: 2160p (Input: 22) ---
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 2160p WEBRip
+👤 100 💾 5.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 2160p WEBRip
+👤 100 💾 5.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 2160p WEBRip
+👤 100 💾 5.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 2160p WEBRip
+👤 100 💾 5.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 2160p WEBRip
+👤 100 💾 5.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 2160p WEBRip
+👤 100 💾 5.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 2160p WEBRip
+👤 100 💾 5.08 GB ⚙️ YTS
+   ✅ Bucket 2160p Final Count: 22
+   --- Processing Bucket: 1080p (Input: 56) ---
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Bla2026-01-09 11:08:56.409 RedLemon[2222:13698] ✅ Persisted stream selection to room event_tt29644189
+2026-01-09 11:08:56.899 RedLemon[2222:11744] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt29644189/img
+2026-01-09 11:08:56.899 RedLemon[2222:11744] ⏳ Background art loading...
+2026-01-09 11:08:56.899 RedLemon[2222:11744] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt29644189/img
+2026-01-09 11:08:56.900 RedLemon[2222:11744] ⏳ Logo loading...
+2026-01-09 11:08:56.943 RedLemon[2222:11744]    Quality: 1080p
+2026-01-09 11:08:56.944 RedLemon[2222:11744]    Mode: watchParty
+2026-01-09 11:08:56.944 RedLemon[2222:11744] 📡 Fetching metadata for tt29644189...
+2026-01-09 11:08:56.944 RedLemon[2222:11744] ✅ Background art loaded successfully
+2026-01-09 11:08:57.028 RedLemon[2222:11744] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-09 11:08:57.028 RedLemon[2222:11744] 📝 GUEST: Extracted filename='Black.Phone.2.2025.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv' (len=62), sourceQuality=nil, selectedQuality=1080p
+ck Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p WEBRip
+👤 100 💾 2.1 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 1080p BluRay
+👤 100 💾 2.1 GB ⚙️ YTS
+   ✅ Bucket 1080p Final Count: 56
+   --- Processing Bucket: 720p (Input: 11) ---
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p WEBRip
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p BluRay
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p WEBRip
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p BluRay
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p WEBRip
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p BluRay
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p WEBRip
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p BluRay
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p WEBRip
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p WEBRip
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p BluRay
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p WEBRip
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p BluRay
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p WEBRip
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p BluRay
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p WEBRip
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p BluRay
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p WEBRip
+👤 100 💾 1.02 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Black Phone 2 2025 720p BluRay
+👤 100 💾 1.02 GB ⚙️ YTS
+   ✅ Bucket 720p Final Count: 11
+   --- Processing Bucket: 480p (Input: 7) ---
+   ✅ Bucket 480p Final Count: 7
+📦 2160p Primary: Black.Phone.2.2025.2160p.WEB-DL.DV.HDR10+.ENG.LATINO.DDP5.1.Atmos.H265.MP4-BTM
+👤 98 💾 21.45 GB ⚙️ ThePirateBay
+Multi Audio / 🇬🇧 / 🇲🇽
+📦 1080p Primary: Black Phone 2 (2025) 1080p WEB-DL H265 Ita Eng AC3 5.1 Multisub iDN_CreW
+👤 6 💾 2.82 GB ⚙️ ilCorSaRoNeRo
+Multi Subs / 🇬🇧 / 🇮🇹
+📦 720p Primary: Black Phone 2 (2025) 720p WEBRip x264 AAC [ Hin Eng ] ESub
+👤 11 💾 1.04 GB ⚙️ 1337x
+🇬🇧 / 🇮🇳
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: b605e93d1d16f1202a595046e3f682110e95003a
+✅ StreamService: Found requested stream hash! Locking selection.
+[2026-01-09T16:08:54Z] [INFO] [StreamService.swift:261] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+🚫 StreamService: Applying Extended Cut Filter (Event Mode)
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Black.Phone.2.2025.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+👤 22 💾 6.73 GB ⚙️ 1337x
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/b605e93d1d16f1202a595046e3f682110e95003a/null/0/Black.Phone.2.2025.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+✅ StreamService: Resolved to: https://chi4-4.download.real-debrid.com/d/7ZKR2Y4JBYFLS127/Black.Phone.2.2025.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Black.Phone.2.2025.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+👤 22 💾 6.73 GB ⚙️ 1337x
+📊 Stream Size: 6.73 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+   ✅ Fresh URL obtained: https://chi4-4.download.real-debrid.com/...
+   ✅ Database updated with fresh URL
+
+🎬 Live event - calculating position: 4039.9419264793396 seconds
+   Event start time: 2026-01-09 15:01:37 +0000
+   Current time: 2026-01-09 16:08:56 +0000
+   Room createdAt: 2026-01-09 15:01:37 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 4039.9419264793396
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Black Phone 2
+✅ Cache HIT: Metadata[meta_movie_tt29644189]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 84DDA423-24B3-468B-B427-A3E5ED01EE40]
+2026-01-09 11:08:57.202 RedLemon[2222:11744] ✅ Logo loaded successfully
+🔍 Searching SubDL: tt29644189 (movie)
+   ℹ️ Fallback Name: Black Phone 2 (2025)
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt29644189": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3399 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb1vBySMo6AnXB","phx_ref_prev":"GIkb0kb1xuU6Au3i","last_seen":"2026-01-09T16:08:58.475Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb0kb1xuU6Au3i","phx_ref_prev":"GIkbzaInDw86AnOB","last_seen":"2026-01-09T16:08:38.455Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"19","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb1vQsCeA6Au5C","phx_ref_prev":"GIkb0mMDVhE6AnTB","last_seen":"2026-01-09T16:08:58.586Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb0mMDVhE6AnTB","phx_ref_prev":"GIkbzaPoGBY6AnOh","last_seen":"2026-01-09T16:08:38.585Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[ WARNING ] Error Domain=NSURLErrorDomain Code=-1001 "The request timed out." UserInfo={_kCFStreamErrorCodeKey=-2103, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <BF6C8C83-4037-4693-BE34-5B21919AF8A5>.<1>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <BF6C8C83-4037-4693-BE34-5B21919AF8A5>.<1>"
+), NSLocalizedDescription=The request timed out., NSErrorFailingURLStringKey=https://api.subdl.com/api/v1/subtitles?api_key=aGS2S1FTQ3441_1JAJaATPtgNVrcEhr7&imdb_id=tt29644189&languages=en&type=movie, NSErrorFailingURLKey=https://api.subdl.com/api/v1/subtitles?api_key=aGS2S1FTQ3441_1JAJaATPtgNVrcEhr7&imdb_id=tt29644189&languages=en&type=movie, _kCFStreamErrorDomainKey=4} [request-id: 84DDA423-24B3-468B-B427-A3E5ED01EE40]
+2026-01-09 11:09:02.060 RedLemon[2222:11744] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi4-4.download.real-debrid.com/d/7ZKR2Y4JBYFLS127/B, subtitles: 0
+2026-01-09 11:09:02.141 RedLemon[2222:11744] ✅ Stream ready, starting playback...
+2026-01-09 11:09:02.141 RedLemon[2222:11744] 🖥️ WindowManager: enterFullscreen() called
+2026-01-09 11:09:02.141 RedLemon[2222:11744]    Window: <SwiftUI.SwiftUIWindow: 0x7f8286351750>
+2026-01-09 11:09:02.141 RedLemon[2222:11744]    Is fullscreen: 0
+2026-01-09 11:09:02.141 RedLemon[2222:11744]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-09 11:09:02.277 RedLemon[2222:11744] 🖼️ Setting up MPV with native macOS video output...
+2026-01-09 11:09:02.283 RedLemon[2222:11744] ✅ MPV initialized with native GPU rendering
+2026-01-09 11:09:02.296 RedLemon[2222:11744] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-09 11:09:02.296 RedLemon[2222:11744] 🎉 Starting watch party sync - Room: event_tt29644189, Host: NO
+2026-01-09 11:09:02.296 RedLemon[2222:11744] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-09 11:09:02.709 RedLemon[2222:11744] 🔄 Starting chat polling for room: event_tt29644189
+2026-01-09 11:09:02.709 RedLemon[2222:11744] 💓 Started playback heartbeat loop
+2026-01-09 11:09:02.709 RedLemon[2222:11744] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-09 11:09:02.709 RedLemon[2222:11744] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-09 11:09:02.709 RedLemon[2222:11744] 🎬🎬🎬 Subtitles: 0
+2026-01-09 11:09:02.709 RedLemon[2222:11744] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Black Phone 2
+2026-01-09 11:09:02.709 RedLemon[2222:11744] 🎬🎬🎬 streamURL: https://chi4-4.download.real-debrid.com/d/7ZKR2Y4JBYFLS127/B
+2026-01-09 11:09:02.710 RedLemon[2222:11744] 🎬🎬🎬 subtitles: 0
+2026-01-09 11:09:02.710 RedLemon[2222:11744] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-09 11:09:02.720 RedLemon[2222:13493] 🔍 MPV track-list/count: 0
+2026-01-09 11:09:02.721 RedLemon[2222:13493] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 11:09:02.721 RedLemon[2222:13493]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 11:09:02.722 RedLemon[2222:13493] ✅ SubtitleService: Scanned 1 tracks (Attempt 1/5)
+2026-01-09 11:09:02.723 RedLemon[2222:13493]    Track: ID=0, Title=Off, External=0
+2026-01-09 11:09:02.725 RedLemon[2222:13917] 🎬 MPV: Current video filename set to: 
+2026-01-09 11:09:02.725 RedLemon[2222:13917] 🎬 MPV loadVideo called with URL: https://chi4-4.download.real-debrid.com/d/7ZKR2Y4J (Encoded: https://chi4-4.download.real-debrid.com/d/7ZKR2Y4J), autoplay: false, expectedSubs: 0
+2026-01-09 11:09:02.725 RedLemon[2222:13917] 🎬 MPV executing: loadfile "https://chi4-4.download.real-debrid.com/d/7ZKR2Y4JBYFLS127/Black.Phone.2.2025.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv"
+2026-01-09 11:09:02.725 RedLemon[2222:13917] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+2026-01-09 11:09:02.736 RedLemon[2222:13582] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-09 11:09:03.161 RedLemon[2222:11744] ⚠️ Playback heartbeat failed: userMessage("No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9")
+2026-01-09 11:09:03.799 RedLemon[2222:13584] 🔍 MPV track-list/count: 0
+2026-01-09 11:09:03.799 RedLemon[2222:13584] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 11:09:03.799 RedLemon[2222:13584]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 11:09:03.799 RedLemon[2222:13584] ✅ SubtitleService: Scanned 1 tracks (Attempt 2/5)
+2026-01-09 11:09:03.799 RedLemon[2222:13584]    Track: ID=0, Title=Off, External=0
+2026-01-09 11:09:04.802 RedLemon[2222:13493] 🔍 MPV track-list/count: 0
+2026-01-09 11:09:04.803 RedLemon[2222:13493] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-09 11:09:04.803 RedLemon[2222:13493]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 11:09:04.803 RedLemon[2222:13493] ✅ SubtitleService: Scanned 1 tracks (Attempt 3/5)
+2026-01-09 11:09:04.803 RedLemon[2222:13493]    Track: ID=0, Title=Off, External=0
+2026-01-09 11:09:05.475 RedLemon[2222:11744] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-09 11:09:05.799 RedLemon[2222:13584] 🔍 MPV track-list/count: 7
+2026-01-09 11:09:05.799 RedLemon[2222:13584] 🔍 Track 0 type: video
+2026-01-09 11:09:05.800 RedLemon[2222:13584] 🔍 Track 1 type: audio
+2026-01-09 11:09:05.800 RedLemon[2222:13584] 🔍 Track 2 type: sub
+2026-01-09 11:09:05.801 RedLemon[2222:13584] ✅ Found subtitle track: ID=1, lang=en, title=Forced, external=0
+2026-01-09 11:09:05.801 RedLemon[2222:13584] 🔍 Track 3 type: sub
+2026-01-09 11:09:05.801 RedLemon[2222:13584] ✅ Found subtitle track: ID=2, lang=en, title=nil, external=0
+2026-01-09 11:09:05.801 RedLemon[2222:13584] 🔍 Track 4 type: sub
+2026-01-09 11:09:05.801 RedLemon[2222:13584] ✅ Found subtitle track: ID=3, lang=en, title=SDH, external=0
+2026-01-09 11:09:05.802 RedLemon[2222:13584] 🔍 Track 5 type: sub
+2026-01-09 11:09:05.802 RedLemon[2222:13584] ✅ Found subtitle track: ID=4, lang=es-419, title=Latin American, external=0
+2026-01-09 11:09:05.802 RedLemon[2222:13584] 🔍 Track 6 type: sub
+2026-01-09 11:09:05.814 RedLemon[2222:13584] ✅ Found subtitle track: ID=5, lang=fr-CA, title=Canadian, external=0
+2026-01-09 11:09:05.814 RedLemon[2222:13584] 📊 Total subtitle tracks found: 6 (including Off if needed)
+2026-01-09 11:09:05.814 RedLemon[2222:13584]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 11:09:05.814 RedLemon[2222:13584]    Start[1]: ID=1, Title='Forced', Lang='en', Ext=0
+2026-01-09 11:09:05.815 RedLemon[2222:13584]    Start[2]: ID=2, Title='nil', Lang='en', Ext=0
+2026-01-09 11:09:05.815 RedLemon[2222:13584]    Start[3]: ID=3, Title='SDH', Lang='en', Ext=0
+2026-01-09 11:09:05.815 RedLemon[2222:13584]    Start[4]: ID=4, Title='Latin American', Lang='es-419', Ext=0
+2026-01-09 11:09:05.815 RedLemon[2222:13584]    Start[5]: ID=5, Title='Canadian', Lang='fr-CA', Ext=0
+2026-01-09 11:09:05.816 RedLemon[2222:13584] ✅ SubtitleService: Scanned 6 tracks (Attempt 1/5)
+2026-01-09 11:09:05.816 RedLemon[2222:13584]    Track: ID=0, Title=Off, External=0
+2026-01-09 11:09:05.816 RedLemon[2222:13584]    Track: ID=1, Title=Forced, External=0
+2026-01-09 11:09:05.817 RedLemon[2222:13584]    Track: ID=2, Title=English, External=0
+2026-01-09 11:09:05.817 RedLemon[2222:13584]    Track: ID=3, Title=SDH, External=0
+2026-01-09 11:09:05.817 RedLemon[2222:13584]    Track: ID=4, Title=Latin American, External=0
+2026-01-09 11:09:05.817 RedLemon[2222:13584]    Track: ID=5, Title=Canadian, External=0
+2026-01-09 11:09:05.818 RedLemon[2222:13584] 🔍 MPV track-list/count: 7
+2026-01-09 11:09:05.818 RedLemon[2222:13584] 🔍 Track 0 type: video
+2026-01-09 11:09:05.819 RedLemon[2222:13584] 🔍 Track 1 type: audio
+2026-01-09 11:09:05.819 RedLemon[2222:13584] 🔍 Track 2 type: sub
+2026-01-09 11:09:05.819 RedLemon[2222:13584] ✅ Found subtitle track: ID=1, lang=en, title=Forced, external=0
+2026-01-09 11:09:05.819 RedLemon[2222:13584] 🔍 Track 3 type: sub
+2026-01-09 11:09:05.819 RedLemon[2222:13584] ✅ Found subtitle track: ID=2, lang=en, title=nil, external=0
+2026-01-09 11:09:05.819 RedLemon[2222:13584] 🔍 Track 4 type: sub
+2026-01-09 11:09:05.819 RedLemon[2222:13584] ✅ Found subtitle track: ID=3, lang=en, title=SDH, external=0
+2026-01-09 11:09:05.819 RedLemon[2222:13584] 🔍 Track 5 type: sub
+2026-01-09 11:09:05.822 RedLemon[2222:13584] ✅ Found subtitle track: ID=4, lang=es-419, title=Latin American, external=0
+2026-01-09 11:09:05.822 RedLemon[2222:13584] 🔍 Track 6 type: sub
+2026-01-09 11:09:05.823 RedLemon[2222:13584] ✅ Found subtitle track: ID=5, lang=fr-CA, title=Canadian, external=0
+2026-01-09 11:09:05.823 RedLemon[2222:13584] 📊 Total subtitle tracks found: 6 (including Off if needed)
+2026-01-09 11:09:05.823 RedLemon[2222:13584]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 11:09:05.823 RedLemon[2222:13584]    Start[1]: ID=1, Title='Forced', Lang='en', Ext=0
+2026-01-09 11:09:05.823 RedLemon[2222:13584]    Start[2]: ID=2, Title='nil', Lang='en', Ext=0
+2026-01-09 11:09:05.823 RedLemon[2222:13584]    Start[3]: ID=3, Title='SDH', Lang='en', Ext=0
+2026-01-09 11:09:05.823 RedLemon[2222:13584]    Start[4]: ID=4, Title='Latin American', Lang='es-419', Ext=0
+2026-01-09 11:09:05.823 RedLemon[2222:13584]    Start[5]: ID=5, Title='Canadian', Lang='fr-CA', Ext=0
+2026-01-09 11:09:05.823 RedLemon[2222:13584] ✅ SubtitleService: Scanned 6 tracks (Attempt 4/5)
+2026-01-09 11:09:05.823 RedLemon[2222:13584]    Track: ID=0, Title=Off, External=0
+2026-01-09 11:09:05.824 RedLemon[2222:13584]    Track: ID=1, Title=Forced, External=0
+2026-01-09 11:09:05.824 RedLemon[2222:13584]    Track: ID=2, Title=English, External=0
+2026-01-09 11:09:05.824 RedLemon[2222:13584]    Track: ID=3, Title=SDH, External=0
+2026-01-09 11:09:05.824 RedLemon[2222:13584]    Track: ID=4, Title=Latin American, External=0
+2026-01-09 11:09:05.824 RedLemon[2222:13584]    Track: ID=5, Title=Canadian, External=0
+2026-01-09 11:09:06.858 RedLemon[2222:13493] 🔍 MPV track-list/count: 7
+2026-01-09 11:09:06.859 RedLemon[2222:13493] 🔍 Track 0 type: video
+2026-01-09 11:09:06.859 RedLemon[2222:13493] 🔍 Track 1 type: audio
+2026-01-09 11:09:06.859 RedLemon[2222:13493] 🔍 Track 2 type: sub
+2026-01-09 11:09:06.859 RedLemon[2222:13493] ✅ Found subtitle track: ID=1, lang=en, title=Forced, external=0
+2026-01-09 11:09:06.859 RedLemon[2222:13493] 🔍 Track 3 type: sub
+2026-01-09 11:09:06.859 RedLemon[2222:13493] ✅ Found subtitle track: ID=2, lang=en, title=nil, external=0
+2026-01-09 11:09:06.859 RedLemon[2222:13493] 🔍 Track 4 type: sub
+2026-01-09 11:09:06.859 RedLemon[2222:13493] ✅ Found subtitle track: ID=3, lang=en, title=SDH, external=0
+2026-01-09 11:09:06.860 RedLemon[2222:13493] 🔍 Track 5 type: sub
+2026-01-09 11:09:06.860 RedLemon[2222:13493] ✅ Found subtitle track: ID=4, lang=es-419, title=Latin American, external=0
+2026-01-09 11:09:06.860 RedLemon[2222:13493] 🔍 Track 6 type: sub
+2026-01-09 11:09:06.860 RedLemon[2222:13493] ✅ Found subtitle track: ID=5, lang=fr-CA, title=Canadian, external=0
+2026-01-09 11:09:06.860 RedLemon[2222:13493] 📊 Total subtitle tracks found: 6 (including Off if needed)
+2026-01-09 11:09:06.860 RedLemon[2222:13493]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 11:09:06.860 RedLemon[2222:13493]    Start[1]: ID=1, Title='Forced', Lang='en', Ext=0
+2026-01-09 11:09:06.860 RedLemon[2222:13493]    Start[2]: ID=2, Title='nil', Lang='en', Ext=0
+2026-01-09 11:09:06.860 RedLemon[2222:13493]    Start[3]: ID=3, Title='SDH', Lang='en', Ext=0
+2026-01-09 11:09:06.861 RedLemon[2222:13493]    Start[4]: ID=4, Title='Latin American', Lang='es-419', Ext=0
+2026-01-09 11:09:06.861 RedLemon[2222:13493]    Start[5]: ID=5, Title='Canadian', Lang='fr-CA', Ext=0
+2026-01-09 11:09:06.861 RedLemon[2222:13493] ✅ SubtitleService: Scanned 6 tracks (Attempt 5/5)
+2026-01-09 11:09:06.861 RedLemon[2222:13493]    Track: ID=0, Title=Off, External=0
+2026-01-09 11:09:06.861 RedLemon[2222:13493]    Track: ID=1, Title=Forced, External=0
+2026-01-09 11:09:06.861 RedLemon[2222:13493]    Track: ID=2, Title=English, External=0
+2026-01-09 11:09:06.862 RedLemon[2222:13493]    Track: ID=3, Title=SDH, External=0
+2026-01-09 11:09:06.862 RedLemon[2222:13493]    Track: ID=4, Title=Latin American, External=0
+2026-01-09 11:09:06.862 RedLemon[2222:13493]    Track: ID=5, Title=Canadian, External=0
+2026-01-09 11:09:06.862 RedLemon[2222:13493] 🔍 MPV track-list/count: 7
+2026-01-09 11:09:06.862 RedLemon[2222:13493] 🔍 Track 0 type: video
+2026-01-09 11:09:06.862 RedLemon[2222:13493] 🔍 Track 1 type: audio
+2026-01-09 11:09:06.862 RedLemon[2222:13493] 🔍 Track 2 type: sub
+2026-01-09 11:09:06.862 RedLemon[2222:13493] ✅ Found subtitle track: ID=1, lang=en, title=Forced, external=0
+2026-01-09 11:09:06.863 RedLemon[2222:13493] 🔍 Track 3 type: sub
+2026-01-09 11:09:06.863 RedLemon[2222:13493] ✅ Found subtitle track: ID=2, lang=en, title=nil, external=0
+2026-01-09 11:09:06.863 RedLemon[2222:13493] 🔍 Track 4 type: sub
+2026-01-09 11:09:06.863 RedLemon[2222:13493] ✅ Found subtitle track: ID=3, lang=en, title=SDH, external=0
+2026-01-09 11:09:06.863 RedLemon[2222:13493] 🔍 Track 5 type: sub
+2026-01-09 11:09:06.863 RedLemon[2222:13493] ✅ Found subtitle track: ID=4, lang=es-419, title=Latin American, external=0
+2026-01-09 11:09:06.863 RedLemon[2222:13493] 🔍 Track 6 type: sub
+2026-01-09 11:09:06.864 RedLemon[2222:13493] ✅ Found subtitle track: ID=5, lang=fr-CA, title=Canadian, external=0
+2026-01-09 11:09:06.864 RedLemon[2222:13493] 📊 Total subtitle tracks found: 6 (including Off if needed)
+2026-01-09 11:09:06.864 RedLemon[2222:13493]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 11:09:06.864 RedLemon[2222:13493]    Start[1]: ID=1, Title='Forced', Lang='en', Ext=0
+2026-01-09 11:09:06.866 RedLemon[2222:13493]    Start[2]: ID=2, Title='nil', Lang='en', Ext=0
+2026-01-09 11:09:06.867 RedLemon[2222:13493]    Start[3]: ID=3, Title='SDH', Lang='en', Ext=0
+2026-01-09 11:09:06.868 RedLemon[2222:13493]    Start[4]: ID=4, Title='Latin American', Lang='es-419', Ext=0
+2026-01-09 11:09:06.868 RedLemon[2222:13493]    Start[5]: ID=5, Title='Canadian', Lang='fr-CA', Ext=0
+2026-01-09 11:09:06.868 RedLemon[2222:13493] ✅ SubtitleService: Scanned 6 tracks (Attempt 2/5)
+2026-01-09 11:09:06.869 RedLemon[2222:13493]    Track: ID=0, Title=Off, External=0
+2026-01-09 11:09:06.869 RedLemon[2222:13493]    Track: ID=1, Title=Forced, External=0
+2026-01-09 11:09:06.869 RedLemon[2222:13493]    Track: ID=2, Title=English, External=0
+2026-01-09 11:09:06.869 RedLemon[2222:13493]    Track: ID=3, Title=SDH, External=0
+2026-01-09 11:09:06.869 RedLemon[2222:13493]    Track: ID=4, Title=Latin American, External=0
+2026-01-09 11:09:06.869 RedLemon[2222:13493]    Track: ID=5, Title=Canadian, External=0
+2026-01-09 11:09:07.869 RedLemon[2222:13493] 🔍 MPV track-list/count: 7
+2026-01-09 11:09:07.870 RedLemon[2222:13493] 🔍 Track 0 type: video
+2026-01-09 11:09:07.870 RedLemon[2222:13493] 🔍 Track 1 type: audio
+2026-01-09 11:09:07.870 RedLemon[2222:13493] 🔍 Track 2 type: sub
+2026-01-09 11:09:07.870 RedLemon[2222:13493] ✅ Found subtitle track: ID=1, lang=en, title=Forced, external=0
+2026-01-09 11:09:07.870 RedLemon[2222:13493] 🔍 Track 3 type: sub
+2026-01-09 11:09:07.871 RedLemon[2222:13493] ✅ Found subtitle track: ID=2, lang=en, title=nil, external=0
+2026-01-09 11:09:07.871 RedLemon[2222:13493] 🔍 Track 4 type: sub
+2026-01-09 11:09:07.871 RedLemon[2222:13493] ✅ Found subtitle track: ID=3, lang=en, title=SDH, external=0
+2026-01-09 11:09:07.871 RedLemon[2222:13493] 🔍 Track 5 type: sub
+2026-01-09 11:09:07.871 RedLemon[2222:13493] ✅ Found subtitle track: ID=4, lang=es-419, title=Latin American, external=0
+2026-01-09 11:09:07.872 RedLemon[2222:13493] 🔍 Track 6 type: sub
+2026-01-09 11:09:07.872 RedLemon[2222:13493] ✅ Found subtitle track: ID=5, lang=fr-CA, title=Canadian, external=0
+2026-01-09 11:09:07.872 RedLemon[2222:13493] 📊 Total subtitle tracks found: 6 (including Off if needed)
+2026-01-09 11:09:07.872 RedLemon[2222:13493]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 11:09:07.872 RedLemon[2222:13493]    Start[1]: ID=1, Title='Forced', Lang='en', Ext=0
+2026-01-09 11:09:07.873 RedLemon[2222:13493]    Start[2]: ID=2, Title='nil', Lang='en', Ext=0
+2026-01-09 11:09:07.873 RedLemon[2222:13493]    Start[3]: ID=3, Title='SDH', Lang='en', Ext=0
+2026-01-09 11:09:07.873 RedLemon[2222:13493]    Start[4]: ID=4, Title='Latin American', Lang='es-419', Ext=0
+2026-01-09 11:09:07.873 RedLemon[2222:13493]    Start[5]: ID=5, Title='Canadian', Lang='fr-CA', Ext=0
+2026-01-09 11:09:07.873 RedLemon[2222:13493] ✅ SubtitleService: Scanned 6 tracks (Attempt 3/5)
+2026-01-09 11:09:07.873 RedLemon[2222:13493]    Track: ID=0, Title=Off, External=0
+2026-01-09 11:09:07.874 RedLemon[2222:13493]    Track: ID=1, Title=Forced, External=0
+2026-01-09 11:09:07.874 RedLemon[2222:13493]    Track: ID=2, Title=English, External=0
+2026-01-09 11:09:07.874 RedLemon[2222:13493]    Track: ID=3, Title=SDH, External=0
+2026-01-09 11:09:07.874 RedLemon[2222:13493]    Track: ID=4, Title=Latin American, External=0
+2026-01-09 11:09:07.874 RedLemon[2222:13493]    Track: ID=5, Title=Canadian, External=0
+2026-01-09 11:09:08.915 RedLemon[2222:13917] 🔍 MPV track-list/count: 7
+2026-01-09 11:09:08.915 RedLemon[2222:13917] 🔍 Track 0 type: video
+2026-01-09 11:09:08.916 RedLemon[2222:13917] 🔍 Track 1 type: audio
+2026-01-09 11:09:08.916 RedLemon[2222:13917] 🔍 Track 2 type: sub
+2026-01-09 11:09:08.916 RedLemon[2222:13917] ✅ Found subtitle track: ID=1, lang=en, title=Forced, external=0
+2026-01-09 11:09:08.916 RedLemon[2222:13917] 🔍 Track 3 type: sub
+2026-01-09 11:09:08.916 RedLemon[2222:13917] ✅ Found subtitle track: ID=2, lang=en, title=nil, external=0
+2026-01-09 11:09:08.917 RedLemon[2222:13917] 🔍 Track 4 type: sub
+2026-01-09 11:09:08.917 RedLemon[2222:13917] ✅ Found subtitle track: ID=3, lang=en, title=SDH, external=0
+2026-01-09 11:09:08.917 RedLemon[2222:13917] 🔍 Track 5 type: sub
+2026-01-09 11:09:08.917 RedLemon[2222:13917] ✅ Found subtitle track: ID=4, lang=es-419, title=Latin American, external=0
+2026-01-09 11:09:08.917 RedLemon[2222:13917] 🔍 Track 6 type: sub
+2026-01-09 11:09:08.918 RedLemon[2222:13917] ✅ Found subtitle track: ID=5, lang=fr-CA, title=Canadian, external=0
+2026-01-09 11:09:08.918 RedLemon[2222:13917] 📊 Total subtitle tracks found: 6 (including Off if needed)
+2026-01-09 11:09:08.918 RedLemon[2222:13917]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 11:09:08.918 RedLemon[2222:13917]    Start[1]: ID=1, Title='Forced', Lang='en', Ext=0
+2026-01-09 11:09:08.918 RedLemon[2222:13917]    Start[2]: ID=2, Title='nil', Lang='en', Ext=0
+2026-01-09 11:09:08.919 RedLemon[2222:13917]    Start[3]: ID=3, Title='SDH', Lang='en', Ext=0
+2026-01-09 11:09:08.919 RedLemon[2222:13917]    Start[4]: ID=4, Title='Latin American', Lang='es-419', Ext=0
+2026-01-09 11:09:08.919 RedLemon[2222:13917]    Start[5]: ID=5, Title='Canadian', Lang='fr-CA', Ext=0
+2026-01-09 11:09:08.919 RedLemon[2222:13917] ✅ SubtitleService: Scanned 6 tracks (Attempt 4/5)
+2026-01-09 11:09:08.920 RedLemon[2222:13917]    Track: ID=0, Title=Off, External=0
+2026-01-09 11:09:08.920 RedLemon[2222:13917]    Track: ID=1, Title=Forced, External=0
+2026-01-09 11:09:08.920 RedLemon[2222:13917]    Track: ID=2, Title=English, External=0
+2026-01-09 11:09:08.920 RedLemon[2222:13917]    Track: ID=3, Title=SDH, External=0
+2026-01-09 11:09:08.921 RedLemon[2222:13917]    Track: ID=4, Title=Latin American, External=0
+2026-01-09 11:09:08.921 RedLemon[2222:13917]    Track: ID=5, Title=Canadian, External=0
+2026-01-09 11:09:10.037 RedLemon[2222:13917] 🔍 MPV track-list/count: 7
+2026-01-09 11:09:10.038 RedLemon[2222:13917] 🔍 Track 0 type: video
+2026-01-09 11:09:10.038 RedLemon[2222:13917] 🔍 Track 1 type: audio
+2026-01-09 11:09:10.038 RedLemon[2222:13917] 🔍 Track 2 type: sub
+2026-01-09 11:09:10.039 RedLemon[2222:13917] ✅ Found subtitle track: ID=1, lang=en, title=Forced, external=0
+2026-01-09 11:09:10.040 RedLemon[2222:13917] 🔍 Track 3 type: sub
+2026-01-09 11:09:10.040 RedLemon[2222:13917] ✅ Found subtitle track: ID=2, lang=en, title=nil, external=0
+2026-01-09 11:09:10.040 RedLemon[2222:13917] 🔍 Track 4 type: sub
+2026-01-09 11:09:10.040 RedLemon[2222:13917] ✅ Found subtitle track: ID=3, lang=en, title=SDH, external=0
+2026-01-09 11:09:10.040 RedLemon[2222:13917] 🔍 Track 5 type: sub
+2026-01-09 11:09:10.041 RedLemon[2222:13917] ✅ Found subtitle track: ID=4, lang=es-419, title=Latin American, external=0
+2026-01-09 11:09:10.041 RedLemon[2222:13917] 🔍 Track 6 type: sub
+2026-01-09 11:09:10.041 RedLemon[2222:13917] ✅ Found subtitle track: ID=5, lang=fr-CA, title=Canadian, external=0
+2026-01-09 11:09:10.041 RedLemon[2222:13917] 📊 Total subtitle tracks found: 6 (including Off if needed)
+2026-01-09 11:09:10.041 RedLemon[2222:13917]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 11:09:10.041 RedLemon[2222:13917]    Start[1]: ID=1, Title='Forced', Lang='en', Ext=0
+2026-01-09 11:09:10.042 RedLemon[2222:13917]    Start[2]: ID=2, Title='nil', Lang='en', Ext=0
+2026-01-09 11:09:10.042 RedLemon[2222:13917]    Start[3]: ID=3, Title='SDH', Lang='en', Ext=0
+2026-01-09 11:09:10.042 RedLemon[2222:13917]    Start[4]: ID=4, Title='Latin American', Lang='es-419', Ext=0
+2026-01-09 11:09:10.042 RedLemon[2222:13917]    Start[5]: ID=5, Title='Canadian', Lang='fr-CA', Ext=0
+2026-01-09 11:09:10.042 RedLemon[2222:13917] ✅ SubtitleService: Scanned 6 tracks (Attempt 5/5)
+2026-01-09 11:09:10.042 RedLemon[2222:13917]    Track: ID=0, Title=Off, External=0
+2026-01-09 11:09:10.043 RedLemon[2222:13917]    Track: ID=1, Title=Forced, External=0
+2026-01-09 11:09:10.043 RedLemon[2222:13917]    Track: ID=2, Title=English, External=0
+2026-01-09 11:09:10.043 RedLemon[2222:13917]    Track: ID=3, Title=SDH, External=0
+2026-01-09 11:09:10.044 RedLemon[2222:13917]    Track: ID=4, Title=Latin American, External=0
+2026-01-09 11:09:10.044 RedLemon[2222:13917]    Track: ID=5, Title=Canadian, External=0
+2026-01-09 11:09:12.264 RedLemon[2222:11744] ✅ Exit button triggered! x=178 <= 342, y=576 >= 576
+2026-01-09 11:09:12.283 RedLemon[2222:11744] ✅ Exit button triggered! x=165 <= 342, y=585 >= 576
+2026-01-09 11:09:12.287 RedLemon[2222:11744] ✅ Exit button triggered! x=158 <= 342, y=588 >= 576
+2026-01-09 11:09:12.296 RedLemon[2222:11744] ✅ Exit button triggered! x=155 <= 342, y=590 >= 576
+2026-01-09 11:09:12.318 RedLemon[2222:11744] ✅ Exit button triggered! x=151 <= 342, y=594 >= 576
+2026-01-09 11:09:12.572 RedLemon[2222:11744] ✅ Exit button triggered! x=62 <= 342, y=644 >= 576
+2026-01-09 11:09:12.609 RedLemon[2222:11744] ✅ Exit button triggered! x=59 <= 342, y=645 >= 576
+2026-01-09 11:09:12.610 RedLemon[2222:11744] ✅ Exit button triggered! x=59 <= 342, y=645 >= 576
+2026-01-09 11:09:12.818 RedLemon[2222:11744] ✅ Exit button triggered! x=0 <= 342, y=712 >= 576
+2026-01-09 11:09:12.874 RedLemon[2222:11744] ✅ Exit button triggered! x=0 <= 342, y=726 >= 576
+2026-01-09 11:09:13.071 RedLemon[2222:11744] ✅ Exit button triggered! x=9 <= 342, y=728 >= 576
+2026-01-09 11:09:13.078 RedLemon[2222:11744] ✅ Exit button triggered! x=12 <= 342, y=728 >= 576
+2026-01-09 11:09:13.111 RedLemon[2222:11744] ✅ Exit button triggered! x=28 <= 342, y=733 >= 576
+2026-01-09 11:09:13.153 RedLemon[2222:11744] ✅ Exit button triggered! x=37 <= 342, y=736 >= 576
+2026-01-09 11:09:13.156 RedLemon[2222:11744] ✅ Exit button triggered! x=38 <= 342, y=736 >= 576
+2026-01-09 11:09:13.193 RedLemon[2222:11744] ✅ Exit button triggered! x=38 <= 342, y=736 >= 576
+2026-01-09 11:09:13.194 RedLemon[2222:11744] ✅ Exit button triggered! x=39 <= 342, y=737 >= 576
+2026-01-09 11:09:13.236 RedLemon[2222:11744] ✅ Exit button triggered! x=39 <= 342, y=737 >= 576
+2026-01-09 11:09:13.319 RedLemon[2222:11744] ✅ Exit button triggered! x=39 <= 342, y=737 >= 576
+2026-01-09 11:09:13.360 RedLemon[2222:11744] ✅ Exit button triggered! x=39 <= 342, y=737 >= 576
+2026-01-09 11:09:13.402 RedLemon[2222:11744] ✅ Exit button triggered! x=39 <= 342, y=738 >= 576
+2026-01-09 11:09:13.487 RedLemon[2222:11744] ✅ Exit button triggered! x=39 <= 342, y=738 >= 576
+2026-01-09 11:09:13.543 RedLemon[2222:11744] 🖥️ WindowManager: exitFullscreen() called
+2026-01-09 11:09:13.543 RedLemon[2222:11744]    ✅ WindowManager: Toggling fullscreen OFF
+2026-01-09 11:09:13.619 RedLemon[2222:11744] 🪟 WindowManager: restoreWindowSize() called - restoring to expanded size
+2026-01-09 11:09:13.619 RedLemon[2222:11744]    📐 WindowManager: Restoring to expanded size: (0.0, 0.0, 1366.0, 743.0)
+2026-01-09 11:09:13.956 RedLemon[2222:11744]    ✅ WindowManager: Window restored to expanded size
+2026-01-09 11:09:14.272 RedLemon[2222:11744] 🛑 Stopped playback heartbeat loop
+❌ Subtitle search failed: {"error":true,"reason":"Error Domain=NSURLErrorDomain Code=-1001 \"The request timed out.\" UserInfo={_kCFStreamErrorCodeKey=-2103, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <BF6C8C83-4037-4693-BE34-5B21919AF8A5>.<1>, _NSURLErrorRelatedURLSessionTaskErrorKey=(\n    \"LocalDataTask <BF6C8C83-4037-4693-BE34-5B21919AF8A5>.<1>\"\n), NSLocalizedDescription=The request timed out., NSErrorFailingURLStringKey=https:\/\/api.subdl.com\/api\/v1\/subtitles?api_key=aGS2S1FTQ3441_1JAJaATPtgNVrcEhr7&imdb_id=tt29644189&languages=en&type=movie, NSErrorFailingURLKey=https:\/\/api.subdl.com\/api\/v1\/subtitles?api_key=aGS2S1FTQ3441_1JAJaATPtgNVrcEhr7&imdb_id=tt29644189&languages=en&type=movie, _kCFStreamErrorDomainKey=4}"}
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi4-4.download.real-debrid.com/d/7ZKR2Y4JBYFLS127/B
+   Display Title: Black Phone 2
+   Subtitle URLs: 0
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🧠 StreamService: Marked hash b605e93d as attempted for tt29644189
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt29644189, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt29644189
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt29644189
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Black Phone 2
+   IMDB: tt29644189
+   URL: https://chi4-4.download.real-debrid.com/d/7ZKR2Y4JBYFLS127/B...
+   Hash: b605e93d...
+   Source: WEB-DL
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Fetching metadata for tt29644189 as movie...
+📝 Pre-scanning embedded subtitles...
+✅ Cache HIT: Metadata[meta_movie_tt29644189]
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+⚡️ PlaybackService: releasing sleep assertion
+📨 Received: {"ref":"657184A8-A2E7-4E20-AD8F-69608F70CFAC","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt29644189"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"a0c8f678-ed74-11f0-9b47-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkbfzBCxb7Y-WMB","is_host":false,"joined_at":1767974561.597784,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt29644189"}
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt29644189"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"83ecd17c-ed75-11f0-8e72-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb1-ovNy7Y-Xah","is_host":false,"joined_at":1767974942.703053,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt29644189"}
+📨 Received: {"ref":"20","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb1-r_Dt86AnbB","phx_ref_prev":"GIkb1vQsCeA6Au5C","last_seen":"2026-01-09T16:09:02.719Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:09:02.719Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb1vQsCeA6Au5C","phx_ref_prev":"GIkb0mMDVhE6AnTB","last_seen":"2026-01-09T16:08:58.586Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt29644189/im...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt29644189/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt29644189/img...
+📡 SocialService: Updated status - online: Black Phone 2
+❌ Supabase API Error: No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIkbfzBCxb7Y-WMB)
+⚠️ Self (656daa91-33b4-4688-9135-c982ea52d7c9) was missing from list - restoring.
+🔄 Updated existing participant 656daa91-33b4-4688-9135-c982ea52d7c9 with Ref: GIkb1-ovNy7Y-Xah
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3394 seconds
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en (f) 'Forced' (subrip)
+[MPV] Subs  --sid=2 --slang=en (subrip)
+[MPV] Subs  --sid=3 --slang=en 'SDH' (subrip)
+[MPV] Subs  --sid=4 --slang=es-419 'Latin American' (subrip)
+[MPV] Subs  --sid=5 --slang=fr-CA 'Canadian' (subrip)
+🎬 DisplayLink: reportSwap() (throttled)
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 0 external subtitles to prevent race condition
+🎉 EVENT: File loaded/Duration ready (6835.704s), preparing to seek...
+   Seeking to live edge: 4048s
+🎉 EVENT: File loaded/Duration ready (6835.704s), preparing to seek...
+   Seeking to live edge: 4048s
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+ MPV Event: 18
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+✅ SMART-LOAD: Found 7 tracks including 0/0 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+🎬 draw() - Rendering frame! (throttled)
+📊 Current subtitle track: 1
+📊 Current subtitle track: 1
+🎉 EVENT: File loaded/Duration ready (6835.704s), preparing to seek...
+   Seeking to live edge: 4049s
+ MPV Event: 17
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: en | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: en (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: en | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: en (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 7 total tracks
+🔍 AUTO-SELECT: Track 2 - ID: 1, lang: 'en', title: 'Forced', forced: true, default: false, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 3 - ID: 2, lang: 'en', title: 'nil', forced: false, default: false, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 4 - ID: 3, lang: 'en', title: 'SDH', forced: false, default: false, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: SDH (ID: 3) [External: false, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 3850 (Embedded: 3000, Match: 0, Clean: 600, SDH: 250)
+ MPV Event: 17
+ MPV Event: 20
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x1080 videotoolbox[nv12]
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en (f) 'Forced' (subrip)
+[MPV] Subs  --sid=2 --slang=en (subrip)
+[MPV] Subs  --sid=3 --slang=en 'SDH' (subrip)
+[MPV] Subs  --sid=4 --slang=es-419 'Latin American' (subrip)
+[MPV] Subs  --sid=5 --slang=fr-CA 'Canadian' (subrip)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en (f) 'Forced' (subrip)
+[MPV] Subs  --sid=2 --slang=en (subrip)
+[MPV] (+) Subs  --sid=3 --slang=en 'SDH' (subrip)
+[MPV] Subs  --sid=4 --slang=es-419 'Latin American' (subrip)
+[MPV] Subs  --sid=5 --slang=fr-CA 'Canadian' (subrip)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+ MPV Event: 20
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.70s), skipping redundant seek
+📝 Started watch history tracking
+⚠️ onVideoReady called again - ignoring to prevent loops
+⚠️ onVideoReady called again - ignoring to prevent loops
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+📊 Current subtitle track: 3
+📊 AppState: Polled participant counts - Active: ["tt29644189": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3389 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+👋 Leaving room: event_tt29644189
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+📅 EventsView appeared
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+❌ Failed to load hero image: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://images.metahub.space/background/medium/tt1663662/img, NSErrorFailingURLKey=https://images.metahub.space/background/medium/tt1663662/img, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <25755AF0-9EC1-473F-86BE-7FDF897A8030>.<19>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <25755AF0-9EC1-473F-86BE-7FDF897A8030>.<19>, NSLocalizedDescription=cancelled}
+❌ Failed to load hero image: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://images.metahub.space/background/medium/tt1396484/img, NSErrorFailingURLKey=https://images.metahub.space/background/medium/tt1396484/img, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <AEC2619C-7C32-4456-96DC-AFBE696F53B9>.<17>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <AEC2619C-7C32-4456-96DC-AFBE696F53B9>.<17>, NSLocalizedDescription=cancelled}
+🧹 Cleaning up MPV player...
+ MPV Event: 17
+📡 SocialService: Updated status - Browsing Events: 
+📡 SocialService: Updated status - Browsing: 
+ MPV Event: 17
+[MPV] Video: no video
+🗑️ Invalidated all active timers
+📨 Received: {"ref":"21","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb2pTQ5KA6AndB","phx_ref_prev":"GIkb1-r_Dt86AnbB","last_seen":"2026-01-09T16:09:14.162Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb1-r_Dt86AnbB","phx_ref_prev":"GIkb1vQsCeA6Au5C","last_seen":"2026-01-09T16:09:02.719Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:09:02.719Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"22","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb2pTdnBQ6Andh","phx_ref_prev":"GIkb2pTQ5KA6AndB","last_seen":"2026-01-09T16:09:14.163Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb2pTQ5KA6AndB","phx_ref_prev":"GIkb1-r_Dt86AnbB","last_seen":"2026-01-09T16:09:14.162Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Left room in database: event_tt29644189
+🧹 Cleaning up Realtime channel for room: event_tt29644189
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+⚡️ PlaybackService: releasing sleep assertion
+🗑️ MPVPlayerViewModel deinit
+🛑 Event polling task cancelled cleanly
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+✅ MPV stop completed with clean event loop exit
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt29644189"}
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt29644189"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:event_tt29644189"}
+📨 Unknown event: phx_close
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"83ecd17c-ed75-11f0-8e72-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb1-ovNy7Y-Xah","is_host":false,"joined_at":1767974942.703053,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt29644189"}
+✅ MPV instance destroyed
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1490 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1490, 412 movies)
+💓 Heartbeat sent
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3379 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb25cvBaQ6AneB","phx_ref_prev":"GIkb1vBySMo6AnXB","last_seen":"2026-01-09T16:09:18.452Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}},"leaves":{"6f390774-ed74-11f0-898c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb1vBySMo6AnXB","phx_ref_prev":"GIkb0kb1xuU6Au3i","last_seen":"2026-01-09T16:08:58.475Z","room_id":"event_tt29644189","started_at":"2026-01-09T16:02:41.623Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29644189","watching_title":"Black Phone 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"23","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb25xhH1A6Aneh","phx_ref_prev":"GIkb2pTdnBQ6Andh","last_seen":"2026-01-09T16:09:18.586Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"fe5587c0-ed74-11f0-90e2-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkb2pTdnBQ6Andh","phx_ref_prev":"GIkb2pTQ5KA6AndB","last_seen":"2026-01-09T16:09:14.163Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"24","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 17:05:37 +0000
+⏰ AppState: Scheduling update in 3369 seconds

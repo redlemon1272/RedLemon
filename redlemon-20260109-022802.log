@@ -1,0 +1,1767 @@
+2026-01-09 02:28:10.264 RedLemon[24248:335940] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-09 02:28:10.264 RedLemon[24248:335940] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-09 02:28:10.345 RedLemon[24248:335940] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-09 02:28:10.347 RedLemon[24248:335977] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-09 02:28:10.387 RedLemon[24248:335940] ✅ Playback state reset complete - starting in browse view
+2026-01-09 02:28:10.387 RedLemon[24248:335940] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-09 02:28:10.387 RedLemon[24248:335940] 🧪 Testing Profile: debug
+2026-01-09 02:28:10.388 RedLemon[24248:335977] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-09 02:28:10.424 RedLemon[24248:335940] ✅ Keychain: Found stored username: ursinho
+2026-01-09 02:28:10.424 RedLemon[24248:335940] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-09 02:28:10.424 RedLemon[24248:335978] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-09 02:28:10.962 RedLemon[24248:335995] 📡 SupabaseClient: User lookup response received (357 bytes)
+2026-01-09 02:28:10.971 RedLemon[24248:335995] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-09 02:28:10.971 RedLemon[24248:335995] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 02:28:10.998 RedLemon[24248:335940] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 02:28:10.999 RedLemon[24248:335940] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 02:28:10.999 RedLemon[24248:335940] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 02:28:10.999 RedLemon[24248:335940] 🚀 RedLemon: Starting HTTP server...
+2026-01-09 02:28:10.999 RedLemon[24248:335940] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-09 02:28:11.022 RedLemon[24248:335940] ✅ RedLemon: HTTPServer instance created
+2026-01-09 02:28:11.022 RedLemon[24248:335995] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📂 Loaded 5 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"A7B490FC-26EC-43D7-816E-309887360940","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-09 02:28:11.357 RedLemon[24248:335940] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 02:28:13.036 RedLemon[24248:335940] ✅ RedLemon: Server marked as ready
+2026-01-09 02:28:13.082 RedLemon[24248:335940] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-09 02:28:13.082 RedLemon[24248:335940] 🔍 Performing startup checks...
+2026-01-09 02:28:13.082 RedLemon[24248:335940] ✅ Username-based authentication ready
+2026-01-09 02:28:13.741 RedLemon[24248:335940] 🔍 Performing startup checks...
+2026-01-09 02:28:13.742 RedLemon[24248:335940] ✅ Username-based authentication ready
+2026-01-09 02:28:14.030 RedLemon[24248:335940] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1490 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1490, 412 movies)
+✅ [EventsView] Loaded 412 movies from config version 1490
+🗓 AppState: Updated schedule epoch to 2026-01-09 03:41:37 +0000
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 506 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt30274401/img (120617 bytes)
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 505 seconds
+📡 Joined channel: realtime:global-presence
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 505 seconds
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"FFBF7519-4C7D-48FA-9557-A1B34E1F797D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_aSvYNsA6Ai_C","phx_ref_prev":"GIj_ZIdgj4Q6Ai7C","last_seen":"2026-01-09T07:28:00.480Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_a_S0JYY6Akjh","last_seen":"2026-01-09T07:28:12.631Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+💰 LicenseManager: Checking for background crypto payments...
+📨 Received: {"ref":"AFC27CF8-A4A6-4607-8B2E-0DDEAEC55531","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+🔄 SocialService: Syncing 49 items to cloud...
+🔄 SocialService: Syncing 49 items to cloud (serial)...
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0195714/img (697529 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt4712810/img (105748 bytes)
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.200s (RTT: 165ms)
+   Local:  2026-01-09 07:28:14 +0000
+   Server: 2026-01-09 07:28:14 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0266915/img (786827 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0480687/img (901283 bytes)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_bdeCg2Q6AjCi","phx_ref_prev":"GIj_aSvYNsA6Ai_C","last_seen":"2026-01-09T07:28:20.541Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}},"leaves":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_aSvYNsA6Ai_C","phx_ref_prev":"GIj_ZIdgj4Q6Ai7C","last_seen":"2026-01-09T07:28:00.480Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 495 seconds
+🔍 [SMART] performSearchSync() called
+🔍 [SMART] searchQuery: 'margin call'
+🔍 [SMART] Starting API search for: 'margin call'
+🔍 [DEBUG] searchMedia called with query: 'margin call', type: 'movie'
+  API: GET http://127.0.0.1:47253/api/metadata/search?query=margin%20call&type=movie
+[ INFO ] GET /api/metadata/search [request-id: CA338A57-C419-417F-B6B0-3243B20ECADA]
+🔍 [DEBUG] Received 436 bytes of data
+  API: Response status 200
+🔍 [DEBUG] Response preview: {"query":"margin call","rank":33.125,"cacheMaxAge":86400,"metas":[{"id":"tt1615147","imdb_id":"tt1615147","type":"movie","name":"Margin Call","poster":"https://m.media-amazon.com/images/M/MV5BMjE5Nzky
+🔍 [DEBUG] Primary JSON decoding successful
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1615147
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Margin Call
+🔍 [DEBUG] Successfully created MediaItem: Margin Call
+🔍 [DEBUG] Successfully created 1 MediaItem objects
+🔍 [DEBUG] searchMedia called with query: 'margin call', type: 'series'
+  API: GET http://127.0.0.1:47253/api/metadata/search?query=margin%20call&type=series
+[ INFO ] GET /api/metadata/search [request-id: D6FF0111-D787-419B-AA4A-9BBB59212395]
+🔍 [DEBUG] Received 63 bytes of data
+  API: Response status 200
+🔍 [DEBUG] Response preview: {"query":"margin call","rank":0,"cacheMaxAge":86400,"metas":[]}
+🔍 [DEBUG] Primary JSON decoding successful
+🔍 [DEBUG] Successfully created 0 MediaItem objects
+🔍 [SMART] API search completed: 1 results
+🔍 [SMART] Movies: 1, Series: 0
+🔍 [SMART] UI updated with sorted results (poster-first)
+🔍 [DEBUG] selectMedia called for: Margin Call
+🔍 [DEBUG] Navigation to mediaDetail completed
+🔍 Loading metadata for: Margin Call (type: movie, id: tt1615147)
+[ INFO ] GET /api/metadata/meta/movie/tt1615147 [request-id: B450D21E-FE29-45E0-B778-CF8DB866E096]
+2026-01-09 02:28:31.284 RedLemon[24248:335995] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-09 02:28:31.284 RedLemon[24248:335940] ✅ Metadata loaded successfully
+2026-01-09 02:28:31.284 RedLemon[24248:335940]    Type: movie
+2026-01-09 02:28:31.284 RedLemon[24248:335940]    Background URL: https://images.metahub.space/background/medium/tt1615147/img
+2026-01-09 02:28:31.284 RedLemon[24248:335940]    Poster URL: https://images.metahub.space/poster/small/tt1615147/img
+2026-01-09 02:28:31.284 RedLemon[24248:335940]    Videos array: 0 episodes
+2026-01-09 02:28:34.156 RedLemon[24248:335940] ⚠️ No backdrop URL provided
+2026-01-09 02:28:34.207 RedLemon[24248:335940]    Quality: 1080p
+2026-01-09 02:28:34.207 RedLemon[24248:335940]    Mode: solo
+2026-01-09 02:28:34.207 RedLemon[24248:335940] 📡 Fetching metadata for tt1615147...
+2026-01-09 02:28:34.209 RedLemon[24248:335940] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1615147/img
+2026-01-09 02:28:34.209 RedLemon[24248:335940] ⏳ Background art loading...
+2026-01-09 02:28:34.210 RedLemon[24248:335940] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1615147/img
+2026-01-09 02:28:34.211 RedLemon[24248:335940] ⏳ Logo loading...
+2026-01-09 02:28:34.269 RedLemon[24248:336079] ✅ StreamService: Using provided metadata: Margin Call
+2026-01-09 02:28:34.269 RedLemon[24248:336079] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-09 02:28:34.269 RedLemon[24248:336079] ⚡️ StreamResolver: Resolving streams for tt1615147 (S0E0)
+2026-01-09 02:28:34.279 RedLemon[24248:335940] ✅ Logo loaded successfully
+2026-01-09 02:28:34.370 RedLemon[24248:335940] ✅ Background art loaded successfully
+2026-01-09 02:28:34.400 RedLemon[24248:336079]    📅 Filtering by year: 2011
+2026-01-09 02:28:34.531 RedLemon[24248:335995] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-09 02:28:34.531 RedLemon[24248:335995] 🔍 ProviderManager: Fetching streams for tt1615147...
+2026-01-09 02:28:34.533 RedLemon[24248:335975] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-09 02:28:34.533 RedLemon[24248:336079] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-09 02:28:34.533 RedLemon[24248:335975] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-09 02:28:34.534 RedLemon[24248:335975] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt1615147.json...
+2026-01-09 02:28:34.534 RedLemon[24248:336079] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A222      0/stream/movie/tt1615147.json
+2026-01-09 02:28:34.534 RedLemon[24248:336079] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA27D/stream/movie/tt1615147.json
+2026-01-09 02:28:34.534 RedLemon[24248:335975] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt1615147.json
+2026-01-09 02:28:34.645 RedLemon[24248:335978] 📡 Torrentio: HTTP 200, received 16709 bytes
+2026-01-09 02:28:34.661 RedLemon[24248:335978] ✅ Torrentio: Parsed 35 streams from 35 raw
+2026-01-09 02:28:39.415 RedLemon[24248:335995] ✅ DebridSearch: Parsed 1 streams
+2026-01-09 02:28:39.417 RedLemon[24248:335995] ✅ ProviderManager: Fetched 36 raw, returning 35 unique streams
+2026-01-09 02:28:39.417 RedLemon[24248:335995] 📦 StreamResolver: Received 35 raw streams, bucketing...
+2026-01-09 02:28:41.257 RedLemon[24248:335978] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-09 02:28:41.258 RedLemon[24248:335978] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-09 02:28:41.258 RedLemon[24248:335975] 🔍 DEBUG: Processing subtitle URL: /subtitle/3507789-8430267.zip
+2026-01-09 02:28:41.258 RedLemon[24248:335978] 🔍 DEBUG: Processing subtitle URL: /subtitle/3466335-8389360.zip
+2026-01-09 02:28:41.258 RedLemon[24248:335976] 🔍 DEBUG: Processing subtitle URL: /subtitle/2382704-2404008.zip
+2026-01-09 02:28:41.258 RedLemon[24248:336079] 🔍 DEBUG: Processing subtitle URL: /subtitle/2937979-2930837.zip
+2026-01-09 02:28:41.258 RedLemon[24248:335978] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 02:28:41.258 RedLemon[24248:335976] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 02:28:41.258 RedLemon[24248:336079] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 02:28:41.258 RedLemon[24248:335975] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 02:28:41.259 RedLemon[24248:335975] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDc3ODktODQzMDI2Ny56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+2026-01-09 02:28:41.259 RedLemon[24248:335978] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0NjYzMzUtODM4OTM2MC56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+2026-01-09 02:28:41.259 RedLemon[24248:335976] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzIzODI3MDQtMjQwNDAwOC56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+2026-01-09 02:28:41.259 RedLemon[24248:336079] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5Mzc5NzktMjkzMDgzNy56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+2026-01-09 02:28:41.259 RedLemon[24248:335975] 🔍 DEBUG: Processing subtitle URL: /subtitle/115347-2019993.zip
+2026-01-09 02:28:41.259 RedLemon[24248:335975] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 02:28:41.260 RedLemon[24248:335975] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzExNTM0Ny0yMDE5OTkzLnppcA==?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+2026-01-09 02:28:41.272 RedLemon[24248:335940] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi5-4.download.real-debrid.com/d/JNDKW4JHFXHD423/mo, subtitles: 5
+2026-01-09 02:28:41.366 RedLemon[24248:335940] ✅ Stream ready, starting playback...
+2026-01-09 02:28:41.366 RedLemon[24248:335940] 🖥️ WindowManager: enterFullscreen() called
+2026-01-09 02:28:41.367 RedLemon[24248:335940]    Window: <SwiftUI.SwiftUIWindow: 0x7f92b41494a0>
+2026-01-09 02:28:41.367 RedLemon[24248:335940]    Is fullscreen: 0
+2026-01-09 02:28:41.367 RedLemon[24248:335940]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-09 02:28:41.480 RedLemon[24248:335940] 🖼️ Setting up MPV with native macOS video output...
+2026-01-09 02:28:41.489 RedLemon[24248:335940] ✅ MPV initialized with native GPU rendering
+2026-01-09 02:28:41.515 RedLemon[24248:335940] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-09 02:28:41.515 RedLemon[24248:335940] 🎬🎬🎬 About to call loadStream - isInWatchParty: NO
+2026-01-09 02:28:41.515 RedLemon[24248:335940] 🎬🎬🎬 Subtitles: 5
+2026-01-09 02:28:41.516 RedLemon[24248:335940] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Margin Call
+2026-01-09 02:28:41.516 RedLemon[24248:335940] 🎬🎬🎬 streamURL: https://chi5-4.download.real-debrid.com/d/JNDKW4JHFXHD423/mo
+2026-01-09 02:28:41.516 RedLemon[24248:335940] 🎬🎬🎬 subtitles: 5
+2026-01-09 02:28:41.517 RedLemon[24248:335940] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-09 02:28:41.630 RedLemon[24248:335975] 🎬 MPV: Current video filename set to: 
+2026-01-09 02:28:41.630 RedLemon[24248:335976] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-09 02:28:41.630 RedLemon[24248:335975] 🎬 MPV loadVideo called with URL: https://chi5-4.download.real-debrid.com/d/JNDKW4JH (Encoded: https://chi5-4.download.real-debrid.com/d/JNDKW4JH), autoplay: true, expectedSubs: 3
+2026-01-09 02:28:41.630 RedLemon[24248:335976] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDc3ODktODQzMDI2Ny56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+2026-01-09 02:28:41.630 RedLemon[24248:335975] 🎬 MPV executing: loadfile "https://chi5-4.download.real-debrid.com/d/JNDKW4JHFXHD423/moovee-mc-p.mkv"
+2026-01-09 02:28:41.631 RedLemon[24248:335975] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+💾 Cache SET: Metadata[meta_movie_tt1615147]
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 485 seconds
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_cJ0HAeI6AkpB","phx_ref_prev":"GIj_a_S0JYY6Akjh","last_seen":"2026-01-09T07:28:32.633Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_a_S0JYY6Akjh","last_seen":"2026-01-09T07:28:12.631Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🎬 PlayerVM: Starting playback for: Margin Call
+✅ Cache HIT: Metadata[meta_movie_tt1615147]
+[2026-01-09T07:28:34Z] [INFO] [StreamService.swift:90] 🎬 StreamService: Starting resolution for: Margin Call
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt1615147.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+⚠️ Comet: Skipping invalid redirect URL: https://www.reddit.com/r/StremioAddons/comments/1plsqv7/elfh...
+✅ Comet: Parsed 0 valid streams
+⚠️ MediaFusion: HTTP 418
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt1615147.json
+✅ Metadata fetched from Cinemeta for tt1615147: Margin Call (2011)
+🎯 Target title for matching: Margin Call
+   📅 Year filter (2011): 35 → 32 streams
+   🚫 RESOLVER BLOCKING AV1: Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON
+👤 1 💾 3.65 GB ⚙️ 1337x
+   🚫 RESOLVER FILTERED AV1: 32 → 31 streams
+   🚫 RESOLVER BLOCKING MPEG-2: Margin Call 2011.DVD5.ITA
+👤 3 💾 4.35 GB ⚙️ ThePirateBay
+🇮🇹
+   🚫 RESOLVER FILTERED MPEG-2: 31 → 30 streams
+   🚫 RESOLVER BLOCKING non-English audio: Предел риска / Margin Call [2011 BDRemux 1080p] Dub Sub Rus + Original Eng
+👤 6 💾 21.19 GB ⚙️ Rutracker
+🇬🇧 / 🇷🇺 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Margin Call [BluRay Rip][AC3 5.1 Castellano][2012][www.descargas2020.com]
+👤 0 💾 1.62 GB ⚙️ Wolfmax4k
+🇪🇸 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Margin.Call.2011.LiMiTED.FRENCH.DVDRip.XviD-ArRoWs
+👤 4 💾 702.7 MB ⚙️ 1337x
+🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Margin.Call.2011.Latino.BRrip-XviD.SBT
+👤 3 💾 706.14 MB ⚙️ ThePirateBay
+🇲🇽 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Margin Call 2011 LiMiTED FRENCH DVDRiP XViD LEGiON
+👤 1 💾 702.7 MB ⚙️ 1337x
+🇫🇷 (Audio)
+   🎵 RESOLVER FILTERED audio language: 30 → 25 streams
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt1615147 (movie)
+   ℹ️ Fallback Name: Margin Call (2011)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Attached best sub for 'Margin Call 2011 1080p BluRay
+...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin.Call.2011.1080p.BluRay....': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin.Call.2011.1080p.BluRay....': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin Call 2011.True.1080p.Bl...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin Call (2011) BluRay 1080...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin.Call.2011.1080p.BluRay....': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin Call 2011 1080p BluRay ...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin Call (2011) 1080p PROPE...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin.Call.2011.1080p.10bit.B...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Предел риска / Margin Call (20...': Margin.Call.2011.1080p.SuperHQ...
+✅ StreamResolver: Attached best sub for 'Margin Call 2011 Blu-ray 1080p...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin.Call.2011.iTA.ENG.AC3.S...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Предел риска / Margin Call [20...': Margin.Call.2011.1080p.SuperHQ...
+✅ StreamResolver: Attached best sub for 'Margin Call (2011 ITA/ENG) [10...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Высоцкий. Спасибо что живой [2...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin Call (2011) 720p Bluray...': Margin.Call.2011.720p.BluRay.x...
+✅ StreamResolver: Attached best sub for 'Margin.Call.2011.720p.BluRay.9...': Margin.Call.2011.720p.BluRay.x...
+✅ StreamResolver: Attached best sub for 'Margin Call (2011) [BDRip 720p...': Margin.Call.2011.1080p.SuperHQ...
+✅ StreamResolver: Attached best sub for 'El.Precio.De.La.Codicia.2011.1...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for '10 Must Watch Movies On Data S...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin Call (2011) 1080p MKV A...': Margin.Call.2011.1080p.BluRay....
+✅ StreamResolver: Attached best sub for 'Margin.Call.2011.NL-subs.bdr.(...': Margin.Call.2011.1080p.SuperHQ...
+✅ StreamResolver: Attached best sub for 'Margin Call 2011 R5 DVDRip XVI...': Margin.Call.2011.1080p.SuperHQ...
+✅ StreamResolver: Attached best sub for 'EFTV
+#22 -  Bedini 16GT Monopo...': Margin.Call.2011.720p.BluRay.x...
+✅ StreamResolver: Attached best sub for 'Margin.Call.2011.1080p.PROPER....': Margin.Call.2011.1080p.BluRay....
+   --- Processing Bucket: 2160p (Input: 0) ---
+   ✅ Bucket 2160p Final Count: 0
+   --- Processing Bucket: 1080p (Input: 19) ---
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call 2011 1080p BluRay
+👤 100 💾 1.98 GB ⚙️ YTS
+   ✅ Bucket 1080p Final Count: 19
+   --- Processing Bucket: 720p (Input: 3) ---
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call (2011) 720p Bluray x264 - 700MB - YIFY
+👤 100 💾 699.97 MB ⚙️ ThePirateBay
+   📉 Penalizing Ad-Supported Release (YTS): Margin Call (2011) 720p Bluray x264 - 700MB - YIFY
+👤 100 💾 699.97 MB ⚙️ ThePirateBay
+   ✅ Bucket 720p Final Count: 3
+   --- Processing Bucket: 480p (Input: 3) ---
+   ✅ Bucket 480p Final Count: 3
+📦 1080p Primary: Margin.Call.2011.1080p.PROPER.BluRay.x264-MOOVEE[rarbg]
+💾 6.56 GB
+📦 720p Primary: Margin Call (2011) [BDRip 720p][DUAL][Eng-Spa]
+👤 5 💾 3.51 GB ⚙️ ThePirateBay
+Dual Audio / 🇬🇧 / 🇪🇸
+✅ StreamResolver: Quality buckets ready
+   ➕ Added 3 720p streams as backup
+   ➕ Added 3 480p streams as backup
+[2026-01-09T07:28:39Z] [INFO] [StreamService.swift:261] 📦 StreamService: Found 17 total streams to try (across all qualities)
+✅ StreamService: Found 14 H.264 streams (Tier 1)
+✅ StreamService: Found 12 'Clean' English streams. Deprioritizing 2 localized/dual streams.
+⚠️ StreamService: Skipping tiny file (Possible fake/sample): Margin.Call.2011.NL-subs.bdr.(DutchReleaseTeam)
+👤 2 💾 459.82 MB ⚙️ ThePirateBay
+🇳🇱 (460 MB < 600 MB)
+⚠️ StreamService: Skipping tiny file (Possible fake/sample): EFTV
+#22 -  Bedini 16GT Monopole Motor - Presentation (2011).mp4
+👤 1 💾 579.54 MB ⚙️ ThePirateBay (580 MB < 600 MB)
+📦 StreamService: 10 streams remain after size filter
+🔄 StreamService: Trying stream 1/10: Margin.Call.2011.1080p.PROPER.BluRay.x264-MOOVEE[rarbg]
+💾 6.56 GB
+🔍 StreamService: Resolving redirect URL: https://68d69db7dc40-debrid-search.baby-beamup.club/resolve/RealDebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/57WXQYR7BSCPY/https%3A%2F%2Freal-debrid.com%2Fd%2FCGQMYRLJGCFMK32C
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_cnv68XY6AjGC","phx_ref_prev":"GIj_bdeCg2Q6AjCi","last_seen":"2026-01-09T07:28:40.636Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}},"leaves":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_bdeCg2Q6AjCi","phx_ref_prev":"GIj_aSvYNsA6Ai_C","last_seen":"2026-01-09T07:28:20.541Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ StreamService: Resolved to: https://chi5-4.download.real-debrid.com/d/JNDKW4JHFXHD423/moovee-mc-p.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Margin.Call.2011.1080p.PROPER.BluRay.x264-MOOVEE[rarbg]
+💾 6.56 GB
+📊 Stream Size: 6.56 GB
+📦 StreamService: Appending 7 fallback streams (alternate codecs)
+📦 StreamService: Returning 16 candidate streams for fallback
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi5-4.download.real-debrid.com/d/JNDKW4JHFXHD423/mo
+   Display Title: Margin Call
+   Subtitle URLs: 5
+      [0] Margin.Call.2011.1080p.BluRay.x265-RARBG.en
+      [1] Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG
+      [2] Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN
+      [3] MarginCall20111080pBluRayDD51x265-Chivaman
+      [4] Margin.Call.2011.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-extra.mkv
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎬 Loading stream: Margin Call
+   IMDB: tt1615147
+   URL: https://chi5-4.download.real-debrid.com/d/JNDKW4JHFXHD423/mo...
+🧹 Clearing previous event state (Non-Event Load)
+🧹 Clearing previous watch party state (Solo Load)
+   Source: BluRay
+💬 Added mock chat messages for testing
+👤 SOLO MODE: Autoplaying
+🎬 DisplayLink: reportSwap() (throttled)
+📡 Fetching metadata for tt1615147 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt1615147]
+📝 Pre-loading external subtitles (Top 3)...
+📡 SocialService: Updated status - online: Margin Call
+✅ Got background: https://images.metahub.space/background/medium/tt1615147/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1615147/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1615147/img...
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MDc3ODktODQzMDI2Ny56aXA= [request-id: 0031F4B1-AB52-4A0A-946D-6C6858B759EF]
+2026-01-09 02:28:42.128 RedLemon[24248:335976] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_F143FDD6-55F1-4F6D-A75B-8637766AEE7F.vtt
+2026-01-09 02:28:42.128 RedLemon[24248:335976] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_F143FDD6-55F1-4F6D-A75B-863
+2026-01-09 02:28:42.155 RedLemon[24248:335976] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 02:28:42.155 RedLemon[24248:335976] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzIzODI3MDQtMjQwNDAwOC56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+📄 Subtitle request: L3N1YnRpdGxlLzM1MDc3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3507789-8430267.zip
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 476 seconds
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_crVIuZw6Akqh","phx_ref_prev":"GIj_cJ0HAeI6AkpB","last_seen":"2026-01-09T07:28:41.624Z","started_at":"2026-01-09T07:28:41.624Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}},"leaves":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_cJ0HAeI6AkpB","phx_ref_prev":"GIj_a_S0JYY6Akjh","last_seen":"2026-01-09T07:28:32.633Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Download complete: 37507 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Margin.Call.2011.1080p.BluRay.x265-RARBG.en.srt
+📦 Extracting specific file: Margin.Call.2011.1080p.BluRay.x265-RARBG.en.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzIzODI3MDQtMjQwNDAwOC56aXA= [request-id: 39DDD206-2CEE-4059-8CE1-385539B25C4F]
+📄 Subtitle request: L3N1YnRpdGxlLzIzODI3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2382704-2404008.zip
+💓 Heartbeat sent
+[MPV] (+) Video --vid=1 (*) (h264 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (dts 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Margin.Call.2011.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✅ Download complete: 37581 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No subtitle files found in zip list output:
+Archive:  /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/8DAEC7B8-EE75-4116-B30E-F73BADFABE7E.zip
+Subscene
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+   163003  02-26-2021 09:42   Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG.smi
+---------                     -------
+   163003                     1 file
+
+[ WARNING ] Abort.404: No subtitle files found in zip [request-id: 39DDD206-2CEE-4059-8CE1-385539B25C4F]
+2026-01-09 02:28:42.458 RedLemon[24248:335995] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_6F90C24F-F499-4224-AA17-1503111F6941.vtt
+2026-01-09 02:28:42.458 RedLemon[24248:335995] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_6F90C24F-F499-4224-AA17-150
+2026-01-09 02:28:42.886 RedLemon[24248:335995] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 02:28:42.887 RedLemon[24248:335995] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0NjYzMzUtODM4OTM2MC56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+ MPV Event: 18
+ MPV Event: 18
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 474 seconds
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+ MPV Event: 18
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0NjYzMzUtODM4OTM2MC56aXA= [request-id: 73BDBEC6-7850-4C4A-86C8-5471B31D5CB2]
+2026-01-09 02:28:42.911 RedLemon[24248:335976] 🔍 MPV track-list/count: 4
+2026-01-09 02:28:42.935 RedLemon[24248:335976] 🔍 Track 0 type: sub
+2026-01-09 02:28:42.936 RedLemon[24248:335976] ✅ Found subtitle track: ID=1, lang=en, title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, external=1
+2026-01-09 02:28:42.936 RedLemon[24248:335976] 🔍 Track 1 type: video
+2026-01-09 02:28:42.936 RedLemon[24248:335976] 🔍 Track 2 type: audio
+2026-01-09 02:28:42.936 RedLemon[24248:335976] 🔍 Track 3 type: sub
+2026-01-09 02:28:42.936 RedLemon[24248:335976] ✅ Found subtitle track: ID=2, lang=en, title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-09 02:28:42.937 RedLemon[24248:335976] 📊 Total subtitle tracks found: 3 (including Off if needed)
+2026-01-09 02:28:42.937 RedLemon[24248:335976]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 02:28:42.937 RedLemon[24248:335976]    Start[1]: ID=1, Title='Margin.Call.2011.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2026-01-09 02:28:42.937 RedLemon[24248:335976]    Start[2]: ID=2, Title='Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-09 02:28:42.937 RedLemon[24248:335976] ✅ SubtitleService: Scanned 3 tracks (Attempt 1/5)
+2026-01-09 02:28:42.938 RedLemon[24248:335976]    Track: ID=0, Title=Off, External=0
+2026-01-09 02:28:42.938 RedLemon[24248:335976]    Track: ID=1, Title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, External=1
+2026-01-09 02:28:42.938 RedLemon[24248:335976]    Track: ID=2, Title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-09 02:28:43.405 RedLemon[24248:335976] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_6267906E-AD4F-49CE-AED2-D7C45390C14E.vtt
+2026-01-09 02:28:43.405 RedLemon[24248:335976] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_6267906E-AD4F-49CE-AED2-D7C
+2026-01-09 02:28:43.438 RedLemon[24248:335976] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 02:28:43.439 RedLemon[24248:335976] 🔍 MPV track-list/count: 5
+2026-01-09 02:28:43.439 RedLemon[24248:335976] 🔍 Track 0 type: sub
+2026-01-09 02:28:43.439 RedLemon[24248:335976] ✅ Found subtitle track: ID=1, lang=en, title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, external=1
+2026-01-09 02:28:43.439 RedLemon[24248:335976] 🔍 Track 1 type: video
+2026-01-09 02:28:43.440 RedLemon[24248:335976] 🔍 Track 2 type: audio
+2026-01-09 02:28:43.440 RedLemon[24248:335976] 🔍 Track 3 type: sub
+2026-01-09 02:28:43.440 RedLemon[24248:335976] ✅ Found subtitle track: ID=2, lang=en, title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-09 02:28:43.440 RedLemon[24248:335976] 🔍 Track 4 type: sub
+2026-01-09 02:28:43.441 RedLemon[24248:335976] ✅ Found subtitle track: ID=3, lang=en, title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, external=1
+2026-01-09 02:28:43.441 RedLemon[24248:335976] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 02:28:43.441 RedLemon[24248:335976]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 02:28:43.441 RedLemon[24248:335976]    Start[1]: ID=1, Title='Margin.Call.2011.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2026-01-09 02:28:43.441 RedLemon[24248:335976]    Start[2]: ID=2, Title='Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-09 02:28:43.441 RedLemon[24248:335976]    Start[3]: ID=3, Title='Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN', Lang='en', Ext=1
+2026-01-09 02:28:43.441 RedLemon[24248:335976] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-09 02:28:43.442 RedLemon[24248:335976]    Track: ID=0, Title=Off, External=0
+2026-01-09 02:28:43.442 RedLemon[24248:335976]    Track: ID=1, Title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, External=1
+2026-01-09 02:28:43.442 RedLemon[24248:335976]    Track: ID=2, Title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-09 02:28:43.443 RedLemon[24248:335976]    Track: ID=3, Title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, External=1
+2026-01-09 02:28:43.970 RedLemon[24248:335975] 🔍 MPV track-list/count: 5
+2026-01-09 02:28:43.970 RedLemon[24248:335975] 🔍 Track 0 type: sub
+2026-01-09 02:28:43.970 RedLemon[24248:335975] ✅ Found subtitle track: ID=1, lang=en, title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, external=1
+2026-01-09 02:28:43.970 RedLemon[24248:335975] 🔍 Track 1 type: video
+2026-01-09 02:28:43.971 RedLemon[24248:335975] 🔍 Track 2 type: audio
+2026-01-09 02:28:43.971 RedLemon[24248:335975] 🔍 Track 3 type: sub
+2026-01-09 02:28:43.971 RedLemon[24248:335975] ✅ Found subtitle track: ID=2, lang=en, title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-09 02:28:43.971 RedLemon[24248:335975] 🔍 Track 4 type: sub
+2026-01-09 02:28:43.971 RedLemon[24248:335975] ✅ Found subtitle track: ID=3, lang=en, title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, external=1
+2026-01-09 02:28:43.971 RedLemon[24248:335975] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 02:28:43.972 RedLemon[24248:335975]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 02:28:43.973 RedLemon[24248:335975]    Start[1]: ID=1, Title='Margin.Call.2011.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2026-01-09 02:28:43.973 RedLemon[24248:335975]    Start[2]: ID=2, Title='Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-09 02:28:43.973 RedLemon[24248:335975]    Start[3]: ID=3, Title='Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN', Lang='en', Ext=1
+2026-01-09 02:28:43.974 RedLemon[24248:335975] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 02:28:43.974 RedLemon[24248:335975]    Track: ID=0, Title=Off, External=0
+2026-01-09 02:28:43.975 RedLemon[24248:335975]    Track: ID=1, Title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, External=1
+2026-01-09 02:28:43.975 RedLemon[24248:335975]    Track: ID=2, Title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-09 02:28:43.977 RedLemon[24248:335975]    Track: ID=3, Title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, External=1
+2026-01-09 02:28:44.550 RedLemon[24248:335975] 🔍 MPV track-list/count: 5
+2026-01-09 02:28:44.550 RedLemon[24248:335975] 🔍 Track 0 type: sub
+2026-01-09 02:28:44.550 RedLemon[24248:335975] ✅ Found subtitle track: ID=1, lang=en, title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, external=1
+2026-01-09 02:28:44.550 RedLemon[24248:335975] 🔍 Track 1 type: video
+2026-01-09 02:28:44.551 RedLemon[24248:335975] 🔍 Track 2 type: audio
+2026-01-09 02:28:44.551 RedLemon[24248:335975] 🔍 Track 3 type: sub
+2026-01-09 02:28:44.551 RedLemon[24248:335975] ✅ Found subtitle track: ID=2, lang=en, title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-09 02:28:44.551 RedLemon[24248:335975] 🔍 Track 4 type: sub
+2026-01-09 02:28:44.552 RedLemon[24248:335975] ✅ Found subtitle track: ID=3, lang=en, title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, external=1
+2026-01-09 02:28:44.552 RedLemon[24248:335975] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 02:28:44.552 RedLemon[24248:335975]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 02:28:44.552 RedLemon[24248:335975]    Start[1]: ID=1, Title='Margin.Call.2011.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2026-01-09 02:28:44.552 RedLemon[24248:335975]    Start[2]: ID=2, Title='Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-09 02:28:44.552 RedLemon[24248:335975]    Start[3]: ID=3, Title='Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN', Lang='en', Ext=1
+2026-01-09 02:28:44.553 RedLemon[24248:335975] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 02:28:44.553 RedLemon[24248:335975]    Track: ID=0, Title=Off, External=0
+2026-01-09 02:28:44.554 RedLemon[24248:335975]    Track: ID=1, Title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, External=1
+2026-01-09 02:28:44.554 RedLemon[24248:335975]    Track: ID=2, Title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-09 02:28:44.554 RedLemon[24248:335975]    Track: ID=3, Title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, External=1
+2026-01-09 02:28:44.981 RedLemon[24248:335976] 🔍 MPV track-list/count: 5
+2026-01-09 02:28:44.981 RedLemon[24248:335976] 🔍 Track 0 type: sub
+2026-01-09 02:28:44.982 RedLemon[24248:335976] ✅ Found subtitle track: ID=1, lang=en, title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, external=1
+2026-01-09 02:28:44.982 RedLemon[24248:335976] 🔍 Track 1 type: video
+2026-01-09 02:28:44.982 RedLemon[24248:335976] 🔍 Track 2 type: audio
+2026-01-09 02:28:44.982 RedLemon[24248:335976] 🔍 Track 3 type: sub
+2026-01-09 02:28:44.982 RedLemon[24248:335976] ✅ Found subtitle track: ID=2, lang=en, title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-09 02:28:44.982 RedLemon[24248:335976] 🔍 Track 4 type: sub
+2026-01-09 02:28:44.983 RedLemon[24248:335976] ✅ Found subtitle track: ID=3, lang=en, title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, external=1
+2026-01-09 02:28:44.984 RedLemon[24248:335976] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 02:28:44.984 RedLemon[24248:335976]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 02:28:44.984 RedLemon[24248:335976]    Start[1]: ID=1, Title='Margin.Call.2011.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2026-01-09 02:28:44.984 RedLemon[24248:335976]    Start[2]: ID=2, Title='Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-09 02:28:44.984 RedLemon[24248:335976]    Start[3]: ID=3, Title='Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN', Lang='en', Ext=1
+2026-01-09 02:28:44.984 RedLemon[24248:335976] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 02:28:44.984 RedLemon[24248:335976]    Track: ID=0, Title=Off, External=0
+2026-01-09 02:28:44.985 RedLemon[24248:335976]    Track: ID=1, Title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, External=1
+2026-01-09 02:28:44.985 RedLemon[24248:335976]    Track: ID=2, Title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-09 02:28:44.985 RedLemon[24248:335976]    Track: ID=3, Title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, External=1
+2026-01-09 02:28:45.650 RedLemon[24248:336370] 🔍 MPV track-list/count: 5
+2026-01-09 02:28:45.650 RedLemon[24248:336370] 🔍 Track 0 type: sub
+2026-01-09 02:28:45.650 RedLemon[24248:336370] ✅ Found subtitle track: ID=1, lang=en, title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, external=1
+2026-01-09 02:28:45.650 RedLemon[24248:336370] 🔍 Track 1 type: video
+2026-01-09 02:28:45.651 RedLemon[24248:336370] 🔍 Track 2 type: audio
+2026-01-09 02:28:45.651 RedLemon[24248:336370] 🔍 Track 3 type: sub
+2026-01-09 02:28:45.651 RedLemon[24248:336370] ✅ Found subtitle track: ID=2, lang=en, title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-09 02:28:45.651 RedLemon[24248:336370] 🔍 Track 4 type: sub
+2026-01-09 02:28:45.651 RedLemon[24248:336370] ✅ Found subtitle track: ID=3, lang=en, title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, external=1
+2026-01-09 02:28:45.651 RedLemon[24248:336370] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 02:28:45.651 RedLemon[24248:336370]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 02:28:45.651 RedLemon[24248:336370]    Start[1]: ID=1, Title='Margin.Call.2011.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2026-01-09 02:28:45.651 RedLemon[24248:336370]    Start[2]: ID=2, Title='Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-09 02:28:45.651 RedLemon[24248:336370]    Start[3]: ID=3, Title='Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN', Lang='en', Ext=1
+2026-01-09 02:28:45.652 RedLemon[24248:336370] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 02:28:45.652 RedLemon[24248:336370]    Track: ID=0, Title=Off, External=0
+2026-01-09 02:28:45.652 RedLemon[24248:336370]    Track: ID=1, Title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, External=1
+2026-01-09 02:28:45.652 RedLemon[24248:336370]    Track: ID=2, Title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-09 02:28:45.652 RedLemon[24248:336370]    Track: ID=3, Title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, External=1
+2026-01-09 02:28:45.985 RedLemon[24248:336370] 🔍 MPV track-list/count: 5
+2026-01-09 02:28:45.986 RedLemon[24248:336370] 🔍 Track 0 type: sub
+2026-01-09 02:28:45.986 RedLemon[24248:336370] ✅ Found subtitle track: ID=1, lang=en, title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, external=1
+2026-01-09 02:28:45.986 RedLemon[24248:336370] 🔍 Track 1 type: video
+2026-01-09 02:28:45.986 RedLemon[24248:336370] 🔍 Track 2 type: audio
+2026-01-09 02:28:45.986 RedLemon[24248:336370] 🔍 Track 3 type: sub
+2026-01-09 02:28:45.986 RedLemon[24248:336370] ✅ Found subtitle track: ID=2, lang=en, title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-09 02:28:45.986 RedLemon[24248:336370] 🔍 Track 4 type: sub
+2026-01-09 02:28:45.986 RedLemon[24248:336370] ✅ Found subtitle track: ID=3, lang=en, title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, external=1
+2026-01-09 02:28:45.987 RedLemon[24248:336370] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 02:28:45.987 RedLemon[24248:336370]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 02:28:45.987 RedLemon[24248:336370]    Start[1]: ID=1, Title='Margin.Call.2011.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2026-01-09 02:28:45.987 RedLemon[24248:336370]    Start[2]: ID=2, Title='Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-09 02:28:45.987 RedLemon[24248:336370]    Start[3]: ID=3, Title='Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN', Lang='en', Ext=1
+2026-01-09 02:28:45.987 RedLemon[24248:336370] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 02:28:45.987 RedLemon[24248:336370]    Track: ID=0, Title=Off, External=0
+2026-01-09 02:28:45.987 RedLemon[24248:336370]    Track: ID=1, Title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, External=1
+2026-01-09 02:28:45.988 RedLemon[24248:336370]    Track: ID=2, Title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-09 02:28:45.988 RedLemon[24248:336370]    Track: ID=3, Title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, External=1
+2026-01-09 02:28:46.676 RedLemon[24248:335975] 🔍 MPV track-list/count: 5
+2026-01-09 02:28:46.676 RedLemon[24248:335975] 🔍 Track 0 type: sub
+2026-01-09 02:28:46.676 RedLemon[24248:335975] ✅ Found subtitle track: ID=1, lang=en, title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, external=1
+2026-01-09 02:28:46.677 RedLemon[24248:335975] 🔍 Track 1 type: video
+2026-01-09 02:28:46.677 RedLemon[24248:335975] 🔍 Track 2 type: audio
+2026-01-09 02:28:46.677 RedLemon[24248:335975] 🔍 Track 3 type: sub
+2026-01-09 02:28:46.677 RedLemon[24248:335975] ✅ Found subtitle track: ID=2, lang=en, title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-09 02:28:46.678 RedLemon[24248:335975] 🔍 Track 4 type: sub
+2026-01-09 02:28:46.698 RedLemon[24248:335975] ✅ Found subtitle track: ID=3, lang=en, title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, external=1
+2026-01-09 02:28:46.698 RedLemon[24248:335975] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 02:28:46.698 RedLemon[24248:335975]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 02:28:46.698 RedLemon[24248:335975]    Start[1]: ID=1, Title='Margin.Call.2011.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2026-01-09 02:28:46.698 RedLemon[24248:335975]    Start[2]: ID=2, Title='Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-09 02:28:46.698 RedLemon[24248:335975]    Start[3]: ID=3, Title='Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN', Lang='en', Ext=1
+2026-01-09 02:28:46.698 RedLemon[24248:335975] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 02:28:46.699 RedLemon[24248:335975]    Track: ID=0, Title=Off, External=0
+2026-01-09 02:28:46.699 RedLemon[24248:335975]    Track: ID=1, Title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, External=1
+2026-01-09 02:28:46.699 RedLemon[24248:335975]    Track: ID=2, Title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-09 02:28:46.699 RedLemon[24248:335975]    Track: ID=3, Title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, External=1
+2026-01-09 02:28:46.989 RedLemon[24248:336242] 🔍 MPV track-list/count: 5
+2026-01-09 02:28:46.989 RedLemon[24248:336242] 🔍 Track 0 type: sub
+2026-01-09 02:28:46.990 RedLemon[24248:336242] ✅ Found subtitle track: ID=1, lang=en, title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, external=1
+2026-01-09 02:28:46.990 RedLemon[24248:336242] 🔍 Track 1 type: video
+2026-01-09 02:28:46.990 RedLemon[24248:336242] 🔍 Track 2 type: audio
+2026-01-09 02:28:46.991 RedLemon[24248:336242] 🔍 Track 3 type: sub
+2026-01-09 02:28:46.991 RedLemon[24248:336242] ✅ Found subtitle track: ID=2, lang=en, title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-09 02:28:46.991 RedLemon[24248:336242] 🔍 Track 4 type: sub
+2026-01-09 02:28:46.992 RedLemon[24248:336242] ✅ Found subtitle track: ID=3, lang=en, title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, external=1
+2026-01-09 02:28:46.992 RedLemon[24248:336242] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 02:28:46.992 RedLemon[24248:336242]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 02:28:46.992 RedLemon[24248:336242]    Start[1]: ID=1, Title='Margin.Call.2011.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2026-01-09 02:28:46.992 RedLemon[24248:336242]    Start[2]: ID=2, Title='Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-09 02:28:46.992 RedLemon[24248:336242]    Start[3]: ID=3, Title='Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN', Lang='en', Ext=1
+2026-01-09 02:28:46.993 RedLemon[24248:336242] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 02:28:46.993 RedLemon[24248:336242]    Track: ID=0, Title=Off, External=0
+2026-01-09 02:28:46.993 RedLemon[24248:336242]    Track: ID=1, Title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, External=1
+2026-01-09 02:28:46.993 RedLemon[24248:336242]    Track: ID=2, Title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-09 02:28:46.994 RedLemon[24248:336242]    Track: ID=3, Title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, External=1
+2026-01-09 02:28:47.074 RedLemon[24248:335940] ✅ Exit button triggered! x=52 <= 342, y=688 >= 576
+2026-01-09 02:28:47.307 RedLemon[24248:335940] ✅ Exit button triggered! x=53 <= 342, y=692 >= 576
+2026-01-09 02:28:47.318 RedLemon[24248:335940] ✅ Exit button triggered! x=54 <= 342, y=694 >= 576
+2026-01-09 02:28:47.328 RedLemon[24248:335940] ✅ Exit button triggered! x=56 <= 342, y=695 >= 576
+2026-01-09 02:28:47.329 RedLemon[24248:335940] ✅ Exit button triggered! x=57 <= 342, y=698 >= 576
+2026-01-09 02:28:47.336 RedLemon[24248:335940] ✅ Exit button triggered! x=59 <= 342, y=700 >= 576
+2026-01-09 02:28:47.388 RedLemon[24248:335940] ✅ Exit button triggered! x=66 <= 342, y=710 >= 576
+2026-01-09 02:28:47.429 RedLemon[24248:335940] ✅ Exit button triggered! x=69 <= 342, y=715 >= 576
+2026-01-09 02:28:47.432 RedLemon[24248:335940] ✅ Exit button triggered! x=69 <= 342, y=715 >= 576
+2026-01-09 02:28:47.472 RedLemon[24248:335940] ✅ Exit button triggered! x=71 <= 342, y=717 >= 576
+2026-01-09 02:28:47.638 RedLemon[24248:335940] ✅ Exit button triggered! x=71 <= 342, y=717 >= 576
+2026-01-09 02:28:47.640 RedLemon[24248:335940] ✅ Exit button triggered! x=71 <= 342, y=718 >= 576
+2026-01-09 02:28:47.650 RedLemon[24248:335940] ✅ Exit button triggered! x=71 <= 342, y=720 >= 576
+2026-01-09 02:28:47.722 RedLemon[24248:335940] ✅ Exit button triggered! x=71 <= 342, y=733 >= 576
+2026-01-09 02:28:47.734 RedLemon[24248:335940] ✅ Exit button triggered! x=71 <= 342, y=733 >= 576
+2026-01-09 02:28:47.738 RedLemon[24248:336242] 🔍 MPV track-list/count: 5
+2026-01-09 02:28:47.738 RedLemon[24248:336242] 🔍 Track 0 type: sub
+2026-01-09 02:28:47.738 RedLemon[24248:336242] ✅ Found subtitle track: ID=1, lang=en, title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, external=1
+2026-01-09 02:28:47.738 RedLemon[24248:336242] 🔍 Track 1 type: video
+2026-01-09 02:28:47.739 RedLemon[24248:336242] 🔍 Track 2 type: audio
+2026-01-09 02:28:47.739 RedLemon[24248:336242] 🔍 Track 3 type: sub
+2026-01-09 02:28:47.739 RedLemon[24248:336242] ✅ Found subtitle track: ID=2, lang=en, title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-09 02:28:47.739 RedLemon[24248:336242] 🔍 Track 4 type: sub
+2026-01-09 02:28:47.739 RedLemon[24248:336242] ✅ Found subtitle track: ID=3, lang=en, title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, external=1
+2026-01-09 02:28:47.739 RedLemon[24248:336242] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 02:28:47.739 RedLemon[24248:336242]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 02:28:47.739 RedLemon[24248:336242]    Start[1]: ID=1, Title='Margin.Call.2011.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2026-01-09 02:28:47.739 RedLemon[24248:336242]    Start[2]: ID=2, Title='Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-09 02:28:47.739 RedLemon[24248:336242]    Start[3]: ID=3, Title='Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN', Lang='en', Ext=1
+2026-01-09 02:28:47.740 RedLemon[24248:336242] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 02:28:47.740 RedLemon[24248:336242]    Track: ID=0, Title=Off, External=0
+2026-01-09 02:28:47.742 RedLemon[24248:336242]    Track: ID=1, Title=Margin.Call.2011.1080p.BluRay.x265-RARBG.en, External=1
+2026-01-09 02:28:47.743 RedLemon[24248:336242]    Track: ID=2, Title=Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-09 02:28:47.743 RedLemon[24248:336242]    Track: ID=3, Title=Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN, External=1
+2026-01-09 02:28:47.763 RedLemon[24248:335940] ✅ Exit button triggered! x=71 <= 342, y=733 >= 576
+2026-01-09 02:28:47.765 RedLemon[24248:335940] ✅ Exit button triggered! x=71 <= 342, y=734 >= 576
+2026-01-09 02:28:47.805 RedLemon[24248:335940] ✅ Exit button triggered! x=71 <= 342, y=734 >= 576
+2026-01-09 02:28:47.807 RedLemon[24248:335940] ✅ Exit button triggered! x=72 <= 342, y=735 >= 576
+2026-01-09 02:28:47.810 RedLemon[24248:335940] ✅ Exit button triggered! x=72 <= 342, y=735 >= 576
+2026-01-09 02:28:47.818 RedLemon[24248:335940] ✅ Exit button triggered! x=72 <= 342, y=735 >= 576
+2026-01-09 02:28:47.889 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=738 >= 576
+2026-01-09 02:28:47.890 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=738 >= 576
+2026-01-09 02:28:47.930 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=739 >= 576
+2026-01-09 02:28:50.642 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=735 >= 576
+2026-01-09 02:28:50.661 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=734 >= 576
+2026-01-09 02:28:50.662 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=733 >= 576
+2026-01-09 02:28:50.667 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=733 >= 576
+2026-01-09 02:28:50.726 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=731 >= 576
+2026-01-09 02:28:50.766 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=728 >= 576
+2026-01-09 02:28:50.808 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=727 >= 576
+2026-01-09 02:28:50.849 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=726 >= 576
+2026-01-09 02:28:50.934 RedLemon[24248:335940] ✅ Exit button triggered! x=73 <= 342, y=726 >= 576
+2026-01-09 02:28:50.975 RedLemon[24248:335940] ✅ Exit button triggered! x=74 <= 342, y=726 >= 576
+2026-01-09 02:28:51.060 RedLemon[24248:335940] ✅ Exit button triggered! x=75 <= 342, y=728 >= 576
+2026-01-09 02:28:51.062 RedLemon[24248:335940] ✅ Exit button triggered! x=75 <= 342, y=728 >= 576
+2026-01-09 02:28:51.143 RedLemon[24248:335940] ✅ Exit button triggered! x=76 <= 342, y=731 >= 576
+2026-01-09 02:28:51.184 RedLemon[24248:335940] ✅ Exit button triggered! x=76 <= 342, y=732 >= 576
+2026-01-09 02:28:51.197 RedLemon[24248:335940] ✅ Exit button triggered! x=76 <= 342, y=732 >= 576
+2026-01-09 02:28:51.199 RedLemon[24248:335940] ✅ Exit button triggered! x=76 <= 342, y=732 >= 576
+2026-01-09 02:28:51.204 RedLemon[24248:335940] ✅ Exit button triggered! x=76 <= 342, y=732 >= 576
+2026-01-09 02:28:51.225 RedLemon[24248:335940] ✅ Exit button triggered! x=76 <= 342, y=733 >= 576
+2026-01-09 02:28:51.229 RedLemon[24248:335940] ✅ Exit button triggered! x=77 <= 342, y=733 >= 576
+2026-01-09 02:28:51.309 RedLemon[24248:335940] ✅ Exit button triggered! x=77 <= 342, y=735 >= 576
+2026-01-09 02:28:51.645 RedLemon[24248:335940] 🖥️ WindowManager: exitFullscreen() called
+2026-01-09 02:28:51.645 RedLemon[24248:335940]    ✅ WindowManager: Toggling fullscreen OFF
+2026-01-09 02:28:51.725 RedLemon[24248:335940] 🪟 WindowManager: restoreWindowSize() called - restoring to expanded size
+2026-01-09 02:28:51.725 RedLemon[24248:335940]    📐 WindowManager: Restoring to expanded size: (0.0, 0.0, 1366.0, 743.0)
+2026-01-09 02:28:52.020 RedLemon[24248:335940]    ✅ WindowManager: Window restored to expanded size
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (dts [DTS] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Margin.Call.2011.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+[MPV] (+) Subs  --sid=2 --slang=en 'Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+📄 Subtitle request: L3N1YnRpdGxlLzM0NjYz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3466335-8389360.zip
+[MPV] VO: [libmpv] 1920x1080 videotoolbox[nv12]
+ MPV Event: 17
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📊 Current subtitle track: 2
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 474 seconds
+⏳ SMART-LOAD: Waiting for subtitles... (Found 2/3)
+✅ Download complete: 40049 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN.srt
+📦 Extracting specific file: Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x1080 23.976fps)
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Margin.Call.2011.1080p.BluRay.x265-RARBG.en', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 3 - ID: 2, lang: 'en', title: 'Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 4 - ID: 3, lang: 'en', title: 'Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN', forced: false, default: false, HI: false, Ext: true
+📊 Current subtitle track: 3
+✅ Auto-selecting BEST English subtitle: Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+[MPV] (+) Audio --aid=1 (*) (dts [DTS] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Margin.Call.2011.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN' (webvtt) (external)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (dts [DTS] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Margin.Call.2011.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+▶️ SMART-LOAD: Resuming playback (Autoplay requested)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+ℹ️ No resume timestamp set (starting from beginning)
+▶️ Auto-playing solo content from beginning
+📝 Started watch history tracking
+📊 Current subtitle track: 3
+🔓 MPVPlayerViewModel: Time advancing (time: 0.375) while buffering - Forcing UI unlock
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Margin.Call.2011.1080p.BluRay.x265-RARBG.en', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 3 - ID: 2, lang: 'en', title: 'Margin.Call.2011.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 4 - ID: 3, lang: 'en', title: 'Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Margin.Call.2011.1080p.BluRay.AV1.Opus.5.1-SWAXXON.EN (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+🧹 Cleaning up MPV player...
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: C4DA0D3F-3C1C-403A-AA69-D2C1EBCB0A4C]
+2026-01-09 02:28:52.227 RedLemon[24248:335940] 🛑 Stopped playback heartbeat loop
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+ MPV Event: 17
+📡 SocialService: Updated status - Browsing: 
+📡 SocialService: Updated status - Browsing: 
+ MPV Event: 17
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31495504
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Der Tiger
+🔍 [DEBUG] Successfully created MediaItem: Der Tiger
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1757678
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Avatar: Fire and Ash
+🔍 [DEBUG] Successfully created MediaItem: Avatar: Fire and Ash
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32820897
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Successfully created MediaItem: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt10799690
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Trap House
+🔍 [DEBUG] Successfully created MediaItem: Trap House
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30254719
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Successfully created MediaItem: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29927663
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Great Flood
+🔍 [DEBUG] Successfully created MediaItem: The Great Flood
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt13186306
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: War of the Worlds
+🔍 [DEBUG] Successfully created MediaItem: War of the Worlds
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt4712810
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Now You See Me: Now You Don't
+🔍 [DEBUG] Successfully created MediaItem: Now You See Me: Now You Don't
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29538620
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Bang
+🔍 [DEBUG] Successfully created MediaItem: Bang
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27543632
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Housemaid
+🔍 [DEBUG] Successfully created MediaItem: The Housemaid
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt34610311
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Shadow's Edge
+🔍 [DEBUG] Successfully created MediaItem: The Shadow's Edge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt19847976
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Wicked: For Good
+🔍 [DEBUG] Successfully created MediaItem: Wicked: For Good
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32395062
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Muzzle: City of Wolves
+🔍 [DEBUG] Successfully created MediaItem: Muzzle: City of Wolves
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+[MPV] Video: no video
+🗑️ Invalidated all active timers
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+🗑️ MPVPlayerViewModel deinit
+⚡️ PlaybackService: releasing sleep assertion
+✅ Loaded 15 movies
+🛑 Event polling task cancelled cleanly
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+🧹 Deduplication: 49 → 48 items
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_dSZWqhA6AktB","phx_ref_prev":"GIj_crVIuZw6Akqh","last_seen":"2026-01-09T07:28:52.114Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_crVIuZw6Akqh","phx_ref_prev":"GIj_cJ0HAeI6AkpB","last_seen":"2026-01-09T07:28:41.624Z","started_at":"2026-01-09T07:28:41.624Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ MPV stop completed with clean event loop exit
+✅ MPV instance destroyed
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2333784/img (28486 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0209163/img (32061 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0162222/img (38190 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0167404/img (16366 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2404435/img (31114 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2872732/img (16390 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10545296/img (37667 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4881806/img (15928 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0172156/img (32093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3065204/img (12736 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29268110/img (20494 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10374610/img (32670 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1781922/img (43043 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10954984/img (21420 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12921446/img (42489 bytes)
+🖼️ [CACHE] Cached image data for key: https://m.media-amazon.com/images/M/MV5BMzcwMjkxMzQ3NV5BMl5BanBnXkFtZTgwMzgyNDA5MDI@._V1_SX250.jpg (25595 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (53296 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30254719/img (39370 bytes)
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 465 seconds
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0070047/img (16672 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24363 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29927663/img (36770 bytes)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for trending
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_dV8bBB86Akth","phx_ref_prev":"GIj_dSZWqhA6AktB","last_seen":"2026-01-09T07:28:53.070Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_dSZWqhA6AktB","phx_ref_prev":"GIj_crVIuZw6Akqh","last_seen":"2026-01-09T07:28:52.114Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256070014/s332/img (36505 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/62371097/s332/img (36484 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331126481/s332/img (53646 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302976085/s332/img (50443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332277457/s332/img (66967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/275806222/s332/img (48443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334220721/s332/img (40321 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/77205086/s332/img (61880 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/245030423/s332/img (72818 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340614766/s332/img (62961 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327223699/s332/img (31103 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309786652/s332/img (45440 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328602380/s332/img (48174 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330798000/s332/img (54287 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335063930/s332/img (28802 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175817145/s332/img (34253 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/173938174/s332/img (31756 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315638406/s332/img (49093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336243710/s332/img (29619 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330298309/s332/img (59242 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243656762/s332/img (42262 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336295680/s332/img (36731 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/241779763/s332/img (48752 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/249473713/s332/img (40462 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331994893/s332/img (37258 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340706662/s332/img (36313 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328819711/s332/img (37494 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321552009/s332/img (34807 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301592778/s332/img (49084 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312291378/s332/img (26090 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176677346/s332/img (63974 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176275502/s332/img (71523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315672113/s332/img (80512 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338962154/s332/img (51864 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331924998/s332/img (45255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320977032/s332/img (29350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/270724834/s332/img (40466 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243951303/s332/img (42607 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12300742/img (13162 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29567915/img (28516 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (19894 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt33244668/img (41655 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32916440/img (25874 bytes)
+🗑️ MPVViewLayer deinit
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_dyVPpVk6AjHi","phx_ref_prev":"GIj_cnv68XY6AjGC","last_seen":"2026-01-09T07:29:00.656Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}},"leaves":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_cnv68XY6AjGC","phx_ref_prev":"GIj_bdeCg2Q6AjCi","last_seen":"2026-01-09T07:28:40.636Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 455 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✅ [EventsConfig] Fetched movie_events version 1490 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1490, 412 movies)
+💓 Heartbeat sent
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 445 seconds
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_ee0m9x06AkyB","phx_ref_prev":"GIj_dV8bBB86Akth","last_seen":"2026-01-09T07:29:12.633Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_dV8bBB86Akth","phx_ref_prev":"GIj_dSZWqhA6AktB","last_seen":"2026-01-09T07:28:53.070Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_e8xVSp06AjIi","phx_ref_prev":"GIj_dyVPpVk6AjHi","last_seen":"2026-01-09T07:29:20.640Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}},"leaves":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_dyVPpVk6AjHi","phx_ref_prev":"GIj_cnv68XY6AjGC","last_seen":"2026-01-09T07:29:00.656Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 435 seconds
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 425 seconds
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_fpV8xeE6Ak3B","phx_ref_prev":"GIj_ee0m9x06AkyB","last_seen":"2026-01-09T07:29:32.634Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_ee0m9x06AkyB","phx_ref_prev":"GIj_dV8bBB86Akth","last_seen":"2026-01-09T07:29:12.633Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_gHgjPc46AjKC","phx_ref_prev":"GIj_e8xVSp06AjIi","last_seen":"2026-01-09T07:29:40.697Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}},"leaves":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_e8xVSp06AjIi","phx_ref_prev":"GIj_dyVPpVk6AjHi","last_seen":"2026-01-09T07:29:20.640Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 415 seconds
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt4712810": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 405 seconds
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_gz2Hdn06AjLC","phx_ref_prev":"GIj_fpV8xeE6Ak3B","last_seen":"2026-01-09T07:29:52.634Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_fpV8xeE6Ak3B","phx_ref_prev":"GIj_ee0m9x06AkyB","last_seen":"2026-01-09T07:29:32.634Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📅 EventsView appeared
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+📡 SocialService: Updated status - Browsing Events: 
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_g7S_U_Y6AjMC","phx_ref_prev":"GIj_gz2Hdn06AjLC","last_seen":"2026-01-09T07:29:54.636Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_gz2Hdn06AjLC","phx_ref_prev":"GIj_fpV8xeE6Ak3B","last_seen":"2026-01-09T07:29:52.634Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🖼️ [CACHE] Cached image data for key: https:/2026-01-09 02:29:56.677 RedLemon[24248:336864] 📡 StreamService: Fetching metadata for tt4712810...
+/images.metahub.space/background/medium/tt4712810/img (105748 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0266915/img (786827 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0480687/img (901283 bytes)
+[2026-01-09T07:29:56Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Now You See Me: Now You Don't (Live: false)
+   Event start time: 2026-01-09 07:36:37 +0000
+   Event duration: 7320.0s
+   Current time: 2026-01-09 07:29:56 +0000
+   Is Live: false
+   Is In Lobby: true
+✅ Event room already exists: event_tt4712810
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY - Re-unlocking for fresh URL 🔑
+   Stored Hash: de6ebbbb1bd350ea35c5af78c2741d749b79a9ed
+   Cached URL: https://chi6-4.download.real-d...
+[2026-01-09T07:29:56Z] [INFO] [StreamService.swift:90] 🎬 StreamService: Starting resolution for: Now You See Me: Now You Don't
+[ INFO ] GET /api/metadata/meta/movie/tt4712810 [request-id: 250F6872-1A05-48B6-BC5F-2F148ABEB29C]
+2026-01-09 02:29:56.800 RedLemon[24248:336864] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-09 02:29:56.800 RedLemon[24248:336864] ✅ StreamService: Metadata loaded: Now You See Me: Now You Don't
+2026-01-09 02:29:56.801 RedLemon[24248:336864] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-09 02:29:56.801 RedLemon[24248:336864] ⚡️ StreamResolver: Resolving streams for tt4712810 (S0E0)
+2026-01-09 02:29:56.932 RedLemon[24248:336864]    📅 Filtering by year: 2025
+2026-01-09 02:29:57.063 RedLemon[24248:336864] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-09 02:29:57.063 RedLemon[24248:336864] 🔍 ProviderManager: Fetching streams for tt4712810...
+2026-01-09 02:29:57.064 RedLemon[24248:336767] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-09 02:29:57.064 RedLemon[24248:336861] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-09 02:29:57.064 RedLemon[24248:336767] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A222      0/stream/movie/tt4712810.json
+2026-01-09 02:29:57.064 RedLemon[24248:336861] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-09 02:29:57.064 RedLemon[24248:336767] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA27D/stream/movie/tt4712810.json
+2026-01-09 02:29:57.064 RedLemon[24248:336861] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt4712810.json...
+2026-01-09 02:29:57.064 RedLemon[24248:336861] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt4712810.json
+2026-01-09 02:29:57.071 RedLemon[24248:336766] 📡 Torrentio: HTTP 200, received 51657 bytes
+2026-01-09 02:29:57.102 RedLemon[24248:336766] ✅ Torrentio: Parsed 96 streams from 96 raw
+2026-01-09 02:30:00.413 RedLemon[24248:336767] ✅ DebridSearch: Parsed 4 streams
+2026-01-09 02:30:00.414 RedLemon[24248:336767] ✅ ProviderManager: Fetched 100 raw, returning 100 unique streams
+2026-01-09 02:30:00.415 RedLemon[24248:336767] 📦 StreamResolver: Received 100 raw streams, bucketing...
+💾 Cache SET: Metadata[meta_movie_tt4712810]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt4712810.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+⚠️ Comet: Skipping invalid redirect URL: https://www.reddit.com/r/StremioAddons/comments/1plsqv7/elfh...
+✅ Comet: Parsed 0 valid streams
+⚠️ MediaFusion: HTTP 418
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt4712810.json
+✅ Metadata fetched from Cinemeta for tt4712810: Now You See Me: Now You Don't (2025)
+🎯 Target title for matching: Now You See Me: Now You Don't
+   📅 Year filter (2025): 100 → 100 streams
+   🚫 RESOLVER BLOCKING Spam/Watermark: Now.You.See.Me.Now.You.Dont.2025.1080p.CAMRp.V2.LAT.DUB.1XBET.mp4
+👤 31 💾 1.91 GB ⚙️ Cinecalidad
+🇲🇽
+   🚫 RESOLVER BLOCKING Spam/Watermark: Now.You.See.Me.Now.You.Dont.2025.1080p.CAMRip.LAT.SUB.1XBET.mp4
+👤 0 💾 1.94 GB ⚙️ Cinecalidad
+🇲🇽
+   🚫 RESOLVER BLOCKING Spam/Watermark: Now.You.See.Me.Now.You.Dont.2025.1080p.CAMRip.LAT.DUB.1XBET.mp4
+👤 0 💾 1.91 GB ⚙️ Cinecalidad
+🇲🇽
+   🚫 RESOLVER FILTERED Spam/Watermarks: 100 → 97 streams
+   🚫 RESOLVER BLOCKING non-English audio: Now.You.See.Me.Now.You.Dont.2025.MULTI.FRENCH.HDR.2160p.WEB.H265…
+👤 29 💾 12.01 GB ⚙️ TorrentGalaxy
+Multi Audio / 🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Insaisissables 3 - Now You See Me: Now You Don't MULTI ULTRA HD 4K 2025
+👤 6 💾 12.01 GB ⚙️ Torrent9
+Multi Audio / 🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Insaisissables 3 - Now You See Me: Now You Don't VOSTFR WEBRIP 1080p 2025
+👤 79 💾 5.48 GB ⚙️ Torrent9
+🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Insaisissables 3 - Now You See Me: Now You Don't MULTI TRUEFRENCH WEBRIP 1080p 2025
+👤 18 💾 6.05 GB ⚙️ Torrent9
+Multi Audio / 🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Are.You.There.2025.1080p.WEBRip.LAT.DUB.PINUP.mp4
+👤 3 💾 1.68 GB ⚙️ Cinecalidad
+🇲🇽 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Now.You.See.Me.Now.You.Dont.2025.PLSUBBED.1080p.AMZN.WEB-DL.XviD.AC3-MAXX.avi
+👤 1 💾 2.68 GB ⚙️ BestTorrents
+🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Insaisissables 3 - Now You See Me: Now You Don't FRENCH WEBRIP 720p 2025
+👤 4 💾 3.29 GB ⚙️ Torrent9
+🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Иллюзия обмана 3 / Now You See Me: Now You Don't (2025) WEB-DLRip-AVC от DoMiNo | D | Пифагор | TS
+👤 391 💾 1.5 GB ⚙️ Rutor
+🇬🇧 / 🇷🇺 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Insaisissables 3 - Now You See Me: Now You Don't FRENCH WEBRIP 2025
+👤 23 💾 1.06 GB ⚙️ Torrent9
+Multi Audio / 🇫🇷 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Иллюзия обмана 3 / Now You See Me: Now You Don't [2025 WEB-DLRip] Dub (Пифагор)
+👤 4 💾 1.45 GB ⚙️ Rutracker
+🇷🇺 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Иллюзия обмана 3 / Now You See Me: Now You Don't [2025 WEB-DLRip-AVC] Dub (Пифагор)
+👤 2 💾 1.4 GB ⚙️ Rutracker
+🇷🇺 (Audio)
+   🎵 RESOLVER FILTERED audio language: 97 → 86 streams
+🔍 Searching SubDL: tt4712810 (movie)
+   ℹ️ Fallback Name: Now You See Me: Now You Don't (2025)
+✅ Found 9 subtitles from SubDL (Primary)
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont [2...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Los.ilusionistas.3.Ahora.me.ve...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me: Now You Don't ...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_hRxQBds6AjMi","phx_ref_prev":"GIj_gHgjPc46AjKC","last_seen":"2026-01-09T07:30:00.634Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}},"leaves":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_gHgjPc46AjKC","phx_ref_prev":"GIj_e8xVSp06AjIi","last_seen":"2026-01-09T07:29:40.697Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Don't (...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me: Now You Don't ...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me: Now You Don't ...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Los.ilusionistas.3.Ahora.me.ve...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Don't.2...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Иллюзия обмана 3 / Now You See...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Иллюзия обмана 3 / Now You See...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont (2...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Los.ilusionistas.3.Ahora.me.ve...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Don't 2...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Don't 2...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Don't 2...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont (2...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont (2...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Truque.de.Mestre.O.3.Ato.2025....': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Los.Ilusionistas.3.Ahora.Me.Ve...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Los.ilusionistas.3.Ahora.me.ve...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me-Now You Dont (2...': Now.You.See.Me.Now.You.Don't.2...
+✅ StreamResolver: Attached best sub for 'Иллюзия обмана 3 / Now You See...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me: Now You Don't ...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont (2...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Los.ilusionistas.3.Ahora.me.ve...': Now.You.See.Me.Now.You.Don_t.2...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Don't 2...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont 20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Don't 2...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for '[nicollubin] Iluzja 3 Now You ...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Don't.2...
+✅ StreamResolver: Attached best sub for '[Color Graded] Now You See Me ...': Now.You.See.Me.Now.You.Don't.2...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Don't.2...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Don't.2...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont [2...': Now.You.See.Me.Now.You.Don't.2...
+✅ StreamResolver: Attached best sub for 'Иллюзия обмана 3 / Now You See...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Los.ilusionistas.3.Ahora.me.ve...': Now.You.See.Me.Now.You.Don't.2...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Don't (...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Don't (...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Iluzja 3 2025.PLDUB.720p.WEB-D...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for '[nicollubin] Iluzja 3 Now You ...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now You See Me Now You Don't (...
+✅ StreamResolver: Attached best sub for 'Now.You.See.Me.Now.You.Dont.20...': Now.You.See.Me.Now.You.Dont.20...
+✅ StreamResolver: Attached best sub for 'Now You See Me Now You Dont [2...': Now You See Me Now You Don't (...
+   --- Processing Bucket: 2160p (Input: 10) ---
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 2160p WEBRip
+👤 100 💾 5.04 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 2160p WEBRip
+👤 100 💾 5.04 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 2160p WEBRip
+👤 100 💾 5.04 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 2160p WEBRip
+👤 100 💾 5.04 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 2160p WEBRip
+👤 100 💾 5.04 GB ⚙️ YTS
+   ✅ Bucket 2160p Final Count: 10
+   --- Processing Bucket: 1080p (Input: 59) ---
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙2026-01-09 02:30:02.972 RedLemon[24248:336766] 📥 StreamService: Pre-downloading 5 (capped from 9) subtitles for direct stream...
+2026-01-09 02:30:02.972 RedLemon[24248:336766] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-09 02:30:02.973 RedLemon[24248:336766] 🔍 DEBUG: Processing subtitle URL: /subtitle/3534903-8456792.zip
+2026-01-09 02:30:02.973 RedLemon[24248:336648] 🔍 DEBUG: Processing subtitle URL: /subtitle/3533276-8455153.zip
+2026-01-09 02:30:02.973 RedLemon[24248:336864] 🔍 DEBUG: Processing subtitle URL: /subtitle/3531231-8453052.zip
+2026-01-09 02:30:02.973 RedLemon[24248:336766] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 02:30:02.973 RedLemon[24248:336861] 🔍 DEBUG: Processing subtitle URL: /subtitle/3533277-8455154.zip
+2026-01-09 02:30:02.973 RedLemon[24248:336648] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 02:30:02.973 RedLemon[24248:336864] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 02:30:02.973 RedLemon[24248:336861] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 02:30:02.973 RedLemon[24248:336766] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MzQ5MDMtODQ1Njc5Mi56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+2026-01-09 02:30:02.974 RedLemon[24248:336648] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MzMyNzYtODQ1NTE1My56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+2026-01-09 02:30:02.974 RedLemon[24248:336864] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MzEyMzEtODQ1MzA1Mi56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+2026-01-09 02:30:02.974 RedLemon[24248:336861] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MzMyNzctODQ1NTE1NC56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+2026-01-09 02:30:02.974 RedLemon[24248:336766] 🔍 DEBUG: Processing subtitle URL: /subtitle/3534906-8456795.zip
+2026-01-09 02:30:02.974 RedLemon[24248:336766] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 02:30:02.974 RedLemon[24248:336766] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MzQ5MDYtODQ1Njc5NS56aXA=?token=24CB69A2-24E6-493A-9C3D-C9E93230B1F3
+2026-01-09 02:30:03.290 RedLemon[24248:336766] ✅ Persisted stream selection to room event_tt4712810
+️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 2.08 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 1080p WEBRip
+👤 100 💾 1.89 GB ⚙️ YTS
+   ✅ Bucket 1080p Final Count: 59
+   --- Processing Bucket: 720p (Input: 8) ---
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 720p WEBRip
+👤 100 💾 1.01 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 720p WEBRip
+👤 100 💾 1.01 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 720p WEBRip
+👤 100 💾 1.01 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 720p WEBRip
+👤 100 💾 1.01 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 720p WEBRip
+👤 100 💾 1.01 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 720p WEBRip
+👤 100 💾 1.01 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): Now You See Me: Now You Don't 2025 720p WEBRip
+👤 100 💾 1.01 GB ⚙️ YTS
+   ✅ Bucket 720p Final Count: 8
+   --- Processing Bucket: 480p (Input: 9) ---
+   ✅ Bucket 480p Final Count: 9
+📦 2160p Primary: Now You See Me Now You Dont 2025 2160p AMZN WEB-DL DDP5.1 Atmos x265-TBMovies
+👤 3 💾 12.36 GB ⚙️ 1337x
+📦 1080p Primary: Now You See Me Now You Don't (2025) Eng AMZN 1080p WEBRip x265 DDP 5.1 ESub
+👤 404 💾 1.98 GB ⚙️ 1337x
+📦 720p Primary: Иллюзия обмана 3 / Now You See Me: Now You Don't (2025) WEB-DLRip 720p | D A
+👤 1058 💾 4.3 GB ⚙️ Rutor
+🇬🇧 / 🇷🇺
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: de6ebbbb1bd350ea35c5af78c2741d749b79a9ed
+✅ StreamService: Found requested stream hash! Locking selection.
+[2026-01-09T07:30:01Z] [INFO] [StreamService.swift:261] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+🚫 StreamService: Applying Extended Cut Filter (Event Mode)
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Иллюзия обмана 3 / Now You See Me: Now You Don't (2025) WEB-DL 1080p от New-Team | D | Пифагор
+👤 24 💾 5.51 GB ⚙️ Rutor
+🇬🇧 / 🇷🇺
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/de6ebbbb1bd350ea35c5af78c2741d749b79a9ed/null/undefined/%20Now%20You%20See%20Me%3A%20Now%20You%20Don't%20(2025)%20WEB-DL%201080p%20%D0%BE%D1%82%20New-Team%20%7C%20D%20%7C%20%D0%9F%D0%B8%D1%84%D0%B0%D0%B3%D0%BE%D1%80
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 395 seconds
+✅ StreamService: Resolved to: https://chi6-4.download.real-debrid.com/d/CQFSC6WJFRYIC122/Now.You.See.Me.Now.You.Dont.2025.1080p.AMZN%20-%20New-Team.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Иллюзия обмана 3 / Now You See Me: Now You Don't (2025) WEB-DL 1080p от New-Team | D | Пифагор
+👤 24 💾 5.51 GB ⚙️ Rutor
+🇬🇧 / 🇷🇺
+📊 Stream Size: 5.51 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+   ✅ Fresh URL obtained: https://chi6-4.download.real-debrid.com/...
+   ✅ Database updated with fresh URL
+
+🎭 Upcoming event - position: 0
+   Room createdAt: 2026-01-09 07:36:37 +0000
+   Room state: lobby
+🎭 Upcoming event - going to lobby
+🎭 Lobby: Connecting to room event_tt4712810...
+🚦 Lobby State: connecting
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Setting up Realtime channel: watch-party:event_tt4712810
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 SocialService: Updated status - In Lobby: Now You See Me: Now You Don't: Now You See Me: Now You Don't
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt4712810
+📡 Connection state: connected
+✅ Realtime channel setup complete
+[ INFO ] GET /api/metadata/meta/movie/tt4712810 [request-id: FD8E9005-8A9F-435F-B4B8-2B6081F9CF54]
+2026-01-09 02:30:04.091 RedLemon[24248:335940] ℹ️ Lobby: Join failed with conflict (409/Duplicate) - assuming user already joined. Proceeding...
+2026-01-09 02:30:04.267 RedLemon[24248:336648] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-09 02:30:04.268 RedLemon[24248:336648]    Payload keys: chatText, chatUsername, senderId, timestamp, type, position
+2026-01-09 02:30:04.268 RedLemon[24248:336767] ✅ Realtime: Message broadcast complete
+2026-01-09 02:30:04.270 RedLemon[24248:336758] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-09 02:30:04.407 RedLemon[24248:336945] 📨 Realtime: Received broadcast message
+2026-01-09 02:30:04.407 RedLemon[24248:336945]    Payload keys: timestamp, type, position, chatText, chatUsername, senderId
+2026-01-09 02:30:04.408 RedLemon[24248:336945] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-09 02:30:04.408 RedLemon[24248:336945] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-09 02:30:04.409 RedLemon[24248:336945] ✅ Realtime: syncCallback invoked successfully
+2026-01-09 02:30:04.415 RedLemon[24248:335940] 👋 Received: Guest 'ursinho' joined room event_tt4712810
+2026-01-09 02:30:10.335 RedLemon[24248:335940] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-09 02:30:10.335 RedLemon[24248:335940] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-09 02:30:10.336 RedLemon[24248:335940] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-09 02:30:10.336 RedLemon[24248:335940] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-09 02:30:12.100 RedLemon[24248:335940] 👋 lemontom synced from database
+2026-01-09 02:30:14.747 RedLemon[24248:336945] 📨 Realtime: Received broadcast message
+2026-01-09 02:30:14.748 RedLemon[24248:336945]    Payload keys: senderId, timestamp, position, isPlaying, type
+2026-01-09 02:30:14.748 RedLemon[24248:336945] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 02:30:14.748 RedLemon[24248:336945] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-09 02:30:14.748 RedLemon[24248:336945] ✅ Realtime: syncCallback invoked successfully
+2026-01-09 02:30:14.748 RedLemon[24248:335940] ⚠️ Received Realtime message with no chat text
+✅ Lobby: Connected to Realtime
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt4712810
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: Now You See Me: Now You Don't
+🔍 [DEBUG] Successfully created MediaItem from meta: Now You See Me: Now You Don't
+✅ Lobby: Loaded metadata for Now You See Me: Now You Don't
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_hdkVYC86Ak8h","phx_ref_prev":"GIj_g7S_U_Y6AjMC","last_seen":"2026-01-09T07:30:03.836Z","room_id":"event_tt4712810","started_at":"2026-01-09T07:30:03.836Z","status":"In Lobby: Now You See Me: Now You Don't","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4712810","watching_title":"Now You See Me: Now You Don't","watching_type":"movie"}]}},"leaves":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_g7S_U_Y6AjMC","phx_ref_prev":"GIj_gz2Hdn06AjLC","last_seen":"2026-01-09T07:29:54.636Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"C9C6D04A-1BE9-4317-B454-A1FDD03BBD83","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":61957917,"event":"*","filter":"id=eq.event_tt4712810","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:event_tt4712810"}
+✅ Lobby: Synced playlist with 0 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:event_tt4712810"},"topic":"realtime:watch-party:event_tt4712810"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt4712810"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt4712810"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"03c2a690-ed2d-11f0-9d22-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_hds9qgTY-TQi","is_host":false,"joined_at":1767943803.83959,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt4712810"}
+❌ Supabase API Error: duplicate key value violates unique constraint "room_participants_pkey"
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+🎬 Event room detected - auto-starting playback
+🤖 Lobby: Checking auto-start for system event
+   Room ID: event_tt4712810
+   Room createdAt: 2026-01-09 07:36:37 +0000
+   Current time: 2026-01-09 07:30:04 +0000
+   Time until start: 392.77650594711304s
+⏳ Lobby: Event starts in 392s. Waiting...
+🔌 Setting up Realtime channel: watch-party:event_tt4712810
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:event_tt4712810, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt4712810"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"03c2a690-ed2d-11f0-9d22-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_hfGv47HY-U9h","phx_ref_prev":"GIj_hds9qgTY-TQi","is_host":false,"joined_at":1767943804.247548,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"03c2a690-ed2d-11f0-9d22-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_hds9qgTY-TQi","is_host":false,"joined_at":1767943803.83959,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt4712810"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt4712810"}
+❌ Supabase API Error: No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9
+⚠️ Heartbeat failed: userMessage("No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9")
+📡 [EventsConfig] Checking server for movie_events config version...
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "event_tt4712810", "name": "Now You See Me: Now You Don't", "season": null, "episode": null, "imdb_id": "tt4712810", "playlist": [], "is_public": true, "created_at": "2026-01-09T07:27:08.4911", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt4712810/img", "description": null, "stream_hash": "de6ebbbb1bd350ea35c5af78c2741d749b79a9ed", "backdrop_url": "https://images.metahub.space/background/medium/tt4712810/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": "http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MzMyNzctODQ1NTE1NC56aXA=?token=1B7ACC53-242C-42DA-9833-64CA22C19FD2", "host_username": "RedLemon Events", "last_activity": "2026-01-09T07:30:02", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi6-4.download.real-debrid.com/d/CQFSC6WJFRYIC122/Now.You.See.Me.Now.You.Dont.2025.1080p.AMZN%20-%20New-Team.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-09T07:30:10.348Z","old_record":{"id": "event_tt4712810"}},"ids":[61957917]},"topic":"realtime:watch-party:event_tt4712810"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "event_tt4712810", "name": "Now You See Me: Now You Don't", "season": null, "episode": null, "imdb_id": "tt4712810", "playlist": [], "is_public": true, "created_at": "2026-01-09T07:27:08.4911", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt4712810/img", "description": null, "stream_hash": "de6ebbbb1bd350ea35c5af78c2741d749b79a9ed", "backdrop_url": "https://images.metahub.space/background/medium/tt4712810/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": "http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MzMyNzctODQ1NTE1NC56aXA=?token=1B7ACC53-242C-42DA-9833-64CA22C19FD2", "host_username": "RedLemon Events", "last_activity": "2026-01-09T07:30:02", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi6-4.download.real-debrid.com/d/CQFSC6WJFRYIC122/Now.You.See.Me.Now.You.Dont.2025.1080p.AMZN%20-%20New-Team.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-09T07:30:10.348Z","old_record":{"id": "event_tt4712810"}},"ids":[61957917]},"topic":"realtime:watch-party:event_tt4712810"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced playlist with 0 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 0 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Fetched movie_events version 1490 with 412 movies
+✅ Lobby: Synced playlist with 0 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 0 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Using cached movie_events config (version 1490, 412 movies)
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_h6wHTyo6AjTC","phx_ref_prev":"GIj_hRxQBds6AjMi","last_seen":"2026-01-09T07:30:11.634Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_hRxQBds6AjMi","phx_ref_prev":"GIj_gHgjPc46AjKC","last_seen":"2026-01-09T07:30:00.634Z","started_at":"2026-01-09T07:25:32.933Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1615147","watching_title":"Margin Call","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"08a6c4d4-ed2d-11f0-ac18-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_h8LrmTfY-TVi","is_host":false,"joined_at":1767943812.017978,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt4712810"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_h8NQhwM6AjWC","phx_ref_prev":"GIj_h6wHTyo6AjTC","last_seen":"2026-01-09T07:30:12.026Z","room_id":"event_tt4712810","started_at":"2026-01-09T07:30:12.026Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4712810","watching_title":"Now You See Me: Now You Don't","watching_type":"movie"}]}},"leaves":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_h6wHTyo6AjTC","phx_ref_prev":"GIj_hRxQBds6AjMi","last_seen":"2026-01-09T07:30:11.634Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"15","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt4712810": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 385 seconds
+📨 Received: {"ref":"16","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_h-WVoVs6Ak_B","phx_ref_prev":"GIj_hdkVYC86Ak8h","last_seen":"2026-01-09T07:30:12.634Z","room_id":"event_tt4712810","started_at":"2026-01-09T07:30:03.836Z","status":"In Lobby: Now You See Me: Now You Don't","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4712810","watching_title":"Now You See Me: Now You Don't","watching_type":"movie"}]}},"leaves":{"c17213e8-ed2c-11f0-927c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_hdkVYC86Ak8h","phx_ref_prev":"GIj_g7S_U_Y6AjMC","last_seen":"2026-01-09T07:30:03.836Z","room_id":"event_tt4712810","started_at":"2026-01-09T07:30:03.836Z","status":"In Lobby: Now You See Me: Now You Don't","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4712810","watching_title":"Now You See Me: Now You Don't","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1767943814.268965,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt4712810"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_icbVcmE6AjWi","phx_ref_prev":"GIj_h8NQhwM6AjWC","last_seen":"2026-01-09T07:30:20.677Z","room_id":"event_tt4712810","started_at":"2026-01-09T07:30:12.026Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4712810","watching_title":"Now You See Me: Now You Don't","watching_type":"movie"}]}},"leaves":{"07846ddc-ed2c-11f0-931d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIj_h8NQhwM6AjWC","phx_ref_prev":"GIj_h6wHTyo6AjTC","last_seen":"2026-01-09T07:30:12.026Z","room_id":"event_tt4712810","started_at":"2026-01-09T07:30:12.026Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4712810","watching_title":"Now You See Me: Now You Don't","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📊 AppState: Polled participant counts - Active: ["tt4712810": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 07:36:37 +0000
+⏰ AppState: Scheduling update in 375 seconds

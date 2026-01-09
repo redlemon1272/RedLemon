@@ -176,7 +176,20 @@ actor StreamResolver {
                     guard !yearsInTitle.isEmpty else { return true }
 
                     let hasAllowedYear = yearsInTitle.contains { allowedYears.contains($0) }
+                    
+                    // FIX: If the "wrong year" is actually part of the show's title (e.g. "1923", "2012"), allow it.
                     if !hasAllowedYear {
+                         // Check if any of the "wrong" years are present in the target title
+                         // e.g. targetTitle="1923", yearsInTitle=["1923"]. 1923 != 2022 (release year), but it matches title.
+                         if let target = targetTitle {
+                             let targetYears = extractYearsFromTitle(target)
+                             let matchesTitleYear = yearsInTitle.contains { y in targetYears.contains(y) || target.contains(y) }
+                             if matchesTitleYear {
+                                 print("   ✅ RESOLVER KEEPING Title-Match Year: \(stream.title) (Matched title year)")
+                                 return true
+                             }
+                         }
+                        
                         print("   🚫 RESOLVER BLOCKING wrong-year series stream: \(stream.title) (years: \(yearsInTitle.joined(separator: ",")))")
                     } else {
                         print("   ✅ RESOLVER KEEPING correct-year series stream: \(stream.title)")
@@ -228,6 +241,9 @@ actor StreamResolver {
         // CRITICAL: Filter Samples, Trailers, and Extras
         let beforeSampleFilter = filteredStreams.count
         let sampleTerms = ["sample", "trailer", "featurette", "teaser", "bonus", "making of", "deleted scenes"]
+        
+        let targetLower = targetTitle?.lowercased() ?? ""
+        
         filteredStreams = filteredStreams.filter { stream in
             let titleLower = getExtendedSearchText(for: stream)
             
@@ -238,6 +254,11 @@ actor StreamResolver {
             // Terms to check loosely: "featurette", "making of", "deleted scenes"
             
             let isSample = sampleTerms.contains { term in
+                // Optimization: Ignore if term is in the official title (e.g. "Sample People", "Trailer Park Boys")
+                if !targetLower.isEmpty && targetLower.contains(term) {
+                    return false
+                }
+                
                 if term == "featurette" || term == "making of" || term == "deleted scenes" {
                     return titleLower.contains(term)
                 }
@@ -267,7 +288,17 @@ actor StreamResolver {
         filteredStreams = filteredStreams.filter { stream in
             let titleLower = getExtendedSearchText(for: stream)
             let isBadGroup = badGroups.contains { group in
-                titleLower.contains(group)
+                // Optimization: Ignore if group name is in the official title
+                if !targetLower.isEmpty && targetLower.contains(group) {
+                    return false
+                }
+                
+                // Use strict delimiters for "le production" to prevent "Simple Production" matches
+                if group == "le production" || group == "le-production" {
+                     return titleLower.contains(" le production ") || titleLower.contains(".le.production.") || titleLower.contains("-le-production-")
+                }
+                
+                return titleLower.contains(group)
             }
             if isBadGroup {
                 print("   🚫 RESOLVER BLOCKING Bad Group: \(stream.title)")
@@ -285,6 +316,11 @@ actor StreamResolver {
             let titleLower = getExtendedSearchText(for: stream)
              // Use strict delimiters for "bet" to avoid false positives (e.g. "Better call saul")
             let isSpam = spamTerms.contains { term in
+                // Optimization: Ignore if term is in the official title (e.g. "Casino Royale", "The Bet")
+                if !targetLower.isEmpty && targetLower.contains(term) {
+                    return false
+                }
+
                 if term == "bet" {
                      return titleLower.contains(".bet.") || titleLower.contains(" bet ") || titleLower.contains("-bet-")
                 }
@@ -333,7 +369,11 @@ actor StreamResolver {
             }
 
             let is3D = threeDFormats.contains { format in
-                titleLower.contains(format)
+                // Optimization: Ignore if format is in the official title (e.g. "Taboo", "SBS Start-Up")
+                if !targetLower.isEmpty && targetLower.contains(format) {
+                    return false
+                }
+                return titleLower.contains(format)
             }
             if is3D {
                 print("   🚫 RESOLVER BLOCKING 3D: \(stream.title)")

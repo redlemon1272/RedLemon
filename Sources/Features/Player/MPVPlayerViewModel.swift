@@ -314,7 +314,6 @@ class MPVPlayerViewModel: ObservableObject {
                         }
 
                         // AI_BIBLE: Events bypass host checks - don't send Ready signals for Events
-                        let isEvent = self.appState?.player.isEventPlayback == true
                         if self.isInWatchParty && !self.hasSentReadySignal && !isEvent {
                             let isRoomPlaying = self.appState?.player.currentWatchPartyRoom?.state == .playing
 

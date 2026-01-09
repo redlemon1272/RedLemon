@@ -103,10 +103,10 @@ class MPVPlayerViewModel: ObservableObject {
                 .sink { [weak self] errorMsg in
                     guard let self = self else { return }
                     print("🚨 MPVPlayerViewModel: Critical MPV Error detected: \(errorMsg) - Triggering Failover")
-                    
+
                     // Force clear buffering state so UI doesn't hang
                     self.isBuffering = false
-                    
+
                     // Trigger failover immediately
                     self.playbackErrorTrigger.send(errorMsg)
                 }
@@ -137,7 +137,7 @@ class MPVPlayerViewModel: ObservableObject {
                     guard let self = self else { return }
                     self.currentTime = time
                     self.checkForNextEpisode()
-                    
+
                     // CRITICAL FIX: Playback Progress Recovery
                     // If time is advancing but UI thinks we are buffering, force clear the buffering state.
                     // This handles cases where MPV misses the "buffering end" event (e.g. paused-for-cache glitch).
@@ -145,7 +145,7 @@ class MPVPlayerViewModel: ObservableObject {
                          print("🔓 MPVPlayerViewModel: Time advancing (time: \(time)) while buffering - Forcing UI unlock")
                          self.isBuffering = false
                          // Also clear the "Refining Initial Seek" lock if it's stuck
-                         self.isRefiningInitialSeek = false 
+                         self.isRefiningInitialSeek = false
                          withAnimation {
                              self.isLoading = false
                              self.showPoster = false
@@ -160,16 +160,14 @@ class MPVPlayerViewModel: ObservableObject {
                 .sink { [weak self] dur in
                     guard let self = self else { return }
                     self.duration = dur
-                    
+
                     // NEW: Retry Event Playback Start when duration becomes available
                     // (Handles race condition where FileLoaded fires before Duration is known)
                     self.attemptEventPlaybackStart()
 
-                    // CRITICAL FIX: Watch Party Black Screen
-                    // If we were "Refining Initial Seek" (Holding UI lock) and buffering finished 
-                    // BEFORE duration was known (blind seek), we might be stuck.
-                    // If we now have duration, and file is loaded, and NOT buffering, release the lock.
-                    if self.isRefiningInitialSeek && dur > 0 && !self.isBuffering && self.mpvWrapper.isFileLoaded && !self.isInWatchParty {
+                    // AI_BIBLE: Events bypass host checks - release lock for Events like solo mode
+                    let isEvent = self.appState?.player.isEventPlayback == true
+                    if self.isRefiningInitialSeek && dur > 0 && !self.isBuffering && self.mpvWrapper.isFileLoaded && (!self.isInWatchParty || isEvent) {
                          print("🔓 MPVPlayerViewModel: Duration arrived (%.1fs) - Releasing stuck UI lock (Recovery)", dur)
                          self.isRefiningInitialSeek = false
                          withAnimation(.easeOut(duration: 0.5)) {
@@ -182,7 +180,7 @@ class MPVPlayerViewModel: ObservableObject {
                     // CRITICAL FIX: Only enter Ready Gate if room is NOT already playing.
                     // If room is playing (late join), we skip this and let Sync Logic handle the jump.
                     let isRoomPlaying = self.appState?.player.currentWatchPartyRoom?.state == .playing
-                    
+
                     if dur > 0 && self.isInWatchParty && !self.hasSentReadySignal {
                         if isRoomPlaying {
                              NSLog("⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)")
@@ -212,7 +210,7 @@ class MPVPlayerViewModel: ObservableObject {
                         print("⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)")
                         self.isBuffering = true
                         self.isLoading = true
-                        
+
                         // NEW: Buffering Timeout (45s)
                         // If we are stuck buffering for too long, assume connection is too slow for this stream
                         self.bufferingTimer?.invalidate()
@@ -269,7 +267,7 @@ class MPVPlayerViewModel: ObservableObject {
                                 print("⚠️ MPVPlayerViewModel: Buffering finished at Watch Party Ready Gate - Ignoring Error Trigger")
                                 return
                             }
-                            
+
                             // NEW EXCEPTION: Late Join Watch Party Blind Seek
                             // If we are refining seek (waiting for video ready), and duration is 0, ignore this.
                             // This happens when checking buffering status before metadata is fully parsed.
@@ -281,7 +279,7 @@ class MPVPlayerViewModel: ObservableObject {
                             print("⚠️ MPVPlayerViewModel: Buffering finished but file NOT loaded - Triggering Error State")
                             self.isBuffering = false
                             // self.isLoading = false // Keep loading overlay visible during retry fallbacks
-                            
+
                             // Trigger Error Feedback to View
                             self.playbackErrorTrigger.send("Playback Failed")
                         }
@@ -303,12 +301,10 @@ class MPVPlayerViewModel: ObservableObject {
                             print("📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...")
                             await self.subtitleService.scanEmbeddedTracks()
                         }
-                        
-                        // CRITICAL FIX: Watch Party Black Screen
-                        // If we were stuck because duration came BEFORE file loaded (rare but possible),
-                        // or if buffering finished early, re-check lock release.
-                        // NOTE: Skip this for Watch Party (unless host failure fallback?), let Sync Message handle it.
-                        if self.isRefiningInitialSeek && self.duration > 0 && !self.isBuffering && !self.isInWatchParty {
+
+                        // AI_BIBLE: Events bypass host checks - release lock for Events like solo mode
+                        let isEvent = self.appState?.player.isEventPlayback == true
+                        if self.isRefiningInitialSeek && self.duration > 0 && !self.isBuffering && (!self.isInWatchParty || isEvent) {
                              print("🔓 MPVPlayerViewModel: File loaded - Releasing stuck UI lock (Recovery)")
                              self.isRefiningInitialSeek = false
                              withAnimation(.easeOut(duration: 0.5)) {
@@ -317,9 +313,11 @@ class MPVPlayerViewModel: ObservableObject {
                              }
                         }
 
-                        if self.isInWatchParty && !self.hasSentReadySignal {
+                        // AI_BIBLE: Events bypass host checks - don't send Ready signals for Events
+                        let isEvent = self.appState?.player.isEventPlayback == true
+                        if self.isInWatchParty && !self.hasSentReadySignal && !isEvent {
                             let isRoomPlaying = self.appState?.player.currentWatchPartyRoom?.state == .playing
-                            
+
                             if isRoomPlaying {
                                 NSLog("⏩ Watch Party: File loaded (late join), skipping Ready Gate")
                                 self.hasSentReadySignal = true
@@ -333,13 +331,13 @@ class MPVPlayerViewModel: ObservableObject {
                 .store(in: &serviceCancellables)
         }
     }
-    
+
     // Helper to robustly start event playback
     private func attemptEventPlaybackStart() {
         guard let appState = appState else { return }
         let eventStartTime = appState.player.eventStartTime
         let isEventPlayback = appState.player.isEventPlayback
-        
+
         // 1. Guard: Duration must be known
         if self.duration <= 0 {
              if isRefiningInitialSeek {
@@ -347,15 +345,15 @@ class MPVPlayerViewModel: ObservableObject {
              }
              return
         }
-        
+
         // 2. Guard: Must be in refining state (holding the gate)
         guard isRefiningInitialSeek else { return }
-        
+
         // 3. Guard: Debounce
         if hasVideoReadyTriggered { return }
-        
+
         var seekTime: Double = 0
-        
+
         // 4. Determine Seek Time
         if let startTime = eventStartTime {
              print("🎉 EVENT: File loaded/Duration ready (\(self.duration)s), preparing to seek...")
@@ -365,7 +363,7 @@ class MPVPlayerViewModel: ObservableObject {
              // Fallback for missing eventStartTime (Race condition workaround)
              print("⚠️ EVENT: eventStartTime is nil but isEventPlayback is TRUE! Falling back to resumeFromTimestamp...")
              seekTime = appState.player.resumeFromTimestamp ?? 0
-             
+
              // Double Fallback: If resumeFromTimestamp is 0 (missing?), try room creation time
              if seekTime == 0, let room = appState.player.currentWatchPartyRoom, room.id.hasPrefix("event_") {
                  let elapsed = Date().timeIntervalSince(room.createdAt)
@@ -380,12 +378,12 @@ class MPVPlayerViewModel: ObservableObject {
              // Not an event, and no start time -> Standard playback (handled elsewhere) or Watch Party sync will take over
              return
         }
-             
+
         // 5. Execute Seek & Play
         print("   Seeking to live edge: \(Int(seekTime))s")
         Task { @MainActor in
              await self.playbackService.seek(to: seekTime)
-             
+
              // Wait briefly for seek to latch, then play
              try? await Task.sleep(nanoseconds: 600_000_000) // 600ms
              await self.playbackService.play()
@@ -406,7 +404,7 @@ class MPVPlayerViewModel: ObservableObject {
     private var chatPollingTimer: Timer?
     private var lastChatMessageId: String?
     private var bufferingTimer: Timer? // Timeout for stuck buffering
-    
+
     // Flag to keep loading state active during event seek stabilization or initial watch party sync
     private var isRefiningInitialSeek = false
 
@@ -417,7 +415,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Watch history tracking
     private var watchHistoryTimer: Timer?
-    
+
     // Cleanup helper
     // Cleanup helper
     // (Consolidated into invalidateAllTimers)
@@ -566,7 +564,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     func kickUser(_ participantId: String) {
         guard isWatchPartyHost else { return }
-        
+
         // 1. Send Kick command via Realtime
         let kickCmd = SyncMessage(
             type: .chat,
@@ -585,7 +583,7 @@ class MPVPlayerViewModel: ObservableObject {
                 roomId: currentRoomId ?? "",
                 userId: UUID(uuidString: participantId) ?? UUID()
             )
-            
+
             // 3. Remove from local presence lists
             await MainActor.run {
                 connectedGuestIds.remove(participantId)
@@ -636,13 +634,13 @@ class MPVPlayerViewModel: ObservableObject {
         print("🎬 Loading stream: \(cleanStreamTitle)")
         print("   IMDB: \(imdbId)")
         print("   URL: \(streamURL.prefix(60))...")
-        
+
         // FIX: Clear event state if this is NOT an event
         // This prevents "Fargo" (Event) state from leaking into "Freaky Friday" (Watch Party)
         if !isEvent {
             print("🧹 Clearing previous event state (Non-Event Load)")
             self.appState?.player.eventStartTime = nil
-            
+
             // FIX: Also clear Watch Party state if we are not in a watch party
             // This prevents "Camp Rock" (Watch Party) state from leaking into "Five Nights" (Solo)
             // Fixes: Stale Invite Content and ability to send invites during solo playback
@@ -706,13 +704,13 @@ class MPVPlayerViewModel: ObservableObject {
                  // Check if we are still loading and NO file is loaded
                  if self.isLoading && !self.mpvWrapper.isFileLoaded {
                      print("⏱️ Soft Timeout: MPV failed to load file in \(timeoutLabel) - triggering fallback")
-                     
+
                      // CRITICAL: If Host in Watch Party, notify guests before exiting
                      if self.isWatchPartyHost {
                          print("📢 Host playback timeout - notifying guests to return to lobby")
                          await self.notifyGuestsOfHostError()
                      }
-                     
+
                      self.playbackErrorTrigger.send("Playback Timeout")
                  }
              }
@@ -794,16 +792,16 @@ class MPVPlayerViewModel: ObservableObject {
 
         } else {
             // Watch Party Mode (Non-Event)
-            
+
             // Check for Solo Host Scenario
             let participantCount = self.appState?.player.currentWatchPartyRoom?.participants.count ?? 0
             // If we are host and nobody is with us (count <= 1), we should bypass the "Start Paused" logic
             let isSoloHost = self.isWatchPartyHost && participantCount <= 1
-            
+
             if isSoloHost {
                 print("👥 WATCH PARTY (SOLO HOST): Bypass Start Paused - Autoplaying")
                 isRefiningInitialSeek = false // Don't hold UI lock
-                
+
                  Task { @MainActor in
                     let expectedCount = min(subtitles.count, 3)
                     await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
@@ -812,7 +810,7 @@ class MPVPlayerViewModel: ObservableObject {
                 print("👥 WATCH PARTY MODE: Starting PAUSED for synchronization")
                 // NEW: Hold poster until we get the first sync message to prevent 0:00 flash
                 isRefiningInitialSeek = true
-    
+
                 // Always load paused for watch party
                 Task { @MainActor in
                     let expectedCount = min(subtitles.count, 3)
@@ -939,7 +937,7 @@ class MPVPlayerViewModel: ObservableObject {
             return
         }
         hasVideoReadyTriggered = true
-        
+
         // Success! Cancel the soft timeout
         self.playbackTimeoutTask?.cancel()
         self.playbackTimeoutTask = nil
@@ -950,7 +948,7 @@ class MPVPlayerViewModel: ObservableObject {
          // NEW: For Events/Watch Parties, delay hiding poster to prevent "Frame 0" flash
         if self.isRefiningInitialSeek {
              // Redundant failsafe: If buffering logic fails to clear this flag after 5 seconds, force clear it.
-             Task { @MainActor in 
+             Task { @MainActor in
                  try? await Task.sleep(nanoseconds: 5_000_000_000) // 5s failsafe
                  if self.isRefiningInitialSeek {
                      print("⚠️ EVENT/VP Mode: Failsafe triggered - forcing UI release")
@@ -1134,7 +1132,7 @@ class MPVPlayerViewModel: ObservableObject {
                         isPlaying: true, // We are explicitly resuming
                         senderId: self.currentUserId
                     )
-                    
+
                     Task {
                         try? await self.realtimeManager?.sendSyncMessage(syncMessage)
                     }
@@ -1389,7 +1387,7 @@ class MPVPlayerViewModel: ObservableObject {
              if let eventStart = appState?.player.eventStartTime {
                  let elapsed = Date().timeIntervalSince(eventStart)
                  print("⚡ Event Mode: Snap-Seek to Wall Clock time: \(elapsed)s (Switch Duration: \(Int(switchDuration * 1000))ms)")
-                 
+
                  // Seek to exact live edge
                  Task { @MainActor in
                      await playbackService.seek(to: max(0, elapsed))
@@ -1829,7 +1827,7 @@ class MPVPlayerViewModel: ObservableObject {
              // self.appState?.player.eventStartTime = nil // REMOVED: Managed by PlayerViewModel.exitPlayer and loadStream to prevent race condition during room join
              // self.appState?.player.resumeFromTimestamp = 0 // REMOVED: Managed by PlayerViewModel.exitPlayer and loadStream to prevent race condition during room join
 
-             
+
              if !returningToLobby {
                  // CRITICAL FIX: Only clear room state if we're still in the SAME room.
                  // When transitioning to a DIFFERENT room (e.g., joining friend's room from player chat),
@@ -1837,19 +1835,19 @@ class MPVPlayerViewModel: ObservableObject {
                  // Clearing it here would cause "No room found" error.
                  let appRoomId = self.appState?.player.currentRoomId
                  let shouldClearRoomState = (appRoomId == nil || appRoomId == self.currentRoomId)
-                 
+
                  if shouldClearRoomState {
                      self.appState?.player.currentWatchPartyRoom = nil // FIX: Clear stale room data
                  } else {
-                     NSLog("🔒 Cleanup: Preserving room state (transitioning to different room: %@ → %@)", 
+                     NSLog("🔒 Cleanup: Preserving room state (transitioning to different room: %@ → %@)",
                            self.currentRoomId ?? "nil", appRoomId ?? "nil")
                  }
-                 
+
                  self.currentRoomId = nil
                  self.isWatchPartyHost = false
                  self.isInWatchParty = false
              }
-             
+
              self.hasCleanedUp = true // Ensure flag is set on MainActor
         }
 
@@ -1878,8 +1876,8 @@ class MPVPlayerViewModel: ObservableObject {
             if !returningToLobby {
                 // Only leave room in database if NOT returning to lobby
                 // Use CAPTURED values since self.currentRoomId was already cleared in MainActor block
-                if let roomId = capturedRoomId, 
-                   let userId = capturedUserId, 
+                if let roomId = capturedRoomId,
+                   let userId = capturedUserId,
                    let userUUID = UUID(uuidString: userId) {
                     try? await SupabaseClient.shared.leaveRoom(roomId: roomId, userId: userUUID)
                     print("✅ Left room in database: \(roomId)")
@@ -1889,7 +1887,7 @@ class MPVPlayerViewModel: ObservableObject {
             } else {
                 print("🏠 Returning to lobby - keeping host in room_participants to preserve room")
             }
-            
+
             // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected
             // CRITICAL FIX: Do NOT disconnect the shared client, only leave the channel.
             // Disconnecting the client kills the connection for the LobbyViewModel too.
@@ -2075,7 +2073,7 @@ extension MPVPlayerViewModel {
                             // User exists - update their timestamp
                             // Capture offline state before update (True if phxRef was nil)
                             let wasOffline = updatedParticipants[index].phxRef == nil
-                            
+
                             updatedParticipants[index].joinedAt = Date()
 
                             // Prefer phx_ref from metadata.
@@ -2090,7 +2088,7 @@ extension MPVPlayerViewModel {
                             }
 
                             // If upgrading from DB-only (Offline) to Realtime (Online), announce it
-                            // This fixes the race condition where DB Polling adds them first (no Ref) 
+                            // This fixes the race condition where DB Polling adds them first (no Ref)
                             // and suppresses the Join message because they are "already in list".
                             if wasOffline && actualUserId != self.currentUserId {
                                 self.addSystemMessage("\(updatedParticipants[index].name) joined")
@@ -2309,7 +2307,7 @@ extension MPVPlayerViewModel {
 
         // Start polling chat messages from database
         startChatPolling()
-        
+
         // Start playback heartbeat to maintain presence in room_participants
         startPlaybackHeartbeat()
 
@@ -2327,13 +2325,13 @@ extension MPVPlayerViewModel {
     func triggerReturnToLobby() {
         guard isWatchPartyHost else { return }
         print("🏠 Host triggering return to lobby...")
-        
+
         // Show exit UI
         self.isExitingToLobby = true
 
         // Set message for Host
         appState?.pendingLobbyMessage = "You returned the group to the lobby."
-        
+
         // CRITICAL FIX: Stop the broadcast timer IMMEDIATELY to prevent race condition
         // If we don't stop it here, the timer will continue sending playbackState messages
         // AFTER we send returnToLobby, causing guests to ignore the lobby return signal.
@@ -2344,13 +2342,13 @@ extension MPVPlayerViewModel {
         // CRITICAL FIX: Use sequential awaits to prevent ViewModel deinit before message send
         Task { [weak self] in
             guard let self = self else { return }
-            
+
             // 1. Clear DB State FIRST (Prevent race condition for quick-returning guests)
             if let roomId = self.appState?.player.currentRoomId {
                 try? await SupabaseClient.shared.updateRoomPlayback(roomId: roomId, position: 0, isPlaying: false)
                 print("✅ Host cleared DB playback state before exit")
             }
-            
+
             // 2. Send sync message to guests and AWAIT completion
             let message = SyncMessage(
                 type: .returnToLobby,
@@ -2359,17 +2357,17 @@ extension MPVPlayerViewModel {
                 isPlaying: false,
                 senderId: self.currentUserId
             )
-            
+
             do {
                 try await self.realtimeManager?.sendSyncMessage(message)
                 print("✅ Host sent returnToLobby message to guests")
             } catch {
                 print("⚠️ Host failed to send returnToLobby message: \(error)")
             }
-            
+
             // 3. Small delay to ensure message propagates through Realtime
             try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s
-            
+
             // 4. ONLY NOW cleanup and navigate
             await MainActor.run {
                 Task { [weak self] in
@@ -2388,18 +2386,18 @@ extension MPVPlayerViewModel {
     /// This prevents guests from being stuck at the ready gate when the host's video fails to load
     private func notifyGuestsOfHostError() async {
         guard isWatchPartyHost else { return }
-        
+
         print("🚨 notifyGuestsOfHostError: Sending returnToLobby signal due to host error")
-        
+
         // Stop broadcast timer to prevent conflicting messages
         syncBroadcastTimer?.invalidate()
         syncBroadcastTimer = nil
-        
+
         // Set a message for the lobby
         await MainActor.run {
             self.appState?.pendingLobbyMessage = "Playback error occurred. Returning to lobby..."
         }
-        
+
         // Send returnToLobby signal to guests
         let message = SyncMessage(
             type: .returnToLobby,
@@ -2408,20 +2406,20 @@ extension MPVPlayerViewModel {
             isPlaying: false,
             senderId: currentUserId
         )
-        
+
         do {
             try await realtimeManager?.sendSyncMessage(message)
             print("✅ Host sent returnToLobby message due to error")
         } catch {
             print("⚠️ Failed to notify guests of host error: \(error)")
         }
-        
+
         // Small delay to ensure message propagates
         try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s
     }
 
     // MARK: - Playback Heartbeat (Room Presence)
-    
+
     /// Start heartbeat loop to maintain presence in room_participants during playback
     /// This prevents the zombie cleanup from removing the host while actively watching
     private func startPlaybackHeartbeat() {
@@ -2431,21 +2429,21 @@ extension MPVPlayerViewModel {
                 guard let self = self,
                       let roomId = self.currentRoomId,
                       let userId = self.appState?.currentUserId else { return }
-                
+
                 do {
                     try await SupabaseClient.shared.sendHeartbeat(roomId: roomId, userId: userId)
                     NSLog("💓 Playback heartbeat sent for room: \(roomId)")
                 } catch {
                     NSLog("⚠️ Playback heartbeat failed: \(error)")
                 }
-                
+
                 // Wait 30 seconds before next heartbeat
                 try? await Task.sleep(nanoseconds: 30_000_000_000)
             }
         }
         NSLog("💓 Started playback heartbeat loop")
     }
-    
+
     /// Stop the playback heartbeat loop
     private func stopPlaybackHeartbeat() {
         playbackHeartbeatTask?.cancel()
@@ -2495,7 +2493,7 @@ extension MPVPlayerViewModel {
 
             // 1. Process DB Participants (Updates & Adds)
             var dbUserIds = Set<String>()
-            
+
             for p in roomParticipants {
                 let pId = p.userId.uuidString.lowercased()
                 dbUserIds.insert(pId)
@@ -2538,20 +2536,20 @@ extension MPVPlayerViewModel {
             // Presence might be ahead of DB.
             // However, if we have a user with NO phxRef (offline) and they are NOT in DB, they should be removed.
             // If they HAVE phxRef (online), we KEEP them regardless of DB.
-            
+
             let idsToRemove = currentMap.keys.filter { id in
                 let isOnline = currentMap[id]?.phxRef != nil
                 let isInDB = dbUserIds.contains(id)
-                
+
                 // If Online: Keep (Source of Truth is Realtime)
                 if isOnline { return false }
-                
+
                 // If Offline and Not in DB: Remove (Stale)
                 if !isInDB { return true }
-                
+
                 return false
             }
-            
+
             if !idsToRemove.isEmpty {
                 for id in idsToRemove {
                     currentMap.removeValue(forKey: id)
@@ -2641,7 +2639,7 @@ extension MPVPlayerViewModel {
                 // CRITICAL FIX: Normalize ID to lowercase to match Presence/DB casing
                 // This prevents deadlocks where "ABC" (ready) != "abc" (connected)
                 let senderId = rawSenderId.lowercased()
-                
+
                 NSLog("✅ Received READY signal from \(rawSenderId) (normalized: \(senderId))")
                 readyGuestIds.insert(senderId)
 
@@ -2719,7 +2717,7 @@ extension MPVPlayerViewModel {
                     print("⏳ Watch Party: Ignoring Initial Sync (video not ready yet)")
                     return // Skip until video is loaded
                 }
-                
+
                 print("👀 Watch Party: Initial Sync - Blind Seeking to \(String(format: "%.2f", predictedHostPosition))s and revealing video")
                 Task { @MainActor in
                      await playbackService.seek(to: predictedHostPosition)
@@ -2870,12 +2868,12 @@ extension MPVPlayerViewModel {
             // CRITICAL: Skip messages from self (already added locally when sent)
             // EXCEPTION: Allow LOBBY_JOIN to pass through so we see "You joined"
             let isJoinMessage = message.chatText == "LOBBY_JOIN"
-            
+
             if message.senderId == currentUserId && !isJoinMessage {
                 print("💬 Skipping own message (already displayed locally)")
                 return
             }
-            
+
             // Block Check
             if let senderId = message.senderId, SocialService.shared.blockedUserIds.contains(senderId.lowercased()) {
                 print("🚫 Skipping chat from blocked user: \(senderId)")
@@ -2904,14 +2902,14 @@ extension MPVPlayerViewModel {
 
                         Task { @MainActor [weak self] in
                             guard let self = self else { return }
-                            
+
                             // 1. Cleanup first (Await disconnection)
                             await self.cleanup()
                             await self.appState?.player.exitPlayer(keepRoomState: false)
-                            
+
                             // 2. Switch View AND Show Alert on the destination screen
                             self.appState?.currentView = .browse
-                            
+
                             // Show GLOBAL alert (Now appears on Browse screen)
                             self.appState?.activeAlert = AppState.AppAlert(
                                 title: "Kicked",
@@ -2920,10 +2918,10 @@ extension MPVPlayerViewModel {
                         }
                         return
                     }
-                    
+
                     // If it's a kick for someone else, we hide it from chat (it's a system message)
                     return
-                    
+
                 } else if text.starts(with: "LOBBY_") {
                     // Filter out LOBBY_READY, LOBBY_UNREADY, etc.
                     print("💬 Skipping system message: \(text)")
@@ -3041,7 +3039,7 @@ extension MPVPlayerViewModel {
 
         case .returnToLobby:
             print("🏠 Received Return to Lobby signal from Host")
-            
+
             // Fix: Explicitly show "Returning to Lobby" overlay instead of generic loading
             self.isExitingToLobby = true
 
@@ -3050,10 +3048,10 @@ extension MPVPlayerViewModel {
             // Perform cleanup and navigate back to lobby
             Task { @MainActor [weak self] in
                 guard let self = self else { return }
-                
+
                 // Slight delay to allow overlay to be seen (optional, but good for UX)
                 try? await Task.sleep(nanoseconds: 500_000_000)
-                
+
                 await self.cleanup(returningToLobby: true)
                 await self.appState?.player.exitPlayer(keepRoomState: true)
                 await MainActor.run {
@@ -3067,7 +3065,7 @@ extension MPVPlayerViewModel {
             if message.senderId == currentUserId {
                 return
             }
-            
+
             // Block Check
             if let senderId = message.senderId, SocialService.shared.blockedUserIds.contains(senderId.lowercased()) {
                 print("🚫 Skipping reaction from blocked user: \(senderId)")
@@ -3449,7 +3447,7 @@ extension MPVPlayerViewModel {
              let accumulatedPercent = duration > 0 ? (accumulatedPlaybackTime / duration) : 0
              // Require 30% of actual Runtime watched (OR 15 mins for long episodes)
              // AND Require 8 minutes of CONTINUOUS playback to prevent scrub-to-verify
-             let tvRuleMet = !isMovie && 
+             let tvRuleMet = !isMovie &&
                             (accumulatedPercent >= 0.30 || accumulatedPlaybackTime > 900) &&
                             continuousPlaybackTime > 480
 
@@ -3475,7 +3473,7 @@ extension MPVPlayerViewModel {
                      // Use explicit values if available (Fixed 2025-12-22)
                      if let s = self.currentSeason { seasonVal = s }
                      else if let player = appState?.player, let s = player.selectedSeason { seasonVal = s }
-                     
+
                      if let e = self.currentEpisode { episodeVal = e }
                      else if let player = appState?.player, let e = player.selectedEpisode { episodeVal = e }
 

@@ -150,6 +150,15 @@ struct RedLemonApp: App {
                         appState.currentUsername = username
                         appState.currentUserId = user.id
                     }
+                    
+                    // CRITICAL FIX: Update SupabaseClient auth context so LicenseManager can access it
+                    SupabaseClient.shared.auth.currentUser = AuthUser(
+                        id: user.id,
+                        username: user.username,
+                        isAdmin: user.isAdmin ?? false,
+                        isPremium: user.isPremium ?? false
+                    )
+                    
                     NSLog("✅ AUTH SUCCESS: User authenticated - \(username) (ID: \(user.id))")
                     NSLog("🎯 AppState: currentUsername=\(username), currentUserId=\(user.id)")
                 } else {

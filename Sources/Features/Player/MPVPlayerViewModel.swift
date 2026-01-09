@@ -2434,6 +2434,8 @@ extension MPVPlayerViewModel {
                     NSLog("💓 Playback heartbeat sent for room: \(roomId)")
                 } catch {
                     NSLog("⚠️ Playback heartbeat failed: \(error)")
+                    // Trigger self-healing if this is an auth token/key error
+                    await SocialService.shared.handleAuthError(error)
                 }
 
                 // Wait 30 seconds before next heartbeat

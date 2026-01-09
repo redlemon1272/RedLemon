@@ -479,16 +479,26 @@ class SocialService: ObservableObject {
         } catch {
             print("❌ SocialService: Failed to load friends: \(error)")
             
-            // Check for Key Mismatch (Invalid cryptographic signature)
-            // This happens if client keys don't match what server expects (e.g. fresh install vs old account)
-            let errorMsg = error.localizedDescription
-            if errorMsg.contains("Invalid cryptographic signature") || errorMsg.contains("signature verification failed") {
-                print("🔑 SocialService: Detected key mismatch. Attempting auto-repair...")
-                await repairKeys()
-            }
+            // Delegate to central handler
+            await handleAuthError(error)
         }
         isLoading = false
     }
+    
+    /// Centralized handler for auth/key errors from any component (Player, Social, etc.)
+    /// Triggers self-healing if a key mismatch is detected.
+    func handleAuthError(_ error: Error) async {
+        let errorMsg = error.localizedDescription
+        // expanded check to cover "No public key registered"
+        if errorMsg.contains("Invalid cryptographic signature") || 
+           errorMsg.contains("signature verification failed") ||
+           errorMsg.contains("No public key registered") {
+            
+            print("🔑 SocialService: Detected key mismatch/auth error: \(errorMsg). Attempting auto-repair...")
+            await repairKeys()
+        }
+    }
+
     
     /// Auto-repair keys by re-uploading the current public key to the server
     private func repairKeys() async {

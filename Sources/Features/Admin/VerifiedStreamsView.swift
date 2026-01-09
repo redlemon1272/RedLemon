@@ -109,6 +109,11 @@ struct VerifiedStreamsView: View {
                 
             case "reported":
                  reportedStreams = try await SupabaseClient.shared.getReportedStreams()
+                 
+                 // Also fetch verified streams to show context (current vote counts)
+                 async let vStreams = SupabaseClient.shared.getAllVerifiedStreams(limit: 500) // Fetch more to ensure coverage
+                 verifiedStreams = try await vStreams
+                 
                  // Trigger title resolution for legacy reports
                  Task { await resolveMissingReportedTitles() }
                 
@@ -283,7 +288,10 @@ struct VerifiedStreamsView: View {
     private var reportedList: some View {
         List {
             ForEach(reportedStreams) { report in
-                ReportedStreamRow(report: report, onBan: {
+                // Find matching verified stream for vote context
+                let matchedStream = verifiedStreams.first(where: { $0.hash == report.streamHash })
+                
+                ReportedStreamRow(report: report, currentVoteCount: matchedStream?.voteCount, onBan: {
                     banStream(hash: report.streamHash, reportId: report.id)
                 }, onBlock: { // NEW
                     blockStream(report: report)
@@ -429,8 +437,9 @@ struct VerifiedStreamsView: View {
 
 struct ReportedStreamRow: View {
     let report: SupabaseClient.ReportedStream
+    let currentVoteCount: Int? // NEW
     let onBan: () -> Void
-    let onBlock: () -> Void // NEW
+    let onBlock: () -> Void 
     let onDismiss: () -> Void
     
     // Helper to extract metadata
@@ -486,6 +495,18 @@ struct ReportedStreamRow: View {
                 Text( "Hash: \(String(report.streamHash.prefix(8)))")
                     .font(.caption2.monospaced())
                     .foregroundColor(.secondary)
+                
+                // Show Vote Count Impact
+                if let votes = currentVoteCount {
+                    HStack(spacing: 4) {
+                        Image(systemName: "chart.bar.fill")
+                        Text("Current Score: \(votes)")
+                            .fontWeight(.bold)
+                    }
+                    .font(.caption)
+                    .foregroundColor(votes < 0 ? .red : .green)
+                    .padding(.top, 2)
+                }
             }
             
             Spacer()
@@ -796,7 +817,7 @@ struct VerifiedStreamRow: View {
                     
                     Text("Votes: \(stream.voteCount)")
                         .font(.caption)
-                        .foregroundColor(.green)
+                        .foregroundColor(stream.voteCount < 0 ? .red : .green)
                 }
                 
                 Text(stream.hash)

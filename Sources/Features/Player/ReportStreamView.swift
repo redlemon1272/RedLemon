@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ReportStreamView: View {
     let imdbId: String
+    let season: Int      // For episode-specific decay (-1 for movies)
+    let episode: Int     // For episode-specific decay (-1 for movies)
     let quality: String
     let streamHash: String
     let movieTitle: String? // Added to capture title for admin visibility
@@ -133,6 +135,8 @@ struct ReportStreamView: View {
         Task {
             await SupabaseClient.shared.reportStream(
                 imdbId: imdbId,
+                season: season,
+                episode: episode,
                 quality: quality,
                 streamHash: streamHash,
                 reason: finalReason,

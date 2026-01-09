@@ -1050,6 +1050,8 @@ struct MPVPlayerView: View {
                      Spacer()
                      ReportStreamView(
                          imdbId: imdbId,
+                         season: season ?? -1,      // Pass for episode-specific decay
+                         episode: episode ?? -1,   // Pass for episode-specific decay
                          quality: streamQuality,
                          streamHash: streamHash ?? "",
                          movieTitle: streamTitle, // Pass title for admin visibility

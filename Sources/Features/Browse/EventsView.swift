@@ -287,12 +287,42 @@ struct EventsView: View {
                 selectedFileIdx = existingRoom.fileIdx
                 
                 if let hash = selectedStreamHash {
-                    print("\n✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑")
-                    print("   UnlockedURL: \(selectedUnlockedURL?.prefix(20) ?? "nil")...")
-                    print("   Hash: \(hash)")
-                    print("   Quality: \(selectedQuality ?? "nil")")
-                    print("   FileIdx: \(selectedFileIdx ?? -1)")
-                    print("   🔗 Locking to server-provided stream hash: \(hash)\n")
+                    print("\n✅ [SYNC VERIFICATION] FOUND SERVER KEY - Re-unlocking for fresh URL 🔑")
+                    print("   Stored Hash: \(hash)")
+                    print("   Cached URL: \(selectedUnlockedURL?.prefix(30) ?? "nil")...")
+                    
+                    // Re-resolve using the hash to get a fresh CDN link
+                    // This ensures the URL hasn't expired (RD links timeout after ~30min of inactivity)
+                    do {
+                        let result = try await StreamService.shared.resolveStream(
+                            item: event.mediaItem,
+                            quality: .fullHD,
+                            season: nil,
+                            episode: nil,
+                            preferredInfoHash: hash,  // Forces exact match to seeded stream
+                            filterExtended: true
+                        )
+                        // Use the freshly unlocked URL
+                        selectedUnlockedURL = result.stream.url
+                        selectedFileIdx = result.stream.fileIdx ?? selectedFileIdx
+                        selectedQuality = "1080p"
+                        
+                        print("   ✅ Fresh URL obtained: \(selectedUnlockedURL?.prefix(40) ?? "nil")...")
+                        
+                        // Update database with fresh URL for future guests
+                        try? await SupabaseClient.shared.updateRoomStream(
+                            roomId: roomId,
+                            streamHash: hash,
+                            fileIdx: selectedFileIdx,
+                            quality: selectedQuality,
+                            unlockedUrl: selectedUnlockedURL
+                        )
+                        print("   ✅ Database updated with fresh URL\n")
+                    } catch {
+                        print("   ⚠️ Re-unlock failed: \(error.localizedDescription)")
+                        print("   ⚠️ Falling back to cached URL (may be stale)\n")
+                        // Keep using the cached selectedUnlockedURL as fallback
+                    }
                 } else if let url = selectedUnlockedURL, !url.isEmpty {
                     // NEW: Trust the URL if it exists, even if hash is missing (e.g. Debrid direct links)
                     print("\n✅ [SYNC VERIFICATION] FOUND SERVER URL (No Hash) 🔑")

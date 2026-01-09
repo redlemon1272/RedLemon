@@ -271,3 +271,32 @@ In `RedLemonApp.swift`, use command line args:
 
 ## Cron Jobs
 Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT jobname, schedule FROM cron.job;\""`
+
+---
+
+# Part 7: Authentication & Security Architecture
+
+## Authentication Model
+- **Primary**: Anonymous Auth (Supabase Anon Key) + Custom User Tables.
+- **Security**: **Cryptographic Signature Verification** (Ed25519).
+- **Goal**: Prevent IDOR (Impersonation) without requiring email passwords.
+
+## How It Works (IDOR Protection)
+1.  **Keys**: App generates an Ed25519 Key Pair on first launch. Stored in macOS Keychain.
+2.  **Registration**: Public Key is sent to server (`register_user_secure`).
+3.  **Signing**: Client signs critical requests (e.g., `room_heartbeat`).
+    -   **Header**: `x-identity-signature`
+    -   **Payload**: `Sign(privateKey, timestamp + user_id.lowercase + path)`
+    -   **Time Window**: Server rejects replay attacks >60s old.
+4.  **Verification**: Server (`verify_user_signature`) verifies signature against stored Public Key using `pgsodium`.
+
+## Critical Rules
+> [!IMPORTANT]
+> **RPC Security**
+> Critical RPCs (`room_heartbeat`, `assign_payment_address`) MUST call `verify_user_signature(user_id, path)`.
+> Removing this line re-opens IDOR vulnerabilities.
+
+## Account Recovery
+- **Mechanism**: `.redlemon-key` file.
+- **Contents**: JSON containing `privateKey`, `publicKey`, and `userId`.
+- **Process**: Importing the file restores the Private Key to Keychain, enabling valid signatures.

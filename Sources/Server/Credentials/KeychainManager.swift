@@ -188,8 +188,11 @@ actor KeychainManager {
     }
 
     func getKeyPair() async -> (privateKey: String, publicKey: String)? {
-        guard let priv = await get(service: "private_key"),
-              let pub = await get(service: "public_key") else {
+        let priv = await get(service: "private_key")
+        let pub = await get(service: "public_key")
+        NSLog("🔐 KeychainManager.getKeyPair() - private_key: \(priv != nil ? "FOUND" : "MISSING") public_key: \(pub != nil ? "FOUND" : "MISSING")")
+
+        guard let priv = priv, let pub = pub else {
             return nil
         }
         return (priv, pub)
@@ -330,7 +333,8 @@ actor KeychainManager {
         }
 
         cache = json
-        print("📂 Loaded \(cache.count) credential(s) from cache")
+        let keys = Array(cache.keys).joined(separator: ", ")
+        print("📂 Loaded \(cache.count) credential(s) from cache: [\(keys)]")
     }
 
     private func saveToEncryptedCache() async {

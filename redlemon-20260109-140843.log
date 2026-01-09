@@ -1,0 +1,761 @@
+2026-01-09 14:08:50.654 RedLemon[7000:83158] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-09 14:08:50.654 RedLemon[7000:83158] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-09 14:08:50.737 RedLemon[7000:83158] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-09 14:08:50.741 RedLemon[7000:83215] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-09 14:08:50.773 RedLemon[7000:83158] ✅ Playback state reset complete - starting in browse view
+2026-01-09 14:08:50.773 RedLemon[7000:83158] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-09 14:08:50.773 RedLemon[7000:83158] 🧪 Testing Profile: debug
+2026-01-09 14:08:50.773 RedLemon[7000:83215] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-09 14:08:50.801 RedLemon[7000:83158] ✅ Keychain: Found stored username: ursinho
+2026-01-09 14:08:50.801 RedLemon[7000:83158] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-09 14:08:50.802 RedLemon[7000:83211] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-09 14:08:51.363 RedLemon[7000:83211] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-09 14:08:51.371 RedLemon[7000:83211] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-09 14:08:51.371 RedLemon[7000:83211] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 14:08:51.401 RedLemon[7000:83158] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 14:08:51.401 RedLemon[7000:83158] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:08:51.401 RedLemon[7000:83158] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:08:51.401 RedLemon[7000:83158] 🚀 RedLemon: Starting HTTP server...
+2026-01-09 14:08:51.401 RedLemon[7000:83158] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-09 14:08:51.421 RedLemon[7000:83158] ✅ RedLemon: HTTPServer instance created
+2026-01-09 14:08:51.422 RedLemon[7000:83237] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 5 credential(s) from cache
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"BEFCC546-F806-4559-869E-9476928FB131","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-09 14:08:51.719 RedLemon[7000:83158] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 14:08:53.477 RedLemon[7000:83158] ✅ RedLemon: Server marked as ready
+2026-01-09 14:08:53.508 RedLemon[7000:83158] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-09 14:08:53.508 RedLemon[7000:83158] 🔍 Performing startup checks...
+2026-01-09 14:08:53.508 RedLemon[7000:83158] ✅ Username-based authentication ready
+2026-01-09 14:08:54.475 RedLemon[7000:83158] 🔍 Performing startup checks...
+2026-01-09 14:08:54.475 RedLemon[7000:83158] ✅ Username-based authentication ready
+2026-01-09 14:08:54.909 RedLemon[7000:83158] 🔄 Checking for app updates...
+2026-01-09 14:08:57.015 RedLemon[7000:83211] 📡 StreamService: Fetching metadata for tt1396484...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1490 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1490, 412 movies)
+✅ [EventsView] Loaded 412 movies from config version 1490
+🗓 AppState: Updated schedule epoch to 2026-01-09 03:41:37 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 1306 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1396484/img (1023800 bytes)
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📊 AppState: Polled participant counts - Active: ["tt1396484": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 1304 seconds
+📊 AppState: Polled participant counts - Active: ["tt1396484": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 1304 seconds
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"365B58ED-4F70-4E97-8ECD-447FC9D3CB58","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a3881618-ed8e-11f0-bdf8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklqELqYkI6AgNC","last_seen":"2026-01-09T19:08:53.210Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+💰 LicenseManager: Starting hybrid subscription check...
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"5467487E-831E-4D9F-AEF6-FFD845AF9EC2","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+🔄 SocialService: Syncing 49 items to cloud...
+🔄 SocialService: Syncing 49 items to cloud (serial)...
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+👤 LicenseManager: Profile expiry: Optional(2026-02-08 05:38:35 +0000)
+🎉 Subscription updated! Expires: 2026-02-08 05:38:35 +0000
+💰 LicenseManager: Starting hybrid subscription check...
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+👤 LicenseManager: Profile expiry: Optional(2026-02-08 05:38:35 +0000)
+🎉 Subscription updated! Expires: 2026-02-08 05:38:35 +0000
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.051s (RTT: 130ms)
+   Local:  2026-01-09 19:08:55 +0000
+   Server: 2026-01-09 19:08:55 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+[2026-01-09T19:08:56Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: It (Live: true)
+   Event start time: 2026-01-09 17:05:37 +0000
+   Event duration: 8700.0s
+   Current time: 2026-01-09 19:08:56 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt1396484
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY - Re-unlocking for fresh URL 🔑
+   Stored Hash: ad1ba686c1b2028858b0aefd835e995d76707d44
+   Cached URL: https://chi9-4.download.real-d...
+[2026-01-09T19:08:57Z] [INFO] [StreamService.swift:90] 🎬 StreamService: Starting resolution for: It
+[ INFO ] GET /api/metadata/meta/movie/tt1396484 [request-id: 307030E8-23DC-472B-A3A3-25B4DE7083BE]
+2026-01-09 14:08:57.230 RedLemon[7000:83211] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-09 14:08:57.230 RedLemon[7000:83211] ✅ StreamService: Metadata loaded: It
+2026-01-09 14:08:57.230 RedLemon[7000:83211] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-09 14:08:57.231 RedLemon[7000:83211] ⚡️ StreamResolver: Resolving streams for tt1396484 (S0E0)
+2026-01-09 14:08:57.456 RedLemon[7000:83213]    📅 Filtering by year: 2017
+💾 Cache SET: Metadata[meta_movie_tt1396484]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+⚡️ StreamResolver: Found Community Verified stream with 4 votes!
+   ℹ️ Hash: ad1ba686c1b2028858b0aefd835e995d76707d44
+   ℹ️ Last Verified: 2026-01-09 18:42:00 +0000
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt1396484 (movie)
+✅ Found 10 subtitles from SubDL (Primary)
+   📉 Penalizing niche subtitle: it 2017 720p new hd-ts 60fps x264 hq-mkv (02:08:39) (Stream is standard)
+✅ StreamResolver: Attached best sub for 'Community Verified Stream (108...': It(2017)720pBluRay-[LRXSTORE]...
+⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.
+⚡️ StreamService: Testing verified stream viability...
+🔓 StreamService: Unlocking with infoHash: ad1ba686c1b2...
+[ INFO ] POST /api/streams/unlock [request-id: B171014A-8830-4274-8201-5EC3A84F4DFE]
+2026-01-09 14:08:57.978 RedLemon[7000:83215] 🔓 Unlock request: infoHash=ad1ba686c1b2..., fileIdx=0
+2026-01-09 14:08:57.978 RedLemon[7000:83215] ✅ Token found, attempting unlock...
+2026-01-09 14:08:59.718 RedLemon[7000:83213] ✅ Unlocked successfully: It.2017.1080p.BluRay.x264-[YTS.AG].mp4
+2026-01-09 14:08:59.722 RedLemon[7000:83237] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles...
+2026-01-09 14:08:59.723 RedLemon[7000:83237] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-09 14:08:59.727 RedLemon[7000:83213] 🔍 DEBUG: Processing subtitle URL: /subtitle/3028916-3033434.zip
+2026-01-09 14:08:59.727 RedLemon[7000:83215] 🔍 DEBUG: Processing subtitle URL: /subtitle/3028915-3033435.zip
+2026-01-09 14:08:59.728 RedLemon[7000:83215] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 14:08:59.728 RedLemon[7000:83211] 🔍 DEBUG: Processing subtitle URL: /subtitle/2973429-2967372.zip
+2026-01-09 14:08:59.728 RedLemon[7000:83213] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 14:08:59.728 RedLemon[7000:83211] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 14:08:59.728 RedLemon[7000:83237] 🔍 DEBUG: Processing subtitle URL: /subtitle/3381778-2862933.zip
+2026-01-09 14:08:59.728 RedLemon[7000:83237] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 14:08:59.728 RedLemon[7000:83237] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzODE3NzgtMjg2MjkzMy56aXA=?token=4CA7A550-CAAD-41D4-B6FF-6AB7664C4397
+2026-01-09 14:08:59.729 RedLemon[7000:83237] 🔍 DEBUG: Processing subtitle URL: /subtitle/3204249-3220719.zip
+2026-01-09 14:08:59.729 RedLemon[7000:83215] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTUtMzAzMzQzNS56aXA=?token=4CA7A550-CAAD-41D4-B6FF-6AB7664C4397
+2026-01-09 14:08:59.729 RedLemon[7000:83211] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NzM0MjktMjk2NzM3Mi56aXA=?token=4CA7A550-CAAD-41D4-B6FF-6AB7664C4397
+2026-01-09 14:08:59.728 RedLemon[7000:83213] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTYtMzAzMzQzNC56aXA=?token=4CA7A550-CAAD-41D4-B6FF-6AB7664C4397
+2026-01-09 14:08:59.729 RedLemon[7000:83237] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 14:08:59.730 RedLemon[7000:83237] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMyMDQyNDktMzIyMDcxOS56aXA=?token=4CA7A550-CAAD-41D4-B6FF-6AB7664C4397
+2026-01-09 14:08:59.901 RedLemon[7000:83237] ✅ Persisted stream selection to room event_tt1396484
+2026-01-09 14:09:00.408 RedLemon[7000:83158] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1396484/img
+2026-01-09 14:09:00.409 RedLemon[7000:83158] ⏳ Background art loading...
+2026-01-09 14:09:00.409 RedLemon[7000:83158] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1396484/img
+2026-01-09 14:09:00.410 RedLemon[7000:83158] ⏳ Logo loading...
+2026-01-09 14:09:00.471 RedLemon[7000:83158]    Quality: 1080p
+2026-01-09 14:09:00.471 RedLemon[7000:83158]    Mode: watchParty
+2026-01-09 14:09:00.472 RedLemon[7000:83158] 📡 Fetching metadata for tt1396484...
+2026-01-09 14:09:00.516 RedLemon[7000:83158] ✅ Logo loaded successfully
+2026-01-09 14:09:00.518 RedLemon[7000:83158] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-09 14:09:00.518 RedLemon[7000:83158] 📝 GUEST: Extracted filename='It.2017.1080p.BluRay.x264-[YTS.AG].mp4' (len=38), sourceQuality=nil, selectedQuality=1080p
+✅ RD addMagnet: 3ZYMVHLWMNJFE
+🎬 Movie: Found matching file for title 'It': /It.2017.1080p.BluRay.x264-[YTS.AG].mp4
+📝 RD: Selecting file ID 2 for torrent 3ZYMVHLWMNJFE
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/4XVIWI2COYKF6A9D
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Verified stream is VIABLE. Returning immediately.
+   ✅ Fresh URL obtained: https://chi9-4.download.real-debrid.com/...
+   ✅ Database updated with fresh URL
+
+🎬 Live event - calculating position: 7403.383996009827 seconds
+   Event start time: 2026-01-09 17:05:37 +0000
+   Current time: 2026-01-09 19:09:00 +0000
+   Room createdAt: 2026-01-09 17:05:37 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 7403.383996009827
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: It
+✅ Cache HIT: Metadata[meta_movie_tt1396484]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 13D8462F-B495-4DEC-B507-F2B1F54D1333]
+2026-01-09 14:09:00.587 RedLemon[7000:83158] ✅ Background art loaded successfully
+2026-01-09 14:09:00.764 RedLemon[7000:83158] ✅ GUEST: Found 10 subtitles
+2026-01-09 14:09:00.774 RedLemon[7000:83158] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi9-4.download.real-debrid.com/d/IL32Q4EJLYENY117/I, subtitles: 10
+2026-01-09 14:09:00.845 RedLemon[7000:83158] ✅ Stream ready, starting playback...
+2026-01-09 14:09:00.845 RedLemon[7000:83158] 🖥️ WindowManager: enterFullscreen() called
+2026-01-09 14:09:00.846 RedLemon[7000:83158]    Window: <SwiftUI.SwiftUIWindow: 0x7f7f82256f00>
+2026-01-09 14:09:00.846 RedLemon[7000:83158]    Is fullscreen: 0
+2026-01-09 14:09:00.846 RedLemon[7000:83158]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-09 14:09:00.931 RedLemon[7000:83158] 🖼️ Setting up MPV with native macOS video output...
+2026-01-09 14:09:00.936 RedLemon[7000:83158] ✅ MPV initialized with native GPU rendering
+2026-01-09 14:09:00.951 RedLemon[7000:83158] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-09 14:09:00.952 RedLemon[7000:83158] 🎉 Starting watch party sync - Room: event_tt1396484, Host: NO
+2026-01-09 14:09:00.952 RedLemon[7000:83158] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-09 14:09:01.021 RedLemon[7000:83158] 🔄 Starting chat polling for room: event_tt1396484
+2026-01-09 14:09:01.021 RedLemon[7000:83158] 💓 Started playback heartbeat loop
+2026-01-09 14:09:01.021 RedLemon[7000:83158] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-09 14:09:01.021 RedLemon[7000:83158] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-09 14:09:01.021 RedLemon[7000:83158] 🎬🎬🎬 Subtitles: 10
+2026-01-09 14:09:01.022 RedLemon[7000:83158] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: It
+2026-01-09 14:09:01.022 RedLemon[7000:83158] 🎬🎬🎬 streamURL: https://chi9-4.download.real-debrid.com/d/IL32Q4EJLYENY117/I
+2026-01-09 14:09:01.022 RedLemon[7000:83158] 🎬🎬🎬 subtitles: 10
+2026-01-09 14:09:01.023 RedLemon[7000:83158] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-09 14:09:01.035 RedLemon[7000:83214] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-09 14:09:01.036 RedLemon[7000:83214] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-09 14:09:01.036 RedLemon[7000:83214] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTYtMzAzMzQzNC56aXA=?token=4CA7A550-CAAD-41D4-B6FF-6AB7664C4397
+2026-01-09 14:09:01.037 RedLemon[7000:83215] 🎬 MPV: Current video filename set to: 
+2026-01-09 14:09:01.037 RedLemon[7000:83215] 🎬 MPV loadVideo called with URL: https://chi9-4.download.real-debrid.com/d/IL32Q4EJ (Encoded: https://chi9-4.download.real-debrid.com/d/IL32Q4EJ), autoplay: false, expectedSubs: 3
+2026-01-09 14:09:01.038 RedLemon[7000:83215] 🎬 MPV executing: loadfile "https://chi9-4.download.real-debrid.com/d/IL32Q4EJLYENY117/It.2017.1080p.BluRay.x264-%5BYTS.AG%5D.mp4"
+2026-01-09 14:09:01.038 RedLemon[7000:83215] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+🔍 Searching SubDL: tt1396484 (movie)
+   ℹ️ Fallback Name: It (2017)
+✅ Found 10 subtitles from SubDL (Primary)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi9-4.download.real-debrid.com/d/IL32Q4EJLYENY117/I
+   Display Title: It
+   Subtitle URLs: 10
+      [0] It(2017)720pBluRay-[LRXSTORE]
+      [1] It(2017)720pBluRay-[LRXSTORE]
+      [2] It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng
+      [3] It.2017.720p.BrRip.x264.YIFY
+      [4] It.2017.WEB-DL.TUBI
+      [5] It.2017.Blueray.720p.x264-ontop
+      [6] It.2017.BRRip.XviD.MP3-RARBG
+      [7] IT 2017 720p new hd-ts 60fps x264 hq-mkv (02:08:39)
+      [8] It.2017.BRRip.XviD.MP3-RARBG
+      [9] IT2017.WEBRip.XviD.MP3-SHITBOX
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🧠 StreamService: Marked hash ad1ba686 as attempted for tt1396484
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+✅ Render context created successfully (IINA method)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt1396484, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt1396484
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt1396484
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: It
+   IMDB: tt1396484
+   URL: https://chi9-4.download.real-debrid.com/d/IL32Q4EJLYENY117/I...
+   Hash: ad1ba686...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Fetching metadata for tt1396484 as movie...
+📝 Pre-loading external subtitles (Top 3)...
+✅ Cache HIT: Metadata[meta_movie_tt1396484]
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTYtMzAzMzQzNC56aXA= [request-id: 9D331F0D-7B63-4271-829E-7BB2584CAAAE]
+2026-01-09 14:09:01.313 RedLemon[7000:83158] ⚠️ Playback heartbeat failed: userMessage("No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9")
+2026-01-09 14:09:01.598 RedLemon[7000:83237] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A576BC99-C19F-450F-959B-7FF527BCDCC6.vtt
+2026-01-09 14:09:01.598 RedLemon[7000:83237] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A576BC99-C19F-450F-959B-7FF
+2026-01-09 14:09:01.623 RedLemon[7000:83237] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 14:09:01.623 RedLemon[7000:83237] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTUtMzAzMzQzNS56aXA=?token=4CA7A550-CAAD-41D4-B6FF-6AB7664C4397
+📄 Subtitle request: L3N1YnRpdGxlLzMwMjg5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3028916-3033434.zip
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+📨 Received: {"ref":"EF3C6A1B-AD35-4D11-B2AE-A9346C27DBC8","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt1396484"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt1396484"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a82f3dc2-ed8e-11f0-9617-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklqhRLOjqQMAVi","is_host":false,"joined_at":1767985741.017633,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt1396484"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1396484"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a3881618-ed8e-11f0-bdf8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklqhVAVO06AgWC","phx_ref_prev":"GIklqELqYkI6AgNC","last_seen":"2026-01-09T19:09:01.034Z","room_id":"event_tt1396484","started_at":"2026-01-09T19:09:01.034Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1396484","watching_title":"It","watching_type":"movie"}]}},"leaves":{"a3881618-ed8e-11f0-bdf8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklqELqYkI6AgNC","last_seen":"2026-01-09T19:08:53.210Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Got background: https://images.metahub.space/background/medium/tt1396484/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1396484/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1396484/img...
+📡 SocialService: Updated status - online: It
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIklqhRLOjqQMAVi)
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 1296 seconds
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+❌ Supabase API Error: No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9
+✅ Download complete: 47066 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: It_English-HI-[LRXSTORE].srt
+📦 Extracting specific file: It_English-HI-\[LRXSTORE\].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTUtMzAzMzQzNS56aXA= [request-id: 752073CF-7A00-406A-B39F-758CFD53CE37]
+2026-01-09 14:09:02.210 RedLemon[7000:83392] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_4A139F87-698E-4950-80B4-FBBFE9A09BB3.vtt
+2026-01-09 14:09:02.210 RedLemon[7000:83392] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_4A139F87-698E-4950-80B4-FBB
+2026-01-09 14:09:02.220 RedLemon[7000:83392] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 14:09:02.220 RedLemon[7000:83392] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMyMDQyNDktMzIyMDcxOS56aXA=?token=4CA7A550-CAAD-41D4-B6FF-6AB7664C4397
+📄 Subtitle request: L3N1YnRpdGxlLzMwMjg5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3028915-3033435.zip
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Download complete: 36124 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: It_English-[LRXSTORE].srt
+📦 Extracting specific file: It_English-\[LRXSTORE\].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMyMDQyNDktMzIyMDcxOS56aXA= [request-id: BBCFC304-4BBC-472F-9392-CAE1A1E865B2]
+2026-01-09 14:09:02.606 RedLemon[7000:83394] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_790E51DF-7BF1-4C11-83EC-188708C8E7ED.vtt
+2026-01-09 14:09:02.607 RedLemon[7000:83394] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_790E51DF-7BF1-4C11-83EC-188
+2026-01-09 14:09:02.619 RedLemon[7000:83394] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 14:09:02.619 RedLemon[7000:83394] 🔍 MPV track-list/count: 3
+2026-01-09 14:09:02.620 RedLemon[7000:83394] 🔍 Track 0 type: sub
+2026-01-09 14:09:02.620 RedLemon[7000:83394] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:02.620 RedLemon[7000:83394] 🔍 Track 1 type: sub
+2026-01-09 14:09:02.620 RedLemon[7000:83394] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:02.620 RedLemon[7000:83394] 🔍 Track 2 type: sub
+2026-01-09 14:09:02.621 RedLemon[7000:83394] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, external=1
+2026-01-09 14:09:02.621 RedLemon[7000:83394] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:09:02.621 RedLemon[7000:83394]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:09:02.621 RedLemon[7000:83394]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:02.621 RedLemon[7000:83394]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:02.621 RedLemon[7000:83394]    Start[3]: ID=3, Title='It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', Lang='en', Ext=1
+2026-01-09 14:09:02.622 RedLemon[7000:83394] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-09 14:09:02.623 RedLemon[7000:83394]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:09:02.623 RedLemon[7000:83394]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:02.624 RedLemon[7000:83394]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:02.624 RedLemon[7000:83394]    Track: ID=3, Title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, External=1
+2026-01-09 14:09:03.119 RedLemon[7000:83158] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-09 14:09:03.249 RedLemon[7000:83392] 🔍 MPV track-list/count: 5
+2026-01-09 14:09:03.252 RedLemon[7000:83392] 🔍 Track 0 type: sub
+2026-01-09 14:09:03.252 RedLemon[7000:83392] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:03.253 RedLemon[7000:83392] 🔍 Track 1 type: sub
+2026-01-09 14:09:03.253 RedLemon[7000:83392] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:03.253 RedLemon[7000:83392] 🔍 Track 2 type: sub
+2026-01-09 14:09:03.254 RedLemon[7000:83392] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, external=1
+2026-01-09 14:09:03.254 RedLemon[7000:83392] 🔍 Track 3 type: video
+2026-01-09 14:09:03.255 RedLemon[7000:83392] 🔍 Track 4 type: audio
+2026-01-09 14:09:03.255 RedLemon[7000:83392] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:09:03.256 RedLemon[7000:83392]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:09:03.256 RedLemon[7000:83392]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:03.256 RedLemon[7000:83392]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:03.256 RedLemon[7000:83392]    Start[3]: ID=3, Title='It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', Lang='en', Ext=1
+2026-01-09 14:09:03.257 RedLemon[7000:83392] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-09 14:09:03.258 RedLemon[7000:83392]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:09:03.258 RedLemon[7000:83392]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:03.258 RedLemon[7000:83392]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:03.259 RedLemon[7000:83392]    Track: ID=3, Title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, External=1
+2026-01-09 14:09:03.632 RedLemon[7000:83214] 🔍 MPV track-list/count: 5
+2026-01-09 14:09:03.632 RedLemon[7000:83214] 🔍 Track 0 type: sub
+2026-01-09 14:09:03.632 RedLemon[7000:83214] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:03.633 RedLemon[7000:83214] 🔍 Track 1 type: sub
+2026-01-09 14:09:03.633 RedLemon[7000:83214] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:03.633 RedLemon[7000:83214] 🔍 Track 2 type: sub
+2026-01-09 14:09:03.634 RedLemon[7000:83214] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, external=1
+2026-01-09 14:09:03.634 RedLemon[7000:83214] 🔍 Track 3 type: video
+2026-01-09 14:09:03.634 RedLemon[7000:83214] 🔍 Track 4 type: audio
+2026-01-09 14:09:03.634 RedLemon[7000:83214] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:09:03.634 RedLemon[7000:83214]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:09:03.634 RedLemon[7000:83214]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:03.635 RedLemon[7000:83214]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:03.635 RedLemon[7000:83214]    Start[3]: ID=3, Title='It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', Lang='en', Ext=1
+2026-01-09 14:09:03.635 RedLemon[7000:83214] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 14:09:03.635 RedLemon[7000:83214]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:09:03.636 RedLemon[7000:83214]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:03.636 RedLemon[7000:83214]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:03.637 RedLemon[7000:83214]    Track: ID=3, Title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, External=1
+2026-01-09 14:09:04.332 RedLemon[7000:83213] 🔍 MPV track-list/count: 5
+2026-01-09 14:09:04.332 RedLemon[7000:83213] 🔍 Track 0 type: sub
+2026-01-09 14:09:04.333 RedLemon[7000:83213] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:04.333 RedLemon[7000:83213] 🔍 Track 1 type: sub
+2026-01-09 14:09:04.333 RedLemon[7000:83213] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:04.333 RedLemon[7000:83213] 🔍 Track 2 type: sub
+2026-01-09 14:09:04.333 RedLemon[7000:83213] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, external=1
+2026-01-09 14:09:04.334 RedLemon[7000:83213] 🔍 Track 3 type: video
+2026-01-09 14:09:04.334 RedLemon[7000:83213] 🔍 Track 4 type: audio
+2026-01-09 14:09:04.334 RedLemon[7000:83213] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:09:04.334 RedLemon[7000:83213]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:09:04.334 RedLemon[7000:83213]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:04.335 RedLemon[7000:83213]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:04.335 RedLemon[7000:83213]    Start[3]: ID=3, Title='It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', Lang='en', Ext=1
+2026-01-09 14:09:04.335 RedLemon[7000:83213] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 14:09:04.336 RedLemon[7000:83213]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:09:04.336 RedLemon[7000:83213]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:04.336 RedLemon[7000:83213]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:04.337 RedLemon[7000:83213]    Track: ID=3, Title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, External=1
+2026-01-09 14:09:04.707 RedLemon[7000:83394] 🔍 MPV track-list/count: 5
+2026-01-09 14:09:04.707 RedLemon[7000:83394] 🔍 Track 0 type: sub
+2026-01-09 14:09:04.708 RedLemon[7000:83394] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:04.708 RedLemon[7000:83394] 🔍 Track 1 type: sub
+2026-01-09 14:09:04.708 RedLemon[7000:83394] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:04.708 RedLemon[7000:83394] 🔍 Track 2 type: sub
+2026-01-09 14:09:04.708 RedLemon[7000:83394] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, external=1
+2026-01-09 14:09:04.708 RedLemon[7000:83394] 🔍 Track 3 type: video
+2026-01-09 14:09:04.709 RedLemon[7000:83394] 🔍 Track 4 type: audio
+2026-01-09 14:09:04.709 RedLemon[7000:83394] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:09:04.709 RedLemon[7000:83394]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:09:04.709 RedLemon[7000:83394]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:04.709 RedLemon[7000:83394]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:04.709 RedLemon[7000:83394]    Start[3]: ID=3, Title='It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', Lang='en', Ext=1
+2026-01-09 14:09:04.709 RedLemon[7000:83394] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 14:09:04.710 RedLemon[7000:83394]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:09:04.710 RedLemon[7000:83394]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:04.710 RedLemon[7000:83394]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:04.710 RedLemon[7000:83394]    Track: ID=3, Title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, External=1
+2026-01-09 14:09:05.359 RedLemon[7000:83392] 🔍 MPV track-list/count: 5
+2026-01-09 14:09:05.360 RedLemon[7000:83392] 🔍 Track 0 type: sub
+2026-01-09 14:09:05.361 RedLemon[7000:83392] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:05.361 RedLemon[7000:83392] 🔍 Track 1 type: sub
+2026-01-09 14:09:05.362 RedLemon[7000:83392] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:05.362 RedLemon[7000:83392] 🔍 Track 2 type: sub
+2026-01-09 14:09:05.362 RedLemon[7000:83392] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, external=1
+2026-01-09 14:09:05.362 RedLemon[7000:83392] 🔍 Track 3 type: video
+2026-01-09 14:09:05.363 RedLemon[7000:83392] 🔍 Track 4 type: audio
+2026-01-09 14:09:05.363 RedLemon[7000:83392] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:09:05.363 RedLemon[7000:83392]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:09:05.363 RedLemon[7000:83392]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:05.364 RedLemon[7000:83392]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:05.364 RedLemon[7000:83392]    Start[3]: ID=3, Title='It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', Lang='en', Ext=1
+2026-01-09 14:09:05.364 RedLemon[7000:83392] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 14:09:05.364 RedLemon[7000:83392]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:09:05.367 RedLemon[7000:83392]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:05.367 RedLemon[7000:83392]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:05.367 RedLemon[7000:83392]    Track: ID=3, Title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, External=1
+2026-01-09 14:09:05.743 RedLemon[7000:83215] 🔍 MPV track-list/count: 5
+2026-01-09 14:09:05.744 RedLemon[7000:83215] 🔍 Track 0 type: sub
+2026-01-09 14:09:05.744 RedLemon[7000:83215] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:05.744 RedLemon[7000:83215] 🔍 Track 1 type: sub
+2026-01-09 14:09:05.745 RedLemon[7000:83215] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:05.745 RedLemon[7000:83215] 🔍 Track 2 type: sub
+2026-01-09 14:09:05.745 RedLemon[7000:83215] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, external=1
+2026-01-09 14:09:05.746 RedLemon[7000:83215] 🔍 Track 3 type: video
+2026-01-09 14:09:05.746 RedLemon[7000:83215] 🔍 Track 4 type: audio
+2026-01-09 14:09:05.746 RedLemon[7000:83215] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:09:05.746 RedLemon[7000:83215]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:09:05.746 RedLemon[7000:83215]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:05.746 RedLemon[7000:83215]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:05.747 RedLemon[7000:83215]    Start[3]: ID=3, Title='It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', Lang='en', Ext=1
+2026-01-09 14:09:05.747 RedLemon[7000:83215] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 14:09:05.747 RedLemon[7000:83215]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:09:05.748 RedLemon[7000:83215]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:05.748 RedLemon[7000:83215]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:05.748 RedLemon[7000:83215]    Track: ID=3, Title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, External=1
+2026-01-09 14:09:06.467 RedLemon[7000:83237] 🔍 MPV track-list/count: 5
+2026-01-09 14:09:06.467 RedLemon[7000:83237] 🔍 Track 0 type: sub
+2026-01-09 14:09:06.467 RedLemon[7000:83237] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:06.468 RedLemon[7000:83237] 🔍 Track 1 type: sub
+2026-01-09 14:09:06.468 RedLemon[7000:83237] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:06.468 RedLemon[7000:83237] 🔍 Track 2 type: sub
+2026-01-09 14:09:06.468 RedLemon[7000:83237] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, external=1
+2026-01-09 14:09:06.469 RedLemon[7000:83237] 🔍 Track 3 type: video
+2026-01-09 14:09:06.469 RedLemon[7000:83237] 🔍 Track 4 type: audio
+2026-01-09 14:09:06.469 RedLemon[7000:83237] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:09:06.469 RedLemon[7000:83237]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:09:06.469 RedLemon[7000:83237]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:06.469 RedLemon[7000:83237]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:06.469 RedLemon[7000:83237]    Start[3]: ID=3, Title='It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', Lang='en', Ext=1
+2026-01-09 14:09:06.470 RedLemon[7000:83237] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 14:09:06.470 RedLemon[7000:83237]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:09:06.470 RedLemon[7000:83237]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:06.471 RedLemon[7000:83237]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:06.471 RedLemon[7000:83237]    Track: ID=3, Title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, External=1
+2026-01-09 14:09:06.791 RedLemon[7000:83237] 🔍 MPV track-list/count: 5
+2026-01-09 14:09:06.791 RedLemon[7000:83237] 🔍 Track 0 type: sub
+2026-01-09 14:09:06.791 RedLemon[7000:83237] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:06.792 RedLemon[7000:83237] 🔍 Track 1 type: sub
+2026-01-09 14:09:06.792 RedLemon[7000:83237] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:06.792 RedLemon[7000:83237] 🔍 Track 2 type: sub
+2026-01-09 14:09:06.792 RedLemon[7000:83237] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, external=1
+2026-01-09 14:09:06.793 RedLemon[7000:83237] 🔍 Track 3 type: video
+2026-01-09 14:09:06.793 RedLemon[7000:83237] 🔍 Track 4 type: audio
+2026-01-09 14:09:06.793 RedLemon[7000:83237] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:09:06.794 RedLemon[7000:83237]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:09:06.794 RedLemon[7000:83237]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:06.794 RedLemon[7000:83237]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:06.794 RedLemon[7000:83237]    Start[3]: ID=3, Title='It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', Lang='en', Ext=1
+2026-01-09 14:09:06.794 RedLemon[7000:83237] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 14:09:06.794 RedLemon[7000:83237]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:09:06.795 RedLemon[7000:83237]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:06.795 RedLemon[7000:83237]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:06.795 RedLemon[7000:83237]    Track: ID=3, Title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, External=1
+2026-01-09 14:09:07.570 RedLemon[7000:83213] 🔍 MPV track-list/count: 5
+2026-01-09 14:09:07.571 RedLemon[7000:83213] 🔍 Track 0 type: sub
+2026-01-09 14:09:07.574 RedLemon[7000:83213] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:07.574 RedLemon[7000:83213] 🔍 Track 1 type: sub
+2026-01-09 14:09:07.575 RedLemon[7000:83213] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 14:09:07.575 RedLemon[7000:83213] 🔍 Track 2 type: sub
+2026-01-09 14:09:07.575 RedLemon[7000:83213] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, external=1
+2026-01-09 14:09:07.576 RedLemon[7000:83213] 🔍 Track 3 type: video
+2026-01-09 14:09:07.576 RedLemon[7000:83213] 🔍 Track 4 type: audio
+2026-01-09 14:09:07.576 RedLemon[7000:83213] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 14:09:07.577 RedLemon[7000:83213]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 14:09:07.577 RedLemon[7000:83213]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:07.578 RedLemon[7000:83213]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 14:09:07.578 RedLemon[7000:83213]    Start[3]: ID=3, Title='It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', Lang='en', Ext=1
+2026-01-09 14:09:07.579 RedLemon[7000:83213] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 14:09:07.579 RedLemon[7000:83213]    Track: ID=0, Title=Off, External=0
+2026-01-09 14:09:07.579 RedLemon[7000:83213]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:07.579 RedLemon[7000:83213]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 14:09:07.579 RedLemon[7000:83213]    Track: ID=3, Title=It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng, External=1
+2026-01-09 14:09:13.670 RedLemon[7000:83237] 📤 Realtime: Sending message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:09:13.671 RedLemon[7000:83237]    Payload keys: chatUsername, senderId, timestamp, type, isPremium, position, chatText
+2026-01-09 14:09:13.673 RedLemon[7000:83215] ✅ Realtime: Message broadcast complete
+2026-01-09 14:09:13.893 RedLemon[7000:83392] 📨 Realtime: Received broadcast message
+2026-01-09 14:09:13.894 RedLemon[7000:83392]    Payload keys: type, chatText, timestamp, isPremium, chatUsername, senderId, position
+2026-01-09 14:09:13.894 RedLemon[7000:83392] ✅ Realtime: Decoded message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:09:13.895 RedLemon[7000:83392] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-09 14:09:13.895 RedLemon[7000:83392] ✅ Realtime: syncCallback invoked successfully
+2026-01-09 14:09:13.904 RedLemon[7000:83158] 🔍 DEBUG: Received sync message - type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:09:21.040 RedLemon[7000:83213] 📨 Realtime: Received broadcast message
+2026-01-09 14:09:21.040 RedLemon[7000:83213]    Payload keys: senderId, type, timestamp, position, isPremium, chatText, chatUsername
+2026-01-09 14:09:21.040 RedLemon[7000:83213] ✅ Realtime: Decoded message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 14:09:21.041 RedLemon[7000:83213] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-09 14:09:21.041 RedLemon[7000:83213] ✅ Realtime: syncCallback invoked successfully
+2026-01-09 14:09:21.078 RedLemon[7000:83158] 🔍 DEBUG: Received sync message - type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 14:09:26.732 RedLemon[7000:83211] 📤 Realtime: Sending message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:09:26.733 RedLemon[7000:83211]    Payload keys: isPremium, chatUsername, senderId, type, position, chatText, timestamp
+2026-01-09 14:09:26.733 RedLemon[7000:83392] ✅ Realtime: Message broadcast complete
+2026-01-09 14:09:26.863 RedLemon[7000:83211] 📨 Realtime: Received broadcast message
+2026-01-09 14:09:26.863 RedLemon[7000:83211]    Payload keys: senderId, position, timestamp, chatUsername, chatText, isPremium, type
+2026-01-09 14:09:26.863 RedLemon[7000:83211] ✅ Realtime: Decoded message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:09:26.863 RedLemon[7000:83211] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-09 14:09:26.863 RedLemon[7000:83211] ✅ Realtime: syncCallback invoked successfully
+2026-01-09 14:09:26.876 RedLemon[7000:83158] 🔍 DEBUG: Received sync message - type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 14:09:31.426 RedLemon[7000:83215] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-09 14:09:31.757 RedLemon[7000:83158] ⚠️ Playback heartbeat failed: userMessage("No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9")
+📄 Subtitle request: L3N1YnRpdGxlLzMyMDQy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3204249-3220719.zip
+✅ Download complete: 34652 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng.srt
+📦 Extracting specific file: It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+[MPV] (+) Video --vid=1 (*) (h264 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'It(2017)720pBluRay-[LRXSTORE]' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'It(2017)720pBluRay-[LRXSTORE]' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng' (webvtt) (external)
+ MPV Event: 18
+ MPV Event: 18
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎉 EVENT: File loaded/Duration ready (8082.411s), preparing to seek...
+   Seeking to live edge: 7406s
+🎉 EVENT: File loaded/Duration ready (8082.411s), preparing to seek...
+   Seeking to live edge: 7406s
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 AppState: Polled participant counts - Active: ["tt1396484": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 1294 seconds
+🎉 EVENT: File loaded/Duration ready (8082.411s), preparing to seek...
+   Seeking to live edge: 7406s
+ MPV Event: 18
+ MPV Event: 17
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x800 videotoolbox[nv12]
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+📊 Current subtitle track: 3
+ MPV Event: 20
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 2ch | English: false | Commentary: false -> Score: 25
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 25)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 2ch | English: false | Commentary: false -> Score: 25
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 25)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'It(2017)720pBluRay-[LRXSTORE]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'It(2017)720pBluRay-[LRXSTORE]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'It(2017)720pBluRay-[LRXSTORE]' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'It(2017)720pBluRay-[LRXSTORE]' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng' (webvtt) (external)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+ MPV Event: 20
+📊 Current subtitle track: 3
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.77s), skipping redundant seek
+📝 Started watch history tracking
+⚠️ onVideoReady called again - ignoring to prevent loops
+📊 Current subtitle track: 3
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'It(2017)720pBluRay-[LRXSTORE]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'It(2017)720pBluRay-[LRXSTORE]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"acb42222-ed8e-11f0-a28e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklq9fw9fo6Ah7h","last_seen":"2026-01-09T19:09:08.569Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt1396484": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 1285 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a3881618-ed8e-11f0-bdf8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklrO8lxN06Agdi","phx_ref_prev":"GIklqhVAVO06AgWC","last_seen":"2026-01-09T19:09:13.281Z","room_id":"event_tt1396484","started_at":"2026-01-09T19:09:01.034Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1396484","watching_title":"It","watching_type":"movie"}]}},"leaves":{"a3881618-ed8e-11f0-bdf8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklqhVAVO06AgWC","phx_ref_prev":"GIklqELqYkI6AgNC","last_seen":"2026-01-09T19:09:01.034Z","room_id":"event_tt1396484","started_at":"2026-01-09T19:09:01.034Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1396484","watching_title":"It","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+💬 Sent: hi
+✅ Chat message sent via Realtime
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hi","chatUsername":"ursinho","isPremium":true,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1767985753.6702309,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt1396484"}
+💬 Skipping own message (already displayed locally)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b08a2c8e-ed8e-11f0-8e83-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklrVeFThuQMAfi","is_host":false,"joined_at":1767985755.005571,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt1396484"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"acb42222-ed8e-11f0-a28e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklrVhrCSA6AggC","phx_ref_prev":"GIklq9fw9fo6Ah7h","last_seen":"2026-01-09T19:09:15.020Z","room_id":"event_tt1396484","started_at":"2026-01-09T19:09:15.021Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1396484","watching_title":"It","watching_type":"movie"}]}},"leaves":{"acb42222-ed8e-11f0-a28e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklq9fw9fo6Ah7h","last_seen":"2026-01-09T19:09:08.569Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIklrVeFThuQMAfi)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+💓 Heartbeat sent
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hey","chatUsername":"lemontom","isPremium":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1767985760.8915548,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt1396484"}
+🎬 DisplayLink: reportSwap() (throttled)
+💬 Received chat from lemontom: hey
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 AppState: Polled participant counts - Active: ["tt1396484": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 1275 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💬 Sent: hi
+✅ Chat message sent via Realtime
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hi","chatUsername":"ursinho","isPremium":true,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1767985766.7327561,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt1396484"}
+💬 Skipping own message (already displayed locally)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"acb42222-ed8e-11f0-a28e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklsIR7Y5U6AgiC","phx_ref_prev":"GIklrVhrCSA6AggC","last_seen":"2026-01-09T19:09:28.649Z","room_id":"event_tt1396484","started_at":"2026-01-09T19:09:15.021Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1396484","watching_title":"It","watching_type":"movie"}]}},"leaves":{"acb42222-ed8e-11f0-a28e-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklrVhrCSA6AggC","phx_ref_prev":"GIklq9fw9fo6Ah7h","last_seen":"2026-01-09T19:09:15.020Z","room_id":"event_tt1396484","started_at":"2026-01-09T19:09:15.021Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1396484","watching_title":"It","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+❌ Supabase API Error: No public key registered for user 656daa91-33b4-4688-9135-c982ea52d7c9
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt1396484": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 19:30:37 +0000
+⏰ AppState: Scheduling update in 1265 seconds
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a3881618-ed8e-11f0-bdf8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklsZXnJKU6Agii","phx_ref_prev":"GIklrO8lxN06Agdi","last_seen":"2026-01-09T19:09:33.262Z","room_id":"event_tt1396484","started_at":"2026-01-09T19:09:01.034Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1396484","watching_title":"It","watching_type":"movie"}]}},"leaves":{"a3881618-ed8e-11f0-bdf8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIklrO8lxN06Agdi","phx_ref_prev":"GIklqhVAVO06AgWC","last_seen":"2026-01-09T19:09:13.281Z","room_id":"event_tt1396484","started_at":"2026-01-09T19:09:01.034Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1396484","watching_title":"It","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💾 Saved to watch history: It at 7435s
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)

@@ -44,17 +44,18 @@ actor StreamService: StreamResolving {
     
     /// Block suspicious file extensions that indicate fake/malware torrents
     /// Also blocks known error placeholder videos from providers
-    private func isBlockedFileExtension(url: String) -> Bool {
+    /// Made internal for testing
+    internal func isBlockedFileExtension(url: String) -> Bool {
         let urlLower = url.lowercased()
         // Remove query params for extension check
         let path = urlLower.components(separatedBy: "?").first ?? urlLower
-        
+
         // Block malware/non-video extensions
         let blockedExtensions = [".iso", ".exe", ".dll", ".bat", ".cmd", ".msi", ".scr", ".vbs"]
         if blockedExtensions.contains(where: { path.hasSuffix($0) }) {
             return true
         }
-        
+
         // Block Torrentio error placeholder videos
         // These indicate Real-Debrid couldn't provide the stream
         if path.contains("/videos/failed_") || path.contains("torrentio.strem.fun/videos/") {
@@ -62,6 +63,23 @@ actor StreamService: StreamResolving {
             return true
         }
         
+        // NEW: Block "Sample" files
+        // Often torrents include a sample video (e.g. movie.sample.mkv) which is selected by mistake
+        if path.contains("sample") {
+             // Avoid false positives (rare, but possible if movie has "sample" in title?)
+             // We check for specific delimiters usually found in sample filenames
+             if path.contains(".sample.") || path.contains("-sample.") || path.contains("_sample.") || path.contains(" sample.") || path.hasSuffix("-sample.mkv") || path.hasSuffix("-sample.mp4") {
+                 print("🚫 StreamService: Detected Sample video: \(url)")
+                 return true
+             }
+        }
+        
+        // Block Trailers
+        if path.contains("trailer.") || path.contains("_trailer") || path.contains("-trailer") {
+            print("🚫 StreamService: Detected Trailer video: \(url)")
+            return true
+        }
+
         return false
     }
 

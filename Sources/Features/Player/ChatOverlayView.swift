@@ -48,6 +48,7 @@ struct ChatOverlayView: View {
     var body: some View {
         VStack(spacing: 0) {
             header
+            roomCodeHeader
 
             switch chatMode {
             case .event:
@@ -169,43 +170,7 @@ struct ChatOverlayView: View {
                 } else {
                     Spacer()
                     
-                    // Room Code Display (Only for user-hosted rooms, not events)
-                    if case .room = chatMode,
-                       let room = appState.player.currentWatchPartyRoom,
-                       room.type == .userRoom {
-                        HStack(spacing: 6) {
-                            Text(room.id)
-                                .font(.system(.caption, design: .monospaced))
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .background(Color.white.opacity(0.15))
-                                .cornerRadius(5)
-                            
-                            Button(action: {
-                                NSPasteboard.general.clearContents()
-                                NSPasteboard.general.setString(room.id, forType: .string)
-                                withAnimation {
-                                    didCopyRoomCode = true
-                                }
-                                // Reset after 2 seconds
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    withAnimation {
-                                        didCopyRoomCode = false
-                                    }
-                                }
-                            }) {
-                                Image(systemName: didCopyRoomCode ? "checkmark.circle.fill" : "doc.on.doc")
-                                    .font(.system(size: 12))
-                                    .foregroundColor(didCopyRoomCode ? .green : .white.opacity(0.7))
-                            }
-                            .buttonStyle(.plain)
-                            .help("Copy Room Code")
-                        }
-                        .padding(.trailing, 8)
-                    }
-                    
+
                     // Reaction Toggle
                     Button(action: {
                         withAnimation {
@@ -238,6 +203,55 @@ struct ChatOverlayView: View {
         }
     }
     
+    private var roomCodeHeader: some View {
+        Group {
+            if case .room = chatMode,
+               let room = appState.player.currentWatchPartyRoom,
+               room.type == .userRoom {
+                HStack {
+                    Spacer()
+                    Text("Room Code:")
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.5))
+                    
+                    HStack(spacing: 6) {
+                        Text(room.id)
+                            .font(.system(.caption, design: .monospaced))
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.white.opacity(0.15))
+                            .cornerRadius(5)
+                        
+                        Button(action: {
+                            NSPasteboard.general.clearContents()
+                            NSPasteboard.general.setString(room.id, forType: .string)
+                            withAnimation {
+                                didCopyRoomCode = true
+                            }
+                            // Reset after 2 seconds
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                withAnimation {
+                                    didCopyRoomCode = false
+                                }
+                            }
+                        }) {
+                            Image(systemName: didCopyRoomCode ? "checkmark.circle.fill" : "doc.on.doc")
+                                .font(.system(size: 12))
+                                .foregroundColor(didCopyRoomCode ? .green : .white.opacity(0.7))
+                        }
+                        .buttonStyle(.plain)
+                        .help("Copy Room Code")
+                    }
+                    Spacer()
+                }
+                .padding(.vertical, 6)
+                .background(Color.white.opacity(0.05))
+            }
+        }
+    }
+
     // MARK: - List Views
     
     private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool) -> some View {

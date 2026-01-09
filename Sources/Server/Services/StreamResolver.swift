@@ -713,9 +713,18 @@ actor StreamResolver {
 
                 // 4. Reputable Scene Groups (Boost)
                 // Includes high-quality P2P groups (LoRD, DON, Wiki) known for reliable embedded subs
-                let goodGroups = ["lord", "don", "wiki", "tayto", "sartre", "ctrlhd", "ntb", "flux", "galaxyrg", "rarbg", "yts", "mx", "qxr", "mzabi"]
+                // REMOVED: YTS/MX (often contain gambling watermarks)
+                let goodGroups = ["lord", "don", "wiki", "tayto", "sartre", "ctrlhd", "ntb", "flux", "galaxyrg", "rarbg", "qxr", "mzabi"]
                 if goodGroups.contains(where: { title.contains($0) }) {
                     score += 25 // Increased boost for quality groups
+                }
+
+                // 4b. Filter out Gambling Watermarks (YTS/YIFY)
+                // These releases often contain hardcoded 1xBet ads. We penalize them heavily so they are only used as last resort.
+                let adGroups = ["yts", "mx", "yify"]
+                if adGroups.contains(where: { title.contains($0) }) {
+                    score -= 2000 // Heavy penalty to push to bottom
+                    print("   📉 Penalizing Ad-Supported Release (YTS): \(stream.title)")
                 }
 
                 // 5. "MULTi" Handling

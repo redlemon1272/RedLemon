@@ -1,0 +1,1342 @@
+2026-01-09 16:36:39.843 RedLemon[23448:192013] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-09 16:36:39.843 RedLemon[23448:192013] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-09 16:36:39.919 RedLemon[23448:192013] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-09 16:36:39.951 RedLemon[23448:192013] ✅ Playback state reset complete - starting in browse view
+2026-01-09 16:36:39.951 RedLemon[23448:192013] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-09 16:36:39.951 RedLemon[23448:192013] 🧪 Testing Profile: debug
+2026-01-09 16:36:39.959 RedLemon[23448:192079] 📂 Loaded 5 credential(s) from cache
+2026-01-09 16:36:39.961 RedLemon[23448:192013] ✅ Keychain: Found stored username: ursinho
+2026-01-09 16:36:39.961 RedLemon[23448:192013] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-09 16:36:39.962 RedLemon[23448:192079] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-09 16:36:40.585 RedLemon[23448:192079] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-09 16:36:40.602 RedLemon[23448:192079] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-09 16:36:40.603 RedLemon[23448:192079] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 16:36:40.652 RedLemon[23448:192013] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-09 16:36:40.652 RedLemon[23448:192013] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 16:36:40.652 RedLemon[23448:192013] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-09 16:36:40.652 RedLemon[23448:192013] 🚀 RedLemon: Starting HTTP server...
+2026-01-09 16:36:40.652 RedLemon[23448:192013] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-09 16:36:40.669 RedLemon[23448:192013] ✅ RedLemon: HTTPServer instance created
+2026-01-09 16:36:40.670 RedLemon[23448:192084] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"162BDBB5-C233-4917-90E4-C115C63E645B","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-09 16:36:43.587 RedLemon[23448:192013] ✅ RedLemon: Server marked as ready
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1493 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1493, 411 movies)
+✅ [EventsView] Loaded 411 movies from config version 1493
+🗓 AppState: Updated schedule epoch to 2026-01-07 16:47:45 +0000
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 844 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1591095/img (651299 bytes)
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for trending
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+🗑️ Cache evicted 6 items
+✅ Progressive loading completed for showtime
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+📊 AppState: Polled participant counts - Active: ["tt3501632": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 843 seconds
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/77205086/s332/img (61880 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256070014/s332/img (36505 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/62371097/s332/img (36484 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+📊 AppState: Polled participant counts - Active: ["tt3501632": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 843 seconds
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331126481/s332/img (53646 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/245030423/s332/img (72818 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332277457/s332/img (66967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309786652/s332/img (45440 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/275806222/s332/img (48443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334220721/s332/img (40321 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302976085/s332/img (50443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328602380/s332/img (48174 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327223699/s332/img (31103 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330798000/s332/img (54287 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335063930/s332/img (28802 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340614766/s332/img (62961 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315638406/s332/img (49093 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/173938174/s332/img (31756 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175817145/s332/img (34253 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336243710/s332/img (29619 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336295680/s332/img (36731 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/249473713/s332/img (40462 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/241779763/s332/img (48752 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330298309/s332/img (59242 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243656762/s332/img (42262 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301592778/s332/img (49084 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321552009/s332/img (34807 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176275502/s332/img (71523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328819711/s332/img (37494 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340706662/s332/img (36313 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243951303/s332/img (42607 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331994893/s332/img (37258 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320977032/s332/img (29350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176677346/s332/img (63974 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/270724834/s332/img (40466 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338962154/s332/img (51864 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315672113/s332/img (80512 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312291378/s332/img (26090 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331924998/s332/img (45255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31193180/img (27098 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12300742/img (13162 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (19894 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29567915/img (28516 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: 448506EC-401A-40BB-9DBD-D987E58BB12A]
+2026-01-09 16:36:43.805 RedLemon[23448:192013] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-09 16:36:43.805 RedLemon[23448:192013] 🔍 Performing startup checks...
+2026-01-09 16:36:43.805 RedLemon[23448:192013] ✅ Username-based authentication ready
+2026-01-09 16:36:44.756 RedLemon[23448:192013] 🔍 Performing startup checks...
+2026-01-09 16:36:44.756 RedLemon[23448:192013] ✅ Username-based authentication ready
+2026-01-09 16:36:45.137 RedLemon[23448:192013] 🔄 Checking for app updates...
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+💰 LicenseManager: Starting hybrid subscription check...
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31495504
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Tiger
+🔍 [DEBUG] Successfully created MediaItem: The Tiger
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1757678
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Avatar: Fire and Ash
+🔍 [DEBUG] Successfully created MediaItem: Avatar: Fire and Ash
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt10799690
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Trap House
+🔍 [DEBUG] Successfully created MediaItem: Trap House
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30254719
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Successfully created MediaItem: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32820897
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Successfully created MediaItem: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt13186306
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: War of the Worlds
+🔍 [DEBUG] Successfully created MediaItem: War of the Worlds
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt4712810
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Now You See Me: Now You Don't
+🔍 [DEBUG] Successfully created MediaItem: Now You See Me: Now You Don't
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27543632
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Housemaid
+🔍 [DEBUG] Successfully created MediaItem: The Housemaid
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29780866
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Icefall
+🔍 [DEBUG] Successfully created MediaItem: Icefall
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29927663
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Great Flood
+🔍 [DEBUG] Successfully created MediaItem: The Great Flood
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt34610311
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Shadow's Edge
+🔍 [DEBUG] Successfully created MediaItem: The Shadow's Edge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32395062
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Muzzle: City of Wolves
+🔍 [DEBUG] Successfully created MediaItem: Muzzle: City of Wolves
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31227572
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Predator: Badlands
+🔍 [DEBUG] Successfully created MediaItem: Predator: Badlands
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+✅ Loaded 15 movies
+🧹 Deduplication: 50 → 49 items
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0162222/img (38190 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2333784/img (28486 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2404435/img (31114 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2872732/img (16390 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0167404/img (16366 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10545296/img (37667 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4881806/img (15928 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0172156/img (32093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10954984/img (21420 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3065204/img (12736 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1781922/img (43043 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12921446/img (42489 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24363 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10374610/img (32670 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1396484/img (14825 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30254719/img (39370 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24363 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29268110/img (20494 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (53296 bytes)
+👤 LicenseManager: Profile expiry: Optional(2026-02-08 05:38:35 +0000)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1663662/img (33915 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0070047/img (16672 bytes)
+🎉 Subscription updated! Expires: 2026-02-08 05:38:35 +0000
+💰 LicenseManager: Starting hybrid subscription check...
+💰 Check Payment Response: {"success":false,"message":"No active payment found"}
+✅ Cache HIT: Catalog[quick_movie_hbm.json_7]
+✅ Cache HIT: Catalog[quick_movie_dnp.json_7]
+✅ Cache HIT: Catalog[quick_movie_nfx.json_7]
+✅ Cache HIT: Catalog[quick_movie_amp.json_7]
+✅ Cache HIT: Catalog[quick_movie_top.json_7]
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+✅ Cache HIT: Catalog[catalog_movie_hbm.json]
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for netflix
+✅ Cache HIT: Catalog[catalog_movie_dnp.json]
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for prime
+✅ Cache HIT: Catalog[catalog_movie_nfx.json]
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for trending
+✅ Cache HIT: Catalog[catalog_movie_amp.json]
+✅ Cache HIT: Catalog[catalog_movie_top.json]
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+👤 LicenseManager: Profile expiry: Optional(2026-02-08 05:38:35 +0000)
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+🎉 Subscription updated! Expires: 2026-02-08 05:38:35 +0000
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/241779763/s332/img (48752 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/249473713/s332/img (40462 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243656762/s332/img (42262 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328819711/s332/img (37494 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340706662/s332/img (36313 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301592778/s332/img (49084 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321552009/s332/img (34807 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176275502/s332/img (71523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243951303/s332/img (42607 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/270724834/s332/img (40466 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338962154/s332/img (51864 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331994893/s332/img (37258 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320977032/s332/img (29350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176677346/s332/img (63974 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315672113/s332/img (80512 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331924998/s332/img (45255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31193180/img (27098 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (19894 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312291378/s332/img (26090 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12300742/img (13162 bytes)
+✅ TimeService: Synced! Offset: 0.140s (RTT: 122ms)
+   Local:  2026-01-09 21:36:45 +0000
+   Server: 2026-01-09 21:36:45 +0000
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 2026-01-09 16:36:48.592 RedLemon[23448:192013] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1396484/img
+2026-01-09 16:36:48.592 RedLemon[23448:192013] ⏳ Background art loading...
+2026-01-09 16:36:48.592 RedLemon[23448:192013] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1396484/img
+2026-01-09 16:36:48.593 RedLemon[23448:192013] ⏳ Logo loading...
+2026-01-09 16:36:48.828 RedLemon[23448:192013]    Quality: 1080p
+2026-01-09 16:36:48.828 RedLemon[23448:192013]    Mode: solo
+2026-01-09 16:36:48.828 RedLemon[23448:192013] 📡 Fetching metadata for tt1396484...
+1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256070014/s332/img (36505 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/62371097/s332/img (36484 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/77205086/s332/img (61880 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302976085/s332/img (50443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331126481/s332/img (53646 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334220721/s332/img (40321 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309786652/s332/img (45440 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332277457/s332/img (66967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/245030423/s332/img (72818 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/275806222/s332/img (48443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340614766/s332/img (62961 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335063930/s332/img (28802 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328602380/s332/img (48174 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/173938174/s332/img (31756 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175817145/s332/img (34253 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315638406/s332/img (49093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330298309/s332/img (59242 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336295680/s332/img (36731 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336243710/s332/img (29619 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327223699/s332/img (31103 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330798000/s332/img (54287 bytes)
+📼 Resume playback called - mode: solo, shouldResume: false, timestamp: 7435.469708333333s
+✅ Cleared resumeFromTimestamp - starting from beginning
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+🎬 PlayerVM: Starting playback for: It
+[ INFO ] GET /api/metadata/meta/movie/tt1396484 [request-id: 7C5F96C0-DA3E-481E-BF5A-5EDC91EA6248]
+2026-01-09 16:36:48.855 RedLemon[23448:192013] ✅ Logo loaded successfully
+2026-01-09 16:36:48.878 RedLemon[23448:192085] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-09 16:36:48.923 RedLemon[23448:192013] ✅ Background art loaded successfully
+2026-01-09 16:36:48.927 RedLemon[23448:192085] ✅ StreamService: Using provided metadata: It
+2026-01-09 16:36:48.927 RedLemon[23448:192085] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-09 16:36:48.928 RedLemon[23448:192085] ⚡️ StreamResolver: Resolving streams for tt1396484 (S0E0)
+2026-01-09 16:36:49.055 RedLemon[23448:192109]    📅 Filtering by year: 2017
+💾 Cache SET: Metadata[meta_movie_tt1396484]
+[2026-01-09T21:36:48Z] [INFO] [StreamService.swift:90] 🎬 StreamService: Starting resolution for: It
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+⚡️ StreamResolver: Found Community Verified stream with 4 votes!
+   ℹ️ Hash: ad1ba686c1b2028858b0aefd835e995d76707d44
+   ℹ️ Last Verified: 2026-01-09 18:42:00 +0000
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt1396484 (movie)
+✅ Found 10 subtitles from SubDL (Primary)
+   📉 Penalizing niche subtitle: it 2017 720p new hd-ts 60fps x264 hq-mkv (02:08:39) (Stream is standard)
+✅ StreamResolver: Attached best sub for 'Community Verified Stream (108...': It(2017)720pBluRay-[LRXSTORE]...
+⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.
+⚡️ StreamService: Testing verified stream viability...
+🔓 StreamService: Unlocking with infoHash: ad1ba686c1b2...
+[ INFO ] POST /api/streams/unlock [request-id: 292122A2-DB7C-4B68-A486-7CDC4527BDFC]
+2026-01-09 16:36:49.417 RedLemon[23448:192085] 🔓 Unlock request: infoHash=ad1ba686c1b2..., fileIdx=0
+2026-01-09 16:36:49.417 RedLemon[23448:192085] ✅ Token found, attempting unlock...
+2026-01-09 16:36:51.109 RedLemon[23448:192106] ✅ Unlocked successfully: It.2017.1080p.BluRay.x264-[YTS.AG].mp4
+2026-01-09 16:36:51.113 RedLemon[23448:192077] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles...
+2026-01-09 16:36:51.113 RedLemon[23448:192077] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-09 16:36:51.114 RedLemon[23448:192077] 🔍 DEBUG: Processing subtitle URL: /subtitle/3028916-3033434.zip
+2026-01-09 16:36:51.114 RedLemon[23448:192084] 🔍 DEBUG: Processing subtitle URL: /subtitle/2973429-2967372.zip
+2026-01-09 16:36:51.114 RedLemon[23448:192106] 🔍 DEBUG: Processing subtitle URL: /subtitle/3028915-3033435.zip
+2026-01-09 16:36:51.114 RedLemon[23448:192085] 🔍 DEBUG: Processing subtitle URL: /subtitle/3381778-2862933.zip
+2026-01-09 16:36:51.114 RedLemon[23448:192077] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 16:36:51.114 RedLemon[23448:192106] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 16:36:51.114 RedLemon[23448:192085] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 16:36:51.114 RedLemon[23448:192084] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 16:36:51.116 RedLemon[23448:192077] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTYtMzAzMzQzNC56aXA=?token=FF7B79F6-2651-4D94-AC54-561C2FDCAEC3
+2026-01-09 16:36:51.116 RedLemon[23448:192106] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTUtMzAzMzQzNS56aXA=?token=FF7B79F6-2651-4D94-AC54-561C2FDCAEC3
+2026-01-09 16:36:51.116 RedLemon[23448:192077] 🔍 DEBUG: Processing subtitle URL: /subtitle/3204249-3220719.zip
+2026-01-09 16:36:51.116 RedLemon[23448:192077] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 16:36:51.116 RedLemon[23448:192085] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzODE3NzgtMjg2MjkzMy56aXA=?token=FF7B79F6-2651-4D94-AC54-561C2FDCAEC3
+2026-01-09 16:36:51.116 RedLemon[23448:192077] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMyMDQyNDktMzIyMDcxOS56aXA=?token=FF7B79F6-2651-4D94-AC54-561C2FDCAEC3
+2026-01-09 16:36:51.117 RedLemon[23448:192084] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NzM0MjktMjk2NzM3Mi56aXA=?token=FF7B79F6-2651-4D94-AC54-561C2FDCAEC3
+2026-01-09 16:36:51.128 RedLemon[23448:192013] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi8-4.download.real-debrid.com/d/LOACDC5R7TXWK108/I, subtitles: 5
+2026-01-09 16:36:51.212 RedLemon[23448:192013] ✅ Stream ready, starting playback...
+2026-01-09 16:36:51.212 RedLemon[23448:192013] 🖥️ WindowManager: enterFullscreen() called
+2026-01-09 16:36:51.212 RedLemon[23448:192013]    Window: <SwiftUI.SwiftUIWindow: 0x7fe2049ab950>
+2026-01-09 16:36:51.212 RedLemon[23448:192013]    Is fullscreen: 0
+2026-01-09 16:36:51.212 RedLemon[23448:192013]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-09 16:36:51.324 RedLemon[23448:192013] 🖼️ Setting up MPV with native macOS video output...
+2026-01-09 16:36:51.330 RedLemon[23448:192013] ✅ MPV initialized with native GPU rendering
+2026-01-09 16:36:51.346 RedLemon[23448:192013] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-09 16:36:51.346 RedLemon[23448:192013] 🎬🎬🎬 About to call loadStream - isInWatchParty: NO
+2026-01-09 16:36:51.346 RedLemon[23448:192013] 🎬🎬🎬 Subtitles: 5
+2026-01-09 16:36:51.346 RedLemon[23448:192013] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: It
+2026-01-09 16:36:51.347 RedLemon[23448:192013] 🎬🎬🎬 streamURL: https://chi8-4.download.real-debrid.com/d/LOACDC5R7TXWK108/I
+2026-01-09 16:36:51.347 RedLemon[23448:192013] 🎬🎬🎬 subtitles: 5
+2026-01-09 16:36:51.348 RedLemon[23448:192013] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-09 16:36:51.446 RedLemon[23448:192085] 🎬 MPV: Current video filename set to: 
+2026-01-09 16:36:51.446 RedLemon[23448:192106] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-09 16:36:51.446 RedLemon[23448:192085] 🎬 MPV loadVideo called with URL: https://chi8-4.download.real-debrid.com/d/LOACDC5R (Encoded: https://chi8-4.download.real-debrid.com/d/LOACDC5R), autoplay: true, expectedSubs: 3
+2026-01-09 16:36:51.446 RedLemon[23448:192106] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTYtMzAzMzQzNC56aXA=?token=FF7B79F6-2651-4D94-AC54-561C2FDCAEC3
+2026-01-09 16:36:51.446 RedLemon[23448:192085] 🎬 MPV executing: loadfile "https://chi8-4.download.real-debrid.com/d/LOACDC5R7TXWK108/It.2017.1080p.BluRay.x264-%5BYTS.AG%5D.mp4"
+2026-01-09 16:36:51.446 RedLemon[23448:192085] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+✅ RD addMagnet: 3SISKUPCTVBZE
+🎬 Movie: Found matching file for title 'It': /It.2017.1080p.BluRay.x264-[YTS.AG].mp4
+📝 RD: Selecting file ID 2 for torrent 3SISKUPCTVBZE
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/4XVIWI2COYKF6A9D
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Verified stream is VIABLE. Returning immediately.
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi8-4.download.real-debrid.com/d/LOACDC5R7TXWK108/I
+   Display Title: It
+   Subtitle URLs: 5
+      [0] It(2017)720pBluRay-[LRXSTORE]
+      [1] It(2017)720pBluRay-[LRXSTORE]
+      [2] It.2017.720p.BrRip.x264.YIFY
+      [3] It.2017.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng
+      [4] It.2017.WEB-DL.TUBI
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🧠 StreamService: Marked hash ad1ba686 as attempted for tt1396484
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎬 Loading stream: It
+   IMDB: tt1396484
+   URL: https://chi8-4.download.real-debrid.com/d/LOACDC5R7TXWK108/I...
+🧹 Clearing previous event state (Non-Event Load)
+🧹 Clearing previous watch party state (Solo Load)
+   Hash: ad1ba686...
+   Source: BluRay
+💬 Added mock chat messages for testing
+👤 SOLO MODE: Autoplaying
+🎬 DisplayLink: reportSwap() (throttled)
+📡 Fetching metadata for tt1396484 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt1396484]
+📝 Pre-loading external subtitles (Top 3)...
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 834 seconds
+✅ Got background: https://images.metahub.space/background/medium/tt1396484/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1396484/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1396484/img...
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTYtMzAzMzQzNC56aXA= [request-id: 4A380D85-1305-49E3-A738-65124AF02BFC]
+2026-01-09 16:36:52.021 RedLemon[23448:192077] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_CA36DAF5-1239-40E5-913D-4F38F22D7FEC.vtt
+2026-01-09 16:36:52.021 RedLemon[23448:192077] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_CA36DAF5-1239-40E5-913D-4F3
+2026-01-09 16:36:52.042 RedLemon[23448:192077] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 16:36:52.042 RedLemon[23448:192077] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTUtMzAzMzQzNS56aXA=?token=FF7B79F6-2651-4D94-AC54-561C2FDCAEC3
+📄 Subtitle request: L3N1YnRpdGxlLzMwMjg5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3028916-3033434.zip
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Download complete: 47066 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: It_English-HI-[LRXSTORE].srt
+📦 Extracting specific file: It_English-HI-\[LRXSTORE\].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMwMjg5MTUtMzAzMzQzNS56aXA= [request-id: 9A012C9F-4898-4969-9EC2-90ABDAEC4827]
+2026-01-09 16:36:52.479 RedLemon[23448:192109] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_BA240CFA-B0FB-4CB3-A810-789389F469DA.vtt
+2026-01-09 16:36:52.479 RedLemon[23448:192109] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_BA240CFA-B0FB-4CB3-A810-789
+2026-01-09 16:36:52.489 RedLemon[23448:192109] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 16:36:52.489 RedLemon[23448:192109] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzODE3NzgtMjg2MjkzMy56aXA=?token=FF7B79F6-2651-4D94-AC54-561C2FDCAEC3
+📄 Subtitle request: L3N1YnRpdGxlLzMwMjg5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3028915-3033435.zip
+📊 AppState: Polled participant counts - Active: ["tt3501632": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 833 seconds
+✅ Download complete: 36124 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: It_English-[LRXSTORE].srt
+📦 Extracting specific file: It_English-\[LRXSTORE\].srt
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMzODE3NzgtMjg2MjkzMy56aXA= [request-id: 9B3915D3-C08C-488F-82D9-92C42C50EF16]
+2026-01-09 16:36:53.055 RedLemon[23448:192189] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_22041681-A2E1-48A2-A4BF-94FA52525FE3.vtt
+2026-01-09 16:36:53.055 RedLemon[23448:192189] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_22041681-A2E1-48A2-A4BF-94F
+2026-01-09 16:36:53.084 RedLemon[23448:192189] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 16:36:53.085 RedLemon[23448:192189] 🔍 MPV track-list/count: 3
+2026-01-09 16:36:53.085 RedLemon[23448:192189] 🔍 Track 0 type: sub
+2026-01-09 16:36:53.085 RedLemon[23448:192189] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:53.086 RedLemon[23448:192189] 🔍 Track 1 type: sub
+2026-01-09 16:36:53.086 RedLemon[23448:192189] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:53.086 RedLemon[23448:192189] 🔍 Track 2 type: sub
+2026-01-09 16:36:53.086 RedLemon[23448:192189] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.720p.BrRip.x264.YIFY, external=1
+2026-01-09 16:36:53.086 RedLemon[23448:192189] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 16:36:53.086 RedLemon[23448:192189]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 16:36:53.086 RedLemon[23448:192189]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:53.087 RedLemon[23448:192189]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:53.087 RedLemon[23448:192189]    Start[3]: ID=3, Title='It.2017.720p.BrRip.x264.YIFY', Lang='en', Ext=1
+2026-01-09 16:36:53.088 RedLemon[23448:192189] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-09 16:36:53.088 RedLemon[23448:192189]    Track: ID=0, Title=Off, External=0
+2026-01-09 16:36:53.088 RedLemon[23448:192189]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:53.089 RedLemon[23448:192189]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:53.089 RedLemon[23448:192189]    Track: ID=3, Title=It.2017.720p.BrRip.x264.YIFY, External=1
+2026-01-09 16:36:53.867 RedLemon[23448:192109] 🔍 MPV track-list/count: 5
+2026-01-09 16:36:53.877 RedLemon[23448:192109] 🔍 Track 0 type: sub
+2026-01-09 16:36:53.878 RedLemon[23448:192109] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:53.878 RedLemon[23448:192109] 🔍 Track 1 type: sub
+2026-01-09 16:36:53.878 RedLemon[23448:192109] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:53.879 RedLemon[23448:192109] 🔍 Track 2 type: sub
+2026-01-09 16:36:53.879 RedLemon[23448:192109] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.720p.BrRip.x264.YIFY, external=1
+2026-01-09 16:36:53.879 RedLemon[23448:192109] 🔍 Track 3 type: video
+2026-01-09 16:36:53.879 RedLemon[23448:192109] 🔍 Track 4 type: audio
+2026-01-09 16:36:53.879 RedLemon[23448:192109] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 16:36:53.879 RedLemon[23448:192109]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 16:36:53.879 RedLemon[23448:192109]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:53.879 RedLemon[23448:192109]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:53.879 RedLemon[23448:192109]    Start[3]: ID=3, Title='It.2017.720p.BrRip.x264.YIFY', Lang='en', Ext=1
+2026-01-09 16:36:53.880 RedLemon[23448:192109] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-09 16:36:53.880 RedLemon[23448:192109]    Track: ID=0, Title=Off, External=0
+2026-01-09 16:36:53.880 RedLemon[23448:192109]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:53.880 RedLemon[23448:192109]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:53.880 RedLemon[23448:192109]    Track: ID=3, Title=It.2017.720p.BrRip.x264.YIFY, External=1
+2026-01-09 16:36:54.097 RedLemon[23448:192109] 🔍 MPV track-list/count: 5
+2026-01-09 16:36:54.097 RedLemon[23448:192109] 🔍 Track 0 type: sub
+2026-01-09 16:36:54.097 RedLemon[23448:192109] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:54.097 RedLemon[23448:192109] 🔍 Track 1 type: sub
+2026-01-09 16:36:54.098 RedLemon[23448:192109] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:54.098 RedLemon[23448:192109] 🔍 Track 2 type: sub
+2026-01-09 16:36:54.098 RedLemon[23448:192109] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.720p.BrRip.x264.YIFY, external=1
+2026-01-09 16:36:54.098 RedLemon[23448:192109] 🔍 Track 3 type: video
+2026-01-09 16:36:54.098 RedLemon[23448:192109] 🔍 Track 4 type: audio
+2026-01-09 16:36:54.098 RedLemon[23448:192109] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 16:36:54.098 RedLemon[23448:192109]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 16:36:54.098 RedLemon[23448:192109]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:54.099 RedLemon[23448:192109]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:54.099 RedLemon[23448:192109]    Start[3]: ID=3, Title='It.2017.720p.BrRip.x264.YIFY', Lang='en', Ext=1
+2026-01-09 16:36:54.099 RedLemon[23448:192109] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 16:36:54.099 RedLemon[23448:192109]    Track: ID=0, Title=Off, External=0
+2026-01-09 16:36:54.099 RedLemon[23448:192109]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:54.099 RedLemon[23448:192109]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:54.100 RedLemon[23448:192109]    Track: ID=3, Title=It.2017.720p.BrRip.x264.YIFY, External=1
+2026-01-09 16:36:54.958 RedLemon[23448:192085] 🔍 MPV track-list/count: 5
+2026-01-09 16:36:54.958 RedLemon[23448:192085] 🔍 Track 0 type: sub
+2026-01-09 16:36:54.958 RedLemon[23448:192085] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:54.958 RedLemon[23448:192085] 🔍 Track 1 type: sub
+2026-01-09 16:36:54.959 RedLemon[23448:192085] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:54.959 RedLemon[23448:192085] 🔍 Track 2 type: sub
+2026-01-09 16:36:54.959 RedLemon[23448:192085] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.720p.BrRip.x264.YIFY, external=1
+2026-01-09 16:36:54.960 RedLemon[23448:192085] 🔍 Track 3 type: video
+2026-01-09 16:36:54.961 RedLemon[23448:192085] 🔍 Track 4 type: audio
+2026-01-09 16:36:54.961 RedLemon[23448:192085] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 16:36:54.961 RedLemon[23448:192085]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 16:36:54.961 RedLemon[23448:192085]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:54.961 RedLemon[23448:192085]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:54.961 RedLemon[23448:192085]    Start[3]: ID=3, Title='It.2017.720p.BrRip.x264.YIFY', Lang='en', Ext=1
+2026-01-09 16:36:54.962 RedLemon[23448:192085] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 16:36:54.962 RedLemon[23448:192085]    Track: ID=0, Title=Off, External=0
+2026-01-09 16:36:54.962 RedLemon[23448:192085]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:54.962 RedLemon[23448:192085]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:54.964 RedLemon[23448:192085]    Track: ID=3, Title=It.2017.720p.BrRip.x264.YIFY, External=1
+2026-01-09 16:36:55.100 RedLemon[23448:192085] 🔍 MPV track-list/count: 5
+2026-01-09 16:36:55.100 RedLemon[23448:192085] 🔍 Track 0 type: sub
+2026-01-09 16:36:55.101 RedLemon[23448:192085] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:55.101 RedLemon[23448:192085] 🔍 Track 1 type: sub
+2026-01-09 16:36:55.101 RedLemon[23448:192085] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:55.101 RedLemon[23448:192085] 🔍 Track 2 type: sub
+2026-01-09 16:36:55.101 RedLemon[23448:192085] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.720p.BrRip.x264.YIFY, external=1
+2026-01-09 16:36:55.102 RedLemon[23448:192085] 🔍 Track 3 type: video
+2026-01-09 16:36:55.102 RedLemon[23448:192085] 🔍 Track 4 type: audio
+2026-01-09 16:36:55.102 RedLemon[23448:192085] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 16:36:55.102 RedLemon[23448:192085]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 16:36:55.102 RedLemon[23448:192085]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:55.102 RedLemon[23448:192085]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:55.103 RedLemon[23448:192085]    Start[3]: ID=3, Title='It.2017.720p.BrRip.x264.YIFY', Lang='en', Ext=1
+2026-01-09 16:36:55.104 RedLemon[23448:192085] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 16:36:55.104 RedLemon[23448:192085]    Track: ID=0, Title=Off, External=0
+2026-01-09 16:36:55.104 RedLemon[23448:192085]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:55.104 RedLemon[23448:192085]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:55.105 RedLemon[23448:192085]    Track: ID=3, Title=It.2017.720p.BrRip.x264.YIFY, External=1
+2026-01-09 16:36:56.049 RedLemon[23448:192085] 🔍 MPV track-list/count: 5
+2026-01-09 16:36:56.050 RedLemon[23448:192085] 🔍 Track 0 type: sub
+2026-01-09 16:36:56.050 RedLemon[23448:192085] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:56.051 RedLemon[23448:192085] 🔍 Track 1 type: sub
+2026-01-09 16:36:56.051 RedLemon[23448:192085] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:56.051 RedLemon[23448:192085] 🔍 Track 2 type: sub
+2026-01-09 16:36:56.052 RedLemon[23448:192085] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.720p.BrRip.x264.YIFY, external=1
+2026-01-09 16:36:56.052 RedLemon[23448:192085] 🔍 Track 3 type: video
+2026-01-09 16:36:56.052 RedLemon[23448:192085] 🔍 Track 4 type: audio
+2026-01-09 16:36:56.052 RedLemon[23448:192085] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 16:36:56.052 RedLemon[23448:192085]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 16:36:56.052 RedLemon[23448:192085]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:56.053 RedLemon[23448:192085]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:56.053 RedLemon[23448:192085]    Start[3]: ID=3, Title='It.2017.720p.BrRip.x264.YIFY', Lang='en', Ext=1
+2026-01-09 16:36:56.053 RedLemon[23448:192085] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-09 16:36:56.053 RedLemon[23448:192085]    Track: ID=0, Title=Off, External=0
+2026-01-09 16:36:56.054 RedLemon[23448:192085]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:56.054 RedLemon[23448:192085]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:56.054 RedLemon[23448:192085]    Track: ID=3, Title=It.2017.720p.BrRip.x264.YIFY, External=1
+2026-01-09 16:36:56.105 RedLemon[23448:192109] 🔍 MPV track-list/count: 5
+2026-01-09 16:36:56.105 RedLemon[23448:192109] 🔍 Track 0 type: sub
+2026-01-09 16:36:56.105 RedLemon[23448:192109] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:56.106 RedLemon[23448:192109] 🔍 Track 1 type: sub
+2026-01-09 16:36:56.106 RedLemon[23448:192109] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:56.106 RedLemon[23448:192109] 🔍 Track 2 type: sub
+2026-01-09 16:36:56.106 RedLemon[23448:192109] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.720p.BrRip.x264.YIFY, external=1
+2026-01-09 16:36:56.106 RedLemon[23448:192109] 🔍 Track 3 type: video
+2026-01-09 16:36:56.106 RedLemon[23448:192109] 🔍 Track 4 type: audio
+2026-01-09 16:36:56.107 RedLemon[23448:192109] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 16:36:56.107 RedLemon[23448:192109]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 16:36:56.107 RedLemon[23448:192109]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:56.107 RedLemon[23448:192109]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:56.107 RedLemon[23448:192109]    Start[3]: ID=3, Title='It.2017.720p.BrRip.x264.YIFY', Lang='en', Ext=1
+2026-01-09 16:36:56.108 RedLemon[23448:192109] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 16:36:56.108 RedLemon[23448:192109]    Track: ID=0, Title=Off, External=0
+2026-01-09 16:36:56.108 RedLemon[23448:192109]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:56.108 RedLemon[23448:192109]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:56.109 RedLemon[23448:192109]    Track: ID=3, Title=It.2017.720p.BrRip.x264.YIFY, External=1
+2026-01-09 16:36:57.055 RedLemon[23448:192109] 🔍 MPV track-list/count: 5
+2026-01-09 16:36:57.055 RedLemon[23448:192109] 🔍 Track 0 type: sub
+2026-01-09 16:36:57.056 RedLemon[23448:192109] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:57.056 RedLemon[23448:192109] 🔍 Track 1 type: sub
+2026-01-09 16:36:57.056 RedLemon[23448:192109] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:57.057 RedLemon[23448:192109] 🔍 Track 2 type: sub
+2026-01-09 16:36:57.057 RedLemon[23448:192109] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.720p.BrRip.x264.YIFY, external=1
+2026-01-09 16:36:57.058 RedLemon[23448:192109] 🔍 Track 3 type: video
+2026-01-09 16:36:57.058 RedLemon[23448:192109] 🔍 Track 4 type: audio
+2026-01-09 16:36:57.058 RedLemon[23448:192109] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 16:36:57.058 RedLemon[23448:192109]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 16:36:57.058 RedLemon[23448:192109]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:57.058 RedLemon[23448:192109]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:57.059 RedLemon[23448:192109]    Start[3]: ID=3, Title='It.2017.720p.BrRip.x264.YIFY', Lang='en', Ext=1
+2026-01-09 16:36:57.059 RedLemon[23448:192109] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-09 16:36:57.060 RedLemon[23448:192109]    Track: ID=0, Title=Off, External=0
+2026-01-09 16:36:57.061 RedLemon[23448:192109]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:57.063 RedLemon[23448:192109]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:57.064 RedLemon[23448:192109]    Track: ID=3, Title=It.2017.720p.BrRip.x264.YIFY, External=1
+2026-01-09 16:36:57.109 RedLemon[23448:192085] 🔍 MPV track-list/count: 5
+2026-01-09 16:36:57.109 RedLemon[23448:192085] 🔍 Track 0 type: sub
+2026-01-09 16:36:57.110 RedLemon[23448:192085] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:57.110 RedLemon[23448:192085] 🔍 Track 1 type: sub
+2026-01-09 16:36:57.110 RedLemon[23448:192085] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:57.110 RedLemon[23448:192085] 🔍 Track 2 type: sub
+2026-01-09 16:36:57.111 RedLemon[23448:192085] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.720p.BrRip.x264.YIFY, external=1
+2026-01-09 16:36:57.111 RedLemon[23448:192085] 🔍 Track 3 type: video
+2026-01-09 16:36:57.111 RedLemon[23448:192085] 🔍 Track 4 type: audio
+2026-01-09 16:36:57.111 RedLemon[23448:192085] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 16:36:57.112 RedLemon[23448:192085]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 16:36:57.112 RedLemon[23448:192085]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:57.112 RedLemon[23448:192085]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:57.113 RedLemon[23448:192085]    Start[3]: ID=3, Title='It.2017.720p.BrRip.x264.YIFY', Lang='en', Ext=1
+2026-01-09 16:36:57.113 RedLemon[23448:192085] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 16:36:57.113 RedLemon[23448:192085]    Track: ID=0, Title=Off, External=0
+2026-01-09 16:36:57.114 RedLemon[23448:192085]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:57.114 RedLemon[23448:192085]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:57.114 RedLemon[23448:192085]    Track: ID=3, Title=It.2017.720p.BrRip.x264.YIFY, External=1
+2026-01-09 16:36:58.099 RedLemon[23448:192109] 🔍 MPV track-list/count: 5
+2026-01-09 16:36:58.099 RedLemon[23448:192109] 🔍 Track 0 type: sub
+2026-01-09 16:36:58.100 RedLemon[23448:192109] ✅ Found subtitle track: ID=1, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:58.101 RedLemon[23448:192109] 🔍 Track 1 type: sub
+2026-01-09 16:36:58.101 RedLemon[23448:192109] ✅ Found subtitle track: ID=2, lang=en, title=It(2017)720pBluRay-[LRXSTORE], external=1
+2026-01-09 16:36:58.101 RedLemon[23448:192109] 🔍 Track 2 type: sub
+2026-01-09 16:36:58.101 RedLemon[23448:192109] ✅ Found subtitle track: ID=3, lang=en, title=It.2017.720p.BrRip.x264.YIFY, external=1
+2026-01-09 16:36:58.101 RedLemon[23448:192109] 🔍 Track 3 type: video
+2026-01-09 16:36:58.101 RedLemon[23448:192109] 🔍 Track 4 type: audio
+2026-01-09 16:36:58.102 RedLemon[23448:192109] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 16:36:58.102 RedLemon[23448:192109]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 16:36:58.102 RedLemon[23448:192109]    Start[1]: ID=1, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:58.102 RedLemon[23448:192109]    Start[2]: ID=2, Title='It(2017)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-09 16:36:58.102 RedLemon[23448:192109]    Start[3]: ID=3, Title='It.2017.720p.BrRip.x264.YIFY', Lang='en', Ext=1
+2026-01-09 16:36:58.102 RedLemon[23448:192109] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-09 16:36:58.102 RedLemon[23448:192109]    Track: ID=0, Title=Off, External=0
+2026-01-09 16:36:58.102 RedLemon[23448:192109]    Track: ID=1, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:58.103 RedLemon[23448:192109]    Track: ID=2, Title=It(2017)720pBluRay-[LRXSTORE], External=1
+2026-01-09 16:36:58.103 RedLemon[23448:192109]    Track: ID=3, Title=It.2017.720p.BrRip.x264.YIFY, External=1
+2026-01-09 16:37:01.549 RedLemon[23448:192013] 🖱️ Mouse: x=0/1366 y=539/768 | Exit: 0 Controls: 0 Chat: 1
+2026-01-09 16:37:01.633 RedLemon[23448:192013] ✅ Exit button triggered! x=11 <= 342, y=600 >= 576
+2026-01-09 16:37:01.756 RedLemon[23448:192013] ✅ Exit button triggered! x=10 <= 342, y=602 >= 576
+2026-01-09 16:37:01.796 RedLemon[23448:192013] ✅ Exit button triggered! x=8 <= 342, y=648 >= 576
+2026-01-09 16:37:01.804 RedLemon[23448:192013] ✅ Exit button triggered! x=8 <= 342, y=654 >= 576
+2026-01-09 16:37:01.882 RedLemon[23448:192013] ✅ Exit button triggered! x=34 <= 342, y=696 >= 576
+2026-01-09 16:37:02.048 RedLemon[23448:192013] ✅ Exit button triggered! x=34 <= 342, y=697 >= 576
+2026-01-09 16:37:02.088 RedLemon[23448:192013] ✅ Exit button triggered! x=36 <= 342, y=701 >= 576
+2026-01-09 16:37:02.091 RedLemon[23448:192013] ✅ Exit button triggered! x=55 <= 342, y=726 >= 576
+2026-01-09 16:37:02.097 RedLemon[23448:192013] ✅ Exit button triggered! x=59 <= 342, y=730 >= 576
+2026-01-09 16:37:02.099 RedLemon[23448:192013] ✅ Exit button triggered! x=61 <= 342, y=733 >= 576
+2026-01-09 16:37:02.107 RedLemon[23448:192013] ✅ Exit button triggered! x=65 <= 342, y=738 >= 576
+2026-01-09 16:37:02.173 RedLemon[23448:192013] ✅ Exit button triggered! x=75 <= 342, y=748 >= 576
+2026-01-09 16:37:02.425 RedLemon[23448:192013] 🖥️ WindowManager: exitFullscreen() called
+2026-01-09 16:37:02.425 RedLemon[23448:192013]    ✅ WindowManager: Toggling fullscreen OFF
+2026-01-09 16:37:02.511 RedLemon[23448:192013] 🪟 WindowManager: restoreWindowSize() called - restoring to expanded size
+2026-01-09 16:37:02.511 RedLemon[23448:192013]    📐 WindowManager: Restoring to expanded size: (0.0, 0.0, 1366.0, 743.0)
+2026-01-09 16:37:02.732 RedLemon[23448:192013]    ✅ WindowManager: Window restored to expanded size
+📄 Subtitle request: L3N1YnRpdGxlLzMzODE3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3381778-2862933.zip
+✅ Download complete: 47217 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: It.2017.720p.BrRip.x264.YIFY.srt
+📦 Extracting specific file: It.2017.720p.BrRip.x264.YIFY.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+[MPV] (+) Video --vid=1 (*) (h264 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'It(2017)720pBluRay-[LRXSTORE]' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'It(2017)720pBluRay-[LRXSTORE]' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'It.2017.720p.BrRip.x264.YIFY' (webvtt) (external)
+ MPV Event: 18
+ MPV Event: 18
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+💬 Chat opened
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+ MPV Event: 18
+ MPV Event: 17
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x800 videotoolbox[nv12]
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+📊 Current subtitle track: 3
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 2ch | English: false | Commentary: false -> Score: 25
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 25)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 2ch | English: false | Commentary: false -> Score: 25
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 25)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'It(2017)720pBluRay-[LRXSTORE]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'It(2017)720pBluRay-[LRXSTORE]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'It.2017.720p.BrRip.x264.YIFY', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: It.2017.720p.BrRip.x264.YIFY (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'It(2017)720pBluRay-[LRXSTORE]' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'It(2017)720pBluRay-[LRXSTORE]' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'It.2017.720p.BrRip.x264.YIFY' (webvtt) (external)
+📊 Current subtitle track: 3
+▶️ SMART-LOAD: Resuming playback (Autoplay requested)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+ℹ️ No resume timestamp set (starting from beginning)
+▶️ Auto-playing solo content from beginning
+📝 Started watch history tracking
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🔓 MPVPlayerViewModel: Time advancing (time: 0.375375) while buffering - Forcing UI unlock
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'It(2017)720pBluRay-[LRXSTORE]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'It(2017)720pBluRay-[LRXSTORE]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'It.2017.720p.BrRip.x264.YIFY', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: It.2017.720p.BrRip.x264.YIFY (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💬 Chat closed
+🎬 DisplayLink: reportSwap() (throttled)
+📊 AppState: Polled participant counts - Active: ["tt3501632": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 824 seconds
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+ MPV Event: 17
+🧹 Cleaning up MPV player...
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: 3178DE7A-6C44-4527-9B7F-DB8133FF219A]
+2026-01-09 16:37:02.953 RedLemon[23448:192013] 🛑 Stopped playback heartbeat loop
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+ MPV Event: 17
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31495504
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Tiger
+🔍 [DEBUG] Successfully created MediaItem: The Tiger
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1757678
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Avatar: Fire and Ash
+🔍 [DEBUG] Successfully created MediaItem: Avatar: Fire and Ash
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt10799690
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Trap House
+🔍 [DEBUG] Successfully created MediaItem: Trap House
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30254719
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Successfully created MediaItem: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32820897
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Successfully created MediaItem: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt13186306
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: War of the Worlds
+🔍 [DEBUG] Successfully created MediaItem: War of the Worlds
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt4712810
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Now You See Me: Now You Don't
+🔍 [DEBUG] Successfully created MediaItem: Now You See Me: Now You Don't
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27543632
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Housemaid
+🔍 [DEBUG] Successfully created MediaItem: The Housemaid
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29780866
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Icefall
+🔍 [DEBUG] Successfully created MediaItem: Icefall
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29927663
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Great Flood
+🔍 [DEBUG] Successfully created MediaItem: The Great Flood
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt34610311
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Shadow's Edge
+🔍 [DEBUG] Successfully created MediaItem: The Shadow's Edge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32395062
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Muzzle: City of Wolves
+🔍 [DEBUG] Successfully created MediaItem: Muzzle: City of Wolves
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31227572
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Predator: Badlands
+🔍 [DEBUG] Successfully created MediaItem: Predator: Badlands
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+✅ Cache HIT: Catalog[quick_movie_sst.json_7]
+✅ Cache HIT: Catalog[quick_movie_pcp.json_7]
+✅ Cache HIT: Catalog[quick_movie_stz.json_7]
+✅ Cache HIT: Catalog[quick_movie_hlu.json_7]
+✅ Cache HIT: Catalog[quick_movie_pmp.json_7]
+✅ Cache HIT: Catalog[quick_movie_atp.json_7]
+[MPV] Video: no video
+🗑️ Invalidated all active timers
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+🗑️ MPVPlayerViewModel deinit
+⚡️ PlaybackService: releasing sleep assertion
+✅ Loaded 15 movies
+🛑 Event polling task cancelled cleanly
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+🧹 Deduplication: 50 → 49 items
+✅ MPV instance destroyed
+✅ MPV stop completed with clean event loop exit
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0162222/img (38190 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0167404/img (16366 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2333784/img (28486 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2404435/img (31114 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2872732/img (16390 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4881806/img (15928 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10545296/img (37667 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3065204/img (12736 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0172156/img (32093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10954984/img (21420 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10374610/img (32670 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1781922/img (43043 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12921446/img (42489 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24363 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1396484/img (14825 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29268110/img (20494 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1663662/img (33915 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (53296 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30254719/img (39370 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24363 bytes)
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+✅ Cache HIT: Catalog[catalog_movie_sst.json]
+✅ Cache HIT: Catalog[catalog_movie_pcp.json]
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+✅ Cache HIT: Catalog[catalog_movie_stz.json]
+✅ Cache HIT: Catalog[catalog_movie_hlu.json]
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+✅ Cache HIT: Catalog[catalog_movie_pmp.json]
+✅ Cache HIT: Catalog[catalog_movie_atp.json]
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0070047/img (16672 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for trending
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/77205086/s332/img (61880 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/62371097/s332/img (36484 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302976085/s332/img (50443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331126481/s332/img (53646 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332277457/s332/img (66967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/275806222/s332/img (48443 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/245030423/s332/img (72818 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256070014/s332/img (36505 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334220721/s332/img (40321 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309786652/s332/img (45440 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335063930/s332/img (28802 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340614766/s332/img (62961 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328602380/s332/img (48174 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/173938174/s332/img (31756 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315638406/s332/img (49093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175817145/s332/img (34253 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336295680/s332/img (36731 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https:2026-01-09 16:37:17.383 RedLemon[23448:192457] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-09 16:37:17.383 RedLemon[23448:192457] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+//images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330298309/s332/img (59242 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336243710/s332/img (29619 bytes)
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+🗑️ Cache evicted 6 items
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt3501632": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 814 seconds
+🎉 Subscription updated! Expires: 2026-02-08 05:38:35 +0000
+📊 AppState: Polled participant counts - Active: ["tt3501632": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 803 seconds
+❌ Supabase API Error: Could not find the table 'public.user_blocks' in the schema cache
+⚠️ Failed to load blocked users: userMessage("Could not find the table \'public.user_blocks\' in the schema cache")
+🗑️ MPVViewLayer deinit

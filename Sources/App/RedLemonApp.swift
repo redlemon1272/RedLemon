@@ -128,6 +128,20 @@ struct RedLemonApp: App {
         if let username = await KeychainManager.shared.getUsername() {
             NSLog("✅ Keychain: Found stored username: \(username)")
 
+            // 🔐 CRITICAL SECURITY: Verify we have the Signing Keys for this user
+            // Without keys, we cannot sign requests (heartbeat, etc), leading to "Zombie" sessions.
+            if await KeychainManager.shared.getKeyPair() == nil {
+                NSLog("⚠️ KEYCHAIN ERROR: Username '\(username)' found but Signing Keys are missing!")
+                NSLog("   This results in a 'Zombie' session where presence fails.")
+                
+                // Clear the corrupted state
+                try? await KeychainManager.shared.deleteUsername()
+                NSLog("✅ CLEARED: Removed invalid username to force re-authentication.")
+                
+                // Stop loading user
+                return
+            }
+            
             // Verify user exists in database
             do {
                 NSLog("🔍 Supabase: Looking up user '\(username)' in database...")

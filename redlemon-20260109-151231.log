@@ -1,0 +1,125 @@
+2026-01-09 15:12:32.186 RedLemon[47028:256884] 🪟 Set initial window to expanded size: (0.0, 141.0, 1280.0, 634.0)
+2026-01-09 15:12:32.186 RedLemon[47028:256884] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-09 15:12:32.238 RedLemon[47028:256884] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-09 15:12:32.270 RedLemon[47028:256884] ✅ Playback state reset complete - starting in browse view
+2026-01-09 15:12:32.270 RedLemon[47028:256884] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-09 15:12:32.270 RedLemon[47028:256884] 🧪 Testing Profile: debug
+2026-01-09 15:12:32.272 RedLemon[47028:256889] 🔍 KeychainManager: No username found in UserDefaults
+2026-01-09 15:12:32.272 RedLemon[47028:256884] ℹ️  KEYCHAIN: No stored username found
+2026-01-09 15:12:32.272 RedLemon[47028:256884] ❌ NO FALLBACK: No UUID found in UserDefaults either
+2026-01-09 15:12:32.272 RedLemon[47028:256884]    User will need to create a new username
+2026-01-09 15:12:32.272 RedLemon[47028:256884] 🏁 AUTH COMPLETE: Final state - username=, userId=nil
+2026-01-09 15:12:32.273 RedLemon[47028:256884] 🚀 RedLemon: Starting HTTP server...
+2026-01-09 15:12:32.273 RedLemon[47028:256884] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/RedLemon-Native
+2026-01-09 15:12:32.289 RedLemon[47028:256884] ✅ RedLemon: HTTPServer instance created
+2026-01-09 15:12:32.290 RedLemon[47028:256891] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 3 credential(s) from cache
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-09 15:12:34.416 RedLemon[47028:256884] ✅ RedLemon: Server marked as ready
+2026-01-09 15:12:34.463 RedLemon[47028:256884] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-09 15:12:34.463 RedLemon[47028:256884] 🔍 Performing startup checks...
+2026-01-09 15:12:34.463 RedLemon[47028:256884] ✅ Username-based authentication ready
+2026-01-09 15:12:35.279 RedLemon[47028:256884] 🔍 Performing startup checks...
+2026-01-09 15:12:35.279 RedLemon[47028:256884] ✅ Username-based authentication ready
+2026-01-09 15:12:35.645 RedLemon[47028:256884] 🔄 Checking for app updates...
+2026-01-09 15:12:42.242 RedLemon[47028:256951] 💾 KeychainManager: Saving username 'lemontom' to UserDefaults
+2026-01-09 15:12:42.242 RedLemon[47028:256951] ✅ KeychainManager: Username saved successfully
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"9A26239A-1C1E-4B82-84E7-3CD480347074","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ [EventsConfig] Fetched movie_events version 1492 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1492, 412 movies)
+✅ [EventsView] Loaded 412 movies from config version 1492
+🗓 AppState: Updated schedule epoch to 2026-01-07 16:47:45 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 5892 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1591095/img (651299 bytes)
+💰 LicenseManager: Starting hybrid subscription check...
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 5890 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 5890 seconds
+⚠️ LicenseManager: Payment sweep failed (non-fatal): httpError(400, "{\"error\":\"Unauthorized: No Token or User ID provided\"}")
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Starting hybrid subscription check...
+⚠️ LicenseManager: Payment sweep failed (non-fatal): httpError(400, "{\"error\":\"Unauthorized: No Token or User ID provided\"}")
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.119s (RTT: 205ms)
+   Local:  2026-01-09 20:12:35 +0000
+   Server: 2026-01-09 20:12:35 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+⚠️ iCloud Keychain save failed, trying local: saveFailed(status: -34018)
+✅ Saved user_id credential to cache
+⚠️ iCloud Keychain save failed, trying local: saveFailed(status: -34018)
+✅ Saved realdebrid credential to cache
+⚠️ iCloud Keychain save failed, trying local: saveFailed(status: -34018)
+✅ Saved subdl credential to cache
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"3A270C02-4DB6-4B70-A089-D36648C1BD8F","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8ed9d18a-ed97-11f0-aa83-9ee62e3b7bba":{"metas":[{"phx_ref":"GIkpJC7kpvU6AroB","last_seen":"2026-01-09T20:12:43.876Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"AC05B038-2179-4719-B431-805D464A7254","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":6798732,"event":"INSERT","filter":"receiver_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"},{"id":83853945,"event":"INSERT","filter":"sender_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-09 21:50:45 +0000
+⏰ AppState: Scheduling update in 5881 seconds
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...

@@ -182,7 +182,9 @@ actor KeychainManager {
     // MARK: - Cryptographic Keys
 
     func saveKeyPair(privateKey: String, publicKey: String) async throws {
+        NSLog("🔐 KeychainManager.saveKeyPair() - ENTRY (priv len: \(privateKey.count), pub len: \(publicKey.count))")
         try await save(credential: privateKey, for: "private_key")
+        NSLog("🔐 KeychainManager.saveKeyPair() - private_key saved")
         try await save(credential: publicKey, for: "public_key")
         NSLog("🔐 KeychainManager: Key pair saved securely")
     }

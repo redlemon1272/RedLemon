@@ -2451,24 +2451,30 @@ extension SupabaseClient {
     // MARK: - Blocking
 
     func blockUser(blockerId: UUID, blockedId: UUID) async throws {
+        // SECURE: Use RPC with signature verification
+        let body: [String: Any] = [
+            "target_id": blockedId.uuidString,
+            "action": "block"
+        ]
+        
         _ = try await makeRequest(
-            path: "/user_blocks",
+            path: "/rpc/manage_block",
             method: "POST",
-            body: [
-                "blocker_id": blockerId.uuidString,
-                "blocked_id": blockedId.uuidString
-            ]
+            body: body
         )
     }
 
     func unblockUser(blockerId: UUID, blockedId: UUID) async throws {
+        // SECURE: Use RPC with signature verification
+        let body: [String: Any] = [
+            "target_id": blockedId.uuidString,
+            "action": "unblock"
+        ]
+        
         _ = try await makeRequest(
-            path: "/user_blocks",
-            method: "DELETE",
-            query: [
-                "blocker_id": "eq.\(blockerId.uuidString)",
-                "blocked_id": "eq.\(blockedId.uuidString)"
-            ]
+            path: "/rpc/manage_block",
+            method: "POST",
+            body: body
         )
     }
 

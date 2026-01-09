@@ -698,21 +698,12 @@ class SocialService: ObservableObject {
     }
     
     private func handleIncomingMessage(_ payload: [String: Any]) {
-        // Payload structure can be:
-        // 1. { "new": { ... }, "eventType": "INSERT", ... } (Standard Realtime)
-        // 2. { "data": { "record": { ... }, "type": "INSERT", ... } } (Postgres Changes)
-        
-        var record: [String: Any]?
-        
-        if let newRecord = payload["new"] as? [String: Any] {
-            record = newRecord
-        } else if let data = payload["data"] as? [String: Any],
-                  let newRecord = data["record"] as? [String: Any] {
-            record = newRecord
+        // Standardized Realtime payload (mapped in SupabaseRealtimeClient)
+        guard let newRecord = payload["new"] as? [String: Any] else {
+            return
         }
         
-        guard let newRecord = record,
-              let idStr = newRecord["id"] as? String,
+        guard let idStr = newRecord["id"] as? String,
               let id = UUID(uuidString: idStr),
               let senderIdStr = newRecord["sender_id"] as? String,
               let senderId = UUID(uuidString: senderIdStr),

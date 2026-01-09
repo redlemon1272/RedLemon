@@ -343,10 +343,38 @@ actor SupabaseRealtimeClient {
 
         case "postgres_changes":
             if let payload = json["payload"] as? [String: Any],
-               let _ = payload["data"] as? [String: Any] {
-                // Notify postgres handlers
+               let data = payload["data"] as? [String: Any] {
+                
+                // CRITICAL STANDARDIZATION: Map raw WebSocket keys to "Standard" Supabase SDK format
+                // This allows consumers to use payload["new"] and payload["eventType"] reliably.
+                var mappedPayload = payload
+                
+                // 1. Map event type (UPDATE, INSERT, DELETE)
+                if let type = data["type"] as? String {
+                    mappedPayload["eventType"] = type
+                }
+                
+                // 2. Map new record (for INSERT/UPDATE)
+                if let record = data["record"] as? [String: Any] {
+                    mappedPayload["new"] = record
+                }
+                
+                // 3. Map old record (for UPDATE/DELETE)
+                if let oldRecord = data["old_record"] as? [String: Any] {
+                    mappedPayload["old"] = oldRecord
+                }
+                
+                // 4. Inject schema and table at top level for convenience
+                if let schema = data["schema"] as? String {
+                    mappedPayload["schema"] = schema
+                }
+                if let table = data["table"] as? String {
+                    mappedPayload["table"] = table
+                }
+                
+                // Notify postgres handlers with standardized payload
                 for handler in postgresHandlers {
-                    handler(payload)
+                    handler(mappedPayload)
                 }
             }
             

@@ -36,17 +36,33 @@ actor KeychainManager {
 
     // In-memory cache for fast access (no keychain prompts)
     private var cache: [String: String] = [:]
+    
+    /// Ensures cache is loaded before any access
+    private var initializationTask: Task<Void, Never>?
 
-    private init() {
-        // Load from encrypted cache file on init
-        Task {
+    private init() {}
+    
+    private func ensureInitialized() async {
+        // If already initialized or initializing, just wait for it
+        if let task = initializationTask {
+            await task.value
+            return
+        }
+        
+        // Create the task while isolated on the actor
+        let task = Task {
             await loadFromCache()
         }
+        
+        initializationTask = task
+        await task.value
     }
 
     // MARK: - Public API
 
     func save(credential: String, for service: String) async throws {
+        await ensureInitialized()
+        
         // 1. Try to save to iCloud keychain (synchronizable)
         do {
             try saveToKeychain(credential: credential, service: service, synchronizable: true)
@@ -67,6 +83,8 @@ actor KeychainManager {
     }
 
     func get(service: String) async -> String? {
+        await ensureInitialized()
+        
         // 1. Try memory cache first (instant, no prompts)
         if let cached = cache[service] {
             return cached
@@ -91,6 +109,8 @@ actor KeychainManager {
     }
 
     func delete(service: String) async throws {
+        await ensureInitialized()
+        
         // 1. Remove from memory cache
         cache.removeValue(forKey: service)
 
@@ -105,6 +125,7 @@ actor KeychainManager {
     }
 
     func listServices() async -> [String] {
+        await ensureInitialized()
         return Array(cache.keys)
     }
 

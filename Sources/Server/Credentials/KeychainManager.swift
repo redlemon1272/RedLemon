@@ -145,6 +145,10 @@ actor KeychainManager {
 
     /// Get username
     func getUsername() async -> String? {
+        // Ensure initialization completes so that accessing username and then immediately accessing keys (which relies on cache)
+        // doesn't trigger a race condition where cache isn't ready.
+        await ensureInitialized()
+
         // Try iCloud KVS first
         if let iCloudUsername = NSUbiquitousKeyValueStore.default.string(forKey: "redlemon.username") {
              // Sync back to local if different

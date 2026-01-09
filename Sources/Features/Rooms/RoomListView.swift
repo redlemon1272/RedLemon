@@ -615,7 +615,18 @@ struct RoomListView: View {
         }
 
         // Find the room in active rooms
-        guard let index = appState.activeRooms.firstIndex(where: { $0.id == roomId }) else {
+        let index = appState.activeRooms.firstIndex(where: { $0.id == roomId })
+        
+        // NEW: If INSERT or Missing Room Update -> Fetch and Add
+        if eventType == "INSERT" || (eventType == "UPDATE" && index == nil) {
+            print("🆕 RoomListView: Detected new/missing room \(roomId) - Fetching details...")
+            Task {
+                 await fetchAndAddNewRoom(roomId: roomId)
+            }
+            return
+        }
+        
+        guard let index = index else {
             return
         }
 
@@ -675,6 +686,36 @@ struct RoomListView: View {
         // But for now, just having the number is good
 
         appState.activeRooms[index] = room
+    }
+
+    // MARK: - Auto-Refresh Helper
+    
+    private func fetchAndAddNewRoom(roomId: String) async {
+        do {
+            guard let supabaseRoom = try await SupabaseClient.shared.getRoomState(roomId: roomId) else { return }
+            
+            // FILTER: Exclude system-run events
+            if supabaseRoom.hostUsername == "RedLemon Events" || supabaseRoom.type == .event {
+                 return
+            }
+            
+            // Convert
+            guard let watchPartyRoom = await convertSupabaseRoomToWatchPartyRoom(supabaseRoom) else { return }
+            
+            // Enrich (Poster, etc)
+            let (_, enrichedRoom) = await RoomListView.fetchPosterForRoom(room: watchPartyRoom)
+            let finalRoom = enrichedRoom ?? watchPartyRoom
+            
+            await MainActor.run {
+                // Double check uniqueness
+                if !appState.activeRooms.contains(where: { $0.id == roomId }) {
+                    appState.activeRooms.append(finalRoom)
+                    print("✅ RoomListView: Added new room \(roomId) from Realtime")
+                }
+            }
+        } catch {
+            print("❌ Failed to fetch/add new room \(roomId): \(error)")
+        }
     }
 
     // MARK: - Participant Count Polling

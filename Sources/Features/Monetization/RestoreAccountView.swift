@@ -90,11 +90,19 @@ struct RestoreAccountView: View {
         successMessage = nil
         
         let openPanel = NSOpenPanel()
-        openPanel.allowedContentTypes = [UTType(filenameExtension: "redlemon-key")!]
+        // Allow any file type so renamed backups still work
+        // The actual validation is done on file content (JSON parsing)
+        openPanel.allowedContentTypes = [
+            UTType(filenameExtension: "redlemon-key")!,
+            UTType.json,
+            UTType.plainText,
+            UTType.data  // Fallback for any file
+        ]
         openPanel.allowsMultipleSelection = false
         openPanel.canChooseDirectories = false
         openPanel.canChooseFiles = true
         openPanel.title = "Select Account Backup File"
+        openPanel.message = "Select your .redlemon-key backup file (renamed files also work)"
         
         openPanel.begin { response in
             if response == .OK, let url = openPanel.url {

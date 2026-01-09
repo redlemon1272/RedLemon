@@ -148,54 +148,90 @@ A persistent blacklist table `public.blocked_streams` was added to permanently b
 
 ## 7. Database Migrations
 
-To apply new SQL migrations (e.g. from `supabase/migrations/`) to the production server:
+To apply new SQL migrations from `supabase/migrations/` to the production server:
 
-**Option 1: Via SSH (Recommended)**
-1.  Copy the SQL file to the server (or just copy the content).
-2.  Run the following command (pipes content to the database container):
+### Quick Method (Recommended)
+Use the helper scripts in the project root. These handle password authentication automatically via `expect`.
 
+**Step 1: Copy file to server**
 ```bash
-# If file is local to the server:
-cat migration.sql | docker exec -i supabase-db psql -U postgres postgres
-
-# If pasting content directly:
-docker exec -i supabase-db psql -U postgres postgres
-# (Paste SQL content, then press Ctrl+D)
+expect -c 'spawn scp supabase/migrations/YOUR_MIGRATION.sql root@151.243.109.243:/tmp/migration.sql; expect "password:"; send "123Scarface123!\r"; expect eof'
 ```
 
-**Option 2: One-Liner from Local Machine**
+**Step 2: Execute on database**
 ```bash
-cat supabase/migrations/YOUR_MIGRATION.sql | ssh root@151.243.109.243 "docker exec -i supabase-db psql -U postgres postgres"
+./remote_exec.sh "cat /tmp/migration.sql | docker exec -i supabase-db psql -U postgres postgres"
 ```
 
-**Option 3: Automated (Expect Script)**
-If `sshpass` is missing, you can use `expect` to handle the password prompt automatically. This is what the AI assistant uses.
-
+### One-Line Commands (For Simple Queries)
 ```bash
-expect -c 'spawn scp -o StrictHostKeyChecking=no supabase/migrations/YOUR_MIGRATION.sql root@151.243.109.243:/root/migration.sql; expect "password:"; send "123Scarface123!\r"; expect eof'
-expect -c 'spawn ssh root@151.243.109.243 "cat /root/migration.sql | docker exec -i supabase-db psql -U postgres postgres"; expect "password:"; send "123Scarface123!\r"; expect eof'
+# Run a SQL command directly
+./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT * FROM users LIMIT 5;\""
+
+# Check cron jobs
+./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT jobname, schedule FROM cron.job;\""
 ```
 
+### Helper Script: `remote_exec.sh`
+This expect script handles SSH password authentication automatically:
+```bash
+#!/usr/bin/expect -f
+set timeout 300
+set password "123Scarface123!"
+set cmd [lindex $argv 0]
+set host "151.243.109.243"
 
-
-
-### Security Migration (01/2026)
-To fix the Security Audit issues (Hardcoded Secrets), you must run the `database-migration-fix-logs-rls.sql` migration.
-This script sets up:
-1. Public RLS for App Logs (no credentials needed to report crashes).
-2. Secure Admin RPCs (`get_admin_logs`) that check your Public Key and Signature to allow viewing logs.
-
-### Room Creation History Migration (01/09/2026)
-**Migration:** `20260109000000_room_creation_history.sql`
-
-Fixes the free user room limit bypass. Previously, the 72-hour limit didn't work because rooms are deleted when hosts leave, resetting the counter. This migration:
-1. Creates `room_creation_history` table to persistently track room creation events
-2. Updates `check_room_creation_limits()` trigger to check history table instead of ephemeral `rooms` table
-3. Enables RLS and adds cleanup function for old records
+spawn ssh -o StrictHostKeyChecking=no root@$host $cmd
+expect {
+    "password:" { send "$password\r"; exp_continue }
+    eof
+}
+```
 
 ---
 
-## 8. Production Wallet Secrets
+## 8. Automated Payment Sweeping (NEW - Jan 9, 2026)
+
+**Status:** ✅ Active (Daily at 9:10 AM UTC)
+
+Funds received at per-user derived addresses are automatically swept to the master wallet.
+
+### Schedule
+| Time (UTC) | Job |
+|------------|-----|
+| **9:00 AM** | Database backup |
+| **9:10 AM** | Payment sweep |
+
+The 10-minute gap ensures backups capture pre-sweep state.
+
+### Edge Function: `sweep-payments`
+- **Location:** `/root/supabase/docker/volumes/functions/sweep-payments/index.ts`
+- **Action:** Checks all assigned EVM addresses across 5 chains (Base, Ethereum, Arbitrum, Optimism, Polygon)
+- **Threshold:** Only sweeps if balance > 0.0005 ETH (~$1.50) to avoid wasting gas
+- **Logging:** All sweeps logged to `payment_sweeps` table
+
+### Manual Sweep (Admin Dashboard)
+Open **Settings → Administration → Payments Tab → Sweep Funds** button.
+
+### Cron Job Details
+```sql
+-- Job ID: 19, runs daily at 9:10 AM UTC
+SELECT cron.schedule(
+    'sweep-payments',
+    '10 9 * * *',
+    $$SELECT net.http_post(
+        'http://supabase-edge-functions:8000/sweep-payments',
+        '{}'::JSONB,
+        'application/json',
+        '{}'::JSONB,
+        60000
+    )$$
+);
+```
+
+---
+
+## 9. Production Wallet Secrets
 > [!CAUTION]
 > **CRITICAL SECURITY INFORMATION**
 > These keys control the funds collected by the application.
@@ -216,3 +252,4 @@ Fixes the free user room limit bypass. Previously, the 72-hour limit didn't work
 **Usage:**
 *   **Importing to Wallet:** Use the Seed Phrase in MetaMask, electrum, or Ledger to access funds.
 *   **Server Config:** These XPUBs are set in `/root/supabase/docker/docker-compose.yml` (injected via `.env`).
+

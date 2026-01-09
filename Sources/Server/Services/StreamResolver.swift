@@ -711,6 +711,23 @@ actor StreamResolver {
                   return false
              }
 
+            // CRITICAL: Filter Tiny Files (Fake/Empty)
+            // Parse size string (e.g. "1.5 GB", "300 MB")
+            // If < 20 MB, it's likely a sample or fake file.
+            if let sizeStr = stream.size {
+                let lowerSize = sizeStr.lowercased()
+                if lowerSize.contains("mb") {
+                    let numberPart = lowerSize.replacingOccurrences(of: "mb", with: "").trimmingCharacters(in: .whitespaces)
+                    if let sizeMB = Double(numberPart), sizeMB < 20 {
+                        print("   🚫 RESOLVER DROP (\(quality)): Too Small (<20MB): \(stream.title) (\(sizeStr))")
+                        return false
+                    }
+                } else if lowerSize.contains("kb") {
+                    print("   🚫 RESOLVER DROP (\(quality)): Too Small (KB): \(stream.title) (\(sizeStr))")
+                    return false
+                }
+            }
+
             return true
         }
 

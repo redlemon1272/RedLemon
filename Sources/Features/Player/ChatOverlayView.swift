@@ -254,7 +254,7 @@ struct ChatOverlayView: View {
 
     // MARK: - List Views
     
-    private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool) -> some View {
+    private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, isSenderHost: Bool) -> some View {
         if isSystem {
             return AnyView(
                 Text(username)
@@ -271,9 +271,27 @@ struct ChatOverlayView: View {
         // If it's me, just show text (no actions)
         if isMe {
             return AnyView(
-                Text(username)
-                    .font(.caption.weight(.semibold))
-                    .foregroundColor(.blue)
+                HStack(spacing: 4) {
+                    Text(username)
+                        .font(.caption.weight(.semibold))
+                        .foregroundColor(.blue)
+                    
+                    if isSenderHost {
+                        Text("Host")
+                            .font(.caption2.weight(.bold))
+                            .foregroundColor(.accentColor)
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 1)
+                            .background(Color.accentColor.opacity(0.15))
+                            .cornerRadius(4)
+                    }
+
+                    if isPremium {
+                        Text("👑")
+                            .font(.system(size: 10))
+                            .help("Premium User")
+                    }
+                }
             )
         }
         
@@ -282,6 +300,22 @@ struct ChatOverlayView: View {
                 Text(username)
                     .font(.caption.weight(.semibold))
                     .foregroundColor(.blue)
+                
+                if isSenderHost {
+                    Text("Host")
+                        .font(.caption2.weight(.bold))
+                        .foregroundColor(.accentColor)
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 1)
+                        .background(Color.accentColor.opacity(0.15))
+                        .cornerRadius(4)
+                }
+
+                if isPremium {
+                    Text("👑")
+                        .font(.system(size: 10))
+                        .help("Premium User")
+                }
                 
                 Menu {
                 Text(username) // Header
@@ -344,7 +378,7 @@ struct ChatOverlayView: View {
                         
                         // Show message (masked if muted)
                         VStack(alignment: .leading, spacing: 4) {
-                            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: false) 
+                            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: false, isPremium: message.isPremium, isSenderHost: false) 
                             
                             if isMuted {
                                 Text("Message muted")
@@ -375,40 +409,47 @@ struct ChatOverlayView: View {
     }
 
     private var messagesList: some View {
-        ScrollView {
+        let hostId = appState.player.currentWatchPartyRoom?.hostId
+
+        return ScrollView {
             LazyVStack(alignment: .leading, spacing: 12) {
                 // ✅ Show only most recent messages for performance
                 // Reversed for inverted list (bottom-up)
                 ForEach(Array(viewModel.messages.suffix(maxVisibleMessages)).reversed(), id: \.id) { message in
-                    let isMuted = viewModel.mutedUserIds.contains(message.senderId ?? "")
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost)
-                        
-                        if isMuted {
-                            Text("Message muted")
-                                .font(.caption)
-                                .italic()
-                                .foregroundColor(.white.opacity(0.5))
-                        } else {
-                            Text(message.text)
-                                .font(.body)
-                                .foregroundColor(.white)
-                        }
-                    }
-                    .padding(12)
-                    .background(Color.black.opacity(0.2))
-                    .cornerRadius(8)
-                    .id(message.id)
-                    .rotationEffect(.degrees(180)) // Correct text orientation
-                    .scaleEffect(x: -1, y: 1, anchor: .center)
-                    .opacity(isMuted ? 0.6 : 1.0)
+                    messageRow(message, hostId: hostId)
                 }
             }
             .padding()
         }
         .rotationEffect(.degrees(180)) // Invert list
         .scaleEffect(x: -1, y: 1, anchor: .center)
+    }
+
+    private func messageRow(_ message: ChatMessage, hostId: String?) -> some View {
+        let isMuted = viewModel.mutedUserIds.contains(message.senderId ?? "")
+        let isSenderHost = (message.senderId != nil && message.senderId == hostId)
+        
+        return VStack(alignment: .leading, spacing: 4) {
+            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost, isPremium: message.isPremium, isSenderHost: isSenderHost)
+            
+            if isMuted {
+                Text("Message muted")
+                    .font(.caption)
+                    .italic()
+                    .foregroundColor(.white.opacity(0.5))
+            } else {
+                Text(message.text)
+                    .font(.body)
+                    .foregroundColor(.white)
+            }
+        }
+        .padding(12)
+        .background(Color.black.opacity(0.2))
+        .cornerRadius(8)
+        .id(message.id)
+        .rotationEffect(.degrees(180)) // Correct text orientation
+        .scaleEffect(x: -1, y: 1, anchor: .center)
+        .opacity(isMuted ? 0.6 : 1.0)
     }
 
     private var friendsList: some View {
@@ -1038,4 +1079,8 @@ struct FriendRowButton: View {
         .padding(0) // Inner padding handles it
     }
 
+    private func isMessageSenderHost(_ message: ChatMessage) -> Bool {
+        guard let senderId = message.senderId else { return false }
+        return senderId == appState.player.currentWatchPartyRoom?.hostId
+    }
 }

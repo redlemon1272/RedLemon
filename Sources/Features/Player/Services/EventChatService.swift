@@ -85,12 +85,14 @@ class EventChatService: ObservableObject {
         
         // Optimistic update
         let tempId = UUID().uuidString
+        let isPremium = LicenseManager.shared.isPremium
         let message = ChatMessage(
             id: tempId,
             username: username,
             text: text,
             timestamp: Date(),
-            senderId: userId
+            senderId: userId,
+            isPremium: isPremium
         )
         self.messages.append(message)
         
@@ -101,7 +103,8 @@ class EventChatService: ObservableObject {
             isPlaying: nil,
             senderId: userId,
             chatText: text,
-            chatUsername: username
+            chatUsername: username,
+            isPremium: isPremium
         )
         
         do {
@@ -162,7 +165,8 @@ class EventChatService: ObservableObject {
             username: username,
             text: text,
             timestamp: Date(timeIntervalSince1970: message.timestamp),
-            senderId: message.senderId
+            senderId: message.senderId,
+            isPremium: message.isPremium ?? false
         )
         self.messages.append(chatMessage)
         

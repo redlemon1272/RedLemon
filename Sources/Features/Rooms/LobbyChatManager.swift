@@ -66,8 +66,10 @@ class LobbyChatManager: ObservableObject {
         // Optimistic clear
         chatInput = ""
         
+        let isPremium = LicenseManager.shared.isPremium
+        
         // Add message locally for instant feedback (optimistic UI)
-        addLocalMessage(username: username, text: trimmed, senderId: senderId)
+        addLocalMessage(username: username, text: trimmed, senderId: senderId, isPremium: isPremium)
         
         // Construct SyncMessage
         let syncMsg = SyncMessage(
@@ -76,7 +78,8 @@ class LobbyChatManager: ObservableObject {
             isPlaying: nil,
             senderId: senderId,
             chatText: trimmed,
-            chatUsername: username
+            chatUsername: username,
+            isPremium: isPremium
         )
         
         // Delegate actual sending to the owner
@@ -88,7 +91,7 @@ class LobbyChatManager: ObservableObject {
         }
     }
     
-    func handleIncomingChat(chatText: String, senderId: String?, username: String?, timestamp: TimeInterval, currentUserId: String, mutedUserIds: Set<String>, blockedUserIds: Set<String>) {
+    func handleIncomingChat(chatText: String, senderId: String?, username: String?, timestamp: TimeInterval, currentUserId: String, mutedUserIds: Set<String>, blockedUserIds: Set<String>, isPremium: Bool) {
         guard let validSenderId = senderId else { return }
         
         // Block check
@@ -109,7 +112,8 @@ class LobbyChatManager: ObservableObject {
             text: chatText,
             timestamp: Date(timeIntervalSince1970: timestamp),
             isSystem: false,
-            senderId: validSenderId
+            senderId: validSenderId,
+            isPremium: isPremium
         )
         
         addChatMessage(chatMessage)
@@ -145,14 +149,15 @@ class LobbyChatManager: ObservableObject {
     }
     
     // Helper to add a local optimistic message
-    public func addLocalMessage(username: String, text: String, senderId: String? = nil) {
+    public func addLocalMessage(username: String, text: String, senderId: String? = nil, isPremium: Bool = false) {
         let msg = ChatMessage(
             id: UUID().uuidString,
             username: username,
             text: text,
             timestamp: Date(),
             isSystem: false,
-            senderId: senderId
+            senderId: senderId,
+            isPremium: isPremium
         )
         addChatMessage(msg)
     }

@@ -44,7 +44,8 @@ class LobbyEventRouter: ObservableObject {
             timestamp: syncMessage.timestamp,
             currentUserId: viewModel.participantId,
             mutedUserIds: viewModel.mutedUserIds,
-            blockedUserIds: SocialService.shared.blockedUserIds
+            blockedUserIds: SocialService.shared.blockedUserIds,
+            isPremium: syncMessage.isPremium ?? false
         )
     }
 

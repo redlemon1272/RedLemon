@@ -615,9 +615,27 @@ struct WatchPartyLobbyView: View {
                                                             VStack(alignment: .leading, spacing: 4) {
                                                                 HStack {
                                                                     // Username / Menu
-                                                                    Text(chatMsg.username)
-                                                                        .font(.caption.weight(.semibold))
-                                                                        .foregroundColor(.blue)
+                                                                    HStack(spacing: 4) {
+                                                                        Text(chatMsg.username)
+                                                                            .font(.caption.weight(.semibold))
+                                                                            .foregroundColor(.blue)
+
+                                                                        if let senderId = chatMsg.senderId, senderId == viewModel.room.hostId {
+                                                                            Text("Host")
+                                                                                .font(.caption2.weight(.bold))
+                                                                                .foregroundColor(.accentColor)
+                                                                                .padding(.horizontal, 4)
+                                                                                .padding(.vertical, 1)
+                                                                                .background(Color.accentColor.opacity(0.15))
+                                                                                .cornerRadius(4)
+                                                                        }
+
+                                                                        if chatMsg.isPremium {
+                                                                            Text("👑")
+                                                                                .font(.system(size: 10))
+                                                                                .help("Premium User")
+                                                                        }
+                                                                    }
 
                                                                     if let senderId = chatMsg.senderId, senderId.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") != .orderedSame {
                                                                         Menu {

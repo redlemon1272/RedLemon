@@ -1631,7 +1631,8 @@ class MPVPlayerViewModel: ObservableObject {
             username: username,
             text: text,
             timestamp: Date(),
-            senderId: userId.uuidString
+            senderId: userId.uuidString,
+            isPremium: LicenseManager.shared.isPremium
         )
 
         messages.append(message)
@@ -1655,7 +1656,8 @@ class MPVPlayerViewModel: ObservableObject {
                     isPlaying: nil,
                     senderId: userId.uuidString,
                     chatText: text,
-                    chatUsername: username
+                    chatUsername: username,
+                    isPremium: LicenseManager.shared.isPremium
                 )
 
                 do {
@@ -1924,6 +1926,7 @@ struct ChatMessage: Identifiable {
     let timestamp: Date
     var isSystem: Bool = false
     var senderId: String? = nil
+    var isPremium: Bool = false
 }
 
 
@@ -2934,7 +2937,8 @@ extension MPVPlayerViewModel {
                     username: displayUsername,
                     text: displayText,
                     timestamp: Date(timeIntervalSince1970: message.timestamp),
-                    senderId: message.senderId
+                    senderId: message.senderId,
+                    isPremium: message.isPremium ?? false
                 )
                 // Batch chat updates to avoid UI thrashing
                 await MainActor.run {

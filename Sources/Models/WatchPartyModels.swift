@@ -264,6 +264,7 @@ struct SyncMessage: Codable {
     let fileIdx: Int?  // Selected stream file index
     let quality: String?  // Selected stream quality
     let unlockedURL: String?  // Unlocked stream URL
+    let isPremium: Bool? // Premium User Status (Crown)
 
     init(
         type: SyncMessageType,
@@ -276,7 +277,8 @@ struct SyncMessage: Codable {
         infoHash: String? = nil,
         fileIdx: Int? = nil,
         quality: String? = nil,
-        unlockedURL: String? = nil
+        unlockedURL: String? = nil,
+        isPremium: Bool? = nil
     ) {
         self.type = type
         self.timestamp = timestamp
@@ -289,6 +291,7 @@ struct SyncMessage: Codable {
         self.fileIdx = fileIdx
         self.quality = quality
         self.unlockedURL = unlockedURL
+        self.isPremium = isPremium
     }
 }
 

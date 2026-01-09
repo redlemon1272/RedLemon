@@ -60,15 +60,46 @@ class LicenseManager: ObservableObject {
         }
     }
     
-    /// Trigger a background check for crypto payments (Run on app start)
     func refreshSubscription() async {
+        print("💰 LicenseManager: Starting hybrid subscription check...")
+        
+        // 1. Run the payment sweep (Edge Function) - Checks for NEW blockchain transactions
+        // We use a separate do-catch or try? so a failure here doesn't block the profile check
+        var sweepPremium = false
+        var sweepExpiry: Date? = nil
+        
         do {
-            print("💰 LicenseManager: Checking for background crypto payments...")
-            let (isPremium, newExpiry) = try await SupabaseClient.shared.checkPaymentStatus()
-            refreshLicense(premium: isPremium, expiresAt: newExpiry)
+            (sweepPremium, sweepExpiry) = try await SupabaseClient.shared.checkPaymentStatus()
         } catch {
-            print("⚠️ LicenseManager: Background payment check failed: \(error)")
+             print("⚠️ LicenseManager: Payment sweep failed (non-fatal): \(error)")
         }
+        
+        // 2. Check the User Profile (Database) - Checks for Admin grants or existing valid subs
+        var profileExpiry: Date? = nil
+        do {
+            if let userId = SupabaseClient.shared.auth.currentUser?.id,
+               let user = try await SupabaseClient.shared.getUserById(userId: userId) {
+                profileExpiry = user.subscriptionExpiresAt
+                print("👤 LicenseManager: Profile expiry: \(String(describing: profileExpiry))")
+            }
+        } catch {
+            print("⚠️ LicenseManager: Profile check failed (non-fatal): \(error)")
+        }
+        
+        // 3. Determine the best expiry date (latest one wins)
+        var finalExpiry: Date? = sweepExpiry
+        if let pDate = profileExpiry {
+            if let sDate = sweepExpiry {
+                finalExpiry = (pDate > sDate) ? pDate : sDate
+            } else {
+                finalExpiry = pDate
+            }
+        }
+        
+        // 4. Update License
+        // If either source says premium (and has a date), use it.
+        let isPremium = sweepPremium || (finalExpiry != nil && finalExpiry! > Date())
+        refreshLicense(premium: isPremium, expiresAt: finalExpiry)
     }
     
     /// Recover account using mnemonic phrase
@@ -103,7 +134,15 @@ class LicenseManager: ObservableObject {
     /// Check if user has premium status
     var isPremium: Bool {
         if !isMonetizationEnabled { return true }
-        return Date().timeIntervalSince1970 < subscriptionExpiresAt
+        
+        // DEBUG CHEAT REMOVED as per user request
+
+        let now = Date().timeIntervalSince1970
+        let isActive = now < subscriptionExpiresAt
+        if !isActive && subscriptionExpiresAt > 0 {
+             print("🔒 LicenseManager: Premium check failed. Expires: \(subscriptionExpiresAt) < Now: \(now)")
+        }
+        return isActive
     }
     
     // MARK: - Hosting Limit

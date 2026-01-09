@@ -13,6 +13,7 @@
 - **What it does**: Everything. Video playback, UI state, Chat networking, Watch Party Sync, Subtitle logic.
 - **Danger**: Modifying one part (e.g., Chat) can break another (e.g., Playback).
 - **Rule**: TRIPLE CHECK that changes handle `DispatchQueue.main` correctly—MPV callbacks often come from background threads.
+- **Sync Integrity**: Chat execution is split between `sendMessage` (Sender) and `handleSyncMessage` (Receiver). Updating one without the other leads to "Silent Failures" where data is sent but ignored. ALWAYS update both.
 
 ### 2. Verified Streams Data Model
 - **File**: `SupabaseClient.swift` → `struct VerifiedStream`
@@ -42,6 +43,16 @@
 - **Mechanism**: Uses `actor` for concurrency.
 - **Fragility**: Initial connection callbacks have race conditions.
 - **Drift Logic**: Hardcoded thresholds (50ms, 500ms) for Seek vs. Rate Shift.
+
+### 6. SwiftUI Compiler Timeouts
+- **Symptom**: `The compiler is unable to type-check this expression in reasonable time`.
+- **Cause**: Complex logic (especially `if/else`, variable declarations, or long chains) inside `ForEach` or other ViewBuilders.
+- **Rule**: EXTRACT row content into separate private functions (`messageRow`, `userRow`) or Subviews. Do not inline complex logic in `ForEach`.
+
+### 7. Service Layer Independence (Singleton Trap)
+- **Problem**: Attempting to access `AppState` (UI Layer) from Services (`LicenseManager`, `SupabaseClient`).
+- **Constaint**: `AppState` does not exist in the service layer context.
+- **Rule**: NEVER import or rely on `AppState` in Services. Use `SupabaseClient.shared.auth` for user context. Dependencies must flow DOWN, not UP.
 
 ## 🏗️ Architecture Map
 
@@ -137,6 +148,12 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 ## Master Wallet
 - **Address**: `0x33E53714ef5dc4d28A5Ea1FD3df16E86cf6223b9`
 - **Derivation**: `m/44'/60'/0'/0/0` (Index 0)
+
+## ⚠️ Source of Truth for Premium Status
+**Critical:** `LicenseManager.refreshSubscription()` relies on a **HYBRID** check:
+1.  **Edge Function** (`check-payment`): Detects *new* incoming crypto transactions.
+2.  **Database Profile** (`users.subscription_expires_at`): Persists valid subscriptions and Admin Grants.
+**Rule:** Always check BOTH. The latest date wins. Never rely solely on the edge function, or Admin Grants will be ignored.
 
 ---
 

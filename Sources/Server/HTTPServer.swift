@@ -80,7 +80,7 @@ class HTTPServer {
 
         await ProviderManager.shared.register(provider: torrentio)
         await ProviderManager.shared.register(provider: comet)
-        await ProviderManager.shared.register(provider: zilean)
+        // await ProviderManager.shared.register(provider: zilean) // Disabled per user request
         await ProviderManager.shared.register(provider: mediafusion)
         await ProviderManager.shared.register(provider: debridSearch)
 

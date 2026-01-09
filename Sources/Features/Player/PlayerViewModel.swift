@@ -260,20 +260,68 @@ class PlayerViewModel: ObservableObject {
                  resolvedMetadata = result.metadata
                  Task { @MainActor in self.streamQueue = result.candidateStreams }
             } else {
-                // Standard resolution
-                let result = try await streamResolver.resolveStream(
-                    item: item,
-                    quality: quality,
-                    season: effectiveSeason, // Use effective variables
-                    episode: effectiveEpisode, // Use effective variables
-                    metadata: metadata,
-                    preferredInfoHash: nil,
-                    filterExtended: false
-                )
+                // Standard resolution with Auto-Retry
+                let maxRetries = 3
+                var lastError: Error?
 
-                resolvedStream = result.stream
-                resolvedMetadata = result.metadata
-                Task { @MainActor in self.streamQueue = result.candidateStreams }
+                for attempt in 1...maxRetries {
+                    // Check cancellation
+                    if Task.isCancelled { throw CancellationError() }
+
+                    if attempt > 1 {
+                         print("🔄 Stream Resolution: Retry attempt \(attempt)/\(maxRetries)...")
+                         // Wait 2s between retries (gives providers time to recover)
+                         try? await Task.sleep(nanoseconds: 2_000_000_000)
+                    }
+
+                    do {
+                        let result = try await streamResolver.resolveStream(
+                            item: item,
+                            quality: quality,
+                            season: effectiveSeason, // Use effective variables
+                            episode: effectiveEpisode, // Use effective variables
+                            metadata: metadata,
+                            preferredInfoHash: nil,
+                            filterExtended: false
+                        )
+
+                        resolvedStream = result.stream
+                        resolvedMetadata = result.metadata
+                        
+                        // Capture safe copy of candidates for the actor boundary
+                        let candidateStreams = result.candidateStreams 
+                        
+                        Task { @MainActor in 
+                            self.streamQueue = candidateStreams
+                        }
+                        
+                        // Success! Break the loop
+                        break
+                    } catch {
+                        print("⚠️ Resolution failed on attempt \(attempt): \(error.localizedDescription)")
+                        lastError = error
+                        
+                        // Only retry specific transient errors
+                        // 1. No streams found (e.g. provider aggregation failed initially)
+                        // 2. Network timeouts
+                        // 2. Network timeouts
+                        let isRetryable: Bool = {
+                            if let apiError = error as? APIError, case .noStreamsFound = apiError { return true }
+                            if (error as? URLError)?.code == .timedOut { return true }
+                            return error.localizedDescription.contains("timed out")
+                        }()
+                        
+                        if !isRetryable {
+                            throw error // Fatal error, don't retry
+                        }
+                    }
+                }
+
+                // If we still don't have a stream after retries, throw the last error
+                // If we still don't have a stream after retries, throw the last error
+                if resolvedStream == nil {
+                    throw lastError ?? APIError.noStreamsFound
+                }
             }
 
             guard let finalStream = resolvedStream else {

@@ -36,24 +36,24 @@ actor KeychainManager {
 
     // In-memory cache for fast access (no keychain prompts)
     private var cache: [String: String] = [:]
-    
+
     /// Ensures cache is loaded before any access
     private var initializationTask: Task<Void, Never>?
 
     private init() {}
-    
+
     private func ensureInitialized() async {
         // If already initialized or initializing, just wait for it
         if let task = initializationTask {
             await task.value
             return
         }
-        
+
         // Create the task while isolated on the actor
         let task = Task {
             await loadFromCache()
         }
-        
+
         initializationTask = task
         await task.value
     }
@@ -62,7 +62,7 @@ actor KeychainManager {
 
     func save(credential: String, for service: String) async throws {
         await ensureInitialized()
-        
+
         // 1. Try to save to iCloud keychain (synchronizable)
         do {
             try saveToKeychain(credential: credential, service: service, synchronizable: true)
@@ -84,7 +84,7 @@ actor KeychainManager {
 
     func get(service: String) async -> String? {
         await ensureInitialized()
-        
+
         // 1. Try memory cache first (instant, no prompts)
         if let cached = cache[service] {
             return cached
@@ -95,12 +95,12 @@ actor KeychainManager {
             cache[service] = credential
             return credential
         }
-        
+
         // 3. Try local keychain (legacy/fallback)
         if let credential = try? getFromKeychain(service: service, synchronizable: false) {
             // Migrate to iCloud if found locally
             try? saveToKeychain(credential: credential, service: service, synchronizable: true)
-            
+
             cache[service] = credential
             return credential
         }
@@ -110,7 +110,7 @@ actor KeychainManager {
 
     func delete(service: String) async throws {
         await ensureInitialized()
-        
+
         // 1. Remove from memory cache
         cache.removeValue(forKey: service)
 
@@ -135,12 +135,16 @@ actor KeychainManager {
     func saveUsername(_ username: String) async throws {
         NSLog("💾 KeychainManager: Saving username '\(username)' to UserDefaults")
         UserDefaults.standard.set(username, forKey: "redlemon.username")
-        
+        UserDefaults.standard.synchronize() // Force immediate flush to disk
+
         // Also sync username to iCloud Key-Value Store (NSUbiquitousKeyValueStore)
         NSUbiquitousKeyValueStore.default.set(username, forKey: "redlemon.username")
         NSUbiquitousKeyValueStore.default.synchronize()
-        
-        NSLog("✅ KeychainManager: Username saved successfully")
+
+        // Verify the save worked
+        let verifyLocal = UserDefaults.standard.string(forKey: "redlemon.username")
+        let verifyCloud = NSUbiquitousKeyValueStore.default.string(forKey: "redlemon.username")
+        NSLog("✅ KeychainManager: Username saved - Local: '\(verifyLocal ?? "nil")' iCloud: '\(verifyCloud ?? "nil")'")
     }
 
     /// Get username
@@ -149,22 +153,21 @@ actor KeychainManager {
         // doesn't trigger a race condition where cache isn't ready.
         await ensureInitialized()
 
+        // Log what we find in both stores for debugging
+        let iCloudValue = NSUbiquitousKeyValueStore.default.string(forKey: "redlemon.username")
+        let localValue = UserDefaults.standard.string(forKey: "redlemon.username")
+        NSLog("🔍 KeychainManager.getUsername() - iCloud: '\(iCloudValue ?? "nil")' Local: '\(localValue ?? "nil")'")
+
         // Try iCloud KVS first
-        if let iCloudUsername = NSUbiquitousKeyValueStore.default.string(forKey: "redlemon.username") {
+        if let iCloudUsername = iCloudValue {
              // Sync back to local if different
-             if UserDefaults.standard.string(forKey: "redlemon.username") != iCloudUsername {
+             if localValue != iCloudUsername {
                  UserDefaults.standard.set(iCloudUsername, forKey: "redlemon.username")
              }
              return iCloudUsername
         }
-        
-        let username = UserDefaults.standard.string(forKey: "redlemon.username")
-        if let username = username {
-            NSLog("🔍 KeychainManager: Retrieved username '\(username)' from UserDefaults")
-        } else {
-            NSLog("🔍 KeychainManager: No username found in UserDefaults")
-        }
-        return username
+
+        return localValue
     }
 
 
@@ -216,7 +219,7 @@ actor KeychainManager {
         }
         return UserDefaults.standard.string(forKey: "redlemon.torrentio.config")
     }
-    
+
     /// Delete custom Torrentio configuration
     func deleteTorrentioConfig() async {
         UserDefaults.standard.removeObject(forKey: "redlemon.torrentio.config")
@@ -239,7 +242,7 @@ actor KeychainManager {
             // Allow access without password prompt when app is running
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
         ]
-        
+
         if synchronizable {
             query[kSecAttrSynchronizable as String] = true
         }
@@ -262,7 +265,7 @@ actor KeychainManager {
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne
         ]
-        
+
         if synchronizable {
             query[kSecAttrSynchronizable as String] = true
         }
@@ -291,7 +294,7 @@ actor KeychainManager {
             kSecAttrService as String: Self.serviceName,
             kSecAttrAccount as String: service
         ]
-        
+
         if synchronizable {
             query[kSecAttrSynchronizable as String] = true
         }

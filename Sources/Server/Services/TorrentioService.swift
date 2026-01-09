@@ -39,8 +39,8 @@ class TorrentioService: ProviderService {
         }
         
         let url = buildUrl(imdbId: imdbId, type: type, season: season, episode: episode, config: config)
-
-        NSLog("🔍 Torrentio: Fetching \(url)")
+        
+        NSLog("%@", "🔍 Torrentio: Fetching \(url)")
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -277,9 +277,4 @@ struct TorrentioStream: Codable {
 }
 
 // MARK: - Errors
-
-enum ProviderError: Error {
-    case httpError(statusCode: Int)
-    case parseError(String)
-    case notFound
-}
+// ProviderError is defined in ProviderService.swift

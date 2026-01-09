@@ -235,3 +235,11 @@ actor ProviderManager {
         return results
     }
 }
+
+// MARK: - Errors
+
+enum ProviderError: Error {
+    case httpError(statusCode: Int)
+    case parseError(String)
+    case notFound
+}

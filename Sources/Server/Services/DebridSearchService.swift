@@ -36,7 +36,7 @@ class DebridSearchService: ProviderService {
         
         let url = buildUrl(imdbId: imdbId, type: type, season: season, episode: episode, apiKey: apiKey)
         
-        NSLog("🔍 DebridSearch: Fetching \(url)")
+        NSLog("%@", "🔍 DebridSearch: Fetching \(url)")
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -108,7 +108,8 @@ class DebridSearchService: ProviderService {
             return URL(string: baseUrl)!
         }
         
-        NSLog("🔗 DebridSearch URL: \(url.absoluteString.replacingOccurrences(of: apiKey, with: "***"))")
+        let logUrl = url.absoluteString.replacingOccurrences(of: apiKey, with: "***")
+        NSLog("%@", "🔗 DebridSearch URL: \(logUrl)")
         return url
     }
     

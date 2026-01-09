@@ -898,17 +898,36 @@ actor StreamService: StreamResolving {
     private func resolveRedirect(url: String) async -> String? {
         guard let urlObj = URL(string: url) else { return nil }
         
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 8.0 // 8 seconds max to resolve
+        config.timeoutIntervalForResource = 8.0
+        let session = URLSession(configuration: config)
+        
         var request = URLRequest(url: urlObj)
-        request.httpMethod = "HEAD" // Try HEAD first to be lightweight
+        request.httpMethod = "HEAD"
         
         do {
-            let (_, response) = try await URLSession.shared.data(for: request)
+            let (_, response) = try await session.data(for: request)
             if let httpResponse = response as? HTTPURLResponse {
-                // URLSession follows redirects by default, so response.url is final
+                // Return the final URL (URLSession follows redirects by default)
                 return httpResponse.url?.absoluteString
             }
         } catch {
-            print("❌ StreamService: Redirect resolution failed: \(error)")
+            print("⚠️ StreamService: HEAD resolution failed (\(error.localizedDescription)). Falling back to GET (Range: 0-0)...")
+            
+            // Fallback to GET with Range header (minimal data download)
+            var getRequest = URLRequest(url: urlObj)
+            getRequest.httpMethod = "GET"
+            getRequest.setValue("bytes=0-0", forHTTPHeaderField: "Range")
+            
+            do {
+                let (_, response) = try await session.data(for: getRequest)
+                if let httpResponse = response as? HTTPURLResponse {
+                    return httpResponse.url?.absoluteString
+                }
+            } catch {
+                print("❌ StreamService: Final redirect resolution failed: \(error)")
+            }
         }
         return nil
     }

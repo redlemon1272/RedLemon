@@ -155,7 +155,7 @@ class SupabaseClient: RoomManager, UserManager {
 
 
             // If all formatters fail, log the actual format we received
-            NSLog("❌ Failed to decode date string: '\(dateString)'")
+            NSLog("❌ Failed to decode date string: '%@'", dateString)
             throw DecodingError.dataCorruptedError(
                 in: container,
                 debugDescription: "Date string '\(dateString)' does not match any expected format"

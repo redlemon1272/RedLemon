@@ -139,14 +139,14 @@ struct RedLemonApp: App {
             // Without keys, we cannot sign requests (heartbeat, etc), leading to "Zombie" sessions.
             if await KeychainManager.shared.getKeyPair() == nil {
                 NSLog("⚠️ KEYCHAIN ERROR: Username '\(username)' found but Signing Keys are missing!")
-                NSLog("   This results in a 'Zombie' session where presence fails.")
+                NSLog("   Regenerating keys to prevent infinite login loop (Legacy backup fix).")
 
-                // Clear the corrupted state
-                try? await KeychainManager.shared.deleteUsername()
-                NSLog("✅ CLEARED: Removed invalid username to force re-authentication.")
-
-                // Stop loading user
-                return
+                // Instead of deleting the user, regenerate keys.
+                // This allows the user to at least into the app.
+                // Note: Server-side signature checks may fail until they re-register or update their public key.
+                let (priv, pub) = CryptoManager.shared.generateKeyPair()
+                try? await KeychainManager.shared.saveKeyPair(privateKey: priv, publicKey: pub)
+                NSLog("✅ REGENERATED: New keys created and saved for '\(username)'.")
             }
 
             // Verify user exists in database

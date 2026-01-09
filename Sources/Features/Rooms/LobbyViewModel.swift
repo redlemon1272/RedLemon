@@ -61,6 +61,7 @@ class LobbyViewModel: ObservableObject {
     var playbackEndedTimestamp: Date? // Made var for LobbyDatabaseManager access (Track when playback ended)
     var isLeavingExplicitly: Bool = false // Flag to track if host is explicitly leaving (vs deinit/background)
     var canAutoJoin: Bool = false // Safety flag: Made var for LobbyDatabaseManager access
+    var joinedAtTimestamp: Date = Date() // Track when user actually entered this lobby instance
 
 
     // Combine storage for Refactor Phase 1
@@ -1172,6 +1173,26 @@ class LobbyViewModel: ObservableObject {
         let timeUntilStart = room.createdAt.timeIntervalSince(now)
 
         print("   Time until start: \(timeUntilStart)s")
+
+        // CRITICAL FIX: Grace Period for Late Joiners
+        // If event is already live (timeUntilStart <= 0), ensure we stay in lobby for at least 10s
+        let dwellTime = now.timeIntervalSince(joinedAtTimestamp)
+        let minDwellTime: TimeInterval = 10.0
+
+        if timeUntilStart <= 0 && dwellTime < minDwellTime {
+            let waitRemaining = minDwellTime - dwellTime
+            print("🕒 Lobby: Event is LIVE but honoring dwell time. Waiting \(Int(waitRemaining))s...")
+            
+            countdownTask?.cancel()
+            countdownTask = Task { [weak self] in
+                try? await Task.sleep(nanoseconds: UInt64(waitRemaining * 1_000_000_000))
+                guard let self = self else { return }
+                await MainActor.run {
+                    self.autoStartSystemEvent()
+                }
+            }
+            return
+        }
 
         if timeUntilStart > 0 {
             // We are early! Wait for the official start time.

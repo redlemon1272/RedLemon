@@ -1148,7 +1148,8 @@ class PlayerViewModel: ObservableObject {
                 finalSeason: finalSeason,
                 finalEpisode: finalEpisode,
                 isPublic: isPublic,
-                description: description
+                description: description,
+                createdAt: nil
             )
              } catch {
                 NSLog("❌ Creation failed or timed out: \(error)")
@@ -1278,7 +1279,8 @@ class PlayerViewModel: ObservableObject {
                              finalSeason: nil,
                              finalEpisode: nil,
                              isPublic: true,
-                             description: "System Event"
+                             description: "System Event",
+                             createdAt: nil
                          ) {
                              NSLog("✨ REVIVAL SUCCESS: Room \(roomId) restored!")
                              room = newRoom
@@ -1321,7 +1323,7 @@ class PlayerViewModel: ObservableObject {
                 ))
             }
 
-            let watchPartyRoom = WatchPartyRoom(
+            var watchPartyRoom = WatchPartyRoom(
                 id: room.id,
                 hostId: room.hostUserId.uuidString,
                 hostName: room.hostUsername,
@@ -1356,6 +1358,18 @@ class PlayerViewModel: ObservableObject {
                 selectedQuality: room.quality,
                 unlockedStreamURL: room.unlockedStreamUrl
             )
+
+            // CRITICAL FIX: For system events, ensure createdAt matches the scheduled startTime
+            // This prevents negative offsets in LobbyViewModel for late joiners.
+            if roomId.hasPrefix("event_"),
+               let config = try? await EventsConfigService.shared.fetchMovieEventsConfig(),
+               let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
+               liveEvent.mediaItem.id == (room.imdbId ?? "") {
+                
+                NSLog("🛡️ PlayerVM: Overriding Room createdAt (\(watchPartyRoom.createdAt)) with Scheduled Start (\(liveEvent.startTime))")
+                watchPartyRoom.createdAt = liveEvent.startTime
+                watchPartyRoom.lastActivity = liveEvent.startTime
+            }
 
             // Fetch dynamic lobby duration from config (Async)
             let eventsConfig = try? await EventsConfigService.shared.fetchMovieEventsConfig()
@@ -1547,7 +1561,8 @@ class PlayerViewModel: ObservableObject {
         finalSeason: Int?,
         finalEpisode: Int?,
         isPublic: Bool,
-        description: String?
+        description: String?,
+        createdAt: Date? = nil
     ) async throws -> SupabaseRoom {
         NSLog("Background: ⏳ Starting room creation (Unstructured Race)...")
 
@@ -1574,7 +1589,9 @@ class PlayerViewModel: ObservableObject {
                         isPublic: isPublic,
                         unlockedStreamUrl: nil,
                         description: description,
-                        playlist: nil
+                        playlist: nil,
+                        subtitleUrl: nil,
+                        createdAt: createdAt
                     )
                     NSLog("Background: ✅ createRoom task finished")
                     continuationWrapper.resume(returning: r)

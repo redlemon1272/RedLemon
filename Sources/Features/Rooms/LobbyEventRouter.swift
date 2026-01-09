@@ -190,6 +190,15 @@ class LobbyEventRouter: ObservableObject {
         guard let viewModel = viewModel else { return }
 
         if !viewModel.isHost {
+            // CRITICAL FIX: Ignore start signals for system events
+            // Events are driven by wall-clock time (autoStartSystemEvent() in VM)
+            // Receiving a LOBBY_START_COUNTDOWN for an event is usually a race condition 
+            // from a "Virtual Host" or a bug, and it yanks users into player prematurely.
+            if viewModel.room.type == .event {
+                NSLog("🛡️ Guest: Ignoring LOBBY_START_COUNTDOWN for system event. Relying on local sync.")
+                return
+            }
+
             NSLog("🎬 Guest: Received LOBBY_START_COUNTDOWN signal")
             viewModel.isStarting = true
             // viewModel.transitionState.isStarting = true // Access control issue likely, check if needed

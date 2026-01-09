@@ -427,7 +427,8 @@ struct EventsView: View {
                     episode: nil,
                     isPublic: true,
                     unlockedStreamUrl: initialUnlockedUrl,
-                    subtitleUrl: initialSubtitleUrl
+                    subtitleUrl: initialSubtitleUrl,
+                    createdAt: event.startTime
                 )
                 // Join the room we just created
                 try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)

@@ -59,7 +59,8 @@ protocol RoomManager {
         unlockedStreamUrl: String?,
         description: String?,
         playlist: [PlaylistItem]?,
-        subtitleUrl: String?
+        subtitleUrl: String?,
+        createdAt: Date?
     ) async throws -> SupabaseRoom
 
     func joinRoom(roomId: String, userId: UUID, isHost: Bool) async throws
@@ -746,7 +747,8 @@ class SupabaseClient: RoomManager, UserManager {
         unlockedStreamUrl: String? = nil,
         description: String? = nil,
         playlist: [PlaylistItem]? = nil,
-        subtitleUrl: String? = nil
+        subtitleUrl: String? = nil,
+        createdAt: Date? = nil
     ) async throws -> SupabaseRoom {
         NSLog("🎬 SupabaseClient: createRoom called for id: \(id) - ENTRY")
         var roomData: [String: Any] = [
@@ -755,8 +757,12 @@ class SupabaseClient: RoomManager, UserManager {
             "host_user_id": hostUserId.uuidString,
             "host_username": hostUsername,
             "is_public": isPublic,
-            "last_activity": ISO8601DateFormatter().string(from: Date())
+            "last_activity": SupabaseClient.isoFormatter.string(from: createdAt ?? Date())
         ]
+
+        if let createdAt = createdAt {
+            roomData["created_at"] = SupabaseClient.isoFormatter.string(from: createdAt)
+        }
 
         if let description = description { roomData["description"] = description }
         if let streamHash = streamHash { roomData["stream_hash"] = streamHash }

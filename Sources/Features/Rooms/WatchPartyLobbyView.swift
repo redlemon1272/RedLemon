@@ -725,21 +725,47 @@ struct WatchPartyLobbyView: View {
     
                                     VStack(spacing: 0) {
                                         if showEmojiPicker {
-                                            // Emoji picker
-                                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 8) {
-                                                ForEach(emojis, id: \.self) { emoji in
+                                            // Emoji picker with close button
+                                            VStack(spacing: 8) {
+                                                // Header with Close Button
+                                                HStack {
+                                                    Text("Emojis")
+                                                        .font(.caption)
+                                                        .foregroundColor(.white.opacity(0.6))
+                                                    Spacer()
                                                     Button(action: {
-                                                        viewModel.chatInput += emoji
-                                                        showEmojiPicker = false
+                                                        withAnimation { showEmojiPicker = false }
                                                     }) {
-                                                        Text(emoji)
+                                                        Image(systemName: "xmark.circle.fill")
+                                                            .font(.system(size: 20))
+                                                            .foregroundColor(.white.opacity(0.6))
                                                     }
-                                                    .buttonStyle(PlainButtonStyle())
+                                                    .buttonStyle(.plain)
+                                                }
+                                                .padding(.horizontal, 4)
+
+                                                LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 8) {
+                                                    ForEach(emojis, id: \.self) { emoji in
+                                                        Button(action: {
+                                                            viewModel.chatInput += emoji
+                                                        }) {
+                                                            Text(emoji)
+                                                                .font(.system(size: 24))
+                                                                .frame(width: 40, height: 40)
+                                                                .background(Color.white.opacity(0.1))
+                                                                .cornerRadius(8)
+                                                        }
+                                                        .buttonStyle(.plain)
+                                                    }
                                                 }
                                             }
-                                            .padding(8)
-                                            .background(Color.white.opacity(0.1))
-                                            .cornerRadius(8)
+                                            .padding(12)
+                                            .background(Color.black.opacity(0.9))
+                                            .cornerRadius(12)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                                            )
                                         }
     
                                         HStack {

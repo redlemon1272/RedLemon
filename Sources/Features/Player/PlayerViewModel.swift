@@ -1361,70 +1361,65 @@ class PlayerViewModel: ObservableObject {
             let eventsConfig = try? await EventsConfigService.shared.fetchMovieEventsConfig()
 
             await MainActor.run {
-                if room.isPlaying || roomId.hasPrefix("event_") {
-                    NSLog("🎬 Room is playing (or is Event) - joining playback")
+                var shouldJoinPlayback = false
+                
+                // 1. Determine Mode based on Room Type and Schedule
+                if roomId.hasPrefix("event_") {
+                    // Event Room: Check Global Schedule
+                     let rawId = roomId.replacingOccurrences(of: "event_", with: "")
+                     
+                     if let config = eventsConfig,
+                        let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
+                        liveEvent.mediaItem.id == rawId {
+                         // Matched current live event
+                         shouldJoinPlayback = true
+                         NSLog("✅ Event Join: \(rawId) is LIVE according to schedule. Joining Playback.")
+                     } else {
+                         // Future/Past or No Config
+                         shouldJoinPlayback = false
+                         NSLog("ℹ️ Event Join: Joining Lobby (Not currently live)")
+                     }
+                } else {
+                    // User Room: Trust DB State
+                    shouldJoinPlayback = room.isPlaying
+                }
+
+                // 2. Execute Mode
+                if shouldJoinPlayback {
+                    NSLog("🎬 Room is playing (or Live Event) - joining playback")
                     self.currentRoomId = roomId
                     self.currentWatchPartyRoom = watchPartyRoom
                     self.isWatchPartyHost = (room.hostUserId == appState.currentUserId)
                     self.currentWatchMode = .watchParty
 
-                    // NEW: Handle Event Rooms specifically
+                    // Handle Event Specifics
                     if roomId.hasPrefix("event_") {
                         self.isEventPlayback = true
-                        // Extract ID from roomId (event_tt12345) or use imdbId if available
                         let rawId = roomId.replacingOccurrences(of: "event_", with: "")
                         self.currentEventId = rawId
-
-                        // Set start time and resume position based on creation time (Schedule start)
-                        self.eventStartTime = room.createdAt // Crucial for MPVPlayerView sync
-
-                        let now = TimeService.shared.now
-                        var position: Double = 0
-                        let buffer = Double(eventsConfig?.bufferBetweenMoviesSeconds ?? 600)
-
-                        // CRITICAL: Use authoritative deterministic schedule if possible to avoid "Late Room Creation" drift.
-                        // If we rely on room.createdAt, we inherit the delay of the first user who joined.
-                        // CRITICAL: Use authoritative deterministic schedule if possible to avoid "Late Room Creation" drift.
-                        // 1. Try "Global Live" event first
+                        
+                        // Recalculate start time for sync
                         if let config = eventsConfig,
                            let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
                            liveEvent.mediaItem.id == self.currentEventId {
-
-                            let slotPosition = now.timeIntervalSince(liveEvent.startTime)
-                            position = max(0, slotPosition)
-                            self.eventStartTime = liveEvent.startTime
-
-                            NSLog("✅ Using Global Live Schedule! Start: \(liveEvent.startTime), Pos: \(position)")
-
+                                self.eventStartTime = liveEvent.startTime
+                                let position = max(0, TimeService.shared.now.timeIntervalSince(liveEvent.startTime))
+                                self.resumeFromTimestamp = position
+                        } else {
+                            // Fallback (unlikely given check above)
+                            self.eventStartTime = room.createdAt
+                            self.resumeFromTimestamp = max(0, TimeService.shared.now.timeIntervalSince(room.createdAt) - Double(eventsConfig?.bufferBetweenMoviesSeconds ?? 600))
                         }
-                        // 2. Try matching ANY scheduled event (e.g. if we are joining a friend in a previous/overlapping slot)
-                        else if let scheduledEvent = appState.eventsSchedule.first(where: { $0.mediaItem.id == self.currentEventId }) {
-                             let slotPosition = now.timeIntervalSince(scheduledEvent.startTime)
-                             position = max(0, slotPosition)
-                             self.eventStartTime = scheduledEvent.startTime
-
-                             NSLog("✅ Using Specific Schedule Item! Start: \(scheduledEvent.startTime), Pos: \(position)")
-                        }
-                        else {
-                            // 3. Fallback: Trust Room DB Position if available (Sync to Host)
-                            if room.playbackPosition > 0 {
-                                position = Double(room.playbackPosition)
-                                NSLog("⚠️ Event Schedule Mismatch - Using Room DB Position: \(position)s")
-                            } else {
-                                // 4. Last resort: Room Creation Time (High risk of staleness for persistent rooms)
-                                position = max(0, now.timeIntervalSince(room.createdAt) - buffer)
-                                NSLog("⚠️ Using Room Creation Time (Fallback). Start: \(room.createdAt), Pos: \(position)")
-                            }
-                        }
-
-                        self.resumeFromTimestamp = position
-
-                        NSLog("🎉 Detected Event Room join! StartTime: \(room.createdAt), Pos: \(position)s")
+                        NSLog("🎉 Detected Event Room join! StartTime: \(self.eventStartTime ?? Date())")
+                    } else {
+                        self.isEventPlayback = false
+                        self.resumeFromTimestamp = Double(room.playbackPosition)
                     }
 
                     if let imdbId = room.imdbId, !imdbId.isEmpty {
-                        self.selectedMediaItem = watchPartyRoom.mediaItem // Use constructed one
+                        self.selectedMediaItem = watchPartyRoom.mediaItem
 
+                        // Async metadata fetch (fire and forget visual update)
                         Task {
                             self.selectedMetadata = try? await self.metadataProvider.fetchMetadata(
                                 type: room.season != nil ? "series" : "movie",
@@ -1435,10 +1430,7 @@ class PlayerViewModel: ObservableObject {
                         self.selectedSeason = room.season
                         self.selectedEpisode = room.episode
                         self.selectedQuality = .fullHD
-                        if !roomId.hasPrefix("event_") {
-                            self.resumeFromTimestamp = Double(room.playbackPosition)
-                        }
-
+                        
                         // Play immediately
                         Task {
                             await self.playMedia(
@@ -1452,11 +1444,14 @@ class PlayerViewModel: ObservableObject {
                         }
                     }
                 } else {
+                    // Lobby Mode
                     NSLog("🚪 Room is in lobby")
                     self.currentRoomId = roomId
                     self.currentWatchPartyRoom = watchPartyRoom
                     self.isWatchPartyHost = (room.hostUserId == appState.currentUserId)
                     self.currentWatchMode = .watchParty
+                    self.isEventPlayback = roomId.hasPrefix("event_") // Can be in lobby of event
+                    self.currentEventId = roomId.hasPrefix("event_") ? roomId.replacingOccurrences(of: "event_", with: "") : nil
 
                     if let imdbId = room.imdbId, !imdbId.isEmpty {
                         self.selectedMediaItem = watchPartyRoom.mediaItem
@@ -1470,9 +1465,10 @@ class PlayerViewModel: ObservableObject {
 
                     appState.currentView = .watchPartyLobby
                 }
+                
                 appState.isLoadingRoom = false
-            }
 
+            }
         } catch {
             NSLog("❌ Failed to join room: \(error)")
             await MainActor.run { appState.isLoadingRoom = false }

@@ -114,7 +114,8 @@ class SocialService: ObservableObject {
             let initialMeta: [String: Any] = [
                 "username": username,
                 "status": "online",
-                "last_seen": SocialService.isoFormatter.string(from: Date())
+                "last_seen": SocialService.isoFormatter.string(from: Date()),
+                "is_premium": LicenseManager.shared.isPremium
             ]
             self.currentMetadata = initialMeta
             try await client.track(userId: userId, metadata: initialMeta)
@@ -134,7 +135,8 @@ class SocialService: ObservableObject {
         var metadata: [String: Any] = [
             "username": username,
             "status": status ?? "online",
-            "last_seen": SocialService.isoFormatter.string(from: Date())
+            "last_seen": SocialService.isoFormatter.string(from: Date()),
+            "is_premium": LicenseManager.shared.isPremium
         ]
         
         if let title = mediaTitle {
@@ -234,8 +236,17 @@ class SocialService: ObservableObject {
             username: newestMetadata["username"] as? String ?? "Unknown",
             currentlyWatching: nil,
             lastSeen: Date(),
-            customStatus: nil
+            customStatus: nil,
+            isPremium: newestMetadata["is_premium"] as? Bool
         )
+        
+        // SYNC: Update the persistent Friend object in self.friends
+        if let premium = activity.isPremium,
+           let index = friends.firstIndex(where: { $0.id == normalizedUserId }) {
+            if friends[index].isPremium != premium {
+                friends[index].isPremium = premium
+            }
+        }
         
         // Parse metadata
         // Check for specific watching status
@@ -417,9 +428,10 @@ class SocialService: ObservableObject {
     private func sendHeartbeat() async {
         guard isConnected, let client = presenceClient, let userId = currentUserId else { return }
         
-        // Refresh timestamp
+        // Refresh timestamp and premium status
         var metadata = currentMetadata
         metadata["last_seen"] = SocialService.isoFormatter.string(from: Date())
+        metadata["is_premium"] = LicenseManager.shared.isPremium
         currentMetadata = metadata
         
         do {

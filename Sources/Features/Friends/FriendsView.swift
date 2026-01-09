@@ -448,7 +448,7 @@ struct FriendRow: View {
                     Text(friend.username)
                         .font(.headline)
 
-                    if friend.isPremium == true {
+                    if activity?.isPremium == true || friend.isPremium == true {
                         Text("👑")
                             .font(.system(size: 12))
                             .help("Premium Host")

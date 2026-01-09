@@ -2364,7 +2364,7 @@ extension SupabaseClient {
         // 3. Fetch profiles for these IDs from 'users' table
         let idsString = friendIds.map { $0.uuidString }.joined(separator: ",")
 
-        let usersPath = "/users?id=in.(\(idsString))"
+        let usersPath = "/users?id=in.(\(idsString))&select=id,username,display_name,avatar_url,created_at,last_seen,is_admin,is_premium,subscription_expires_at"
         let usersData = try await makeRequest(path: usersPath, method: "GET")
 
         return try jsonDecoder.decode([SupabaseUser].self, from: usersData)

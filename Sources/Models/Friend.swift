@@ -58,6 +58,7 @@ struct FriendActivity: Identifiable, Codable {
     // If currentlyWatching is set, that takes precedence usually.
     // If currentlyWatching is nil, this string is shown.
     var customStatus: String? = nil
+    var isPremium: Bool? = nil
     
     struct WatchingInfo: Codable, Equatable {
         let mediaTitle: String

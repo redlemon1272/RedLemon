@@ -43,6 +43,7 @@
 - **Mechanism**: Uses `actor` for concurrency.
 - **Fragility**: Initial connection callbacks have race conditions.
 - **Drift Logic**: Hardcoded thresholds (50ms, 500ms) for Seek vs. Rate Shift.
+- **Rule (Message Preservation)**: When `handleSyncMessage` re-creates a `SyncMessage` for latency compensation, it **MUST** copy every single property (including metadata like `isPremium` or stream info like `infoHash`). Failing to do so causes "Silent Projection Failures" where data is broadcasted but vanishes on the receiving end.
 
 ### 6. SwiftUI Compiler Timeouts
 - **Symptom**: `The compiler is unable to type-check this expression in reasonable time`.
@@ -68,6 +69,10 @@
 - **Problem**: Features working in development (hot reload) fail in production (app restart) because initialization code is missing from the Auto-Login path.
 - **Example**: `SocialService.connect()` was called in `SignUp` but forgotten in `loadStoredUser`.
 - **Rule**: Critical service connections MUST be called in ALL authentication paths: (1) New Account, (2) Manual Login, (3) Auto-Login/Restore.
+
+### 11. Safe Logging (`NSLog` Vulnerabilities)
+- **Problem**: Passing string-interpolated URLs or JSON directly into `NSLog` (e.g., `NSLog("URL: \(url)")`) causes crashes if the string contains a `%` character (standard in encoded URLs).
+- **Rule**: ALWAYS use the specifier format: `NSLog("%@", "Message: \(url)")`.
 
 ## 🏗️ Architecture Map
 

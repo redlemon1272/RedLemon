@@ -285,7 +285,12 @@ actor RealtimeChannelManager: RealtimeService {
             isPlaying: message.isPlaying,
             senderId: message.senderId,
             chatText: message.chatText,
-            chatUsername: message.chatUsername
+            chatUsername: message.chatUsername,
+            infoHash: message.infoHash,
+            fileIdx: message.fileIdx,
+            quality: message.quality,
+            unlockedURL: message.unlockedURL,
+            isPremium: message.isPremium
         )
 
         // Store last remote update time

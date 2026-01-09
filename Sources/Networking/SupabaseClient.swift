@@ -229,7 +229,14 @@ class SupabaseClient: RoomManager, UserManager {
 
         var bodyData: Data? = nil
         if let body = body {
-            bodyData = try JSONSerialization.data(withJSONObject: body) // Default formatting
+            // CRITICAL FIX: Use deterministic JSON ordering to ensure signature matches across platforms.
+            // .sortedKeys is essential for cryptographic verification.
+            // .withoutEscapingSlashes prevents URL escaping differences.
+            var options: JSONSerialization.WritingOptions = [.sortedKeys]
+            if #available(iOS 13.0, macOS 10.15, *) {
+                options.insert(.withoutEscapingSlashes)
+            }
+            bodyData = try JSONSerialization.data(withJSONObject: body, options: options)
             request.httpBody = bodyData
         }
         
@@ -759,7 +766,7 @@ class SupabaseClient: RoomManager, UserManager {
         var roomData: [String: Any] = [
             "id": id,
             "name": name,
-            "host_user_id": hostUserId.uuidString,
+            "host_user_id": hostUserId.uuidString.lowercased(),
             "host_username": hostUsername,
             "is_public": isPublic,
             "last_activity": SupabaseClient.isoFormatter.string(from: createdAt ?? Date())
@@ -893,7 +900,7 @@ class SupabaseClient: RoomManager, UserManager {
             method: "POST",
             body: [
                 "p_room_id": roomId,
-                "p_user_id": userId.uuidString
+                "p_user_id": userId.uuidString.lowercased()
             ],
             // 🔐 SECURE: Sign request to prevent IDOR/Spoofing
             sign: true
@@ -1221,7 +1228,7 @@ class SupabaseClient: RoomManager, UserManager {
             _ = try await makeRequest(
                 path: "/rpc/delete_admin_log",
                 method: "POST",
-                body: ["p_log_id": id.uuidString],
+                body: ["p_log_id": id.uuidString.lowercased()],
                 sign: true
             )
             print("🗑️ Deleted app log: \(id)")
@@ -2632,7 +2639,12 @@ class EdgeFunctionsAPI {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         if let body = options?.body {
-            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+            // CRITICAL: Use deterministic JSON for potential future signature/hash verification
+            var options: JSONSerialization.WritingOptions = [.sortedKeys]
+            if #available(iOS 13.0, macOS 10.15, *) {
+                options.insert(.withoutEscapingSlashes)
+            }
+            request.httpBody = try JSONSerialization.data(withJSONObject: body, options: options)
         }
 
         let (data, response) = try await URLSession.shared.data(for: request)

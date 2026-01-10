@@ -29,7 +29,7 @@ struct WatchPartyLobbyView: View {
         case chat
         case friends
     }
-    
+
     private var totalUnreadCount: Int {
         socialService.unreadCounts.values.reduce(0, +)
     }
@@ -56,15 +56,15 @@ struct WatchPartyLobbyView: View {
         .onAppear {
             viewModel.appState = appState  // Set weak reference
             viewModel.connect()
-            
+
             // Broadcast "In Lobby" status
             Task {
                 let movieName = room.mediaItem?.name ?? "Event"
                 await SocialService.shared.updateWatchingStatus(
-                    mediaTitle: movieName, 
-                    mediaType: room.mediaItem?.type, 
-                    imdbId: room.mediaItem?.id, 
-                    roomId: room.id, 
+                    mediaTitle: movieName,
+                    mediaType: room.mediaItem?.type,
+                    imdbId: room.mediaItem?.id,
+                    roomId: room.id,
                     status: "In Lobby: \(movieName)"
                 )
             }
@@ -285,7 +285,7 @@ struct WatchPartyLobbyView: View {
                                             canAddFriend: participant.id != (appState.currentUserId?.uuidString.lowercased() ?? "") && !socialService.friends.contains(where: { $0.id == participant.id }),
                                             onKick: { viewModel.kickParticipant(participant) },
                                             onBlock: { viewModel.blockParticipant(participant) },
-                                            onMute: { 
+                                            onMute: {
                                                 // Dispatch async to avoid Menu update conflicts during view rebuild
                                                 DispatchQueue.main.async {
                                                     viewModel.toggleMute(participantId: participant.id)
@@ -370,7 +370,7 @@ struct WatchPartyLobbyView: View {
                     HStack(spacing: 16) {
                         if let friend = selectedFriend {
                             // DM Header
-                            Button(action: { 
+                            Button(action: {
                                 withAnimation { selectedFriend = nil }
                             }) {
                                 Image(systemName: "chevron.left")
@@ -380,13 +380,13 @@ struct WatchPartyLobbyView: View {
                                     .clipShape(Circle())
                             }
                             .buttonStyle(.plain)
-                            
+
                             Text(friend.displayName)
                                 .font(.headline)
                                 .foregroundColor(.white)
-                            
+
                             Spacer()
-                            
+
                             // Online/Watching Status Indicator
                             if let activity = socialService.friendActivity[friend.id] {
                                 // Check for custom status first (e.g., "In Lobby")
@@ -417,7 +417,7 @@ struct WatchPartyLobbyView: View {
                                         Text("Chat")
                                     }
                                     .foregroundColor(sidebarTab == .chat ? .white : .white.opacity(0.6))
-                                    
+
                                     // Active Indicator
                                     Rectangle()
                                         .fill(sidebarTab == .chat ? Color.accentColor : Color.clear)
@@ -425,13 +425,13 @@ struct WatchPartyLobbyView: View {
                                 }
                             }
                             .buttonStyle(.plain)
-                            
+
                             Button(action: { sidebarTab = .friends }) {
                                 VStack(spacing: 4) {
                                     HStack(spacing: 4) {
                                         Image(systemName: "person.2.fill")
                                         Text("Friends")
-                                        
+
                                         if totalUnreadCount > 0 {
                                             Text("\(totalUnreadCount)")
                                                 .font(.system(size: 10, weight: .bold))
@@ -443,7 +443,7 @@ struct WatchPartyLobbyView: View {
                                         }
                                     }
                                     .foregroundColor(sidebarTab == .friends ? .white : .white.opacity(0.6))
-                                    
+
                                     // Active Indicator
                                     Rectangle()
                                         .fill(sidebarTab == .friends ? Color.accentColor : Color.clear)
@@ -451,7 +451,7 @@ struct WatchPartyLobbyView: View {
                                 }
                             }
                             .buttonStyle(.plain)
-                            
+
                             Spacer()
                         }
                     }
@@ -483,18 +483,18 @@ struct WatchPartyLobbyView: View {
                                             if (u1 > 0) != (u2 > 0) {
                                                 return u1 > 0
                                             }
-                                            
+
                                             // Priority 2: Online Status
                                             let online1 = socialService.onlineUserIds.contains(f1.id)
                                             let online2 = socialService.onlineUserIds.contains(f2.id)
                                             if online1 != online2 {
                                                 return online1
                                             }
-                                            
+
                                             // Priority 3: Alphabetical
                                             return f1.displayName < f2.displayName
                                         }
-                                        
+
                                     ForEach(sortedFriends) { friend in
                                             Button(action: {
                                                 withAnimation { selectedFriend = friend }
@@ -510,7 +510,7 @@ struct WatchPartyLobbyView: View {
                                                                     .font(.caption.bold())
                                                                     .foregroundColor(.white)
                                                             )
-                                                        
+
                                                         if let count = socialService.unreadCounts[friend.id], count > 0 {
                                                             Circle()
                                                                 .fill(Color.red)
@@ -519,12 +519,12 @@ struct WatchPartyLobbyView: View {
                                                                 .offset(x: 2, y: -2)
                                                         }
                                                     }
-                                                    
+
                                                     VStack(alignment: .leading) {
                                                         Text(friend.displayName)
                                                             .foregroundColor(.white)
                                                             .font(.callout)
-                                                        
+
                                                         // Status (Check custom status first)
                                                         if let activity = socialService.friendActivity[friend.id] {
                                                             if let status = activity.customStatus, !status.isEmpty, status != "online" {
@@ -554,9 +554,9 @@ struct WatchPartyLobbyView: View {
                                                                 .foregroundColor(.gray)
                                                         }
                                                     }
-                                                    
+
                                                     Spacer()
-                                                    
+
                                                     // Invite Button (Only show if room exists)
                                                     if isHost || room.type == .userRoom {
                                                         Button(action: {
@@ -575,7 +575,7 @@ struct WatchPartyLobbyView: View {
                                                         }
                                                         .buttonStyle(.plain)
                                                     }
-                                                    
+
                                                     Image(systemName: "chevron.right")
                                                         .foregroundColor(.white.opacity(0.3))
                                                         .font(.caption)
@@ -605,13 +605,13 @@ struct WatchPartyLobbyView: View {
                                                     case .chat(let chatMsg):
                                                         // 1. FILTER: Active Block Check
                                                         // If socialService says blocked, do not show AT ALL
-                                                        if let senderId = chatMsg.senderId, 
+                                                        if let senderId = chatMsg.senderId,
                                                            socialService.blockedUserIds.contains(senderId) {
                                                             EmptyView()
                                                         } else {
                                                             // 2. MUTE CHECK: Local Mute from Lobby
                                                             let isMuted = chatMsg.senderId.map { viewModel.mutedUserIds.contains($0) } ?? false
-                                                            
+
                                                             VStack(alignment: .leading, spacing: 4) {
                                                                 HStack {
                                                                     // Username / Menu
@@ -620,7 +620,7 @@ struct WatchPartyLobbyView: View {
                                                                             .font(.caption.weight(.semibold))
                                                                             .foregroundColor(.blue)
 
-                                                                        if let senderId = chatMsg.senderId, senderId == viewModel.room.hostId {
+                                                                        if let senderId = chatMsg.senderId, senderId.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame {
                                                                             Text("Host")
                                                                                 .font(.caption2.weight(.bold))
                                                                                 .foregroundColor(.accentColor)
@@ -667,7 +667,7 @@ struct WatchPartyLobbyView: View {
                                                                                     Label("Mute User", systemImage: "speaker.slash.fill")
                                                                                 }
                                                                             }
-                                                                            
+
                                                                             // Kick (Host Only)
                                                                             if isHost {
                                                                                 Divider()
@@ -677,7 +677,7 @@ struct WatchPartyLobbyView: View {
                                                                                     Label("Kick User", systemImage: "xmark.circle")
                                                                                 }
                                                                             }
-                                                                            
+
                                                                             // Block (Always available for strangers)
                                                                             Button(role: .destructive) {
                                                                                 viewModel.blockUser(senderId, username: chatMsg.username)
@@ -696,13 +696,13 @@ struct WatchPartyLobbyView: View {
                                                                         .menuStyle(.borderlessButton)
                                                                         .menuIndicator(.hidden)
                                                                     }
-                                                                    
+
                                                                     Spacer()
                                                                     Text(chatMsg.timestamp, style: .time)
                                                                         .font(.caption2)
                                                                         .foregroundColor(.white.opacity(0.4))
                                                                 }
-                                                                
+
                                                                 if isMuted {
                                                                     Text("(Message hidden - User muted)")
                                                                         .font(.body.italic())
@@ -720,7 +720,7 @@ struct WatchPartyLobbyView: View {
                                                         }
                                                     }
                                                 }
-                                                
+
                                                 // Invisible view to anchor the scroll
                                                 Color.clear
                                                     .frame(height: 1)
@@ -740,7 +740,7 @@ struct WatchPartyLobbyView: View {
                                             }
                                         }
                                     }
-    
+
                                     VStack(spacing: 0) {
                                         if showEmojiPicker {
                                             // Emoji picker with close button
@@ -785,7 +785,7 @@ struct WatchPartyLobbyView: View {
                                                     .stroke(Color.white.opacity(0.15), lineWidth: 1)
                                             )
                                         }
-    
+
                                         HStack {
                                             Button(action: {
                                                 showEmojiPicker.toggle()
@@ -794,7 +794,7 @@ struct WatchPartyLobbyView: View {
                                                 .foregroundColor(.white.opacity(0.7))
                                             }
                                             .buttonStyle(PlainButtonStyle())
-    
+
                                             TextField("Send a message...", text: $viewModel.chatInput)
                                                 .textFieldStyle(PlainTextFieldStyle())
                                                 .padding(8)
@@ -802,7 +802,7 @@ struct WatchPartyLobbyView: View {
                                                 .cornerRadius(8)
                                                 .foregroundColor(.white)
                                                 .onSubmit(sendMessage)
-    
+
                                             Button(action: sendMessage) {
                                                 Image(systemName: "paperplane.fill")
                                                     .foregroundColor(.accentColor)
@@ -821,7 +821,7 @@ struct WatchPartyLobbyView: View {
                 VStack(spacing: 12) {
                     if isHost {
 
-                        
+
                             // Host controls
                         Button(action: {
                             startMovie()
@@ -991,7 +991,7 @@ extension WatchPartyLobbyView {
 struct ParticipantRow: View {
     @EnvironmentObject var appState: AppState
     @ObservedObject private var socialService = SocialService.shared
-    
+
     let participant: Participant
     let canKick: Bool
     let canBlock: Bool
@@ -1040,7 +1040,7 @@ struct ParticipantRow: View {
             // Check if this participant is the current user or a friend
             let isCurrentUser = participant.id.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") == .orderedSame
             let isFriend = socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(participant.id) == .orderedSame })
-            
+
             // Only show menu if it's a stranger AND (we can add friend OR mute OR kick OR block)
             if !isCurrentUser && !isFriend && (canAddFriend || canKick || canBlock) {
                 Menu {
@@ -1049,19 +1049,19 @@ struct ParticipantRow: View {
                             Label("Add Friend", systemImage: "person.badge.plus")
                         }
                     }
-                    
+
                     Button(action: onMute) {
                         Label(isMuted ? "Unmute" : "Mute", systemImage: isMuted ? "speaker.wave.2" : "speaker.slash")
                     }
 
                     if canKick {
                         Divider()
-                        
+
                         Button(role: .destructive, action: onKick) {
                             Label("Kick Participant", systemImage: "xmark.circle")
                         }
                     }
-                    
+
                     if canBlock {
                         Button(role: .destructive, action: onBlock) {
                             Label("Block User", systemImage: "slash.circle")

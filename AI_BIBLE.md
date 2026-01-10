@@ -99,6 +99,11 @@
 - **Symptom**: "Ghost behavior" where a fresh video starts at a specific timestamp from a previous session.
 - **Rule**: "Consume" transient state immediately. Use it, then set it to `nil` in the SAME execution block. Never assume the next view will clear it.
 
+### 16. The "Revival" Logic Trap (Zombie Events)
+- **Problem**: Code that attempts to "heal" missing data (e.g., `PlayerViewModel` re-creating a missing room because the ID exists in a link) can bypass expiration rules.
+- **Example**: Users joining `event_123` after it ended. The room was deleted (correctly), but the client "revived" it because it thought it was helping a user join a valid room.
+- **Rule**: NEVER auto-create "System" resources (Events) based solely on client-side IDs. Always validate against the *current* `EventsConfig` liveness before "reviving" a room.
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |
@@ -566,7 +571,8 @@ Tracks when users create watch party rooms to enforce limits.
 ## Key Files
 | Purpose | File |
 | :--- | :--- |
-| Video Playback | `MPVPlayerViewModel.swift` (God Class) |
+| Playback Core | `MPVPlayerViewModel.swift` (The God Class: Video, Subs, Sync) |
+| Room Logic | `PlayerViewModel.swift` (Lobby, Navigation, Room Creation) |
 | Stream Resolution | `StreamResolver.swift` |
 | Subtitles | `MPVWrapper.swift`, `SubtitleService.swift` |
 | Watch Parties | `RealtimeChannelManager.swift`, `LobbyViewModel.swift` |

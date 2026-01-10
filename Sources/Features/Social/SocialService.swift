@@ -299,7 +299,8 @@ class SocialService: ObservableObject {
             } else {
                 // Room exists - check if it has a host by checking participants
                 let participants = try await SupabaseClient.shared.getRoomParticipants(roomId: roomId)
-                let hasHost = participants.contains { $0.userId.uuidString.lowercased() == room?.hostUserId.uuidString.lowercased() }
+                let targetHostId = room?.hostUserId?.uuidString.lowercased()
+                let hasHost = participants.contains { $0.userId.uuidString.lowercased() == targetHostId }
                 
                 if !hasHost {
                     print("👻 SocialService: Room \(roomId) has no active host - marking \(userId) as unjoinable")

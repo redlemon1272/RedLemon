@@ -389,12 +389,12 @@ class LobbyViewModel: ObservableObject {
                             } else {
                                 NSLog("⚠️ Lobby: System room missing, attempting to create: \(room.id)")
                                 do {
-                                    // Create the room using current user as host (technical requirement)
+                                    // Create the room with system host (nil userId)
                                     // but keeping system name/metadata
                                     let _ = try await self.dataService.createRoom(
                                         id: room.id,
                                         name: room.description ?? "Live Event",
-                                        hostUserId: userId,
+                                        hostUserId: nil,
                                         hostUsername: "RedLemon System",
                                         streamHash: room.selectedStreamHash,
                                         imdbId: room.mediaItem?.id,

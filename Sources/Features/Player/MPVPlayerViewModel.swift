@@ -2000,7 +2000,7 @@ extension MPVPlayerViewModel {
 
                         // Basic host participant (others will populate via Realtime)
                         let host = Participant(
-                            id: fetchedSupabaseRoom.hostUserId.uuidString.lowercased(),
+                            id: (fetchedSupabaseRoom.type == .event) ? "system" : (fetchedSupabaseRoom.hostUserId?.uuidString.lowercased() ?? "system"),
                             name: fetchedSupabaseRoom.hostUsername,
                             isHost: true,
                             isReady: true,
@@ -2010,7 +2010,7 @@ extension MPVPlayerViewModel {
 
                         let fetchedRoom = WatchPartyRoom(
                             id: fetchedSupabaseRoom.id,
-                            hostId: fetchedSupabaseRoom.hostUserId.uuidString,
+                            hostId: (fetchedSupabaseRoom.type == .event) ? "system" : (fetchedSupabaseRoom.hostUserId?.uuidString ?? "system"),
                             hostName: fetchedSupabaseRoom.hostUsername,
                             mediaItem: mediaItem,
                             season: fetchedSupabaseRoom.season,

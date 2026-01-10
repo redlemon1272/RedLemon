@@ -280,40 +280,50 @@ struct RoomListView: View {
         // Fetch actual participants from room_participants table first to verify Host presence
         var guests: [Participant] = []
         var host: Participant?
+        
+        // Handle System Host (Legacy or Explicit)
+        // Force "system" if it's an event, overriding any accidental user assignment in DB
+        let isPreExistingEvent = room.type == .event
+        let hostIdString = isPreExistingEvent ? "system" : (room.hostUserId?.uuidString.lowercased() ?? "system")
+        let isSystemHost = (hostIdString == "system")
 
         do {
             let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: room.id)
-
-            // ZOMBIE CHECK: Verify host is in the participant list
-            // ZOMBIE CHECK: Verify host is in the participant list
-            guard let hostData = roomParticipants.first(where: { $0.userId.uuidString == room.hostUserId.uuidString }) else {
-                print("👻 Room anomaly detected: \(room.id) (Host \(room.hostUsername) missing). Hiding from list but preserving.")
-                // SAFEGUARD: Disabled aggressive zombie cleanup to prevent accidental deletion of active rooms during network blips.
-                /*
-                Task {
-                    try? await SupabaseClient.shared.deleteRoom(roomId: room.id)
-                    print("🧹 Distributed Cleanup: Deleted zombie room \(room.id)")
+            
+            if isSystemHost {
+                 // System Host is always "present" virtually
+                 host = Participant(
+                    id: "system",
+                    name: room.hostUsername,
+                    isHost: true,
+                    isReady: true,
+                    joinedAt: room.createdAt
+                )
+            } else {
+                // ZOMBIE CHECK: Verify host is in the participant list
+                guard let hostData = roomParticipants.first(where: { $0.userId.uuidString.lowercased() == hostIdString }) else {
+                    print("👻 Room anomaly detected: \(room.id) (Host \(room.hostUsername) missing). Hiding from list but preserving.")
+                    return nil
                 }
-                */
-                return nil
-            }
 
-            // Create host participant from REAL data
-            host = Participant(
-                id: room.hostUserId.uuidString,
-                name: room.hostUsername,
-                isHost: true,
-                isReady: true,
-                joinedAt: hostData.joinedAt
-            )
+                // Create host participant from REAL data
+                host = Participant(
+                    id: hostIdString,
+                    name: room.hostUsername,
+                    isHost: true,
+                    isReady: true,
+                    joinedAt: hostData.joinedAt
+                )
+            }
 
             // Convert guests
             for participant in roomParticipants {
-                if participant.userId.uuidString == room.hostUserId.uuidString { continue }
+                let pId = participant.userId.uuidString.lowercased()
+                if pId == hostIdString { continue }
 
                 if let user = try? await SupabaseClient.shared.getUserById(userId: participant.userId) {
                     let guest = Participant(
-                        id: participant.userId.uuidString,
+                        id: pId,
                         name: user.username,
                         isHost: participant.isHost,
                         isReady: false,
@@ -322,7 +332,7 @@ struct RoomListView: View {
                     guests.append(guest)
                 } else {
                     let guest = Participant(
-                        id: participant.userId.uuidString,
+                        id: pId,
                         name: "Unknown User",
                         isHost: participant.isHost,
                         isReady: false,

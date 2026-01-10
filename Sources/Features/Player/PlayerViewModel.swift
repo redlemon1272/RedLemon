@@ -1170,7 +1170,7 @@ class PlayerViewModel: ObservableObject {
 
             let watchPartyRoom = WatchPartyRoom(
                 id: room.id,
-                hostId: room.hostUserId.uuidString,
+                hostId: room.hostUserId?.uuidString ?? userId.uuidString.lowercased(),
                 hostName: room.hostUsername,
                 mediaItem: mediaItem,
                 season: finalSeason,
@@ -1325,7 +1325,7 @@ class PlayerViewModel: ObservableObject {
 
             var watchPartyRoom = WatchPartyRoom(
                 id: room.id,
-                hostId: room.hostUserId.uuidString,
+                hostId: (room.type == .event) ? "system" : (room.hostUserId?.uuidString ?? "system"),
                 hostName: room.hostUsername,
                 mediaItem: MediaItem(
                     id: room.imdbId ?? "",

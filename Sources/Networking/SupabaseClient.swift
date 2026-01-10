@@ -47,7 +47,7 @@ protocol RoomManager {
     func createRoom(
         id: String,
         name: String,
-        hostUserId: UUID,
+        hostUserId: UUID?,
         hostUsername: String,
         streamHash: String?,
         imdbId: String?,
@@ -754,7 +754,7 @@ class SupabaseClient: RoomManager, UserManager {
     func createRoom(
         id: String,
         name: String,
-        hostUserId: UUID,
+        hostUserId: UUID?,
         hostUsername: String,
         streamHash: String? = nil,
         imdbId: String? = nil,
@@ -773,11 +773,16 @@ class SupabaseClient: RoomManager, UserManager {
         var roomData: [String: Any] = [
             "id": id,
             "name": name,
-            "host_user_id": hostUserId.uuidString.lowercased(),
             "host_username": hostUsername,
             "is_public": isPublic,
             "last_activity": SupabaseClient.isoFormatter.string(from: createdAt ?? Date())
         ]
+        
+        if let hostId = hostUserId {
+            roomData["host_user_id"] = hostId.uuidString.lowercased()
+        } else {
+             roomData["host_user_id"] = NSNull()
+        }
 
         if let createdAt = createdAt {
             roomData["created_at"] = SupabaseClient.isoFormatter.string(from: createdAt)
@@ -2163,7 +2168,7 @@ struct SupabaseRoom: Codable {
     }
 
     let name: String
-    let hostUserId: UUID
+    let hostUserId: UUID?
     let hostUsername: String
     let streamHash: String?
     let imdbId: String?

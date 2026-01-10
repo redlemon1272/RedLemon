@@ -12,7 +12,7 @@ protocol LobbyDataService {
     func createRoom(
         id: String,
         name: String,
-        hostUserId: UUID,
+        hostUserId: UUID?,
         hostUsername: String,
         streamHash: String?,
         imdbId: String?,
@@ -66,7 +66,7 @@ extension LobbyDataService {
     func createRoom(
         id: String,
         name: String,
-        hostUserId: UUID,
+        hostUserId: UUID?,
         hostUsername: String,
         streamHash: String? = nil,
         imdbId: String? = nil,

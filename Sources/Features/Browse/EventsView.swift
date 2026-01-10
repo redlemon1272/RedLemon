@@ -417,7 +417,7 @@ struct EventsView: View {
                 _ = try await SupabaseClient.shared.createRoom(
                     id: roomId,
                     name: event.mediaItem.name,
-                    hostUserId: userId, // First user becomes "host" for DB purposes
+                    hostUserId: nil, // System hosted, no user is host
                     hostUsername: "RedLemon Events",
                     streamHash: initialStreamHash,
                     imdbId: event.mediaItem.id,

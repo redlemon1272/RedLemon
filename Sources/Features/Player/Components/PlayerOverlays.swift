@@ -69,10 +69,11 @@ struct ExitButton: View {
 
         let isEvent = appState.player.isEventPlayback == true
         let isHost = viewModel.isWatchPartyHost
+        let isSoloPlayback = !viewModel.isInWatchParty && !isEvent
 
         Button(action: {
             Task {
-                if !isEvent && isHost {
+                if !isEvent && isHost && viewModel.isInWatchParty {
                      // Trigger synchronized return
                      viewModel.triggerReturnToLobby()
                 } else {
@@ -82,11 +83,10 @@ struct ExitButton: View {
             }
         }) {
             HStack(spacing: 6) {
-                Image(systemName: (!isEvent && isHost) ? "arrow.turn.up.left" : "arrow.left.circle.fill")
+                Image(systemName: (!isEvent && isHost && viewModel.isInWatchParty) ? "arrow.turn.up.left" : "arrow.left.circle.fill")
                     .font(.system(size: 14))
-                // Note: User requested "Back to Lobby" for hosts, "Exit Room" for guests.
-                // Events logic remains "Exit Room" (or Event)
-                Text(isEvent ? "Exit Event" : (isHost ? "Back to Lobby" : "Exit Room"))
+                // Solo playback = "Exit", Events = "Exit Event", Room Host = "Back to Lobby", Room Guest = "Exit Room"
+                Text(isSoloPlayback ? "Exit" : (isEvent ? "Exit Event" : (isHost ? "Back to Lobby" : "Exit Room")))
                     .font(.system(size: 13, weight: .medium))
             }
             .foregroundColor(.white)

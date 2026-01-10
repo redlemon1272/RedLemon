@@ -382,7 +382,7 @@ class MPVPlayerViewModel: ObservableObject {
              // Not an event, and no start time -> Standard playback (handled elsewhere) or Watch Party sync will take over
              return
         }
-        
+
         // Consume the timestamp request now that we are successfully launching the event
         // This prevents the timestamp from leaking to the NEXT video (e.g. if user exits event and plays solo)
         appState.player.resumeFromTimestamp = nil
@@ -1823,11 +1823,11 @@ class MPVPlayerViewModel: ObservableObject {
         // ✅ STEP 1: Clear watching status immediately
         if !returningToLobby {
             // FIX: Race Condition Check
-            // If the user has heavily transitioned to "In Lobby" (e.g. WatchPartyLobbyView loaded first), 
+            // If the user has heavily transitioned to "In Lobby" (e.g. WatchPartyLobbyView loaded first),
             // do NOT revert them to "Browsing" just because an old player instance is dying.
             let currentStatus = SocialService.shared.currentStatus
             let isInLobby = currentStatus?.hasPrefix("In Lobby") == true
-            
+
             if !isInLobby {
                 await SocialService.shared.updateWatchingStatus(
                     mediaTitle: nil,
@@ -2448,6 +2448,8 @@ extension MPVPlayerViewModel {
     private func startPlaybackHeartbeat() {
         playbackHeartbeatTask?.cancel()
         playbackHeartbeatTask = Task { [weak self] in
+            // OPTIMIZATION: Initial delay to stagger from WebSocket heartbeat (30s)
+            try? await Task.sleep(nanoseconds: 10_000_000_000) // 10s initial offset
             while !Task.isCancelled {
                 guard let self = self,
                       let roomId = self.currentRoomId,
@@ -2482,8 +2484,8 @@ extension MPVPlayerViewModel {
 
         NSLog("🔄 Starting chat polling for room: \(roomId)")
 
-        // Poll chat every 10 seconds (reduced from 2s to prevent buffering)
-        chatPollingTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
+        // OPTIMIZATION: Reduced from 10s to 15s - Realtime handles instant delivery
+        chatPollingTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             Task { @MainActor in
                 await self.pollChatMessages()
@@ -3295,7 +3297,7 @@ extension MPVPlayerViewModel {
             if self.isAnimatingChatToggle {
                 return
             }
-            
+
             // CRITICAL FIX: Persist playback state to DB every 10s (5 ticks * 2s)
             // This ensures late joiners see the correct "is_playing" status and bypass the lobby.
             self.persistenceTickCount += 1
@@ -3305,8 +3307,8 @@ extension MPVPlayerViewModel {
                     if let roomId = self.currentRoomId {
                         // Fire and forget db update
                          try? await SupabaseClient.shared.updateRoomPlayback(
-                            roomId: roomId, 
-                            position: Int(self.currentTime), 
+                            roomId: roomId,
+                            position: Int(self.currentTime),
                             isPlaying: self.isPlaying
                         )
                     }

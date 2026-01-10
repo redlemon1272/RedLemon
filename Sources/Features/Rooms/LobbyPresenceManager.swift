@@ -378,13 +378,13 @@ class LobbyPresenceManager: ObservableObject {
         // Start Heartbeat (Host only or everyone? Logic says check appState currentUserId)
         startHeartbeatLoop()
 
-        // Poll participants every 2 seconds
+        // OPTIMIZATION: Reduced from 2s to 5s - Realtime is primary, polling is fallback
         participantsPollingTask?.cancel()
         participantsPollingTask = Task { [weak self] in
             while !Task.isCancelled {
                 guard let self = self else { return }
                 await self.pollParticipants()
-                try? await Task.sleep(nanoseconds: 2_000_000_000)
+                try? await Task.sleep(nanoseconds: 5_000_000_000) // 5s (was 2s)
             }
         }
     }
@@ -416,8 +416,8 @@ class LobbyPresenceManager: ObservableObject {
                     }
                 }
 
-                // Wait 30 seconds
-                try? await Task.sleep(nanoseconds: 30_000_000_000)
+                // OPTIMIZATION: 35s (was 30s) to stagger from WebSocket heartbeat
+                try? await Task.sleep(nanoseconds: 35_000_000_000)
             }
         }
     }

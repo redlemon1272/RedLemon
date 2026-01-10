@@ -104,6 +104,14 @@
 - **Example**: Users joining `event_123` after it ended. The room was deleted (correctly), but the client "revived" it because it thought it was helping a user join a valid room.
 - **Rule**: NEVER auto-create "System" resources (Events) based solely on client-side IDs. Always validate against the *current* `EventsConfig` liveness before "reviving" a room.
 
+### 17. Black Box Service Diagnostics (The "Silent Failure" Trap)
+- **Problem**: Self-hosted binaries (like Zilean or Stremio Addons) can be "Running" (Exit Code 0, HTTP 200) but functionally dead due to missing dependencies or silent logic failures.
+- **Example**: Zilean ran perfectly but indexed 0 torrents because the `rank-torrent-name` Python library was missing from the system. It swallowed the exception until Debug logs were enabled.
+- **Rule**: Verify the **Data Pipeline**, not just the Process Status.
+    1.  **Persistence**: Redirect logs to a file (`> session.log 2>&1`). Stdout is useless if the session closes.
+    2.  **Dependencies**: Manually verify external requirements (Python libs, FFmpeg) exist in the *execution environment* (`/root`, not just `/usr`).
+    3.  **Output**: The only proof of life is **Database Growth** (`SELECT count(*)`), not log activity.
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |
@@ -254,12 +262,32 @@ docker compose logs -f --tail 100
 docker exec -it supabase-db psql -U postgres
 ```
 
+## Zilean Maintenance (Native Service)
+- **Start/Restart**: `screen -dmS zilean /root/start_zilean.sh`
+- **Logs**: `tail -f /root/zilean_bin/zilean_session.log`
+- **Console**: `screen -r zilean` (Ctrl+A, D to detach)
+- **Database Check**: `./remote_exec.sh "PGPASSWORD=zilean psql -h localhost -p 5433 -U zilean -d zilean -c \"SELECT count(*) FROM \\\"Torrents\\\";\""`
+- **Janitor Logs**: `./remote_exec.sh "docker exec supabase-db psql -U postgres -d postgres -c \"SELECT * FROM system_job_logs ORDER BY created_at DESC LIMIT 5;\""`
+
+## Self-Hosting Service Checklist (Lessons Learned)
+0.  **Feasibility Check**: Is the source code public?
+    -   *Lesson*: **Torrentio is Closed Source/Proprietary** and cannot be self-hosted.
+    -   *Action*: Search for "open source alternative" (e.g., **Comet** or **MediaFusion** instead of Torrentio).
+1.  **Runtime Autonomy**: Native services (outside Docker) require manual dependency management.
+    -   *Lesson*: Zilean needed .NET 9.0 AND specific Python libraries (`rank-torrent-name`) installed system-wide.
+    -   *Action*: Check `.runtimeconfig.json` and `requirements.txt` immediately.
+2.  **Output Persistence**: Native binaries write to `stdout`, which vanishes in `screen`.
+    -   *Action*: Always modify start scripts to redirect: `> app.log 2>&1`.
+3.  **Data Verification**: Services can be "Healthy" (HTTP 200) but empty.
+    -   *Action*: Verify specific tables (`ParsedPages`, `Torrents`) to confirm *logic* execution.
+
 ## Daily Schedule (UTC)
 
 | Time | Job |
 |------|-----|
 | 9:00 AM | Database backup |
 | 9:10 AM | Payment sweep |
+| 9:20 AM | Zilean Maintenance (Janitor) |
 
 ## Database Migrations
 
@@ -601,6 +629,8 @@ Tracks when users create watch party rooms to enforce limits.
 | `friend_requests` | Pending friend requests |
 | `user_blocks` | Blocked users |
 | `events_config` | Live event schedule |
+| `system_job_logs` | Server maintenance/cron logs |
+
 
 ## Cron Jobs
 Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT jobname, schedule FROM cron.job;\""`

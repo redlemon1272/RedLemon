@@ -5,6 +5,8 @@ struct AdminServerView: View {
     @State private var dbMetrics: SystemMetrics?
     @State private var routerStatus: RouterStatus?
     @State private var lastBackup: BackupLog?
+    @State private var lastJanitor: SystemJobLog?
+    @State private var lastSweep: SystemJobLog?
     @State private var isLoading = false
     @State private var lastRefreshed: Date?
     
@@ -42,7 +44,8 @@ struct AdminServerView: View {
                     Label("Database (PostgreSQL)", systemImage: "cylinder.split.1x2.fill")
                         .font(.headline)
                     
-                    HStack(spacing: 16) {
+                    // Grid Layout for metrics
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 160), spacing: 16)], spacing: 16) {
                         if let metrics = dbMetrics {
                             StatusCard(
                                 title: "DB Size",
@@ -63,23 +66,62 @@ struct AdminServerView: View {
 
                         // Backup Status Card
                         if let backup = lastBackup {
-                            StatusCard(
-                                title: "Last Backup",
-                                value: backup.createdAt.formatted(.relative(presentation: .named)),
-                                icon: (backup.status == "verified" || backup.status == "success") ? "checkmark.shield.fill" : "clock.arrow.circlepath",
-                                color: (backup.status == "verified" || backup.status == "success") ? .green : .red
-                            )
-                            if backup.status == "verified" || backup.status == "success" {
-                                Text("✅ Verified Safe")
-                                    .font(.caption2)
-                                    .foregroundColor(.green)
-                            } else {
-                                Text("⚠️ Check Logs")
-                                    .font(.caption2)
-                                    .foregroundColor(.orange)
+                            VStack(alignment: .leading, spacing: 8) {
+                                HStack {
+                                    Image(systemName: (backup.status == "verified" || backup.status == "success") ? "checkmark.shield.fill" : "clock.arrow.circlepath")
+                                        .foregroundColor((backup.status == "verified" || backup.status == "success") ? .green : .red)
+                                    Text("Last Backup")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(backup.createdAt.formatted(.relative(presentation: .named)))
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                    
+                                    if backup.status == "verified" || backup.status == "success" {
+                                        Text("✅ Verified Safe")
+                                            .font(.caption2)
+                                            .foregroundColor(.green)
+                                    } else {
+                                        Text("⚠️ Check Logs")
+                                            .font(.caption2)
+                                            .foregroundColor(.orange)
+                                    }
+                                }
                             }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .background(Color(NSColor.controlBackgroundColor))
+                            .cornerRadius(12)
+                            .padding(4)
                         } else {
                             StatusCard(title: "Last Backup", value: "None", icon: "clock.arrow.circlepath", color: .gray)
+                        }
+
+                        // Payment Sweep Card
+                        if let sweep = lastSweep {
+                            StatusCard(
+                                title: "Payment Sweep",
+                                value: sweep.createdAt.formatted(.relative(presentation: .named)),
+                                icon: sweep.status == "success" ? "checkmark.circle.fill" : "xmark.octagon.fill",
+                                color: sweep.status == "success" ? .green : .red
+                            )
+                        } else {
+                            StatusCard(title: "Payment Sweep", value: "Pending", icon: "dollarsign.circle", color: .gray)
+                        }
+
+                        // Janitor Script Card
+                        if let janitor = lastJanitor {
+                            StatusCard(
+                                title: "Maintenance",
+                                value: janitor.createdAt.formatted(.relative(presentation: .named)),
+                                icon: janitor.status == "success" ? "broom.fill" : "exclamationmark.triangle.fill",
+                                color: janitor.status == "success" ? .green : .red
+                            )
+                        } else {
+                            StatusCard(title: "Maintenance", value: "Pending", icon: "broom", color: .gray)
                         }
                     }
                 }
@@ -190,18 +232,29 @@ struct AdminServerView: View {
             }
 
             // 3. Get Last Backup
-             do {
-                // We use a raw select query here since we don't have a specific RPC for it, 
-                // but strictly speaking we should move this to SupabaseClient if we want to be clean.
-                // For now, let's assume SupabaseClient exposes a helper or we use the generic client.
-                // Since I can't easily add a generic `from` method to the singleton without seeing it,
-                // I will use a new method in SupabaseClient or just `rpc` if I made one.
-                // I didn't make an RPC for backups.
-                // Let's assume there's a `getLatestBackupLog()` method I will add to SupabaseClient.
-                let log = try await SupabaseClient.shared.getLatestBackupLog()
-                lastBackup = log
+            do {
+                 // We use a raw select query here since we don't have a specific RPC for it, 
+                 // but strictly speaking we should move this to SupabaseClient if we want to be clean.
+                 // For now, let's assume SupabaseClient exposes a helper or we use the generic client.
+                 // Since I can't easily add a generic `from` method to the singleton without seeing it,
+                 // I will use a new method in SupabaseClient or just `rpc` if I made one.
+                 // I didn't make an RPC for backups.
+                 // Let's assume there's a `getLatestBackupLog()` method I will add to SupabaseClient.
+                 let log = try await SupabaseClient.shared.getLatestBackupLog()
+                 lastBackup = log
             } catch {
                  print("Backup Log Error: \(error)")
+            }
+
+            // 4. Get System Job Logs
+            do {
+                async let janitor = SupabaseClient.shared.getLatestSystemJobLog(jobName: "zilean_maintenance")
+                async let sweep = SupabaseClient.shared.getLatestSystemJobLog(jobName: "payment_sweep")
+                
+                lastJanitor = try await janitor
+                lastSweep = try await sweep
+            } catch {
+                print("System Logs Error: \(error)")
             }
             
             lastRefreshed = Date()

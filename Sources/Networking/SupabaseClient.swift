@@ -550,6 +550,22 @@ class SupabaseClient: RoomManager, UserManager {
         return logs.first
     }
 
+    /// Fetch latest system job log (e.g. payment_sweep, zilean_maintenance)
+    func getLatestSystemJobLog(jobName: String) async throws -> SystemJobLog? {
+        let data = try await makeRequest(
+            path: "/system_job_logs",
+            query: [
+                "select": "*",
+                "job_name": "eq.\(jobName)",
+                "order": "created_at.desc",
+                "limit": "1"
+            ]
+        )
+        let logs = try jsonDecoder.decode([SystemJobLog].self, from: data)
+        return logs.first
+    }
+
+
     /// Grant Premium Status (Admin Only)
     func grantPremium(callerUserId: UUID, username: String, days: Int) async throws -> String {
         struct GrantParams: Encodable {
@@ -2773,5 +2789,21 @@ struct QueryResult {
             }
             return json
         }
+    }
+}
+
+struct SystemJobLog: Codable {
+    let id: UUID
+    let jobName: String
+    let status: String
+    let details: String?
+    let createdAt: Date
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case jobName = "job_name"
+        case status
+        case details
+        case createdAt = "created_at"
     }
 }

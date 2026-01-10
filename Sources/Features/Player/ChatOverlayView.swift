@@ -389,6 +389,11 @@ struct ChatOverlayView: View {
                                 Text(message.text)
                                     .font(.body)
                                     .foregroundColor(.white)
+                                
+                                Text(message.timestamp.toMessageTime())
+                                    .font(.caption2)
+                                    .foregroundColor(.white.opacity(0.4))
+                                    .padding(.top, 2)
                             }
                         }
                         .padding(12)
@@ -441,6 +446,11 @@ struct ChatOverlayView: View {
                 Text(message.text)
                     .font(.body)
                     .foregroundColor(.white)
+                
+                Text(message.timestamp.toMessageTime())
+                    .font(.caption2)
+                    .foregroundColor(.white.opacity(0.4))
+                    .padding(.top, 2)
             }
         }
         .padding(12)
@@ -501,12 +511,19 @@ struct ChatOverlayView: View {
                                 if message.content.hasPrefix("INVITE|") {
                                     InviteMessageView(message: message, isMe: isMe)
                                 } else {
-                                    Text(message.content)
-                                        .font(.body)
-                                        .foregroundColor(.white)
-                                        .padding(10)
-                                        .background(isMe ? Color.blue : Color(white: 0.2))
-                                        .cornerRadius(12)
+                                    VStack(alignment: isMe ? .trailing : .leading, spacing: 4) {
+                                        Text(message.content)
+                                            .font(.body)
+                                            .foregroundColor(.white)
+                                            .padding(10)
+                                            .background(isMe ? Color.blue : Color(white: 0.2))
+                                            .cornerRadius(12)
+                                        
+                                        Text(message.createdAt.toMessageTime())
+                                            .font(.caption2)
+                                            .foregroundColor(.white.opacity(0.4))
+                                            .padding(.horizontal, 4)
+                                    }
                                 }
                                 
                                 if !isMe { Spacer() }
@@ -1082,5 +1099,21 @@ struct FriendRowButton: View {
     private func isMessageSenderHost(_ message: ChatMessage) -> Bool {
         guard let senderId = message.senderId else { return false }
         return senderId == appState.player.currentWatchPartyRoom?.hostId
+    }
+}
+
+// Helper extension for clean timestamp formatting
+extension Date {
+    func toMessageTime() -> String {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(self) {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            return formatter.string(from: self)
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM d, HH:mm"
+            return formatter.string(from: self)
+        }
     }
 }

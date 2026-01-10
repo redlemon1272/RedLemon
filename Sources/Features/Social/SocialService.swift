@@ -215,7 +215,7 @@ class SocialService: ObservableObject {
         
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let fallbackFormatter = ISO8601DateFormatter() // Default
+
         
         // Sort refs by 'last_seen' or 'started_at' to find the newest
         let sortedRefs = refs.values.sorted { (m1, m2) -> Bool in
@@ -282,10 +282,38 @@ class SocialService: ObservableObject {
     /// If the room doesn't exist or has no host, sets isJoinable = false for the friend's activity.
     /// Note: Live Events (room IDs starting with "event_") are always joinable.
     private func validateRoomJoinability(userId: String, roomId: String) async {
-        // Live Events are always joinable - they don't exist in the rooms table
+        // Live Events validation
         // Event room IDs follow the pattern "event_{imdbId}" (e.g., "event_tt1293847")
         if roomId.hasPrefix("event_") {
-            return // Event is joinable, no further validation needed
+            // Check if this event is currently "live" according to the schedule
+            do {
+                let config = try await EventsConfigService.shared.fetchMovieEventsConfig()
+                
+                // Calculate what SHOULD be playing right now
+                if let (startTime, currentMedia) = EventsConfigService.shared.calculateLiveEvent(config: config) {
+                    let liveRoomId = "event_\(currentMedia.id)"
+                    
+                    if roomId == liveRoomId {
+                        print("✅ SocialService: Event \(roomId) is LIVE (started at \(startTime)) - allowing join")
+                        return // Allow join
+                    } else {
+                        print("🚫 SocialService: Event \(roomId) is NOT live (Current: \(liveRoomId)) - marking \(userId) as unjoinable")
+                        markUserAsUnjoinable(userId: userId)
+                        return
+                    }
+                } else {
+                    print("🚫 SocialService: No event is currently live - marking \(userId) as unjoinable")
+                    markUserAsUnjoinable(userId: userId)
+                    return
+                }
+            } catch {
+                print("⚠️ SocialService: Failed to validate event liveness: \(error)")
+                // Fail safe: If we can't fetch config, we probably shouldn't block access lightly, 
+                // BUT for "expired invites" strictness, maybe we should? 
+                // Reverting to "allow if error" to prevent lockout during outages, 
+                // but logging heavily.
+                return 
+            }
         }
         
         do {

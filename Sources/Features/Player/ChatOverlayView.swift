@@ -254,7 +254,7 @@ struct ChatOverlayView: View {
 
     // MARK: - List Views
     
-    private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, isSenderHost: Bool) -> some View {
+    private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, isSenderHost: Bool, timestamp: String? = nil) -> some View {
         if isSystem {
             return AnyView(
                 Text(username)
@@ -291,6 +291,13 @@ struct ChatOverlayView: View {
                             .font(.system(size: 10))
                             .help("Premium User")
                     }
+
+                    if let timestamp = timestamp {
+                        Text(timestamp)
+                            .font(.caption2)
+                            .foregroundColor(.white.opacity(0.4))
+                            .padding(.leading, 4)
+                    }
                 }
             )
         }
@@ -315,6 +322,13 @@ struct ChatOverlayView: View {
                     Text("👑")
                         .font(.system(size: 10))
                         .help("Premium User")
+                }
+
+                if let timestamp = timestamp {
+                    Text(timestamp)
+                        .font(.caption2)
+                        .foregroundColor(.white.opacity(0.4))
+                        .padding(.leading, 4)
                 }
                 
                 Menu {
@@ -435,7 +449,7 @@ struct ChatOverlayView: View {
         let isSenderHost = (message.senderId != nil && message.senderId == hostId)
         
         return VStack(alignment: .leading, spacing: 4) {
-            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost, isPremium: message.isPremium, isSenderHost: isSenderHost)
+            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost, isPremium: message.isPremium, isSenderHost: isSenderHost, timestamp: message.timestamp.toMessageTime())
             
             if isMuted {
                 Text("Message muted")
@@ -446,11 +460,6 @@ struct ChatOverlayView: View {
                 Text(message.text)
                     .font(.body)
                     .foregroundColor(.white)
-                
-                Text(message.timestamp.toMessageTime())
-                    .font(.caption2)
-                    .foregroundColor(.white.opacity(0.4))
-                    .padding(.top, 2)
             }
         }
         .padding(12)

@@ -1247,6 +1247,27 @@ class PlayerViewModel: ObservableObject {
         await MainActor.run { appState.isLoadingRoom = true }
 
         do {
+            // STRICT LIVENESS CHECK: Prevent joining/reviving stale events
+            if roomId.hasPrefix("event_") {
+                let config = try await EventsConfigService.shared.fetchMovieEventsConfig()
+                if let (startTime, currentMedia) = EventsConfigService.shared.calculateLiveEvent(config: config) {
+                    let liveRoomId = "event_\(currentMedia.id)"
+                    if roomId != liveRoomId {
+                        NSLog("🚫 PlayerVM: Blocking join to STALE event room \(roomId). Current live: \(liveRoomId)")
+                        await MainActor.run { 
+                            appState.isLoadingRoom = false 
+                            // Optional: Show alert? For now, silent fail/log is safer than crashing flow
+                        }
+                        return
+                    }
+                    NSLog("✅ PlayerVM: Event \(roomId) is confirmed LIVE (Started: \(startTime))")
+                } else {
+                    NSLog("🚫 PlayerVM: Blocking join to event \(roomId) - No event is currently live.")
+                    await MainActor.run { appState.isLoadingRoom = false }
+                    return
+                }
+            }
+
             let roomState = try await roomManager.getRoomState(roomId: roomId)
 
             var room = roomState

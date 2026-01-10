@@ -83,6 +83,17 @@
   - ❌ `.font(.caption).fontWeight(.semibold)` - Fails on macOS 12
   - ✅ `.font(.system(size: 12, weight: .semibold))` - Works on all versions
 
+### 13. State Persistence Fallback (Lobby Bypass)
+- **Problem**: Relying solely on Realtime/WebSockets for state (e.g., `isPlaying`, `isReady`) fails when users join late or reconnect, as they miss previous broadcast messages.
+- **Symptom**: "Lobby loops" where a user can't join a playing room, or "desyncs" where late joiners wait forever.
+- **Rule**: Critical state MUST be backed by Database persistence.
+    - **Example**: The Host updates `rooms.is_playing` in DB alongside broadcasting `PLAY` events. New joiners check DB state to bypass lobby if room is already live.
+
+### 14. Configuration Authority (Events Config)
+- **Problem**: Hardcoding logic-dependent constants (like `epochTimestamp` for event cycles) in local Swift code causes desyncs if the server config differs (e.g., legacy vs. updated epoch).
+- **Rule**: The Server (Database/Config) is the Single Source of Truth.
+    - **Action**: Always fetch `EventsConfig` first and use its values (`epoch_timestamp`, `cycle_duration`) to drive logic. Fallback to local constants ONLY if offline.
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |

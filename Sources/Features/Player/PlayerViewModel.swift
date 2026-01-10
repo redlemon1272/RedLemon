@@ -748,7 +748,6 @@ class PlayerViewModel: ObservableObject {
 
         DispatchQueue.main.async {
              // RedLemon: Silent retry (no UI flash)
-             // self.streamError = "Stream failed. Retrying... (\(self.streamQueue.count + 1) left)"
              print("🔄 Silently retrying next stream (\(self.streamQueue.count + 1) left)")
         }
 

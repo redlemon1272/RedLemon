@@ -643,9 +643,14 @@ class MPVPlayerViewModel: ObservableObject {
         print("   IMDB: \(imdbId)")
         print("   URL: \(streamURL.prefix(60))...")
 
+        // FIX: Determine effective event status
+        // A room starting with "event_" is ALWAYS an event, regardless of the boolean flag passed
+        // This fixes the bug where retrying a stream might lose the isEvent flag and treat it as a room
+        let effectiveIsEvent = isEvent || (self.currentRoomId?.hasPrefix("event_") == true)
+
         // FIX: Clear event state if this is NOT an event
         // This prevents "Fargo" (Event) state from leaking into "Freaky Friday" (Watch Party)
-        if !isEvent {
+        if !effectiveIsEvent {
             print("🧹 Clearing previous event state (Non-Event Load)")
             self.appState?.player.eventStartTime = nil
 
@@ -766,7 +771,7 @@ class MPVPlayerViewModel: ObservableObject {
 
         // Note: isEvent is now passed explicitly to avoid race conditions with appState injection
 
-        if isEvent {
+        if effectiveIsEvent {
             print("🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)")
             isRefiningInitialSeek = true // START: Hold loading state until seek is stable
             Task { @MainActor in

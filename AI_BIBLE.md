@@ -1,6 +1,6 @@
 # RedLemon AI Bible
-> **THE ULTIMATE CONTEXT DOCUMENT**  
-> **Last Updated:** January 9, 2026  
+> **THE ULTIMATE CONTEXT DOCUMENT**
+> **Last Updated:** January 9, 2026
 > Read this first. Contains everything an AI assistant needs to work on this codebase.
 
 ---
@@ -157,7 +157,7 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 - **Trigger**: App polling.
 - **Logic**: Scans all chains (multi-asset: ETH, USDC, USDT), calculates USD value via Coinbase API, grants access:
   - **$4.00+** = 30 days
-  - **$7.00+** = 60 days  
+  - **$7.00+** = 60 days
   - **$10.00+** = 90 days
 - **Note**: Actual code thresholds are slightly lower ($3.80/$6.80/$9.80) to account for price fluctuations.
 
@@ -276,7 +276,7 @@ Functions: `assign-address`, `check-payment`, `sweep-payments`, `cleanup-rooms`,
 
 ## Local Testing Profiles
 In `RedLemonApp.swift`, use command line args:
-- `-user-profile host` 
+- `-user-profile host`
 - `-user-profile guest`
 
 ---
@@ -337,3 +337,236 @@ Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SE
 - **Mechanism**: `.redlemon-key` file.
 - **Contents**: JSON containing `privateKey`, `publicKey`, and `userId`.
 - **Process**: Importing the file restores the Private Key to Keychain, enabling valid signatures.
+
+---
+
+# Part 8: Local HTTP Server Architecture
+
+## Overview
+The app runs an **embedded Vapor HTTP server** on `127.0.0.1:8080`. This server handles stream resolution, metadata fetching, and debrid unlocking—replacing the Node.js Express server from the original ColorFruit project.
+
+## Key Files
+| File | Purpose |
+| :--- | :--- |
+| `HTTPServer.swift` | Server initialization, CORS, route registration |
+| `LocalAuthMiddleware.swift` | Token authentication (`X-RedLemon-Auth`) |
+| `LocalAPIClient.swift` | Swift client for calling local server |
+
+## Route Files (`Sources/Server/Routes/`)
+| Route | Endpoints |
+| :--- | :--- |
+| `TokenRoutes.swift` | `/tokens/save`, `/tokens/delete`, `/tokens/list` |
+| `UnlockRoutes.swift` | `/api/streams/unlock` (RealDebrid) |
+| `StreamRoutes.swift` | `/api/streams/resolve`, `/api/streams/resolveByQuality` |
+| `MetadataRoutes.swift` | `/api/metadata/catalog`, `/api/metadata/meta` |
+| `ProxyRoutes.swift` | Subtitle proxy, image proxy |
+| `SubtitleRoutes.swift` | Subtitle search and download |
+
+## Stream Provider System
+Located in `Sources/Server/Services/`:
+
+| Provider | File | Description |
+| :--- | :--- | :--- |
+| **Torrentio** | `TorrentioService.swift` | Primary source, RD integration |
+| **Comet** | `CometService.swift` | Alternative source |
+| **MediaFusion** | `MediaFusionService.swift` | Addon aggregator |
+| **DebridSearch** | `DebridSearchService.swift` | Direct RD library search |
+| **Zilean** | `ZileanService.swift` | DMM hash database |
+
+**Provider Manager**: `ProviderService.swift` - Registers and queries all providers.
+
+## Stream Resolution Flow
+1. `LocalAPIClient.resolveStreamWithFallback()` calls `/api/streams/resolve`
+2. `StreamResolver.swift` queries all providers in parallel
+3. Results are filtered (codecs, groups, languages) and sorted by quality
+4. Best match is unlocked via RealDebrid and returned
+
+> [!WARNING]
+> **StreamResolver Filters**: Contains hardcoded blocklists for groups (`tamilmv`), codecs (`av1`), and audio. Check these if valid streams are missing.
+
+---
+
+# Part 9: Secrets & Credentials Management
+
+## KeychainManager (`Sources/Server/Credentials/KeychainManager.swift`)
+An `actor` that securely stores sensitive data in macOS Keychain.
+
+| Service Key | Data Stored |
+| :--- | :--- |
+| `realdebrid` | RealDebrid API token |
+| `subdl` | SubDL API key |
+| `user_id` | Current user's UUID |
+| `recovery_phrase` | Mnemonic phrase hash |
+| (Special) | Ed25519 Key Pair |
+
+## Dynamic Credential Loading
+Providers fetch credentials **on each request** via `KeychainManager.shared.get(service:)`. This ensures account recovery or credential updates take effect immediately without app restart.
+
+## Account Export/Import (`AccountExportManager.swift`)
+Creates `.redlemon-key` files containing:
+- User ID + Username
+- Ed25519 Key Pair (for signature auth)
+- RealDebrid/SubDL tokens (optional)
+
+---
+
+# Part 10: Social Features System
+
+## SocialService (`Sources/Features/Social/SocialService.swift`)
+A 1000+ line singleton managing all social features.
+
+### Core Features
+- **Friends List**: Add, remove, accept/decline requests
+- **Presence**: Real-time online/offline status
+- **Activity Tracking**: "Watching {Movie}" status
+- **Blocking**: User blocking with `user_blocks` table
+- **Direct Messages**: DM channel support
+
+### Presence Architecture
+- Uses dedicated `SupabaseRealtimeClient` for `global-presence` channel
+- Tracks multiple connection refs per user (handles reconnects)
+- Heartbeat every 30 seconds to maintain online status
+
+### Key Tables
+| Table | Purpose |
+| :--- | :--- |
+| `friendships` | Friend relationships |
+| `friend_requests` | Pending requests |
+| `user_blocks` | Block list |
+
+### Landmine: Ghost Rooms
+When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the room actually exists and has a host. Without this, users could attempt to join deleted rooms.
+
+---
+
+# Part 11: App Updates & Versioning
+
+## UpdateManager (`Sources/Services/UpdateManager.swift`)
+Uses **Sparkle** framework for macOS auto-updates.
+
+### Configuration
+- **Appcast URL**: `https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml`
+- **Mode**: Manual only (no auto-checks, no automatic downloads)
+- **Silent Check**: Custom implementation that parses appcast XML without Sparkle UI
+
+### Update Flow
+1. `checkForUpdatesInBackground()` called on app launch
+2. Silently fetches `appcast.xml` from GitHub
+3. Compares `<sparkle:version>` with `CFBundleVersion`
+4. Sets `updateAvailable = true` if newer version exists
+
+> [!NOTE]
+> For production release signing, add `SUPublicEDKey` to Info.plist with your Ed25519 public key.
+
+---
+
+# Part 12: Caching System
+
+## CacheManager (`Sources/Networking/CacheManager.swift`)
+An `actor`-based LRU cache with memory pressure handling.
+
+### Cache Types
+| Type | Max Items | Expiration |
+| :--- | :--- | :--- |
+| Catalog | 20 | 5 minutes |
+| Metadata | 50 | 10 minutes |
+| Images | 100 | 30 minutes |
+
+### Memory Pressure
+- Periodic check every 60 seconds
+- Aggressive cleanup when >80 total items
+- Images cleared first (largest memory consumer)
+
+### Usage
+```swift
+// Check cache
+if let cached = await CacheManager.shared.getMetadata(key: imdbId) {
+    return cached
+}
+// ... fetch from network ...
+await CacheManager.shared.setMetadata(key: imdbId, value: metadata)
+```
+
+---
+
+# Part 13: Logging System
+
+## LoggingManager (`Sources/Services/LoggingManager.swift`)
+Centralized logging with throttling to reduce console spam.
+
+### Log Levels
+`debug` < `info` < `warning` < `error`
+
+### Categories (can be individually enabled/disabled)
+- `videoRendering` - Frame rendering (heavily throttled)
+- `mouseTracking` - UI hover states
+- `subtitles` - Track selection
+- `watchHistory` - Progress saves
+- `network` - API calls
+- `watchParty` - Sync messages
+
+### Throttling
+Certain high-frequency logs (video rendering, mouse tracking) are throttled to max 1 per second to prevent log flooding.
+
+---
+
+# Part 14: Free-Tier Hosting Limits
+
+## Room Creation History (`room_creation_history` table)
+Tracks when users create watch party rooms to enforce limits.
+
+### Limit Rules
+- **Free Users**: 1 room per 24 hours
+- **Premium Users**: Unlimited
+
+### Implementation
+- `SupabaseClient.checkFreeTierLimit()` returns seconds until next free room
+- `LicenseManager.checkHostingLimit()` updates `timeUntilNextFreeRoom`
+- UI shows cooldown timer when limit reached
+
+### Database RPC
+`check_room_creation_limit(user_id)` returns `{can_create, time_until_next, is_premium}`
+
+---
+
+# Quick Reference
+
+## Key Files
+| Purpose | File |
+| :--- | :--- |
+| Video Playback | `MPVPlayerViewModel.swift` (God Class) |
+| Stream Resolution | `StreamResolver.swift` |
+| Subtitles | `MPVWrapper.swift`, `SubtitleService.swift` |
+| Watch Parties | `RealtimeChannelManager.swift`, `LobbyViewModel.swift` |
+| Payments | `SupabaseClient.swift`, Edge Functions |
+| Settings | `SettingsView.swift` |
+| Admin | `AdminDashboardView.swift` |
+| Social | `SocialService.swift` |
+| Local Server | `HTTPServer.swift`, `StreamRoutes.swift` |
+| Secrets | `KeychainManager.swift` |
+| Updates | `UpdateManager.swift` |
+| Caching | `CacheManager.swift` |
+
+## Important Database Tables
+| Table | Purpose |
+| :--- | :--- |
+| `users` | User accounts, premium status |
+| `rooms` | Active watch parties |
+| `room_participants` | Who's in each room |
+| `room_creation_history` | Free-tier limit tracking |
+| `verified_streams` | Community-verified streams |
+| `reported_streams` | Problem reports |
+| `blocked_streams` | Permanent blacklist |
+| `payment_pools` | Assigned crypto addresses |
+| `payment_transactions` | Payment records |
+| `friendships` | Friend connections |
+| `friend_requests` | Pending friend requests |
+| `user_blocks` | Blocked users |
+| `events_config` | Live event schedule |
+
+## Cron Jobs
+Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT jobname, schedule FROM cron.job;\""`
+
+## UUID Case Sensitivity
+> [!CAUTION]
+> UUIDs are normalized to **lowercase** in most places (`participantId = room.hostId.lowercased()`). When comparing UUIDs, always use `caseInsensitiveCompare()` or normalize both sides. Direct `==` comparison can silently fail.

@@ -17,9 +17,7 @@ struct VerifiedStreamsView: View {
     @State private var reportedStreams: [SupabaseClient.ReportedStream] = []
     @State private var blockedStreams: [SupabaseClient.BlockedStream] = [] // NEW
     @State private var feedbackReports: [SupabaseClient.FeedbackReport] = []
-    @State private var sessionLogs: [SessionLog] = []
     @State private var isLoading = false
-    @State private var highlightedLogId: UUID?
     @State private var searchText = ""
     
     var body: some View {
@@ -41,7 +39,6 @@ struct VerifiedStreamsView: View {
                 Text("Reported Streams").tag("reported")
                 Text("Blocked Streams").tag("blocked") // NEW
                 Text("Feedback").tag("feedback")
-                Text("Session Logs").tag("logs")
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding()
@@ -74,8 +71,6 @@ struct VerifiedStreamsView: View {
             blockedList // NEW
         case "feedback":
             feedbackList
-        case "logs":
-            logsList
         default:
             Text("Unknown Tab")
         }
@@ -122,9 +117,6 @@ struct VerifiedStreamsView: View {
                  
             case "feedback":
                 feedbackReports = try await SupabaseClient.shared.getFeedback()
-                
-            case "logs":
-                sessionLogs = try await SupabaseClient.shared.getSessionLogs()
                 
             default: break
             }
@@ -395,42 +387,14 @@ struct VerifiedStreamsView: View {
     private var feedbackList: some View {
         List {
             ForEach(feedbackReports) { feedback in
-                FeedbackRow(feedback: feedback, onViewLog: { logId in
-                    highlightedLogId = logId
-                    selectedTab = "logs"
-                }, onDelete: {
+                FeedbackRow(feedback: feedback, onDelete: {
                     deleteFeedback(id: feedback.id)
                 })
             }
         }
     }
     
-    private var logsList: some View {
-        ScrollViewReader { proxy in
-            List {
-                ForEach(sessionLogs) { log in
-                    SessionLogRow(log: log, isHighlighted: log.id == highlightedLogId, onDelete: {
-                        deleteSessionLog(id: log.id)
-                    })
-                    .id(log.id)
-                }
-            }
-            .onChange(of: highlightedLogId) { id in
-                if let id = id {
-                    withAnimation {
-                        proxy.scrollTo(id, anchor: .top)
-                    }
-                }
-            }
-            .onAppear {
-                 if let id = highlightedLogId {
-                     withAnimation {
-                         proxy.scrollTo(id, anchor: .top)
-                     }
-                 }
-            }
-        }
-    }
+
 }
 
 // MARK: - Subviews
@@ -577,7 +541,6 @@ struct Badge: View {
 
 struct FeedbackRow: View {
     let feedback: SupabaseClient.FeedbackReport
-    var onViewLog: ((UUID) -> Void)?
     var onDelete: (() -> Void)?
     
     var body: some View {
@@ -624,15 +587,19 @@ struct FeedbackRow: View {
                 }
                 
                 if let sessionLogId = feedback.sessionLogId {
-                    Button(action: { onViewLog?(sessionLogId) }) {
+                    Button(action: {
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(sessionLogId.uuidString, forType: .string)
+                    }) {
                         HStack(spacing: 4) {
-                            Image(systemName: "doc.text")
-                            Text("View Log")
+                            Image(systemName: "doc.on.doc")
+                            Text("Copy Session ID")
                         }
                         .font(.caption)
                         .foregroundColor(.blue)
                     }
                     .buttonStyle(.plain)
+                    .help("Search this ID in Logs section")
                 }
             }
         }
@@ -649,136 +616,7 @@ struct FeedbackRow: View {
     }
 }
 
-struct SessionLogRow: View {
-    let log: SessionLog
-    let isHighlighted: Bool
-    let onDelete: (() -> Void)?
-    @State private var isCopied = false
-    @State private var isExpanded = false
-    
-    init(log: SessionLog, isHighlighted: Bool = false, onDelete: (() -> Void)? = nil) {
-        self.log = log
-        self.isHighlighted = isHighlighted
-        self.onDelete = onDelete
-        _isExpanded = State(initialValue: isHighlighted)
-    }
-    
-    var body: some View {
-        DisclosureGroup(isExpanded: $isExpanded) {
-            VStack(alignment: .leading, spacing: 4) {
-                // Action Bar inside expanded view
-                HStack {
-                    Spacer()
-                    Button(action: copyToClipboard) {
-                        HStack(spacing: 4) {
-                            Image(systemName: isCopied ? "checkmark" : "doc.on.doc")
-                            Text(isCopied ? "Copied!" : "Copy Log")
-                        }
-                        .font(.caption)
-                        .foregroundColor(isCopied ? .green : .primary)
-                    }
-                    .buttonStyle(.plain)
-                    
-                    if let onDelete = onDelete {
-                        Button(action: onDelete) {
-                            HStack(spacing: 4) {
-                                Image(systemName: "trash")
-                                Text("Delete")
-                            }
-                            .font(.caption)
-                            .foregroundColor(.red)
-                        }
-                        .buttonStyle(.plain)
-                        .padding(.leading, 8)
-                    }
-                }
-                .padding(.bottom, 4)
-                
-                ForEach(log.events, id: \.timestamp) { event in
-                    LogEventRow(event: event)
-                }
-            }
-            .padding()
-            .background(Color.black.opacity(0.1))
-            .cornerRadius(8)
-        } label: {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(log.sessionId.uuidString.prefix(8))
-                        .font(.headline.monospaced())
-                    Text(log.platform + " | " + log.appVersion)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                Spacer()
-                
-                if isHighlighted {
-                   Text("LINKED LOG")
-                       .font(.caption.bold())
-                       .foregroundColor(.white)
-                       .padding(.horizontal, 6)
-                       .padding(.vertical, 2)
-                       .background(Color.blue)
-                       .cornerRadius(4)
-                }
-                
-                Text(log.createdAt, style: .time)
-                    .font(.caption)
-            }
-        }
-        .padding(4)
-        .background(isHighlighted ? Color.blue.opacity(0.1) : Color.clear)
-        .cornerRadius(8)
-    }
-    
-    private func copyToClipboard() {
-        let text = log.events.map { "[\($0.timestamp)] [\($0.category.rawValue)] \($0.message) \($0.metadata?.description ?? "")" }.joined(separator: "\n")
-        NSPasteboard.general.clearContents()
-        let success = NSPasteboard.general.setString(text, forType: .string)
-        print("📋 Copy to clipboard result: \(success). Text length: \(text.count)")
-        
-        if success {
-            withAnimation {
-                isCopied = true
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                withAnimation {
-                    isCopied = false
-                }
-            }
-        }
-    }
-}
 
-// ... LogEventRow and VerifiedStreamRow ...
-
-struct LogEventRow: View {
-    let event: SessionEvent
-    
-    var body: some View {
-        HStack(alignment: .top) {
-            Text(event.timestamp, style: .time)
-                .font(.caption.monospaced())
-                .foregroundColor(.secondary)
-                .frame(width: 80, alignment: .leading)
-            
-            Text("[\(event.category.rawValue)]")
-                .font(.caption.monospaced())
-                .foregroundColor(.blue)
-                .frame(width: 80, alignment: .leading)
-            
-            Text(event.message)
-                .font(.caption)
-        }
-        if let meta = event.metadata {
-            Text("\(meta.description)")
-                .font(.caption2)
-                .foregroundColor(.secondary)
-                .padding(.leading, 160)
-        }
-    }
-}
 
 struct VerifiedStreamRow: View {
     let stream: SupabaseClient.VerifiedStream

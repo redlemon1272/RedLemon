@@ -976,103 +976,539 @@ struct PaymentStatCard: View {
 }
 
 // MARK: - Admin Logs View
+
+enum AdminLogTab: String, CaseIterable, Identifiable {
+    case app = "App Logs"
+    case session = "Session Logs"
+    case system = "System Logs"
+    
+    var id: String { self.rawValue }
+    var icon: String {
+        switch self {
+        case .app: return "terminal"
+        case .session: return "person.text.rectangle"
+        case .system: return "gearshape.2"
+        }
+    }
+}
+
 struct AdminLogsView: View {
-    @State private var logs: [AppLog] = []
+    @State private var selectedTab: AdminLogTab = .app
+    @State private var appLogs: [AppLog] = []
+    @State private var sessionLogs: [SessionLog] = []
+    @State private var systemLogs: [SystemJobLog] = []
+    
     @State private var isLoading = false
-    @State private var currentPage = 1
+    @State private var searchText = ""
+    @State private var selectedLevel: String = "ALL"
+    
+    @State private var appPage = 1
+    @State private var sessionPage = 1
+    @State private var systemPage = 1
     private let pageSize = 50
+    
+    var filteredAppLogs: [AppLog] {
+        appLogs.filter { log in
+            let matchesSearch = searchText.isEmpty || log.message.localizedCaseInsensitiveContains(searchText) || (log.userId?.uuidString.contains(searchText) ?? false)
+            let matchesLevel = selectedLevel == "ALL" || log.level.uppercased() == selectedLevel
+            return matchesSearch && matchesLevel
+        }
+    }
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Text("App Logs")
-                    .font(.system(size: 20, weight: .bold))
-                
-                Spacer()
-                
-                Button(action: {
-                    Task {
-                        try? await SupabaseClient.shared.deleteAllAppLogs()
-                        loadLogs()
+            // Header & Tabs
+            VStack(spacing: 0) {
+                HStack {
+                    Text("Logs Management")
+                        .font(.system(size: 20, weight: .bold))
+                    
+                    Spacer()
+                    
+                    if selectedTab == .app {
+                        Button(action: {
+                            Task {
+                                try? await SupabaseClient.shared.deleteAllAppLogs()
+                                await loadData()
+                            }
+                        }) {
+                            Label("Clear App Logs", systemImage: "trash")
+                                .foregroundColor(.red)
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(appLogs.isEmpty)
                     }
-                }) {
-                    Label("Delete All", systemImage: "trash")
-                        .foregroundColor(.red)
+                    
+                    Button(action: { Task { await loadData() } }) {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
-                .disabled(logs.isEmpty)
+                .padding()
                 
-                Button(action: loadLogs) {
-                    Image(systemName: "arrow.clockwise")
+                HStack(spacing: 0) {
+                    ForEach(AdminLogTab.allCases) { tab in
+                        Button(action: { selectedTab = tab }) {
+                            VStack(spacing: 8) {
+                                Label(tab.rawValue, systemImage: tab.icon)
+                                    .foregroundColor(selectedTab == tab ? .blue : .primary)
+                                
+                                Rectangle()
+                                    .fill(selectedTab == tab ? Color.blue : Color.clear)
+                                    .frame(height: 2)
+                            }
+                        }
+                        .buttonStyle(.plain)
+                        .frame(maxWidth: .infinity)
+                    }
                 }
-                .buttonStyle(.plain)
             }
-            .padding()
             .background(Color(NSColor.controlBackgroundColor))
+            
+            // Search & Filter Bar
+            if selectedTab == .app {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.secondary)
+                    TextField("Search logs, user IDs...", text: $searchText)
+                        .textFieldStyle(.plain)
+                    
+                    if !searchText.isEmpty {
+                        Button(action: { searchText = "" }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundColor(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    
+                    Divider().frame(height: 20)
+                    
+                    Picker("Level", selection: $selectedLevel) {
+                        Text("All Levels").tag("ALL")
+                        Text("Error").tag("ERROR")
+                        Text("Warning").tag("WARNING")
+                        Text("Info").tag("INFO")
+                        Text("Debug").tag("DEBUG")
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(width: 300)
+                }
+                .padding(8)
+                .background(Color.black.opacity(0.05))
+            }
             
             Divider()
             
-            if isLoading && logs.isEmpty {
-                Spacer()
-                ProgressView()
-                Spacer()
-            } else if logs.isEmpty {
-                Spacer()
-                Text("No logs found.")
-                    .foregroundColor(.secondary)
-                Spacer()
-            } else {
-                List {
-                    ForEach(logs) { log in
-                        LogEntryRow(log: log)
+            // Content
+            ZStack {
+                if isLoading && currentLogsEmpty() {
+                    ProgressView()
+                } else {
+                    switch selectedTab {
+                    case .app:
+                        appLogsList
+                    case .session:
+                        sessionLogsList
+                    case .system:
+                        systemLogsList
                     }
                 }
-                .listStyle(InsetListStyle())
             }
             
-            // Pagination
+            Divider()
+            
+            // Footer (Pagination)
             HStack {
-                Button(action: {
-                    if currentPage > 1 {
-                        currentPage -= 1
-                        loadLogs()
-                    }
-                }) {
+                Button(action: { changePage(delta: -1) }) {
                     Image(systemName: "chevron.left")
                 }
-                .disabled(currentPage <= 1 || isLoading)
+                .disabled(currentPage() <= 1 || isLoading)
                 
-                Text("Page \(currentPage)")
-                    .monospacedDigit()
+                Text("Page \(currentPage())")
+                    .font(.system(.body, design: .monospaced))
                 
-                Button(action: {
-                    if logs.count == pageSize {
-                        currentPage += 1
-                        loadLogs()
-                    }
-                }) {
+                Button(action: { changePage(delta: 1) }) {
                     Image(systemName: "chevron.right")
                 }
-                .disabled(logs.count < pageSize || isLoading)
+                .disabled(!canGoNext() || isLoading)
+                
+                Spacer()
+                
+                Text(countSummary())
+                    .font(.caption)
+                    .foregroundColor(.secondary)
             }
             .padding()
             .background(Color(NSColor.controlBackgroundColor))
         }
         .onAppear {
-            loadLogs()
+            Task { await loadData() }
+        }
+        .onChange(of: selectedTab) { _ in
+            Task { await loadData() }
         }
     }
     
-    private func loadLogs() {
-        isLoading = true
-        Task {
-            do {
-                let offset = (currentPage - 1) * pageSize
-                logs = try await SupabaseClient.shared.getAppLogs(limit: pageSize, offset: offset)
-            } catch {
-                print("Error loading logs: \(error)")
+    @ViewBuilder
+    private var appLogsList: some View {
+        if filteredAppLogs.isEmpty {
+            emptyView(text: "No app logs found.")
+        } else {
+            List {
+                ForEach(filteredAppLogs) { log in
+                    LogEntryRow(log: log)
+                }
             }
-            isLoading = false
+            .listStyle(InsetListStyle())
+        }
+    }
+    
+    @ViewBuilder
+    private var sessionLogsList: some View {
+        if sessionLogs.isEmpty {
+            emptyView(text: "No session logs found.")
+        } else {
+            List {
+                ForEach(sessionLogs) { log in
+                    SessionLogRow(log: log)
+                }
+            }
+            .listStyle(InsetListStyle())
+        }
+    }
+    
+    @ViewBuilder
+    private var systemLogsList: some View {
+        if systemLogs.isEmpty {
+            emptyView(text: "No system job logs found.")
+        } else {
+            List {
+                ForEach(systemLogs) { log in
+                    SystemJobLogRow(log: log)
+                }
+            }
+            .listStyle(InsetListStyle())
+        }
+    }
+    
+    private func emptyView(text: String) -> some View {
+        VStack {
+            Spacer()
+            Text(text)
+                .foregroundColor(.secondary)
+            Spacer()
+        }
+    }
+    
+    private func currentLogsEmpty() -> Bool {
+        switch selectedTab {
+        case .app: return appLogs.isEmpty
+        case .session: return sessionLogs.isEmpty
+        case .system: return systemLogs.isEmpty
+        }
+    }
+    
+    private func currentPage() -> Int {
+        switch selectedTab {
+        case .app: return appPage
+        case .session: return sessionPage
+        case .system: return systemPage
+        }
+    }
+    
+    private func canGoNext() -> Bool {
+        switch selectedTab {
+        case .app: return appLogs.count == pageSize
+        case .session: return sessionLogs.count == pageSize
+        case .system: return systemLogs.count == pageSize
+        }
+    }
+    
+    private func countSummary() -> String {
+        switch selectedTab {
+        case .app: return "\(appLogs.count) entries loaded"
+        case .session: return "\(sessionLogs.count) sessions loaded"
+        case .system: return "\(systemLogs.count) jobs loaded"
+        }
+    }
+    
+    private func changePage(delta: Int) {
+        switch selectedTab {
+        case .app: appPage += delta
+        case .session: sessionPage += delta
+        case .system: systemPage += delta
+        }
+        Task { await loadData() }
+    }
+    
+    private func loadData() async {
+        isLoading = true
+        defer { isLoading = false }
+        
+        do {
+            let offset = (currentPage() - 1) * pageSize
+            switch selectedTab {
+            case .app:
+                appLogs = try await SupabaseClient.shared.getAppLogs(limit: pageSize, offset: offset)
+            case .session:
+                sessionLogs = try await SupabaseClient.shared.getSessionLogs(limit: pageSize, offset: offset)
+            case .system:
+                systemLogs = try await SupabaseClient.shared.getSystemJobLogs(limit: pageSize, offset: offset)
+            }
+        } catch {
+            print("❌ Error loading \(selectedTab.rawValue): \(error)")
+        }
+    }
+}
+
+struct SystemJobLogRow: View {
+    let log: SystemJobLog
+    
+    var statusColor: Color {
+        switch log.status.lowercased() {
+        case "success": return .green
+        case "failed": return .red
+        default: return .orange
+        }
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text(log.jobName)
+                    .font(.headline)
+                
+                Spacer()
+                
+                Text(log.status.uppercased())
+                    .font(.caption.bold())
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(statusColor.opacity(0.2))
+                    .foregroundColor(statusColor)
+                    .cornerRadius(4)
+                
+                Text(log.createdAt, style: .date)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Text(log.createdAt, style: .time)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            
+            if let details = log.details {
+                Text(details)
+                    .font(.subheadline)
+                    .foregroundColor(.primary)
+                    .lineLimit(2)
+            }
+        }
+        .padding(.vertical, 8)
+    }
+}
+
+struct LogEntryRow: View {
+    let log: AppLog
+
+    var levelColor: Color {
+        switch log.level.uppercased() {
+        case "ERROR": return .red
+        case "WARNING": return .orange
+        case "INFO": return .blue
+        default: return .gray
+        }
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text(log.level.uppercased())
+                .font(.system(size: 11, weight: .bold))
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(levelColor.opacity(0.2))
+                    .foregroundColor(levelColor)
+                    .cornerRadius(4)
+
+                Text(log.timestamp, style: .time)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+
+                Spacer()
+
+                if let userId = log.userId {
+                    Text(userId.uuidString.prefix(8))
+                        .font(.system(.caption2, design: .monospaced))
+                        .foregroundColor(.secondary)
+                }
+                
+                // Action Buttons
+                HStack(spacing: 12) {
+                    Button(action: {
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(log.message, forType: .string)
+                    }) {
+                        Image(systemName: "doc.on.doc")
+                            .foregroundColor(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Copy Message")
+                    
+                    Button(action: {
+                        Task {
+                            await SupabaseClient.shared.deleteAppLog(id: log.id)
+                        }
+                    }) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Delete Log")
+                }
+                .padding(.leading, 8)
+            }
+
+            Text(log.message)
+                .font(.body)
+                .lineLimit(3)
+                .textSelection(.enabled) // Allow text selection
+
+            if let metadata = log.metadata, !metadata.isEmpty {
+                Text(metadataDescription(metadata))
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .lineLimit(2)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+
+    private func metadataDescription(_ metadata: [String: AnyCodable]) -> String {
+        return metadata.map { "\($0.key): \($0.value.value)" }.joined(separator: " | ")
+    }
+}
+
+struct SessionLogRow: View {
+    let log: SessionLog
+    var isHighlighted: Bool = false
+    @State private var isCopied = false
+    
+    var body: some View {
+        DisclosureGroup {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Text("Metadata")
+                        .font(.caption.bold())
+                    Spacer()
+                    Button(action: copyToClipboard) {
+                        Label(isCopied ? "Copied!" : "Copy Full Log", systemImage: isCopied ? "checkmark" : "doc.on.doc")
+                            .font(.caption)
+                    }
+                    .buttonStyle(.plain)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    if let imdbId = log.imdbId {
+                        HStack {
+                            Text("IMDb ID").foregroundColor(.secondary).frame(width: 80, alignment: .leading)
+                            Text(imdbId).font(.system(.caption2, design: .monospaced))
+                        }
+                    }
+                    if let hash = log.streamHash {
+                        HStack {
+                            Text("Hash").foregroundColor(.secondary).frame(width: 80, alignment: .leading)
+                            Text(hash.prefix(12) + "...").font(.system(.caption2, design: .monospaced))
+                        }
+                    }
+                    HStack {
+                        Text("App").foregroundColor(.secondary).frame(width: 80, alignment: .leading)
+                        Text(log.appVersion)
+                    }
+                }
+                .font(.caption2)
+                
+                Divider()
+                
+                Text("Events (\(log.events.count))")
+                    .font(.caption.bold())
+                
+                ForEach(log.events.indices, id: \.self) { index in
+                    LogEventRow(event: log.events[index])
+                    if index < log.events.count - 1 {
+                        Divider().opacity(0.3)
+                    }
+                }
+            }
+            .padding()
+            .background(Color.black.opacity(0.1))
+            .cornerRadius(8)
+        } label: {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(log.sessionId.uuidString.prefix(8))
+                        .font(.headline.monospaced())
+                    Text(log.platform + " | " + log.appVersion)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+                
+                if isHighlighted {
+                   Text("LINKED LOG")
+                       .font(.caption.bold())
+                       .foregroundColor(.white)
+                       .padding(.horizontal, 6)
+                       .padding(.vertical, 2)
+                       .background(Color.blue)
+                       .cornerRadius(4)
+                }
+                
+                Text(log.createdAt, style: .time)
+                    .font(.caption)
+            }
+        }
+        .padding(4)
+        .background(isHighlighted ? Color.blue.opacity(0.1) : Color.clear)
+        .cornerRadius(8)
+    }
+    
+    private func copyToClipboard() {
+        let text = log.events.map { "[\($0.timestamp)] [\($0.category.rawValue)] \($0.message) \($0.metadata?.description ?? "")" }.joined(separator: "\n")
+        NSPasteboard.general.clearContents()
+        _ = NSPasteboard.general.setString(text, forType: .string)
+        
+        withAnimation { isCopied = true }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            withAnimation { isCopied = false }
+        }
+    }
+}
+
+struct LogEventRow: View {
+    let event: SessionEvent
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            HStack(alignment: .top) {
+                Text(event.timestamp, style: .time)
+                    .font(.caption.monospaced())
+                    .foregroundColor(.secondary)
+                    .frame(width: 80, alignment: .leading)
+                
+                Text("[\(event.category.rawValue)]")
+                    .font(.caption.monospaced())
+                    .foregroundColor(event.category == .error ? .red : .blue)
+                    .frame(width: 90, alignment: .leading)
+                
+                Text(event.message)
+                    .font(.caption)
+            }
+            if let meta = event.metadata, !meta.isEmpty {
+                Text("\(meta.description)")
+                    .font(.system(size: 9, design: .monospaced))
+                    .foregroundColor(.secondary)
+                    .padding(.leading, 175)
+            }
         }
     }
 }

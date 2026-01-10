@@ -575,9 +575,15 @@ class SupabaseClient: RoomManager, UserManager {
             return 0
         }
         
-        // Expected format in details: "Total Torrents: 43776" or similar
-        // Let's use regex or simple replacement to extract digits
-        let digits = details.filter { $0.isNumber }
+        // Expected format: "Total Torrents: 64973. ..."
+        if let range = details.range(of: "Total Torrents: "),
+           let firstPeriod = details[range.upperBound...].firstIndex(of: ".") {
+            let countStr = details[range.upperBound..<firstPeriod].trimmingCharacters(in: .whitespaces)
+            return Int(countStr) ?? 0
+        }
+        
+        // Fallback to extraction if format changed but numbers exist
+        let digits = details.prefix(while: { $0 != "." }).filter { $0.isNumber }
         return Int(digits) ?? 0
     }
 
@@ -1230,7 +1236,7 @@ class SupabaseClient: RoomManager, UserManager {
         }
 
         var body: [String: Any] = [
-            "level": level,
+            "level": level.uppercased(),
             "message": finalMessage,
             "created_at": SupabaseClient.isoFormatter.string(from: Date())
         ]
@@ -1927,6 +1933,19 @@ struct ReportedStream: Identifiable, Codable {
 
 
 
+    func getSystemJobLogs(limit: Int = 50, offset: Int = 0) async throws -> [SystemJobLog] {
+        let data = try await makeRequest(
+            path: "/system_job_logs",
+            query: [
+                "select": "*",
+                "order": "created_at.desc",
+                "limit": String(limit),
+                "offset": String(offset)
+            ]
+        )
+        return try jsonDecoder.decode([SystemJobLog].self, from: data)
+    }
+
     /// Delete a session log (Admin)
     func deleteSessionLog(id: UUID) async {
         do {
@@ -1942,13 +1961,14 @@ struct ReportedStream: Identifiable, Codable {
     }
 
     /// Get session logs (Admin)
-    func getSessionLogs(limit: Int = 20) async throws -> [SessionLog] {
+    func getSessionLogs(limit: Int = 20, offset: Int = 0) async throws -> [SessionLog] {
         let data = try await makeRequest(
             path: "/session_logs",
             query: [
                 "select": "*",
                 "order": "created_at.desc",
-                "limit": String(limit)
+                "limit": String(limit),
+                "offset": String(offset)
             ]
         )
 
@@ -2808,7 +2828,7 @@ struct QueryResult {
     }
 }
 
-struct SystemJobLog: Codable {
+struct SystemJobLog: Codable, Identifiable {
     let id: UUID
     let jobName: String
     let status: String

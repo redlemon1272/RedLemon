@@ -156,6 +156,8 @@
 - **Messages**: `LOBBY_VOTE:<itemId>` and `LOBBY_UNVOTE:<itemId>`.
 - **UI**: Heart icon ❤️ on playlist items.
 - **State**: Managed in `LobbyViewModel.playlistVotes`.
+- **Single Vote**: Each user can only vote for ONE item at a time.
+- **Late Joiner Sync**: Host re-broadcasts their vote on `LOBBY_JOIN` so late joiners see existing votes (per Landmine #13).
 
 ## System Hosted Events (Movie Events)
 - **Behavior**: Movie plays at specific time. No pause/seek. Everyone sees same frame.

@@ -123,11 +123,36 @@ class LobbyEventRouter: ObservableObject {
              // Log updated room status
              let readyCount = viewModel.participants.filter { $0.isReady }.count
              NSLog("👥 Room status after join: \(viewModel.participants.count) participants, \(readyCount) ready")
+
+             // VOTE SYNC: Re-broadcast host's current vote so late joiners see it
+             // (AI Bible Landmine #13: ephemeral state must be re-synced on join)
+             await broadcastCurrentVotes()
          } else {
              // Non-host received guest join notification
              let guestUsername = syncMessage.chatUsername ?? "Guest"
              NSLog("👋 Received: Guest '\(guestUsername)' joined room \(viewModel.room.id)")
          }
+    }
+
+    /// Re-broadcasts host's current vote so late joiners can sync up
+    private func broadcastCurrentVotes() async {
+        guard let viewModel = viewModel else { return }
+
+        // Only broadcast our own votes (other users will broadcast theirs)
+        for (itemId, voters) in viewModel.playlistVotes {
+            if voters.contains(where: { $0.caseInsensitiveCompare(viewModel.participantId) == .orderedSame }) {
+                let syncMsg = SyncMessage(
+                    type: .chat,
+                    timestamp: 0,
+                    isPlaying: nil,
+                    senderId: viewModel.participantId,
+                    chatText: "LOBBY_VOTE:\(itemId)",
+                    chatUsername: viewModel.appState?.currentUsername ?? "Host"
+                )
+                try? await viewModel.realtimeManager?.sendSyncMessage(syncMsg)
+                NSLog("📡 Vote sync: Re-broadcasted vote for item \(itemId.prefix(8)) to new joiner")
+            }
+        }
     }
 
     private func handleLobbyReadyChange(_ syncMessage: SyncMessage, isReady: Bool) {

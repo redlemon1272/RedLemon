@@ -1,0 +1,963 @@
+2026-01-09 21:40:30.050 RedLemon[27252:589783] 🪟 Set initial window to expanded size: (0.0, 141.0, 1280.0, 634.0)
+2026-01-09 21:40:30.050 RedLemon[27252:589783] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-09 21:40:30.097 RedLemon[27252:589783] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-09 21:40:30.123 RedLemon[27252:589783] ✅ Playback state reset complete - starting in browse view
+2026-01-09 21:40:30.123 RedLemon[27252:589783] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-09 21:40:30.123 RedLemon[27252:589783] 🧪 Testing Profile: debug
+2026-01-09 21:40:30.127 RedLemon[27252:589790] 📂 Loaded 5 credential(s) from cache
+2026-01-09 21:40:30.129 RedLemon[27252:589783] ✅ Keychain: Found stored username: lemontom
+2026-01-09 21:40:30.129 RedLemon[27252:589783] 🔍 Supabase: Looking up user 'lemontom' in database...
+2026-01-09 21:40:30.130 RedLemon[27252:589790] 🔍 SupabaseClient: Looking up user by username 'lemontom'
+2026-01-09 21:40:30.851 RedLemon[27252:589789] 📡 SupabaseClient: User lookup response received (400 bytes)
+2026-01-09 21:40:30.856 RedLemon[27252:589789] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-09 21:40:30.856 RedLemon[27252:589789] 👤 SupabaseClient: Found user - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-09 21:40:30.882 RedLemon[27252:589783] ✅ AUTH SUCCESS: User authenticated - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-09 21:40:30.883 RedLemon[27252:589783] 🎯 AppState: currentUsername=lemontom, currentUserId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 21:40:33.628 RedLemon[27252:589783] 🏁 AUTH COMPLETE: Final state - username=lemontom, userId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-09 21:40:33.628 RedLemon[27252:589783] 🚀 RedLemon: Starting HTTP server...
+2026-01-09 21:40:33.628 RedLemon[27252:589783] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/RedLemon-Native
+2026-01-09 21:40:33.638 RedLemon[27252:589783] ✅ RedLemon: HTTPServer instance created
+2026-01-09 21:40:33.643 RedLemon[27252:589788] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"DC537DBA-CD36-4AE8-B080-B178B5A03890","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ [EventsConfig] Fetched movie_events version 1493 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1493, 411 movies)
+✅ [EventsView] Loaded 411 movies from config version 1493
+🗓 AppState: Updated schedule epoch to 2026-01-07 16:47:45 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-10 04:25:45 +0000
+⏰ AppState: Scheduling update in 6314 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1293847/img (1002992 bytes)
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+⏰ AppState: Next schedule update set for Event End: 2026-01-10 04:25:45 +0000
+⏰ AppState: Scheduling update in 6313 seconds
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"64D39423-0A17-41A2-8E00-51F39149DA5F","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"62857cca-edcd-11f0-b9b4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-TKGucn86Ag7i","phx_ref_prev":"GIk-S6yZyvY6Ag7C","is_premium":true,"last_seen":"2026-01-10T02:40:27.456Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-10 04:25:45 +0000
+⏰ AppState: Scheduling update in 6312 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bc3fbf82-edcd-11f0-802f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-Teq2FXo6AhFC","is_premium":true,"last_seen":"2026-01-10T02:40:32.912Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"1AC6EE8D-F95C-4C4E-ADD2-A84EE944DBAD","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":6798732,"event":"INSERT","filter":"receiver_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"},{"id":83853945,"event":"INSERT","filter":"sender_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-09 21:40:34.238 RedLemon[27252:589788] 📡 StreamService: Fetching metadata for tt1293847...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+[2026-01-10T02:40:33Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: xXx: Return of Xander Cage (Live: true)
+   Event start time: 2026-01-10 02:28:45 +0000
+   Event duration: 7020.0s
+   Current time: 2026-01-10 02:40:33 +0000
+   Is Live: true
+   Is In Lobby: false
+📝 Creating new event room: event_tt1293847
+⚡️ Resolving stream for system event creation...
+[2026-01-10T02:40:34Z] [INFO] [StreamService.swift:90] 🎬 StreamService: Starting resolution for: xXx: Return of Xander Cage
+[ INFO ] GET /api/metadata/meta/movie/tt1293847 [request-id: 6040D5AE-F54D-405E-9332-8687AF90D2BB]
+2026-01-09 21:40:34.388 RedLemon[27252:589788] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-09 21:40:34.388 RedLemon[27252:589788] ✅ StreamService: Metadata loaded: xXx: Return of Xander Cage
+2026-01-09 21:40:34.388 RedLemon[27252:589788] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-09 21:40:34.389 RedLemon[27252:589788] ⚡️ StreamResolver: Resolving streams for tt1293847 (S0E0)
+2026-01-09 21:40:34.750 RedLemon[27252:589788]    📅 Filtering by year: 2017
+2026-01-09 21:40:34.954 RedLemon[27252:589790] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-09 21:40:34.954 RedLemon[27252:589790] 🔍 ProviderManager: Fetching streams for tt1293847...
+2026-01-09 21:40:34.956 RedLemon[27252:589809] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-09 21:40:34.956 RedLemon[27252:589810] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-09 21:40:34.956 RedLemon[27252:589810] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22***%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt1293847.json
+2026-01-09 21:40:34.956 RedLemon[27252:589809] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-09 21:40:34.956 RedLemon[27252:589810] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt1293847.json
+2026-01-09 21:40:34.956 RedLemon[27252:589809] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt1293847.json...
+2026-01-09 21:40:34.956 RedLemon[27252:589809] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt1293847.json
+2026-01-09 21:40:35.733 RedLemon[27252:589783] ✅ RedLemon: Server marked as ready
+2026-01-09 21:40:35.768 RedLemon[27252:589783] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-09 21:40:35.768 RedLemon[27252:589783] 🔍 Performing startup checks...
+2026-01-09 21:40:35.768 RedLemon[27252:589783] ✅ Username-based authentication ready
+2026-01-09 21:40:37.619 RedLemon[27252:589783] 🔍 Performing startup checks...
+2026-01-09 21:40:37.620 RedLemon[27252:589783] ✅ Username-based authentication ready
+2026-01-09 21:40:38.847 RedLemon[27252:589783] 🔄 Checking for app updates...
+2026-01-09 21:40:43.001 RedLemon[27252:589788] ❌ Provider debridsearch failed: Error Domain=NSURLErrorDomain Code=-1001 "The request timed out." UserInfo={_kCFStreamErrorCodeKey=-2102, NSUnderlyingError=0x7f809b7f04e0 {Error Domain=kCFErrorDomainCFNetwork Code=-1001 "(null)" UserInfo={_kCFStreamErrorCodeKey=-2102, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <56FF8722-B306-48D4-AE16-24991DEACAA4>.<4>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <56FF8722-B306-48D4-AE16-24991DEACAA4>.<4>"
+), NSLocalizedDescription=The request timed out., NSErrorFailingURLStringKey=https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA2                     0ebridProvider23A2ealDebrid27D/stream/movie/tt1293847.json, NSErrorFailingURLKey=https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA2                     0ebridProvider23A2ealDebrid27D/stream/movie/tt1293847.json, _kCFStreamErrorDomainKey=4}
+2026-01-09 21:40:44.960 RedLemon[27252:589829] ❌ Torrentio: Request failed - The request timed out.
+2026-01-09 21:40:44.961 RedLemon[27252:589829] ❌ Provider torrentio failed: httpError(statusCode: 0)
+2026-01-09 21:40:44.961 RedLemon[27252:589788] ✅ ProviderManager: Fetched 1 raw, returning 1 unique streams
+2026-01-09 21:40:44.962 RedLemon[27252:589788] 📦 StreamResolver: Received 1 raw streams, bucketing...
+2026-01-09 21:40:45.281 RedLemon[27252:589789] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-09 21:40:45.281 RedLemon[27252:589789] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-09 21:40:45.281 RedLemon[27252:589789] 🔍 DEBUG: Processing subtitle URL: /subtitle/61729-1557627.zip
+2026-01-09 21:40:45.281 RedLemon[27252:589829] 🔍 DEBUG: Processing subtitle URL: /subtitle/3501614-8424038.zip
+2026-01-09 21:40:45.281 RedLemon[27252:589788] 🔍 DEBUG: Processing subtitle URL: /subtitle/3470173-8393281.zip
+2026-01-09 21:40:45.281 RedLemon[27252:589810] 🔍 DEBUG: Processing subtitle URL: /subtitle/61726-1557629.zip
+2026-01-09 21:40:45.281 RedLemon[27252:589829] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 21:40:45.281 RedLemon[27252:589789] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 21:40:45.281 RedLemon[27252:589810] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 21:40:45.281 RedLemon[27252:589788] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 21:40:45.281 RedLemon[27252:589810] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzI2LTE1NTc2Mjkuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+2026-01-09 21:40:45.281 RedLemon[27252:589829] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDE2MTQtODQyNDAzOC56aXA=?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+2026-01-09 21:40:45.282 RedLemon[27252:589788] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0NzAxNzMtODM5MzI4MS56aXA=?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+2026-01-09 21:40:45.282 RedLemon[27252:589789] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzI5LTE1NTc2Mjcuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+2026-01-09 21:40:45.282 RedLemon[27252:589810] 🔍 DEBUG: Processing subtitle URL: /subtitle/61727-1555556.zip
+2026-01-09 21:40:45.282 RedLemon[27252:589810] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 21:40:45.282 RedLemon[27252:589810] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzI3LTE1NTU1NTYuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+2026-01-09 21:40:45.282 RedLemon[27252:589788] 🎬 SupabaseClient: createRoom called for id: event_tt1293847 - ENTRY
+2026-01-09 21:40:45.283 RedLemon[27252:589788] 🎬 SupabaseClient: Creating room 'event_tt1293847' for host 'RedLemon Events'...
+2026-01-09 21:40:45.283 RedLemon[27252:589788] 🔐 Signed request to /rooms
+2026-01-09 21:40:45.684 RedLemon[27252:589788] ✅ SupabaseClient: Room creation request completed (received response)
+2026-01-09 21:40:46.410 RedLemon[27252:589783] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1293847/img
+2026-01-09 21:40:46.412 RedLemon[27252:589783] ⏳ Background art loading...
+2026-01-09 21:40:46.413 RedLemon[27252:589783] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1293847/img
+2026-01-09 21:40:46.415 RedLemon[27252:589783] ⏳ Logo loading...
+2026-01-09 21:40:46.450 RedLemon[27252:589783]    Quality: 1080p
+2026-01-09 21:40:46.450 RedLemon[27252:589783]    Mode: watchParty
+2026-01-09 21:40:46.450 RedLemon[27252:589783] 📡 Fetching metadata for tt1293847...
+2026-01-09 21:40:46.496 RedLemon[27252:589788] ✅ StreamService: Using provided metadata: xXx: Return of Xander Cage
+2026-01-09 21:40:46.496 RedLemon[27252:589788] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-09 21:40:46.496 RedLemon[27252:589788] ⚡️ StreamResolver: Resolving streams for tt1293847 (S0E0)
+2026-01-09 21:40:46.538 RedLemon[27252:589783] ✅ Logo loaded successfully
+2026-01-09 21:40:46.584 RedLemon[27252:589783] ✅ Background art loaded successfully
+2026-01-09 21:40:46.627 RedLemon[27252:589810]    📅 Filtering by year: 2017
+2026-01-09 21:40:46.900 RedLemon[27252:589829] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-09 21:40:46.900 RedLemon[27252:589829] 🔍 ProviderManager: Fetching streams for tt1293847...
+2026-01-09 21:40:46.900 RedLemon[27252:589829] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-09 21:40:46.901 RedLemon[27252:589829] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22***%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt1293847.json
+2026-01-09 21:40:46.901 RedLemon[27252:589829] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt1293847.json
+2026-01-09 21:40:46.901 RedLemon[27252:589789] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-09 21:40:46.901 RedLemon[27252:589789] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-09 21:40:46.902 RedLemon[27252:589789] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt1293847.json...
+2026-01-09 21:40:46.902 RedLemon[27252:589789] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt1293847.json
+2026-01-09 21:40:46.978 RedLemon[27252:589810] 📡 Torrentio: HTTP 200, received 19752 bytes
+2026-01-09 21:40:46.986 RedLemon[27252:589810] ✅ Torrentio: Parsed 35 streams from 35 raw
+2026-01-09 21:40:50.726 RedLemon[27252:589788] ✅ DebridSearch: Parsed 2 streams
+2026-01-09 21:40:50.726 RedLemon[27252:589997] ✅ ProviderManager: Fetched 38 raw, returning 38 unique streams
+2026-01-09 21:40:50.726 RedLemon[27252:589997] 📦 StreamResolver: Received 38 raw streams, bucketing...
+💾 Cache SET: Metadata[meta_movie_tt1293847]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt1293847.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+✅ Comet: Parsed 1 valid streams
+⚠️ MediaFusion: HTTP 418
+💰 LicenseManager: Starting hybrid subscription check...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":2,"assets_found":[{"chain":"base","currency":"ETH","amount":86964473127,"amountFloat":8.6964473127e-8}],"prices":{"btc":90525,"eth":3081.955},"logs":[],"rpc_logs":["Scanning btc address: bc1qmlnzfps4fg3lupud249k884zl94u7f569wnt43","BTC Response: {\"address\":\"bc1qmlnzfps4fg3lupud249k884zl94u7f569wnt43\",\"chain_stats\":{\"funded_txo_count\":0,\"funded_...","Scanning evm address: 0x9505FE7C8de86F229CD8F0eE4B79108D3d3471D1","base eth_getBalance: 0x143f7c8d27","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","arb eth_getBalance: 0x0"]}}
+👤 LicenseManager: Profile expiry: Optional(2026-01-18 17:23:32 +0000)
+🎉 Subscription updated! Expires: 2026-01-18 17:23:32 +0000
+💰 LicenseManager: Starting hybrid subscription check...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":2,"assets_found":[{"chain":"base","currency":"ETH","amount":86964473127,"amountFloat":8.6964473127e-8}],"prices":{"btc":90525,"eth":3081.955},"logs":[],"rpc_logs":["Scanning btc address: bc1qmlnzfps4fg3lupud249k884zl94u7f569wnt43","BTC Response: {\"address\":\"bc1qmlnzfps4fg3lupud249k884zl94u7f569wnt43\",\"chain_stats\":{\"funded_txo_count\":0,\"funded_...","Scanning evm address: 0x9505FE7C8de86F229CD8F0eE4B79108D3d3471D1","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0x143f7c8d27","arb eth_getBalance: 0x0"]}}
+👤 LicenseManager: Profile expiry: Optional(2026-01-18 17:23:32 +0000)
+🎉 Subscription updated! Expires: 2026-01-18 17:23:32 +0000
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.182s (RTT: 393ms)
+   Local:  2026-01-10 02:40:39 +0000
+   Server: 2026-01-10 02:40:39 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62857cca-edcd-11f0-b9b4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-UB76ndE6Am0B","phx_ref_prev":"GIk-TKGucn86Ag7i","is_premium":true,"last_seen":"2026-01-10T02:40:42.438Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"62857cca-edcd-11f0-b9b4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-TKGucn86Ag7i","phx_ref_prev":"GIk-S6yZyvY6Ag7C","is_premium":true,"last_seen":"2026-01-10T02:40:27.456Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📉 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 went offline (No active refs)
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+⏰ AppState: Next schedule update set for Event End: 2026-01-10 04:25:45 +0000
+⏰ AppState: Scheduling update in 6302 seconds
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt1293847.json
+✅ Metadata fetched from Cinemeta for tt1293847: xXx: Return of Xander Cage (2017)
+🎯 Target title for matching: xXx: Return of Xander Cage
+   📅 Year filter (2017): 1 → 0 streams
+   ⚠️ Year filter too strict! Restoring 1 streams to attempt title matching.
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt1293847 (movie)
+   ℹ️ Fallback Name: xXx: Return of Xander Cage (2017)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Attached best sub for '[⛔️] Comet...': xXx.Return.of.Xander.Cage.2017...
+   --- Processing Bucket: 2160p (Input: 0) ---
+   ✅ Bucket 2160p Final Count: 0
+   --- Processing Bucket: 1080p (Input: 0) ---
+   ✅ Bucket 1080p Final Count: 0
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 1) ---
+   ✅ Bucket 480p Final Count: 1
+✅ StreamResolver: Quality buckets ready
+   ➕ Added 1 480p streams as backup
+[2026-01-10T02:40:45Z] [INFO] [StreamService.swift:261] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+🚫 StreamService: Applying Extended Cut Filter (Event Mode)
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+📦 StreamService: 1 streams remain after size filter
+🔄 StreamService: Trying stream 1/1: [⛔️] Comet
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: [⛔️] Comet
+📊 Stream Size: Unknown
+📦 StreamService: Returning 0 candidate streams for fallback
+✅ Selected seed subtitle: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzI2LTE1NTc2Mjkuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+✅ Stream resolved for system event: [⛔️] Comet
+   Hash: nil
+   URL: https://comet.elfhosted.com/pl...
+🎬 Live event - calculating position: 721.5062835216522 seconds
+   Event start time: 2026-01-10 02:28:45 +0000
+   Current time: 2026-01-10 02:40:46 +0000
+   Room createdAt: 2026-01-10 02:28:45 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 721.5062835216522
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: xXx: Return of Xander Cage
+✅ Cache HIT: Metadata[meta_movie_tt1293847]
+[2026-01-10T02:40:46Z] [INFO] [StreamService.swift:90] 🎬 StreamService: Starting resolution for: xXx: Return of Xander Cage
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 0 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt1293847.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+✅ Comet: Parsed 1 valid streams
+⚠️ MediaFusion: HTTP 418
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62857cca-edcd-11f0-b9b4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-UWrEPBE6AhOC","phx_ref_prev":"GIk-UB76ndE6Am0B","is_premium":true,"last_seen":"2026-01-10T02:40:48.003Z","room_id":"event_tt1293847","started_at":"2026-01-10T02:40:48.003Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1293847","watching_title":"xXx: Return of Xander Cage","watching_type":"movie"}]}},"leaves":{"62857cca-edcd-11f0-b9b4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-UB76ndE6Am0B","phx_ref_prev":"GIk-TKGucn86Ag7i","is_premium":true,"last_seen":"2026-01-10T02:40:42.438Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62857cca-edcd-11f0-b9b4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-UZRkZOc6Am0h","phx_ref_prev":"GIk-UWrEPBE6AhOC","is_premium":true,"last_seen":"2026-01-10T02:40:48.703Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"62857cca-edcd-11f0-b9b4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-UWrEPBE6AhOC","phx_ref_prev":"GIk-UB76ndE6Am0B","is_premium":true,"last_seen":"2026-01-10T02:40:48.003Z","room_id":"event_tt1293847","started_at":"2026-01-10T02:40:48.003Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1293847","watching_title":"xXx: Return of Xander Cage","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Metadata cache hit for tt1293847: xXx: Return of Xander Cage
+🎯 Target title for matching: xXx: Return of Xander Cage
+   📅 Year filter (2017): 38 → 33 streams
+   🚫 RESOLVER BLOCKING 3D (Strict): xXx Return Of Xander Cage (2017) 3D HSBS 1080p BluRay H264 DolbyD 5.1 + nickarad
+👤 5 💾 2.01 GB ⚙️ ThePirateBay
+   🚫 RESOLVER BLOCKING 3D (Strict): xXx: Return of Xander Cage 2017 3D BluRay
+👤 9 💾 1.63 GB ⚙️ YTS
+   🚫 RESOLVER FILTERED 3D: 33 → 31 streams
+   🚫 RESOLVER BLOCKING non-English audio: xXx.Return.of.Xander.Cage.2017.FRENCH.720p.BluRay.x264-VENUE
+👤 1 💾 4.37 GB ⚙️ Torrent9
+🇫🇷 (Audio)
+   🎵 RESOLVER FILTERED audio language: 31 → 30 streams
+🔍 Searching SubDL: tt1293847 (movie)
+   ℹ️ Fallback Name: xXx: Return of Xander Cage (2017)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': XXx.Return.Of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx: Return of Xander Cage 201...': XXx.Return.Of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx 1 2 3 - Triple X Trilogy 2...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx - Il Ritorno di Xander Cag...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'Три икса: Мировое господство /...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx: Return of Xander Cage 201...': XXx.Return.Of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': XXx.Return.Of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': XXx.Return.Of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': XXx.Return.Of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx Return of Xander Cage 2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx Saga (2002-2017) 1080p H26...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx Return of Xander Cage 2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx Reativado 2017 (1080p)
+👤 2...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.Of.Xander.Cage.2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx Return Of Xander Cage (201...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'Xxx.return.of.xander.cage.2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx Return of Xander Cage 2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx- Return of Xander Cage (20...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx: Return of Xander Cage (20...': xXx.Return.of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': xXx Return of Xander Cage 2017...
+✅ StreamResolver: Attached best sub for 'XXx Return Of Xander Cage (201...': XXx.Return.Of.Xander.Cage.2017...
+✅ StreamResolver: Attached best sub for 'xXx.Return.of.Xander.Cage.2017...': xXx.Return.of.Xander.Cage.2017...
+   --- Processing Bucket: 2160p (Input: 11) ---
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 2160p BluRay
+👤 23 💾 4.81 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 2160p BluRay
+👤 23 💾 4.81 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 2160p BluRay
+👤 23 💾 4.81 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 2160p BluRay
+👤 23 💾 4.81 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 2160p BluRay
+👤 23 💾 4.81 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 2160p BluRay
+👤 23 💾 4.81 GB ⚙️ YTS
+   ✅ Bucket 2160p Final Count: 11
+   --- Processing Bucket: 1080p (Input: 16) ---
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCo2026-01-09 21:40:58.507 RedLemon[27252:589997] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-09 21:40:58.507 RedLemon[27252:589997] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-09 21:40:58.507 RedLemon[27252:589997] 🔍 DEBUG: Processing subtitle URL: /subtitle/61726-1557629.zip
+2026-01-09 21:40:58.507 RedLemon[27252:589809] 🔍 DEBUG: Processing subtitle URL: /subtitle/61728-1518423.zip
+2026-01-09 21:40:58.507 RedLemon[27252:589789] 🔍 DEBUG: Processing subtitle URL: /subtitle/61729-1557627.zip
+2026-01-09 21:40:58.507 RedLemon[27252:589829] 🔍 DEBUG: Processing subtitle URL: /subtitle/61759-1554881.zip
+2026-01-09 21:40:58.507 RedLemon[27252:589997] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 21:40:58.507 RedLemon[27252:589829] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 21:40:58.507 RedLemon[27252:589789] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 21:40:58.507 RedLemon[27252:589809] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 21:40:58.508 RedLemon[27252:589809] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzI4LTE1MTg0MjMuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+2026-01-09 21:40:58.508 RedLemon[27252:589997] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzI2LTE1NTc2Mjkuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+2026-01-09 21:40:58.508 RedLemon[27252:589789] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzI5LTE1NTc2Mjcuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+2026-01-09 21:40:58.508 RedLemon[27252:589829] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzU5LTE1NTQ4ODEuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+2026-01-09 21:40:58.508 RedLemon[27252:589809] 🔍 DEBUG: Processing subtitle URL: /subtitle/61755-1555324.zip
+2026-01-09 21:40:58.508 RedLemon[27252:589809] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-09 21:40:58.509 RedLemon[27252:589809] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzU1LTE1NTUzMjQuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+2026-01-09 21:40:58.517 RedLemon[27252:589783] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi9-4.download.real-debrid.com/d/W4MWHRK74DMHY108/x, subtitles: 5
+2026-01-09 21:40:58.600 RedLemon[27252:589783] ✅ Stream ready, starting playback...
+2026-01-09 21:40:58.600 RedLemon[27252:589783] 🖥️ WindowManager: enterFullscreen() called
+2026-01-09 21:40:58.601 RedLemon[27252:589783]    Window: <SwiftUI.SwiftUIWindow: 0x7f809c731d70>
+2026-01-09 21:40:58.601 RedLemon[27252:589783]    Is fullscreen: 0
+2026-01-09 21:40:58.601 RedLemon[27252:589783]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-09 21:40:58.706 RedLemon[27252:589783] 🖼️ Setting up MPV with native macOS video output...
+2026-01-09 21:40:58.711 RedLemon[27252:589783] ✅ MPV initialized with native GPU rendering
+2026-01-09 21:40:58.809 RedLemon[27252:589783] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-09 21:40:58.809 RedLemon[27252:589783] 🎉 Starting watch party sync - Room: event_tt1293847, Host: NO
+2026-01-09 21:40:58.812 RedLemon[27252:589783] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-09 21:40:58.847 RedLemon[27252:589783] 🔄 Starting chat polling for room: event_tt1293847
+2026-01-09 21:40:58.851 RedLemon[27252:589783] 💓 Started playback heartbeat loop
+2026-01-09 21:40:58.853 RedLemon[27252:589783] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-09 21:40:58.853 RedLemon[27252:589783] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-09 21:40:58.853 RedLemon[27252:589783] 🎬🎬🎬 Subtitles: 5
+2026-01-09 21:40:58.854 RedLemon[27252:589783] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: xXx: Return of Xander Cage
+2026-01-09 21:40:58.855 RedLemon[27252:589783] 🎬🎬🎬 streamURL: https://chi9-4.download.real-debrid.com/d/W4MWHRK74DMHY108/x
+2026-01-09 21:40:58.855 RedLemon[27252:589783] 🎬🎬🎬 subtitles: 5
+2026-01-09 21:40:58.857 RedLemon[27252:589783] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-09 21:40:58.867 RedLemon[27252:589809] 🔐 SupabaseClient: Signing Identity Payload: '176801285896e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-09 21:40:58.868 RedLemon[27252:589809] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-09 21:40:58.868 RedLemon[27252:589810] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-09 21:40:58.868 RedLemon[27252:589829] 🎬 MPV: Current video filename set to: 
+2026-01-09 21:40:58.868 RedLemon[27252:589810] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzI4LTE1MTg0MjMuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+2026-01-09 21:40:58.868 RedLemon[27252:589829] 🎬 MPV loadVideo called with URL: https://chi9-4.download.real-debrid.com/d/W4MWHRK7 (Encoded: https://chi9-4.download.real-debrid.com/d/W4MWHRK7), autoplay: false, expectedSubs: 3
+2026-01-09 21:40:58.868 RedLemon[27252:589829] 🎬 MPV executing: loadfile "https://chi9-4.download.real-debrid.com/d/W4MWHRK74DMHY108/xXx%20Return%20of%20Xander%20Cage%202017%201080p%20ATVP%20MGMP%20WEB-DL%20DD%205%201%20H%20264-PiRaTeS.mkv"
+2026-01-09 21:40:58.868 RedLemon[27252:589829] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+rSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): XXx Return Of Xander Cage (2017) [1080p] [YTS.AG]
+💾 1.63 GB
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): XXx Return Of Xander Cage (2017) [1080p] [YTS.AG]
+💾 1.63 GB
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): XXx Return Of Xander Cage (2017) [1080p] [YTS.AG]
+💾 1.63 GB
+   📉 Penalizing Ad-Supported Release (YTS): xXx Saga (2002-2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX
+xXx 3 - Il ritorno di Xander Cage - Return of Xander Cage (2017) 1080p H265 AC3 5.1 ITA ENG sub ita eng Ph4nt0mX.mkv
+👤 3 💾 3.2 GB ⚙️ ilCorSaRoNeRo
+🇬🇧 / 🇮🇹
+   📉 Penalizing Ad-Supported Release (YTS): xXx: Return of Xander Cage 2017 1080p BluRay
+👤 62 💾 1.63 GB ⚙️ YTS
+   📉 Penalizing Ad-Supported Release (YTS): XXx Return Of Xander Cage (2017) [1080p] [YTS.AG]
+💾 1.63 GB
+   ✅ Bucket 1080p Final Count: 16
+   --- Processing Bucket: 720p (Input: 3) ---
+   ✅ Bucket 720p Final Count: 3
+   --- Processing Bucket: 480p (Input: 0) ---
+   ✅ Bucket 480p Final Count: 0
+📦 2160p Primary: xXx.Return.of.Xander.Cage.2017.2160p.BluRay.x264.8bit.SDR.DTS-HD.MA.TrueHD.7.1.Atmos-SWTYBLZ
+👤 6 💾 42.79 GB ⚙️ RARBG
+📦 1080p Primary: xXx.Return.Of.Xander.Cage.2017.1080p.BluRay.x265-RARBG
+👤 1 💾 1.66 GB ⚙️ RARBG
+🇬🇧 / 🇷🇺 / 🇵🇹 / 🇪🇸 / 🇨🇳
+📦 720p Primary: xXx- Return of Xander Cage (2017) [720p] English
+👤 24 💾 790.6 MB ⚙️ ThePirateBay
+✅ StreamResolver: Quality buckets ready
+   ➕ Added 3 720p streams as backup
+[2026-01-10T02:40:51Z] [INFO] [StreamService.swift:261] 📦 StreamService: Found 14 total streams to try (across all qualities)
+✅ StreamService: Found 13 H.264 streams (Tier 1)
+🚫 StreamService: Blocking stream with restricted keyword: xXx.Return.of.Xander.Cage.2017.1080p.BluRay.REMUX.AVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT
+👤 1 💾 27.75 GB ⚙️ RARBG
+🚫 StreamService: Blocking stream with restricted keyword: xXx.Return.of.Xander.Cage.2017.BD3D.1080p.BluRay.REMUX.AVC.TrueHD.7.1.Atmos-Asmo
+👤 1 💾 39.9 GB ⚙️ TorrentGalaxy
+✅ StreamService: Found 7 'Clean' English streams. Deprioritizing 4 localized/dual streams.
+📦 StreamService: 7 streams remain after size filter
+🔄 StreamService: Trying stream 1/7: xXx Return Of Xander Cage (2017)-Vin Diesel & Donnie Yen-1080p-H264-AC 3 (DolbyDigital-5.1) & nickarad
+👤 1 💾 2.01 GB ⚙️ 1337x
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/b61a5bbeca848d170c168b9aeb3654a7dab0ed80/null/3/xXx%20Return%20Of%20Xander%20Cage%20(2017)%201080p-H264-AC%203%20(DolbyDigital-5.1)%20%26%20nickarad.mp4
+📊 AppState: Polled participant counts - Active: ["tt1293847": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-10 04:25:45 +0000
+⏰ AppState: Scheduling update in 6293 seconds
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bc3fbf82-edcd-11f0-802f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-UpL7qyc6AhOi","phx_ref_prev":"GIk-Teq2FXo6AhFC","is_premium":true,"last_seen":"2026-01-10T02:40:52.914Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"bc3fbf82-edcd-11f0-802f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-Teq2FXo6AhFC","is_premium":true,"last_seen":"2026-01-10T02:40:32.912Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+✅ StreamService: Resolved to: https://torrentio.strem.fun/videos/downloading_v2.mp4
+🚫 StreamService: Detected Torrentio error placeholder video
+🚫 StreamService: Blocked suspicious file extension in resolved URL. Skipping stream.
+[2026-01-10T02:40:54Z] [WARNING] [StreamService.swift:563] ❌ StreamService: [Attempt 1/7] Unlock failed for xXx Return Of Xander Cage (2017)-Vin Diesel & Donnie Yen-1080p-H264-AC 3 (DolbyDigital-5.1) & nickarad
+👤 1 💾 2.01 GB ⚙️ 1337x: Stream resolved to invalid file type
+🔄 StreamService: Trying stream 2/7: xXx Return of Xander Cage 2017 1080p BDRip Tamil+Telugu+English
+👤 1 💾 2.62 GB ⚙️ ThePirateBay
+🇬🇧 / 🇮🇳
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/2370685eacc7c375ec1de00290e60abe3e95e668/null/undefined/xXx%20Return%20of%20Xander%20Cage%202017%201080p%20BDRip%20Tamil%2BTelugu%2BEnglish
+✅ StreamService: Resolved to: https://torrentio.strem.fun/videos/downloading_v2.mp4
+🚫 StreamService: Detected Torrentio error placeholder video
+🚫 StreamService: Blocked suspicious file extension in resolved URL. Skipping stream.
+[2026-01-10T02:40:55Z] [WARNING] [StreamService.swift:563] ❌ StreamService: [Attempt 2/7] Unlock failed for xXx Return of Xander Cage 2017 1080p BDRip Tamil+Telugu+English
+👤 1 💾 2.62 GB ⚙️ ThePirateBay
+🇬🇧 / 🇮🇳: Stream resolved to invalid file type
+🔄 StreamService: Trying stream 3/7: xXx Return of Xander Cage 2017 1080p ATVP MGMP WEB-DL DD 5 1 H 264-PiRaTeS
+👤 3 💾 5.21 GB ⚙️ ThePirateBay
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/3d56a25370ffe39f62e4cbade55da9a430201398/null/1/xXx%20Return%20of%20Xander%20Cage%202017%201080p%20ATVP%20MGMP%20WEB-DL%20DD%205%201%20H%20264-PiRaTeS.mkv
+✅ StreamService: Resolved to: https://chi9-4.download.real-debrid.com/d/W4MWHRK74DMHY108/xXx%20Return%20of%20Xander%20Cage%202017%201080p%20ATVP%20MGMP%20WEB-DL%20DD%205%201%20H%20264-PiRaTeS.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: xXx Return of Xander Cage 2017 1080p ATVP MGMP WEB-DL DD 5 1 H 264-PiRaTeS
+👤 3 💾 5.21 GB ⚙️ ThePirateBay
+📊 Stream Size: 5.21 GB
+📦 StreamService: Appending 9 fallback streams (alternate codecs)
+📦 StreamService: Returning 13 candidate streams for fallback
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi9-4.download.real-debrid.com/d/W4MWHRK74DMHY108/x
+   Display Title: xXx: Return of Xander Cage
+   Subtitle URLs: 5
+      [0] xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV
+      [1] xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT
+      [2] xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT
+      [3] xXx.Return.of.Xander.Cage.2017.BRRip.XviD.AC3-EVO + iFT
+      [4] xXx.Return.of.Xander.Cage.2017.BRRip.XViD-ETRG + EVO
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🧠 StreamService: Marked hash 3d56a253 as attempted for tt1293847
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎬 DisplayLink: reportSwap() (throttled)
+🎉 Starting watch party: roomId=event_tt1293847, isHost=false
+🔌 Setting up Realtime channel: watch-party:event_tt1293847
+   Role: Guest
+   User ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt1293847
+📡 Connection state: connected
+✅ Realtime channel setup complete
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: xXx: Return of Xander Cage
+   IMDB: tt1293847
+   URL: https://chi9-4.download.real-debrid.com/d/W4MWHRK74DMHY108/x...
+   Hash: 3d56a253...
+   Source: WEB-DL
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+📡 Fetching metadata for tt1293847 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt1293847]
+📝 Pre-loading external subtitles (Top 3)...
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYxNzI4LTE1MTg0MjMuemlw [request-id: FD449199-5159-4E89-B696-66B9027F2D77]
+2026-01-09 21:40:59.256 RedLemon[27252:589783] 💓 Playback heartbeat sent for room: event_tt1293847
+2026-01-09 21:40:59.387 RedLemon[27252:589789] ✅ Subtitle 1 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_F3EB3C08-A31B-444A-985D-0474579A8F2E.vtt
+2026-01-09 21:40:59.387 RedLemon[27252:589789] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_F3EB3C08-A31B-444A-985D-047
+2026-01-09 21:40:59.409 RedLemon[27252:589789] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 21:40:59.409 RedLemon[27252:589789] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzI2LTE1NTc2Mjkuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+📄 Subtitle request: L3N1YnRpdGxlLzYxNzI4... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/61728-1518423.zip
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+📨 Received: {"ref":"668FDA77-F651-4936-B5D6-0003CA7FAB31","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt1293847"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt1293847"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1293847"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"cbb4eb54-edcd-11f0-8401-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-U_RoPF7Y-RQC","is_host":false,"joined_at":1768012858.836997,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt1293847"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bc3fbf82-edcd-11f0-802f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-U_WV5ok6AhQi","phx_ref_prev":"GIk-UpL7qyc6AhOi","is_premium":true,"last_seen":"2026-01-10T02:40:58.867Z","room_id":"event_tt1293847","started_at":"2026-01-10T02:40:58.868Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1293847","watching_title":"xXx: Return of Xander Cage","watching_type":"movie"}]}},"leaves":{"bc3fbf82-edcd-11f0-802f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-UpL7qyc6AhOi","phx_ref_prev":"GIk-Teq2FXo6AhFC","is_premium":true,"last_seen":"2026-01-10T02:40:52.914Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+✅ Got background: https://images.metahub.space/background/medium/tt1293847/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1293847/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1293847/img...
+📡 SocialService: Updated status - online: xXx: Return of Xander Cage
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIk-U_RoPF7Y-RQC)
+⏰ AppState: Next schedule update set for Event End: 2026-01-10 04:25:45 +0000
+⏰ AppState: Scheduling update in 6286 seconds
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Download complete: 29977 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV.srt
+📦 Extracting specific file: xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYxNzI2LTE1NTc2Mjkuemlw [request-id: 6A9628A7-71D9-4152-AF80-4C99CA34B2DB]
+2026-01-09 21:41:00.001 RedLemon[27252:590102] ✅ Subtitle 2 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_09F0BE00-D24E-4F5E-8AF9-828DA448683B.vtt
+2026-01-09 21:41:00.001 RedLemon[27252:590102] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_09F0BE00-D24E-4F5E-8AF9-828
+2026-01-09 21:41:00.004 RedLemon[27252:590102] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 21:41:00.004 RedLemon[27252:590102] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYxNzI5LTE1NTc2Mjcuemlw?token=5952D3EB-B584-4C2D-951A-B73B7BBAB01F
+📄 Subtitle request: L3N1YnRpdGxlLzYxNzI2... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/61726-1557629.zip
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+✅ Download complete: 737 bytes
+📦 Detected ZIP archive, extracting...
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⚠️ No specific episode match found, using first file: xXx.Return.of.Xander.Cage.2017.BluRay.1080p.TrueHD.Atmos.7.1.AVC.REMUX-FraMeSToR.srt
+📦 Extracting specific file: xXx.Return.of.Xander.Cage.2017.BluRay.1080p.TrueHD.Atmos.7.1.AVC.REMUX-FraMeSToR.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYxNzI5LTE1NTc2Mjcuemlw [request-id: 85CDFB3C-252A-4DCD-9473-DC4A916DDE24]
+2026-01-09 21:41:00.458 RedLemon[27252:589997] ✅ Subtitle 3 downloaded to: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_C33502B8-F0CB-469D-B9D4-4F845AE99E4B.vtt
+2026-01-09 21:41:00.458 RedLemon[27252:589997] 📝 Loading subtitle from: /var/folders/jc/l80q3kbs1sd9bjsvc347d22r0000gn/T/sub_C33502B8-F0CB-469D-B9D4-4F8
+2026-01-09 21:41:00.464 RedLemon[27252:589997] ✅ External subtitle added to track list (not auto-selected)
+2026-01-09 21:41:00.464 RedLemon[27252:589997] 🔍 MPV track-list/count: 3
+2026-01-09 21:41:00.465 RedLemon[27252:589997] 🔍 Track 0 type: sub
+2026-01-09 21:41:00.465 RedLemon[27252:589997] ✅ Found subtitle track: ID=1, lang=en, title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, external=1
+2026-01-09 21:41:00.465 RedLemon[27252:589997] 🔍 Track 1 type: sub
+2026-01-09 21:41:00.465 RedLemon[27252:589997] ✅ Found subtitle track: ID=2, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:00.465 RedLemon[27252:589997] 🔍 Track 2 type: sub
+2026-01-09 21:41:00.465 RedLemon[27252:589997] ✅ Found subtitle track: ID=3, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:00.465 RedLemon[27252:589997] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 21:41:00.465 RedLemon[27252:589997]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 21:41:00.465 RedLemon[27252:589997]    Start[1]: ID=1, Title='xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', Lang='en', Ext=1
+2026-01-09 21:41:00.466 RedLemon[27252:589997]    Start[2]: ID=2, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:00.466 RedLemon[27252:589997]    Start[3]: ID=3, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:00.466 RedLemon[27252:589997] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-09 21:41:00.466 RedLemon[27252:589997]    Track: ID=0, Title=Off, External=0
+2026-01-09 21:41:00.466 RedLemon[27252:589997]    Track: ID=1, Title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, External=1
+2026-01-09 21:41:00.466 RedLemon[27252:589997]    Track: ID=2, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:00.466 RedLemon[27252:589997]    Track: ID=3, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:01.512 RedLemon[27252:589997] 🔍 MPV track-list/count: 3
+2026-01-09 21:41:01.512 RedLemon[27252:589997] 🔍 Track 0 type: sub
+2026-01-09 21:41:01.513 RedLemon[27252:589997] ✅ Found subtitle track: ID=1, lang=en, title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, external=1
+2026-01-09 21:41:01.513 RedLemon[27252:589997] 🔍 Track 1 type: sub
+2026-01-09 21:41:01.514 RedLemon[27252:589997] ✅ Found subtitle track: ID=2, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:01.514 RedLemon[27252:589997] 🔍 Track 2 type: sub
+2026-01-09 21:41:01.514 RedLemon[27252:589997] ✅ Found subtitle track: ID=3, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:01.514 RedLemon[27252:589997] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-09 21:41:01.514 RedLemon[27252:589997]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 21:41:01.514 RedLemon[27252:589997]    Start[1]: ID=1, Title='xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', Lang='en', Ext=1
+2026-01-09 21:41:01.514 RedLemon[27252:589997]    Start[2]: ID=2, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:01.514 RedLemon[27252:589997]    Start[3]: ID=3, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:01.515 RedLemon[27252:589997] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-09 21:41:01.515 RedLemon[27252:589997]    Track: ID=0, Title=Off, External=0
+2026-01-09 21:41:01.515 RedLemon[27252:589997]    Track: ID=1, Title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, External=1
+2026-01-09 21:41:01.515 RedLemon[27252:589997]    Track: ID=2, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:01.515 RedLemon[27252:589997]    Track: ID=3, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:02.081 RedLemon[27252:589783] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-09 21:41:02.307 RedLemon[27252:590102] 🔍 MPV track-list/count: 6
+2026-01-09 21:41:02.307 RedLemon[27252:590102] 🔍 Track 0 type: sub
+2026-01-09 21:41:02.307 RedLemon[27252:590102] ✅ Found subtitle track: ID=1, lang=en, title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, external=1
+2026-01-09 21:41:02.308 RedLemon[27252:590102] 🔍 Track 1 type: sub
+2026-01-09 21:41:02.308 RedLemon[27252:590102] ✅ Found subtitle track: ID=2, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:02.308 RedLemon[27252:590102] 🔍 Track 2 type: sub
+2026-01-09 21:41:02.309 RedLemon[27252:590102] ✅ Found subtitle track: ID=3, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:02.311 RedLemon[27252:590102] 🔍 Track 3 type: video
+2026-01-09 21:41:02.311 RedLemon[27252:590102] 🔍 Track 4 type: audio
+2026-01-09 21:41:02.311 RedLemon[27252:590102] 🔍 Track 5 type: sub
+2026-01-09 21:41:02.311 RedLemon[27252:590102] ✅ Found subtitle track: ID=4, lang=en, title=nil, external=0
+2026-01-09 21:41:02.311 RedLemon[27252:590102] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-09 21:41:02.311 RedLemon[27252:590102]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 21:41:02.311 RedLemon[27252:590102]    Start[1]: ID=1, Title='xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', Lang='en', Ext=1
+2026-01-09 21:41:02.311 RedLemon[27252:590102]    Start[2]: ID=2, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:02.311 RedLemon[27252:590102]    Start[3]: ID=3, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:02.311 RedLemon[27252:590102]    Start[4]: ID=4, Title='nil', Lang='en', Ext=0
+2026-01-09 21:41:02.312 RedLemon[27252:590102] ✅ SubtitleService: Scanned 5 tracks (Attempt 1/5)
+2026-01-09 21:41:02.312 RedLemon[27252:590102]    Track: ID=0, Title=Off, External=0
+2026-01-09 21:41:02.313 RedLemon[27252:590102]    Track: ID=1, Title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, External=1
+2026-01-09 21:41:02.313 RedLemon[27252:590102]    Track: ID=2, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:02.313 RedLemon[27252:590102]    Track: ID=3, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:02.313 RedLemon[27252:590102]    Track: ID=4, Title=English, External=0
+2026-01-09 21:41:02.516 RedLemon[27252:589997] 🔍 MPV track-list/count: 6
+2026-01-09 21:41:02.517 RedLemon[27252:589997] 🔍 Track 0 type: sub
+2026-01-09 21:41:02.517 RedLemon[27252:589997] ✅ Found subtitle track: ID=1, lang=en, title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, external=1
+2026-01-09 21:41:02.517 RedLemon[27252:589997] 🔍 Track 1 type: sub
+2026-01-09 21:41:02.517 RedLemon[27252:589997] ✅ Found subtitle track: ID=2, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:02.517 RedLemon[27252:589997] 🔍 Track 2 type: sub
+2026-01-09 21:41:02.518 RedLemon[27252:589997] ✅ Found subtitle track: ID=3, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:02.518 RedLemon[27252:589997] 🔍 Track 3 type: video
+2026-01-09 21:41:02.518 RedLemon[27252:589997] 🔍 Track 4 type: audio
+2026-01-09 21:41:02.518 RedLemon[27252:589997] 🔍 Track 5 type: sub
+2026-01-09 21:41:02.518 RedLemon[27252:589997] ✅ Found subtitle track: ID=4, lang=en, title=nil, external=0
+2026-01-09 21:41:02.518 RedLemon[27252:589997] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-09 21:41:02.518 RedLemon[27252:589997]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 21:41:02.518 RedLemon[27252:589997]    Start[1]: ID=1, Title='xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', Lang='en', Ext=1
+2026-01-09 21:41:02.518 RedLemon[27252:589997]    Start[2]: ID=2, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:02.518 RedLemon[27252:589997]    Start[3]: ID=3, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:02.518 RedLemon[27252:589997]    Start[4]: ID=4, Title='nil', Lang='en', Ext=0
+2026-01-09 21:41:02.519 RedLemon[27252:589997] ✅ SubtitleService: Scanned 5 tracks (Attempt 3/5)
+2026-01-09 21:41:02.519 RedLemon[27252:589997]    Track: ID=0, Title=Off, External=0
+2026-01-09 21:41:02.519 RedLemon[27252:589997]    Track: ID=1, Title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, External=1
+2026-01-09 21:41:02.519 RedLemon[27252:589997]    Track: ID=2, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:02.519 RedLemon[27252:589997]    Track: ID=3, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:02.519 RedLemon[27252:589997]    Track: ID=4, Title=English, External=0
+2026-01-09 21:41:02.533 RedLemon[27252:589783] 🖱️ Mouse: x=932/1280 y=0/800 | Exit: 0 Controls: 1 Chat: 0
+2026-01-09 21:41:02.622 RedLemon[27252:589783] 🖱️ Mouse: x=936/1280 y=0/800 | Exit: 0 Controls: 1 Chat: 0
+2026-01-09 21:41:03.325 RedLemon[27252:590111] 🔍 MPV track-list/count: 6
+2026-01-09 21:41:03.325 RedLemon[27252:590111] 🔍 Track 0 type: sub
+2026-01-09 21:41:03.325 RedLemon[27252:590111] ✅ Found subtitle track: ID=1, lang=en, title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, external=1
+2026-01-09 21:41:03.325 RedLemon[27252:590111] 🔍 Track 1 type: sub
+2026-01-09 21:41:03.326 RedLemon[27252:590111] ✅ Found subtitle track: ID=2, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:03.326 RedLemon[27252:590111] 🔍 Track 2 type: sub
+2026-01-09 21:41:03.326 RedLemon[27252:590111] ✅ Found subtitle track: ID=3, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:03.326 RedLemon[27252:590111] 🔍 Track 3 type: video
+2026-01-09 21:41:03.326 RedLemon[27252:590111] 🔍 Track 4 type: audio
+2026-01-09 21:41:03.326 RedLemon[27252:590111] 🔍 Track 5 type: sub
+2026-01-09 21:41:03.326 RedLemon[27252:590111] ✅ Found subtitle track: ID=4, lang=en, title=nil, external=0
+2026-01-09 21:41:03.326 RedLemon[27252:590111] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-09 21:41:03.326 RedLemon[27252:590111]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 21:41:03.326 RedLemon[27252:590111]    Start[1]: ID=1, Title='xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', Lang='en', Ext=1
+2026-01-09 21:41:03.326 RedLemon[27252:590111]    Start[2]: ID=2, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:03.327 RedLemon[27252:590111]    Start[3]: ID=3, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:03.327 RedLemon[27252:590111]    Start[4]: ID=4, Title='nil', Lang='en', Ext=0
+2026-01-09 21:41:03.327 RedLemon[27252:590111] ✅ SubtitleService: Scanned 5 tracks (Attempt 2/5)
+2026-01-09 21:41:03.327 RedLemon[27252:590111]    Track: ID=0, Title=Off, External=0
+2026-01-09 21:41:03.327 RedLemon[27252:590111]    Track: ID=1, Title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, External=1
+2026-01-09 21:41:03.328 RedLemon[27252:590111]    Track: ID=2, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:03.328 RedLemon[27252:590111]    Track: ID=3, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:03.328 RedLemon[27252:590111]    Track: ID=4, Title=English, External=0
+2026-01-09 21:41:03.598 RedLemon[27252:590111] 🔍 MPV track-list/count: 6
+2026-01-09 21:41:03.603 RedLemon[27252:590111] 🔍 Track 0 type: sub
+2026-01-09 21:41:03.603 RedLemon[27252:590111] ✅ Found subtitle track: ID=1, lang=en, title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, external=1
+2026-01-09 21:41:03.603 RedLemon[27252:590111] 🔍 Track 1 type: sub
+2026-01-09 21:41:03.603 RedLemon[27252:590111] ✅ Found subtitle track: ID=2, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:03.604 RedLemon[27252:590111] 🔍 Track 2 type: sub
+2026-01-09 21:41:03.604 RedLemon[27252:590111] ✅ Found subtitle track: ID=3, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:03.604 RedLemon[27252:590111] 🔍 Track 3 type: video
+2026-01-09 21:41:03.604 RedLemon[27252:590111] 🔍 Track 4 type: audio
+2026-01-09 21:41:03.604 RedLemon[27252:590111] 🔍 Track 5 type: sub
+2026-01-09 21:41:03.604 RedLemon[27252:590111] ✅ Found subtitle track: ID=4, lang=en, title=nil, external=0
+2026-01-09 21:41:03.604 RedLemon[27252:590111] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-09 21:41:03.604 RedLemon[27252:590111]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 21:41:03.605 RedLemon[27252:590111]    Start[1]: ID=1, Title='xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', Lang='en', Ext=1
+2026-01-09 21:41:03.605 RedLemon[27252:590111]    Start[2]: ID=2, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:03.605 RedLemon[27252:590111]    Start[3]: ID=3, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:03.605 RedLemon[27252:590111]    Start[4]: ID=4, Title='nil', Lang='en', Ext=0
+2026-01-09 21:41:03.605 RedLemon[27252:590111] ✅ SubtitleService: Scanned 5 tracks (Attempt 4/5)
+2026-01-09 21:41:03.605 RedLemon[27252:590111]    Track: ID=0, Title=Off, External=0
+2026-01-09 21:41:03.605 RedLemon[27252:590111]    Track: ID=1, Title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, External=1
+2026-01-09 21:41:03.606 RedLemon[27252:590111]    Track: ID=2, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:03.606 RedLemon[27252:590111]    Track: ID=3, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:03.606 RedLemon[27252:590111]    Track: ID=4, Title=English, External=0
+2026-01-09 21:41:04.359 RedLemon[27252:589997] 🔍 MPV track-list/count: 6
+2026-01-09 21:41:04.359 RedLemon[27252:589997] 🔍 Track 0 type: sub
+2026-01-09 21:41:04.359 RedLemon[27252:589997] ✅ Found subtitle track: ID=1, lang=en, title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, external=1
+2026-01-09 21:41:04.359 RedLemon[27252:589997] 🔍 Track 1 type: sub
+2026-01-09 21:41:04.359 RedLemon[27252:589997] ✅ Found subtitle track: ID=2, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:04.359 RedLemon[27252:589997] 🔍 Track 2 type: sub
+2026-01-09 21:41:04.359 RedLemon[27252:589997] ✅ Found subtitle track: ID=3, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:04.359 RedLemon[27252:589997] 🔍 Track 3 type: video
+2026-01-09 21:41:04.359 RedLemon[27252:589997] 🔍 Track 4 type: audio
+2026-01-09 21:41:04.359 RedLemon[27252:589997] 🔍 Track 5 type: sub
+2026-01-09 21:41:04.359 RedLemon[27252:589997] ✅ Found subtitle track: ID=4, lang=en, title=nil, external=0
+2026-01-09 21:41:04.359 RedLemon[27252:589997] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-09 21:41:04.360 RedLemon[27252:589997]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 21:41:04.360 RedLemon[27252:589997]    Start[1]: ID=1, Title='xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', Lang='en', Ext=1
+2026-01-09 21:41:04.360 RedLemon[27252:589997]    Start[2]: ID=2, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:04.360 RedLemon[27252:589997]    Start[3]: ID=3, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:04.360 RedLemon[27252:589997]    Start[4]: ID=4, Title='nil', Lang='en', Ext=0
+2026-01-09 21:41:04.360 RedLemon[27252:589997] ✅ SubtitleService: Scanned 5 tracks (Attempt 3/5)
+2026-01-09 21:41:04.360 RedLemon[27252:589997]    Track: ID=0, Title=Off, External=0
+2026-01-09 21:41:04.360 RedLemon[27252:589997]    Track: ID=1, Title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, External=1
+2026-01-09 21:41:04.360 RedLemon[27252:589997]    Track: ID=2, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:04.361 RedLemon[27252:589997]    Track: ID=3, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:04.361 RedLemon[27252:589997]    Track: ID=4, Title=English, External=0
+2026-01-09 21:41:04.701 RedLemon[27252:589829] 🔍 MPV track-list/count: 6
+2026-01-09 21:41:04.701 RedLemon[27252:589829] 🔍 Track 0 type: sub
+2026-01-09 21:41:04.701 RedLemon[27252:589829] ✅ Found subtitle track: ID=1, lang=en, title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, external=1
+2026-01-09 21:41:04.701 RedLemon[27252:589829] 🔍 Track 1 type: sub
+2026-01-09 21:41:04.702 RedLemon[27252:589829] ✅ Found subtitle track: ID=2, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:04.702 RedLemon[27252:589829] 🔍 Track 2 type: sub
+2026-01-09 21:41:04.702 RedLemon[27252:589829] ✅ Found subtitle track: ID=3, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:04.702 RedLemon[27252:589829] 🔍 Track 3 type: video
+2026-01-09 21:41:04.702 RedLemon[27252:589829] 🔍 Track 4 type: audio
+2026-01-09 21:41:04.702 RedLemon[27252:589829] 🔍 Track 5 type: sub
+2026-01-09 21:41:04.702 RedLemon[27252:589829] ✅ Found subtitle track: ID=4, lang=en, title=nil, external=0
+2026-01-09 21:41:04.702 RedLemon[27252:589829] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-09 21:41:04.702 RedLemon[27252:589829]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 21:41:04.703 RedLemon[27252:589829]    Start[1]: ID=1, Title='xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', Lang='en', Ext=1
+2026-01-09 21:41:04.704 RedLemon[27252:589829]    Start[2]: ID=2, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:04.704 RedLemon[27252:589829]    Start[3]: ID=3, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:04.704 RedLemon[27252:589829]    Start[4]: ID=4, Title='nil', Lang='en', Ext=0
+2026-01-09 21:41:04.705 RedLemon[27252:589829] ✅ SubtitleService: Scanned 5 tracks (Attempt 5/5)
+2026-01-09 21:41:04.705 RedLemon[27252:589829]    Track: ID=0, Title=Off, External=0
+2026-01-09 21:41:04.705 RedLemon[27252:589829]    Track: ID=1, Title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, External=1
+2026-01-09 21:41:04.705 RedLemon[27252:589829]    Track: ID=2, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:04.705 RedLemon[27252:589829]    Track: ID=3, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:04.705 RedLemon[27252:589829]    Track: ID=4, Title=English, External=0
+2026-01-09 21:41:05.379 RedLemon[27252:589829] 🔍 MPV track-list/count: 6
+2026-01-09 21:41:05.379 RedLemon[27252:589829] 🔍 Track 0 type: sub
+2026-01-09 21:41:05.379 RedLemon[27252:589829] ✅ Found subtitle track: ID=1, lang=en, title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, external=1
+2026-01-09 21:41:05.380 RedLemon[27252:589829] 🔍 Track 1 type: sub
+2026-01-09 21:41:05.380 RedLemon[27252:589829] ✅ Found subtitle track: ID=2, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:05.380 RedLemon[27252:589829] 🔍 Track 2 type: sub
+2026-01-09 21:41:05.380 RedLemon[27252:589829] ✅ Found subtitle track: ID=3, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:05.380 RedLemon[27252:589829] 🔍 Track 3 type: video
+2026-01-09 21:41:05.380 RedLemon[27252:589829] 🔍 Track 4 type: audio
+2026-01-09 21:41:05.381 RedLemon[27252:589829] 🔍 Track 5 type: sub
+2026-01-09 21:41:05.381 RedLemon[27252:589829] ✅ Found subtitle track: ID=4, lang=en, title=nil, external=0
+2026-01-09 21:41:05.381 RedLemon[27252:589829] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-09 21:41:05.381 RedLemon[27252:589829]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 21:41:05.381 RedLemon[27252:589829]    Start[1]: ID=1, Title='xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', Lang='en', Ext=1
+2026-01-09 21:41:05.381 RedLemon[27252:589829]    Start[2]: ID=2, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:05.381 RedLemon[27252:589829]    Start[3]: ID=3, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:05.381 RedLemon[27252:589829]    Start[4]: ID=4, Title='nil', Lang='en', Ext=0
+2026-01-09 21:41:05.381 RedLemon[27252:589829] ✅ SubtitleService: Scanned 5 tracks (Attempt 4/5)
+2026-01-09 21:41:05.382 RedLemon[27252:589829]    Track: ID=0, Title=Off, External=0
+2026-01-09 21:41:05.382 RedLemon[27252:589829]    Track: ID=1, Title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, External=1
+2026-01-09 21:41:05.382 RedLemon[27252:589829]    Track: ID=2, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:05.382 RedLemon[27252:589829]    Track: ID=3, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:05.382 RedLemon[27252:589829]    Track: ID=4, Title=English, External=0
+2026-01-09 21:41:06.471 RedLemon[27252:590111] 🔍 MPV track-list/count: 6
+2026-01-09 21:41:06.472 RedLemon[27252:590111] 🔍 Track 0 type: sub
+2026-01-09 21:41:06.472 RedLemon[27252:590111] ✅ Found subtitle track: ID=1, lang=en, title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, external=1
+2026-01-09 21:41:06.472 RedLemon[27252:590111] 🔍 Track 1 type: sub
+2026-01-09 21:41:06.473 RedLemon[27252:590111] ✅ Found subtitle track: ID=2, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:06.473 RedLemon[27252:590111] 🔍 Track 2 type: sub
+2026-01-09 21:41:06.473 RedLemon[27252:590111] ✅ Found subtitle track: ID=3, lang=en, title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, external=1
+2026-01-09 21:41:06.473 RedLemon[27252:590111] 🔍 Track 3 type: video
+2026-01-09 21:41:06.473 RedLemon[27252:590111] 🔍 Track 4 type: audio
+2026-01-09 21:41:06.474 RedLemon[27252:590111] 🔍 Track 5 type: sub
+2026-01-09 21:41:06.474 RedLemon[27252:590111] ✅ Found subtitle track: ID=4, lang=en, title=nil, external=0
+2026-01-09 21:41:06.474 RedLemon[27252:590111] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-09 21:41:06.474 RedLemon[27252:590111]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-09 21:41:06.474 RedLemon[27252:590111]    Start[1]: ID=1, Title='xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', Lang='en', Ext=1
+2026-01-09 21:41:06.474 RedLemon[27252:590111]    Start[2]: ID=2, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:06.474 RedLemon[27252:590111]    Start[3]: ID=3, Title='xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', Lang='en', Ext=1
+2026-01-09 21:41:06.474 RedLemon[27252:590111]    Start[4]: ID=4, Title='nil', Lang='en', Ext=0
+2026-01-09 21:41:06.475 RedLemon[27252:590111] ✅ SubtitleService: Scanned 5 tracks (Attempt 5/5)
+2026-01-09 21:41:06.475 RedLemon[27252:590111]    Track: ID=0, Title=Off, External=0
+2026-01-09 21:41:06.475 RedLemon[27252:590111]    Track: ID=1, Title=xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV, External=1
+2026-01-09 21:41:06.476 RedLemon[27252:590111]    Track: ID=2, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:06.476 RedLemon[27252:590111]    Track: ID=3, Title=xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT, External=1
+2026-01-09 21:41:06.476 RedLemon[27252:590111]    Track: ID=4, Title=English, External=0
+📄 Subtitle request: L3N1YnRpdGxlLzYxNzI5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/61729-1557627.zip
+✅ Download complete: 31813 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: xXx.Return.of.Xander.Cage.2017.BluRay.1080p.TrueHD.Atmos.7.1.AVC.REMUX-FraMeSToR.srt
+📦 Extracting specific file: xXx.Return.of.Xander.Cage.2017.BluRay.1080p.TrueHD.Atmos.7.1.AVC.REMUX-FraMeSToR.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 1918x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en (*) (ac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en (subrip)
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎉 EVENT: File loaded/Duration ready (6403.648s), preparing to seek...
+   Seeking to live edge: 737s
+🎉 EVENT: File loaded/Duration ready (6403.648s), preparing to seek...
+   Seeking to live edge: 737s
+📊 AppState: Polled participant counts - Active: ["tt1293847": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-10 04:25:45 +0000
+⏰ AppState: Scheduling update in 6283 seconds
+ MPV Event: 18
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+ MPV Event: 17
+🎉 EVENT: File loaded/Duration ready (6403.648s), preparing to seek...
+   Seeking to live edge: 737s
+✅ SMART-LOAD: Found 6 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+📊 Current subtitle track: 3
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: en | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: en (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: en | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: en (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 6 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'en', title: 'nil', forced: false, default: false, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: en (ID: 4) [External: false, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 3000 (Embedded: 3000, Match: 0, Clean: 0, SDH: 0)
+ MPV Event: 20
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] h264: Increasing reorder buffer to 1
+[MPV] VO: [libmpv] 1918x798 videotoolbox[nv12]
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1918x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en (*) (ac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en (subrip)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1918x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en (*) (ac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT' (webvtt) (external)
+[MPV] (+) Subs  --sid=4 --slang=en (subrip)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+💓 Heartbeat sent
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62857cca-edcd-11f0-b9b4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-VMebMA06AhRC","phx_ref_prev":"GIk-UZRkZOc6Am0h","is_premium":true,"last_seen":"2026-01-10T02:41:02.443Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"62857cca-edcd-11f0-b9b4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIk-UZRkZOc6Am0h","phx_ref_prev":"GIk-UWrEPBE6AhOC","is_premium":true,"last_seen":"2026-01-10T02:40:48.703Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📊 Current subtitle track: 4
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+ MPV Event: 20
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+💓 Heartbeat sent
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.65s), skipping redundant seek
+📝 Started watch history tracking
+⚠️ onVideoReady called again - ignoring to prevent loops
+⚠️ onVideoReady called again - ignoring to prevent loops
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 Current subtitle track: 4
+📊 Current subtitle track: 4
+🎬 DisplayLink: reportSwap() (throttled)
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+📊 Current subtitle track: 4
+📊 Current subtitle track: 4
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 6 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'xXx Return of Xander Cage 2017 HC 720p HDRip 750 MB - iExTV', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'xXx.Return.of.Xander.Cage.2017.BluRay.720p.AC3.x264 - AdiT', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'en', title: 'nil', forced: false, default: false, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: en (ID: 4) [External: false, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 3000 (Embedded: 3000, Match: 0, Clean: 0, SDH: 0)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 4
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 4
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)

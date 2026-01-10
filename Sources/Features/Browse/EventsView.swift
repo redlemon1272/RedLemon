@@ -36,24 +36,24 @@ struct EventsView: View {
                             // Dynamic Layout Calculations
                             let totalWidth = geometry.size.width
                             let horizontalPadding: CGFloat = 32 // Approximate system padding (16*2)
-                           
+
                             // Hero Card Height: Cinematic ratio (approx 2.4:1) or min 550
                             // On 2560px screen: ~1066px height (fills space nicely)
                             // On 1440px screen: 600px height
                             let heroHeight = max(550, totalWidth / 2.4)
-                            
+
                             // Grid Item Height Calculation
                             // mimic LazyVGrid's adaptive logic to find item width
                             let minItemWidth: CGFloat = 500
                             let spacing: CGFloat = 20
                             let availableGridWidth = totalWidth - horizontalPadding
-                            
+
                             // Calculate column count (at least 1)
                             let columnCount = max(1, floor((availableGridWidth + spacing) / (minItemWidth + spacing)))
-                            
+
                             // Calculate actual item width
                             let itemWidth = (availableGridWidth - (spacing * (columnCount - 1))) / columnCount
-                            
+
                             // Target 2:1 aspect ratio for grid items
                             let gridItemHeight = itemWidth / 2.0
 
@@ -69,7 +69,7 @@ struct EventsView: View {
                                             // Hero Card Phase
                                             let _ = lastUpdate
                                             let isLobbyOverride = (heroEvent.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
-                                            
+
                                             HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, lastUpdate: lastUpdate, height: heroHeight) {
                                                 await joinEvent(heroEvent)
                                             }
@@ -77,7 +77,7 @@ struct EventsView: View {
                                             .id(heroEvent.id) // FORCE STATE RESET: Ensures background image updates when event changes
                                         }
                                     }
-                                    
+
                                     // 2. Upcoming Events Grid
                                     if appState.eventsSchedule.count > 1 {
                                         VStack(alignment: .leading, spacing: 16) {
@@ -86,12 +86,12 @@ struct EventsView: View {
                                                 .fontWeight(.bold)
                                                 .foregroundColor(.primary)
                                                 .padding(.horizontal, 4)
-                                            
+
                                             // Increased minimum to 500 to ensure items fill the row on large screens (prevents empty 5th column gap)
                                             LazyVGrid(columns: [GridItem(.adaptive(minimum: 500), spacing: 20)], spacing: 20) {
                                                 ForEach(appState.eventsSchedule.dropFirst()) { event in
                                                     let isLobbyOverride = (event.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
-                                                    
+
                                                     HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, lastUpdate: lastUpdate, height: gridItemHeight) {
                                                         await joinEvent(event)
                                                     }
@@ -117,14 +117,14 @@ struct EventsView: View {
             Task {
                 await SocialService.shared.updateWatchingStatus(mediaTitle: nil, mediaType: nil, imdbId: nil, roomId: nil, status: "Browsing Events")
             }
-            
+
             // Load events if AppState doesn't have them yet
             if appState.allMovies.isEmpty {
                 loadEvents()
             } else {
                 isLoading = false
             }
-            
+
             if appState.shouldAutoJoinLobby {
                 attemptAutoJoin()
             }
@@ -133,7 +133,7 @@ struct EventsView: View {
              // Fix for Event Transition Regression:
              // Force view refresh every 10 seconds to check if events have finished/started
              // Capable of updating 'Lobby Open' status without full reload
-             
+
              // Combined Timer: Updates 'currentTime' every second for countdowns
              // AND 'lastUpdate' every 10s for logic checks
              // Combined Timer: Updates 'lastUpdate' every 10s for logic checks
@@ -167,7 +167,7 @@ struct EventsView: View {
 
     private func attemptAutoJoin() {
         print("🔄 EventsView: Attempting Auto-Join...")
-        
+
         let scheduledEvents = appState.eventsSchedule
         guard !scheduledEvents.isEmpty else {
             print("⚠️ Auto-Join skipped: No events scheduled yet")
@@ -195,31 +195,31 @@ struct EventsView: View {
             return isInLobby || isNextEvent
         }) {
             print("🚀 Auto-joining NEXT event lobby: \(lobbyEvent.mediaItem.name) (index: \(lobbyEvent.index))")
-            
+
             // Reset flag immediately to prevent loops
             appState.shouldAutoJoinLobby = false
-            
+
             Task {
                 // Determine wait time if needed (optional polish, but immediate is fine for lobby)
                 await self.joinEvent(lobbyEvent)
             }
-        } 
+        }
         // Fallback: Check if there is a LIVE event that we haven't finished yet
         // (e.g. User joined late and previous event finished, but next one is already live)
         else if let liveEvent = scheduledEvents.first(where: {
             $0.isLive && !$0.isFinished && !appState.player.finishedEventIds.contains($0.id)
         }) {
             print("🚀 Auto-joining LIVE event: \(liveEvent.mediaItem.name)")
-            
+
             // Reset flag
             appState.shouldAutoJoinLobby = false
-            
+
             Task {
                 await self.joinEvent(liveEvent)
             }
         } else {
             print("⚠️ Auto-Join failed: No eligible event found to join.")
-            // Do NOT reset flag here? Or should we? 
+            // Do NOT reset flag here? Or should we?
             // Better to leave it for a moment in case schedule is about to update.
             // But to be safe against infinite retries, we might want to reset if we are sure.
             // For now, let's leave it true and let the .onChange(eventsSchedule) retry it.
@@ -245,7 +245,7 @@ struct EventsView: View {
             }
         }
     }
-    
+
     // Legacy calculation logic and timers removed - all handled by AppState now
 
 
@@ -278,19 +278,19 @@ struct EventsView: View {
             let existingRoom = try? await SupabaseClient.shared.getRoomState(roomId: roomId)
             if let existingRoom = existingRoom {
                 print("✅ Event room already exists: \(roomId)")
-                
+
                 // CRITICAL: Extract stream details from the server room to ensure we match the host/server state
                 // This prevents independent resolution which causes desync (Colombiana bug)
                 selectedStreamHash = existingRoom.streamHash
                 selectedUnlockedURL = existingRoom.unlockedStreamUrl
                 selectedQuality = existingRoom.quality
                 selectedFileIdx = existingRoom.fileIdx
-                
+
                 if let hash = selectedStreamHash {
                     print("\n✅ [SYNC VERIFICATION] FOUND SERVER KEY - Re-unlocking for fresh URL 🔑")
                     print("   Stored Hash: \(hash)")
                     print("   Cached URL: \(selectedUnlockedURL?.prefix(30) ?? "nil")...")
-                    
+
                     // Re-resolve using the hash to get a fresh CDN link
                     // This ensures the URL hasn't expired (RD links timeout after ~30min of inactivity)
                     do {
@@ -306,9 +306,9 @@ struct EventsView: View {
                         selectedUnlockedURL = result.stream.url
                         selectedFileIdx = result.stream.fileIdx ?? selectedFileIdx
                         selectedQuality = "1080p"
-                        
+
                         print("   ✅ Fresh URL obtained: \(selectedUnlockedURL?.prefix(40) ?? "nil")...")
-                        
+
                         // Update database with fresh URL for future guests
                         try? await SupabaseClient.shared.updateRoomStream(
                             roomId: roomId,
@@ -346,7 +346,7 @@ struct EventsView: View {
                         selectedUnlockedURL = result.stream.url
                         selectedQuality = "1080p"
                         selectedFileIdx = result.stream.fileIdx
-                        
+
                         // Persist to database
                         try await SupabaseClient.shared.updateRoomStream(
                             roomId: roomId,
@@ -387,7 +387,7 @@ struct EventsView: View {
                     )
                     initialStreamHash = result.stream.infoHash
                     initialUnlockedUrl = result.stream.url
-                    
+
                     // NEW: Pick the first best subtitle to seed the room
                     if let subs = result.stream.subtitles, !subs.isEmpty {
                         // Prefer English if available, otherwise first
@@ -406,7 +406,7 @@ struct EventsView: View {
                     print("⚠️ Failed to resolve seed stream for system event: \(error)")
                     // Continue creation without a hash (clients will have to resolve themselves as fallback)
                 }
-                
+
                 // Use the resolved hash for our local state too
                 selectedStreamHash = initialStreamHash
                 // Also capture subtitle URL for local playback if valid
@@ -433,7 +433,7 @@ struct EventsView: View {
                 // Join the room we just created
                 try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)
             }
-            
+
             // If we are joining an existing room, we need to fetch the subtitle URL from it if we didn't just create it
             var finalSubtitleUrl: String? = nil
             if let existing = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
@@ -441,9 +441,9 @@ struct EventsView: View {
             }
 
             createLocalEventRoom(
-                event: event, 
-                roomId: roomId, 
-                streamHash: selectedStreamHash, 
+                event: event,
+                roomId: roomId,
+                streamHash: selectedStreamHash,
                 unlockedStreamUrl: selectedUnlockedURL,
                 quality: selectedQuality,
                 fileIdx: selectedFileIdx,
@@ -455,34 +455,87 @@ struct EventsView: View {
             // it means another user beat us to it. We should join that room instead of falling back to local.
             if errorString.contains("409") || errorString.contains("duplicate key") {
                 print("⚠️ Race condition detected: Room created by another user while joining. Retrying as guest...")
-                
-                print("⚠️ Race condition detected: Room created by another user while joining. Retrying as guest...")
-                
-                // 1. Fetch the room that was just created by the winner (with retries for consistency lag)
+
+                // 1. Fetch the room AND wait for stream details (winner may still be resolving)
+                // Per AI_BIBLE: Stream resolution can take 10-15s, so we need longer retries
                 var roomState: SupabaseRoom? = nil
-                for i in 1...3 {
+                for i in 1...10 {
                     if let state = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
-                        roomState = state
-                        break
+                        // Check if stream details are populated (winner finished resolving)
+                        if state.unlockedStreamUrl != nil || state.streamHash != nil {
+                            roomState = state
+                            print("✅ Race recovery: Stream details available on attempt \(i)")
+                            break
+                        }
+                        print("⏳ Retry \(i)/10: Room exists but stream not resolved yet...")
+                    } else {
+                        print("⏳ Retry \(i)/10: Room not visible yet...")
                     }
-                    print("⏳ Retry \(i)/3: Room not visible yet, waiting...")
-                    try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s delay
+                    try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s delay
                 }
 
                 if let roomState = roomState {
                     LogManager.shared.info("✅ Recovered from race condition! Joining existing room.")
-                    
+
                     // 2. Join it
                     try? await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId)
-                    
-                    // 3. Use the WINNER'S stream details to ensure sync
+
+                    // 3. Check if we need to resolve ourselves (winner's URL might still be nil)
+                    var finalUnlockedUrl = roomState.unlockedStreamUrl
+                    let finalStreamHash = roomState.streamHash
+                    var finalFileIdx = roomState.fileIdx
+                    var finalQuality = roomState.quality
+
+                    if finalUnlockedUrl == nil {
+                        print("⚠️ Winner's stream URL not ready - resolving using hash...")
+                        if let hash = finalStreamHash {
+                            // Re-resolve with preferred hash to match winner's stream
+                            do {
+                                let result = try await StreamService.shared.resolveStream(
+                                    item: event.mediaItem,
+                                    quality: .fullHD,
+                                    season: nil,
+                                    episode: nil,
+                                    preferredInfoHash: hash,
+                                    filterExtended: true
+                                )
+                                finalUnlockedUrl = result.stream.url
+                                finalFileIdx = result.stream.fileIdx ?? finalFileIdx
+                                finalQuality = "1080p"
+                                print("✅ Race recovery: Re-resolved stream using hash: \(finalUnlockedUrl?.prefix(40) ?? "nil")...")
+                            } catch {
+                                print("⚠️ Race recovery: Re-resolution failed: \(error.localizedDescription)")
+                            }
+                        } else {
+                            // No hash available - resolve independently as last resort
+                            print("⚠️ Race recovery: No hash available - resolving independently...")
+                            do {
+                                let result = try await StreamService.shared.resolveStream(
+                                    item: event.mediaItem,
+                                    quality: .fullHD,
+                                    season: nil,
+                                    episode: nil,
+                                    preferredInfoHash: nil,
+                                    filterExtended: true
+                                )
+                                finalUnlockedUrl = result.stream.url
+                                finalFileIdx = result.stream.fileIdx
+                                finalQuality = "1080p"
+                                print("✅ Race recovery: Independent resolution succeeded")
+                            } catch {
+                                print("❌ Race recovery: Independent resolution failed: \(error.localizedDescription)")
+                            }
+                        }
+                    }
+
+                    // 4. Use the stream details to ensure sync
                     createLocalEventRoom(
                         event: event,
                         roomId: roomId,
-                        streamHash: roomState.streamHash,
-                        unlockedStreamUrl: roomState.unlockedStreamUrl,
-                        quality: roomState.quality,
-                        fileIdx: roomState.fileIdx
+                        streamHash: finalStreamHash,
+                        unlockedStreamUrl: finalUnlockedUrl,
+                        quality: finalQuality,
+                        fileIdx: finalFileIdx
                     )
                     return
                 } else {
@@ -499,7 +552,7 @@ struct EventsView: View {
 
     @MainActor
     private func createLocalEventRoom(
-        event: EventItem, 
+        event: EventItem,
         roomId: String,
         streamHash: String? = nil,
         unlockedStreamUrl: String? = nil,
@@ -568,7 +621,7 @@ struct EventsView: View {
 
         appState.player.currentWatchPartyRoom = room
         appState.player.isWatchPartyHost = false // User is always guest in system events
-        
+
         if event.isLive {
             // For live events, set resume position and go directly to player
             appState.player.eventStartTime = event.startTime // Opt-in to robust MPV sync logic
@@ -669,10 +722,10 @@ struct HeroEventCard: View {
             // Lazy Hydration: Check if we have background art
             if event.mediaItem.background == nil && !event.mediaItem.id.isEmpty {
                  print("💧 HeroEventCard: Missing background for \(event.mediaItem.name) (\(event.mediaItem.id)). Attempting lazy hydration...")
-                 
+
                  do {
                      let enriched = try await LocalAPIClient.shared.fetchMediaDetails(imdbId: event.mediaItem.id, type: "movie")
-                     
+
                      if enriched.background != nil {
                          print("✅ HeroEventCard: Hydrated metadata for \(enriched.name). Updating AppState...")
                          await MainActor.run {
@@ -714,7 +767,7 @@ struct HeroEventCardContent: View {
             if let img = NSImage(data: cachedData) {
                 // Populate fast cache
                 EventsView.EventImageCache.shared.setObject(img, forKey: cacheKey as NSString)
-                
+
                 await MainActor.run {
                     self.cachedImage = img
                 }
@@ -727,7 +780,7 @@ struct HeroEventCardContent: View {
             let (data, _) = try await URLSession.shared.data(from: imageURL)
             // Cache
             await CacheManager.shared.setImageData(key: cacheKey, value: data)
-            
+
             // Decode newly fetched data
             if let img = NSImage(data: data) {
                 // Populate fast cache
@@ -763,7 +816,7 @@ struct HeroEventCardContent: View {
                 )
                 .frame(height: height)
                 .frame(maxWidth: .infinity)
-                
+
                 // Overlay: Image (Appears on top when loaded)
                 if let nsImage = cachedImage {
                     Image(nsImage: nsImage)
@@ -1005,7 +1058,7 @@ struct EventLobbyStatusBadge: View {
             now = input
         }
     }
-    
+
     func formatDuration(_ interval: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
@@ -1028,11 +1081,11 @@ struct EventLiveProgressView: View {
     var remainingTime: TimeInterval {
         return event.duration - elapsedTime
     }
-    
+
     var progress: Double {
         return min(max(elapsedTime / event.duration, 0), 1)
     }
-    
+
     func formatEventTime(_ interval: TimeInterval) -> String {
          let formatter = DateComponentsFormatter()
          formatter.allowedUnits = [.hour, .minute, .second]
@@ -1049,7 +1102,7 @@ struct EventLiveProgressView: View {
                         .fill(Color.gray.opacity(0.3))
                         .frame(height: 4)
                         .cornerRadius(2)
-                    
+
                     Rectangle()
                         .fill(Color.red)
                         .frame(width: geo.size.width * CGFloat(progress), height: 4)

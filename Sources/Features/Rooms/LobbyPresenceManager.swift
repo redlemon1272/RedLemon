@@ -280,6 +280,14 @@ class LobbyPresenceManager: ObservableObject {
         let isVoting = !votes.contains(userId)
 
         if isVoting {
+            // SINGLE VOTE ENFORCEMENT: Remove vote from any other item first
+            for (otherItemId, var otherVotes) in viewModel.playlistVotes {
+                if otherItemId != itemId && otherVotes.contains(userId) {
+                    otherVotes.remove(userId)
+                    viewModel.playlistVotes[otherItemId] = otherVotes
+                    NSLog("👍 Lobby: Removed previous vote from item \(otherItemId.prefix(8)) (single vote enforcement)")
+                }
+            }
             votes.insert(userId)
         } else {
             votes.remove(userId)

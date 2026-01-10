@@ -7,54 +7,54 @@ actor MockRealtimeManager: RealtimeService {
     var syncCallback: ((SyncMessage) -> Void)?
     var connectionStateCallback: ((RealtimeConnectionState) -> Void)?
     var presenceCallback: ((PresenceAction, String, [String: Any]?) -> Void)?
-    
+
     // Test verification properties
     var sentMessages: [SyncMessage] = []
-    
+
     func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]? = nil, onSync: @escaping (SyncMessage) -> Void) async throws {
         self.syncCallback = onSync
         self.isConnected = true
         connectionStateCallback?(.connected)
     }
-    
+
     func sendSyncMessage(_ message: SyncMessage) async throws {
         sentMessages.append(message)
     }
-    
+
     func disconnect(leaveChannel: Bool, disconnectClient: Bool) async {
         isConnected = false
         connectionStateCallback?(.disconnected)
     }
-    
+
     func cleanup(leaveChannel: Bool, disconnectClient: Bool) async {
         isConnected = false
     }
-    
+
     func isRealtimeConnected() -> Bool {
         return isConnected
     }
-    
+
     func setConnectionStateCallback(_ callback: @escaping (RealtimeConnectionState) -> Void) {
         self.connectionStateCallback = callback
     }
-    
+
     func setPresenceCallback(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void) {
         self.presenceCallback = callback
     }
-    
+
     func onPresenceChange(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void) {
         self.presenceCallback = callback
     }
-    
+
     func onConnectionStateChange(_ callback: @escaping (RealtimeConnectionState) -> Void) {
         self.connectionStateCallback = callback
     }
-    
+
     // Helper to simulate incoming messages
     func simulateIncomingMessage(_ message: SyncMessage) {
         syncCallback?(message)
     }
-    
+
     func setPostgresCallback(_ callback: @escaping ([String: Any]) -> Void) {
         // Mock implementation
     }
@@ -66,10 +66,10 @@ class MockMetadataProvider: MetadataProvider {
     var fetchedMetadata: MediaMetadata?
     var fetchedDetails: MediaItem?
     var fetchedPopularMovies: [MediaItem] = []
-    
+
     // Configurable responses
     var metadataResult: Result<MediaMetadata, Error>?
-    
+
     func fetchMetadata(type: String, id: String) async throws -> MediaMetadata {
         if let result = metadataResult {
             return try result.get()
@@ -93,7 +93,7 @@ class MockMetadataProvider: MetadataProvider {
             videos: nil
         )
     }
-    
+
     func fetchMediaDetails(imdbId: String, type: String) async throws -> MediaItem {
         return fetchedDetails ?? MediaItem(
             id: imdbId,
@@ -111,15 +111,15 @@ class MockMetadataProvider: MetadataProvider {
         )
     }
 
-    
+
     func fetchPopularMovies() async throws -> [MediaItem] {
         return fetchedPopularMovies
     }
-    
+
     func fetchPopularShows() async throws -> [MediaItem] {
         return fetchedPopularMovies // Reuse common mock for now
     }
-    
+
     func searchMedia(query: String, type: String) async throws -> [MediaItem] {
         return []
     }
@@ -130,7 +130,7 @@ class MockMetadataProvider: MetadataProvider {
 class MockStreamResolver: StreamResolving {
     var resolvedStream: RedLemon.Stream?
     var unlockedStream: RedLemon.Stream?
-    
+
     func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, filterExtended: Bool) async throws -> StreamResolutionResult {
         let stream = resolvedStream ?? RedLemon.Stream(
             url: "https://example.com/stream",
@@ -147,7 +147,7 @@ class MockStreamResolver: StreamResolving {
         )
         return StreamResolutionResult(stream: stream, metadata: metadata!)
     }
-    
+
     func unlockStream(stream: RedLemon.Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> RedLemon.Stream {
         return unlockedStream ?? stream
     }
@@ -163,11 +163,11 @@ class MockRoomManager: RoomManager, UserManager {
     var updatePlaylistCalled = false
     var roomState: SupabaseRoom?
     var participants: [RoomParticipant] = []
-    
+
     func createRoom(
         id: String,
         name: String,
-        hostUserId: UUID,
+        hostUserId: UUID?,
         hostUsername: String,
         streamHash: String?,
         imdbId: String?,
@@ -211,27 +211,27 @@ class MockRoomManager: RoomManager, UserManager {
         createdRoom = room
         return room
     }
-    
+
     func joinRoom(roomId: String, userId: UUID, isHost: Bool) async throws {
         joinRoomCalled = true
     }
-    
+
     func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?, resetPlayback: Bool) async throws {
         updateStreamCalled = true
     }
-    
+
     func updateRoomPlaylist(roomId: String, playlist: [PlaylistItem], currentIndex: Int) async throws {
         updatePlaylistCalled = true
     }
-    
+
     func getRoomState(roomId: String) async throws -> SupabaseRoom? {
         return roomState
     }
-    
+
     func getRoomParticipants(roomId: String) async throws -> [RoomParticipant] {
         return participants
     }
-    
+
     // UserManager
     func getUserById(userId: UUID) async throws -> SupabaseUser? {
         return nil

@@ -175,6 +175,16 @@ class LobbyEventRouter: ObservableObject {
         let prefix = isVoting ? "LOBBY_VOTE:" : "LOBBY_UNVOTE:"
         let itemId = String(chatText.dropFirst(prefix.count))
 
+        // SINGLE VOTE ENFORCEMENT: Remove sender's vote from any other item first
+        if isVoting {
+            for (otherItemId, var otherVotes) in viewModel.playlistVotes {
+                if otherItemId != itemId && otherVotes.contains(senderId) {
+                    otherVotes.remove(senderId)
+                    viewModel.playlistVotes[otherItemId] = otherVotes
+                }
+            }
+        }
+
         var votes = viewModel.playlistVotes[itemId] ?? Set<String>()
         if isVoting {
             votes.insert(senderId)

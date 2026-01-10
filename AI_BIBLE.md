@@ -112,6 +112,12 @@
     2.  **Dependencies**: Manually verify external requirements (Python libs, FFmpeg) exist in the *execution environment* (`/root`, not just `/usr`).
     3.  **Output**: The only proof of life is **Database Growth** (`SELECT count(*)`), not log activity.
 
+### 18. Event Source of Truth (The `event_` Prefix)
+- **Problem**: Relying on boolean flags (`isEvent`, `isHost`) to determine UI state (like Waiting Gates) is fragile during retries or re-joins where state might be lost.
+- **Rule**: The Room ID is the ultimate source of truth.
+    - If `room_id.startsWith("event_")` -> It IS an event.
+    - **Implication**: ALWAYS bypass "Ready Gates" and Host Checks for these IDs, regardless of what `appState` says.
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |
@@ -448,8 +454,14 @@ Located in `Sources/Server/Services/`:
 3. Results are filtered (codecs, groups, languages) and sorted by quality
 4. Best match is unlocked via RealDebrid and returned
 
-> [!WARNING]
 > **StreamResolver Filters**: Contains hardcoded blocklists for groups (`tamilmv`), codecs (`av1`), and audio. Check these if valid streams are missing.
+
+## Failover Strategy
+### Guest Failover (Emergency Resolution)
+- **Problem**: Guests inherit the Host's stream. If that specific stream fails (404/Timeout) for the Guest, they have no fallback queue.
+- **Mechanism**: If `streamQueue` is empty during a retry, the client triggers **Emergency Resolution**.
+- **Action**: It autonomously resolves fresh streams for the content and effectively "forks" playback to a working stream.
+- **Note**: This prevents "No Streams Found" errors but may lead to minor runtime deltas if the Guest picks a different release group.
 
 ---
 

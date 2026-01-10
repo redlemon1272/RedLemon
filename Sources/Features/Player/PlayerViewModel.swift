@@ -714,9 +714,10 @@ class PlayerViewModel: ObservableObject {
 
         // Check for transient "Playback Timeout" error
         if error.contains("Timeout") {
-            if playbackRetryCount < 1 && selectedStream != nil {
+            // RedLemon: Increased retry limit to 3 (was 1) for better stability
+            if playbackRetryCount < 3 && selectedStream != nil {
                 playbackRetryCount += 1
-                print("🔄 Transient Timeout detected. Retrying current stream (Attempt \(playbackRetryCount)/1)...")
+                print("🔄 Transient Timeout detected. Retrying current stream (Attempt \(playbackRetryCount)/3)...")
                 
                 // Silent retry of the SAME stream
                 Task { @MainActor in
@@ -736,10 +737,60 @@ class PlayerViewModel: ObservableObject {
     }
 
     func tryNextStream() {
-        guard !streamQueue.isEmpty else {
-            print("🚫 PlayerVM: No more streams in queue. Playback failed.")
-            self.streamError = "Playback Failed: No working streams found."
-            return
+        if streamQueue.isEmpty {
+            // CRITICAL: Failover for Guests (or initial failure)
+            // If we are a guest and the host's stream failed (queue empty), 
+            // OR if we just ran out of streams, try to resolve fresh streams as a last resort.
+            // We verify 'isResolvingStream' to prevent infinite loops if resolution itself returns empty.
+            if !isResolvingStream {
+                print("⚠️ PlayerVM: Stream queue empty. Attempting emergency resolution...")
+                Task { @MainActor in
+                    self.isResolvingStream = true
+                    do {
+                       guard let item = self.selectedMediaItem else { throw APIError.noStreamsFound }
+                       let season = self.selectedMediaItem?.type == "series" ? self.selectedSeason : nil
+                       let episode = self.selectedMediaItem?.type == "series" ? self.selectedEpisode : nil
+                       
+                       // Resolve fresh streams
+                       // Note: We use the existing resolve logic which will fetch providers
+                       let result = try await self.streamResolver.resolveStream(
+                           item: item,
+                           quality: self.selectedQuality ?? .fullHD,
+                           season: season,
+                           episode: episode,
+                           metadata: self.selectedMetadata ?? nil,
+                           preferredInfoHash: nil, // Don't force the failed hash
+                           filterExtended: false
+                       )
+                       
+                       // Populate queue
+                       self.streamQueue = result.candidateStreams.dropFirst().map { $0 } // Candidates
+                       let primary = result.stream
+                       
+                       if self.streamQueue.isEmpty && primary == nil {
+                           throw APIError.noStreamsFound
+                       }
+                       
+                       print("✅ PlayerVM: Emergency resolution found \(self.streamQueue.count + 1) streams.")
+                       self.isResolvingStream = false
+                       
+                       // If we found a primary, try it (or add to queue and recursive call?)
+                       // Let's treat the new primary as the next stream
+                       self.streamQueue.insert(primary, at: 0)
+                       self.tryNextStream()
+                       
+                    } catch {
+                       print("🚫 PlayerVM: Emergency resolution failed: \(error)")
+                       self.isResolvingStream = false
+                       self.streamError = "Playback Failed: No working streams found."
+                    }
+                }
+                return
+            } else {
+                 print("🚫 PlayerVM: No more streams in queue and resolution already attempted. Playback failed.")
+                 self.streamError = "Playback Failed: No working streams found."
+                 return
+            }
         }
 
         let nextStream = streamQueue.removeFirst()

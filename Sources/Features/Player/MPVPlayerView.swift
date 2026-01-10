@@ -33,7 +33,7 @@ class KeyCaptureView: NSView {
         // Become first responder when added to window
         if let window = window {
             window.makeFirstResponder(self)
-            
+
             // Critical: Ensure window comes to front and becomes key
             DispatchQueue.main.async {
                 NSApp.activate(ignoringOtherApps: true)
@@ -158,7 +158,7 @@ struct MPVPlayerView: View {
 
                     // Overlays (Loading, Waiting, Logo)
                     overlays
-                    
+
                     // Floating Reactions (Always visible, even if chat is closed)
                     ReactionOverlayView(viewModel: viewModel)
                         .zIndex(200) // Below controls (99) but above video
@@ -198,6 +198,7 @@ struct MPVPlayerView: View {
                     menus
             }
             .frame(width: viewModel.showChat ? geometry.size.width * 0.8 : geometry.size.width)
+            .clipped() // Fix: Ensure content doesn't overflow when chat is open
 
             // Chat overlay (Pop in/out)
             if viewModel.showChat {
@@ -245,7 +246,7 @@ struct MPVPlayerView: View {
                     // 🚫 Fix: Ignore if mouse is in the chat area (Right 20%) when chat is open
                     let chatThreshold = windowWidth * 0.8
                     let isMouseInChat = viewModel.showChat && location.x > chatThreshold
-                    
+
                     if location.y <= bottomThreshold && location != .zero && !isMouseInChat {
                         showControls = true
 
@@ -325,7 +326,7 @@ struct MPVPlayerView: View {
                 return event // Pass through if not handled
             }
 
-            
+
             // FORCE FOCUS: Ensure player window becomes Key immediately
             // This fixes the issue where user has to click to see UI
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -340,7 +341,7 @@ struct MPVPlayerView: View {
             // This ensures isInWatchParty is set when video loads, activating the ready gate
             if appState.player.currentWatchMode == .watchParty, let roomId = appState.player.currentRoomId {
                 NSLog("🎉 Starting watch party sync - Room: %@, Host: %@", roomId, appState.player.isWatchPartyHost ? "YES" : "NO")
-                
+
                 do {
                     try await viewModel.startWatchPartySync(roomId: roomId, isHost: appState.player.isWatchPartyHost)
                     NSLog("✅ Watch party sync started successfully - isInWatchParty is now TRUE")
@@ -400,7 +401,7 @@ struct MPVPlayerView: View {
         .onDisappear {
             // Stop watch history tracking
             viewModel.stopWatchHistorySaving()
-            
+
             // Stop playback when view disappears - use Task for async
             Task {
                 await viewModel.cleanup()
@@ -529,11 +530,11 @@ struct MPVPlayerView: View {
              WaitingGateView(isHost: viewModel.isWatchPartyHost)
                 .zIndex(100)
         }
-        
+
         // Next Episode Prompt
         if viewModel.showNextEpisodePrompt, let info = viewModel.nextEpisodeInfo {
             NextEpisodeOverlay(
-                info: info, 
+                info: info,
                 thumbnail: viewModel.nextEpisodeThumbnail,
                 onCancel: { viewModel.showNextEpisodePrompt = false },
                 onPlay: {
@@ -899,7 +900,7 @@ struct MPVPlayerView: View {
         // Tap shield to close subtitle menu when open
         if showSubtitleMenu {
             Color.black.opacity(0.001)
-                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .zIndex(101)
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.15)) {
@@ -911,7 +912,7 @@ struct MPVPlayerView: View {
         // Tap shield to close AUDIO menu when open
         if showAudioMenu {
             Color.black.opacity(0.001)
-                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .zIndex(101)
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.15)) {
@@ -923,7 +924,7 @@ struct MPVPlayerView: View {
         // Tap shield to close playlist menu
         if showPlaylistMenu {
             Color.black.opacity(0.001)
-                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .zIndex(101)
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.15)) {
@@ -935,7 +936,7 @@ struct MPVPlayerView: View {
         // Tap shield to close Stream Info
         if showStreamInfoSheet {
             Color.black.opacity(0.5)
-                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .zIndex(101)
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.15)) {
@@ -943,11 +944,11 @@ struct MPVPlayerView: View {
                     }
                 }
         }
-        
+
         // Tap shield to close event list menu
         if showEventListMenu {
             Color.black.opacity(0.001)
-                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .zIndex(101)
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.15)) {
@@ -959,7 +960,7 @@ struct MPVPlayerView: View {
         // Tap shield to close report sheet
         if showReportSheet {
              Color.black.opacity(0.5)
-                 .ignoresSafeArea()
+                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                  .zIndex(101)
                  .onTapGesture {
                      withAnimation(.easeInOut(duration: 0.15)) {
@@ -1000,7 +1001,7 @@ struct MPVPlayerView: View {
             .transition(.opacity.combined(with: .move(edge: .bottom)))
             .zIndex(102)
         }
-        
+
         // Playlist Menu (Bottom Left)
         if showPlaylistMenu {
             VStack {
@@ -1021,7 +1022,7 @@ struct MPVPlayerView: View {
             .transition(.opacity.combined(with: .move(edge: .bottom)))
             .zIndex(102)
         }
-        
+
         // Event List Menu (Bottom Left)
         if showEventListMenu {
             VStack {
@@ -1096,7 +1097,7 @@ struct MPVPlayerView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "bubble.left.and.bubble.right.fill")
                             .font(.system(size: 16))
-                        
+
                         if hasUnreadMessages {
                             Text("Chat (\(totalUnreadCount))")
                                 .font(.system(size: 14, weight: .bold))
@@ -1127,12 +1128,12 @@ struct MPVPlayerView: View {
             Spacer()
         }
     }
-    
+
     // Helper for unread count
     private var totalUnreadCount: Int {
         socialService.unreadCounts.values.reduce(0, +)
     }
-    
+
     private var hasUnreadMessages: Bool {
         totalUnreadCount > 0
     }
@@ -1251,25 +1252,25 @@ struct NextEpisodeOverlay: View {
     let thumbnail: String?
     let onCancel: () -> Void
     let onPlay: () -> Void
-    
+
     @State private var remainingSeconds = 10
     @State private var timer: Timer?
-    
+
     var body: some View {
         VStack {
             Spacer()
-            
+
             HStack(alignment: .bottom) {
                 Spacer()
-                
+
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
                         Text("Up Next in \(remainingSeconds)s")
                             .font(.headline)
                             .foregroundColor(.white)
-                        
+
                         Spacer()
-                        
+
                         Button(action: onCancel) {
                             Image(systemName: "xmark.circle.fill")
                                 .font(.title2)
@@ -1277,7 +1278,7 @@ struct NextEpisodeOverlay: View {
                         }
                         .buttonStyle(.plain)
                     }
-                    
+
                     HStack(spacing: 16) {
                         if let thumbnail = thumbnail, let url = URL(string: thumbnail) {
                             AsyncImage(url: url) { image in
@@ -1296,13 +1297,13 @@ struct NextEpisodeOverlay: View {
                                  .cornerRadius(8)
                                  .overlay(Image(systemName: "play.tv.fill").foregroundColor(.white.opacity(0.5)))
                         }
-                        
+
                         VStack(alignment: .leading, spacing: 4) {
                             Text(info)
                                 .font(.subheadline.weight(.semibold))
                                 .foregroundColor(.white)
                                 .lineLimit(2)
-                            
+
                             Button(action: onPlay) {
                                 HStack {
                                     Image(systemName: "play.fill")
@@ -1338,7 +1339,7 @@ struct NextEpisodeOverlay: View {
             timer?.invalidate()
         }
     }
-    
+
     private func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             if remainingSeconds > 0 {

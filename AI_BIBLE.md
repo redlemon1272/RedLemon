@@ -120,6 +120,13 @@
 - **Database**: `rooms` and `room_participants` tables.
 - **Latency**: Critical. High-performance WebSockets.
 
+## Playlist Voting (Watch Party)
+- **Mechanism**: Ephemeral real-time signals (not persisted to DB).
+- **Pattern**: Follows `toggleReady` architecture.
+- **Messages**: `LOBBY_VOTE:<itemId>` and `LOBBY_UNVOTE:<itemId>`.
+- **UI**: Heart icon ❤️ on playlist items.
+- **State**: Managed in `LobbyViewModel.playlistVotes`.
+
 ## System Hosted Events (Movie Events)
 - **Behavior**: Movie plays at specific time. No pause/seek. Everyone sees same frame.
 - **Database**: `events_config` table.
@@ -142,7 +149,7 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 
 ### Key Features
 - **Non-Custodial**: Private keys never touch server.
-- **Multi-Chain**: BTC + EVM (Ethereum, Base, Arbitrum, Optimism, Polygon).
+- **Multi-Chain**: EVM only (Ethereum, Base, Arbitrum, Optimism, Polygon). **No BTC.**
 - **Multi-Asset**: ETH, USDC, USDT.
 - **Automated**: Unique derived addresses per user.
 

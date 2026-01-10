@@ -85,6 +85,10 @@ class LobbyEventRouter: ObservableObject {
             handleLobbyReadyChange(syncMessage, isReady: true)
         } else if chatText == "LOBBY_UNREADY" {
             handleLobbyReadyChange(syncMessage, isReady: false)
+        } else if chatText.hasPrefix("LOBBY_VOTE:") {
+            handleLobbyVote(chatText, syncMessage: syncMessage, isVoting: true)
+        } else if chatText.hasPrefix("LOBBY_UNVOTE:") {
+            handleLobbyVote(chatText, syncMessage: syncMessage, isVoting: false)
         } else if chatText.starts(with: "LOBBY_KICK:") {
             await handleLobbyKick(chatText)
         } else if chatText == "LOBBY_START_COUNTDOWN" {
@@ -159,6 +163,31 @@ class LobbyEventRouter: ObservableObject {
         }
     }
 
+    private func handleLobbyVote(_ chatText: String, syncMessage: SyncMessage, isVoting: Bool) {
+        guard let viewModel = viewModel,
+              let senderId = syncMessage.senderId else { return }
+
+        // Don't process our own votes (we already updated locally)
+        if senderId.caseInsensitiveCompare(viewModel.participantId) == .orderedSame {
+            return
+        }
+
+        let prefix = isVoting ? "LOBBY_VOTE:" : "LOBBY_UNVOTE:"
+        let itemId = String(chatText.dropFirst(prefix.count))
+
+        var votes = viewModel.playlistVotes[itemId] ?? Set<String>()
+        if isVoting {
+            votes.insert(senderId)
+        } else {
+            votes.remove(senderId)
+        }
+        viewModel.playlistVotes[itemId] = votes
+
+        let action = isVoting ? "voted for" : "unvoted from"
+        let username = syncMessage.chatUsername ?? "User"
+        NSLog("👍 Received: \(username) \(action) playlist item \(itemId.prefix(8))")
+    }
+
     private func handleLobbyKick(_ chatText: String) async {
         guard let viewModel = viewModel else { return }
 
@@ -192,7 +221,7 @@ class LobbyEventRouter: ObservableObject {
         if !viewModel.isHost {
             // CRITICAL FIX: Ignore start signals for system events
             // Events are driven by wall-clock time (autoStartSystemEvent() in VM)
-            // Receiving a LOBBY_START_COUNTDOWN for an event is usually a race condition 
+            // Receiving a LOBBY_START_COUNTDOWN for an event is usually a race condition
             // from a "Virtual Host" or a bug, and it yanks users into player prematurely.
             if viewModel.room.type == .event {
                 NSLog("🛡️ Guest: Ignoring LOBBY_START_COUNTDOWN for system event. Relying on local sync.")

@@ -36,6 +36,10 @@ class LobbyViewModel: ObservableObject {
     @Published var isPlaylistMode: Bool = false
     @Published var mutedUserIds: Set<String> = []
 
+    // NEW: Playlist Voting (ephemeral, not persisted to DB)
+    // Maps playlist item ID -> Set of user IDs who voted for it
+    @Published var playlistVotes: [String: Set<String>] = [:]
+
     // Track unique realtime connection IDs to show "Joined" notifications correctly
     // even if user is already known from DB polling
     var connectedUserIds: Set<String> = []
@@ -445,7 +449,7 @@ class LobbyViewModel: ObservableObject {
                     } else {
                         // Room not found in database - likely deleted by host
                         print("❌ Lobby: Failed to fetch fresh room state (not found)")
-                        
+
                         // CRITICAL FIX: Only auto-start for events (system-managed rooms)
                         // For user rooms, a missing room means the host left/deleted it.
                         // Do NOT use stale cached state to auto-start playback.
@@ -560,10 +564,10 @@ class LobbyViewModel: ObservableObject {
                 }
             } else if let userId = currentUserId {
                 // Guest / Event Host logic
-                
-                // CRITICAL FIX: Only leave room if EXPLICITLY leaving. 
+
+                // CRITICAL FIX: Only leave room if EXPLICITLY leaving.
                 // Implicit disconnects (backgrounding, view reload) should NOT remove user from DB.
-                // This prevents race conditions where the old view deletes the user 
+                // This prevents race conditions where the old view deletes the user
                 // just as the new view is trying to join/sync.
                 if isLeavingExplicitly {
                     do {
@@ -652,10 +656,14 @@ class LobbyViewModel: ObservableObject {
         presenceManager.toggleMute(participantId: participantId)
     }
 
+    func toggleVote(for itemId: String) {
+        presenceManager.toggleVote(for: itemId)
+    }
+
     func kickParticipant(_ participant: Participant) {
         presenceManager.kickParticipant(participant)
     }
-    
+
     /// Kick user by ID (Used by Context Menu)
     func kickUser(userId: String) {
         if let participant = participants.first(where: { $0.id == userId }) {
@@ -674,7 +682,7 @@ class LobbyViewModel: ObservableObject {
             await SocialService.shared.blockUser(userId: participant.id, username: participant.name)
         }
     }
-    
+
     /// Block user by ID (Used by Context Menu when participant might not be in the list)
     /// Block user by ID (Used by Context Menu when participant might not be in the list)
     func blockUser(_ userId: String, username: String? = nil) {
@@ -1093,18 +1101,18 @@ class LobbyViewModel: ObservableObject {
                    currentRoomParam.id == self.room.id {
                     currentRoomParam.playlist = self.room.playlist
                     currentRoomParam.currentPlaylistIndex = self.room.currentPlaylistIndex
-                    
+
                     // Sync corrected season/episode
                     currentRoomParam.season = self.room.season
                     currentRoomParam.episode = self.room.episode
-                    
+
                     // Sync verified stream properties (ensuring correct hash/fileIdx)
                     currentRoomParam.selectedStreamHash = self.room.selectedStreamHash
                     currentRoomParam.selectedFileIdx = self.room.selectedFileIdx
                     currentRoomParam.selectedQuality = self.room.selectedQuality
                     currentRoomParam.unlockedStreamURL = self.room.unlockedStreamURL
                     currentRoomParam.subtitleUrl = self.room.subtitleUrl
-                    
+
                     // Sync verified media item
                     currentRoomParam.mediaItem = self.room.mediaItem
 
@@ -1182,7 +1190,7 @@ class LobbyViewModel: ObservableObject {
         if timeUntilStart <= 0 && dwellTime < minDwellTime {
             let waitRemaining = minDwellTime - dwellTime
             print("🕒 Lobby: Event is LIVE but honoring dwell time. Waiting \(Int(waitRemaining))s...")
-            
+
             countdownTask?.cancel()
             countdownTask = Task { [weak self] in
                 try? await Task.sleep(nanoseconds: UInt64(waitRemaining * 1_000_000_000))
@@ -1339,7 +1347,7 @@ class LobbyViewModel: ObservableObject {
                     self.posterURL = mediaItem.posterURL?.absoluteString
                     self.backdropURL = mediaItem.backgroundURL?.absoluteString
                     self.logoURL = mediaItem.logo
-                    
+
                     // CRITICAL FIX: Update AppState with changes
                     if var currentRoomParam = self.appState?.player.currentWatchPartyRoom {
                          currentRoomParam.mediaItem = self.room.mediaItem

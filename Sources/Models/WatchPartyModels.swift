@@ -34,7 +34,7 @@ enum RoomType {
 
 struct WatchPartyRoom: Identifiable {
     let id: String // Room ID for joining
-    
+
     var type: RoomType {
         id.hasPrefix("event_") ? .event : .userRoom
     }
@@ -180,6 +180,8 @@ enum LobbyMessageType: String {
     case userLeft
     case userReady
     case userNotReady
+    case userVoted
+    case userUnvoted
     case hostStarting
     case movieChanged
     case userKicked

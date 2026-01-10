@@ -343,8 +343,11 @@ struct WatchPartyLobbyView: View {
                                                 index: index,
                                                 isCurrent: index == viewModel.currentPlaylistIndex,
                                                 isHost: isHost,
+                                                voteCount: viewModel.playlistVotes[item.id]?.count ?? 0,
+                                                hasVoted: viewModel.playlistVotes[item.id]?.contains(viewModel.participantId) ?? false,
                                                 onRemove: { viewModel.removeFromPlaylist(at: index) },
-                                                onPlay: { viewModel.playItem(at: index) }
+                                                onPlay: { viewModel.playItem(at: index) },
+                                                onVote: { viewModel.toggleVote(for: item.id) }
                                             )
                                         }
                                     }
@@ -1215,8 +1218,11 @@ struct PlaylistItemRow: View {
     let index: Int
     let isCurrent: Bool
     let isHost: Bool
+    let voteCount: Int
+    let hasVoted: Bool
     let onRemove: () -> Void
     let onPlay: () -> Void
+    let onVote: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
@@ -1254,6 +1260,22 @@ struct PlaylistItemRow: View {
             }
 
             Spacer()
+
+            // Vote button (everyone can vote)
+            Button(action: onVote) {
+                HStack(spacing: 4) {
+                    Image(systemName: hasVoted ? "heart.fill" : "heart")
+                        .foregroundColor(hasVoted ? .pink : .white.opacity(0.6))
+                    if voteCount > 0 {
+                        Text("\(voteCount)")
+                            .font(.caption2)
+                            .foregroundColor(.white.opacity(0.8))
+                    }
+                }
+                .font(.system(size: 14))
+            }
+            .buttonStyle(PlainButtonStyle())
+            .padding(.trailing, 8)
 
             // Play button (Host only, if not current)
             if isHost && !isCurrent {

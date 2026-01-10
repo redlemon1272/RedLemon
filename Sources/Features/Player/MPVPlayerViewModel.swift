@@ -45,6 +45,9 @@ class MPVPlayerViewModel: ObservableObject {
     // This protects against "Ghost Leaves" (stale refs) AND "True Leaves" where the user is wiped from the list by DB polling before the Leave event processes.
     private var activeConnectionRefs: [String: String] = [:]
 
+    // Counter for database persistence limiting (Host Only)
+    private var persistenceTickCount: Int = 0
+
     init(mpvWrapper: MPVWrapper = MPVWrapper(),
          subtitleService: SubtitleService? = nil,
          playbackService: PlaybackService? = nil) {
@@ -3270,6 +3273,23 @@ extension MPVPlayerViewModel {
             // ✅ Don't broadcast during chat animation
             if self.isAnimatingChatToggle {
                 return
+            }
+            
+            // CRITICAL FIX: Persist playback state to DB every 10s (5 ticks * 2s)
+            // This ensures late joiners see the correct "is_playing" status and bypass the lobby.
+            self.persistenceTickCount += 1
+            if self.persistenceTickCount >= 5 {
+                self.persistenceTickCount = 0
+                Task {
+                    if let roomId = self.currentRoomId {
+                        // Fire and forget db update
+                         try? await SupabaseClient.shared.updateRoomPlayback(
+                            roomId: roomId, 
+                            position: Int(self.currentTime), 
+                            isPlaying: self.isPlaying
+                        )
+                    }
+                }
             }
 
             // Don't send if we've already cleaned up

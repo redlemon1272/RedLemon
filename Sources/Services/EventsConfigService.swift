@@ -378,9 +378,9 @@ class EventsConfigService {
         // 2. Determine where we are in the cycle relative to fixed epoch
         let now = TimeService.shared.now
         
-        // CRITICAL: Use the SAME fixed epoch as EventsView.swift to ensure the schedule matches!
-        // We use the shared constant to enforce this.
-        let epoch = ScheduleConstants.Epoch
+        // CRITICAL FIX: Use dynamic epoch from config if available, otherwise fallback (Task 2)
+        // This resolves the mismatch between AppState (dynamic) and EventsConfigService (was static)
+        let epoch = Date(timeIntervalSince1970: TimeInterval(config.epochTimestamp))
         
         let timeSinceEpoch = now.timeIntervalSince(epoch)
         let currentCycleTime = timeSinceEpoch.truncatingRemainder(dividingBy: totalCycleDuration)

@@ -33,6 +33,11 @@ class SocialService: ObservableObject {
     private var currentUsername: String?
     private var currentMetadata: [String: Any] = [:]
     
+    // Public accessor for status checks (prevent race conditions)
+    var currentStatus: String? {
+        currentMetadata["status"] as? String
+    }
+    
     // Performance: Cache formatter to avoid expensive initialization on main thread
     private static let isoFormatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()

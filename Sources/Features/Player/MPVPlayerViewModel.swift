@@ -1817,12 +1817,22 @@ class MPVPlayerViewModel: ObservableObject {
 
         // ✅ STEP 1: Clear watching status immediately
         if !returningToLobby {
-            await SocialService.shared.updateWatchingStatus(
-                mediaTitle: nil,
-                mediaType: nil,
-                imdbId: nil,
-                roomId: nil
-            )
+            // FIX: Race Condition Check
+            // If the user has heavily transitioned to "In Lobby" (e.g. WatchPartyLobbyView loaded first), 
+            // do NOT revert them to "Browsing" just because an old player instance is dying.
+            let currentStatus = SocialService.shared.currentStatus
+            let isInLobby = currentStatus?.hasPrefix("In Lobby") == true
+            
+            if !isInLobby {
+                await SocialService.shared.updateWatchingStatus(
+                    mediaTitle: nil,
+                    mediaType: nil,
+                    imdbId: nil,
+                    roomId: nil
+                )
+            } else {
+                 print("🛡️ Cleanup: Skipping status reset (User is already in Lobby)")
+            }
         }
 
         // ✅ STEP 1.5: Clear UI state to prevent re-use flash

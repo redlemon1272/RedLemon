@@ -1,6 +1,7 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
 > **Last Updated:** January 9, 2026
+> **Platform:** macOS (Native App)
 > Read this first. Contains everything an AI assistant needs to work on this codebase.
 
 ---

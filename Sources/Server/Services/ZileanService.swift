@@ -14,7 +14,7 @@ class ZileanService: ProviderService {
     let name = "zilean"
     private let baseUrl: String
 
-    init(url: String = "https://zilean.elfhosted.com") {
+    init(url: String = "https://151.243.109.243.nip.io/zilean") {
         self.baseUrl = url
     }
 
@@ -24,25 +24,25 @@ class ZileanService: ProviderService {
         season: Int? = nil,
         episode: Int? = nil
     ) async throws -> [Stream] {
-        // Zilean uses text search, not IMDB ID - need to get title from metadata
-        guard let metadata = await MetadataService.shared.getMetadata(imdbId: imdbId, type: type) else {
-            print("⚠️ Zilean: Could not get metadata for \(imdbId)")
+        // Build URL: /dmm/filtered?imdbId={imdbId}&season={season}&episode={episode}
+        var urlComponents = URLComponents(string: "\(baseUrl)/dmm/filtered")
+        var queryItems = [URLQueryItem(name: "imdbId", value: imdbId)]
+        
+        if let season = season {
+            queryItems.append(URLQueryItem(name: "season", value: String(season)))
+        }
+        
+        if let episode = episode {
+            queryItems.append(URLQueryItem(name: "episode", value: String(episode)))
+        }
+        
+        urlComponents?.queryItems = queryItems
+        
+        guard let url = urlComponents?.url else {
             return []
         }
 
-        let title = metadata.title
-        NSLog("🔍 Zilean: Searching for \"\(title)\"")
-
-        // URL encode the title
-        guard let encodedTitle = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-            return []
-        }
-
-        // Build URL: /dmm/search?query={title}
-        let urlString = "\(baseUrl)/dmm/search?query=\(encodedTitle)"
-        guard let url = URL(string: urlString) else {
-            return []
-        }
+        NSLog("🔍 Zilean: Searching via IMDB ID: \(imdbId)")
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -62,53 +62,16 @@ class ZileanService: ProviderService {
             throw ProviderError.httpError(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 0)
         }
 
-        // Zilean returns JSON array directly, not {streams: []}
         let results = try JSONDecoder().decode([ZileanResult].self, from: data)
 
         NSLog("✅ Zilean: Got \(results.count) results")
 
-        // Filter by season/episode if needed
-        let filtered: [ZileanResult]
-        if let season = season, let episode = episode {
-            filtered = results.filter { result in
-                let rawTitle = result.raw_title ?? ""
-
-                // Check if it's a season pack that includes this season
-                if let seasons = result.seasons, seasons.contains(season) {
-                    return true
-                }
-
-                // Check if filename matches S01E01 pattern
-                let pattern = "S\\d{1,2}E\\d{1,2}"
-                let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive)
-                if let match = regex?.firstMatch(in: rawTitle, options: [], range: NSRange(rawTitle.startIndex..., in: rawTitle)) {
-                    let matchedText = (rawTitle as NSString).substring(with: match.range)
-                    // Extract season and episode numbers
-                    let parts = matchedText.dropFirst().split(separator: "E")
-                    if parts.count == 2,
-                       let matchSeason = Int(parts[0].filter { $0.isNumber }),
-                       let matchEpisode = Int(parts[1].filter { $0.isNumber }) {
-                        return matchSeason == season && matchEpisode == episode
-                    }
-                }
-
-                return false
-            }
-        } else {
-            filtered = results
-        }
-
-        NSLog("🔍 Zilean: Filtered to \(filtered.count) streams")
-
-        return parseStreams(filtered)
+        return parseStreams(results)
     }
     
     func checkHealth() async -> Bool {
-        // Try to reach the root endpoint or search for a Common title
-        // Note: The curl verification showed 404 for /dmm/search, so this might fail until the endpoint is corrected upstream or configured correctly.
-        // We will try a known query.
-        let encodedTitle = "The Matrix".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "The Matrix"
-        let urlString = "\(baseUrl)/dmm/search?query=\(encodedTitle)"
+        // Use the verified health check endpoint
+        let urlString = "\(baseUrl)/healthchecks/ping"
         guard let url = URL(string: urlString) else { return false }
         
         var request = URLRequest(url: url)
@@ -120,9 +83,9 @@ class ZileanService: ProviderService {
             let config = URLSessionConfiguration.default
             config.timeoutIntervalForRequest = 5
             let session = URLSession(configuration: config)
-            let (_, response) = try await session.data(for: request)
+            let (data, response) = try await session.data(for: request)
             if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200 {
+                if httpResponse.statusCode == 200, let body = String(data: data, encoding: .utf8), body.contains("Pong!") {
                     return true
                 }
                 print("⚠️ Zilean Health Check returned status: \(httpResponse.statusCode)")
@@ -132,6 +95,7 @@ class ZileanService: ProviderService {
         }
         return false
     }
+
 
     private func parseStreams(_ zileanResults: [ZileanResult]) -> [Stream] {
         return zileanResults.compactMap { result -> Stream? in
@@ -190,6 +154,9 @@ class ZileanService: ProviderService {
 struct ZileanResult: Codable {
     let info_hash: String?
     let raw_title: String?
-    let size: String?  // Changed from Int64? to String? since Zilean returns string
-    let seasons: [Int]?  // For season packs
+    let size: String?
+    let seasons: [Int]?
+    let episodes: [Int]?
+    let imdb_id: String?
 }
+

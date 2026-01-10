@@ -142,6 +142,10 @@ class AppState: ObservableObject {
         didSet { player.selectedEpisode = selectedEpisode }
     }
     
+    // Provider Health Status
+    @Published var providerHealth: [String: String] = [:]
+    @Published var isCheckingProviders: Bool = false
+    
     // Window management
     private var wasFullscreen = false
 
@@ -424,6 +428,27 @@ class AppState: ObservableObject {
         // CRITICAL: Immediately recalculate schedule to inject new counts into eventsSchedule
         // Without this, the UI won't update until the next timer tick
         calculateDeterministicSchedule()
+    }
+
+    /// Check health of all registered providers and update global state
+    func checkProviderHealth() {
+        guard !isCheckingProviders else { return }
+        
+        NSLog("🏥 [AppState] Starting global provider health check...")
+        isCheckingProviders = true
+        
+        Task {
+            // Give system time to settle if called on startup
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            
+            let health = await ProviderManager.shared.checkAllHealth()
+            
+            await MainActor.run {
+                self.providerHealth = health
+                self.isCheckingProviders = false
+                NSLog("✅ [AppState] Provider health check complete (found \(health.count) providers)")
+            }
+        }
     }
 
 

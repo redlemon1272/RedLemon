@@ -77,6 +77,7 @@ struct RedLemonApp: App {
                     }
 
                     await startServer()
+                    appState.checkProviderHealth() // Trigger initial check
                     await performStartupChecks()
                     await performStartupChecks()
                     await checkForUpdates()

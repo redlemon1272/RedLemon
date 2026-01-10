@@ -1,0 +1,1832 @@
+🍋 Building RedLemon.app (DEBUG mode - faster)...
+🔧 System: x86_64
+🍎 macOS: 12.7.6
+🛠️  Xcode: 14.2
+✅ macOS 12.7.6 - OpenGL should be available
+🔧 Intel Mac detected - using standard libraries
+📁 Ensuring .app bundle structure exists...
+📦 Building Swift executable (debug)...
+🔧 Using architecture-specific flags: --arch x86_64
+[0/1] Planning build
+Building for debugging...
+[0/475] Compiling _NumericsShims _NumericsShims.c
+[1/475] Compiling _AtomicsShims.c
+[2/475] Copying Sparkle.framework
+[3/475] Compiling CSystem shims.c
+[4/475] Compiling CVaporBcrypt bcrypt.c
+[5/475] Compiling CVaporBcrypt blf.c
+[6/475] Compiling CNIOWindows shim.c
+[7/475] Compiling CNIOWindows WSAStartup.c
+[8/475] Compiling CNIOLinux shim.c
+[9/475] Compiling CNIOLinux liburing_shims.c
+[10/475] Compiling CNIOSHA1 c_nio_sha1.c
+[11/475] Compiling CNIOLLHTTP c_nio_http.c
+[12/475] Compiling CNIOLLHTTP c_nio_api.c
+[13/475] Compiling CNIOExtrasZlib empty.c
+[14/475] Compiling fiat_p256_adx_sqr.S
+[15/475] Compiling CNIODarwin shim.c
+[16/475] Compiling CNIOBoringSSLShims shims.c
+[17/475] Compiling fiat_p256_adx_mul.S
+[18/475] Compiling CNIOLLHTTP c_nio_llhttp.c
+[19/475] Compiling fiat_curve25519_adx_square.S
+[20/475] Compiling fiat_curve25519_adx_mul.S
+[21/475] Compiling tls_method.cc
+[21/475] Compiling tls_record.cc
+[23/475] Compiling tls13_enc.cc
+[24/475] Compiling tls13_server.cc
+[25/475] Compiling tls13_both.cc
+[25/475] Compiling t1_enc.cc
+[27/475] Compiling tls13_client.cc
+[28/475] Compiling ssl_x509.cc
+[29/475] Compiling ssl_stat.cc
+[30/475] Compiling ssl_transcript.cc
+[31/475] Compiling ssl_versions.cc
+[32/475] Compiling ssl_session.cc
+[33/475] Compiling ssl_privkey.cc
+[34/475] Compiling ssl_key_share.cc
+[35/475] Compiling ssl_lib.cc
+[36/475] Compiling ssl_file.cc
+[37/475] Compiling ssl_cipher.cc
+[38/475] Compiling ssl_cert.cc
+[39/475] Compiling ssl_buffer.cc
+[40/475] Compiling ssl_asn1.cc
+[41/475] Compiling ssl_aead_ctx.cc
+[42/475] Compiling s3_pkt.cc
+[43/475] Compiling s3_lib.cc
+[44/475] Compiling s3_both.cc
+[45/475] Compiling handshake_server.cc
+[46/475] Compiling handshake_client.cc
+[47/475] Compiling handshake.cc
+[48/475] Compiling handoff.cc
+[49/475] Compiling dtls_record.cc
+[50/475] Compiling encrypted_client_hello.cc
+[51/475] Compiling extensions.cc
+[52/475] Compiling dtls_method.cc
+[53/475] Compiling d1_srtp.cc
+[54/475] Compiling d1_pkt.cc
+[55/475] Compiling d1_lib.cc
+[56/475] Compiling d1_both.cc
+[57/475] Compiling v3_utl.c
+[58/475] Compiling v3_skey.c
+[59/475] Compiling v3_prn.c
+[60/475] Compiling v3_purp.c
+[61/475] Compiling v3_pmaps.c
+[62/475] Compiling bio_ssl.cc
+[63/475] Compiling v3_ocsp.c
+[64/475] Compiling v3_pcons.c
+[65/475] Compiling v3_ncons.c
+[66/475] Compiling v3_lib.c
+[67/475] Compiling v3_int.c
+[68/475] Compiling v3_info.c
+[69/475] Compiling v3_ia5.c
+[70/475] Compiling v3_genn.c
+[71/475] Compiling v3_extku.c
+[72/475] Compiling v3_enum.c
+[73/475] Compiling v3_crld.c
+[74/475] Compiling v3_conf.c
+[75/475] Compiling v3_cpols.c
+[76/475] Compiling v3_bitst.c
+[77/475] Compiling v3_bcons.c
+[78/475] Compiling v3_akeya.c
+[79/475] Compiling v3_akey.c
+[80/475] Compiling v3_alt.c
+[81/475] Compiling x_x509a.c
+[82/475] Compiling x_val.c
+[83/475] Compiling x_spki.c
+[84/475] Compiling x_x509.c
+[85/475] Compiling x_sig.c
+[86/475] Compiling x_req.c
+[87/475] Compiling x_pkey.c
+[88/475] Compiling x_pubkey.c
+[89/475] Compiling x_name.c
+[90/475] Compiling x_info.c
+[91/475] Compiling x_exten.c
+[92/475] Compiling x_attrib.c
+[93/475] Compiling x_crl.c
+[94/475] Compiling x_algor.c
+[95/475] Compiling x_all.c
+[96/475] Compiling x509spki.c
+[97/475] Compiling x509rset.c
+[98/475] Compiling x509name.c
+[99/475] Compiling x509cset.c
+[100/475] Compiling x509_vpm.c
+[101/475] Compiling x509_txt.c
+[102/475] Compiling x509_vfy.c
+[103/475] Compiling x509_v3.c
+[104/475] Compiling x509_trs.c
+[105/475] Compiling x509_set.c
+[106/475] Compiling x509_req.c
+[107/475] Compiling x509_obj.c
+[108/475] Compiling x509_def.c
+[109/475] Compiling x509_lu.c
+[110/475] Compiling x509_ext.c
+[111/475] Compiling x509_d2.c
+[112/475] Compiling x509_att.c
+[113/475] Compiling x509.c
+[114/475] Compiling x509_cmp.c
+[115/475] Compiling t_x509a.c
+[116/475] Compiling t_crl.c
+[117/475] Compiling t_x509.c
+[118/475] Compiling t_req.c
+[119/475] Compiling rsa_pss.c
+[120/475] Compiling i2d_pr.c
+[121/475] Compiling name_print.c
+[122/475] Compiling by_file.c
+[123/475] Compiling policy.c
+[124/475] Compiling by_dir.c
+[125/475] Compiling asn1_gen.c
+[126/475] Compiling algorithm.c
+[127/475] Compiling a_verify.c
+[128/475] Compiling a_sign.c
+[129/475] Compiling a_digest.c
+[130/475] Compiling trust_token.c
+[131/475] Compiling voprf.c
+[132/475] Compiling thread_win.c
+[133/475] Compiling thread_pthread.c
+[134/475] Compiling thread_none.c
+[135/475] Compiling pmbtoken.c
+[136/475] Compiling thread.c
+[137/475] Compiling siphash.c
+[138/475] Compiling stack.c
+[139/475] Compiling rsa_print.c
+[140/475] Compiling refcount.c
+[141/475] Compiling rsa_crypt.c
+[142/475] Compiling rsa_asn1.c
+[143/475] Compiling rc4.c
+[144/475] Compiling rand_extra.c
+[145/475] Compiling windows.c
+[146/475] Compiling trusty.c
+[147/475] Compiling passive.c
+[148/475] Compiling ios.c
+[149/475] Compiling getentropy.c
+[150/475] Compiling forkunsafe.c
+[151/475] Compiling deterministic.c
+[152/475] Compiling poly1305_arm_asm.S
+[153/475] Compiling pool.c
+[154/475] Compiling poly1305_arm.c
+[155/475] Compiling poly1305.c
+[156/475] Compiling poly1305_vec.c
+[157/475] Compiling pkcs8.c
+[158/475] Compiling p5_pbev2.c
+[159/475] Compiling pkcs8_x509.c
+[160/475] Compiling pkcs7_x509.c
+[161/475] Compiling pkcs7.c
+[162/475] Compiling pem_xaux.c
+[163/475] Compiling pem_x509.c
+[164/475] Compiling pem_pkey.c
+[165/475] Compiling pem_pk8.c
+[166/475] Compiling pem_oth.c
+[167/475] Compiling pem_lib.c
+[168/475] Compiling pem_info.c
+[169/475] Compiling obj_xref.c
+[170/475] Compiling pem_all.c
+[171/475] Compiling mem.c
+[172/475] Compiling lhash.c
+[173/475] Compiling kyber.c
+[174/475] Compiling obj.c
+[175/475] Compiling keccak.c
+[176/475] Compiling poly_rq_mul.S
+[177/475] Compiling x86_64-mont5-linux.linux.x86_64.S
+[178/475] Compiling x86_64-mont5-mac.mac.x86_64.S
+[179/475] Compiling hpke.c
+[180/475] Compiling x86_64-mont-mac.mac.x86_64.S
+[181/475] Compiling hrss.c
+[182/475] Compiling x86_64-mont-linux.linux.x86_64.S
+[183/475] Compiling x86-mont-linux.linux.x86.S
+[184/475] Compiling vpaes-x86_64-linux.linux.x86_64.S
+[185/475] Compiling vpaes-x86-linux.linux.x86.S
+[186/475] Compiling vpaes-x86_64-mac.mac.x86_64.S
+[187/475] Compiling vpaes-armv8-linux.linux.aarch64.S
+[188/475] Compiling vpaes-armv8-ios.ios.aarch64.S
+[189/475] Compiling vpaes-armv7-linux.linux.arm.S
+[190/475] Compiling vpaes-armv7-ios.ios.arm.S
+[191/475] Compiling sha512-x86_64-linux.linux.x86_64.S
+[192/475] Compiling sha512-armv8-linux.linux.aarch64.S
+[193/475] Compiling sha512-x86_64-mac.mac.x86_64.S
+[194/475] Compiling kdf.c
+[195/475] Compiling sha512-armv8-ios.ios.aarch64.S
+[196/475] Compiling sha512-armv4-linux.linux.arm.S
+[197/475] Compiling sha512-armv4-ios.ios.arm.S
+[198/475] Compiling sha512-586-linux.linux.x86.S
+[199/475] Compiling sha256-x86_64-linux.linux.x86_64.S
+[200/475] Compiling sha256-armv8-linux.linux.aarch64.S
+[201/475] Compiling sha256-armv8-ios.ios.aarch64.S
+[202/475] Compiling sha256-x86_64-mac.mac.x86_64.S
+[203/475] Compiling sha256-armv4-linux.linux.arm.S
+[204/475] Compiling sha256-armv4-ios.ios.arm.S
+[205/475] Compiling sha256-586-linux.linux.x86.S
+[206/475] Compiling sha1-x86_64-linux.linux.x86_64.S
+[207/475] Compiling sha1-armv8-ios.ios.aarch64.S
+[207/475] Compiling sha1-armv8-linux.linux.aarch64.S
+[209/475] Compiling sha1-x86_64-mac.mac.x86_64.S
+[210/475] Compiling sha1-armv4-large-linux.linux.arm.S
+[211/475] Compiling sha1-586-linux.linux.x86.S
+[212/475] Compiling sha1-armv4-large-ios.ios.arm.S
+[213/475] Compiling sha512.c
+[213/475] Compiling sha256.c
+[215/475] Compiling sha1.c
+[216/475] Compiling service_indicator.c
+[217/475] Compiling rsaz-avx2-linux.linux.x86_64.S
+[218/475] Compiling fips.c
+[219/475] Compiling rsaz-avx2-mac.mac.x86_64.S
+[220/475] Compiling self_check.c
+[221/475] Compiling padding.c
+[222/475] Compiling rsa_impl.c
+[223/475] Compiling rsa.c
+[224/475] Compiling blinding.c
+[225/475] Compiling rdrand-x86_64-mac.mac.x86_64.S
+[226/475] Compiling rdrand-x86_64-linux.linux.x86_64.S
+[227/475] Compiling urandom.c
+[228/475] Compiling rand.c
+[229/475] Compiling fork_detect.c
+[230/475] Compiling p256_beeu-x86_64-asm-mac.mac.x86_64.S
+[231/475] Compiling ctrdrbg.c
+[232/475] Compiling p256_beeu-x86_64-asm-linux.linux.x86_64.S
+[233/475] Compiling p256_beeu-armv8-asm-linux.linux.aarch64.S
+[234/475] Compiling p256_beeu-armv8-asm-ios.ios.aarch64.S
+[235/475] Compiling p256-x86_64-asm-linux.linux.x86_64.S
+[236/475] Compiling p256-armv8-asm-linux.linux.aarch64.S
+[237/475] Compiling p256-armv8-asm-ios.ios.aarch64.S
+[238/475] Compiling p256-x86_64-asm-mac.mac.x86_64.S
+[239/475] Compiling ofb.c
+[240/475] Compiling polyval.c
+[241/475] Compiling gcm_nohw.c
+[242/475] Compiling gcm.c
+[243/475] Compiling ctr.c
+[244/475] Compiling cfb.c
+[245/475] Compiling cbc.c
+[246/475] Compiling md5-x86_64-linux.linux.x86_64.S
+[247/475] Compiling md5-x86_64-mac.mac.x86_64.S
+[248/475] Compiling md5.c
+[249/475] Compiling md5-586-linux.linux.x86.S
+[250/475] Compiling ghashv8-armv8-linux.linux.aarch64.S
+[251/475] Compiling md4.c
+[252/475] Compiling hkdf.c
+[253/475] Compiling hmac.c
+[254/475] Compiling ghashv8-armv8-ios.ios.aarch64.S
+[255/475] Compiling ghashv8-armv7-ios.ios.arm.S
+[256/475] Compiling ghashv8-armv7-linux.linux.arm.S
+[257/475] Compiling ghash-x86_64-mac.mac.x86_64.S
+[258/475] Compiling ghash-x86_64-linux.linux.x86_64.S
+[259/475] Compiling ghash-x86-linux.linux.x86.S
+[260/475] Compiling ghash-ssse3-x86_64-mac.mac.x86_64.S
+[261/475] Compiling ghash-ssse3-x86-linux.linux.x86.S
+[261/475] Compiling ghash-ssse3-x86_64-linux.linux.x86_64.S
+[263/475] Compiling ghash-neon-armv8-linux.linux.aarch64.S
+[264/475] Compiling ghash-neon-armv8-ios.ios.aarch64.S
+[265/475] Compiling ghash-armv4-linux.linux.arm.S
+[266/475] Compiling ghash-armv4-ios.ios.arm.S
+[267/475] Compiling fips_shared_support.c
+[268/475] Compiling ecdh.c
+[269/475] Compiling wnaf.c
+[270/475] Compiling ecdsa.c
+[271/475] Compiling util.c
+[272/475] Compiling simple_mul.c
+[273/475] Compiling simple.c
+[274/475] Compiling scalar.c
+[275/475] Compiling p256.c
+[276/475] Compiling oct.c
+[277/475] Compiling p224-64.c
+[278/475] Compiling felem.c
+[279/475] Compiling ec_montgomery.c
+[280/475] Compiling ec_key.c
+[281/475] Compiling ec.c
+[282/475] Compiling digestsign.c
+[283/475] Compiling p256-nistz.c
+[284/475] Compiling digests.c
+[285/475] Compiling co-586-linux.linux.x86.S
+[286/475] Compiling digest.c
+[287/475] Compiling dh.c
+[288/475] Compiling check.c
+[289/475] Compiling cmac.c
+[290/475] Compiling e_aesccm.c
+[291/475] Compiling cipher.c
+[292/475] Compiling bsaes-armv7-linux.linux.arm.S
+[293/475] Compiling e_aes.c
+[294/475] Compiling bsaes-armv7-ios.ios.arm.S
+[295/475] Compiling aead.c
+[296/475] Compiling sqrt.c
+[297/475] Compiling rsaz_exp.c
+[298/475] Compiling shift.c
+[299/475] Compiling random.c
+[300/475] Compiling prime.c
+[301/475] Compiling montgomery_inv.c
+[302/475] Compiling mul.c
+[303/475] Compiling montgomery.c
+[304/475] Compiling generic.c
+[305/475] Compiling jacobi.c
+[306/475] Compiling gcd_extra.c
+[307/475] Compiling gcd.c
+[308/475] Compiling div_extra.c
+[309/475] Compiling ctx.c
+[310/475] Compiling exponentiation.c
+[311/475] Compiling div.c
+[312/475] Compiling cmp.c
+[313/475] Compiling bytes.c
+[314/475] Compiling bn.c
+[315/475] Compiling bn-armv8-linux.linux.aarch64.S
+[316/475] Compiling add.c
+[317/475] Compiling bn-armv8-ios.ios.aarch64.S
+[318/475] Compiling bn-586-linux.linux.x86.S
+[319/475] Compiling armv8-mont-linux.linux.aarch64.S
+[320/475] Compiling armv8-mont-ios.ios.aarch64.S
+[321/475] Compiling armv4-mont-linux.linux.arm.S
+[322/475] Compiling armv4-mont-ios.ios.arm.S
+[323/475] Compiling aesv8-gcm-armv8-linux.linux.aarch64.S
+[324/475] Compiling aesv8-gcm-armv8-ios.ios.aarch64.S
+[325/475] Compiling x86_64-gcc.c
+[326/475] Compiling aesv8-armv8-linux.linux.aarch64.S
+[327/475] Compiling aesv8-armv8-ios.ios.aarch64.S
+[328/475] Compiling aesv8-armv7-linux.linux.arm.S
+[329/475] Compiling aesv8-armv7-ios.ios.arm.S
+[330/475] Compiling aesni-x86_64-mac.mac.x86_64.S
+[331/475] Compiling aesni-x86_64-linux.linux.x86_64.S
+[332/475] Compiling aesni-x86-linux.linux.x86.S
+[333/475] Compiling aesni-gcm-x86_64-mac.mac.x86_64.S
+[334/475] Compiling aesni-gcm-x86_64-linux.linux.x86_64.S
+[335/475] Compiling mode_wrappers.c
+[336/475] Compiling key_wrap.c
+[337/475] Compiling aes.c
+[338/475] Compiling aes_nohw.c
+[339/475] Compiling ex_data.c
+[340/475] Compiling sign.c
+[341/475] Compiling scrypt.c
+[342/475] Compiling pbkdf.c
+[343/475] Compiling print.c
+[344/475] Compiling p_x25519_asn1.c
+[345/475] Compiling p_x25519.c
+[346/475] Compiling p_rsa_asn1.c
+[347/475] Compiling p_rsa.c
+[348/475] Compiling p_hkdf.c
+[349/475] Compiling p_ed25519_asn1.c
+[350/475] Compiling p_ed25519.c
+[351/475] Compiling p_ec_asn1.c
+[352/475] Compiling p_ec.c
+[353/475] Compiling p_dsa_asn1.c
+[354/475] Compiling evp_ctx.c
+[355/475] Compiling err_data.c
+[356/475] Compiling evp_asn1.c
+[357/475] Compiling evp.c
+[358/475] Compiling err.c
+[359/475] Compiling engine.c
+[360/475] Compiling ecdsa_asn1.c
+[361/475] Compiling ecdh_extra.c
+[362/475] Compiling ec_derive.c
+[363/475] Compiling hash_to_curve.c
+[364/475] Compiling dsa_asn1.c
+[365/475] Compiling ec_asn1.c
+[366/475] Compiling dsa.c
+[367/475] Compiling digest_extra.c
+[368/475] Compiling params.c
+[369/475] Compiling dh_asn1.c
+[370/475] Compiling spake25519.c
+[371/475] Compiling curve25519_64_adx.c
+[372/475] Compiling des.c
+[373/475] Compiling x25519-asm-arm.S
+[374/475] Compiling crypto.c
+[375/475] Compiling cpu_intel.c
+[376/475] Compiling cpu_arm_linux.c
+[377/475] Compiling curve25519.c
+[378/475] Compiling cpu_arm_freebsd.c
+[379/475] Compiling cpu_aarch64_win.c
+[380/475] Compiling cpu_aarch64_sysreg.c
+[381/475] Compiling cpu_aarch64_openbsd.c
+[382/475] Compiling cpu_aarch64_linux.c
+[383/475] Compiling cpu_aarch64_fuchsia.c
+[384/475] Compiling cpu_aarch64_apple.c
+[385/475] Compiling conf.c
+[386/475] Compiling e_rc4.c
+[387/475] Compiling tls_cbc.c
+[388/475] Compiling e_tls.c
+[389/475] Compiling e_null.c
+[390/475] Compiling e_des.c
+[391/475] Compiling e_rc2.c
+[392/475] Compiling e_chacha20poly1305.c
+[393/475] Compiling derive_key.c
+[394/475] Compiling e_aesctrhmac.c
+[395/475] Compiling cipher_extra.c
+[396/475] Compiling e_aesgcmsiv.c
+[397/475] Compiling chacha20_poly1305_x86_64-linux.linux.x86_64.S
+[398/475] Compiling chacha20_poly1305_armv8-linux.linux.aarch64.S
+[399/475] Compiling chacha20_poly1305_armv8-ios.ios.aarch64.S
+[400/475] Compiling aes128gcmsiv-x86_64-linux.linux.x86_64.S
+[401/475] Compiling aes128gcmsiv-x86_64-mac.mac.x86_64.S
+[402/475] Compiling chacha20_poly1305_x86_64-mac.mac.x86_64.S
+[403/475] Compiling chacha.c
+[404/475] Compiling chacha-x86_64-linux.linux.x86_64.S
+[405/475] Compiling chacha-x86_64-mac.mac.x86_64.S
+[406/475] Compiling chacha-x86-linux.linux.x86.S
+[407/475] Compiling chacha-armv8-linux.linux.aarch64.S
+[408/475] Compiling chacha-armv8-ios.ios.aarch64.S
+[409/475] Compiling chacha-armv4-linux.linux.arm.S
+[410/475] Compiling chacha-armv4-ios.ios.arm.S
+[411/475] Compiling unicode.c
+[412/475] Compiling ber.c
+[413/475] Compiling cbb.c
+[414/475] Compiling cbs.c
+[415/475] Compiling asn1_compat.c
+[416/475] Compiling buf.c
+[417/475] Compiling bn_asn1.c
+[418/475] Compiling convert.c
+[419/475] Compiling blake2.c
+[420/475] Compiling socket_helper.c
+[421/475] Compiling socket.c
+[422/475] Compiling printf.c
+[423/475] Compiling pair.c
+[424/475] Compiling hexdump.c
+[425/475] Compiling file.c
+[426/475] Compiling fd.c
+[427/475] Compiling errno.c
+[428/475] Compiling connect.c
+[429/475] Compiling bio_mem.c
+[430/475] Compiling base64.c
+[431/475] Compiling bio.c
+[432/475] Compiling tasn_utl.c
+[433/475] Compiling tasn_typ.c
+[434/475] Compiling tasn_new.c
+[434/475] Compiling tasn_fre.c
+[436/475] Compiling tasn_enc.c
+[437/475] Compiling f_string.c
+[438/475] Compiling posix_time.c
+[439/475] Compiling tasn_dec.c
+[440/475] Compiling f_int.c
+[441/475] Compiling asn_pack.c
+[442/475] Compiling asn1_par.c
+[443/475] Compiling asn1_lib.c
+[444/475] Compiling a_utctm.c
+[445/475] Compiling a_type.c
+[446/475] Compiling a_time.c
+[447/475] Compiling a_strnid.c
+[448/475] Compiling a_strex.c
+[449/475] Compiling a_octet.c
+[450/475] Compiling a_object.c
+[451/475] Compiling a_mbstr.c
+[452/475] Compiling a_i2d_fp.c
+[453/475] Compiling a_int.c
+[454/475] Compiling a_gentm.c
+[455/475] Compiling a_dup.c
+[456/475] Compiling a_d2i_fp.c
+[457/475] Compiling a_bool.c
+[458/475] Compiling CBacktrace state.c
+[459/475] Compiling CBacktrace sort.c
+[460/475] Compiling a_bitstr.c
+[461/475] Compiling CBacktrace print.c
+[461/475] Compiling CBacktrace simple.c
+[463/475] Compiling CBacktrace mmapio.c
+[464/475] Compiling CBacktrace posix.c
+[465/475] Compiling CBacktrace mmap.c
+[466/475] Compiling CBacktrace fileline.c
+[467/475] Compiling CBacktrace elf.c
+[468/475] Compiling CBacktrace dwarf.c
+[469/475] Compiling CBacktrace atomic.c
+[470/475] Compiling CBacktrace backtrace.c
+[471/475] Compiling CAsyncHTTPClient CAsyncHTTPClient.c
+[472/475] Compiling c-nioatomics.c
+[473/475] Compiling c-atomics.c
+[475/481] Compiling RedLemon EventListComponents.swift
+[476/481] Compiling RedLemon PlayerControlsView.swift
+[477/481] Compiling RedLemon PlayerOverlays.swift
+[478/483] Compiling RedLemon PlaylistComponents.swift
+[479/483] Compiling RedLemon MPVPlayerView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerView.swift:397:19: warning: no 'async' operations occur within 'await' expression
+                  await appState.player.handlePlaybackError(error)
+                  ^
+[480/483] Compiling RedLemon AudioTrack.swift
+[481/483] Compiling RedLemon ChatOverlayView.swift
+[482/483] Emitting module RedLemon
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[483/537] Compiling RedLemon SocialService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[484/537] Compiling RedLemon RealtimeChannelManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[485/537] Compiling RedLemon Metadata.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[486/537] Compiling RedLemon WatchPartyModels.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[487/537] Compiling RedLemon CacheManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[488/537] Compiling RedLemon SupabaseClient.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[489/537] Compiling RedLemon RealDebridClient.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[490/537] Compiling RedLemon StreamResolver.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[491/537] Compiling RedLemon EventsConfigService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[492/537] Compiling RedLemon LogManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[493/537] Compiling RedLemon LoggingManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[494/537] Compiling RedLemon SessionRecorder.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[495/537] Compiling RedLemon TimeService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[496/537] Compiling RedLemon QualitySelectionView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[497/537] Compiling RedLemon SeasonEpisodeSelectorView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[498/537] Compiling RedLemon StreamSelectionView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[499/537] Compiling RedLemon FriendProfileView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[500/537] Compiling RedLemon FriendsView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[501/537] Compiling RedLemon FriendsViewModel.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[502/537] Compiling RedLemon LicenseManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[503/537] Compiling RedLemon RestoreAccountView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[504/537] Compiling RedLemon ReactionOverlayView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[505/537] Compiling RedLemon MPVPlayerViewModel.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[506/537] Compiling RedLemon MPVWrapper.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[507/537] Compiling RedLemon PlayerViewModel.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[508/537] Compiling RedLemon EventChatService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[509/537] Compiling RedLemon SubtitleSyncView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[510/537] Compiling RedLemon AppState.swift
+[511/537] Compiling RedLemon ContentView.swift
+[512/537] Compiling RedLemon RedLemonApp.swift
+[513/537] Compiling RedLemon ScheduleConstants.swift
+[514/537] Compiling RedLemon AdminDashboardComponents.swift
+[515/537] Compiling RedLemon AdminDashboardView.swift
+[516/537] Compiling RedLemon AdminServerView.swift
+[517/537] Compiling RedLemon ScheduleManagementView.swift
+[518/537] Compiling RedLemon UsernameSetupView.swift
+[519/537] Compiling RedLemon BrowseView.swift
+[520/537] Compiling RedLemon DiscoverView.swift
+[521/537] Compiling RedLemon EventModels.swift
+[522/537] Compiling RedLemon EventsView.swift
+[523/537] Compiling RedLemon MediaDetailView.swift
+[524/537] Compiling RedLemon LobbyChatManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[525/537] Compiling RedLemon LobbyDatabaseManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[526/537] Compiling RedLemon LobbyEventRouter.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[527/537] Compiling RedLemon LobbyPresenceManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[528/537] Compiling RedLemon LobbyStateMachine.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[529/537] Compiling RedLemon LobbyViewModel.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[530/537] Compiling RedLemon RoomListView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[531/537] Compiling RedLemon WatchPartyLobbyView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[532/537] Compiling RedLemon SearchView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[533/537] Compiling RedLemon AccountExportManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[534/537] Compiling RedLemon ProviderHealthView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[535/537] Compiling RedLemon SettingsView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[536/537] Compiling RedLemon ChatView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:297:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:360:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:368:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:395:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Social/ChatView.swift:50:28: warning: value 'lastId' was defined but never used; consider replacing with boolean test
+                    if let lastId = socialService.messages[friend.id]?.last?.id {
+                       ~~~~^~~~~~~~~
+                       (                                                       ) != nil
+[536/537] Linking RedLemon
+Build complete! (141.81s)
+🔧 Copying debug executable...
+✅ Binary updated at 12:50:57
+📚 Copying frameworks...
+📚 Using default frameworks
+✅ libmpv.2.dylib copied
+📦 Copying Sparkle.framework...
+✅ Sparkle.framework copied
+📄 Copying resources...
+✅ Copied AppIcon.icns
+🔗 Fixing library paths...
+🔏 Code signing app with ad-hoc signature...
+✅ App signed
+🔓 Removing quarantine flag...
+
+✅ RedLemon.app built successfully!
+📍 Location: build/RedLemon.app
+▶️  Run with: open build/RedLemon.app

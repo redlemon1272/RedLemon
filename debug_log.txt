@@ -1,0 +1,253 @@
+🍋 Building RedLemon.app (DEBUG mode - faster)...
+🔧 System: x86_64
+🍎 macOS: 12.7.6
+🛠️  Xcode: 14.2
+✅ macOS 12.7.6 - OpenGL should be available
+🔧 Intel Mac detected - using standard libraries
+📁 Ensuring .app bundle structure exists...
+📦 Building Swift executable (debug)...
+🔧 Using architecture-specific flags: --arch x86_64
+[0/1] Planning build
+Building for debugging...
+[1/20] Emitting module RedLemon
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[2/25] Compiling RedLemon ReactionOverlayView.swift
+[3/25] Compiling RedLemon StreamInfoView.swift
+[4/25] Compiling RedLemon WaitingGateView.swift
+[5/25] Compiling RedLemon MPVController.swift
+[6/25] Compiling RedLemon MPVLayerVideoView.swift
+[7/27] Compiling RedLemon BackupPhraseView.swift
+[8/27] Compiling RedLemon FirstTimeRecoverySetupView.swift
+[9/27] Compiling RedLemon LicenseManager.swift
+[10/27] Compiling RedLemon PremiumPaymentView.swift
+[11/27] Compiling RedLemon RecoveryPhraseManager.swift
+[12/27] Compiling RedLemon RestoreAccountView.swift
+[13/27] Compiling RedLemon QualitySelectionView.swift
+[14/27] Compiling RedLemon SeasonEpisodeSelectorView.swift
+[15/27] Compiling RedLemon StreamSelectionView.swift
+[16/27] Compiling RedLemon FriendProfileView.swift
+[17/27] Compiling RedLemon FriendsView.swift
+[18/27] Compiling RedLemon FriendsViewModel.swift
+[19/27] Compiling RedLemon AudioTrack.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:393:38: error: cannot find 'formatMessageTime' in scope
+                                Text(formatMessageTime(message.timestamp))
+                                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:450:22: error: cannot find 'formatMessageTime' in scope
+                Text(formatMessageTime(message.timestamp))
+                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:522:46: error: cannot find 'formatMessageTime' in scope
+                                        Text(formatMessageTime(message.createdAt))
+                                             ^~~~~~~~~~~~~~~~~
+[20/27] Compiling RedLemon ChatOverlayView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:393:38: error: cannot find 'formatMessageTime' in scope
+                                Text(formatMessageTime(message.timestamp))
+                                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:450:22: error: cannot find 'formatMessageTime' in scope
+                Text(formatMessageTime(message.timestamp))
+                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:522:46: error: cannot find 'formatMessageTime' in scope
+                                        Text(formatMessageTime(message.createdAt))
+                                             ^~~~~~~~~~~~~~~~~
+[21/27] Compiling RedLemon EventListComponents.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:393:38: error: cannot find 'formatMessageTime' in scope
+                                Text(formatMessageTime(message.timestamp))
+                                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:450:22: error: cannot find 'formatMessageTime' in scope
+                Text(formatMessageTime(message.timestamp))
+                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:522:46: error: cannot find 'formatMessageTime' in scope
+                                        Text(formatMessageTime(message.createdAt))
+                                             ^~~~~~~~~~~~~~~~~
+[22/27] Compiling RedLemon PlayerControlsView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:393:38: error: cannot find 'formatMessageTime' in scope
+                                Text(formatMessageTime(message.timestamp))
+                                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:450:22: error: cannot find 'formatMessageTime' in scope
+                Text(formatMessageTime(message.timestamp))
+                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:522:46: error: cannot find 'formatMessageTime' in scope
+                                        Text(formatMessageTime(message.createdAt))
+                                             ^~~~~~~~~~~~~~~~~
+[23/27] Compiling RedLemon PlayerOverlays.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:393:38: error: cannot find 'formatMessageTime' in scope
+                                Text(formatMessageTime(message.timestamp))
+                                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:450:22: error: cannot find 'formatMessageTime' in scope
+                Text(formatMessageTime(message.timestamp))
+                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:522:46: error: cannot find 'formatMessageTime' in scope
+                                        Text(formatMessageTime(message.createdAt))
+                                             ^~~~~~~~~~~~~~~~~
+[24/27] Compiling RedLemon PlaylistComponents.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:393:38: error: cannot find 'formatMessageTime' in scope
+                                Text(formatMessageTime(message.timestamp))
+                                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:450:22: error: cannot find 'formatMessageTime' in scope
+                Text(formatMessageTime(message.timestamp))
+                     ^~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/ChatOverlayView.swift:522:46: error: cannot find 'formatMessageTime' in scope
+                                        Text(formatMessageTime(message.createdAt))
+                                             ^~~~~~~~~~~~~~~~~
+[25/31] Compiling RedLemon PlaybackService.swift
+[26/31] Compiling RedLemon SubtitleService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:108:22: warning: immutable value 'index' was never used; consider replacing with '_' or removing it
+                for (index, subtitle) in items.enumerated() {
+                     ^~~~~
+                     _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:102:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:115:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:187:24: warning: immutable value 'response' was never used; consider replacing with '_' or removing it
+            let (data, response) = try await session.data(from: subtitleURL)
+                       ^~~~~~~~
+                       _
+[27/36] Compiling RedLemon MPVPlayerView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerView.swift:397:19: warning: no 'async' operations occur within 'await' expression
+                  await appState.player.handlePlaybackError(error)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+[28/36] Compiling RedLemon MPVPlayerViewModel.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerView.swift:397:19: warning: no 'async' operations occur within 'await' expression
+                  await appState.player.handlePlaybackError(error)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2191:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2380:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2501:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2780:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3443:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+[29/38] Compiling RedLemon MPVViewLayer.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:131:19: warning: 'CGLChoosePixelFormat' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        let err = CGLChoosePixelFormat(attributes, &pix, &npix)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:143:9: warning: 'CGLCreateContext' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLCreateContext(pixelFormat, nil, &ctx)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:151:9: warning: 'CGLSetParameter' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLSetParameter(context, kCGLCPSwapInterval, &swapInterval)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:154:9: warning: 'CGLEnable' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLEnable(context, kCGLCEMPEngine)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:209:9: warning: 'glClear' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:213:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:217:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_VIEWPORT), &dims)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:244:9: warning: 'glFlush()' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glFlush()
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+[30/38] Compiling RedLemon MPVWrapper.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:131:19: warning: 'CGLChoosePixelFormat' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        let err = CGLChoosePixelFormat(attributes, &pix, &npix)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:143:9: warning: 'CGLCreateContext' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLCreateContext(pixelFormat, nil, &ctx)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:151:9: warning: 'CGLSetParameter' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLSetParameter(context, kCGLCPSwapInterval, &swapInterval)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:154:9: warning: 'CGLEnable' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLEnable(context, kCGLCEMPEngine)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:209:9: warning: 'glClear' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:213:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:217:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_VIEWPORT), &dims)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:244:9: warning: 'glFlush()' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glFlush()
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:519:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+[31/40] Compiling RedLemon PlayerViewModel.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[32/40] Compiling RedLemon EventChatService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+[33/40] Compiling RedLemon ContentView.swift
+[34/40] Compiling RedLemon RedLemonApp.swift
+[35/40] Compiling RedLemon UsernameSetupView.swift
+[36/40] Compiling RedLemon SettingsView.swift
+[37/40] Compiling RedLemon SocialService.swift
+[38/40] Compiling RedLemon LobbyChatManager.swift
+[39/40] Compiling RedLemon WatchPartyLobbyView.swift

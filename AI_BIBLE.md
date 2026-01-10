@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 9, 2026
+> **Last Updated:** January 10, 2026
 > **Platform:** macOS (Native App)
 > Read this first. Contains everything an AI assistant needs to work on this codebase.
 
@@ -117,13 +117,28 @@
 - **Rule**: The Room ID is the ultimate source of truth.
     - If `room_id.startsWith("event_")` -> It IS an event.
     - **Implication**: ALWAYS bypass "Ready Gates" and Host Checks for these IDs, regardless of what `appState` says.
-120: 
+120:
 121: ### 19. Zilean Population Verification (Data Pipeline Check)
 122: - **Problem**: Zilean can appear healthy while not populating new torrents.
 123: - **Rule**: Verify **Database Growth** in the Admin Dashboard "Overview".
 124:     - If the "Zilean Torrents" count is static over several hours despite logs showing activity, the indexing pipeline is broken (likely Landmine #17).
-125:     - **Log Source**: `SupabaseClient.getZileanTorrentCount()` parses the `details` field of the latest `zilean_maintenance` job log. 
+125:     - **Log Source**: `SupabaseClient.getZileanTorrentCount()` parses the `details` field of the latest `zilean_maintenance` job log.
 126:     - **Requirement**: The server-side maintenance script MUST write `Total Torrents: X` into the `system_job_logs` details for this metric to be live.
+
+### 20. Timer Burst Pattern (Playback Jitters)
+- **Problem**: Multiple background heartbeat/polling systems running at similar intervals (e.g., all at 30s) cause "bursts" of CPU activity that can produce micro-jitters during video playback on older hardware (MacBook Air 2015).
+- **Symptom**: Smooth playback on newer hardware (quad-core), occasional micro-stutters on older hardware (dual-core).
+- **Systems at Risk**:
+    - `SocialService.swift` - Global presence heartbeat
+    - `LobbyPresenceManager.swift` - Room heartbeat + participant polling
+    - `MPVPlayerViewModel.swift` - Playback heartbeat + chat polling
+    - `SupabaseRealtimeClient.swift` - WebSocket heartbeat
+- **Rule**: **Stagger intervals** to spread CPU load:
+    - Use different intervals (25s, 30s, 35s instead of all 30s)
+    - Add initial offsets so timers don't start synchronized
+    - Prefer `Task` over `Timer` to avoid blocking main RunLoop
+    - Keep fallback polling conservative (5s+, not 2s)
+- **Example Fix**: Changed from `Timer(timeInterval: 20.0)` on main RunLoop to `Task { try? await Task.sleep(nanoseconds: 25_000_000_000) }` with 5s initial offset.
 
 ## 🏗️ Architecture Map
 

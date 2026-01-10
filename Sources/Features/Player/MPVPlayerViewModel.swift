@@ -365,6 +365,8 @@ class MPVPlayerViewModel: ObservableObject {
              // Fallback for missing eventStartTime (Race condition workaround)
              print("⚠️ EVENT: eventStartTime is nil but isEventPlayback is TRUE! Falling back to resumeFromTimestamp...")
              seekTime = appState.player.resumeFromTimestamp ?? 0
+             // Consume the timestamp to prevent leaks
+             appState.player.resumeFromTimestamp = nil
 
              // Double Fallback: If resumeFromTimestamp is 0 (missing?), try room creation time
              if seekTime == 0, let room = appState.player.currentWatchPartyRoom, room.id.hasPrefix("event_") {
@@ -380,6 +382,10 @@ class MPVPlayerViewModel: ObservableObject {
              // Not an event, and no start time -> Standard playback (handled elsewhere) or Watch Party sync will take over
              return
         }
+        
+        // Consume the timestamp request now that we are successfully launching the event
+        // This prevents the timestamp from leaking to the NEXT video (e.g. if user exits event and plays solo)
+        appState.player.resumeFromTimestamp = nil
 
         // 5. Execute Seek & Play
         print("   Seeking to live edge: \(Int(seekTime))s")

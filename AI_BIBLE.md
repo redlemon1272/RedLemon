@@ -94,6 +94,11 @@
 - **Rule**: The Server (Database/Config) is the Single Source of Truth.
     - **Action**: Always fetch `EventsConfig` first and use its values (`epoch_timestamp`, `cycle_duration`) to drive logic. Fallback to local constants ONLY if offline.
 
+### 15. Transient State Pollution
+- **Problem**: Variables in `AppState` (like `resumeFromTimestamp` or `eventStartTime`) behave as GLOBAL state. If a feature (e.g., Events) sets them but fails to clear them, they "leak" into the next feature (e.g., Solo Playback).
+- **Symptom**: "Ghost behavior" where a fresh video starts at a specific timestamp from a previous session.
+- **Rule**: "Consume" transient state immediately. Use it, then set it to `nil` in the SAME execution block. Never assume the next view will clear it.
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |

@@ -1020,8 +1020,12 @@ struct ParticipantRow: View {
 
                 if participant.isHost {
                     Text("Host")
-                        .font(.caption)
+                        .font(.caption2.weight(.bold))
                         .foregroundColor(.accentColor)
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 1)
+                        .background(Color.accentColor.opacity(0.15))
+                        .cornerRadius(4)
                 }
             }
 

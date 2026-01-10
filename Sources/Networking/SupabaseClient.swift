@@ -932,6 +932,9 @@ class SupabaseClient: RoomManager, UserManager {
             ],
             query: ["id": "eq.\(roomId)"]
         )
+        if position % 10 == 0 { // Don't log every second
+             NSLog("✅ SupabaseClient: Updated room playback (Playing: \(isPlaying), Pos: \(position)s)")
+        }
     }
 
     /// Start room playback for database fallback (when Realtime fails)

@@ -74,6 +74,14 @@
 - **Problem**: Passing string-interpolated URLs or JSON directly into `NSLog` (e.g., `NSLog("URL: \(url)")`) causes crashes if the string contains a `%` character (standard in encoded URLs).
 - **Rule**: ALWAYS use the specifier format: `NSLog("%@", "Message: \(url)")`.
 
+### 12. SwiftUI Modifier Version Compatibility
+- **Problem**: Some SwiftUI modifiers are macOS version-specific. For example, `.fontWeight()` on `Text` or `Button` requires **macOS 13.0+**.
+- **Symptom**: Build fails with `'fontWeight' is only available in macOS 13.0 or newer`.
+- **Rule**: Use `.font(.system(size:weight:))` instead of `.fontWeight()` for weight styling. This is compatible with macOS 12.x.
+- **Example**:
+  - ❌ `.font(.caption).fontWeight(.semibold)` - Fails on macOS 12
+  - ✅ `.font(.system(size: 12, weight: .semibold))` - Works on all versions
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |

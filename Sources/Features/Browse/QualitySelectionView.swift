@@ -92,6 +92,41 @@ struct QualitySelectionView: View {
                             .frame(width: 180, height: 120)
                         }
 
+                        // Free user warning when Watch Party is selected
+                        if watchMode == .watchParty && !licenseManager.isPremium {
+                            HStack(spacing: 8) {
+                                Image(systemName: "exclamationmark.triangle.fill")
+                                    .foregroundColor(.orange)
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("Starting will use your free watch party")
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                    Text("Free users can host 1 room every 72 hours")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                Button("Upgrade") {
+                                    showPremiumSheet = true
+                                }
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .background(Color.accentColor)
+                                .cornerRadius(6)
+                            }
+                            .padding(12)
+                            .background(Color.orange.opacity(0.1))
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+                            )
+                            .frame(maxWidth: 400)
+                            .padding(.top, 8)
+                        }
+
                         // NEW: Room Settings (Only for Watch Party)
                         if watchMode == .watchParty {
                             VStack(alignment: .center, spacing: 12) {
@@ -99,7 +134,7 @@ struct QualitySelectionView: View {
                                     .font(.headline)
                                     .foregroundColor(.primary)
                                     .padding(.top, 4)
-                                
+
                                 TextField("Room Description (optional)", text: $roomDescription)
                                     .textFieldStyle(PlainTextFieldStyle())
                                     .multilineTextAlignment(.center)
@@ -107,7 +142,7 @@ struct QualitySelectionView: View {
                                     .background(Color.secondary.opacity(0.1))
                                     .cornerRadius(8)
                                     .frame(width: 300)
-                                
+
                                 Toggle("Public Room (Visible in Browse)", isOn: $isPublicRoom)
                                     .toggleStyle(SwitchToggleStyle(tint: .accentColor))
                             }

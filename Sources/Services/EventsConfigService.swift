@@ -409,6 +409,71 @@ class EventsConfigService {
         print("🗓 Schedule Calc: No event found for current time slot.")
         return nil
     }
+
+    /// Check if an event is valid to join (Live OR Next Upcoming Lobby)
+    /// This prevents joining "Stale" events while allowing friends to join lobbies of upcoming movies.
+    func isEventJoinable(eventId: String, config: EventsConfig) -> Bool {
+        guard !config.movies.isEmpty else { return false }
+        
+        // Strip "event_" prefix if present
+        let cleanId = eventId.replacingOccurrences(of: "event_", with: "")
+        
+        // 1. Calculate Cycle Info
+        var totalCycleDuration: TimeInterval = 0
+        var movieDurations: [TimeInterval] = []
+        let buffer = Double(config.bufferBetweenMoviesSeconds)
+        
+        for movie in config.movies {
+            let runtimeString = movie.runtime?.components(separatedBy: " ").first ?? "120"
+            let runtimeMinutes = Int(runtimeString) ?? 120
+            let duration = TimeInterval(runtimeMinutes * 60) + buffer
+            movieDurations.append(duration)
+            totalCycleDuration += duration
+        }
+        
+        // 2. Determine Current Position
+        let now = TimeService.shared.now
+        let epoch = Date(timeIntervalSince1970: TimeInterval(config.epochTimestamp))
+        let timeSinceEpoch = now.timeIntervalSince(epoch)
+        let currentCycleTime = timeSinceEpoch.truncatingRemainder(dividingBy: totalCycleDuration)
+        
+        // 3. Identify Live and Next Indices
+        var accumulatedTime: TimeInterval = 0
+        var liveIndex: Int? = nil
+        
+        for (index, duration) in movieDurations.enumerated() {
+            if accumulatedTime + duration > currentCycleTime {
+                liveIndex = index
+                break
+            }
+            accumulatedTime += duration
+        }
+        
+        guard let currentIndex = liveIndex else { return false }
+        
+        // Calculate Next Index (Circular)
+        let nextIndex = (currentIndex + 1) % config.movies.count
+        
+        let liveMovieId = config.movies[currentIndex].id
+        let nextMovieId = config.movies[nextIndex].id
+        
+        let isLive = (cleanId == liveMovieId)
+        let isNext = (cleanId == nextMovieId)
+        
+        if isLive {
+             // Debug log (throttled conceptually, but explicit here for trace)
+             // print("✅ Event \(cleanId) is LIVE")
+             return true
+        }
+        
+        if isNext {
+             // print("✅ Event \(cleanId) is NEXT UP (Lobby Open)")
+             return true
+        }
+        
+        print("🚫 Event \(cleanId) is STALE or Far Future (Live: \(liveMovieId), Next: \(nextMovieId))")
+        return false
+    }
 }
 
 // MARK: - Models

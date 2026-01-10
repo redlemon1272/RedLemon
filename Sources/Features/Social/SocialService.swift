@@ -285,33 +285,20 @@ class SocialService: ObservableObject {
         // Live Events validation
         // Event room IDs follow the pattern "event_{imdbId}" (e.g., "event_tt1293847")
         if roomId.hasPrefix("event_") {
-            // Check if this event is currently "live" according to the schedule
+            // Check if this event is currently "live" OR "upcoming lobby"
             do {
                 let config = try await EventsConfigService.shared.fetchMovieEventsConfig()
                 
-                // Calculate what SHOULD be playing right now
-                if let (startTime, currentMedia) = EventsConfigService.shared.calculateLiveEvent(config: config) {
-                    let liveRoomId = "event_\(currentMedia.id)"
-                    
-                    if roomId == liveRoomId {
-                        print("✅ SocialService: Event \(roomId) is LIVE (started at \(startTime)) - allowing join")
-                        return // Allow join
-                    } else {
-                        print("🚫 SocialService: Event \(roomId) is NOT live (Current: \(liveRoomId)) - marking \(userId) as unjoinable")
-                        markUserAsUnjoinable(userId: userId)
-                        return
-                    }
+                if EventsConfigService.shared.isEventJoinable(eventId: roomId, config: config) {
+                     print("✅ SocialService: Event \(roomId) is JOINABLE (Live or Next Up) - allowing join")
+                     return // Allow join
                 } else {
-                    print("🚫 SocialService: No event is currently live - marking \(userId) as unjoinable")
+                    print("🚫 SocialService: Event \(roomId) is STALE - marking \(userId) as unjoinable")
                     markUserAsUnjoinable(userId: userId)
                     return
                 }
             } catch {
                 print("⚠️ SocialService: Failed to validate event liveness: \(error)")
-                // Fail safe: If we can't fetch config, we probably shouldn't block access lightly, 
-                // BUT for "expired invites" strictness, maybe we should? 
-                // Reverting to "allow if error" to prevent lockout during outages, 
-                // but logging heavily.
                 return 
             }
         }

@@ -207,6 +207,10 @@ struct LobbyMessage: Identifiable {
             return "\(userName) is ready ✓"
         case .userNotReady:
             return "\(userName) is not ready"
+        case .userVoted:
+             return "\(userName) voted for a video ❤️"
+        case .userUnvoted:
+             return "\(userName) removed their vote"
         case .hostStarting:
             return "🎬 Host is starting the movie..."
         case .movieChanged:

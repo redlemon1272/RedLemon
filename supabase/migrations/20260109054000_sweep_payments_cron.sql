@@ -1,5 +1,5 @@
 -- Add daily sweep-payments cron job
--- Runs at 9:00 AM UTC daily, same time as server backups
+-- Runs at 9:10 AM UTC daily, 10 minutes AFTER server backup (9:00 AM) to avoid collision
 
 SELECT cron.schedule(
     'sweep-payments',

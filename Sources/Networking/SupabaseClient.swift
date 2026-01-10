@@ -266,22 +266,22 @@ class SupabaseClient: RoomManager, UserManager {
                         
                         // DIAGNOSTIC LOGGING: Verify exactly what we are signing
                         if path == "/rpc/room_heartbeat" {
-                            NSLog("🔐 SupabaseClient: Signing Identity Payload: '\(identityPayload)'")
+                            NSLog("%@", "🔐 SupabaseClient: Signing Identity Payload: '\(identityPayload)'")
                         }
                         
                         let identitySignature = try CryptoManager.shared.sign(message: identityPayload, privateKeyBase64: privateKey)
                         request.setValue(identitySignature, forHTTPHeaderField: "x-identity-signature")
                     }
                     
-                    NSLog("🔐 Signed request to \(path)")
+                    NSLog("%@", "🔐 Signed request to \(path)")
                 } catch {
-                    NSLog("❌ Failed to sign request: \(error)")
+                    NSLog("%@", "❌ Failed to sign request: \(error)")
                     // We continue without signing? Or fail?
                     // Fail safe:
                     throw SupabaseError.serverError("Signing failed: \(error.localizedDescription)")
                 }
             } else {
-                 NSLog("⚠️ Request requested signing but no keys found in Keychain")
+                 NSLog("%@", "⚠️ Request requested signing but no keys found in Keychain")
             }
         }
         // -----------------------------
@@ -391,36 +391,36 @@ class SupabaseClient: RoomManager, UserManager {
     /// Create or get existing user
     /// Get user by username (for friends lookup)
     func getUserByUsername(username: String) async throws -> SupabaseUser? {
-        NSLog("🔍 SupabaseClient: Looking up user by username '\(username)'")
+        NSLog("%@", "🔍 SupabaseClient: Looking up user by username '\(username)'")
 
         let data = try await makeRequest(
             path: "/users",
             query: ["username": "ilike.\(username)", "select": "*"]
         )
 
-        NSLog("📡 SupabaseClient: User lookup response received (\(data.count) bytes)")
+        NSLog("%@", "📡 SupabaseClient: User lookup response received (\(data.count) bytes)")
 
         do {
             let users = try jsonDecoder.decode([SupabaseUser].self, from: data)
-            NSLog("✅ SupabaseClient: Decoded \(users.count) users from response")
+            NSLog("%@", "✅ SupabaseClient: Decoded \(users.count) users from response")
 
             if let user = users.first {
-                NSLog("👤 SupabaseClient: Found user - \(user.username) (ID: \(user.id))")
+                NSLog("%@", "👤 SupabaseClient: Found user - \(user.username) (ID: \(user.id))")
                 return user
             } else {
-                NSLog("⚠️ SupabaseClient: No users found for username '\(username)'")
+                NSLog("%@", "⚠️ SupabaseClient: No users found for username '\(username)'")
                 return nil
             }
         } catch {
             // Log the raw response for debugging
             if let responseString = String(data: data, encoding: .utf8) {
-                NSLog("❌ SupabaseClient: Failed to decode user response. Raw data: \(responseString)")
+                NSLog("%@", "❌ SupabaseClient: Failed to decode user response. Raw data: \(responseString)")
             } else {
-                NSLog("❌ SupabaseClient: Failed to decode user response (could not convert to string)")
+                NSLog("%@", "❌ SupabaseClient: Failed to decode user response (could not convert to string)")
             }
-            NSLog("❌ SupabaseClient: Decoding error: \(error)")
-            NSLog("   Error type: \(type(of: error))")
-            NSLog("   Error details: \(error.localizedDescription)")
+            NSLog("%@", "❌ SupabaseClient: Decoding error: \(error)")
+            NSLog("%@", "   Error type: \(type(of: error))")
+            NSLog("%@", "   Error details: \(error.localizedDescription)")
             throw error
         }
     }
@@ -461,7 +461,7 @@ class SupabaseClient: RoomManager, UserManager {
         } else {
             // Fallback if fetch fails (rare) -> Construct ephemeral user
             // We fake dates to avoid crash. This is a critical fallback.
-            NSLog("⚠️ registerUserSecure: Could not fetch full profile immediately. Using fallback.")
+            NSLog("%@", "⚠️ registerUserSecure: Could not fetch full profile immediately. Using fallback.")
             
             // Construct AuthUser manually
             auth.currentUser = AuthUser(
@@ -563,6 +563,22 @@ class SupabaseClient: RoomManager, UserManager {
         )
         let logs = try jsonDecoder.decode([SystemJobLog].self, from: data)
         return logs.first
+    }
+
+    /// Extract Zilean torrent count from the latest maintenance log details
+    func getZileanTorrentCount() async throws -> Int {
+        guard let log = try await getLatestSystemJobLog(jobName: "zilean_maintenance") else {
+            return 0
+        }
+        
+        guard let details = log.details else {
+            return 0
+        }
+        
+        // Expected format in details: "Total Torrents: 43776" or similar
+        // Let's use regex or simple replacement to extract digits
+        let digits = details.filter { $0.isNumber }
+        return Int(digits) ?? 0
     }
 
 
@@ -785,7 +801,7 @@ class SupabaseClient: RoomManager, UserManager {
         subtitleUrl: String? = nil,
         createdAt: Date? = nil
     ) async throws -> SupabaseRoom {
-        NSLog("🎬 SupabaseClient: createRoom called for id: \(id) - ENTRY")
+        NSLog("%@", "🎬 SupabaseClient: createRoom called for id: \(id) - ENTRY")
         var roomData: [String: Any] = [
             "id": id,
             "name": name,
@@ -826,12 +842,12 @@ class SupabaseClient: RoomManager, UserManager {
                 }
                 roomData["playlist"] = playlistData
             } catch {
-                NSLog("⚠️ Failed to encode playlist for room creation: \(error)")
+                NSLog("%@", "⚠️ Failed to encode playlist for room creation: \(error)")
                 // Continue without playlist rather than failing entirely
             }
         }
 
-        NSLog("🎬 SupabaseClient: Creating room '\(id)' for host '\(hostUsername)'...")
+        NSLog("%@", "🎬 SupabaseClient: Creating room '\(id)' for host '\(hostUsername)'...")
         let data = try await makeRequest(
             path: "/rooms",
             method: "POST",
@@ -840,7 +856,7 @@ class SupabaseClient: RoomManager, UserManager {
             useEphemeralSession: true,
             sign: true // 🔐 Sign this request to prove identity and spend hosting days
         )
-        NSLog("✅ SupabaseClient: Room creation request completed (received response)")
+        NSLog("%@", "✅ SupabaseClient: Room creation request completed (received response)")
 
         let rooms = try jsonDecoder.decode([SupabaseRoom].self, from: data)
         guard let room = rooms.first else {
@@ -865,12 +881,12 @@ class SupabaseClient: RoomManager, UserManager {
         } catch SupabaseError.httpError(let code, _) where code == 409 {
             // Error 409 means user is already in the room (duplicate key).
             // We can safely ignore this and proceed as if join was successful.
-            NSLog("⚠️ SupabaseClient: User already in room (409), proceeding...")
+            NSLog("%@", "⚠️ SupabaseClient: User already in room (409), proceeding...")
         } catch let error as SupabaseError {
             // Check for specific Postgres error code 23505 (Unique Violation)
             // Sometimes Supabase returns this as a generic server error with a code
             if case .serverError(let msg) = error, msg.contains("23505") || msg.contains("duplicate key") {
-                 NSLog("⚠️ SupabaseClient: User already in room (Duplicate Key), proceeding...")
+                 NSLog("%@", "⚠️ SupabaseClient: User already in room (Duplicate Key), proceeding...")
             } else {
                 throw error
             }
@@ -878,7 +894,7 @@ class SupabaseClient: RoomManager, UserManager {
             // Catch generic Swift errors that might wrap the Supabase error
             let nsError = error as NSError
             if nsError.description.contains("23505") || nsError.localizedDescription.contains("duplicate key") {
-                NSLog("⚠️ SupabaseClient: User already in room (Generic Duplicate Key), proceeding...")
+                NSLog("%@", "⚠️ SupabaseClient: User already in room (Generic Duplicate Key), proceeding...")
             } else {
                 // Re-throw other errors
                 throw error
@@ -949,7 +965,7 @@ class SupabaseClient: RoomManager, UserManager {
             query: ["id": "eq.\(roomId)"]
         )
         if position % 10 == 0 { // Don't log every second
-             NSLog("✅ SupabaseClient: Updated room playback (Playing: \(isPlaying), Pos: \(position)s)")
+             NSLog("%@", "✅ SupabaseClient: Updated room playback (Playing: \(isPlaying), Pos: \(position)s)")
         }
     }
 
@@ -1030,7 +1046,7 @@ class SupabaseClient: RoomManager, UserManager {
             query: ["id": "eq.\(roomId)"]
         )
 
-        NSLog("✅ Persisted stream selection to room \(roomId)")
+        NSLog("%@", "✅ Persisted stream selection to room \(roomId)")
     }
 
     /// Reset room stream selection (Admin/Debug)

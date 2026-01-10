@@ -18,6 +18,7 @@ struct AdminDashboardView: View {
     @State private var versionStats: [AppVersionStat] = []
     @State private var contentStats: [ContentPopularityStat] = []
     @State private var userCount: Int = 0
+    @State private var zileanCount: Int = 0
     @State private var systemLatency: Double = 0
     @State private var isLoadingOverview = false
     
@@ -72,17 +73,18 @@ struct AdminDashboardView: View {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 20) {
                             Text("Admin Dashboard")
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
+                                .font(.system(size: 34, weight: .bold)) // Large Title equivalent
                             
                             // MARK: - Provider Health
                             ProviderHealthView()
                             
                             AdminOverviewView(
                                 userCount: userCount,
+                                zileanCount: zileanCount,
                                 systemLatency: systemLatency,
                                 versionStats: versionStats,
-                                contentStats: contentStats
+                                contentStats: contentStats,
+                                onRefresh: loadOverviewData
                             )
                             .onAppear(perform: loadOverviewData)
                         }
@@ -113,12 +115,14 @@ struct AdminDashboardView: View {
         isLoadingOverview = true
         Task {
             async let count = SupabaseClient.shared.getUserCount()
+            async let zCount = SupabaseClient.shared.getZileanTorrentCount()
             async let latency = SupabaseClient.shared.checkHealth()
             async let versions = SupabaseClient.shared.getAppVersionStats()
             async let content = SupabaseClient.shared.getContentPopularity()
             
             do {
                 userCount = try await count
+                zileanCount = try await zCount
                 systemLatency = try await latency
                 versionStats = try await versions
                 contentStats = try await content
@@ -142,7 +146,7 @@ struct AdminSidebarRow: View {
                 .foregroundColor(isSelected ? .white : .primary)
                 .frame(width: 20)
             Text(category.rawValue)
-                .fontWeight(isSelected ? .medium : .regular)
+                .font(.system(size: 13, weight: isSelected ? .medium : .regular))
                 .foregroundColor(isSelected ? .white : .primary)
             Spacer()
         }
@@ -181,8 +185,7 @@ struct StatusCard: View {
                     .foregroundColor(.secondary)
             }
             Text(value)
-                .font(.title2)
-                .fontWeight(.bold)
+                .font(.system(size: 24, weight: .bold))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
@@ -208,8 +211,7 @@ struct LogEntryRow: View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
                 Text(log.level.uppercased())
-                    .font(.caption)
-                    .fontWeight(.bold)
+                .font(.system(size: 11, weight: .bold))
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
                     .background(levelColor.opacity(0.2))

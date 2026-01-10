@@ -117,6 +117,13 @@
 - **Rule**: The Room ID is the ultimate source of truth.
     - If `room_id.startsWith("event_")` -> It IS an event.
     - **Implication**: ALWAYS bypass "Ready Gates" and Host Checks for these IDs, regardless of what `appState` says.
+120: 
+121: ### 19. Zilean Population Verification (Data Pipeline Check)
+122: - **Problem**: Zilean can appear healthy while not populating new torrents.
+123: - **Rule**: Verify **Database Growth** in the Admin Dashboard "Overview".
+124:     - If the "Zilean Torrents" count is static over several hours despite logs showing activity, the indexing pipeline is broken (likely Landmine #17).
+125:     - **Log Source**: `SupabaseClient.getZileanTorrentCount()` parses the `details` field of the latest `zilean_maintenance` job log. 
+126:     - **Requirement**: The server-side maintenance script MUST write `Total Torrents: X` into the `system_job_logs` details for this metric to be live.
 
 ## 🏗️ Architecture Map
 
@@ -276,6 +283,7 @@ docker exec -it supabase-db psql -U postgres
 - **Console**: `screen -r zilean` (Ctrl+A, D to detach)
 - **Database Check**: `./remote_exec.sh "PGPASSWORD=zilean psql -h localhost -p 5433 -U zilean -d zilean -c \"SELECT count(*) FROM \\\"Torrents\\\";\""`
 - **Janitor Logs**: `./remote_exec.sh "docker exec supabase-db psql -U postgres -d postgres -c \"SELECT * FROM system_job_logs ORDER BY created_at DESC LIMIT 5;\""`
+- **Dashboard Visibility**: The Admin Dashboard (Overview & Server tabs) provides high-level visibility into Zilean's count and last maintenance run.
 
 ## Self-Hosting Service Checklist (Lessons Learned)
 0.  **Feasibility Check**: Is the source code public?

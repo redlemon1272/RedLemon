@@ -42,7 +42,7 @@ class ZileanService: ProviderService {
             return []
         }
 
-        NSLog("🔍 Zilean: Searching via IMDB ID: \(imdbId)")
+        NSLog("%@", "🔍 Zilean: Searching via IMDB ID: \(imdbId)")
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -64,7 +64,7 @@ class ZileanService: ProviderService {
 
         let results = try JSONDecoder().decode([ZileanResult].self, from: data)
 
-        NSLog("✅ Zilean: Got \(results.count) results")
+        NSLog("%@", "✅ Zilean: Got \(results.count) results")
 
         return parseStreams(results)
     }

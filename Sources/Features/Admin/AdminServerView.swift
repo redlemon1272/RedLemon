@@ -19,8 +19,7 @@ struct AdminServerView: View {
                 // Header
                 HStack {
                     Text("Server Health")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                        .font(.system(size: 20, weight: .bold))
                     
                     if let date = lastRefreshed {
                         Text("Updated: \(date, style: .time)")
@@ -77,8 +76,7 @@ struct AdminServerView: View {
                                 
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(backup.createdAt.formatted(.relative(presentation: .named)))
-                                        .font(.title2)
-                                        .fontWeight(.bold)
+                                        .font(.system(size: 24, weight: .bold))
                                     
                                     if backup.status == "verified" || backup.status == "success" {
                                         Text("✅ Verified Safe")
@@ -145,7 +143,7 @@ struct AdminServerView: View {
                                         .fill(status.status == "online" ? Color.green : Color.red)
                                         .frame(width: 8, height: 8)
                                     Text(status.status.uppercased())
-                                        .fontWeight(.bold)
+                                        .font(.system(size: 13, weight: .bold))
                                         .foregroundColor(status.status == "online" ? .green : .red)
                                 }
                             }
@@ -157,7 +155,7 @@ struct AdminServerView: View {
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                 Text(status.region)
-                                    .fontWeight(.medium)
+                                    .font(.system(size: 13, weight: .medium))
                             }
                             
                             Spacer()
@@ -167,8 +165,7 @@ struct AdminServerView: View {
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                 Text(status.service)
-                                    .font(.caption2)
-                                    .fontWeight(.medium)
+                                    .font(.system(size: 11, weight: .medium))
                             }
                         }
                         .padding()

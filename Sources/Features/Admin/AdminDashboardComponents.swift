@@ -26,21 +26,36 @@ enum AdminCategory: String, CaseIterable, Identifiable {
 // MARK: - Admin Overview View
 struct AdminOverviewView: View {
     let userCount: Int
+    let zileanCount: Int
     let systemLatency: Double
     let versionStats: [AppVersionStat]
     let contentStats: [ContentPopularityStat]
+    var onRefresh: (() -> Void)?
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 // System Status
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("System Status")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                    HStack {
+                        Text("System Status")
+                            .font(.system(size: 20, weight: .bold))
+                        
+                        Spacer()
+                        
+                        if let onRefresh = onRefresh {
+                            Button(action: onRefresh) {
+                                Image(systemName: "arrow.clockwise")
+                                    .foregroundColor(.secondary)
+                            }
+                            .buttonStyle(.plain)
+                            .help("Refresh Data")
+                        }
+                    }
                     
                     HStack(spacing: 16) {
                         StatusCard(title: "Users", value: "\(userCount)", icon: "person.2.fill", color: .blue)
+                        StatusCard(title: "Zilean Torrents", value: "\(zileanCount.formatted())", icon: "magnifyingglass.circle.fill", color: .purple)
                         StatusCard(title: "Latency", value: String(format: "%.0f ms", systemLatency), icon: "network", color: systemLatency > 500 ? .orange : .green)
                     }
                 }
@@ -50,8 +65,7 @@ struct AdminOverviewView: View {
                 // Analytics
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Analytics")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                        .font(.system(size: 20, weight: .bold))
                     
                     HStack(alignment: .top, spacing: 24) {
                         // App Versions
@@ -69,7 +83,7 @@ struct AdminOverviewView: View {
                                         Text(stat.version ?? "Unknown")
                                         Spacer()
                                         Text("\(stat.count)")
-                                            .fontWeight(.medium)
+                                            .font(.system(size: 13, weight: .medium))
                                             .foregroundColor(.secondary)
                                     }
                                     .padding(.vertical, 4)
@@ -98,7 +112,7 @@ struct AdminOverviewView: View {
                                             .lineLimit(1)
                                         Spacer()
                                         Text("\(stat.count)")
-                                            .fontWeight(.medium)
+                                            .font(.system(size: 13, weight: .medium))
                                             .foregroundColor(.secondary)
                                     }
                                     .padding(.vertical, 4)
@@ -142,8 +156,7 @@ struct AdminUsersView: View {
             // Header / Toolbar
             HStack {
                 Text("User Management")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.system(size: 20, weight: .bold))
                 
                 Spacer()
                 
@@ -187,7 +200,7 @@ struct AdminUsersView: View {
                     .foregroundColor(.yellow)
                 Text("Grant Premium:")
                     .font(.caption)
-                    .fontWeight(.medium)
+                    .font(.system(size: 11, weight: .medium))
                 
                 TextField("Username", text: $grantUsername)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -256,7 +269,7 @@ struct AdminUsersView: View {
                             VStack(alignment: .leading) {
                                 HStack {
                                     Text(user.username)
-                                        .fontWeight(.medium)
+                                        .font(.system(size: 13, weight: .medium))
                                         .font(.headline)
                                     if user.isPremium == true {
                                         Image(systemName: "crown.fill")
@@ -276,8 +289,7 @@ struct AdminUsersView: View {
                             VStack(alignment: .trailing) {
                                 if let isAdmin = user.isAdmin, isAdmin {
                                     Text("ADMIN")
-                                        .font(.caption2)
-                                        .fontWeight(.bold)
+                                        .font(.system(size: 10, weight: .bold))
                                         .foregroundColor(.white)
                                         .padding(.horizontal, 6)
                                         .padding(.vertical, 2)
@@ -442,8 +454,7 @@ struct AdminEventsView: View {
                 // Header
                 HStack {
                     Text("Events & Rooms")
-                        .font(.title2)
-                        .fontWeight(.bold)
+                    .font(.system(size: 20, weight: .bold))
                     Spacer()
                 }
                 
@@ -455,7 +466,7 @@ struct AdminEventsView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Movie Schedule")
-                                .fontWeight(.medium)
+                                .font(.system(size: 13, weight: .medium))
                             if let version = eventConfigVersion {
                                 Text("Version: \(version)")
                                     .font(.caption)
@@ -482,7 +493,7 @@ struct AdminEventsView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Content Manager")
-                                .fontWeight(.medium)
+                                .font(.system(size: 13, weight: .medium))
                             Text("Verified Streams & Feedback")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
@@ -555,7 +566,7 @@ struct AdminEventsView: View {
                             HStack {
                                 VStack(alignment: .leading) {
                                     Text(room.name)
-                                        .fontWeight(.medium)
+                                        .font(.system(size: 13, weight: .medium))
                                     Text(room.id)
                                         .font(.caption)
                                         .foregroundColor(.secondary)
@@ -688,8 +699,7 @@ struct AdminPaymentsView: View {
             // Header
             HStack {
                 Text("Payment Transactions")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.system(size: 20, weight: .bold))
                 
                 Spacer()
                 
@@ -809,13 +819,12 @@ struct AdminPaymentsView: View {
                         HStack {
                             VStack(alignment: .leading, spacing: 4) {
                                 HStack(spacing: 8) {
-                                    Text("@\(tx.username ?? "Unknown")")
-                                        .fontWeight(.medium)
+                                    Text(tx.username ?? "Unknown")
+                                        .font(.system(size: 13, weight: .medium))
                                     
                                     // Chain badge
                                     Text(tx.chain.uppercased())
-                                        .font(.caption2)
-                                        .fontWeight(.bold)
+                                        .font(.system(size: 10, weight: .bold)) // caption2 equivalent
                                         .foregroundColor(.white)
                                         .padding(.horizontal, 6)
                                         .padding(.vertical, 2)
@@ -824,14 +833,13 @@ struct AdminPaymentsView: View {
                                     
                                     // Currency badge
                                     Text(tx.currency)
-                                        .font(.caption2)
+                                        .font(.system(size: 11, weight: .bold))
                                         .foregroundColor(.secondary)
 
                                     // Duration badge
                                     if let days = tx.durationDays {
                                         Text("\(days)D")
-                                            .font(.caption2)
-                                            .fontWeight(.bold)
+                                            .font(.system(size: 10, weight: .bold))
                                             .foregroundColor(.cyan)
                                             .padding(.horizontal, 4)
                                             .padding(.vertical, 2)
@@ -848,8 +856,8 @@ struct AdminPaymentsView: View {
                             Spacer()
                             
                             VStack(alignment: .trailing, spacing: 4) {
-                                Text(String(format: "%.6f %@", tx.amount, tx.currency))
-                                    .fontWeight(.semibold)
+                                Text(String(format: "$%.2f", tx.amount))
+                                    .font(.system(size: 14, weight: .semibold))
                                     .foregroundColor(.green)
                                 
                                 Text(tx.createdAt, style: .date)
@@ -953,8 +961,7 @@ struct PaymentStatCard: View {
                 .foregroundColor(.secondary)
             
             Text(value)
-                .font(.title2)
-                .fontWeight(.bold)
+                .font(.system(size: 22, weight: .bold))
                 .foregroundColor(color)
             
             Text(subtitle)
@@ -979,8 +986,7 @@ struct AdminLogsView: View {
         VStack(spacing: 0) {
             HStack {
                 Text("App Logs")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.system(size: 20, weight: .bold))
                 
                 Spacer()
                 

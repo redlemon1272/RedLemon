@@ -109,7 +109,7 @@ actor ProviderManager {
         episode: Int? = nil,
         providerNames: [String]? = nil
     ) async throws -> [Stream] {
-        NSLog("🔍 ProviderManager: Fetching streams for \(imdbId)...")
+        NSLog("%@", "🔍 ProviderManager: Fetching streams for \(imdbId)...")
         
         // Use specified providers or all registered
         let providersToUse = providerNames?.compactMap { providers[$0] } ?? Array(providers.values)
@@ -129,7 +129,7 @@ actor ProviderManager {
                                     episode: episode
                                 )
                             } catch {
-                                NSLog("❌ Provider \(provider.name) failed: \(error)")
+                                NSLog("%@", "❌ Provider \(provider.name) failed: \(error)")
                                 return []
                             }
                         }
@@ -163,12 +163,12 @@ actor ProviderManager {
         
         // Deduplicate by info hash
         let unique = deduplicateStreams(results)
-        NSLog("✅ ProviderManager: Fetched \(results.count) raw, returning \(unique.count) unique streams")
+        NSLog("%@", "✅ ProviderManager: Fetched \(results.count) raw, returning \(unique.count) unique streams")
         return unique
     }
 
     func searchTorrents(query: String) async throws -> [Stream] {
-        NSLog("🔍 Searching torrents for query: \(query)")
+        NSLog("%@", "🔍 Searching torrents for query: \(query)")
 
         // Use all providers but search with specific query instead of broad IMDB search
         let providersToUse = Array(providers.values)
@@ -177,14 +177,14 @@ actor ProviderManager {
         for provider in providersToUse {
             do {
                 let results = try await provider.search(query: query)
-                NSLog("   🔍 Provider \(provider.name) found \(results.count) results")
+                NSLog("%@", "   🔍 Provider \(provider.name) found \(results.count) results")
                 searchResults.append(contentsOf: results)
             } catch {
-                NSLog("❌ Provider \(provider.name) search failed: \(error)")
+                NSLog("%@", "❌ Provider \(provider.name) search failed: \(error)")
             }
         }
 
-        NSLog("📦 Search completed: \(searchResults.count) total results")
+        NSLog("%@", "📦 Search completed: \(searchResults.count) total results")
         return deduplicateStreams(searchResults)
     }
     

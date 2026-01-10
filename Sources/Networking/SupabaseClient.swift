@@ -261,9 +261,16 @@ class SupabaseClient: RoomManager, UserManager {
                     // 🛡️ SECURITY: Identity Proof (Timestamp + UserID + Path)
                     // This prevents replay attacks across users
                     if let userId = auth.currentUser?.id {
+                        // NOTE: This MUST match the server's verify_user_signature function exactly.
                         let identityPayload = "\(timestamp)\(userId.uuidString.lowercased())\(path)"
-                        let identitySig = try CryptoManager.shared.sign(message: identityPayload, privateKeyBase64: privateKey)
-                        request.setValue(identitySig, forHTTPHeaderField: "x-identity-signature")
+                        
+                        // DIAGNOSTIC LOGGING: Verify exactly what we are signing
+                        if path == "/rpc/room_heartbeat" {
+                            NSLog("🔐 SupabaseClient: Signing Identity Payload: '\(identityPayload)'")
+                        }
+                        
+                        let identitySignature = try CryptoManager.shared.sign(message: identityPayload, privateKeyBase64: privateKey)
+                        request.setValue(identitySignature, forHTTPHeaderField: "x-identity-signature")
                     }
                     
                     NSLog("🔐 Signed request to \(path)")

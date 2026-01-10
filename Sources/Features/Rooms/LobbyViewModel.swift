@@ -1187,7 +1187,7 @@ class LobbyViewModel: ObservableObject {
         let dwellTime = now.timeIntervalSince(joinedAtTimestamp)
         let minDwellTime: TimeInterval = 10.0
 
-        if timeUntilStart <= 0 && dwellTime < minDwellTime {
+        if timeUntilStart <= 0 && dwellTime < minDwellTime && !canAutoJoin {
             let waitRemaining = minDwellTime - dwellTime
             print("🕒 Lobby: Event is LIVE but honoring dwell time. Waiting \(Int(waitRemaining))s...")
 

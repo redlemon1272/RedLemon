@@ -1378,11 +1378,18 @@ class PlayerViewModel: ObservableObject {
                 var shouldJoinPlayback = false
                 
                 // 1. Determine Mode based on Room Type and Schedule
+                // Check if room is active (Playing state)
+                let isActuallyPlaying = room.isPlaying
+                
                 if roomId.hasPrefix("event_") {
                     // Event Room: Check Global Schedule
                      let rawId = roomId.replacingOccurrences(of: "event_", with: "")
                      
-                     if let config = eventsConfig,
+                     // REDLEMON: If room is already in playback (e.g. friend is watching), trust that over strict schedule
+                     if isActuallyPlaying {
+                         shouldJoinPlayback = true
+                         NSLog("✅ Event Join: \(rawId) is already PLAYING. Joining Playback.")
+                     } else if let config = eventsConfig,
                         let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
                         liveEvent.mediaItem.id == rawId {
                          // Matched current live event
@@ -1395,7 +1402,7 @@ class PlayerViewModel: ObservableObject {
                      }
                 } else {
                     // User Room: Trust DB State
-                    shouldJoinPlayback = room.isPlaying
+                    shouldJoinPlayback = isActuallyPlaying
                 }
 
                 // 2. Execute Mode

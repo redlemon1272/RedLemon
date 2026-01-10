@@ -473,28 +473,14 @@ struct RoomListView: View {
         }
     }
 
-      private func joinRoom(room: WatchPartyRoom) {
+    private func joinRoom(room: WatchPartyRoom) {
         print("🚪 Joining room: \(room.id)")
-
-        // Check if current user is the host
-        let isUserHost = appState.currentUserId?.uuidString == room.hostId
-        print("   User ID: \(appState.currentUserId?.uuidString ?? "nil")")
-        print("   Host ID: \(room.hostId)")
-        print("   Is host: \(isUserHost)")
-        print("   Room state: \(room.state)")
-
-        // Set current room
-        appState.player.currentWatchPartyRoom = room
-        appState.player.currentRoomId = room.id
-        appState.player.isWatchPartyHost = isUserHost
-
-        // If room is already playing, set auto-join flag so lobby auto-starts immediately
-        if room.state == .playing {
-            print("🎬 Room is already playing - will auto-start from lobby")
-            appState.shouldAutoJoinLobby = true
+        
+        // REDLEMON: Delegate to PlayerViewModel canonical logic
+        // This handles lobby bypass for active rooms/events and transitions to the correct view (Player vs Lobby)
+        Task {
+            await appState.player.joinRoom(roomId: room.id)
         }
-
-        appState.currentView = .watchPartyLobby
     }
 
     private func joinRoomByCode(code: String) {

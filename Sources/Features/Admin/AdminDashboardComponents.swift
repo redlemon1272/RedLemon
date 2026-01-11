@@ -981,6 +981,7 @@ struct AdminLogsView: View {
     @State private var selectedTab: AdminLogTab = .app
     @State private var appLogs: [AppLog] = []
     @State private var sessionLogs: [SessionLog] = []
+    @State private var feedbackReports: [FeedbackReport] = [] // Add state for feedback reports
     @State private var systemLogs: [SystemJobLog] = []
     
     @State private var isLoading = false
@@ -1022,6 +1023,31 @@ struct AdminLogsView: View {
                         }
                         .buttonStyle(.plain)
                         .disabled(appLogs.isEmpty)
+                    } else if selectedTab == .session {
+                        Button(action: {
+                            Task {
+                                try? await SupabaseClient.shared.deleteAllSessionLogs()
+                                await loadData()
+                            }
+                        }) {
+                            Label("Clear Session Logs", systemImage: "trash")
+                                .foregroundColor(.red)
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(sessionLogs.isEmpty)
+
+                    } else if selectedTab == .system {
+                         Button(action: {
+                            Task {
+                                try? await SupabaseClient.shared.deleteAllSystemLogs()
+                                await loadData()
+                            }
+                        }) {
+                            Label("Clear System Logs", systemImage: "trash")
+                                .foregroundColor(.red)
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(systemLogs.isEmpty)
                     }
                     
                     Button(action: { Task { await loadData() } }) {
@@ -1155,7 +1181,12 @@ struct AdminLogsView: View {
         } else {
             List {
                 ForEach(sessionLogs) { log in
-                    SessionLogRow(log: log)
+                    // Find associated feedback report
+                    let report = feedbackReports.first(where: { $0.sessionLogId == log.sessionId })
+                    
+                    SessionLogRow(log: log, feedbackReport: report, onDelete: {
+                        Task { await loadData() }
+                    })
                 }
             }
             .listStyle(InsetListStyle())
@@ -1236,7 +1267,11 @@ struct AdminLogsView: View {
             case .app:
                 appLogs = try await SupabaseClient.shared.getAppLogs(limit: pageSize, offset: offset)
             case .session:
-                sessionLogs = try await SupabaseClient.shared.getSessionLogs(limit: pageSize, offset: offset)
+                async let logs = SupabaseClient.shared.getSessionLogs(limit: pageSize, offset: offset)
+                async let reports = SupabaseClient.shared.getFeedback(limit: 50)
+                let (fetchedLogs, fetchedReports) = try await (logs, reports)
+                sessionLogs = fetchedLogs
+                feedbackReports = fetchedReports
             case .system:
                 systemLogs = try await SupabaseClient.shared.getSystemJobLogs(limit: pageSize, offset: offset)
             }
@@ -1375,7 +1410,9 @@ struct LogEntryRow: View {
 
 struct SessionLogRow: View {
     let log: SessionLog
+    var feedbackReport: FeedbackReport? // Inject optional feedback
     var isHighlighted: Bool = false
+    var onDelete: (() -> Void)? // Optional callback for refresh
     @State private var isCopied = false
     
     var body: some View {
@@ -1390,6 +1427,37 @@ struct SessionLogRow: View {
                             .font(.caption)
                     }
                     .buttonStyle(.plain)
+                    
+                    Button(action: deleteLog) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Delete Session Log")
+                }
+                
+                if let report = feedbackReport {
+                    VStack(alignment: .leading, spacing: 2) {
+                        HStack {
+                           Text("📣 Feedback Report")
+                               .font(.caption)
+                               .fontWeight(.bold)
+                               .foregroundColor(.orange)
+                           
+                           if let email = report.contactEmail {
+                               Text("• \(email)")
+                                   .font(.caption)
+                                   .foregroundColor(.secondary)
+                           }
+                       }
+                       Text(report.message)
+                           .font(.caption)
+                           .foregroundColor(.white)
+                           .padding(4)
+                           .background(Color.orange.opacity(0.1))
+                           .cornerRadius(4)
+                    }
+                    .padding(.bottom, 4)
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
@@ -1465,6 +1533,13 @@ struct SessionLogRow: View {
         withAnimation { isCopied = true }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             withAnimation { isCopied = false }
+        }
+    }
+    
+    private func deleteLog() {
+        Task {
+            await SupabaseClient.shared.deleteSessionLog(id: log.sessionId)
+            onDelete?()
         }
     }
 }

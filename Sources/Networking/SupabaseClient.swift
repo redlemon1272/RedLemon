@@ -1837,23 +1837,7 @@ struct ReportedStream: Identifiable, Codable {
 
     // MARK: - Feedback & Logging System
 
-    struct FeedbackReport: Identifiable, Codable {
-        let id: UUID
-        let type: String
-        let message: String
-        let contactEmail: String?
-        let sessionLogId: UUID?
-        let createdAt: Date
 
-        enum CodingKeys: String, CodingKey {
-            case id
-            case type
-            case message
-            case contactEmail = "contact_email"
-            case sessionLogId = "session_log_id"
-            case createdAt = "created_at"
-        }
-    }
 
     /// Send user feedback
     func sendFeedback(type: String, message: String, email: String? = nil, sessionLogId: UUID? = nil) async {
@@ -1953,6 +1937,16 @@ struct ReportedStream: Identifiable, Codable {
         )
         return try jsonDecoder.decode([SystemJobLog].self, from: data)
     }
+    
+    /// Delete all system job logs (Admin)
+    func deleteAllSystemLogs() async throws {
+         _ = try await makeRequest(
+            path: "/system_job_logs",
+            method: "DELETE",
+            query: ["id": "neq.00000000-0000-0000-0000-000000000000"]
+        )
+        print("🗑️ Deleted all system logs.")
+    }
 
     /// Delete a session log (Admin)
     func deleteSessionLog(id: UUID) async {
@@ -1966,6 +1960,17 @@ struct ReportedStream: Identifiable, Codable {
         } catch {
             print("❌ Failed to delete session log: \(error)")
         }
+    }
+
+    /// Delete all session logs (Admin)
+    func deleteAllSessionLogs() async throws {
+        // Delete where ID is not the zero-UUID (effectively all)
+        _ = try await makeRequest(
+            path: "/session_logs",
+            method: "DELETE",
+            query: ["id": "neq.00000000-0000-0000-0000-000000000000"]
+        )
+        print("🗑️ Deleted all session logs.")
     }
 
     /// Get session logs (Admin)
@@ -2848,6 +2853,26 @@ struct SystemJobLog: Codable, Identifiable {
         case jobName = "job_name"
         case status
         case details
+        case createdAt = "created_at"
+    }
+}
+
+// MARK: - Feedback Models
+
+struct FeedbackReport: Identifiable, Codable {
+    let id: UUID
+    let type: String
+    let message: String
+    let contactEmail: String?
+    let sessionLogId: UUID?
+    let createdAt: Date
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case type
+        case message
+        case contactEmail = "contact_email"
+        case sessionLogId = "session_log_id"
         case createdAt = "created_at"
     }
 }

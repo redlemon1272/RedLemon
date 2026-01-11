@@ -17,7 +17,7 @@ struct VerifiedStreamsView: View {
     @State private var verifiedStreams: [SupabaseClient.VerifiedStream] = []
     @State private var reportedStreams: [SupabaseClient.ReportedStream] = []
     @State private var blockedStreams: [SupabaseClient.BlockedStream] = [] // NEW
-    @State private var feedbackReports: [SupabaseClient.FeedbackReport] = []
+    @State private var feedbackReports: [FeedbackReport] = []
     @State private var isLoading = false
     @State private var searchText = ""
     
@@ -544,7 +544,7 @@ struct Badge: View {
 }
 
 struct FeedbackRow: View {
-    let feedback: SupabaseClient.FeedbackReport
+    let feedback: FeedbackReport
     var onDelete: (() -> Void)?
     
     var body: some View {

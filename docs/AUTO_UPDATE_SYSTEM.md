@@ -14,8 +14,8 @@
 
 **Architecture:**
 - Sparkle framework handles all update logic
-- `appcast.xml` feed hosted on GitHub
-- DMG files hosted on GitHub Releases
+- `appcast.xml` feed hosted on production server
+- DMG files hosted on production server
 - Code signing validation (ad-hoc for dev, Developer ID for production)
 - Native macOS update UI
 
@@ -23,14 +23,13 @@
 1. Update version in `build-app-debug.sh`
 2. Build: `./build-app-debug.sh`
 3. Create DMG: `./build-dmg.sh`
-4. Upload DMG to GitHub Releases
-5. Update `appcast.xml` with version and file size
-6. Push appcast.xml to GitHub
+4. Run `./scripts/release.sh` to package, sign, and deploy DMG and XML to production server.
+5. Push appcast.xml to repo.
 
 **Configuration:**
 - Info.plist: `SUFeedURL`, `SUEnableAutomaticChecks`, `SUAllowsInsecureUpdates`
 - UpdateManager: `Sources/Services/UpdateManager.swift`
-- Appcast: `https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml`
+- Appcast: `https://151.243.109.243.nip.io/updates/appcast.xml`
 
 **See:** Sparkle documentation at https://sparkle-project.org/documentation/
 

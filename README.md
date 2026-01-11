@@ -2,7 +2,7 @@
 
 A native macOS media streaming app with watch party features.
 
-**Current Version:** v1.0.61 (build 61)
+**Current Version:** v1.0.62 (build 62)
 **Status:** ✅ Production Ready
 
 ## 🚀 For AI Assistants & Developers
@@ -23,7 +23,7 @@ A native macOS media streaming app with watch party features.
 - 🔗 Real-Debrid integration for premium streaming
 - 👥 **Watch Parties** - Synchronized viewing with friends (Supabase-powered)
 - 🔐 **Username System** - Persistent usernames in database
-- 🔄 **Auto-Updates** - Sparkle framework with GitHub releases
+- 🔄 **Auto-Updates** - Sparkle framework integration
 - 🎯 **4-Character Room Codes** - Easy sharing (e.g., "K7M2")
 - 👤 **MySpace Tom Feature** - Every user gets `lemontom` as first friend
 
@@ -49,7 +49,7 @@ RedLemon-Native/
 ## Quick Start
 
 ### 1. Download & Install
-Download the latest DMG from [GitHub Releases](https://github.com/orangeapple1272/Redlemon/releases):
+Download the latest DMG from the project distribution folder:
 - Open `RedLemon-Installer.dmg`
 - Drag RedLemon.app to Applications
 - **Important:** To launch for the first time, **Right-Click (Control-Click)** the app in Applications and select **Open**.
@@ -97,17 +97,17 @@ Every new user automatically gets `lemontom` as their first friend (inspired by 
 - **Backend Server**: Vapor (HTTP server for metadata/streaming)
 - **Database**: Supabase PostgreSQL (watch parties, users, friends)
 - **Authentication**: Username-based
-- **Auto-Updates**: Sparkle framework with GitHub releases
+- **Auto-Updates**: Sparkle framework integration
 
 ## Auto-Updates 🔄
 
 RedLemon uses the industry-standard **Sparkle framework** for auto-updates:
 - **Check:** App checks for updates on launch (24hr interval)
-- **Download:** DMG files hosted on GitHub Releases
+- **Download:** DMG files hosted on production server
 - **Verify:** Code signing validation (ad-hoc for development, Developer ID for production)
 - **Install:** Automatic replacement and relaunch
 
-Appcast feed: `https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml`
+Appcast feed: `https://151.243.109.243.nip.io/updates/appcast.xml`
 
 
 ## License

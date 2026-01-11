@@ -34,7 +34,7 @@ This document helps you quickly understand the RedLemon project structure and fi
 | File | Purpose | When to Read |
 |------|---------|--------------|
 | **docs/SUPABASE_SETUP.md** | Database setup and schema | Working with friends/rooms/watch parties |
-| **appcast.xml** | Sparkle update feed (GitHub-hosted) | Releasing new versions |
+| **appcast.xml** | Sparkle update feed (Server-hosted) | Releasing new versions |
 | **docs/MONETIZATION_ROADMAP.md** | Monetization strategy | Implementing payments |
 
 ### Performance & Technical
@@ -64,9 +64,9 @@ This document helps you quickly understand the RedLemon project structure and fi
 1. Update version in `scripts/build-app-debug.sh` (CFBundleShortVersionString and CFBundleVersion)
 2. Build app: `scripts/build-app-debug.sh`
 3. Create DMG: `scripts/build-dmg.sh`
-4. Upload DMG to GitHub Releases
-5. Update `appcast.xml` with new version and file size
-6. Commit and push appcast.xml to GitHub
+4. Run `./scripts/release.sh` to package, sign, and deploy.
+5. Update `appcast.xml` (handled automatically by script).
+6. Commit and push appcast.xml to repo.
 
 ### "What are we building next?"
 → **ROADMAP.md** (Phase 2: Watch Parties & Phase 3: Monetization)
@@ -79,7 +79,7 @@ This document helps you quickly understand the RedLemon project structure and fi
 
 ### "Auto-updates aren't working"
 1. Check Sparkle logs in Console.app (filter by "Sparkle")
-2. Verify appcast.xml is accessible: `curl https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml`
+2. Verify appcast.xml is accessible: `curl https://151.243.109.243.nip.io/updates/appcast.xml`
 3. Verify app is code-signed: `codesign -dvv build/RedLemon.app`
 4. Check Info.plist has SUFeedURL and SUAllowsInsecureUpdates keys
 
@@ -92,8 +92,7 @@ This document helps you quickly understand the RedLemon project structure and fi
 
 ### Production System
 ```
-GitHub Releases: https://github.com/orangeapple1272/Redlemon/releases
-Appcast Feed: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+Appcast Feed: https://151.243.109.243.nip.io/updates/appcast.xml
 Database: Supabase PostgreSQL
 Auto-Updates: Sparkle 2.8.0 framework
 Payments: Bitcoin/LNBits (Planned)

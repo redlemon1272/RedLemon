@@ -82,43 +82,40 @@ ln -s /Applications "${DMG_DIR}/Applications"
 # Create README with version-specific info
 log_info "Creating README..."
 cat > "${DMG_DIR}/README.txt" << EOF
-RedLemon v${VERSION} (Build ${BUILD_NUMBER})
-====================================
+🍋 RedLemon v\${VERSION} (Build \${BUILD_NUMBER})
+========================================
+The Unified Native macOS Media Experience
 
-Installation:
-1. Drag RedLemon.app to the Applications folder
-2. Open RedLemon from Applications
-3. If you see a security warning:
-   - Go to System Settings > Privacy & Security
-   - Click "Open Anyway" next to RedLemon
+RedLemon is a high-performance, native macOS application designed for premium media streaming and synchronized group viewing. Built for the modern macOS experience.
 
-First Launch:
-1. Enter your username (no password required)
-2. Add your Real-Debrid API token in Settings
-3. Optionally add SubDL API key for subtitles
+🚀 QUICK START
+----------------------------------------
+1. INSTALL: Drag RedLemon.app into your Applications folder.
+2. LAUNCH: Locate the app in Applications. For the first launch, Right-Click (Control-Click) and select 'Open' to authorize the app.
+3. ONBOARD: Follow the onboarding flow to set up your identity or 'Restore from Backup' to instantly recover your account, friends, and history.
 
-Features:
-• Stream movies and TV shows with Real-Debrid
-• Watch parties with friends (real-time sync)
-• Automatic updates via Sparkle
-• Smart subtitle selection (embedded preferred)
-• Live movie events with synchronized playback
+✨ PREMIUM FEATURES
+----------------------------------------
+• CINEMATIC PLAYBACK: Powered by an embedded libmpv engine with full hardware acceleration and Pro-Grade subtitle rendering.
+• WATCH PARTIES: Experience perfect synchronization with friends. Every seek, pause, and play is broadcasted in real-time via high-performance WebSockets.
+• SMART SUBTITLES: Intelligent scoring system that prioritizes high-quality embedded tracks and release-matched content.
+• SEAMLESS UPDATES: Integrated Sparkle support ensures you are always running the latest version with zero friction.
+• PRIVACY BY DESIGN: No telemetry. RedLemon respects your privacy—all logs and app data are stored silently in your local Application Support directory.
 
-Requirements:
-• macOS 12.0 (Monterey) or later
-• Real-Debrid account (https://real-debrid.com)
-• Internet connection
+⚙️ REQUIREMENTS
+----------------------------------------
+• macOS 12.0 (Monterey) or newer.
+• Real-Debrid Account (Required for high-speed streaming).
+• SubDL API Key (Optional, for expanded subtitle discovery).
 
-Troubleshooting:
-• App won't open? Check Privacy & Security settings
-• No streams found? Verify Real-Debrid token in Settings
-• Subtitles missing? Add SubDL API key in Settings
+❓ TROUBLESHOOTING
+----------------------------------------
+• INITIAL LAUNCH: If macOS prevents launch, go to System Settings > Privacy & Security and click "Open Anyway".
+• STREAM ERRORS: Ensure your Real-Debrid token is active and correctly configured in Settings.
+• SYNC ISSUES: For Watch Parties, ensure all participants are on the latest version (check Settings > About).
 
-Support:
-• GitHub: https://github.com/orangeapple1272/Redlemon
-• Report issues via GitHub Issues
-
-Enjoy! 🍋
+----------------------------------------
+Enjoy the ultimate viewing experience. 🍋
 EOF
 
 # Create DMG with optimized settings

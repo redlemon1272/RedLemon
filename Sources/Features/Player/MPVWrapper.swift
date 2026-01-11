@@ -1035,7 +1035,7 @@ class MPVWrapper: ObservableObject {
         }
 
         // Scoring:
-        // +1000 for Embedded (vs External)
+        // +3000 for Embedded (vs External)
         // +500 for Release Match (WEBRip vs BluRay)
         // +250 for SDH/CC/HI (Increased to beat Forced/Default penalties and slight release match disadvantage)
         // +600 for CLEAN TITLE if short (<20) and matching lang (SDH/English) -> Neutralizes Release Match bias against clean titles

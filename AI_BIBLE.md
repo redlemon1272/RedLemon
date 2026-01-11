@@ -622,6 +622,12 @@ We have streamlined the release process into a single script:
 4.  **Signs the update** using your local Keychain private key.
 5.  Generates the XML block for `appcast.xml`.
 
+### Build Artifacts
+| File | Purpose |
+| :--- | :--- |
+| `RedLemon-Installer.dmg` | The distributable installer (drag-to-Applications) |
+| `RedLemon-Installer.sha256` | SHA256 checksum for verification |
+
 ### Release Steps
 1.  Run `./scripts/release.sh 1.0.XX XX`
 2.  Copy the generated XML block into `appcast.xml`.

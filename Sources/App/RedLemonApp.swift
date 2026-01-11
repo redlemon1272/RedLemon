@@ -72,7 +72,15 @@ struct RedLemonApp: App {
 
                     // Show username setup only AFTER auth flow completes
                     // This prevents race condition where ContentView showed modal prematurely
-                    if appState.currentUserId == nil {
+                    
+                    // NEW: Check for First Run Onboarding
+                    let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding_v1")
+                    if !hasCompletedOnboarding {
+                        NSLog("✨ RedLemon: First run detected. Initiating onboarding tour.")
+                        appState.showOnboarding = true
+                        // Note: Username setup will be triggered by AppOnboardingView's close action OR falls through below
+                    } else if appState.currentUserId == nil {
+                        // Return user: go straight to username setup if not logged in
                         appState.showUsernameSetup = true
                     }
 

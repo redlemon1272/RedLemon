@@ -192,6 +192,10 @@ struct ContentView: View {
             UsernameSetupView()
                 .environmentObject(appState)
         }
+        .sheet(isPresented: $appState.showOnboarding) {
+            AppOnboardingView(isPresented: $appState.showOnboarding)
+                .environmentObject(appState)
+        }
         .alert(item: $appState.activeAlert) { alert in
             Alert(
                 title: Text(alert.title),

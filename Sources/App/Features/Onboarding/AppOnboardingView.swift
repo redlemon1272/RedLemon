@@ -82,7 +82,6 @@ struct AppOnboardingView: View {
                     Image(systemName: pages[currentPage].icon)
                         .font(.system(size: 80))
                         .foregroundStyle(pages[currentPage].color)
-                        .symbolEffect(.bounce, value: currentPage) // iOS 17/macOS 14 effect, falls back gracefully
                         .shadow(color: pages[currentPage].color.opacity(0.5), radius: 20, x: 0, y: 0)
                         
                     // Title & Subtitle

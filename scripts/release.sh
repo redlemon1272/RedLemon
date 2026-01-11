@@ -30,7 +30,7 @@ sed -i '' "s/APP_BUILD=\".*\"/APP_BUILD=\"${BUILD_NUMBER}\"/" build-app-debug.sh
 
 # 1.5. Update Version in README.md
 echo -e "${YELLOW}📝 Updating version in README.md...${NC}"
-sed -i '' "s/Current Version:** v.* (build .*)/Current Version:** v${VERSION} (build ${BUILD_NUMBER})/" README.md
+sed -i '' "s/Current Version:\*\* v.* (build .*)/Current Version:** v${VERSION} (build ${BUILD_NUMBER})/" README.md
 
 # 2. Build the App (Headless)
 echo -e "${YELLOW}🔨 Building App (Headless)...${NC}"

@@ -83,8 +83,8 @@ struct RoomListView: View {
                     VStack(spacing: 24) {
                         ForEach(appState.activeRooms) { room in
                             HeroRoomCard(room: room) {
-                                // Although joinRoom is synchronous, the closure is async, so we wrap it
-                                joinRoom(room: room)
+                                // joinRoom is now async, so the card will show loading state while this awaits
+                                await joinRoom(room: room)
                             }
                         }
 
@@ -473,14 +473,12 @@ struct RoomListView: View {
         }
     }
 
-    private func joinRoom(room: WatchPartyRoom) {
+    private func joinRoom(room: WatchPartyRoom) async {
         print("🚪 Joining room: \(room.id)")
         
         // REDLEMON: Delegate to PlayerViewModel canonical logic
         // This handles lobby bypass for active rooms/events and transitions to the correct view (Player vs Lobby)
-        Task {
-            await appState.player.joinRoom(roomId: room.id)
-        }
+        await appState.player.joinRoom(roomId: room.id)
     }
 
     private func joinRoomByCode(code: String) {
@@ -490,7 +488,9 @@ struct RoomListView: View {
 
         // 1. Try local list first (fast path)
         if let room = appState.activeRooms.first(where: { $0.id == code }) {
-            joinRoom(room: room)
+            Task {
+                await joinRoom(room: room)
+            }
             return
         }
 
@@ -504,8 +504,8 @@ struct RoomListView: View {
                     if let watchPartyRoom = await convertSupabaseRoomToWatchPartyRoom(supabaseRoom) {
                         await MainActor.run {
                             isLoading = false
-                            joinRoom(room: watchPartyRoom)
                         }
+                        await joinRoom(room: watchPartyRoom)
                     } else {
                         throw NSError(domain: "RoomListView", code: 404, userInfo: [NSLocalizedDescriptionKey: "Room exists but could not be processed (possibly invalid host or empty)"])
                     }

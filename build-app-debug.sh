@@ -13,6 +13,10 @@ ARCH_NAME=$(uname -m)
 MACOS_VERSION=$(sw_vers -productVersion)
 XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
 
+# User-configurable versioning
+APP_VERSION="1.0.14"
+APP_BUILD="14"
+
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
 echo "🔧 System: $ARCH_NAME"
 echo "🍎 macOS: $MACOS_VERSION"
@@ -142,7 +146,7 @@ echo "🔗 Fixing library paths..."
 install_name_tool -change "@rpath/libmpv.2.dylib" "@executable_path/../Frameworks/libmpv.2.dylib" "$MACOS/RedLemon" 2>/dev/null || true
 
 # Create Info.plist
-cat > "$CONTENTS/Info.plist" << 'PLIST'
+cat > "$CONTENTS/Info.plist" << PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -156,9 +160,9 @@ cat > "$CONTENTS/Info.plist" << 'PLIST'
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0.14</string>
+    <string>${APP_VERSION}</string>
     <key>CFBundleVersion</key>
-    <string>14</string>
+    <string>${APP_BUILD}</string>
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>
     <key>LSMinimumSystemVersion</key>
@@ -187,8 +191,8 @@ cat > "$CONTENTS/Info.plist" << 'PLIST'
     <true/>
     <key>SUScheduledCheckInterval</key>
     <integer>86400</integer>
-    <key>SUAllowsInsecureUpdates</key>
-    <true/>
+    <key>SUPublicEDKey</key>
+    <string>oT0UkapQxn9PE5FOU+lpW5aJBuvfvPGICml3hg2pjCw=</string>
 </dict>
 </plist>
 PLIST

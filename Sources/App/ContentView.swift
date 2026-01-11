@@ -145,7 +145,7 @@ struct ContentView: View {
                     case .rooms:
                         RoomListView()
                     case .settings:
-                        SettingsView()
+                        SettingsView(updateManager: updateManager)
                     case .mediaDetail:
                         if let mediaItem = appState.player.selectedMediaItem {
                             MediaDetailView(mediaItem: mediaItem)

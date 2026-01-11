@@ -11,9 +11,20 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
     // Published properties for UI binding
     @Published var updateAvailable: Bool = false
     @Published var canCheckForUpdates: Bool = false
+    @Published var lastCheckedDate: Date? {
+        didSet {
+            if let date = lastCheckedDate {
+                UserDefaults.standard.set(date, forKey: "lastUpdateCheck")
+            }
+        }
+    }
 
     private override init() {
         super.init()
+        // Load persistency
+        if let saved = UserDefaults.standard.object(forKey: "lastUpdateCheck") as? Date {
+            self.lastCheckedDate = saved
+        }
         setupSparkle()
     }
 
@@ -29,11 +40,11 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
         if let updater = updaterController?.updater {
             canCheckForUpdates = updater.canCheckForUpdates
 
-            // Disable ALL automatic behaviors
-            updater.automaticallyChecksForUpdates = false
-            updater.automaticallyDownloadsUpdates = false
+            // Enable automatic behaviors for seamless updates
+            updater.automaticallyChecksForUpdates = true
+            updater.automaticallyDownloadsUpdates = true
 
-            print("✅ Sparkle configured (manual only, no auto-checks)")
+            print("✅ Sparkle configured (seamless mode)")
             print("   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml")
             print("   Can check: \(canCheckForUpdates)")
         }
@@ -42,6 +53,8 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
     /// Check for updates manually
     func checkForUpdates() {
         print("🔍 Manual update check requested...")
+        // Update the timestamp immediately to show user something happened
+        self.lastCheckedDate = Date()
         updaterController?.checkForUpdates(nil)
     }
 
@@ -79,11 +92,13 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
                     print("✅ Update available: \(latestVersion)")
                     await MainActor.run {
                         self.updateAvailable = true
+                        self.lastCheckedDate = Date()
                     }
                 } else {
                     print("✅ App is up to date")
                     await MainActor.run {
                         self.updateAvailable = false
+                        self.lastCheckedDate = Date()
                     }
                 }
             }
@@ -105,7 +120,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
     /// This is required when SUPublicEDKey is not set or empty
     /// PRODUCTION: Generate Ed25519 keys and add SUPublicEDKey to Info.plist
     func updaterMayCheck(forUpdates updater: SPUUpdater) -> Bool {
-        print("✅ Sparkle may check for updates (insecure mode enabled)")
+        print("✅ Sparkle checking for updates...")
         return true
     }
 
@@ -118,6 +133,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
         print("📦 Update found: \(item.displayVersionString)")
         DispatchQueue.main.async {
             self.updateAvailable = true
+            self.lastCheckedDate = Date()
         }
     }
 
@@ -126,6 +142,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
         print("✅ No updates available")
         DispatchQueue.main.async {
             self.updateAvailable = false
+            self.lastCheckedDate = Date()
         }
     }
 }

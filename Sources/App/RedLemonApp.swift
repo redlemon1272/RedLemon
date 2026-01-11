@@ -264,7 +264,7 @@ struct RedLemonApp: App {
 
     func checkForUpdates() async {
         NSLog("🔄 Checking for app updates...")
-        updateManager.checkForUpdates()
+        updateManager.checkForUpdatesInBackground()
     }
 
     /// Reset playback state to prevent automatic selection of last played content

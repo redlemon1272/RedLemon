@@ -12,7 +12,7 @@ import UniformTypeIdentifiers
 
 struct SettingsView: View {
 
-    @EnvironmentObject var updateManager: UpdateManager
+    @ObservedObject var updateManager: UpdateManager
     @EnvironmentObject var appState: AppState
     @StateObject private var licenseManager = LicenseManager.shared
 
@@ -1172,6 +1172,36 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 12) {
                 InfoRow(label: "App", value: "RedLemon Native")
                 InfoRow(label: "Version", value: appVersion)
+                
+                // Last Update Check
+                HStack {
+                    Text("Updates")
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    
+                    if let lastChecked = updateManager.lastCheckedDate {
+                        Text(lastChecked.formatted(date: .abbreviated, time: .shortened))
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundColor(.secondary)
+                    } else {
+                        Text("Never Checked")
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    Button(action: {
+                        updateManager.checkForUpdates()
+                    }) {
+                        Image(systemName: "arrow.clockwise.circle.fill")
+                            .foregroundColor(.blue)
+                            .font(.title3)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Check for Updates Now")
+                    .padding(.leading, 8)
+                }
+                
                 InfoRow(label: "Server", value: Config.serverURL)
             }
             .padding(24)
@@ -1394,7 +1424,7 @@ struct InfoRow: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(updateManager: UpdateManager.shared)
             .frame(width: 800, height: 600)
     }
 }

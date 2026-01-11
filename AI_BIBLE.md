@@ -589,17 +589,33 @@ Uses **Sparkle** framework for macOS auto-updates.
 
 ### Configuration
 - **Appcast URL**: `https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml`
-- **Mode**: Manual only (no auto-checks, no automatic downloads)
-- **Silent Check**: Custom implementation that parses appcast XML without Sparkle UI
+- **Mode**: **Seamless** (Automatic checks, Automatic downloading)
+- **Security**: Ed25519 Signed Updates (Key in Keychain/Info.plist)
 
-### Update Flow
-1. `checkForUpdatesInBackground()` called on app launch
-2. Silently fetches `appcast.xml` from GitHub
-3. Compares `<sparkle:version>` with `CFBundleVersion`
-4. Sets `updateAvailable = true` if newer version exists
+### Release Workflow (How to Ship)
+We have streamlined the release process into a single script:
 
-> [!NOTE]
-> For production release signing, add `SUPublicEDKey` to Info.plist with your Ed25519 public key.
+```bash
+./scripts/release.sh <VERSION> <BUILD_NUMBER>
+# Example: ./scripts/release.sh 1.0.15 15
+```
+
+**This script automatically:**
+1.  Updates version variables in `build-app-debug.sh`.
+2.  Builds the App (`start-production.sh`).
+3.  Packages the DMG (`build-dmg.sh`).
+4.  **Signs the update** using your local Keychain private key.
+5.  Generates the XML block for `appcast.xml`.
+
+### Release Steps
+1.  Run `./scripts/release.sh 1.0.XX XX`
+2.  Copy the generated XML block into `appcast.xml`.
+3.  Commit and Push.
+4.  Create a GitHub Release and upload `RedLemon-Installer.dmg`.
+
+> [!IMPORTANT]
+> **Signing Keys**: The Private Key is stored in your macOS Keychain (entry: "Sparkle Private Key"). The Public Key is embedded in `Info.plist` (`SUPublicEDKey`).
+> If you move to a new machine, you must export/import the Sparkle private key or generate a new pair.
 
 ---
 

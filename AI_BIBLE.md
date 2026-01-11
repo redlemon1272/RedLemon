@@ -423,8 +423,8 @@ Functions: `assign-address`, `check-payment`, `sweep-payments`, `cleanup-rooms`,
 `moment absent unfair song unusual neck panther asset clock conduct doll voice`
 
 **Derivation Paths:**
-- **BTC**: `m/84'/0'/0'` (Native Segwit)
-- **EVM**: `m/44'/60'/0'` (Standard BIP44)
+- **BTC**: `m/84'/0'/0'` (Native Segwit) - *Currently Inactive/Hidden in UI*
+- **EVM**: `m/44'/60'/0'` (Standard BIP44) - *Active (Ethereum, Base, etc)*
 
 **XPUBs (Server Config):**
 - **XPUB_BTC**: `xpub6CNJnaQ1bu7oLQH4g8ZGSJUbVtRLqu3ikYm9PhiFohEb9LdFCsz4QTK1aWob5nR1P7uzDmRR7GKm5aJvKgzrrWmh6CahF95K5Vtb3TgzLoq`
@@ -445,34 +445,6 @@ In `RedLemonApp.swift`, use command line args:
 - `-user-profile guest`
 
 ---
-
-# Quick Reference
-
-## Key Files
-| Purpose | File |
-| :--- | :--- |
-| Video Playback | `MPVPlayerViewModel.swift` |
-| Stream Resolution | `StreamResolver.swift` |
-| Subtitles | `MPVWrapper.swift`, `SubtitleService.swift` |
-| Watch Parties | `RealtimeChannelManager.swift`, `LobbyViewModel.swift` |
-| Payments | `SupabaseClient.swift`, Edge Functions |
-| Settings | `SettingsView.swift` |
-| Admin | `AdminDashboardView.swift` |
-
-## Important Database Tables
-| Table | Purpose |
-| :--- | :--- |
-| `users` | User accounts, premium status |
-| `rooms` | Active watch parties |
-| `room_creation_history` | Persistent room limit tracking |
-| `verified_streams` | Community-verified streams |
-| `reported_streams` | Problem reports |
-| `blocked_streams` | Permanent blacklist |
-| `payment_pools` | Assigned crypto addresses |
-| `payment_transactions` | Payment records |
-
-## Cron Jobs
-Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT jobname, schedule FROM cron.job;\""`
 
 ---
 
@@ -650,33 +622,6 @@ Uses **Sparkle** framework for macOS auto-updates.
 - **Mode**: **Seamless** (Automatic checks, Automatic downloading)
 - **Security**: Ed25519 Signed Updates (Key in Keychain/Info.plist)
 
-### Release Workflow (How to Ship)
-The authoritative way to ship is via the automated release script:
-
-```bash
-./scripts/release.sh <VERSION> <BUILD_NUMBER>
-# Example: ./scripts/release.sh 1.0.16 16
-```
-
-**This script (headless) automatically:**
-1.  **Sets Version**: Updates `build-app-debug.sh`.
-2.  **Builds App**: Compiles `RedLemon.app` (without launching).
-3.  **Packages DMG**: Creates the installer.
-4.  **Signs Update**: Generates the EdSignature using your local Keychain.
-5.  **Updates Appcast**: Appends the new release block to local `appcast.xml`.
-6.  **Deploys**: Pushes the DMG and XML to the production server via SCP.
-
-### Build Artifacts
-| File | Purpose | Location |
-| :--- | :--- | :--- |
-| `RedLemon-Installer.dmg` | Distributable installer | `build/` |
-| `appcast.xml` | Sparkle RSS feed | Project Root / Server |
-| `checksums.txt` | SHA256 verification | `build/` |
-
-> [!IMPORTANT]
-> **Signing Keys**: The Private Key is stored in your macOS Keychain (entry: "Sparkle Private Key"). The Public Key is embedded in `Info.plist` (`SUPublicEDKey`).
-> If you move to a new machine, you must export/import the Sparkle private key or generate a new pair.
-
 ---
 
 # Part 12: Caching System
@@ -811,10 +756,18 @@ Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SE
 
 ## Automated Deployment
 The `./scripts/release.sh` script is now fully automated and "Headless". It performs:
-1. **Headless Build**: Compiles without launching.
-2. **DMG Creation**: Packages the app.
-3. **Appcast Injection**: Uses `sed` to insert the new version at the top of the local `appcast.xml`.
-4. **Remote Push**: Uses `scp` to deploy both the DMG and the XML to the production server.
+1. **Version Prep**: Updates version strings in `build-app-debug.sh` and `README.md`.
+2. **Headless Build**: Compiles the binary without launching (prevents Landmine #26).
+3. **DMG Packaging**: Creates the `RedLemon-Installer.dmg`.
+4. **Appcast Injection**: Uses `sed` to insert the new version (using numeric build number) at the top of the local `appcast.xml`.
+5. **Remote Push**: Deploys both the DMG and the XML to the production server via `scp`.
+
+### Build Artifacts
+| File | Purpose | Location |
+| :--- | :--- | :--- |
+| `RedLemon-Installer.dmg` | Distributable installer | `RedLemon-Native/` |
+| `appcast.xml` | Sparkle RSS feed | `RedLemon-Native/` |
+| `RedLemon-Installer.sha256` | Checksum for verification | `RedLemon-Native/` |
 
 ---
 

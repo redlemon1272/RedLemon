@@ -33,7 +33,7 @@ class EventChatService: ObservableObject {
         self.username = username
         self.messages = [] // Clear previous chat
         
-        print("🎫 EventChatService: Connecting to event lobby \(eventId)...")
+        LoggingManager.shared.debug(.social, message: "EventChatService: Connecting to event lobby \(eventId)...")
         
         // Initialize Realtime Manager
         // distinct from the Room one to allow side-by-side connections if needed (though usually exclusive)
@@ -57,20 +57,20 @@ class EventChatService: ObservableObject {
                 }
             )
             self.isConnected = true
-            print("✅ EventChatService: Connected!")
+            LoggingManager.shared.info(.social, message: "EventChatService: Connected!")
             
             // Send join message silently (or visible if desired)
             // let joinMsg = SyncMessage(type: .chat, timestamp: Date().timeIntervalSince1970, isPlaying: nil, senderId: userId, chatText: "LOBBY_JOIN", chatUsername: username)
             // try? await realtimeManager?.sendSyncMessage(joinMsg)
             
         } catch {
-            print("❌ EventChatService: Failed to connect: \(error)")
+            LoggingManager.shared.error(.social, message: "EventChatService: Failed to connect: \(error)")
         }
     }
     
     func disconnect() async {
         guard let _ = currentEventId else { return }
-        print("🎫 EventChatService: Disconnecting...")
+        LoggingManager.shared.debug(.social, message: "EventChatService: Disconnecting...")
         
         await realtimeManager?.disconnect()
         realtimeManager = nil
@@ -110,7 +110,7 @@ class EventChatService: ObservableObject {
         do {
             try await realtimeManager?.sendSyncMessage(syncMsg)
         } catch {
-            print("❌ EventChatService: Failed to send message: \(error)")
+            LoggingManager.shared.error(.social, message: "EventChatService: Failed to send message: \(error)")
             self.messages.removeAll { $0.id == tempId }
         }
     }

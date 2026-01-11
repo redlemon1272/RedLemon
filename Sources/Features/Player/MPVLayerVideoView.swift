@@ -25,8 +25,7 @@ class MPVLayerHostView: NSView {
         // Enable layer backing
         wantsLayer = true
         layerContentsRedrawPolicy = .duringViewResize
-
-        print("🎬 MPVLayerHostView initialized")
+        LoggingManager.shared.debug(.videoRendering, message: "MPVLayerHostView initialized")
     }
 
     required init?(coder: NSCoder) {
@@ -74,7 +73,7 @@ class MPVLayerHostView: NSView {
         self.videoLayer = layer
         self.layer = layer
 
-        print("🎬 Video layer assigned to host view")
+        LoggingManager.shared.debug(.videoRendering, message: "Video layer assigned to host view")
 
         // Initialize MPV first
         wrapper.setupVideo(in: self)
@@ -97,7 +96,7 @@ class MPVLayerHostView: NSView {
         let result = CVDisplayLinkCreateWithActiveCGDisplays(&link)
 
         guard result == kCVReturnSuccess, let displayLink = link else {
-            print("❌ Failed to create display link")
+            LoggingManager.shared.error(.videoRendering, message: "Failed to create display link")
             return
         }
 
@@ -119,13 +118,13 @@ class MPVLayerHostView: NSView {
         // Start the link
         CVDisplayLinkStart(displayLink)
 
-        print("🎬 CVDisplayLink started")
+        LoggingManager.shared.debug(.videoRendering, message: "CVDisplayLink started")
     }
 
     func stopDisplayLink() {
         guard let link = displayLink else { return }
 
-        print("🎬 Stopping CVDisplayLink...")
+        LoggingManager.shared.debug(.videoRendering, message: "Stopping CVDisplayLink...")
 
         if CVDisplayLinkIsRunning(link) {
             CVDisplayLinkStop(link)
@@ -134,13 +133,13 @@ class MPVLayerHostView: NSView {
         // Immediately nil out the reference to break retain cycle
         displayLink = nil
 
-        print("🎬 CVDisplayLink stopped and released")
+        LoggingManager.shared.debug(.videoRendering, message: "CVDisplayLink stopped and released")
     }
 
     deinit {
         stopDisplayLink()
         videoLayer?.uninit()
-        print("🎬 MPVLayerHostView deinit")
+        LoggingManager.shared.debug(.videoRendering, message: "MPVLayerHostView deinit")
     }
 }
 
@@ -170,7 +169,7 @@ private func displayLinkCallback(
     // Log throttling - only print once per second to reduce spam
     let currentTime = CACurrentMediaTime()
     if currentTime - lastDisplayLinkLogTime > 1.0 {
-        print("🎬 DisplayLink: reportSwap() (throttled)")
+        LoggingManager.shared.debug(.videoRendering, message: "DisplayLink: reportSwap() (throttled)")
         lastDisplayLinkLogTime = currentTime
     }
     wrapper.reportSwap()

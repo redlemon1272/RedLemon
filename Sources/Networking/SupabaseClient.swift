@@ -326,12 +326,12 @@ class SupabaseClient: RoomManager, UserManager {
             }
 
             if let jsonError = try? JSONDecoder().decode(PostgresError.self, from: data) {
-                print("❌ Supabase API Error: \(jsonError.message)")
+                LoggingManager.shared.error(.network, message: "Supabase API Error: \(jsonError.message)")
                 // For PostgreSQL exceptions (which we use for limits), use the raw message
                 throw SupabaseError.userMessage(jsonError.message)
             }
 
-            print("❌ Supabase error (\(httpResponse.statusCode)): \(errorString)")
+            LoggingManager.shared.error(.network, message: "Supabase error (\(httpResponse.statusCode)): \(errorString)")
             throw SupabaseError.httpError(httpResponse.statusCode, errorString)
         }
 
@@ -771,7 +771,7 @@ class SupabaseClient: RoomManager, UserManager {
     /// Returns: TimeInterval remaining until they can host again (0 if allowed)
     func checkFreeTierLimit() async throws -> TimeInterval {
         guard let userId = auth.currentUser?.id else {
-            print("⚠️ checkFreeTierLimit: No current user ID")
+            LoggingManager.shared.warn(.network, message: "checkFreeTierLimit: No current user ID")
             return 0
         }
 
@@ -787,11 +787,11 @@ class SupabaseClient: RoomManager, UserManager {
                 params: ["target_user_id": userId.uuidString.lowercased()]
             )
 
-            print("⏳ checkFreeTierLimit (RPC): Locked=\(status.is_locked), Remaining=\(status.remaining_seconds)")
+            LoggingManager.shared.debug(.network, message: "checkFreeTierLimit (RPC): Locked=\(status.is_locked), Remaining=\(status.remaining_seconds)")
             return status.remaining_seconds
 
         } catch {
-            print("❌ checkFreeTierLimit RPC failed: \(error)")
+            LoggingManager.shared.error(.network, message: "checkFreeTierLimit RPC failed: \(error)")
             // Fallback to 0 (allow hosting) if check fails, to avoid blocking legitimate users on network error
             return 0
         }
@@ -1281,7 +1281,7 @@ class SupabaseClient: RoomManager, UserManager {
                 body: body
             )
         } catch {
-            print("❌ Failed to upload log: \(error)")
+            NSLog("❌ Failed to upload log: \(error)")
         }
     }
 
@@ -1311,9 +1311,9 @@ class SupabaseClient: RoomManager, UserManager {
                 body: ["p_log_id": id.uuidString.lowercased()],
                 sign: true
             )
-            print("🗑️ Deleted app log: \(id)")
+            LoggingManager.shared.info(.general, message: "Deleted app log: \(id)")
         } catch {
-            print("❌ Failed to delete app log: \(error)")
+            LoggingManager.shared.error(.general, message: "Failed to delete app log: \(error)")
         }
     }
 
@@ -1324,7 +1324,7 @@ class SupabaseClient: RoomManager, UserManager {
             method: "POST",
             sign: true
         )
-        print("🗑️ Deleted all app logs.")
+        LoggingManager.shared.info(.general, message: "Deleted all app logs.")
     }
 
     /// Get total user count
@@ -1513,9 +1513,9 @@ struct ReportedStream: Identifiable, Codable {
                     "id": "eq.\(id.uuidString)"
                 ]
             )
-            print("Title updated for report \(id.uuidString)")
+            LoggingManager.shared.info(.general, message: "Title updated for report \(id.uuidString)")
         } catch {
-            print("Failed to update report title: \(error)")
+            LoggingManager.shared.error(.general, message: "Failed to update report title: \(error)")
         }
     }
 
@@ -1550,9 +1550,9 @@ struct ReportedStream: Identifiable, Codable {
                 method: "POST",
                 body: body
             )
-            print("🚨 Reported stream: \(streamHash) Reason: \(reason)")
+            LoggingManager.shared.info(.social, message: "Reported stream: \(streamHash) Reason: \(reason)")
         } catch {
-            print("Failed to report stream: \(error)")
+            LoggingManager.shared.error(.social, message: "Failed to report stream: \(error)")
         }
     }
 
@@ -1564,9 +1564,9 @@ struct ReportedStream: Identifiable, Codable {
                 method: "DELETE",
                 query: ["id": "eq.\(id.uuidString)"]
             )
-            print("✅ Report dismissed: \(id)")
+            LoggingManager.shared.info(.social, message: "Report dismissed: \(id)")
         } catch {
-            print("❌ Failed to dismiss report: \(error)")
+            LoggingManager.shared.error(.social, message: "Failed to dismiss report: \(error)")
         }
     }
 
@@ -1592,7 +1592,7 @@ struct ReportedStream: Identifiable, Codable {
                 "id": "eq.\(id)"
             ]
         )
-        print("🗑️ Deleted reported stream entry: \(id)")
+        LoggingManager.shared.info(.social, message: "Deleted reported stream entry: \(id)")
     }
 
     /// Delete a verified stream (Admin) - Unlocks the stream for normal resolver
@@ -1604,7 +1604,7 @@ struct ReportedStream: Identifiable, Codable {
                 "stream_hash": "eq.\(streamHash)"
             ]
         )
-        print("🗑️ Deleted verified stream with hash: \(streamHash)")
+        LoggingManager.shared.info(.general, message: "Deleted verified stream with hash: \(streamHash)")
     }
 
     // MARK: - Blocked Streams (Blacklist)
@@ -1636,7 +1636,7 @@ struct ReportedStream: Identifiable, Codable {
             method: "POST",
             body: body
         )
-        print("🚫 Blocked stream: \(hash)")
+        LoggingManager.shared.warn(.general, message: "Blocked stream: \(hash)")
     }
 
     /// Unblock a stream (Admin)
@@ -1646,7 +1646,7 @@ struct ReportedStream: Identifiable, Codable {
             method: "DELETE",
             query: ["stream_hash": "eq.\(hash)"]
         )
-        print("✅ Unblocked stream: \(hash)")
+        LoggingManager.shared.info(.general, message: "Unblocked stream: \(hash)")
     }
 
     /// Update title for an existing verified stream (Legacy migration)
@@ -1660,9 +1660,9 @@ struct ReportedStream: Identifiable, Codable {
                     "imdb_id": "eq.\(imdbId)"
                 ]
             )
-            print("Title updated for \(imdbId)")
+            LoggingManager.shared.info(.general, message: "Title updated for \(imdbId)")
         } catch {
-            print("Failed to update title: \(error)")
+            LoggingManager.shared.error(.general, message: "Failed to update title: \(error)")
         }
     }
 
@@ -1702,7 +1702,7 @@ struct ReportedStream: Identifiable, Codable {
                     // Different hash -> Conflict.
                     // For now, let's NOT overwrite if the existing one is popular (e.g. votes > 5)
                     if existing.voteCount > 5 {
-                        print("⚠️ Verified Stream: Keeping incumbent hash (Votes: \(existing.voteCount)) vs new candidate.")
+                        LoggingManager.shared.warn(.network, message: "Verified Stream: Keeping incumbent hash (Votes: \(existing.voteCount)) vs new candidate.")
                         return
                     }
                     // Else overwrite (incubment was weak)
@@ -1719,10 +1719,10 @@ struct ReportedStream: Identifiable, Codable {
                 body: body,
                 headers: ["Prefer": "resolution=merge-duplicates"]
             )
-            print("✅ Verified Stream: Voted for \(imdbId) S\(season)E\(episode) (\(quality)) [Hash: \(streamHash.prefix(8))...]")
+            LoggingManager.shared.info(.network, message: "Verified Stream: Voted for \(imdbId) S\(season)E\(episode) (\(quality)) [Hash: \(streamHash.prefix(8))...]")
 
         } catch {
-            print("❌ Failed to vote for stream: \(error)")
+            LoggingManager.shared.error(.network, message: "Failed to vote for stream: \(error)")
         }
     }
 
@@ -1743,7 +1743,7 @@ struct ReportedStream: Identifiable, Codable {
 
         // Log raw response for debugging
         if let string = String(data: response, encoding: .utf8) {
-            print("💰 Check Payment Response: \(string)")
+            LoggingManager.shared.debug(.network, message: "Check Payment Response: \(string)")
         }
 
         let result = try JSONDecoder().decode(PaymentResponse.self, from: response)
@@ -1882,9 +1882,9 @@ struct ReportedStream: Identifiable, Codable {
                 method: "POST",
                 body: body
             )
-            print("📝 Feedback sent successfully")
+            LoggingManager.shared.info(.social, message: "Feedback sent successfully")
         } catch {
-            print("❌ Failed to send feedback: \(error)")
+            LoggingManager.shared.error(.social, message: "Failed to send feedback: \(error)")
         }
     }
 
@@ -1912,9 +1912,9 @@ struct ReportedStream: Identifiable, Codable {
                 method: "POST",
                 body: body
             )
-            print("📋 Session Log uploaded successfully: \(log.sessionId)")
+            LoggingManager.shared.info(.network, message: "Session Log uploaded successfully: \(log.sessionId)")
         } catch {
-            print("❌ Failed to upload session log: \(error)")
+            LoggingManager.shared.error(.network, message: "Failed to upload session log: \(error)")
         }
     }
 
@@ -1939,9 +1939,9 @@ struct ReportedStream: Identifiable, Codable {
                 method: "DELETE",
                 query: ["id": "eq.\(id.uuidString)"]
             )
-            print("🗑️ Deleted feedback: \(id)")
+            LoggingManager.shared.info(.social, message: "Deleted feedback: \(id)")
         } catch {
-            print("❌ Failed to delete feedback: \(error)")
+            LoggingManager.shared.error(.social, message: "Failed to delete feedback: \(error)")
         }
     }
 
@@ -1967,7 +1967,7 @@ struct ReportedStream: Identifiable, Codable {
             method: "DELETE",
             query: ["id": "neq.00000000-0000-0000-0000-000000000000"]
         )
-        print("🗑️ Deleted all system logs.")
+        LoggingManager.shared.info(.network, message: "Deleted all system logs.")
     }
 
     /// Delete a session log (Admin)
@@ -1978,9 +1978,9 @@ struct ReportedStream: Identifiable, Codable {
                 method: "DELETE",
                 query: ["id": "eq.\(id.uuidString)"]
             )
-            print("🗑️ Deleted session log: \(id)")
+            LoggingManager.shared.info(.network, message: "Deleted session log: \(id)")
         } catch {
-            print("❌ Failed to delete session log: \(error)")
+            LoggingManager.shared.error(.network, message: "Failed to delete session log: \(error)")
         }
     }
 
@@ -1992,7 +1992,7 @@ struct ReportedStream: Identifiable, Codable {
             method: "DELETE",
             query: ["id": "neq.00000000-0000-0000-0000-000000000000"]
         )
-        print("🗑️ Deleted all session logs.")
+        LoggingManager.shared.info(.network, message: "Deleted all session logs.")
     }
 
     /// Get session logs (Admin)

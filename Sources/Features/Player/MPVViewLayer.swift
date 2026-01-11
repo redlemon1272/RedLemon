@@ -85,8 +85,8 @@ class MPVViewLayer: CAOpenGLLayer {
         // Video content is naturally soft, so hardware upscaling by the OS is virtually indistinguishable
         // but saves ~75% of GPU fill rate.
         self.contentsScale = 1.0
-
-        print("🎬 MPVViewLayer initialized with async rendering")
+        
+        LoggingManager.shared.debug(.videoRendering, message: "MPVViewLayer initialized with async rendering")
     }
 
     override init(layer: Any) {
@@ -102,7 +102,9 @@ class MPVViewLayer: CAOpenGLLayer {
         inLiveResize = previousLayer.inLiveResize
         isAsynchronous = previousLayer.isAsynchronous
 
-        print("🎬 MPVViewLayer shadow copy created")
+        isAsynchronous = previousLayer.isAsynchronous
+
+        LoggingManager.shared.debug(.videoRendering, message: "MPVViewLayer shadow copy created")
     }
 
     required init?(coder: NSCoder) {
@@ -134,7 +136,7 @@ class MPVViewLayer: CAOpenGLLayer {
             fatalError("Cannot create OpenGL pixel format: \(err)")
         }
 
-        print("🎬 Created CGL pixel format (Core Profile 3.2)")
+        LoggingManager.shared.debug(.videoRendering, message: "Created CGL pixel format (Core Profile 3.2)")
         return (pixelFormat, 8)
     }
 
@@ -155,7 +157,7 @@ class MPVViewLayer: CAOpenGLLayer {
 
         CGLSetCurrentContext(context)
 
-        print("🎬 Created CGL context with vsync enabled")
+        LoggingManager.shared.debug(.videoRendering, message: "Created CGL context with vsync enabled")
         return context
     }
 
@@ -181,7 +183,7 @@ class MPVViewLayer: CAOpenGLLayer {
             // Log throttling - only print every 5 seconds to reduce spam
             let currentTime = CACurrentMediaTime()
             if currentTime - Self.lastCanDrawLogTime > 5.0 {
-                print("🎬 canDraw() = true (forceDraw:\(forceDraw), hasFrame:\(wrapper.shouldRenderUpdateFrame())) (throttled)")
+                LoggingManager.shared.debug(.videoRendering, message: "canDraw() = true (forceDraw:\(forceDraw), hasFrame:\(wrapper.shouldRenderUpdateFrame())) (throttled)")
                 Self.lastCanDrawLogTime = currentTime
             }
         }
@@ -201,7 +203,7 @@ class MPVViewLayer: CAOpenGLLayer {
         // Log throttling - only print every 5 seconds to reduce spam
         let currentTime = CACurrentMediaTime()
         if currentTime - Self.lastDrawLogTime > 5.0 {
-            print("🎬 draw() - Rendering frame! (throttled)")
+            LoggingManager.shared.debug(.videoRendering, message: "draw() - Rendering frame! (throttled)")
             Self.lastDrawLogTime = currentTime
         }
 
@@ -288,7 +290,7 @@ class MPVViewLayer: CAOpenGLLayer {
             // Log throttling - only print every 3 seconds to reduce spam
             let currentTime = CACurrentMediaTime()
             if currentTime - Self.lastLayerUpdateLogTime > 3.0 {
-                print("🎬 Layer.update() called - forceDraw:\(forceDraw) needsFlip:\(needsFlip) (throttled)")
+                LoggingManager.shared.debug(.videoRendering, message: "Layer.update() called - forceDraw:\(forceDraw) needsFlip:\(needsFlip) (throttled)")
                 Self.lastLayerUpdateLogTime = currentTime
             }
 
@@ -320,7 +322,7 @@ class MPVViewLayer: CAOpenGLLayer {
         
         guard !isUninited else { return }
         isUninited = true
-        print("🎬 MPVViewLayer uniniting...")
+        LoggingManager.shared.debug(.videoRendering, message: "MPVViewLayer uniniting...")
 
         // Stop all rendering and cleanup OpenGL resources on the GL queue
         mpvGLQueue.sync { [weak self] in
@@ -329,12 +331,12 @@ class MPVViewLayer: CAOpenGLLayer {
             // Cleanup MPV render context on the OpenGL thread
             self.wrapper?.destroyRenderContext()
 
-            print("🎬 MPVViewLayer cleanup complete")
+            LoggingManager.shared.debug(.videoRendering, message: "MPVViewLayer cleanup complete")
         }
     }
 
     deinit {
-        print("🗑️ MPVViewLayer deinit")
+        LoggingManager.shared.debug(.videoRendering, message: "MPVViewLayer deinit")
         // We can't take the lock in deinit if we are calling uninit which takes it
         // But uninit handles the lock.
         // However, calling uninit() directly from deinit is fine as long as we don't deadlock.

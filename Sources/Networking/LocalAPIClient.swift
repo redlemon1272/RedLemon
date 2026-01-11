@@ -645,7 +645,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
     // MARK: - Stream Resolution with Quality Buckets
 
     func resolveStreamsByQuality(imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, year: String? = nil) async throws -> QualityBuckets {
-        NSLog("🔍 CLIENT: Resolving streams - imdbId=\(imdbId), type=\(type), year=\(year ?? "nil")")
+        NSLog("%@", "🔍 CLIENT: Resolving streams - imdbId=\(imdbId), type=\(type), year=\(year ?? "nil")")
 
         var components = URLComponents(string: "\(baseURL)/api/streams/resolveByQuality")!
         var queryItems = [
@@ -1128,10 +1128,6 @@ struct MediaItem: Identifiable, Codable, Equatable {
 
     // HARDWARE-SAFE initializer from CinemetaSearchResult - avoid computed properties
     init(from result: CinemetaSearchResult) {
-        print("🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult")
-        print("🔍 [DEBUG] result.id: \(result.id)")
-        print("🔍 [DEBUG] result.type: \(result.type)")
-        print("🔍 [DEBUG] result.name: \(result.name)")
 
         // Direct property access - avoid computed properties that might crash on older hardware
         self.id = result.id
@@ -1147,15 +1143,10 @@ struct MediaItem: Identifiable, Codable, Equatable {
         self.genres = nil
         self.runtime = nil
 
-        print("🔍 [DEBUG] Successfully created MediaItem: \(self.name)")
     }
 
     // HARDWARE-SAFE initializer from CinemetaMeta - avoid computed properties
     init(from meta: CinemetaMeta) {
-        print("🔍 [DEBUG] Creating MediaItem from CinemetaMeta")
-        print("🔍 [DEBUG] meta.itemId: \(meta.itemId)")
-        print("🔍 [DEBUG] meta.type: \(meta.type)")
-        print("🔍 [DEBUG] meta.name: \(meta.name)")
 
         // Use direct property access instead of computed property
         let itemId = meta.imdb_id ?? meta.id ?? "unknown"
@@ -1173,12 +1164,10 @@ struct MediaItem: Identifiable, Codable, Equatable {
         self.genres = meta.genre  // Use the actual genres instead of nil
         self.runtime = meta.runtime
 
-        print("🔍 [DEBUG] Successfully created MediaItem from meta: \(self.name)")
     }
 
     // HARDWARE-SAFE initializer from MediaMetadata
     init(from meta: MediaMetadata) {
-        print("🔍 [DEBUG] Creating MediaItem from MediaMetadata")
         
         self.id = meta.id
         self.type = meta.type
@@ -1193,7 +1182,6 @@ struct MediaItem: Identifiable, Codable, Equatable {
         self.genres = meta.genres
         self.runtime = meta.runtime
         
-        print("🔍 [DEBUG] Successfully created MediaItem from metadata: \(self.name)")
     }
 
     // Cinemeta returns full URLs, no need for construction

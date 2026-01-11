@@ -562,7 +562,7 @@ actor StreamResolver {
              }
 
              // Map streams to attach the BEST matching subtitles for THAT specific stream
-             return streams.map { stream in
+             let attachedStreams = streams.map { stream in
                  if stream.subtitles == nil || stream.subtitles!.isEmpty {
 
                      // Rank subtitles specifically for this stream's filename/title
@@ -581,18 +581,19 @@ actor StreamResolver {
                         )
                      }
 
-                     if !mappedSubs.isEmpty {
-                        // Log the match for debugging
-                        let bestMatch = mappedSubs.first?.label ?? "Unknown"
-                        print("✅ StreamResolver: Attached best sub for '\(stream.title.prefix(30))...': \(bestMatch.prefix(30))...")
-                     }
-
+                     
                      var newStream = stream
                      newStream.subtitles = Array(mappedSubs)
                      return newStream
                  }
                  return stream
              }
+             
+             // Log summary instead of per-stream spam
+             let streamsWithSubs = attachedStreams.filter { ($0.subtitles?.count ?? 0) > 0 }
+             print("✅ StreamResolver: Processed subtitles for \(streams.count) streams (Attached to \(streamsWithSubs.count))")
+             
+             return attachedStreams
          } catch {
              print("❌ StreamResolver: Subtitle error: \(error)")
              return streams
@@ -781,7 +782,6 @@ actor StreamResolver {
                 let adGroups = ["yts", "mx", "yify"]
                 if adGroups.contains(where: { title.contains($0) }) {
                     score -= 2000 // Heavy penalty to push to bottom
-                    print("   📉 Penalizing Ad-Supported Release (YTS): \(stream.title)")
                 }
 
                 // 5. "MULTi" Handling
@@ -838,6 +838,17 @@ actor StreamResolver {
             let seeders1 = s1.seeders ?? 0
             let seeders2 = s2.seeders ?? 0
             return seeders1 > seeders2
+        }
+
+        // Log penalization summary
+        let adGroups = ["yts", "mx", "yify"]
+        let penalizedCount = filtered.filter { stream in
+            let title = stream.title.lowercased()
+            return adGroups.contains(where: { title.contains($0) })
+        }.count
+        
+        if penalizedCount > 0 {
+             print("   📉 Penalized \(penalizedCount) Ad-Supported Releases (YTS/MX)")
         }
 
         // Seeder filter (skipped for cached streams and RD direct URLs)

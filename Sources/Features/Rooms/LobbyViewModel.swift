@@ -1000,14 +1000,18 @@ class LobbyViewModel: ObservableObject {
             await MainActor.run {
                 // Update Playlist
                 if let playlist = freshRoom.playlist {
-                    print("✅ Lobby: Synced playlist with \(playlist.count) items")
+                    if self.playlist.count != playlist.count {
+                        print("✅ Lobby: Synced playlist with \(playlist.count) items")
+                    }
                     self.playlist = playlist
                     self.isPlaylistMode = !playlist.isEmpty
                 }
 
                 // Update Index
                 if let index = freshRoom.currentPlaylistIndex {
-                    print("✅ Lobby: Synced playlist index to \(index)")
+                    if self.currentPlaylistIndex != index {
+                        print("✅ Lobby: Synced playlist index to \(index)")
+                    }
                     self.currentPlaylistIndex = index
                 }
 

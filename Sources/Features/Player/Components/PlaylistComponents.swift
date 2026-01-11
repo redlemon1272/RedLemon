@@ -72,7 +72,7 @@ struct PlaylistModalView: View {
                                 // Only host can change playlist item
                                 if isHost && index != room.currentPlaylistIndex {
                                     // TODO: Implement playlist jump logic
-                                    print("Playlist item tapped: \(index)")
+                                    LoggingManager.shared.debug(.general, message: "Playlist item tapped: \(index)")
                                 }
                             }) {
                                 HStack(spacing: 12) {

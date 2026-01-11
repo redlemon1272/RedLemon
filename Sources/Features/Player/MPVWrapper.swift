@@ -46,24 +46,24 @@ class MPVWrapper: ObservableObject {
     private let minTimeChangeThreshold: Double = 0.1 // 100ms minimum change
 
     init() {
-        print("🎬 MPVWrapper: Creating embedded MPV with render context...")
+        LoggingManager.shared.info(.videoRendering, message: "MPVWrapper: Creating embedded MPV with render context...")
         mpvHandle = mpv_create()
 
         guard mpvHandle != nil else {
-            print("❌ Failed to create MPV handle")
+            LoggingManager.shared.error(.videoRendering, message: "Failed to create MPV handle")
             return
         }
 
-        print("✅ MPV handle created")
+        LoggingManager.shared.info(.videoRendering, message: "MPV handle created")
     }
 
     func setupVideo(in view: NSView) {
         guard let handle = mpvHandle, !isInitialized else {
-            NSLog("⚠️ MPV already initialized or no handle")
+            LoggingManager.shared.warn(.videoRendering, message: "MPV already initialized or no handle")
             return
         }
 
-        NSLog("🖼️ Setting up MPV with native macOS video output...")
+        LoggingManager.shared.info(.videoRendering, message: "Setting up MPV with native macOS video output...")
 
         // Use libmpv render API with optimized settings for Intel Macs
         mpv_set_option_string(handle, "vo", "libmpv")
@@ -116,11 +116,11 @@ class MPVWrapper: ObservableObject {
 
         let initResult = mpv_initialize(handle)
         guard initResult >= 0 else {
-            NSLog("❌ MPV initialization failed: \(initResult)")
+            LoggingManager.shared.error(.videoRendering, message: "MPV initialization failed: \(initResult)")
             return
         }
 
-        NSLog("✅ MPV initialized with native GPU rendering")
+        LoggingManager.shared.info(.videoRendering, message: "MPV initialized with native GPU rendering")
 
         isInitialized = true
         // Render context will be created by the layer when it's ready
@@ -149,7 +149,7 @@ class MPVWrapper: ObservableObject {
     internal func createRenderContext(with layer: MPVViewLayer) {
         guard let handle = mpvHandle else { return }
 
-        print("🎬 Creating MPV render context with OpenGL (IINA method)...")
+        LoggingManager.shared.debug(.videoRendering, message: "🎬 Creating MPV render context with OpenGL (IINA method)...")
 
         // Use IINA's proven get_proc_address implementation
         let apiType = UnsafeMutableRawPointer(mutating: (MPV_RENDER_API_TYPE_OPENGL as NSString).utf8String)
@@ -171,7 +171,7 @@ class MPVWrapper: ObservableObject {
                 var ctx: OpaquePointer?
                 let result = mpv_render_context_create(&ctx, handle, &params)
                 guard result >= 0, let renderCtx = ctx else {
-                    print("❌ Failed to create render context: \(result)")
+                    LoggingManager.shared.error(.videoRendering, message: "Failed to create render context: \(result)")
                     return
                 }
 
@@ -184,7 +184,7 @@ class MPVWrapper: ObservableObject {
                 let layerPtr = Unmanaged.passUnretained(layer).toOpaque()
                 mpv_render_context_set_update_callback(renderCtx, mpvUpdateCallback, layerPtr)
 
-                print("✅ Render context created successfully (IINA method)")
+                LoggingManager.shared.debug(.videoRendering, message: "Render context created successfully (IINA method)")
             }
         }
     }
@@ -210,8 +210,8 @@ class MPVWrapper: ObservableObject {
     private func pollForTracksAndResume() async {
         guard let handle = mpvHandle else { return }
         
-        print("🔍 SMART-LOAD: Starting track polling loop...")
-        print("🔍 SMART-LOAD: Expecting \(self.expectedExternalSubtitles) external subtitles to prevent race condition")
+        LoggingManager.shared.debug(.subtitles, message: "SMART-LOAD: Starting track polling loop...")
+        LoggingManager.shared.debug(.subtitles, message: "SMART-LOAD: Expecting \(self.expectedExternalSubtitles) external subtitles to prevent race condition")
         
         // Timeout: 8.0 seconds max wait (allow time for slow downloads)
         let timeout = Date().addingTimeInterval(8.0)
@@ -252,14 +252,14 @@ class MPVWrapper: ObservableObject {
             if basicTracksExist && subsReady {
                 tracksFound = true
                 allExpectedSubsLoaded = true
-                print("✅ SMART-LOAD: Found \(trackCount) tracks including \(externalSubCount)/\(self.expectedExternalSubtitles) external subs.")
+                LoggingManager.shared.info(.subtitles, message: "SMART-LOAD: Found \(trackCount) tracks including \(externalSubCount)/\(self.expectedExternalSubtitles) external subs.")
                 break
             }
             
             if basicTracksExist && !subsReady {
                  // Log occasionally
                  if Int(Date().timeIntervalSince1970 * 10) % 10 == 0 {
-                     print("⏳ SMART-LOAD: Waiting for subtitles... (Found \(externalSubCount)/\(self.expectedExternalSubtitles))")
+                     LoggingManager.shared.debug(.subtitles, message: "SMART-LOAD: Waiting for subtitles... (Found \(externalSubCount)/\(self.expectedExternalSubtitles))")
                  }
             }
             
@@ -267,9 +267,9 @@ class MPVWrapper: ObservableObject {
         }
         
         if allExpectedSubsLoaded {
-            print("✅ SMART-LOAD: All tracks ready! Proceeding to selection.")
+            LoggingManager.shared.info(.subtitles, message: "SMART-LOAD: All tracks ready! Proceeding to selection.")
         } else {
-            print("⚠️ SMART-LOAD: Timed out waiting for tracks. Proceeding best-effort.")
+            LoggingManager.shared.warn(.subtitles, message: "SMART-LOAD: Timed out waiting for tracks. Proceeding best-effort.")
         }
         
         // 2. Select Tracks
@@ -286,7 +286,7 @@ class MPVWrapper: ObservableObject {
         // 3. Execute Pending Seek (moved here to happen AFTER tracks ready)
         if let targetTime = self.pendingSeekTime {
              await MainActor.run {
-                 NSLog("🔄 MPV: Executing PENDING SEEK to %.1fs (Smart Load)", targetTime)
+                 LoggingManager.shared.info(.videoRendering, message: "MPV: Executing PENDING SEEK to \(String(format: "%.1f", targetTime))s (Smart Load)")
                  Task { await SessionRecorder.shared.log(category: .player, message: "Executing Pending Seek", metadata: ["target": "\(targetTime)"]) }
                  self.seek(to: targetTime)
                  self.pendingSeekTime = nil
@@ -295,13 +295,13 @@ class MPVWrapper: ObservableObject {
         
         // 4. Resume Playback if Autoplay was requested
         if self.shouldResumeAfterLoad {
-            print("▶️ SMART-LOAD: Resuming playback (Autoplay requested)")
+            LoggingManager.shared.debug(.videoRendering, message: "SMART-LOAD: Resuming playback (Autoplay requested)")
              await MainActor.run {
                  mpv_set_property_string(handle, "pause", "no")
                  self.isPlaying = true
              }
         } else {
-             print("⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)")
+             LoggingManager.shared.debug(.videoRendering, message: "SMART-LOAD: Staying paused (Watch Party / User Request)")
         }
     }
 
@@ -323,7 +323,7 @@ class MPVWrapper: ObservableObject {
             await MainActor.run { self.handleMPVEvent(eventId: eventId, eventPtr: eventPtr) }
         }
 
-        print("🛑 Event polling task cancelled cleanly")
+        LoggingManager.shared.debug(.videoRendering, message: "Event polling task cancelled cleanly")
     }
 
     private func handleMPVEvent(eventId: mpv_event_id, eventPtr: UnsafePointer<mpv_event>) {
@@ -376,18 +376,18 @@ class MPVWrapper: ObservableObject {
                     // If duration is suspiciously short (< 60s) AND we're still buffering or file just loaded,
                     // this is likely a false EOF - ignore it and the stream will continue buffering
                     if duration < 60 && (isBuffering || !isFileLoaded) {
-                        print("⏳ MPV: Ignoring premature EOF - duration \(Int(duration))s is likely a placeholder (buffering: \(isBuffering), fileLoaded: \(isFileLoaded))")
+                        LoggingManager.shared.warn(.videoRendering, message: "MPV: Ignoring premature EOF - duration \(Int(duration))s is likely a placeholder (buffering: \(isBuffering), fileLoaded: \(isFileLoaded))")
                         Task { await SessionRecorder.shared.log(category: .player, message: "Ignoring Placeholder EOF", metadata: ["duration": "\(duration)"]) }
                         return // Don't trigger EOF handling
                     }
                     
-                    print("🏁 MPV: Playback finished (EOF - reason: \(reason.rawValue))")
-                    print("🏁 MPV: Setting playbackFinished = true")
+                    LoggingManager.shared.debug(.videoRendering, message: "MPV: Playback finished (EOF - reason: \(reason.rawValue))")
+                    LoggingManager.shared.debug(.videoRendering, message: "MPV: Setting playbackFinished = true")
                     playbackFinished = true
-                    print("🏁 MPV: playbackFinished is now \(playbackFinished)")
+                    LoggingManager.shared.debug(.videoRendering, message: "MPV: playbackFinished is now \(playbackFinished)")
                     Task { await SessionRecorder.shared.log(category: .player, message: "Playback Finished (EOF)") }
                 } else {
-                    print("⚠️ MPV: END_FILE event but not EOF (reason: \(reason.rawValue))")
+                    LoggingManager.shared.warn(.videoRendering, message: "MPV: END_FILE event but not EOF (reason: \(reason.rawValue))")
                     Task { await SessionRecorder.shared.log(category: .player, message: "Playback Ended", metadata: ["reason": "\(reason.rawValue)"]) }
                     
                     // CRITICAL: Expose error to ViewModel for immediate failover
@@ -400,7 +400,7 @@ class MPVWrapper: ObservableObject {
                     }
                 }
             } else {
-                print("⚠️ MPV: END_FILE event but no event data available")
+                LoggingManager.shared.warn(.videoRendering, message: "MPV: END_FILE event but no event data available")
                 Task { await SessionRecorder.shared.log(category: .player, message: "Playback Ended (Unknown Reason)") }
             }
         case MPV_EVENT_IDLE:
@@ -422,7 +422,7 @@ class MPVWrapper: ObservableObject {
                     // Only update if changed to avoid loop
                     if self.isPlaying == isPaused {
                         self.isPlaying = !isPaused
-                        print("⏯️ MPV: Pause state changed to \(isPaused) -> isPlaying = \(self.isPlaying)")
+                        LoggingManager.shared.info(.videoRendering, message: "MPV: Pause state changed to \(isPaused) -> isPlaying = \(self.isPlaying)")
                         Task { await SessionRecorder.shared.log(category: .player, message: isPaused ? "Paused" : "Resumed") }
                     }
                 }
@@ -432,7 +432,7 @@ class MPVWrapper: ObservableObject {
                      let isBufferingNow = value.assumingMemoryBound(to: Int32.self).pointee != 0
                      if self.isBuffering != isBufferingNow {
                          self.isBuffering = isBufferingNow
-                         print("⏳ MPV: Buffering state changed: \(isBufferingNow) (paused-for-cache)")
+                         LoggingManager.shared.info(.videoRendering, message: "MPV: Buffering state changed: \(isBufferingNow) (paused-for-cache)")
                          Task { await SessionRecorder.shared.log(category: .player, message: "Buffering State", metadata: ["buffering": "\(isBufferingNow)"]) }
                      }
                  }
@@ -442,15 +442,18 @@ class MPVWrapper: ObservableObject {
             let log = data.assumingMemoryBound(to: mpv_event_log_message.self)
             guard let text = log.pointee.text else { break }
             let message = String(cString: text).trimmingCharacters(in: .whitespacesAndNewlines)
-            // Filter out noisy logs if needed, but keeping "info" level is good for diagnostics
-            print("[MPV] \(message)")
             
-            // Capture errors/warnings in Session Log
+            // Filter and route MPV internal logs via LoggingManager
             let lower = message.lowercased()
             if lower.contains("error") || lower.contains("failed") || lower.contains("panic") {
-                 Task { await SessionRecorder.shared.log(category: .error, message: "MPV Internal Error", metadata: ["details": message]) }
+                LoggingManager.shared.error(.videoRendering, message: "[MPV] \(message)")
+                Task { await SessionRecorder.shared.log(category: .error, message: "MPV Internal Error", metadata: ["details": message]) }
             } else if lower.contains("warn") {
-                 Task { await SessionRecorder.shared.log(category: .player, message: "MPV Internal Warning", metadata: ["details": message]) }
+                LoggingManager.shared.warn(.videoRendering, message: "[MPV] \(message)")
+                Task { await SessionRecorder.shared.log(category: .player, message: "MPV Internal Warning", metadata: ["details": message]) }
+            } else {
+                // High frequency MPV logs are debug level
+                LoggingManager.shared.debug(.videoRendering, message: "[MPV] \(message)")
             }
             
             // CRITICAL: Catch specific fatal errors that don't trigger END_FILE immediately
@@ -463,7 +466,7 @@ class MPVWrapper: ObservableObject {
             }
         default:
             if eventId.rawValue != MPV_EVENT_LOG_MESSAGE.rawValue {
-                print(" MPV Event: \(eventId.rawValue)")
+                LoggingManager.shared.debug(.videoRendering, message: "MPV Event: \(eventId.rawValue)")
             }
         }
     }
@@ -517,7 +520,7 @@ class MPVWrapper: ObservableObject {
     func loadVideo(url: String, autoplay: Bool = true, expectedSubtitleCount: Int = 0) {
         // Extract filename for subtitle matching (e.g. "Movie.2023.1080p.WEBRip.mp4")
         if let urlObj = URL(string: url) {
-        NSLog("🎬 MPV: Current video filename set to: %@", self.currentVideoFilename)
+        LoggingManager.shared.debug(.videoRendering, message: "MPV: Current video filename set to: \(self.currentVideoFilename)")
         } else {
             self.currentVideoFilename = url
         }
@@ -527,13 +530,12 @@ class MPVWrapper: ObservableObject {
         let encodedUrl = url.replacingOccurrences(of: " ", with: "%20")
                             .replacingOccurrences(of: "\"", with: "%22") // Escape quotes just in case
 
-        NSLog("🎬 MPV loadVideo called with URL: %@ (Encoded: %@), autoplay: %@, expectedSubs: %d", 
-              String(url.prefix(50)), String(encodedUrl.prefix(50)), autoplay ? "true" : "false", expectedSubtitleCount)
+        LoggingManager.shared.debug(.videoRendering, message: "MPV loadVideo called with URL: \(String(url.prefix(50))) (Encoded: \(String(encodedUrl.prefix(50)))), autoplay: \(autoplay), expectedSubs: \(expectedSubtitleCount)")
         
         self.expectedExternalSubtitles = expectedSubtitleCount
         
         if !isInitialized {
-            NSLog("⚠️ MPV not initialized yet, waiting 500ms and retrying...")
+            LoggingManager.shared.warn(.videoRendering, message: "MPV not initialized yet, waiting 500ms and retrying...")
             Task { @MainActor in try? await Task.sleep(nanoseconds: 500_000_000); if isInitialized { loadVideo(url: encodedUrl, autoplay: autoplay, expectedSubtitleCount: expectedSubtitleCount) } }
             return
         }
@@ -544,7 +546,7 @@ class MPVWrapper: ObservableObject {
 
     private func executeLoadVideo(url: String, autoplay: Bool) {
         guard let handle = mpvHandle else {
-            NSLog("❌ MPV handle is nil!")
+            LoggingManager.shared.error(.videoRendering, message: "MPV handle is nil!")
             return
         }
 
@@ -558,16 +560,16 @@ class MPVWrapper: ObservableObject {
         mpv_set_property_string(handle, "pause", "yes")
 
         let command = "loadfile \"\(url)\""
-        NSLog("🎬 MPV executing: %@", command)
+        LoggingManager.shared.debug(.videoRendering, message: "MPV executing: \(command)")
         let result = mpv_command_string(handle, command)
         
         if result >= 0 {
             // Update local state (we are technically paused right now)
              isPlaying = false
-             NSLog("✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)")
+             LoggingManager.shared.debug(.videoRendering, message: "MPV loadfile succeeded (Started Paused, waiting for Smart Load)")
              Task { await SessionRecorder.shared.log(category: .player, message: "Load Video (Smart)", metadata: ["url": url]) }
         } else {
-            NSLog("❌ MPV loadfile failed with code: %d", result)
+            LoggingManager.shared.error(.videoRendering, message: "MPV loadfile failed with code: \(result)")
              // Clean up
              self.shouldResumeAfterLoad = false
              mpv_set_property_string(handle, "pause", "no")
@@ -580,10 +582,10 @@ class MPVWrapper: ObservableObject {
 
     func loadSubtitle(url: String, title: String = "English") {
         guard let handle = mpvHandle, isInitialized else {
-            NSLog("❌ Cannot load subtitle: MPV not initialized")
+            LoggingManager.shared.error(.videoRendering, message: "Cannot load subtitle: MPV not initialized")
             return
         }
-        NSLog("📝 Loading subtitle from: %@", String(url.prefix(80)))
+        LoggingManager.shared.debug(.subtitles, message: "Loading subtitle from: \(String(url.prefix(80)))")
 
         // Add the subtitle WITHOUT auto-selecting (use "cached" instead of "select")
         // This prevents external subs from overriding embedded English subs
@@ -606,9 +608,9 @@ class MPVWrapper: ObservableObject {
         }
 
         if result >= 0 {
-            NSLog("✅ External subtitle added to track list (not auto-selected)")
+            LoggingManager.shared.debug(.subtitles, message: "External subtitle added to track list (not auto-selected)")
         } else {
-            NSLog("❌ Failed to load subtitle, MPV error code: %d", result)
+            LoggingManager.shared.error(.subtitles, message: "Failed to load subtitle, MPV error code: \(result)")
         }
     }
 
@@ -640,7 +642,7 @@ class MPVWrapper: ObservableObject {
         
         // If file isn't loaded yet, queue the seek
         if !isFileLoaded {
-            NSLog("⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to %.1fs", seconds)
+            LoggingManager.shared.debug(.videoRendering, message: "MPV: File not fully loaded yet. Queueing PENDING SEEK to \(String(format: "%.1f", seconds))s")
             pendingSeekTime = seconds
             return
         }
@@ -656,7 +658,7 @@ class MPVWrapper: ObservableObject {
             // Clear any pending seek since we succeeded
             pendingSeekTime = nil
         } else {
-            NSLog("⚠️ MPV seek failed: \(result). Retrying in 200ms...")
+            LoggingManager.shared.warn(.videoRendering, message: "MPV seek failed: \(result). Retrying in 200ms...")
             
             // Retry once after a short delay (still useful for transient errors)
             Task { @MainActor in
@@ -665,10 +667,10 @@ class MPVWrapper: ObservableObject {
                 
                 let retryResult = mpv_command_string(handle, command)
                 if retryResult >= 0 {
-                    NSLog("✅ MPV seek retry succeeded")
+                    LoggingManager.shared.debug(.videoRendering, message: "MPV seek retry succeeded")
                     self.currentTime = seconds
                 } else {
-                    NSLog("❌ MPV seek retry failed: \(retryResult)")
+                    LoggingManager.shared.error(.videoRendering, message: "MPV seek retry failed: \(retryResult)")
                 }
             }
         }
@@ -686,7 +688,7 @@ class MPVWrapper: ObservableObject {
         var s = speed
         mpv_set_property(handle, "speed", MPV_FORMAT_DOUBLE, &s)
         if speed != 1.0 {
-            print("⚡ Playback speed adjusted to \(String(format: "%.2f", speed))x for sync")
+            LoggingManager.shared.debug(.videoRendering, message: "Playback speed adjusted to \(String(format: "%.2f", speed))x for sync")
         }
     }
 
@@ -747,13 +749,13 @@ class MPVWrapper: ObservableObject {
 
     func getSubtitleTracks() -> [SubtitleTrack] {
         guard let handle = mpvHandle, isInitialized else {
-            NSLog("❌ getSubtitleTracks: MPV not initialized")
+            LoggingManager.shared.error(.subtitles, message: "getSubtitleTracks: MPV not initialized")
             return []
         }
 
         var trackCount: Int64 = 0
         mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
-        NSLog("🔍 MPV track-list/count: %lld", trackCount)
+        LoggingManager.shared.debug(.subtitles, message: "MPV track-list/count: \(trackCount)")
 
         var tracks: [SubtitleTrack] = []
         var hasOffTrack = false
@@ -766,7 +768,7 @@ class MPVWrapper: ObservableObject {
                let type = typeStr.map({ String(cString: $0) }) {
                 mpv_free(typeStr)
 
-                NSLog("🔍 Track %d type: %@", i, type)
+                LoggingManager.shared.debug(.subtitles, message: "Track \(i) type: \(type)")
 
                 if type == "sub" {
                     // Get track ID
@@ -801,7 +803,7 @@ class MPVWrapper: ObservableObject {
                     mpv_get_property(handle, externalKey, MPV_FORMAT_FLAG, &isExternalVal)
                     let isExternal = isExternalVal != 0
 
-                    NSLog("✅ Found subtitle track: ID=%lld, lang=%@, title=%@, external=%d", trackId, lang ?? "nil", title ?? "nil", isExternal)
+                    LoggingManager.shared.debug(.subtitles, message: "Found subtitle track: ID=\(trackId), lang=\(lang ?? "nil"), title=\(title ?? "nil"), external=\(isExternal)")
                     tracks.append(SubtitleTrack(id: Int(trackId), lang: lang, title: title, isExternal: isExternal))
                 }
             }
@@ -812,9 +814,9 @@ class MPVWrapper: ObservableObject {
             tracks.insert(SubtitleTrack(id: 0, lang: nil, title: "Off", isExternal: false), at: 0)
         }
 
-        NSLog("📊 Total subtitle tracks found: %d (including Off if needed)", tracks.count)
+        LoggingManager.shared.debug(.subtitles, message: "Total subtitle tracks found: \(tracks.count) (including Off if needed)")
         for (index, track) in tracks.enumerated() {
-             NSLog("   Start[%d]: ID=%d, Title='%@', Lang='%@', Ext=%d", index, track.id, track.title ?? "nil", track.lang ?? "nil", track.isExternal)
+             LoggingManager.shared.debug(.subtitles, message: "   Start[\(index)]: ID=\(track.id), Title='\(track.title ?? "nil")', Lang='\(track.lang ?? "nil")', Ext=\(track.isExternal)")
         }
         return tracks
     }
@@ -823,7 +825,7 @@ class MPVWrapper: ObservableObject {
     private func autoSelectEnglishAudio() {
         guard let handle = mpvHandle, isInitialized else { return }
 
-        print("🔍 AUDIO AUTO-SELECT: Starting smart audio track scan")
+        LoggingManager.shared.debug(.videoRendering, message: "AUDIO AUTO-SELECT: Starting smart audio track scan")
 
         var trackCount: Int64 = 0
         mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
@@ -903,7 +905,7 @@ class MPVWrapper: ObservableObject {
             mpv_get_property(handle, defaultKey, MPV_FORMAT_FLAG, &isDefaultFlag)
             if isDefaultFlag == 1 { score += 5 }
 
-            print("🔍 Track \(trackId): \(displayName) | \(channels)ch | English: \(isEnglish) | Commentary: \(isCommentary) -> Score: \(score)")
+            LoggingManager.shared.debug(.videoRendering, message: "Track \(trackId): \(displayName) | \(channels)ch | English: \(isEnglish) | Commentary: \(isCommentary) -> Score: \(score)")
 
             if score > bestScore {
                 bestScore = score
@@ -913,11 +915,11 @@ class MPVWrapper: ObservableObject {
         }
 
         if bestTrackId != -1 {
-            print("🏆 Selected best audio track: \(bestTrackName) (ID: \(bestTrackId), Score: \(bestScore))")
+            LoggingManager.shared.info(.videoRendering, message: "Selected best audio track: \(bestTrackName) (ID: \(bestTrackId), Score: \(bestScore))")
             var tid = bestTrackId
             mpv_set_property(handle, "aid", MPV_FORMAT_INT64, &tid)
         } else {
-            print("⚠️ No suitable audio tracks found")
+            LoggingManager.shared.warn(.videoRendering, message: "No suitable audio tracks found")
         }
     }
 
@@ -926,11 +928,11 @@ class MPVWrapper: ObservableObject {
     func refreshSubtitleSelection() {
         guard let handle = mpvHandle, isInitialized else { return }
 
-        print("🔍 AUTO-SELECT: Starting subtitle scan & selection refresh")
+        LoggingManager.shared.debug(.subtitles, message: "AUTO-SELECT: Starting subtitle scan & selection refresh")
 
         var trackCount: Int64 = 0
         mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
-        print("🔍 AUTO-SELECT: Found \(trackCount) total tracks")
+        LoggingManager.shared.debug(.subtitles, message: "AUTO-SELECT: Found \(trackCount) total tracks")
 
         struct SubCandidate {
             let id: Int
@@ -1008,7 +1010,7 @@ class MPVWrapper: ObservableObject {
 
             if isEnglish {
                 let displayName = title ?? lang ?? "Track \(trackId)"
-                print("🔍 AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")', forced: \(isForced), default: \(isDefault), HI: \(isHI), Ext: \(isExternal)")
+                LoggingManager.shared.debug(.subtitles, message: "AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")', forced: \(isForced), default: \(isDefault), HI: \(isHI), Ext: \(isExternal)")
 
                 // Filter out known bad patterns
                 let isPartialSub = titleLower.contains("valyrian") ||
@@ -1027,7 +1029,7 @@ class MPVWrapper: ObservableObject {
                         isHearingImpaired: isHI
                     ))
                 } else {
-                    print("⚠️ Ignoring partial/commentary subtitle: \(displayName)")
+                    LoggingManager.shared.debug(.subtitles, message: "Ignoring partial/commentary subtitle: \(displayName)")
                 }
             }
         }
@@ -1088,7 +1090,7 @@ class MPVWrapper: ObservableObject {
         }
 
         if let best = bestCandidate {
-            print("✅ Auto-selecting BEST English subtitle: \(best.name) (ID: \(best.id)) [External: \(best.isExternal), Forced: \(best.isForced), Default: \(best.isDefault), HI: \(best.isHearingImpaired)]")
+            LoggingManager.shared.info(.subtitles, message: "Auto-selecting BEST English subtitle: \(best.name) (ID: \(best.id)) [External: \(best.isExternal), Forced: \(best.isForced), Default: \(best.isDefault), HI: \(best.isHearingImpaired)]")
             
             // Log final winning logic
             let matchScore = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: best.title)
@@ -1098,7 +1100,7 @@ class MPVWrapper: ObservableObject {
             if best.isForced { finalScore -= 50 }
             if best.isDefault { finalScore -= 10 }
             
-            print("   🏆 Final Score: \(finalScore) (Embedded: \(best.isExternal ? 0 : 3000), Match: \(matchScore), Clean: \(isClean ? 600 : 0), SDH: \(isSDH ? 250 : 0))")
+            LoggingManager.shared.debug(.subtitles, message: "   Final Score: \(finalScore) (Embedded: \(best.isExternal ? 0 : 3000), Match: \(matchScore), Clean: \(isClean ? 600 : 0), SDH: \(isSDH ? 250 : 0))")
 
             var trackId = Int64(best.id)
             mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)
@@ -1107,7 +1109,7 @@ class MPVWrapper: ObservableObject {
             var visFlag: Int32 = 1
             mpv_set_property(handle, "sub-visibility", MPV_FORMAT_FLAG, &visFlag)
         } else {
-            print("ℹ️ No suitable English subtitles found")
+            LoggingManager.shared.info(.subtitles, message: "No suitable English subtitles found")
         }
     }
     
@@ -1182,10 +1184,10 @@ class MPVWrapper: ObservableObject {
             // Set subtitle track (use "no" string for disabling, or track ID)
             if id <= 0 {
                 // Disable subtitles
-                let noStr = "no".cString(using: .utf8)
+                 let noStr = "no".cString(using: .utf8)
                 var noPtr = noStr?.withUnsafeBufferPointer { UnsafeMutablePointer(mutating: $0.baseAddress) }
                 mpv_set_property(handle, "sid", MPV_FORMAT_STRING, &noPtr)
-                print("🔇 Disabled subtitles (async)")
+                LoggingManager.shared.debug(.subtitles, message: "Disabled subtitles (async)")
             } else {
                 // Enable specific subtitle track
                 var trackId = Int64(id)
@@ -1195,7 +1197,7 @@ class MPVWrapper: ObservableObject {
                 var visFlag: Int32 = 1
                 mpv_set_property(handle, "sub-visibility", MPV_FORMAT_FLAG, &visFlag)
                 
-                print("📝 Set subtitle track to: \(id) (async, visibility enabled)")
+                LoggingManager.shared.debug(.subtitles, message: "Set subtitle track to: \(id) (async, visibility enabled)")
             }
 
             // Notify completion on main thread
@@ -1211,7 +1213,7 @@ class MPVWrapper: ObservableObject {
         guard let handle = mpvHandle, isInitialized else { return }
         var offset = offsetMs / 1000.0  // Convert to seconds for MPV
         mpv_set_property(handle, "sub-delay", MPV_FORMAT_DOUBLE, &offset)
-        print("⏱️ Subtitle offset set to \(String(format: "%.1f", offsetMs))ms")
+        LoggingManager.shared.debug(.subtitles, message: "Subtitle offset set to \(String(format: "%.1f", offsetMs))ms")
     }
 
     /// Get current subtitle offset in milliseconds
@@ -1228,7 +1230,7 @@ class MPVWrapper: ObservableObject {
         guard let handle = mpvHandle, isInitialized else { return }
         var speed = speedFactor
         mpv_set_property(handle, "sub-speed", MPV_FORMAT_DOUBLE, &speed)
-        print("⚡ Subtitle speed set to \(String(format: "%.3f", speedFactor))x")
+        LoggingManager.shared.debug(.subtitles, message: "Subtitle speed set to \(String(format: "%.3f", speedFactor))x")
     }
 
     /// Get current subtitle speed multiplier
@@ -1243,7 +1245,7 @@ class MPVWrapper: ObservableObject {
     func resetSubtitleTiming() {
         setSubtitleOffset(0.0)
         setSubtitleSpeed(1.0)
-        print("🔄 Subtitle timing reset to default")
+        LoggingManager.shared.debug(.subtitles, message: "Subtitle timing reset to default")
     }
 
     func setAudioTrack(_ id: Int) {
@@ -1261,7 +1263,7 @@ class MPVWrapper: ObservableObject {
            let str = strValue.map({ String(cString: $0) }) {
             mpv_free(strValue)
             if str == "no" || str == "false" {
-                print("📊 Current subtitle track: disabled (string: \(str))")
+                LoggingManager.shared.debug(.subtitles, message: "Current subtitle track: disabled (string: \(str))")
                 return 0  // Return 0 for disabled
             }
         }
@@ -1269,7 +1271,7 @@ class MPVWrapper: ObservableObject {
         // Otherwise get as integer
         var trackId: Int64 = 0
         if mpv_get_property(handle, "sid", MPV_FORMAT_INT64, &trackId) >= 0 {
-            print("📊 Current subtitle track: \(trackId)")
+            LoggingManager.shared.debug(.subtitles, message: "Current subtitle track: \(trackId)")
             return Int(trackId)
         }
 
@@ -1286,7 +1288,7 @@ class MPVWrapper: ObservableObject {
     func stop() {
         guard let handle = mpvHandle, isInitialized else { return }
 
-        print("🛑 Stopping MPV playback...")
+        LoggingManager.shared.debug(.videoRendering, message: "Stopping MPV playback...")
 
         // ✅ IMMEDIATE: Cancel event polling
         eventPollingTask?.cancel()
@@ -1306,7 +1308,7 @@ class MPVWrapper: ObservableObject {
         }
         Task {
             _ = await cleanupDelay.value
-            print("✅ MPV stop completed with clean event loop exit")
+            LoggingManager.shared.debug(.videoRendering, message: "MPV stop completed with clean event loop exit")
         }
     }
 
@@ -1338,7 +1340,7 @@ class MPVWrapper: ObservableObject {
     /// Safe cleanup - must be called from the OpenGL thread
     func destroyRenderContext() {
         guard let context = renderContext else { return }
-        print("🧹 Freeing render context on OpenGL thread...")
+        LoggingManager.shared.debug(.videoRendering, message: "Freeing render context on OpenGL thread...")
         mpv_render_context_free(context)
         renderContext = nil
     }
@@ -1381,7 +1383,7 @@ class MPVWrapper: ObservableObject {
     // MARK: - Enhanced Cleanup (Smooth Playback)
 
     deinit {
-        print("🗑️ MPVWrapper deinit - cleaning up...")
+        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper deinit - cleaning up...")
 
         // Cancel event polling FIRST with immediate effect
         eventPollingTask?.cancel()
@@ -1406,13 +1408,13 @@ class MPVWrapper: ObservableObject {
             // which causes "spinning beach ball" freezes if run on Main Thread.
             Task.detached(priority: .background) {
                 if wasInitialized {
-                    print("🗑️ Terminating MPV instance (background)...")
+                    LoggingManager.shared.debug(.videoRendering, message: "Terminating MPV instance (background)...")
                     mpv_terminate_destroy(handle)
                 } else {
-                    print("🗑️ Destroying MPV instance (background)...")
+                    LoggingManager.shared.debug(.videoRendering, message: "Destroying MPV instance (background)...")
                     mpv_destroy(handle)
                 }
-                print("✅ MPV instance destroyed")
+                LoggingManager.shared.info(.videoRendering, message: "MPV instance destroyed")
             }
         }
 
@@ -1420,7 +1422,7 @@ class MPVWrapper: ObservableObject {
         // memoryPressureSource?.cancel()
         // memoryPressureSource = nil
 
-        print("✅ MPVWrapper cleanup complete")
+        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper cleanup complete")
     }
 }
 

@@ -1,9 +1,222 @@
+[0/1] Planning build
 Building for debugging...
-[1/5] Compiling RedLemon UIConstants.swift
-[2/5] Compiling RedLemon AdminDashboardView.swift
-[3/7] Compiling RedLemon AdminServerView.swift
-[4/7] Compiling RedLemon SettingsView.swift
-[5/9] Emitting module RedLemon
+[1/20] Compiling RedLemon ReportStreamView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:108:22: warning: immutable value 'index' was never used; consider replacing with '_' or removing it
+                for (index, subtitle) in items.enumerated() {
+                     ^~~~~
+                     _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:102:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:115:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:187:24: warning: immutable value 'response' was never used; consider replacing with '_' or removing it
+            let (data, response) = try await session.data(from: subtitleURL)
+                       ^~~~~~~~
+                       _
+[2/20] Compiling RedLemon EventChatService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:108:22: warning: immutable value 'index' was never used; consider replacing with '_' or removing it
+                for (index, subtitle) in items.enumerated() {
+                     ^~~~~
+                     _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:102:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:115:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:187:24: warning: immutable value 'response' was never used; consider replacing with '_' or removing it
+            let (data, response) = try await session.data(from: subtitleURL)
+                       ^~~~~~~~
+                       _
+[3/20] Compiling RedLemon PlaybackService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:108:22: warning: immutable value 'index' was never used; consider replacing with '_' or removing it
+                for (index, subtitle) in items.enumerated() {
+                     ^~~~~
+                     _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:102:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:115:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:187:24: warning: immutable value 'response' was never used; consider replacing with '_' or removing it
+            let (data, response) = try await session.data(from: subtitleURL)
+                       ^~~~~~~~
+                       _
+[4/20] Compiling RedLemon SubtitleService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:108:22: warning: immutable value 'index' was never used; consider replacing with '_' or removing it
+                for (index, subtitle) in items.enumerated() {
+                     ^~~~~
+                     _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:102:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:115:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:187:24: warning: immutable value 'response' was never used; consider replacing with '_' or removing it
+            let (data, response) = try await session.data(from: subtitleURL)
+                       ^~~~~~~~
+                       _
+[5/20] Compiling RedLemon SubtitleSyncView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:108:22: warning: immutable value 'index' was never used; consider replacing with '_' or removing it
+                for (index, subtitle) in items.enumerated() {
+                     ^~~~~
+                     _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:102:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:115:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:187:24: warning: immutable value 'response' was never used; consider replacing with '_' or removing it
+            let (data, response) = try await session.data(from: subtitleURL)
+                       ^~~~~~~~
+                       _
+[6/20] Compiling RedLemon SubtitleTrack.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/EventChatService.swift:27:16: warning: value 'current' was defined but never used; consider replacing with boolean test
+        if let current = currentEventId {
+           ~~~~^~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:108:22: warning: immutable value 'index' was never used; consider replacing with '_' or removing it
+                for (index, subtitle) in items.enumerated() {
+                     ^~~~~
+                     _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:102:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:115:17: warning: no 'async' operations occur within 'await' expression
+                await mpv.refreshSubtitleSelection()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/Services/SubtitleService.swift:187:24: warning: immutable value 'response' was never used; consider replacing with '_' or removing it
+            let (data, response) = try await session.data(from: subtitleURL)
+                       ^~~~~~~~
+                       _
+[7/20] Compiling RedLemon TransparentTextEditor.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:332:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:395:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+[8/20] Compiling RedLemon HeroRoomCard.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:332:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:395:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+[9/20] Compiling RedLemon LobbyChatManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:332:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:395:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+[10/20] Compiling RedLemon LobbyDataService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:332:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:395:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+[11/20] Compiling RedLemon LobbyDatabaseManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:332:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:395:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+[12/20] Compiling RedLemon LobbyEventRouter.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:16:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:80:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:332:19: warning: value 'currentMediaItem' was defined but never used; consider replacing with boolean test
+        guard let currentMediaItem = viewModel.room.mediaItem else {
+              ~~~~^~~~~~~~~~~~~~~~~~~
+                                                              != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyEventRouter.swift:395:13: warning: initialization of immutable value 'totalWaitTime' was never used; consider replacing with assignment to '_' or removing it
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        ~~~~^~~~~~~~~~~~~
+        _
+[13/27] Emitting module RedLemon
 /Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
 class MPVViewLayer: CAOpenGLLayer {
                     ^
@@ -11,12 +224,688 @@ class MPVViewLayer: CAOpenGLLayer {
             if let jsonString = String(data: data, encoding: .utf8) {
                ~~~~^~~~~~~~~~~~~
                                                                     != nil
-[6/9] Compiling RedLemon AdminDashboardComponents.swift
-/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Admin/AdminDashboardComponents.swift:1186:17: error: referencing initializer 'init(_:content:)' on 'ForEach' requires that 'SystemJobLog' conform to 'Identifiable'
-                ForEach(systemLogs) { log in
+[14/27] Compiling RedLemon MPVOpenGLBridge.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerView.swift:398:19: warning: no 'async' operations occur within 'await' expression
+                  await appState.player.handlePlaybackError(error)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2210:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2399:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2522:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2803:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3511:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:131:19: warning: 'CGLChoosePixelFormat' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        let err = CGLChoosePixelFormat(attributes, &pix, &npix)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:143:9: warning: 'CGLCreateContext' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLCreateContext(pixelFormat, nil, &ctx)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:151:9: warning: 'CGLSetParameter' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLSetParameter(context, kCGLCPSwapInterval, &swapInterval)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:154:9: warning: 'CGLEnable' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLEnable(context, kCGLCEMPEngine)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:209:9: warning: 'glClear' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:213:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:217:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_VIEWPORT), &dims)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:244:9: warning: 'glFlush()' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glFlush()
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:458:17: error: invalid redeclaration of 'lower'
+            let lower = message.lowercased()
                 ^
-SwiftUI.ForEach:2:11: note: where 'Data.Element' = 'SystemJobLog'
-extension ForEach where ID == Data.Element.ID, Content : View, Data.Element : Identifiable {
-          ^
-[7/9] Compiling RedLemon WatchPartyLobbyView.swift
-[8/9] Compiling RedLemon ChatOverlayView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:447:17: note: 'lower' previously declared here
+            let lower = message.lowercased()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:528:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:758:58: warning: left side of nil coalescing operator '??' has non-optional type 'VideoQuality', so the right side is never used
+                           quality: self.selectedQuality ?? .fullHD,
+                                    ~~~~~~~~~~~~~~~~~~~~ ^~~~~~~~~~
+                                                         
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:770:63: warning: comparing non-optional value of type 'Stream' to 'nil' always returns false
+                       if self.streamQueue.isEmpty && primary == nil {
+                                                      ~~~~~~~ ^  ~~~
+[15/27] Compiling RedLemon MPVPlayerView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerView.swift:398:19: warning: no 'async' operations occur within 'await' expression
+                  await appState.player.handlePlaybackError(error)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2210:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2399:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2522:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2803:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3511:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:131:19: warning: 'CGLChoosePixelFormat' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        let err = CGLChoosePixelFormat(attributes, &pix, &npix)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:143:9: warning: 'CGLCreateContext' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLCreateContext(pixelFormat, nil, &ctx)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:151:9: warning: 'CGLSetParameter' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLSetParameter(context, kCGLCPSwapInterval, &swapInterval)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:154:9: warning: 'CGLEnable' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLEnable(context, kCGLCEMPEngine)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:209:9: warning: 'glClear' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:213:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:217:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_VIEWPORT), &dims)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:244:9: warning: 'glFlush()' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glFlush()
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:458:17: error: invalid redeclaration of 'lower'
+            let lower = message.lowercased()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:447:17: note: 'lower' previously declared here
+            let lower = message.lowercased()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:528:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:758:58: warning: left side of nil coalescing operator '??' has non-optional type 'VideoQuality', so the right side is never used
+                           quality: self.selectedQuality ?? .fullHD,
+                                    ~~~~~~~~~~~~~~~~~~~~ ^~~~~~~~~~
+                                                         
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:770:63: warning: comparing non-optional value of type 'Stream' to 'nil' always returns false
+                       if self.streamQueue.isEmpty && primary == nil {
+                                                      ~~~~~~~ ^  ~~~
+[16/27] Compiling RedLemon MPVPlayerViewModel.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerView.swift:398:19: warning: no 'async' operations occur within 'await' expression
+                  await appState.player.handlePlaybackError(error)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2210:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2399:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2522:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2803:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3511:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:131:19: warning: 'CGLChoosePixelFormat' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        let err = CGLChoosePixelFormat(attributes, &pix, &npix)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:143:9: warning: 'CGLCreateContext' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLCreateContext(pixelFormat, nil, &ctx)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:151:9: warning: 'CGLSetParameter' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLSetParameter(context, kCGLCPSwapInterval, &swapInterval)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:154:9: warning: 'CGLEnable' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLEnable(context, kCGLCEMPEngine)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:209:9: warning: 'glClear' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:213:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:217:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_VIEWPORT), &dims)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:244:9: warning: 'glFlush()' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glFlush()
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:458:17: error: invalid redeclaration of 'lower'
+            let lower = message.lowercased()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:447:17: note: 'lower' previously declared here
+            let lower = message.lowercased()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:528:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:758:58: warning: left side of nil coalescing operator '??' has non-optional type 'VideoQuality', so the right side is never used
+                           quality: self.selectedQuality ?? .fullHD,
+                                    ~~~~~~~~~~~~~~~~~~~~ ^~~~~~~~~~
+                                                         
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:770:63: warning: comparing non-optional value of type 'Stream' to 'nil' always returns false
+                       if self.streamQueue.isEmpty && primary == nil {
+                                                      ~~~~~~~ ^  ~~~
+[17/27] Compiling RedLemon MPVViewLayer.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerView.swift:398:19: warning: no 'async' operations occur within 'await' expression
+                  await appState.player.handlePlaybackError(error)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2210:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2399:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2522:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2803:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3511:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:131:19: warning: 'CGLChoosePixelFormat' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        let err = CGLChoosePixelFormat(attributes, &pix, &npix)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:143:9: warning: 'CGLCreateContext' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLCreateContext(pixelFormat, nil, &ctx)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:151:9: warning: 'CGLSetParameter' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLSetParameter(context, kCGLCPSwapInterval, &swapInterval)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:154:9: warning: 'CGLEnable' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLEnable(context, kCGLCEMPEngine)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:209:9: warning: 'glClear' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:213:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:217:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_VIEWPORT), &dims)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:244:9: warning: 'glFlush()' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glFlush()
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:458:17: error: invalid redeclaration of 'lower'
+            let lower = message.lowercased()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:447:17: note: 'lower' previously declared here
+            let lower = message.lowercased()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:528:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:758:58: warning: left side of nil coalescing operator '??' has non-optional type 'VideoQuality', so the right side is never used
+                           quality: self.selectedQuality ?? .fullHD,
+                                    ~~~~~~~~~~~~~~~~~~~~ ^~~~~~~~~~
+                                                         
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:770:63: warning: comparing non-optional value of type 'Stream' to 'nil' always returns false
+                       if self.streamQueue.isEmpty && primary == nil {
+                                                      ~~~~~~~ ^  ~~~
+[18/27] Compiling RedLemon MPVWrapper.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerView.swift:398:19: warning: no 'async' operations occur within 'await' expression
+                  await appState.player.handlePlaybackError(error)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2210:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2399:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2522:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2803:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3511:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:131:19: warning: 'CGLChoosePixelFormat' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        let err = CGLChoosePixelFormat(attributes, &pix, &npix)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:143:9: warning: 'CGLCreateContext' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLCreateContext(pixelFormat, nil, &ctx)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:151:9: warning: 'CGLSetParameter' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLSetParameter(context, kCGLCPSwapInterval, &swapInterval)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:154:9: warning: 'CGLEnable' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLEnable(context, kCGLCEMPEngine)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:209:9: warning: 'glClear' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:213:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:217:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_VIEWPORT), &dims)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:244:9: warning: 'glFlush()' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glFlush()
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:458:17: error: invalid redeclaration of 'lower'
+            let lower = message.lowercased()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:447:17: note: 'lower' previously declared here
+            let lower = message.lowercased()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:528:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:758:58: warning: left side of nil coalescing operator '??' has non-optional type 'VideoQuality', so the right side is never used
+                           quality: self.selectedQuality ?? .fullHD,
+                                    ~~~~~~~~~~~~~~~~~~~~ ^~~~~~~~~~
+                                                         
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:770:63: warning: comparing non-optional value of type 'Stream' to 'nil' always returns false
+                       if self.streamQueue.isEmpty && primary == nil {
+                                                      ~~~~~~~ ^  ~~~
+[19/27] Compiling RedLemon PlayerViewModel.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerView.swift:398:19: warning: no 'async' operations occur within 'await' expression
+                  await appState.player.handlePlaybackError(error)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2210:39: warning: value 'currentParticipants' was defined but never used; consider replacing with boolean test
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                                  ~~~~^~~~~~~~~~~~~~~~~~~~~~
+                                  (                                                                                  ) != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2399:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2522:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:2803:17: warning: initialization of immutable value 'isEvent' was never used; consider replacing with assignment to '_' or removing it
+            let isEvent = appState?.player.isEventPlayback == true
+            ~~~~^~~~~~~
+            _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVPlayerViewModel.swift:3511:13: warning: initialization of immutable value 'progress' was never used; consider replacing with assignment to '_' or removing it
+        let progress = currentTime / duration
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:131:19: warning: 'CGLChoosePixelFormat' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        let err = CGLChoosePixelFormat(attributes, &pix, &npix)
+                  ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:143:9: warning: 'CGLCreateContext' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLCreateContext(pixelFormat, nil, &ctx)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:151:9: warning: 'CGLSetParameter' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLSetParameter(context, kCGLCPSwapInterval, &swapInterval)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:154:9: warning: 'CGLEnable' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        CGLEnable(context, kCGLCEMPEngine)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:209:9: warning: 'glClear' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:213:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:217:9: warning: 'glGetIntegerv' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glGetIntegerv(GLenum(GL_VIEWPORT), &dims)
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:244:9: warning: 'glFlush()' was deprecated in macOS 10.14: OpenGL API deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)
+        glFlush()
+        ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:218:13: warning: variable 'tracksFound' was written to, but never read
+        var tracksFound = false
+            ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:458:17: error: invalid redeclaration of 'lower'
+            let lower = message.lowercased()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:447:17: note: 'lower' previously declared here
+            let lower = message.lowercased()
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVWrapper.swift:528:16: warning: value 'urlObj' was defined but never used; consider replacing with boolean test
+        if let urlObj = URL(string: url) {
+           ~~~~^~~~~~~~~
+                                         != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:423:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:758:58: warning: left side of nil coalescing operator '??' has non-optional type 'VideoQuality', so the right side is never used
+                           quality: self.selectedQuality ?? .fullHD,
+                                    ~~~~~~~~~~~~~~~~~~~~ ^~~~~~~~~~
+                                                         
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:770:63: warning: comparing non-optional value of type 'Stream' to 'nil' always returns false
+                       if self.streamQueue.isEmpty && primary == nil {
+                                                      ~~~~~~~ ^  ~~~
+[20/30] Compiling RedLemon ReactionOverlayView.swift
+[21/31] Compiling RedLemon MPVController.swift
+[22/38] Compiling RedLemon PlayerControlsView.swift
+[23/38] Compiling RedLemon PlayerOverlays.swift
+[24/45] Compiling RedLemon BrowseView.swift
+[25/45] Compiling RedLemon EventsView.swift
+[26/45] Compiling RedLemon FriendProfileView.swift
+[27/45] Compiling RedLemon FriendsView.swift
+[28/45] Compiling RedLemon FriendsViewModel.swift
+[29/45] Compiling RedLemon FirstTimeRecoverySetupView.swift
+[30/45] Compiling RedLemon LicenseManager.swift
+[31/51] Compiling RedLemon LobbyPresenceManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:376:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:403:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+[32/51] Compiling RedLemon LobbyStateMachine.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:376:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:403:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+[33/51] Compiling RedLemon LobbyViewModel.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:376:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:403:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+[34/51] Compiling RedLemon MediaPickerSheet.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:376:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:403:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+[35/51] Compiling RedLemon RoomListView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:78:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:96:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:100:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:120:48: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        if let dict = metadata as? [String: Any] {
+                                      ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                              
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:130:51: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
+                                         ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                                 
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:148:44: warning: conditional downcast from '[String : Any]?' to '[String : Any]' does nothing
+                    if let dict = metadata as? [String: Any],
+                                  ~~~~~~~~~^~~~~~~~~~~~~~~~~
+                                          
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:13: warning: initialization of immutable value 'wasReady' was never used; consider replacing with assignment to '_' or removing it
+        let wasReady = viewModel.isReady
+        ~~~~^~~~~~~~
+        _
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:376:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:403:19: warning: value 'viewModel' was defined but never used; consider replacing with boolean test
+        guard let viewModel = viewModel else { return }
+              ~~~~^~~~~~~~~~~~
+                                        != nil
+[36/57] Compiling RedLemon AppState.swift
+[37/57] Compiling RedLemon RedLemonApp.swift
+[38/57] Compiling RedLemon AdminDashboardComponents.swift
+[39/57] Compiling RedLemon AdminDashboardView.swift
+[40/57] Compiling RedLemon AdminServerView.swift
+[41/57] Compiling RedLemon VerifiedStreamsView.swift
+[42/57] Compiling RedLemon UsernameSetupView.swift
+[43/57] Compiling RedLemon SupabaseClient.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[44/57] Compiling RedLemon StreamResolver.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[45/57] Compiling RedLemon EventsConfigService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[46/57] Compiling RedLemon LogManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[47/57] Compiling RedLemon TimeService.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[48/57] Compiling RedLemon UserResetManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/SupabaseClient.swift:308:20: warning: value 'jsonString' was defined but never used; consider replacing with boolean test
+            if let jsonString = String(data: data, encoding: .utf8) {
+               ~~~~^~~~~~~~~~~~~
+                                                                    != nil
+[49/57] Compiling RedLemon PremiumPaymentView.swift
+[50/57] Compiling RedLemon RestoreAccountView.swift
+[51/57] Compiling RedLemon WatchPartyLobbyView.swift
+[52/57] Compiling RedLemon SettingsView.swift
+[53/57] Compiling RedLemon SocialService.swift
+[54/57] Compiling RedLemon RealtimeChannelManager.swift
+[55/57] Compiling RedLemon ContentView.swift
+[56/57] Compiling RedLemon ChatOverlayView.swift

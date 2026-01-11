@@ -75,7 +75,7 @@ struct ChatOverlayView: View {
         .background(Color.black)
         .compositingGroup() // Optimize transparency blending
         .onAppear {
-            print("👁️ ChatOverlayView appeared - UI UPDATE ROUND 6")
+            LoggingManager.shared.debug(.social, message: "ChatOverlayView appeared - UI UPDATE ROUND 6")
             setupInitialMode()
             
             // Connect to event chat if applicable
@@ -87,7 +87,7 @@ struct ChatOverlayView: View {
             
             // Auto-focus the input field if chat is open (whether animated or pre-loaded)
             if viewModel.showChat && chatMode != .friends {
-                print("⌨️ ChatOverlayView: Triggering input focus (showChat=true)")
+                LoggingManager.shared.debug(.social, message: "ChatOverlayView: Triggering input focus (showChat=true)")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     isInputFocused = true
                     manualFocus = true

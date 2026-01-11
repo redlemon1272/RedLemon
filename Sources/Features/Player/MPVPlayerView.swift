@@ -113,7 +113,7 @@ struct MPVPlayerView: View {
         self.season = season
         self.episode = episode
         self.onPlaybackFinished = onPlaybackFinished
-        NSLog("🎬🎬🎬 MPVPlayerView INIT called - streamURL: %@, subtitles: %d", streamURL.prefix(60) as CVarArg, subtitles.count)
+        LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView INIT called - streamURL: \(String(streamURL.prefix(60))), subtitles: \(subtitles.count)")
     }
 
     var body: some View {
@@ -215,6 +215,12 @@ struct MPVPlayerView: View {
                     .zIndex(100)
             }
         }
+        .onChange(of: geometry.size) { newSize in
+             // Throttle logging to avoid spam
+             if Int.random(in: 0...50) == 0 {
+                 LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView Layout: Geometry Size = \(newSize)")
+             }
+        }
         .background(MouseTrackingView { location in
                 mouseLocation = location
 
@@ -237,9 +243,7 @@ struct MPVPlayerView: View {
 
                     // Debug: Log mouse position occasionally
                     if Int.random(in: 0...100) == 0 {
-                        NSLog("🖱️ Mouse: x=%.0f/%.0f y=%.0f/%.0f | Exit: %d Controls: %d Chat: %d",
-                              location.x, windowWidth, location.y, windowHeight,
-                              showExitButton, showControls, showChatButton)
+                        LoggingManager.shared.debug(.general, message: "Mouse: x=\(Int(location.x))/\(Int(windowWidth)) y=\(Int(location.y))/\(Int(windowHeight)) | Exit: \(showExitButton) Controls: \(showControls) Chat: \(showChatButton)")
                     }
 
                     // Show controls when mouse is in bottom 25% of screen
@@ -270,8 +274,7 @@ struct MPVPlayerView: View {
 
                     // Show exit button when mouse is in top-left corner (independent)
                     if location.y >= topThreshold && location.x <= leftThreshold {
-                        NSLog("✅ Exit button triggered! x=%.0f <= %.0f, y=%.0f >= %.0f",
-                              location.x, leftThreshold, location.y, topThreshold)
+                        LoggingManager.shared.debug(.general, message: "Exit button triggered! x=\(Int(location.x)) <= \(Int(leftThreshold)), y=\(Int(location.y)) >= \(Int(topThreshold))")
                         showExitButton = true
 
                         // Reset exit button timer
@@ -300,7 +303,7 @@ struct MPVPlayerView: View {
 
             // Start auto-exit timer for event movies
             if appState.player.isEventPlayback {
-                print("🎬 Event playback detected - starting auto-exit monitor")
+                LoggingManager.shared.info(.videoRendering, message: "Event playback detected - starting auto-exit monitor")
                 eventAutoExitTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
                     checkEventMovieFinished()
                 }
@@ -335,18 +338,18 @@ struct MPVPlayerView: View {
             }
         }
         .task {
-            NSLog("🎬🎬🎬 MPVPlayerView .task starting")
+            LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView .task starting")
 
             // CRITICAL: Start watch party sync BEFORE loading stream
             // This ensures isInWatchParty is set when video loads, activating the ready gate
             if appState.player.currentWatchMode == .watchParty, let roomId = appState.player.currentRoomId {
-                NSLog("🎉 Starting watch party sync - Room: %@, Host: %@", roomId, appState.player.isWatchPartyHost ? "YES" : "NO")
+                LoggingManager.shared.info(.watchParty, message: "Starting watch party sync - Room: \(roomId), Host: \(appState.player.isWatchPartyHost)")
 
                 do {
                     try await viewModel.startWatchPartySync(roomId: roomId, isHost: appState.player.isWatchPartyHost)
-                    NSLog("✅ Watch party sync started successfully - isInWatchParty is now TRUE")
+                    LoggingManager.shared.info(.watchParty, message: "Watch party sync started successfully - isInWatchParty is now TRUE")
                 } catch {
-                    NSLog("❌ Failed to start watch party sync: %@", error.localizedDescription)
+                    LoggingManager.shared.error(.watchParty, message: "Failed to start watch party sync: \(error.localizedDescription)")
                 }
             }
 
@@ -354,8 +357,8 @@ struct MPVPlayerView: View {
             viewModel.appState = appState
 
             // Now load stream with watch party mode properly set
-            NSLog("🎬🎬🎬 About to call loadStream - isInWatchParty: %@", viewModel.isInWatchParty ? "YES" : "NO")
-            NSLog("🎬🎬🎬 Subtitles: %d", subtitles.count)
+            LoggingManager.shared.debug(.videoRendering, message: "About to call loadStream - isInWatchParty: \(viewModel.isInWatchParty)")
+            LoggingManager.shared.debug(.subtitles, message: "Subtitles count: \(subtitles.count)")
             await viewModel.loadStream(
                 streamURL: streamURL,
                 imdbId: imdbId,
@@ -370,7 +373,7 @@ struct MPVPlayerView: View {
                 episode: self.episode
             )
 
-            NSLog("🎬🎬🎬 MPVPlayerView .task completed")
+            LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView .task completed")
         }
         .onChange(of: viewModel.isLoading) { isLoading in
             if !isLoading {
@@ -382,16 +385,16 @@ struct MPVPlayerView: View {
             }
         }
         .onChange(of: viewModel.playbackFinished) { finished in
-            print("🎬 MPVPlayerView: onChange triggered - playbackFinished = \(finished)")
+            LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView: onChange triggered - playbackFinished = \(finished)")
             if finished {
-                print("🎬 MPVPlayerView: Playback finished, triggering callback")
-                print("🎬 MPVPlayerView: onPlaybackFinished callback exists: \(onPlaybackFinished != nil)")
+                LoggingManager.shared.info(.videoRendering, message: "MPVPlayerView: Playback finished, triggering callback")
+                LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView: onPlaybackFinished callback exists: \(onPlaybackFinished != nil)")
                 onPlaybackFinished?()
-                print("🎬 MPVPlayerView: Callback invoked")
+                LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView: Callback invoked")
             }
         }
         .onReceive(viewModel.playbackErrorTrigger) { error in
-             print("❌ MPVPlayerView: Playback error detected: \(error). Triggering fallback...")
+             LoggingManager.shared.error(.videoRendering, message: "Playback error detected: \(error). Triggering fallback...")
              Task {
                   // Attempt to play the next stream in the queue (or retry current if transient)
                   // This will handle the UI state update (loading -> new stream OR error)
@@ -434,9 +437,9 @@ struct MPVPlayerView: View {
 
         // Check if MPV reported EOF (most reliable)
         if viewModel.playbackFinished {
-            print("🎬 Event movie finished detected (MPV EOF)!")
-            print("   Position: \(position)s / Duration: \(duration)s")
-            print("   Auto-exiting player and returning to Events page...")
+            LoggingManager.shared.info(.videoRendering, message: "Event movie finished detected (MPV EOF)!")
+            LoggingManager.shared.debug(.videoRendering, message: "   Position: \(position)s / Duration: \(duration)s")
+            LoggingManager.shared.info(.videoRendering, message: "   Auto-exiting player and returning to Events page...")
 
             // Stop the timer
             eventAutoExitTimer?.invalidate()
@@ -452,9 +455,9 @@ struct MPVPlayerView: View {
         // Fallback: Check if near end and paused (in case EOF wasn't detected)
         let isPaused = !viewModel.isPlaying
         if duration > 0 && position >= duration - 5 && isPaused {
-            print("🎬 Event movie finished detected (time-based fallback)!")
-            print("   Position: \(position)s / Duration: \(duration)s")
-            print("   Auto-exiting player and returning to Events page...")
+            LoggingManager.shared.info(.videoRendering, message: "Event movie finished detected (time-based fallback)!")
+            LoggingManager.shared.debug(.videoRendering, message: "   Position: \(position)s / Duration: \(duration)s")
+            LoggingManager.shared.info(.videoRendering, message: "   Auto-exiting player and returning to Events page...")
 
             // Stop the timer
             eventAutoExitTimer?.invalidate()
@@ -470,7 +473,7 @@ struct MPVPlayerView: View {
     // MARK: - Timer Management
 
     private func invalidateAllTimers() {
-        print("⏱️ Invalidating all active timers")
+        LoggingManager.shared.debug(.videoRendering, message: "Invalidating all active timers")
 
         controlsTimer?.invalidate()
         controlsTimer = nil

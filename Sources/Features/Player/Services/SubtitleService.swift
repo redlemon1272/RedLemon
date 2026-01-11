@@ -71,9 +71,9 @@ actor MPVSubtitleService: SubtitleService {
         let areSubtitlesLocal = items.allSatisfy { $0.url.starts(with: "/") }
 
         if areSubtitlesLocal && !items.isEmpty {
-            NSLog("✅ Subtitles already downloaded, loading as additional options...")
+            LoggingManager.shared.debug(.subtitles, message: "Subtitles already downloaded, loading as additional options...")
             for (index, subtitle) in items.enumerated() {
-                NSLog("📝 Loading external subtitle %d (%@): %@", index + 1, subtitle.label, subtitle.url)
+                LoggingManager.shared.debug(.subtitles, message: "Loading external subtitle \(index + 1) (\(subtitle.label)): \(subtitle.url)")
                 mpv.loadSubtitle(url: subtitle.url, title: subtitle.label)
             }
             // Update tracks after loading
@@ -83,16 +83,16 @@ actor MPVSubtitleService: SubtitleService {
              let hasSubDLSubtitles = items.contains { $0.url.contains("/subtitles/subdl/") }
 
             if hasSubDLSubtitles {
-                NSLog("ℹ️ SubDL subtitles detected - downloading to local files in background...")
+                LoggingManager.shared.info(.subtitles, message: "SubDL subtitles detected - downloading to local files in background...")
 
                 // Download sequentially to avoid overwhelming server or logic
                 for (index, subtitle) in items.enumerated() {
                     // Start download
                     if let localPath = await downloadSubtitle(url: subtitle.url) {
-                        NSLog("✅ Subtitle %d downloaded to: %@", index + 1, localPath)
+                        LoggingManager.shared.info(.subtitles, message: "Subtitle \(index + 1) downloaded to: \(localPath)")
                         mpv.loadSubtitle(url: localPath, title: subtitle.label)
                     } else {
-                         NSLog("❌ Failed to download subtitle %d", index + 1)
+                         LoggingManager.shared.error(.subtitles, message: "Failed to download subtitle \(index + 1)")
                     }
                 }
 
@@ -122,7 +122,7 @@ actor MPVSubtitleService: SubtitleService {
 
         // Retry logic: Tracks often appear slightly AFTER file load/video ready
         // We poll for 5 seconds to ensure we catch all embedded streams
-        print("🔍 SubtitleService: Starting embedded track scan (polling 5s)...")
+        LoggingManager.shared.debug(.subtitles, message: "SubtitleService: Starting embedded track scan (polling 5s)...")
 
         for i in 0..<5 {
             let tracks = await mpv.getSubtitleTracks()
@@ -137,9 +137,9 @@ actor MPVSubtitleService: SubtitleService {
                 self.currentTrack = nil
             }
 
-            NSLog("✅ SubtitleService: Scanned %d tracks (Attempt %d/5)", tracks.count, i+1)
+            LoggingManager.shared.debug(.subtitles, message: "SubtitleService: Scanned \(tracks.count) tracks (Attempt \(i+1)/5)")
             for t in tracks {
-                NSLog("   Track: ID=%d, Title=%@, External=%d", t.id, t.displayName, t.isExternal)
+                LoggingManager.shared.debug(.subtitles, message: "   Track: ID=\(t.id), Title=\(t.displayName), External=\(t.isExternal)")
             }
 
             // Wait 1 second before next poll
@@ -176,7 +176,7 @@ actor MPVSubtitleService: SubtitleService {
     // MARK: - Private Helpers (Extracted from VM)
 
     nonisolated private func downloadSubtitle(url: String) async -> String? {
-        NSLog("🔍 SubtitleService: Downloading %@", url)
+        LoggingManager.shared.debug(.subtitles, message: "SubtitleService: Downloading \(url)")
         guard let subtitleURL = URL(string: url) else { return nil }
 
         do {
@@ -215,7 +215,7 @@ actor MPVSubtitleService: SubtitleService {
             return try saveSubtitleLocally(content: subtitleText, extension: "vtt")
 
         } catch {
-            NSLog("❌ SubtitleService: Download failed: %@", error.localizedDescription)
+            LoggingManager.shared.error(.subtitles, message: "SubtitleService: Download failed: \(error.localizedDescription)")
             return nil
         }
     }

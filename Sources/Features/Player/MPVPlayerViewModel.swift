@@ -105,7 +105,7 @@ class MPVPlayerViewModel: ObservableObject {
                 .compactMap { $0 } // remove nils
                 .sink { [weak self] errorMsg in
                     guard let self = self else { return }
-                    print("🚨 MPVPlayerViewModel: Critical MPV Error detected: \(errorMsg) - Triggering Failover")
+                    LoggingManager.shared.error(.videoRendering, message: "Critical MPV Error detected: \(errorMsg) - Triggering Failover")
 
                     // Force clear buffering state so UI doesn't hang
                     self.isBuffering = false
@@ -145,7 +145,7 @@ class MPVPlayerViewModel: ObservableObject {
                     // If time is advancing but UI thinks we are buffering, force clear the buffering state.
                     // This handles cases where MPV misses the "buffering end" event (e.g. paused-for-cache glitch).
                     if (self.isBuffering || self.isLoading) && self.mpvWrapper.isPlaying && !self.isInWatchParty {
-                         print("🔓 MPVPlayerViewModel: Time advancing (time: \(time)) while buffering - Forcing UI unlock")
+                         LoggingManager.shared.info(.videoRendering, message: "Time advancing (time: \(time)) while buffering - Forcing UI unlock")
                          self.isBuffering = false
                          // Also clear the "Refining Initial Seek" lock if it's stuck
                          self.isRefiningInitialSeek = false
@@ -171,7 +171,7 @@ class MPVPlayerViewModel: ObservableObject {
                     // AI_BIBLE: Events bypass host checks - release lock for Events like solo mode
                     let isEvent = self.appState?.player.isEventPlayback == true
                     if self.isRefiningInitialSeek && dur > 0 && !self.isBuffering && self.mpvWrapper.isFileLoaded && (!self.isInWatchParty || isEvent) {
-                         print("🔓 MPVPlayerViewModel: Duration arrived (%.1fs) - Releasing stuck UI lock (Recovery)", dur)
+                         LoggingManager.shared.info(.videoRendering, message: "Duration arrived (\(String(format: "%.1f", dur))s) - Releasing stuck UI lock (Recovery)")
                          self.isRefiningInitialSeek = false
                          withAnimation(.easeOut(duration: 0.5)) {
                              self.isLoading = false
@@ -186,13 +186,13 @@ class MPVPlayerViewModel: ObservableObject {
 
                     if dur > 0 && self.isInWatchParty && !self.hasSentReadySignal {
                         if isRoomPlaying {
-                             NSLog("⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)")
+                             LoggingManager.shared.info(.watchParty, message: "Watch Party: Room already playing, skipping Ready Gate (Late Join)")
                              self.hasSentReadySignal = true // Mark as sent to disable future triggers
                         } else if isRoomPlaying && self.isWatchPartyHost {
-                             NSLog("⏩ Watch Party: Room playing but I am HOST - Force sending ready signal (Recovery)")
+                             LoggingManager.shared.warn(.watchParty, message: "Watch Party: Room playing but I am HOST - Force sending ready signal (Recovery)")
                              self.sendReadySignal()
                         } else {
-                            NSLog("⏱️ Watch Party: Duration available (%.1fs), triggering ready signal", dur)
+                            LoggingManager.shared.info(.watchParty, message: "Watch Party: Duration available (\(String(format: "%.1f", dur))s), triggering ready signal")
                             self.sendReadySignal()
                         }
                     }
@@ -210,7 +210,7 @@ class MPVPlayerViewModel: ObservableObject {
                 .sink { [weak self] isBuffering in
                     guard let self = self else { return }
                     if isBuffering {
-                        print("⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)")
+                        LoggingManager.shared.info(.videoRendering, message: "Enhancing UI - Buffering started (show spinner)")
                         self.isBuffering = true
                         self.isLoading = true
 
@@ -218,7 +218,7 @@ class MPVPlayerViewModel: ObservableObject {
                         // If we are stuck buffering for too long, assume connection is too slow for this stream
                         self.bufferingTimer?.invalidate()
                         self.bufferingTimer = Timer.scheduledTimer(withTimeInterval: 45.0, repeats: false) { [weak self] _ in
-                             print("🚨 MPVPlayerViewModel: Buffering Timeout (45s) - Connection too slow, triggering Failover")
+                             LoggingManager.shared.error(.videoRendering, message: "Buffering Timeout (45s) - Connection too slow, triggering Failover")
                              self?.playbackErrorTrigger.send("Connection Timeout")
                         }
                     } else {
@@ -230,11 +230,11 @@ class MPVPlayerViewModel: ObservableObject {
                          } else if self.hasVideoReadyTriggered && self.mpvWrapper.isFileLoaded {
                             if self.isRefiningInitialSeek {
                                 if self.appState?.player.eventStartTime != nil {
-                                    print("⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...")
+                                    LoggingManager.shared.info(.watchParty, message: "Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...")
                                     // Delay hiding the spinner to ensure the sought frame is rendered
                                     Task { @MainActor in
                                         try? await Task.sleep(nanoseconds: 500_000_000) // 500ms
-                                        print("✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI")
+                                        LoggingManager.shared.info(.watchParty, message: "Render Stabilization Complete - Releasing UI")
                                         self.isRefiningInitialSeek = false
                                         self.isBuffering = false
                                         withAnimation(.easeOut(duration: 0.5)) {
@@ -243,11 +243,11 @@ class MPVPlayerViewModel: ObservableObject {
                                         }
                                     }
                                 } else if self.isInWatchParty {
-                                    print("⏳ MPVPlayerViewModel: Buffering finished (Watch Party) - Keeping poster until Initial Sync Message...")
+                                    LoggingManager.shared.info(.watchParty, message: "Buffering finished (Watch Party) - Keeping poster until Initial Sync Message...")
                                     // Do NOT clear flag here; wait for handleSyncMessage
                                 }
                             } else {
-                                print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]")
+                                LoggingManager.shared.info(.videoRendering, message: "Enhancing UI - Buffering finished (hide spinner) [File Loaded]")
                                 self.isBuffering = false
                                 self.isLoading = false
                             }
@@ -259,7 +259,7 @@ class MPVPlayerViewModel: ObservableObject {
                             // If we are in an event and duration is 0, we are likely in the middle of a blind seek
                             // where buffering might toggle briefly before metadata loads.
                             if self.appState?.player.eventStartTime != nil && self.duration == 0 {
-                                print("⚠️ MPVPlayerViewModel: Buffering finished during Event Blind Seek (Duration 0) - Ignoring Error Trigger")
+                                LoggingManager.shared.debug(.watchParty, message: "Buffering finished during Event Blind Seek (Duration 0) - Ignoring Error Trigger")
                                 return
                             }
 
@@ -267,7 +267,7 @@ class MPVPlayerViewModel: ObservableObject {
                             // In Watch Party, we load paused. Buffering might flicker before file is fully loaded.
                             // If we haven't sent the ready signal (or are at the gate), ignore this.
                             if self.isInWatchParty && !self.hasSentReadySignal {
-                                print("⚠️ MPVPlayerViewModel: Buffering finished at Watch Party Ready Gate - Ignoring Error Trigger")
+                                LoggingManager.shared.debug(.watchParty, message: "Buffering finished at Watch Party Ready Gate - Ignoring Error Trigger")
                                 return
                             }
 
@@ -275,11 +275,11 @@ class MPVPlayerViewModel: ObservableObject {
                             // If we are refining seek (waiting for video ready), and duration is 0, ignore this.
                             // This happens when checking buffering status before metadata is fully parsed.
                             if self.isInWatchParty && self.isRefiningInitialSeek && self.duration == 0 {
-                                 print("⚠️ MPVPlayerViewModel: Buffering finished during VP Blind Seek (Duration 0) - Ignoring Error Trigger")
+                                 LoggingManager.shared.debug(.watchParty, message: "Buffering finished during VP Blind Seek (Duration 0) - Ignoring Error Trigger")
                                  return
                             }
 
-                            print("⚠️ MPVPlayerViewModel: Buffering finished but file NOT loaded - Triggering Error State")
+                            LoggingManager.shared.error(.videoRendering, message: "Buffering finished but file NOT loaded - Triggering Error State")
                             self.isBuffering = false
                             // self.isLoading = false // Keep loading overlay visible during retry fallbacks
 
@@ -301,14 +301,14 @@ class MPVPlayerViewModel: ObservableObject {
                         // NEW: Scan for embedded tracks now that file is loaded
                         // This handles network streams where tracks appear after the initial scan timeout
                         Task {
-                            print("📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...")
+                            LoggingManager.shared.info(.videoRendering, message: "File Loaded - Re-scanning embedded tracks...")
                             await self.subtitleService.scanEmbeddedTracks()
                         }
 
                         // AI_BIBLE: Events bypass host checks - release lock for Events like solo mode
                         let isEvent = self.appState?.player.isEventPlayback == true
                         if self.isRefiningInitialSeek && self.duration > 0 && !self.isBuffering && (!self.isInWatchParty || isEvent) {
-                             print("🔓 MPVPlayerViewModel: File loaded - Releasing stuck UI lock (Recovery)")
+                             LoggingManager.shared.info(.videoRendering, message: "File loaded - Releasing stuck UI lock (Recovery)")
                              self.isRefiningInitialSeek = false
                              withAnimation(.easeOut(duration: 0.5)) {
                                  self.isLoading = false
@@ -321,10 +321,10 @@ class MPVPlayerViewModel: ObservableObject {
                             let isRoomPlaying = self.appState?.player.currentWatchPartyRoom?.state == .playing
 
                             if isRoomPlaying {
-                                NSLog("⏩ Watch Party: File loaded (late join), skipping Ready Gate")
+                                LoggingManager.shared.info(.watchParty, message: "Watch Party: File loaded (late join), skipping Ready Gate")
                                 self.hasSentReadySignal = true
                             } else {
-                                NSLog("📂 Watch Party: File loaded signal received (fallback trigger), sending Ready signal")
+                                LoggingManager.shared.warn(.watchParty, message: "Watch Party: File loaded signal received (fallback trigger), sending Ready signal")
                                 self.sendReadySignal()
                             }
                         }
@@ -343,7 +343,7 @@ class MPVPlayerViewModel: ObservableObject {
         // 1. Guard: Duration must be known
         if self.duration <= 0 {
              if isRefiningInitialSeek {
-                 print("⏳ EVENT: Waiting for duration to start playback...")
+                 LoggingManager.shared.debug(.watchParty, message: "EVENT: Waiting for duration to start playback...")
              }
              return
         }
@@ -358,12 +358,12 @@ class MPVPlayerViewModel: ObservableObject {
 
         // 4. Determine Seek Time
         if let startTime = eventStartTime {
-             print("🎉 EVENT: File loaded/Duration ready (\(self.duration)s), preparing to seek...")
+             LoggingManager.shared.info(.watchParty, message: "EVENT: File loaded/Duration ready (\(self.duration)s), preparing to seek...")
              let elapsed = Date().timeIntervalSince(startTime)
              seekTime = max(0, elapsed)
         } else if isEventPlayback {
              // Fallback for missing eventStartTime (Race condition workaround)
-             print("⚠️ EVENT: eventStartTime is nil but isEventPlayback is TRUE! Falling back to resumeFromTimestamp...")
+             LoggingManager.shared.warn(.videoRendering, message: "EVENT: eventStartTime is nil but isEventPlayback is TRUE! Falling back to resumeFromTimestamp...")
              seekTime = appState.player.resumeFromTimestamp ?? 0
              // Consume the timestamp to prevent leaks
              appState.player.resumeFromTimestamp = nil
@@ -375,7 +375,7 @@ class MPVPlayerViewModel: ObservableObject {
                  let calculated = max(0, elapsed - 600)
                  if calculated > 0 {
                      seekTime = calculated
-                     print("⚠️ EVENT: resumeFromTimestamp was 0. Calculated from Room Creation: \(seekTime)s")
+                     LoggingManager.shared.warn(.videoRendering, message: "EVENT: resumeFromTimestamp was 0. Calculated from Room Creation: \(seekTime)s")
                  }
              }
         } else {
@@ -388,7 +388,7 @@ class MPVPlayerViewModel: ObservableObject {
         appState.player.resumeFromTimestamp = nil
 
         // 5. Execute Seek & Play
-        print("   Seeking to live edge: \(Int(seekTime))s")
+        LoggingManager.shared.debug(.watchParty, message: "Seeking to live edge: \(Int(seekTime))s")
         Task { @MainActor in
              await self.playbackService.seek(to: seekTime)
 
@@ -640,12 +640,12 @@ class MPVPlayerViewModel: ObservableObject {
         self.playbackTimeoutTask?.cancel()
         self.playbackTimeoutTask = nil
 
-        NSLog("🎬🎬🎬 LOADSTREAM CALLED - streamTitle: %@", cleanStreamTitle)
-        NSLog("🎬🎬🎬 streamURL: %@", streamURL.prefix(60) as CVarArg)
-        NSLog("🎬🎬🎬 subtitles: %d", subtitles.count)
-        print("🎬 Loading stream: \(cleanStreamTitle)")
-        print("   IMDB: \(imdbId)")
-        print("   URL: \(streamURL.prefix(60))...")
+        LoggingManager.shared.debug(.general, message: "LOADSTREAM CALLED - streamTitle: \(cleanStreamTitle)")
+        LoggingManager.shared.debug(.general, message: "streamURL: \(streamURL.prefix(60))...")
+        LoggingManager.shared.debug(.general, message: "subtitles: \(subtitles.count)")
+        LoggingManager.shared.info(.general, message: "Loading stream: \(cleanStreamTitle)")
+        LoggingManager.shared.debug(.general, message: "   IMDB: \(imdbId)")
+        LoggingManager.shared.debug(.general, message: "   URL: \(streamURL.prefix(60))...")
 
         // FIX: Determine effective event status
         // A room starting with "event_" is ALWAYS an event, regardless of the boolean flag passed
@@ -655,22 +655,22 @@ class MPVPlayerViewModel: ObservableObject {
         // FIX: Clear event state if this is NOT an event
         // This prevents "Fargo" (Event) state from leaking into "Freaky Friday" (Watch Party)
         if !effectiveIsEvent {
-            print("🧹 Clearing previous event state (Non-Event Load)")
+            LoggingManager.shared.debug(.general, message: "Clearing previous event state (Non-Event Load)")
             self.appState?.player.eventStartTime = nil
 
             // FIX: Also clear Watch Party state if we are not in a watch party
             // This prevents "Camp Rock" (Watch Party) state from leaking into "Five Nights" (Solo)
             // Fixes: Stale Invite Content and ability to send invites during solo playback
             if !self.isInWatchParty {
-                 print("🧹 Clearing previous watch party state (Solo Load)")
+                 LoggingManager.shared.debug(.general, message: "Clearing previous watch party state (Solo Load)")
                  self.appState?.player.currentWatchPartyRoom = nil
                  self.currentRoomId = nil
                  self.isWatchPartyHost = false
             }
         }
 
-        if let h = streamHash { print("   Hash: \(h.prefix(8))...") }
-        if let sq = sourceQuality { print("   Source: \(sq)") }
+        if let h = streamHash { LoggingManager.shared.debug(.general, message: "   Hash: \(h.prefix(8))...") }
+        if let sq = sourceQuality { LoggingManager.shared.debug(.general, message: "   Source: \(sq)") }
 
         self.videoURL = streamURL
         self.imdbId = imdbId
@@ -720,11 +720,11 @@ class MPVPlayerViewModel: ObservableObject {
              if !Task.isCancelled {
                  // Check if we are still loading and NO file is loaded
                  if self.isLoading && !self.mpvWrapper.isFileLoaded {
-                     print("⏱️ Soft Timeout: MPV failed to load file in \(timeoutLabel) - triggering fallback")
+                     LoggingManager.shared.error(.videoRendering, message: "Soft Timeout: MPV failed to load file in \(timeoutLabel) - triggering fallback")
 
                      // CRITICAL: If Host in Watch Party, notify guests before exiting
                      if self.isWatchPartyHost {
-                         print("📢 Host playback timeout - notifying guests to return to lobby")
+                         LoggingManager.shared.error(.watchParty, message: "Host playback timeout - notifying guests to return to lobby")
                          await self.notifyGuestsOfHostError()
                      }
 
@@ -737,7 +737,7 @@ class MPVPlayerViewModel: ObservableObject {
         self.messages = [
             ChatMessage(id: UUID().uuidString, username: "System", text: "Press ⌘ (Cmd) to toggle chat.", timestamp: Date(), isSystem: true)
         ]
-        print("💬 Added mock chat messages for testing")
+        LoggingManager.shared.debug(.social, message: "Added mock chat messages for testing")
 
         // Fetch metadata for background art
         // Fetch metadata for background art (parallel, don't block video load)
@@ -756,10 +756,10 @@ class MPVPlayerViewModel: ObservableObject {
             if !subtitles.isEmpty {
                 // Limit to top 3 subtitles to prevent "brutal wait" / heavy hiccup
                 let limitedSubtitles = Array(subtitles.prefix(3))
-                print("📝 Pre-loading external subtitles (Top \(limitedSubtitles.count))...")
+                LoggingManager.shared.info(.subtitles, message: "Pre-loading external subtitles (Top \(limitedSubtitles.count))...")
                 await self.subtitleService.loadExternalSubtitles(limitedSubtitles)
             } else {
-                print("📝 Pre-scanning embedded subtitles...")
+                LoggingManager.shared.info(.subtitles, message: "Pre-scanning embedded subtitles...")
                 await self.subtitleService.scanEmbeddedTracks()
             }
         }
@@ -776,7 +776,7 @@ class MPVPlayerViewModel: ObservableObject {
         // Note: isEvent is now passed explicitly to avoid race conditions with appState injection
 
         if effectiveIsEvent {
-            print("🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)")
+            LoggingManager.shared.info(.watchParty, message: "EVENT MODE: Loading PAUSED to seek first (preventing flash)")
             isRefiningInitialSeek = true // START: Hold loading state until seek is stable
             Task { @MainActor in
                 // Fix: Only expect the number of subtitles we ACTUALLY loaded (limited to 3)
@@ -791,9 +791,9 @@ class MPVPlayerViewModel: ObservableObject {
             Task { @MainActor in self.showChat = true }
 
         } else if !isInWatchParty {
-            print("👤 SOLO MODE: Autoplaying")
+            LoggingManager.shared.info(.general, message: "SOLO MODE: Autoplaying")
             if shouldResume {
-                print("   With resume from \(Int(resumeTime))s")
+                LoggingManager.shared.info(.general, message: "   With resume from \(Int(resumeTime))s")
                 // Load with autoplay=true, onVideoReady will handle the seek
                 Task { @MainActor in
                     let expectedCount = min(subtitles.count, 3)
@@ -816,7 +816,7 @@ class MPVPlayerViewModel: ObservableObject {
             let isSoloHost = self.isWatchPartyHost && participantCount <= 1
 
             if isSoloHost {
-                print("👥 WATCH PARTY (SOLO HOST): Bypass Start Paused - Autoplaying")
+                LoggingManager.shared.info(.watchParty, message: "WATCH PARTY (SOLO HOST): Bypass Start Paused - Autoplaying")
                 isRefiningInitialSeek = false // Don't hold UI lock
 
                  Task { @MainActor in
@@ -824,7 +824,7 @@ class MPVPlayerViewModel: ObservableObject {
                     await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
                 }
             } else {
-                print("👥 WATCH PARTY MODE: Starting PAUSED for synchronization")
+                LoggingManager.shared.info(.watchParty, message: "WATCH PARTY MODE: Starting PAUSED for synchronization")
                 // NEW: Hold poster until we get the first sync message to prevent 0:00 flash
                 isRefiningInitialSeek = true
 
@@ -897,7 +897,7 @@ class MPVPlayerViewModel: ObservableObject {
     // MARK: - Metadata Fetching
 
     private func fetchMetadata(imdbId: String, mediaType: String) async {
-        print("📡 Fetching metadata for \(imdbId) as \(mediaType)...")
+        LoggingManager.shared.debug(.network, message: "Fetching metadata for \(imdbId) as \(mediaType)...")
 
         do {
             // Use LocalAPIClient which correctly handles both movies and series
@@ -907,28 +907,28 @@ class MPVPlayerViewModel: ObservableObject {
             // Prefer background (widescreen) over poster
             if let background = metadata.backgroundURL {
                 self.backgroundURL = upgradeToHD(background)
-                print("✅ Got background: \(background.prefix(60))...")
+                LoggingManager.shared.debug(.videoRendering, message: "Got background: \(background.prefix(60))...")
             } else if let poster = metadata.posterURL {
                 self.backgroundURL = upgradeToHD(poster)
-                print("✅ Got poster as background: \(poster.prefix(60))...")
+                LoggingManager.shared.debug(.videoRendering, message: "Got poster as background: \(poster.prefix(60))...")
             }
 
             // Set poster URL for player UI
             if let poster = metadata.posterURL {
                 self.posterURL = upgradeToHD(poster)
-                print("✅ Got poster URL: \(poster.prefix(60))...")
+                LoggingManager.shared.debug(.videoRendering, message: "Got poster URL: \(poster.prefix(60))...")
             }
 
             // Get logo for loading screen
             if let logo = metadata.logoURL {
                 self.logoURL = upgradeToHD(logo)
-                print("✅ Got logo: \(logo.prefix(60))...")
+                LoggingManager.shared.debug(.videoRendering, message: "Got logo: \(logo.prefix(60))...")
             }
 
             self.title = metadata.title
 
         } catch {
-            print("⚠️ Failed to fetch metadata: \(error.localizedDescription)")
+            LoggingManager.shared.warn(.network, message: "Failed to fetch metadata: \(error.localizedDescription)")
         }
     }
 
@@ -950,7 +950,7 @@ class MPVPlayerViewModel: ObservableObject {
     func onVideoReady() {
         // Strict gate: Ensure this only runs once per video load
         guard !hasVideoReadyTriggered else {
-            print("⚠️ onVideoReady called again - ignoring to prevent loops")
+            LoggingManager.shared.warn(.videoRendering, message: "onVideoReady called again - ignoring to prevent loops")
             return
         }
         hasVideoReadyTriggered = true
@@ -959,7 +959,7 @@ class MPVPlayerViewModel: ObservableObject {
         self.playbackTimeoutTask?.cancel()
         self.playbackTimeoutTask = nil
 
-        print("✅ Video ready - hiding poster")
+        LoggingManager.shared.info(.general, message: "Video ready - hiding poster")
 
         // Fade out poster when video is ready
          // NEW: For Events/Watch Parties, delay hiding poster to prevent "Frame 0" flash
@@ -968,7 +968,7 @@ class MPVPlayerViewModel: ObservableObject {
              Task { @MainActor in
                  try? await Task.sleep(nanoseconds: 5_000_000_000) // 5s failsafe
                  if self.isRefiningInitialSeek {
-                     print("⚠️ EVENT/VP Mode: Failsafe triggered - forcing UI release")
+                     LoggingManager.shared.warn(.watchParty, message: "EVENT/VP Mode: Failsafe triggered - forcing UI release")
                      self.isRefiningInitialSeek = false
                      withAnimation(.easeOut(duration: 0.5)) {
                         self.showPoster = false
@@ -980,7 +980,7 @@ class MPVPlayerViewModel: ObservableObject {
             // CRITICAL FIX: Watch Party Ready Gate
             // Video is ready locally, but we are waiting for Host/Sync.
             // Keep the poster visible so we don't show a static frame 0.
-            print("✅ Video ready (Watch Party) - Keeping poster visible until Sync Message")
+            LoggingManager.shared.info(.watchParty, message: "Video ready (Watch Party) - Keeping poster visible until Sync Message")
             withAnimation {
                 self.isLoading = false // Hide spinner, but keep poster
             }
@@ -1014,16 +1014,16 @@ class MPVPlayerViewModel: ObservableObject {
             let drift = abs(self.currentTime - seekTime)
 
             if drift < 2.0 {
-                print("🎉 EVENT: Video ready, drift is small (\(String(format: "%.2f", drift))s), skipping redundant seek")
+                LoggingManager.shared.info(.watchParty, message: "EVENT: Video ready, drift is small (\(String(format: "%.2f", drift))s), skipping redundant seek")
                 startWatchHistorySaving()
                 return
             }
 
-            print("🎉 EVENT: Recalculating seek time at video ready (Drift: \(String(format: "%.2f", drift))s)")
-            print("   Event started at: \(eventStartTime)")
-            print("   Current time: \(Date())")
-            print("   Elapsed: \(Int(elapsed))s")
-            print("   Seeking to: \(Int(seekTime))s")
+            LoggingManager.shared.info(.watchParty, message: "EVENT: Recalculating seek time at video ready (Drift: \(String(format: "%.2f", drift))s)")
+            LoggingManager.shared.debug(.watchParty, message: "   Event started at: \(eventStartTime)")
+            LoggingManager.shared.debug(.watchParty, message: "   Current time: \(Date())")
+            LoggingManager.shared.debug(.watchParty, message: "   Elapsed: \(Int(elapsed))s")
+            LoggingManager.shared.debug(.watchParty, message: "   Seeking to: \(Int(seekTime))s")
 
             // Pause, seek, then resume
             Task { @MainActor in
@@ -1040,23 +1040,23 @@ class MPVPlayerViewModel: ObservableObject {
 
         // Watch Party Ready Gate
         if isInWatchParty && !hasSentReadySignal {
-            print("👋 Watch Party: Video ready (playing), sending READY signal as fallback")
+            LoggingManager.shared.warn(.watchParty, message: "Watch Party: Video ready (playing), sending READY signal as fallback")
             sendReadySignal()
         }
 
         // Check if we should resume from a specific timestamp
         if let resumeTime = appState?.player.resumeFromTimestamp, resumeTime > 0 {
-            print("🔄 Resuming playback from \(Int(resumeTime))s (appState.resumeFromTimestamp = \(appState?.player.resumeFromTimestamp ?? 0))")
+            LoggingManager.shared.info(.general, message: "Resuming playback from \(Int(resumeTime))s (appState.resumeFromTimestamp = \(appState?.player.resumeFromTimestamp ?? 0))")
 
 
 
             // Check if we're in watch party mode and set flag accordingly
             if isInWatchParty {
                 isResumingInWatchParty = true
-                print("👥 Resuming inside watch party - will sync resume time to guests")
+                LoggingManager.shared.info(.watchParty, message: "Resuming inside watch party - will sync resume time to guests")
             }
 
-            print("⏸️ Pausing immediately for resume...")
+            LoggingManager.shared.debug(.videoRendering, message: "Pausing immediately for resume...")
             Task { @MainActor in
                 await playbackService.pause()
             }
@@ -1075,7 +1075,7 @@ class MPVPlayerViewModel: ObservableObject {
             }
         } else if !isInWatchParty {
             // Only auto-play if NOT in watch party (Watch Party waits for Ready Gate)
-            print("ℹ️ No resume timestamp set (starting from beginning)")
+            LoggingManager.shared.info(.general, message: "No resume timestamp set (starting from beginning)")
 
             // For normal playback, ensure MPV is playing and update UI state
             if !isPlaying {
@@ -1084,7 +1084,7 @@ class MPVPlayerViewModel: ObservableObject {
                 }
             }
             self.isPlaying = true
-            print("▶️ Auto-playing solo content from beginning")
+            LoggingManager.shared.info(.general, message: "Auto-playing solo content from beginning")
         }
 
         // Start periodic watch history saving (every 10 seconds)
@@ -1093,7 +1093,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     /// Immediate resume: Seek right away without waiting for full buffering
     private func attemptImmediateResume(resumeTime: Double) {
-        print("🎯 IMMEDIATE RESUME: Seeking to \(Int(resumeTime))s without delay")
+        LoggingManager.shared.info(.videoRendering, message: "IMMEDIATE RESUME: Seeking to \(Int(resumeTime))s without delay")
 
         // Wait a brief moment for video metadata to load (much faster than buffering)
         Task { @MainActor [weak self] in
@@ -1105,7 +1105,7 @@ class MPVPlayerViewModel: ObservableObject {
             // MPV might report 0 duration until playback/seeking starts, especially if loaded in paused state.
             if self.duration > 0 {
                 guard resumeTime < self.duration else {
-                    print("⚠️ Resume time (\(Int(resumeTime))s) exceeds video duration (\(Int(self.duration))s). Event is effectively finished for this file.")
+                    LoggingManager.shared.warn(.videoRendering, message: "Resume time (\(Int(resumeTime))s) exceeds video duration (\(Int(self.duration))s). Event is effectively finished for this file.")
                     let nearEnd = max(0, self.duration - 1.0)
                     Task { @MainActor in
                         await playbackService.seek(to: nearEnd)
@@ -1118,11 +1118,11 @@ class MPVPlayerViewModel: ObservableObject {
                     return
                 }
             } else {
-                 print("⚠️ Video duration not available yet (0.0s), performing BLIND SEEK to \(Int(resumeTime))s...")
+                 LoggingManager.shared.warn(.videoRendering, message: "Video duration not available yet (0.0s), performing BLIND SEEK to \(Int(resumeTime))s...")
             }
 
             // Execute seek immediately
-            print("🎯 Executing immediate seek to \(Int(resumeTime))s...")
+            LoggingManager.shared.info(.videoRendering, message: "Executing immediate seek to \(Int(resumeTime))s...")
             Task { @MainActor in
                 await playbackService.seek(to: resumeTime)
             }
@@ -1153,10 +1153,10 @@ class MPVPlayerViewModel: ObservableObject {
                     Task {
                         try? await self.realtimeManager?.sendSyncMessage(syncMessage)
                     }
-                    print("📡 Host broadcasting immediate resume seek to \(Int(resumeTime))s")
+                    LoggingManager.shared.info(.watchParty, message: "Host broadcasting immediate resume seek to \(Int(resumeTime))s")
                 }
 
-                print("✅ Resumed playback after seek to \(Int(resumeTime))s")
+                LoggingManager.shared.info(.videoRendering, message: "Resumed playback after seek to \(Int(resumeTime))s")
             }
         }
     }
@@ -1171,7 +1171,7 @@ class MPVPlayerViewModel: ObservableObject {
             pendingPlayTask?.cancel()
 
             // Host is about to play - add brief delay for guest synchronization
-            print("🏁 Host initiating play with \(Int(hostStartupDelay * 1000))ms startup delay for guest sync")
+            LoggingManager.shared.info(.watchParty, message: "Host initiating play with \(Int(hostStartupDelay * 1000))ms startup delay for guest sync")
 
             // Send play message FIRST (before actually playing)
             let syncMessage = SyncMessage(
@@ -1188,9 +1188,9 @@ class MPVPlayerViewModel: ObservableObject {
                 guard let self = self else { return }
                 do {
                     try await self.realtimeManager?.sendSyncMessage(syncMessage)
-                    NSLog("📡 Sent play message to guests (pre-delay)")
+                    LoggingManager.shared.info(.watchParty, message: "Sent play message to guests (pre-delay)")
                 } catch {
-                    NSLog("⚠️ Failed to send play sync message: \(error)")
+                    LoggingManager.shared.error(.watchParty, message: "Failed to send play sync message: \(error)")
                 }
             }
 
@@ -1203,11 +1203,11 @@ class MPVPlayerViewModel: ObservableObject {
 
                 // Check if task wasn't cancelled
                 guard !Task.isCancelled else {
-                    print("⏹️ Startup delay cancelled")
+                    LoggingManager.shared.debug(.watchParty, message: "Startup delay cancelled")
                     return
                 }
 
-                print("▶️ Host starting playback after startup delay")
+                LoggingManager.shared.info(.watchParty, message: "Host starting playback after startup delay")
                 await playbackService.togglePlayPause()
             }
 
@@ -1219,7 +1219,7 @@ class MPVPlayerViewModel: ObservableObject {
             await playbackService.togglePlayPause()
         }
         let isNowPlaying = !isPlaying
-        print(isNowPlaying ? "▶️ Playing" : "⏸️ Paused")
+        LoggingManager.shared.info(.general, message: isNowPlaying ? "Playing" : "Paused")
 
         // Mark that we initiated this action (ignore echo from remote)
         markLocalAction()
@@ -1241,9 +1241,9 @@ class MPVPlayerViewModel: ObservableObject {
                 guard let self = self else { return }
                 do {
                     try await self.realtimeManager?.sendSyncMessage(syncMessage)
-                    NSLog("📡 Sent explicit \(messageType) message to guests")
+                    LoggingManager.shared.info(.watchParty, message: "Sent explicit \(messageType) message to guests")
                 } catch {
-                    NSLog("⚠️ Failed to send \(messageType) sync message: \(error)")
+                    LoggingManager.shared.error(.watchParty, message: "Failed to send \(messageType) sync message: \(error)")
                 }
             }
         }
@@ -1257,7 +1257,7 @@ class MPVPlayerViewModel: ObservableObject {
             try? await Task.sleep(nanoseconds: 1_000_000_000) // 1s
             self.isSeeking = false
         }
-        print("⏩ Seeking to \(Int(time))s")
+        LoggingManager.shared.info(.general, message: "Seeking to \(Int(time))s")
 
         // Mark that we initiated this action (ignore echo from remote)
         markLocalAction()
@@ -1278,9 +1278,9 @@ class MPVPlayerViewModel: ObservableObject {
                 guard let self = self else { return }
                 do {
                     try await self.realtimeManager?.sendSyncMessage(syncMessage)
-                    NSLog("📡 Sent explicit seek message to guests: \(Int(time))s")
+                    LoggingManager.shared.info(.watchParty, message: "Sent explicit seek message to guests: \(Int(time))s")
                 } catch {
-                    NSLog("⚠️ Failed to send seek sync message: \(error)")
+                    LoggingManager.shared.error(.watchParty, message: "Failed to send seek sync message: \(error)")
                 }
             }
         }
@@ -1291,7 +1291,7 @@ class MPVPlayerViewModel: ObservableObject {
         Task { @MainActor in
             await playbackService.setVolume(level)
         }
-        print("🔊 Volume: \(Int(level))%")
+        LoggingManager.shared.debug(.general, message: "Volume: \(Int(level))%")
     }
 
     // MARK: - Subtitle Sync Controls
@@ -1306,7 +1306,7 @@ class MPVPlayerViewModel: ObservableObject {
         // Save to UserDefaults
         if !imdbId.isEmpty {
             UserDefaults.standard.set(offsetMs, forKey: "subtitleOffset_\(imdbId)")
-            print("💾 Saved subtitle offset: \(offsetMs)ms for \(imdbId)")
+            LoggingManager.shared.debug(.subtitles, message: "Saved subtitle offset: \(offsetMs)ms for \(imdbId)")
         }
     }
 
@@ -1319,7 +1319,7 @@ class MPVPlayerViewModel: ObservableObject {
         // Remove from UserDefaults
         if !imdbId.isEmpty {
             UserDefaults.standard.removeObject(forKey: "subtitleOffset_\(imdbId)")
-            print("💾 Cleared subtitle offset for \(imdbId)")
+            LoggingManager.shared.info(.subtitles, message: "Cleared subtitle offset for \(imdbId)")
         }
     }
 
@@ -1346,7 +1346,7 @@ class MPVPlayerViewModel: ObservableObject {
     func analyzeSubtitleCompatibility() {
         guard !subtitles.isEmpty else { return }
 
-        print("🔍 Analyzing subtitle compatibility...")
+        LoggingManager.shared.debug(.subtitles, message: "Analyzing subtitle compatibility...")
 
         // Check for version mismatches between video and subtitles
         let lowerTitle = streamTitle.lowercased()
@@ -1358,13 +1358,13 @@ class MPVPlayerViewModel: ObservableObject {
             let subtitleIsBluRay = subtitle.label.lowercased().contains("blu-ray") || subtitle.label.lowercased().contains("bluray")
 
             if videoIsBluRay && subtitleIsWEBDL {
-                print("⚠️ Version mismatch detected: BluRay video with WEB-DL subtitle '\(subtitle.label)' - sync issues likely")
+                LoggingManager.shared.warn(.subtitles, message: "Version mismatch detected: BluRay video with WEB-DL subtitle '\(subtitle.label)' - sync issues likely")
                 showSubtitleSyncPanel = true
             } else if videoIsWEBDL && subtitleIsBluRay {
-                print("⚠️ Version mismatch detected: WEB-DL video with BluRay subtitle '\(subtitle.label)' - sync issues likely")
+                LoggingManager.shared.warn(.subtitles, message: "Version mismatch detected: WEB-DL video with BluRay subtitle '\(subtitle.label)' - sync issues likely")
                 showSubtitleSyncPanel = true
             } else {
-                print("✅ Good version match: \(subtitle.label)")
+                LoggingManager.shared.debug(.subtitles, message: "Good version match: \(subtitle.label)")
             }
         }
 
@@ -1377,18 +1377,18 @@ class MPVPlayerViewModel: ObservableObject {
     }    // MARK: - Phantom Sync / Snap-Seek Logic
 
     private func completeTrackSwitch() {
-        print("🎯 Completing track switch (Snap-Seek)...")
+        LoggingManager.shared.info(.watchParty, message: "Completing track switch (Snap-Seek)...")
 
         // Reset state immediately to avoid re-triggering
         isSwitchingTracks = false
 
         let switchDuration = Date().timeIntervalSince(trackSwitchStartTime ?? Date())
-        print("⏱️ Switch took: \(Int(switchDuration * 1000))ms")
+        LoggingManager.shared.debug(.watchParty, message: "Switch took: \(Int(switchDuration * 1000))ms")
 
         // 1. HOST LOGIC: Phantom Sync
         if isWatchPartyHost {
             let targetTime = trackSwitchStartPos + switchDuration
-            print("👻 Host: Phantom Sync - seeking to \(String(format: "%.3f", targetTime))s (skipped stalling period)")
+            LoggingManager.shared.info(.watchParty, message: "Host: Phantom Sync - seeking to \(String(format: "%.3f", targetTime))s (skipped stalling period)")
 
             // Seek to where we would have been
             Task { @MainActor in
@@ -1403,7 +1403,7 @@ class MPVPlayerViewModel: ObservableObject {
              // System events don't have a host broadcasting position, so getInterpolatedPosition() returns 0.
              if let eventStart = appState?.player.eventStartTime {
                  let elapsed = Date().timeIntervalSince(eventStart)
-                 print("⚡ Event Mode: Snap-Seek to Wall Clock time: \(elapsed)s (Switch Duration: \(Int(switchDuration * 1000))ms)")
+                 LoggingManager.shared.info(.watchParty, message: "Event Mode: Snap-Seek to Wall Clock time: \(elapsed)s (Switch Duration: \(Int(switchDuration * 1000))ms)")
 
                  // Seek to exact live edge
                  Task { @MainActor in
@@ -1418,14 +1418,14 @@ class MPVPlayerViewModel: ObservableObject {
                     let remotePos = await manager.getInterpolatedPosition()
                     let drift = abs(remotePos - self.currentTime)
 
-                    print("⚡ Guest: Snap-Seek - Host is at \(String(format: "%.3f", remotePos))s (Drift: \(Int(drift * 1000))ms)")
+                    LoggingManager.shared.debug(.watchParty, message: "Guest: Snap-Seek - Host is at \(String(format: "%.3f", remotePos))s (Drift: \(Int(drift * 1000))ms)")
 
                     // Always snap if drift is significant (> 100ms)
                     if drift > 0.1 {
-                        print("⚡ Executing Snap-Seek to Host time")
+                        LoggingManager.shared.info(.watchParty, message: "Executing Snap-Seek to Host time")
                         await playbackService.seek(to: remotePos)
                     } else {
-                        print("✅ Drift is negligible, skipping snap")
+                        LoggingManager.shared.debug(.watchParty, message: "Drift is negligible, skipping snap")
                     }
                 }
             }
@@ -1440,7 +1440,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     func setAudioTrack(_ track: AudioTrack) {
         if isInWatchParty {
-            print("🔄 Switching audio track in Watch Party Mode...")
+            LoggingManager.shared.info(.watchParty, message: "Switching audio track in Watch Party Mode...")
             isSwitchingTracks = true
             trackSwitchStartTime = Date()
             trackSwitchStartPos = currentTime
@@ -1459,7 +1459,7 @@ class MPVPlayerViewModel: ObservableObject {
         let isEmbedded = availableSubtitleTracks.first(where: { $0.id == trackId })?.isExternal == false
 
         if isInWatchParty && isEmbedded {
-             print("🔄 Switching embedded subtitle track in Watch Party Mode...")
+             LoggingManager.shared.info(.watchParty, message: "Switching embedded subtitle track in Watch Party Mode...")
              isSwitchingTracks = true
              trackSwitchStartTime = Date()
              trackSwitchStartPos = currentTime
@@ -1472,21 +1472,21 @@ class MPVPlayerViewModel: ObservableObject {
 
     @discardableResult
     private func selectEnglishDefaults() -> Bool {
-        print("🌐 Selecting English audio and subtitle tracks...")
+        LoggingManager.shared.info(.subtitles, message: "Selecting English audio and subtitle tracks...")
 
         // 1. Restore Subtitle Offset if exists
         if !imdbId.isEmpty {
              if let savedOffset = UserDefaults.standard.object(forKey: "subtitleOffset_\(imdbId)") as? Double {
-                 print("💾 Restoring saved subtitle offset: \(savedOffset)ms")
+                 LoggingManager.shared.info(.subtitles, message: "Restoring saved subtitle offset: \(savedOffset)ms")
                  self.adjustSubtitleOffset(savedOffset)
              }
         }
 
         // Try to find and select English audio
         let audioTracks = mpvWrapper.getAudioTracks()
-        print("📊 Found \(audioTracks.count) audio tracks")
+        LoggingManager.shared.debug(.general, message: "Found \(audioTracks.count) audio tracks")
         for track in audioTracks {
-            print("   Audio: ID=\(track.id) lang=\(track.lang ?? "nil") title=\(track.title ?? "nil")")
+            LoggingManager.shared.debug(.general, message: "   Audio: ID=\(track.id) lang=\(track.lang ?? "nil") title=\(track.title ?? "nil")")
         }
 
         if let englishAudio = audioTracks.first(where: { track in
@@ -1495,23 +1495,23 @@ class MPVPlayerViewModel: ObservableObject {
             // Fix: Check for "eng" in title (e.g. "AC3 5.1 ENG") not just "english"
             return lang.contains("eng") || lang == "en" || title.contains("english") || title.contains("eng")
         }) {
-            print("✅ Found English audio track: \(englishAudio.displayName)")
+            LoggingManager.shared.info(.general, message: "Found English audio track: \(englishAudio.displayName)")
             mpvWrapper.setAudioTrack(englishAudio.id)
         } else if let firstAudio = audioTracks.first {
-            print("⚠️ No English audio found, using: \(firstAudio.displayName)")
+            LoggingManager.shared.warn(.general, message: "No English audio found, using: \(firstAudio.displayName)")
             mpvWrapper.setAudioTrack(firstAudio.id)
         }
 
         // Try to find and select English subtitles
         let subtitleTracks = mpvWrapper.getSubtitleTracks()
-        print("📊 Found \(subtitleTracks.count) subtitle tracks (including 'Off')")
+        LoggingManager.shared.debug(.subtitles, message: "Found \(subtitleTracks.count) subtitle tracks (including 'Off')")
         for track in subtitleTracks {
-            print("   Subtitle: ID=\(track.id) lang=\(track.lang ?? "nil") title=\(track.title ?? "nil")")
+            LoggingManager.shared.debug(.subtitles, message: "   Subtitle: ID=\(track.id) lang=\(track.lang ?? "nil") title=\(track.title ?? "nil")")
         }
 
         // Filter out "Off" option (ID 0) and look for English
         let actualSubtitles = subtitleTracks.filter { $0.id != 0 }
-        print("📊 After filtering: \(actualSubtitles.count) actual subtitle tracks")
+        LoggingManager.shared.debug(.subtitles, message: "After filtering: \(actualSubtitles.count) actual subtitle tracks")
 
         // Find all English subtitles
         let englishSubs = actualSubtitles.filter { track in
@@ -1555,10 +1555,10 @@ class MPVPlayerViewModel: ObservableObject {
         if let englishSub = preferredSub {
             let currentSid = mpvWrapper.getCurrentSubtitleTrack()
             if currentSid != englishSub.id {
-                print("✅ Found English subtitle track: \(englishSub.displayName) (ID: \(englishSub.id))")
+                LoggingManager.shared.info(.subtitles, message: "Found English subtitle track: \(englishSub.displayName) (ID: \(englishSub.id))")
                 mpvWrapper.setSubtitleTrack(englishSub.id)
             } else {
-                print("ℹ️ English subtitle already active (ID: \(currentSid)), no switch needed")
+                LoggingManager.shared.debug(.subtitles, message: "English subtitle already active (ID: \(currentSid)), no switch needed")
             }
 
             // Update our state
@@ -1572,10 +1572,10 @@ class MPVPlayerViewModel: ObservableObject {
         } else if let firstSub = actualSubtitles.first {
             let currentSid = mpvWrapper.getCurrentSubtitleTrack()
             if currentSid != firstSub.id {
-                print("⚠️ No English subtitles found, using first available: \(firstSub.displayName)")
+                LoggingManager.shared.warn(.subtitles, message: "No English subtitles found, using first available: \(firstSub.displayName)")
                 mpvWrapper.setSubtitleTrack(firstSub.id)
             } else {
-                print("ℹ️ First available subtitle already active (ID: \(currentSid)), no switch needed")
+                LoggingManager.shared.debug(.subtitles, message: "First available subtitle already active (ID: \(currentSid)), no switch needed")
             }
 
             // Update our state
@@ -1587,7 +1587,7 @@ class MPVPlayerViewModel: ObservableObject {
 
             return true
         } else {
-            print("ℹ️ No subtitle tracks found in video yet")
+            LoggingManager.shared.debug(.subtitles, message: "No subtitle tracks found in video yet")
             return false
         }
     }
@@ -1628,13 +1628,13 @@ class MPVPlayerViewModel: ObservableObject {
             self?.isAnimatingChatToggle = false
         }
 
-        print(showChat ? "💬 Chat opened" : "💬 Chat closed")
+        LoggingManager.shared.info(.social, message: showChat ? "Chat opened" : "Chat closed")
     }
 
     func sendMessage(_ text: String) {
         guard !text.isEmpty else { return }
         guard currentRoomId != nil else {
-            NSLog("⚠️ Cannot send message: no room ID")
+            LoggingManager.shared.warn(.social, message: "Cannot send message: no room ID")
             return
         }
 
@@ -1658,7 +1658,7 @@ class MPVPlayerViewModel: ObservableObject {
         }
 
         trimChatMessages()
-        print("💬 Sent: \(text)")
+        LoggingManager.shared.debug(.social, message: "Sent: \(text)")
 
         // Watch party chat: Send via Realtime ONLY (no database)
         // Watch party rooms don't exist in the database, only in Realtime
@@ -1677,9 +1677,9 @@ class MPVPlayerViewModel: ObservableObject {
 
                 do {
                     try await self.realtimeManager?.sendSyncMessage(syncMessage)
-                    print("✅ Chat message sent via Realtime")
+                    LoggingManager.shared.info(.social, message: "Chat message sent via Realtime")
                 } catch {
-                    print("❌ Failed to send chat message: \(error)")
+                    LoggingManager.shared.error(.social, message: "Failed to send chat message: \(error)")
                 }
             }
         }
@@ -1699,7 +1699,7 @@ class MPVPlayerViewModel: ObservableObject {
         reactionTimestamps = reactionTimestamps.filter { now.timeIntervalSince($0) < 2.0 }
 
         if reactionTimestamps.count >= 5 {
-             print("⚠️ Reaction limit reached (spam guard)")
+             LoggingManager.shared.warn(.social, message: "Reaction limit reached (spam guard)")
              return
         }
 
@@ -1733,7 +1733,7 @@ class MPVPlayerViewModel: ObservableObject {
     /// Send a floating announcement to all participants (Host Only)
     func sendAnnouncement(_ text: String) {
         guard isWatchPartyHost else { return }
-        print("📢 Host sending announcement: \(text)")
+        LoggingManager.shared.info(.watchParty, message: "Host sending announcement: \(text)")
 
         // 1. Show locally immediately (floating only)
         announcementTriggers.send(text)
@@ -1780,7 +1780,7 @@ class MPVPlayerViewModel: ObservableObject {
         bufferingTimer = nil
         activeTimers.forEach { $0.invalidate() }
         activeTimers.removeAll()
-        print("🗑️ Invalidated all active timers")
+        LoggingManager.shared.debug(.general, message: "Invalidated all active timers")
     }
 
     /// Keep chat list bounded to avoid long-session memory bloat
@@ -1810,12 +1810,12 @@ class MPVPlayerViewModel: ObservableObject {
     func cleanup(returningToLobby: Bool = false) async {
         // Prevent double cleanup
         guard !hasCleanedUp else {
-            print("⚠️ Cleanup already performed, skipping")
+            LoggingManager.shared.warn(.general, message: "Cleanup already performed, skipping")
             return
         }
         hasCleanedUp = true
 
-        print("🧹 Cleaning up MPV player...")
+        LoggingManager.shared.info(.general, message: "Cleaning up MPV player...")
 
         // ✅ Capture state BEFORE clearing it (Fix for "User Left" bug)
         // We need to know if we WERE in a watch party to trigger the leave signal.
@@ -1840,7 +1840,7 @@ class MPVPlayerViewModel: ObservableObject {
                     roomId: nil
                 )
             } else {
-                 print("🛡️ Cleanup: Skipping status reset (User is already in Lobby)")
+                 LoggingManager.shared.debug(.general, message: "Cleanup: Skipping status reset (User is already in Lobby)")
             }
         }
 
@@ -1866,8 +1866,7 @@ class MPVPlayerViewModel: ObservableObject {
                  if shouldClearRoomState {
                      self.appState?.player.currentWatchPartyRoom = nil // FIX: Clear stale room data
                  } else {
-                     NSLog("🔒 Cleanup: Preserving room state (transitioning to different room: %@ → %@)",
-                           self.currentRoomId ?? "nil", appRoomId ?? "nil")
+                     LoggingManager.shared.debug(.general, message: "Cleanup: Preserving room state (transitioning to different room: \(self.currentRoomId ?? "nil") → \(appRoomId ?? "nil"))")
                  }
 
                  self.currentRoomId = nil
@@ -1907,28 +1906,28 @@ class MPVPlayerViewModel: ObservableObject {
                    let userId = capturedUserId,
                    let userUUID = UUID(uuidString: userId) {
                     try? await SupabaseClient.shared.leaveRoom(roomId: roomId, userId: userUUID)
-                    print("✅ Left room in database: \(roomId)")
+                    LoggingManager.shared.info(.watchParty, message: "Left room in database: \(roomId)")
                 } else {
-                    print("⚠️ Could not leave room - capturedRoomId: \(capturedRoomId ?? "nil"), capturedUserId: \(capturedUserId ?? "nil")")
+                    LoggingManager.shared.warn(.watchParty, message: "Could not leave room - capturedRoomId: \(capturedRoomId ?? "nil"), capturedUserId: \(capturedUserId ?? "nil")")
                 }
             } else {
-                print("🏠 Returning to lobby - keeping host in room_participants to preserve room")
+                LoggingManager.shared.info(.watchParty, message: "Returning to lobby - keeping host in room_participants to preserve room")
             }
 
             // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected
             // CRITICAL FIX: Do NOT disconnect the shared client, only leave the channel.
             // Disconnecting the client kills the connection for the LobbyViewModel too.
             await realtimeManager?.disconnect(leaveChannel: true, disconnectClient: false)
-            print("✅ Realtime manager channel left (client connection preserved)")
+            LoggingManager.shared.info(.watchParty, message: "Realtime manager channel left (client connection preserved)")
         }
 
         // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected
-        print("🛑 Stopping MPV playback...")
+        LoggingManager.shared.info(.videoRendering, message: "Stopping MPV playback...")
         mpvWrapper.stop()
     }
 
     deinit {
-        print("🗑️ MPVPlayerViewModel deinit")
+        LoggingManager.shared.debug(.general, message: "MPVPlayerViewModel deinit")
         // ✅ Don't create async tasks in deinit - cleanup() is already called before deallocation
         // The Task with [weak self] creates a race condition where self may be deallocated
         // between the guard check and the MainActor.run execution, causing a crash in Swift's
@@ -1982,12 +1981,12 @@ struct CinemetaMetadata: Codable {
 extension MPVPlayerViewModel {
     /// Start watch party sync as host or guest
     func startWatchPartySync(roomId: String, isHost: Bool) async throws {
-        print("🎉 Starting watch party: roomId=\(roomId), isHost=\(isHost)")
+        LoggingManager.shared.info(.watchParty, message: "Starting watch party: roomId=\(roomId), isHost=\(isHost)")
 
         self.currentRoomId = roomId
         self.isWatchPartyHost = isHost
         self.isInWatchParty = true  // Enable watch party mode
-        NSLog("🎉 Watch Party Mode ENABLED. isInWatchParty = %@", self.isInWatchParty ? "YES" : "NO")
+        LoggingManager.shared.info(.watchParty, message: "Watch Party Mode ENABLED. isInWatchParty = \(self.isInWatchParty ? "YES" : "NO")")
 
         // Get user ID from appState
         guard let userId = appState?.currentUserId?.uuidString else {
@@ -2008,7 +2007,7 @@ extension MPVPlayerViewModel {
                 if self.appState?.player.currentWatchPartyRoom == nil {
                     // Explicitly capture roomId to avoid ambiguous expression error in closure
                     if let roomId: String = self.currentRoomId {
-                    print("⚠️ Room state missing in MPVViewModel - fetching fallback for \(roomId)")
+                    LoggingManager.shared.warn(.watchParty, message: "Room state missing in MPVViewModel - fetching fallback for \(roomId)")
                     if let fetchedSupabaseRoom = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
                         // Map to minimal WatchPartyRoom for participant tracking
                         let mediaItem = MediaItem(
@@ -2088,7 +2087,7 @@ extension MPVPlayerViewModel {
                         // Cancel any pending leave for this user
                         // Cancel any pending leave for this user
                         if let existingTask = self.pendingLeaveTasks[actualUserId] {
-                            print("🔄 User \(actualUserId) reconnected within grace period - cancelling leave")
+                            LoggingManager.shared.info(.watchParty, message: "User \(actualUserId) reconnected within grace period - cancelling leave")
                             existingTask.cancel()
                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                             // Do NOT return here - we must proceed to update the phx_ref!
@@ -2107,9 +2106,9 @@ extension MPVPlayerViewModel {
                             if let newPhxRef = metadata?["phx_ref"] as? String {
                                 updatedParticipants[index].phxRef = newPhxRef
                                 self.activeConnectionRefs[actualUserId] = newPhxRef // Track officially
-                                print("🔄 Updated existing participant \(actualUserId) with Ref: \(newPhxRef)")
+                                LoggingManager.shared.info(.watchParty, message: "Updated existing participant \(actualUserId) with Ref: \(newPhxRef)")
                             } else {
-                                print("⚠️ Join event for \(actualUserId) missing phx_ref - preserving existing Ref: \(updatedParticipants[index].phxRef ?? "nil")")
+                                LoggingManager.shared.warn(.watchParty, message: "Join event for \(actualUserId) missing phx_ref - preserving existing Ref: \(updatedParticipants[index].phxRef ?? "nil")")
                                 // If we don't have a new ref, do we keep the old one in `activeConnectionRefs`?
                                 // Yes, assume same session.
                             }
@@ -2145,7 +2144,7 @@ extension MPVPlayerViewModel {
                                 phxRef: phxRefVal
                             )
                             updatedParticipants.append(newParticipant)
-                            print("➕ Added new participant \(actualUserId) (Ref: \(phxRefVal ?? "nil"))")
+                            LoggingManager.shared.info(.watchParty, message: "Added new participant \(actualUserId) (Ref: \(phxRefVal ?? "nil"))")
 
                             // 💬 System Message: Join
                             if actualUserId != self.currentUserId {
@@ -2157,7 +2156,7 @@ extension MPVPlayerViewModel {
                         if let currentId = localCurrentUserId?.lowercased() {
                             let isSelfPresent = updatedParticipants.contains(where: { (p: Participant) in p.id == currentId })
                             if !isSelfPresent {
-                                print("⚠️ Self (\(currentId)) was missing from list - restoring.")
+                                LoggingManager.shared.warn(.watchParty, message: "Self (\(currentId)) was missing from list - restoring.")
                                 // CRITICAL FIX: Only use 'userId' (closure arg) as phxRef if this event was FOR SELF.
                                 // Otherwise, use nil (we don't know our own ref from someone else's join).
                                 var selfRef = (actualUserId == currentId) ? (metadata?["phx_ref"] as? String) : nil
@@ -2166,7 +2165,7 @@ extension MPVPlayerViewModel {
                                 if selfRef == nil {
                                     if let oldSelf = self.appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == currentId }) {
                                         selfRef = oldSelf.phxRef
-                                        print("♻️ Restored stale phx_ref for Self: \(selfRef ?? "nil")")
+                                        LoggingManager.shared.debug(.watchParty, message: "Restored stale phx_ref for Self: \(selfRef ?? "nil")")
                                     }
                                 }
 
@@ -2188,7 +2187,7 @@ extension MPVPlayerViewModel {
 
                     case .leave:
                         // This handles flaky connections and Lobby->Player transitions
-                        print("⏳ Participant leaving (grace period started): \(actualUserId)")
+                        LoggingManager.shared.info(.watchParty, message: "Participant leaving (grace period started): \(actualUserId)")
 
                         // Extract ref immediately for closure capture
                         let leavingPhxRef = metadata?["phx_ref"] as? String
@@ -2202,7 +2201,7 @@ extension MPVPlayerViewModel {
 
                             // Check for cancellation
                             if Task.isCancelled {
-                                print("⏹️ Leave task cancelled for \(actualUserId)")
+                                LoggingManager.shared.debug(.watchParty, message: "Leave task cancelled for \(actualUserId)")
                                 return
                             }
 
@@ -2214,11 +2213,11 @@ extension MPVPlayerViewModel {
                             if let trackedRef = self.activeConnectionRefs[actualUserId] {
                                 if let leavingRef = leavingPhxRef {
                                      if trackedRef != leavingRef {
-                                         print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Tracked: \(trackedRef) != Leaving: \(leavingRef))")
+                                         LoggingManager.shared.debug(.watchParty, message: "Ignoring stale LEAVE event for \(actualUserId) (Tracked: \(trackedRef) != Leaving: \(leavingRef))")
                                          self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                          return
                                      } else {
-                                         print("✅ LEAVE MATCHED tracked ref: \(trackedRef)")
+                                         LoggingManager.shared.debug(.watchParty, message: "LEAVE MATCHED tracked ref: \(trackedRef)")
                                      }
                                 }
                             } else {
@@ -2228,7 +2227,7 @@ extension MPVPlayerViewModel {
                                  // But if it's "Ghost Leave" (rotation), we should have the NEW ref in the map (from Join).
                                  // So if map is empty, it means they are NOT currently connected with ANY ref.
                                  // So it's safe to process the leave.
-                                 print("⚠️ Participant \(actualUserId) not in Ref Map. Assuming valid leave (or already processed).")
+                                 LoggingManager.shared.warn(.watchParty, message: "Participant \(actualUserId) not in Ref Map. Assuming valid leave (or already processed).")
                             }
 
                             // Clean up ref map
@@ -2248,7 +2247,7 @@ extension MPVPlayerViewModel {
                             if actualUserId != self.currentUserId {
                                 self.addSystemMessage("\(username) left")
                             }
-                            print("👋 Participant left (confirmed): \(actualUserId)")
+                            LoggingManager.shared.info(.watchParty, message: "Participant left (confirmed): \(actualUserId)")
 
                             // Post-Load Gate Logic
                             if actualUserId != self.currentUserId {
@@ -2338,12 +2337,12 @@ extension MPVPlayerViewModel {
         // Start playback heartbeat to maintain presence in room_participants
         startPlaybackHeartbeat()
 
-        print("✅ Watch party sync initialized with Realtime")
+        LoggingManager.shared.info(.watchParty, message: "Watch party sync initialized with Realtime")
 
         // Post-Setup Check: If video already loaded, send ready signal now
         // This handles the race condition where duration loaded before Realtime was ready
         if duration > 0 && !hasSentReadySignal {
-             NSLog("👋 Watch Party: Setup complete, sending delayed READY signal")
+             LoggingManager.shared.info(.watchParty, message: "Watch Party: Setup complete, sending delayed READY signal")
              sendReadySignal()
         }
     }
@@ -2351,7 +2350,7 @@ extension MPVPlayerViewModel {
     /// Trigger return to lobby for all participants (Host Only)
     func triggerReturnToLobby() {
         guard isWatchPartyHost else { return }
-        print("🏠 Host triggering return to lobby...")
+        LoggingManager.shared.info(.watchParty, message: "Host triggering return to lobby...")
 
         // Show exit UI
         self.isExitingToLobby = true
@@ -2364,7 +2363,7 @@ extension MPVPlayerViewModel {
         // AFTER we send returnToLobby, causing guests to ignore the lobby return signal.
         syncBroadcastTimer?.invalidate()
         syncBroadcastTimer = nil
-        print("🛑 Host stopped sync broadcast timer before returnToLobby")
+        LoggingManager.shared.info(.watchParty, message: "Host stopped sync broadcast timer before returnToLobby")
 
         // CRITICAL FIX: Use sequential awaits to prevent ViewModel deinit before message send
         Task { [weak self] in
@@ -2373,7 +2372,7 @@ extension MPVPlayerViewModel {
             // 1. Clear DB State FIRST (Prevent race condition for quick-returning guests)
             if let roomId = self.appState?.player.currentRoomId {
                 try? await SupabaseClient.shared.updateRoomPlayback(roomId: roomId, position: 0, isPlaying: false)
-                print("✅ Host cleared DB playback state before exit")
+                LoggingManager.shared.info(.watchParty, message: "Host cleared DB playback state before exit")
             }
 
             // 2. Send sync message to guests and AWAIT completion
@@ -2387,9 +2386,9 @@ extension MPVPlayerViewModel {
 
             do {
                 try await self.realtimeManager?.sendSyncMessage(message)
-                print("✅ Host sent returnToLobby message to guests")
+                LoggingManager.shared.info(.watchParty, message: "Host sent returnToLobby message to guests")
             } catch {
-                print("⚠️ Host failed to send returnToLobby message: \(error)")
+                LoggingManager.shared.error(.watchParty, message: "Host failed to send returnToLobby message: \(error)")
             }
 
             // 3. Small delay to ensure message propagates through Realtime
@@ -2414,7 +2413,7 @@ extension MPVPlayerViewModel {
     private func notifyGuestsOfHostError() async {
         guard isWatchPartyHost else { return }
 
-        print("🚨 notifyGuestsOfHostError: Sending returnToLobby signal due to host error")
+        LoggingManager.shared.warn(.videoRendering, message: "notifyGuestsOfHostError: Sending returnToLobby signal due to host error")
 
         // Stop broadcast timer to prevent conflicting messages
         syncBroadcastTimer?.invalidate()
@@ -2436,9 +2435,9 @@ extension MPVPlayerViewModel {
 
         do {
             try await realtimeManager?.sendSyncMessage(message)
-            print("✅ Host sent returnToLobby message due to error")
+            LoggingManager.shared.info(.watchParty, message: "Host sent returnToLobby message due to error")
         } catch {
-            print("⚠️ Failed to notify guests of host error: \(error)")
+            LoggingManager.shared.error(.watchParty, message: "Failed to notify guests of host error: \(error)")
         }
 
         // Small delay to ensure message propagates
@@ -2461,9 +2460,9 @@ extension MPVPlayerViewModel {
 
                 do {
                     try await SupabaseClient.shared.sendHeartbeat(roomId: roomId, userId: userId)
-                    NSLog("💓 Playback heartbeat sent for room: \(roomId)")
+                    LoggingManager.shared.debug(.watchParty, message: "Playback heartbeat sent for room: \(roomId)")
                 } catch {
-                    NSLog("⚠️ Playback heartbeat failed: \(error)")
+                    LoggingManager.shared.warn(.watchParty, message: "Playback heartbeat failed: \(error)")
                     // Trigger self-healing if this is an auth token/key error
                     await SocialService.shared.handleAuthError(error)
                 }
@@ -2472,21 +2471,21 @@ extension MPVPlayerViewModel {
                 try? await Task.sleep(nanoseconds: 30_000_000_000)
             }
         }
-        NSLog("💓 Started playback heartbeat loop")
+        LoggingManager.shared.debug(.watchParty, message: "Started playback heartbeat loop")
     }
 
     /// Stop the playback heartbeat loop
     private func stopPlaybackHeartbeat() {
         playbackHeartbeatTask?.cancel()
         playbackHeartbeatTask = nil
-        NSLog("🛑 Stopped playback heartbeat loop")
+        LoggingManager.shared.debug(.watchParty, message: "Stopped playback heartbeat loop")
     }
 
     /// Start polling chat messages from Supabase
     private func startChatPolling() {
         guard let roomId = currentRoomId else { return }
 
-        NSLog("🔄 Starting chat polling for room: \(roomId)")
+        LoggingManager.shared.debug(.social, message: "Starting chat polling for room: \(roomId)")
 
         // OPTIMIZATION: Reduced from 10s to 15s - Realtime handles instant delivery
         chatPollingTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: true) { [weak self] _ in
@@ -2592,7 +2591,7 @@ extension MPVPlayerViewModel {
             if hasChanges {
                 let sortedList = currentMap.values.sorted { $0.joinedAt < $1.joinedAt }
                 self.appState?.player.currentWatchPartyRoom?.participants = sortedList
-                NSLog("👥 MPVPlayer: Merged participants list via polling (Count: \(sortedList.count))")
+                LoggingManager.shared.debug(.watchParty, message: "MPVPlayer: Merged participants list via polling (Count: \(sortedList.count))")
             }
 
         } catch {
@@ -2630,11 +2629,11 @@ extension MPVPlayerViewModel {
                 trimChatMessages()
                 lastChatMessageId = msg.id.uuidString
 
-                NSLog("💬 New chat message from \(msg.username): \(msg.message)")
+                LoggingManager.shared.debug(.social, message: "New chat message from \(msg.username): \(msg.message)")
             }
 
         } catch {
-            NSLog("⚠️ Failed to poll chat messages: \(error)")
+            LoggingManager.shared.warn(.social, message: "Failed to poll chat messages: \(error)")
         }
     }
 
@@ -2642,24 +2641,24 @@ extension MPVPlayerViewModel {
     private func stopChatPolling() {
         chatPollingTimer?.invalidate()
         chatPollingTimer = nil
-        NSLog("🛑 Chat polling stopped")
+        LoggingManager.shared.debug(.social, message: "Chat polling stopped")
     }
 
     /// Handle incoming sync messages from peers
     private func handleSyncMessage(_ message: SyncMessage) async {
         // DEBUG: Log ALL incoming messages before any filtering
-        NSLog("🔍 DEBUG: Received sync message - type: \(message.type), sender: \(message.senderId ?? "unknown")")
+        LoggingManager.shared.debug(.watchParty, message: "Received sync message - type: \(message.type), sender: \(message.senderId ?? "unknown")")
 
         // Host is authoritative for playback, but should still receive chat messages, READY signals, and REACTIONS
         if isWatchPartyHost && message.type != .chat && message.type != .ready && message.type != .reaction {
-            NSLog("🚫 DEBUG: Host filtering out message type: \(message.type)")
+            LoggingManager.shared.debug(.watchParty, message: "Host filtering out message type: \(message.type)")
             return
         }
 
         // Syncplay-inspired: Ignore remote updates if we just made a local action
         // CRITICAL: NEVER ignore READY, CHAT, REACTION, or EXIT messages - they must always be processed
         if message.type != .ready && message.type != .chat && message.type != .reaction && message.type != .returnToLobby && message.type != .roomClosed && shouldIgnoreRemoteUpdate() {
-            NSLog("🚫 DEBUG: Filtering message due to recent local action - type: \(message.type)")
+            LoggingManager.shared.debug(.watchParty, message: "Filtering message due to recent local action - type: \(message.type)")
             return
         }
 
@@ -2671,13 +2670,13 @@ extension MPVPlayerViewModel {
                 // This prevents deadlocks where "ABC" (ready) != "abc" (connected)
                 let senderId = rawSenderId.lowercased()
 
-                NSLog("✅ Received READY signal from \(rawSenderId) (normalized: \(senderId))")
+                LoggingManager.shared.info(.watchParty, message: "Received READY signal from \(rawSenderId) (normalized: \(senderId))")
                 readyGuestIds.insert(senderId)
 
                 // PRESENCE FALLBACK: Ensure sender is in connectedGuestIds
                 // This handles cases where Presence events are delayed/missing
                 if !connectedGuestIds.contains(senderId) && senderId != currentUserId {
-                    NSLog("⚠️ Adding \(senderId) to connectedGuestIds (presence fallback)")
+                    LoggingManager.shared.warn(.watchParty, message: "Adding \(senderId) to connectedGuestIds (presence fallback)")
                     connectedGuestIds.insert(senderId)
                 }
 
@@ -2689,7 +2688,7 @@ extension MPVPlayerViewModel {
         case .play:
             // Handle Play signal (Start of movie)
             if showWaitingForGuests {
-                print("🎬 Received PLAY signal - All guests ready! Starting playback.")
+                LoggingManager.shared.info(.watchParty, message: "Received PLAY signal - All guests ready! Starting playback.")
                 showWaitingForGuests = false
                 showWaitingForGuests = false
                 readySignalsSentCount = 0 // Reset timeout counter
@@ -2702,7 +2701,7 @@ extension MPVPlayerViewModel {
             } else {
                 // Normal play sync
                 if !isPlaying {
-                    print("▶️ Sync: Playing")
+                    LoggingManager.shared.info(.watchParty, message: "Sync: Playing")
                     await playbackService.play()
                     isPlaying = true
                 }
@@ -2713,7 +2712,7 @@ extension MPVPlayerViewModel {
                 try? await Task.sleep(nanoseconds: 1_500_000_000)
                 guard let self = self else { return }
                 if self.currentTime < 0.1 && self.isPlaying {
-                    NSLog("⚠️ PLAYBACK SAFETY NET (GUEST): Force-starting playback (stuck at 0.0)")
+                    LoggingManager.shared.warn(.videoRendering, message: "PLAYBACK SAFETY NET (GUEST): Force-starting playback (stuck at 0.0)")
                     await self.playbackService.play()
                 }
             }
@@ -2726,7 +2725,7 @@ extension MPVPlayerViewModel {
             // FIX: Ensure waiting overlay is dismissed if host is playing
             // This handles cases where the initial .play command was missed
             if remoteIsPlaying && showWaitingForGuests {
-                print("🎬 Received playback state (playing) - Dismissing waiting overlay")
+                LoggingManager.shared.info(.watchParty, message: "Received playback state (playing) - Dismissing waiting overlay")
                 showWaitingForGuests = false
                 readySignalsSentCount = 0 // Reset timeout counter
 
@@ -2747,11 +2746,11 @@ extension MPVPlayerViewModel {
             // This prevents premature poster hiding at the ready gate
             if isRefiningInitialSeek && !self.isWatchPartyHost {
                 guard hasSentReadySignal else {
-                    print("⏳ Watch Party: Ignoring Initial Sync (video not ready yet)")
+                    LoggingManager.shared.debug(.watchParty, message: "Async Initial Sync: Ignoring (video not ready yet)")
                     return // Skip until video is loaded
                 }
 
-                print("👀 Watch Party: Initial Sync - Blind Seeking to \(String(format: "%.2f", predictedHostPosition))s and revealing video")
+                LoggingManager.shared.info(.watchParty, message: "Initial Sync - Blind Seeking to \(String(format: "%.2f", predictedHostPosition))s and revealing video")
                 Task { @MainActor in
                      await playbackService.seek(to: predictedHostPosition)
                      // Force update logic (bypass normal buffering release)
@@ -2809,7 +2808,7 @@ extension MPVPlayerViewModel {
                     mpvWrapper.setSpeed(1.0)
                     isCurrentlyAdjustingSpeed = false
                     currentSpeedAdjustment = 1.0
-                    print("✅ Perfect sync achieved: \(Int(absSmoothedDrift * 1000))ms - resetting to 1.0x")
+                    LoggingManager.shared.info(.watchParty, message: "Perfect sync achieved: \(Int(absSmoothedDrift * 1000))ms - resetting to 1.0x")
                 }
             } else if absSmoothedDrift < 5.0 {
                 // Rate Sync (Enabled for ALL session types, including Events)
@@ -2829,15 +2828,15 @@ extension MPVPlayerViewModel {
                         // Use proportional correction: more drift = faster correction
                         let correctionRate = min(absSmoothedDrift * 0.02, 0.05)  // Cap at 5%
                         speedFactor = smoothedDrift > 0 ? (1.0 - correctionRate) : (1.0 + correctionRate)
-                        print("⚡ Adaptive speed sync: \(String(format: "%.3f", speedFactor))x to fix \(String(format: "%.1f", absSmoothedDrift))s drift")
+                        LoggingManager.shared.debug(.watchParty, message: "Adaptive speed sync: \(String(format: "%.3f", speedFactor))x to fix \(String(format: "%.1f", absSmoothedDrift))s drift")
                     } else if absSmoothedDrift > 0.4 {
                         // Medium drift (400ms-1s): Gentle correction
                         speedFactor = smoothedDrift > 0 ? 0.99 : 1.01  // ±1%
-                        print("⚡ Gentle speed sync: \(speedFactor)x to fix \(Int(absSmoothedDrift * 1000))ms drift")
+                        LoggingManager.shared.debug(.watchParty, message: "Gentle speed sync: \(speedFactor)x to fix \(Int(absSmoothedDrift * 1000))ms drift")
                     } else {
                         // Small drift (100-400ms): Ultra-gentle correction
                         speedFactor = smoothedDrift > 0 ? 0.995 : 1.005  // ±0.5%
-                        print("⚡ Ultra-gentle sync: \(speedFactor)x to fix \(Int(absSmoothedDrift * 1000))ms drift")
+                        LoggingManager.shared.debug(.watchParty, message: "Ultra-gentle sync: \(speedFactor)x to fix \(Int(absSmoothedDrift * 1000))ms drift")
                     }
 
                     await playbackService.setSpeed(speedFactor)
@@ -2864,7 +2863,7 @@ extension MPVPlayerViewModel {
                 let seekBufferOffset: Double = 1.2  // 1.2s to account for seek + buffer time
                 let targetPosition = predictedHostPosition + seekBufferOffset
 
-                print("🔄 Large drift (\(String(format: "%.1f", absSmoothedDrift))s) - seeking to \(String(format: "%.1f", targetPosition))s (host at \(String(format: "%.1f", predictedHostPosition))s + \(seekBufferOffset)s offset)")
+                LoggingManager.shared.info(.watchParty, message: "Large drift (\(String(format: "%.1f", absSmoothedDrift))s) - seeking to \(String(format: "%.1f", targetPosition))s (host at \(String(format: "%.1f", predictedHostPosition))s + \(seekBufferOffset)s offset)")
                 await playbackService.seek(to: targetPosition)
                 // Reset drift history after seek
                 driftHistory.removeAll()
@@ -2876,24 +2875,24 @@ extension MPVPlayerViewModel {
             // FIX: Shadowing bug resolved. "remoteIsPlaying" is the source of truth from host.
             // "self.isPlaying" is our current local state.
             if remoteIsPlaying && !self.isPlaying {
-                print("▶️ Sync: Resuming playback to match Host")
+                LoggingManager.shared.info(.watchParty, message: "Sync: Resuming playback to match Host")
                 await playbackService.play()
             } else if !remoteIsPlaying && self.isPlaying {
-                print("⏸️ Sync: Pausing playback to match Host")
+                LoggingManager.shared.info(.watchParty, message: "Sync: Pausing playback to match Host")
                 await playbackService.pause()
             }
 
 
 
         case .pause:
-            print("⏸️ Host pressed pause")
+            LoggingManager.shared.info(.watchParty, message: "Host pressed pause")
             if isPlaying {
                 await playbackService.togglePlayPause()
             }
 
         case .seek:
             let timestamp = message.timestamp
-            print("⏩ Host seeked to \(timestamp)s")
+            LoggingManager.shared.info(.watchParty, message: "Host seeked to \(timestamp)s")
             await playbackService.seek(to: timestamp)
 
         case .chat:
@@ -2903,13 +2902,13 @@ extension MPVPlayerViewModel {
             let isJoinMessage = message.chatText == "LOBBY_JOIN"
 
             if message.senderId == currentUserId && !isJoinMessage {
-                print("💬 Skipping own message (already displayed locally)")
+                LoggingManager.shared.debug(.social, message: "Skipping own message (already displayed locally)")
                 return
             }
 
             // Block Check
             if let senderId = message.senderId, SocialService.shared.blockedUserIds.contains(senderId.lowercased()) {
-                print("🚫 Skipping chat from blocked user: \(senderId)")
+                LoggingManager.shared.debug(.social, message: "Skipping chat from blocked user: \(senderId)")
                 return
             }
 
@@ -2931,7 +2930,7 @@ extension MPVPlayerViewModel {
 
                     // Check if *I* am the one being kicked
                     if let myId = currentUserId, myId.caseInsensitiveCompare(kickedId) == .orderedSame {
-                        print("❌ WatchParty: Kicked by host (ID Match: \(kickedId))")
+                        LoggingManager.shared.warn(.watchParty, message: "WatchParty: Kicked by host (ID Match: \(kickedId))")
 
                         Task { @MainActor [weak self] in
                             guard let self = self else { return }
@@ -2957,7 +2956,7 @@ extension MPVPlayerViewModel {
 
                 } else if text.starts(with: "LOBBY_") {
                     // Filter out LOBBY_READY, LOBBY_UNREADY, etc.
-                    print("💬 Skipping system message: \(text)")
+                    LoggingManager.shared.debug(.social, message: "Skipping system message: \(text)")
                     return
                 } else {
                     displayText = text
@@ -2989,7 +2988,7 @@ extension MPVPlayerViewModel {
                         }
                     }
                 }
-                print("💬 Received chat from \(username): \(text)")
+                LoggingManager.shared.debug(.social, message: "Received chat from \(username): \(text)")
             }
 
         case .streamSelected:
@@ -2998,15 +2997,11 @@ extension MPVPlayerViewModel {
                let quality = message.quality,
                let unlockedURL = message.unlockedURL {
 
-                print("🎬 Host selected new stream:")
-                print("   InfoHash: \(infoHash)")
-                print("   Quality: \(quality)")
-                print("   File Index: \(message.fileIdx ?? -1)")
-
+                LoggingManager.shared.info(.watchParty, message: "Host selected new stream - InfoHash: \(infoHash), Quality: \(quality), File Index: \(message.fileIdx ?? -1)")
                 // Update local stream information
                 // Note: Guests might need to reload stream with new URL
                 if videoURL != unlockedURL {
-                    print("🔄 Stream URL changed, reloading...")
+                    LoggingManager.shared.info(.watchParty, message: "Stream URL changed, reloading...")
                     videoURL = unlockedURL
 
                     // If currently playing, reload with new stream
@@ -3015,13 +3010,13 @@ extension MPVPlayerViewModel {
                     }
                 }
             } else {
-                print("⚠️ Received streamSelected message with incomplete data")
+                LoggingManager.shared.warn(.watchParty, message: "Received streamSelected message with incomplete data")
             }
 
         case .requestStream:
             // Guest requested current stream info - only host should handle this
             if isWatchPartyHost {
-                print("📤 Guest requested stream info, sending current stream details")
+                LoggingManager.shared.debug(.watchParty, message: "Guest requested stream info, sending current stream details")
 
                 // Send current stream information back to requesting guest
                 let streamInfoMessage = SyncMessage(
@@ -3041,13 +3036,13 @@ extension MPVPlayerViewModel {
                 Task {
                     do {
                         try await realtimeManager?.sendSyncMessage(streamInfoMessage)
-                        print("✅ Sent stream info to requesting guest")
+                        LoggingManager.shared.debug(.watchParty, message: "Sent stream info to requesting guest")
                     } catch {
-                        print("❌ Failed to send stream info: \(error)")
+                        LoggingManager.shared.error(.watchParty, message: "Failed to send stream info: \(error)")
                     }
                 }
             } else {
-                print("⚠️ Non-host received requestStream message, ignoring")
+                LoggingManager.shared.warn(.watchParty, message: "Non-host received requestStream message, ignoring")
             }
 
         case .preload:
@@ -3055,7 +3050,7 @@ extension MPVPlayerViewModel {
             break
 
         case .roomClosed:
-            print("🔒 Received Room Closed signal in Player")
+            LoggingManager.shared.info(.watchParty, message: "Received Room Closed signal in Player")
             Task { @MainActor [weak self] in
                 guard let self = self else { return }
                 await self.cleanup()
@@ -3071,7 +3066,7 @@ extension MPVPlayerViewModel {
             break
 
         case .returnToLobby:
-            print("🏠 Received Return to Lobby signal from Host")
+            LoggingManager.shared.info(.watchParty, message: "Received Return to Lobby signal from Host")
 
             // Fix: Explicitly show "Returning to Lobby" overlay instead of generic loading
             self.isExitingToLobby = true
@@ -3101,19 +3096,19 @@ extension MPVPlayerViewModel {
 
             // Block Check
             if let senderId = message.senderId, SocialService.shared.blockedUserIds.contains(senderId.lowercased()) {
-                print("🚫 Skipping reaction from blocked user: \(senderId)")
+                LoggingManager.shared.debug(.social, message: "Skipping reaction from blocked user: \(senderId)")
                 return
             }
 
             if let emoji = message.chatText {
-                 print("😂 Received reaction: \(emoji)")
+                 LoggingManager.shared.debug(.social, message: "Received reaction: \(emoji)")
                  reactionTriggers.send(emoji)
             }
 
         case .hostAnnouncement:
             // Handle floating host announcement
             if let text = message.chatText {
-                print("📢 Received announcement: \(text)")
+                LoggingManager.shared.info(.watchParty, message: "Received announcement: \(text)")
                 // 1. Trigger floating overlay
                 announcementTriggers.send(text)
 
@@ -3138,7 +3133,7 @@ extension MPVPlayerViewModel {
         // Optimistically set true to prevent rapid-fire calls
         hasSentReadySignal = true
 
-        NSLog("👋 Watch Party: Sending INITIAL READY signal and starting loop")
+        LoggingManager.shared.info(.watchParty, message: "Sending INITIAL READY signal and starting loop")
 
         // Define transmission logic
         let transmit = { [weak self] (isRetry: Bool) in
@@ -3159,15 +3154,15 @@ extension MPVPlayerViewModel {
                     if let manager = self.realtimeManager {
                         try await manager.sendSyncMessage(syncMessage)
                         if isRetry {
-                            NSLog("🔄 Watch Party: Resent READY signal (loop)")
+                            LoggingManager.shared.debug(.watchParty, message: "Resent READY signal (loop)")
                         } else {
-                            NSLog("✅ Watch Party: READY signal sent successfully")
+                            LoggingManager.shared.info(.watchParty, message: "READY signal sent successfully")
                         }
                     } else {
-                        NSLog("❌ Watch Party: realtimeManager is nil, cannot send READY signal")
+                        LoggingManager.shared.warn(.watchParty, message: "realtimeManager is nil, cannot send READY signal")
                     }
                 } catch {
-                    NSLog("❌ Watch Party: Failed to send READY signal: %@", error.localizedDescription)
+                    LoggingManager.shared.error(.watchParty, message: "Failed to send READY signal: \(error.localizedDescription)")
                 }
             }
         }
@@ -3188,7 +3183,7 @@ extension MPVPlayerViewModel {
                 // DEADLOCK DETECTION (Landmine #13 fix): If we've sent too many signals without response,
                 // the host is probably gone. Trigger return to browse.
                 if self.readySignalsSentCount >= self.maxReadySignalsBeforeTimeout {
-                    NSLog("%@", "⚠️ Watch Party: Ready Gate Timeout - Host not responding after \(self.readySignalsSentCount) attempts")
+                    LoggingManager.shared.warn(.watchParty, message: "Watch Party: Ready Gate Timeout - Host not responding after \(self.readySignalsSentCount) attempts")
                     self.triggerHostAbsentExit()
                     return
                 }
@@ -3210,7 +3205,7 @@ extension MPVPlayerViewModel {
     /// Called when the ready gate times out waiting for host response.
     /// Returns guest to browse with an informative message.
     private func triggerHostAbsentExit() {
-        NSLog("🚪 Ready Gate Timeout: Returning to browse (host absent)")
+        LoggingManager.shared.warn(.watchParty, message: "Ready Gate Timeout: Returning to browse (host absent)")
 
         // Stop flags
         self.showWaitingForGuests = false
@@ -3244,38 +3239,38 @@ extension MPVPlayerViewModel {
     private func checkIfAllGuestsReady() {
         guard isWatchPartyHost else { return }
 
-        NSLog("🔍 DEBUG: checkIfAllGuestsReady called")
-        NSLog("🔍 DEBUG: hasSentReadySignal = %@", hasSentReadySignal ? "true" : "false")
-        NSLog("🔍 DEBUG: connectedGuestIds = %@", Array(connectedGuestIds).joined(separator: ", "))
-        NSLog("🔍 DEBUG: readyGuestIds = %@", Array(readyGuestIds).joined(separator: ", "))
+        LoggingManager.shared.debug(.watchParty, message: "checkIfAllGuestsReady called")
+        LoggingManager.shared.debug(.watchParty, message: "hasSentReadySignal = \(hasSentReadySignal ? "true" : "false")")
+        LoggingManager.shared.debug(.watchParty, message: "connectedGuestIds = \(Array(connectedGuestIds).joined(separator: ", "))")
+        LoggingManager.shared.debug(.watchParty, message: "readyGuestIds = \(Array(readyGuestIds).joined(separator: ", "))")
 
         let missingIds = connectedGuestIds.subtracting(readyGuestIds)
         if !missingIds.isEmpty {
-             NSLog("⏳ Waiting for guests: %@", missingIds.joined(separator: ", "))
+             LoggingManager.shared.debug(.watchParty, message: "Waiting for guests: \(missingIds.joined(separator: ", "))")
         } else {
-             NSLog("✅ All guests reported READY")
+             LoggingManager.shared.info(.watchParty, message: "All guests reported READY")
         }
 
         // Ensure Host is ready (video loaded)
         guard hasSentReadySignal else {
-            NSLog("⏳ Host not ready yet (but %d guests are ready)", readyGuestIds.count)
+            LoggingManager.shared.debug(.watchParty, message: "Host not ready yet (but \(readyGuestIds.count) guests are ready)")
             return
         }
 
         // CRITICAL FIX: Ensure we have at least one guest before starting
         // Without this, fast hosts would start immediately if guests haven't joined presence yet
         guard !connectedGuestIds.isEmpty else {
-            NSLog("⏳ No guests connected yet (waiting for presence updates)")
+            LoggingManager.shared.debug(.watchParty, message: "No guests connected yet (waiting for presence updates)")
             return
         }
 
         // Check if all connected guests are ready
         // Note: connectedGuestIds comes from Presence
         let allReady = connectedGuestIds.isSubset(of: readyGuestIds)
-        NSLog("🔍 DEBUG: allReady = %@", allReady ? "true" : "false")
+        LoggingManager.shared.debug(.watchParty, message: "allReady = \(allReady ? "true" : "false")")
 
         if allReady {
-            NSLog("🚀 All guests ready! Starting playback in 1s...")
+            LoggingManager.shared.info(.watchParty, message: "All guests ready! Starting playback in 1s...")
 
             // Small delay to ensure UI updates
             Task { @MainActor [weak self] in
@@ -3285,12 +3280,12 @@ extension MPVPlayerViewModel {
             }
         } else {
             let missing = connectedGuestIds.subtracting(readyGuestIds)
-            NSLog("⏳ Waiting for guests: %d remaining - %@", missing.count, Array(missing).joined(separator: ", "))
+            LoggingManager.shared.debug(.watchParty, message: "Waiting for guests: \(missing.count) remaining - \(Array(missing).joined(separator: ", "))")
         }
     }
 
     private func startSynchronizedPlayback() {
-        NSLog("🎬 Host: Initiating synchronized start")
+        LoggingManager.shared.info(.watchParty, message: "Host: Initiating synchronized start")
         showWaitingForGuests = false
 
         // CRITICAL FIX: Host Background Art Linger
@@ -3298,7 +3293,7 @@ extension MPVPlayerViewModel {
         // Guests rely on the incoming Sync Message to trigger this, but the Host ignores their own echo.
         // Without this, the Host waits for the 5s failsafe timer to clear the poster.
         if isRefiningInitialSeek {
-             print("🎬 Host: Releasing initial seek lock (Starting Playback)")
+             LoggingManager.shared.debug(.watchParty, message: "Host: Releasing initial seek lock (Starting Playback)")
              isRefiningInitialSeek = false
              withAnimation(.easeOut(duration: 0.5)) {
                  self.showPoster = false
@@ -3315,7 +3310,7 @@ extension MPVPlayerViewModel {
             try? await Task.sleep(nanoseconds: 1_500_000_000)
             guard let self = self else { return }
             if self.currentTime < 0.1 && self.isPlaying {
-                NSLog("⚠️ PLAYBACK SAFETY NET: Force-starting playback (stuck at 0.0)")
+                LoggingManager.shared.warn(.videoRendering, message: "PLAYBACK SAFETY NET: Force-starting playback (stuck at 0.0)")
                 await self.playbackService.play()
             }
         }
@@ -3408,13 +3403,13 @@ extension MPVPlayerViewModel {
     /// Check if we should ignore remote updates (recently made local action)
     private func shouldIgnoreRemoteUpdate() -> Bool {
         if ignoringRemoteUpdates > 0 {
-            print("🚫 Ignoring remote update (recent local action)")
+            LoggingManager.shared.debug(.watchParty, message: "Ignoring remote update (recent local action)")
             return true
         }
 
         // Also check time-based (backup in case counter gets out of sync)
         if let lastAction = lastLocalActionTime, Date().timeIntervalSince(lastAction) < 0.5 {
-            print("🚫 Ignoring remote update (recent local action by time)")
+            LoggingManager.shared.debug(.watchParty, message: "Ignoring remote update (recent local action by time)")
             return true
         }
 
@@ -3445,7 +3440,7 @@ extension MPVPlayerViewModel {
 
     /// Stop watch party sync
     func stopWatchPartySync() async {
-        print("👋 Stopping watch party sync")
+        LoggingManager.shared.info(.watchParty, message: "Stopping watch party sync")
 
         // Stop broadcast timer
         syncBroadcastTimer?.invalidate()
@@ -3462,7 +3457,7 @@ extension MPVPlayerViewModel {
         // This ensures participants_count decrements correctly
         if let roomId = currentRoomId, let userId = currentUserId, let userUUID = UUID(uuidString: userId) {
             try? await SupabaseClient.shared.leaveRoom(roomId: roomId, userId: userUUID)
-            print("✅ Left room in database: \(roomId)")
+            LoggingManager.shared.info(.watchParty, message: "Left room in database: \(roomId)")
         }
 
         // Reset state
@@ -3485,7 +3480,7 @@ extension MPVPlayerViewModel {
         ))
         trimChatMessages()
 
-        print("✅ Watch party sync stopped, returned to solo mode")
+        LoggingManager.shared.info(.watchParty, message: "Watch party sync stopped, returned to solo mode")
     }
 
     // MARK: - Watch History
@@ -3502,7 +3497,7 @@ extension MPVPlayerViewModel {
             }
         }
 
-        print("📝 Started watch history tracking")
+        LoggingManager.shared.debug(.watchHistory, message: "Started watch history tracking")
     }
 
     private func saveWatchHistory(force: Bool = false) {
@@ -3556,7 +3551,7 @@ extension MPVPlayerViewModel {
                      let isLowQuality = badSources.contains { source.localizedCaseInsensitiveContains($0) }
 
                      if isLowQuality {
-                         print("🚫 MPVPlayerViewModel: Skipping Community Vote - Low Quality Source detected (\(source))")
+                         LoggingManager.shared.warn(.watchHistory, message: "Skipping Community Vote - Low Quality Source detected (\(source))")
                          hasVotedForStream = true // Mark as "handled"
                          return
                      }
@@ -3613,6 +3608,6 @@ extension MPVPlayerViewModel {
         watchHistoryTimer?.invalidate()
         watchHistoryTimer = nil
 
-        print("📝 Stopped watch history tracking")
+        LoggingManager.shared.debug(.watchHistory, message: "Stopped watch history tracking")
     }
 }

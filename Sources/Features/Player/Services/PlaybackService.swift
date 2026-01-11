@@ -165,7 +165,7 @@ actor MPVPlaybackService: PlaybackService {
         
         if playing {
             if sleepAssertion == nil {
-                print("⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)")
+                LoggingManager.shared.debug(.videoRendering, message: "PlaybackService: creating sleep assertion (preventing idle sleep)")
                 sleepAssertion = ProcessInfo.processInfo.beginActivity(
                     options: [.userInitiated, .idleSystemSleepDisabled], 
                     reason: "RedLemon Video Playback"
@@ -173,7 +173,7 @@ actor MPVPlaybackService: PlaybackService {
             }
         } else {
             if let assertion = sleepAssertion {
-                print("⚡️ PlaybackService: releasing sleep assertion")
+                LoggingManager.shared.debug(.videoRendering, message: "PlaybackService: releasing sleep assertion")
                 ProcessInfo.processInfo.endActivity(assertion)
                 sleepAssertion = nil
             }

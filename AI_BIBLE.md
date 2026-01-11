@@ -184,11 +184,11 @@
     - ✅ **`await MainActor.run { ... }`** for explicit hopping
     - ❌ **`DispatchQueue.main.async { ... }`** causes data races with actors
 - **Exception**: `DispatchQueue.main.async` is fine for non-actor-isolated code, but avoid mixing with Swift Concurrency actors.
-|
-| ### 26. Automation Deadlock (The Startup Script Trap)
-| - **Problem**: Using `start-production.sh` inside an automated script (like `release.sh`) causes a "Deadlock". 
-| - **Symptom**: The script hangs indefinitely after building because it launches the app and waits for it to exit before proceeding to the signing/DMG steps.
-| - **Rule**: Automated pipelines MUST use headless build scripts (`build-app-debug.sh`) that return control immediately after the binary is created.
+
+### 26. Automation Deadlock (The Startup Script Trap)
+- **Problem**: Using `start-production.sh` inside an automated script (like `release.sh`) causes a "Deadlock". 
+- **Symptom**: The script hangs indefinitely after building because it launches the app and waits for it to exit before proceeding to the signing/DMG steps.
+- **Rule**: Automated pipelines MUST use headless build scripts (`build-app-debug.sh`) that return control immediately after the binary is created.
 
 ## 🏗️ Architecture Map
 
@@ -718,6 +718,10 @@ Centralized logging with throttling to reduce console spam.
 
 ### Throttling
 Certain high-frequency logs (video rendering, mouse tracking) are throttled to max 1 per second to prevent log flooding.
+
+### Anti-Spam Best Practices
+- **Summary Over Iteration**: NEVER log inside high-volume loops (e.g., `streams.map`). Log a single summary line *after* the loop (e.g., `📉 Penalized 45 streams`).
+- **Polling Debounce**: Periodic tasks MUST check `if newValue != oldValue` before logging to prevent idle noise.
 
 ---
 

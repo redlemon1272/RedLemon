@@ -340,15 +340,15 @@ struct PlayerLoadingView: View {
                 .transition(.opacity)
             }
             else {
-                let _ = {
-                    print("❌ RedLemon: NOT showing MPVPlayerView")
-                    print("   isResolvingStream: \(appState.player.isResolvingStream)")
-                    print("   streamError: \(appState.player.streamError ?? "nil")")
-                    print("   selectedStream: \(appState.player.selectedStream == nil ? "NIL" : "SET")")
+                Color.clear.onAppear {
+                    LoggingManager.shared.debug(.videoRendering, message: "❌ RedLemon: NOT showing MPVPlayerView")
+                    LoggingManager.shared.debug(.videoRendering, message: "   isResolvingStream: \(appState.player.isResolvingStream)")
+                    LoggingManager.shared.debug(.videoRendering, message: "   streamError: \(appState.player.streamError ?? "nil")")
+                    LoggingManager.shared.debug(.videoRendering, message: "   selectedStream: \(appState.player.selectedStream == nil ? "NIL" : "SET")")
                     if let stream = appState.player.selectedStream {
-                        print("   stream.url: \(stream.url == nil ? "NIL" : "SET")")
+                        LoggingManager.shared.debug(.videoRendering, message: "   stream.url: \(stream.url == nil ? "NIL" : "SET")")
                     }
-                }()
+                }
             }
         }
     }
@@ -380,12 +380,12 @@ struct StablePlayerContainer: View, Equatable {
                 if let videos = metadata.videos {
                    if let videoEpisode = videos.first(where: { $0.season == season && $0.episode == episode }) {
                        title += ": \(videoEpisode.title)"
-                       print("✨ StablePlayerContainer: Found episode title: \(videoEpisode.title)")
+                       LoggingManager.shared.debug(.general, message: "✨ StablePlayerContainer: Found episode title: \(videoEpisode.title)")
                    } else {
-                       print("⚠️ StablePlayerContainer: No matching video found for S\(season)E\(episode) in \(videos.count) videos")
+                       LoggingManager.shared.warn(.general, message: "⚠️ StablePlayerContainer: No matching video found for S\(season)E\(episode) in \(videos.count) videos")
                    }
                 } else {
-                    print("⚠️ StablePlayerContainer: metadata.videos is NIL")
+                    LoggingManager.shared.warn(.general, message: "⚠️ StablePlayerContainer: metadata.videos is NIL")
                 }
 
                 return title
@@ -394,12 +394,12 @@ struct StablePlayerContainer: View, Equatable {
         }()
 
         let _ = {
-            print("🎬 RedLemon: Creating MPVPlayerView")
-            print("   Stream URL: \(streamURL.prefix(60))")
-            print("   Display Title: \(displayTitle)")
-            print("   Subtitle URLs: \(subtitles.count)")
+            LoggingManager.shared.debug(.videoRendering, message: "🎬 RedLemon: Creating MPVPlayerView")
+            LoggingManager.shared.debug(.videoRendering, message: "   Stream URL: \(streamURL.prefix(60))")
+            LoggingManager.shared.debug(.videoRendering, message: "   Display Title: \(displayTitle)")
+            LoggingManager.shared.debug(.videoRendering, message: "   Subtitle URLs: \(subtitles.count)")
             for (idx, sub) in subtitles.enumerated() {
-                print("      [\(idx)] \(sub.label)")
+                LoggingManager.shared.debug(.subtitles, message: "      [\(idx)] \(sub.label)")
             }
         }()
 
@@ -424,7 +424,7 @@ struct StablePlayerContainer: View, Equatable {
         let urlChanged = lhs.streamURL != rhs.streamURL
 
         if titleChanged {
-             print("♻️ StablePlayerContainer: Recreating due to Season/Episode change (S\(lhs.selectedSeason ?? -1)E\(lhs.selectedEpisode ?? -1) -> S\(rhs.selectedSeason ?? -1)E\(rhs.selectedEpisode ?? -1))")
+             LoggingManager.shared.debug(.general, message: "♻️ StablePlayerContainer: Recreating due to Season/Episode change (S\(lhs.selectedSeason ?? -1)E\(lhs.selectedEpisode ?? -1) -> S\(rhs.selectedSeason ?? -1)E\(rhs.selectedEpisode ?? -1))")
         }
 
         return !urlChanged && !titleChanged
@@ -446,27 +446,27 @@ struct BackgroundArtView: View {
         Group {
             if let backdropURL = backdropURL {
                 let fullURL = fullImageURL(backdropURL)
-                let _ = NSLog("🖼️ Loading background art: \(fullURL)")
+                let _ = LoggingManager.shared.debug(.general, message: "🖼️ Loading background art: \(fullURL)")
                 AsyncImage(url: URL(string: fullURL)) { phase in
                     switch phase {
                     case .success(let image):
-                        let _ = NSLog("✅ Background art loaded successfully")
+                        let _ = LoggingManager.shared.debug(.general, message: "✅ Background art loaded successfully")
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .ignoresSafeArea()
                     case .failure(let error):
-                        let _ = NSLog("❌ Background art failed: \(error)")
+                        let _ = LoggingManager.shared.error(.general, message: "❌ Background art failed: \(error)")
                         Color.black.ignoresSafeArea()
                     case .empty:
-                        let _ = NSLog("⏳ Background art loading...")
+                        let _ = LoggingManager.shared.debug(.general, message: "⏳ Background art loading...")
                         Color.black.ignoresSafeArea()
                     @unknown default:
                         Color.black.ignoresSafeArea()
                     }
                 }
             } else {
-                let _ = NSLog("⚠️ No backdrop URL provided")
+                let _ = LoggingManager.shared.warn(.general, message: "⚠️ No backdrop URL provided")
                 Color.black.ignoresSafeArea()
             }
         }
@@ -488,21 +488,21 @@ struct LogoOverlayView: View {
         Group {
             if let logoURL = logoURL {
                 let fullLogoURL = fullImageURL(logoURL)
-                let _ = NSLog("🎨 Loading logo: \(fullLogoURL)")
+                let _ = LoggingManager.shared.debug(.general, message: "🎨 Loading logo: \(fullLogoURL)")
                 AsyncImage(url: URL(string: fullLogoURL)) { phase in
                     switch phase {
                     case .success(let image):
-                        let _ = NSLog("✅ Logo loaded successfully")
+                        let _ = LoggingManager.shared.debug(.general, message: "✅ Logo loaded successfully")
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(maxWidth: 400, maxHeight: 200)
                             .shadow(color: .black.opacity(0.5), radius: 20, x: 0, y: 10)
                     case .failure(let error):
-                        let _ = NSLog("❌ Logo failed: \(error)")
+                        let _ = LoggingManager.shared.error(.general, message: "❌ Logo failed: \(error)")
                         EmptyView()
                     case .empty:
-                        let _ = NSLog("⏳ Logo loading...")
+                        let _ = LoggingManager.shared.debug(.general, message: "⏳ Logo loading...")
                         ProgressView()
                             .tint(.white)
                     @unknown default:

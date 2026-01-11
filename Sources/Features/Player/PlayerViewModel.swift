@@ -106,9 +106,9 @@ class PlayerViewModel: ObservableObject {
         }
 
         do {
-            print("🎬 PlayerVM: Starting playback for: \(item.name)")
-            NSLog("   Quality: \(quality.rawValue)")
-            NSLog("   Mode: \(watchMode)")
+            LoggingManager.shared.info(.videoRendering, message: "PlayerVM: Starting playback for: \(item.name)")
+            LoggingManager.shared.debug(.videoRendering, message: "   Quality: \(quality.rawValue)")
+            LoggingManager.shared.debug(.videoRendering, message: "   Mode: \(watchMode)")
 
             // Step 1: Fetch metadata immediately for UI feedback
             NSLog("📡 Fetching metadata for \(item.id)...")
@@ -146,7 +146,7 @@ class PlayerViewModel: ObservableObject {
 
                 let hostQuality = watchPartyRoom.selectedQuality ?? "Unknown" // Relaxed check
 
-                print("\n\n✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒")
+                LoggingManager.shared.info(.watchParty, message: "[SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒")
                 NSLog("🎬 GUEST: Using host's stream selection (skipping resolution)")
 
                 // Extract filename from URL for better metadata
@@ -245,7 +245,7 @@ class PlayerViewModel: ObservableObject {
                       let hostStreamHash = watchPartyRoom.selectedStreamHash {
 
                  // PARTIAL LOCK (Hash only)
-                 print("\n\n✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (HASH ONLY) 🔒")
+                 LoggingManager.shared.info(.watchParty, message: "[SYNC VERIFICATION] LOCKING TO SHARED STREAM (HASH ONLY) 🔒")
 
                  let result = try await streamResolver.resolveStream(
                      item: item,
@@ -269,7 +269,7 @@ class PlayerViewModel: ObservableObject {
                     if Task.isCancelled { throw CancellationError() }
 
                     if attempt > 1 {
-                         print("🔄 Stream Resolution: Retry attempt \(attempt)/\(maxRetries)...")
+                         LoggingManager.shared.info(.network, message: "Stream Resolution: Retry attempt \(attempt)/\(maxRetries)...")
                          // Wait 2s between retries (gives providers time to recover)
                          try? await Task.sleep(nanoseconds: 2_000_000_000)
                     }
@@ -298,7 +298,7 @@ class PlayerViewModel: ObservableObject {
                         // Success! Break the loop
                         break
                     } catch {
-                        print("⚠️ Resolution failed on attempt \(attempt): \(error.localizedDescription)")
+                        LoggingManager.shared.warn(.network, message: "Resolution failed on attempt \(attempt): \(error.localizedDescription)")
                         lastError = error
 
                         // Only retry specific transient errors
@@ -359,7 +359,7 @@ class PlayerViewModel: ObservableObject {
             enterFullscreen()
 
         } catch {
-            print("❌ Playback error: \(error)")
+            LoggingManager.shared.error(.videoRendering, message: "Playback error: \(error)")
             await MainActor.run {
                 streamError = error.localizedDescription
                 isResolvingStream = false
@@ -379,7 +379,7 @@ class PlayerViewModel: ObservableObject {
         streamError = nil
 
         do {
-            print("🎬 PlayerVM: Preloading playback for: \(item.name)")
+            LoggingManager.shared.info(.videoRendering, message: "PlayerVM: Preloading playback for: \(item.name)")
 
             let metadata = try await metadataProvider.fetchMetadata(type: item.type, id: item.id)
 
@@ -469,7 +469,7 @@ class PlayerViewModel: ObservableObject {
             enterFullscreen()
 
         } catch {
-            print("❌ Preload error: \(error)")
+            LoggingManager.shared.error(.videoRendering, message: "Preload error: \(error)")
             await MainActor.run {
                 streamError = error.localizedDescription
                 isResolvingStream = false
@@ -480,13 +480,13 @@ class PlayerViewModel: ObservableObject {
 
     func startPreloadedPlayback() {
         guard isPreloading else { return }
-        print("▶️ Starting preloaded playback")
+        LoggingManager.shared.info(.videoRendering, message: "Starting preloaded playback")
         isPreloading = false
     }
 
     // Resolve and persist stream BEFORE starting watch party
     func resolveAndPersistForWatchParty(mediaItem: MediaItem, quality: VideoQuality, roomId: String, season: Int? = nil, episode: Int? = nil) async throws -> Stream {
-        print("🎬 Resolving & Persisting stream for Watch Party Room: \(roomId)")
+        LoggingManager.shared.info(.watchParty, message: "Resolving & Persisting stream for Watch Party Room: \(roomId)")
 
         await MainActor.run {
             self.isResolvingStream = true
@@ -513,7 +513,7 @@ class PlayerViewModel: ObservableObject {
             if Task.isCancelled { throw CancellationError() }
 
             if attempt > 1 {
-                print("🔄 Watch Party Resolve: Retry attempt \(attempt)/\(maxRetries)...")
+                LoggingManager.shared.info(.network, message: "Watch Party Resolve: Retry attempt \(attempt)/\(maxRetries)...")
                 // Wait 1.5s between retries to let providers realize their mistake or network to settle
                 try? await Task.sleep(nanoseconds: 1_500_000_000)
             }
@@ -532,7 +532,7 @@ class PlayerViewModel: ObservableObject {
                 // Populate failover queue for Host
                 await MainActor.run {
                     self.streamQueue = result.candidateStreams
-                    print("📊 Watch Party Queue: Loaded \(result.candidateStreams.count) candidate streams for failover")
+                    LoggingManager.shared.debug(.watchParty, message: "Watch Party Queue: Loaded \(result.candidateStreams.count) candidate streams for failover")
                 }
 
                 // Build retry queue: Primary + Candidates
@@ -542,7 +542,7 @@ class PlayerViewModel: ObservableObject {
                     throw APIError.noStreamsFound
                 }
 
-                print("🎬 Stream Resolution (Attempt \(attempt)): Found \(streamsToTry.count) streams to attempt unlock...")
+                LoggingManager.shared.info(.videoRendering, message: "Stream Resolution (Attempt \(attempt)): Found \(streamsToTry.count) streams to attempt unlock...")
 
                 // Try to unlock candidates
                 for (index, stream) in streamsToTry.enumerated() {
@@ -550,7 +550,7 @@ class PlayerViewModel: ObservableObject {
 
                     do {
                         if index > 0 {
-                            print("   🔄 Candidate #\(index): \(stream.title)")
+                            LoggingManager.shared.debug(.videoRendering, message: "Candidate #\(index): \(stream.title)")
                         }
 
                         unlockedStream = try await streamResolver.unlockStream(
@@ -560,10 +560,10 @@ class PlayerViewModel: ObservableObject {
                             episode: targetEpisode
                         )
 
-                        print("✅ Successfully unlocked stream on attempt \(attempt) (Candidate #\(index))")
+                        LoggingManager.shared.info(.videoRendering, message: "Successfully unlocked stream on attempt \(attempt) (Candidate #\(index))")
                         break // Break unlock loop
                     } catch {
-                        print("   ⚠️ Unlock failed for candidate #\(index): \(error.localizedDescription)")
+                        LoggingManager.shared.warn(.videoRendering, message: "Unlock failed for candidate #\(index): \(error.localizedDescription)")
                         lastError = error
                         continue // Try next candidate
                     }
@@ -575,18 +575,18 @@ class PlayerViewModel: ObservableObject {
                 }
 
             } catch {
-                print("⚠️ Resolution failed on attempt \(attempt): \(error.localizedDescription)")
+                LoggingManager.shared.warn(.network, message: "Resolution failed on attempt \(attempt): \(error.localizedDescription)")
                 lastError = error
             }
         }
 
         guard let finalStream = unlockedStream else {
-            print("❌ All Watch Party resolution attempts failed.")
+            LoggingManager.shared.error(.videoRendering, message: "All Watch Party resolution attempts failed.")
             throw lastError ?? APIError.noStreamsFound
         }
 
         // Persist
-        print("📡 Persisting resolved stream to room \(roomId)...")
+        LoggingManager.shared.info(.watchParty, message: "Persisting resolved stream to room \(roomId)...")
 
         await MainActor.run {
             self.selectedMetadata = metadata
@@ -609,7 +609,7 @@ class PlayerViewModel: ObservableObject {
             resetPlayback: true // RESET STATE: Ensure room is paused/lobby for new media
         )
 
-        print("✅ Stream persisted! Hash: \(finalStream.infoHash ?? "nil")")
+        LoggingManager.shared.info(.watchParty, message: "Stream persisted! Hash: \(finalStream.infoHash ?? "nil")")
         return finalStream
     }
 
@@ -623,7 +623,7 @@ class PlayerViewModel: ObservableObject {
         playbackRetryCount = 0 // Reset retry count for manual selections
 
         do {
-            print("🎬 PlayerVM: Starting playback with selected stream: \(stream.title)")
+            LoggingManager.shared.info(.videoRendering, message: "PlayerVM: Starting playback with selected stream: \(stream.title)")
 
             await MainActor.run {
                 isResolvingStream = true
@@ -701,7 +701,7 @@ class PlayerViewModel: ObservableObject {
             enterFullscreen()
 
         } catch {
-            print("❌ Playback error: \(error)")
+            LoggingManager.shared.error(.videoRendering, message: "Playback error: \(error)")
             await MainActor.run {
                 streamError = error.localizedDescription
                 isResolvingStream = false
@@ -710,14 +710,14 @@ class PlayerViewModel: ObservableObject {
     }
 
     func handlePlaybackError(_ error: String) {
-        print("⚠️ PlayerVM: Handling playback error: \(error)")
+        LoggingManager.shared.warn(.videoRendering, message: "PlayerVM: Handling playback error: \(error)")
 
         // Check for transient "Playback Timeout" error
         if error.contains("Timeout") {
             // RedLemon: Increased retry limit to 3 (was 1) for better stability
             if playbackRetryCount < 3 && selectedStream != nil {
                 playbackRetryCount += 1
-                print("🔄 Transient Timeout detected. Retrying current stream (Attempt \(playbackRetryCount)/3)...")
+                LoggingManager.shared.info(.videoRendering, message: "Transient Timeout detected. Retrying current stream (Attempt \(playbackRetryCount)/3)...")
 
                 // Silent retry of the SAME stream
                 Task { @MainActor in
@@ -728,7 +728,7 @@ class PlayerViewModel: ObservableObject {
                 }
                 return
             } else {
-                 print("🚫 Timeout retry limit reached or no stream selected. Proceeding to fallback.")
+                 LoggingManager.shared.warn(.videoRendering, message: "Timeout retry limit reached or no stream selected. Proceeding to fallback.")
             }
         }
 
@@ -743,7 +743,7 @@ class PlayerViewModel: ObservableObject {
             // OR if we just ran out of streams, try to resolve fresh streams as a last resort.
             // We verify 'isResolvingStream' to prevent infinite loops if resolution itself returns empty.
             if !isResolvingStream {
-                print("⚠️ PlayerVM: Stream queue empty. Attempting emergency resolution...")
+                LoggingManager.shared.warn(.videoRendering, message: "PlayerVM: Stream queue empty. Attempting emergency resolution...")
                 Task { @MainActor in
                     self.isResolvingStream = true
                     do {
@@ -771,7 +771,7 @@ class PlayerViewModel: ObservableObject {
                            throw APIError.noStreamsFound
                        }
 
-                       print("✅ PlayerVM: Emergency resolution found \(self.streamQueue.count + 1) streams.")
+                       LoggingManager.shared.info(.videoRendering, message: "PlayerVM: Emergency resolution found \(self.streamQueue.count + 1) streams.")
                        self.isResolvingStream = false
 
                        // If we found a primary, try it (or add to queue and recursive call?)
@@ -780,26 +780,26 @@ class PlayerViewModel: ObservableObject {
                        self.tryNextStream()
 
                     } catch {
-                       print("🚫 PlayerVM: Emergency resolution failed: \(error)")
+                       LoggingManager.shared.error(.videoRendering, message: "PlayerVM: Emergency resolution failed: \(error)")
                        self.isResolvingStream = false
                        self.streamError = "Playback Failed: No working streams found."
                     }
                 }
                 return
             } else {
-                 print("🚫 PlayerVM: No more streams in queue and resolution already attempted. Playback failed.")
+                 LoggingManager.shared.warn(.videoRendering, message: "PlayerVM: No more streams in queue and resolution already attempted. Playback failed.")
                  self.streamError = "Playback Failed: No working streams found."
                  return
             }
         }
 
         let nextStream = streamQueue.removeFirst()
-        print("⏭️ PlayerVM: Falling back to next stream: \(nextStream.title)")
+        LoggingManager.shared.info(.videoRendering, message: "PlayerVM: Falling back to next stream: \(nextStream.title)")
 
 
         DispatchQueue.main.async {
              // RedLemon: Silent retry (no UI flash)
-             print("🔄 Silently retrying next stream (\(self.streamQueue.count + 1) left)")
+             LoggingManager.shared.info(.videoRendering, message: "Silently retrying next stream (\(self.streamQueue.count + 1) left)")
         }
 
         Task {
@@ -825,7 +825,7 @@ class PlayerViewModel: ObservableObject {
 
                     // CRITICAL: If Host, persist new stream selection to Room so guests follow
                     if self.isWatchPartyHost, let room = self.currentWatchPartyRoom, let roomId = self.currentRoomId {
-                        print("📡 Watch Party Failover: Persisting new stream to room \(roomId)...")
+                        LoggingManager.shared.warn(.watchParty, message: "Watch Party Failover: Persisting new stream to room \(roomId)...")
 
                         // Update local room object
                         var updatedRoom = room
@@ -846,16 +846,16 @@ class PlayerViewModel: ObservableObject {
                                     unlockedUrl: unlockedStream.url,
                                     resetPlayback: true // RESET STATE: Failover needs to sync guests to new file
                                 )
-                                print("✅ Watch Party Failover: Room updated successfully")
+                                LoggingManager.shared.info(.watchParty, message: "Watch Party Failover: Room updated successfully")
                             } catch {
-                                print("❌ Watch Party Failover: Failed to update room: \(error)")
+                                LoggingManager.shared.error(.watchParty, message: "Watch Party Failover: Failed to update room: \(error)")
                             }
                         }
                     }
                 }
 
             } catch {
-                print("❌ PlayerVM: Fallback stream failed to unlock: \(error.localizedDescription)")
+                LoggingManager.shared.error(.videoRendering, message: "PlayerVM: Fallback stream failed to unlock: \(error.localizedDescription)")
                 // Recursive retry if unlock fails immediately
                 tryNextStream()
             }
@@ -874,7 +874,7 @@ class PlayerViewModel: ObservableObject {
     func exitPlayer(keepRoomState: Bool = false) async {
         if !keepRoomState {
             if let roomId = currentRoomId {
-                print("👋 Leaving room: \(roomId)")
+                LoggingManager.shared.info(.watchParty, message: "Leaving room: \(roomId)")
             }
         }
 
@@ -921,7 +921,7 @@ class PlayerViewModel: ObservableObject {
     }
 
     func handleMovieFinished() async {
-        print("🎬 PlayerVM.handleMovieFinished() called")
+        LoggingManager.shared.debug(.videoRendering, message: "PlayerVM.handleMovieFinished() called")
 
         // Auto-play next episode logic
         if let item = selectedMediaItem, item.type == "series",
@@ -931,12 +931,12 @@ class PlayerViewModel: ObservableObject {
             let (targetS, targetE) = findNextEpisode(currentS: selectedSeason ?? 1, currentE: selectedEpisode ?? 1, videos: videos)
 
             if let s = targetS, let e = targetE {
-                print("⏭️ Series playback finished, auto-playing next episode: S\(s)E\(e)")
+                LoggingManager.shared.info(.videoRendering, message: "Series playback finished, auto-playing next episode: S\(s)E\(e)")
 
                 // Binge Blocking: Free hosts cannot auto-play next episode in Watch Parties
                 let isPremium = SupabaseClient.shared.auth.currentUser?.isPremium ?? false
                 if isWatchPartyHost && !isPremium {
-                    print("🚫 Auto-play blocked (Free Tier Host)")
+                    LoggingManager.shared.warn(.watchParty, message: "Auto-play blocked (Free Tier Host)")
                     await exitPlayer(keepRoomState: false)
                     return
                 }
@@ -998,7 +998,7 @@ class PlayerViewModel: ObservableObject {
                   // Let's use 5 minutes for "xXx" case (1h 20m vs 10s file).
 
                   if timeRemaining > 300 {
-                       print("🚨 PlayerVM: Premature EOF detected! Time remaining: \(Int(timeRemaining))s. Triggering Failover.")
+                       LoggingManager.shared.error(.videoRendering, message: "Premature EOF detected! Time remaining: \(Int(timeRemaining))s. Triggering Failover.")
                        handlePlaybackError("Premature EOF (Target: \(Int(timeRemaining))s left)")
                        return
                   }
@@ -1009,7 +1009,7 @@ class PlayerViewModel: ObservableObject {
         if let roomId = currentRoomId {
             let roomExists = try? await roomManager.getRoomState(roomId: roomId)
             if roomExists == nil {
-                print("👻 PlayerVM: Room \(roomId) no longer exists - returning to browse")
+                LoggingManager.shared.warn(.watchParty, message: "PlayerVM: Room \(roomId) no longer exists - returning to browse")
                 await exitPlayer(keepRoomState: false)
                 if let appState = appState {
                     appState.currentView = .browse
@@ -1075,16 +1075,16 @@ class PlayerViewModel: ObservableObject {
         let (targetS, targetE) = findNextEpisode(currentS: currentS, currentE: currentE, videos: videos)
 
         guard let s = targetS, let e = targetE else {
-            print("🚫 No next episode found")
+            LoggingManager.shared.info(.videoRendering, message: "No next episode found")
             return
         }
 
-        print("⏭️ Playing Next Episode: S\(s)E\(e)")
+        LoggingManager.shared.info(.videoRendering, message: "Playing Next Episode: S\(s)E\(e)")
 
         // Binge Blocking: Free Hosts cannot play next episode in same room
         let isPremium = SupabaseClient.shared.auth.currentUser?.isPremium ?? false
         if isWatchPartyHost && !isPremium {
-            print("🚫 Binge Blocked (Watch Party): User is not premium")
+            LoggingManager.shared.warn(.watchParty, message: "Binge Blocked (Watch Party): User is not premium")
             await MainActor.run {
                 streamError = "Upgrade to Premium to binge watch with friends!"
                 showPlayer = false
@@ -1611,7 +1611,7 @@ class PlayerViewModel: ObservableObject {
         if let data = try? JSONEncoder().encode(history) {
             UserDefaults.standard.set(data, forKey: "watchHistory")
             lastHistorySaveTime = Date()
-            print("💾 Saved to watch history: \(mediaItem.name) at \(Int(timestamp))s")
+            LoggingManager.shared.info(.watchHistory, message: "Saved to watch history: \(mediaItem.name) at \(Int(timestamp))s")
         }
     }
 

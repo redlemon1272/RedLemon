@@ -43,6 +43,7 @@ enum LogCategory: String, CaseIterable {
     case network = "network"
     case watchParty = "watchparty"
     case general = "general"
+    case social = "social"
 }
 
 /// Centralized logging manager with throttling and level control
@@ -57,6 +58,7 @@ class LoggingManager: ObservableObject {
     @Published var enableNetworkLogs: Bool = true
     @Published var enableWatchPartyLogs: Bool = true
     @Published var enableGeneralLogs: Bool = true
+    @Published var enableSocialLogs: Bool = true
 
     // Throttling intervals (seconds)
     private let videoRenderingInterval: TimeInterval = 10.0
@@ -95,12 +97,10 @@ class LoggingManager: ObservableObject {
 
         let filename = (file as NSString).lastPathComponent
         let timestamp = DateFormatter.logTimestamp.string(from: Date())
+        let formattedMessage = "\(level.emoji) [\(timestamp)] [\(category.rawValue.uppercased())] [\(filename):\(line)] \(message)"
 
-        if #available(macOS 11.0, *) {
-            print("\(level.emoji) [\(timestamp)] [\(category.rawValue.uppercased())] [\(filename):\(line)] \(message)")
-        } else {
-            print("\(level.emoji) [\(timestamp)] [\(category.rawValue.uppercased())] \(message)")
-        }
+        // 🚨 BIBLE LANDMINE #11: Always use %@ specifier to prevent crashes from '%' in URLs/JSON
+        NSLog("%@", formattedMessage)
     }
 
     // MARK: - Convenience Methods
@@ -193,6 +193,7 @@ class LoggingManager: ObservableObject {
         case .network: return enableNetworkLogs
         case .watchParty: return enableWatchPartyLogs
         case .general: return enableGeneralLogs
+        case .social: return enableSocialLogs
         }
     }
 
@@ -219,6 +220,7 @@ class LoggingManager: ObservableObject {
         enableNetworkLogs = defaults.object(forKey: "enableNetworkLogs") == nil ? true : defaults.bool(forKey: "enableNetworkLogs")
         enableWatchPartyLogs = defaults.object(forKey: "enableWatchPartyLogs") == nil ? true : defaults.bool(forKey: "enableWatchPartyLogs")
         enableGeneralLogs = defaults.object(forKey: "enableGeneralLogs") == nil ? true : defaults.bool(forKey: "enableGeneralLogs")
+        enableSocialLogs = defaults.object(forKey: "enableSocialLogs") == nil ? true : defaults.bool(forKey: "enableSocialLogs")
     }
 
     func saveSettings() {
@@ -231,6 +233,7 @@ class LoggingManager: ObservableObject {
         defaults.set(enableNetworkLogs, forKey: "enableNetworkLogs")
         defaults.set(enableWatchPartyLogs, forKey: "enableWatchPartyLogs")
         defaults.set(enableGeneralLogs, forKey: "enableGeneralLogs")
+        defaults.set(enableSocialLogs, forKey: "enableSocialLogs")
     }
 
     func resetToDefaults() {
@@ -242,6 +245,7 @@ class LoggingManager: ObservableObject {
         enableNetworkLogs = true
         enableWatchPartyLogs = true
         enableGeneralLogs = true
+        enableSocialLogs = true
         saveSettings()
     }
 }

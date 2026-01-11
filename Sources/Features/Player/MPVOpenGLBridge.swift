@@ -26,7 +26,7 @@ func mpvGetOpenGLFunc(_ ctx: UnsafeMutableRawPointer?, _ name: UnsafePointer<Int
         ),
         symbolName
     ) else {
-        print("❌ Cannot get OpenGL function pointer for \(String(cString: name!))")
+        LoggingManager.shared.error(.videoRendering, message: "Cannot get OpenGL function pointer for \(String(cString: name!))")
         return nil
     }
 
@@ -44,7 +44,7 @@ func mpvUpdateCallback(_ ctx: UnsafeMutableRawPointer?) {
     // Log throttling - only print every 2 seconds to reduce spam
     let currentTime = CACurrentMediaTime()
     if currentTime - lastMPVFrameLogTime > 2.0 {
-        print("🎬 MPV: Frame ready! Calling layer.update() (throttled)")
+        LoggingManager.shared.debug(.videoRendering, message: "MPV: Frame ready! Calling layer.update() (throttled)")
         lastMPVFrameLogTime = currentTime
     }
     layer.update()

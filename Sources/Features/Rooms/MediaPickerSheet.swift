@@ -43,11 +43,9 @@ struct MediaPickerSheet: View {
             if let series = selectedSeries {
                 // EPISODE SELECTION VIEW
                 episodeSelectionView(series: series)
-                    .transition(.move(edge: .trailing))
             } else {
                 // SEARCH / DISCOVERY VIEW
                 searchAndDiscoveryView
-                    .transition(.move(edge: .leading))
             }
         }
         .frame(width: 1100, height: 650) // Fixed size contained within app
@@ -64,11 +62,9 @@ struct MediaPickerSheet: View {
         HStack {
             if selectedSeries != nil {
                 Button(action: {
-                    withAnimation {
-                        selectedSeries = nil
-                        seriesMetadata = nil
-                        selectedEpisodes.removeAll()
-                    }
+                    selectedSeries = nil
+                    seriesMetadata = nil
+                    selectedEpisodes.removeAll()
                 }) {
                     HStack(spacing: 6) {
                         Image(systemName: "chevron.left")
@@ -85,8 +81,7 @@ struct MediaPickerSheet: View {
                 .buttonStyle(PlainButtonStyle())
             } else {
                 Text("Add to Marathon")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.system(size: 24, weight: .bold))
                     .foregroundColor(.white)
             }
             
@@ -112,7 +107,7 @@ struct MediaPickerSheet: View {
             alignment: .bottom
         )
     }
-    
+
     // MARK: - Search & Discovery
     
     var searchAndDiscoveryView: some View {
@@ -184,8 +179,7 @@ struct MediaPickerSheet: View {
                     // Discovery / Trending State (Visible until explicit search)
                     VStack(alignment: .leading, spacing: 20) {
                         Text("Popular Now")
-                            .font(.title3)
-                            .fontWeight(.bold)
+                            .font(.system(size: 20, weight: .bold))
                             .padding(.horizontal)
                         
                         LazyVGrid(columns: columns, spacing: 20) {
@@ -256,8 +250,7 @@ struct MediaPickerSheet: View {
                 // Season Picker
                 VStack(alignment: .leading, spacing: 8) {
                     Text("SEASON")
-                        .font(.caption)
-                        .fontWeight(.bold)
+                        .font(.system(size: 12, weight: .bold))
                         .foregroundColor(.gray)
                     
                     ScrollView {
@@ -270,7 +263,7 @@ struct MediaPickerSheet: View {
                                 }) {
                                     HStack {
                                         Text("Season \(season)")
-                                            .fontWeight(selectedSeason == season ? .bold : .regular)
+                                            .font(.system(size: 14, weight: selectedSeason == season ? .bold : .regular))
                                         Spacer()
                                         if selectedSeason == season {
                                             Image(systemName: "checkmark")
@@ -300,8 +293,7 @@ struct MediaPickerSheet: View {
                 // Toolbar
                 HStack {
                     Text("Season \(selectedSeason)")
-                        .font(.title3)
-                        .fontWeight(.bold)
+                        .font(.system(size: 20, weight: .bold))
                     
                     Spacer()
                     
@@ -458,10 +450,8 @@ struct MediaPickerSheet: View {
 
     private func handleSelection(_ item: MediaItem) {
         if item.type == "series" {
-            withAnimation {
-                selectedSeries = item
-                loadEpisodes(for: item)
-            }
+            selectedSeries = item
+            loadEpisodes(for: item)
         } else {
             onSelect(item, nil, nil)
             presentationMode.wrappedValue.dismiss()
@@ -579,8 +569,7 @@ struct MediaPickerCard: View {
             }
             
             Text(item.name)
-                .font(.caption)
-                .fontWeight(.medium)
+                .font(.system(size: 12, weight: .medium))
                 .foregroundColor(.white) // Visible on dark
                 .lineLimit(2)
                 .multilineTextAlignment(.center)

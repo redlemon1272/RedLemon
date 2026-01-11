@@ -1376,7 +1376,7 @@ struct PlaylistItemRow: View {
                         .font(.system(size: 18))
                 }
                 .buttonStyle(PlainButtonStyle())
-                .help("Select to play")
+                .help("Select to queue")
                 .padding(.trailing, 4)
             }
 

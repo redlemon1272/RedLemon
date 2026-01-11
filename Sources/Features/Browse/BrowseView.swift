@@ -449,8 +449,14 @@ struct BrowseView: View {
 
     private func selectMedia(_ item: MediaItem) async {
         // Navigate to detail view in main content area
-        appState.player.selectedMediaItem = item
-        appState.currentView = .mediaDetail
+        // Decouple state update from gesture processing to prevent lifecycle conflicts
+        print("👆 Selected media item: \(item.name)")
+        
+        // Force update on next runloop cycle to unsure gesture is fully completed
+        DispatchQueue.main.async {
+            self.appState.player.selectedMediaItem = item
+            self.appState.currentView = .mediaDetail
+        }
     }
 
     private func loadRecentlyWatched() {

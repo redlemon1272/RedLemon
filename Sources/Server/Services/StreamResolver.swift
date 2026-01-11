@@ -24,7 +24,8 @@ actor StreamResolver {
         name: String? = nil,
         year: String? = nil,
         excludedHashes: Set<String> = [],
-        ignoreVerified: Bool = false
+        ignoreVerified: Bool = false,
+        preferredHash: String? = nil
     ) async throws -> QualityBucketsResponse {
         NSLog("⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
         await SessionRecorder.shared.startNewSession(imdbId: imdbId)
@@ -88,14 +89,34 @@ actor StreamResolver {
                 infoHash: verified.hash
             )
 
-            // OPTIMIZATION: Attach subtitles for verified stream
-            let streamsWithSubtitles = await attachSubtitles(
-                to: [candidateStream],
-                imdbId: imdbId,
-                type: type,
-                season: season,
-                episode: episode
-            )
+            // OPTIMIZATION: Attach subtitles for verified stream (Time-boxed to 3s)
+            var streamsWithSubtitles: [Stream] = [candidateStream]
+            let verifiedStreamsToAttach = [candidateStream]
+            do {
+                streamsWithSubtitles = try await withThrowingTaskGroup(of: [Stream].self) { group in
+                    group.addTask {
+                        return await self.attachSubtitles(
+                            to: verifiedStreamsToAttach,
+                            imdbId: imdbId,
+                            type: type,
+                            season: season,
+                            episode: episode
+                        )
+                    }
+                    group.addTask {
+                        try await Task.sleep(nanoseconds: 3_000_000_000) // 3s Timeout
+                        throw URLError(.timedOut)
+                    }
+                    
+                    guard let result = try await group.next() else {
+                        return verifiedStreamsToAttach
+                    }
+                    group.cancelAll()
+                    return result
+                }
+            } catch {
+                print("⚠️ StreamResolver: Verified stream subtitle attachment timed out.")
+            }
 
             let finalStream = streamsWithSubtitles.first ?? candidateStream
 
@@ -121,9 +142,21 @@ actor StreamResolver {
             season: season,
             episode: episode
         )
+        
+        // OPTIMIZATION: If preferredHash is set (Sync Mode), filter immediately to avoid processing/subtitling 100+ streams
+        var rawStreams = streams
+        if let targetHash = preferredHash, !targetHash.isEmpty {
+            print("⚡️ StreamResolver: Optimizing for preferred hash: \(targetHash)")
+            if let match = streams.first(where: { $0.infoHash?.lowercased() == targetHash.lowercased() }) {
+                print("   ✅ Found target stream immediately. Discarding everything else.")
+                rawStreams = [match]
+            } else {
+                print("   ⚠️ Target hash not found in provider results. Falling back to full resolution.")
+            }
+        }
 
-        NSLog("📦 StreamResolver: Received \(streams.count) raw streams, bucketing...")
-
+        NSLog("📦 StreamResolver: Received \(rawStreams.count) raw streams, bucketing...")
+        
         // For movies only, pull canonical title to prioritize correct matches
         let targetTitle: String?
         if type == "movie" {
@@ -137,7 +170,7 @@ actor StreamResolver {
         }
 
         // OPTIMIZATION: Filter streams FIRST, then attach subtitles to the survivors
-        var filteredStreams = streams
+        var filteredStreams = rawStreams
 
         // CRITICAL: Filter Blocked Streams immediately
         if !blockedHashes.isEmpty {
@@ -453,8 +486,28 @@ actor StreamResolver {
             print("   📺 Episode filter: \(beforeEpisodeFilter) → \(filteredStreams.count) streams")
         }
 
-        // OPTIMIZATION: Attach subtitles
-        let streamsWithSubtitles = await attachSubtitles(to: filteredStreams, imdbId: imdbId, type: type, season: season, episode: episode, name: targetTitle ?? name, year: year != nil ? Int(year!) : nil)
+        // OPTIMIZATION: Attach subtitles (Time-boxed to 3s to prevent playback delays)
+        var streamsWithSubtitles = filteredStreams
+        let streamsToAttach = filteredStreams // Capture immutable copy for concurrency
+        do {
+            streamsWithSubtitles = try await withThrowingTaskGroup(of: [Stream].self) { group in
+                group.addTask {
+                    return await self.attachSubtitles(to: streamsToAttach, imdbId: imdbId, type: type, season: season, episode: episode, name: targetTitle ?? name, year: year != nil ? Int(year!) : nil)
+                }
+                group.addTask {
+                    try await Task.sleep(nanoseconds: 3_000_000_000) // 3s Timeout
+                    throw URLError(.timedOut)
+                }
+                
+                guard let result = try await group.next() else {
+                    return filteredStreams
+                }
+                group.cancelAll()
+                return result
+            }
+        } catch {
+            print("⚠️ StreamResolver: Subtitle attachment timed out. Proceeding without initial subtitles.")
+        }
 
         // Partition into quality buckets
         var buckets: [String: [Stream]] = ["2160p": [], "1080p": [], "720p": [], "480p": []]

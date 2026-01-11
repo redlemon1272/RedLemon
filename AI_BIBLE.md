@@ -190,6 +190,14 @@
 - **Symptom**: The script hangs indefinitely after building because it launches the app and waits for it to exit before proceeding to the signing/DMG steps.
 - **Rule**: Automated pipelines MUST use headless build scripts (`build-app-debug.sh`) that return control immediately after the binary is created.
 
+### 27. Network Timeout Blind Spots (The 16-Second Spin)
+- **Problem**: Chaining multiple network requests (e.g. `HEAD` -> `GET`) with default timeouts (60s) or moderately high timeouts (8s) creates massive cumulative delays when endpoints are slow/unresponsive.
+- **Symptom**: User sees a "Loading Spinner" for 15-20 seconds before playback starts.
+- **Rule**: Implement "Fail Fast" logic for validation checks.
+    - Set aggressive timeouts (e.g., 3s) for pre-flight checks (HEAD).
+    - If the pre-flight fails/times out, **ABORT** the chain. Do not fall back to a heavier request (GET) that is guaranteed to also fail.
+
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |
@@ -859,6 +867,9 @@ Users can report broken streams. The system captures:
 ## Landmine #26: Automation Deadlock
 Avoid calling scripts that `open` the app (like `start-production.sh`) in automated pipelines. Headless terminals (CI/CD or release scripts) will hang indefinitely waiting for the windowing system. Use `build-app-debug.sh` for headless builds.
 
-## Landmine #27: UUID Case Sensitivity
+## Landmine #27: Network Timeout Blind Spots
+Chaining requests with default timeouts creates massive delays. Always use "Fail Fast" logic with aggressive timeouts (3s) for pre-flight checks, and abort strictly on timeout.
+
+## Landmine #28: UUID Case Sensitivity
 Supabase/Postgres is case-insensitive for UUID types, but **Swift and Realtime Channels are sensitive**.
 **Rule**: Always `.lowercased()` a UUID string before using it as a dictionary key or Realtime topic to avoid silent mismatches.

@@ -397,7 +397,7 @@ final class SubDLClient {
     ///   - offset: Optional time offset in milliseconds for sync adjustment
     ///   - season: Optional season number for zip extraction
     ///   - episode: Optional episode number for zip extraction
-    func download(downloadPath: String, offset: Int = 0, season: Int? = nil, episode: Int? = nil) async throws -> String {
+    func download(downloadPath: String, offset: Int = 0, season: Int? = nil, episode: Int? = nil, streamFilename: String? = nil) async throws -> String {
         let downloadURL = downloadPath.starts(with: "http")
             ? downloadPath
             : "\(cdnURL)\(downloadPath)"
@@ -439,7 +439,7 @@ final class SubDLClient {
             try data.write(to: zipURL)
 
             do {
-                srtText = try extractSubtitleFromZip(zipURL: zipURL, season: season, episode: episode)
+                srtText = try extractSubtitleFromZip(zipURL: zipURL, season: season, episode: episode, streamFilename: streamFilename)
                 print("✅ Extraction successful")
                 try FileManager.default.removeItem(at: zipURL)
             } catch {
@@ -480,7 +480,7 @@ final class SubDLClient {
 
     // MARK: - Helper Methods
 
-    private func extractSubtitleFromZip(zipURL: URL, season: Int?, episode: Int?) throws -> String {
+    private func extractSubtitleFromZip(zipURL: URL, season: Int?, episode: Int?, streamFilename: String? = nil) throws -> String {
         // 1. List files in zip
         let listProcess = Process()
         let listPipe = Pipe()
@@ -660,12 +660,46 @@ final class SubDLClient {
                 }
             }
         }
+        
+        // Strategy 4: Calculate Compatibility Score (Movies / Episodes w/o pattern match)
+        // If we haven't matched a specific episode yet (or if we are a movie), assume all files are candidates
+        // and score them based on stream match (quality, source, release group)
+        if bestMatch == nil {
+             print("🔍 Calculating compatibility scores for \(subtitleFiles.count) files...")
+             
+             // Reuse the scoring logic (but adapting it for simpler filenames inside zip)
+             // We create dummy SubDLSubtitle objects to reuse 'calculateCompatibilityScore'
+             
+             let scoredFiles = subtitleFiles.map { file -> (String, Int) in
+                 let dummySub = SubDLSubtitle(
+                     language: "en", // assumed
+                     url: "",
+                     releaseName: file, // Use zip filename as release name for scoring
+                     author: nil,
+                     comment: nil,
+                     season: season,
+                     episode: episode
+                 )
+                 let score = calculateCompatibilityScore(dummySub, season: season, episode: episode, streamFilename: streamFilename)
+                 return (file, score)
+             }
+             
+             // Sort by score
+             if let best = scoredFiles.sorted(by: { $0.1 > $1.1 }).first {
+                 if best.1 > 0 {
+                     print("✅ Selected best match by compatibility score (\(best.1)): \(best.0)")
+                     bestMatch = best.0
+                 } else {
+                     print("⚠️ No strong compatibility match (Best: \(best.1) for \(best.0))")
+                 }
+             }
+        }
 
         // Fallback: Use first subtitle file if no specific match found
         if bestMatch == nil {
             bestMatch = subtitleFiles.first
             if let match = bestMatch {
-                print("⚠️ No specific episode match found, using first file: \(match)")
+                print("⚠️ No specific match found, using first file: \(match)")
             }
         }
 
@@ -806,7 +840,7 @@ final class SubDLClient {
 
         // Prefer standard release groups and formats
         let preferredGroups = ["web-dl", "webdl", "blu-ray", "bluray", "bdrip", "webrip", "hdtv"]
-        let avoidGroups = ["cam", "ts", "tc", "subsdubbed", "subforced"]
+        let avoidGroups = ["cam", "ts", "tc", "subsdubbed", "subforced", "telesync", "camrip", "hdcam", "hc", "korsub"]
 
         // Check for preferred groups
         for group in preferredGroups {

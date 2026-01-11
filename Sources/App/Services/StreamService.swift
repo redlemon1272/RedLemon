@@ -136,7 +136,8 @@ actor StreamService: StreamResolving {
             name: item.name,
             year: finalMetadata.year,
             excludedHashes: excludedHashes,
-            ignoreVerified: false
+            ignoreVerified: false,
+            preferredHash: preferredInfoHash
         )
 
         // Robustness Check: If we got a Verified Stream, test it immediately.
@@ -724,9 +725,15 @@ actor StreamService: StreamResolving {
         print("✅ StreamService: Stream unlocked successfully!")
 
         // Create unlocked stream
+        // CRITICAL: Avoid overwriting rich torrent title with generic Debrid filename (e.g. "video.mkv")
+        // We need the torrent title for subtitle matching (WEBRip vs CAM, etc.)
+        let genericFilenames = ["video.mkv", "video.mp4", "movie.mkv", "movie.mp4", "stream.mkv", "stream.mp4"]
+        let resolvedFilename = unlockResult.filename
+        let isGeneric = genericFilenames.contains(resolvedFilename.lowercased())
+        
         var unlockedStream = Stream(
             url: unlockResult.url,
-            title: unlockResult.filename.isEmpty ? stream.title : unlockResult.filename, // Fix: Use returned filename
+            title: (resolvedFilename.isEmpty || isGeneric) ? stream.title : resolvedFilename,
             quality: stream.quality,
             seeders: stream.seeders,
             size: stream.size,
@@ -743,7 +750,7 @@ actor StreamService: StreamResolving {
             // Optimize: Cap at 5 subtitles to prevent blocking playback start
             let limitedSubtitles = Array(subtitles.prefix(5))
             NSLog("📥 StreamService: Pre-downloading %d (capped from %d) subtitles...", limitedSubtitles.count, subtitles.count)
-            let downloadedSubs = await downloadSubtitlesInParallel(subtitles: limitedSubtitles, season: season, episode: episode)
+            let downloadedSubs = await downloadSubtitlesInParallel(subtitles: limitedSubtitles, season: season, episode: episode, streamFilename: unlockedStream.title)
             unlockedStream.subtitles = downloadedSubs
         }
 
@@ -752,8 +759,8 @@ actor StreamService: StreamResolving {
 
     // MARK: - Subtitle Downloading
 
-    func downloadSubtitlesInParallel(subtitles: [Subtitle], season: Int? = nil, episode: Int? = nil) async -> [Subtitle] {
-        NSLog("🐛 StreamService: downloadSubtitlesInParallel called. Season: \(String(describing: season)), Episode: \(String(describing: episode)), Count: \(subtitles.count)")
+    func downloadSubtitlesInParallel(subtitles: [Subtitle], season: Int? = nil, episode: Int? = nil, streamFilename: String? = nil) async -> [Subtitle] {
+        NSLog("%@", "🐛 StreamService: downloadSubtitlesInParallel called. Season: \(String(describing: season)), Episode: \(String(describing: episode)), Count: \(subtitles.count)")
         // Use a custom session with short timeout to avoid blocking playback
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 3.0 // 3 seconds max per subtitle
@@ -794,12 +801,16 @@ actor StreamService: StreamResolving {
 
                     if subtitle.url.hasPrefix("/subtitle/") {
                         NSLog("✅ DEBUG: Raw SubDL URL detected, converting to proxy URL")
+                        
                         // Convert raw SubDL URL to proxy URL
                         // Use shared helper for robust URL construction (handles encoding & params)
                         let url = LocalAPIClient.shared.getSubtitleURL(downloadPath: subtitle.url, season: season, episode: episode)
-                        let finalProxyURL = url + (url.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
+                        var finalProxyURL = url + (url.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
                         
-                        NSLog("🐛 StreamService: Constructed Proxy URL: %@", finalProxyURL)
+                        // APPEND filename hint to URL so route can use it
+                        if let hint = streamFilename, let encodedHint = hint.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                             finalProxyURL += "&filename=\(encodedHint)"
+                        }
 
                         return Subtitle(
                             id: subtitle.id,
@@ -811,6 +822,8 @@ actor StreamService: StreamResolving {
                             provider: subtitle.provider
                         )
                     }
+                        
+
 
                     NSLog("⚠️ DEBUG: Not a SubDL URL, attempting download")
                     guard let url = URL(string: subtitle.url) else {
@@ -899,8 +912,8 @@ actor StreamService: StreamResolving {
         guard let urlObj = URL(string: url) else { return nil }
         
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 8.0 // 8 seconds max to resolve
-        config.timeoutIntervalForResource = 8.0
+        config.timeoutIntervalForRequest = 3.0 // 3 seconds max (Fail fast)
+        config.timeoutIntervalForResource = 3.0
         let session = URLSession(configuration: config)
         
         var request = URLRequest(url: urlObj)
@@ -913,6 +926,13 @@ actor StreamService: StreamResolving {
                 return httpResponse.url?.absoluteString
             }
         } catch {
+            // Optimization: If HEAD timed out, GET will likely timeout too. Fail fast.
+            let nsError = error as NSError
+            if nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorTimedOut {
+                 print("⚠️ StreamService: HEAD request timed out after 3s. Skipping fallback.")
+                 return nil
+            }
+            
             print("⚠️ StreamService: HEAD resolution failed (\(error.localizedDescription)). Falling back to GET (Range: 0-0)...")
             
             // Fallback to GET with Range header (minimal data download)

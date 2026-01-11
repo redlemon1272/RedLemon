@@ -73,12 +73,15 @@ func registerSubtitleRoutes(_ app: Application) {
             throw Abort(.badRequest, reason: "Invalid encoded path")
         }
 
+        let streamFilename = req.query[String.self, at: "filename"]
+        
         // Download and convert subtitle
         let vttText = try await SubDLClient.shared.download(
             downloadPath: downloadPath,
             offset: offset,
             season: season,
-            episode: episode
+            episode: episode,
+            streamFilename: streamFilename
         )
 
         // Return as VTT

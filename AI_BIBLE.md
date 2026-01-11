@@ -147,6 +147,14 @@
     - **Implementation**: ALL "Waiting" gates must have a client-side timeout (e.g., 30 seconds).
     - **Fallback**: If timeout triggers, exit gracefully to Lobby/Browse with a message ("Host is absent"). Do NOT hang indefinitely.
 
+### 22. Data Shadowing (User vs Media Metadata)
+- **Problem**: `WatchPartyRoom` has a mutable `description` (Host's message), while `MediaItem` has an immutable `description` (TMDB Plot). Realtime payloads often flatten these into a single JSON object.
+- **Danger**: Mapping the `description` column from a realtime update into `room.mediaItem.description` erroneously overwrites the Plot Summary with the Host's message (or vice versa), causing the UI to show the wrong text.
+- **Rule**: **Explicitly Separate** during decoding.
+    - `room.description` = `payload["description"]` (The Host's custom text)
+    - `mediaItem.description` = `payload["overview"]` or kept as-is (The Movie's plot)
+    - **Never** assume "description" genericially refers to one or the other without checking context.
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |

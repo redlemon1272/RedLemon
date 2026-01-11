@@ -1024,6 +1024,9 @@ struct WatchPartyLobbyView: View {
             TextField("What's this room about?", text: $editingDescription)
                 .textFieldStyle(.roundedBorder)
                 .frame(width: 280)
+                .onSubmit {
+                    saveDescription()
+                }
 
             HStack {
                 Text("\(editingDescription.count)/200")
@@ -1039,18 +1042,7 @@ struct WatchPartyLobbyView: View {
                 .foregroundColor(.secondary)
 
                 Button("Save") {
-                    Task {
-                        let trimmed = String(editingDescription.prefix(200))
-                        try? await SupabaseClient.shared.updateRoomDescription(
-                            roomId: room.id,
-                            description: trimmed.isEmpty ? nil : trimmed
-                        )
-                        // Update local state
-                        await MainActor.run {
-                            viewModel.room.description = trimmed.isEmpty ? nil : trimmed
-                            showDescriptionEditor = false
-                        }
-                    }
+                    saveDescription()
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(editingDescription.count > 200)
@@ -1058,6 +1050,21 @@ struct WatchPartyLobbyView: View {
         }
         .padding(16)
         .frame(width: 320)
+    }
+
+    private func saveDescription() {
+        Task {
+            let trimmed = String(editingDescription.prefix(200))
+            try? await SupabaseClient.shared.updateRoomDescription(
+                roomId: room.id,
+                description: trimmed.isEmpty ? nil : trimmed
+            )
+            // Update local state
+            await MainActor.run {
+                viewModel.room.description = trimmed.isEmpty ? nil : trimmed
+                showDescriptionEditor = false
+            }
+        }
     }
 
     private func formatDuration(_ interval: TimeInterval) -> String {

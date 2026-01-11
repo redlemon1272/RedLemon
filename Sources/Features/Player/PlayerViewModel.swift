@@ -94,7 +94,7 @@ class PlayerViewModel: ObservableObject {
             currentWatchMode = watchMode
             isWatchPartyHost = isHost
             selectedQuality = quality
-            
+
             // CRITICAL FIX: Enforce event playback state to ensure UI correctness
             isEventPlayback = isEvent
 
@@ -176,7 +176,7 @@ class PlayerViewModel: ObservableObject {
                 // Standard Behavior: Search for subtitles locally (SubDL)
                 // We no longer enforce "Shared Subtitles" from the host, allowing guests to pick their own.
                 // Fetch subtitles from SubDL via local server, passing stream info for release-type matching
-                
+
                 // Build stream filename for subtitle matching
                 // Real-Debrid URLs are truncated (e.g., /d/xxx/TR), so use room's sourceQuality as hint
                 var streamHint = filename
@@ -189,7 +189,7 @@ class PlayerViewModel: ObservableObject {
                     streamHint = "\(item.name.replacingOccurrences(of: " ", with: ".")).\(quality).\(sourceQuality)".lowercased()
                     NSLog("📝 GUEST: Using room sourceQuality for subtitle matching: \(streamHint)")
                 }
-                
+
                 if let subDLSubtitles = try? await LocalAPIClient.shared.searchSubtitles(
                     imdbId: item.id,
                     type: item.type,
@@ -287,20 +287,20 @@ class PlayerViewModel: ObservableObject {
 
                         resolvedStream = result.stream
                         resolvedMetadata = result.metadata
-                        
+
                         // Capture safe copy of candidates for the actor boundary
-                        let candidateStreams = result.candidateStreams 
-                        
-                        Task { @MainActor in 
+                        let candidateStreams = result.candidateStreams
+
+                        Task { @MainActor in
                             self.streamQueue = candidateStreams
                         }
-                        
+
                         // Success! Break the loop
                         break
                     } catch {
                         print("⚠️ Resolution failed on attempt \(attempt): \(error.localizedDescription)")
                         lastError = error
-                        
+
                         // Only retry specific transient errors
                         // 1. No streams found (e.g. provider aggregation failed initially)
                         // 2. Network timeouts
@@ -310,7 +310,7 @@ class PlayerViewModel: ObservableObject {
                             if (error as? URLError)?.code == .timedOut { return true }
                             return error.localizedDescription.contains("timed out")
                         }()
-                        
+
                         if !isRetryable {
                             throw error // Fatal error, don't retry
                         }
@@ -718,7 +718,7 @@ class PlayerViewModel: ObservableObject {
             if playbackRetryCount < 3 && selectedStream != nil {
                 playbackRetryCount += 1
                 print("🔄 Transient Timeout detected. Retrying current stream (Attempt \(playbackRetryCount)/3)...")
-                
+
                 // Silent retry of the SAME stream
                 Task { @MainActor in
                     if let stream = self.selectedStream {
@@ -739,7 +739,7 @@ class PlayerViewModel: ObservableObject {
     func tryNextStream() {
         if streamQueue.isEmpty {
             // CRITICAL: Failover for Guests (or initial failure)
-            // If we are a guest and the host's stream failed (queue empty), 
+            // If we are a guest and the host's stream failed (queue empty),
             // OR if we just ran out of streams, try to resolve fresh streams as a last resort.
             // We verify 'isResolvingStream' to prevent infinite loops if resolution itself returns empty.
             if !isResolvingStream {
@@ -750,7 +750,7 @@ class PlayerViewModel: ObservableObject {
                        guard let item = self.selectedMediaItem else { throw APIError.noStreamsFound }
                        let season = self.selectedMediaItem?.type == "series" ? self.selectedSeason : nil
                        let episode = self.selectedMediaItem?.type == "series" ? self.selectedEpisode : nil
-                       
+
                        // Resolve fresh streams
                        // Note: We use the existing resolve logic which will fetch providers
                        let result = try await self.streamResolver.resolveStream(
@@ -762,23 +762,23 @@ class PlayerViewModel: ObservableObject {
                            preferredInfoHash: nil, // Don't force the failed hash
                            filterExtended: false
                        )
-                       
+
                        // Populate queue
                        self.streamQueue = result.candidateStreams.dropFirst().map { $0 } // Candidates
                        let primary = result.stream
-                       
+
                        if self.streamQueue.isEmpty && primary == nil {
                            throw APIError.noStreamsFound
                        }
-                       
+
                        print("✅ PlayerVM: Emergency resolution found \(self.streamQueue.count + 1) streams.")
                        self.isResolvingStream = false
-                       
+
                        // If we found a primary, try it (or add to queue and recursive call?)
                        // Let's treat the new primary as the next stream
                        self.streamQueue.insert(primary, at: 0)
                        self.tryNextStream()
-                       
+
                     } catch {
                        print("🚫 PlayerVM: Emergency resolution failed: \(error)")
                        self.isResolvingStream = false
@@ -915,6 +915,9 @@ class PlayerViewModel: ObservableObject {
         }
 
         WindowManager.shared.restoreWindowSize()
+
+        // Check for deferred schedule update notification (Context-Aware Notifications)
+        appState?.checkPendingScheduleUpdate()
     }
 
     func handleMovieFinished() async {
@@ -950,50 +953,50 @@ class PlayerViewModel: ObservableObject {
              // Calculate expected end time based on runtime
              // Note: eventStartTime is the SCHEDULED start, not when we started watching.
              // We need to check if we are significantly before the scheduled end.
-             
+
              // Get total runtime in seconds
              // runtime is usually string "120 min" or similar. Need to parse or rely on `duration` from MPV if valid?
              // Actually, `Sessions/Events` have fixed slots.
-             
+
              // Better approach: Check `TimeService.shared.serverTime`.
              // Compare current server time with `eventEndTime` (which we need to calculate or store).
-             
+
              // Let's use the MPV duration vs Expected duration? No, MPV duration is the issue (it's short).
              // We should check if we are "near" the end of the event slot.
-             
+
              // If we don't have event slot info readily available here (we have `eventStartTime` but maybe not duration/end),
              // let's rely on a simpler metric: We know it's an event.
              // We know we just hit EOF.
              // If this was a "normal" finish, we should be near the end of the schedule.
-             
+
              // Let's look at `EventsConfigService` which usually has the current event.
              // Or rely on `TimeService`.
-             
+
              // Let's calculate Time Remaining in the Event Slot.
              // We need to know when the event *should* end.
              // `PlayerViewModel` has `selectedMediaItem` but not the `EventSlot` directly.
              // However, `eventStartTime` is set for sync.
-             
+
              // Let's assume runtime from metadata is truth for the movie content.
              // If we finish 10 minutes before runtime implies, that's "Credits" maybe.
              // If we finish 50 minutes before, that's a crash.
-             
+
              // Parsed "107 min" -> 107.0
              let cleanedRuntime = (metadata.runtime ?? "0").filter { "0123456789.".contains($0) }
              let runtimeMinutes = Double(cleanedRuntime) ?? 0
              let runtimeSeconds = runtimeMinutes * 60
-             
+
              if runtimeSeconds > 0 {
                   // Calculate how long we've been "playing" or where we are relative to start.
                   // `eventStartTime` is the wall-clock time the event started.
                   let now = Date()
                   let timeSinceStart = now.timeIntervalSince(start)
                   let timeRemaining = runtimeSeconds - timeSinceStart
-                  
+
                   // Tolerance: 5 minutes (300s) + Credits allowance
                   // If we are more than 10% or 10 minutes "early", it's suspicious.
                   // Let's use 5 minutes for "xXx" case (1h 20m vs 10s file).
-                  
+
                   if timeRemaining > 300 {
                        print("🚨 PlayerVM: Premature EOF detected! Time remaining: \(Int(timeRemaining))s. Triggering Failover.")
                        handlePlaybackError("Premature EOF (Target: \(Int(timeRemaining))s left)")
@@ -1301,14 +1304,14 @@ class PlayerViewModel: ObservableObject {
             // SMART LIVENESS CHECK: Prevent joining/reviving stale events, but allow Upcoming Lobbies
             if roomId.hasPrefix("event_") {
                 let config = try await EventsConfigService.shared.fetchMovieEventsConfig()
-                
+
                 if EventsConfigService.shared.isEventJoinable(eventId: roomId, config: config) {
                     // Valid to join (either Live or Next Up)
                     NSLog("✅ PlayerVM: Event \(roomId) is JOINABLE (Live or Next Up)")
                 } else {
                     NSLog("🚫 PlayerVM: Blocking join to STALE event room \(roomId).")
-                    await MainActor.run { 
-                        appState.isLoadingRoom = false 
+                    await MainActor.run {
+                        appState.isLoadingRoom = false
                     }
                     return
                 }
@@ -1334,7 +1337,7 @@ class PlayerViewModel: ObservableObject {
                              background: meta.backgroundURL,
                              logo: meta.logoURL, description: meta.description, releaseInfo: meta.releaseInfo, year: meta.year, imdbRating: String(meta.imdbRating ?? 0), genres: meta.genres, runtime: meta.runtime
                          )
-                         
+
                          // Re-use creation logic (this creates it in DB)
                          if let newRoom = try? await performRoomCreation(
                              roomManager: roomManager,
@@ -1432,7 +1435,7 @@ class PlayerViewModel: ObservableObject {
                let config = try? await EventsConfigService.shared.fetchMovieEventsConfig(),
                let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
                liveEvent.mediaItem.id == (room.imdbId ?? "") {
-                
+
                 NSLog("🛡️ PlayerVM: Overriding Room createdAt (\(watchPartyRoom.createdAt)) with Scheduled Start (\(liveEvent.startTime))")
                 watchPartyRoom.createdAt = liveEvent.startTime
                 watchPartyRoom.lastActivity = liveEvent.startTime
@@ -1443,15 +1446,15 @@ class PlayerViewModel: ObservableObject {
 
             await MainActor.run {
                 var shouldJoinPlayback = false
-                
+
                 // 1. Determine Mode based on Room Type and Schedule
                 // Check if room is active (Playing state)
                 let isActuallyPlaying = room.isPlaying
-                
+
                 if roomId.hasPrefix("event_") {
                     // Event Room: Check Global Schedule
                      let rawId = roomId.replacingOccurrences(of: "event_", with: "")
-                     
+
                      // REDLEMON: If room is already in playback (e.g. friend is watching), trust that over strict schedule
                      if isActuallyPlaying {
                          shouldJoinPlayback = true
@@ -1485,7 +1488,7 @@ class PlayerViewModel: ObservableObject {
                         self.isEventPlayback = true
                         let rawId = roomId.replacingOccurrences(of: "event_", with: "")
                         self.currentEventId = rawId
-                        
+
                         // Recalculate start time for sync
                         if let config = eventsConfig,
                            let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
@@ -1518,7 +1521,7 @@ class PlayerViewModel: ObservableObject {
                         self.selectedSeason = room.season
                         self.selectedEpisode = room.episode
                         self.selectedQuality = .fullHD
-                        
+
                         // Play immediately
                         Task {
                             await self.playMedia(
@@ -1553,7 +1556,7 @@ class PlayerViewModel: ObservableObject {
 
                     appState.currentView = .watchPartyLobby
                 }
-                
+
                 appState.isLoadingRoom = false
 
             }

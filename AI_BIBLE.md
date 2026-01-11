@@ -888,3 +888,31 @@ Never compare versions like `latestVersion > currentVersion` using raw strings i
 ## Landmine #31: Onboarding UX Dead-ends
 Avoid leaving the user on a "Success" or "finished" page during onboarding (e.g., after an Account Restoration).
 **Rule**: After a critical background action (like Restoration) finishes, transition immediately to a **Success View** and implement an **Automatic Timer (2.5s)** to close the modal and drop the user into the app. Never force a user to click "Next" on a page they've already completed.
+
+---
+
+# Part 19: The Release Workflow (Safety & Order)
+
+To ensure a 100% success rate for updates and prevent broken builds from hitting production, all AI assistants MUST follow this strict 5-step sequence. **NEVER skip Step 2**.
+
+### 1. Code Edit & Build
+Make relevant code changes and run `./build-app-debug.sh`. Ensure the build completes with 0 errors.
+
+### 2. User Validation (MANDATORY GATE)
+**STOP.** You must ask the USER to test the fix locally.
+- If it's a UI fix: "Please verify the layout on your screen."
+- If it's a logic fix: "Please verify [Feature X] works as expected."
+**Do not proceed to Git or Sparkle until the USER explicitly confirms the fix.**
+
+### 3. Git Synchronization
+Once verified, commit and push to the active branch (e.g., `git push origin solo-launch`). This ensures the "Source of Truth" on GitHub matches what you are about to ship.
+
+### 4. Sparkle Release
+Execute `./scripts/release.sh <version> <build_number>`.
+- **Constraint**: Ensure `<build_number>` is strictly greater than the current build (see `appcast.xml`).
+- **Headless Build**: This script builds the app in the background, packages the DMG, and deploys it to the production server via SCP.
+
+### 5. Final Appcast Sync
+After the release script finishes, the local `appcast.xml` will be updated with the new item.
+- **Action**: You MUST push this updated `appcast.xml` to GitHub immediately so that future sessions have the latest version history.
+- **Rule**: Never manually edit `appcast.xml` unless fixing a malformed entry; always let `release.sh` handle the injection.

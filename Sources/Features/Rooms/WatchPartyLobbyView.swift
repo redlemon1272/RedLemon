@@ -11,6 +11,8 @@ struct WatchPartyLobbyView: View {
     @State private var showPaymentGate = false
     @State private var isAutoJoining = false
     @State private var showMediaPicker = false
+    @State private var showDescriptionEditor = false
+    @State private var editingDescription: String = ""
     @StateObject private var licenseManager = LicenseManager.shared
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
@@ -247,6 +249,39 @@ struct WatchPartyLobbyView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
                                 }
+                            }
+
+                            // Room Description (with edit button for host)
+                            if room.type == .userRoom {
+                                HStack(spacing: 6) {
+                                    if let description = viewModel.room.description, !description.isEmpty {
+                                        Text(description)
+                                            .font(.subheadline)
+                                            .foregroundColor(.white.opacity(0.8))
+                                            .lineLimit(2)
+                                    } else if isHost {
+                                        Text("Add a description...")
+                                            .font(.subheadline)
+                                            .foregroundColor(.white.opacity(0.4))
+                                            .italic()
+                                    }
+
+                                    if isHost {
+                                        Button(action: {
+                                            editingDescription = viewModel.room.description ?? ""
+                                            showDescriptionEditor = true
+                                        }) {
+                                            Image(systemName: "pencil.circle.fill")
+                                                .font(.system(size: 16))
+                                                .foregroundColor(.accentColor)
+                                        }
+                                        .buttonStyle(PlainButtonStyle())
+                                        .popover(isPresented: $showDescriptionEditor, arrowEdge: .bottom) {
+                                            descriptionEditorPopover
+                                        }
+                                    }
+                                }
+                                .padding(.top, 4)
                             }
                         }
                         .frame(maxWidth: .infinity)
@@ -975,6 +1010,52 @@ struct WatchPartyLobbyView: View {
         viewModel.initiateLeave()
         appState.restoreWindowFromLobby()
         appState.currentView = .browse
+    }
+
+    // MARK: - Description Editor Popover
+    private var descriptionEditorPopover: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Room Description")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(.primary)
+
+            TextField("What's this room about?", text: $editingDescription)
+                .textFieldStyle(.roundedBorder)
+                .frame(width: 280)
+
+            HStack {
+                Text("\(editingDescription.count)/200")
+                    .font(.caption)
+                    .foregroundColor(editingDescription.count > 200 ? .red : .secondary)
+
+                Spacer()
+
+                Button("Cancel") {
+                    showDescriptionEditor = false
+                }
+                .buttonStyle(.plain)
+                .foregroundColor(.secondary)
+
+                Button("Save") {
+                    Task {
+                        let trimmed = String(editingDescription.prefix(200))
+                        try? await SupabaseClient.shared.updateRoomDescription(
+                            roomId: room.id,
+                            description: trimmed.isEmpty ? nil : trimmed
+                        )
+                        // Update local state
+                        await MainActor.run {
+                            viewModel.room.description = trimmed.isEmpty ? nil : trimmed
+                            showDescriptionEditor = false
+                        }
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(editingDescription.count > 200)
+            }
+        }
+        .padding(16)
+        .frame(width: 320)
     }
 
     private func formatDuration(_ interval: TimeInterval) -> String {

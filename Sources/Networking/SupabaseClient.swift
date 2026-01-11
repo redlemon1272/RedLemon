@@ -239,40 +239,40 @@ class SupabaseClient: RoomManager, UserManager {
             bodyData = try JSONSerialization.data(withJSONObject: body, options: options)
             request.httpBody = bodyData
         }
-        
+
         // --- 🔐 SIGNATURE GENERATION ---
         if sign {
             if let (privateKey, publicKey) = await KeychainManager.shared.getKeyPair() {
                 let timestamp = String(Int(Date().timeIntervalSince1970))
-                
+
                 // Payload: Timestamp + Method + Path + Body
                 var payload = "\(timestamp)\(method)\(path)"
                 if let bodyData = bodyData, let bodyString = String(data: bodyData, encoding: .utf8) {
                     payload += bodyString
                 }
-                
+
                 do {
                     let signature = try CryptoManager.shared.sign(message: payload, privateKeyBase64: privateKey)
-                    
+
                     request.setValue(signature, forHTTPHeaderField: "x-signature")
                     request.setValue(timestamp, forHTTPHeaderField: "x-timestamp")
                     request.setValue(publicKey, forHTTPHeaderField: "x-public-key")
-                    
+
                     // 🛡️ SECURITY: Identity Proof (Timestamp + UserID + Path)
                     // This prevents replay attacks across users
                     if let userId = auth.currentUser?.id {
                         // NOTE: This MUST match the server's verify_user_signature function exactly.
                         let identityPayload = "\(timestamp)\(userId.uuidString.lowercased())\(path)"
-                        
+
                         // DIAGNOSTIC LOGGING: Verify exactly what we are signing
                         if path == "/rpc/room_heartbeat" {
                             NSLog("%@", "🔐 SupabaseClient: Signing Identity Payload: '\(identityPayload)'")
                         }
-                        
+
                         let identitySignature = try CryptoManager.shared.sign(message: identityPayload, privateKeyBase64: privateKey)
                         request.setValue(identitySignature, forHTTPHeaderField: "x-identity-signature")
                     }
-                    
+
                     NSLog("%@", "🔐 Signed request to \(path)")
                 } catch {
                     NSLog("%@", "❌ Failed to sign request: \(error)")
@@ -301,7 +301,7 @@ class SupabaseClient: RoomManager, UserManager {
 
         return try handleResponse(data: data, response: response, path: path)
     }
-    
+
     private func handleResponse(data: Data, response: URLResponse, path: String) throws -> Data {
         // DEBUG: Print raw JSON for room requests to verify season/episode
         if path.contains("/rooms") {
@@ -316,7 +316,7 @@ class SupabaseClient: RoomManager, UserManager {
 
         guard (200...299).contains(httpResponse.statusCode) else {
             let errorString = String(data: data, encoding: .utf8) ?? "Unknown error"
-            
+
             // Attempt to parse clean Postgres error message
             // Format: {"code": "...", "message": "...", "details": "...", "hint": "..."}
             struct PostgresError: Decodable {
@@ -324,13 +324,13 @@ class SupabaseClient: RoomManager, UserManager {
                 let details: String?
                 let hint: String?
             }
-            
+
             if let jsonError = try? JSONDecoder().decode(PostgresError.self, from: data) {
                 print("❌ Supabase API Error: \(jsonError.message)")
                 // For PostgreSQL exceptions (which we use for limits), use the raw message
                 throw SupabaseError.userMessage(jsonError.message)
             }
-            
+
             print("❌ Supabase error (\(httpResponse.statusCode)): \(errorString)")
             throw SupabaseError.httpError(httpResponse.statusCode, errorString)
         }
@@ -431,22 +431,22 @@ class SupabaseClient: RoomManager, UserManager {
             "p_username": username,
             "p_public_key": publicKey
         ]
-        
+
         let data = try await makeRequest(
             path: "/rpc/register_user_secure",
             method: "POST",
             body: params
         )
-        
+
         struct MinimalResponse: Decodable {
             let id: UUID
             let username: String
             let status: String
         }
-        
+
         // The RPC returns a minimal object {id, username, status} that doesn't match full SupabaseUser
         let response = try jsonDecoder.decode(MinimalResponse.self, from: data)
-        
+
         // Now fetch the full user profile to get created_at, isAdmin, etc.
         // We use a small retry in case of replication lag, though likely instantaneous on same node
         if let fullUser = try await getUserById(userId: response.id) {
@@ -462,7 +462,7 @@ class SupabaseClient: RoomManager, UserManager {
             // Fallback if fetch fails (rare) -> Construct ephemeral user
             // We fake dates to avoid crash. This is a critical fallback.
             NSLog("%@", "⚠️ registerUserSecure: Could not fetch full profile immediately. Using fallback.")
-            
+
             // Construct AuthUser manually
             auth.currentUser = AuthUser(
                 id: response.id,
@@ -470,8 +470,8 @@ class SupabaseClient: RoomManager, UserManager {
                 isAdmin: false,
                 isPremium: false
             )
-            
-            // We return a constructed SupabaseUser. 
+
+            // We return a constructed SupabaseUser.
             // Warning: Missing fields might be nil or default.
             return SupabaseUser(
                 id: response.id,
@@ -570,11 +570,11 @@ class SupabaseClient: RoomManager, UserManager {
         guard let log = try await getLatestSystemJobLog(jobName: "zilean_maintenance") else {
             return (0, nil)
         }
-        
+
         guard let details = log.details else {
             return (0, log.createdAt)
         }
-        
+
         var count = 0
         // Expected format: "Total Torrents: 64973. ..."
         if let range = details.range(of: "Total Torrents: "),
@@ -586,7 +586,7 @@ class SupabaseClient: RoomManager, UserManager {
             let digits = details.prefix(while: { $0 != "." }).filter { $0.isNumber }
             count = Int(digits) ?? 0
         }
-        
+
         return (count, log.createdAt)
     }
 
@@ -739,11 +739,11 @@ class SupabaseClient: RoomManager, UserManager {
             "limit": String(limit),
             "offset": String(offset)
         ]
-        
+
         if let search = searchQuery, !search.isEmpty {
             queryParams["name"] = "ilike.%\(search)%"
         }
-        
+
         let data = try await makeRequest(
             path: "/rooms",
             query: queryParams
@@ -774,22 +774,22 @@ class SupabaseClient: RoomManager, UserManager {
             print("⚠️ checkFreeTierLimit: No current user ID")
             return 0
         }
-        
+
         struct FreeTierStatus: Decodable {
             let remaining_seconds: Double
             let is_locked: Bool
         }
-        
+
         do {
             // Use RPC to bypass RLS and get robust server-side calculation
             let status: FreeTierStatus = try await rpc(
                 fn: "get_free_tier_status",
                 params: ["target_user_id": userId.uuidString.lowercased()]
             )
-            
+
             print("⏳ checkFreeTierLimit (RPC): Locked=\(status.is_locked), Remaining=\(status.remaining_seconds)")
             return status.remaining_seconds
-            
+
         } catch {
             print("❌ checkFreeTierLimit RPC failed: \(error)")
             // Fallback to 0 (allow hosting) if check fails, to avoid blocking legitimate users on network error
@@ -823,7 +823,7 @@ class SupabaseClient: RoomManager, UserManager {
             "is_public": isPublic,
             "last_activity": SupabaseClient.isoFormatter.string(from: createdAt ?? Date())
         ]
-        
+
         if let hostId = hostUserId {
             roomData["host_user_id"] = hostId.uuidString.lowercased()
         } else {
@@ -1152,17 +1152,17 @@ class SupabaseClient: RoomManager, UserManager {
             "name": name,
             "last_activity": ISO8601DateFormatter().string(from: Date())
         ]
-        
+
         // CRITICAL FIX: Explicitly clear fields when nil to remove stale values
         // When changing from series to movie, we must NULL out season/episode
         if let imdbId = imdbId {
             body["imdb_id"] = imdbId
         }
-        
+
         // Always set season/episode (use NSNull() to clear if nil)
         body["season"] = season != nil ? season! : NSNull()
         body["episode"] = episode != nil ? episode! : NSNull()
-        
+
         if let posterUrl = posterUrl { body["poster_url"] = posterUrl }
         if let backdropUrl = backdropUrl { body["backdrop_url"] = backdropUrl }
 
@@ -1190,8 +1190,27 @@ class SupabaseClient: RoomManager, UserManager {
         )
     }
 
+    /// Update room description (Host only)
+    func updateRoomDescription(roomId: String, description: String?) async throws {
+        var body: [String: Any] = [
+            "last_activity": ISO8601DateFormatter().string(from: Date())
+        ]
 
+        if let description = description, !description.isEmpty {
+            // Limit to 200 characters to prevent abuse
+            body["description"] = String(description.prefix(200))
+        } else {
+            body["description"] = NSNull()
+        }
 
+        _ = try await makeRequest(
+            path: "/rooms",
+            method: "PATCH",
+            body: body,
+            query: ["id": "eq.\(roomId)"]
+        )
+        NSLog("%@", "✅ Updated room description for \(roomId)")
+    }
     /// Invoke cleanup for stale participants (RPC call)
     func cleanupStaleParticipants() async throws {
         _ = try await makeRequest(
@@ -1272,7 +1291,7 @@ class SupabaseClient: RoomManager, UserManager {
             "p_limit": limit,
             "p_offset": offset
         ]
-        
+
         // Use SIGNED request to prove Admin Identity via Public Key
         let data = try await makeRequest(
             path: "/rpc/get_admin_logs",
@@ -1297,7 +1316,7 @@ class SupabaseClient: RoomManager, UserManager {
             print("❌ Failed to delete app log: \(error)")
         }
     }
-    
+
     /// Delete all app logs (Admin RPC)
     func deleteAllAppLogs() async throws {
         _ = try await makeRequest(
@@ -1736,27 +1755,27 @@ struct ReportedStream: Identifiable, Codable {
 
         return (result.premium ?? false, nil)
     }
-    
+
     /// Trigger manual sweep of funds to master wallet
     func sweepPayments() async throws -> String {
         let response = try await functions.invoke("sweep-payments", options: .init(body: [:]))
-        
+
         if let string = String(data: response, encoding: .utf8) {
             return string
         }
         return "Sweep command sent"
     }
-    
+
     // MARK: - Payment Transaction History
-    
+
     /// Get current user's own payment transactions (uses RLS policy)
     func getMyPaymentTransactions() async throws -> [PaymentTransaction] {
         guard let userId = auth.currentUser?.id else {
             return []
         }
-        
+
         let params = ["p_user_id": userId.uuidString]
-        
+
         // Use RPC to bypass RLS since client auth token is missing/invalid
         let data = try await makeRequest(
             path: "/rpc/get_user_payment_history",
@@ -1765,7 +1784,7 @@ struct ReportedStream: Identifiable, Codable {
         )
         return try jsonDecoder.decode([PaymentTransaction].self, from: data)
     }
-    
+
     /// Admin: Get all payment transactions with joined username
     /// Uses RPC `get_all_payment_transactions` to bypass RLS and join users
     func getAllPaymentTransactions(limit: Int = 50, offset: Int = 0, search: String? = nil) async throws -> [PaymentTransaction] {
@@ -1779,7 +1798,7 @@ struct ReportedStream: Identifiable, Codable {
             let txHash: String
             let createdAt: Date
             let durationDays: Int?
-            
+
             enum CodingKeys: String, CodingKey {
                 case id, username, chain, currency, amount
                 case userId = "user_id"
@@ -1788,12 +1807,12 @@ struct ReportedStream: Identifiable, Codable {
                 case durationDays = "duration_days"
             }
         }
-        
+
         var params: [String: Any] = ["p_limit": limit, "p_offset": offset]
         if let search = search, !search.isEmpty {
             params["p_search"] = search
         }
-        
+
         // Use manual RPC call via PostgREST
         let data = try await makeRequest(
             path: "/rpc/get_all_payment_transactions",
@@ -1801,7 +1820,7 @@ struct ReportedStream: Identifiable, Codable {
             body: params
         )
         let rpcTransactions = try jsonDecoder.decode([RPCTransaction].self, from: data)
-        
+
         // Map RPC result to PaymentTransaction model
         return rpcTransactions.map { tx in
             var paymentTx = PaymentTransaction(
@@ -1818,7 +1837,7 @@ struct ReportedStream: Identifiable, Codable {
             return paymentTx
         }
     }
-    
+
     /// Admin: Get payment statistics (total revenue, 30-day, 90-day)
     /// Uses RPC `get_payment_stats` to bypass RLS
     func getPaymentStats() async throws -> PaymentStats {
@@ -1827,7 +1846,7 @@ struct ReportedStream: Identifiable, Codable {
             path: "/rpc/get_payment_stats",
             method: "POST"
         )
-        
+
         let statsArray = try jsonDecoder.decode([PaymentStats].self, from: data)
         if let stats = statsArray.first {
             return stats
@@ -1937,7 +1956,7 @@ struct ReportedStream: Identifiable, Codable {
         )
         return try jsonDecoder.decode([SystemJobLog].self, from: data)
     }
-    
+
     /// Delete all system job logs (Admin)
     func deleteAllSystemLogs() async throws {
          _ = try await makeRequest(
@@ -2156,10 +2175,10 @@ struct PaymentTransaction: Codable, Identifiable {
     let txHash: String
     let createdAt: Date
     let durationDays: Int?
-    
+
     // Joined username (optional, populated for admin views)
     var username: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case id, chain, currency, amount, username
         case userId = "user_id"
@@ -2175,7 +2194,7 @@ struct PaymentStats: Codable {
     let totalRevenueUsd: Double
     let revenue30d: Double
     let revenue90d: Double
-    
+
     enum CodingKeys: String, CodingKey {
         case totalTransactions = "total_transactions"
         case totalRevenueUsd = "total_revenue_usd"
@@ -2193,7 +2212,7 @@ extension SupabaseClient {
         let reason: String?
         let blockedBy: UUID?
         let createdAt: Date
-        
+
         enum CodingKeys: String, CodingKey {
             case streamHash = "stream_hash"
             case filename
@@ -2543,7 +2562,7 @@ extension SupabaseClient {
             "target_id": blockedId.uuidString,
             "action": "block"
         ]
-        
+
         _ = try await makeRequest(
             path: "/rpc/manage_block",
             method: "POST",
@@ -2557,7 +2576,7 @@ extension SupabaseClient {
             "target_id": blockedId.uuidString,
             "action": "unblock"
         ]
-        
+
         _ = try await makeRequest(
             path: "/rpc/manage_block",
             method: "POST",

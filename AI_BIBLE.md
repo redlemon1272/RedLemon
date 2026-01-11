@@ -164,6 +164,12 @@
     -   Linking a Report? Use `log.id`.
     -   Grouping a User's history? Use `log.session_id`.
 
+### 24. Decouple Navigation State Updates
+- **Problem**: Synchronous state updates within gesture handlers can cause the parent view (e.g., `BrowseView`) to unmount/disappear immediately, triggering its `onDisappear` cleanup logic (cancelling tasks) *before* the target view is ready or data is prepared.
+- **Symptom**: The app appears to "freeze" or the current view vanishes without the new one appearing, often accompanied by logs showing "View disappeared - cancelling tasks".
+- **Rule**: When triggering significant view transitions from detailed user interactions (gestures, list taps), **ALWAYS** wrap the state update in `DispatchQueue.main.async` or a detached `Task { @MainActor ... }`.
+    - **Fix**: `DispatchQueue.main.async { appState.currentView = .target }`
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |

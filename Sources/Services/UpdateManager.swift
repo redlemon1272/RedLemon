@@ -55,7 +55,15 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
         print("🔍 Manual update check requested...")
         // Update the timestamp immediately to show user something happened
         self.lastCheckedDate = Date()
+        
+        // Primary method via controller
         updaterController?.checkForUpdates(nil)
+        
+        // Fallback: Directly trigger updater if controller is stubborn
+        if let updater = updaterController?.updater {
+            print("🚀 Triggering updater directly (fallback)")
+            updater.checkForUpdates()
+        }
     }
 
     /// Check for updates silently (called on app launch)

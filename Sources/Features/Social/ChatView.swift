@@ -195,7 +195,13 @@ struct DMMessageRow: View {
             if isMe { Spacer() }
             
             VStack(alignment: isMe ? .trailing : .leading, spacing: 4) {
-                // Only show name for friend if not me
+                // Timestamp Above
+                Text(formatDate(message.createdAt))
+                    .font(.caption2)
+                    .foregroundColor(.white.opacity(0.4))
+                    .padding(.horizontal, 4)
+                
+                // Only show name for friend if not me (and not redundant with avatar if we had one, but here we keep it)
                 if !isMe {
                    Text(friend.username)
                         .font(.caption.weight(.semibold))
@@ -203,70 +209,75 @@ struct DMMessageRow: View {
                 }
                 
                 if message.content.hasPrefix("INVITE|") {
-                    // Render Invite Card
-                    let components = message.content.split(separator: "|")
-                    if components.count >= 3 {
-                        let roomId = String(components[1])
-                        let roomName = String(components[2])
-                        
-                        VStack(spacing: 8) {
-                            Text("🎬 Watch Party Invite")
-                                .font(.caption)
-                                .fontWeight(.bold)
-                                .foregroundColor(isMe ? .white.opacity(0.8) : .secondary)
-                            
-                            Text(roomName)
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .lineLimit(1)
-                            
-                            if !isMe {
-                                Button(action: {
-                                    Task {
-                                        await appState.player.joinRoom(roomId: roomId)
-                                    }
-                                }) {
-                                    Text("Join Party")
-                                        .fontWeight(.semibold)
-                                        .padding(.horizontal, 16)
-                                        .padding(.vertical, 8)
-                                        .background(Color.green)
-                                        .foregroundColor(.white)
-                                        .cornerRadius(8)
-                                }
-                                .buttonStyle(.plain)
-                            } else {
-                                Text("Invite Sent")
-                                    .font(.caption)
-                                    .italic()
-                                    .foregroundColor(.white.opacity(0.7))
-                            }
-                        }
-                        .padding(12)
-                        .background(isMe ? Color.blue.opacity(0.8) : Color.white.opacity(0.1))
-                        .cornerRadius(12)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.white.opacity(0.15), lineWidth: 1)
-                        )
-                    } else {
-                         // Malformed Invite fallback
-                         Text("Invalid Invite")
-                            .font(.caption)
-                            .foregroundColor(.red)
-                    }
+                    inviteCard(isMe: isMe)
                 } else {
-                    // Standard Text Message
-                    Text(message.content)
-                        .font(.body)
-                        .foregroundColor(.white)
-                        .padding(10)
-                        .background(isMe ? Color.blue : Color(white: 0.2)) // Safer dark grey than opacity
-                        .cornerRadius(12)
+                    textMessage(isMe: isMe)
                 }
             }
             
             if !isMe { Spacer() }
         }
+    }
+    
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, h:mm a"
+        return formatter.string(from: date)
+    }
+    
+    private func textMessage(isMe: Bool) -> some View {
+        Text(message.content)
+            .font(.body)
+            .foregroundColor(.white)
+            .padding(10)
+            .background(isMe ? Color.blue : Color(white: 0.2)) // Safer dark grey than opacity
+            .cornerRadius(12)
+    }
+    
+    private func inviteCard(isMe: Bool) -> some View {
+        let components = message.content.split(separator: "|")
+        let roomId = components.count >= 2 ? String(components[1]) : ""
+        let roomName = components.count >= 3 ? String(components[2]) : "Watch Party"
+        
+        return VStack(spacing: 8) {
+            Text("🎬 Watch Party Invite")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(isMe ? .white.opacity(0.8) : .secondary)
+            
+            Text(roomName)
+                .font(.headline)
+                .foregroundColor(.white)
+                .lineLimit(1)
+            
+            if !isMe {
+                Button(action: {
+                    Task {
+                        await appState.player.joinRoom(roomId: roomId)
+                    }
+                }) {
+                    Text("Join Party")
+                        .fontWeight(.semibold)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
+                .buttonStyle(.plain)
+            } else {
+                Text("Invite Sent")
+                    .font(.caption)
+                    .italic()
+                    .foregroundColor(.white.opacity(0.7))
+            }
+        }
+        .padding(12)
+        .background(isMe ? Color.blue.opacity(0.8) : Color.white.opacity(0.1))
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.white.opacity(0.15), lineWidth: 1)
+        )
     }
 }

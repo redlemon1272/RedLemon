@@ -6,6 +6,7 @@ enum AdminCategory: String, CaseIterable, Identifiable {
     case users = "Users"
     case payments = "Payments"
     case events = "Events"
+    case content = "Content"
     case server = "Server"
     case logs = "Logs"
     
@@ -17,6 +18,7 @@ enum AdminCategory: String, CaseIterable, Identifiable {
         case .users: return "person.2.fill"
         case .payments: return "dollarsign.circle.fill"
         case .events: return "play.tv.fill"
+        case .content: return "film.fill"
         case .server: return "server.rack"
         case .logs: return "list.bullet.rectangle.portrait"
         }
@@ -30,6 +32,7 @@ struct AdminOverviewView: View {
     let systemLatency: Double
     let versionStats: [AppVersionStat]
     let contentStats: [ContentPopularityStat]
+    let zileanLastUpdate: Date?
     var onRefresh: (() -> Void)?
     
     var body: some View {
@@ -55,7 +58,13 @@ struct AdminOverviewView: View {
                     
                     HStack(spacing: 16) {
                         StatusCard(title: "Users", value: "\(userCount)", icon: "person.2.fill", color: .blue)
-                        StatusCard(title: "Zilean Torrents", value: "\(zileanCount.formatted())", icon: "magnifyingglass.circle.fill", color: .purple)
+                        StatusCard(
+                            title: "Zilean Torrents",
+                            value: "\(zileanCount.formatted())",
+                            icon: "magnifyingglass.circle.fill",
+                            color: .purple,
+                            subtitle: zileanLastUpdate.map { "Updated \($0.timeAgoDisplay())" }
+                        )
                         StatusCard(title: "Latency", value: String(format: "%.0f ms", systemLatency), icon: "network", color: systemLatency > 500 ? .orange : .green)
                     }
                 }
@@ -443,7 +452,6 @@ struct AdminEventsView: View {
     
     // Schedule Management
     @State private var isShowingScheduleManagement = false
-    @State private var isShowingVerifiedStreams = false
     @State private var eventConfigVersion: Int?
     @State private var eventConfigMovieCount: Int?
     @State private var isLoading = false
@@ -490,25 +498,6 @@ struct AdminEventsView: View {
                     .background(Color(NSColor.controlBackgroundColor))
                     .cornerRadius(8)
                     
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Content Manager")
-                                .font(.system(size: 13, weight: .medium))
-                            Text("Verified Streams & Feedback")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                        
-                        Spacer()
-                        
-                        Button("View List") {
-                            isShowingVerifiedStreams = true
-                        }
-                        .tint(.green)
-                    }
-                    .padding()
-                    .background(Color(NSColor.controlBackgroundColor))
-                    .cornerRadius(8)
                 }
                 
                 Divider()
@@ -606,10 +595,6 @@ struct AdminEventsView: View {
         }
         .sheet(isPresented: $isShowingScheduleManagement) {
             ScheduleManagementView(isPresented: $isShowingScheduleManagement)
-        }
-        .sheet(isPresented: $isShowingVerifiedStreams) {
-            VerifiedStreamsView()
-                .frame(minWidth: 600, minHeight: 400)
         }
         .onAppear(perform: loadData)
     }
@@ -1510,5 +1495,13 @@ struct LogEventRow: View {
                     .padding(.leading, 175)
             }
         }
+    }
+}
+
+extension Date {
+    func timeAgoDisplay() -> String {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
+        return formatter.localizedString(for: self, relativeTo: Date())
     }
 }

@@ -565,26 +565,34 @@ class SupabaseClient: RoomManager, UserManager {
         return logs.first
     }
 
-    /// Extract Zilean torrent count from the latest maintenance log details
-    func getZileanTorrentCount() async throws -> Int {
+    /// Extract Zilean torrent count and last update time
+    func getZileanStatus() async throws -> (count: Int, lastUpdate: Date?) {
         guard let log = try await getLatestSystemJobLog(jobName: "zilean_maintenance") else {
-            return 0
+            return (0, nil)
         }
         
         guard let details = log.details else {
-            return 0
+            return (0, log.createdAt)
         }
         
+        var count = 0
         // Expected format: "Total Torrents: 64973. ..."
         if let range = details.range(of: "Total Torrents: "),
            let firstPeriod = details[range.upperBound...].firstIndex(of: ".") {
             let countStr = details[range.upperBound..<firstPeriod].trimmingCharacters(in: .whitespaces)
-            return Int(countStr) ?? 0
+            count = Int(countStr) ?? 0
+        } else {
+            // Fallback to extraction if format changed but numbers exist
+            let digits = details.prefix(while: { $0 != "." }).filter { $0.isNumber }
+            count = Int(digits) ?? 0
         }
         
-        // Fallback to extraction if format changed but numbers exist
-        let digits = details.prefix(while: { $0 != "." }).filter { $0.isNumber }
-        return Int(digits) ?? 0
+        return (count, log.createdAt)
+    }
+
+    // Keep the old one for compatibility if needed, but let's just update all callers
+    func getZileanTorrentCount() async throws -> Int {
+        return try await getZileanStatus().count
     }
 
 

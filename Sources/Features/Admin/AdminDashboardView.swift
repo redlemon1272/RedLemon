@@ -19,6 +19,7 @@ struct AdminDashboardView: View {
     @State private var contentStats: [ContentPopularityStat] = []
     @State private var userCount: Int = 0
     @State private var zileanCount: Int = 0
+    @State private var zileanLastUpdate: Date?
     @State private var systemLatency: Double = 0
     @State private var isLoadingOverview = false
     
@@ -84,6 +85,7 @@ struct AdminDashboardView: View {
                                 systemLatency: systemLatency,
                                 versionStats: versionStats,
                                 contentStats: contentStats,
+                                zileanLastUpdate: zileanLastUpdate,
                                 onRefresh: loadOverviewData
                             )
                             .onAppear(perform: loadOverviewData)
@@ -99,6 +101,8 @@ struct AdminDashboardView: View {
                     AdminPaymentsView()
                 case .events:
                     AdminEventsView()
+                case .content:
+                    VerifiedStreamsView(isEmbedded: true)
                 case .server:
                     AdminServerView()
                 case .logs:
@@ -115,14 +119,16 @@ struct AdminDashboardView: View {
         isLoadingOverview = true
         Task {
             async let count = SupabaseClient.shared.getUserCount()
-            async let zCount = SupabaseClient.shared.getZileanTorrentCount()
+            async let zStatus = SupabaseClient.shared.getZileanStatus()
             async let latency = SupabaseClient.shared.checkHealth()
             async let versions = SupabaseClient.shared.getAppVersionStats()
             async let content = SupabaseClient.shared.getContentPopularity()
             
             do {
                 userCount = try await count
-                zileanCount = try await zCount
+                let status = try await zStatus
+                zileanCount = status.count
+                zileanLastUpdate = status.lastUpdate
                 systemLatency = try await latency
                 versionStats = try await versions
                 contentStats = try await content
@@ -174,6 +180,7 @@ struct StatusCard: View {
     let value: String
     let icon: String
     let color: Color
+    var subtitle: String? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -186,6 +193,12 @@ struct StatusCard: View {
             }
             Text(value)
                 .font(.system(size: 24, weight: .bold))
+            
+            if let subtitle = subtitle {
+                Text(subtitle)
+                    .font(.system(size: 10))
+                    .foregroundColor(.secondary)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()

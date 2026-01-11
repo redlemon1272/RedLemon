@@ -11,6 +11,7 @@ import Foundation
 struct VerifiedStreamsView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedTab = "streams"
+    var isEmbedded: Bool = false
     
     // Data Storage
     @State private var verifiedStreams: [SupabaseClient.VerifiedStream] = []
@@ -22,16 +23,18 @@ struct VerifiedStreamsView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Header
-            HStack {
-                Text("Content & Feedback Manager")
-                    .font(.title2.bold())
-                Spacer()
-                Button("Close") { dismiss() }
-                    .keyboardShortcut(.cancelAction)
+            if !isEmbedded {
+                // Header
+                HStack {
+                    Text("Content & Feedback Manager")
+                        .font(.title2.bold())
+                    Spacer()
+                    Button("Close") { dismiss() }
+                        .keyboardShortcut(.cancelAction)
+                }
+                .padding()
+                .background(Color(NSColor.controlBackgroundColor))
             }
-            .padding()
-            .background(Color(NSColor.controlBackgroundColor))
             
             // Tabs
             Picker("", selection: $selectedTab) {
@@ -54,7 +57,8 @@ struct VerifiedStreamsView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(minWidth: 800, minHeight: 600)
+        .frame(minWidth: isEmbedded ? nil : 800, minHeight: isEmbedded ? nil : 600)
+        .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensure it fills the container in embedded mode
         .task(id: selectedTab) {
             await loadData()
         }

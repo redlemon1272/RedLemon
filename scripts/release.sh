@@ -83,7 +83,7 @@ cat > new_item.xml <<EOF
                 </ul>
             ]]></description>
             <pubDate>${DATE_APPC}</pubDate>
-            <sparkle:version>${VERSION}</sparkle:version>
+            <sparkle:version>${BUILD_NUMBER}</sparkle:version>
             <sparkle:shortVersionString>${VERSION}</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure

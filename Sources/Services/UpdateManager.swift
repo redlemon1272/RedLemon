@@ -31,7 +31,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
     private func setupSparkle() {
         // Initialize Sparkle updater with delegate (but don't start automatically)
         updaterController = SPUStandardUpdaterController(
-            startingUpdater: false,  // Don't auto-start to prevent popups
+            startingUpdater: true,  // Must be true to allow Sparkle to run
             updaterDelegate: self,
             userDriverDelegate: nil
         )
@@ -82,20 +82,24 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
 
             // Parse version from appcast (simple regex for <sparkle:version>)
             if let versionRange = xmlString.range(of: #"<sparkle:version>([^<]+)</sparkle:version>"#, options: .regularExpression),
-               let latestVersion = String(xmlString[versionRange]).components(separatedBy: ">")[1].components(separatedBy: "<").first {
+               let latestVersionStr = String(xmlString[versionRange]).components(separatedBy: ">")[1].components(separatedBy: "<").first {
 
-                let currentVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "0"
+                let currentVersionStr = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "0"
 
-                print("📦 Current version: \(currentVersion), Latest: \(latestVersion)")
+                print("📦 Current build: \(currentVersionStr), Latest build: \(latestVersionStr)")
 
-                if latestVersion != currentVersion && latestVersion > currentVersion {
-                    print("✅ Update available: \(latestVersion)")
+                // Convert to Int for robust numeric comparison (build numbers are integers)
+                let currentBuild = Int(currentVersionStr) ?? 0
+                let latestBuild = Int(latestVersionStr) ?? 0
+
+                if latestBuild > currentBuild {
+                    print("✅ Update available: Build \(latestBuild)")
                     await MainActor.run {
                         self.updateAvailable = true
                         self.lastCheckedDate = Date()
                     }
                 } else {
-                    print("✅ App is up to date")
+                    print("✅ App is up to date (current: \(currentBuild), latest: \(latestBuild))")
                     await MainActor.run {
                         self.updateAvailable = false
                         self.lastCheckedDate = Date()

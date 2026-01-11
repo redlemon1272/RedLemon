@@ -447,16 +447,17 @@ struct BrowseView: View {
         print("🚨 SERVICE FAILURE LOG: \(logEntry)")
     }
 
-    private func selectMedia(_ item: MediaItem) async {
+    private func selectMedia(_ item: MediaItem) {
         // Navigate to detail view in main content area
-        // Decouple state update from gesture processing to prevent lifecycle conflicts
+        // CRITICAL: This function MUST be synchronous (not async) to prevent Landmine #24
+        // Making it async keeps the calling Task alive, which gets cancelled by onDisappear,
+        // causing intermittent freezes during navigation.
         print("👆 Selected media item: \(item.name)")
-        
-        // Force update on next runloop cycle to unsure gesture is fully completed
-        DispatchQueue.main.async {
-            self.appState.player.selectedMediaItem = item
-            self.appState.currentView = .mediaDetail
-        }
+
+        // Direct assignment - gesture handlers already run on MainActor
+        // AppState is @MainActor isolated, so this is safe from SwiftUI gesture context
+        appState.player.selectedMediaItem = item
+        appState.currentView = .mediaDetail
     }
 
     private func loadRecentlyWatched() {
@@ -1307,7 +1308,7 @@ struct MediaCard: View {
 struct StreamingServiceRow: View {
     let title: String
     let items: [MediaItem]
-    let onTap: (MediaItem) async -> Void
+    let onTap: (MediaItem) -> Void
 
     var body: some View {
         if !items.isEmpty {
@@ -1322,9 +1323,7 @@ struct StreamingServiceRow: View {
                         ForEach(items) { item in
                             MediaCard(item: item)
                                 .onTapGesture {
-                                    Task {
-                                        await onTap(item)
-                                    }
+                                    onTap(item)
                                 }
                         }
                     }
@@ -1341,7 +1340,7 @@ struct LazyStreamingServiceRow: View {
     let catalogKey: String
     let items: [MediaItem]
     let isLoading: Bool
-    let onTap: (MediaItem) async -> Void
+    let onTap: (MediaItem) -> Void
     let onAppear: () async -> Void
 
     @State private var hasAppeared = false
@@ -1376,9 +1375,7 @@ struct LazyStreamingServiceRow: View {
                         ForEach(items) { item in
                             OptimizedMediaCard(item: item)
                                 .onTapGesture {
-                                    Task {
-                                        await onTap(item)
-                                    }
+                                    onTap(item)
                                 }
                         }
                     }

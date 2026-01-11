@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 10, 2026
+> **Last Updated:** January 11, 2026
 > **Platform:** macOS (Native App)
 > Read this first. Contains everything an AI assistant needs to work on this codebase.
 
@@ -164,11 +164,26 @@
     -   Linking a Report? Use `log.id`.
     -   Grouping a User's history? Use `log.session_id`.
 
-### 24. Decouple Navigation State Updates
-- **Problem**: Synchronous state updates within gesture handlers can cause the parent view (e.g., `BrowseView`) to unmount/disappear immediately, triggering its `onDisappear` cleanup logic (cancelling tasks) *before* the target view is ready or data is prepared.
-- **Symptom**: The app appears to "freeze" or the current view vanishes without the new one appearing, often accompanied by logs showing "View disappeared - cancelling tasks".
-- **Rule**: When triggering significant view transitions from detailed user interactions (gestures, list taps), **ALWAYS** wrap the state update in `DispatchQueue.main.async` or a detached `Task { @MainActor ... }`.
-    - **Fix**: `DispatchQueue.main.async { appState.currentView = .target }`
+### 24. Navigation State Updates from Gestures
+- **Problem**: When triggering navigation from gesture handlers (tap, swipe), the current view's `onDisappear` fires immediately and cancels any active Tasks, potentially racing with the navigation transition.
+- **Symptom**: Intermittent "freeze" when clicking items on browse pages. Logs show "View disappeared - cancelling tasks" immediately after selection.
+- **Root Cause**: If the navigation trigger is wrapped in an `async` function, the calling `Task` stays alive and gets cancelled by `onDisappear`. Alternatively, wrapping in `DispatchQueue.main.async` causes Landmine #25.
+- **Rule**: Navigation state changes from gesture handlers should be **synchronous** and **direct**:
+    - ✅ **Correct**: `appState.currentView = .target` (direct assignment)
+    - ❌ **Wrong**: `Task { await navigate() }` (async keeps Task alive)
+    - ❌ **Wrong**: `DispatchQueue.main.async { appState.currentView = .target }` (GCD incompatible with @MainActor, see Landmine #25)
+- **Key Files**: `BrowseView.swift` (`selectMedia`), `DiscoverView.swift` (`selectMedia`)
+
+### 25. GCD vs @MainActor Isolation (The DispatchQueue Trap)
+- **Problem**: `DispatchQueue.main.async` and `@MainActor` are **not equivalent**. Using GCD to access `@MainActor` isolated objects can cause data races and intermittent freezes.
+- **Background**: `AppState` is marked `@MainActor`. While both GCD main queue and MainActor run on the main thread, Swift's actor isolation doesn't recognize `DispatchQueue.main` as satisfying `@MainActor` requirements.
+- **Symptom**: Intermittent hangs, freezes, or unpredictable UI behavior when mixing GCD with actor-isolated types.
+- **Rule**: For `@MainActor` isolated objects:
+    - ✅ **Direct access** from SwiftUI views (they're already MainActor-isolated)
+    - ✅ **`Task { @MainActor in ... }`** for async contexts
+    - ✅ **`await MainActor.run { ... }`** for explicit hopping
+    - ❌ **`DispatchQueue.main.async { ... }`** causes data races with actors
+- **Exception**: `DispatchQueue.main.async` is fine for non-actor-isolated code, but avoid mixing with Swift Concurrency actors.
 
 ## 🏗️ Architecture Map
 
@@ -480,7 +495,7 @@ Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SE
 # Part 8: Local HTTP Server Architecture
 
 ## Overview
-The app runs an **embedded Vapor HTTP server** on `127.0.0.1:8080`. This server handles stream resolution, metadata fetching, and debrid unlocking—replacing the Node.js Express server from the original ColorFruit project.
+The app runs an **embedded Vapor HTTP server** on `127.0.0.1:47253`. This server handles stream resolution, metadata fetching, and debrid unlocking—replacing the Node.js Express server from the original ColorFruit project.
 
 ## Key Files
 | File | Purpose |

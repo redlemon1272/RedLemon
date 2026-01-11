@@ -165,9 +165,7 @@ struct DiscoverView: View {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(filteredItems, id: \.id) { item in
                             Button(action: {
-                                Task {
-                                    await selectMedia(item)
-                                }
+                                selectMedia(item)
                             }) {
                                 DiscoverMediaCard(item: item)
                             }
@@ -256,8 +254,10 @@ struct DiscoverView: View {
         }
     }
 
-    private func selectMedia(_ item: MediaItem) async {
+    private func selectMedia(_ item: MediaItem) {
         // Navigate to detail view in main content area (same as BrowseView)
+        // CRITICAL: Must be synchronous to prevent Landmine #24 race conditions
+        // Direct assignment - gesture handlers already run on MainActor
         appState.player.selectedMediaItem = item
         appState.currentView = .mediaDetail
     }
@@ -323,7 +323,7 @@ struct DiscoverMediaCard: View {
 
     private func loadPoster() async {
         guard let posterURL = item.poster else { return }
-        
+
         // Check cache first
         if let cachedData = await CacheManager.shared.getImageData(key: posterURL) {
             await MainActor.run {
@@ -338,7 +338,7 @@ struct DiscoverMediaCard: View {
             let (data, _) = try await URLSession.shared.data(from: url)
             // Cache
             await CacheManager.shared.setImageData(key: posterURL, value: data)
-            
+
             await MainActor.run {
                 self.imageData = data
             }

@@ -155,6 +155,15 @@
     - `mediaItem.description` = `payload["overview"]` or kept as-is (The Movie's plot)
     - **Never** assume "description" genericially refers to one or the other without checking context.
 
+### 23. Session ID vs. Log Entry ID (The Feedback Trap)
+- **Problem**: The `session_logs` table stores *individual events*, not just sessions. It has two IDs:
+    -   `id`: The Primary Key of the specific log row.
+    -   `session_id`: The Grouping Key for the entire user session.
+- **Pitfall**: External tables (like `feedback_reports`) often link to a specific *Log Entry* (`id`) to capture the exact state at reporting time. Matching this against `session_id` causes silent failures.
+- **Rule**: When joining or matching `session_logs`, check the Granularity.
+    -   Linking a Report? Use `log.id`.
+    -   Grouping a User's history? Use `log.session_id`.
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |

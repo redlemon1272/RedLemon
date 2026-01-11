@@ -45,7 +45,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
             updater.automaticallyDownloadsUpdates = true
 
             print("✅ Sparkle configured (seamless mode)")
-            print("   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml")
+            print("   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml")
             print("   Can check: \(canCheckForUpdates)")
         }
     }
@@ -68,7 +68,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
 
     /// Custom silent update check that doesn't use Sparkle's UI
     private func checkForUpdatesQuietly() async {
-        guard let feedURL = URL(string: "https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml") else {
+        guard let feedURL = URL(string: "https://151.243.109.243.nip.io/updates/appcast.xml") else {
             print("❌ Invalid feed URL")
             return
         }
@@ -111,7 +111,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
 
     /// Provide the feed URL (can also be set in Info.plist as SUFeedURL)
     func feedURLString(for updater: SPUUpdater) -> String? {
-        let feedURL = "https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml"
+        let feedURL = "https://151.243.109.243.nip.io/updates/appcast.xml"
         print("📡 Sparkle requesting feed URL: \(feedURL)")
         return feedURL
     }

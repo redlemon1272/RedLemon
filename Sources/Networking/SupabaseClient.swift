@@ -1795,12 +1795,14 @@ struct ReportedStream: Identifiable, Codable {
             let chain: String
             let currency: String
             let amount: Double
+            let amountUsd: Double?
             let txHash: String
             let createdAt: Date
             let durationDays: Int?
 
             enum CodingKeys: String, CodingKey {
                 case id, username, chain, currency, amount
+                case amountUsd = "amount_usd"
                 case userId = "user_id"
                 case txHash = "tx_hash"
                 case createdAt = "created_at"
@@ -1829,6 +1831,7 @@ struct ReportedStream: Identifiable, Codable {
                 chain: tx.chain,
                 currency: tx.currency,
                 amount: tx.amount,
+                amountUsd: tx.amountUsd,
                 txHash: tx.txHash,
                 createdAt: tx.createdAt,
                 durationDays: tx.durationDays
@@ -2172,6 +2175,7 @@ struct PaymentTransaction: Codable, Identifiable {
     let chain: String      // "btc", "evm" (matches key_derivation_indices)
     let currency: String   // "BTC", "ETH", "USDC", "USDT"
     let amount: Double
+    var amountUsd: Double? // Value in USD at time of query
     let txHash: String
     let createdAt: Date
     let durationDays: Int?
@@ -2181,6 +2185,7 @@ struct PaymentTransaction: Codable, Identifiable {
 
     enum CodingKeys: String, CodingKey {
         case id, chain, currency, amount, username
+        case amountUsd = "amount_usd"
         case userId = "user_id"
         case txHash = "tx_hash"
         case createdAt = "created_at"

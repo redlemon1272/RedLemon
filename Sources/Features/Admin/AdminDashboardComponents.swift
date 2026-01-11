@@ -723,6 +723,18 @@ struct AdminPaymentsView: View {
                     .padding(.horizontal)
                     .padding(.bottom, 4)
             }
+            if let msg = sweepMessage {
+                Text(msg)
+                    .font(.caption)
+                    .foregroundColor(msg.contains("Error") ? .red : .green)
+                    .padding(.horizontal)
+                    .padding(.bottom, 4)
+            }
+            
+            // Dispute Resolver
+            DisputeResolverView()
+                .padding(.horizontal)
+                .padding(.bottom, 8)
             
             // Stats Cards
             if let stats = stats {
@@ -841,9 +853,15 @@ struct AdminPaymentsView: View {
                             Spacer()
                             
                             VStack(alignment: .trailing, spacing: 4) {
-                                Text(String(format: "$%.2f", tx.amount))
-                                    .font(.system(size: 14, weight: .semibold))
-                                    .foregroundColor(.green)
+                                if let usd = tx.amountUsd {
+                                    Text(String(format: "$%.2f", usd))
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(.green)
+                                } else {
+                                    Text(String(format: "%.4f %@", tx.amount, tx.currency))
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(.green)
+                                }
                                 
                                 Text(tx.createdAt, style: .date)
                                     .font(.caption)
@@ -1182,7 +1200,7 @@ struct AdminLogsView: View {
             List {
                 ForEach(sessionLogs) { log in
                     // Find associated feedback report
-                    let report = feedbackReports.first(where: { $0.sessionLogId == log.sessionId })
+                    let report = feedbackReports.first(where: { $0.sessionLogId == log.id })
                     
                     SessionLogRow(log: log, feedbackReport: report, onDelete: {
                         Task { await loadData() }
@@ -1578,5 +1596,302 @@ extension Date {
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .full
         return formatter.localizedString(for: self, relativeTo: Date())
+    }
+}
+// MARK: - Dispute Resolver View
+struct DisputeResolverView: View {
+    @State private var txHash: String = ""
+    @State private var searchResult: PaymentTransaction?
+    @State private var hasSearched: Bool = false
+    @State private var isLoading: Bool = false
+    @State private var errorMessage: String?
+    
+    // Grant Premium State
+    @State private var manualUsername: String = ""
+    @State private var manualDays: Int = 30
+    @State private var isGranting: Bool = false
+    @State private var grantMessage: String?
+    
+    @EnvironmentObject var appState: AppState
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Dispute Resolution")
+                .font(.headline)
+            
+            // Search Input
+            HStack {
+                TextField("Enter Transaction Hash (0x...)", text: $txHash)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .font(.system(.body, design: .monospaced))
+                    .onSubmit {
+                        performSearch()
+                    }
+                
+                Button(action: performSearch) {
+                    if isLoading {
+                        ProgressView().scaleEffect(0.5)
+                    } else {
+                        Text("Verify Payment")
+                    }
+                }
+                .disabled(txHash.count < 10 || isLoading)
+            }
+            
+            // Results Area
+            if hasSearched {
+                if let tx = searchResult {
+                    // CASE 1: FOUND
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.green)
+                                .font(.title2)
+                            Text("Payment Processed Successfully")
+                                .font(.headline)
+                                .foregroundColor(.green)
+                        }
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Text("User:")
+                                    .foregroundColor(.secondary)
+                                    .frame(width: 60, alignment: .leading)
+                                Text(tx.username ?? "Unknown")
+                                    .bold()
+                            }
+                            HStack {
+                                Text("Amount:")
+                                    .foregroundColor(.secondary)
+                                    .frame(width: 60, alignment: .leading)
+                                if let usd = tx.amountUsd {
+                                    Text(String(format: "$%.2f", usd))
+                                        .bold()
+                                    Text("(\(String(format: "%.4f %@", tx.amount, tx.currency)))")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                } else {
+                                    Text(String(format: "%.4f %@", tx.amount, tx.currency))
+                                        .bold()
+                                }
+                            }
+                            HStack {
+                                Text("Date:")
+                                    .foregroundColor(.secondary)
+                                     .frame(width: 60, alignment: .leading)
+                                Text(tx.createdAt, style: .date)
+                            }
+                        }
+                        
+                        Button("View on Block Explorer") {
+                            openExplorer(hash: tx.txHash)
+                        }
+                        .buttonStyle(.link)
+                        .padding(.top, 4)
+                    }
+                    .padding()
+                    .background(Color.green.opacity(0.1))
+                    .cornerRadius(8)
+                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.green.opacity(0.3)))
+                    
+                } else {
+                    // CASE 2: NOT FOUND (Dispute)
+                    VStack(alignment: .leading, spacing: 16) {
+                        HStack(alignment: .top) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundColor(.orange)
+                                .font(.title2)
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Transaction Not Found in Database")
+                                    .font(.headline)
+                                    .foregroundColor(.orange)
+                                Text("This payment was not processed by our system. Please verify it on-chain.")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        
+                        Divider()
+                        
+                        // 1. Verify On-Chain
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Step 1: Check Blockchain")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 12) {
+                                    explorerButton(name: "Base", url: "https://basescan.org/tx/\(txHash)")
+                                    explorerButton(name: "Ethereum", url: "https://etherscan.io/tx/\(txHash)")
+                                    explorerButton(name: "Optimism", url: "https://optimistic.etherscan.io/tx/\(txHash)")
+                                    explorerButton(name: "Arbitrum", url: "https://arbiscan.io/tx/\(txHash)")
+                                    explorerButton(name: "Polygon", url: "https://polygonscan.com/tx/\(txHash)")
+                                }
+                            }
+                        }
+                        
+                        Divider()
+                        
+                        // 2. Resolve (Grant)
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Step 2: Resolve Dispute")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                            
+                            HStack(alignment: .top, spacing: 12) {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Username")
+                                        .font(.caption2)
+                                        .foregroundColor(.secondary)
+                                    TextField("username", text: $manualUsername)
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .frame(width: 150)
+                                }
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Duration")
+                                        .font(.caption2)
+                                        .foregroundColor(.secondary)
+                                    Picker("", selection: $manualDays) {
+                                        Text("30 Days").tag(30)
+                                        Text("90 Days").tag(90)
+                                        Text("1 Year").tag(365)
+                                    }
+                                    .labelsHidden()
+                                    .frame(width: 100)
+                                }
+                                
+                                Button(action: grantPremium) {
+                                    if isGranting {
+                                        ProgressView().scaleEffect(0.5)
+                                    } else {
+                                        Text("Grant Premium & Close")
+                                    }
+                                }
+                                .disabled(manualUsername.isEmpty || isGranting)
+                                .padding(.top, 18) // Align with fields
+                                
+                                if let msg = grantMessage {
+                                    Text(msg)
+                                        .font(.caption)
+                                        .foregroundColor(msg.contains("Error") ? .red : .green)
+                                        .padding(.top, 22)
+                                }
+                            }
+                        }
+                    }
+                    .padding()
+                    .background(Color.orange.opacity(0.05))
+                    .cornerRadius(8)
+                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.orange.opacity(0.2)))
+                }
+            } else if let error = errorMessage {
+                Text(error)
+                    .foregroundColor(.red)
+                    .font(.caption)
+            }
+        }
+        .padding()
+        .background(Color(NSColor.controlBackgroundColor))
+        .cornerRadius(12)
+        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(NSColor.separatorColor), lineWidth: 1))
+    }
+    
+    // MARK: - Logic
+    
+    private func performSearch() {
+        guard !txHash.isEmpty else { return }
+        
+        // Auto-clean hash
+        txHash = txHash.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        isLoading = true
+        errorMessage = nil
+        hasSearched = false
+        searchResult = nil
+        grantMessage = nil // Reset grant state
+        
+        Task {
+            do {
+                // We use the existing getAllPaymentTransactions with search.
+                // It searches username OR txHash if we implemented backend correctly,
+                // otherwise we assume it might fetch a list.
+                // Ideally backend RPC `get_all_payment_transactions` supports partial hash search.
+                // If it returns a match, great.
+                
+                let results = try await SupabaseClient.shared.getAllPaymentTransactions(limit: 5, offset: 0, search: txHash)
+                
+                // Exact match check (or contains)
+                if let match = results.first(where: { $0.txHash.localizedCaseInsensitiveContains(txHash) }) {
+                    searchResult = match
+                }
+                
+                hasSearched = true
+            } catch {
+                errorMessage = "Search failed: \(error.localizedDescription)"
+            }
+            isLoading = false
+        }
+    }
+    
+    private func openExplorer(hash: String) {
+        // Default to Ethereum for unknown chain, but typically we know the chain from the TX object.
+        // If we have the object, we can be smarter.
+        // But for generic button, let's just use etherscan if unknown.
+        let url = "https://etherscan.io/tx/\(hash)"
+        if let nsUrl = URL(string: url) {
+            NSWorkspace.shared.open(nsUrl)
+        }
+    }
+    
+    private func explorerButton(name: String, url: String) -> some View {
+        Button(action: {
+            if let nsUrl = URL(string: url) {
+                NSWorkspace.shared.open(nsUrl)
+            }
+        }) {
+            HStack(spacing: 4) {
+                Text(name)
+                Image(systemName: "arrow.up.right.square")
+            }
+            .font(.caption)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(Color(NSColor.controlBackgroundColor))
+            .cornerRadius(4)
+            .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+    }
+    
+    private func grantPremium() {
+        guard let currentUserId = appState.currentUserId else { return }
+        isGranting = true
+        grantMessage = nil
+        
+        Task {
+            do {
+                let message = try await SupabaseClient.shared.grantPremium(
+                    callerUserId: currentUserId,
+                    username: manualUsername,
+                    days: manualDays
+                )
+                grantMessage = "✅ Success: \(message)"
+                // Optional: Clear fields? Keep them for record?
+                // Let's keep them so admin sees what they did.
+                
+                // Log safe
+                NSLog("%@", "Admin granted premium to \(manualUsername) for \(manualDays) days via Dispute Resolver")
+            } catch {
+                grantMessage = "❌ Error: \(error.localizedDescription)"
+            }
+            isGranting = false
+        }
     }
 }

@@ -140,6 +140,13 @@
     - Keep fallback polling conservative (5s+, not 2s)
 - **Example Fix**: Changed from `Timer(timeInterval: 20.0)` on main RunLoop to `Task { try? await Task.sleep(nanoseconds: 25_000_000_000) }` with 5s initial offset.
 
+### 21. Zombie Room Deadlocks (The "Ready Gate" Trap)
+- **Problem**: A host quits abruptly (force quit), leaving the room state as `is_playing: true` in the DB for ~2 minutes (until cron cleanup).
+- **Symptom**: Guests join, see `is_playing`, enter the "Waiting for Host" gate, and wait FOREVER because the host is gone and will never send a `PLAY` signal.
+- **Rule**: **Trust but Verify**. Never assume DB state guarantees Real-time presence.
+    - **Implementation**: ALL "Waiting" gates must have a client-side timeout (e.g., 30 seconds).
+    - **Fallback**: If timeout triggers, exit gracefully to Lobby/Browse with a message ("Host is absent"). Do NOT hang indefinitely.
+
 ## 🏗️ Architecture Map
 
 | Component | Responsibility | Hidden Dependencies |

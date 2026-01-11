@@ -22,9 +22,20 @@ struct BrowseView: View {
     @State private var tabSwitchTask: Task<Void, Never>?
     @State private var lastTabSwitchTime: Date = Date()
 
+    // Alert state for global messages (e.g. Watch Party disconnect)
+    @State private var showMessageAlert = false
+    @State private var alertMessage = ""
+
     enum MediaType: String, CaseIterable {
         case movies = "Movies"
         case shows = "TV Shows"
+    }
+
+    // Helper for filtered history to reduce body complexity
+    private var filteredHistoryItems: [WatchHistoryItem] {
+        recentlyWatched.filter { item in
+            selectedTab == .movies ? item.mediaItem.type == "movie" : item.mediaItem.type == "series"
+        }
     }
 
     let columns = [
@@ -67,34 +78,8 @@ struct BrowseView: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(alignment: .leading, spacing: 24) {
-                            // Continue Watching section - filtered by type
-                            let filteredHistory = recentlyWatched.filter { item in
-                                selectedTab == .movies ? item.mediaItem.type == "movie" : item.mediaItem.type == "series"
-                            }
-
-                            if !filteredHistory.isEmpty {
-                                VStack(alignment: .leading, spacing: 12) {
-                                    Text("Continue Watching")
-                                        .font(.title2)
-                                        .fontWeight(.bold)
-                                        .padding(.horizontal)
-
-                                    ScrollView(.horizontal, showsIndicators: false) {
-                                        HStack(spacing: 16) {
-                                            ForEach(filteredHistory) { historyItem in
-                                                Button(action: {
-                                                    showWatchModeSelection(for: historyItem)
-                                                }) {
-                                                    RecentlyWatchedCard(historyItem: historyItem)
-                                                }
-                                                .buttonStyle(.plain)
-                                            }
-                                        }
-                                        .padding(.horizontal)
-                                    }
-                                }
-                                .padding(.top)
-                            }
+                            // Continue Watching section
+                            continueWatchingView
 
                             // Popular section - horizontal row
                             StreamingServiceRow(
@@ -177,6 +162,16 @@ struct BrowseView: View {
             }
         }
         .onAppear {
+            // Check for pending messages from other views (e.g. Watch Party timeout)
+            if let message = appState.pendingLobbyMessage {
+                print("📢 BrowseView: Found pending message: \(message)")
+                self.alertMessage = message
+                self.showMessageAlert = true
+
+                // Clear the message so it doesn't show again
+                appState.pendingLobbyMessage = nil
+            }
+
             setupMemoryCleanupTimer()
             // Broadcast "Browsing Library" status
             Task {
@@ -198,6 +193,11 @@ struct BrowseView: View {
             }
 
             print("🛑 BrowseView disappeared - cancelled all ongoing tasks")
+        }
+        .alert("Notice", isPresented: $showMessageAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(alertMessage)
         }
     }
 
@@ -495,6 +495,36 @@ struct BrowseView: View {
 
         print("🧹 Deduplication: \(history.count) → \(uniqueItems.count) items")
         return uniqueItems
+    }
+
+    // MARK: - Subviews to reduce body complexity (Landmine #6)
+
+    @ViewBuilder
+    private var continueWatchingView: some View {
+        let history = filteredHistoryItems
+        if !history.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Continue Watching")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .padding(.horizontal)
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 16) {
+                        ForEach(history) { historyItem in
+                            Button(action: {
+                                showWatchModeSelection(for: historyItem)
+                            }) {
+                                RecentlyWatchedCard(historyItem: historyItem)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+            }
+            .padding(.top)
+        }
     }
 
     private func showWatchModeSelection(for historyItem: WatchHistoryItem) {

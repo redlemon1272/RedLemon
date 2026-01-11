@@ -280,7 +280,7 @@ struct RoomListView: View {
         // Fetch actual participants from room_participants table first to verify Host presence
         var guests: [Participant] = []
         var host: Participant?
-        
+
         // Handle System Host (Legacy or Explicit)
         // Force "system" if it's an event, overriding any accidental user assignment in DB
         let isPreExistingEvent = room.type == .event
@@ -289,7 +289,7 @@ struct RoomListView: View {
 
         do {
             let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: room.id)
-            
+
             if isSystemHost {
                  // System Host is always "present" virtually
                  host = Participant(
@@ -475,7 +475,7 @@ struct RoomListView: View {
 
     private func joinRoom(room: WatchPartyRoom) async {
         print("🚪 Joining room: \(room.id)")
-        
+
         // REDLEMON: Delegate to PlayerViewModel canonical logic
         // This handles lobby bypass for active rooms/events and transitions to the correct view (Player vs Lobby)
         await appState.player.joinRoom(roomId: room.id)
@@ -608,7 +608,7 @@ struct RoomListView: View {
 
         // Find the room in active rooms
         let index = appState.activeRooms.firstIndex(where: { $0.id == roomId })
-        
+
         // NEW: If INSERT or Missing Room Update -> Fetch and Add
         if eventType == "INSERT" || (eventType == "UPDATE" && index == nil) {
             print("🆕 RoomListView: Detected new/missing room \(roomId) - Fetching details...")
@@ -617,7 +617,7 @@ struct RoomListView: View {
             }
             return
         }
-        
+
         guard let index = index else {
             return
         }
@@ -641,7 +641,7 @@ struct RoomListView: View {
                 room.lastActivity = lastActivity
             }
         }
-        
+
         // NEW: Update participant count if changed (Realtime)
         if let count = newRecord["participants_count"] as? Int {
              room.participantCount = count
@@ -653,11 +653,11 @@ struct RoomListView: View {
             let name = newRecord["name"] as? String ?? room.mediaItem?.name ?? "Unknown Title"
             let poster = newRecord["poster_url"] as? String
             let backdrop = newRecord["backdrop_url"] as? String
-            
+
             // Reconstruct MediaItem with updated data
             // We use the existing type if possible, or infer from season/episode
             let currentType = room.mediaItem?.type ?? ((newRecord["season"] != nil || newRecord["episode"] != nil) ? "series" : "movie")
-            
+
             let updatedMedia = MediaItem(
                 id: imdbId,
                 type: currentType,
@@ -672,15 +672,15 @@ struct RoomListView: View {
                 genres: room.mediaItem?.genres,
                 runtime: room.mediaItem?.runtime
             )
-            
+
             // Check if identity changed (triggering fresh metadata load)
             let isNewMedia = room.mediaItem?.id != imdbId
             room.mediaItem = updatedMedia
-            
+
             if let poster = updatedMedia.poster {
                 room.posterURL = poster
             }
-            
+
             // If it's a new media item, trigger a background metadata enrichment
             if isNewMedia {
                 NSLog("%@", "🆕 RoomListView: Detected media change to \(name) (\(imdbId)) - Triggering enrichment")
@@ -694,6 +694,15 @@ struct RoomListView: View {
                     }
                 }
             }
+        }
+
+        // Update room description (separate from MediaItem.description)
+        // This handles host editing description in lobby
+        if let newDescription = newRecord["description"] as? String {
+            room.description = newDescription.isEmpty ? nil : newDescription
+        } else if newRecord.keys.contains("description") {
+            // Description was explicitly set to NULL
+            room.description = nil
         }
 
         // Update Season/Episode (Only if Series)
@@ -717,23 +726,23 @@ struct RoomListView: View {
     }
 
     // MARK: - Auto-Refresh Helper
-    
+
     private func fetchAndAddNewRoom(roomId: String) async {
         do {
             guard let supabaseRoom = try await SupabaseClient.shared.getRoomState(roomId: roomId) else { return }
-            
+
             // FILTER: Exclude system-run events
             if supabaseRoom.hostUsername == "RedLemon Events" || supabaseRoom.type == .event {
                  return
             }
-            
+
             // Convert
             guard let watchPartyRoom = await convertSupabaseRoomToWatchPartyRoom(supabaseRoom) else { return }
-            
+
             // Enrich (Poster, etc)
             let (_, enrichedRoom) = await RoomListView.fetchPosterForRoom(room: watchPartyRoom)
             let finalRoom = enrichedRoom ?? watchPartyRoom
-            
+
             await MainActor.run {
                 // Double check uniqueness
                 if !appState.activeRooms.contains(where: { $0.id == roomId }) {
@@ -747,14 +756,14 @@ struct RoomListView: View {
     }
 
     // MARK: - Participant Count Polling
-    
+
     private func startParticipantCountPolling() {
         participantPollingTimer?.invalidate()
         // Poll every 10 seconds
         participantPollingTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak appState] _ in
             Task { @MainActor [weak appState] in
                 guard let appState = appState, !appState.activeRooms.isEmpty else { return }
-                
+
                 // Fetch counts for all active rooms concurrently
                 await withTaskGroup(of: (String, Int?).self) { group in
                     for room in appState.activeRooms {
@@ -765,7 +774,7 @@ struct RoomListView: View {
                             return (room.id, nil)
                         }
                     }
-                    
+
                     // Collect results
                     var updates: [String: Int] = [:]
                     for await (roomId, count) in group {
@@ -773,12 +782,12 @@ struct RoomListView: View {
                             updates[roomId] = count
                         }
                     }
-                    
+
                     // Update state on MainActor
                     await MainActor.run {
                         var updatedRooms = appState.activeRooms
                         var hasChanges = false
-                        
+
                         for (roomId, count) in updates {
                             if let index = updatedRooms.firstIndex(where: { $0.id == roomId }) {
                                 if updatedRooms[index].participantCount != count {
@@ -787,7 +796,7 @@ struct RoomListView: View {
                                 }
                             }
                         }
-                        
+
                         if hasChanges {
                             appState.activeRooms = updatedRooms
                             // print("📊 RoomListView: Polled participant counts updated")
@@ -797,7 +806,7 @@ struct RoomListView: View {
             }
         }
     }
-    
+
     private func stopParticipantCountPolling() {
         participantPollingTimer?.invalidate()
         participantPollingTimer = nil

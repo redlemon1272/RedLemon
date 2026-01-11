@@ -276,6 +276,7 @@ struct WatchPartyLobbyView: View {
                                                 .foregroundColor(.accentColor)
                                         }
                                         .buttonStyle(PlainButtonStyle())
+                                        .help("Edit Description")
                                         .popover(isPresented: $showDescriptionEditor, arrowEdge: .bottom) {
                                             descriptionEditorPopover
                                         }
@@ -367,6 +368,7 @@ struct WatchPartyLobbyView: View {
                                             .cornerRadius(6)
                                         }
                                         .buttonStyle(PlainButtonStyle())
+                                        .help("Add to Playlist")
                                     }
                                 }
 
@@ -1356,6 +1358,7 @@ struct PlaylistItemRow: View {
                 .font(.system(size: 14))
             }
             .buttonStyle(PlainButtonStyle())
+            .help(hasVoted ? "Remove Vote" : "Vote for this")
             .padding(.trailing, 8)
 
             // Play button (Host only, if not current)
@@ -1366,6 +1369,7 @@ struct PlaylistItemRow: View {
                         .font(.system(size: 18))
                 }
                 .buttonStyle(PlainButtonStyle())
+                .help("Select to play")
                 .padding(.trailing, 4)
             }
 

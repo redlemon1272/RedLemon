@@ -10,6 +10,7 @@ struct RestoreAccountView: View {
     @State private var errorMessage: String?
     @State private var successMessage: String?
     @EnvironmentObject var appState: AppState
+    var onDismiss: (() -> Void)? = nil
     
     var body: some View {
         ZStack {
@@ -36,17 +37,21 @@ struct RestoreAccountView: View {
                 // Import Actions
                 VStack(spacing: 16) {
                     Button(action: importFromFile) {
-                        HStack {
+                        HStack(spacing: 12) {
                             Image(systemName: "arrow.up.doc.fill")
+                                .font(.system(size: 18, weight: .semibold))
                             Text("Import Backup File")
+                                .font(.system(size: 16, weight: .bold))
                         }
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
                         .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.blue)
+                        )
                     }
+                    .buttonStyle(.plain)
                     .disabled(isRestoring)
                 }
                 .padding(.horizontal, 40)
@@ -61,15 +66,19 @@ struct RestoreAccountView: View {
                 }
                 
                 if let success = successMessage {
-                    Text(success)
-                        .foregroundColor(.green)
-                        .font(.caption)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
+                    VStack(spacing: 12) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(.green)
+                        Text(success)
+                            .foregroundColor(.white)
+                            .font(.headline)
+                    }
+                    .transition(.scale.combined(with: .opacity))
                 }
                 
                 if isRestoring {
-                    ProgressView("Restoring...")
+                    ProgressView("Securing Connection...")
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                 }
                 
@@ -79,6 +88,7 @@ struct RestoreAccountView: View {
                     dismiss()
                 }
                 .foregroundColor(.gray)
+                .buttonStyle(.plain)
             }
             .padding(40)
         }
@@ -90,13 +100,11 @@ struct RestoreAccountView: View {
         successMessage = nil
         
         let openPanel = NSOpenPanel()
-        // Allow any file type so renamed backups still work
-        // The actual validation is done on file content (JSON parsing)
         openPanel.allowedContentTypes = [
             UTType(filenameExtension: "redlemon-key")!,
             UTType.json,
             UTType.plainText,
-            UTType.data  // Fallback for any file
+            UTType.data
         ]
         openPanel.allowsMultipleSelection = false
         openPanel.canChooseDirectories = false
@@ -124,9 +132,11 @@ struct RestoreAccountView: View {
                 let account = try await AccountExportManager.shared.importAccount(from: jsonString)
                 
                 await MainActor.run {
-                    successMessage = "✅ Restored account: \(account.username)"
+                    withAnimation(.spring()) {
+                        successMessage = "✅ Restored: \(account.username)"
+                    }
                     
-                    // Update AppState to trigger navigation changes (e.g. dismiss UsernameSetupView)
+                    // Update AppState
                     appState.currentUsername = account.username
                     if let uuid = UUID(uuidString: account.userId) {
                         appState.currentUserId = uuid
@@ -137,9 +147,9 @@ struct RestoreAccountView: View {
                         }
                     }
                     
-                    // Trigger app state refresh if needed
-                    // For now, just dismiss after delay
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    // Unified Dismissal after a short delay for feedback
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                        appState.showUsernameSetup = false
                         dismiss()
                     }
                 }

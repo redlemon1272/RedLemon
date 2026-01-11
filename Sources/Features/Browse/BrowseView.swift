@@ -512,12 +512,14 @@ struct BrowseView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
                         ForEach(history) { historyItem in
-                            Button(action: {
-                                showWatchModeSelection(for: historyItem)
-                            }) {
                                 RecentlyWatchedCard(historyItem: historyItem)
-                            }
-                            .buttonStyle(.plain)
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        print("🖱️ Continue Watching clicked for: \(historyItem.mediaItem.name)")
+                                        Task { @MainActor in
+                                            showWatchModeSelection(for: historyItem)
+                                        }
+                                    }
                         }
                     }
                     .padding(.horizontal)
@@ -1176,24 +1178,29 @@ struct RecentlyWatchedCard: View {
         guard let posterURL = historyItem.mediaItem.posterURL else { return }
         let cacheKey = posterURL.absoluteString
 
-        // Check cache first
-        if let cachedData = await CacheManager.shared.getImageData(key: cacheKey) {
-            await MainActor.run {
-                self.imageData = cachedData
+        // Check cache and load image in detached task to avoid actor isolation issues
+        let data: Data? = await Task.detached {
+            // Check cache first
+            if let cachedData = await CacheManager.shared.getImageData(key: cacheKey) {
+                return cachedData
             }
-            return
-        }
 
-        do {
-            let (data, _) = try await URLSession.shared.data(from: posterURL)
-            // Cache
-            await CacheManager.shared.setImageData(key: cacheKey, value: data)
-            // Update UI
+            do {
+                let (data, _) = try await URLSession.shared.data(from: posterURL)
+                // Cache
+                await CacheManager.shared.setImageData(key: cacheKey, value: data)
+                return data
+            } catch {
+                print("Failed to load poster: \(error)")
+                return nil
+            }
+        }.value
+
+        // Update UI on main actor
+        if let data = data {
             await MainActor.run {
                 self.imageData = data
             }
-        } catch {
-            print("Failed to load poster: \(error)")
         }
     }
 }

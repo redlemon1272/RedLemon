@@ -184,6 +184,11 @@
     - ✅ **`await MainActor.run { ... }`** for explicit hopping
     - ❌ **`DispatchQueue.main.async { ... }`** causes data races with actors
 - **Exception**: `DispatchQueue.main.async` is fine for non-actor-isolated code, but avoid mixing with Swift Concurrency actors.
+|
+| ### 26. Automation Deadlock (The Startup Script Trap)
+| - **Problem**: Using `start-production.sh` inside an automated script (like `release.sh`) causes a "Deadlock". 
+| - **Symptom**: The script hangs indefinitely after building because it launches the app and waits for it to exit before proceeding to the signing/DMG steps.
+| - **Rule**: Automated pipelines MUST use headless build scripts (`build-app-debug.sh`) that return control immediately after the binary is created.
 
 ## 🏗️ Architecture Map
 
@@ -533,6 +538,36 @@ Located in `Sources/Server/Services/`:
 3. Results are filtered (codecs, groups, languages) and sorted by quality
 4. Best match is unlocked via RealDebrid and returned
 
+## Stream & Playback Lifecycle (Visual Map)
+
+```mermaid
+graph TD
+    subgraph "UI Layer (SwiftUI)"
+        A[Media Selection] --> B[LocalAPIClient]
+        K[MPVPlayerViewModel] --> L[MPVWrapper]
+    end
+
+    subgraph "Server Layer (Vapor - 127.0.0.1:47253)"
+        B --> C{StreamResolver}
+        C --> D[TorrentioService]
+        C --> E[ZileanService]
+        C --> F[...]
+        
+        D & E & F --> G[Filter & Sort Logic]
+        G --> H[RealDebrid Unlock]
+    end
+
+    subgraph "External Providers"
+        D -.-> T[Torrentio API]
+        E -.-> Z[Production DB - Zilean]
+        H -.-> RD[Real-Debrid API]
+    end
+
+    H -->|Playable URL| B
+    B -->|URL Queue| K
+    L -->|C-Interop| MPV[libmpv engine]
+```
+
 > **StreamResolver Filters**: Contains hardcoded blocklists for groups (`tamilmv`), codecs (`av1`), and audio. Check these if valid streams are missing.
 
 ## Failover Strategy
@@ -603,36 +638,32 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 Uses **Sparkle** framework for macOS auto-updates.
 
 ### Configuration
-- **Appcast URL**: `https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml`
+- **Appcast URL**: `https://151.243.109.243.nip.io/updates/appcast.xml`
 - **Mode**: **Seamless** (Automatic checks, Automatic downloading)
 - **Security**: Ed25519 Signed Updates (Key in Keychain/Info.plist)
 
 ### Release Workflow (How to Ship)
-We have streamlined the release process into a single script:
+The authoritative way to ship is via the automated release script:
 
 ```bash
 ./scripts/release.sh <VERSION> <BUILD_NUMBER>
-# Example: ./scripts/release.sh 1.0.15 15
+# Example: ./scripts/release.sh 1.0.16 16
 ```
 
-**This script automatically:**
-1.  Updates version variables in `build-app-debug.sh`.
-2.  Builds the App (`start-production.sh`).
-3.  Packages the DMG (`build-dmg.sh`).
-4.  **Signs the update** using your local Keychain private key.
-5.  Generates the XML block for `appcast.xml`.
+**This script (headless) automatically:**
+1.  **Sets Version**: Updates `build-app-debug.sh`.
+2.  **Builds App**: Compiles `RedLemon.app` (without launching).
+3.  **Packages DMG**: Creates the installer.
+4.  **Signs Update**: Generates the EdSignature using your local Keychain.
+5.  **Updates Appcast**: Appends the new release block to local `appcast.xml`.
+6.  **Deploys**: Pushes the DMG and XML to the production server via SCP.
 
 ### Build Artifacts
-| File | Purpose |
-| :--- | :--- |
-| `RedLemon-Installer.dmg` | The distributable installer (drag-to-Applications) |
-| `RedLemon-Installer.sha256` | SHA256 checksum for verification |
-
-### Release Steps
-1.  Run `./scripts/release.sh 1.0.XX XX`
-2.  Copy the generated XML block into `appcast.xml`.
-3.  Commit and Push.
-4.  Create a GitHub Release and upload `RedLemon-Installer.dmg`.
+| File | Purpose | Location |
+| :--- | :--- | :--- |
+| `RedLemon-Installer.dmg` | Distributable installer | `build/` |
+| `appcast.xml` | Sparkle RSS feed | Project Root / Server |
+| `checksums.txt` | SHA256 verification | `build/` |
 
 > [!IMPORTANT]
 > **Signing Keys**: The Private Key is stored in your macOS Keychain (entry: "Sparkle Private Key"). The Public Key is embedded in `Info.plist` (`SUPublicEDKey`).
@@ -752,4 +783,78 @@ Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SE
 
 ## UUID Case Sensitivity
 > [!CAUTION]
-> UUIDs are normalized to **lowercase** in most places (`participantId = room.hostId.lowercased()`). When comparing UUIDs, always use `caseInsensitiveCompare()` or normalize both sides. Direct `==` comparison can silently fail.
+# Part 15: Update Infrastructure & Private Distribution
+
+## Private Repository Strategy
+- **Limitation**: Sparkle cannot authenticate with private GitHub repositories (`raw.githubusercontent.com`) directly.
+- **Solution**: Use the production server (`151.243.109.243`) as a public bridge for the `appcast.xml` and DMG files.
+- **Path**: Files are served from `/root/updates` on the host, mapped to `/srv/updates` in the `caddy-proxy` container.
+
+## Sparkle Tooling Quirks
+- **Binary Output**: The `sign_update` tool returns a single string containing multiple XML attributes: `sparkle:edSignature="..." length="..."`.
+- **Logic**: In release scripts, never wrap the `$SIGNATURE` variable in a manual `sparkle:edSignature` tag, or the XML will be malformed. Use the variable directly inside the `<enclosure />` tag.
+
+## Automated Deployment
+The `./scripts/release.sh` script is now fully automated and "Headless". It performs:
+1. **Headless Build**: Compiles without launching.
+2. **DMG Creation**: Packages the app.
+3. **Appcast Injection**: Uses `sed` to insert the new version at the top of the local `appcast.xml`.
+4. **Remote Push**: Uses `scp` to deploy both the DMG and the XML to the production server.
+
+---
+
+# Part 16: Playback Synchronization
+
+## Drift Correction (MPVPlayerViewModel.swift)
+Watch Parties use a tiered synchronization system to compensate for network latency and hardware variance.
+
+### Tiered Logic
+- **Perfect Sync (<0.1s)**: No action, reset speed to 1.0x.
+- **Micro Drift (0.1s - 0.4s)**: Ultra-gentle speed adjustment (±0.5%).
+- **Medium Drift (0.4s - 1.0s)**: Gentle speed adjustment (±1.0%).
+- **Large Drift (1.0s - 5.0s)**: Aggressive speed adjustment (up to ±5.0%).
+- **Fatal Drift (>5.0s)**: Hard seek to host position + 1.2s buffer offset.
+
+### Event Sync (Wall Clock)
+For Live Events, devices calculate the seek position based on `Date() - eventStartTime`. This ensures all users see the exact same frame regardless of when they join.
+
+---
+
+# Part 17: Subtitle & Audio Scoring
+
+## Subtitle Selection (`MPVWrapper.refreshSubtitleSelection`)
+When multiple tracks exist, we use a weighted scoring system (higher = better):
+
+| Factor | Weight |
+| :--- | :--- |
+| **Embedded Track** | +3000 |
+| **Clean Title** (e.g., "English") | +600 |
+| **Release Match** (e.g., "WEBRip") | +500 |
+| **SDH/CC/HI** Labels | +250 |
+| **Forced Track** | -50 |
+| **Default Flag** | -10 |
+
+## Audio Selection
+Prioritizes **English** (+1000) and **Surround Sound** (+10 per channel), while strictly avoiding **Commentary** (-10000).
+
+---
+
+# Part 18: Reporting & Diagnostics
+
+## Session Logging (`Sources/Services/SessionRecorder.swift`)
+Every playback session generates an anonymized JSON log including:
+- **Provider events** (Torrentio/RealDebrid response times)
+- **MPV events** (Buffering status, Internal errors)
+- **Sync events** (Drift corrections)
+
+## Reported Streams (`reported_streams` table)
+Users can report broken streams. The system captures:
+- `imdb_id`, `stream_hash`, `quality`, and `reason`.
+- Reported hashes are temporarily hidden after 3 reports and permanently blocked after admin review.
+
+## Landmine #26: Automation Deadlock
+Avoid calling scripts that `open` the app (like `start-production.sh`) in automated pipelines. Headless terminals (CI/CD or release scripts) will hang indefinitely waiting for the windowing system. Use `build-app-debug.sh` for headless builds.
+
+## Landmine #27: UUID Case Sensitivity
+Supabase/Postgres is case-insensitive for UUID types, but **Swift and Realtime Channels are sensitive**.
+**Rule**: Always `.lowercased()` a UUID string before using it as a dictionary key or Realtime topic to avoid silent mismatches.

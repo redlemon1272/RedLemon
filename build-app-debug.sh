@@ -14,8 +14,8 @@ MACOS_VERSION=$(sw_vers -productVersion)
 XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
 
 # User-configurable versioning
-APP_VERSION="1.0.14"
-APP_BUILD="14"
+APP_VERSION="1.0.16"
+APP_BUILD="16"
 
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
 echo "🔧 System: $ARCH_NAME"
@@ -186,7 +186,7 @@ cat > "$CONTENTS/Info.plist" << PLIST
         </dict>
     </array>
     <key>SUFeedURL</key>
-    <string>https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml</string>
+    <string>https://151.243.109.243.nip.io/updates/appcast.xml</string>
     <key>SUEnableAutomaticChecks</key>
     <true/>
     <key>SUScheduledCheckInterval</key>

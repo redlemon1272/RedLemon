@@ -2,7 +2,7 @@
 
 A native macOS media streaming app with watch party features.
 
-**Current Version:** v1.0.8 (build 8)
+**Current Version:** v1.0.58 (build 58)
 **Status:** ✅ Production Ready
 
 ## 🚀 For AI Assistants & Developers
@@ -52,9 +52,8 @@ RedLemon-Native/
 Download the latest DMG from [GitHub Releases](https://github.com/orangeapple1272/Redlemon/releases):
 - Open `RedLemon-Installer.dmg`
 - Drag RedLemon.app to Applications
-- Launch from Applications folder
-
-**No additional setup required** - Just launch and play!
+- **Important:** To launch for the first time, **Right-Click (Control-Click)** the app in Applications and select **Open**.
+- Click **"Open"** in the confirmation dialog (this bypasses the "Unidentified Developer" warning).
 
 ### 2. Build from Source (Developers)
 ```bash
@@ -110,10 +109,6 @@ RedLemon uses the industry-standard **Sparkle framework** for auto-updates:
 
 Appcast feed: `https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml`
 
-## Documentation
-
-- [Supabase Setup](docs/SUPABASE_SETUP.md) - Database configuration
-- [Migration Notes](MIGRATION_COMPLETE.md) - Swift migration from Node.js
 
 ## License
 

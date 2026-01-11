@@ -465,6 +465,10 @@ class MPVPlayerViewModel: ObservableObject {
     // Ready Loop: Periodically resend READY signal until playback starts
     private var readyLoopTimer: Timer?
 
+    // Ready Gate Timeout Tracking (Landmine #13 fix: detect absent host)
+    private var readySignalsSentCount: Int = 0
+    private let maxReadySignalsBeforeTimeout: Int = 15  // 30 seconds (15 signals × 2s interval)
+
     // Player state
     @Published var videoURL: String = ""
     @Published var isLoading: Bool = true
@@ -2688,6 +2692,7 @@ extension MPVPlayerViewModel {
                 print("🎬 Received PLAY signal - All guests ready! Starting playback.")
                 showWaitingForGuests = false
                 showWaitingForGuests = false
+                readySignalsSentCount = 0 // Reset timeout counter
                 await playbackService.play()
                 isPlaying = true
 
@@ -2723,6 +2728,7 @@ extension MPVPlayerViewModel {
             if remoteIsPlaying && showWaitingForGuests {
                 print("🎬 Received playback state (playing) - Dismissing waiting overlay")
                 showWaitingForGuests = false
+                readySignalsSentCount = 0 // Reset timeout counter
 
                 // Stop Ready Loop
                 readyLoopTimer?.invalidate()
@@ -3171,11 +3177,22 @@ extension MPVPlayerViewModel {
 
         // Start Ready Loop (resend every 2 seconds until playback starts)
         readyLoopTimer?.invalidate()
+        readySignalsSentCount = 0  // Reset counter on fresh loop start
         readyLoopTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
 
             // Only continue loop if we are still waiting for guests (waiting for host to start)
             if self.showWaitingForGuests {
+                self.readySignalsSentCount += 1
+
+                // DEADLOCK DETECTION (Landmine #13 fix): If we've sent too many signals without response,
+                // the host is probably gone. Trigger return to browse.
+                if self.readySignalsSentCount >= self.maxReadySignalsBeforeTimeout {
+                    NSLog("%@", "⚠️ Watch Party: Ready Gate Timeout - Host not responding after \(self.readySignalsSentCount) attempts")
+                    self.triggerHostAbsentExit()
+                    return
+                }
+
                 transmit(true)
             } else {
                 // Stop loop if we're no longer waiting
@@ -3187,6 +3204,40 @@ extension MPVPlayerViewModel {
         // If Host, mark self as ready and check if we can start
         if isWatchPartyHost {
             checkIfAllGuestsReady()
+        }
+    }
+
+    /// Called when the ready gate times out waiting for host response.
+    /// Returns guest to browse with an informative message.
+    private func triggerHostAbsentExit() {
+        NSLog("🚪 Ready Gate Timeout: Returning to browse (host absent)")
+
+        // Stop flags
+        self.showWaitingForGuests = false
+        self.hasSentReadySignal = false
+        self.readySignalsSentCount = 0
+
+        // Show exit overlay
+        self.isExitingToLobby = true
+
+        // Set message for user
+        appState?.pendingLobbyMessage = "The host is no longer in this room."
+
+        // Timer cleanup
+        self.readyLoopTimer?.invalidate()
+        self.readyLoopTimer = nil
+
+        // Reuse existing cleanup flow
+        Task { @MainActor [weak self] in
+            guard let self = self else { return }
+
+            try? await Task.sleep(nanoseconds: 500_000_000)
+
+            await self.cleanup(returningToLobby: true)
+            await self.appState?.player.exitPlayer(keepRoomState: false)
+            await MainActor.run {
+                self.appState?.currentView = .browse
+            }
         }
     }
 

@@ -257,6 +257,17 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 2.  **Database Profile** (`users.subscription_expires_at`): Persists valid subscriptions and Admin Grants.
 **Rule:** Always check BOTH. The latest date wins. Never rely solely on the edge function, or Admin Grants will be ignored.
 
+## Payment Stacking (Extend License)
+The `check-payment` edge function **automatically stacks** new payments onto existing subscriptions:
+```typescript
+let currentExpiry = userData?.subscription_expires_at ? new Date(userData.subscription_expires_at) : new Date()
+if (currentExpiry < new Date()) currentExpiry = new Date()  // Reset if expired
+const newExpiry = new Date(currentExpiry.getTime() + (daysToAdd * 24 * 60 * 60 * 1000))  // ADDS days
+```
+**Example:** User with 60 days remaining pays $10 → Gets 90 days added → Now has 150 days total.
+
+**UI:** Premium users see "Extend License" button in Settings when < 365 days remain (`SettingsView.swift`).
+
 ---
 
 # Part 4: Server Infrastructure

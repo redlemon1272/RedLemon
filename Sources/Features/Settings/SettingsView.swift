@@ -50,10 +50,10 @@ struct SettingsView: View {
 
     // Payment State
     @State private var showPaymentGate = false
-    
+
     // Admin State
     @State private var showAdminDashboard = false
-    
+
     // Feedback State
     @State private var showFeedbackSheet = false
 
@@ -77,7 +77,7 @@ struct SettingsView: View {
                 providerStatusSection
 
                 licenseSection
-                
+
                 // Show payment history for premium users
                 if licenseManager.isPremium {
                     paymentHistorySection
@@ -91,7 +91,7 @@ struct SettingsView: View {
 
                 Group {
                     adminSection
-                    
+
                     supportSection
 
                     aboutSection
@@ -282,7 +282,7 @@ struct SettingsView: View {
             .padding(24)
             .background(Color(NSColor.controlBackgroundColor))
             .cornerRadius(16)
-            
+
             // Provider Connectivity - Moved to separate section
 
             // Save Button
@@ -331,7 +331,7 @@ struct SettingsView: View {
         VStack(alignment: .leading, spacing: 24) {
             Text("Network Status")
                 .font(.system(size: 28, weight: .semibold))
-            
+
             ProviderHealthView()
         }
     }
@@ -430,7 +430,7 @@ struct SettingsView: View {
                     }
                 } else {
                     // License active message
-                    VStack(alignment: .leading, spacing: 6) {
+                    VStack(alignment: .leading, spacing: 8) {
                         HStack(spacing: 8) {
                             Image(systemName: "checkmark.circle.fill")
                                 .font(.caption)
@@ -439,17 +439,52 @@ struct SettingsView: View {
                                 .font(.caption)
                                 .foregroundColor(.green)
                         }
-                        
+
                         // Show premium expiration
                         let expiryDate = Date(timeIntervalSince1970: licenseManager.subscriptionExpiresAt)
                         let daysLeft = Calendar.current.dateComponents([.day], from: Date(), to: expiryDate).day ?? 0
-                        
+
                         // Show expiration if it's not unreasonably far in the future (> 10 years means likely lifetime/permanent)
                         if daysLeft < 3650 {
-                             Text("License valid until: \(expiryDate.formatted(date: .long, time: .omitted)) (\(daysLeft) days left)")
-                                .font(.caption2)
-                                .foregroundColor(.secondary)
-                                .padding(.leading, 24)
+                            // Urgency coloring based on days remaining
+                            let urgencyColor: Color = daysLeft <= 7 ? .red : (daysLeft <= 30 ? .orange : .secondary)
+
+                            HStack(spacing: 8) {
+                                if daysLeft <= 30 {
+                                    Image(systemName: daysLeft <= 7 ? "exclamationmark.triangle.fill" : "clock.badge.exclamationmark.fill")
+                                        .font(.caption)
+                                        .foregroundColor(urgencyColor)
+                                }
+                                Text("License valid until: \(expiryDate.formatted(date: .long, time: .omitted)) (\(daysLeft) days left)")
+                                    .font(.caption2)
+                                    .foregroundColor(urgencyColor)
+                            }
+                            .padding(.leading, daysLeft <= 30 ? 0 : 24)
+
+                            // Show "Extend" button for users with expiring licenses (< 1 year)
+                            if daysLeft < 365 {
+                                Divider()
+                                    .padding(.vertical, 4)
+
+                                Text("Add more time to your license with a new payment")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+
+                                Button(action: {
+                                    showPaymentGate = true
+                                }) {
+                                    HStack(spacing: 8) {
+                                        Image(systemName: "plus.circle.fill")
+                                            .font(.body)
+                                        Text("Extend License")
+                                            .font(.body.weight(.medium))
+                                    }
+                                    .padding(.vertical, 10)
+                                    .padding(.horizontal, 16)
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(daysLeft <= 30 ? .orange : .blue)
+                            }
                         }
                     }
                     .padding(.top, 4)
@@ -460,16 +495,16 @@ struct SettingsView: View {
             .cornerRadius(16)
         }
     }
-    
+
     // MARK: - Payment History Section (for premium users)
     @State private var myTransactions: [PaymentTransaction] = []
     @State private var isLoadingPayments = false
-    
+
     private var paymentHistorySection: some View {
         VStack(alignment: .leading, spacing: 24) {
             Text("Payment History")
                 .font(.system(size: 28, weight: .semibold))
-            
+
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
                     Image(systemName: "clock.arrow.circlepath")
@@ -477,9 +512,9 @@ struct SettingsView: View {
                         .foregroundColor(.green)
                     Text("Your Transactions")
                         .font(.title3.weight(.semibold))
-                    
+
                     Spacer()
-                    
+
                     Button(action: loadMyPayments) {
                         Image(systemName: "arrow.clockwise")
                             .foregroundColor(.secondary)
@@ -487,11 +522,11 @@ struct SettingsView: View {
                     .buttonStyle(.plain)
                     .disabled(isLoadingPayments)
                 }
-                
+
                 Text("All crypto payments made to your account")
                     .font(.body)
                     .foregroundColor(.secondary)
-                
+
                 if isLoadingPayments {
                     HStack {
                         Spacer()
@@ -526,7 +561,7 @@ struct SettingsView: View {
             loadMyPayments()
         }
     }
-    
+
     @ViewBuilder
     private func transactionRow(_ tx: PaymentTransaction) -> some View {
         HStack {
@@ -541,7 +576,7 @@ struct SettingsView: View {
                         .padding(.vertical, 2)
                         .background(tx.chain == "btc" ? Color.orange : Color.blue)
                         .cornerRadius(4)
-                    
+
                     // Status Badge
                     Text("COMPLETED")
                         .font(.caption2)
@@ -553,7 +588,7 @@ struct SettingsView: View {
                             RoundedRectangle(cornerRadius: 4)
                                 .stroke(Color.green.opacity(0.5), lineWidth: 1)
                         )
-                    
+
                     // Duration Badge
                     if let days = tx.durationDays {
                         Text("\(days) DAYS")
@@ -568,7 +603,7 @@ struct SettingsView: View {
                             )
                     }
                 }
-                
+
                 // Only show transaction link for real hashes (not detected_ payments)
                 if !tx.txHash.hasPrefix("detected_"), let url = getExplorerUrl(chain: tx.chain, hash: tx.txHash) {
                     HStack(spacing: 6) {
@@ -579,7 +614,7 @@ struct SettingsView: View {
                                 .underline()
                         }
                         .help("View Transaction on Explorer")
-                        
+
                         Button(action: {
                             NSPasteboard.general.clearContents()
                             NSPasteboard.general.setString(tx.txHash, forType: .string)
@@ -593,14 +628,14 @@ struct SettingsView: View {
                     }
                 }
             }
-            
+
             Spacer()
-            
+
             VStack(alignment: .trailing, spacing: 2) {
                 Text(String(format: "%.6f %@", tx.amount, tx.currency))
                     .fontWeight(.medium)
                     .foregroundColor(.primary)
-                
+
                 Text(tx.createdAt, style: .date)
                     .font(.caption2)
                     .foregroundColor(.secondary)
@@ -610,7 +645,7 @@ struct SettingsView: View {
         .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
         .cornerRadius(8)
     }
-    
+
     private func loadMyPayments() {
         isLoadingPayments = true
         Task {
@@ -638,7 +673,7 @@ struct SettingsView: View {
             }
             return nil
         }
-        
+
         if chain == "btc" {
             return URL(string: "https://mempool.space/tx/\(hash)")
         } else if chain == "evm" || chain == "base" {
@@ -930,14 +965,14 @@ struct SettingsView: View {
             .cornerRadius(16)
         }
     }
-    
+
     private var adminSection: some View {
         Group {
             if SupabaseClient.shared.auth.currentUser?.isAdmin == true {
                 VStack(alignment: .leading, spacing: 24) {
                     Text("Administration")
                         .font(.system(size: 28, weight: .semibold))
-                    
+
                     Button(action: { showAdminDashboard = true }) {
                         HStack {
                             Image(systemName: "shield.checkerboard")
@@ -963,12 +998,12 @@ struct SettingsView: View {
             }
         }
     }
-    
+
     private var supportSection: some View {
         VStack(alignment: .leading, spacing: 24) {
             Text("Support & Feedback")
                 .font(.system(size: 28, weight: .semibold))
-            
+
             VStack(alignment: .leading, spacing: 12) {
                 // Send Feedback Button
                 Button(action: { showFeedbackSheet = true }) {
@@ -988,22 +1023,22 @@ struct SettingsView: View {
                     .cornerRadius(16)
                 }
                 .buttonStyle(PlainButtonStyle())
-                
+
             }
         }
     }
 
-    
+
     private func uploadSessionLog() async {
         isLoading = true
         let log = await SessionRecorder.shared.getSanitizedLog()
         await SupabaseClient.shared.uploadSessionLog(log: log)
-        
+
         await MainActor.run {
             isLoading = false
             saveMessage = "Session log sent! Thank you." // Reuse message state or add new
             messageType = .success
-            
+
             // Clear message after delay
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 if saveMessage == "Session log sent! Thank you." {
@@ -1012,7 +1047,7 @@ struct SettingsView: View {
             }
         }
     }
-    
+
     // MARK: - Feedback View
     struct FeedbackView: View {
         @Binding var isPresented: Bool
@@ -1021,23 +1056,23 @@ struct SettingsView: View {
         @State private var email = ""
         @State private var includeLog = false
         @State private var isSending = false
-        
+
         let categories = ["Bug", "Stream Issue", "Feature Request", "Other"]
-        
+
         var body: some View {
             VStack(spacing: 20) {
                 Text("Send Feedback")
                     .font(.title2.bold())
-                
+
                 Picker("Category", selection: $category) {
                     ForEach(categories, id: \.self) { cat in
                         Text(cat)
                     }
                 }
-                
+
                 TextField("Email (Optional)", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+
                 TextEditor(text: $message)
                     .font(.body)
                     .frame(height: 150)
@@ -1045,28 +1080,28 @@ struct SettingsView: View {
                     .background(Color(NSColor.controlBackgroundColor))
                     .cornerRadius(8)
                     .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.3)))
-                
+
                 Toggle("Attach anonymous session log", isOn: $includeLog)
                     .font(.caption)
                     .foregroundColor(.secondary)
-                
+
                 HStack {
                     Button("Cancel") { isPresented = false }
                         .keyboardShortcut(.cancelAction)
-                    
+
                     Spacer()
-                    
+
                     Button("Send") {
                         isSending = true
                         Task {
                             var logId: UUID? = nil
-                            
+
                             if includeLog {
                                 let log = await SessionRecorder.shared.getSanitizedLog()
                                 await SupabaseClient.shared.uploadSessionLog(log: log)
                                 logId = log.id
                             }
-                            
+
                             await SupabaseClient.shared.sendFeedback(
                                 type: category,
                                 message: message,
@@ -1156,7 +1191,7 @@ struct SettingsView: View {
         if let subdlKey = await KeychainManager.shared.get(service: "subdl") {
             subDLApiKey = subdlKey
         }
-        
+
 
 
         // Load RD user info if token exists
@@ -1193,7 +1228,7 @@ struct SettingsView: View {
                         for: "subdl"
                     )
                 }
-                
+
 
 
                 await MainActor.run {

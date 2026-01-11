@@ -804,6 +804,9 @@ Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SE
 
 ## Sparkle Tooling Quirks
 - **Binary Output**: The `sign_update` tool returns a single string containing multiple XML attributes: `sparkle:edSignature="..." length="..."`.
+- **Versioning Strategy**: Use the numeric **Build Number** (`CFBundleVersion`) for the `sparkle:version` attribute in `appcast.xml`. Using string versions like "1.0.60" can cause string-sorting failures where "1.0.60" is treated as less than "59" (since '1' < '5'). 
+- **Initialization**: `SPUStandardUpdaterController` MUST be initialized with `startingUpdater: true`. If set to `false`, the update engine remains dormant, and manual `checkForUpdates()` triggers from the UI will have no response.
+- **Critical Forcing**: Use `sparkle:criticalUpdate="true"` in the enclosure tag to force old or dormant clients to prioritize the update.
 - **Logic**: In release scripts, never wrap the `$SIGNATURE` variable in a manual `sparkle:edSignature` tag, or the XML will be malformed. Use the variable directly inside the `<enclosure />` tag.
 
 ## Automated Deployment
@@ -873,3 +876,15 @@ Chaining requests with default timeouts creates massive delays. Always use "Fail
 ## Landmine #28: UUID Case Sensitivity
 Supabase/Postgres is case-insensitive for UUID types, but **Swift and Realtime Channels are sensitive**.
 **Rule**: Always `.lowercased()` a UUID string before using it as a dictionary key or Realtime topic to avoid silent mismatches.
+
+## Landmine #29: The "Documents Folder" Privacy Trap
+Using `fileManager.urls(for: .documentDirectory, ...)` to store internal app data (logs, cache) triggers a user-facing macOS Privacy prompt ("RedLemon would like to access files in your Documents folder").
+**Rule**: Use `.applicationSupportDirectory` for all internal data. It is silent, professional, and standard for macOS applications.
+
+## Landmine #30: Numeric vs String Update Logic
+Never compare versions like `latestVersion > currentVersion` using raw strings if they can contain mixed formats (e.g., "1.0.60" vs "59"). 
+**Rule**: Always cast to `Int` and compare numeric build numbers for ground-truth update detection to prevent "Version 1.0.0" being treated as older than "Version 9".
+
+## Landmine #31: Onboarding UX Dead-ends
+Avoid leaving the user on a "Success" or "finished" page during onboarding (e.g., after an Account Restoration).
+**Rule**: After a critical background action (like Restoration) finishes, transition immediately to a **Success View** and implement an **Automatic Timer (2.5s)** to close the modal and drop the user into the app. Never force a user to click "Next" on a page they've already completed.

@@ -188,10 +188,6 @@ struct ContentView: View {
                 scheduleUpdateOverlay
             }
         }
-        .sheet(isPresented: $appState.showUsernameSetup) {
-            UsernameSetupView()
-                .environmentObject(appState)
-        }
         .sheet(isPresented: $appState.showOnboarding) {
             AppOnboardingView(isPresented: $appState.showOnboarding)
                 .environmentObject(appState)

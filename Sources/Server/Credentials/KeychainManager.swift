@@ -63,15 +63,9 @@ actor KeychainManager {
     func save(credential: String, for service: String) async throws {
         await ensureInitialized()
 
-        // 1. Try to save to iCloud keychain (synchronizable)
-        do {
-            try saveToKeychain(credential: credential, service: service, synchronizable: true)
-            print("☁️🔐 Saved \(service) credential to iCloud Keychain")
-        } catch {
-            print("⚠️ iCloud Keychain save failed, trying local: \(error)")
-            // Fallback to local keychain
-            try? saveToKeychain(credential: credential, service: service, synchronizable: false)
-        }
+        // 1. Save to local keychain (non-synchronizable to avoid prompts)
+        try saveToKeychain(credential: credential, service: service)
+        print("🔐 Saved \(service) credential to local Keychain")
 
         // 2. Update memory cache
         cache[service] = credential
@@ -90,17 +84,8 @@ actor KeychainManager {
             return cached
         }
 
-        // 2. Try iCloud keychain
-        if let credential = try? getFromKeychain(service: service, synchronizable: true) {
-            cache[service] = credential
-            return credential
-        }
-
-        // 3. Try local keychain (legacy/fallback)
-        if let credential = try? getFromKeychain(service: service, synchronizable: false) {
-            // Migrate to iCloud if found locally
-            try? saveToKeychain(credential: credential, service: service, synchronizable: true)
-
+        // 2. Try keychain
+        if let credential = try? getFromKeychain(service: service) {
             cache[service] = credential
             return credential
         }
@@ -117,9 +102,8 @@ actor KeychainManager {
         // 2. Update encrypted cache file
         await saveToEncryptedCache()
 
-        // 3. Delete from macOS Keychain (both local and synced)
-        try? deleteFromKeychain(service: service, synchronizable: true)
-        try? deleteFromKeychain(service: service, synchronizable: false)
+        // 3. Delete from local Keychain
+        try? deleteFromKeychain(service: service)
 
         print("🗑️ Removed \(service) from cache and keychain")
     }
@@ -219,46 +203,41 @@ actor KeychainManager {
 
     // MARK: - Keychain Operations
 
-    private func saveToKeychain(credential: String, service: String, synchronizable: Bool) throws {
+    private func saveToKeychain(credential: String, service: String) throws {
         guard let data = credential.data(using: .utf8) else {
             throw KeychainError.unexpectedData
         }
 
-        var query: [String: Any] = [
+        // 1. Broad Delete (to clear both synced and local versions)
+        try? deleteFromKeychain(service: service)
+
+        // 2. Add as Local Only (non-synchronizable)
+        let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: Self.serviceName,
             kSecAttrAccount as String: service,
             kSecValueData as String: data,
-            // Allow access without password prompt when app is running
-            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
+            // Ensure no UI pops up during save either
+            kSecUseAuthenticationUI as String: kSecUseAuthenticationUIFail
         ]
 
-        if synchronizable {
-            query[kSecAttrSynchronizable as String] = true
-        }
-
-        // Delete existing first
-        SecItemDelete(query as CFDictionary)
-
-        // Add new
         let status = SecItemAdd(query as CFDictionary, nil)
         guard status == errSecSuccess else {
             throw KeychainError.saveFailed(status: status)
         }
     }
 
-    private func getFromKeychain(service: String, synchronizable: Bool) throws -> String? {
-        var query: [String: Any] = [
+    private func getFromKeychain(service: String) throws -> String? {
+        let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: Self.serviceName,
             kSecAttrAccount as String: service,
             kSecReturnData as String: true,
-            kSecMatchLimit as String: kSecMatchLimitOne
+            kSecMatchLimit as String: kSecMatchLimitOne,
+            // 🛑 NEVER prompt the user for a password. If it's locked, just fail.
+            kSecUseAuthenticationUI as String: kSecUseAuthenticationUIFail
         ]
-
-        if synchronizable {
-            query[kSecAttrSynchronizable as String] = true
-        }
 
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
@@ -278,25 +257,31 @@ actor KeychainManager {
         return credential
     }
 
-    private func deleteFromKeychain(service: String, synchronizable: Bool) throws {
-        var query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: Self.serviceName,
-            kSecAttrAccount as String: service
-        ]
-
-        if synchronizable {
-            query[kSecAttrSynchronizable as String] = true
+    private func deleteFromKeychain(service: String) throws {
+        // Delete all versions (synced and local)
+        let versions = [true, false]
+        
+        for isSync in versions {
+            var query: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrService as String: Self.serviceName,
+                kSecAttrAccount as String: service
+            ]
+            
+            if isSync {
+                query[kSecAttrSynchronizable as String] = true
+            } else {
+                // If we explicitly set to false, it might still find items.
+                // Usually it's better to just skip the key if we want to match everything,
+                // but for SecItemDelete, sometimes being explicit helps or hurts.
+                // Let's try explicit first.
+                query[kSecAttrSynchronizable as String] = false
+            }
+            
+            SecItemDelete(query as CFDictionary)
         }
 
-        let status = SecItemDelete(query as CFDictionary)
-
-        // Success or item not found are both OK
-        guard status == errSecSuccess || status == errSecItemNotFound else {
-            throw KeychainError.deleteFailed(status: status)
-        }
-
-        print("🗑️ Deleted \(service) from macOS Keychain (sync: \(synchronizable))")
+        print("🗑️ Broadly deleted \(service) from Keychain")
     }
 
     // MARK: - Encrypted Cache (eliminates prompts on restart)

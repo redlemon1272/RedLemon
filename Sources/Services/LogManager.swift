@@ -22,8 +22,15 @@ class LogManager {
     }()
     
     private func setupLogFile() {
-        guard let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-        logFileURL = documentsPath.appendingPathComponent(logFileName)
+        guard let appSupportPath = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else { return }
+        let logDirectory = appSupportPath.appendingPathComponent("RedLemon", isDirectory: true)
+        
+        // Ensure the directory exists
+        if !fileManager.fileExists(atPath: logDirectory.path) {
+            try? fileManager.createDirectory(at: logDirectory, withIntermediateDirectories: true)
+        }
+        
+        logFileURL = logDirectory.appendingPathComponent(logFileName)
         
         // Rotate logs if too large (e.g., > 5MB)
         if let url = logFileURL,

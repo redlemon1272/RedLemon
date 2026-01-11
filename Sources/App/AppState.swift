@@ -157,7 +157,6 @@ class AppState: ObservableObject {
     @Published var searchResults: [MediaItem] = []  // Persist search results across navigation
     @Published var lastSearchQuery: String = ""  // Remember last search query
     @Published var isServerReady: Bool = false  // Track if HTTP server is ready to accept requests
-    @Published var showUsernameSetup: Bool = false  // Show username setup dialog
     @Published var showOnboarding: Bool = false     // Show welcome onboarding tour
 
     // User authentication (simple username)

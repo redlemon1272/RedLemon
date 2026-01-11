@@ -769,7 +769,7 @@ struct SettingsView: View {
                 // Set username button (only if not set)
                 if currentUsername.isEmpty {
                     Button(action: {
-                        appState.showUsernameSetup = true
+                        appState.showOnboarding = true
                     }) {
                         HStack(spacing: 8) {
                             Image(systemName: "person.badge.plus")

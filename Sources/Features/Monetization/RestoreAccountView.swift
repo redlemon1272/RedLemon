@@ -148,8 +148,9 @@ struct RestoreAccountView: View {
                     }
                     
                     // Unified Dismissal after a short delay for feedback
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                        appState.showUsernameSetup = false
+                    Task { @MainActor in
+                        try? await Task.sleep(nanoseconds: 1_200_000_000) // 1.2 seconds
+                        self.onDismiss?()
                         dismiss()
                     }
                 }

@@ -69,7 +69,6 @@ struct UsernameSetupView: View {
                             onFinish: {
                                 // Trigger app state refresh and dismiss EVERYTHING
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                                    appState.showUsernameSetup = false
                                     dismiss()
                                 }
                             }

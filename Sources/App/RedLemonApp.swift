@@ -60,6 +60,28 @@ struct RedLemonApp: App {
                 .task {
                     // Wiring up PlayerViewModel callbacks
                     appState.setupPlayerBindings()
+                    
+                    // 1. Check for First Run Onboarding IMMEDIATELY
+                    // This ensures the modal appears instantly without waiting for Keychain/DB checks
+                    let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding_v1")
+                    if !hasCompletedOnboarding {
+                        NSLog("✨ RedLemon: First run detected. Initiating onboarding tour.")
+                        await MainActor.run {
+                            appState.showOnboarding = true
+                        }
+                        // Loading user in background just in case, but onboarding takes precedence
+                        await loadStoredUser()
+                    } else {
+                        // 2. Returning User: Load credentials normally
+                        await loadStoredUser()
+                        
+                        // 3. Username fallback if loading failed
+                        if appState.currentUserId == nil {
+                            await MainActor.run {
+                                appState.showOnboarding = true
+                            }
+                        }
+                    }
 
                     // Check if username setup should be forced (after user reset)
                     await checkForcedUsernameSetup()
@@ -67,26 +89,8 @@ struct RedLemonApp: App {
                     // Reset state to prevent automatic playback of last watched content
                     await resetPlaybackState()
 
-
-                    await loadStoredUser()  // Load username from keychain on startup
-
-                    // Show username setup only AFTER auth flow completes
-                    // This prevents race condition where ContentView showed modal prematurely
-                    
-                    // NEW: Check for First Run Onboarding
-                    let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding_v1")
-                    if !hasCompletedOnboarding {
-                        NSLog("✨ RedLemon: First run detected. Initiating onboarding tour.")
-                        appState.showOnboarding = true
-                        // Note: Username setup will be triggered by AppOnboardingView's close action OR falls through below
-                    } else if appState.currentUserId == nil {
-                        // Return user: go straight to username setup if not logged in
-                        appState.showUsernameSetup = true
-                    }
-
                     await startServer()
                     appState.checkProviderHealth() // Trigger initial check
-                    await performStartupChecks()
                     await performStartupChecks()
                     await checkForUpdates()
 
@@ -307,7 +311,7 @@ struct RedLemonApp: App {
         if shouldForce {
             NSLog("🔄 Forced username setup detected, showing setup dialog")
             await MainActor.run {
-                appState.showUsernameSetup = true
+                appState.showOnboarding = true
             }
             await UserResetManager.shared.clearForceUsernameSetupFlag()
         }

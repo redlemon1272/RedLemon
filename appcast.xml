@@ -12,7 +12,9 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Production Release v1.0.68</li>
+                    <li><strong>Chat Colors:</strong> Fixed Host appearing blue. Host is now Gold/Lemon (DesignSystem.Colors.accent).</li>
+                    <li><strong>Guest Colors:</strong> Guests now have unique deterministic colors based on username.</li>
+                    <li><strong>Fix:</strong> Case-insensitive Host ID check to prevent host-as-guest bugs.</li>
                 </ul>
             ]]></description>
             <pubDate>Mon, 12 Jan 2026 10:40:30 -0500</pubDate>

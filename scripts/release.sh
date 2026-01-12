@@ -21,6 +21,19 @@ if [ -z "$VERSION" ] || [ -z "$BUILD_NUMBER" ]; then
     exit 1
 fi
 
+# 0. Safety Check: Verify Version Increment
+CURRENT_BUILD=$(grep "Current Version:\*\*" README.md | sed -E 's/.*build ([0-9]+).*/\1/')
+if [ ! -z "$CURRENT_BUILD" ] && [ "$BUILD_NUMBER" -le "$CURRENT_BUILD" ]; then
+    echo -e "${RED}⚠️  CRITICAL ERROR: New build (${BUILD_NUMBER}) must be > current (${CURRENT_BUILD})!${NC}"
+    echo "Sparkle ignores updates with lower/equal build numbers."
+    exit 1
+fi
+
+RELEASE_NOTES=$3
+if [ -z "$RELEASE_NOTES" ]; then
+    RELEASE_NOTES="<li>Production Release v${VERSION}</li>"
+fi
+
 echo -e "${BLUE}🚀 Starting Release Flow for v${VERSION} (${BUILD_NUMBER})...${NC}"
 
 # 1. Update Version in build script
@@ -79,7 +92,7 @@ cat > new_item.xml <<EOF
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Production Release v${VERSION}</li>
+                    ${RELEASE_NOTES}
                 </ul>
             ]]></description>
             <pubDate>${DATE_APPC}</pubDate>

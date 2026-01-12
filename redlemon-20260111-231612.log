@@ -1,0 +1,699 @@
+2026-01-11 23:16:13.216 RedLemon[80424:472626] 🪟 Set initial window to expanded size: (0.0, 120.0, 1280.0, 655.0)
+2026-01-11 23:16:13.216 RedLemon[80424:472626] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-11 23:16:13.265 RedLemon[80424:472626] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-11 23:16:13.267 RedLemon[80424:472626] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-11 23:16:13.296 RedLemon[80424:472626] ✅ Playback state reset complete - starting in browse view
+2026-01-11 23:16:13.297 RedLemon[80424:472626] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-11 23:16:13.297 RedLemon[80424:472626] 🧪 Testing Profile: debug
+2026-01-11 23:16:13.299 RedLemon[80424:472641] 📂 Loaded 5 credential(s) from cache
+2026-01-11 23:16:13.300 RedLemon[80424:472626] ✅ Keychain: Found stored username: lemontom
+2026-01-11 23:16:13.300 RedLemon[80424:472626] 🔍 Supabase: Looking up user 'lemontom' in database...
+2026-01-11 23:16:13.300 RedLemon[80424:472641] 🔍 SupabaseClient: Looking up user by username 'lemontom'
+2026-01-11 23:16:14.010 RedLemon[80424:472641] 📡 SupabaseClient: User lookup response received (400 bytes)
+2026-01-11 23:16:14.015 RedLemon[80424:472641] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-11 23:16:14.018 RedLemon[80424:472641] 👤 SupabaseClient: Found user - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-11 23:16:14.100 RedLemon[80424:472626] ✅ AUTH SUCCESS: User authenticated - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-11 23:16:14.100 RedLemon[80424:472626] 🎯 AppState: currentUsername=lemontom, currentUserId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-11 23:16:17.792 RedLemon[80424:472626] 🏁 AUTH COMPLETE: Final state - username=lemontom, userId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-11 23:16:17.795 RedLemon[80424:472626] 🚀 RedLemon: Starting HTTP server...
+2026-01-11 23:16:17.795 RedLemon[80424:472626] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/RedLemon-Native
+2026-01-11 23:16:17.808 RedLemon[80424:472626] ✅ RedLemon: HTTPServer instance created
+2026-01-11 23:16:17.809 RedLemon[80424:472626] ✅ RedLemon: Server marked as ready (Optimistic)
+2026-01-11 23:16:17.809 RedLemon[80424:472680] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"D63AD105-9E55-4012-BD5E-CC03D7AABC6C","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+📦 Current build: 65, Latest build: 65
+✅ App is up to date (current: 65, latest: 65)
+✅ [EventsConfig] Fetched movie_events version 1523 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1523, 412 movies)
+✅ [EventsView] Loaded 412 movies from config version 1523
+🗓 AppState: Updated schedule epoch to 2026-01-11 08:34:45 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1291 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0241527/img (799080 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1396484/img (1023800 bytes)
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1288 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1288 seconds
+🔍 [DEBUG] Network attempt 1 failed: Error Domain=NSURLErrorDomain Code=-1004 "Could not connect to the server." UserInfo={_kCFStreamErrorCodeKey=61, NSUnderlyingError=0x7fedfcb66c00 {Error Domain=kCFErrorDomainCFNetwork Code=-1004 "(null)" UserInfo={_NSURLErrorNWPathKey=satisfied (Path is satisfied), viable, interface: lo0, _kCFStreamErrorCodeKey=61, _kCFStreamErrorDomainKey=1}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <91A45561-93DB-40E3-96AC-C2D40FED96B7>.<1>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <91A45561-93DB-40E3-96AC-C2D40FED96B7>.<1>"
+), NSLocalizedDescription=Could not connect to the server., NSErrorFailingURLStringKey=http://127.0.0.1:47253/api/metadata/meta/series/tt7252812, NSErrorFailingURLKey=http://127.0.0.1:47253/api/metadata/meta/series/tt7252812, _kCFStreamErrorDomainKey=1}
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📡 Joined channel: realtime:rooms_updates
+✅ RoomListView: Connected to rooms realtime updates
+🔍 [DEBUG] Network attempt 1 failed: Error Domain=NSURLErrorDomain Code=-1004 "Could not connect to the server." UserInfo={_kCFStreamErrorCodeKey=61, NSUnderlyingError=0x7fedfcb940c0 {Error Domain=kCFErrorDomainCFNetwork Code=-1004 "(null)" UserInfo={_NSURLErrorNWPathKey=satisfied (Path is satisfied), viable, interface: lo0, _kCFStreamErrorCodeKey=61, _kCFStreamErrorDomainKey=1}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <882B9536-083E-46AF-9A98-127AA16083A3>.<2>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <882B9536-083E-46AF-9A98-127AA16083A3>.<2>"
+), NSLocalizedDescription=Could not connect to the server., NSErrorFailingURLStringKey=http://127.0.0.1:47253/api/metadata/meta/series/tt7252812, NSErrorFailingURLKey=http://127.0.0.1:47253/api/metadata/meta/series/tt7252812, _kCFStreamErrorDomainKey=1}
+📨 Received: {"ref":"282DC0FB-EFD5-4062-BBBC-073D59843D70","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngrlpmH5Y6Al5B","phx_ref_prev":"GIngrGB05Vo6Al3h","is_premium":true,"last_seen":"2026-01-12T04:16:08.023Z","room_id":"DDLT","started_at":"2026-01-12T04:16:08.023Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngsISdjuA6AmGh","is_premium":true,"last_seen":"2026-01-12T04:16:17.200Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"F10E6C1D-10D7-4F3D-9392-132BCB7EF3B1","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":"80E95CA8-FBAE-446A-BF26-18E139B2A22D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":6798732,"event":"INSERT","filter":"receiver_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"},{"id":83853945,"event":"INSERT","filter":"sender_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-11 23:16:17.868 RedLemon[80424:472626] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-11 23:16:17.868 RedLemon[80424:472626] 🏥 [AppState] Starting global provider health check...
+2026-01-11 23:16:17.868 RedLemon[80424:472626] 🔍 Performing startup checks...
+2026-01-11 23:16:17.868 RedLemon[80424:472626] ✅ Username-based authentication ready
+2026-01-11 23:16:18.386 RedLemon[80424:472659] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-11 23:16:18.386 RedLemon[80424:472659] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-11 23:16:18.798 RedLemon[80424:472626] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+💰 LicenseManager: Starting hybrid subscription check...
+👤 LicenseManager: Profile expiry: Optional(2026-01-18 17:23:32 +0000)
+🎉 Subscription updated! Expires: 2026-01-18 17:23:32 +0000
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+📦 Current build: 65, Latest build: 65
+✅ App is up to date (current: 65, latest: 65)
+✅ TimeService: Synced! Offset: 0.195s (RTT: 122ms)
+   Local:  2026-01-12 04:16:18 +0000
+   Server: 2026-01-12 04:16:19 +0000
+🔍 [DEBUG] Network attempt 2/5 for tt7252812
+[ INFO ] GET /api/metadata/meta/series/tt7252812 [request-id: D80B6DFA-1B61-4335-92B3-68F730F51BE1]
+2026-01-11 23:16:19.273 RedLemon[80424:472626] ✅ [AppState] Provider health check complete (found 5 providers)
+🔍 [DEBUG] Network attempt 2/5 for tt7252812
+[ INFO ] GET /api/metadata/meta/series/tt7252812 [request-id: 91EB4FE9-33CD-4807-8AAB-3621B3949BA8]
+2026-01-11 23:16:19.389 RedLemon[80424:472637] 📦 Decoded CinemetaMeta - videos count: 126
+2026-01-11 23:16:19.422 RedLemon[80424:472659] 📦 Decoded CinemetaMeta - videos count: 126
+2026-01-11 23:16:20.536 RedLemon[80424:472626] 🚪 Joining room: DDLT
+2026-01-11 23:16:22.422 RedLemon[80424:472626] 🚪 Room is in lobby
+2026-01-11 23:16:22.422 RedLemon[80424:472626] ✅ PlayerVM: currentWatchPartyRoom set to DDLT
+💾 Cache SET: Metadata[meta_series_tt7252812]
+📺 Found episode title for 90 Day Fiancé: Before the 90 Days S5E1: A Leap of Faith
+✅ Loaded 1 rooms (total: 1)
+💾 Cache SET: Metadata[meta_series_tt7252812]
+📺 Found episode title for 90 Day Fiancé: Before the 90 Days S5E1: A Leap of Faith
+✅ Loaded 1 rooms (total: 1)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt7252812/img (624507 bytes)
+🚪 Joining room: DDLT
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1523 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1523, 412 movies)
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngsbhz4JE6AmQB","phx_ref_prev":"GIngsISdjuA6AmGh","is_premium":true,"last_seen":"2026-01-12T04:16:22.369Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngsISdjuA6AmGh","is_premium":true,"last_seen":"2026-01-12T04:16:17.200Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎭 Lobby: Connecting to room DDLT...
+🚦 Lobby State: connecting
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Cache HIT: Metadata[meta_series_tt7252812]
+[ INFO ] GET /api/metadata/meta/series/tt7252812 [request-id: 3809B603-C00C-44CB-BF60-FC4B152E11E0]
+2026-01-11 23:16:22.771 RedLemon[80424:472626] ✅ Guest joined room DDLT in database
+2026-01-11 23:16:22.819 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:22.820 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:23.089 RedLemon[80424:472637] 📤 Realtime: Sending message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-11 23:16:23.090 RedLemon[80424:472637]    Payload keys: senderId, chatUsername, timestamp, position, type, chatText
+2026-01-11 23:16:23.090 RedLemon[80424:472637] ✅ Realtime: Message broadcast complete
+2026-01-11 23:16:23.091 RedLemon[80424:472639] 🔐 SupabaseClient: Signing Identity Payload: '176819138396e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-11 23:16:23.092 RedLemon[80424:472639] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-11 23:16:23.212 RedLemon[80424:472638] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:23.213 RedLemon[80424:472638]    Payload keys: senderId, position, timestamp, chatUsername, type, chatText
+2026-01-11 23:16:23.213 RedLemon[80424:472638] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-11 23:16:23.213 RedLemon[80424:472638] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-11 23:16:23.213 RedLemon[80424:472638] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:23.219 RedLemon[80424:472626] 👋 Received: Guest 'lemontom' joined room DDLT
+2026-01-11 23:16:23.320 RedLemon[80424:472626] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIngseJzmE2mN2Uh)
+2026-01-11 23:16:23.320 RedLemon[80424:472626] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIngseJzmE2mN2Uh)
+2026-01-11 23:16:23.399 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:23.399 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:27.505 RedLemon[80424:472680] 📤 Realtime: Sending message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-11 23:16:27.505 RedLemon[80424:472680]    Payload keys: chatUsername, isPremium, position, timestamp, type, chatText, senderId
+2026-01-11 23:16:27.505 RedLemon[80424:472639] ✅ Realtime: Message broadcast complete
+2026-01-11 23:16:27.505 RedLemon[80424:472626] 📡 ChatManager: Chat message sent via Realtime
+2026-01-11 23:16:27.628 RedLemon[80424:472638] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:27.628 RedLemon[80424:472638]    Payload keys: chatText, position, chatUsername, timestamp, isPremium, type, senderId
+2026-01-11 23:16:27.628 RedLemon[80424:472638] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-11 23:16:27.629 RedLemon[80424:472638] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-11 23:16:27.629 RedLemon[80424:472638] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:31.482 RedLemon[80424:472659] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:31.482 RedLemon[80424:472659]    Payload keys: chatText, position, chatUsername, timestamp, isPremium, type, senderId
+2026-01-11 23:16:31.483 RedLemon[80424:472659] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-11 23:16:31.483 RedLemon[80424:472659] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-11 23:16:31.483 RedLemon[80424:472659] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:42.745 RedLemon[80424:472638] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:42.745 RedLemon[80424:472638]    Payload keys: timestamp, chatUsername, position, senderId, type, chatText
+2026-01-11 23:16:42.746 RedLemon[80424:472638] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+🔌 Disconnecting from Supabase Realtime
+✅ Disconnected from Supabase Realtime
+❌ Heartbeat failed: CancellationError()
+📡 SocialService: Updated status - In Lobby: 90 Day Fiancé: Before the 90 Days: 90 Day Fiancé: Before the 90 Days
+🔌 Setting up Realtime channel: watch-party:DDLT
+   Role: Guest
+   User ID: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:DDLT
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Loaded metadata for 90 Day Fiancé: Before the 90 Days
+✅ Lobby: Connected to Realtime
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngscQ-5Jg6AmQh","phx_ref_prev":"GIngsbhz4JE6AmQB","is_premium":true,"last_seen":"2026-01-12T04:16:22.569Z","room_id":"DDLT","started_at":"2026-01-12T04:16:22.570Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}},"leaves":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngsbhz4JE6AmQB","phx_ref_prev":"GIngsISdjuA6AmGh","is_premium":true,"last_seen":"2026-01-12T04:16:22.369Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":"C71551B1-7CE9-4BEB-9D69-FB5EA67818BE","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":46033609,"event":"*","filter":"id=eq.DDLT","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:DDLT"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"6b778796-ef6d-11f0-bb3e-ee9e47993347":{"metas":[{"phx_ref":"GIngrmzD1aamN19B","phx_ref_prev":"GIngrl6Y0dimN18h","is_host":true,"joined_at":1768191368.324867,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"74398e88-ef6d-11f0-8a17-ee9e47993347":{"metas":[{"phx_ref":"GIngscn5q6amN4gD","is_host":false,"joined_at":1768191382.624502,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:16:08.512248", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:16:22.879Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:16:08.512248", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:16:22.879Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngsc0DO8k6AmUB","phx_ref_prev":"GIngrlpmH5Y6Al5B","is_premium":true,"last_seen":"2026-01-12T04:16:22.828Z","room_id":"DDLT","started_at":"2026-01-12T04:16:08.023Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}},"leaves":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngrlpmH5Y6Al5B","phx_ref_prev":"GIngrGB05Vo6Al3h","is_premium":true,"last_seen":"2026-01-12T04:16:08.023Z","room_id":"DDLT","started_at":"2026-01-12T04:16:08.023Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+📺 Lobby: Synced season/episode: S5E1
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔌 Setting up Realtime channel: watch-party:DDLT
+   Role: Guest
+   User ID: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:DDLT, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"74398e88-ef6d-11f0-8a17-ee9e47993347":{"metas":[{"phx_ref":"GIngseJzmE2mN2Uh","phx_ref_prev":"GIngscn5q6amN4gD","is_host":false,"joined_at":1768191383.0701919,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"74398e88-ef6d-11f0-8a17-ee9e47993347":{"metas":[{"phx_ref":"GIngscn5q6amN4gD","is_host":false,"joined_at":1768191382.624502,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"lemontom","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:16:23.399614", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:16:23.409Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1279 seconds
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hi","chatUsername":"lemontom","isPremium":true,"position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":1768191387.484517,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hey","chatUsername":"ursinho","isPremium":true,"position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":1768191391.373815,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1269 seconds
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:16:42", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selec2026-01-11 23:16:42.746 RedLemon[80424:472638] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-11 23:16:42.746 RedLemon[80424:472638] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:42.746 RedLemon[80424:472626] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2026-01-11 23:16:42.747 RedLemon[80424:472626] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing
+2026-01-11 23:16:42.768 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:42.768 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:42.951 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:42.951 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:42.953 RedLemon[80424:472626] ✅ Guest: Forced stream sync from Host (Hash: 2e744c7d)
+2026-01-11 23:16:43.030 RedLemon[80424:472626] 📺 Guest: Set season/episode from DB (Realtime path): S5E1
+2026-01-11 23:16:43.871 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:43.872 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:46.133 RedLemon[80424:472626] 🎬 Guest: Fetch took 0.284s, finished countdown loop
+2026-01-11 23:16:46.231 RedLemon[80424:472626] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIngtzX9G7qmN4ij)
+2026-01-11 23:16:46.231 RedLemon[80424:472626] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIngtzX9G7qmN4ij)
+2026-01-11 23:16:46.331 RedLemon[80424:472626] 🎬 Guest: Starting playback after countdown
+2026-01-11 23:16:46.331 RedLemon[80424:472626] 🎬 Guest: Launching player for 90 Day Fiancé: Before the 90 Days
+2026-01-11 23:16:46.432 RedLemon[80424:472626] 📡 Fetching metadata for tt7252812...
+2026-01-11 23:16:46.477 RedLemon[80424:472626] 🎬 PlayerVM: Using Playlist Metadata: S5E1
+2026-01-11 23:16:46.477 RedLemon[80424:472626] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-11 23:16:46.477 RedLemon[80424:472626] 📝 GUEST: Extracted filename='90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv' (len=78), sourceQuality=nil, selectedQuality=1080p
+ted_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:16:42.692Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:16:42", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:16:42.853Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+💓 Heartbeat sent
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:16:43.909561", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:16:43.914Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1260 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6b778796-ef6d-11f0-bb3e-ee9e47993347":{"metas":[{"phx_ref":"GIngtzX9G7qmN4ij","phx_ref_prev":"GIngrmzD1aamN19B","is_host":true,"joined_at":1768191406.0640988,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"6b778796-ef6d-11f0-bb3e-ee9e47993347":{"metas":[{"phx_ref":"GIngrmzD1aamN19B","phx_ref_prev":"GIngrl6Y0dimN18h","is_host":true,"joined_at":1768191368.324867,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngtzl7ucI6AmWh","phx_ref_prev":"GIngsc0DO8k6AmUB","is_premium":true,"last_seen":"2026-01-12T04:16:46.125Z","room_id":"DDLT","started_at":"2026-01-12T04:16:46.125Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}},"leaves":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngsc0DO8k6AmUB","phx_ref_prev":"GIngrlpmH5Y6Al5B","is_premium":true,"last_seen":"2026-01-12T04:16:22.828Z","room_id":"DDLT","started_at":"2026-01-12T04:16:08.023Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+✅ Cache HIT: Metadata[meta_series_tt7252812]
+[ INFO ] GET /subtitles/search [request-id: 65E4377C-03DC-4F98-BB73-72334BCB1850]
+2026-01-11 23:16:47.357 RedLemon[80424:472626] ✅ GUEST: Found 1 subtitles
+2026-01-11 23:16:47.427 RedLemon[80424:472626] ✅ Stream ready, starting playback...
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt7252812 (tv) S05E01
+   ℹ️ Fallback Name: 90 Day Fiancé: Before the 90 Days (No Year)
+✅ Found 1 subtitles from SubDL (Primary)
+⚠️ Low subtitle count (1). Attempting supplemental Name Search for '90 Day Fiancé: Before the 90 Days'...
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✅ Supplemental Search found ID: 1313943. Fetching additional subtitles...
+💓 Heartbeat sent
+📦 Supplemental Fetch returned 1 raw subtitles
+🔗 Merged 0 unique subtitles from supplemental search.
+🧠 StreamService: Marked hash 2e744c7d as attempted for tt7252812
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🔌 Setting up Realtime channel: watch-party:DDLT
+   Role: Guest
+   User ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:DDLT, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_series_tt7252812]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzkzNjc4Mi0yNjQ0MTUzLnppcA== [request-id: 7DDD49B6-2524-492C-960F-D4B70EB44E1B]
+2026-01-11 23:16:47.841 RedLemon[80424:472626] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIngt5XVN96mN2Yh)
+2026-01-11 23:16:47.841 RedLemon[80424:472626] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIngt5XVN96mN2Yh)
+2026-01-11 23:16:48.074 RedLemon[80424:472680] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:48.075 RedLemon[80424:472680]    Payload keys: type, position, isPlaying, senderId, timestamp
+2026-01-11 23:16:48.076 RedLemon[80424:472680] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:16:48.076 RedLemon[80424:472680] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:16:48.076 RedLemon[80424:472680] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:49.219 RedLemon[80424:472681] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:49.220 RedLemon[80424:472681]    Payload keys: type, timestamp, position, senderId, isPlaying
+2026-01-11 23:16:49.220 RedLemon[80424:472681] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-11 23:16:49.220 RedLemon[80424:472681] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-11 23:16:49.220 RedLemon[80424:472681] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:50.102 RedLemon[80424:473031] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:50.102 RedLemon[80424:473031]    Payload keys: position, timestamp, senderId, isPlaying, type
+2026-01-11 23:16:50.102 RedLemon[80424:473031] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:16:50.102 RedLemon[80424:473031] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:16:50.102 RedLemon[80424:473031] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:50.147 RedLemon[80424:472638] 📤 Realtime: Sending message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-11 23:16:50.148 RedLemon[80424:472638]    Payload keys: timestamp, isPlaying, position, type, senderId
+2026-01-11 23:16:50.148 RedLemon[80424:472680] ✅ Realtime: Message broadcast complete
+2026-01-11 23:16:50.271 RedLemon[80424:472638] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:50.271 RedLemon[80424:472638]    Payload keys: senderId, position, isPlaying, timestamp, type
+2026-01-11 23:16:50.271 RedLemon[80424:472638] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-11 23:16:50.272 RedLemon[80424:472638] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-11 23:16:50.272 RedLemon[80424:472638] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:50.547 RedLemon[80424:473031] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:50.547 RedLemon[80424:473031]    Payload keys: timestamp, type, position, isPlaying, senderId
+2026-01-11 23:16:50.548 RedLemon[80424:473031] ✅ Realtime: Decoded message type: play, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-11 23:16:50.548 RedLemon[80424:473031] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-11 23:16:50.548 RedLemon[80424:473031] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:51.478 RedLemon[80424:472637] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:51.478 RedLemon[80424:472637]    Payload keys: position, senderId, timestamp, isPlaying, type
+2026-01-11 23:16:51.479 RedLemon[80424:472637] ✅ Realtime: Decoded message type: play, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-11 23:16:51.479 RedLemon[80424:472637] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-11 23:16:51.479 RedLemon[80424:472637] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:52.180 RedLemon[80424:473031] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:52.180 RedLemon[80424:473031]    Payload keys: isPlaying, senderId, timestamp, position, type
+2026-01-11 23:16:52.181 RedLemon[80424:473031] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:16:52.181 RedLemon[80424:473031] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:16:52.181 RedLemon[80424:473031] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:54.111 RedLemon[80424:473031] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:54.111 RedLemon[80424:473031]    Payload keys: type, isPlaying, position, senderId, timestamp
+2026-01-11 23:16:54.112 RedLemon[80424:473031] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:16:54.112 RedLemon[80424:473031] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:16:54.112 RedLemon[80424:473031] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:56.162 RedLemon[80424:472681] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:56.162 RedLemon[80424:472681]    Payload keys: isPlaying, senderId, type, timestamp, position
+2026-01-11 23:16:56.163 RedLemon[80424:472681] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:16:56.163 RedLemon[80424:472681] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:16:56.163 RedLemon[80424:472681] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:56.242 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:56.242 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:56.243 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:56.243 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:57.601 RedLemon[80424:472638] 🔐 SupabaseClient: Signing Identity Payload: '176819141796e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-11 23:16:57.602 RedLemon[80424:472638] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-11 23:16:58.168 RedLemon[80424:473032] 📨 Realtime: Received broadcast message
+2026-01-11 23:16:58.168 RedLemon[80424:473032]    Payload keys: type, isPlaying, timestamp, position, senderId
+2026-01-11 23:16:58.168 RedLemon[80424:473032] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:16:58.169 RedLemon[80424:473032] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:16:58.169 RedLemon[80424:473032] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:16:58.216 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:58.216 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:58.311 RedLemon[80424:473031] 🔐 SupabaseClient: Signing Identity Payload: '176819141896e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-11 23:16:58.311 RedLemon[80424:473031] 🔐 Signed request to /rpc/room_heartbeat
+📄 Subtitle request: L3N1YnRpdGxlLzkzNjc4... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/936782-2644153.zip
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngt5NcRu06AmYB","phx_ref_prev":"GIngscQ-5Jg6AmQh","is_premium":true,"last_seen":"2026-01-12T04:16:47.510Z","room_id":"DDLT","started_at":"2026-01-12T04:16:22.570Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}},"leaves":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngscQ-5Jg6AmQh","phx_ref_prev":"GIngsbhz4JE6AmQB","is_premium":true,"last_seen":"2026-01-12T04:16:22.569Z","room_id":"DDLT","started_at":"2026-01-12T04:16:22.570Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"74398e88-ef6d-11f0-8a17-ee9e47993347":{"metas":[{"phx_ref":"GIngt5XVN96mN2Yh","phx_ref_prev":"GIngseJzmE2mN2Uh","is_host":false,"joined_at":1768191407.552664,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"74398e88-ef6d-11f0-8a17-ee9e47993347":{"metas":[{"phx_ref":"GIngseJzmE2mN2Uh","phx_ref_prev":"GIngscn5q6amN4gD","is_host":false,"joined_at":1768191383.0701919,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:DDLT"}
+📡 SocialService: Updated status - online: 90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngt5mpMuw6AmZB","phx_ref_prev":"GIngt5NcRu06AmYB","is_premium":true,"last_seen":"2026-01-12T04:16:47.598Z","room_id":"DDLT","started_at":"2026-01-12T04:16:47.599Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}},"leaves":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngt5NcRu06AmYB","phx_ref_prev":"GIngscQ-5Jg6AmQh","is_premium":true,"last_seen":"2026-01-12T04:16:47.510Z","room_id":"DDLT","started_at":"2026-01-12T04:16:22.570Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1257 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngt5_43q46AmZh","phx_ref_prev":"GIngtzl7ucI6AmWh","is_premium":true,"last_seen":"2026-01-12T04:16:47.841Z","room_id":"DDLT","started_at":"2026-01-12T04:16:46.125Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}},"leaves":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngtzl7ucI6AmWh","phx_ref_prev":"GIngsc0DO8k6AmUB","is_premium":true,"last_seen":"2026-01-12T04:16:46.125Z","room_id":"DDLT","started_at":"2026-01-12T04:16:46.125Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+✅ Download complete: 44480 bytes
+📦 Detected ZIP archive, extracting...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"DDLT","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+🔍 Looking for S%02dE%02d in zip (%d files)... 5 1 1
+✅ Found matching file in zip (Strategy 2 - Pattern s05e01): 90.Day.Fiance.Before.the.90.Days.S05E01.A.Leap.of.Faith.720p.HEVC.x265-MeGusta[eztv.re].srt
+📦 Extracting specific file: 90.Day.Fiance.Before.the.90.Days.S05E01.A.Leap.of.Faith.720p.HEVC.x265-MeGusta\[eztv.re\].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1768191409.196711,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":0.209,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768191410.1313481,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0.45899999999999996,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1768191410.4842172,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":1.335,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1768191411.4413018,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":2.211,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":3.9619999999999997,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1250 seconds
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5469.967862044219,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:16:56", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5469, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:16:56.222Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:16:56.235335", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5469, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:16:56.238Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5471.465999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:16:58.041989", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5469, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:16:58.047Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_pu2026-01-11 23:16:58.938 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:16:58.938 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:00.153 RedLemon[80424:473032] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:00.153 RedLemon[80424:473032]    Payload keys: position, isPlaying, senderId, timestamp, type
+2026-01-11 23:17:00.153 RedLemon[80424:473032] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:00.154 RedLemon[80424:473032] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:00.154 RedLemon[80424:473032] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:02.201 RedLemon[80424:472638] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:02.202 RedLemon[80424:472638]    Payload keys: position, type, timestamp, isPlaying, senderId
+2026-01-11 23:17:02.202 RedLemon[80424:472638] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:02.202 RedLemon[80424:472638] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:02.202 RedLemon[80424:472638] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:04.250 RedLemon[80424:472638] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:04.250 RedLemon[80424:472638]    Payload keys: senderId, type, timestamp, isPlaying, position
+2026-01-11 23:17:04.250 RedLemon[80424:472638] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:04.250 RedLemon[80424:472638] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:04.251 RedLemon[80424:472638] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:06.135 RedLemon[80424:473031] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:06.135 RedLemon[80424:473031]    Payload keys: isPlaying, position, timestamp, type, senderId
+2026-01-11 23:17:06.136 RedLemon[80424:473031] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:06.136 RedLemon[80424:473031] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:06.136 RedLemon[80424:473031] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:06.285 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:06.285 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:08.242 RedLemon[80424:472637] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:08.242 RedLemon[80424:472637]    Payload keys: isPlaying, timestamp, position, senderId, type
+2026-01-11 23:17:08.243 RedLemon[80424:472637] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:08.243 RedLemon[80424:472637] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:08.243 RedLemon[80424:472637] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:10.188 RedLemon[80424:472637] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:10.189 RedLemon[80424:472637]    Payload keys: type, position, isPlaying, senderId, timestamp
+2026-01-11 23:17:10.189 RedLemon[80424:472637] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:10.189 RedLemon[80424:472637] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:10.189 RedLemon[80424:472637] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:12.236 RedLemon[80424:472659] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:12.236 RedLemon[80424:472659]    Payload keys: isPlaying, senderId, timestamp, position, type
+2026-01-11 23:17:12.236 RedLemon[80424:472659] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:12.236 RedLemon[80424:472659] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:12.236 RedLemon[80424:472659] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:14.147 RedLemon[80424:472659] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:14.147 RedLemon[80424:472659]    Payload keys: senderId, position, isPlaying, type, timestamp
+2026-01-11 23:17:14.147 RedLemon[80424:472659] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:14.148 RedLemon[80424:472659] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:14.148 RedLemon[80424:472659] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:16.230 RedLemon[80424:472637] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:16.230 RedLemon[80424:472637]    Payload keys: type, isPlaying, senderId, position, timestamp
+2026-01-11 23:17:16.230 RedLemon[80424:472637] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:16.230 RedLemon[80424:472637] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:16.230 RedLemon[80424:472637] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:16.295 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:16.295 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:18.157 RedLemon[80424:472659] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:18.157 RedLemon[80424:472659]    Payload keys: position, senderId, isPlaying, timestamp, type
+2026-01-11 23:17:18.157 RedLemon[80424:472659] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:18.157 RedLemon[80424:472659] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:18.157 RedLemon[80424:472659] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:20.222 RedLemon[80424:473032] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:20.222 RedLemon[80424:473032]    Payload keys: position, isPlaying, type, senderId, timestamp
+2026-01-11 23:17:20.223 RedLemon[80424:473032] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:20.223 RedLemon[80424:473032] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:20.223 RedLemon[80424:473032] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:22.237 RedLemon[80424:473031] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:22.238 RedLemon[80424:473031]    Payload keys: type, isPlaying, senderId, position, timestamp
+2026-01-11 23:17:22.238 RedLemon[80424:473031] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:22.239 RedLemon[80424:473031] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:22.239 RedLemon[80424:473031] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:24.216 RedLemon[80424:472637] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:24.216 RedLemon[80424:472637]    Payload keys: isPlaying, position, timestamp, type, senderId
+2026-01-11 23:17:24.216 RedLemon[80424:472637] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:24.216 RedLemon[80424:472637] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:24.216 RedLemon[80424:472637] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:26.163 RedLemon[80424:473031] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:26.163 RedLemon[80424:473031]    Payload keys: type, senderId, isPlaying, timestamp, position
+2026-01-11 23:17:26.164 RedLemon[80424:473031] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:26.164 RedLemon[80424:473031] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:26.164 RedLemon[80424:473031] ✅ Realtime: syncCallback invoked successfully
+blic": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:16:58.674466", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5469, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:16:58.684Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5473.259,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5475.303,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5477.347,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1239 seconds
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5479.391,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:17:06", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5479, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:17:06.291Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5481.434,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5483.186,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5485.23,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngvWmiXuo6AmdB","phx_ref_prev":"GIngt5mpMuw6AmZB","is_premium":true,"last_seen":"2026-01-12T04:17:12.583Z","room_id":"DDLT","started_at":"2026-01-12T04:16:47.599Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}},"leaves":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngt5mpMuw6AmZB","phx_ref_prev":"GIngt5NcRu06AmYB","is_premium":true,"last_seen":"2026-01-12T04:16:47.598Z","room_id":"DDLT","started_at":"2026-01-12T04:16:47.599Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngvXn_OTU6Amdh","phx_ref_prev":"GIngt5_43q46AmZh","is_premium":true,"last_seen":"2026-01-12T04:17:12.973Z","room_id":"DDLT","started_at":"2026-01-12T04:16:46.125Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}},"leaves":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngt5_43q46AmZh","phx_ref_prev":"GIngtzl7ucI6AmWh","is_premium":true,"last_seen":"2026-01-12T04:16:47.841Z","room_id":"DDLT","started_at":"2026-01-12T04:16:46.125Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📡 [EventsConfig] Checking server for movie_events config version...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5487.273,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+✅ [EventsConfig] Fetched movie_events version 1523 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1523, 412 movies)
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1230 seconds
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5489.317,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:17:16", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5489, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:17:16.332Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5491.361,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5493.405,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5495.447999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5497.492,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1220 seconds
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5499.244,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:17:26", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5499, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"2026-01-11 23:17:26.279 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:26.279 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:26.477 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:26.477 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:27.984 RedLemon[80424:472638] 🔐 SupabaseClient: Signing Identity Payload: '176819144796e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-11 23:17:27.985 RedLemon[80424:472638] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-11 23:17:28.211 RedLemon[80424:473032] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:28.211 RedLemon[80424:473032]    Payload keys: position, senderId, type, isPlaying, timestamp
+2026-01-11 23:17:28.211 RedLemon[80424:473032] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:28.211 RedLemon[80424:473032] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:28.211 RedLemon[80424:473032] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:28.235 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:28.235 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:30.155 RedLemon[80424:472659] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:30.156 RedLemon[80424:472659]    Payload keys: type, position, senderId, isPlaying, timestamp
+2026-01-11 23:17:30.156 RedLemon[80424:472659] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:30.156 RedLemon[80424:472659] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:30.156 RedLemon[80424:472659] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:32.305 RedLemon[80424:472659] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:32.305 RedLemon[80424:472659]    Payload keys: senderId, timestamp, position, isPlaying, type
+2026-01-11 23:17:32.306 RedLemon[80424:472659] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:32.306 RedLemon[80424:472659] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:32.306 RedLemon[80424:472659] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:33.703 RedLemon[80424:473031] 🔐 SupabaseClient: Signing Identity Payload: '176819145396e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-11 23:17:33.703 RedLemon[80424:473031] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-11 23:17:34.207 RedLemon[80424:473031] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:34.207 RedLemon[80424:473031]    Payload keys: position, senderId, isPlaying, type, timestamp
+2026-01-11 23:17:34.208 RedLemon[80424:473031] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:34.208 RedLemon[80424:473031] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:34.208 RedLemon[80424:473031] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:34.250 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:34.250 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:36.326 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:36.326 RedLemon[80424:472626] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-11 23:17:36.505 RedLemon[80424:472659] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:36.506 RedLemon[80424:472659]    Payload keys: position, isPlaying, type, senderId, timestamp
+2026-01-11 23:17:36.506 RedLemon[80424:472659] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:36.506 RedLemon[80424:472659] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:36.506 RedLemon[80424:472659] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:38.208 RedLemon[80424:472681] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:38.208 RedLemon[80424:472681]    Payload keys: isPlaying, position, timestamp, type, senderId
+2026-01-11 23:17:38.209 RedLemon[80424:472681] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:38.209 RedLemon[80424:472681] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:38.209 RedLemon[80424:472681] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:40.093 RedLemon[80424:472638] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:40.094 RedLemon[80424:472638]    Payload keys: type, timestamp, senderId, isPlaying, position
+2026-01-11 23:17:40.094 RedLemon[80424:472638] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:40.095 RedLemon[80424:472638] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:40.095 RedLemon[80424:472638] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:42.238 RedLemon[80424:473031] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:42.238 RedLemon[80424:473031]    Payload keys: isPlaying, timestamp, senderId, type, position
+2026-01-11 23:17:42.238 RedLemon[80424:473031] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:42.238 RedLemon[80424:473031] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:42.239 RedLemon[80424:473031] ✅ Realtime: syncCallback invoked successfully
+2026-01-11 23:17:44.183 RedLemon[80424:472659] 📨 Realtime: Received broadcast message
+2026-01-11 23:17:44.183 RedLemon[80424:472659]    Payload keys: position, type, timestamp, senderId, isPlaying
+2026-01-11 23:17:44.183 RedLemon[80424:472659] ✅ Realtime: Decoded message type: playbackState, sender: DDLT
+2026-01-11 23:17:44.184 RedLemon[80424:472659] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-11 23:17:44.184 RedLemon[80424:472659] ✅ Realtime: syncCallback invoked successfully
+}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:17:26.279Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:17:26.395107", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5499, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:17:26.406Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5501.286999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:17:28.263348", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5499, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:17:28.266Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5503.331,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5505.375,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5507.419,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:17:34.205317", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5499, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:17:34.208Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+⏰ AppState: Next schedule update set for Event End: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1209 seconds
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DDLT", "name": "90 Day Fiancé: Before the 90 Days", "season": 5, "episode": 1, "imdb_id": "tt7252812", "playlist": [{"id": "01946719-AF13-4EA0-B48C-5B0F27516E66", "season": 5, "episode": 1, "mediaItem": {"id": "tt7252812", "name": "90 Day Fiancé: Before the 90 Days", "type": "series", "poster": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-12T04:16:07.678214", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNDM2MmM5MWYtM2NhNS00ZTlhLWI5N2EtYzQ4ZWUyYjc3NTU2XkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "2e744c7ded5f8a1ae413b80e251a80b69cbfb6de", "backdrop_url": null, "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-12T04:17:36", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5509, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NWLJW4HABFCHM40/90.day.fiance.before.the.90.days.s05e01.a.leap.of.faith.1080p.web.h264-b2b.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-12T04:17:36.296Z","old_record":{"id": "DDLT"}},"ids":[46033609]},"topic":"realtime:watch-party:DDLT"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5509.17,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngw0W-bsk6Amih","phx_ref_prev":"GIngvWmiXuo6AmdB","is_premium":true,"last_seen":"2026-01-12T04:17:37.747Z","room_id":"DDLT","started_at":"2026-01-12T04:16:47.599Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}},"leaves":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngvWmiXuo6AmdB","phx_ref_prev":"GIngt5mpMuw6AmZB","is_premium":true,"last_seen":"2026-01-12T04:17:12.583Z","room_id":"DDLT","started_at":"2026-01-12T04:16:47.599Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngw1KONmw6AmjB","phx_ref_prev":"GIngvXn_OTU6Amdh","is_premium":true,"last_seen":"2026-01-12T04:17:38.079Z","room_id":"DDLT","started_at":"2026-01-12T04:16:46.125Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}},"leaves":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngvXn_OTU6Amdh","phx_ref_prev":"GIngt5_43q46AmZh","is_premium":true,"last_seen":"2026-01-12T04:17:12.973Z","room_id":"DDLT","started_at":"2026-01-12T04:16:46.125Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5511.505999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5513.258,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5515.3009999999995,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+💓 Heartbeat sent
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DDLT","timestamp":5517.344999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DDLT"}
+⚠️ Lobby: Already connected or connecting - skipping duplicate connect call
+🧹 Cleaning up Realtime channel for room: DDLT
+🔄 Untracking presence...
+📡 SocialService: Updated status - In Lobby: 90 Day Fia2026-01-11 23:17:46.095 RedLemon[80424:472626] 🛑 Guest: Ignoring playback signal - just finished playback (Grace Period)
+2026-01-11 23:17:46.448 RedLemon[80424:472626] 👋 lemontom synced from database
+2026-01-11 23:17:57.736 RedLemon[80424:473032] 📤 Realtime: Sending message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-11 23:17:57.736 RedLemon[80424:473032]    Payload keys: chatText, type, timestamp, senderId, isPremium, position, chatUsername
+2026-01-11 23:17:57.736 RedLemon[80424:472626] ❌ ChatManager: Failed to send chat message: notJoined
+ncé: Before the 90 Days: 90 Day Fiancé: Before the 90 Days
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+📡 Connection state: disconnected
+✅ Realtime channel cleanup complete
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:DDLT"}
+📨 Unknown event: phx_close
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"74398e88-ef6d-11f0-8a17-ee9e47993347":{"metas":[{"phx_ref":"GIngt5XVN96mN2Yh","phx_ref_prev":"GIngseJzmE2mN2Uh","is_host":false,"joined_at":1768191407.552664,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:DDLT"}
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngxTI0zUk6AmlB","phx_ref_prev":"GIngw0W-bsk6Amih","is_premium":true,"last_seen":"2026-01-12T04:17:45.612Z","room_id":"DDLT","started_at":"2026-01-12T04:17:45.612Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}},"leaves":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngw0W-bsk6Amih","phx_ref_prev":"GIngvWmiXuo6AmdB","is_premium":true,"last_seen":"2026-01-12T04:17:37.747Z","room_id":"DDLT","started_at":"2026-01-12T04:16:47.599Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1199 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngxT_f2RE6Amlh","phx_ref_prev":"GIngw1KONmw6AmjB","is_premium":true,"last_seen":"2026-01-12T04:17:46.359Z","room_id":"DDLT","started_at":"2026-01-12T04:17:46.359Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}},"leaves":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngw1KONmw6AmjB","phx_ref_prev":"GIngvXn_OTU6Amdh","is_premium":true,"last_seen":"2026-01-12T04:17:38.079Z","room_id":"DDLT","started_at":"2026-01-12T04:16:46.125Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days - S05E01: A Leap of Faith","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-12 04:37:45 +0000
+⏰ AppState: Scheduling update in 1190 seconds
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngyUndTMw6Amoh","phx_ref_prev":"GIngxTI0zUk6AmlB","is_premium":true,"last_seen":"2026-01-12T04:18:03.583Z","room_id":"DDLT","started_at":"2026-01-12T04:17:45.612Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}},"leaves":{"70fd98e0-ef6d-11f0-b063-ee9e47993347":{"metas":[{"phx_ref":"GIngxTI0zUk6AmlB","phx_ref_prev":"GIngw0W-bsk6Amih","is_premium":true,"last_seen":"2026-01-12T04:17:45.612Z","room_id":"DDLT","started_at":"2026-01-12T04:17:45.612Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngyVP5pEk6AmpB","phx_ref_prev":"GIngxT_f2RE6Amlh","is_premium":true,"last_seen":"2026-01-12T04:18:03.874Z","room_id":"DDLT","started_at":"2026-01-12T04:17:46.359Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}},"leaves":{"4232cc6a-ef6d-11f0-b845-ee9e47993347":{"metas":[{"phx_ref":"GIngxT_f2RE6Amlh","phx_ref_prev":"GIngw1KONmw6AmjB","is_premium":true,"last_seen":"2026-01-12T04:17:46.359Z","room_id":"DDLT","started_at":"2026-01-12T04:17:46.359Z","status":"In Lobby: 90 Day Fiancé: Before the 90 Days","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt7252812","watching_title":"90 Day Fiancé: Before the 90 Days","watching_type":"series"}]}}},"topic":"realtime:global-presence"}

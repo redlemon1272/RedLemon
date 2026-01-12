@@ -115,6 +115,7 @@ class MPVPlayerViewModel: ObservableObject {
 
                     // Trigger failover immediately
                     self.playbackErrorTrigger.send(errorMsg)
+                    Task { await SessionRecorder.shared.log(category: .player, message: "Critical MPV Error", metadata: ["error": errorMsg]) }
                 }
                 .store(in: &serviceCancellables)
 
@@ -128,6 +129,7 @@ class MPVPlayerViewModel: ObservableObject {
                         // Video started playing - hide poster
                         self.onVideoReady()
                     }
+                    Task { await SessionRecorder.shared.log(category: .player, message: "Playback State Changed", metadata: ["state": isPlaying ? "Playing" : "Paused"]) }
                 }
                 .store(in: &serviceCancellables)
 
@@ -223,7 +225,9 @@ class MPVPlayerViewModel: ObservableObject {
                         self.bufferingTimer = Timer.scheduledTimer(withTimeInterval: 45.0, repeats: false) { [weak self] _ in
                              LoggingManager.shared.error(.videoRendering, message: "Buffering Timeout (45s) - Connection too slow, triggering Failover")
                              self?.playbackErrorTrigger.send("Connection Timeout")
+                             Task { await SessionRecorder.shared.log(category: .player, message: "Buffering Timeout (45s) - Connection too slow") }
                         }
+                        Task { await SessionRecorder.shared.log(category: .player, message: "Buffering Started") }
                     } else {
                          self.bufferingTimer?.invalidate()
                          // Buffering finished
@@ -788,6 +792,7 @@ class MPVPlayerViewModel: ObservableObject {
                 let expectedCount = min(subtitles.count, 3)
                 // Disable autoplay so we can seek BEFORE showing the first frame
                 await playbackService.loadVideo(url: streamURL, autoplay: false, expectedSubtitleCount: expectedCount)
+                await SessionRecorder.shared.log(category: .player, message: "Load Video (Event)", metadata: ["url": streamURL])
             }
             // Events don't use waitingForGuests
             showWaitingForGuests = false
@@ -800,14 +805,20 @@ class MPVPlayerViewModel: ObservableObject {
                 LoggingManager.shared.info(.general, message: "   With resume from \(Int(resumeTime))s")
                 // Load with autoplay=true, onVideoReady will handle the seek
                 Task { @MainActor in
-                    let expectedCount = min(subtitles.count, 3)
-                    await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
-                }
-            } else {
-                Task { @MainActor in
-                    let expectedCount = min(subtitles.count, 3)
-                    await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
-                }
+                let expectedCount = min(subtitles.count, 3)
+                // Autoplay true for solo playback
+                await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
+                await SessionRecorder.shared.log(category: .player, message: "Load Video (Solo)", metadata: ["url": streamURL])
+            }
+        } else {
+            LoggingManager.shared.info(.watchParty, message: "WATCH PARTY TO START: Loading PAUSED (Waiting for Ready Gate)")
+            isRefiningInitialSeek = true
+            Task { @MainActor in
+                let expectedCount = min(subtitles.count, 3)
+                // Autoplay false because we need to wait for checks
+                await playbackService.loadVideo(url: streamURL, autoplay: false, expectedSubtitleCount: expectedCount)
+                await SessionRecorder.shared.log(category: .player, message: "Load Video (Watch Party - Paused)", metadata: ["url": streamURL])
+            }
             }
             showWaitingForGuests = false
 

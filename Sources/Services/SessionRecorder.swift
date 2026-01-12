@@ -74,12 +74,26 @@ actor SessionRecorder {
     
     // MARK: - Public API
     
-    func startNewSession(imdbId: String? = nil) {
+    func startNewSession(imdbId: String? = nil, userId: String? = nil) {
         events.removeAll()
         currentSessionId = UUID()
         currentImdbId = imdbId
         currentStreamHash = nil
-        log(category: .app, message: "New Session Started", metadata: ["session_id": currentSessionId.uuidString])
+        
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "0"
+        
+        var metadata: [String: String] = [
+            "session_id": currentSessionId.uuidString,
+            "app_version": appVersion,
+            "build": buildNumber
+        ]
+        
+        if let uid = userId {
+            metadata["user_id"] = uid
+        }
+        
+        log(category: .app, message: "New Session Started", metadata: metadata)
         if let id = imdbId {
             log(category: .app, message: "Target Content Set", metadata: ["imdb_id": id])
         }
@@ -93,6 +107,8 @@ actor SessionRecorder {
     func log(category: SessionEventCategory, message: String, metadata: [String: String]? = nil) {
         // Sanitize metadata keys/values
         var safeMetadata: [String: String]? = nil
+        var metadataString = ""
+        
         if let meta = metadata {
             safeMetadata = [:]
             for (key, value) in meta {
@@ -102,6 +118,12 @@ actor SessionRecorder {
                     safeMetadata?[key] = value
                 }
             }
+            // Format for console (JSON-like)
+            if let safe = safeMetadata {
+                let sortedKeys = safe.keys.sorted()
+                let jsonItems = sortedKeys.map { "\"\($0)\": \"\(safe[$0] ?? "")\"" }
+                metadataString = " [\(jsonItems.joined(separator: ", "))]"
+            }
         }
         
         // Remove sensitive info from message
@@ -109,6 +131,10 @@ actor SessionRecorder {
         
         let event = SessionEvent(category: category, message: safeMessage, metadata: safeMetadata)
         events.append(event)
+        
+        // Mirror to System Log for real-time debugging
+        // Format: [CATEGORY] Message [key: value]
+        NSLog("%@", "📝 [\(category.rawValue)] \(safeMessage)\(metadataString)")
         
         // Cap log size to prevent memory issues (last 1000 events)
         if events.count > 1000 {

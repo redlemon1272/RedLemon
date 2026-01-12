@@ -28,7 +28,8 @@ actor StreamResolver {
         preferredHash: String? = nil
     ) async throws -> QualityBucketsResponse {
         NSLog("⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
-        await SessionRecorder.shared.startNewSession(imdbId: imdbId)
+        let userId = await KeychainManager.shared.get(service: "user_id")
+        await SessionRecorder.shared.startNewSession(imdbId: imdbId, userId: userId)
         await SessionRecorder.shared.log(category: .resolver, message: "Started Resolution", metadata: ["type": type, "season": "\(season ?? 0)", "episode": "\(episode ?? 0)"])
         
         // Fetch Blacklisted Streams (Parallel)
@@ -156,6 +157,14 @@ actor StreamResolver {
         }
 
         NSLog("📦 StreamResolver: Received \(rawStreams.count) raw streams, bucketing...")
+        
+        // LOGGING: Provider Breakdown
+        let providerCounts = rawStreams.reduce(into: [String: Int]()) { counts, stream in
+            counts[stream.provider, default: 0] += 1
+        }
+        let providerStats = providerCounts.map { "\($0.key):\($0.value)" }.joined(separator: ", ")
+        print("📊 StreamResolver: Provider Stats: [\(providerStats)]")
+        await SessionRecorder.shared.log(category: .resolver, message: "Providers Fetched", metadata: providerCounts.mapValues { String($0) })
         
         // For movies only, pull canonical title to prioritize correct matches
         let targetTitle: String?
@@ -575,7 +584,9 @@ actor StreamResolver {
         await SessionRecorder.shared.log(category: .resolver, message: "Resolution Complete", metadata: [
             "2160p": "\(uhd4kBucket.primary != nil ? "1" : "0")",
             "1080p": "\(fullHDBucket.primary != nil ? "1" : "0")",
-            "720p": "\(hdBucket.primary != nil ? "1" : "0")"
+            "720p": "\(hdBucket.primary != nil ? "1" : "0")",
+            "selected_title": fullHDBucket.primary?.title ?? uhd4kBucket.primary?.title ?? hdBucket.primary?.title ?? "None",
+            "selected_provider": fullHDBucket.primary?.provider ?? uhd4kBucket.primary?.provider ?? hdBucket.primary?.provider ?? "None"
         ])
 
         return QualityBucketsResponse(buckets: QualityBuckets(

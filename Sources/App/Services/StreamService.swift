@@ -205,12 +205,14 @@ actor StreamService: StreamResolving {
                 // Case-insensitive comparison for reliability
                 if let match = streams.first(where: { $0.infoHash?.lowercased() == targetHash.lowercased() }) {
                     print("✅ StreamService: Found requested stream hash! Locking selection.")
+                    await SessionRecorder.shared.log(category: .resolver, message: "Host Stream Match", metadata: ["hash": targetHash])
                     forcedStream = match
                     break
                 }
             }
             if forcedStream == nil {
                 print("⚠️ StreamService: Requested hash not found in resolved streams. Attempting forced direct resolve.")
+                await SessionRecorder.shared.log(category: .resolver, message: "Host Stream Missing - Forcing Direct", metadata: ["hash": targetHash, "fallback": "direct"])
                 // Attempt to force resolve the hash directly via Debrid (Unlocker)
                 // We construct a synthetic stream object with the required Hash
                 forcedStream = Stream(
@@ -565,6 +567,12 @@ actor StreamService: StreamResolving {
                 }
 
                 lastError = error
+                // LOGGING: Unlock Failure
+                await SessionRecorder.shared.log(category: .error, message: "Stream Unlock Failed", metadata: [
+                    "stream": stream.title.prefix(50).description,
+                    "error": errorMsg,
+                    "provider": stream.provider
+                ])
                 continue
             }
         }
@@ -722,6 +730,7 @@ actor StreamService: StreamResolving {
         // CRITICAL: Validate unlocked URL is a valid video file
         if isBlockedFileExtension(url: unlockResult.url) {
             print("🚫 StreamService: Unlocked URL has suspicious extension. Skipping stream.")
+            await SessionRecorder.shared.log(category: .error, message: "Blocked Suspicious Extension", metadata: ["url": unlockResult.url])
             throw APIError.invalidStream
         }
 
@@ -747,6 +756,14 @@ actor StreamService: StreamResolving {
             behaviorHints: stream.behaviorHints,
             subtitles: stream.subtitles
         )
+
+        // LOGGING: Unlock Success
+        await SessionRecorder.shared.log(category: .resolver, message: "Stream Unlocked", metadata: [
+            "filename": resolvedFilename,
+            "original_title": stream.title,
+            "is_generic": isGeneric ? "true" : "false",
+            "url_host": URL(string: unlockResult.url)?.host ?? "unknown"
+        ])
 
         // Download subtitles if available
         if let subtitles = unlockedStream.subtitles, !subtitles.isEmpty {

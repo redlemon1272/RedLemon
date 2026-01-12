@@ -2767,7 +2767,9 @@ extension MPVPlayerViewModel {
 
             // Predictive compensation: Account for network latency
             // By the time we receive this message, the host has moved forward
-            let predictedHostPosition = hostTimestamp + networkLatency
+            // Subtract guestLagOffset so guest is slightly BEHIND host (prevents race condition at video end)
+            let guestLagOffset: Double = 0.3  // 300ms behind host
+            let predictedHostPosition = hostTimestamp + networkLatency - guestLagOffset
 
             // NEW: Initial Sync Logic (Prevent Flash of Frame 0)
             // CRITICAL FIX: Only reveal video after guest has sent ready signal (video loaded)

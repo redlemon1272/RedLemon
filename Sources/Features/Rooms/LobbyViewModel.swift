@@ -67,6 +67,7 @@ class LobbyViewModel: ObservableObject {
     var canAutoJoin: Bool = false // Safety flag: Made var for LobbyDatabaseManager access
     var joinedAtTimestamp: Date = Date() // Track when user actually entered this lobby instance
     @Published var shouldDelayConnectAfterLobbyReturn: Bool = false // Safety flag for race condition on return
+    var lastAutoStartedSessionId: String? // Track unique session (StreamHash + StartTime) to prevent loops
 
 
     // Combine storage for Refactor Phase 1
@@ -487,8 +488,18 @@ class LobbyViewModel: ObservableObject {
                             print("🎬 Event room detected - auto-starting playback")
                             autoStartSystemEvent()
                         } else if freshRoom.isPlaying {
-                            print("▶️ Room already playing - auto-starting playback")
-                            autoStartSystemEvent()
+                            // Fix: Ghost Stream Loop
+                            // Check if we have already auto-started this EXACT session.
+                            // We combine StreamHash + LastActivity to create a unique Session ID.
+                            // If the Host restarts the movie, LastActivity will update, allowing a fresh start.
+                            let sessionId = "\(freshRoom.streamHash ?? "")_\(freshRoom.lastActivity.timeIntervalSince1970)"
+                            
+                            if sessionId == self.lastAutoStartedSessionId {
+                                print("🚫 Lobby: Blocking auto-start loop. Already played session: \(sessionId)")
+                            } else {
+                                print("▶️ Room already playing - auto-starting playback")
+                                autoStartSystemEvent()
+                            }
                         }
                     } else {
                         // Room not found in database - likely deleted by host
@@ -1158,7 +1169,15 @@ class LobbyViewModel: ObservableObject {
                 self.room.unlockedStreamURL = freshRoom.unlockedStreamUrl
                 self.room.subtitleUrl = freshRoom.subtitleUrl
 
-                // NOTE: AppState update moved to AFTER type inference to prevent stale data sync
+                // Reset session ID if room stops playing
+                if !freshRoom.isPlaying {
+                    if self.lastAutoStartedSessionId != nil {
+                        print("♻️ Lobby: Room stopped playing. Resetting auto-start session ID.")
+                        self.lastAutoStartedSessionId = nil
+                    }
+                }
+
+                // Update AppState last (trigger UI updates)
 
                 // CRITICAL FIX: Syn Sync UI Metadata on Init (Fixes Art Reversion)
                 // Construct MediaItem from SupabaseRoom flat properties
@@ -1387,19 +1406,25 @@ class LobbyViewModel: ObservableObject {
             // Wait a moment for the UI to settle and show "Starting..."
             try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5 seconds
 
-            if let mediaItem = self.room.mediaItem {
-                print("🎬 Lobby: Calling playMedia for \(mediaItem.name)")
+                if let mediaItem = self.room.mediaItem {
+                    // Fix: Ghost Stream Loop
+                    // Save Session ID so we don't auto-start this again if we return to lobby while DB is still "Playing"
+                    let sessionId = "\(self.room.selectedStreamHash ?? "")_\(self.room.lastActivity.timeIntervalSince1970)"
+                    self.lastAutoStartedSessionId = sessionId
+                    print("📝 Lobby: Marking session as auto-started: \(sessionId)")
 
-                // Stop polling before transition
-                self.stopPolling()
+                    print("🎬 Lobby: Calling playMedia for \(mediaItem.name)")
 
-                await self.appState?.player.playMedia(
-                    mediaItem,
-                    quality: .fullHD,
-                    watchMode: .watchParty,
-                    roomId: self.room.id,
-                    isHost: false, // System is host, user is guest
-                    isEvent: self.room.type == .event
+                    // Stop polling before transition
+                    self.stopPolling()
+
+                    await self.appState?.player.playMedia(
+                        mediaItem,
+                        quality: .fullHD,
+                        watchMode: .watchParty,
+                        roomId: self.room.id,
+                        isHost: false, // System is host, user is guest
+                        isEvent: self.room.type == .event
                 )
             } else {
                 print("❌ Lobby: No media item to play!")

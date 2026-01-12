@@ -2,7 +2,10 @@
 > **THE ULTIMATE CONTEXT DOCUMENT**
 > **Last Updated:** January 11, 2026
 > **Platform:** macOS (Native App)
-> Read this first. Contains everything an AI assistant needs to work on this codebase.
+
+> [!IMPORTANT]
+> **Mandatory AI Instruction:**
+> "You are the custodian of RedLemon. First, STUDY `MPVPlayerViewModel.swift` (Landmine #1)—it is the fragile engine of this app. Second, respect `MainActor` isolation or you will crash the UI. Finally, when shipping, obey **Part 19** implicitly. Deviating from the Bible corrupts the project."
 
 ---
 
@@ -117,13 +120,12 @@
 - **Rule**: The Room ID is the ultimate source of truth.
     - If `room_id.startsWith("event_")` -> It IS an event.
     - **Implication**: ALWAYS bypass "Ready Gates" and Host Checks for these IDs, regardless of what `appState` says.
-120:
-121: ### 19. Zilean Population Verification (Data Pipeline Check)
-122: - **Problem**: Zilean can appear healthy while not populating new torrents.
-123: - **Rule**: Verify **Database Growth** in the Admin Dashboard "Overview".
-124:     - If the "Zilean Torrents" count is static over several hours despite logs showing activity, the indexing pipeline is broken (likely Landmine #17).
-125:     - **Log Source**: `SupabaseClient.getZileanTorrentCount()` parses the `details` field of the latest `zilean_maintenance` job log.
-126:     - **Requirement**: The server-side maintenance script MUST write `Total Torrents: X` into the `system_job_logs` details for this metric to be live.
+### 19. Zilean Population Verification (Data Pipeline Check)
+- **Problem**: Zilean can appear healthy while not populating new torrents.
+- **Rule**: Verify **Database Growth** in the Admin Dashboard "Overview".
+    - If the "Zilean Torrents" count is static over several hours despite logs showing activity, the indexing pipeline is broken (likely Landmine #17).
+    - **Log Source**: `SupabaseClient.getZileanTorrentCount()` parses the `details` field of the latest `zilean_maintenance` job log.
+    - **Requirement**: The server-side maintenance script MUST write `Total Torrents: X` into the `system_job_logs` details for this metric to be live.
 
 ### 20. Timer Burst Pattern (Playback Jitters)
 - **Problem**: Multiple background heartbeat/polling systems running at similar intervals (e.g., all at 30s) cause "bursts" of CPU activity that can produce micro-jitters during video playback on older hardware (MacBook Air 2015).

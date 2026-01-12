@@ -542,7 +542,7 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 
 ---
 
-# Part 11: Deployment & Updates
+# Part 19: Deployment & Release Workflow
 
 ## Update Infrastructure (Sparkle)
 - **Framework**: Sparkle 2.8.0.
@@ -555,7 +555,7 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 2. **Initialization**: `SPUStandardUpdaterController` MUST use `startingUpdater: true`.
 3. **Forcing**: Use `sparkle:criticalUpdate="true"` for mandatory fixes.
 
-## Release Workflow (The "Part 19" Protocol)
+## Release Protocol (The "Part 19" Standard)
 **Mandatory 5-Step Sequence:**
 1.  **Code & Build**: Run `./build-app-debug.sh`. Verify 0 errors.
 2.  **User Validation (GATE)**: Ask user to test. **DO NOT PROCEED** without confirmation.

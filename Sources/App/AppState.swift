@@ -141,7 +141,7 @@ class AppState: ObservableObject {
     // isWatchPartyHost, currentWatchPartyRoom, isPreloading
     // Event specific state
     @Published var eventsSchedule: [EventItem] = []
-    
+
     // Persistent Lobby Session
     // Keeps the LobbyViewModel alive during playback to prevent "Leave/Delete" logic
     @Published var activeLobbyViewModel: LobbyViewModel?
@@ -470,19 +470,46 @@ class AppState: ObservableObject {
     func checkProviderHealth() {
         guard !isCheckingProviders else { return }
 
-        NSLog("🏥 [AppState] Starting global provider health check...")
+        NSLog("%@", "🏥 [AppState] Starting global provider health check...")
         isCheckingProviders = true
 
         Task {
             // Give system time to settle if called on startup
             try? await Task.sleep(nanoseconds: 500_000_000)
 
-            let health = await ProviderManager.shared.checkAllHealth()
+            // Get provider health
+            var health = await ProviderManager.shared.checkAllHealth()
+
+            // Also check RealDebrid and subdl (external services)
+            let rdToken = await KeychainManager.shared.get(service: "realdebrid")
+            let subdlKey = await KeychainManager.shared.get(service: "subdl")
+
+            // Run checks in parallel
+            async let rdHealthTask: Bool = {
+                if let token = rdToken, !token.isEmpty {
+                    return await RealDebridClient.shared.checkHealth(token: token)
+                }
+                return false
+            }()
+
+            async let subdlHealthTask: Bool = {
+                if let key = subdlKey, !key.isEmpty {
+                    return await SubDLClient.shared.checkHealth(apiKey: key)
+                }
+                return false
+            }()
+
+            let rdHealthy = await rdHealthTask
+            let subdlHealthy = await subdlHealthTask
+
+            // Add to health dictionary
+            health["realdebrid"] = rdHealthy ? "Online" : "Offline"
+            health["subdl"] = subdlHealthy ? "Online" : "Offline"
 
             await MainActor.run {
                 self.providerHealth = health
                 self.isCheckingProviders = false
-                NSLog("✅ [AppState] Provider health check complete (found \(health.count) providers)")
+                NSLog("%@", "✅ [AppState] Provider health check complete (found \(health.count) services)")
             }
         }
     }

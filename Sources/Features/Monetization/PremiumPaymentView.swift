@@ -52,12 +52,12 @@ struct PremiumPaymentView: View {
                 VStack(spacing: 0) {
                     ScrollView {
                         VStack(spacing: 20) {
-                        Text("Premium Subscription")
+                        Text("Host License")
                             .font(.system(size: 28, weight: .bold))
 
 
 
-                        Text("Subscribe to host unlimited watch parties. Choose a plan that suits you.")
+                        Text("Unlock premium to host unlimited watch parties. Choose a plan that suits you.")
                             .font(.body)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -132,18 +132,18 @@ struct PremiumPaymentView: View {
                         }
                     }
                     .padding(.horizontal)
-                    
+
                     // EVM Clarity Note
                     if selectedChain == .evm {
                         VStack(alignment: .leading, spacing: 6) {
                             Text("✅ Single Address Support")
                                 .font(.caption.bold())
                                 .foregroundColor(.green)
-                            
+
                             Text("You can send **ETH**, **USDC**, or **USDT** on any of these networks to this single address:")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
-                            
+
                             Text("• Ethereum Mainnet\n• Base\n• Arbitrum One\n• Optimism\n• Polygon PoS")
                                 .font(.caption)
                                 .foregroundColor(.primary)
@@ -247,7 +247,7 @@ struct PremiumPaymentView: View {
                 }
                 .padding(30)
             }
-            
+
             // Footer (Pinned)
             VStack(spacing: 0) {
                 Divider()
@@ -375,7 +375,7 @@ struct PremiumPaymentView: View {
             LogManager.shared.error("❌ Failed to check limit", error: error)
         }
     }
-    
+
     private func formatDuration(_ interval: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute]
@@ -409,12 +409,12 @@ struct PremiumPaymentView: View {
 
     private func formatPaymentURI(address: String, amountUSD: Double) -> String {
         guard let rates = exchangeRates else { return address }
-        
+
         // EIP-681: ethereum:<address>?value=<WEI>
         // standard ETH decimal is 18
         let amountETH = amountUSD / rates.eth
         let wei = amountETH * 1_000_000_000_000_000_000
-        
+
         // Compatibility: Some wallets look for "amount" (decimal) instead of "value" (wei)
         // We provide BOTH to maximize success rate.
         // value = integer string of wei (%.0f)

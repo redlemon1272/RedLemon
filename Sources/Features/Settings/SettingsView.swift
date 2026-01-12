@@ -105,18 +105,20 @@ struct SettingsView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.clear)
         .task {
-            await loadCredentials()
-            await licenseManager.checkHostingLimit()
-            await syncLicenseStatus()
-            // Load username from UserDefaults and sync with AppState
+            // Run network calls in parallel for faster loading (Bible: avoid sequential awaits)
+            async let credentialsTask: () = loadCredentials()
+            async let hostingLimitTask: () = licenseManager.checkHostingLimit()
+            async let licenseSyncTask: () = syncLicenseStatus()
+
+            // Wait for all to complete concurrently
+            _ = await (credentialsTask, hostingLimitTask, licenseSyncTask)
+
+            // Load username from UserDefaults and sync with AppState (non-async)
             if let username = UserDefaults.standard.string(forKey: "redlemon.username") {
                 currentUsername = username
             } else if !appState.currentUsername.isEmpty {
                 currentUsername = appState.currentUsername
             }
-
-            // Load recovery phrase - REMOVED
-            // await loadRecoveryPhrase()
         }
         .onChange(of: appState.currentUsername) { newUsername in
             // Sync when AppState changes
@@ -136,7 +138,8 @@ struct SettingsView: View {
             RestoreAccountView()
         }
         .sheet(isPresented: $showPaymentGate, onDismiss: {
-            Task {
+            // Fire-and-forget sync after payment modal closes
+            Task { @MainActor in
                 await syncLicenseStatus()
             }
         }) {
@@ -1172,14 +1175,14 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 12) {
                 InfoRow(label: "App", value: "RedLemon Native")
                 InfoRow(label: "Version", value: appVersion)
-                
+
                 // Last Update Check
                 HStack {
                     Text("Updates")
                         .font(.body)
                         .foregroundColor(.secondary)
                     Spacer()
-                    
+
                     if let lastChecked = updateManager.lastCheckedDate {
                         Text(lastChecked.formatted(date: .abbreviated, time: .shortened))
                             .font(.system(.body, design: .monospaced))
@@ -1189,7 +1192,7 @@ struct SettingsView: View {
                             .font(.system(.body, design: .monospaced))
                             .foregroundColor(.secondary)
                     }
-                    
+
                     Button(action: {
                         updateManager.checkForUpdates()
                     }) {
@@ -1201,7 +1204,7 @@ struct SettingsView: View {
                     .help("Check for Updates Now")
                     .padding(.leading, 8)
                 }
-                
+
                 InfoRow(label: "Server", value: Config.serverURL)
             }
             .padding(24)
@@ -1340,12 +1343,13 @@ struct SettingsView: View {
                 currentUsername = ""
                 appState.currentUsername = ""
                 appState.currentUserId = nil
+            }
 
-                // Clear message after 3 seconds
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    withAnimation {
-                        resetMessage = nil
-                    }
+            // Clear message after 3 seconds (Bible Landmine #25: no DispatchQueue.main)
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 3_000_000_000)
+                withAnimation {
+                    resetMessage = nil
                 }
             }
 

@@ -84,6 +84,32 @@ actor RealDebridClient {
 
     private init() {}
 
+    // MARK: - Health Check
+
+    /// Quick health check - verifies RD API is reachable
+    /// Uses 3s timeout per Landmine #27 (fail fast on pre-flight checks)
+    func checkHealth(token: String) async -> Bool {
+        let url = URL(string: "\(baseURL)/user")!
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.timeoutInterval = 3
+
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 3
+        config.timeoutIntervalForResource = 3
+        let session = URLSession(configuration: config)
+
+        do {
+            let (_, response) = try await session.data(for: request)
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                return true
+            }
+        } catch {
+            NSLog("%@", "🏥 RealDebrid health check failed: \(error.localizedDescription)")
+        }
+        return false
+    }
+
     // MARK: - Public API
 
     func unlock(infoHash: String, fileIdx: Int? = nil, token: String, maxPolls: Int = 3, season: Int? = nil, episode: Int? = nil, title: String? = nil) async throws -> UnlockResult? {

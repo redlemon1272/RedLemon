@@ -53,6 +53,38 @@ final class SubDLClient {
         print("✅ SubDLClient initialized")
     }
 
+    // MARK: - Health Check
+
+    /// Quick health check - verifies SubDL API is reachable
+    /// Uses 3s timeout per Landmine #27 (fail fast on pre-flight checks)
+    func checkHealth(apiKey: String) async -> Bool {
+        var components = URLComponents(string: "\(baseURL)/subtitles")!
+        components.queryItems = [
+            URLQueryItem(name: "api_key", value: apiKey),
+            URLQueryItem(name: "imdb_id", value: "tt0133093"), // The Matrix
+            URLQueryItem(name: "type", value: "movie")
+        ]
+
+        guard let url = components.url else { return false }
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 3
+
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 3
+        config.timeoutIntervalForResource = 3
+        let session = URLSession(configuration: config)
+
+        do {
+            let (_, response) = try await session.data(for: request)
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                return true
+            }
+        } catch {
+            NSLog("%@", "🏥 SubDL health check failed: \(error.localizedDescription)")
+        }
+        return false
+    }
+
     /// Search for subtitles by IMDB ID
     /// - Parameters:
     ///   - imdbId: IMDB ID (with or without "tt" prefix)
@@ -95,7 +127,7 @@ final class SubDLClient {
         } else {
             print("🔍 Searching SubDL: \(imdbWithPrefix) (\(subdlType))")
         }
-        
+
         if let name = name {
             print("   ℹ️ Fallback Name: \(name) (\(year != nil ? "\(year!)" : "No Year"))")
         }
@@ -122,7 +154,7 @@ final class SubDLClient {
 
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
         var subtitles = result.subtitles ?? []
-        
+
         // CHECK FOR FAILURE -> TRIGGER FALLBACK
         if result.status == false || subtitles.isEmpty {
             if let errorMsg = result.error {
@@ -130,7 +162,7 @@ final class SubDLClient {
             } else if subtitles.isEmpty {
                 print("⚠️ SubDL API returned empty subtitles list")
             }
-            
+
             // Try standard API fallback (results list)
             if let results = result.results, !results.isEmpty {
                 let firstResult = results[0]
@@ -138,7 +170,7 @@ final class SubDLClient {
                 // ... (Existing API Fallback Logic could go here, but we will use the improved shared helper below)
                 // Actually, let's just create a helper to query by ID to keep this clean
                 subtitles = try await fetchByInternalId(sdId: firstResult.sd_id, tmdbId: firstResult.tmdb_id, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
-            } 
+            }
             // NEW: Try API Name Search (Intermediate Fallback)
             else if let name = name {
                 print("⚠️ IMDB ID failed. Attempting API Name Search for '\(name)'...")
@@ -153,24 +185,24 @@ final class SubDLClient {
 
         // Post-Processing (Filtering & Sorting)
         print("✅ Found \(subtitles.count) subtitles from SubDL (Primary)")
-        
+
         var filteredSubtitles = filterSubtitlesByEpisode(subtitles, season: season, episode: episode)
-        
+
         // SUPPLEMENTAL SEARCH LOGIC
         // If we have few results (e.g. < 3), try to find the show by Name instead of IMDb ID
         // This handles cases where SubDL has duplicate pages or unlinked content
         if filteredSubtitles.count < 3, let name = name {
             print("⚠️ Low subtitle count (\(filteredSubtitles.count)). Attempting supplemental Name Search for '\(name)'...")
-            
+
             // Try identifying the show ID via text search
             if let alternateId = try await searchByApiName(name: name, year: year, type: subdlType, apiKey: apiKey) {
                 print("✅ Supplemental Search found ID: \(alternateId). Fetching additional subtitles...")
-                
+
                 let extraSubtitles = try await fetchByInternalId(sdId: alternateId, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
                 print("📦 Supplemental Fetch returned \(extraSubtitles.count) raw subtitles")
-                
+
                 let filteredExtras = filterSubtitlesByEpisode(extraSubtitles, season: season, episode: episode)
-                
+
                 // Merge uniqueness (by URL)
                 let existingUrls = Set(filteredSubtitles.map { $0.url })
                 var addedCount = 0
@@ -194,9 +226,9 @@ final class SubDLClient {
 
         return sortedSubtitles
     }
-    
+
     // MARK: - Private Fallback Methods
-    
+
     private func fetchByInternalId(sdId: Int, tmdbId: Int?, type: String, season: Int?, episode: Int?, languages: String, apiKey: String) async throws -> [SubDLSubtitle] {
         var components = URLComponents(string: "\(baseURL)/subtitles")!
         var queryItems = [
@@ -204,7 +236,7 @@ final class SubDLClient {
             URLQueryItem(name: "languages", value: languages),
             URLQueryItem(name: "type", value: type)
         ]
-        
+
         // Prioritize TMDB ID if available
         if let tmdbId = tmdbId {
             // print("⚠️ Retrying with TMDB ID: \(tmdbId)")
@@ -222,20 +254,20 @@ final class SubDLClient {
         }
 
         components.queryItems = queryItems
-        
+
         guard let url = components.url else { return [] }
         var request = URLRequest(url: url)
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 15
-        
+
         // print("🔍 Retrying URL: \(url)")
-        
+
         // Use custom session to enforce timeout
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 15
         config.timeoutIntervalForResource = 15
         let session = URLSession(configuration: config)
-        
+
         let (data, _) = try await session.data(for: request)
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
         return result.subtitles ?? []
@@ -255,9 +287,9 @@ final class SubDLClient {
             URLQueryItem(name: "film_name", value: sanitizedName), // Use 'film_name' for text search
             URLQueryItem(name: "type", value: type)
         ]
-        
+
         // Note: We don't send 'subs_per_page' or other filters, rely on filtering the 'results' array
-        
+
         components.queryItems = queryItems
         guard let url = components.url else { return nil }
 
@@ -273,31 +305,31 @@ final class SubDLClient {
         let session = URLSession(configuration: config)
 
         let (data, _) = try await session.data(for: request)
-        
+
         // Decode response - we expect 'results' array populated now
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
-        
+
         guard let results = result.results, !results.isEmpty else {
             // print("❌ API Name Search returned no results.")
             return nil
         }
-        
+
         // print("✅ API Name Search returned \(results.count) candidates.")
-        
+
         // Filter candidates
         for candidate in results {
             // Check Year (Strongest Signal) - BUT API doesn't return year in 'SubDLResult' explicitly?
             // Actually SubDLResult has name, sd_id, imdb_id, tmdb_id.
             // Wait, does 'name' field in result contain the year? e.g. "Jumanji: The Next Level (2019)"
             // Let's assume it might or might not.
-            
+
             // 1. Check if candidate name matches our sanitized name (ignoring casing)
             // Ideally we'd check IMDB ID if we had it, but we failed IMDB ID search.
-            
+
             // Simple match:
             let candidateName = candidate.name.lowercased()
 
-            
+
             // Check for Year in candidate name (e.g. "Movie Title (2019)")
             var yearMatch = false
             if let year = year {
@@ -305,40 +337,40 @@ final class SubDLClient {
                     yearMatch = true
                 }
             }
-            
+
             // Similarity check
             // If year matches, we are very confident.
             if yearMatch {
                 // print("   ✅ Candidate Year Match! ID: \(candidate.sd_id) Name: \(candidate.name)")
                 return candidate.sd_id
             }
-            
+
             // If no year in search but name is very close
             if candidateName.contains(sanitizedName.lowercased()) {
                  // print("   ⚠️ Candidate Name Match (No Year): ID: \(candidate.sd_id) Name: \(candidate.name)")
                  return candidate.sd_id
             }
         }
-        
+
         // Fallback: Return first result if list not empty
         if let first = results.first {
              // print("⚠️ No exact match logic passed, using first result: ID=\(first.sd_id) Name=\(first.name)")
              return first.sd_id
         }
-        
+
         return nil
     }
-    
-    // We can remove searchByWebScraping if not used, or keep it. 
+
+    // We can remove searchByWebScraping if not used, or keep it.
     // For now I'll just comment it out to save space/complexity as API name search is safer.
     /*
     private func searchByWebScraping(name: String, year: Int?, type: String) async throws -> String? {
        ...
     }
     */
-    
+
     // MARK: - Private Filtering Logic
-    
+
     private func filterSubtitlesByEpisode(_ subtitles: [SubDLSubtitle], season: Int?, episode: Int?) -> [SubDLSubtitle] {
         return subtitles.filter { sub in
             // Global Filter: Block Trailers
@@ -352,7 +384,7 @@ final class SubDLClient {
             guard let season = season, let episode = episode else {
                 return true // Movies: Keep it (unless it was a trailer)
             }
-            
+
             // If API provides explicit metadata, use it
             if let subSeason = sub.season, let subEpisode = sub.episode {
                 if subSeason != season || subEpisode != episode {
@@ -362,21 +394,21 @@ final class SubDLClient {
                 }
                 return true
             }
-            
+
             // Fallback to name parsing if metadata is missing (Safety)
             if let releaseName = sub.releaseName {
                 let lowerName = releaseName.lowercased()
-                
+
                 // e.g. "S01E03" when we want "S01E02" -> Block
                 // Regex for SxxExx
                 // Pattern: s(\d+)e(\d+)
                 let pattern = "s(\\d+)e(\\d+)"
                 if let regex = try? NSRegularExpression(pattern: pattern) {
                     if let match = regex.firstMatch(in: lowerName, range: NSRange(lowerName.startIndex..., in: lowerName)) {
-                        
+
                         let sStr = (lowerName as NSString).substring(with: match.range(at: 1))
                         let eStr = (lowerName as NSString).substring(with: match.range(at: 2))
-                        
+
                         if let sInt = Int(sStr), let eInt = Int(eStr) {
                             if sInt != season || eInt != episode {
                                 print("   ⛔️ Dropped '\(releaseName)': Name mismatch (S\(sStr)E\(eStr))")
@@ -386,7 +418,7 @@ final class SubDLClient {
                     }
                 }
             }
-            
+
             return true
         }
     }
@@ -546,22 +578,22 @@ final class SubDLClient {
                 "\(String(format: "%02d", s))x\(String(format: "%02d", e))",
                 // E24 (with boundary check done via regex later)
             ]
-            
+
             // Helper to check for multi-episode ranges (e.g. E23-24, E23-E24)
             func isMultiEpisodeMatch(_ filename: String, targetEpisode: Int) -> Bool {
                 // Look for patterns like "E23-24", "E23-E24", "Episodes 23-24"
                 // Regex: (?:e|episode|ep)\s*(\d+)\s*(?:-|to|thru)\s*(?:e|episode|ep)?\s*(\d+)
                 let rangePattern = "(?:e|episode|ep|\\s)\\s*(\\d+)\\s*(?:-|to|thru)\\s*(?:e|episode|ep)?\\s*(\\d+)"
-                
+
                 guard let regex = try? NSRegularExpression(pattern: rangePattern, options: .caseInsensitive) else { return false }
                 let nsString = filename as NSString
                 let matches = regex.matches(in: filename, options: [], range: NSRange(location: 0, length: nsString.length))
-                
+
                 for match in matches {
                     if match.numberOfRanges >= 3 {
                         let startStr = nsString.substring(with: match.range(at: 1))
                         let endStr = nsString.substring(with: match.range(at: 2))
-                        
+
                         if let start = Int(startStr), let end = Int(endStr) {
                             if targetEpisode >= start && targetEpisode <= end {
                                 return true
@@ -580,7 +612,7 @@ final class SubDLClient {
                     break
                 }
             }
-            
+
             // Strategy 2: Specific Patterns (SxxExx)
             if bestMatch == nil {
                 for file in subtitleFiles {
@@ -604,7 +636,7 @@ final class SubDLClient {
                 // or just "24" surrounded by non-digits
                 let episodeNum = String(e)
                 let paddedNum = String(format: "%02d", e)
-                
+
                 let loosePatterns = [
                     "(?:^|[^\\d])e\(episodeNum)(?:[^\\d]|$)",        // e24
                     "(?:^|[^\\d])e\(paddedNum)(?:[^\\d]|$)",      // e05
@@ -612,16 +644,16 @@ final class SubDLClient {
                     "(?:^|[^\\d])\(episodeNum)(?:[^\\d]|$)",          // 24 (risky, but useful for plain numbers)
                     "(?:^|[^\\d])\(paddedNum)(?:[^\\d]|$)"        // 05
                 ]
-                
+
                 for file in subtitleFiles {
                     let norm = normalize(file)
                     // If we are looking for loose match, we should verify Season if possible
                     // If file contains S09, and we want S09, that's good.
                     // If file contains S08, we should skip it.
-                    
+
                     let seasonStr = String(s)
                     let paddedSeason = String(format: "%02d", s)
-                    
+
                     // Simple negative check: if it explicitly says a DIFFERENT season, skip it
                     // Regex for Sxx where xx != season
                     let otherSeasonPattern = "s(\\d+)"
@@ -648,8 +680,8 @@ final class SubDLClient {
                                 bestMatch = file
                                 break
                             }
-                            
-                            // If no season info, we accept it as Candidate but keep looking for a better one? 
+
+                            // If no season info, we accept it as Candidate but keep looking for a better one?
                             // For now, accept it. Use first loose match.
                              print("✅ Found matching file in zip (Strategy 3 - Loose): \(file)")
                              bestMatch = file
@@ -660,16 +692,16 @@ final class SubDLClient {
                 }
             }
         }
-        
+
         // Strategy 4: Calculate Compatibility Score (Movies / Episodes w/o pattern match)
         // If we haven't matched a specific episode yet (or if we are a movie), assume all files are candidates
         // and score them based on stream match (quality, source, release group)
         if bestMatch == nil {
              print("🔍 Calculating compatibility scores for \(subtitleFiles.count) files...")
-             
+
              // Reuse the scoring logic (but adapting it for simpler filenames inside zip)
              // We create dummy SubDLSubtitle objects to reuse 'calculateCompatibilityScore'
-             
+
              let scoredFiles = subtitleFiles.map { file -> (String, Int) in
                  let dummySub = SubDLSubtitle(
                      language: "en", // assumed
@@ -683,7 +715,7 @@ final class SubDLClient {
                  let score = calculateCompatibilityScore(dummySub, season: season, episode: episode, streamFilename: streamFilename)
                  return (file, score)
              }
-             
+
              // Sort by score
              if let best = scoredFiles.sorted(by: { $0.1 > $1.1 }).first {
                  if best.1 > 0 {
@@ -712,13 +744,13 @@ final class SubDLClient {
         let extractPipe = Pipe()
 
         extractProcess.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
-        
+
         // Escape special characters for unzip command
         // unzip treats [] as wildcards, so we must escape them to match literal filenames
         let escapedTargetFile = targetFile
             .replacingOccurrences(of: "[", with: "\\[")
             .replacingOccurrences(of: "]", with: "\\]")
-            
+
         print("📦 Extracting specific file: \(escapedTargetFile)")
         extractProcess.arguments = ["-p", zipURL.path, escapedTargetFile]
         extractProcess.standardOutput = extractPipe
@@ -904,19 +936,19 @@ final class SubDLClient {
         if let lang = subtitle.language?.lowercased(), lang.contains("en") {
             score += 5
         }
-        
+
         // STREAM-MATCHED SCORING: If we know the stream's filename, match release types
         if let streamFile = streamFilename?.lowercased() {
             let sourceTokens = ["webrip", "web-dl", "webdl", "bluray", "bdrip", "brrip", "dvdrip", "hdrip", "remux", "hdtv"]
             let qualityTokens = ["1080p", "720p", "2160p", "4k", "480p"]
             let releaseGroups = ["yts", "yify", "fgt", "sparks", "rarbg", "tigole", "framestor", "cinema", "ntb", "axxo", "psa"]
-            
+
             // Source Match (Critical: +500 for match, -200 for mismatch)
             var hasSourceMatch = false
             for token in sourceTokens {
                 let streamHas = streamFile.contains(token)
                 let subHas = releaseName.contains(token)
-                
+
                 if streamHas && subHas {
                     score += 500 // Strong match
                     hasSourceMatch = true
@@ -930,14 +962,14 @@ final class SubDLClient {
                     score -= 50
                 }
             }
-            
+
             // Release Group Match (+300 bonus for matching release groups)
             for group in releaseGroups {
                 if streamFile.contains(group) && releaseName.contains(group) {
                     score += 300 // Strong release group match (e.g., both are YTS)
                 }
             }
-            
+
             // Quality Match (+100)
             for token in qualityTokens {
                 if streamFile.contains(token) && releaseName.contains(token) {

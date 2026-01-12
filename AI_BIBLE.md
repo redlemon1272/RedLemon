@@ -75,6 +75,68 @@
 | `StreamResolver` | Scraper Logic & Filtering |
 
 
+# Part 1.5: The Holy Patterns (Code Snippets)
+> **Use these exact patterns to implement rules. Do not invent your own.**
+
+### 🛑 Safe Concurrency (Handling MainActor)
+**Pattern**: Move heavy work off-thread, update UI on MainActor.
+```swift
+// ❌ WRONG: Dispatch.main.async (Data Race) or blocking Task
+Task { @MainActor in 
+   let data = heavyWork() // FREEZES UI
+}
+
+// ✅ RIGHT: Detached work + MainActor update
+Task.detached(priority: .userInitiated) {
+    let result = await HeavyService.compute()
+    await MainActor.run {
+        self.data = result
+    }
+}
+```
+
+### 🛑 Safe Logging (No Crashing)
+**Pattern**: Use string specifiers to prevent `%` crashes.
+```swift
+// ❌ WRONG: String interpolation crash on %
+NSLog("URL: \(url.absoluteString)") 
+
+// ✅ RIGHT: Specifier format
+NSLog("%@", "URL: \(url.absoluteString)")
+```
+
+### 🛑 Safe Date Decoding (Postgres)
+**Pattern**: Handle fractional seconds and ISO formats.
+```swift
+// ✅ RIGHT: The Only Allowed Decoder
+let decoder = JSONDecoder()
+let formatter = ISO8601DateFormatter()
+formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+decoder.dateDecodingStrategy = .custom { decoder in
+    let container = try decoder.singleValueContainer()
+    let string = try container.decode(String.self)
+    if let date = formatter.date(from: string) { return date }
+    throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date: \(string)")
+}
+```
+
+### 🛑 Safe Navigation (Gesture Handlers)
+**Pattern**: Synchronous state update, no async wrapping.
+```swift
+// ❌ WRONG: Async task gets cancelled by onDisappear
+Button(action: {
+    Task { await appState.navigate(to: .target) }
+})
+
+// ✅ RIGHT: Direct State Mutation
+Button(action: {
+    appState.currentView = .target
+})
+```
+
+---
+
+
 ## 🛠️ Common Tasks Cheat Sheet
 
 **"Fix a subtitle issue"**

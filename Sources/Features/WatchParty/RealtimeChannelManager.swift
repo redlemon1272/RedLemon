@@ -14,7 +14,7 @@ protocol RealtimeService: Actor {
     func sendSyncMessage(_ message: SyncMessage) async throws
     func disconnect(leaveChannel: Bool, disconnectClient: Bool) async
     func cleanup(leaveChannel: Bool, disconnectClient: Bool) async
-    func isRealtimeConnected() -> Bool
+    func isRealtimeConnected() async -> Bool
     func setConnectionStateCallback(_ callback: @escaping (RealtimeConnectionState) -> Void)
     func setPresenceCallback(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void)
     func onPresenceChange(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void)
@@ -444,8 +444,15 @@ actor RealtimeChannelManager: RealtimeService {
     }
 
     /// Check if realtime is connected
-    func isRealtimeConnected() -> Bool {
-        return isConnected
+    /// CRITICAL FIX (v4): Check actual channel join state, not just cached isConnected.
+    /// Multiple RealtimeChannelManager instances share the same SupabaseRealtimeClient.
+    /// If one manager leaves the channel (e.g., player cleanup), the underlying channel
+    /// is gone but other managers still have isConnected=true (stale).
+    func isRealtimeConnected() async -> Bool {
+        guard isConnected, let roomId = self.roomId else { return false }
+        // Verify the underlying channel is actually joined
+        let channelName = "watch-party:\(roomId)"
+        return await realtimeClient.isJoined(to: channelName)
     }
 
     /// Set connection state callback (for compatibility)

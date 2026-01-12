@@ -38,7 +38,7 @@ actor SupabaseRealtimeClient {
             self.realtimeURL = realtimeURL
         }
         self.apiKey = apiKey
-        
+
         // Initialize shared session
         let config = URLSessionConfiguration.default
         self.session = URLSession(configuration: config)
@@ -138,7 +138,7 @@ actor SupabaseRealtimeClient {
             "broadcast": ["self": true],
             "presence": ["key": ""]
         ]
-        
+
         if let changes = postgresChanges {
             config["postgres_changes"] = changes
         }
@@ -168,7 +168,7 @@ actor SupabaseRealtimeClient {
         ]
 
         try await sendMessage(message)
-        
+
         // Only clear local state if we left the currently tracked channel
         if targetTopic == self.realtimeTopic {
             self.channelName = nil
@@ -344,26 +344,26 @@ actor SupabaseRealtimeClient {
         case "postgres_changes":
             if let payload = json["payload"] as? [String: Any],
                let data = payload["data"] as? [String: Any] {
-                
+
                 // CRITICAL STANDARDIZATION: Map raw WebSocket keys to "Standard" Supabase SDK format
                 // This allows consumers to use payload["new"] and payload["eventType"] reliably.
                 var mappedPayload = payload
-                
+
                 // 1. Map event type (UPDATE, INSERT, DELETE)
                 if let type = data["type"] as? String {
                     mappedPayload["eventType"] = type
                 }
-                
+
                 // 2. Map new record (for INSERT/UPDATE)
                 if let record = data["record"] as? [String: Any] {
                     mappedPayload["new"] = record
                 }
-                
+
                 // 3. Map old record (for UPDATE/DELETE)
                 if let oldRecord = data["old_record"] as? [String: Any] {
                     mappedPayload["old"] = oldRecord
                 }
-                
+
                 // 4. Inject schema and table at top level for convenience
                 if let schema = data["schema"] as? String {
                     mappedPayload["schema"] = schema
@@ -371,13 +371,13 @@ actor SupabaseRealtimeClient {
                 if let table = data["table"] as? String {
                     mappedPayload["table"] = table
                 }
-                
+
                 // Notify postgres handlers with standardized payload
                 for handler in postgresHandlers {
                     handler(mappedPayload)
                 }
             }
-            
+
         case "system":
             if let payload = json["payload"] as? [String: Any],
                let status = payload["status"] as? String,
@@ -408,7 +408,7 @@ actor SupabaseRealtimeClient {
                 for (_, data) in joins {
                     let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
                     let metadata = metas?.first
-                    
+
                     // Extract actual user_id from metadata, fallback to empty string if missing (shouldn't happen)
                     if let realUserId = metadata?["user_id"] as? String {
                         for handler in presenceHandlers {
@@ -423,7 +423,7 @@ actor SupabaseRealtimeClient {
                 for (_, data) in leaves {
                     let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
                     let metadata = metas?.first
-                    
+
                     if let realUserId = metadata?["user_id"] as? String {
                         for handler in presenceHandlers {
                             handler(.leave, realUserId, metadata)
@@ -436,7 +436,7 @@ actor SupabaseRealtimeClient {
             for (_, data) in payload {
                 let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
                 let metadata = metas?.first
-                
+
                 if let realUserId = metadata?["user_id"] as? String {
                     for handler in presenceHandlers {
                         handler(.join, realUserId, metadata)
@@ -449,7 +449,7 @@ actor SupabaseRealtimeClient {
     private func startHeartbeat() {
         // Cancel any existing heartbeat task to prevent duplicates
         heartbeatTask?.cancel()
-        
+
         heartbeatTask = Task {
             while !Task.isCancelled {
                 do {

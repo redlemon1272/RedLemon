@@ -51,7 +51,7 @@ class PlayerViewModel: ObservableObject {
 
     // Subtitles
     @Published var hasAutoSelectedSubtitles: Bool = false
-    
+
     // Auto-Play Control
     @Published var userCancelledAutoPlay: Bool = false
 
@@ -150,16 +150,48 @@ class PlayerViewModel: ObservableObject {
             var resolvedMetadata: MediaMetadata? = metadata
 
             // GUEST OPTIMIZATION
+            // First check if host's URL is still valid (RD links expire after ~30min inactivity)
+            var validatedHostURL: String? = nil
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
-               (roomId == nil || watchPartyRoom.id == roomId), // Ensure we matched the correct room
+               (roomId == nil || watchPartyRoom.id == roomId),
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
+
+                // Quick HEAD request to validate URL (Bible #27: 3s timeout)
+                NSLog("%@", "🔍 GUEST: Validating host's stream URL...")
+                var urlValid = false
+                if let url = URL(string: hostUnlockedURL) {
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "HEAD"
+                    request.timeoutInterval = 3
+
+                    do {
+                        let (_, response) = try await URLSession.shared.data(for: request)
+                        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                            urlValid = true
+                            NSLog("%@", "✅ GUEST: Host's URL is valid (HTTP 200)")
+                        } else {
+                            NSLog("%@", "⚠️ GUEST: Host's URL returned non-200, will re-resolve")
+                        }
+                    } catch {
+                        NSLog("%@", "⚠️ GUEST: Host's URL validation failed: \(error.localizedDescription)")
+                    }
+                }
+
+                if urlValid {
+                    validatedHostURL = hostUnlockedURL
+                }
+            }
+
+            if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
+               (roomId == nil || watchPartyRoom.id == roomId),
+               let hostUnlockedURL = validatedHostURL { // Use VALIDATED URL
 
                 let hostStreamHash = watchPartyRoom.selectedStreamHash
 
                 let hostQuality = watchPartyRoom.selectedQuality ?? "Unknown" // Relaxed check
 
                 LoggingManager.shared.info(.watchParty, message: "[SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒")
-                NSLog("🎬 GUEST: Using host's stream selection (skipping resolution)")
+                NSLog("%@", "🎬 GUEST: Using host's stream selection (skipping resolution)")
 
                 // Extract filename from URL for better metadata
                 let filename = URL(string: hostUnlockedURL)?.lastPathComponent.removingPercentEncoding ?? "Host Stream"
@@ -573,12 +605,12 @@ class PlayerViewModel: ObservableObject {
                         break // Break unlock loop
                     } catch {
                         LoggingManager.shared.warn(.videoRendering, message: "Unlock failed for candidate #\(index): \(error.localizedDescription)")
-                        
+
                         // Smart Retry: Mark this hash as bad so we don't try it again this session
                         if let hash = stream.infoHash {
                              Task { await StreamService.shared.markStreamAsAttempted(imdbId: mediaItem.id, hash: hash) }
                         }
-                        
+
                         lastError = error
                         continue // Try next candidate
                     }
@@ -752,7 +784,7 @@ class PlayerViewModel: ObservableObject {
              LoggingManager.shared.info(.videoRendering, message: "Marking failed stream hash as attempted/bad: \(hash.prefix(8))")
              Task { await StreamService.shared.markStreamAsAttempted(imdbId: item.id, hash: hash) }
         }
-        
+
         tryNextStream()
     }
 
@@ -899,7 +931,7 @@ class PlayerViewModel: ObservableObject {
         // This resets 'isStarting' flags and sets the 'playbackEndedTimestamp' for grace periods.
         if keepRoomState {
              appState?.activeLobbyViewModel?.markPlaybackEnded()
-             
+
              if isWatchPartyHost {
                   appState?.activeLobbyViewModel?.announceReturnToLobby()
              }
@@ -923,7 +955,7 @@ class PlayerViewModel: ObservableObject {
             currentWatchPartyRoom = nil // Clear stale room state
             currentWatchMode = .solo
             isWatchPartyHost = false
-            
+
             // Clear persistent lobby session
             if let appState = appState {
                 appState.activeLobbyViewModel = nil
@@ -1618,7 +1650,7 @@ class PlayerViewModel: ObservableObject {
                     // CRITICAL FIX: Create persistent Lobby Session
                     let vm = LobbyViewModel(room: watchPartyRoom, isHost: self.isWatchPartyHost)
                     appState.activeLobbyViewModel = vm
-                    
+
                     appState.currentView = .watchPartyLobby
                 }
 

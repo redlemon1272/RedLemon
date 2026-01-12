@@ -164,7 +164,18 @@ class LobbyDatabaseManager: ObservableObject {
         if let endedAt = viewModel.playbackEndedTimestamp,
            Date().timeIntervalSince(endedAt) < 5 {
             NSLog("%@", "🛑 Guest: Ignoring playback signal - just finished playback (Grace Period)")
+            NSLog("%@", "🛑 Guest: Ignoring playback signal - just finished playback (Grace Period)")
             return
+        }
+
+        // 1.5. Check Idempotency (Ghost Loop Fix)
+        // If we have already started this exact session (StreamHash + LastActivity), block it.
+        // This prevents the Guest from restarting the same movie endlessly if the Host stays in the lobby.
+        // The only way to bypass this is if the Host updates 'lastActivity' (by starting a new session).
+        let sessionId = "\(roomState.streamHash ?? "")_\(roomState.lastActivity.timeIntervalSince1970)"
+        if sessionId == viewModel.lastAutoStartedSessionId {
+             // NSLog("%@", "🛑 Guest: Blocking auto-start loop. Already played session: \(sessionId)")
+             return
         }
 
         // 2. Causality Check (The Reference Fix)
@@ -214,6 +225,12 @@ class LobbyDatabaseManager: ObservableObject {
                 viewModel.countdown = i
                 try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
             }
+            
+            // Mark session as started (Idempotency)
+            // We capture the state NOW, before `roomState` changes
+            let sessionId = "\(roomState.streamHash ?? "")_\(roomState.lastActivity.timeIntervalSince1970)"
+            viewModel.lastAutoStartedSessionId = sessionId
+            NSLog("✅ Guest: Idempotency Lock Set -> \(sessionId)")
 
             NSLog("🎬 Guest: Starting playback after database fallback detection")
 
@@ -304,7 +321,8 @@ class LobbyDatabaseManager: ObservableObject {
                 watchMode: .watchParty,
                 roomId: viewModel.room.id,
                 isHost: false,
-                isEvent: viewModel.room.type == .event
+                isEvent: viewModel.room.type == .event,
+                triggerSource: "lobby_auto_join"
             )
         }
     }

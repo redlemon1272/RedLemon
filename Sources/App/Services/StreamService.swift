@@ -11,7 +11,7 @@ struct StreamResolutionResult {
 
 /// Protocol for resolving and unlocking streams
 protocol StreamResolving {
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, filterExtended: Bool) async throws -> StreamResolutionResult
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, filterExtended: Bool, triggerSource: String) async throws -> StreamResolutionResult
     func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> Stream
 }
 
@@ -86,7 +86,16 @@ actor StreamService: StreamResolving {
     // MARK: - Stream Resolution
 
 
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata? = nil, preferredInfoHash: String? = nil, filterExtended: Bool = false) async throws -> StreamResolutionResult {
+    func resolveStream(
+        item: MediaItem,
+        quality: VideoQuality = .fullHD,
+        season: Int? = nil,
+        episode: Int? = nil,
+        metadata: MediaMetadata? = nil,
+        preferredInfoHash: String? = nil,
+        filterExtended: Bool = false,
+        triggerSource: String = "manual"
+    ) async throws -> StreamResolutionResult {
         LogManager.shared.info("🎬 StreamService: Starting resolution for: \(item.name)")
 
         // Step 0: Early validation - Check for Real-Debrid API key
@@ -137,7 +146,8 @@ actor StreamService: StreamResolving {
             year: finalMetadata.year,
             excludedHashes: excludedHashes,
             ignoreVerified: false,
-            preferredHash: preferredInfoHash
+            preferredHash: preferredInfoHash,
+            triggerSource: triggerSource
         )
 
         // Robustness Check: If we got a Verified Stream, test it immediately.

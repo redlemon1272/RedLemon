@@ -70,7 +70,7 @@ class PlayerViewModel: ObservableObject {
 
     // MARK: - Playback Logic
 
-    func playMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false, isEvent: Bool = false) async {
+    func playMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false, isEvent: Bool = false, triggerSource: String = "manual") async {
         streamError = nil
 
         // Step 0: Clear state IMMEDIATELY to prevent stale UI
@@ -298,7 +298,8 @@ class PlayerViewModel: ObservableObject {
                      episode: effectiveEpisode, // Use effective variables
                      metadata: metadata,
                      preferredInfoHash: hostStreamHash,
-                     filterExtended: false
+                     filterExtended: false,
+                     triggerSource: triggerSource
                  )
                  resolvedStream = result.stream
                  resolvedMetadata = result.metadata
@@ -326,7 +327,8 @@ class PlayerViewModel: ObservableObject {
                             episode: effectiveEpisode, // Use effective variables
                             metadata: metadata,
                             preferredInfoHash: nil,
-                            filterExtended: false
+                            filterExtended: false,
+                            triggerSource: triggerSource
                         )
 
                         resolvedStream = result.stream
@@ -483,7 +485,8 @@ class PlayerViewModel: ObservableObject {
                     episode: episode,
                     metadata: metadata,
                     preferredInfoHash: nil,
-                    filterExtended: false
+                    filterExtended: false,
+                    triggerSource: "preload"
                 )
                 resolvedStream = result.stream
             }
@@ -567,7 +570,8 @@ class PlayerViewModel: ObservableObject {
                     episode: targetEpisode,
                     metadata: metadata,
                     preferredInfoHash: nil,
-                    filterExtended: false
+                    filterExtended: false,
+                    triggerSource: "watch_party_resolve"
                 )
 
                 // Populate failover queue for Host

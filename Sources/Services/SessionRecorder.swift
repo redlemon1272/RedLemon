@@ -74,7 +74,7 @@ actor SessionRecorder {
     
     // MARK: - Public API
     
-    func startNewSession(imdbId: String? = nil, userId: String? = nil) {
+    func startNewSession(imdbId: String? = nil, userId: String? = nil, triggerSource: String? = nil) {
         events.removeAll()
         currentSessionId = UUID()
         currentImdbId = imdbId
@@ -91,6 +91,10 @@ actor SessionRecorder {
         
         if let uid = userId {
             metadata["user_id"] = uid
+        }
+
+        if let source = triggerSource {
+            metadata["trigger_source"] = source
         }
         
         log(category: .app, message: "New Session Started", metadata: metadata)

@@ -25,11 +25,12 @@ actor StreamResolver {
         year: String? = nil,
         excludedHashes: Set<String> = [],
         ignoreVerified: Bool = false,
-        preferredHash: String? = nil
+        preferredHash: String? = nil,
+        triggerSource: String? = nil
     ) async throws -> QualityBucketsResponse {
         NSLog("⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
         let userId = await KeychainManager.shared.get(service: "user_id")
-        await SessionRecorder.shared.startNewSession(imdbId: imdbId, userId: userId)
+        await SessionRecorder.shared.startNewSession(imdbId: imdbId, userId: userId, triggerSource: triggerSource)
         await SessionRecorder.shared.log(category: .resolver, message: "Started Resolution", metadata: ["type": type, "season": "\(season ?? 0)", "episode": "\(episode ?? 0)"])
         
         // Fetch Blacklisted Streams (Parallel)

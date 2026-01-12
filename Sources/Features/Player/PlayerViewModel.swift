@@ -24,7 +24,15 @@ class PlayerViewModel: ObservableObject {
     @Published var currentWatchMode: WatchMode = .solo
     @Published var currentRoomId: String?
     @Published var isWatchPartyHost: Bool = false
-    @Published var currentWatchPartyRoom: WatchPartyRoom? // Current lobby/room
+    @Published var currentWatchPartyRoom: WatchPartyRoom? { // Current lobby/room
+        didSet {
+            if currentWatchPartyRoom == nil {
+                NSLog("⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.")
+            } else if oldValue == nil {
+                NSLog("✅ PlayerVM: currentWatchPartyRoom set to \(currentWatchPartyRoom?.id ?? "unknown")")
+            }
+        }
+    }
 
     @Published var showPremiumLimitAlert: Bool = false // Alert for free user limit logic
     @Published var premiumLimitMessage: String? = nil // Store specific error message from backend
@@ -43,6 +51,9 @@ class PlayerViewModel: ObservableObject {
 
     // Subtitles
     @Published var hasAutoSelectedSubtitles: Bool = false
+    
+    // Auto-Play Control
+    @Published var userCancelledAutoPlay: Bool = false
 
     // Weak reference to AppState for navigation callbacks
     weak var appState: AppState?
@@ -67,6 +78,7 @@ class PlayerViewModel: ObservableObject {
             selectedStream = nil // Clear previous stream to prevent stale playback
             streamQueue = [] // Clear stream queue
             playbackRetryCount = 0 // Reset retry count
+            userCancelledAutoPlay = false // Reset auto-play cancellation
 
             // ✅ OPTIMISTIC UPDATE: Set metadata immediately to prevent background flash
             // This ensures the generic background (from Browse) is shown while fetching full details
@@ -872,6 +884,19 @@ class PlayerViewModel: ObservableObject {
     }
 
     func exitPlayer(keepRoomState: Bool = false) async {
+        LoggingManager.shared.info(.videoRendering, message: "PlayerVM: exitPlayer called (keepRoomState: \(keepRoomState))")
+
+        // CRITICAL: Lobby State Sync
+        // When returning to the lobby, ensure the LobbyViewModel knows we are done with playback.
+        // This resets 'isStarting' flags and sets the 'playbackEndedTimestamp' for grace periods.
+        if keepRoomState {
+             appState?.activeLobbyViewModel?.markPlaybackEnded()
+             
+             if isWatchPartyHost {
+                  appState?.activeLobbyViewModel?.announceReturnToLobby()
+             }
+        }
+
         if !keepRoomState {
             if let roomId = currentRoomId {
                 LoggingManager.shared.info(.watchParty, message: "Leaving room: \(roomId)")
@@ -890,6 +915,11 @@ class PlayerViewModel: ObservableObject {
             currentWatchPartyRoom = nil // Clear stale room state
             currentWatchMode = .solo
             isWatchPartyHost = false
+            
+            // Clear persistent lobby session
+            if let appState = appState {
+                appState.activeLobbyViewModel = nil
+            }
 
         }
 
@@ -931,20 +961,33 @@ class PlayerViewModel: ObservableObject {
             let (targetS, targetE) = findNextEpisode(currentS: selectedSeason ?? 1, currentE: selectedEpisode ?? 1, videos: videos)
 
             if let s = targetS, let e = targetE {
-                LoggingManager.shared.info(.videoRendering, message: "Series playback finished, auto-playing next episode: S\(s)E\(e)")
+                // Fix: Watch Parties must return to lobby (no auto-play)
+                if currentWatchMode == .watchParty {
+                    LoggingManager.shared.info(.watchParty, message: "Series playback finished in Watch Party - returning to lobby (skipping auto-play)")
+                } else {
+                    // Check if user explicitly cancelled auto-play (via UI prompt)
+                    if userCancelledAutoPlay {
+                        LoggingManager.shared.info(.videoRendering, message: "Auto-play cancelled by user. Exiting player.")
+                        await exitPlayer(keepRoomState: false)
+                        return
+                    }
 
-                // Binge Blocking: Free hosts cannot auto-play next episode in Watch Parties
-                let isPremium = SupabaseClient.shared.auth.currentUser?.isPremium ?? false
-                if isWatchPartyHost && !isPremium {
-                    LoggingManager.shared.warn(.watchParty, message: "Auto-play blocked (Free Tier Host)")
-                    await exitPlayer(keepRoomState: false)
+                    LoggingManager.shared.info(.videoRendering, message: "Series playback finished, auto-playing next episode: S\(s)E\(e)")
+
+                    // Binge Blocking: Free hosts cannot auto-play next episode in Watch Parties
+                    // (Note: This is technically redundant now given the check above, but kept for logic safety if mode changes)
+                    let isPremium = SupabaseClient.shared.auth.currentUser?.isPremium ?? false
+                    if isWatchPartyHost && !isPremium {
+                        LoggingManager.shared.warn(.watchParty, message: "Auto-play blocked (Free Tier Host)")
+                        await exitPlayer(keepRoomState: false)
+                        return
+                    }
+
+                    // Add a small delay for better UX
+                    try? await Task.sleep(nanoseconds: 1_000_000_000)
+                    await playNextEpisode()
                     return
                 }
-
-                // Add a small delay for better UX
-                try? await Task.sleep(nanoseconds: 1_000_000_000)
-                await playNextEpisode()
-                return
             }
         }
 
@@ -1015,6 +1058,8 @@ class PlayerViewModel: ObservableObject {
                     appState.currentView = .browse
                 }
                 return
+            } else {
+                LoggingManager.shared.info(.watchParty, message: "PlayerVM: Room \(roomId) still exists, proceeding with session persistence")
             }
         }
 
@@ -1022,9 +1067,10 @@ class PlayerViewModel: ObservableObject {
         let isPlaylistRoom = currentWatchPartyRoom?.hasPlaylist ?? false
         let isPersistentRoom = currentWatchPartyRoom?.isPersistent ?? false
 
-        let shouldKeepRoomState = !wasEventPlayback && (isPlaylistRoom || isPersistentRoom)
+        let shouldKeepRoomState = !wasEventPlayback && (currentWatchMode == .watchParty || isPlaylistRoom || isPersistentRoom)
 
 
+        LoggingManager.shared.info(.videoRendering, message: "PlayerVM: Movie finished. isWatchParty=\(currentWatchMode == .watchParty), shouldKeepRoomState=\(shouldKeepRoomState)")
         await exitPlayer(keepRoomState: shouldKeepRoomState)
 
         if wasEventPlayback {
@@ -1044,7 +1090,8 @@ class PlayerViewModel: ObservableObject {
             return
         }
 
-        if isPersistentRoom {
+        // Catch-all for regular Watch Parties
+        if currentWatchMode == .watchParty || isPersistentRoom {
             if let appState = appState {
                 appState.currentView = .watchPartyLobby
             }
@@ -1266,6 +1313,12 @@ class PlayerViewModel: ObservableObject {
                         self.selectedMetadata = try? await self.metadataProvider.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
                     }
                 }
+
+                // CRITICAL FIX: Create persistent Lobby Session
+                let vm = LobbyViewModel(room: watchPartyRoom, isHost: true)
+                appState.activeLobbyViewModel = vm
+
+                appState.activeLobbyViewModel = vm
 
                 appState.currentView = .watchPartyLobby
                 appState.isLoadingRoom = false
@@ -1554,6 +1607,10 @@ class PlayerViewModel: ObservableObject {
                         }
                     }
 
+                    // CRITICAL FIX: Create persistent Lobby Session
+                    let vm = LobbyViewModel(room: watchPartyRoom, isHost: self.isWatchPartyHost)
+                    appState.activeLobbyViewModel = vm
+                    
                     appState.currentView = .watchPartyLobby
                 }
 

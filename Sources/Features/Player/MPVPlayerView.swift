@@ -35,7 +35,7 @@ class KeyCaptureView: NSView {
             window.makeFirstResponder(self)
 
             // Critical: Ensure window comes to front and becomes key
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 NSApp.activate(ignoringOtherApps: true)
                 window.makeKeyAndOrderFront(nil)
             }
@@ -332,7 +332,8 @@ struct MPVPlayerView: View {
 
             // FORCE FOCUS: Ensure player window becomes Key immediately
             // This fixes the issue where user has to click to see UI
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s
                 NSApp.activate(ignoringOtherApps: true)
                 NSApp.windows.first { $0.isVisible }?.makeKeyAndOrderFront(nil)
             }
@@ -378,7 +379,8 @@ struct MPVPlayerView: View {
         .onChange(of: viewModel.isLoading) { isLoading in
             if !isLoading {
                 // Focus when loading finishes (playback starts)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                Task { @MainActor in
+                    try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s
                     NSApp.activate(ignoringOtherApps: true)
                     NSApp.windows.first { $0.isVisible }?.makeKeyAndOrderFront(nil)
                 }
@@ -407,7 +409,8 @@ struct MPVPlayerView: View {
 
             // Stop playback when view disappears - use Task for async
             Task {
-                await viewModel.cleanup()
+                let isWatchParty = appState.player.currentWatchMode == .watchParty
+                await viewModel.cleanup(returningToLobby: isWatchParty)
             }
 
             // ✅ Use centralized timer cleanup
@@ -539,8 +542,9 @@ struct MPVPlayerView: View {
             NextEpisodeOverlay(
                 info: info,
                 thumbnail: viewModel.nextEpisodeThumbnail,
-                onCancel: { viewModel.showNextEpisodePrompt = false },
+                onCancel: { viewModel.cancelNextEpisodeAutoPlay() },
                 onPlay: {
+                    viewModel.startNextEpisodeNow() // Sync hide and mark handled
                     Task {
                         await appState.player.playNextEpisode()
                     }

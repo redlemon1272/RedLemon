@@ -214,14 +214,28 @@ class LobbyDatabaseManager: ObservableObject {
             
             NSLog("🎬 Guest: Starting playback after database fallback detection")
             
+            // Perform one final check: did the host stop playing while we were counting down?
+            if let freshState = try? await viewModel.dataService.getRoomState(roomId: viewModel.room.id) {
+                if !freshState.isPlaying {
+                     NSLog("🛑 Guest: Host stopped playing during countdown - aborting playback")
+                     viewModel.isStarting = false
+                     viewModel.transitionState.isStarting = false
+                     return
+                }
+            }
+
             // Validate prerequisites
             guard viewModel.room.mediaItem != nil else {
                 NSLog("❌ Guest: Cannot start playback - no media selected")
+                viewModel.isStarting = false
+                viewModel.transitionState.isStarting = false
                 return
             }
             
             guard let appState = viewModel.appState else {
                 NSLog("❌ Guest: Cannot start playback - no appState")
+                viewModel.isStarting = false
+                viewModel.transitionState.isStarting = false
                 return
             }
             
@@ -231,6 +245,8 @@ class LobbyDatabaseManager: ObservableObject {
             // Check if room has media item
             guard viewModel.room.mediaItem != nil else {
                 print("⚠️ Cannot join room: No media item")
+                viewModel.isStarting = false
+                viewModel.transitionState.isStarting = false
                 return
             }
             

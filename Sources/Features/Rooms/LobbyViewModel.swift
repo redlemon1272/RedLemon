@@ -355,7 +355,7 @@ class LobbyViewModel: ObservableObject {
                          // We use try? because we don't want to block connection if this fails (e.g. network blip)
                          // The heartbeat loop will also try to keep us alive, but this is the "instant" fix.
                          try? await self.dataService.joinRoom(roomId: room.id, userId: userId, isHost: true)
-                         NSLog("✅ Host re-joined room \(room.id) in database (refreshing presence)")
+                         NSLog("%@", "✅ Host re-joined room \(room.id) in database (refreshing presence)")
                      }
                 }
 
@@ -371,7 +371,7 @@ class LobbyViewModel: ObservableObject {
 
                     do {
                         try await self.dataService.joinRoom(roomId: room.id, userId: userId, isHost: false)
-                        NSLog("✅ Guest joined room \(room.id) in database")
+                        NSLog("%@", "✅ Guest joined room \(room.id) in database")
                     } catch {
                         // If join failed, check if it's because we're already in the room
                         let errorStr = String(describing: error)
@@ -387,7 +387,7 @@ class LobbyViewModel: ObservableObject {
                                 NSLog("ℹ️ Lobby: Join failed but room exists - assuming user already joined")
                                 // Proceed as success
                             } else {
-                                NSLog("⚠️ Lobby: System room missing, attempting to create: \(room.id)")
+                                NSLog("%@", "⚠️ Lobby: System room missing, attempting to create: \(room.id)")
                                 do {
                                     // Create the room with system host (nil userId)
                                     // but keeping system name/metadata
@@ -407,9 +407,9 @@ class LobbyViewModel: ObservableObject {
 
                                     // Retry join
                                     try await self.dataService.joinRoom(roomId: room.id, userId: userId, isHost: false)
-                                    NSLog("✅ Guest created and joined system room \(room.id)")
+                                    NSLog("%@", "✅ Guest created and joined system room \(room.id)")
                                 } catch let createError {
-                                    NSLog("❌ Lobby: Failed to create system room: \(createError)")
+                                    NSLog("%@", "❌ Lobby: Failed to create system room: \(createError)")
                                     // CRITICAL FIX: Don't throw here for events!
                                     // We want to proceed to autoStartSystemEvent even if DB join fails
                                     NSLog("⚠️ Proceeding with local playback despite join failure")
@@ -456,9 +456,19 @@ class LobbyViewModel: ObservableObject {
                         if room.type == .event {
                             print("🎬 Event room detected - auto-starting playback")
                             autoStartSystemEvent()
+                        } else {
+                            // Non-event room doesn't exist anymore
+                            await MainActor.run {
+                                self.appState?.activeAlert = AppState.AppAlert(
+                                    title: "Room Unavailable",
+                                    message: "This watch party is no longer active."
+                                )
+                                self.disconnect()
+                                self.appState?.currentView = .browse
+                                self.appState?.restoreWindowFromLobby()
+                            }
+                            return
                         }
-                        // User rooms: Skip auto-start entirely.
-                        // Guest will stay in lobby and see "room closed" message if applicable.
                     }
                 }
 
@@ -470,47 +480,70 @@ class LobbyViewModel: ObservableObject {
                 }
 
                 if !isHost {
-                    // Guest joining - send join message via Realtime only
-                    let guestName = self.appState?.currentUsername ?? "Guest"
-
-                    // Send join message via Realtime
-                    let joinMsg = SyncMessage(
-                        type: .chat,
-                        timestamp: 0,
-                        isPlaying: nil,
-                        senderId: self.participantId,
-                        chatText: "LOBBY_JOIN",
-                        chatUsername: guestName
-                    )
-                    try? await realtimeManager?.sendSyncMessage(joinMsg)
+                     let guestName = self.appState?.currentUsername ?? "Guest"
+                     let joinMsg = SyncMessage(
+                         type: .chat,
+                         timestamp: 0,
+                         isPlaying: nil,
+                         senderId: self.participantId,
+                         chatText: "LOBBY_JOIN",
+                         chatUsername: guestName
+                     )
+                     try? await realtimeManager?.sendSyncMessage(joinMsg)
                 }
 
             } catch {
-                NSLog("❌ Lobby: Failed to connect - \(error)")
-                if !isHost {
-                    NSLog("   Guest could not join room in database")
-                    addMessage(.systemError, userName: "System", data: [
-                        "message": "Failed to join room. Please check your connection and try again.",
-                        "error": "\(error.localizedDescription)"
-                    ])
-                } else {
-                    NSLog("   Will rely on database polling instead")
-                    addMessage(.systemInfo, userName: "System", data: [
-                        "message": "Connection setup failed. Using database polling for synchronization.",
-                        "error": "\(error.localizedDescription)"
-                    ])
+                NSLog("%@", "❌ Lobby: Failed to connect - \(error)")
+
+                let errStr = String(describing: error)
+                
+                // CRITICAL FIX: Handle "Already Joined" (Duplicate Key) as SUCCESS
+                if errStr.localizedCaseInsensitiveContains("duplicate key") || 
+                   errStr.localizedCaseInsensitiveContains("unique constraint") ||
+                   errStr.localizedCaseInsensitiveContains("room_participants_pkey") {
+                    print("ℹ️ Lobby: User already in room (Duplicate Key) - Proceeding as connected.")
+                    // Fallback to success state
+                    await MainActor.run {
+                        self.stateMachine.transition(to: .connected)
+                    }
+                } 
+                // CRITICAL FIX: Detect deleted/missing rooms (Foreign Key) - FATAL
+                else if errStr.localizedCaseInsensitiveContains("foreign key constraint") || 
+                          errStr.localizedCaseInsensitiveContains("room_participants_room_id_fkey") {
+                    print("💀 Lobby: Room definitely deleted (Foreign Key Error). Exiting to Browse...")
+                    await MainActor.run {
+                        self.appState?.currentView = .browse
+                        self.appState?.player.currentRoomId = nil
+                        self.appState?.player.currentWatchPartyRoom = nil
+                    }
+                    return
                 }
+                else {
+                    if !isHost {
+                        NSLog("   Guest could not join room in database")
+                        addMessage(.systemError, userName: "System", data: [
+                            "message": "Failed to join room. Please check your connection and try again.",
+                            "error": "\(error.localizedDescription)"
+                        ])
+                    } else {
+                        NSLog("   Will rely on database polling instead")
+                        addMessage(.systemInfo, userName: "System", data: [
+                            "message": "Connection setup failed. Using database polling for synchronization.",
+                            "error": "\(error.localizedDescription)"
+                        ])
+                    }
 
-                realtimeConnectionStatus = .disconnected
-
-                await MainActor.run {
-                    self.stateMachine.transition(to: .error(error.localizedDescription))
+                    await MainActor.run {
+                        // Don't transition to error if it was a dupe key (already handled above), but here we are in 'else'
+                        self.stateMachine.transition(to: .error(error.localizedDescription))
+                    }
+                    realtimeConnectionStatus = .disconnected
                 }
             }
 
             // Start database polling (works even if Realtime fails)
             startPolling()
-        }
+        } // End Task
     }
 
     func disconnect() {
@@ -551,16 +584,16 @@ class LobbyViewModel: ObservableObject {
                 do {
                     // Delete Room: Explicitly delete the room from the database
                     if isLeavingExplicitly {
-                        print("🙈 Host leaving explicitly: Deleting room \(roomId)")
+                        NSLog("%@", "🙈 Host leaving explicitly: Deleting room \(roomId)")
 
                         // CRITICAL: Explicitly delete the room to trigger DELETE event for guests
                         try await self.dataService.deleteRoom(roomId: roomId)
-                        NSLog("✅ Host DELETED room \(roomId)")
+                        NSLog("%@", "✅ Host DELETED room \(roomId)")
                     } else {
-                        print("⚠️ Lobby: Host disconnected but preserving room presence (implicit disconnect)")
+                        NSLog("%@", "⚠️ Lobby: Host disconnected but preserving room presence (implicit disconnect)")
                     }
                 } catch {
-                    NSLog("❌ Failed to delete room: \(error)")
+                    NSLog("%@", "❌ Failed to delete room: \(error)")
                 }
             } else if let userId = currentUserId {
                 // Guest / Event Host logic
@@ -572,12 +605,12 @@ class LobbyViewModel: ObservableObject {
                 if isLeavingExplicitly {
                     do {
                         try await self.dataService.leaveRoom(roomId: roomId, userId: userId)
-                        NSLog("✅ Left room \(roomId) (User: \(userId))")
+                        NSLog("%@", "✅ Left room \(roomId) (User: \(userId))")
                     } catch {
-                        NSLog("❌ Failed to leave room: \(error)")
+                        NSLog("%@", "❌ Failed to leave room: \(error)")
                     }
                 } else {
-                     NSLog("⚠️ Implicit disconnect for \(userId) - Preserving DB presence")
+                     NSLog("%@", "⚠️ Implicit disconnect for \(userId) - Preserving DB presence")
                 }
             }
 
@@ -586,17 +619,17 @@ class LobbyViewModel: ObservableObject {
         }
         countdownTask?.cancel()
 
-        print("🎭 Lobby: Disconnected from room \(room.id)")
+        NSLog("%@", "🎭 Lobby: Disconnected from room \(room.id)")
     }
 
     func initiateLeave() {
-        print("🚪 Lobby: Explicit leave initiated. isHost=\(isHost), roomId=\(room.id), hostId=\(room.hostId)")
+        LoggingManager.shared.info(.watchParty, message: "🚪 Lobby: Explicit leave initiated. isHost=\(isHost), roomId=\(room.id)")
         isLeavingExplicitly = true
 
         if isHost && room.type == .userRoom && room.hostId != "system" {
             // Notify guests that room is closing
-            Task { [weak self] in
-                guard let self = self else { return }
+            // CRITICAL: Capture self STRONGLY to ensure cleanup completes even after view layer drops reference
+            Task {
                 print("🔒 Host closing room, notifying guests...")
                 let syncMsg = SyncMessage(
                     type: .roomClosed,
@@ -607,8 +640,10 @@ class LobbyViewModel: ObservableObject {
                     chatUsername: "Host"
                 )
                 try? await self.realtimeManager?.sendSyncMessage(syncMsg)
+                
                 // Short wait to ensure message delivery
                 try? await Task.sleep(nanoseconds: 1_000_000_000) // 1.0s
+                
                 await MainActor.run {
                     self.disconnect()
                 }
@@ -616,6 +651,37 @@ class LobbyViewModel: ObservableObject {
         } else {
              disconnect()
         }
+    }
+
+    func announceReturnToLobby() {
+        guard isHost else { return }
+        
+        Task { [weak self] in
+            guard let self = self else { return }
+            LoggingManager.shared.info(.watchParty, message: "📣 Host returning to lobby, notifying guests...")
+            
+            // 1. Update Database (Prevent Guest auto-start loop)
+            try? await self.dataService.updateRoomPlayback(roomId: self.room.id, position: 0, isPlaying: false)
+            
+            // 2. Broadcast Realtime Message
+            let syncMsg = SyncMessage(
+                type: .returnToLobby,
+                timestamp: Date().timeIntervalSince1970,
+                isPlaying: false,
+                senderId: self.participantId,
+                chatText: "LOBBY_RETURN",
+                chatUsername: "Host"
+            )
+            try? await self.realtimeManager?.sendSyncMessage(syncMsg)
+        }
+    }
+
+    /// Explicitly mark playback as ended (called when returning from player)
+    func markPlaybackEnded() {
+        self.playbackEndedTimestamp = Date()
+        self.isStarting = false
+        self.transitionState.isStarting = false
+        LoggingManager.shared.info(.watchParty, message: "🏁 Lobby: Marked playback as finished (Grace period active)")
     }
 
     func sendChatMessage() {
@@ -727,7 +793,7 @@ class LobbyViewModel: ObservableObject {
             return
         }
 
-        NSLog("🎬 Host: Starting movie for \(participants.count) participants")
+        NSLog("%@", "🎬 Host: Starting movie for \(participants.count) participants")
         isStarting = true
         transitionState.isStarting = true
 
@@ -762,7 +828,7 @@ class LobbyViewModel: ObservableObject {
             )
             NSLog("✅ Host: Stream resolved and persisted OK")
         } catch {
-            NSLog("❌ Host: Stream resolution failed: \(error)")
+            NSLog("%@", "❌ Host: Stream resolution failed: \(error)")
             addMessage(.systemError, userName: "System", data: [
                 "message": "Failed to resolve stream for Watch Party",
                 "error": "\(error.localizedDescription)"
@@ -797,7 +863,7 @@ class LobbyViewModel: ObservableObject {
                 try await self.realtimeManager?.sendSyncMessage(syncMsg)
                 realtimeSuccess = true
                 NSLog("✅ Host: Successfully broadcast LOBBY_START_COUNTDOWN via Realtime")
-                NSLog("📡 Realtime delivery confirmed for \(self.participants.count) guests")
+                NSLog("%@", "📡 Realtime delivery confirmed for \(self.participants.count) guests")
             } catch RealtimeError.channelNotReady {
                 NSLog("⚠️ Host: Realtime channel not ready - will use database fallback")
                 self.addMessage(.systemInfo, userName: "System", data: [
@@ -805,7 +871,7 @@ class LobbyViewModel: ObservableObject {
                     "reason": "Channel not ready"
                 ])
             } catch {
-                NSLog("⚠️ Host: Unknown Realtime error: \(error) - will use database fallback")
+                NSLog("%@", "⚠️ Host: Unknown Realtime error: \(error) - will use database fallback")
                 self.addMessage(.systemInfo, userName: "System", data: [
                     "message": "Using database fallback for start signal",
                     "error": "\(error.localizedDescription)"
@@ -826,7 +892,7 @@ class LobbyViewModel: ObservableObject {
                     ])
                 }
             } catch {
-                NSLog("❌ Host: Failed to update room state in database: \(error)")
+                NSLog("%@", "❌ Host: Failed to update room state in database: \(error)")
             }
         }
 
@@ -848,7 +914,7 @@ class LobbyViewModel: ObservableObject {
         }
 
         // Start playback for everyone
-        NSLog("🎬 Host: Launching player for \(mediaItem.name)")
+        NSLog("%@", "🎬 Host: Launching player for \(mediaItem.name)")
 
         // Stop polling before transition to prevent double-polling
         stopPolling()
@@ -980,7 +1046,7 @@ class LobbyViewModel: ObservableObject {
         databaseManager.startPolling() // Delegates room state polling for guests
     }
 
-    private func stopPolling() {
+    func stopPolling() {
         presenceManager.stopPolling()
         databaseManager.stopPolling()
 
@@ -1326,10 +1392,10 @@ class LobbyViewModel: ObservableObject {
         if idMismatch || typeMismatch {
             NSLog("🔄 Guest: Detected media change via DB")
             if idMismatch {
-                NSLog("   ID Mismatch: Local \(room.mediaItem?.id ?? "nil") -> Remote \(newImdbId)")
+                NSLog("%@", "   ID Mismatch: Local \(room.mediaItem?.id ?? "nil") -> Remote \(newImdbId)")
             }
             if typeMismatch {
-                NSLog("   Type Mismatch: Local \(room.mediaItem?.type ?? "nil") -> Expected \(expectedType)")
+                NSLog("%@", "   Type Mismatch: Local \(room.mediaItem?.type ?? "nil") -> Expected \(expectedType)")
             }
 
             do {
@@ -1362,13 +1428,13 @@ class LobbyViewModel: ObservableObject {
                     }
                 }
 
-                NSLog("✅ Guest: Updated media item to \(mediaItem.name) (\(expectedType))")
+                NSLog("%@", "✅ Guest: Updated media item to \(mediaItem.name) (\(expectedType))")
 
                 // Trigger metadata load to ensure everything is fresh
                 loadMetadata()
 
             } catch {
-                NSLog("❌ Guest: Failed to fetch metadata for new media item: \(error)")
+                NSLog("%@", "❌ Guest: Failed to fetch metadata for new media item: \(error)")
             }
         }
     }

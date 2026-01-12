@@ -416,16 +416,35 @@ class LobbyEventRouter: ObservableObject {
 
         NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, finished countdown loop")
 
+        // Final validation: Room still exists and is still playing?
+        // (Prevent race condition where host stopped while guest was counting down)
+        if let roomCheck = try? await SupabaseClient.shared.getRoomState(roomId: viewModel.room.id) {
+            if !roomCheck.isPlaying {
+                NSLog("🛑 Guest: Host stopped playing during countdown - aborting playback")
+                await MainActor.run {
+                    viewModel.isStarting = false
+                    // viewModel.transitionState.isStarting = false
+                }
+                return
+            }
+        }
+
         NSLog("🎬 Guest: Starting playback after countdown")
 
         // Start playback
         guard let mediaItem = viewModel.room.mediaItem else {
             NSLog("❌ Guest: Cannot start playback - no media selected")
+            await MainActor.run {
+                viewModel.isStarting = false
+            }
             return
         }
 
         guard let appState = viewModel.appState else {
             NSLog("❌ Guest: Cannot start playback - no appState")
+            await MainActor.run {
+                viewModel.isStarting = false
+            }
             return
         }
 

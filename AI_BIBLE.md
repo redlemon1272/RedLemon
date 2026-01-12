@@ -65,6 +65,9 @@
 29. **Privacy Trap**: **Rule**: Logs to `.applicationSupportDirectory` (Hidden), NEVER `.documentDirectory` (Prompt).
 30. **Versioning**: Strings fail sort ("1.0.60" < "59"). **Rule**: Compare `Int` Build Numbers.
 31. **Onboarding**: **Rule**: Auto-close Success modals (2.5s timer). Don't make users click "Next" on success.
+32. **ViewModel Survival (Room Cleanup)**: **Rule**: Hosts MUST capture `self` strongly in the exit `Task` to ensure `deleteRoom()` completes before deallocation. Weak capture = Zombie Rooms.
+33. **Ghost Join Protection**: **Rule**: Guests MUST verify the room record in the DB during connection. If missing (host left), immediately eject to `.browse` with an alert.
+34. **Binge Control Flash**: **Rule**: "Next Episode" prompts MUST use a local session flag (`hasHandledNextEpisodePrompt`) to stay hidden after dismissal or play. Global status resets cause UI flicker.
 
 ## 🏗️ Architecture Map
 | Component | Responsibility |

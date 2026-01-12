@@ -491,6 +491,7 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var showNextEpisodePrompt: Bool = false
     @Published var nextEpisodeInfo: String?
     @Published var nextEpisodeThumbnail: String? = nil
+    private var hasHandledNextEpisodePrompt: Bool = false // Prevent reappearing
     @Published var showPoster: Bool = true  // Show during loading
     @Published var isVideoTitleVisible: Bool = false
 
@@ -853,7 +854,18 @@ class MPVPlayerViewModel: ObservableObject {
         guard let appState = appState,
               appState.player.selectedMediaItem?.type == "series",
               self.duration > 0,
+
               self.currentTime > 0 else {
+            return
+        }
+
+        // Prevent "Next Episode" prompt in Watch Party rooms (users should return to lobby)
+        if isInWatchParty {
+            return
+        }
+
+        // CRITICAL FIX: Don't show if user explicitly cancelled this session
+        if appState.player.userCancelledAutoPlay || hasHandledNextEpisodePrompt {
             return
         }
 
@@ -1436,6 +1448,19 @@ class MPVPlayerViewModel: ObservableObject {
         self.isLoading = false
     }
 
+    // MARK: - Auto-Play Control
+
+    func cancelNextEpisodeAutoPlay() {
+        self.showNextEpisodePrompt = false
+        self.hasHandledNextEpisodePrompt = true
+        self.appState?.player.userCancelledAutoPlay = true
+    }
+
+    func startNextEpisodeNow() {
+        self.showNextEpisodePrompt = false
+        self.hasHandledNextEpisodePrompt = true
+    }
+
     // MARK: - Track Selection
 
     func setAudioTrack(_ track: AudioTrack) {
@@ -1864,7 +1889,7 @@ class MPVPlayerViewModel: ObservableObject {
                  let shouldClearRoomState = (appRoomId == nil || appRoomId == self.currentRoomId)
 
                  if shouldClearRoomState {
-                     self.appState?.player.currentWatchPartyRoom = nil // FIX: Clear stale room data
+                     // self.appState?.player.currentWatchPartyRoom = nil // REMOVED: Managed by PlayerViewModel.exitPlayer to prevent premature deletion during transitions (Rule #101)
                  } else {
                      LoggingManager.shared.debug(.general, message: "Cleanup: Preserving room state (transitioning to different room: \(self.currentRoomId ?? "nil") → \(appRoomId ?? "nil"))")
                  }

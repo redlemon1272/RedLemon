@@ -229,9 +229,30 @@ struct ContentView: View {
         if appState.currentView == .watchPartyLobby {
             Group {
                 if let room = appState.player.currentWatchPartyRoom {
-                    WatchPartyLobbyView(room: room, isHost: appState.player.isWatchPartyHost)
-                        .id("lobby-\(room.id)")  // CRITICAL: Stable identity prevents SwiftUI from recreating the view on AppState changes
-                        .environmentObject(appState)
+                    // CRITICAL FIX: Use persistent LobbyViewModel from AppState
+                    // This ensures the Realtime connection survives view transitions (Player <-> Lobby)
+                    if let vm = appState.activeLobbyViewModel, vm.room.id == room.id {
+                        // NSLog("🤝 Lobby: Using persistent session VM for \(room.id)")
+                        WatchPartyLobbyView(viewModel: vm)
+                            .id("lobby-\(room.id)")
+                            .environmentObject(appState)
+                    } else {
+                        // Fallback: Create new VM (should ideally be handled by PlayerViewModel)
+                        let _ = {
+                            let vmId = appState.activeLobbyViewModel?.room.id ?? "nil"
+                            LoggingManager.shared.warn(.watchParty, message: "⚠️ Lobby: Session mismatch (AppState: \(vmId) vs Room: \(room.id)) - Creating fallback VM")
+                        }()
+                        
+                        let isHost = appState.player.isWatchPartyHost
+                        let newVM = LobbyViewModel(room: room, isHost: isHost)
+                        // Trigger async update to store it
+                        let _ = Task { @MainActor in
+                            appState.activeLobbyViewModel = newVM
+                        }
+                        WatchPartyLobbyView(viewModel: newVM)
+                            .id("lobby-\(room.id)")
+                            .environmentObject(appState)
+                    }
                 } else if appState.isLoadingRoom {
                     ProgressView("Loading room...")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

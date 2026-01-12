@@ -141,6 +141,10 @@ class AppState: ObservableObject {
     // isWatchPartyHost, currentWatchPartyRoom, isPreloading
     // Event specific state
     @Published var eventsSchedule: [EventItem] = []
+    
+    // Persistent Lobby Session
+    // Keeps the LobbyViewModel alive during playback to prevent "Leave/Delete" logic
+    @Published var activeLobbyViewModel: LobbyViewModel?
 
     // Dynamic Schedule
     @Published var scheduleEpoch: Date = ScheduleConstants.Epoch

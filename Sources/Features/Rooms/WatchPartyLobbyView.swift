@@ -2,10 +2,10 @@ import SwiftUI
 
 struct WatchPartyLobbyView: View {
     @EnvironmentObject var appState: AppState
-    @StateObject private var viewModel: LobbyViewModel
+    @ObservedObject var viewModel: LobbyViewModel
 
-    let room: WatchPartyRoom
-    let isHost: Bool
+    var room: WatchPartyRoom { viewModel.room }
+    var isHost: Bool { viewModel.isHost }
 
     @State private var showEmojiPicker: Bool = false
     @State private var showPaymentGate = false
@@ -16,10 +16,8 @@ struct WatchPartyLobbyView: View {
     @StateObject private var licenseManager = LicenseManager.shared
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
-    init(room: WatchPartyRoom, isHost: Bool) {
-        self.room = room
-        self.isHost = isHost
-        _viewModel = StateObject(wrappedValue: LobbyViewModel(room: room, isHost: isHost))
+    init(viewModel: LobbyViewModel) {
+        self.viewModel = viewModel
     }
 
     // Social & Sidebar State
@@ -77,16 +75,17 @@ struct WatchPartyLobbyView: View {
 
                 isAutoJoining = true
                 // Auto-ready after a brief delay to allow connection
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                // Auto-ready after a brief delay to allow connection
+                Task { @MainActor in
+                    try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s
                     if !viewModel.isReady {
                         viewModel.toggleReady()
                     }
                     // Keep overlay for a bit longer, then hide if not switched
                     // If room is playing, LobbyViewModel will switch view automatically
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                        withAnimation {
-                            isAutoJoining = false
-                        }
+                    try? await Task.sleep(nanoseconds: 3_500_000_000) // 5.0s (3.5s additional)
+                    withAnimation {
+                        isAutoJoining = false
                     }
                 }
                 // Reset flag
@@ -323,7 +322,7 @@ struct WatchPartyLobbyView: View {
                                             onBlock: { viewModel.blockParticipant(participant) },
                                             onMute: {
                                                 // Dispatch async to avoid Menu update conflicts during view rebuild
-                                                DispatchQueue.main.async {
+                                                Task { @MainActor in
                                                     viewModel.toggleMute(participantId: participant.id)
                                                 }
                                             },
@@ -773,7 +772,8 @@ struct WatchPartyLobbyView: View {
                                         .cornerRadius(8)
                                         .onChange(of: viewModel.unifiedMessages.count) { _ in
                                             // Scroll to bottom whenever messages change
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                            Task { @MainActor in
+                                                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
                                                 withAnimation {
                                                     proxy.scrollTo("BOTTOM", anchor: .bottom)
                                                 }
@@ -1011,6 +1011,7 @@ struct WatchPartyLobbyView: View {
     private func leaveLobby() {
         viewModel.initiateLeave()
         appState.restoreWindowFromLobby()
+        appState.activeLobbyViewModel = nil // Clear persistent session
         appState.currentView = .browse
     }
 

@@ -45,19 +45,23 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         }
 
         let url = URL(string: "\(baseURL)/api/metadata/catalog/movie/popular")!
-        let (data, _) = try await session.data(for: makeAuthorizedRequest(url: url))
-        let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
+        let request = makeAuthorizedRequest(url: url)
+        
+        // APPLY HOLY PATTERN #82: Run network and decoding off-thread
+        return try await Task.detached(priority: .userInitiated) {
+            let (data, _) = try await self.session.data(for: request)
+            
+            // Heavy decoding on background thread
+            let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
 
-        // Apply fixed catalog size (conservative for all devices)
-        let fixedSize = 15
-        let items = response.metas.prefix(fixedSize).map { MediaItem(from: $0) }
+            // Apply fixed catalog size (conservative for all devices)
+            let fixedSize = 15
+            let items = response.metas.prefix(fixedSize).map { MediaItem(from: $0) }
 
-        print("📊 Using fixed catalog size: \(fixedSize) items")
-
-        // Cache result
-        await CacheManager.shared.setCatalog(key: cacheKey, value: items)
-
-        return items
+            // Update cache and return
+            await CacheManager.shared.setCatalog(key: cacheKey, value: items)
+            return items
+        }.value
     }
 
 
@@ -72,19 +76,23 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         }
 
         let url = URL(string: "\(baseURL)/api/metadata/catalog/series/popular")!
-        let (data, _) = try await session.data(for: makeAuthorizedRequest(url: url))
-        let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
+        let request = makeAuthorizedRequest(url: url)
+        
+        // APPLY HOLY PATTERN #82: Run network and decoding off-thread
+        return try await Task.detached(priority: .userInitiated) {
+            let (data, _) = try await self.session.data(for: request)
+            
+            // Heavy decoding on background thread
+            let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
 
-        // Apply fixed catalog size (conservative for all devices)
-        let fixedSize = 15
-        let items = response.metas.prefix(fixedSize).map { MediaItem(from: $0) }
+            // Apply fixed catalog size (conservative for all devices)
+            let fixedSize = 15
+            let items = response.metas.prefix(fixedSize).map { MediaItem(from: $0) }
 
-        print("📊 Using fixed catalog size: \(fixedSize) items")
-
-        // Cache result
-        await CacheManager.shared.setCatalog(key: cacheKey, value: items)
-
-        return items
+            // Update cache and return
+            await CacheManager.shared.setCatalog(key: cacheKey, value: items)
+            return items
+        }.value
     }
 
     func fetchTopMoviesForEvents() async throws -> EventsConfig {

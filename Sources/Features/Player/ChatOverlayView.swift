@@ -88,7 +88,8 @@ struct ChatOverlayView: View {
             // Auto-focus the input field if chat is open (whether animated or pre-loaded)
             if viewModel.showChat && chatMode != .friends {
                 LoggingManager.shared.debug(.social, message: "ChatOverlayView: Triggering input focus (showChat=true)")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                Task { @MainActor in
+                    try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
                     isInputFocused = true
                     manualFocus = true
                 }
@@ -231,7 +232,9 @@ struct ChatOverlayView: View {
                                 didCopyRoomCode = true
                             }
                             // Reset after 2 seconds
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            // Reset after 2 seconds
+                            Task { @MainActor in
+                                try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s
                                 withAnimation {
                                     didCopyRoomCode = false
                                 }
@@ -577,7 +580,8 @@ struct ChatOverlayView: View {
     }
 
     private func scrollToBottom(proxy: ScrollViewProxy, lastId: AnyHashable?) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
             if let id = lastId {
                 withAnimation {
                     proxy.scrollTo(id, anchor: .bottom)

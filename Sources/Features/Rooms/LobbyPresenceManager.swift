@@ -537,8 +537,24 @@ class LobbyPresenceManager: ObservableObject {
                                  try await viewModel.dataService.joinRoom(roomId: viewModel.room.id, userId: userId, isHost: true)
                                  print("✅ Lobby: Host self-healed presence in DB")
                              } catch {
-                                 print("❌ Lobby: Failed to self-heal host presence: \(error)")
-                             }
+                                print("❌ Lobby: Failed to self-heal host presence: \(error)")
+                                // CRITICAL FIX: Detect deleted room during self-heal
+                                let errStr = String(describing: error)
+                                print("🔍 Lobby: Self-Heal Error Debug: '\(errStr)'") // Trap log
+
+                                if errStr.localizedCaseInsensitiveContains("foreign key constraint") || 
+                                   errStr.localizedCaseInsensitiveContains("room_participants_room_id_fkey") {
+                                     print("💀 Lobby: Room deleted during Host Self-Heal. Exiting.")
+                                     await MainActor.run { 
+                                         viewModel.appState?.currentView = .browse
+                                         // Clear invalid room state
+                                         viewModel.appState?.player.currentRoomId = nil
+                                         viewModel.appState?.player.currentWatchPartyRoom = nil
+                                     }
+                                     viewModel.stopPolling() // Stop this loop
+                                     return 
+                                }
+                            }
                          }
                      }
                 }

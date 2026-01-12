@@ -61,6 +61,10 @@ struct RedLemonApp: App {
                     // Wiring up PlayerViewModel callbacks
                     appState.setupPlayerBindings()
                     
+                    // 0. Reset state EARLY to prevent automatic playback of last watched content
+                    // and ensure UI starts in a clean state before loading user data.
+                    await resetPlaybackState()
+                    
                     // 1. Check for First Run Onboarding IMMEDIATELY
                     // This ensures the modal appears instantly without waiting for Keychain/DB checks
                     let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding_v1")
@@ -85,9 +89,6 @@ struct RedLemonApp: App {
 
                     // Check if username setup should be forced (after user reset)
                     await checkForcedUsernameSetup()
-
-                    // Reset state to prevent automatic playback of last watched content
-                    await resetPlaybackState()
 
                     await startServer()
                     appState.checkProviderHealth() // Trigger initial check
@@ -251,13 +252,14 @@ struct RedLemonApp: App {
                 }
             }
 
-            // Give server time to start
-            try? await Task.sleep(nanoseconds: 2_000_000_000) // 2 seconds
-
-            // Mark server as ready
+            // OPTIMIZATION: Don't block MainActor with a hard sleep (Rule #52)
+            // LocalAPIClient has built-in retry logic (3 attempts with backoff).
+            // We enable isServerReady immediately so BrowseView can start its retry loop.
+            // This prevents the UI from waiting 2 seconds unnecessarily and potentially deadlock.
+            
             await MainActor.run {
                 appState.isServerReady = true
-                NSLog("✅ RedLemon: Server marked as ready")
+                NSLog("✅ RedLemon: Server marked as ready (Optimistic)")
             }
 
             NSLog("✅ RedLemon: Server should be running on \(Config.serverURL)")

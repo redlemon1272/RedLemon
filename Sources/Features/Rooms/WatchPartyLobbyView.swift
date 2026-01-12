@@ -655,9 +655,12 @@ struct WatchPartyLobbyView: View {
                                                                 HStack {
                                                                     // Username / Menu
                                                                     HStack(spacing: 4) {
+                                                                        let isSenderHost = chatMsg.senderId.map { $0.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame } ?? false
+                                                                        let nameColor: Color = isSenderHost ? .accentColor : .blue
+
                                                                         Text(chatMsg.username)
                                                                             .font(.caption.weight(.semibold))
-                                                                            .foregroundColor(.blue)
+                                                                            .foregroundColor(nameColor)
 
                                                                         if let senderId = chatMsg.senderId, senderId.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame {
                                                                             Text("Host")

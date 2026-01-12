@@ -258,11 +258,13 @@ struct ChatOverlayView: View {
     // MARK: - List Views
     
     private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, isSenderHost: Bool, timestamp: String? = nil) -> some View {
+        let nameColor: Color = isSystem ? .gray : (isSenderHost ? .accentColor : .blue)
+
         if isSystem {
             return AnyView(
                 Text(username)
                     .font(.caption.weight(.semibold))
-                    .foregroundColor(.blue)
+                    .foregroundColor(nameColor)
             )
         }
         
@@ -277,7 +279,7 @@ struct ChatOverlayView: View {
                 HStack(spacing: 4) {
                     Text(username)
                         .font(.caption.weight(.semibold))
-                        .foregroundColor(.blue)
+                        .foregroundColor(nameColor)
                     
                     if isSenderHost {
                         Text("Host")
@@ -309,7 +311,7 @@ struct ChatOverlayView: View {
             HStack(spacing: 4) {
                 Text(username)
                     .font(.caption.weight(.semibold))
-                    .foregroundColor(.blue)
+                    .foregroundColor(nameColor)
                 
                 if isSenderHost {
                     Text("Host")

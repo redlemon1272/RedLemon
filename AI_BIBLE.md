@@ -107,6 +107,13 @@
     *   **Trigger**: Host returns to Lobby, Guest auto-joins "Playing" stream because `is_playing` wasn't cleared.
     *   **Rule**: Hosts MUST explicitly `nil` query-able stream properties (`stream_hash`, `unlocked_stream_url`) in the DB immediately upon returning to lobby. Relying on `is_playing=false` alone is insufficient as guests may auto-join "ready" streams due to race conditions.
 36. **Idempotent Auto-Start (The "Ghost Loop" Fix)**: **Rule**: Database reads are eventually consistent. Clients MUST track the `session_id` (Hash + Timestamp) of the last *completed* action. If the remote state asks to "Start" the same Session ID again, **BLOCK IT**. Never rely on a raw boolean (`is_playing`) alone.
+37. **UUID String Case Sensitivity**:
+    *   **Trigger**: Comparing IDs with `==` (e.g., `hostId == currentUserId`) when one is Uppercase (from App) and one is Lowercase (from DB).
+    *   **Rule**: NEVER use `==` for String IDs. ALways use `.caseInsensitiveCompare(...) == .orderedSame`.
+38. **System Color Fallback Trap**:
+    *   **Trigger**: Relying on `.accentColor` without a configured `Assets.xcassets`. On macOS, this defaults to system Blue, breaking custom branding (e.g., Host labels).
+    *   **Rule**: NEVER use system semantic colors (`.accentColor`, `.blue`) for core branding. Always use explicit tokens like `DesignSystem.Colors.accent`.
+
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

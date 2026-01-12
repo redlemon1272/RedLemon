@@ -338,6 +338,14 @@ class LobbyViewModel: ObservableObject {
             print("🔔 Lobby: Displaying pending message: \(msg)")
             addMessage(.systemInfo, userName: "System", data: ["message": msg])
             appState?.pendingLobbyMessage = nil
+
+            // CRITICAL FIX: When returning from playback, the player's cleanup() runs
+            // asynchronously and may not have finished by the time onAppear triggers.
+            // The realtimeConnectionStatus is stale (.connected) from before playback.
+            // Force reset to .disconnected to ensure we reconnect.
+            // Per Bible Rule #13: WebSockets fail on reconnect, don't trust stale state.
+            print("🔄 Lobby: Returning from playback - resetting connection status")
+            realtimeConnectionStatus = .disconnected
         }
 
         // Prevent multiple connection attempts

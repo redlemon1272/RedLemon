@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.64 -->
+        <item>
+            <title>Version 1.0.64</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.64</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 11 Jan 2026 22:26:14 -0500</pubDate>
+            <sparkle:version>64</sparkle:version>
+            <sparkle:shortVersionString>1.0.64</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.64.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="oGDFHiJh+TbVOqEZ2MBfdDF6q3Z89F2mYDa/Jj7ZyeZhIMgnMAAN35/FUEn9wMo8Cnhgsyxu7ySO62iizRGnAQ==" length="72635012"
+            />
+        </item>
         <!-- v1.0.63 -->
         <item>
             <title>Version 1.0.63</title>

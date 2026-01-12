@@ -162,6 +162,7 @@ cat > "$CONTENTS/Info.plist" << PLIST
     <key>CFBundleShortVersionString</key>
     <string>${APP_VERSION}</string>
     <key>CFBundleVersion</key>
+    <!-- ⚠️ AI_BIBLE #30: Versioning Rule - CFBundleVersion MUST be a pure Integer (e.g. 64). Strings break updates. -->
     <string>${APP_BUILD}</string>
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>

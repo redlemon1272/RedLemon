@@ -4,6 +4,9 @@
 //
 //  ViewModel for MPV player with background art and chat
 //
+//  ⚠️ AI_BIBLE #1: GOD CLASS - FRAGILE!
+//  Strict MainActor isolation required. Touch with fear.
+//
 
 import Foundation
 import SwiftUI

@@ -716,7 +716,7 @@ class LobbyViewModel: ObservableObject {
             LoggingManager.shared.info(.watchParty, message: "📣 Host returning to lobby, notifying guests...")
 
             // 1. Update Database (Prevent Guest auto-start loop)
-            // CRITICAL FIX: Clear stream hash/url so guests don't see a "ready" stream and auto-join
+            // ⚠️ AI_BIBLE #35: Ghost Streams - MUST nil stream_hash on lobby return to prevent Zombie Playback
             do {
                 try await self.dataService.resetRoomStream(roomId: self.room.id)
             } catch {

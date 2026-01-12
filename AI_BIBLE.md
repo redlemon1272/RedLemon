@@ -672,27 +672,7 @@ Users can report broken streams. The system captures:
 - `imdb_id`, `stream_hash`, `quality`, and `reason`.
 - Reported hashes are temporarily hidden after 3 reports and permanently blocked after admin review.
 
-## Landmine #26: Automation Deadlock
-Avoid calling scripts that `open` the app (like `start-production.sh`) in automated pipelines. Headless terminals (CI/CD or release scripts) will hang indefinitely waiting for the windowing system. Use `build-app-debug.sh` for headless builds.
 
-## Landmine #27: Network Timeout Blind Spots
-Chaining requests with default timeouts creates massive delays. Always use "Fail Fast" logic with aggressive timeouts (3s) for pre-flight checks, and abort strictly on timeout.
-
-## Landmine #28: UUID Case Sensitivity
-Supabase/Postgres is case-insensitive for UUID types, but **Swift and Realtime Channels are sensitive**.
-**Rule**: Always `.lowercased()` a UUID string before using it as a dictionary key or Realtime topic to avoid silent mismatches.
-
-## Landmine #29: The "Documents Folder" Privacy Trap
-Using `fileManager.urls(for: .documentDirectory, ...)` to store internal app data (logs, cache) triggers a user-facing macOS Privacy prompt ("RedLemon would like to access files in your Documents folder").
-**Rule**: Use `.applicationSupportDirectory` for all internal data. It is silent, professional, and standard for macOS applications.
-
-## Landmine #30: Numeric vs String Update Logic
-Never compare versions like `latestVersion > currentVersion` using raw strings if they can contain mixed formats (e.g., "1.0.60" vs "59"). 
-**Rule**: Always cast to `Int` and compare numeric build numbers for ground-truth update detection to prevent "Version 1.0.0" being treated as older than "Version 9".
-
-## Landmine #31: Onboarding UX Dead-ends
-Avoid leaving the user on a "Success" or "finished" page during onboarding (e.g., after an Account Restoration).
-**Rule**: After a critical background action (like Restoration) finishes, transition immediately to a **Success View** and implement an **Automatic Timer (2.5s)** to close the modal and drop the user into the app. Never force a user to click "Next" on a page they've already completed.
 
 ---
 

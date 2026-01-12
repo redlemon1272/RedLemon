@@ -816,7 +816,8 @@ class PlayerViewModel: ObservableObject {
                            episode: episode,
                            metadata: self.selectedMetadata ?? nil,
                            preferredInfoHash: nil, // Don't force the failed hash
-                           filterExtended: false
+                           filterExtended: false,
+                           triggerSource: "emergency_resolve"
                        )
 
                        // Populate queue

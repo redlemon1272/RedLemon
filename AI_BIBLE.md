@@ -113,6 +113,9 @@
 38. **System Color Fallback Trap**:
     *   **Trigger**: Relying on `.accentColor` without a configured `Assets.xcassets`. On macOS, this defaults to system Blue, breaking custom branding (e.g., Host labels).
     *   **Rule**: NEVER use system semantic colors (`.accentColor`, `.blue`) for core branding. Always use explicit tokens like `DesignSystem.Colors.accent`.
+39. **Sparkle Hygiene**:
+    *   **Trigger**: Deploying an update that isn't detected by users or lacks info (generic "Production Release").
+    *   **Rule**: (1) New Build (`X`) MUST be > Current Build (`Y`) found in `README.md`. (2) Never release with generic notes; inject HTML `<li>` items listing specific fixes via the `RELEASE_NOTES` arg in `release.sh`.
 
 
 ## 🪦 Resolved Landmines (Archived)

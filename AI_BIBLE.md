@@ -346,7 +346,8 @@ docker exec -it supabase-db psql -U postgres
 
 ## Self-Hosting Service Checklist (Lessons Learned)
 0.  **Feasibility Check**: Is the source code public?
-    -   *Lesson*: **Torrentio is Closed Source/Proprietary** and cannot be self-hosted.
+    -   *Lesson*: **Torrentio is Closed Source/Proprietary** and cannot be self-hosted. We rely on the public API (`torrentio.strem.fun`).
+    -   *Risk Mitigation*: We implemented **Provider Redundancy** (Comet, MediaFusion, Zilean, DebridSearch). If Torrentio fails or rate-limits, `StreamResolver` falls back to these alternatives. Zilean is our self-hosted safety net.
     -   *Action*: Search for "open source alternative" (e.g., **Comet** or **MediaFusion** instead of Torrentio).
 1.  **Runtime Autonomy**: Native services (outside Docker) require manual dependency management.
     -   *Lesson*: Zilean needed .NET 9.0 AND specific Python libraries (`rank-torrent-name`) installed system-wide.

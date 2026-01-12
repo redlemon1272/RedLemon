@@ -570,6 +570,19 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
     -   *Action*: Builds -> Packages DMG -> Signs -> Deploys to Server.
 5.  **Appcast Sync**: Push the auto-updated `appcast.xml` to GitHub.
 
+## Manual Key Recovery (New Device)
+To sign releases on a new machine, you must import the **Sparkle Private Key** into the Keychain.
+
+**Private Key:** `d5KfXj5aB/3zD1HPHnB7bRvZs+0mFoQczwi7yoa1D8g=`
+
+**Import Command:**
+```bash
+security add-generic-password -a "ed25519" -s "https://sparkle-project.org" -D "application password" -w "d5KfXj5aB/3zD1HPHnB7bRvZs+0mFoQczwi7yoa1D8g="
+```
+
+**Verification:**
+Run `./.build/artifacts/sparkle/bin/generate_keys -p` to confirm it generates the Public Key matching `Info.plist` (`oT0UkapQxn9PE5FOU...`).
+
 ---
 
 

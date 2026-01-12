@@ -349,8 +349,27 @@ class LobbyViewModel: ObservableObject {
         }
 
         // Prevent multiple connection attempts
+        // CRITICAL FIX (v3): Check ACTUAL manager state, not just cached status.
+        // When returning from playback, the player's cleanup() runs async and clears the channel.
+        // But this function may be called BEFORE cleanup finishes, so realtimeConnectionStatus
+        // is stale (.connected) while the channel is actually dead.
+        // Per Bible Rule #13: WebSockets fail on reconnect, don't trust stale state.
         if realtimeConnectionStatus == .connected || realtimeConnectionStatus == .connecting {
-            print("⚠️ Lobby: Already connected or connecting - skipping duplicate connect call")
+            // Verify the actual underlying connection state
+            Task { [weak self] in
+                guard let self = self else { return }
+                let isActuallyConnected = await self.realtimeManager?.isRealtimeConnected() ?? false
+
+                await MainActor.run {
+                    if !isActuallyConnected {
+                        print("🔄 Lobby: Stale connection status detected (channel was cleaned up) - forcing reconnect")
+                        self.realtimeConnectionStatus = .disconnected
+                        self.connect() // Recursive call with corrected status
+                    } else {
+                        print("⚠️ Lobby: Already connected or connecting - skipping duplicate connect call")
+                    }
+                }
+            }
             return
         }
 

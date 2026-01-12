@@ -25,6 +25,9 @@ class LobbyEventRouter: ObservableObject {
         // Handle special lobby commands
         if chatText.starts(with: "LOBBY_") {
             await handleLobbyCommand(chatText, syncMessage: syncMessage)
+        } else if syncMessage.type == .returnToLobby || chatText == "LOBBY_RETURN" {
+             // Host returned to lobby
+             await handleLobbyReturn(syncMessage)
         } else if syncMessage.type == .roomClosed {
              // Host closed the room
              await handleRoomClosed()
@@ -277,6 +280,27 @@ class LobbyEventRouter: ObservableObject {
 
             // Replicating logic here requires access to many VM properties
             await handleGuestStartLogic(timestamp: syncMessage.timestamp)
+        }
+    }
+
+    private func handleLobbyReturn(_ syncMessage: SyncMessage) async {
+        guard let viewModel = viewModel else { return }
+        
+        NSLog("🎬 Guest: Received LOBBY_RETURN signal from Host")
+        
+        // Add a system message
+        viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host returned to lobby"])
+        
+        await MainActor.run {
+            // If the guest is currently in the player, switch back to lobby
+            // We check if currentView is player (or if we are simply not in lobby?)
+            if viewModel.appState?.currentView == .player {
+                NSLog("🔄 Guest: Switching from Player to Lobby due to host return")
+                viewModel.appState?.currentView = .watchPartyLobby
+                
+                // Reset player state if needed
+                // viewModel.appState?.player.resetState() // If such method exists
+            }
         }
     }
 

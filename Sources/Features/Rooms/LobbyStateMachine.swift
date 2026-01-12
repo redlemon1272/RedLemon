@@ -72,15 +72,21 @@ class LobbyStateMachine: ObservableObject {
             return newState == .connected || newState == .error("")
             
         case .connected:
+            // Allow moving to connecting (Reconnect)
+            if newState == .connecting { return true }
             return newState == .waitingForReady || newState == .startingCountdown(secondsRemaining: 3) || newState == .transitioning
             
         case .waitingForReady:
+            // Allow moving to connecting (Reconnect)
+            if newState == .connecting { return true }
             // Can go back to connected (unready?), starting countdown, or transitioning (direct start?)
              if case .startingCountdown = newState { return true }
              if case .transitioning = newState { return true }
              return false
             
         case .startingCountdown:
+            // Allow moving to connecting (Reconnect)
+            if newState == .connecting { return true }
             // Can go to transitioning (count finished) or back to waitingForReady (cancelled)
             if case .transitioning = newState { return true }
             if case .waitingForReady = newState { return true }
@@ -89,6 +95,8 @@ class LobbyStateMachine: ObservableObject {
             return false
             
         case .transitioning:
+            // Allow moving to connecting (Reconnect)
+            if newState == .connecting { return true }
             // Terminal state generally, but maybe back to waitingForReady if failed?
             return false
             

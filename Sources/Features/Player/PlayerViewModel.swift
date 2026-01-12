@@ -344,11 +344,8 @@ class PlayerViewModel: ObservableObject {
             await MainActor.run {
                 selectedStream = finalStream
 
-                // Smart Retry: Mark this hash as attempted for this session
-                if let hash = finalStream.infoHash {
-                    Task {
-                        await StreamService.shared.markStreamAsAttempted(imdbId: item.id, hash: hash)
-                    }
+                if let meta = resolvedMetadata {
+                    selectedMetadata = meta
                 }
 
                 if let meta = resolvedMetadata {
@@ -576,6 +573,12 @@ class PlayerViewModel: ObservableObject {
                         break // Break unlock loop
                     } catch {
                         LoggingManager.shared.warn(.videoRendering, message: "Unlock failed for candidate #\(index): \(error.localizedDescription)")
+                        
+                        // Smart Retry: Mark this hash as bad so we don't try it again this session
+                        if let hash = stream.infoHash {
+                             Task { await StreamService.shared.markStreamAsAttempted(imdbId: mediaItem.id, hash: hash) }
+                        }
+                        
                         lastError = error
                         continue // Try next candidate
                     }
@@ -745,6 +748,11 @@ class PlayerViewModel: ObservableObject {
         }
 
         // Default: Try next stream in queue
+        if let currentStream = selectedStream, let hash = currentStream.infoHash, let item = selectedMediaItem {
+             LoggingManager.shared.info(.videoRendering, message: "Marking failed stream hash as attempted/bad: \(hash.prefix(8))")
+             Task { await StreamService.shared.markStreamAsAttempted(imdbId: item.id, hash: hash) }
+        }
+        
         tryNextStream()
     }
 

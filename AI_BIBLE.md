@@ -689,6 +689,13 @@ Certain high-frequency logs (video rendering, mouse tracking) are throttled to m
 - **Summary Over Iteration**: NEVER log inside high-volume loops (e.g., `streams.map`). Log a single summary line *after* the loop (e.g., `📉 Penalized 45 streams`).
 - **Polling Debounce**: Periodic tasks MUST check `if newValue != oldValue` before logging to prevent idle noise.
 
+### Forensic Logging Standard
+Logs must be "Forensically Complete" - a silent narrative that explains "Who, What, Why, and Result" without needing user input.
+1.  **Identity**: Every session log MUST start with `App Version`, `Build Number`, and `User ID`.
+2.  **State Mirroring**: Critical debugging events (Resolution, Unlock, Player State) MUST be mirrored to the System Console (`NSLog`) via `SessionRecorder` for real-time `tail -f` debugging.
+3.  **Cross-Boundary Context**: When handing off between subsystems (e.g., Resolver -> Player), log the exact artifact being passed (e.g., "Unlocked Filename" vs "Provider Title").
+4.  **Explicit Failure**: Never log just "Failed". Log "Failed: [Reason] [Context]". E.g., `Buffering Timeout (45s) - Connection too slow`.
+
 ---
 
 # Part 14: Free-Tier Hosting Limits

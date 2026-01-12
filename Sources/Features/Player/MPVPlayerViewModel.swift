@@ -121,6 +121,7 @@ class MPVPlayerViewModel: ObservableObject {
 
             // IsPlaying: Sync state and trigger VideoReady logic
             isPlayingPub
+                .removeDuplicates()
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] isPlaying in
                     guard let self = self else { return }

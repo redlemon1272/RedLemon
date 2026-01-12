@@ -66,6 +66,7 @@ class LobbyViewModel: ObservableObject {
     var isLeavingExplicitly: Bool = false // Flag to track if host is explicitly leaving (vs deinit/background)
     var canAutoJoin: Bool = false // Safety flag: Made var for LobbyDatabaseManager access
     var joinedAtTimestamp: Date = Date() // Track when user actually entered this lobby instance
+    @Published var shouldDelayConnectAfterLobbyReturn: Bool = false // Safety flag for race condition on return
 
 
     // Combine storage for Refactor Phase 1
@@ -378,6 +379,17 @@ class LobbyViewModel: ObservableObject {
 
         Task { [weak self] in
             guard let self = self else { return }
+
+            // RACE CONDITION FIX: If returning to lobby, wait for DB write to propagate
+            if self.shouldDelayConnectAfterLobbyReturn {
+                print("⏳ Lobby: Ensuring DB consistency before connecting (Waiting 2.0s)...")
+                try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
+                await MainActor.run {
+                    self.shouldDelayConnectAfterLobbyReturn = false
+                }
+                print("✅ Lobby: DB wait complete. Proceeding with connection.")
+            }
+
             do {
                 // Force Host re-join to ensure presence in DB (idempotent)
                 // This fixes the "zombie host" issue where host times out during playback

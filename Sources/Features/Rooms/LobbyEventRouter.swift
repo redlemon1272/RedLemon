@@ -292,6 +292,9 @@ class LobbyEventRouter: ObservableObject {
         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host returned to lobby"])
         
         await MainActor.run {
+            // RACE CONDITION FIX: Flag next connect() to wait for DB propagation
+            viewModel.shouldDelayConnectAfterLobbyReturn = true
+
             // If the guest is currently in the player, switch back to lobby
             // We check if currentView is player (or if we are simply not in lobby?)
             if viewModel.appState?.currentView == .player {

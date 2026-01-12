@@ -5,7 +5,7 @@ import Foundation
 protocol LobbyDataService {
     // Realtime Client Access
     var realtimeClient: SupabaseRealtimeClient { get }
-    
+
     // Room Management
     func getRoomState(roomId: String) async throws -> SupabaseRoom?
     func joinRoom(roomId: String, userId: UUID, isHost: Bool) async throws
@@ -25,10 +25,10 @@ protocol LobbyDataService {
         description: String?,
         playlist: [PlaylistItem]?
     ) async throws -> SupabaseRoom
-    
+
     func deleteRoom(roomId: String) async throws
     func leaveRoom(roomId: String, userId: UUID) async throws
-    
+
     // Playback & State
     func startRoomPlayback(roomId: String) async throws
     func updateRoomPlayback(roomId: String, position: Int, isPlaying: Bool) async throws
@@ -41,9 +41,9 @@ protocol LobbyDataService {
         posterUrl: String?,
         backdropUrl: String?
     ) async throws
-    
+
     func updateRoomPlaylist(roomId: String, playlist: [PlaylistItem], currentIndex: Int) async throws
-    
+
     func updateRoomStream(
         roomId: String,
         streamHash: String?,
@@ -52,11 +52,13 @@ protocol LobbyDataService {
         unlockedUrl: String?,
         resetPlayback: Bool
     ) async throws
-    
+
+    func resetRoomStream(roomId: String) async throws
+
     // Participants & Presence
     func getRoomParticipants(roomId: String) async throws -> [RoomParticipant]
     func sendHeartbeat(roomId: String, userId: UUID) async throws
-    
+
     // User
     func getUserById(userId: UUID) async throws -> SupabaseUser?
 }

@@ -1070,6 +1070,8 @@ class SupabaseClient: RoomManager, UserManager {
             "selected_file_idx": NSNull(),
             "selected_quality": NSNull(),
             "unlocked_stream_url": NSNull(),
+            "is_playing": false,
+            "playback_position": 0,
             "last_activity": ISO8601DateFormatter().string(from: Date())
         ]
 

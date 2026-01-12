@@ -693,7 +693,13 @@ class LobbyViewModel: ObservableObject {
             LoggingManager.shared.info(.watchParty, message: "📣 Host returning to lobby, notifying guests...")
 
             // 1. Update Database (Prevent Guest auto-start loop)
-            try? await self.dataService.updateRoomPlayback(roomId: self.room.id, position: 0, isPlaying: false)
+            // CRITICAL FIX: Clear stream hash/url so guests don't see a "ready" stream and auto-join
+            do {
+                try await self.dataService.resetRoomStream(roomId: self.room.id)
+            } catch {
+                // Rule #17: Avoid silent failures. Log the error.
+                LoggingManager.shared.warn(.watchParty, message: "Failed to reset room stream: \(error)")
+            }
 
             // 2. Broadcast Realtime Message
             let syncMsg = SyncMessage(
@@ -1136,6 +1142,7 @@ class LobbyViewModel: ObservableObject {
                 self.room.selectedStreamHash = freshRoom.streamHash
                 self.room.selectedFileIdx = freshRoom.fileIdx
                 self.room.selectedQuality = freshRoom.quality
+                self.room.unlockedStreamURL = freshRoom.unlockedStreamUrl
                 self.room.unlockedStreamURL = freshRoom.unlockedStreamUrl
                 self.room.subtitleUrl = freshRoom.subtitleUrl
 

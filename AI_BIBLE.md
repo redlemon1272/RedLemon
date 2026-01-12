@@ -8,6 +8,20 @@
 > "You are the custodian of RedLemon. First, STUDY `MPVPlayerViewModel.swift` (Landmine #1)—it is the fragile engine of this app. Second, respect `MainActor` isolation or you will crash the UI. Finally, when shipping, obey **Part 19** implicitly. Deviating from the Bible corrupts the project."
 
 
+
+# ⚡️ THE SURVIVAL GUIDE (Start Here)
+> **The 80/20 Rule: 80% of crashes come from ignoring these 3 rules.**
+
+1.  **Read Landmines #1, #25, & #35**:
+    *   **#1 (The God Class)**: `MPVPlayerViewModel` is fragile. Touch it with fear.
+    *   **#25 (MainActor)**: NEVER use `DispatchQueue.main.async`. Use `Task { @MainActor }`.
+    *   **#35 (Ghost Streams)**: DB state MUST be cleared when Host leaves.
+2.  **Copy-Paste Patterns**: Use **Part 1.5** for Concurrency and Logging. Do not invent your own.
+3.  **Debug via Symptoms**: Use the **Symptom Checker** below to find the specific Landmine.
+
+---
+
+
 # Part 0: The Core Rules (The "Stone Tablet")
 
 1.  **The God Class**: `MPVPlayerViewModel.swift` is the central nervous system. It handles concurrency, C-interop, and state. Thread safety here is paramount.
@@ -65,11 +79,15 @@
 20. **Timer Bursts**: Synchronized timers cause jitter. **Rule**: Stagger tasks (`Task.sleep` with offsets).
 
 ### 21-25: Concurrency & Sync
-21. **Zombie Rooms**: Host quits abruptly. **Rule**: All "Waiting" gates need client-side timeouts (30s).
+21. **Zombie Rooms**: Host quits abruptly.
+    *   **Trigger**: Host force-quits (Cmd+Q) while 2+ guests in lobby.
+    *   **Rule**: All "Waiting" gates need client-side timeouts (30s).
 22. **Data Shadowing**: **Rule**: Explicitly separate `payload["description"]` (User Msg) from `mediaItem.description` (Plot).
 23. **Session IDs**: **Rule**: Match Reports to `log.id`, User History to `log.session_id`.
 24. **Gesture Nav**: `onDisappear` cancels Tasks. **Rule**: Nav writes must be synchronous (`appState.view = .target`).
-25. **MainActor**: GCD != MainActor. **Rule**: Use `Task { @MainActor }`, NEVER `DispatchQueue.main.async`.
+25. **MainActor**: GCD != MainActor.
+    *   **Trigger**: Using `DispatchQueue.main.async` inside a Task or Actor.
+    *   **Rule**: Use `Task { @MainActor }`, NEVER `DispatchQueue.main.async`.
 
 ### 26-31: Deployment & Privacy
 26. **Automation Deadlock**: **Rule**: Use headless `build-app-debug.sh`.
@@ -78,11 +96,20 @@
 29. **Privacy Trap**: **Rule**: Logs to `.applicationSupportDirectory` (Hidden), NEVER `.documentDirectory` (Prompt).
 30. **Versioning**: Strings fail sort ("1.0.60" < "59"). **Rule**: Compare `Int` Build Numbers.
 31. **Onboarding**: **Rule**: Auto-close Success modals (2.5s timer). Don't make users click "Next" on success.
-32. **ViewModel Survival (Room Cleanup)**: **Rule**: Hosts MUST capture `self` strongly in the exit `Task` to ensure `deleteRoom()` completes before deallocation. Weak capture = Zombie Rooms.
-33. **Ghost Join Protection**: **Rule**: Guests MUST verify the room record in the DB during connection. If missing (host left), immediately eject to `.browse` with an alert.
+32. **ViewModel Survival (Room Cleanup)**:
+    *   **Trigger**: Host deallocates ViewModel while async `deleteRoom` is pending.
+    *   **Rule**: Hosts MUST capture `self` strongly in the exit `Task` to ensure `deleteRoom()` completes before deallocation. Weak capture = Zombie Rooms.
+33. **Ghost Join Protection**:
+    *   **Trigger**: User clicks "Join" on a room where Host has crashed/left.
+    *   **Rule**: Guests MUST verify the room record in the DB *during* connection. If missing (host left), immediately eject to `.browse` with an alert.
 34. **Binge Control Flash**: **Rule**: "Next Episode" prompts MUST use a local session flag (`hasHandledNextEpisodePrompt`) to stay hidden after dismissal or play. Global status resets cause UI flicker.
-35. **Ghost Streams (Zombie Playback)**: **Rule**: Hosts MUST explicitly `nil` query-able stream properties (`stream_hash`, `unlocked_stream_url`) in the DB immediately upon returning to lobby. Relying on `is_playing=false` alone is insufficient as guests may auto-join "ready" streams due to race conditions.
+35. **Ghost Streams (Zombie Playback)**: *(Added v1.0.65)*
+    *   **Trigger**: Host returns to Lobby, Guest auto-joins "Playing" stream because `is_playing` wasn't cleared.
+    *   **Rule**: Hosts MUST explicitly `nil` query-able stream properties (`stream_hash`, `unlocked_stream_url`) in the DB immediately upon returning to lobby. Relying on `is_playing=false` alone is insufficient as guests may auto-join "ready" streams due to race conditions.
 36. **Idempotent Auto-Start (The "Ghost Loop" Fix)**: **Rule**: Database reads are eventually consistent. Clients MUST track the `session_id` (Hash + Timestamp) of the last *completed* action. If the remote state asks to "Start" the same Session ID again, **BLOCK IT**. Never rely on a raw boolean (`is_playing`) alone.
+
+## 🪦 Resolved Landmines (Archived)
+*   ~~#XX: Old Issue~~ - (Example placeholder)
 
 ## 🏗️ Architecture Map
 | Component | Responsibility |
@@ -659,7 +686,7 @@ Certain high-frequency logs (video rendering, mouse tracking) are throttled to m
 Tracks when users create watch party rooms to enforce limits.
 
 ### Limit Rules
-- **Free Users**: 1 room per 24 hours
+- **Free Users**: 1 room per 72 hours
 - **Premium Users**: Unlimited
 
 ### Implementation

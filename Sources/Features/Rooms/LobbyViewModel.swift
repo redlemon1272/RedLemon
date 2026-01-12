@@ -713,6 +713,17 @@ class LobbyViewModel: ObservableObject {
         self.playbackEndedTimestamp = Date()
         self.isStarting = false
         self.transitionState.isStarting = false
+
+        // CRITICAL FIX (v5): Reset connection status BEFORE view transition.
+        // This function is called from PlayerViewModel.exitPlayer() BEFORE
+        // appState.currentView = .watchPartyLobby. When the lobby view appears,
+        // its onAppear calls connect(). If we don't reset here, connect() sees
+        // stale .connected status and skips reconnection.
+        // The actual cleanup() runs later in MPVPlayerView.onDisappear, but by then
+        // connect() has already returned. Per Bible Rule #13: Don't trust stale websocket state.
+        print("🔄 Lobby: markPlaybackEnded - resetting connection status for reconnection")
+        realtimeConnectionStatus = .disconnected
+
         LoggingManager.shared.info(.watchParty, message: "🏁 Lobby: Marked playback as finished (Grace period active)")
     }
 

@@ -638,51 +638,7 @@ Tracks when users create watch party rooms to enforce limits.
 ### Database RPC
 `check_room_creation_limit(user_id)` returns `{can_create, time_until_next, is_premium}`
 
----
 
-# Quick Reference
-
-## Key Files
-| Purpose | File |
-| :--- | :--- |
-| Playback Core | `MPVPlayerViewModel.swift` (The God Class: Video, Subs, Sync) |
-| Room Logic | `PlayerViewModel.swift` (Lobby, Navigation, Room Creation) |
-| Stream Resolution | `StreamResolver.swift` |
-| Subtitles | `MPVWrapper.swift`, `SubtitleService.swift` |
-| Watch Parties | `RealtimeChannelManager.swift`, `LobbyViewModel.swift` |
-| Payments | `SupabaseClient.swift`, Edge Functions |
-| Settings | `SettingsView.swift` |
-| Admin | `AdminDashboardView.swift` |
-| Social | `SocialService.swift` |
-| Local Server | `HTTPServer.swift`, `StreamRoutes.swift` |
-| Secrets | `KeychainManager.swift` |
-| Updates | `UpdateManager.swift` |
-| Caching | `CacheManager.swift` |
-
-## Important Database Tables
-| Table | Purpose |
-| :--- | :--- |
-| `users` | User accounts, premium status |
-| `rooms` | Active watch parties |
-| `room_participants` | Who's in each room |
-| `room_creation_history` | Free-tier limit tracking |
-| `verified_streams` | Community-verified streams |
-| `reported_streams` | Problem reports |
-| `blocked_streams` | Permanent blacklist |
-| `payment_pools` | Assigned crypto addresses |
-| `payment_transactions` | Payment records |
-| `friendships` | Friend connections |
-| `friend_requests` | Pending friend requests |
-| `user_blocks` | Blocked users |
-| `events_config` | Live event schedule |
-| `system_job_logs` | Server maintenance/cron logs |
-
-
-## Cron Jobs
-Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT jobname, schedule FROM cron.job;\""`
-
-## UUID Case Sensitivity
-> [!CAUTION]
 
 
 # Part 16: Playback Synchronization
@@ -737,5 +693,45 @@ Users can report broken streams. The system captures:
 
 
 ---
+
+# Appendix: Quick Reference
+
+## Key Files
+| Purpose | File |
+| :--- | :--- |
+| Playback Core | `MPVPlayerViewModel.swift` (The God Class: Video, Subs, Sync) |
+| Room Logic | `PlayerViewModel.swift` (Lobby, Navigation, Room Creation) |
+| Stream Resolution | `StreamResolver.swift` |
+| Subtitles | `MPVWrapper.swift`, `SubtitleService.swift` |
+| Watch Parties | `RealtimeChannelManager.swift`, `LobbyViewModel.swift` |
+| Payments | `SupabaseClient.swift`, Edge Functions |
+| Settings | `SettingsView.swift` |
+| Admin | `AdminDashboardView.swift` |
+| Social | `SocialService.swift` |
+| Local Server | `HTTPServer.swift`, `StreamRoutes.swift` |
+| Secrets | `KeychainManager.swift` |
+| Updates | `UpdateManager.swift` |
+| Caching | `CacheManager.swift` |
+
+## Important Database Tables
+| Table | Purpose |
+| :--- | :--- |
+| `users` | User accounts, premium status |
+| `rooms` | Active watch parties |
+| `room_participants` | Who's in each room |
+| `room_creation_history` | Free-tier limit tracking |
+| `verified_streams` | Community-verified streams |
+| `reported_streams` | Problem reports |
+| `blocked_streams` | Permanent blacklist |
+| `payment_pools` | Assigned crypto addresses |
+| `payment_transactions` | Payment records |
+| `friendships` | Friend connections |
+| `friend_requests` | Pending friend requests |
+| `user_blocks` | Blocked users |
+| `events_config` | Live event schedule |
+| `system_job_logs` | Server maintenance/cron logs |
+
+## Cron Jobs
+Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT jobname, schedule FROM cron.job;\""`
 
 

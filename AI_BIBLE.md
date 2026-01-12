@@ -21,6 +21,19 @@
 
 # Part 1: Architecture & Landmines
 
+## 🚑 Symptom Checker (Quick Index)
+| Symptom | Probable Cause | Landmine |
+| :--- | :--- | :--- |
+| **UI Freeze / Lag** | Threading violation (MainActor) | #2, #25 |
+| **Crash on Logging** | Strings with `%` symbols | #11 |
+| **"Ghost" / Zombie Room** | Host quit without strong capture | #21, #32 |
+| **Guests Auto-Join Dead Stream** | Stale DB state (is_playing=true) | #35 |
+| **Ghost Join (Host Left)** | Missing DB Verification on Join | #33 |
+| **Updates Fail** | String comparison used instead of Int | #30 |
+| **Missing Streams** | Hardcoded blocklists active | #4 |
+| **Binge Prompt Flicker** | Global Status Reset used | #34 |
+| **Date Decoding Error** | Wrong Formatter (Missing Fractional) | #8 |
+
 ## 🚨 Critical Landmines
 
 ### 1-5: Core Engines

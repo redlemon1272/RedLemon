@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.69 -->
+        <item>
+            <title>Version 1.0.69</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li><b>Forensic Logging</b>: Crystal clear debug logs for every session.</li><li><b>Session Mirroring</b>: Critical events now visible in Console.app.</li><li><b>Provider Breakdown</b>: Detailed stats on source resolution.</li><li><b>Playback Fixes</b>: Improved buffering logic and state tracking.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 17:11:24 -0500</pubDate>
+            <sparkle:version>69</sparkle:version>
+            <sparkle:shortVersionString>1.0.69</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.69.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="T5GZ/VNruxmTesOF82/TR8qqu5D9v8zQn6ddhKzsFm6LRKtN0q631liY36JNxicz05+mprNzMeVqp4cwAqvSBg==" length="72264086"
+            />
+        </item>
         <!-- v1.0.68 -->
         <item>
             <title>Version 1.0.68</title>

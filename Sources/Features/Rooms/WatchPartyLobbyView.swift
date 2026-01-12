@@ -654,13 +654,13 @@ struct WatchPartyLobbyView: View {
                                                             VStack(alignment: .leading, spacing: 4) {
                                                                 HStack {
                                                                     // Username / Menu
-                                                                    HStack(spacing: 4) {
-                                                                        let isSenderHost = chatMsg.senderId.map { $0.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame } ?? false
-                                                                        let nameColor: Color = isSenderHost ? .accentColor : .blue
+                                                                     HStack(spacing: 4) {
+                                                                         let isSenderHost = chatMsg.senderId.map { $0.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame } ?? false
+                                                                         let nameColor: Color = isSenderHost ? .accentColor : Constants.avatarColor(for: chatMsg.username)
 
-                                                                        Text(chatMsg.username)
-                                                                            .font(.caption.weight(.semibold))
-                                                                            .foregroundColor(nameColor)
+                                                                         Text(chatMsg.username)
+                                                                             .font(.caption.weight(.semibold))
+                                                                             .foregroundColor(nameColor)
 
                                                                         if let senderId = chatMsg.senderId, senderId.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame {
                                                                             Text("Host")

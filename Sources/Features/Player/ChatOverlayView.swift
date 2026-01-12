@@ -258,7 +258,7 @@ struct ChatOverlayView: View {
     // MARK: - List Views
     
     private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, isSenderHost: Bool, timestamp: String? = nil) -> some View {
-        let nameColor: Color = isSystem ? .gray : (isSenderHost ? .accentColor : .blue)
+        let nameColor: Color = isSystem ? .gray : (isSenderHost ? .accentColor : Constants.avatarColor(for: username))
 
         if isSystem {
             return AnyView(

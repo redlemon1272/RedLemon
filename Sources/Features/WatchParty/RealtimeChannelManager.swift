@@ -62,7 +62,7 @@ actor RealtimeChannelManager: RealtimeService {
 
     // Presence tracking
     private var presenceCallback: ((PresenceAction, String, [String: Any]?) -> Void)?
-    
+
     // Postgres tracking
     private var postgresCallback: (([String: Any]) -> Void)?
 
@@ -140,41 +140,41 @@ actor RealtimeChannelManager: RealtimeService {
                 await self?.handleConnectionChange(connected)
             }
         }
-        
+
         // Handle postgres changes
         await realtimeClient.onPostgresChange { payload in
             Task { [weak self] in
                await self?.handlePostgresChange(payload)
             }
         }
-        
+
         // Start monitoring connection for auto-reconnect
         await monitorConnection()
     }
-    
+
     /// Monitors connection state and attempts to reconnect if dropped unexpectedly
     private func monitorConnection() async {
         await realtimeClient.onConnectionChange { [weak self] connected in
             guard let self = self else { return }
-            
+
             Task {
                 // Update local state
                 await self.handleConnectionChange(connected)
-                
+
                 // Auto-Reconnect Logic
                 let isDisconnectingLocal = await self.isDisconnecting
-                
+
                 if !connected && !isDisconnectingLocal {
                     print("⚠️ Realtime: Connection lost. Attempting auto-reconnect in 2s...")
                     await self.logError("Realtime connection lost unexpectedly. Reconnecting...")
-                    
+
                     try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s
-                    
+
                     // Double check we haven't started disconnecting in the meantime
                     // We must re-fetch the actor state
                     let isDisconnectingNow = await self.isDisconnecting
                     let isConnectedNow = await self.isConnected
-                    
+
                     if !isDisconnectingNow && !isConnectedNow {
                         print("🔄 Realtime: Reconnecting now...")
                         do {
@@ -189,21 +189,21 @@ actor RealtimeChannelManager: RealtimeService {
             }
         }
     }
-    
+
     // MARK: - Telemetry
-    
+
     private func logError(_ message: String) {
         Task {
             // Bridge to SupabaseClient for server-side logging
             // We use 'error' level for these runtime failures
             try? await SupabaseClient.shared.insertLog(
-                level: "error", 
+                level: "error",
                 message: "[Realtime] \(message)",
                 metadata: ["room_id": roomId ?? "unknown", "user_id": userId ?? "unknown"]
             )
         }
     }
-    
+
     // New method to handle postgres changes
     private func handlePostgresChange(_ payload: [String: Any]) async {
         postgresCallback?(payload)
@@ -216,7 +216,7 @@ actor RealtimeChannelManager: RealtimeService {
     private func handleBroadcastMessage(_ payload: [String: Any]) async {
         NSLog("📨 Realtime: Received broadcast message")
         NSLog("   Payload keys: \(payload.keys.joined(separator: ", "))")
-        
+
         // Decode the sync message
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: payload)
@@ -246,7 +246,7 @@ actor RealtimeChannelManager: RealtimeService {
     func setPostgresCallback(_ callback: @escaping ([String: Any]) -> Void) {
         self.postgresCallback = callback
     }
-    
+
     func sendSyncMessage(_ message: SyncMessage) async throws {
         guard isConnected else {
             NSLog("⚠️ Realtime: Cannot send sync message - not connected")
@@ -254,13 +254,13 @@ actor RealtimeChannelManager: RealtimeService {
         }
 
         NSLog("📤 Realtime: Sending message type: \(message.type), sender: \(message.senderId ?? "unknown")")
-        
+
         // Convert message to dictionary
         let jsonData = try JSONEncoder().encode(message)
         let payload = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] ?? [:]
-        
+
         NSLog("   Payload keys: \(payload.keys.joined(separator: ", "))")
-        
+
         // Broadcast to channel
         try await realtimeClient.broadcast(event: eventName, payload: payload)
         NSLog("✅ Realtime: Message broadcast complete")
@@ -302,12 +302,12 @@ actor RealtimeChannelManager: RealtimeService {
             NSLog("❌ Realtime: syncCallback is NIL, cannot deliver message type: \(message.type)")
             return
         }
-        
+
         NSLog("📞 Realtime: Invoking syncCallback for message type: \(message.type)")
-        
+
         // Pass to callback
         syncCallback?(compensatedMessage)
-        
+
         NSLog("✅ Realtime: syncCallback invoked successfully")
     }
 
@@ -366,9 +366,9 @@ actor RealtimeChannelManager: RealtimeService {
             print("⚠️ Cleanup already in progress, skipping")
             return
         }
-        
+
         let capturedRoomId = self.roomId
-        
+
         // If we are not connected and not just trying to disconnect the client, we might be able to skip
         // But we should be careful. The safest is to check if we have anything to clean up.
         if !isConnected && !disconnectClient {
@@ -420,6 +420,13 @@ actor RealtimeChannelManager: RealtimeService {
         }
 
         isConnected = false
+
+        // CRITICAL FIX: Notify state change BEFORE clearing callbacks
+        // When returning from playback to lobby, LobbyViewModel needs to know
+        // the channel is disconnected so it can reconnect. Without this notification,
+        // realtimeConnectionStatus stays stale at .connected and connect() skips.
+        await notifyConnectionStateChange(.disconnected)
+
         isDisconnecting = false
         roomId = nil
         userId = nil

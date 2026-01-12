@@ -235,6 +235,11 @@ class LobbyViewModel: ObservableObject {
     }
 
     private func setupRealtimeSubscription() async {
+        // SAFEGUARD: Reset connection status when setting up new subscription
+        // This handles edge cases where cleanup() notification was missed
+        // (e.g., callback already nil when cleanup ran)
+        realtimeConnectionStatus = .connecting
+
         // Initialize Realtime manager if not already injected (for testing)
         if self.realtimeManager == nil {
             self.realtimeManager = RealtimeChannelManager(realtimeClient: self.dataService.realtimeClient)
@@ -496,9 +501,9 @@ class LobbyViewModel: ObservableObject {
                 NSLog("%@", "❌ Lobby: Failed to connect - \(error)")
 
                 let errStr = String(describing: error)
-                
+
                 // CRITICAL FIX: Handle "Already Joined" (Duplicate Key) as SUCCESS
-                if errStr.localizedCaseInsensitiveContains("duplicate key") || 
+                if errStr.localizedCaseInsensitiveContains("duplicate key") ||
                    errStr.localizedCaseInsensitiveContains("unique constraint") ||
                    errStr.localizedCaseInsensitiveContains("room_participants_pkey") {
                     print("ℹ️ Lobby: User already in room (Duplicate Key) - Proceeding as connected.")
@@ -506,9 +511,9 @@ class LobbyViewModel: ObservableObject {
                     await MainActor.run {
                         self.stateMachine.transition(to: .connected)
                     }
-                } 
+                }
                 // CRITICAL FIX: Detect deleted/missing rooms (Foreign Key) - FATAL
-                else if errStr.localizedCaseInsensitiveContains("foreign key constraint") || 
+                else if errStr.localizedCaseInsensitiveContains("foreign key constraint") ||
                           errStr.localizedCaseInsensitiveContains("room_participants_room_id_fkey") {
                     print("💀 Lobby: Room definitely deleted (Foreign Key Error). Exiting to Browse...")
                     await MainActor.run {
@@ -640,10 +645,10 @@ class LobbyViewModel: ObservableObject {
                     chatUsername: "Host"
                 )
                 try? await self.realtimeManager?.sendSyncMessage(syncMsg)
-                
+
                 // Short wait to ensure message delivery
                 try? await Task.sleep(nanoseconds: 1_000_000_000) // 1.0s
-                
+
                 await MainActor.run {
                     self.disconnect()
                 }
@@ -655,14 +660,14 @@ class LobbyViewModel: ObservableObject {
 
     func announceReturnToLobby() {
         guard isHost else { return }
-        
+
         Task { [weak self] in
             guard let self = self else { return }
             LoggingManager.shared.info(.watchParty, message: "📣 Host returning to lobby, notifying guests...")
-            
+
             // 1. Update Database (Prevent Guest auto-start loop)
             try? await self.dataService.updateRoomPlayback(roomId: self.room.id, position: 0, isPlaying: false)
-            
+
             // 2. Broadcast Realtime Message
             let syncMsg = SyncMessage(
                 type: .returnToLobby,

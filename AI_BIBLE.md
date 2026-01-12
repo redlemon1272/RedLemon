@@ -68,6 +68,7 @@
 32. **ViewModel Survival (Room Cleanup)**: **Rule**: Hosts MUST capture `self` strongly in the exit `Task` to ensure `deleteRoom()` completes before deallocation. Weak capture = Zombie Rooms.
 33. **Ghost Join Protection**: **Rule**: Guests MUST verify the room record in the DB during connection. If missing (host left), immediately eject to `.browse` with an alert.
 34. **Binge Control Flash**: **Rule**: "Next Episode" prompts MUST use a local session flag (`hasHandledNextEpisodePrompt`) to stay hidden after dismissal or play. Global status resets cause UI flicker.
+35. **Ghost Streams (Zombie Playback)**: **Rule**: Hosts MUST explicitly `nil` query-able stream properties (`stream_hash`, `unlocked_stream_url`) in the DB immediately upon returning to lobby. Relying on `is_playing=false` alone is insufficient as guests may auto-join "ready" streams due to race conditions.
 
 ## 🏗️ Architecture Map
 | Component | Responsibility |
@@ -85,7 +86,7 @@
 **Pattern**: Move heavy work off-thread, update UI on MainActor.
 ```swift
 // ❌ WRONG: Dispatch.main.async (Data Race) or blocking Task
-Task { @MainActor in 
+Task { @MainActor in
    let data = heavyWork() // FREEZES UI
 }
 
@@ -102,7 +103,7 @@ Task.detached(priority: .userInitiated) {
 **Pattern**: Use string specifiers to prevent `%` crashes.
 ```swift
 // ❌ WRONG: String interpolation crash on %
-NSLog("URL: \(url.absoluteString)") 
+NSLog("URL: \(url.absoluteString)")
 
 // ✅ RIGHT: Specifier format
 NSLog("%@", "URL: \(url.absoluteString)")
@@ -465,7 +466,7 @@ graph TD
         C --> D[TorrentioService]
         C --> E[ZileanService]
         C --> F[...]
-        
+
         D & E & F --> G[Filter & Sort Logic]
         G --> H[RealDebrid Unlock]
     end
@@ -557,6 +558,7 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 1. **Versioning**: Use numeric **Build Number** (`CFBundleVersion`) for comparisons. Strings fail (1.0.60 < 1.0.9).
 2. **Initialization**: `SPUStandardUpdaterController` MUST use `startingUpdater: true`.
 3. **Forcing**: Use `sparkle:criticalUpdate="true"` for mandatory fixes.
+4. **Key Verification**: Agents MUST verify presence of Private Sparkle Key in Keychain (`./.build/artifacts/sparkle/bin/sign_update` check) BEFORE starting build.
 
 ## Release Protocol (The "Part 19" Standard)
 **Mandatory 5-Step Sequence:**

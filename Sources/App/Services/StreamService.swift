@@ -41,7 +41,7 @@ actor StreamService: StreamResolving {
     }
 
     // MARK: - File Extension Validation
-    
+
     /// Block suspicious file extensions that indicate fake/malware torrents
     /// Also blocks known error placeholder videos from providers
     /// Made internal for testing
@@ -62,7 +62,7 @@ actor StreamService: StreamResolving {
             print("🚫 StreamService: Detected Torrentio error placeholder video")
             return true
         }
-        
+
         // NEW: Block "Sample" files
         // Often torrents include a sample video (e.g. movie.sample.mkv) which is selected by mistake
         if path.contains("sample") {
@@ -73,7 +73,7 @@ actor StreamService: StreamResolving {
                  return true
              }
         }
-        
+
         // Block Trailers
         if path.contains("trailer.") || path.contains("_trailer") || path.contains("-trailer") {
             print("🚫 StreamService: Detected Trailer video: \(url)")
@@ -88,7 +88,7 @@ actor StreamService: StreamResolving {
 
     func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata? = nil, preferredInfoHash: String? = nil, filterExtended: Bool = false) async throws -> StreamResolutionResult {
         LogManager.shared.info("🎬 StreamService: Starting resolution for: \(item.name)")
-        
+
         // Step 0: Early validation - Check for Real-Debrid API key
         let rdKey = await KeychainManager.shared.get(service: "realdebrid")
         if rdKey == nil || rdKey?.isEmpty == true {
@@ -371,7 +371,7 @@ actor StreamService: StreamResolving {
             if safeLocalizedKeywords.contains(where: { titleLower.contains($0) }) {
                 isLocalized = true
             }
-            
+
             // Whitelist DebridSearch from language deprioritization
             if stream.provider == "debridsearch" {
                 isLocalized = false
@@ -522,7 +522,7 @@ actor StreamService: StreamResolving {
                 } else {
                     print("📊 Stream Size: Unknown")
                 }
-                
+
                 // Return selected stream AND remaining candidates
                 // We use finalStreams (all valid streams) and remove the one we just unlocked/selected
                 // NOTE: We do NOT remove previous failed attempts because they failed for a reason (unlock error),
@@ -531,18 +531,18 @@ actor StreamService: StreamResolving {
                 // The loop continues on failure. So 'index' is the current successful one.
                 // The streams AFTER index are candidates.
                 // The streams BEFORE index failed unlock.
-                
+
                 // However, for robustness, let's just return ALL streams except the current one?
                 // Or just the subsequent ones?
                 // If the previous ones failed "Unlock" (HTTP error), retrying them is probably futile.
                 // So let's return streams from index + 1 onwards.
-                
+
                 // Build candidate streams for failover:
                 // 1. Remaining streams from the same priority tier (finalStreams)
                 // 2. APPEND all other valid streams (including 10-bit) as "last resort" fallback
                 // This ensures if the CDN returns a broken file, we can try alternate codecs
                 var candidateStreams = Array(finalStreams.dropFirst(index + 1))
-                
+
                 // Append deprioritized streams (10-bit, etc.) that weren't in finalStreams
                 // These are from streamsToTry (pre-filter) minus what's already in candidateStreams
                 let alreadyIncluded = Set(candidateStreams.map { $0.id })
@@ -551,9 +551,9 @@ actor StreamService: StreamResolving {
                     print("📦 StreamService: Appending \(fallbackStreams.count) fallback streams (alternate codecs)")
                     candidateStreams.append(contentsOf: fallbackStreams)
                 }
-                
+
                 print("📦 StreamService: Returning \(candidateStreams.count) candidate streams for fallback")
-                
+
                 return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata, candidateStreams: candidateStreams)
             } catch {
                 // Auto-Report Server Errors (5xx) to Admin Dashboard
@@ -614,7 +614,7 @@ actor StreamService: StreamResolving {
     func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> Stream {
         // Check for direct HTTP URL (Pre-unlocked)
         if let url = stream.url, (url.hasPrefix("http://") || url.hasPrefix("https://")) {
-            
+
             // NEW: Resolve "resolve" URLs (Debrid Search) to final direct links
             // These URLs are redirects (302) to the actual file. MPV fails on them, so we must resolve them now.
             var finalURL = url
@@ -622,16 +622,19 @@ actor StreamService: StreamResolving {
                  print("🔍 StreamService: Resolving redirect URL: \(url)")
                  if let resolved = await resolveRedirect(url: url) {
                      print("✅ StreamService: Resolved to: \(resolved)")
-                     
+
                      // CRITICAL: Validate resolved URL is a valid video file
                      if isBlockedFileExtension(url: resolved) {
                          print("🚫 StreamService: Blocked suspicious file extension in resolved URL. Skipping stream.")
                          throw APIError.invalidStream
                      }
-                     
+
                      finalURL = resolved
                  } else {
-                     print("⚠️ StreamService: Failed to resolve URL, using original.")
+                     // FIX: Throw error instead of using invalid redirect URL (Bible: Silent Retry)
+                     // The invalid resolve URL cannot be played by MPV - it's a 302 redirect
+                     print("❌ StreamService: Failed to resolve redirect URL. Stream unusable, trying next candidate.")
+                     throw APIError.invalidStream
                  }
             }
 
@@ -639,7 +642,7 @@ actor StreamService: StreamResolving {
 
             // Still process subtitles
             var finalStream = stream
-            
+
             // Update URL if resolved
             if finalURL != url {
                 finalStream = Stream(
@@ -656,7 +659,7 @@ actor StreamService: StreamResolving {
                      subtitles: stream.subtitles
                  )
             }
-            
+
              if let subtitles = finalStream.subtitles, !subtitles.isEmpty {
                 // Optimize: Cap at 5 subtitles to prevent blocking playback start
                 let limitedSubtitles = Array(subtitles.prefix(5))
@@ -730,7 +733,7 @@ actor StreamService: StreamResolving {
         let genericFilenames = ["video.mkv", "video.mp4", "movie.mkv", "movie.mp4", "stream.mkv", "stream.mp4"]
         let resolvedFilename = unlockResult.filename
         let isGeneric = genericFilenames.contains(resolvedFilename.lowercased())
-        
+
         var unlockedStream = Stream(
             url: unlockResult.url,
             title: (resolvedFilename.isEmpty || isGeneric) ? stream.title : resolvedFilename,
@@ -801,12 +804,12 @@ actor StreamService: StreamResolving {
 
                     if subtitle.url.hasPrefix("/subtitle/") {
                         NSLog("✅ DEBUG: Raw SubDL URL detected, converting to proxy URL")
-                        
+
                         // Convert raw SubDL URL to proxy URL
                         // Use shared helper for robust URL construction (handles encoding & params)
                         let url = LocalAPIClient.shared.getSubtitleURL(downloadPath: subtitle.url, season: season, episode: episode)
                         var finalProxyURL = url + (url.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
-                        
+
                         // APPEND filename hint to URL so route can use it
                         if let hint = streamFilename, let encodedHint = hint.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
                              finalProxyURL += "&filename=\(encodedHint)"
@@ -822,7 +825,7 @@ actor StreamService: StreamResolving {
                             provider: subtitle.provider
                         )
                     }
-                        
+
 
 
                     NSLog("⚠️ DEBUG: Not a SubDL URL, attempting download")
@@ -910,15 +913,15 @@ actor StreamService: StreamResolving {
     /// Helper to resolve HTTP redirects (e.g. for DebridSearch /resolve/ URLs)
     private func resolveRedirect(url: String) async -> String? {
         guard let urlObj = URL(string: url) else { return nil }
-        
+
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 3.0 // 3 seconds max (Fail fast)
         config.timeoutIntervalForResource = 3.0
         let session = URLSession(configuration: config)
-        
+
         var request = URLRequest(url: urlObj)
         request.httpMethod = "HEAD"
-        
+
         do {
             let (_, response) = try await session.data(for: request)
             if let httpResponse = response as? HTTPURLResponse {
@@ -932,14 +935,14 @@ actor StreamService: StreamResolving {
                  print("⚠️ StreamService: HEAD request timed out after 3s. Skipping fallback.")
                  return nil
             }
-            
+
             print("⚠️ StreamService: HEAD resolution failed (\(error.localizedDescription)). Falling back to GET (Range: 0-0)...")
-            
+
             // Fallback to GET with Range header (minimal data download)
             var getRequest = URLRequest(url: urlObj)
             getRequest.httpMethod = "GET"
             getRequest.setValue("bytes=0-0", forHTTPHeaderField: "Range")
-            
+
             do {
                 let (_, response) = try await session.data(for: getRequest)
                 if let httpResponse = response as? HTTPURLResponse {

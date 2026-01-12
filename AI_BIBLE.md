@@ -616,10 +616,11 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 **Mandatory 5-Step Sequence:**
 1.  **Code & Build**: Run `./build-app-debug.sh`. Verify 0 errors.
 2.  **User Validation (GATE)**: Ask user to test. **DO NOT PROCEED** without confirmation.
-3.  **Git Sync**: `git push origin <branch>`.
-4.  **Release Script**: Run `./scripts/release.sh <VERSION> <BUILD>`.
+3.  **Git Sync**: `git pull` (Change Log depends on this!) then `git push origin <branch>`.
+4.  **Generate Notes**: Run `./scripts/get-changelog.sh` to grab the list of changes since the last release. Copy the output.
+5.  **Release Script**: Run `./scripts/release.sh <VERSION> <BUILD> "<PASTE_NOTES_HERE>"`.
     -   *Action*: Builds -> Packages DMG -> Signs -> Deploys to Server.
-5.  **Appcast Sync**: Push the auto-updated `appcast.xml` to GitHub.
+6.  **Appcast Sync**: Push the auto-updated `appcast.xml` to GitHub.
 
 ## Manual Key Recovery (New Device)
 To sign releases on a new machine, you must import the **Sparkle Private Key** into the Keychain.

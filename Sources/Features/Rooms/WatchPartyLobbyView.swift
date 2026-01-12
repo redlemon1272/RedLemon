@@ -656,7 +656,7 @@ struct WatchPartyLobbyView: View {
                                                                     // Username / Menu
                                                                      HStack(spacing: 4) {
                                                                          let isSenderHost = chatMsg.senderId.map { $0.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame } ?? false
-                                                                         let nameColor: Color = isSenderHost ? .accentColor : Constants.avatarColor(for: chatMsg.username)
+                                                                         let nameColor: Color = isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: chatMsg.username)
 
                                                                          Text(chatMsg.username)
                                                                              .font(.caption.weight(.semibold))
@@ -665,10 +665,10 @@ struct WatchPartyLobbyView: View {
                                                                         if let senderId = chatMsg.senderId, senderId.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame {
                                                                             Text("Host")
                                                                                 .font(.caption2.weight(.bold))
-                                                                                .foregroundColor(.accentColor)
+                                                                                .foregroundColor(DesignSystem.Colors.accent)
                                                                                 .padding(.horizontal, 4)
                                                                                 .padding(.vertical, 1)
-                                                                                .background(Color.accentColor.opacity(0.15))
+                                                                                .background(DesignSystem.Colors.accent.opacity(0.15))
                                                                                 .cornerRadius(4)
                                                                         }
 
@@ -1102,7 +1102,7 @@ struct ParticipantRow: View {
     var body: some View {
         HStack {
             Circle()
-                .fill(participant.isHost ? Color.accentColor : Color.gray)
+                .fill(participant.isHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: participant.name))
                 .frame(width: 32, height: 32)
                 .overlay(
                     Text(String(participant.name.prefix(1)))

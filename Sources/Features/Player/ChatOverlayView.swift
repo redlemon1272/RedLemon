@@ -258,7 +258,7 @@ struct ChatOverlayView: View {
     // MARK: - List Views
     
     private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, isSenderHost: Bool, timestamp: String? = nil) -> some View {
-        let nameColor: Color = isSystem ? .gray : (isSenderHost ? .accentColor : Constants.avatarColor(for: username))
+        let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: username))
 
         if isSystem {
             return AnyView(
@@ -316,10 +316,10 @@ struct ChatOverlayView: View {
                 if isSenderHost {
                     Text("Host")
                         .font(.caption2.weight(.bold))
-                        .foregroundColor(.accentColor)
+                        .foregroundColor(DesignSystem.Colors.accent)
                         .padding(.horizontal, 4)
                         .padding(.vertical, 1)
-                        .background(Color.accentColor.opacity(0.15))
+                        .background(DesignSystem.Colors.accent.opacity(0.15))
                         .cornerRadius(4)
                 }
 
@@ -451,7 +451,7 @@ struct ChatOverlayView: View {
 
     private func messageRow(_ message: ChatMessage, hostId: String?) -> some View {
         let isMuted = viewModel.mutedUserIds.contains(message.senderId ?? "")
-        let isSenderHost = (message.senderId != nil && message.senderId == hostId)
+        let isSenderHost = (message.senderId != nil && hostId != nil && message.senderId!.caseInsensitiveCompare(hostId!) == .orderedSame)
         
         return VStack(alignment: .leading, spacing: 4) {
             userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost, isPremium: message.isPremium, isSenderHost: isSenderHost, timestamp: message.timestamp.toMessageTime())

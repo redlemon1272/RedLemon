@@ -1,0 +1,555 @@
+2026-01-13 13:38:22.093 RedLemon[4901:32828] 🪟 Set initial window to expanded size: (0.0, 148.0, 1366.0, 595.0)
+2026-01-13 13:38:22.093 RedLemon[4901:32828] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-13 13:38:22.157 RedLemon[4901:32828] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-13 13:38:22.159 RedLemon[4901:32828] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-13 13:38:22.200 RedLemon[4901:32828] ✅ Playback state reset complete - starting in browse view
+2026-01-13 13:38:22.200 RedLemon[4901:32828] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-13 13:38:22.200 RedLemon[4901:32828] 🧪 Testing Profile: debug
+2026-01-13 13:38:22.219 RedLemon[4901:32891] 📂 Loaded 5 credential(s) from cache
+2026-01-13 13:38:22.233 RedLemon[4901:32828] ✅ Keychain: Found stored username: ursinho
+2026-01-13 13:38:22.233 RedLemon[4901:32828] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-13 13:38:22.234 RedLemon[4901:32891] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-13 13:38:22.627 RedLemon[4901:32894] 📡 SupabaseClient: User lookup response received (399 bytes)
+2026-01-13 13:38:22.659 RedLemon[4901:32894] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-13 13:38:22.659 RedLemon[4901:32894] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-13 13:38:22.690 RedLemon[4901:32828] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-13 13:38:22.690 RedLemon[4901:32828] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 13:38:24.926 RedLemon[4901:32828] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 13:38:24.932 RedLemon[4901:32828] 🚀 RedLemon: Starting HTTP server...
+2026-01-13 13:38:24.932 RedLemon[4901:32828] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-13 13:38:24.948 RedLemon[4901:32828] ✅ RedLemon: HTTPServer instance created
+2026-01-13 13:38:24.949 RedLemon[4901:32891] 📡 RedLemon: Server starting on port 47253...
+2026-01-13 13:38:24.949 RedLemon[4901:32828] ✅ RedLemon: Server marked as ready (Optimistic)
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+✅ Connected to Supabase Realtime
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📦 Current build: 74, Latest build: 74
+✅ App is up to date (current: 74, latest: 74)
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+📨 Received: {"ref":"B502299B-9831-4BFE-AFCA-4D0E7F74A68B","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ [EventsView] Loaded 412 movies from config version 1526
+🗓 AppState: Updated schedule epoch to 2025-12-25 18:10:25 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 8042 seconds
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0372784/img (1034221 bytes)
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"9620A40A-96FC-4EF8-B5F5-1C4F8F59DA4A","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeUDGnsOI6AuGk","phx_ref_prev":"GIpeTJBgqGc6AuDk","is_premium":true,"last_seen":"2026-01-13T18:38:22.110Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeUK2Srx06ArBi","is_premium":true,"last_seen":"2026-01-13T18:38:24.166Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 [EventsConfig] Checking server for movie_events config version...
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 8041 seconds
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 8041 seconds
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":"2803F653-AFF6-433C-9000-2D8B3AE8C072","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-13 13:38:25.006 RedLemon[4901:32828] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-13 13:38:25.006 RedLemon[4901:32828] 🏥 [AppState] Starting global provider health check...
+2026-01-13 13:38:25.006 RedLemon[4901:32828] 🔍 Performing startup checks...
+2026-01-13 13:38:25.007 RedLemon[4901:32828] ✅ Username-based authentication ready
+2026-01-13 13:38:25.008 RedLemon[4901:32891] 🔐 Signed request to /check-payment
+2026-01-13 13:38:25.514 RedLemon[4901:32892] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-13 13:38:25.514 RedLemon[4901:32892] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-13 13:38:26.045 RedLemon[4901:32828] 🔄 Checking for app updates...
+2026-01-13 13:38:27.140 RedLemon[4901:32828] ✅ [AppState] Provider health check complete (found 7 services)
+2026-01-13 13:40:07.142 RedLemon[4901:33659] 📝 [APP] 🎟️ Joining event: Batman Begins (Live: true) ["file": "EventsView.swift", "level": "INFO", "line": "253"]
+2026-01-13 13:40:07.142 RedLemon[4901:33659] 📝 [APP] SessionRecorder initialized
+2026-01-13 13:40:07.270 RedLemon[4901:33659] 📡 StreamService: Fetching metadata for tt0372784...
+2026-01-13 13:40:07.271 RedLemon[4901:33275] 📝 [APP] 🎬 StreamService: Starting resolution for: Batman Begins ["file": "StreamService.swift", "level": "INFO", "line": "104"]
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+👤 LicenseManager: Profile expiry: Optional(2026-02-11 06:00:30 +0000)
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+🎉 License updated! Expires: 2026-02-11 06:00:30 +0000
+📦 Current build: 74, Latest build: 74
+✅ App is up to date (current: 74, latest: 74)
+✅ SubDLClient initialized
+✅ TimeService: Synced! Offset: 0.067s (RTT: 133ms)
+   Local:  2026-01-13 18:38:26 +0000
+   Server: 2026-01-13 18:38:26 +0000
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeUdsbHRg6ArGi","phx_ref_prev":"GIpeUK2Srx06ArBi","is_premium":true,"last_seen":"2026-01-13T18:38:29.223Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeUK2Srx06ArBi","is_premium":true,"last_seen":"2026-01-13T18:38:24.166Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeUmqN8_o6AuHE","phx_ref_prev":"GIpeUDGnsOI6AuGk","is_premium":true,"last_seen":"2026-01-13T18:38:31.653Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}},"leaves":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeUDGnsOI6AuGk","phx_ref_prev":"GIpeTJBgqGc6AuDk","is_premium":true,"last_seen":"2026-01-13T18:38:22.110Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 8031 seconds
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 8022 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 8012 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeV7hUT4M6ArMi","phx_ref_prev":"GIpeUdsbHRg6ArGi","is_premium":true,"last_seen":"2026-01-13T18:38:54.408Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeUdsbHRg6ArGi","phx_ref_prev":"GIpeUK2Srx06ArBi","is_premium":true,"last_seen":"2026-01-13T18:38:29.223Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeWEkitWk6AuHk","phx_ref_prev":"GIpeUmqN8_o6AuHE","is_premium":true,"last_seen":"2026-01-13T18:38:56.860Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}},"leaves":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeUmqN8_o6AuHE","phx_ref_prev":"GIpeUDGnsOI6AuGk","is_premium":true,"last_seen":"2026-01-13T18:38:31.653Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 8001 seconds
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7992 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeXhN28ls6AuKE","phx_ref_prev":"GIpeV7hUT4M6ArMi","is_premium":true,"last_seen":"2026-01-13T18:39:21.712Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeV7hUT4M6ArMi","phx_ref_prev":"GIpeUdsbHRg6ArGi","is_premium":true,"last_seen":"2026-01-13T18:38:54.408Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeXhx9o0s6AuKk","phx_ref_prev":"GIpeWEkitWk6AuHk","is_premium":true,"last_seen":"2026-01-13T18:39:21.885Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}},"leaves":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeWEkitWk6AuHk","phx_ref_prev":"GIpeUmqN8_o6AuHE","is_premium":true,"last_seen":"2026-01-13T18:38:56.860Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7982 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7972 seconds
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7962 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeY_ySG106AuLk","phx_ref_prev":"GIpeXhx9o0s6AuKk","is_premium":true,"last_seen":"2026-01-13T18:39:46.922Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}},"leaves":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeXhx9o0s6AuKk","phx_ref_prev":"GIpeWEkitWk6AuHk","is_premium":true,"last_seen":"2026-01-13T18:39:21.885Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeZAtYigs6ArWC","phx_ref_prev":"GIpeXhN28ls6AuKE","is_premium":true,"last_seen":"2026-01-13T18:39:47.351Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeXhN28ls6AuKE","phx_ref_prev":"GIpeV7hUT4M6ArMi","is_premium":true,"last_seen":"2026-01-13T18:39:21.712Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7952 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7941 seconds
+📅 EventsView appeared
+📡 SocialService: Updated status - Browsing Events: 
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeaIfvrmE6ArZi","phx_ref_prev":"GIpeZAtYigs6ArWC","is_premium":true,"last_seen":"2026-01-13T18:40:06.616Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeZAtYigs6ArWC","phx_ref_prev":"GIpeXhN28ls6AuKE","is_premium":true,"last_seen":"2026-01-13T18:39:47.351Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[2026-01-13T18:40:07Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Batman Begins (Live: true)
+   Event start time: 2026-01-13 18:22:25 +0000
+   Event duration: 9000.0s
+   Current time: 2026-01-13 18:40:07 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt0372784
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY - Re-unlocking for fresh URL 🔑
+   Stored Hash: 49dbd83c84139f6ad0de11b78b46c9629b88668c
+   Cached URL: https://chi7-4.download.real-d...
+[2026-01-13T18:40:07Z] [INFO] [StreamService.swift:104] 🎬 StreamService: Starting resolution for: Batman Begins
+[ INFO ] GET /api/metadata/meta/movie/tt0372784 [request-id: 41CDF32F-008E-4516-87D5-1996682CAC73]
+2026-01-13 13:40:07.480 RedLemon[4901:33658] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-13 13:40:07.480 RedLemon[4901:33658] ✅ StreamService: Metadata loaded: Batman Begins
+2026-01-13 13:40:07.481 RedLemon[4901:33658] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-13 13:40:07.481 RedLemon[4901:33658] ⚡️ StreamResolver: Resolving streams for tt0372784 (S0E0)
+2026-01-13 13:40:07.482 RedLemon[4901:33658] 📝 [APP] New Session Started ["app_version": "1.0.74", "build": "74", "session_id": "407E2970-5670-4731-8C7E-7FDF842CC8E5", "trigger_source": "manual", "user_id": "656DAA91-33B4-4688-9135-C982EA52D7C9"]
+2026-01-13 13:40:07.482 RedLemon[4901:33658] 📝 [APP] Target Content Set ["imdb_id": "tt0372784"]
+2026-01-13 13:40:07.482 RedLemon[4901:33658] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-13 13:40:07.617 RedLemon[4901:33275]    📅 Filtering by year: 2005
+2026-01-13 13:40:07.747 RedLemon[4901:33658] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-13 13:40:07.747 RedLemon[4901:33658] 🔍 ProviderManager: Fetching streams for tt0372784...
+2026-01-13 13:40:07.749 RedLemon[4901:33658] 🔍 Zilean: Searching via IMDB ID: tt0372784
+2026-01-13 13:40:07.749 RedLemon[4901:33275] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-13 13:40:07.749 RedLemon[4901:33275] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-13 13:40:07.749 RedLemon[4901:33275] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0372784.json...
+2026-01-13 13:40:07.749 RedLemon[4901:33659] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-13 13:40:07.750 RedLemon[4901:33275] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0372784.json
+2026-01-13 13:40:07.750 RedLemon[4901:33659] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridProvider%22%3A%22RealDebrid%22,%22DebridApiKey%22%3A%22***%22%7D/stream/movie/tt0372784.json
+2026-01-13 13:40:07.750 RedLemon[4901:33659] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridProvider%22%3A%22RealDebrid%22,%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22%7D/stream/movie/tt0372784.json
+2026-01-13 13:40:07.762 RedLemon[4901:33275] 📡 Torrentio: HTTP 200, received 58816 bytes
+2026-01-13 13:40:07.795 RedLemon[4901:33275] ✅ Torrentio: Parsed 107 streams from 107 raw
+2026-01-13 13:40:08.513 RedLemon[4901:33587] ✅ Zilean: Got 104 results
+2026-01-13 13:40:13.137 RedLemon[4901:33275] ✅ DebridSearch: Parsed 1 streams
+2026-01-13 13:40:13.138 RedLemon[4901:33275] ✅ ProviderManager: Fetched 213 raw, returning 165 unique streams
+2026-01-13 13:40:13.139 RedLemon[4901:33275] 📦 StreamResolver: Received 1 raw streams, bucketing...
+2026-01-13 13:40:13.139 RedLemon[4901:33275] 📝 [RESOLVER] Providers Fetched ["torrentio": "1"]
+2026-01-13 13:40:13.396 RedLemon[4901:33658] 📝 [RESOLVER] Resolution Complete ["1080p": "1", "2160p": "0", "720p": "0", "selected_provider": "torrentio", "selected_title": "Batman.Begins.2005.REMASTERED.1080p.BluRay.x264.DTS-HD.MA.5.1-SWTYBLZ
+👤 1 💾 13.04 GB ⚙️ RARBG"]
+2026-01-13 13:40:13.397 RedLemon[4901:33658] 📝 [RESOLVER] Host Stream Match ["hash": "49dbd83c84139f6ad0de11b78b46c9629b88668c"]
+2026-01-13 13:40:13.398 RedLemon[4901:33637] 📝 [APP] 📦 StreamService: Found 1 total streams to try (across all qualities) ["file": "StreamService.swift", "level": "INFO", "line": "279"]
+2026-01-13 13:40:14.687 RedLemon[4901:33275] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-13 13:40:14.687 RedLemon[4901:33275] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-13 13:40:14.687 RedLemon[4901:33275] 🔍 DEBUG: Processing subtitle URL: /subtitle/3483020-8406113.zip
+2026-01-13 13:40:14.687 RedLemon[4901:33637] 🔍 DEBUG: Processing subtitle URL: /subtitle/2809708-2819979.zip
+2026-01-13 13:40:14.687 RedLemon[4901:33639] 🔍 DEBUG: Processing subtitle URL: /subtitle/559864-452507.zip
+2026-01-13 13:40:14.687 RedLemon[4901:33658] 🔍 DEBUG: Processing subtitle URL: /subtitle/1529537-2384779.zip
+2026-01-13 13:40:14.687 RedLemon[4901:33275] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 13:40:14.687 RedLemon[4901:33639] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 13:40:14.687 RedLemon[4901:33658] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 13:40:14.687 RedLemon[4901:33637] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 13:40:14.688 RedLemon[4901:33637] 🔍 DEBUG: Processing subtitle URL: /subtitle/1529538-2614830.zip
+2026-01-13 13:40:14.688 RedLemon[4901:33637] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 13:40:14.836 RedLemon[4901:33637] ✅ Persisted stream selection to room event_tt0372784
+2026-01-13 13:40:15.101 RedLemon[4901:32828] ✅ PlayerVM: currentWatchPartyRoom set to event_tt0372784
+2026-01-13 13:40:15.228 RedLemon[4901:32828] 📡 Fetching metadata for tt0372784...
+2026-01-13 13:40:15.270 RedLemon[4901:32828] 🔍 GUEST: Validating host's stream URL...
+2026-01-13 13:40:16.119 RedLemon[4901:32828] ✅ GUEST: Host's URL is valid (HTTP 200)
+2026-01-13 13:40:16.119 RedLemon[4901:32828] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-13 13:40:16.119 RedLemon[4901:32828] 📝 GUEST: Extracted filename='Batman.Begins.2005.REMASTERED.1080p.BluRay.x264.DTS-HD.MA.5.1-SWTYBLZ.mkv' (len=73), sourceQuality=nil, selectedQuality=1080p
+💾 Cache SET: Metadata[meta_movie_tt0372784]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 3 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0372784.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+✅ Comet: Parsed 1 valid streams
+⚠️ MediaFusion: HTTP 418
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeadJnNcE6AuOE","phx_ref_prev":"GIpeY_ySG106AuLk","is_premium":true,"last_seen":"2026-01-13T18:40:12.014Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}},"leaves":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeY_ySG106AuLk","phx_ref_prev":"GIpeXhx9o0s6AuKk","is_premium":true,"last_seen":"2026-01-13T18:39:46.922Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeaeQDJQ86Arbi","phx_ref_prev":"GIpeaIfvrmE6ArZi","is_premium":true,"last_seen":"2026-01-13T18:40:12.468Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeaIfvrmE6ArZi","phx_ref_prev":"GIpeZAtYigs6ArWC","is_premium":true,"last_seen":"2026-01-13T18:40:06.616Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+⚡️ StreamResolver: Optimizing for preferred hash: 49dbd83c84139f6ad0de11b78b46c9629b88668c
+   ✅ Found target stream immediately. Discarding everything else.
+📊 StreamResolver: Provider Stats: [torrentio:1]
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt0372784.json
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ Metadata fetched from Cinemeta for tt0372784: Batman Begins (2005)
+🎯 Target title for matching: Batman Begins
+   📅 Year filter (2005): 1 → 1 streams
+🔍 Searching SubDL: tt0372784 (movie)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+   ℹ️ Fallback Name: Batman Begins (2005)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+   --- Processing Bucket: 2160p (Input: 0) ---
+   ✅ Bucket 2160p Final Count: 0
+   --- Processing Bucket: 1080p (Input: 1) ---
+   ✅ Bucket 1080p Final Count: 1
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 0) ---
+   ✅ Bucket 480p Final Count: 0
+📦 1080p Primary: Batman.Begins.2005.REMASTERED.1080p.BluRay.x264.DTS-HD.MA.5.1-SWTYBLZ
+👤 1 💾 13.04 GB ⚙️ RARBG
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: 49dbd83c84139f6ad0de11b78b46c9629b88668c
+✅ StreamService: Found requested stream hash! Locking selection.
+[2026-01-13T18:40:13Z] [INFO] [StreamService.swift:279] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+🚫 StreamService: Applying Extended Cut Filter (Event Mode)
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Batman.Begins.2005.REMASTERED.1080p.BluRay.x264.DTS-HD.MA.5.1-SWTYBLZ
+👤 1 💾 13.04 GB ⚙️ RARBG
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/49dbd83c84139f6ad0de11b78b46c9629b88668c/null/0/Batman.Begins.2005.REMASTERED.1080p.BluRay.x264.DTS-HD.MA.5.1-SWTYBLZ.mkv
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7932 seconds
+✅ StreamService: Resolved to: https://chi5-4.download.real-debrid.com/d/FFSEIIVV76ZFE106/Batman.Begins.2005.REMASTERED.1080p.BluRay.x264.DTS-HD.MA.5.1-SWTYBLZ.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Batman.Begins.2005.REMASTERED.1080p.BluRay.x264.DTS-HD.MA.5.1-SWTYBLZ
+👤 1 💾 13.04 GB ⚙️ RARBG
+📊 Stream Size: 13.04 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+   ✅ Fresh URL obtained: https://chi5-4.download.real-debrid.com/...
+   ✅ Database updated with fresh URL
+
+🎬 Live event - calculating position: 1070.1676998138428 seconds
+   Event start time: 2026-01-13 18:22:25 +0000
+   Current time: 2026-01-13 18:40:15 +0000
+   Room createdAt: 2026-01-13 18:22:25 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 1070.1676998138428
+🎬 Live event - starting playback immediately (no lobby)
+✅ Cache HIT: Metadata[meta_movie_tt0372784]
+[ INFO ] GET /subtitles/search [request-id: E40DF564-82BD-473E-B811-9AB5B82237A9]
+2026-01-13 13:40:16.408 RedLemon[4901:32828] ✅ GUEST: Found 10 subtitles
+2026-01-13 13:40:16.485 RedLemon[4901:32828] ✅ Stream ready, starting playback...
+2026-01-13 13:40:16.639 RedLemon[4901:33660] 📝 [PLAYER] Resumed
+2026-01-13 13:40:16.648 RedLemon[4901:33660] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi5-4.download.real-debrid.com/d/FFSEIIVV76ZFE106/Batman.Begins.2005.REMASTERED.1080p.BluRay.x264.DTS-HD.MA.5.1-SWTYBLZ.mkv"]
+🔍 Searching SubDL: tt0372784 (movie)
+   ℹ️ Fallback Name: Batman Begins (2005)
+✅ Found 10 subtitles from SubDL (Primary)
+🔌 Setting up Realtime channel: watch-party:event_tt0372784
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt0372784
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_movie_tt0372784]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0ODMwMjAtODQwNjExMy56aXA= [request-id: 8870BE8A-7792-404B-A665-CE4ECCD9AD56]
+2026-01-13 13:40:16.840 RedLemon[4901:33637] 📝 [PLAYER] Load Video (Event) ["url": "https://chi5-4.download.real-debrid.com/d/FFSEIIVV76ZFE106/Batman.Begins.2005.REMASTERED.1080p.BluRay.x264.DTS-HD.MA.5.1-SWTYBLZ.mkv"]
+2026-01-13 13:40:16.930 RedLemon[4901:33639] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-13 13:40:16.931 RedLemon[4901:33639] 📝 [PLAYER] Buffering Started
+📄 Subtitle request: L3N1YnRpdGxlLzM0ODMw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3483020-8406113.zip
+📨 Received: {"ref":"E8659699-B7F5-47F2-A7D4-CDE00E1C0095","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt0372784"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"09bc3aea-f0af-11f0-89c6-ee9e47993347":{"metas":[{"phx_ref":"GIpeUC-0HKGBpeGE","is_host":false,"joined_at":1768329502.07309,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt0372784"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0372784"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4e0693bc-f0af-11f0-a2fd-ee9e47993347":{"metas":[{"phx_ref":"GIpeatxs0K-BpbfC","is_host":false,"joined_at":1768329616.6385012,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0372784"}
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeatzMXUg6AuOk","phx_ref_prev":"GIpeaeQDJQ86Arbi","is_premium":true,"last_seen":"2026-01-13T18:40:16.645Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:40:16.645Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}},"leaves":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeaeQDJQ86Arbi","phx_ref_prev":"GIpeaIfvrmE6ArZi","is_premium":true,"last_seen":"2026-01-13T18:40:12.468Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📡 SocialService: Updated status - online: Batman Begins
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7929 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ Download complete: 86172 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 2 files...
+✅ Selected best match by compatibility score (5): Batman.Begins.2005.Remastered.BluRay.1080p.DTS.x264-3Li.eng-SDH.srt
+📦 Extracting specific file: Batman.Begins.2005.Remastered.BluRay.1080p.DTS.x264-3Li.eng-SDH.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzU1OTg2NC00NTI1MDcuemlw [request-id: 0A4CE1CE-D11E-418C-BDBB-9D281D7FAA1E]
+📄 Subtitle request: L3N1YnRpdGxlLzU1OTg2... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/559864-452507.zip
+✅ Download complete: 44517 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): Batman Begins 2005 BluRay 720p.srt
+📦 Extracting specific file: Batman Begins 2005 BluRay 720p.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI4MDk3MDgtMjgxOTk3OS56aXA= [request-id: 542D708B-23D4-4775-A079-11883AF15FD2]
+2026-01-13 13:40:18.991 RedLemon[4901:33639] 📨 Realtime: Received broadcast message
+2026-01-13 13:40:18.992 RedLemon[4901:33639]    Payload keys: chatUsername, isPremium, type, senderId, position, timestamp, chatText
+2026-01-13 13:40:18.993 RedLemon[4901:33639] ✅ Realtime: Decoded message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 13:40:18.993 RedLemon[4901:33639] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 13:40:18.993 RedLemon[4901:33639] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 13:40:19.957 RedLemon[4901:33639] 📝 [PLAYER] File Loaded ["duration": "8402.944"]
+2026-01-13 13:40:20.928 RedLemon[4901:33775] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-13 13:40:26.657 RedLemon[4901:33637] 🔐 SupabaseClient: Signing Identity Payload: '1768329626656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-13 13:40:26.658 RedLemon[4901:33637] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-13 13:40:57.024 RedLemon[4901:33660] 🔐 SupabaseClient: Signing Identity Payload: '1768329657656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-13 13:40:57.025 RedLemon[4901:33660] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-13 13:41:00.096 RedLemon[4901:34055] ❌ [13:41:00.096] [NETWORK] [SupabaseClient.swift:335] Supabase API Error: Missing x-identity-id header
+2026-01-13 13:41:02.584 RedLemon[4901:34055] 📨 Realtime: Received broadcast message
+2026-01-13 13:41:02.584 RedLemon[4901:34055]    Payload keys: chatUsername, position, chatText, isPremium, timestamp, type, senderId
+2026-01-13 13:41:02.584 RedLemon[4901:34055] ✅ Realtime: Decoded message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 13:41:02.585 RedLemon[4901:34055] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 13:41:02.585 RedLemon[4901:34055] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 13:41:05.786 RedLemon[4901:32828] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+📄 Subtitle request: L3N1YnRpdGxlLzI4MDk3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2809708-2819979.zip
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ Download complete: 44319 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (5): Batman Begins (2005).en.srt
+📦 Extracting specific file: Batman Begins (2005).en.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hi","chatUsername":"lemontom","isPremium":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768329618.709383,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0372784"}
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0372784": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7921 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0372784": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7911 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeb6zlBQo6AuQE","phx_ref_prev":"GIpeadJnNcE6AuOE","is_premium":true,"last_seen":"2026-01-13T18:40:37.159Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}},"leaves":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeadJnNcE6AuOE","phx_ref_prev":"GIpeY_ySG106AuLk","is_premium":true,"last_seen":"2026-01-13T18:40:12.014Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeb8Z8itw6AuQk","phx_ref_prev":"GIpeatzMXUg6AuOk","is_premium":true,"last_seen":"2026-01-13T18:40:37.752Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:40:16.645Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}},"leaves":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeatzMXUg6AuOk","phx_ref_prev":"GIpeaeQDJQ86Arbi","is_premium":true,"last_seen":"2026-01-13T18:40:16.645Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:40:16.645Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0372784": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7901 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 AppState: Polled participant counts - Active: ["tt0372784": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7892 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+❌ SocialService: Backend block failed: userMessage("Missing x-identity-id header"). Using local fallback.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpedYNu0CE6AuRk","phx_ref_prev":"GIpeb6zlBQo6AuQE","is_premium":true,"last_seen":"2026-01-13T18:41:02.229Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}},"leaves":{"bfac4c56-f0ae-11f0-8177-ee9e47993347":{"metas":[{"phx_ref":"GIpeb6zlBQo6AuQE","phx_ref_prev":"GIpeadJnNcE6AuOE","is_premium":true,"last_seen":"2026-01-13T18:40:37.159Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:38:22.110Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hi","chatUsername":"lemontom","isPremium":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768329662.2926168,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0372784"}
+📨 Received: {"ref":"15","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpedZyMw-06ArmC","phx_ref_prev":"GIpeb8Z8itw6AuQk","is_premium":true,"last_seen":"2026-01-13T18:41:02.821Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:40:16.645Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}},"leaves":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpeb8Z8itw6AuQk","phx_ref_prev":"GIpeatzMXUg6AuOk","is_premium":true,"last_seen":"2026-01-13T18:40:37.752Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:40:16.645Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ SocialService: Event event_tt0372784 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0372784": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7881 seconds
+📅 EventsView appeared
+❌ Failed to load hero image: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://images.metahub.space/background/medium/tt0770828/img, NSErrorFailingURLKey=https://images.metahub.space/background/medium/tt0770828/img, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <F941B473-35D4-4E72-94A6-BFA7F798193A>.<19>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <F941B473-35D4-4E72-94A6-BFA7F798193A>.<19>, NSLocalizedDescription=cancelled}
+❌ Failed to load hero image: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://images.metahub.space/background/medium/tt1457767/img, NSErrorFailingURLKey=https://images.metahub.space/background/medium/tt1457767/img, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <1AEC0FDE-70A5-4141-8E4D-E542FE9F664F>.<18>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <1AEC0FDE-70A5-4141-8E4D-E542FE9F664F>.<18>, NSLocalizedDescription=cancelled}
+📡 SocialService: Updated status - Browsing: 
+📡 SocialService: Updated status - Browsing Events: 
+📨 Received: {"ref":"16","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpednubHvc6AuSk","phx_ref_prev":"GIpedZyMw-06ArmC","is_premium":true,"last_seen":"2026-01-13T18:41:06.554Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpedZyMw-06ArmC","phx_ref_prev":"GIpeb8Z8itw6AuQk","is_premium":true,"last_seen":"2026-01-13T18:41:02.821Z","room_id":"event_tt0372784","started_at":"2026-01-13T18:40:16.645Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0372784","watching_title":"Batman Begins","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"17","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpedn8HeP86Arni","phx_ref_prev":"GIpednubHvc6AuSk","is_premium":true,"last_seen":"2026-01-13T18:41:06.623Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0affff0e-f0af-11f0-9b0d-ee9e47993347":{"metas":[{"phx_ref":"GIpednubHvc6AuSk","phx_ref_prev":"GIpedZyMw-06ArmC","is_premium":true,"last_seen":"2026-01-13T18:41:06.554Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🧹 Cleaning up Realtime channel for room: event_tt0372784
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+📡 Connection state: disconnected
+✅ Realtime channel cleanup complete
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0372784"}
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0372784"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:event_tt0372784"}
+📨 Unknown event: phx_close
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"4e0693bc-f0af-11f0-a2fd-ee9e47993347":{"metas":[{"phx_ref":"GIpeatxs0K-BpbfC","is_host":false,"joined_at":1768329616.6385012,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt0372784"}
+📊 AppState: Polled participant counts - Active: ["tt0372784": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 20:52:25 +0000
+⏰ AppState: Scheduling update in 7872 seconds
+📡 [EventsConfig] Checking server for movie_events config version...

@@ -986,19 +986,27 @@ class SupabaseClient: RoomManager, UserManager {
 
 
     /// Update room playback state
-    func updateRoomPlayback(roomId: String, position: Int, isPlaying: Bool) async throws {
+    func updateRoomPlayback(roomId: String, position: Int, isPlaying: Bool, shouldClearStream: Bool = false) async throws {
+        var body: [String: Any] = [
+            "playback_position": position,
+            "is_playing": isPlaying,
+            "last_activity": ISO8601DateFormatter().string(from: Date())
+        ]
+        
+        // Landmine #35: Explicitly nil query-able stream properties to prevent Ghost Streams
+        if shouldClearStream {
+            body["stream_hash"] = NSNull()
+            body["unlocked_stream_url"] = NSNull()
+        }
+        
         _ = try await makeRequest(
             path: "/rooms",
             method: "PATCH",
-            body: [
-                "playback_position": position,
-                "is_playing": isPlaying,
-                "last_activity": ISO8601DateFormatter().string(from: Date())
-            ],
+            body: body,
             query: ["id": "eq.\(roomId)"]
         )
         if position % 10 == 0 { // Don't log every second
-             NSLog("%@", "✅ SupabaseClient: Updated room playback (Playing: \(isPlaying), Pos: \(position)s)")
+             NSLog("%@", "✅ SupabaseClient: Updated room playback (Playing: \(isPlaying), Pos: \(position)s, ClearedStream: \(shouldClearStream))")
         }
     }
 

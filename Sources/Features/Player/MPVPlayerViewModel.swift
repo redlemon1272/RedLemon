@@ -1957,11 +1957,12 @@ class MPVPlayerViewModel: ObservableObject {
 
         // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected
         LoggingManager.shared.info(.videoRendering, message: "Stopping MPV playback...")
+        mpvWrapper.pause() // Ensure paused state before hard stop
         mpvWrapper.stop()
     }
 
     deinit {
-        LoggingManager.shared.debug(.general, message: "MPVPlayerViewModel deinit")
+        LoggingManager.shared.info(.general, message: "MPVPlayerViewModel deinit")
         // ✅ Don't create async tasks in deinit - cleanup() is already called before deallocation
         // The Task with [weak self] creates a race condition where self may be deallocated
         // between the guard check and the MainActor.run execution, causing a crash in Swift's
@@ -2405,8 +2406,13 @@ extension MPVPlayerViewModel {
 
             // 1. Clear DB State FIRST (Prevent race condition for quick-returning guests)
             if let roomId = self.appState?.player.currentRoomId {
-                try? await SupabaseClient.shared.updateRoomPlayback(roomId: roomId, position: 0, isPlaying: false)
-                LoggingManager.shared.info(.watchParty, message: "Host cleared DB playback state before exit")
+                try? await SupabaseClient.shared.updateRoomPlayback(
+                    roomId: roomId,
+                    position: 0,
+                    isPlaying: false,
+                    shouldClearStream: true // CLEARS GHOST STREAM (Landmine #35)
+                )
+                LoggingManager.shared.info(.watchParty, message: "Host cleared DB playback state and GHOST STREAMS before exit")
             }
 
             // 2. Send sync message to guests and AWAIT completion

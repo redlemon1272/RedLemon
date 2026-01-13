@@ -31,7 +31,7 @@ protocol LobbyDataService {
 
     // Playback & State
     func startRoomPlayback(roomId: String) async throws
-    func updateRoomPlayback(roomId: String, position: Int, isPlaying: Bool) async throws
+    func updateRoomPlayback(roomId: String, position: Int, isPlaying: Bool, shouldClearStream: Bool) async throws
     func updateRoomMetadata(
         roomId: String,
         name: String,
@@ -65,6 +65,11 @@ protocol LobbyDataService {
 
 // Default Implementations (For Default Arguments)
 extension LobbyDataService {
+    // Forwarding for backward compatibility
+    func updateRoomPlayback(roomId: String, position: Int, isPlaying: Bool) async throws {
+        try await updateRoomPlayback(roomId: roomId, position: position, isPlaying: isPlaying, shouldClearStream: false)
+    }
+
     func createRoom(
         id: String,
         name: String,

@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.75 -->
+        <item>
+            <title>Version 1.0.75</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Security: Fix 'Blocked User' persistence bug & harden blocking logic.</li><li>Security: Enforce cryptographic signatures on all sensitive API calls.</li><li>Video Player: Fix playback for files with spaces/special characters.</li><li>Performance: Improve Friends List rendering.</li><li>Stability: Fix 'Ghost Stream' issues and enforce strict concurrency checks.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 14:04:14 -0500</pubDate>
+            <sparkle:version>75</sparkle:version>
+            <sparkle:shortVersionString>1.0.75</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.75.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ttNZO5S77tuwBq3HBoIZ/GdrtF90qYzpsvIw4DdntB/vZcsXyOWnBPCjboWbixWXNi/hAWmWSf8uuu2pNxbOBA==" length="72881178"
+            />
+        </item>
         <!-- v1.0.74 -->
         <item>
             <title>Version 1.0.74</title>

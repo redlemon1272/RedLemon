@@ -91,11 +91,9 @@ struct ReactionParticleView: View {
                     .font(.system(size: 24, weight: .bold))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
-                    .lineLimit(3) // Prevent extremely long messages from taking over screen
-                    .fixedSize(horizontal: false, vertical: true) // Allow vertical growth, constrain horizontal
+                    .lineLimit(3) // Safety limit for very long messages
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
-                    .frame(maxWidth: 500) // Only constrains very long messages
                     .background(Color.black.opacity(0.7))
                     .cornerRadius(16)
                     .overlay(
@@ -103,6 +101,7 @@ struct ReactionParticleView: View {
                             .stroke(Color.white.opacity(0.3), lineWidth: 1)
                     )
                     .shadow(color: .black.opacity(0.5), radius: 4, x: 0, y: 2)
+                    .fixedSize() // Pill hugs text exactly
             } else {
                 // Emoji Style
                 Text(model.content)

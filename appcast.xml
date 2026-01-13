@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.73 -->
+        <item>
+            <title>Version 1.0.73</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Watch Party ready gate now reliably shows 'Waiting for guests' for hosts</li><li>Fix: Broadcast announcements position correctly when chat panel is open</li><li>Fix: Announcement pill now hugs text content (no more oversized bubbles)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 00:42:11 -0500</pubDate>
+            <sparkle:version>73</sparkle:version>
+            <sparkle:shortVersionString>1.0.73</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.73.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="7kbARoWyHgDMk3HUW3vv+YW9qHU6uJDWU5oMfWYTahRU3ugSuOOOPXMxeLmcnRbyJAFtHu1KbTzoaMGKtqJbDw==" length="72525847"
+            />
+        </item>
         <!-- v1.0.72 -->
         <item>
             <title>Version 1.0.72</title>

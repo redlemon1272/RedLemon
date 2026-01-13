@@ -845,18 +845,18 @@ struct SidebarButton: View {
                     if badgeCount > 0 {
                         Text("\(badgeCount)")
                             .font(.system(size: 9, weight: .bold))
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .padding(.horizontal, 4)
                             .frame(minWidth: 14, minHeight: 14)
-                            .background(DesignSystem.Colors.accent)
+                            .background(DesignSystem.Colors.notification)
                             .clipShape(Capsule())
                             .offset(x: 10, y: -8)
                     } else if showBadge {
                         Circle()
-                            .fill(DesignSystem.Colors.accent)
+                            .fill(DesignSystem.Colors.notification)
                             .frame(width: 10, height: 10)
                             .offset(x: 6, y: -6)
-                            .stitchGlow()
+                            .stitchGlow(color: DesignSystem.Colors.notification, radius: 6)
                     }
                 }
 

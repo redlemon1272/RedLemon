@@ -22,6 +22,7 @@ class MPVWrapper: ObservableObject {
     @Published var playbackFinished = false
     @Published var isFileLoaded = false
     @Published var mpvError: String? = nil // Expose critical errors to ViewModel
+    @Published var hasCompletedInitialTrackSelection = false // Prevents duplicate re-scans
     
     // Track the current video filename for subtitle matching
     private var currentVideoFilename: String = ""
@@ -278,6 +279,8 @@ class MPVWrapper: ObservableObject {
              // Run it twice just to be safe (idempotent)
              self.autoSelectEnglishAudio()
              self.refreshSubtitleSelection()
+             // Mark that initial selection is complete to prevent ViewModel from re-scanning
+             self.hasCompletedInitialTrackSelection = true
         }
         
         // Final stabilization delay (short) just to be safe
@@ -540,6 +543,7 @@ class MPVWrapper: ObservableObject {
         // If autoplay=true, we set a flag to unpause AFTER tracks are found (in pollForTracksAndResume).
         
         self.shouldResumeAfterLoad = autoplay
+        self.hasCompletedInitialTrackSelection = false // Reset for new video
         
         // CRITICAL: Always set pause=yes BEFORE loading
         mpv_set_property_string(handle, "pause", "yes")
@@ -924,8 +928,19 @@ class MPVWrapper: ObservableObject {
 
     /// Refresh subtitle selection logic (called on file load and after loading external subs)
     /// Public to allow Service to trigger re-evaluation after asynchronous external sub load.
+    /// 
+    /// ⚠️ AI_BIBLE #41: This MUST NOT be called while video is actively playing.
+    /// Changing subtitle tracks during playback causes MPV to rebuffer ("play-buffer-play" flash).
+    /// Initial selection happens in pollForTracksAndResume() BEFORE playback starts.
     func refreshSubtitleSelection() {
         guard let handle = mpvHandle, isInitialized else { return }
+        
+        // DEFENSIVE GUARD: Prevent regression - never change tracks while playing
+        // AI_BIBLE #41: Track selection must happen BEFORE playback starts
+        if isPlaying && hasCompletedInitialTrackSelection {
+            LoggingManager.shared.warn(.subtitles, message: "⚠️ BLOCKED: refreshSubtitleSelection called during playback. This would cause buffer flash. Ignoring.")
+            return
+        }
 
         LoggingManager.shared.debug(.subtitles, message: "AUTO-SELECT: Starting subtitle scan & selection refresh")
 

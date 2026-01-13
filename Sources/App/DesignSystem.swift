@@ -11,6 +11,9 @@ struct DesignSystem {
         /// Vibrant Accent Color (Safety Orange / Gold)
         static let accent = Color(hex: "FFAA00")
         
+        /// Notification Badge Color (Red)
+        static let notification = Color(hex: "FF3B30")
+        
         /// Soft Glow Color (Red-Orange)
         static let glow = Color(hex: "FF5500")
         

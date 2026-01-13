@@ -29,8 +29,26 @@ actor StreamResolver {
         triggerSource: String? = nil
     ) async throws -> QualityBucketsResponse {
         NSLog("⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
+        
+        // MARK: - Kitsu → IMDB Resolution
+        // Most stream providers (Torrentio, Zilean, DebridSearch) require IMDB IDs.
+        // If we receive a Kitsu ID, try to resolve it to an IMDB ID first.
+        let effectiveId: String
+        if imdbId.hasPrefix("kitsu:") {
+            if let resolvedImdb = await MetadataService.shared.resolveKitsuToImdb(kitsuId: imdbId) {
+                NSLog("%@", "🎌 Using resolved IMDB ID: \(resolvedImdb) (from \(imdbId))")
+                effectiveId = resolvedImdb
+            } else {
+                NSLog("%@", "⚠️ Could not resolve Kitsu→IMDB, using original ID: \(imdbId)")
+                // Continue with Kitsu ID - some providers (Comet, MediaFusion) may still work
+                effectiveId = imdbId
+            }
+        } else {
+            effectiveId = imdbId
+        }
+        
         let userId = await KeychainManager.shared.get(service: "user_id")
-        await SessionRecorder.shared.startNewSession(imdbId: imdbId, userId: userId, triggerSource: triggerSource)
+        await SessionRecorder.shared.startNewSession(imdbId: effectiveId, userId: userId, triggerSource: triggerSource)
         await SessionRecorder.shared.log(category: .resolver, message: "Started Resolution", metadata: ["type": type, "season": "\(season ?? 0)", "episode": "\(episode ?? 0)"])
         
         // Fetch Blacklisted Streams (Parallel)
@@ -56,7 +74,7 @@ actor StreamResolver {
              // Pass season/episode (defaulting to -1 if nil, to match DB default)
              let s = season ?? -1
              let e = episode ?? -1
-             verifiedStream = try? await SupabaseClient.shared.getVerifiedStream(imdbId: imdbId, season: s, episode: e, quality: "1080p")
+             verifiedStream = try? await SupabaseClient.shared.getVerifiedStream(imdbId: effectiveId, season: s, episode: e, quality: "1080p")
         }
 
         if let verified = verifiedStream, let hash = verified.hash as String?, !hash.isEmpty {
@@ -99,7 +117,7 @@ actor StreamResolver {
                     group.addTask {
                         return await self.attachSubtitles(
                             to: verifiedStreamsToAttach,
-                            imdbId: imdbId,
+                            imdbId: effectiveId,
                             type: type,
                             season: season,
                             episode: episode
@@ -139,7 +157,7 @@ actor StreamResolver {
         // Fetch streams if not verified
         NSLog("📦 StreamResolver: Fetching streams from ProviderManager...")
         let streams = try await ProviderManager.shared.fetchStreams(
-            imdbId: imdbId,
+            imdbId: effectiveId,
             type: type,
             season: season,
             episode: episode
@@ -170,7 +188,7 @@ actor StreamResolver {
         // For movies only, pull canonical title to prioritize correct matches
         let targetTitle: String?
         if type == "movie" {
-            let metadata = await MetadataService.shared.getMetadata(imdbId: imdbId, type: type)
+            let metadata = await MetadataService.shared.getMetadata(imdbId: effectiveId, type: type)
             targetTitle = metadata?.title
             if let title = targetTitle {
                 print("🎯 Target title for matching: \(title)")
@@ -502,7 +520,7 @@ actor StreamResolver {
         do {
             streamsWithSubtitles = try await withThrowingTaskGroup(of: [Stream].self) { group in
                 group.addTask {
-                    return await self.attachSubtitles(to: streamsToAttach, imdbId: imdbId, type: type, season: season, episode: episode, name: targetTitle ?? name, year: year != nil ? Int(year!) : nil)
+                    return await self.attachSubtitles(to: streamsToAttach, imdbId: effectiveId, type: type, season: season, episode: episode, name: targetTitle ?? name, year: year != nil ? Int(year!) : nil)
                 }
                 group.addTask {
                     try await Task.sleep(nanoseconds: 3_000_000_000) // 3s Timeout

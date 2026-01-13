@@ -54,6 +54,76 @@ actor MetadataService {
         return nil
     }
 
+    /// Resolve a Kitsu ID to an IMDB ID by fetching anime metadata
+    /// - Parameter kitsuId: Kitsu ID in format "kitsu:12345"
+    /// - Returns: IMDB ID (e.g., "tt1234567") or nil if not found
+    func resolveKitsuToImdb(kitsuId: String) async -> String? {
+        guard kitsuId.hasPrefix("kitsu:") else {
+            // Not a Kitsu ID, return as-is (caller should handle)
+            return nil
+        }
+
+        // Check cache first (we may have already resolved this)
+        let cacheKey = "kitsu_imdb_\(kitsuId)"
+        if let cached = cache[cacheKey] {
+            NSLog("%@", "✅ Kitsu→IMDB cache hit: \(kitsuId) → \(cached.imdbId)")
+            return cached.imdbId
+        }
+
+        // Fetch from anime-kitsu addon (same endpoint used for metadata display)
+        let urlString = "https://anime-kitsu.strem.fun/meta/anime/\(kitsuId).json"
+        guard let url = URL(string: urlString) else {
+            NSLog("%@", "⚠️ Invalid Kitsu URL: \(urlString)")
+            return nil
+        }
+
+        NSLog("%@", "🎌 Resolving Kitsu→IMDB: \(kitsuId)")
+
+        do {
+            var request = URLRequest(url: url)
+            request.timeoutInterval = 5
+            let (data, response) = try await URLSession.shared.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 200 else {
+                NSLog("%@", "⚠️ Kitsu metadata fetch failed: HTTP \((response as? HTTPURLResponse)?.statusCode ?? 0)")
+                return nil
+            }
+
+            // Parse response - anime-kitsu uses same structure as Cinemeta
+            let cinemataResponse = try JSONDecoder().decode(CinemetaResponse.self, from: data)
+            let meta = cinemataResponse.meta
+
+            // Extract IMDB ID from the response
+            if let imdbId = meta.imdb_id, !imdbId.isEmpty, imdbId.hasPrefix("tt") {
+                NSLog("%@", "✅ Resolved \(kitsuId) → \(imdbId) (\(meta.name))")
+
+                // Cache this mapping
+                let cacheEntry = Metadata(
+                    imdbId: imdbId,
+                    title: meta.name,
+                    type: "series",
+                    year: meta.year,
+                    poster: meta.poster,
+                    background: meta.background,
+                    logo: meta.logo,
+                    description: meta.description,
+                    releaseInfo: meta.releaseInfo
+                )
+                cache[cacheKey] = cacheEntry
+
+                return imdbId
+            } else {
+                NSLog("%@", "⚠️ No IMDB ID found in Kitsu metadata for \(kitsuId) (Title: \(meta.name))")
+                return nil
+            }
+
+        } catch {
+            NSLog("%@", "⚠️ Kitsu metadata fetch error: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
     /// Search for content by title
     func search(query: String) async -> [CinemetaSearchResult] {
         guard query.count >= 2 else {

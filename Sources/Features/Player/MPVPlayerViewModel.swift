@@ -306,12 +306,10 @@ class MPVPlayerViewModel: ObservableObject {
                         // NEW: Event Playback Logic - Handle seek immediately on load
                         self.attemptEventPlaybackStart()
 
-                        // NEW: Scan for embedded tracks now that file is loaded
-                        // This handles network streams where tracks appear after the initial scan timeout
-                        Task {
-                            LoggingManager.shared.info(.videoRendering, message: "File Loaded - Re-scanning embedded tracks...")
-                            await self.subtitleService.scanEmbeddedTracks()
-                        }
+                        // NOTE: Embedded track scanning is handled by MPVWrapper.pollForTracksAndResume()
+                        // which runs BEFORE playback starts. We don't need to scan again here.
+                        // Scanning here would race with pollForTracksAndResume() and cause a buffer flash
+                        // when the subtitle track changes during playback.
 
                         // AI_BIBLE: Events bypass host checks - release lock for Events like solo mode
                         let isEvent = self.appState?.player.isEventPlayback == true

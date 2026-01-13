@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 11, 2026
+> **Last Updated:** January 13, 2026
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -47,6 +47,8 @@
 | **Missing Streams** | Hardcoded blocklists active | #4 |
 | **Binge Prompt Flicker** | Global Status Reset used | #34 |
 | **Date Decoding Error** | Wrong Formatter (Missing Fractional) | #8 |
+| **Anime: No Streams Found** | Kitsu ID not resolved to IMDB | #40 |
+| **Play-Buffer-Play Flash** | Subtitle track changed during playback | #41 |
 
 ## 🚨 Critical Landmines
 
@@ -87,7 +89,8 @@
 24. **Gesture Nav**: `onDisappear` cancels Tasks. **Rule**: Nav writes must be synchronous (`appState.view = .target`).
 25. **MainActor**: GCD != MainActor.
     *   **Trigger**: Using `DispatchQueue.main.async` inside a Task or Actor.
-    *   **Rule**: Use `Task { @MainActor }`, NEVER `DispatchQueue.main.async`.
+    *   **Rule**: In NEW code, use `Task { @MainActor }`, NEVER `DispatchQueue.main.async`.
+    *   **Note**: Existing `DispatchQueue.main.async` calls that work correctly do not require refactoring. This rule prevents NEW violations, not mandating rewrites of stable code.
 
 ### 26-31: Deployment & Privacy
 26. **Automation Deadlock**: **Rule**: Use headless `build-app-debug.sh`.
@@ -116,6 +119,12 @@
 39. **Sparkle Hygiene**:
     *   **Trigger**: Deploying an update that isn't detected by users or lacks info (generic "Production Release").
     *   **Rule**: (1) New Build (`X`) MUST be > Current Build (`Y`) found in `README.md`. (2) Never release with generic notes; inject HTML `<li>` items listing specific fixes via the `RELEASE_NOTES` arg in `release.sh`.
+40. **Kitsu→IMDB Resolution (Anime Support)**: *(Added v1.0.75)*
+    *   **Trigger**: Anime content uses Kitsu IDs (`kitsu:49205`) which providers like Zilean/DebridSearch don't understand.
+    *   **Rule**: `StreamResolver` MUST check if ID starts with `kitsu:` and resolve to IMDB via `MetadataService.resolveKitsuToImdb()`. Use the resolved IMDB ID for ALL provider queries. The addon `anime-kitsu.strem.fun` provides this mapping.
+41. **Subtitle Track Selection Timing**: *(Added v1.0.75)*
+    *   **Trigger**: Changing subtitle tracks (via `refreshSubtitleSelection`) DURING playback causes MPV to rebuffer, creating a visible "play-buffer-play" flash.
+    *   **Rule**: Track selection MUST happen BEFORE playback starts. `MPVWrapper.pollForTracksAndResume()` handles this. `SubtitleService.loadExternalSubtitles()` must NEVER call `refreshSubtitleSelection()` after playback has begun.
 
 
 ## 🪦 Resolved Landmines (Archived)
@@ -454,12 +463,20 @@ In `RedLemonApp.swift`, use command line args:
 ## Critical Rules
 > [!IMPORTANT]
 > **RPC & Edge Function Security**
-> Critical RPCs (`room_heartbeat`, `manage_block`) AND Edge Functions (`assign-address`, `check-payment`) MUST:
-> 1. Call `verify_user_signature(user_id, path)` in the Postgres/TypeScript backend.
-> 2. Be called from Swift using `makeRequest(..., sign: true)`.
-> 3. **CRITICAL**: The `makeRequest` implementation MUST include the `x-identity-id` header.
 >
-> Removing these headers or signatures re-opens IDOR vulnerabilities and causes silent API failures (e.g., "Missing x-identity-id header"). *Functions using the standard SDK wrapper (`functions.invoke`) DO NOT auto-sign.* You MUST constructs requests manually with `makeRequest(..., sign: true)`.
+> **RPCs (Postgres Functions):** Critical RPCs (`room_heartbeat`, `manage_block`) are fully secured:
+> 1. Swift calls them via `makeRequest(..., sign: true)` which attaches `x-identity-signature`, `x-timestamp`, and `x-identity-id` headers.
+> 2. Postgres function `verify_user_signature()` validates the Ed25519 signature against the user's stored public key.
+> 3. Replay attacks are blocked by 60-second timestamp window.
+>
+> **Edge Functions (Deno):** Currently use a **defense-in-depth** approach:
+> 1. Swift client signs requests via `makeRequest(sign: true, isFunction: true)`.
+> 2. Edge Functions accept `user_id` from request body (client-provided).
+> 3. **Note:** Server-side signature verification is NOT yet implemented in Edge Functions. Security relies on: (a) users only knowing their own UUID, (b) RLS policies on underlying tables, (c) payment pools being user-specific.
+>
+> **Future Hardening:** To add server-side verification to Edge Functions, you would need to implement Ed25519 signature verification in Deno and query the user's public key from the database. This is non-trivial and requires full payment testing.
+>
+> *Functions using the standard SDK wrapper (`functions.invoke`) DO NOT auto-sign.* You MUST use `makeRequest(..., sign: true, isFunction: true)` for Edge Function calls.
 
 ## Account Recovery
 - **Mechanism**: `.redlemon-key` file.

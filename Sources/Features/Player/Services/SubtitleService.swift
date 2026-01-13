@@ -98,8 +98,9 @@ actor MPVSubtitleService: SubtitleService {
 
                 // Update tracks after loading all
                 await scanEmbeddedTracks()
-                // Ensure we re-evaluate best subtitle after adding new ones
-                await mpv.refreshSubtitleSelection()
+                // NOTE: Do NOT call refreshSubtitleSelection() here!
+                // The initial selection is done by MPVWrapper.pollForTracksAndResume() BEFORE playback starts.
+                // Calling it again here would change the track DURING playback, causing a buffer flash.
             } else {
                  // Standard URL loading (MPV can handle many http urls directly, but safer to download)
                  // For now, assuming direct load for non-SubDL or falling back to download logic
@@ -111,8 +112,9 @@ actor MPVSubtitleService: SubtitleService {
                     }
                 }
                 await scanEmbeddedTracks()
-                // Ensure we re-evaluate best subtitle after adding new ones
-                await mpv.refreshSubtitleSelection()
+                // NOTE: Do NOT call refreshSubtitleSelection() here!
+                // The initial selection is done by MPVWrapper.pollForTracksAndResume() BEFORE playback starts.
+                // Calling it again here would change the track DURING playback, causing a buffer flash.
             }
         }
     }

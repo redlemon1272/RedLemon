@@ -821,7 +821,7 @@ class MPVPlayerViewModel: ObservableObject {
             // Watch Party Mode (Non-Event)
 
             // Check for Solo Host Scenario
-            let participantCount = self.appState?.player.currentWatchPartyRoom?.participants.count ?? 0
+            let participantCount = self.appState?.player.currentWatchPartyRoom?.participantCount ?? 0
             // If we are host and nobody is with us (count <= 1), we should bypass the "Start Paused" logic
             let isSoloHost = self.isWatchPartyHost && participantCount <= 1
 

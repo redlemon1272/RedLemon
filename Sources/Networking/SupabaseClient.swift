@@ -193,9 +193,15 @@ class SupabaseClient: RoomManager, UserManager {
         query: [String: String]? = nil,
         headers: [String: String]? = nil,
         useEphemeralSession: Bool = false,
-        sign: Bool = false
+        sign: Bool = false,
+        isFunction: Bool = false
     ) async throws -> Data {
-        var urlString = "\(baseURL)/rest/v1\(path)"
+        var urlString: String
+        if isFunction {
+             urlString = "\(baseURL)/functions/v1\(path)"
+        } else {
+             urlString = "\(baseURL)/rest/v1\(path)"
+        }
 
         if let query = query, !query.isEmpty {
             let queryItems = query.map { "\($0.key)=\($0.value)" }.joined(separator: "&")
@@ -340,18 +346,30 @@ class SupabaseClient: RoomManager, UserManager {
 
     /// Remote Procedure Call (RPC)
     func rpc<T: Decodable>(fn: String, params: [String: Any]? = nil) async throws -> T {
+        // CRITICAL SECURITY: Auto-sign sensitive RPCs defined in AI Bible
+        let sensitiveRPCs = ["room_heartbeat", "cleanup_stale_participants", "get_admin_logs"]
+        let shouldSign = sensitiveRPCs.contains(fn)
+
         let data = try await makeRequest(
             path: "/rpc/\(fn)",
             method: "POST",
-            body: params
+            body: params,
+            sign: shouldSign
         )
         return try jsonDecoder.decode(T.self, from: data)
     }
 
     /// Invoke Edge Function
     func invokeFunction<T: Decodable>(name: String, body: [String: Any]? = nil) async throws -> T {
-        // Use the existing functions API wrapper
-        let data = try await functions.invoke(name, options: FunctionInvokeOptions(body: body ?? [:]))
+        // CRITICAL SECURITY: Always sign Edge Function calls to preventing IDOR
+        // Enforced by switching from functions.invoke to makeRequest(isFunction: true, sign: true)
+        let data = try await makeRequest(
+            path: "/\(name)", // makeRequest appends /functions/v1
+            method: "POST",
+            body: body,
+            sign: true,
+            isFunction: true
+        )
         return try jsonDecoder.decode(T.self, from: data)
     }
 
@@ -1217,7 +1235,8 @@ class SupabaseClient: RoomManager, UserManager {
     func cleanupStaleParticipants() async throws {
         _ = try await makeRequest(
             path: "/rpc/cleanup_stale_participants",
-            method: "POST"
+            method: "POST",
+            sign: true
         )
     }
 
@@ -1403,12 +1422,18 @@ class SupabaseClient: RoomManager, UserManager {
             throw SupabaseError.userNotFound
         }
 
-        let response = try await functions.invoke(
-            "assign-address",
-            options: FunctionInvokeOptions(body: [
-                "chain": chain,
-                "user_id": userId.uuidString
-            ])
+        let body = [
+            "chain": chain,
+            "user_id": userId.uuidString
+        ]
+
+        // Use makeRequest to enforce signature (IDOR protection)
+        let response = try await makeRequest(
+            path: "/assign-address",
+            method: "POST",
+            body: body,
+            sign: true,
+            isFunction: true
         )
 
         let result = try JSONDecoder().decode(PaymentAssignment.self, from: response)
@@ -1735,7 +1760,13 @@ struct ReportedStream: Identifiable, Codable {
         let userId = auth.currentUser?.id.uuidString ?? ""
         let body = ["user_id": userId]
 
-        let response = try await functions.invoke("check-payment", options: .init(body: body))
+        let response = try await makeRequest(
+            path: "/check-payment",
+            method: "POST",
+            body: body,
+            sign: true,
+            isFunction: true
+        )
 
         struct PaymentResponse: Decodable {
             let success: Bool
@@ -1760,7 +1791,13 @@ struct ReportedStream: Identifiable, Codable {
 
     /// Trigger manual sweep of funds to master wallet
     func sweepPayments() async throws -> String {
-        let response = try await functions.invoke("sweep-payments", options: .init(body: [:]))
+        let response = try await makeRequest(
+            path: "/sweep-payments",
+            method: "POST",
+            body: [:],
+            sign: true,
+            isFunction: true
+        )
 
         if let string = String(data: response, encoding: .utf8) {
             return string

@@ -854,7 +854,7 @@ class PlayerViewModel: ObservableObject {
         LoggingManager.shared.info(.videoRendering, message: "PlayerVM: Falling back to next stream: \(nextStream.title)")
 
 
-        DispatchQueue.main.async {
+        Task { @MainActor in
              // RedLemon: Silent retry (no UI flash)
              LoggingManager.shared.info(.videoRendering, message: "Silently retrying next stream (\(self.streamQueue.count + 1) left)")
         }

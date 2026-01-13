@@ -525,23 +525,8 @@ class MPVWrapper: ObservableObject {
             self.currentVideoFilename = url
         }
 
-        // CRITICAL FIX: Ensure URL is properly encoded for MPV command string
-        // Spaces in URL paths (from Real-Debrid filenames) can break the command string parser
-        let encodedUrl = url.replacingOccurrences(of: " ", with: "%20")
-                            .replacingOccurrences(of: "\"", with: "%22") // Escape quotes just in case
-
-        LoggingManager.shared.debug(.videoRendering, message: "MPV loadVideo called with URL: \(String(url.prefix(50))) (Encoded: \(String(encodedUrl.prefix(50)))), autoplay: \(autoplay), expectedSubs: \(expectedSubtitleCount)")
-        
-        self.expectedExternalSubtitles = expectedSubtitleCount
-        
-        if !isInitialized {
-            LoggingManager.shared.warn(.videoRendering, message: "MPV not initialized yet, waiting 500ms and retrying...")
-            Task { @MainActor in try? await Task.sleep(nanoseconds: 500_000_000); if isInitialized { loadVideo(url: encodedUrl, autoplay: autoplay, expectedSubtitleCount: expectedSubtitleCount) } }
-            return
-        }
-
-        // Execute load immediately with ENCODED URL
-        executeLoadVideo(url: encodedUrl, autoplay: autoplay)
+        // Execute load immediately (Array-based command handles spaces/quotes safely)
+        executeLoadVideo(url: url, autoplay: autoplay)
     }
 
     private func executeLoadVideo(url: String, autoplay: Bool) {
@@ -559,9 +544,23 @@ class MPVWrapper: ObservableObject {
         // CRITICAL: Always set pause=yes BEFORE loading
         mpv_set_property_string(handle, "pause", "yes")
 
-        let command = "loadfile \"\(url)\""
-        LoggingManager.shared.debug(.videoRendering, message: "MPV executing: \(command)")
-        let result = mpv_command_string(handle, command)
+        LoggingManager.shared.debug(.videoRendering, message: "MPV loading file (Safe Array Command): \(url.prefix(60))")
+
+        // Use array-based command to prevent injection/parsing issues
+        var args: [UnsafePointer<CChar>?] = [
+            UnsafePointer(strdup("loadfile")),
+            UnsafePointer(strdup(url)),
+            nil
+        ]
+
+        let result = args.withUnsafeMutableBufferPointer { ptr in
+            mpv_command(handle, ptr.baseAddress)
+        }
+
+        // Free strings
+        for i in 0..<2 {
+            if let arg = args[i] { free(UnsafeMutablePointer(mutating: arg)) }
+        }
         
         if result >= 0 {
             // Update local state (we are technically paused right now)

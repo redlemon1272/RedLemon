@@ -694,7 +694,7 @@ struct WatchPartyLobbyView: View {
                                                                             // Mute Toggle
                                                                             if isMuted {
                                                                                 Button {
-                                                                                    DispatchQueue.main.async {
+                                                                                    Task { @MainActor in
                                                                                         viewModel.toggleMute(participantId: senderId)
                                                                                     }
                                                                                 } label: {
@@ -702,7 +702,7 @@ struct WatchPartyLobbyView: View {
                                                                                 }
                                                                             } else {
                                                                                 Button {
-                                                                                    DispatchQueue.main.async {
+                                                                                    Task { @MainActor in
                                                                                         viewModel.toggleMute(participantId: senderId)
                                                                                     }
                                                                                 } label: {

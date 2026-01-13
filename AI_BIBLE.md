@@ -452,9 +452,9 @@ In `RedLemonApp.swift`, use command line args:
 
 ## Critical Rules
 > [!IMPORTANT]
-> **RPC Security**
-> Critical RPCs (`room_heartbeat`, `assign_payment_address`) MUST call `verify_user_signature(user_id, path)`.
-> Removing this line re-opens IDOR vulnerabilities.
+> **RPC & Edge Function Security**
+> Critical RPCs (`room_heartbeat`) AND Edge Functions (`assign-address`, `check-payment`) MUST call `verify_user_signature(user_id, path)`.
+> Removing this line re-opens IDOR vulnerabilities. *Functions using the standard SDK wrapper (`functions.invoke`) DO NOT auto-sign.* You MUST constructs requests manually with `makeRequest(..., sign: true)` to ensure `x-identity-signature` is attached.
 
 ## Account Recovery
 - **Mechanism**: `.redlemon-key` file.

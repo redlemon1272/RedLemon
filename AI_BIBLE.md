@@ -444,17 +444,22 @@ In `RedLemonApp.swift`, use command line args:
 ## How It Works (IDOR Protection)
 1.  **Keys**: App generates an Ed25519 Key Pair on first launch. Stored in macOS Keychain.
 2.  **Registration**: Public Key is sent to server (`register_user_secure`).
-3.  **Signing**: Client signs critical requests (e.g., `room_heartbeat`).
-    -   **Header**: `x-identity-signature`
-    -   **Payload**: `Sign(privateKey, timestamp + user_id.lowercase + path)`
+3.  **Signing**: Client signs critical requests (e.g., `room_heartbeat`, `manage_block`).
+    -   **Header `x-identity-signature`**: `Sign(privateKey, timestamp + user_id.lowercase + path)`
+    -   **Header `x-identity-id`**: The `user_id` string. **MANDATORY for linking signature to user.**
+    -   **Payload**: `Sign(privateKey, timestamp + method + path + body)` (Request Integrity)
     -   **Time Window**: Server rejects replay attacks >60s old.
 4.  **Verification**: Server (`verify_user_signature`) verifies signature against stored Public Key using `pgsodium`.
 
 ## Critical Rules
 > [!IMPORTANT]
 > **RPC & Edge Function Security**
-> Critical RPCs (`room_heartbeat`) AND Edge Functions (`assign-address`, `check-payment`) MUST call `verify_user_signature(user_id, path)`.
-> Removing this line re-opens IDOR vulnerabilities. *Functions using the standard SDK wrapper (`functions.invoke`) DO NOT auto-sign.* You MUST constructs requests manually with `makeRequest(..., sign: true)` to ensure `x-identity-signature` is attached.
+> Critical RPCs (`room_heartbeat`, `manage_block`) AND Edge Functions (`assign-address`, `check-payment`) MUST:
+> 1. Call `verify_user_signature(user_id, path)` in the Postgres/TypeScript backend.
+> 2. Be called from Swift using `makeRequest(..., sign: true)`.
+> 3. **CRITICAL**: The `makeRequest` implementation MUST include the `x-identity-id` header.
+>
+> Removing these headers or signatures re-opens IDOR vulnerabilities and causes silent API failures (e.g., "Missing x-identity-id header"). *Functions using the standard SDK wrapper (`functions.invoke`) DO NOT auto-sign.* You MUST constructs requests manually with `makeRequest(..., sign: true)`.
 
 ## Account Recovery
 - **Mechanism**: `.redlemon-key` file.

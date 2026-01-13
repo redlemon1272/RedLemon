@@ -621,6 +621,8 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 5.  **Release Script**: Run `./scripts/release.sh <VERSION> <BUILD> "<PASTE_NOTES_HERE>"`.
     -   *Action*: Builds -> Packages DMG -> Signs -> Deploys to Server.
 6.  **Appcast Sync**: Push the auto-updated `appcast.xml` to GitHub.
+7.  **Merge & Tag**: Run `./scripts/merge-and-tag.sh <VERSION>` (e.g., `v1.0.71`) to merge the feature branch into `main` and create the release tag.
+    -   *Action*: Fetches origin -> Checkouts main -> Merges branch -> Tags -> Pushes Main & Tag -> Returns to Branch.
 
 ## Manual Key Recovery (New Device)
 To sign releases on a new machine, you must import the **Sparkle Private Key** into the Keychain.

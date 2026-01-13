@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.71 -->
+        <item>
+            <title>Version 1.0.71</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <ul><li>Fix: Solo buffering loop and Stream Resolution timeouts</li></ul>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 19:54:20 -0500</pubDate>
+            <sparkle:version>71</sparkle:version>
+            <sparkle:shortVersionString>1.0.71</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.71.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="TSzQbgAJsg5rU5STQwqIE6lEI2zfUh+aTy/6bIaCAmSwXi605FsijUg8C5wUoC8jzNMjfDW3UiZaDDdpCk2lAw==" length="72265619"
+            />
+        </item>
         <!-- vv1.0.70 -->
         <item>
             <title>Version v1.0.70</title>

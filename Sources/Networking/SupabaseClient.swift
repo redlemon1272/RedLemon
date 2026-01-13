@@ -277,6 +277,7 @@ class SupabaseClient: RoomManager, UserManager {
 
                         let identitySignature = try CryptoManager.shared.sign(message: identityPayload, privateKeyBase64: privateKey)
                         request.setValue(identitySignature, forHTTPHeaderField: "x-identity-signature")
+                        request.setValue(userId.uuidString, forHTTPHeaderField: "x-identity-id")
                     }
 
                     NSLog("%@", "🔐 Signed request to \(path)")
@@ -2606,7 +2607,8 @@ extension SupabaseClient {
         _ = try await makeRequest(
             path: "/rpc/manage_block",
             method: "POST",
-            body: body
+            body: body,
+            sign: true
         )
     }
 
@@ -2620,7 +2622,8 @@ extension SupabaseClient {
         _ = try await makeRequest(
             path: "/rpc/manage_block",
             method: "POST",
-            body: body
+            body: body,
+            sign: true
         )
     }
 

@@ -13,7 +13,7 @@ struct ChatOverlayView: View {
     @ObservedObject private var socialService = SocialService.shared
     @ObservedObject private var eventChatService = EventChatService.shared
     @StateObject private var friendsVM = FriendsViewModel()
-    
+
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
     @State private var showEmojiPicker: Bool = false
@@ -41,7 +41,7 @@ struct ChatOverlayView: View {
 
     // ✅ Performance limit
     private let maxVisibleMessages = 100
-    
+
     // Quick Reactions
     private let quickReactions = ["😂", "😮", "🤔", "😭", "😢", "💀", "❤️", "🔥", "👏", "🎉", "👀", "🤬", "🤮", "😴"]
 
@@ -77,14 +77,14 @@ struct ChatOverlayView: View {
         .onAppear {
             LoggingManager.shared.debug(.social, message: "ChatOverlayView appeared - UI UPDATE ROUND 6")
             setupInitialMode()
-            
+
             // Connect to event chat if applicable
             if appState.isEventPlayback, let eventId = appState.currentEventId, let userId = appState.currentUserId {
                 Task {
                     await eventChatService.connect(eventId: eventId, userId: userId.uuidString, username: appState.currentUsername)
                 }
             }
-            
+
             // Auto-focus the input field if chat is open (whether animated or pre-loaded)
             if viewModel.showChat && chatMode != .friends {
                 LoggingManager.shared.debug(.social, message: "ChatOverlayView: Triggering input focus (showChat=true)")
@@ -106,7 +106,7 @@ struct ChatOverlayView: View {
             }
         }
     }
-    
+
     private func setupInitialMode() {
         // Intelligence to pick the best default tab
         if appState.isEventPlayback {
@@ -132,13 +132,13 @@ struct ChatOverlayView: View {
                     .buttonStyle(.plain)
 
                     Spacer()
-                    
+
                     Text(friend.displayName)
                         .font(.headline)
                         .foregroundColor(.white)
-                    
+
                     Spacer()
-                    
+
                     // Invisible spacer balance
                     Color.clear.frame(width: 50, height: 1)
                 } else {
@@ -147,17 +147,17 @@ struct ChatOverlayView: View {
                         if appState.isEventPlayback {
                             tabButton(title: "Event", mode: .event)
                         } else if !viewModel.isInWatchParty {
-                            // Only show mute list directly in single event mode? 
+                            // Only show mute list directly in single event mode?
                             // Actually better to have it always accessible if someone is muted
                         }
-                        
+
                         // Show "Room" if we are in a legit room (Watch Party) OR we are in an event (which is also a room)
                         // But if we are in an event, we usually prefer "Event" tab for public chat.
                         // However, user might be in a PRIVATE party viewing the event.
                         if viewModel.isInWatchParty {
                             tabButton(title: "Room", mode: .room)
                         }
-                        
+
                         tabButton(title: "Friends", mode: .friends, badge: totalUnreadCount)
                     }
                     .padding(2)
@@ -170,7 +170,7 @@ struct ChatOverlayView: View {
                     // No extra controls in DM header for now
                 } else {
                     Spacer()
-                    
+
 
                     // Reaction Toggle
                     Button(action: {
@@ -188,7 +188,7 @@ struct ChatOverlayView: View {
                     .buttonStyle(.plain)
                     .help(viewModel.areReactionsEnabled ? "Hide Reactions" : "Show Reactions")
                     .padding(.trailing, 4)
-                    
+
                     // Close Button
                     Button(action: { viewModel.toggleChat() }) {
                         Image(systemName: "xmark.circle.fill")
@@ -203,7 +203,7 @@ struct ChatOverlayView: View {
             .background(Color.black.opacity(0.3))
         }
     }
-    
+
     private var roomCodeHeader: some View {
         Group {
             if case .room = chatMode,
@@ -214,7 +214,7 @@ struct ChatOverlayView: View {
                     Text("Room Code:")
                         .font(.caption)
                         .foregroundColor(.white.opacity(0.5))
-                    
+
                     HStack(spacing: 6) {
                         Text(room.id)
                             .font(.system(.caption, design: .monospaced))
@@ -224,7 +224,7 @@ struct ChatOverlayView: View {
                             .padding(.vertical, 4)
                             .background(Color.white.opacity(0.15))
                             .cornerRadius(5)
-                        
+
                         Button(action: {
                             NSPasteboard.general.clearContents()
                             NSPasteboard.general.setString(room.id, forType: .string)
@@ -256,7 +256,7 @@ struct ChatOverlayView: View {
     }
 
     // MARK: - List Views
-    
+
     private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, isSenderHost: Bool, timestamp: String? = nil) -> some View {
         let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: username))
 
@@ -267,12 +267,12 @@ struct ChatOverlayView: View {
                     .foregroundColor(nameColor)
             )
         }
-        
+
         let uid = userId ?? ""
         let myId = appState.currentUserId?.uuidString ?? ""
         let isMe = uid.caseInsensitiveCompare(myId) == .orderedSame
         let isFriend = socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(uid) == .orderedSame })
-        
+
         // If it's me, just show text (no actions)
         if isMe {
             return AnyView(
@@ -280,7 +280,7 @@ struct ChatOverlayView: View {
                     Text(username)
                         .font(.caption.weight(.semibold))
                         .foregroundColor(nameColor)
-                    
+
                     if isSenderHost {
                         Text("Host")
                             .font(.caption2.weight(.bold))
@@ -306,13 +306,13 @@ struct ChatOverlayView: View {
                 }
             )
         }
-        
+
         return AnyView(
             HStack(spacing: 4) {
                 Text(username)
                     .font(.caption.weight(.semibold))
                     .foregroundColor(nameColor)
-                
+
                 if isSenderHost {
                     Text("Host")
                         .font(.caption2.weight(.bold))
@@ -335,7 +335,7 @@ struct ChatOverlayView: View {
                         .foregroundColor(.white.opacity(0.4))
                         .padding(.leading, 4)
                 }
-                
+
                 Menu {
                 Text(username) // Header
 
@@ -353,7 +353,7 @@ struct ChatOverlayView: View {
                         Label("Add Friend", systemImage: "person.badge.plus")
                     }
                 }
-                 
+
                 // Mute (Always available)
                 Button(action: {
                     viewModel.toggleMute(userId: uid)
@@ -361,12 +361,12 @@ struct ChatOverlayView: View {
                     Label(viewModel.mutedUserIds.contains(uid) ? "Unmute User" : "Mute User",
                           systemImage: viewModel.mutedUserIds.contains(uid) ? "speaker.wave.2" : "speaker.slash")
                 }
-                
+
                 // Block (Always available)
                  Button(role: .destructive, action: { viewModel.blockUser(uid, username: username) }) {
                     Label("Block User", systemImage: "slash.circle")
                 }
-                
+
                 // Kick (Host Only)
                 if isHost {
                     Divider()
@@ -394,11 +394,11 @@ struct ChatOverlayView: View {
                 LazyVStack(alignment: .leading, spacing: 12) {
                     ForEach(eventChatService.messages.suffix(maxVisibleMessages), id: \.id) { message in
                         let isMuted = viewModel.mutedUserIds.contains(message.senderId ?? "")
-                        
+
                         // Show message (masked if muted)
                         VStack(alignment: .leading, spacing: 4) {
-                            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: false, isPremium: message.isPremium, isSenderHost: false) 
-                            
+                            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: false, isPremium: message.isPremium, isSenderHost: false)
+
                             if isMuted {
                                 Text("Message muted")
                                     .font(.caption)
@@ -408,7 +408,7 @@ struct ChatOverlayView: View {
                                 Text(message.text)
                                     .font(.body)
                                     .foregroundColor(.white)
-                                
+
                                 Text(message.timestamp.toMessageTime())
                                     .font(.caption2)
                                     .foregroundColor(.white.opacity(0.4))
@@ -452,10 +452,10 @@ struct ChatOverlayView: View {
     private func messageRow(_ message: ChatMessage, hostId: String?) -> some View {
         let isMuted = viewModel.mutedUserIds.contains(message.senderId ?? "")
         let isSenderHost = (message.senderId != nil && hostId != nil && message.senderId!.caseInsensitiveCompare(hostId!) == .orderedSame)
-        
+
         return VStack(alignment: .leading, spacing: 4) {
             userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost, isPremium: message.isPremium, isSenderHost: isSenderHost, timestamp: message.timestamp.toMessageTime())
-            
+
             if isMuted {
                 Text("Message muted")
                     .font(.caption)
@@ -493,7 +493,7 @@ struct ChatOverlayView: View {
                     }
                     .id(friend.id)
                 }
-                
+
                 if friendsVM.isReady {
                     if friendsVM.displayedFriends.isEmpty {
                         Text("No friends found")
@@ -521,7 +521,7 @@ struct ChatOverlayView: View {
                             let isMe = message.senderId.uuidString.lowercased() != friend.id.lowercased()
                             HStack {
                                 if isMe { Spacer() }
-                                
+
                                 if message.content.hasPrefix("INVITE|") {
                                     InviteMessageView(message: message, isMe: isMe)
                                 } else {
@@ -532,14 +532,14 @@ struct ChatOverlayView: View {
                                             .padding(10)
                                             .background(isMe ? Color.blue : Color(white: 0.2))
                                             .cornerRadius(12)
-                                        
+
                                         Text(message.createdAt.toMessageTime())
                                             .font(.caption2)
                                             .foregroundColor(.white.opacity(0.4))
                                             .padding(.horizontal, 4)
                                     }
                                 }
-                                
+
                                 if !isMe { Spacer() }
                             }
                             .id(message.id)
@@ -568,7 +568,7 @@ struct ChatOverlayView: View {
             }
         }
     }
-    
+
     private func openDM(_ friend: Friend) {
         chatMode = .dm(friend)
         Task { await socialService.loadMessages(friendId: friend.id) }
@@ -603,7 +603,7 @@ struct ChatOverlayView: View {
 
             // Unified Input Bar (Sleek)
             HStack(alignment: .bottom, spacing: 6) {
-                
+
                 if chatMode != .friends {
                     // Emoji button (Hide in search mode)
                     Button(action: {
@@ -651,7 +651,7 @@ struct ChatOverlayView: View {
                             .foregroundColor(.white)
                             .focused($isInputFocused)
                             .lineLimit(1...5)
-                            .onSubmit { 
+                            .onSubmit {
                                 if chatMode != .friends { sendMessage() }
                             }
                     } else {
@@ -664,21 +664,21 @@ struct ChatOverlayView: View {
                                     .padding(.top, 0)
                                     .allowsHitTesting(false)
                             }
-                            
+
                             if chatMode == .friends {
                                 TextField("", text: $friendsVM.searchText)
                                     .textFieldStyle(.plain)
                                     .foregroundColor(.white)
                             } else {
                                 TransparentTextEditor(text: $inputText, onCommit: sendMessage, isFocused: manualFocus)
-                                    .frame(minHeight: 20, maxHeight: 100)
+                                    .frame(minHeight: 20, maxHeight: 60)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 4)
                     }
                 }
-                
+
                 if chatMode != .friends {
                     // Send Button
                     Button(action: sendMessage) {
@@ -692,8 +692,8 @@ struct ChatOverlayView: View {
                     .padding(.bottom, 2)
                 }
             }
-            .padding(.horizontal, 8)
-            .padding(.horizontal, 8)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
             .background(isAnnouncementMode ? Color.yellow.opacity(0.2) : Color.white.opacity(0.1))
             .cornerRadius(20)
             .overlay(
@@ -701,12 +701,11 @@ struct ChatOverlayView: View {
                     .stroke(isAnnouncementMode ? Color.yellow.opacity(0.8) : Color.white.opacity(0.1), lineWidth: isAnnouncementMode ? 1.0 : 0.5)
             )
             .padding(.horizontal, 16)
-            .padding(.horizontal, 16)
             .padding(.bottom, 8)
-            .frame(height: 32)
+            .fixedSize(horizontal: false, vertical: true)
         }
     }
-    
+
     private var inputPlaceholder: String {
         switch chatMode {
         case .friends: return "Search friends..."
@@ -763,7 +762,7 @@ struct ChatOverlayView: View {
 
     private func sendMessage() {
         guard !inputText.isEmpty else { return }
-        
+
         let contentToSend = inputText
         inputText = ""
 
@@ -773,7 +772,7 @@ struct ChatOverlayView: View {
         case .room:
             if isAnnouncementMode && viewModel.isWatchPartyHost {
                 viewModel.sendAnnouncement(contentToSend)
-                // Auto-disable after sending to prevent spam? 
+                // Auto-disable after sending to prevent spam?
                 // Let's keep it enabled for multi-message flows, user can toggle off.
             } else {
                 viewModel.sendMessage(contentToSend)
@@ -784,7 +783,7 @@ struct ChatOverlayView: View {
             Task { await socialService.sendMessage(to: friend.id, content: contentToSend) }
         }
     }
-    
+
     private var totalUnreadCount: Int {
         socialService.unreadCounts.values.reduce(0, +)
     }
@@ -824,7 +823,7 @@ struct ChatOverlayView: View {
             .allowsHitTesting(false)
         )
     }
-    
+
     private func sendReaction(_ emoji: String) {
         // Route reaction based on Playback Context, not UI Tab
         if appState.isEventPlayback {
@@ -842,7 +841,7 @@ struct ChatOverlayView: View {
             HStack(spacing: 4) {
                 Text(title)
                     .font(.system(size: 13, weight: .medium))
-                
+
                 if badge > 0 {
                     Text("\(badge)")
                         .font(.system(size: 10, weight: .bold))
@@ -870,17 +869,17 @@ struct ChatOverlayView: View {
         if let friend = socialService.friends.first(where: { $0.id == userId }) {
             return friend.username
         }
-        
+
         // 2. Check Room Messages
         if let msg = viewModel.messages.first(where: { $0.senderId == userId }) {
             return msg.username
         }
-        
+
         // 3. Check Event Messages
         if let msg = eventChatService.messages.first(where: { $0.senderId == userId }) {
             return msg.username
         }
-        
+
         return "Unknown User"
     }
 }
@@ -889,25 +888,25 @@ struct InviteMessageView: View {
     let message: DirectMessage
     let isMe: Bool
     @EnvironmentObject var appState: AppState
-    
+
     var body: some View {
         let components = message.content.split(separator: "|")
         if components.count >= 3 {
             let roomId = String(components[1])
             let roomName = String(components[2])
-            
+
             VStack(spacing: 4) {
                 Text("🎬 Watch Party Invite")
                     .font(.caption2)
                     .fontWeight(.bold)
                     .foregroundColor(isMe ? .white.opacity(0.8) : .secondary)
-                
+
                 Text(roomName)
                     .font(.caption)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
                     .lineLimit(1)
-                
+
                 if !isMe {
                     Button(action: {
                         Task {
@@ -945,18 +944,18 @@ struct FriendRowButton: View {
     var body: some View {
         let isOnline = SocialService.shared.onlineUserIds.contains(friend.id)
         let activity = SocialService.shared.friendActivity[friend.id]
-        
+
         // Determine Room contexts
         let myRoomId = appState.player.currentWatchPartyRoom?.id
         let friendRoomId = activity?.currentlyWatching?.roomId
-        
+
         // Check if we are in the same room
         let isSameRoom = (myRoomId != nil && friendRoomId != nil && myRoomId == friendRoomId)
-        
+
         // Logic for Buttons
         // Show Join if friend is in a room AND NOT in same room (regardless of premium/free)
         let canJoin = (friendRoomId != nil) && !isSameRoom
-        
+
         // Show Invite if I am in a room AND friend is online AND NOT in same room
         // User request: "only have envelopes ... for users that are online"
         let canInvite = (myRoomId != nil) && isOnline && !isSameRoom
@@ -971,7 +970,7 @@ struct FriendRowButton: View {
                             .fill(Constants.avatarColor(for: friend.username))
                             .frame(width: 32, height: 32)
                             .overlay(Text(friend.username.prefix(1).uppercased()).foregroundColor(.white))
-                        
+
                         if unreadCount > 0 {
                             Circle()
                                 .fill(Color.red)
@@ -986,7 +985,7 @@ struct FriendRowButton: View {
                             Text(friend.displayName)
                                 .foregroundColor(.white)
                                 .font(.body)
-                            
+
                             // Premium Host Badge
                             if friend.isPremium == true {
                                 Text("👑")
@@ -1025,7 +1024,7 @@ struct FriendRowButton: View {
                                  .foregroundColor(.secondary)
                          }
                     }
-                    
+
                     Spacer()
                 }
                 .padding(8)
@@ -1057,14 +1056,14 @@ struct FriendRowButton: View {
                         .help("Online")
                         .padding(.trailing, 4)
                 }
-                
+
                 // Invite Button
                 if canInvite {
                    Button(action: {
                        let room = appState.player.currentWatchPartyRoom
                        let roomName = room?.mediaItem?.name ?? "Watch Party"
                        let rId = room?.id ?? ""
-                       
+
                        if !rId.isEmpty {
                            Task {
                                await SocialService.shared.sendInvite(to: friend.id, roomId: rId, roomName: roomName)
@@ -1081,7 +1080,7 @@ struct FriendRowButton: View {
                    .buttonStyle(.plain)
                    .help("Invite to Room")
                 }
-                
+
                 // Join Button
                 if canJoin, let rId = friendRoomId {
                     Button(action: {

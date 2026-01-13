@@ -936,7 +936,10 @@ class LobbyViewModel: ObservableObject {
         if !guests.isEmpty && room.type == .userRoom { // Only for user rooms, maintain fast start for events
              NSLog("⏳ Host: Initiating handshake for \(guests.count) guests...")
 
-             // 1. Send PREPARE signal
+             // 1. Send PREPARE signal (with Hash/FileIdx payload)
+             // Payload format: LOBBY_PREPARE_PLAYBACK|<Hash>|<FileIdx>
+             let payload = "LOBBY_PREPARE_PLAYBACK|\(preResolvedStream?.infoHash ?? "")|\(preResolvedStream?.fileIdx ?? 0)"
+             
              Task { [weak self] in
                  guard let self = self else { return }
                  let prepMsg = SyncMessage(
@@ -944,7 +947,7 @@ class LobbyViewModel: ObservableObject {
                      timestamp: Date().timeIntervalSince1970,
                      isPlaying: nil,
                      senderId: self.participantId,
-                     chatText: "LOBBY_PREPARE_PLAYBACK",
+                     chatText: payload,
                      chatUsername: "Host"
                  )
                  try? await self.realtimeManager?.sendSyncMessage(prepMsg)

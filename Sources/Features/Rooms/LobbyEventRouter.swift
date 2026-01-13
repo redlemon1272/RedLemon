@@ -96,7 +96,7 @@ class LobbyEventRouter: ObservableObject {
             await handleLobbyKick(chatText)
         } else if chatText == "LOBBY_START_COUNTDOWN" {
             await handleLobbyStartCountdown(syncMessage)
-        } else if chatText == "LOBBY_PREPARE_PLAYBACK" {
+        } else if chatText == "LOBBY_PREPARE_PLAYBACK" || chatText.hasPrefix("LOBBY_PREPARE_PLAYBACK|") {
              await handleLobbyPreparePlayback(syncMessage)
         } else if chatText == "LOBBY_READY_FOR_PLAYBACK" {
              handleLobbyReadyForPlayback(syncMessage)
@@ -512,31 +512,48 @@ class LobbyEventRouter: ObservableObject {
         // Ignore for events (Auto-start handles it)
         if viewModel.room.type == .event { return }
         
-        NSLog("🎬 Guest: Received LOBBY_PREPARE_PLAYBACK - Starting background resolution")
+        let chatText = syncMessage.chatText ?? ""
+        NSLog("🎬 Guest: Received PREPARE signal: \(chatText)")
         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host is preparing playback..."])
 
-        // 1. Fetch fresh room state to get Hash/FileIdx
+        // 1. Extract Hash/FileIdx from Payload (Fast Path)
+        // Payload: LOBBY_PREPARE_PLAYBACK|<Hash>|<FileIdx>
+        var targetHash: String?
+        // var targetFileIdx: Int? // Unused for resolution, used for validation if needed
+
+        let parts = chatText.components(separatedBy: "|")
+        if parts.count >= 2 {
+            targetHash = parts[1]
+            if targetHash?.isEmpty == true { targetHash = nil } // Handle empty string
+            NSLog("✅ Guest: Extracted Hash from Payload: \(targetHash ?? "nil")")
+        }
+
+        // 2. Fetch fresh room state (Fallback / Hydration)
+        // We still fetch to ensure Metadata/Season/Episode is up to date
         guard let roomState = try? await SupabaseClient.shared.getRoomState(roomId: viewModel.room.id) else {
             NSLog("❌ Guest: Failed to fetch room state during prepare")
             return
         }
         
-        // 2. Sync Media/Metadata
+        // 3. Sync Media/Metadata
         await viewModel.updateMediaItemFromRoomState(roomState)
         
         guard let mediaItem = viewModel.room.mediaItem else { return }
         
-        // 3. Preload Stream
+        // 4. Preload Stream
+        // Priority: Payload Hash > DB Hash > Best Match (Double Fallback)
+        let effectiveHash = targetHash ?? roomState.streamHash
+        
         do {
             try await viewModel.appState?.player.preloadStream(
                 mediaItem: mediaItem,
                 quality: .fullHD,
-                streamHash: roomState.streamHash,
+                streamHash: effectiveHash,
                 season: roomState.season,
                 episode: roomState.episode
             )
             
-            // 4. Report Ready
+            // 5. Report Ready
             NSLog("✅ Guest: Stream preloaded. Sending READY signal.")
             let readyMsg = SyncMessage(
                 type: .chat,

@@ -289,6 +289,12 @@ class LobbyEventRouter: ObservableObject {
 
     private func handleLobbyReturn(_ syncMessage: SyncMessage) async {
         guard let viewModel = viewModel else { return }
+
+        // CRITICAL FIX: Ignore lobby return for System Events
+        if viewModel.room.type == .event {
+            NSLog("🛡️ Guest: Ignoring LOBBY_RETURN for system event")
+            return
+        }
         
         NSLog("🎬 Guest: Received LOBBY_RETURN signal from Host")
         

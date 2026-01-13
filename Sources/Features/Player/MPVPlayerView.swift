@@ -435,6 +435,10 @@ struct MPVPlayerView: View {
     private func checkEventMovieFinished() {
         guard appState.player.isEventPlayback else { return }
 
+        // CRITICAL FIX: Don't trigger auto-exit if we are already resolving a new stream or starting a transition
+        // This prevents the Guest from being kicked back to the lobby when the host switches items (previous item EOF)
+        guard !appState.player.isResolvingStream && !viewModel.isLoading else { return }
+
         let position = viewModel.currentTime
         let duration = viewModel.duration
 

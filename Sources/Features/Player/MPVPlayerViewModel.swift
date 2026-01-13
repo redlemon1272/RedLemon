@@ -3114,6 +3114,14 @@ extension MPVPlayerViewModel {
             break
 
         case .returnToLobby:
+            // CRITICAL FIX: Ignore Return to Lobby signals for System Events
+            // Events are automated and should not be interrupted by stale host signals or mod actions
+            // unless we strictly implement a "Emergency Stop" command (which should be separate)
+            if appState?.player.isEventPlayback == true {
+                 LoggingManager.shared.info(.watchParty, message: "🛡️ Guest: Ignoring returnToLobby signal during Event Playback")
+                 return
+            }
+
             LoggingManager.shared.info(.watchParty, message: "Received Return to Lobby signal from Host")
 
             // Fix: Explicitly show "Returning to Lobby" overlay instead of generic loading

@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.72 -->
+        <item>
+            <title>Version 1.0.72</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix(chat): Make player chat input box compact with proper height constraints</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 22:40:23 -0500</pubDate>
+            <sparkle:version>72</sparkle:version>
+            <sparkle:shortVersionString>1.0.72</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.72.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="RyQGFwjrhW6vYNACGMxtvW85RXE2Y9KuVuPabP3UwhGTKMOzctvdQ4OfEHZIW6wIs6WNRiBbzfVGCpDgGW3aAw==" length="72621922"
+            />
+        </item>
         <!-- v1.0.71 -->
         <item>
             <title>Version 1.0.71</title>

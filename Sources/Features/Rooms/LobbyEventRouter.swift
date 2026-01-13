@@ -96,6 +96,10 @@ class LobbyEventRouter: ObservableObject {
             await handleLobbyKick(chatText)
         } else if chatText == "LOBBY_START_COUNTDOWN" {
             await handleLobbyStartCountdown(syncMessage)
+        } else if chatText == "LOBBY_PREPARE_PLAYBACK" {
+             await handleLobbyPreparePlayback(syncMessage)
+        } else if chatText == "LOBBY_READY_FOR_PLAYBACK" {
+             handleLobbyReadyForPlayback(syncMessage)
         } else {
              // Unknown LOBBY command - log warning
              let senderInfo = syncMessage.chatUsername ?? syncMessage.senderId ?? "Unknown"
@@ -495,5 +499,58 @@ class LobbyEventRouter: ObservableObject {
             isEvent: (viewModel.room.type == .event),
             triggerSource: "watch_party_sync"
         )
+    }
+
+    private func handleLobbyReadyForPlayback(_ syncMessage: SyncMessage) {
+        guard let viewModel = viewModel, viewModel.isHost, let senderId = syncMessage.senderId else { return }
+        viewModel.markStreamReady(participantId: senderId)
+    }
+
+    private func handleLobbyPreparePlayback(_ syncMessage: SyncMessage) async {
+        guard let viewModel = viewModel, !viewModel.isHost else { return }
+        
+        // Ignore for events (Auto-start handles it)
+        if viewModel.room.type == .event { return }
+        
+        NSLog("🎬 Guest: Received LOBBY_PREPARE_PLAYBACK - Starting background resolution")
+        viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host is preparing playback..."])
+
+        // 1. Fetch fresh room state to get Hash/FileIdx
+        guard let roomState = try? await SupabaseClient.shared.getRoomState(roomId: viewModel.room.id) else {
+            NSLog("❌ Guest: Failed to fetch room state during prepare")
+            return
+        }
+        
+        // 2. Sync Media/Metadata
+        await viewModel.updateMediaItemFromRoomState(roomState)
+        
+        guard let mediaItem = viewModel.room.mediaItem else { return }
+        
+        // 3. Preload Stream
+        do {
+            try await viewModel.appState?.player.preloadStream(
+                mediaItem: mediaItem,
+                quality: .fullHD,
+                streamHash: roomState.streamHash,
+                season: roomState.season,
+                episode: roomState.episode
+            )
+            
+            // 4. Report Ready
+            NSLog("✅ Guest: Stream preloaded. Sending READY signal.")
+            let readyMsg = SyncMessage(
+                type: .chat,
+                timestamp: Date().timeIntervalSince1970,
+                isPlaying: nil,
+                senderId: viewModel.participantId,
+                chatText: "LOBBY_READY_FOR_PLAYBACK",
+                chatUsername: viewModel.appState?.currentUsername
+            )
+            try? await viewModel.realtimeManager?.sendSyncMessage(readyMsg)
+            
+        } catch {
+             NSLog("%@", "❌ Guest: Failed to preload stream: \(error)")
+             viewModel.chatManager.addSystemMessage(.systemError, userName: "System", data: ["message": "Failed to prepare stream", "error": error.localizedDescription])
+        }
     }
 }

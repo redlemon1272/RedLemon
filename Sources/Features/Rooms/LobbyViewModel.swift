@@ -38,7 +38,17 @@ class LobbyViewModel: ObservableObject {
 
     // NEW: Playlist Voting (ephemeral, not persisted to DB)
     // Maps playlist item ID -> Set of user IDs who voted for it
+    // Maps playlist item ID -> Set of user IDs who voted for it
     @Published var playlistVotes: [String: Set<String>] = [:]
+
+    // Track technical readiness (Stream Resolved) separate from "Joined" or "Ready" checkbox
+    @Published var streamReadyParticipantIds: Set<String> = []
+
+    func markStreamReady(participantId: String) {
+        streamReadyParticipantIds.insert(participantId.lowercased())
+        NSLog("✅ Lobby: Participant \(participantId) is ready for stream")
+    }
+
 
     // Track unique realtime connection IDs to show "Joined" notifications correctly
     // even if user is already known from DB polling
@@ -919,6 +929,56 @@ class LobbyViewModel: ObservableObject {
         }
 
         var realtimeSuccess = false
+
+        // HANDSHAKE: Wait for guests to resolve stream
+        // This prevents the host from starting playback while guests are still resolving (3-10s delay)
+        let guests = participants.filter { !$0.isHost && $0.id.lowercased() != self.participantId.lowercased() }
+        if !guests.isEmpty && room.type == .userRoom { // Only for user rooms, maintain fast start for events
+             NSLog("⏳ Host: Initiating handshake for \(guests.count) guests...")
+
+             // 1. Send PREPARE signal
+             Task { [weak self] in
+                 guard let self = self else { return }
+                 let prepMsg = SyncMessage(
+                     type: .chat,
+                     timestamp: Date().timeIntervalSince1970,
+                     isPlaying: nil,
+                     senderId: self.participantId,
+                     chatText: "LOBBY_PREPARE_PLAYBACK",
+                     chatUsername: "Host"
+                 )
+                 try? await self.realtimeManager?.sendSyncMessage(prepMsg)
+             }
+
+             // 2. Clear previous ready states
+             self.streamReadyParticipantIds.removeAll()
+
+             // 3. Wait Loop (Max 15s)
+             let timeout = Date().addingTimeInterval(15)
+             addMessage(.systemInfo, userName: "System", data: ["message": "Waiting for guests to synchronize stream..."])
+             
+             while Date() < timeout {
+                 if Task.isCancelled { return }
+                 
+                 let readyCount = guests.filter { self.streamReadyParticipantIds.contains($0.id.lowercased()) }.count
+                 if readyCount >= guests.count {
+                     NSLog("✅ Host: All guests ready (\(readyCount)/\(guests.count))! Starting countdown.")
+                     break
+                 }
+                 
+                 // if readyCount > 0 {
+                 //    NSLog("⏳ Host: Waiting for guests... (\(readyCount)/\(guests.count) ready)")
+                 // }
+
+                 // Sleep 1s
+                 try? await Task.sleep(nanoseconds: 1_000_000_000)
+             }
+             
+             if Date() >= timeout {
+                 NSLog("⚠️ Host: Handshake timed out. Starting anyway.")
+                 addMessage(.systemInfo, userName: "System", data: ["message": "Starting playback (Guest timeout exceeded)"])
+             }
+        }
 
         // Broadcast via Realtime with error handling
         Task { [weak self] in

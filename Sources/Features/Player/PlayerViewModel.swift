@@ -55,6 +55,42 @@ class PlayerViewModel: ObservableObject {
     // Auto-Play Control
     @Published var userCancelledAutoPlay: Bool = false
 
+    // Pre-resolved stream for Watch Party Optimization
+    var preResolvedStream: Stream?
+
+    func preloadStream(mediaItem: MediaItem, quality: VideoQuality, streamHash: String?, season: Int?, episode: Int?) async throws {
+        // Run on main actor to update published properties if needed, 
+        // though we are mostly updating internal state here.
+        await MainActor.run {
+             self.isResolvingStream = true
+        }
+        defer { 
+            Task { @MainActor in self.isResolvingStream = false }
+        }
+        
+        LoggingManager.shared.info(.watchParty, message: "⚡️ PlayerVM: Pre-loading stream for hash: \(streamHash ?? "nil")")
+        
+        // Fetch metadata
+        let metadata = try await metadataProvider.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
+        
+        // Resolve using hash
+        let result = try await streamResolver.resolveStream(
+            item: mediaItem,
+            quality: quality,
+            season: season,
+            episode: episode,
+            metadata: metadata,
+            preferredInfoHash: streamHash,
+            filterExtended: false,
+            triggerSource: "preload"
+        )
+        
+        await MainActor.run {
+            self.preResolvedStream = result.stream
+        }
+        LoggingManager.shared.info(.watchParty, message: "✅ PlayerVM: Stream pre-loaded successfully: \(result.stream.title ?? "Unknown")")
+    }
+
     // Weak reference to AppState for navigation callbacks
     weak var appState: AppState?
 
@@ -146,8 +182,15 @@ class PlayerViewModel: ObservableObject {
             }
 
             // Step 2: Resolve stream (Optimized for Guest)
-            var resolvedStream: Stream?
+            var resolvedStream: Stream? = self.preResolvedStream // Check pre-load first
             var resolvedMetadata: MediaMetadata? = metadata
+
+            if let pre = resolvedStream {
+                 NSLog("🚀 PlayerVM: Using pre-resolved stream (Zero-Wait Start)")
+                 // Clear it after use so we don't reuse it for next media
+                 self.preResolvedStream = nil
+            } else {
+                // ... Normal Logic ...
 
             // GUEST OPTIMIZATION
             // First check if host's URL is still valid (RD links expire after ~30min inactivity)
@@ -374,6 +417,8 @@ class PlayerViewModel: ObservableObject {
                 if resolvedStream == nil {
                     throw lastError ?? APIError.noStreamsFound
                 }
+            }
+
             }
 
             guard let finalStream = resolvedStream else {

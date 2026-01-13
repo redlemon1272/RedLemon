@@ -152,6 +152,11 @@ class PlayerViewModel: ObservableObject {
             // GUEST OPTIMIZATION
             // First check if host's URL is still valid (RD links expire after ~30min inactivity)
             var validatedHostURL: String? = nil
+            /* 
+            // GUEST OPTIMIZATION - DISABLED (Causes EOF on RealDebrid due to IP Locking)
+            // RealDebrid links are IP-locked to the creator. If we reuse the Host's URL, remote guests get dropped.
+            // We must force resolution via the Hash fallback below.
+            
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
                (roomId == nil || watchPartyRoom.id == roomId),
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
@@ -181,6 +186,7 @@ class PlayerViewModel: ObservableObject {
                     validatedHostURL = hostUnlockedURL
                 }
             }
+            */
 
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
                (roomId == nil || watchPartyRoom.id == roomId),

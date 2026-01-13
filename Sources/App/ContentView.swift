@@ -547,6 +547,10 @@ struct StreamErrorView: View {
     let error: String
     @ObservedObject var appState: AppState
 
+    @State private var isReporting = false
+    @State private var reportSent = false
+    @State private var errorMessage: String?
+
     /// Parse error string to extract StreamError info if available
     private var errorInfo: (title: String, message: String, solution: String, icon: String, showSettings: Bool) {
         // Check for known error patterns and return actionable info
@@ -643,7 +647,7 @@ struct StreamErrorView: View {
         return (
             title: "Playback Error",
             message: error,
-            solution: "Try again or select a different stream.",
+            solution: "We couldn't play this title. Please report this issue.",
             icon: "exclamationmark.triangle.fill",
             showSettings: false
         )
@@ -696,25 +700,53 @@ struct StreamErrorView: View {
                     .buttonStyle(.plain)
                     .shadow(radius: 5)
                 } else {
-                    Button(action: {
-                        retryPlayback()
-                    }) {
-                        HStack {
-                            Image(systemName: "arrow.clockwise")
-                            Text("Retry Connection")
+                    // REPORT ISSUE BUTTON (Replaces Retry)
+                    if reportSent {
+                         HStack(spacing: 8) {
+                             Image(systemName: "checkmark.circle.fill")
+                                 .font(.title2)
+                             Text("Report Sent")
+                                 .font(.headline.weight(.medium))
+                         }
+                         .foregroundColor(.green)
+                         .frame(width: 220, height: 50)
+                         .background(Color.green.opacity(0.1))
+                         .cornerRadius(12)
+                         .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.green.opacity(0.3)))
+                    } else {
+                        Button(action: {
+                            submitReport()
+                        }) {
+                            HStack {
+                                if isReporting {
+                                    ProgressView()
+                                        .scaleEffect(0.8)
+                                        .frame(width: 20, height: 20)
+                                } else {
+                                    Image(systemName: "exclamationmark.bubble.fill")
+                                }
+                                Text(isReporting ? "Sending..." : "Report Issue")
+                            }
+                            .font(.headline.weight(.semibold))
+                            .foregroundColor(.white)
+                            .frame(width: 220, height: 50)
+                            .background(Color.red.opacity(0.8))
+                            .cornerRadius(12)
                         }
-                        .font(.headline.weight(.semibold))
-                        .foregroundColor(.black)
-                        .frame(width: 220, height: 50)
-                        .background(Color.yellow)
-                        .cornerRadius(12)
+                        .buttonStyle(.plain)
+                        .disabled(isReporting)
+                        .shadow(radius: 5)
+                        
+                        if let errorMessage = errorMessage {
+                            Text(errorMessage)
+                                .font(.caption)
+                                .foregroundColor(.red)
+                        } else {
+                            Text("Automatically sends error logs to help us fix this.")
+                                .font(.caption)
+                                .foregroundColor(.white.opacity(0.5))
+                        }
                     }
-                    .buttonStyle(.plain)
-                    .shadow(radius: 5)
-
-                    Text("Retrying can improve stream reliability")
-                        .font(.caption)
-                        .foregroundColor(.white.opacity(0.5))
                 }
             }
             .padding(.top, 10)
@@ -748,6 +780,43 @@ struct StreamErrorView: View {
                 roomId: roomId,
                 isHost: isHost
             )
+        }
+    }
+    
+    // Logic to upload the log
+    private func submitReport() {
+        isReporting = true
+        errorMessage = nil
+        
+        Task {
+            // 1. Capture the log
+            let log = await SessionRecorder.shared.getSanitizedLog()
+            
+            do {
+                // 2. Upload to Supabase 'session_logs' table
+                try await SupabaseClient.shared.uploadSessionLog(log: log)
+                
+                // 3. Update UI to show Success
+                await MainActor.run {
+                    isReporting = false
+                    withAnimation {
+                        reportSent = true
+                    }
+                }
+                
+                // 4. Wait 2 seconds then Close Player
+                try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
+                
+                await MainActor.run {
+                    appState.player.streamError = nil
+                    appState.currentView = .mediaDetail
+                }
+            } catch {
+                await MainActor.run {
+                    isReporting = false
+                    errorMessage = "Failed: \(error.localizedDescription)"
+                }
+            }
         }
     }
 }

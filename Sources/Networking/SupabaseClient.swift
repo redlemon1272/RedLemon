@@ -1891,33 +1891,29 @@ struct ReportedStream: Identifiable, Codable {
     }
 
     /// Upload a session log
-    func uploadSessionLog(log: SessionLog) async {
-        do {
-            let encoder = JSONEncoder()
-            encoder.dateEncodingStrategy = .iso8601
-            let data = try encoder.encode(log)
-            guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
+    func uploadSessionLog(log: SessionLog) async throws {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        let data = try encoder.encode(log)
+        guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
 
-            // Map to DB columns
-            let body: [String: Any] = [
-                "id": log.id.uuidString,
-                "session_id": log.sessionId.uuidString,
-                "platform": log.platform,
-                "app_version": log.appVersion,
-                "imdb_id": log.imdbId ?? "",
-                "stream_hash": log.streamHash ?? "",
-                "events": json["events"] ?? []
-            ]
+        // Map to DB columns
+        let body: [String: Any] = [
+            "id": log.id.uuidString,
+            "session_id": log.sessionId.uuidString,
+            "platform": log.platform,
+            "app_version": log.appVersion,
+            "imdb_id": log.imdbId ?? "",
+            "stream_hash": log.streamHash ?? "",
+            "events": json["events"] ?? []
+        ]
 
-            _ = try await makeRequest(
-                path: "/session_logs",
-                method: "POST",
-                body: body
-            )
-            LoggingManager.shared.info(.network, message: "Session Log uploaded successfully: \(log.sessionId)")
-        } catch {
-            LoggingManager.shared.error(.network, message: "Failed to upload session log: \(error)")
-        }
+        _ = try await makeRequest(
+            path: "/session_logs",
+            method: "POST",
+            body: body
+        )
+        LoggingManager.shared.info(.network, message: "Session Log uploaded successfully: \(log.sessionId)")
     }
 
     /// Get feedback reports (Admin)

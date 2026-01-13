@@ -996,8 +996,9 @@ enum AdminLogTab: String, CaseIterable, Identifiable {
 }
 
 struct AdminLogsView: View {
-    @State private var selectedTab: AdminLogTab = .app
+    @State private var selectedTab: AdminLogTab = .session
     @State private var appLogs: [AppLog] = []
+    
     @State private var sessionLogs: [SessionLog] = []
     @State private var feedbackReports: [FeedbackReport] = [] // Add state for feedback reports
     @State private var systemLogs: [SystemJobLog] = []
@@ -1008,8 +1009,6 @@ struct AdminLogsView: View {
     
     @State private var appPage = 1
     @State private var sessionPage = 1
-    @State private var systemPage = 1
-    private let pageSize = 50
     
     var filteredAppLogs: [AppLog] {
         appLogs.filter { log in
@@ -1018,6 +1017,12 @@ struct AdminLogsView: View {
             return matchesSearch && matchesLevel
         }
     }
+    
+
+    @State private var systemPage = 1
+    private let pageSize = 50
+    
+
     
     var body: some View {
         VStack(spacing: 0) {
@@ -1029,19 +1034,7 @@ struct AdminLogsView: View {
                     
                     Spacer()
                     
-                    if selectedTab == .app {
-                        Button(action: {
-                            Task {
-                                try? await SupabaseClient.shared.deleteAllAppLogs()
-                                await loadData()
-                            }
-                        }) {
-                            Label("Clear App Logs", systemImage: "trash")
-                                .foregroundColor(.red)
-                        }
-                        .buttonStyle(.plain)
-                        .disabled(appLogs.isEmpty)
-                    } else if selectedTab == .session {
+                    if selectedTab == .session {
                         Button(action: {
                             Task {
                                 try? await SupabaseClient.shared.deleteAllSessionLogs()
@@ -1076,7 +1069,9 @@ struct AdminLogsView: View {
                 .padding()
                 
                 HStack(spacing: 0) {
-                    ForEach(AdminLogTab.allCases) { tab in
+
+                    ForEach(AdminLogTab.allCases.filter { $0 != .app }) { tab in
+
                         Button(action: { selectedTab = tab }) {
                             VStack(spacing: 8) {
                                 Label(tab.rawValue, systemImage: tab.icon)
@@ -1094,38 +1089,6 @@ struct AdminLogsView: View {
             }
             .background(Color(NSColor.controlBackgroundColor))
             
-            // Search & Filter Bar
-            if selectedTab == .app {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.secondary)
-                    TextField("Search logs, user IDs...", text: $searchText)
-                        .textFieldStyle(.plain)
-                    
-                    if !searchText.isEmpty {
-                        Button(action: { searchText = "" }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.secondary)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                    
-                    Divider().frame(height: 20)
-                    
-                    Picker("Level", selection: $selectedLevel) {
-                        Text("All Levels").tag("ALL")
-                        Text("Error").tag("ERROR")
-                        Text("Warning").tag("WARNING")
-                        Text("Info").tag("INFO")
-                        Text("Debug").tag("DEBUG")
-                    }
-                    .pickerStyle(.segmented)
-                    .frame(width: 300)
-                }
-                .padding(8)
-                .background(Color.black.opacity(0.05))
-            }
-            
             Divider()
             
             // Content
@@ -1142,6 +1105,7 @@ struct AdminLogsView: View {
                         systemLogsList
                     }
                 }
+
             }
             
             Divider()

@@ -777,6 +777,12 @@ Users can report broken streams. The system captures:
 - `imdb_id`, `stream_hash`, `quality`, and `reason`.
 - Reported hashes are temporarily hidden after 3 reports and permanently blocked after admin review.
 
+## Smart Crash Reporting
+**Rule:** When a playback session ends in a fatal error (e.g., "No Streams Found"), the user MUST be prompted to "Report Issue".
+- **Action:** This triggers `SessionRecorder.shared.getSanitizedLog()` and uploads the JSON log to the `session_logs` table via `SupabaseClient`.
+- **Privacy:** Logs are uploaded ONLY with explicit user consent (button click). Automatic background uploading is strictly forbidden to preserve privacy.
+- **UI Standard:** Replace the "Retry" button (which usually fails in loop) with "Report Issue" in fatal error states.
+
 
 
 ---
@@ -809,6 +815,7 @@ Users can report broken streams. The system captures:
 | `room_creation_history` | Free-tier limit tracking |
 | `verified_streams` | Community-verified streams |
 | `reported_streams` | Problem reports |
+| `session_logs` | Playback error reports & session analytics |
 | `blocked_streams` | Permanent blacklist |
 | `payment_pools` | Assigned crypto addresses |
 | `payment_transactions` | Payment records |

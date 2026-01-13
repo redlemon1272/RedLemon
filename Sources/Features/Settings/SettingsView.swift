@@ -1035,18 +1035,27 @@ struct SettingsView: View {
     private func uploadSessionLog() async {
         isLoading = true
         let log = await SessionRecorder.shared.getSanitizedLog()
-        await SupabaseClient.shared.uploadSessionLog(log: log)
+        
+        do {
+            try await SupabaseClient.shared.uploadSessionLog(log: log)
 
-        await MainActor.run {
-            isLoading = false
-            saveMessage = "Session log sent! Thank you." // Reuse message state or add new
-            messageType = .success
+            await MainActor.run {
+                isLoading = false
+                saveMessage = "Session log sent! Thank you." // Reuse message state or add new
+                messageType = .success
 
-            // Clear message after delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                if saveMessage == "Session log sent! Thank you." {
-                    saveMessage = nil
+                // Clear message after delay
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    if saveMessage == "Session log sent! Thank you." {
+                        saveMessage = nil
+                    }
                 }
+            }
+        } catch {
+            await MainActor.run {
+                isLoading = false
+                saveMessage = "Failed: \(error.localizedDescription)"
+                messageType = .error
             }
         }
     }
@@ -1101,8 +1110,12 @@ struct SettingsView: View {
 
                             if includeLog {
                                 let log = await SessionRecorder.shared.getSanitizedLog()
-                                await SupabaseClient.shared.uploadSessionLog(log: log)
-                                logId = log.id
+                                do {
+                                    try await SupabaseClient.shared.uploadSessionLog(log: log)
+                                    logId = log.id
+                                } catch {
+                                    LoggingManager.shared.error(.network, message: "Feedback: Failed to attach log: \(error)")
+                                }
                             }
 
                             await SupabaseClient.shared.sendFeedback(

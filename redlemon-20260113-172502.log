@@ -1,0 +1,956 @@
+2026-01-13 17:25:10.306 RedLemon[11313:113619] 🪟 Set initial window to expanded size: (0.0, 148.0, 1366.0, 595.0)
+2026-01-13 17:25:10.306 RedLemon[11313:113619] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-13 17:25:10.384 RedLemon[11313:113619] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-13 17:25:10.386 RedLemon[11313:113619] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-13 17:25:10.415 RedLemon[11313:113619] ✅ Playback state reset complete - starting in browse view
+2026-01-13 17:25:10.415 RedLemon[11313:113619] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-13 17:25:10.415 RedLemon[11313:113619] 🧪 Testing Profile: debug
+2026-01-13 17:25:10.431 RedLemon[11313:113695] 📂 Loaded 5 credential(s) from cache
+2026-01-13 17:25:10.435 RedLemon[11313:113619] ✅ Keychain: Found stored username: ursinho
+2026-01-13 17:25:10.436 RedLemon[11313:113619] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-13 17:25:10.436 RedLemon[11313:113695] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-13 17:25:10.777 RedLemon[11313:113691] 📡 SupabaseClient: User lookup response received (399 bytes)
+2026-01-13 17:25:10.796 RedLemon[11313:113691] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-13 17:25:10.796 RedLemon[11313:113691] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-13 17:25:10.821 RedLemon[11313:113619] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-13 17:25:10.821 RedLemon[11313:113619] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 17:25:12.707 RedLemon[11313:113619] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 17:25:12.713 RedLemon[11313:113619] 🚀 RedLemon: Starting HTTP server...
+2026-01-13 17:25:12.714 RedLemon[11313:113619] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-13 17:25:12.731 RedLemon[11313:113619] ✅ RedLemon: HTTPServer instance created
+2026-01-13 17:25:12.732 RedLemon[11313:113694] 📡 RedLemon: Server starting on port 47253...
+2026-01-13 17:25:12.732 RedLemon[11313:113619] ✅ RedLemon: Server marked as ready (Optimistic)
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+📨 Received: {"ref":"580FE12C-9FCC-4627-85FC-DD69D8C84426","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+📦 Current build: 76, Latest build: 76
+✅ App is up to date (current: 76, latest: 76)
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+✅ [EventsView] Loaded 412 movies from config version 1526
+🗓 AppState: Updated schedule epoch to 2025-12-25 18:10:25 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3614 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0770828/img (534025 bytes)
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3613 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3613 seconds
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"6BEC63CD-9366-4241-9056-53CFE57F5B2F","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqq6gpQk06AvfB","phx_ref_prev":"GIpqpUi9J0s6AvdB","is_premium":true,"last_seen":"2026-01-13T22:24:49.078Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqsQhqNvo6Avkh","is_premium":true,"last_seen":"2026-01-13T22:25:12.178Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"59F912BE-DBC1-47EA-A55F-53C01AB6E818","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-13 17:25:12.770 RedLemon[11313:113619] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-13 17:25:12.771 RedLemon[11313:113619] 🏥 [AppState] Starting global provider health check...
+2026-01-13 17:25:12.771 RedLemon[11313:113619] 🔍 Performing startup checks...
+2026-01-13 17:25:12.771 RedLemon[11313:113619] ✅ Username-based authentication ready
+2026-01-13 17:25:12.772 RedLemon[11313:113734] 🔐 Signed request to /check-payment
+2026-01-13 17:25:13.288 RedLemon[11313:113695] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-13 17:25:13.288 RedLemon[11313:113695] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-13 17:25:13.547 RedLemon[11313:113619] 🔄 Checking for app updates...
+2026-01-13 17:25:14.148 RedLemon[11313:113619] ✅ [AppState] Provider health check complete (found 7 services)
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+👤 LicenseManager: Profile expiry: Optional(2026-02-11 06:00:30 +0000)
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+🎉 License updated! Expires: 2026-02-11 06:00:30 +0000
+📦 Current build: 76, Latest build: 76
+✅ App is up to date (current: 76, latest: 76)
+✅ TimeService: Synced! Offset: 0.038s (RTT: 129ms)
+   Local:  2026-01-13 22:25:13 +0000
+   Server: 2026-01-13 22:25:13 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+✅ SubDLClient initialized
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqsZzIgLM6AvlB","phx_ref_prev":"GIpqq6gpQk06AvfB","is_premium":true,"last_seen":"2026-01-13T22:25:14.652Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqq6gpQk06AvfB","phx_ref_prev":"GIpqpUi9J0s6AvdB","is_premium":true,"last_seen":"2026-01-13T22:24:49.078Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqsfrXFbM6Algi","phx_ref_prev":"GIpqsZzIgLM6AvlB","is_premium":true,"last_seen":"2026-01-13T22:25:16.236Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqsZzIgLM6AvlB","phx_ref_prev":"GIpqq6gpQk06AvfB","is_premium":true,"last_seen":"2026-01-13T22:25:14.652Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqsjboflk6Avlh","phx_ref_prev":"GIpqsQhqNvo6Avkh","is_premium":true,"last_seen":"2026-01-13T22:25:17.256Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqsQhqNvo6Avkh","is_premium":true,"last_seen":"2026-01-13T22:25:12.178Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3603 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqs2X96iM6AvnB","phx_ref_prev":"GIpqsfrXFbM6Algi","is_premium":true,"last_seen":"2026-01-13T22:25:22.326Z","room_id":"G4CL","started_at":"2026-01-13T22:25:22.326Z","status":"In Lobby: Spirited Away","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqsfrXFbM6Algi","phx_ref_prev":"GIpqsZzIgLM6AvlB","is_premium":true,"last_seen":"2026-01-13T22:25:16.236Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+[ INFO ] GET /api/metadata/meta/movie/tt0245429 [request-id: 92C51A71-F14F-4F4A-8246-7EE557A864AB]
+[ INFO ] GET /api/metadata/meta/movie/tt0245429 [request-id: 4F8A3458-0216-4720-82CF-B758D1F2AAC2]
+2026-01-13 17:25:25.584 RedLemon[11313:113690] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-13 17:25:25.584 RedLemon[11313:113734] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-13 17:25:26.401 RedLemon[11313:113619] 🚪 Joining room: G4CL
+2026-01-13 17:25:27.476 RedLemon[11313:113619] 🚪 Room is in lobby
+2026-01-13 17:25:27.476 RedLemon[11313:113619] ✅ PlayerVM: currentWatchPartyRoom set to G4CL
+💾 Cache SET: Metadata[meta_movie_tt0245429]
+💾 Cache SET: Metadata[meta_movie_tt0245429]
+✅ Loaded 1 rooms (total: 1)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0245429/img (368050 bytes)
+✅ Loaded 1 rooms (total: 1)
+📡 Joined channel: realtime:rooms_updates
+✅ RoomListView: Connected to rooms realtime updates
+📨 Received: {"ref":"4E962F56-715D-4B63-8DF0-0823B35DCEA6","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+🚪 Joining room: G4CL
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+🎭 Lobby: Connecting to room G4CL...
+🚦 Lobby State: connecting
+✅ Cache HIT: Metadata[meta_movie_tt0245429]
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Disconnecting from Supabase Realtime
+✅ Disconnected from Supabase Realtime
+❌ Heartbeat failed: CancellationError()
+[ INFO ] GET /api/metadata/meta/movie/tt0245429 [request-id: 317408D9-D0AD-4510-92E8-E0CAA186C7BB]
+2026-01-13 17:25:27.931 RedLemon[11313:113619] ✅ Guest joined room G4CL in database
+2026-01-13 17:25:28.094 RedLemon[11313:113695] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 17:25:28.095 RedLemon[11313:113695]    Payload keys: timestamp, position, chatText, senderId, type, chatUsername
+2026-01-13 17:25:28.096 RedLemon[11313:113695] ✅ Realtime: Message broadcast complete
+2026-01-13 17:25:28.105 RedLemon[11313:113734] 🔐 SupabaseClient: Signing Identity Payload: '1768343128656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-13 17:25:28.106 RedLemon[11313:113734] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-13 17:25:28.115 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:25:28.116 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:25:28.116 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:25:28.116 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:25:28.215 RedLemon[11313:113880] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:28.215 RedLemon[11313:113880]    Payload keys: position, timestamp, type, chatText, senderId, chatUsername
+2026-01-13 17:25:28.215 RedLemon[11313:113880] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 17:25:28.215 RedLemon[11313:113880] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 17:25:28.215 RedLemon[11313:113880] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:25:28.216 RedLemon[11313:113619] 👋 Received: Guest 'ursinho' joined room G4CL
+2026-01-13 17:25:28.313 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIpqtLv1yQ9tb_tB)
+2026-01-13 17:25:28.313 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIpqtLv1yQ9tb_tB)
+2026-01-13 17:25:28.374 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:25:28.374 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:25:39.091 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:25:39.091 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:25:39.237 RedLemon[11313:113734] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:39.237 RedLemon[11313:113734]    Payload keys: position, senderId, chatUsername, chatText, timestamp, type
+2026-01-13 17:25:39.237 RedLemon[11313:113734] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-13 17:25:39.237 RedLemon[11313:113734] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 17:25:39.237 RedLemon[11313:113734] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:25:39.254 RedLemon[11313:113619] 🎬 Guest: Received PREPARE signal: LOBBY_PREPARE_PLAYBACK|bb0de557069aa24337476989bab74715890dbd3c|0
+2026-01-13 17:25:39.254 RedLemon[11313:113619] ✅ Guest: Extracted Hash from Payload: bb0de557069aa24337476989bab74715890dbd3c
+2026-01-13 17:25:39.420 RedLemon[11313:113734] ✅ StreamService: Using provided metadata: Spirited Away
+2026-01-13 17:25:39.420 RedLemon[11313:113734] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-13 17:25:39.420 RedLemon[11313:113734] ⚡️ StreamResolver: Resolving streams for tt0245429 (S0E0)
+2026-01-13 17:25:39.420 RedLemon[11313:113970] 📝 [APP] 🎬 StreamService: Starting resolution for: Spirited Away ["file": "StreamService.swift", "level": "INFO", "line": "104"]
+2026-01-13 17:25:39.420 RedLemon[11313:113734] 📝 [APP] SessionRecorder initialized
+2026-01-13 17:25:39.421 RedLemon[11313:113734] 📝 [APP] New Session Started ["app_version": "1.0.76", "build": "76", "session_id": "0D03EEDC-CB39-4E1A-BFD9-7B973DBCE947", "trigger_source": "preload", "user_id": "656DAA91-33B4-4688-9135-C982EA52D7C9"]
+2026-01-13 17:25:39.421 RedLemon[11313:113734] 📝 [APP] Target Content Set ["imdb_id": "tt0245429"]
+2026-01-13 17:25:39.421 RedLemon[11313:113734] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-13 17:25:39.546 RedLemon[11313:113690]    📅 Filtering by year: 2001
+2026-01-13 17:25:39.673 RedLemon[11313:113970] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-13 17:25:39.673 RedLemon[11313:113970] 🔍 ProviderManager: Fetching streams for tt0245429...
+2026-01-13 17:25:39.674 RedLemon[11313:113970] 🔍 Zilean: Searching via IMDB ID: tt0245429
+2026-01-13 17:25:39.674 RedLemon[11313:113695] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-13 17:25:39.674 RedLemon[11313:113695] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridProvider%22%3A%22RealDebrid%22,%22DebridApiKey%22%3A%22***%22%7D/stream/movie/tt0245429.json
+2026-01-13 17:25:39.675 RedLemon[11313:113695] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridProvider%22%3A%22RealDebrid%22,%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22%7D/stream/movie/tt0245429.json
+2026-01-13 17:25:39.675 RedLemon[11313:113970] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-13 17:25:39.675 RedLemon[11313:113970] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-13 17:25:39.676 RedLemon[11313:113970] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0245429.json...
+2026-01-13 17:25:39.676 RedLemon[11313:113970] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0245429.json
+2026-01-13 17:25:39.768 RedLemon[11313:113695] 📡 Torrentio: HTTP 200, received 42291 bytes
+2026-01-13 17:25:39.793 RedLemon[11313:113695] ✅ Torrentio: Parsed 74 streams from 74 raw
+📡 SocialService: Updated status - In Lobby: Spirited Away: Spirited Away
+🔌 Setting up Realtime channel: watch-party:G4CL
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:G4CL
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Loaded metadata for Spirited Away
+✅ Lobby: Connected to Realtime
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqtKnd-ng6Avrh","phx_ref_prev":"GIpqsjboflk6Avlh","is_premium":true,"last_seen":"2026-01-13T22:25:27.770Z","room_id":"G4CL","started_at":"2026-01-13T22:25:27.770Z","status":"In Lobby: Spirited Away","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqsjboflk6Avlh","phx_ref_prev":"GIpqsQhqNvo6Avkh","is_premium":true,"last_seen":"2026-01-13T22:25:17.256Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"94E87C2E-C61F-4EB9-AF58-809CBC536B12","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":43190631,"event":"*","filter":"id=eq.G4CL","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:G4CL"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"c00fee26-f0ce-11f0-a854-ee9e47993347":{"metas":[{"phx_ref":"GIpqs3Ybkx9tb1ki","phx_ref_prev":"GIpqs2nWN6ptb1kC","is_host":true,"joined_at":1768343122.5942302,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c3511786-f0ce-11f0-a02a-ee9e47993347":{"metas":[{"phx_ref":"GIpqtK4Vl4Ztb_sh","is_host":false,"joined_at":1768343127.829057,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:G4CL"}
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+🔌 Setting up Realtime channel: watch-party:G4CL
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:G4CL, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:25:22.830417", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:25:27.889Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:25:22.830417", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:25:27.889Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c3511786-f0ce-11f0-a02a-ee9e47993347":{"metas":[{"phx_ref":"GIpqtLv1yQ9tb_tB","phx_ref_prev":"GIpqtK4Vl4Ztb_sh","is_host":false,"joined_at":1768343128.0736961,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c3511786-f0ce-11f0-a02a-ee9e47993347":{"metas":[{"phx_ref":"GIpqtK4Vl4Ztb_sh","is_host":false,"joined_at":1768343127.829057,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:25:28.216382", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:25:28.228Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3594 seconds
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "bb0de557069aa24337476989bab74715890dbd3c", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:25:38", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/3UQJ52SIYQTNG40/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:25:38.987Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_PREPARE_PLAYBACK|bb0de557069aa24337476989bab74715890dbd3c|0","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":1768343139.100037,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Cache HIT: Metadata[meta_movie_tt0245429]
+[2026-01-13T22:25:39Z] [INFO] [StreamService.swift:104] 🎬 StreamService: Starting resolution for: Spirited Away
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 3 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0245429.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⚠️ MediaFusion: HTTP 418
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+✅ Comet: Parsed 1 valid streams
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqt4LvVxM6Avth","phx_ref_prev":"GIpqs2X96iM6AvnB","is_premium":true,"last_seen":"2026-01-13T22:25:39.990Z","room_id":"G4CL","started_at":"2026-01-13T22:25:22.326Z","status":"In Lobby: Spirited Away","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"meta2026-01-13 17:25:40.343 RedLemon[11313:113734] ✅ Zilean: Got 63 results
+2026-01-13 17:25:44.930 RedLemon[11313:113734] ✅ DebridSearch: Parsed 2 streams
+2026-01-13 17:25:44.931 RedLemon[11313:113695] ✅ ProviderManager: Fetched 140 raw, returning 110 unique streams
+2026-01-13 17:25:44.932 RedLemon[11313:113695] 📦 StreamResolver: Received 1 raw streams, bucketing...
+2026-01-13 17:25:44.932 RedLemon[11313:113695] 📝 [RESOLVER] Providers Fetched ["torrentio": "1"]
+2026-01-13 17:25:45.481 RedLemon[11313:113976] 📝 [RESOLVER] Resolution Complete ["1080p": "1", "2160p": "0", "720p": "0", "selected_provider": "torrentio", "selected_title": "Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT
+👤 11 💾 10.27 GB ⚙️ RARBG"]
+2026-01-13 17:25:45.482 RedLemon[11313:113976] 📝 [RESOLVER] Host Stream Match ["hash": "bb0de557069aa24337476989bab74715890dbd3c"]
+2026-01-13 17:25:45.483 RedLemon[11313:113695] 📝 [APP] 📦 StreamService: Found 1 total streams to try (across all qualities) ["file": "StreamService.swift", "level": "INFO", "line": "279"]
+2026-01-13 17:25:47.692 RedLemon[11313:113734] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-13 17:25:47.693 RedLemon[11313:113734] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-13 17:25:47.693 RedLemon[11313:113695] 🔍 DEBUG: Processing subtitle URL: /subtitle/1967006-2450322.zip
+2026-01-13 17:25:47.693 RedLemon[11313:113970] 🔍 DEBUG: Processing subtitle URL: /subtitle/3423776-8347341.zip
+2026-01-13 17:25:47.693 RedLemon[11313:113976] 🔍 DEBUG: Processing subtitle URL: /subtitle/3120390-3132798.zip
+2026-01-13 17:25:47.693 RedLemon[11313:113695] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 17:25:47.693 RedLemon[11313:113970] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 17:25:47.693 RedLemon[11313:113734] 🔍 DEBUG: Processing subtitle URL: /subtitle/1967005-2450326.zip
+2026-01-13 17:25:47.694 RedLemon[11313:113976] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 17:25:47.694 RedLemon[11313:113734] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 17:25:47.694 RedLemon[11313:113970] 🔍 DEBUG: Processing subtitle URL: /subtitle/779699-949579.zip
+2026-01-13 17:25:47.695 RedLemon[11313:113970] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 17:25:47.696 RedLemon[11313:113619] ✅ Guest: Stream preloaded. Sending READY signal.
+2026-01-13 17:25:47.696 RedLemon[11313:113970] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 17:25:47.697 RedLemon[11313:113970]    Payload keys: position, senderId, chatUsername, chatText, type, timestamp
+2026-01-13 17:25:47.698 RedLemon[11313:113695] ✅ Realtime: Message broadcast complete
+2026-01-13 17:25:47.822 RedLemon[11313:113734] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:47.822 RedLemon[11313:113734]    Payload keys: chatText, timestamp, type, position, senderId, chatUsername
+2026-01-13 17:25:47.823 RedLemon[11313:113734] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 17:25:47.823 RedLemon[11313:113734] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 17:25:47.823 RedLemon[11313:113734] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:25:48.613 RedLemon[11313:113734] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:48.614 RedLemon[11313:113734]    Payload keys: chatText, timestamp, type, position, senderId, chatUsername
+2026-01-13 17:25:48.614 RedLemon[11313:113734] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-13 17:25:48.614 RedLemon[11313:113734] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 17:25:48.615 RedLemon[11313:113734] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:25:48.615 RedLemon[11313:113619] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2026-01-13 17:25:48.615 RedLemon[11313:113619] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing
+2026-01-13 17:25:48.742 RedLemon[11313:113619] ✅ Guest: Forced stream sync from Host (Hash: bb0de557)
+2026-01-13 17:25:48.782 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:25:48.782 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:25:51.910 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIpqujmgOhNtb1vi)
+2026-01-13 17:25:51.910 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIpqujmgOhNtb1vi)
+2026-01-13 17:25:51.943 RedLemon[11313:113619] 🎬 Guest: Fetch took 0.167s, finished countdown loop
+2026-01-13 17:25:52.072 RedLemon[11313:113619] 🎬 Guest: Starting playback after countdown
+2026-01-13 17:25:52.073 RedLemon[11313:113619] 🎬 Guest: Launching player for Spirited Away
+2026-01-13 17:25:52.173 RedLemon[11313:113619] 📡 Fetching metadata for tt0245429...
+2026-01-13 17:25:52.216 RedLemon[11313:113619] 🎬 PlayerVM: Using Playlist Metadata: S0E0
+2026-01-13 17:25:52.216 RedLemon[11313:113619] 🚀 PlayerVM: Using pre-resolved stream (Zero-Wait Start)
+2026-01-13 17:25:52.294 RedLemon[11313:113619] ✅ Stream ready, starting playback...
+2026-01-13 17:25:52.474 RedLemon[11313:113695] 📝 [PLAYER] Resumed
+2026-01-13 17:25:52.528 RedLemon[11313:113976] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi6-4.download.real-debrid.com/d/NLW2MC3B7ULO223/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv"]
+s":[{"phx_ref":"GIpqs2X96iM6AvnB","phx_ref_prev":"GIpqsfrXFbM6Algi","is_premium":true,"last_seen":"2026-01-13T22:25:22.326Z","room_id":"G4CL","started_at":"2026-01-13T22:25:22.326Z","status":"In Lobby: Spirited Away","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3584 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpquBiFlm86AvuB","phx_ref_prev":"GIpqtKnd-ng6Avrh","is_premium":true,"last_seen":"2026-01-13T22:25:42.516Z","room_id":"G4CL","started_at":"2026-01-13T22:25:27.770Z","status":"In Lobby: Spirited Away","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqtKnd-ng6Avrh","phx_ref_prev":"GIpqsjboflk6Avlh","is_premium":true,"last_seen":"2026-01-13T22:25:27.770Z","room_id":"G4CL","started_at":"2026-01-13T22:25:27.770Z","status":"In Lobby: Spirited Away","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+⚡️ StreamResolver: Optimizing for preferred hash: bb0de557069aa24337476989bab74715890dbd3c
+   ✅ Found target stream immediately. Discarding everything else.
+📊 StreamResolver: Provider Stats: [torrentio:1]
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt0245429.json
+✅ Metadata fetched from Cinemeta for tt0245429: Spirited Away (2001)
+🎯 Target title for matching: Spirited Away
+   📅 Year filter (2001): 1 → 1 streams
+🔍 Searching SubDL: tt0245429 (movie)
+   ℹ️ Fallback Name: Spirited Away (2001)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+   --- Processing Bucket: 2160p (Input: 0) ---
+   ✅ Bucket 2160p Final Count: 0
+   --- Processing Bucket: 1080p (Input: 1) ---
+   ✅ Bucket 1080p Final Count: 1
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 0) ---
+   ✅ Bucket 480p Final Count: 0
+📦 1080p Primary: Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT
+👤 11 💾 10.27 GB ⚙️ RARBG
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: bb0de557069aa24337476989bab74715890dbd3c
+✅ StreamService: Found requested stream hash! Locking selection.
+[2026-01-13T22:25:45Z] [INFO] [StreamService.swift:279] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT
+👤 11 💾 10.27 GB ⚙️ RARBG
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/bb0de557069aa24337476989bab74715890dbd3c/null/1/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv
+✅ StreamService: Resolved to: https://chi6-4.download.real-debrid.com/d/NLW2MC3B7ULO223/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT
+👤 11 💾 10.27 GB ⚙️ RARBG
+📊 Stream Size: 10.27 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_READY_FOR_PLAYBACK","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":1768343147.696653,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "bb0de557069aa24337476989bab74715890dbd3c", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:25:48", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/3UQJ52SIYQTNG40/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:25:48.719Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+📝 Guest: Marked session as started (Idempotency Lock): bb0de557069aa24337476989bab74715890dbd3c_1768343138.0
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c00fee26-f0ce-11f0-a854-ee9e47993347":{"metas":[{"phx_ref":"GIpqujmgOhNtb1vi","phx_ref_prev":"GIpqs3Ybkx9tb1ki","is_host":true,"joined_at":1768343151.6459908,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"c00fee26-f0ce-11f0-a854-ee9e47993347":{"metas":[{"phx_ref":"GIpqs3Ybkx9tb1ki","phx_ref_prev":"GIpqs2nWN6ptb1kC","is_host":true,"joined_at":1768343122.5942302,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpquj4Zhvo6Avuh","phx_ref_prev":"GIpqt4LvVxM6Avth","is_premium":true,"last_seen":"2026-01-13T22:25:51.704Z","room_id":"G4CL","started_at":"2026-01-13T22:25:51.704Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqt4LvVxM6Avth","phx_ref_prev":"GIpqs2X96iM6AvnB","is_premium":true,"last_seen":"2026-01-13T22:25:39.990Z","room_id":"G4CL","started_at":"2026-01-13T22:25:22.326Z","status":"In Lobby: Spirited Away","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3573 seconds
+✅ Cache HIT: Metadata[meta_movie_tt0245429]
+🔌 Setting up Realtime channel: watch-party:G4CL
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:G4CL, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_movie_tt0245429]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0MjM3NzYtODM0NzM0MS56aXA= [request-id: 7D199790-7AF6-4BE2-953B-83DB70AFC6A8]
+2026-01-13 17:25:52.790 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIpqumoVrW1tb_vB)
+2026-01-13 17:25:52.791 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIpqumoVrW1tb_vB)
+2026-01-13 17:25:52.804 RedLemon[11313:113694] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-13 17:25:52.804 RedLemon[11313:113694] 📝 [PLAYER] Buffering Started
+📄 Subtitle request: L3N1YnRpdGxlLzM0MjM3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3423776-8347341.zip
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c3511786-f0ce-11f0-a02a-ee9e47993347":{"metas":[{"phx_ref":"GIpqumoVrW1tb_vB","phx_ref_prev":"GIpqtLv1yQ9tb_tB","is_host":false,"joined_at":1768343152.47001,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"c3511786-f0ce-11f0-a02a-ee9e47993347":{"metas":[{"phx_ref":"GIpqtLv1yQ9tb_tB","phx_ref_prev":"GIpqtK4Vl4Ztb_sh","is_host":false,"joined_at":1768343128.0736961,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqum2qOxk6Avvh","phx_ref_prev":"GIpquBiFlm86AvuB","is_premium":true,"last_seen":"2026-01-13T22:25:52.526Z","room_id":"G4CL","started_at":"2026-01-13T22:25:52.527Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpquBiFlm86AvuB","phx_ref_prev":"GIpqtKnd-ng6Avrh","is_premium":true,"last_seen":"2026-01-13T22:25:42.516Z","room_id":"G4CL","started_at":"2026-01-13T22:25:27.770Z","status":"In Lobby: Spirited Away","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 SocialService: Updated status - online: Spirited Away
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3573 seconds
+✅ Download complete: 27086 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): Spirited.Away.2001.1080p.BluRay.srt
+📦 Extracting specific file: Spirited.Away.2001.1080p.BluRay.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMjAzOTAtMzEzMjc5OC56aXA= [request-id: 7E4DE0D6-002A-402B-9500-DBF73EAEA23C]
+2026-01-13 17:25:53.103 RedLemon[11313:113970] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:53.103 RedLemon[11313:113970]    Payload keys: position, isPlaying, timestamp, type, senderId
+2026-01-13 17:25:53.103 RedLemon[11313:113970] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 17:25:53.103 RedLemon[11313:113970] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-13 17:25:53.104 RedLemon[11313:113970] ✅ Realtime: syncCallback invoked successfully
+📄 Subtitle request: L3N1YnRpdGxlLzMxMjAz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3120390-3132798.zip
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768343152.939347,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+✅ Download complete: 36554 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): Spirited Away (2001) RM (1080p BluRay x265 Garshasp).srt
+📦 Extracting specific file: Spirited Away (2001) RM (1080p BluRay x265 Garshasp).srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzE5NjcwMDYtMjQ1MDMyMi56aXA= [request-id: 7695A2B9-8BB9-4CE4-958A-33AC83BA3EE2]
+2026-01-13 17:25:53.799 RedLemon[11313:113975] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:53.799 RedLemon[11313:113975]    Payload keys: position, isPlaying, type, senderId, timestamp
+2026-01-13 17:25:53.800 RedLemon[11313:113975] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:25:53.800 RedLemon[11313:113975] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:25:53.800 RedLemon[11313:113975] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:25:53.912 RedLemon[11313:113690] 📝 [PLAYER] File Loaded ["duration": "7472.288"]
+2026-01-13 17:25:53.925 RedLemon[11313:113975] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 17:25:53.925 RedLemon[11313:113975]    Payload keys: senderId, timestamp, isPlaying, type, position
+2026-01-13 17:25:53.926 RedLemon[11313:113970] ✅ Realtime: Message broadcast complete
+2026-01-13 17:25:54.051 RedLemon[11313:113975] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:54.051 RedLemon[11313:113975]    Payload keys: type, isPlaying, position, timestamp, senderId
+2026-01-13 17:25:54.052 RedLemon[11313:113975] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 17:25:54.052 RedLemon[11313:113975] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-13 17:25:54.052 RedLemon[11313:113975] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:25:54.374 RedLemon[11313:113976] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:54.374 RedLemon[11313:113976]    Payload keys: timestamp, senderId, type, isPlaying, position
+2026-01-13 17:25:54.375 RedLemon[11313:113976] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 17:25:54.376 RedLemon[11313:113976] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-13 17:25:54.376 RedLemon[11313:113976] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:25:54.411 RedLemon[11313:113976] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-13 17:25:55.247 RedLemon[11313:113976] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:55.247 RedLemon[11313:113976]    Payload keys: senderId, timestamp, isPlaying, position, type
+2026-01-13 17:25:55.248 RedLemon[11313:113976] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 17:25:55.248 RedLemon[11313:113976] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-13 17:25:55.248 RedLemon[11313:113976] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:25:55.836 RedLemon[11313:113734] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:55.836 RedLemon[11313:113734]    Payload keys: position, type, senderId, isPlaying, timestamp
+2026-01-13 17:25:55.837 RedLemon[11313:113734] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:25:55.837 RedLemon[11313:113734] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:25:55.837 RedLemon[11313:113734] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:25:57.853 RedLemon[11313:113694] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:57.854 RedLemon[11313:113694]    Payload keys: isPlaying, senderId, timestamp, type, position
+2026-01-13 17:25:57.854 RedLemon[11313:113694] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:25:57.855 RedLemon[11313:113694] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:25:57.855 RedLemon[11313:113694] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:25:59.863 RedLemon[11313:113976] 📨 Realtime: Received broadcast message
+2026-01-13 17:25:59.864 RedLemon[11313:113976]    Payload keys: type, isPlaying, timestamp, position, senderId
+2026-01-13 17:25:59.864 RedLemon[11313:113976] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:25:59.864 RedLemon[11313:113976] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:25:59.864 RedLemon[11313:113976] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:01.876 RedLemon[11313:113690] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:01.877 RedLemon[11313:113690]    Payload keys: senderId, isPlaying, timestamp, type, position
+2026-01-13 17:26:01.878 RedLemon[11313:113690] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:26:01.878 RedLemon[11313:113690] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:26:01.879 RedLemon[11313:113690] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:02.160 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:02.160 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:02.161 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:02.161 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:02.618 RedLemon[11313:113695] 🔐 SupabaseClient: Signing Identity Payload: '1768343162656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-13 17:26:02.618 RedLemon[11313:113695] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-13 17:26:02.869 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:02.869 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:03.496 RedLemon[11313:113694] 🔐 SupabaseClient: Signing Identity Payload: '1768343163656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-13 17:26:03.497 RedLemon[11313:113694] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-13 17:26:03.703 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:03.703 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:03.863 RedLemon[11313:113975] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:03.863 RedLemon[11313:113975]    Payload keys: timestamp, position, isPlaying, senderId, type
+2026-01-13 17:26:03.863 RedLemon[11313:113975] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:26:03.863 RedLemon[11313:113975] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:26:03.863 RedLemon[11313:113975] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:04.772 RedLemon[11313:113734] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:04.773 RedLemon[11313:113734]    Payload keys: isPlaying, type, senderId, position, timestamp
+2026-01-13 17:26:04.773 RedLemon[11313:113734] ✅ Realtime: Decoded message type: returnToLobby, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 17:26:04.773 RedLemon[11313:113734] 📞 Realtime: Invoking syncCallback for message type: returnToLobby
+2026-01-13 17:26:04.773 RedLemon[11313:113734] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:04.785 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:04.785 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+📄 Subtitle request: L3N1YnRpdGxlLzE5Njcw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/1967006-2450322.zip
+✅ Download complete: 27839 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): Spirited.Away.2001.1080p.BluRay.x264.anoXmous.eng jap soundtrack-English.srt
+📦 Extracting specific file: Spirited.Away.2001.1080p.BluRay.x264.anoXmous.eng jap soundtrack-English.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1768343153.9127312,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768343154.213793,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768343155.09776,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":1.752,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":3.629,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":5.672,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "bb0de557069aa24337476989bab74715890dbd3c", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:26:01", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/3UQJ52SIYQTNG40/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:26:02.005Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "bb0de557069aa24337476989bab74715890dbd3c", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:26:01.997743", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/3UQJ52SIYQTNG40/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:26:02.018Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3563 seconds
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "bb0de557069aa24337476989bab74715890dbd3c", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:26:02.726829", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/3UQJ52SIYQTNG40/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:26:02.737Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "bb0de557069aa24337476989bab74715890dbd3c", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:26:03.604721", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/3UQJ52SIYQTNG40/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:26:03.614Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":7.715999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:26:04", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:26:04.607Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768343164.634932,"type":"returnToLobby"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+♻️ Lobby: Room stopped playing. Resetting auto-start session ID.
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppSta2026-01-13 17:26:06.225 RedLemon[11313:113695] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-13 17:26:06.354 RedLemon[11313:113976] ❌ [17:26:06.354] [NETWORK] [SupabaseClient.swift:336] Supabase API Error: duplicate key value violates unique constraint "room_participants_pkey"
+2026-01-13 17:26:06.371 RedLemon[11313:113619] ℹ️ Lobby: Join failed with conflict (409/Duplicate) - assuming user already joined. Proceeding...
+2026-01-13 17:26:06.541 RedLemon[11313:114249] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 17:26:06.541 RedLemon[11313:114249]    Payload keys: type, timestamp, chatUsername, chatText, position, senderId
+2026-01-13 17:26:06.541 RedLemon[11313:114249] ✅ Realtime: Message broadcast complete
+2026-01-13 17:26:06.542 RedLemon[11313:113695] 🔐 SupabaseClient: Signing Identity Payload: '1768343166656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-13 17:26:06.543 RedLemon[11313:113695] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-13 17:26:06.659 RedLemon[11313:113975] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:06.660 RedLemon[11313:113975]    Payload keys: senderId, chatUsername, type, position, chatText, timestamp
+2026-01-13 17:26:06.661 RedLemon[11313:113975] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 17:26:06.661 RedLemon[11313:113975] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 17:26:06.661 RedLemon[11313:113975] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:06.706 RedLemon[11313:113619] 👋 Received: Guest 'ursinho' joined room G4CL
+2026-01-13 17:26:06.808 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:06.808 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:06.809 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:14.418 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:14.419 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:14.419 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:14.462 RedLemon[11313:114249] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:14.463 RedLemon[11313:114249]    Payload keys: position, timestamp, chatText, chatUsername, senderId, type
+2026-01-13 17:26:14.463 RedLemon[11313:114249] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-13 17:26:14.463 RedLemon[11313:114249] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 17:26:14.464 RedLemon[11313:114249] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:14.464 RedLemon[11313:113619] 🎬 Guest: Received PREPARE signal: LOBBY_PREPARE_PLAYBACK|bb0de557069aa24337476989bab74715890dbd3c|0
+2026-01-13 17:26:14.464 RedLemon[11313:113619] ✅ Guest: Extracted Hash from Payload: bb0de557069aa24337476989bab74715890dbd3c
+2026-01-13 17:26:14.653 RedLemon[11313:113976] ✅ StreamService: Using provided metadata: Spirited Away
+2026-01-13 17:26:14.653 RedLemon[11313:113976] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-13 17:26:14.653 RedLemon[11313:114249] 📝 [APP] 🎬 StreamService: Starting resolution for: Spirited Away ["file": "StreamService.swift", "level": "INFO", "line": "104"]
+2026-01-13 17:26:14.653 RedLemon[11313:113976] ⚡️ StreamResolver: Resolving streams for tt0245429 (S0E0)
+2026-01-13 17:26:14.654 RedLemon[11313:113976] 📝 [APP] New Session Started ["app_version": "1.0.76", "build": "76", "session_id": "0D5158C3-519E-4D0B-A5E3-78CF75AFDB5D", "trigger_source": "preload", "user_id": "656DAA91-33B4-4688-9135-C982EA52D7C9"]
+2026-01-13 17:26:14.654 RedLemon[11313:113976] 📝 [APP] Target Content Set ["imdb_id": "tt0245429"]
+2026-01-13 17:26:14.654 RedLemon[11313:113976] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-13 17:26:14.779 RedLemon[11313:113976]    📅 Filtering by year: 2001
+2026-01-13 17:26:14.924 RedLemon[11313:113976] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-13 17:26:14.924 RedLemon[11313:113976] 🔍 ProviderManager: Fetching streams for tt0245429...
+2026-01-13 17:26:14.924 RedLemon[11313:113690] 🔍 Zilean: Searching via IMDB ID: tt0245429
+2026-01-13 17:26:14.925 RedLemon[11313:114249] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-13 17:26:14.925 RedLemon[11313:114249] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22***%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt0245429.json
+2026-01-13 17:26:14.925 RedLemon[11313:113976] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-13 17:26:14.925 RedLemon[11313:114249] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt0245429.json
+2026-01-13 17:26:14.925 RedLemon[11313:113976] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-13 17:26:14.925 RedLemon[11313:113976] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0245429.json...
+2026-01-13 17:26:14.925 RedLemon[11313:113976] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0245429.json
+2026-01-13 17:26:14.932 RedLemon[11313:114249] 📡 Torrentio: HTTP 200, received 42291 bytes
+2026-01-13 17:26:14.957 RedLemon[11313:114249] ✅ Torrentio: Parsed 74 streams from 74 raw
+2026-01-13 17:26:15.588 RedLemon[11313:114249] ✅ Zilean: Got 63 results
+2026-01-13 17:26:22.202 RedLemon[11313:113690] ✅ DebridSearch: Parsed 2 streams
+2026-01-13 17:26:22.204 RedLemon[11313:113695] ✅ ProviderManager: Fetched 140 raw, returning 110 unique streams
+2026-01-13 17:26:22.204 RedLemon[11313:113695] 📦 StreamResolver: Received 1 raw streams, bucketing...
+2026-01-13 17:26:22.205 RedLemon[11313:113695] 📝 [RESOLVER] Providers Fetched ["torrentio": "1"]
+2026-01-13 17:26:22.451 RedLemon[11313:113695] 📝 [RESOLVER] Resolution Complete ["1080p": "1", "2160p": "0", "720p": "0", "selected_provider": "torrentio", "selected_title": "Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT
+👤 11 💾 10.27 GB ⚙️ RARBG"]
+te
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqvVn2ctw6AvxB","phx_ref_prev":"GIpquj4Zhvo6Avuh","is_premium":true,"last_seen":"2026-01-13T22:26:05.064Z","room_id":"G4CL","started_at":"2026-01-13T22:25:51.704Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpquj4Zhvo6Avuh","phx_ref_prev":"GIpqt4LvVxM6Avth","is_premium":true,"last_seen":"2026-01-13T22:25:51.704Z","room_id":"G4CL","started_at":"2026-01-13T22:25:51.704Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🧹 Cleaning up Realtime channel for room: G4CL
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+📡 Connection state: disconnected
+✅ Realtime channel cleanup complete
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"c00fee26-f0ce-11f0-a854-ee9e47993347":{"metas":[{"phx_ref":"GIpqujmgOhNtb1vi","phx_ref_prev":"GIpqs3Ybkx9tb1ki","is_host":true,"joined_at":1768343151.6459908,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: markPlaybackEnded - resetting connection status for reconnection
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:G4CL"}
+📨 Unknown event: phx_close
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"c3511786-f0ce-11f0-a02a-ee9e47993347":{"metas":[{"phx_ref":"GIpqumoVrW1tb_vB","phx_ref_prev":"GIpqtLv1yQ9tb_tB","is_host":false,"joined_at":1768343152.47001,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:G4CL"}
+🔔 Lobby: Displaying pending message: Host returned the group to the lobby.
+🔄 Lobby: Returning from playback - resetting connection status
+🎭 Lobby: Connecting to room G4CL...
+🚦 Lobby State: connecting
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqvY7lEAM6Avxh","phx_ref_prev":"GIpqvVn2ctw6AvxB","is_premium":true,"last_seen":"2026-01-13T22:26:05.961Z","room_id":"G4CL","started_at":"2026-01-13T22:26:05.961Z","status":"In Lobby: Spirited Away","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqvVn2ctw6AvxB","phx_ref_prev":"GIpquj4Zhvo6Avuh","is_premium":true,"last_seen":"2026-01-13T22:26:05.064Z","room_id":"G4CL","started_at":"2026-01-13T22:25:51.704Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 SocialService: Updated status - In Lobby: Spirited Away: Spirited Away
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqvZ3FKUk6AvyB","phx_ref_prev":"GIpqum2qOxk6Avvh","is_premium":true,"last_seen":"2026-01-13T22:26:06.226Z","room_id":"G4CL","started_at":"2026-01-13T22:26:06.226Z","status":"In Lobby: Spirited Away","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqum2qOxk6Avvh","phx_ref_prev":"GIpquBiFlm86AvuB","is_premium":true,"last_seen":"2026-01-13T22:25:52.526Z","room_id":"G4CL","started_at":"2026-01-13T22:25:52.527Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+🔌 Setting up Realtime channel: watch-party:G4CL
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:G4CL
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+📨 Received: {"ref":"33C19548-D473-4BB5-9B3F-0D2EE5DC0B27","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":43190631,"event":"*","filter":"id=eq.G4CL","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:G4CL"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"da360998-f0ce-11f0-92f7-ee9e47993347":{"metas":[{"phx_ref":"GIpqvaAt78ltb_yh","is_host":true,"joined_at":1768343166.222158,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"da5f9768-f0ce-11f0-a277-ee9e47993347":{"metas":[{"phx_ref":"GIpqvbALH75tb_2B","is_host":false,"joined_at":1768343166.512556,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:26:06.643523", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:26:06.646Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqve9LG8o6Av3B","phx_ref_prev":"GIpqvZ3FKUk6AvyB","is_premium":true,"last_seen":"2026-01-13T22:26:07.597Z","room_id":"G4CL","started_at":"2026-01-13T22:26:06.226Z","status":"In Lobby: Spirited Away","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqvZ3FKUk6AvyB","phx_ref_prev":"GIpqum2qOxk6Avvh","is_premium":true,"last_seen":"2026-01-13T22:26:06.226Z","room_id":"G4CL","started_at":"2026-01-13T22:26:06.226Z","status":"In Lobby: Spirited Away","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1526 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1526, 412 movies)
+💓 Heartbeat sent
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3553 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "bb0de557069aa24337476989bab74715890dbd3c", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:26:13", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/3UQJ52SIYQTNG40/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:26:14.211Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_PREPARE_PLAYBACK|bb0de557069aa24337476989bab74715890dbd3c|0","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":1768343174.3232188,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Cache HIT: Metadata[meta_movie_tt0245429]
+[2026-01-13T22:26:14Z] [INFO] [StreamService.swift:104] 🎬 StreamService: Starting resolution for: Spirited Away
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 3 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0245429.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+✅ Comet: Parsed 1 valid streams
+⚠️ MediaFusion: HTTP 418
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3544 seconds
+⚡️ StreamResolver: Optimizing for preferred hash: bb0de557069aa24337476989bab74715890dbd3c
+   ✅ Found target stream immediately. Discarding everything else.
+📊 StreamResolver: Provider Stats: [torrentio:1]
+✅ Metadata cache hit for tt0245429: Spirited Away
+🎯 Target title for matching: Spirited Away
+   📅 Year filter (2001): 1 → 1 streams
+🔍 Searching SubDL: tt0245429 (movie)
+   ℹ️ Fallback Name: Spirited Away (2001)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+   --- Processing Bucket: 2160p (Input: 0) ---
+   ✅ Bucket 2160p Final Count: 0
+   --- Processing Bucket: 1080p (Input: 1) ---
+   ✅ Bucket 1080p Final Count: 1
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 0) ---
+   ✅ Bucket 480p Final Count: 0
+📦 1080p Primary: Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT
+👤 11 💾 10.27 GB ⚙️ RARBG
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: bb0de557069aa24337476989bab74715890dbd3c
+✅ StreamService: Found requested strea2026-01-13 17:26:22.452 RedLemon[11313:113695] 📝 [RESOLVER] Host Stream Match ["hash": "bb0de557069aa24337476989bab74715890dbd3c"]
+2026-01-13 17:26:22.453 RedLemon[11313:113976] 📝 [APP] 📦 StreamService: Found 1 total streams to try (across all qualities) ["file": "StreamService.swift", "level": "INFO", "line": "279"]
+2026-01-13 17:26:23.272 RedLemon[11313:113976] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-13 17:26:23.272 RedLemon[11313:113976] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-13 17:26:23.273 RedLemon[11313:113695] 🔍 DEBUG: Processing subtitle URL: /subtitle/3423776-8347341.zip
+2026-01-13 17:26:23.273 RedLemon[11313:113976] 🔍 DEBUG: Processing subtitle URL: /subtitle/1967006-2450322.zip
+2026-01-13 17:26:23.273 RedLemon[11313:114338] 🔍 DEBUG: Processing subtitle URL: /subtitle/3120390-3132798.zip
+2026-01-13 17:26:23.273 RedLemon[11313:113690] 🔍 DEBUG: Processing subtitle URL: /subtitle/1967005-2450326.zip
+2026-01-13 17:26:23.273 RedLemon[11313:113695] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 17:26:23.273 RedLemon[11313:113976] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 17:26:23.273 RedLemon[11313:114338] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 17:26:23.273 RedLemon[11313:113690] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 17:26:23.273 RedLemon[11313:113976] 🔍 DEBUG: Processing subtitle URL: /subtitle/779699-949579.zip
+2026-01-13 17:26:23.273 RedLemon[11313:113976] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 17:26:23.275 RedLemon[11313:113619] ✅ Guest: Stream preloaded. Sending READY signal.
+2026-01-13 17:26:23.275 RedLemon[11313:113690] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 17:26:23.276 RedLemon[11313:113690]    Payload keys: type, chatText, position, chatUsername, senderId, timestamp
+2026-01-13 17:26:23.277 RedLemon[11313:113976] ✅ Realtime: Message broadcast complete
+2026-01-13 17:26:23.398 RedLemon[11313:113976] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:23.398 RedLemon[11313:113976]    Payload keys: timestamp, type, chatUsername, senderId, position, chatText
+2026-01-13 17:26:23.399 RedLemon[11313:113976] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 17:26:23.399 RedLemon[11313:113976] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 17:26:23.399 RedLemon[11313:113976] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:23.697 RedLemon[11313:113690] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:23.698 RedLemon[11313:113690]    Payload keys: chatText, timestamp, type, senderId, position, chatUsername
+2026-01-13 17:26:23.698 RedLemon[11313:113690] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-13 17:26:23.698 RedLemon[11313:113690] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 17:26:23.698 RedLemon[11313:113690] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:23.698 RedLemon[11313:113619] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2026-01-13 17:26:23.699 RedLemon[11313:113619] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing
+2026-01-13 17:26:23.826 RedLemon[11313:113619] ✅ Guest: Forced stream sync from Host (Hash: bb0de557)
+2026-01-13 17:26:23.874 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:23.874 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:23.874 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:27.027 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIpqwmYzNO9tb13i)
+2026-01-13 17:26:27.028 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIpqwmYzNO9tb13i)
+2026-01-13 17:26:27.028 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIpqwmYzNO9tb13i)
+2026-01-13 17:26:27.112 RedLemon[11313:113619] 🎬 Guest: Fetch took 0.168s, finished countdown loop
+2026-01-13 17:26:27.240 RedLemon[11313:113619] 🎬 Guest: Starting playback after countdown
+2026-01-13 17:26:27.240 RedLemon[11313:113619] 🎬 Guest: Launching player for Spirited Away
+2026-01-13 17:26:27.341 RedLemon[11313:113619] 📡 Fetching metadata for tt0245429...
+2026-01-13 17:26:27.392 RedLemon[11313:113619] 🎬 PlayerVM: Using Playlist Metadata: S0E0
+2026-01-13 17:26:27.392 RedLemon[11313:113619] 🚀 PlayerVM: Using pre-resolved stream (Zero-Wait Start)
+2026-01-13 17:26:27.443 RedLemon[11313:113619] ✅ Stream ready, starting playback...
+2026-01-13 17:26:27.612 RedLemon[11313:113695] 📝 [PLAYER] Resumed
+2026-01-13 17:26:27.616 RedLemon[11313:114338] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi6-4.download.real-debrid.com/d/NLW2MC3B7ULO223/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv"]
+m hash! Locking selection.
+[2026-01-13T22:26:22Z] [INFO] [StreamService.swift:279] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT
+👤 11 💾 10.27 GB ⚙️ RARBG
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/bb0de557069aa24337476989bab74715890dbd3c/null/1/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv
+✅ StreamService: Resolved to: https://chi6-4.download.real-debrid.com/d/NLW2MC3B7ULO223/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT
+👤 11 💾 10.27 GB ⚙️ RARBG
+📊 Stream Size: 10.27 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_READY_FOR_PLAYBACK","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":1768343183.27533,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📝 Guest: Marked session as started (Idempotency Lock): bb0de557069aa24337476989bab74715890dbd3c_1768343183.0
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "bb0de557069aa24337476989bab74715890dbd3c", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:26:23", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/3UQJ52SIYQTNG40/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:26:23.789Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"da360998-f0ce-11f0-92f7-ee9e47993347":{"metas":[{"phx_ref":"GIpqwmYzNO9tb13i","phx_ref_prev":"GIpqvaAt78ltb_yh","is_host":true,"joined_at":1768343186.743506,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"da360998-f0ce-11f0-92f7-ee9e47993347":{"metas":[{"phx_ref":"GIpqvaAt78ltb_yh","is_host":true,"joined_at":1768343166.222158,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqwmqyWrg6Av5h","phx_ref_prev":"GIpqvY7lEAM6Avxh","is_premium":true,"last_seen":"2026-01-13T22:26:26.802Z","room_id":"G4CL","started_at":"2026-01-13T22:26:26.802Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqvY7lEAM6Avxh","phx_ref_prev":"GIpqvVn2ctw6AvxB","is_premium":true,"last_seen":"2026-01-13T22:26:05.961Z","room_id":"G4CL","started_at":"2026-01-13T22:26:05.961Z","status":"In Lobby: Spirited Away","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Cache HIT: Metadata[meta_movie_tt0245429]
+🔌 Setting up Realtime channel: watch-party:G4CL
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:G4CL, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_movie_tt0245429]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzE5NjcwMDYtMjQ1MDMyMi56aXA= [request-id: E41898E6-4EF0-4DA4-B7FF-8F3B8BDCBDB2]
+2026-01-13 17:26:27.786 RedLemon[11313:114338] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-13 17:26:27.786 RedLemon[11313:114338] 📝 [PLAYER] Buffering Started
+2026-01-13 17:26:27.828 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIpqwpWeOpptb_7B)
+2026-01-13 17:26:27.828 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIpqwpWeOpptb_7B)
+2026-01-13 17:26:27.828 RedLemon[11313:113619] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIpqwpWeOpptb_7B)
+2026-01-13 17:26:28.159 RedLemon[11313:114338] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:28.159 RedLemon[11313:114338]    Payload keys: type, isPlaying, senderId, position, timestamp
+2026-01-13 17:26:28.160 RedLemon[11313:114338] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 17:26:28.160 RedLemon[11313:114338] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-13 17:26:28.160 RedLemon[11313:114338] ✅ Realtime: syncCallback invoked successfully
+📄 Subtitle request: L3N1YnRpdGxlLzE5Njcw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/1967006-2450322.zip
+📡 SocialService: Updated status - online: Spirited Away
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"da5f9768-f0ce-11f0-a277-ee9e47993347":{"metas":[{"phx_ref":"GIpqwpWeOpptb_7B","phx_ref_prev":"GIpqvbALH75tb_2B","is_host":false,"joined_at":1768343187.554572,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"da5f9768-f0ce-11f0-a277-ee9e47993347":{"metas":[{"phx_ref":"GIpqvbALH75tb_2B","is_host":false,"joined_at":1768343166.512556,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:G4CL"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3538 seconds
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqwpjUbC46Av7h","phx_ref_prev":"GIpqve9LG8o6Av3B","is_premium":true,"last_seen":"2026-01-13T22:26:27.612Z","room_id":"G4CL","started_at":"2026-01-13T22:26:27.612Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqve9LG8o6Av3B","phx_ref_prev":"GIpqvZ3FKUk6AvyB","is_premium":true,"last_seen":"2026-01-13T22:26:07.597Z","room_id":"G4CL","started_at":"2026-01-13T22:26:06.226Z","status":"In Lobby: Spirited Away","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768343187.7850509,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+✅ Download complete: 27839 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): Spirited.Away.2001.1080p.BluRay.x264.anoXmous.eng jap soundtrack-English.srt
+📦 Extracting specific file: Spirited.Away.2001.1080p.BluRay.x264.anoXmous.eng jap soundtrack-English.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0MjM3NzYtODM0NzM0MS56aXA= [request-id: ADBB80FD-AAE6-4CAB-AEBD-83F4866A8858]
+2026-01-13 17:26:28.673 RedLemon[11313:113690] 📝 [PLAYER] File Loaded ["duration": "7472.288"]
+2026-01-13 17:26:28.887 RedLemon[11313:113695] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:28.887 RedLemon[11313:113695]    Payload keys: isPlaying, timestamp, type, senderId, position
+2026-01-13 17:26:28.888 RedLemon[11313:113695] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:26:28.888 RedLemon[11313:113695] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:26:28.888 RedLemon[11313:113695] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:28.902 RedLemon[11313:113695] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 17:26:28.903 RedLemon[11313:113695]    Payload keys: type, timestamp, senderId, isPlaying, position
+2026-01-13 17:26:28.904 RedLemon[11313:113695] ✅ Realtime: Message broadcast complete
+📄 Subtitle request: L3N1YnRpdGxlLzM0MjM3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3423776-8347341.zip
+✅ Download complete: 27086 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): Spirited.Away.2001.1080p.BluRay.srt
+📦 Extracting specific file: Spirited.Away.2001.1080p.BluRay.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"G4CL","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMjAzOTAtMzEzMjc5OC56aXA= [request-id: 03E82B99-8836-4631-8FE2-4A6C285D93AA]
+2026-01-13 17:26:29.024 RedLemon[11313:114337] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:29.024 RedLemon[11313:114337]    Payload keys: timestamp, type, senderId, isPlaying, position
+2026-01-13 17:26:29.024 RedLemon[11313:114337] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 17:26:29.024 RedLemon[11313:114337] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-13 17:26:29.025 RedLemon[11313:114337] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:29.321 RedLemon[11313:114338] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:29.321 RedLemon[11313:114338]    Payload keys: position, senderId, isPlaying, type, timestamp
+2026-01-13 17:26:29.321 RedLemon[11313:114338] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 17:26:29.321 RedLemon[11313:114338] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-13 17:26:29.321 RedLemon[11313:114338] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:29.361 RedLemon[11313:113976] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-13 17:26:30.292 RedLemon[11313:113695] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:30.292 RedLemon[11313:113695]    Payload keys: timestamp, senderId, position, type, isPlaying
+2026-01-13 17:26:30.293 RedLemon[11313:113695] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 17:26:30.293 RedLemon[11313:113695] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-13 17:26:30.293 RedLemon[11313:113695] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:30.924 RedLemon[11313:113695] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:30.924 RedLemon[11313:113695]    Payload keys: type, senderId, isPlaying, position, timestamp
+2026-01-13 17:26:30.924 RedLemon[11313:113695] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:26:30.924 RedLemon[11313:113695] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:26:30.924 RedLemon[11313:113695] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:32.977 RedLemon[11313:113734] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:32.977 RedLemon[11313:113734]    Payload keys: isPlaying, position, timestamp, senderId, type
+2026-01-13 17:26:32.978 RedLemon[11313:113734] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:26:32.978 RedLemon[11313:113734] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:26:32.978 RedLemon[11313:113734] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:34.939 RedLemon[11313:113690] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:34.939 RedLemon[11313:113690]    Payload keys: senderId, timestamp, type, isPlaying, position
+2026-01-13 17:26:34.940 RedLemon[11313:113690] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:26:34.940 RedLemon[11313:113690] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:26:34.940 RedLemon[11313:113690] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:36.947 RedLemon[11313:113734] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:36.947 RedLemon[11313:113734]    Payload keys: senderId, timestamp, isPlaying, type, position
+2026-01-13 17:26:36.948 RedLemon[11313:113734] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:26:36.948 RedLemon[11313:113734] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:26:36.948 RedLemon[11313:113734] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:37.282 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:37.283 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:37.283 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:37.283 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:37.283 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:37.284 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:37.592 RedLemon[11313:113976] 🔐 SupabaseClient: Signing Identity Payload: '1768343197656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-13 17:26:37.592 RedLemon[11313:113976] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-13 17:26:37.871 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:37.872 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:37.872 RedLemon[11313:113619] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 17:26:38.937 RedLemon[11313:113695] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:38.938 RedLemon[11313:113695]    Payload keys: senderId, type, position, isPlaying, timestamp
+2026-01-13 17:26:38.939 RedLemon[11313:113695] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:26:38.939 RedLemon[11313:113695] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:26:38.939 RedLemon[11313:113695] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 17:26:40.942 RedLemon[11313:114338] 📨 Realtime: Received broadcast message
+2026-01-13 17:26:40.942 RedLemon[11313:114338]    Payload keys: isPlaying, type, senderId, position, timestamp
+2026-01-13 17:26:40.942 RedLemon[11313:114338] ✅ Realtime: Decoded message type: playbackState, sender: G4CL
+2026-01-13 17:26:40.942 RedLemon[11313:114338] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 17:26:40.943 RedLemon[11313:114338] ✅ Realtime: syncCallback invoked successfully
+📄 Subtitle request: L3N1YnRpdGxlLzMxMjAz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3120390-3132798.zip
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1768343188.6734428,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+✅ Download complete: 36554 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): Spirited Away (2001) RM (1080p BluRay x265 Garshasp).srt
+📦 Extracting specific file: Spirited Away (2001) RM (1080p BluRay x265 Garshasp).srt
+✅ Extraction successful
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768343189.17379,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+✅ Subtitle downloaded and converted to VTT
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768343190.0997229,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqwy38COE6Av8B","phx_ref_prev":"GIpqwmqyWrg6Av5h","is_premium":true,"last_seen":"2026-01-13T22:26:30.100Z","room_id":"G4CL","started_at":"2026-01-13T22:26:26.802Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"69698fdc-f0ce-11f0-835d-ee9e47993347":{"metas":[{"phx_ref":"GIpqwmqyWrg6Av5h","phx_ref_prev":"GIpqvY7lEAM6Avxh","is_premium":true,"last_seen":"2026-01-13T22:26:26.802Z","room_id":"G4CL","started_at":"2026-01-13T22:26:26.802Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-13 23:25:25 +0000
+⏰ AppState: Scheduling update in 3533 seconds
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqw8QdnTE6Av8h","phx_ref_prev":"GIpqwpjUbC46Av7h","is_premium":true,"last_seen":"2026-01-13T22:26:32.636Z","room_id":"G4CL","started_at":"2026-01-13T22:26:27.612Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}},"leaves":{"b9fcf89e-f0ce-11f0-9b5e-ee9e47993347":{"metas":[{"phx_ref":"GIpqwpjUbC46Av7h","phx_ref_prev":"GIpqve9LG8o6Av3B","is_premium":true,"last_seen":"2026-01-13T22:26:27.612Z","room_id":"G4CL","started_at":"2026-01-13T22:26:27.612Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0245429","watching_title":"Spirited Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":2.044,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":4.087,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":6.130999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "bb0de557069aa24337476989bab74715890dbd3c", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:26:36", "max_participants": 50, "selected_quality": "1080p", "playback_position": 6, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/3UQJ52SIYQTNG40/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:26:37.057Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "bb0de557069aa24337476989bab74715890dbd3c", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:26:37.054145", "max_participants": 50, "selected_quality": "1080p", "playback_position": 6, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/3UQJ52SIYQTNG40/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:26:37.078Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "G4CL", "name": "Spirited Away", "season": null, "episode": null, "imdb_id": "tt0245429", "playlist": [{"id": "DA4C03D6-3589-455E-80BF-C01643063ADC", "mediaItem": {"id": "tt0245429", "name": "Spirited Away", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-13T22:25:21.717709", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "bb0de557069aa24337476989bab74715890dbd3c", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-13T22:26:37.696346", "max_participants": 50, "selected_quality": "1080p", "playback_position": 6, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/3UQJ52SIYQTNG40/Spirited.Away.2001.1080p.BluRay.x264.DTS-ES-FGT.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-13T22:26:37.698Z","old_record":{"id": "G4CL"}},"ids":[43190631]},"topic":"realtime:watch-party:G4CL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":7.883,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}
+💓 Heartbeat sent
+📨 Received: {"ref":"16","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"G4CL","timestamp":9.927,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:G4CL"}

@@ -1847,6 +1847,7 @@ class MPVPlayerViewModel: ObservableObject {
             LoggingManager.shared.warn(.general, message: "Cleanup already performed, skipping")
             return
         }
+        print("DEBUG: MPVPlayerViewModel.cleanup called - forcing cleanup")
         hasCleanedUp = true
 
         LoggingManager.shared.info(.general, message: "Cleaning up MPV player...")
@@ -1959,6 +1960,11 @@ class MPVPlayerViewModel: ObservableObject {
         LoggingManager.shared.info(.videoRendering, message: "Stopping MPV playback...")
         mpvWrapper.pause() // Ensure paused state before hard stop
         mpvWrapper.stop()
+        
+        // CRITICAL FIX: Manually destroy MPV instance.
+        // This ensures the underlying libmpv instance and render context are freed 
+        // even if this ViewModel is retained by a lingering closure or cycle.
+        mpvWrapper.destroy()
     }
 
     deinit {

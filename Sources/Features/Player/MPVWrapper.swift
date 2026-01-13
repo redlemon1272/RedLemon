@@ -1396,8 +1396,10 @@ class MPVWrapper: ObservableObject {
 
     // MARK: - Enhanced Cleanup (Smooth Playback)
 
-    deinit {
-        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper deinit - cleaning up...")
+    /// Manually destroy the MPV instance and release resources.
+    /// Call this when the wrapper is no longer needed, especially if the owner might be retained.
+    func destroy() {
+        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper destroy() called - cleaning up...")
 
         // Cancel event polling FIRST with immediate effect
         eventPollingTask?.cancel()
@@ -1407,7 +1409,6 @@ class MPVWrapper: ObservableObject {
         timeUpdateTask?.cancel()
         timeUpdateTask = nil
 
-        // Clean up MPV resources
         // Clean up MPV resources
         if let handle = mpvHandle {
             // Explicitly clear render context pointer to prevent any further access
@@ -1432,11 +1433,12 @@ class MPVWrapper: ObservableObject {
             }
         }
 
-        // Clean up memory pressure monitoring
-        // memoryPressureSource?.cancel()
-        // memoryPressureSource = nil
-
         LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper cleanup complete")
+    }
+
+    deinit {
+        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper deinit")
+        destroy()
     }
 }
 

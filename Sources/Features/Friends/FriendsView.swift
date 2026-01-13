@@ -31,7 +31,7 @@ struct FriendsView: View {
 
             // Friend list
             ScrollView {
-                LazyVStack(spacing: 12) {
+                VStack(spacing: 12) {
                     if socialService.isLoading && socialService.friends.isEmpty {
                         ProgressView()
                             .padding(40)
@@ -65,7 +65,6 @@ struct FriendsView: View {
         .task {
             // Refresh friends on view appear
             await SocialService.shared.loadFriends()
-            await SocialService.shared.loadBlockedUsers()
         }
     }
 

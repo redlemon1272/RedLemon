@@ -498,7 +498,7 @@ class LobbyViewModel: ObservableObject {
                                 print("🚫 Lobby: Blocking auto-start loop. Already played session: \(sessionId)")
                             } else {
                                 print("▶️ Room already playing - auto-starting playback")
-                                autoStartSystemEvent()
+                                autoStartSystemEvent(sessionId: sessionId)
                             }
                         }
                     } else {
@@ -1309,12 +1309,21 @@ class LobbyViewModel: ObservableObject {
     // MARK: - Helper Functions
 
 
-    private func autoStartSystemEvent() {
+    func autoStartSystemEvent(sessionId: String? = nil) {
         if isHost {
             if isStarting || stateMachine.isCountingDown {
                 print("⚠️ Host is already starting, ignoring auto-start")
                 return
             }
+        }
+
+        // Prevent double start
+        if isStarting { return }
+
+        // If provided, check idempotency again (Double Check)
+        if let sid = sessionId, sid == self.lastAutoStartedSessionId {
+             print("🛑 autoStartSystemEvent: Blocking loop again (Session: \(sid))")
+             return
         }
 
         guard let appState = appState else {
@@ -1323,21 +1332,16 @@ class LobbyViewModel: ObservableObject {
         }
 
         print("🤖 Lobby: Checking auto-start for system event")
-        print("   Room ID: \(room.id)")
-        print("   Room createdAt: \(room.createdAt)")
-        print("   Current time: \(Date())")
-
-        // Calculate time until start
+        
         let now = Date()
         let timeUntilStart = room.createdAt.timeIntervalSince(now)
-
-        print("   Time until start: \(timeUntilStart)s")
 
         // CRITICAL FIX: Grace Period for Late Joiners
         // If event is already live (timeUntilStart <= 0), ensure we stay in lobby for at least 10s
         let dwellTime = now.timeIntervalSince(joinedAtTimestamp)
         let minDwellTime: TimeInterval = 10.0
 
+        // Only enforce dwell time if we haven't been authorized to auto-join yet
         if timeUntilStart <= 0 && dwellTime < minDwellTime && !canAutoJoin {
             let waitRemaining = minDwellTime - dwellTime
             print("🕒 Lobby: Event is LIVE but honoring dwell time. Waiting \(Int(waitRemaining))s...")
@@ -1347,89 +1351,77 @@ class LobbyViewModel: ObservableObject {
                 try? await Task.sleep(nanoseconds: UInt64(waitRemaining * 1_000_000_000))
                 guard let self = self else { return }
                 await MainActor.run {
-                    self.autoStartSystemEvent()
+                    self.autoStartSystemEvent(sessionId: sessionId)
                 }
             }
             return
         }
 
         if timeUntilStart > 0 {
-            // We are early! Wait for the official start time.
             print("⏳ Lobby: Event starts in \(Int(timeUntilStart))s. Waiting...")
-
             self.timeUntilStart = timeUntilStart
 
-            // Start a task to update the countdown UI
             countdownTask?.cancel()
             countdownTask = Task { [weak self] in
                 while !Task.isCancelled {
                     guard let self = self else { return }
-
                     let remaining = self.room.createdAt.timeIntervalSince(Date())
                     if remaining <= 0 {
                         self.timeUntilStart = 0
-                        self.autoStartSystemEvent() // Retry start
+                        self.autoStartSystemEvent(sessionId: sessionId)
                         return
                     } else {
                         self.timeUntilStart = remaining
                     }
-
                     try? await Task.sleep(nanoseconds: 1_000_000_000)
                 }
             }
             return
         }
 
+        // --- START PLAYBACK LOGIC ---
         print("🤖 Lobby: Auto-starting system event now")
 
-        // Calculate playback position (should be >= 0 now)
         let elapsed = now.timeIntervalSince(room.createdAt)
-
-        print("   Elapsed time: \(elapsed)s")
-        print("   Media item: \(room.mediaItem?.name ?? "nil")")
-
-        // NEW: Set event start time for dynamic seeking (instead of static timestamp)
-        // The player will recalculate the correct seek position when video is ready
+        
+        // Dynamic Seeking Setup
         appState.player.eventStartTime = room.createdAt
-        appState.player.resumeFromTimestamp = nil  // Don't use static timestamp for events
+        appState.player.resumeFromTimestamp = nil
 
-        print("   Set eventStartTime to: \(room.createdAt)")
-        print("   Current elapsed would be: \(elapsed)s (will recalculate on video ready)")
-
-        // Set starting state to update UI
         self.isStarting = true
         self.transitionState.isStarting = true
 
-        // Start playback
-        Task { [weak self] in
+         Task { [weak self] in
             guard let self = self else { return }
             // Wait a moment for the UI to settle and show "Starting..."
             try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5 seconds
 
-                if let mediaItem = self.room.mediaItem {
-                    // Fix: Ghost Stream Loop
-                    // Save Session ID so we don't auto-start this again if we return to lobby while DB is still "Playing"
-                    let sessionId = "\(self.room.selectedStreamHash ?? "")_\(self.room.lastActivity.timeIntervalSince1970)"
-                    self.lastAutoStartedSessionId = sessionId
-                    print("📝 Lobby: Marking session as auto-started: \(sessionId)")
+            if let mediaItem = self.room.mediaItem {
+                 // Idempotency Lock
+                 if let sid = sessionId {
+                     self.lastAutoStartedSessionId = sid
+                     print("📝 Lobby: Marking session as auto-started: \(sid)")
+                 } else {
+                     let calculatedSid = "\(self.room.selectedStreamHash ?? "")_\(self.room.lastActivity.timeIntervalSince1970)"
+                     self.lastAutoStartedSessionId = calculatedSid
+                     print("📝 Lobby: Marking session as auto-started (Calculated): \(calculatedSid)")
+                 }
+                 
+                 self.stopPolling()
 
-                    print("🎬 Lobby: Calling playMedia for \(mediaItem.name)")
-
-                    // Stop polling before transition
-                    self.stopPolling()
-
-                    await self.appState?.player.playMedia(
-                        mediaItem,
-                        quality: .fullHD,
-                        watchMode: .watchParty,
-                        roomId: self.room.id,
-                        isHost: false, // System is host, user is guest
-                        isEvent: self.room.type == .event
-                )
+                 await self.appState?.player.playMedia(
+                    mediaItem,
+                    quality: .fullHD,
+                    watchMode: .watchParty,
+                    roomId: self.room.id,
+                    isHost: false, // System is host, user is guest
+                    isEvent: self.room.type == .event,
+                    triggerSource: "lobby_auto_start"
+                 )
             } else {
-                print("❌ Lobby: No media item to play!")
+                 print("❌ Lobby: No media item to play!")
             }
-        }
+         }
     }
 
 

@@ -804,22 +804,16 @@ class MPVPlayerViewModel: ObservableObject {
             LoggingManager.shared.info(.general, message: "SOLO MODE: Autoplaying")
             if shouldResume {
                 LoggingManager.shared.info(.general, message: "   With resume from \(Int(resumeTime))s")
-                // Load with autoplay=true, onVideoReady will handle the seek
-                Task { @MainActor in
-                let expectedCount = min(subtitles.count, 3)
-                // Autoplay true for solo playback
-                await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
-                await SessionRecorder.shared.log(category: .player, message: "Load Video (Solo)", metadata: ["url": streamURL])
+            } else {
+                LoggingManager.shared.info(.general, message: "   Starting from beginning")
             }
-        } else {
-            LoggingManager.shared.info(.watchParty, message: "WATCH PARTY TO START: Loading PAUSED (Waiting for Ready Gate)")
-            isRefiningInitialSeek = true
+
+            // Load with autoplay=true (Solo starts immediately)
+            // onVideoReady will handle the resume seek if needed
             Task { @MainActor in
                 let expectedCount = min(subtitles.count, 3)
-                // Autoplay false because we need to wait for checks
-                await playbackService.loadVideo(url: streamURL, autoplay: false, expectedSubtitleCount: expectedCount)
-                await SessionRecorder.shared.log(category: .player, message: "Load Video (Watch Party - Paused)", metadata: ["url": streamURL])
-            }
+                await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
+                await SessionRecorder.shared.log(category: .player, message: "Load Video (Solo)", metadata: ["url": streamURL])
             }
             showWaitingForGuests = false
 

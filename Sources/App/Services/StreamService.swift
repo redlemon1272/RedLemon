@@ -52,14 +52,17 @@ actor StreamService: StreamResolving {
 
         // Block malware/non-video extensions
         let blockedExtensions = [".iso", ".exe", ".dll", ".bat", ".cmd", ".msi", ".scr", ".vbs"]
-        if blockedExtensions.contains(where: { path.hasSuffix($0) }) {
+        if let blockedExt = blockedExtensions.first(where: { path.hasSuffix($0) }) {
+            print("🚫 StreamService: Blocked restricted extension: \(blockedExt) in \(url)")
+            Task { await SessionRecorder.shared.log(category: .error, message: "Blocked Extension", metadata: ["url": url, "ext": blockedExt]) }
             return true
         }
 
         // Block Torrentio error placeholder videos
         // These indicate Real-Debrid couldn't provide the stream
         if path.contains("/videos/failed_") || path.contains("torrentio.strem.fun/videos/") {
-            print("🚫 StreamService: Detected Torrentio error placeholder video")
+            print("🚫 StreamService: Detected Torrentio error placeholder video: \(url)")
+            Task { await SessionRecorder.shared.log(category: .error, message: "Blocked Torrentio Placeholder", metadata: ["url": url]) }
             return true
         }
 
@@ -70,6 +73,7 @@ actor StreamService: StreamResolving {
              // We check for specific delimiters usually found in sample filenames
              if path.contains(".sample.") || path.contains("-sample.") || path.contains("_sample.") || path.contains(" sample.") || path.hasSuffix("-sample.mkv") || path.hasSuffix("-sample.mp4") {
                  print("🚫 StreamService: Detected Sample video: \(url)")
+                 Task { await SessionRecorder.shared.log(category: .error, message: "Blocked Sample Video", metadata: ["url": url]) }
                  return true
              }
         }
@@ -77,6 +81,7 @@ actor StreamService: StreamResolving {
         // Block Trailers
         if path.contains("trailer.") || path.contains("_trailer") || path.contains("-trailer") {
             print("🚫 StreamService: Detected Trailer video: \(url)")
+            Task { await SessionRecorder.shared.log(category: .error, message: "Blocked Trailer Video", metadata: ["url": url]) }
             return true
         }
 
@@ -651,7 +656,8 @@ actor StreamService: StreamResolving {
                  } else {
                      // FIX: Throw error instead of using invalid redirect URL (Bible: Silent Retry)
                      // The invalid resolve URL cannot be played by MPV - it's a 302 redirect
-                     print("❌ StreamService: Failed to resolve redirect URL. Stream unusable, trying next candidate.")
+                     print("❌ StreamService: Failed to resolve redirect URL (Timeout or Error). Stream unusable, trying next candidate.")
+                     await SessionRecorder.shared.log(category: .error, message: "Stream Resolution Failed", metadata: ["url": url, "error": "redirect_resolution_failed"])
                      throw APIError.invalidStream
                  }
             }
@@ -942,8 +948,8 @@ actor StreamService: StreamResolving {
         guard let urlObj = URL(string: url) else { return nil }
 
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 3.0 // 3 seconds max (Fail fast)
-        config.timeoutIntervalForResource = 3.0
+        config.timeoutIntervalForRequest = 10.0 // 10 seconds (More robust for slow networks)
+        config.timeoutIntervalForResource = 10.0
         let session = URLSession(configuration: config)
 
         var request = URLRequest(url: urlObj)
@@ -959,7 +965,7 @@ actor StreamService: StreamResolving {
             // Optimization: If HEAD timed out, GET will likely timeout too. Fail fast.
             let nsError = error as NSError
             if nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorTimedOut {
-                 print("⚠️ StreamService: HEAD request timed out after 3s. Skipping fallback.")
+                 print("⚠️ StreamService: HEAD request timed out after 10s. Skipping fallback.")
                  return nil
             }
 

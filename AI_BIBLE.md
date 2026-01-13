@@ -91,7 +91,7 @@
 
 ### 26-31: Deployment & Privacy
 26. **Automation Deadlock**: **Rule**: Use headless `build-app-debug.sh`.
-27. **Network Timeouts**: **Rule**: Fail fast (3s) on pre-flight checks.
+27. **Network Timeouts**: **Rule**: Fail fast (3s) on pre-flight checks (Health/Version). Stream Resolution allowed 10s (Debrid Latency).
 28. **UUID Case**: **Rule**: Always `.lowercased()` UUIDs for Dict keys / Realtime topics.
 29. **Privacy Trap**: **Rule**: Logs to `.applicationSupportDirectory` (Hidden), NEVER `.documentDirectory` (Prompt).
 30. **Versioning**: Strings fail sort ("1.0.60" < "59"). **Rule**: Compare `Int` Build Numbers.
@@ -693,9 +693,16 @@ Certain high-frequency logs (video rendering, mouse tracking) are throttled to m
 ### Forensic Logging Standard
 Logs must be "Forensically Complete" - a silent narrative that explains "Who, What, Why, and Result" without needing user input.
 1.  **Identity**: Every session log MUST start with `App Version`, `Build Number`, and `User ID`.
-2.  **State Mirroring**: Critical debugging events (Resolution, Unlock, Player State) MUST be mirrored to the System Console (`NSLog`) via `SessionRecorder` for real-time `tail -f` debugging.
-3.  **Cross-Boundary Context**: When handing off between subsystems (e.g., Resolver -> Player), log the exact artifact being passed (e.g., "Unlocked Filename" vs "Provider Title").
-4.  **Explicit Failure**: Never log just "Failed". Log "Failed: [Reason] [Context]". E.g., `Buffering Timeout (45s) - Connection too slow`.
+2.  **Trigger Source**: Explicitly log the `trigger_source` for every session:
+    - `"manual"`: User clicked play/join.
+    - `"lobby_auto_join"`: Database polling auto-started the session.
+    - `"lobby_auto_start"`: Lobby view model auto-started via system event.
+    - `"watch_party_sync"`: Realtime event from host started the session.
+    - `"watch_party_resolve"`: Host initiated resolution.
+    - `"preload"`: Background preloading.
+3.  **State Mirroring**: Critical debugging events (Resolution, Unlock, Player State) MUST be mirrored to the System Console (`NSLog`) via `SessionRecorder` for real-time `tail -f` debugging.
+4.  **Cross-Boundary Context**: When handing off between subsystems (e.g., Resolver -> Player), log the exact artifact being passed (e.g., "Unlocked Filename" vs "Provider Title").
+5.  **Explicit Failure**: Never log just "Failed". Log "Failed: [Reason] [Context]". E.g., `Buffering Timeout (45s) - Connection too slow`.
 
 ---
 

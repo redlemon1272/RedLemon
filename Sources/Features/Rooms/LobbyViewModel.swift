@@ -527,14 +527,13 @@ class LobbyViewModel: ObservableObject {
                                 print("🎬 Event room detected - auto-starting playback")
                                 autoStartSystemEvent()
                             } else if freshRoom.isPlaying {
-                                // Fix: Ghost Stream Loop
-                                // Check if we have already auto-started this EXACT session.
-                                // We combine StreamHash + LastActivity to create a unique Session ID.
-                                // If the Host restarts the movie, LastActivity will update, allowing a fresh start.
-                                let sessionId = "\(freshRoom.streamHash ?? "")_\(freshRoom.lastActivity.timeIntervalSince1970)"
+                                // Fix: Ghost Stream Loop (v2)
+                                // Check if we have already auto-started this stream.
+                                // We use ONLY the streamHash (not lastActivity) because lastActivity updates constantly.
+                                let sessionId = freshRoom.streamHash ?? ""
                                 
-                                if sessionId == self.lastAutoStartedSessionId {
-                                    print("🚫 Lobby: Blocking auto-start loop. Already played session: \(sessionId)")
+                                if !sessionId.isEmpty && sessionId == self.lastAutoStartedSessionId {
+                                    print("🚫 Lobby: Blocking auto-start loop. Already played stream: \(sessionId.prefix(8))")
                                 } else {
                                     print("▶️ Room already playing - auto-starting playback")
                                     autoStartSystemEvent(sessionId: sessionId)
@@ -1492,14 +1491,14 @@ class LobbyViewModel: ObservableObject {
             try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5 seconds
 
             if let mediaItem = self.room.mediaItem {
-                 // Idempotency Lock
-                 if let sid = sessionId {
+                 // Idempotency Lock (v2)
+                 // Use only streamHash (not lastActivity) - see Ghost Stream Loop fix
+                 if let sid = sessionId, !sid.isEmpty {
                      self.lastAutoStartedSessionId = sid
-                     print("📝 Lobby: Marking session as auto-started: \(sid)")
-                 } else {
-                     let calculatedSid = "\(self.room.selectedStreamHash ?? "")_\(self.room.lastActivity.timeIntervalSince1970)"
-                     self.lastAutoStartedSessionId = calculatedSid
-                     print("📝 Lobby: Marking session as auto-started (Calculated): \(calculatedSid)")
+                     print("📝 Lobby: Marking session as auto-started: \(sid.prefix(8))")
+                 } else if let hash = self.room.selectedStreamHash, !hash.isEmpty {
+                     self.lastAutoStartedSessionId = hash
+                     print("📝 Lobby: Marking session as auto-started (Hash): \(hash.prefix(8))")
                  }
                  
                  self.stopPolling()

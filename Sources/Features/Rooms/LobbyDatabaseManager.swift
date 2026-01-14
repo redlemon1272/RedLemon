@@ -168,13 +168,13 @@ class LobbyDatabaseManager: ObservableObject {
             return
         }
 
-        // 1.5. Check Idempotency (Ghost Loop Fix)
-        // If we have already started this exact session (StreamHash + LastActivity), block it.
-        // This prevents the Guest from restarting the same movie endlessly if the Host stays in the lobby.
-        // The only way to bypass this is if the Host updates 'lastActivity' (by starting a new session).
-        let sessionId = "\(roomState.streamHash ?? "")_\(roomState.lastActivity.timeIntervalSince1970)"
-        if sessionId == viewModel.lastAutoStartedSessionId {
-             // NSLog("%@", "🛑 Guest: Blocking auto-start loop. Already played session: \(sessionId)")
+        // 1.5. Check Idempotency (Ghost Loop Fix v2)
+        // If we have already started playback for this stream hash, block it.
+        // We use ONLY the streamHash (not lastActivity) because lastActivity updates constantly during playback.
+        // The only way to bypass this is if the Host changes the stream (different hash).
+        let sessionId = roomState.streamHash ?? ""
+        if !sessionId.isEmpty && sessionId == viewModel.lastAutoStartedSessionId {
+             NSLog("%@", "🛑 Guest: Blocking auto-start loop. Already played stream: \(sessionId.prefix(8))")
              return
         }
 
@@ -227,10 +227,12 @@ class LobbyDatabaseManager: ObservableObject {
             }
             
             // Mark session as started (Idempotency)
-            // We capture the state NOW, before `roomState` changes
-            let sessionId = "\(roomState.streamHash ?? "")_\(roomState.lastActivity.timeIntervalSince1970)"
-            viewModel.lastAutoStartedSessionId = sessionId
-            NSLog("✅ Guest: Idempotency Lock Set -> \(sessionId)")
+            // We use ONLY the streamHash (not lastActivity) to prevent loops when Host keeps playing
+            let sessionId = roomState.streamHash ?? ""
+            if !sessionId.isEmpty {
+                viewModel.lastAutoStartedSessionId = sessionId
+                NSLog("✅ Guest: Idempotency Lock Set -> \(sessionId.prefix(8))")
+            }
 
             NSLog("🎬 Guest: Starting playback after database fallback detection")
 

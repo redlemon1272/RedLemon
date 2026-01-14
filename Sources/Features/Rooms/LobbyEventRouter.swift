@@ -396,13 +396,16 @@ class LobbyEventRouter: ObservableObject {
         // Also ensure currentRoomId is set so PlayerVM knows we are in a room
         viewModel.appState?.player.currentRoomId = viewModel.room.id
 
-        // CRITICAL FIX: Ghost Stream Loop
+        // CRITICAL FIX: Ghost Stream Loop (v2)
         // We must cache the session ID NOW so that when the guest returns to the lobby,
         // the idempotency check knows this session has already been played.
-        let sessionId = "\(roomState.streamHash ?? "")_\(roomState.lastActivity.timeIntervalSince1970)"
+        // We use ONLY the streamHash (not lastActivity) because lastActivity updates constantly during playback.
+        let sessionId = roomState.streamHash ?? ""
         await MainActor.run {
-            viewModel.lastAutoStartedSessionId = sessionId
-            print("📝 Guest: Marked session as started (Idempotency Lock): \(sessionId)")
+            if !sessionId.isEmpty {
+                viewModel.lastAutoStartedSessionId = sessionId
+                print("📝 Guest: Marked session as started (Idempotency Lock): \(sessionId.prefix(8))")
+            }
         }
 
         // Show start message to Guest (now that we have valid media type)

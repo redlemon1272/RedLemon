@@ -55,6 +55,7 @@ class PlayerViewModel: ObservableObject {
     // Auto-Play Control
     @Published var userCancelledAutoPlay: Bool = false
     @Published var lastAutoStartedSessionId: String? = nil // Persist auto-start session ID (Guest Loop Fix)
+    @Published var playbackEndedTimestamp: Date? = nil // Persist end time to prevent grace period loops
 
     // Pre-resolved stream for Watch Party Optimization
     var preResolvedStream: Stream?

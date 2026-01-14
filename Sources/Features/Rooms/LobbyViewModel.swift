@@ -73,7 +73,15 @@ class LobbyViewModel: ObservableObject {
     var participantId: String
     private var isDisconnecting: Bool = false
     var realtimeManager: (any RealtimeService)?
-    var playbackEndedTimestamp: Date? // Made var for LobbyDatabaseManager access (Track when playback ended)
+    // Delegated to AppState.player to persist across View recreations (Guest Loop Fix)
+    var playbackEndedTimestamp: Date? {
+        get { appState?.player.playbackEndedTimestamp }
+        set { 
+            if let appState = appState {
+                appState.player.playbackEndedTimestamp = newValue
+            }
+        }
+    }
     var isLeavingExplicitly: Bool = false // Flag to track if host is explicitly leaving (vs deinit/background)
     var canAutoJoin: Bool = false // Safety flag: Made var for LobbyDatabaseManager access
     var joinedAtTimestamp: Date = Date() // Track when user actually entered this lobby instance

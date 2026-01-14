@@ -78,7 +78,16 @@ class LobbyViewModel: ObservableObject {
     var canAutoJoin: Bool = false // Safety flag: Made var for LobbyDatabaseManager access
     var joinedAtTimestamp: Date = Date() // Track when user actually entered this lobby instance
     @Published var shouldDelayConnectAfterLobbyReturn: Bool = false // Safety flag for race condition on return
-    var lastAutoStartedSessionId: String? // Track unique session (StreamHash + StartTime) to prevent loops
+    // Track unique session (StreamHash + StartTime) to prevent loops
+    // Delegated to AppState.player to persist across View recreations (Guest Loop Fix)
+    var lastAutoStartedSessionId: String? {
+        get { appState?.player.lastAutoStartedSessionId }
+        set { 
+            if let appState = appState {
+                appState.player.lastAutoStartedSessionId = newValue
+            }
+        }
+    }
 
 
     // Combine storage for Refactor Phase 1
@@ -494,22 +503,34 @@ class LobbyViewModel: ObservableObject {
                              print("📺 Lobby: Synced season/episode: S\(s)E\(e)")
                         }
 
+                        // CRITICAL FIX: Grace Period Check
+                        // If we JUST returned from playback, do not auto-start immediately.
+                        // This prevents the "Flash" where the guest returns to lobby and bounces back instantly.
+                        var isGracePeriodActive = false
+                        if let endedAt = self.playbackEndedTimestamp, Date().timeIntervalSince(endedAt) < 5.0 {
+                             print("🛑 Lobby: Ignoring auto-start on connect - Grace Period active")
+                             isGracePeriodActive = true
+                        }
+
                         // Auto-start for event rooms (always) or regular rooms that are already playing
-                        if room.type == .event {
-                            print("🎬 Event room detected - auto-starting playback")
-                            autoStartSystemEvent()
-                        } else if freshRoom.isPlaying {
-                            // Fix: Ghost Stream Loop
-                            // Check if we have already auto-started this EXACT session.
-                            // We combine StreamHash + LastActivity to create a unique Session ID.
-                            // If the Host restarts the movie, LastActivity will update, allowing a fresh start.
-                            let sessionId = "\(freshRoom.streamHash ?? "")_\(freshRoom.lastActivity.timeIntervalSince1970)"
-                            
-                            if sessionId == self.lastAutoStartedSessionId {
-                                print("🚫 Lobby: Blocking auto-start loop. Already played session: \(sessionId)")
-                            } else {
-                                print("▶️ Room already playing - auto-starting playback")
-                                autoStartSystemEvent(sessionId: sessionId)
+                        // BUT respect grace period
+                        if !isGracePeriodActive {
+                            if room.type == .event {
+                                print("🎬 Event room detected - auto-starting playback")
+                                autoStartSystemEvent()
+                            } else if freshRoom.isPlaying {
+                                // Fix: Ghost Stream Loop
+                                // Check if we have already auto-started this EXACT session.
+                                // We combine StreamHash + LastActivity to create a unique Session ID.
+                                // If the Host restarts the movie, LastActivity will update, allowing a fresh start.
+                                let sessionId = "\(freshRoom.streamHash ?? "")_\(freshRoom.lastActivity.timeIntervalSince1970)"
+                                
+                                if sessionId == self.lastAutoStartedSessionId {
+                                    print("🚫 Lobby: Blocking auto-start loop. Already played session: \(sessionId)")
+                                } else {
+                                    print("▶️ Room already playing - auto-starting playback")
+                                    autoStartSystemEvent(sessionId: sessionId)
+                                }
                             }
                         }
                     } else {

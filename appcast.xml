@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.79 -->
+        <item>
+            <title>Version 1.0.79</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix: restore vertical scrolling on Browse page for macOS 13+</li><li>fix: add filename-based blocking for hashless streams</li><li>fix: use currentStreamHash when saving watch history</li><li>fix: lowercase provider hash before blocked stream check</li><li>fix: lowercase blocked stream hashes for comparison (Landmine #37)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 23:12:15 -0500</pubDate>
+            <sparkle:version>79</sparkle:version>
+            <sparkle:shortVersionString>1.0.79</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.79.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="KdBXS54TGfgkLJaItPIC+ZmciNUjB3MkDWo3mHvsq7KDB2vmZUAwdRtS2cERtt/WDqPvt1AdG5KIVRJF8DvwBQ==" length="72840629"
+            />
+        </item>
         <!-- v1.0.78 -->
         <item>
             <title>Version 1.0.78</title>

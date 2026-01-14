@@ -227,6 +227,9 @@ class PlayerViewModel: ObservableObject {
                 }
             }
 
+            // CRITICAL: Skip remaining resolution if we already have a stream (from direct unlock)
+            if resolvedStream == nil {
+
             // GUEST OPTIMIZATION
             // First check if host's URL is still valid (RD links expire after ~30min inactivity)
             var validatedHostURL: String? = nil
@@ -453,6 +456,8 @@ class PlayerViewModel: ObservableObject {
                     throw lastError ?? APIError.noStreamsFound
                 }
             }
+
+            } // End: if resolvedStream == nil (skip if already resolved from direct unlock)
 
             }
 

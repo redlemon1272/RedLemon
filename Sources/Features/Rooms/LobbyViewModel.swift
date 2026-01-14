@@ -19,6 +19,7 @@ class LobbyViewModel: ObservableObject {
 
     @Published var isReady: Bool = false
     @Published var isStarting: Bool = false
+    @Published var isAwaitingGuests: Bool = false // FIX (v1.0.77): Track guest sync phase for better UX
 
     @Published var countdown: Int = 3
     @Published var didCopyRoomID: Bool = false
@@ -958,6 +959,7 @@ class LobbyViewModel: ObservableObject {
 
              // 3. Wait Loop (Max 15s)
              let timeout = Date().addingTimeInterval(15)
+             await MainActor.run { self.isAwaitingGuests = true } // Show "Waiting for guests..." in UI
              addMessage(.systemInfo, userName: "System", data: ["message": "Waiting for guests to synchronize stream..."])
              
              while Date() < timeout {
@@ -981,6 +983,7 @@ class LobbyViewModel: ObservableObject {
                  NSLog("⚠️ Host: Handshake timed out. Starting anyway.")
                  addMessage(.systemInfo, userName: "System", data: ["message": "Starting playback (Guest timeout exceeded)"])
              }
+             await MainActor.run { self.isAwaitingGuests = false } // Guests ready or timed out, proceed to countdown
         }
 
         // Broadcast via Realtime with error handling

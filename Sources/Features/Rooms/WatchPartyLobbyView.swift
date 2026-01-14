@@ -890,6 +890,15 @@ struct WatchPartyLobbyView: View {
                                     .foregroundColor(.white)
                             }
                             .padding()
+                        } else if viewModel.isAwaitingGuests {
+                            // FIX (v1.0.77): Show "Waiting for guests..." during handshake instead of frozen countdown
+                            HStack {
+                                ProgressView()
+                                    .scaleEffect(0.8)
+                                Text("Waiting for guests to sync...")
+                                    .foregroundColor(.white)
+                            }
+                            .padding()
                         } else if viewModel.isStarting {
                             HStack {
                                 ProgressView()

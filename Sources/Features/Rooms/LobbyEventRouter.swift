@@ -547,8 +547,44 @@ class LobbyEventRouter: ObservableObject {
         guard let mediaItem = viewModel.room.mediaItem else { return }
         
         // 4. Preload Stream
-        // Priority: Payload Hash > DB Hash > Best Match (Double Fallback)
+        // Priority: Payload Hash > DB Hash > Unlocked URL (Direct) > Best Match (Double Fallback)
         let effectiveHash = targetHash ?? roomState.streamHash
+        
+        // FIX (v1.0.77): When host's stream has no infoHash (e.g., cached DebridSearch links),
+        // use the unlocked_stream_url directly instead of resolving independently.
+        // This prevents host and guest from playing different videos (stream mismatch bug).
+        // Symptom: Guest plays old cached stream while host plays new resolved stream.
+        // Root Cause: DebridSearch streams don't have torrent hashes, so LOBBY_PREPARE_PLAYBACK
+        // sends an empty hash, causing guest to resolve independently and find a different stream.
+        if effectiveHash == nil, let hostUnlockedURL = roomState.unlockedStreamUrl, !hostUnlockedURL.isEmpty {
+            NSLog("⚡️ Guest: No stream hash available, using host's unlocked URL directly")
+            
+            // Sync the unlocked URL to the room so playMedia can use it
+            await MainActor.run {
+                viewModel.room.unlockedStreamURL = hostUnlockedURL
+                viewModel.room.selectedStreamHash = nil // Clear any stale hash
+                viewModel.room.selectedQuality = roomState.quality
+                
+                // Also update AppState's currentWatchPartyRoom if it exists
+                viewModel.appState?.player.currentWatchPartyRoom?.unlockedStreamURL = hostUnlockedURL
+                viewModel.appState?.player.currentWatchPartyRoom?.selectedStreamHash = nil
+                viewModel.appState?.player.currentWatchPartyRoom?.selectedQuality = roomState.quality
+            }
+            
+            // Skip resolution - the URL will be used directly in playMedia
+            // Report Ready immediately since we trust the host's URL
+            NSLog("✅ Guest: Using host's direct URL. Sending READY signal.")
+            let readyMsg = SyncMessage(
+                type: .chat,
+                timestamp: Date().timeIntervalSince1970,
+                isPlaying: nil,
+                senderId: viewModel.participantId,
+                chatText: "LOBBY_READY_FOR_PLAYBACK",
+                chatUsername: viewModel.appState?.currentUsername
+            )
+            try? await viewModel.realtimeManager?.sendSyncMessage(readyMsg)
+            return
+        }
         
         do {
             try await viewModel.appState?.player.preloadStream(

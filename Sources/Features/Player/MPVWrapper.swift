@@ -66,6 +66,22 @@ class MPVWrapper: ObservableObject {
 
         LoggingManager.shared.info(.videoRendering, message: "Setting up MPV with native macOS video output...")
 
+        // Fix: Explicitly set user-writable config/cache directories
+        // This prevents MPV from failing to write checks/fonts in Release builds
+        if let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+            let mpvConfigDir = appSupport.appendingPathComponent("RedLemon/mpv")
+            try? FileManager.default.createDirectory(at: mpvConfigDir, withIntermediateDirectories: true, attributes: nil)
+            
+            let configPath = mpvConfigDir.path
+            mpv_set_option_string(handle, "config", "yes")
+            mpv_set_option_string(handle, "config-dir", configPath)
+            mpv_set_option_string(handle, "icc-cache-dir", mpvConfigDir.appendingPathComponent("icc").path)
+            mpv_set_option_string(handle, "gpu-shader-cache-dir", mpvConfigDir.appendingPathComponent("shaders").path)
+            mpv_set_option_string(handle, "watch-later-directory", mpvConfigDir.appendingPathComponent("watch_later").path)
+            
+            LoggingManager.shared.debug(.videoRendering, message: "MPV Config Dir set to: \(configPath)")
+        }
+
         // Use libmpv render API with optimized settings for Intel Macs
         mpv_set_option_string(handle, "vo", "libmpv")
 

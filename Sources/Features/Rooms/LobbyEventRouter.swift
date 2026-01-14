@@ -358,12 +358,15 @@ class LobbyEventRouter: ObservableObject {
                 NSLog("❌ Guest: Cannot start playback - missing media or appState")
                 return
             }
+            // Use local room hash if available for direct unlock optimization
+            let fallbackHash = viewModel.appState?.player.currentWatchPartyRoom?.selectedStreamHash
             await appState.player.playMedia(
                 mediaItem,
                 quality: .fullHD,
                 watchMode: .watchParty,
                 roomId: viewModel.room.id,
-                isHost: false
+                isHost: false,
+                preferredStreamHash: fallbackHash  // v1.0.83: Direct unlock optimization
             )
             return
         }
@@ -537,7 +540,8 @@ class LobbyEventRouter: ObservableObject {
             roomId: viewModel.room.id,
             isHost: false,
             isEvent: (viewModel.room.type == .event),
-            triggerSource: "watch_party_sync"
+            triggerSource: "watch_party_sync",
+            preferredStreamHash: roomState.streamHash  // v1.0.83: Direct unlock optimization
         )
     }
 

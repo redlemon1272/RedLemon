@@ -75,7 +75,7 @@ struct BrowseView: View {
                 }
                 .padding()
             } else {
-                ScrollView {
+                ScrollView(.vertical, showsIndicators: true) {
                     ScrollViewReader { proxy in
                         VStack(alignment: .leading, spacing: 24) {
                             // Continue Watching section
@@ -532,6 +532,7 @@ struct BrowseView: View {
                     }
                     .padding(.horizontal)
                 }
+                .frame(height: 200) // Fixed height helps macOS gesture system with nested scroll boundaries
             }
             .padding(.top)
         }
@@ -1330,6 +1331,7 @@ struct StreamingServiceRow: View {
                     }
                     .padding(.horizontal, 8)
                 }
+                .frame(height: 240) // Fixed height helps macOS gesture system with nested scroll boundaries
             }
         }
     }
@@ -1382,6 +1384,7 @@ struct LazyStreamingServiceRow: View {
                     }
                     .padding(.horizontal, 8)
                 }
+                .frame(height: 240) // Fixed height helps macOS gesture system with nested scroll boundaries
             }
         }
         .onAppear {

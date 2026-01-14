@@ -2,332 +2,358 @@
 Translated Report (Full Report Below)
 -------------------------------------
 
-Process:               RedLemon [26799]
+Process:               RedLemon [93785]
 Path:                  /Users/USER/Desktop/*/RedLemon.app/Contents/MacOS/RedLemon
 Identifier:            com.redlemon.app
-Version:               1.0.59 (59)
+Version:               1.0.76 (76)
 Code Type:             X86-64 (Native)
-Parent Process:        Exited process [26685]
-Responsible:           Electron [482]
+Parent Process:        Exited process [93094]
+Responsible:           Electron [475]
 User ID:               501
 
-Date/Time:             2026-01-11 14:53:43.8332 -0500
+Date/Time:             2026-01-13 18:59:51.7411 -0500
 OS Version:            macOS 12.7.6 (21H1320)
 Report Version:        12
 Anonymous UUID:        C28F189C-26A5-9231-FF60-5D500339B5DA
 
 
-Time Awake Since Boot: 7900 seconds
+Time Awake Since Boot: 22000 seconds
 
 System Integrity Protection: enabled
 
-Crashed Thread:        0  Dispatch queue: com.apple.main-thread
+Crashed Thread:        18  Dispatch queue: com.apple.root.background-qos.cooperative
 
-Exception Type:        EXC_BAD_INSTRUCTION (SIGILL)
-Exception Codes:       0x0000000000000001, 0x0000000000000000
+Exception Type:        EXC_CRASH (SIGABRT)
+Exception Codes:       0x0000000000000000, 0x0000000000000000
 Exception Note:        EXC_CORPSE_NOTIFY
 
-Termination Reason:    Namespace SIGNAL, Code 4 Illegal instruction: 4
-Terminating Process:   exc handler [26799]
-
-Thread 0 Crashed::  Dispatch queue: com.apple.main-thread
-0   libswiftCore.dylib            	    0x7ff819c36ff8 closure #1 in closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 456
-1   libswiftCore.dylib            	    0x7ff819c36d0b closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 267
-2   libswiftCore.dylib            	    0x7ff819c36afd closure #1 in _assertionFailure(_:_:file:line:flags:) + 333
-3   libswiftCore.dylib            	    0x7ff819c36675 _assertionFailure(_:_:file:line:flags:) + 309
-4   libswiftCore.dylib            	    0x7ff819c1650d _ArrayBuffer._checkInoutAndNativeTypeCheckedBounds(_:wasNativeTypeChecked:) + 253
-5   libswiftCore.dylib            	    0x7ff819c19cde Array.subscript.getter + 78
-6   RedLemon                      	       0x101f3096e closure #1 in AppOnboardingView.body.getter + 1166 (AppOnboardingView.swift:78)
-7   RedLemon                      	       0x101f3113d partial apply for closure #1 in AppOnboardingView.body.getter + 13
-8   SwiftUI                       	    0x7ff91892c4c8 ZStack.init(alignment:content:) + 152
-9   RedLemon                      	       0x101f303b2 AppOnboardingView.body.getter + 978 (AppOnboardingView.swift:71)
-10  RedLemon                      	       0x101f4c347 protocol witness for View.body.getter in conformance AppOnboardingView + 55
-11  SwiftUI                       	    0x7ff917f8e6f8 partial apply for closure #1 in ViewBodyAccessor.updateBody(of:changed:) + 22
-12  SwiftUI                       	    0x7ff91833c46a closure #1 in BodyAccessor.setBody(_:) + 34
-13  SwiftUI                       	    0x7ff917f8e60f ViewBodyAccessor.updateBody(of:changed:) + 1371
-14  SwiftUI                       	    0x7ff91833ca9b DynamicBody.updateValue() + 479
-15  SwiftUI                       	    0x7ff917e1c20a partial apply for implicit closure #2 in implicit closure #1 in closure #1 in closure #1 in Attribute.init<A>(_:) + 26
-16  AttributeGraph                	    0x7ff918b88757 AG::Graph::UpdateStack::update() + 559
-17  AttributeGraph                	    0x7ff918b88d57 AG::Graph::update_attribute(AG::data::ptr<AG::Node>, unsigned int) + 421
-18  AttributeGraph                	    0x7ff918b9335e AG::Subgraph::update(unsigned int) + 904
-19  SwiftUI                       	    0x7ff9189164ab GraphHost.flushTransactions() + 495
-20  SwiftUI                       	    0x7ff918917304 closure #1 in closure #1 in closure #1 in GraphHost.asyncTransaction<A>(_:mutation:style:mayDeferUpdate:) + 15
-21  SwiftUI                       	    0x7ff917f6b6aa partial apply for closure #1 in ViewGraphDelegate.updateGraph<A>(body:) + 17
-22  SwiftUI                       	    0x7ff91877cca8 closure #1 in ViewRendererHost.updateViewGraph<A>(body:) + 69
-23  SwiftUI                       	    0x7ff91877b8df ViewRendererHost.updateViewGraph<A>(body:) + 78
-24  SwiftUI                       	    0x7ff918789cd0 protocol witness for ViewGraphDelegate.updateViewGraph<A>(body:) in conformance NSHostingView<A1> + 25
-25  SwiftUI                       	    0x7ff917f642a4 ViewGraphDelegate.updateGraph<A>(body:) + 55
-26  SwiftUI                       	    0x7ff917f6b5e3 protocol witness for GraphDelegate.updateGraph<A>(body:) in conformance NSHostingView<A1> + 25
-27  SwiftUI                       	    0x7ff9189172e0 closure #1 in GraphHost.init(data:) + 122
-28  SwiftUI                       	    0x7ff91891814e partial apply for closure #1 in closure #1 in GraphHost.asyncTransaction<A>(_:mutation:style:mayDeferUpdate:) + 19
-29  SwiftUI                       	    0x7ff917f6ce3c thunk for @escaping @callee_guaranteed () -> () + 12
-30  SwiftUI                       	    0x7ff9187fc25b partial apply for thunk for @escaping @callee_guaranteed () -> () + 17
-31  SwiftUI                       	    0x7ff9187f9b20 static NSRunLoop.flushObservers() + 118
-32  SwiftUI                       	    0x7ff9187fc1d8 closure #1 in closure #1 in static NSRunLoop.addObserver(_:) + 16
-33  SwiftUI                       	    0x7ff9187f6716 specialized thunk for @callee_guaranteed () -> (@error @owned Error) + 14
-34  libswiftObjectiveC.dylib      	    0x7ff82170ee7c autoreleasepool<A>(invoking:) + 44
-35  SwiftUI                       	    0x7ff9187fc1c0 closure #1 in static NSRunLoop.addObserver(_:) + 35
-36  SwiftUI                       	    0x7ff9187fc205 @objc closure #1 in static NSRunLoop.addObserver(_:) + 43
-37  CoreFoundation                	    0x7ff80c80c450 __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__ + 23
-38  CoreFoundation                	    0x7ff80c80c2e2 __CFRunLoopDoObservers + 543
-39  CoreFoundation                	    0x7ff80c80ade0 CFRunLoopRunSpecific + 678
-40  HIToolbox                     	    0x7ff8154bd5e6 RunCurrentEventLoopInMode + 292
-41  HIToolbox                     	    0x7ff8154bd213 ReceiveNextEventCommon + 283
-42  HIToolbox                     	    0x7ff8154bd0e5 _BlockUntilNextEventMatchingListInModeWithFilter + 70
-43  AppKit                        	    0x7ff80f249aa9 _DPSNextEvent + 927
-44  AppKit                        	    0x7ff80f248166 -[NSApplication(NSEvent) _nextEventMatchingEventMask:untilDate:inMode:dequeue:] + 1394
-45  AppKit                        	    0x7ff80f23a818 -[NSApplication run] + 586
-46  AppKit                        	    0x7ff80f20e79a NSApplicationMain + 817
-47  SwiftUI                       	    0x7ff917d5f09c specialized runApp(_:) + 161
-48  SwiftUI                       	    0x7ff9187c1424 runApp<A>(_:) + 164
-49  SwiftUI                       	    0x7ff9182b9c5f static App.main() + 63
-50  RedLemon                      	       0x101f7c7c3 static RedLemonApp.$main() + 35 (RedLemonApp.swift:31)
-51  RedLemon                      	       0x101f7c849 RedLemon_main + 9
-52  dyld                          	       0x10f68052e start + 462
-
-Thread 1:
-0   libsystem_pthread.dylib       	    0x7ff80c741f48 start_wqthread + 0
-
-Thread 2:
-0   libsystem_pthread.dylib       	    0x7ff80c741f48 start_wqthread + 0
-
-Thread 3:
-0   libsystem_pthread.dylib       	    0x7ff80c741f48 start_wqthread + 0
-
-Thread 4:
-0   libsystem_pthread.dylib       	    0x7ff80c741f48 start_wqthread + 0
-
-Thread 5:: com.apple.NSEventThread
-0   libsystem_kernel.dylib        	    0x7ff80c70993a mach_msg_trap + 10
-1   libsystem_kernel.dylib        	    0x7ff80c709ca8 mach_msg + 56
-2   CoreFoundation                	    0x7ff80c80d29d __CFRunLoopServiceMachPort + 319
-3   CoreFoundation                	    0x7ff80c80b928 __CFRunLoopRun + 1276
-4   CoreFoundation                	    0x7ff80c80ad6c CFRunLoopRunSpecific + 562
-5   AppKit                        	    0x7ff80f3b7572 _NSEventThread + 132
-6   libsystem_pthread.dylib       	    0x7ff80c7464e1 _pthread_start + 125
-7   libsystem_pthread.dylib       	    0x7ff80c741f6b thread_start + 15
-
-Thread 6:: NIO-SGLTN-0-#0
-0   libsystem_kernel.dylib        	    0x7ff80c70e30e kevent + 10
-1   RedLemon                      	       0x101d09209 @nonobjc kevent(_:_:_:_:_:_:) + 9
-2   RedLemon                      	       0x101d1312f closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 95 (System.swift:911)
-3   RedLemon                      	       0x101d13784 partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 36
-4   RedLemon                      	       0x101d09ebb syscall<A>(blocking:where:_:) + 395 (System.swift:247)
-5   RedLemon                      	       0x101d13028 static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 312 (System.swift:910)
-6   RedLemon                      	       0x101cefaf6 closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 230 (SelectorKqueue.swift:212)
-7   RedLemon                      	       0x101cf0b5f partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 15
-8   RedLemon                      	       0x101ce1a23 Optional.withUnsafeOptionalPointer<A>(_:) + 467 (SelectorGeneric.swift:31)
-9   RedLemon                      	       0x101cee30d Selector.whenReady0(strategy:onLoopBegin:_:) + 1053 (SelectorKqueue.swift:211)
-10  RedLemon                      	       0x101ce7c34 Selector.whenReady(strategy:onLoopBegin:_:) + 100 (SelectorGeneric.swift:288)
-11  RedLemon                      	       0x101cdc4ee closure #2 in SelectableEventLoop.run() + 158 (SelectableEventLoop.swift:653)
-12  RedLemon                      	       0x101cdf914 partial apply for closure #2 in SelectableEventLoop.run() + 20
-13  RedLemon                      	       0x101cd44a2 closure #1 in withAutoReleasePool<A>(_:) + 34 (SelectableEventLoop.swift:27)
-14  RedLemon                      	       0x101cd44ec partial apply for closure #1 in withAutoReleasePool<A>(_:) + 28
-15  libswiftObjectiveC.dylib      	    0x7ff82170ee7c autoreleasepool<A>(invoking:) + 44
-16  RedLemon                      	       0x101cd4449 withAutoReleasePool<A>(_:) + 57 (SelectableEventLoop.swift:26)
-17  RedLemon                      	       0x101cdb56f SelectableEventLoop.run() + 591 (SelectableEventLoop.swift:652)
-18  RedLemon                      	       0x101c7d288 static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:) + 856 (MultiThreadedEventLoopGroup.swift:93)
-19  RedLemon                      	       0x101c7d9da closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 282 (MultiThreadedEventLoopGroup.swift:111)
-20  RedLemon                      	       0x101c83cb3 partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 51
-21  RedLemon                      	       0x101d13b7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
-22  RedLemon                      	       0x101d166ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
-23  RedLemon                      	       0x101d167a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
-24  libsystem_pthread.dylib       	    0x7ff80c7464e1 _pthread_start + 125
-25  libsystem_pthread.dylib       	    0x7ff80c741f6b thread_start + 15
-
-Thread 7:: NIO-SGLTN-0-#1
-0   libsystem_kernel.dylib        	    0x7ff80c70e30e kevent + 10
-1   RedLemon                      	       0x101d09209 @nonobjc kevent(_:_:_:_:_:_:) + 9
-2   RedLemon                      	       0x101d1312f closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 95 (System.swift:911)
-3   RedLemon                      	       0x101d13784 partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 36
-4   RedLemon                      	       0x101d09ebb syscall<A>(blocking:where:_:) + 395 (System.swift:247)
-5   RedLemon                      	       0x101d13028 static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 312 (System.swift:910)
-6   RedLemon                      	       0x101cefaf6 closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 230 (SelectorKqueue.swift:212)
-7   RedLemon                      	       0x101cf0b5f partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 15
-8   RedLemon                      	       0x101ce1a23 Optional.withUnsafeOptionalPointer<A>(_:) + 467 (SelectorGeneric.swift:31)
-9   RedLemon                      	       0x101cee30d Selector.whenReady0(strategy:onLoopBegin:_:) + 1053 (SelectorKqueue.swift:211)
-10  RedLemon                      	       0x101ce7c34 Selector.whenReady(strategy:onLoopBegin:_:) + 100 (SelectorGeneric.swift:288)
-11  RedLemon                      	       0x101cdc4ee closure #2 in SelectableEventLoop.run() + 158 (SelectableEventLoop.swift:653)
-12  RedLemon                      	       0x101cdf914 partial apply for closure #2 in SelectableEventLoop.run() + 20
-13  RedLemon                      	       0x101cd44a2 closure #1 in withAutoReleasePool<A>(_:) + 34 (SelectableEventLoop.swift:27)
-14  RedLemon                      	       0x101cd44ec partial apply for closure #1 in withAutoReleasePool<A>(_:) + 28
-15  libswiftObjectiveC.dylib      	    0x7ff82170ee7c autoreleasepool<A>(invoking:) + 44
-16  RedLemon                      	       0x101cd4449 withAutoReleasePool<A>(_:) + 57 (SelectableEventLoop.swift:26)
-17  RedLemon                      	       0x101cdb56f SelectableEventLoop.run() + 591 (SelectableEventLoop.swift:652)
-18  RedLemon                      	       0x101c7d288 static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:) + 856 (MultiThreadedEventLoopGroup.swift:93)
-19  RedLemon                      	       0x101c7d9da closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 282 (MultiThreadedEventLoopGroup.swift:111)
-20  RedLemon                      	       0x101c83cb3 partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 51
-21  RedLemon                      	       0x101d13b7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
-22  RedLemon                      	       0x101d166ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
-23  RedLemon                      	       0x101d167a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
-24  libsystem_pthread.dylib       	    0x7ff80c7464e1 _pthread_start + 125
-25  libsystem_pthread.dylib       	    0x7ff80c741f6b thread_start + 15
-
-Thread 8:: NIO-SGLTN-0-#2
-0   libsystem_kernel.dylib        	    0x7ff80c70e30e kevent + 10
-1   RedLemon                      	       0x101d09209 @nonobjc kevent(_:_:_:_:_:_:) + 9
-2   RedLemon                      	       0x101d1312f closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 95 (System.swift:911)
-3   RedLemon                      	       0x101d13784 partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 36
-4   RedLemon                      	       0x101d09ebb syscall<A>(blocking:where:_:) + 395 (System.swift:247)
-5   RedLemon                      	       0x101d13028 static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 312 (System.swift:910)
-6   RedLemon                      	       0x101cefaf6 closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 230 (SelectorKqueue.swift:212)
-7   RedLemon                      	       0x101cf0b5f partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 15
-8   RedLemon                      	       0x101ce1a23 Optional.withUnsafeOptionalPointer<A>(_:) + 467 (SelectorGeneric.swift:31)
-9   RedLemon                      	       0x101cee30d Selector.whenReady0(strategy:onLoopBegin:_:) + 1053 (SelectorKqueue.swift:211)
-10  RedLemon                      	       0x101ce7c34 Selector.whenReady(strategy:onLoopBegin:_:) + 100 (SelectorGeneric.swift:288)
-11  RedLemon                      	       0x101cdc4ee closure #2 in SelectableEventLoop.run() + 158 (SelectableEventLoop.swift:653)
-12  RedLemon                      	       0x101cdf914 partial apply for closure #2 in SelectableEventLoop.run() + 20
-13  RedLemon                      	       0x101cd44a2 closure #1 in withAutoReleasePool<A>(_:) + 34 (SelectableEventLoop.swift:27)
-14  RedLemon                      	       0x101cd44ec partial apply for closure #1 in withAutoReleasePool<A>(_:) + 28
-15  libswiftObjectiveC.dylib      	    0x7ff82170ee7c autoreleasepool<A>(invoking:) + 44
-16  RedLemon                      	       0x101cd4449 withAutoReleasePool<A>(_:) + 57 (SelectableEventLoop.swift:26)
-17  RedLemon                      	       0x101cdb56f SelectableEventLoop.run() + 591 (SelectableEventLoop.swift:652)
-18  RedLemon                      	       0x101c7d288 static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:) + 856 (MultiThreadedEventLoopGroup.swift:93)
-19  RedLemon                      	       0x101c7d9da closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 282 (MultiThreadedEventLoopGroup.swift:111)
-20  RedLemon                      	       0x101c83cb3 partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 51
-21  RedLemon                      	       0x101d13b7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
-22  RedLemon                      	       0x101d166ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
-23  RedLemon                      	       0x101d167a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
-24  libsystem_pthread.dylib       	    0x7ff80c7464e1 _pthread_start + 125
-25  libsystem_pthread.dylib       	    0x7ff80c741f6b thread_start + 15
-
-Thread 9:: NIO-SGLTN-0-#3
-0   libsystem_kernel.dylib        	    0x7ff80c70e30e kevent + 10
-1   RedLemon                      	       0x101d09209 @nonobjc kevent(_:_:_:_:_:_:) + 9
-2   RedLemon                      	       0x101d1312f closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 95 (System.swift:911)
-3   RedLemon                      	       0x101d13784 partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 36
-4   RedLemon                      	       0x101d09ebb syscall<A>(blocking:where:_:) + 395 (System.swift:247)
-5   RedLemon                      	       0x101d13028 static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 312 (System.swift:910)
-6   RedLemon                      	       0x101cefaf6 closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 230 (SelectorKqueue.swift:212)
-7   RedLemon                      	       0x101cf0b5f partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 15
-8   RedLemon                      	       0x101ce1a23 Optional.withUnsafeOptionalPointer<A>(_:) + 467 (SelectorGeneric.swift:31)
-9   RedLemon                      	       0x101cee30d Selector.whenReady0(strategy:onLoopBegin:_:) + 1053 (SelectorKqueue.swift:211)
-10  RedLemon                      	       0x101ce7c34 Selector.whenReady(strategy:onLoopBegin:_:) + 100 (SelectorGeneric.swift:288)
-11  RedLemon                      	       0x101cdc4ee closure #2 in SelectableEventLoop.run() + 158 (SelectableEventLoop.swift:653)
-12  RedLemon                      	       0x101cdf914 partial apply for closure #2 in SelectableEventLoop.run() + 20
-13  RedLemon                      	       0x101cd44a2 closure #1 in withAutoReleasePool<A>(_:) + 34 (SelectableEventLoop.swift:27)
-14  RedLemon                      	       0x101cd44ec partial apply for closure #1 in withAutoReleasePool<A>(_:) + 28
-15  libswiftObjectiveC.dylib      	    0x7ff82170ee7c autoreleasepool<A>(invoking:) + 44
-16  RedLemon                      	       0x101cd4449 withAutoReleasePool<A>(_:) + 57 (SelectableEventLoop.swift:26)
-17  RedLemon                      	       0x101cdb56f SelectableEventLoop.run() + 591 (SelectableEventLoop.swift:652)
-18  RedLemon                      	       0x101c7d288 static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:) + 856 (MultiThreadedEventLoopGroup.swift:93)
-19  RedLemon                      	       0x101c7d9da closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 282 (MultiThreadedEventLoopGroup.swift:111)
-20  RedLemon                      	       0x101c83cb3 partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 51
-21  RedLemon                      	       0x101d13b7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
-22  RedLemon                      	       0x101d166ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
-23  RedLemon                      	       0x101d167a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
-24  libsystem_pthread.dylib       	    0x7ff80c7464e1 _pthread_start + 125
-25  libsystem_pthread.dylib       	    0x7ff80c741f6b thread_start + 15
-
-Thread 10:: TP-#0
-0   libsystem_kernel.dylib        	    0x7ff80c709976 semaphore_wait_trap + 10
-1   libdispatch.dylib             	    0x7ff80c58e7ce _dispatch_sema4_wait + 16
-2   libdispatch.dylib             	    0x7ff80c58ec9d _dispatch_semaphore_wait_slow + 98
-3   RedLemon                      	       0x101c8617f NIOThreadPool.process(identifier:) + 143 (NIOThreadPool.swift:186)
-4   RedLemon                      	       0x101c8704e closure #3 in NIOThreadPool._start(threadNamePrefix:) + 222 (NIOThreadPool.swift:252)
-5   RedLemon                      	       0x101d13b7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
-6   RedLemon                      	       0x101d166ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
-7   RedLemon                      	       0x101d167a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
-8   libsystem_pthread.dylib       	    0x7ff80c7464e1 _pthread_start + 125
-9   libsystem_pthread.dylib       	    0x7ff80c741f6b thread_start + 15
-
-Thread 11:: TP-#1
-0   libsystem_kernel.dylib        	    0x7ff80c709976 semaphore_wait_trap + 10
-1   libdispatch.dylib             	    0x7ff80c58e7ce _dispatch_sema4_wait + 16
-2   libdispatch.dylib             	    0x7ff80c58ec9d _dispatch_semaphore_wait_slow + 98
-3   RedLemon                      	       0x101c8617f NIOThreadPool.process(identifier:) + 143 (NIOThreadPool.swift:186)
-4   RedLemon                      	       0x101c8704e closure #3 in NIOThreadPool._start(threadNamePrefix:) + 222 (NIOThreadPool.swift:252)
-5   RedLemon                      	       0x101d13b7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
-6   RedLemon                      	       0x101d166ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
-7   RedLemon                      	       0x101d167a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
-8   libsystem_pthread.dylib       	    0x7ff80c7464e1 _pthread_start + 125
-9   libsystem_pthread.dylib       	    0x7ff80c741f6b thread_start + 15
-
-Thread 12:: TP-#2
-0   libsystem_kernel.dylib        	    0x7ff80c709976 semaphore_wait_trap + 10
-1   libdispatch.dylib             	    0x7ff80c58e7ce _dispatch_sema4_wait + 16
-2   libdispatch.dylib             	    0x7ff80c58ec9d _dispatch_semaphore_wait_slow + 98
-3   RedLemon                      	       0x101c8617f NIOThreadPool.process(identifier:) + 143 (NIOThreadPool.swift:186)
-4   RedLemon                      	       0x101c8704e closure #3 in NIOThreadPool._start(threadNamePrefix:) + 222 (NIOThreadPool.swift:252)
-5   RedLemon                      	       0x101d13b7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
-6   RedLemon                      	       0x101d166ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
-7   RedLemon                      	       0x101d167a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
-8   libsystem_pthread.dylib       	    0x7ff80c7464e1 _pthread_start + 125
-9   libsystem_pthread.dylib       	    0x7ff80c741f6b thread_start + 15
-
-Thread 13:: TP-#3
-0   libsystem_kernel.dylib        	    0x7ff80c709976 semaphore_wait_trap + 10
-1   libdispatch.dylib             	    0x7ff80c58e7ce _dispatch_sema4_wait + 16
-2   libdispatch.dylib             	    0x7ff80c58ec9d _dispatch_semaphore_wait_slow + 98
-3   RedLemon                      	       0x101c8617f NIOThreadPool.process(identifier:) + 143 (NIOThreadPool.swift:186)
-4   RedLemon                      	       0x101c8704e closure #3 in NIOThreadPool._start(threadNamePrefix:) + 222 (NIOThreadPool.swift:252)
-5   RedLemon                      	       0x101d13b7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
-6   RedLemon                      	       0x101d166ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
-7   RedLemon                      	       0x101d167a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
-8   libsystem_pthread.dylib       	    0x7ff80c7464e1 _pthread_start + 125
-9   libsystem_pthread.dylib       	    0x7ff80c741f6b thread_start + 15
-
-Thread 14:: com.apple.NSURLConnectionLoader
-0   libsystem_kernel.dylib        	    0x7ff80c70993a mach_msg_trap + 10
-1   libsystem_kernel.dylib        	    0x7ff80c709ca8 mach_msg + 56
-2   CoreFoundation                	    0x7ff80c80d29d __CFRunLoopServiceMachPort + 319
-3   CoreFoundation                	    0x7ff80c80b928 __CFRunLoopRun + 1276
-4   CoreFoundation                	    0x7ff80c80ad6c CFRunLoopRunSpecific + 562
-5   CFNetwork                     	    0x7ff811439964 0x7ff8111f1000 + 2394468
-6   Foundation                    	    0x7ff80d662724 __NSThread__start__ + 1009
-7   libsystem_pthread.dylib       	    0x7ff80c7464e1 _pthread_start + 125
-8   libsystem_pthread.dylib       	    0x7ff80c741f6b thread_start + 15
-
-Thread 15:: CVDisplayLink
-0   libsystem_kernel.dylib        	    0x7ff80c70c3aa __psynch_cvwait + 10
-1   libsystem_pthread.dylib       	    0x7ff80c746aa4 _pthread_cond_wait + 1302
-2   CoreVideo                     	    0x7ff813fede60 CVDisplayLink::waitUntil(unsigned long long) + 370
-3   CoreVideo                     	    0x7ff813fecddc CVDisplayLink::runIOThread() + 526
-4   libsystem_pthread.dylib       	    0x7ff80c7464e1 _pthread_start + 125
-5   libsystem_pthread.dylib       	    0x7ff80c741f6b thread_start + 15
+Application Specific Information:
+abort() called
 
 
-Thread 0 crashed with X86 Thread State (64-bit):
-  rax: 0x0000000000000103  rbx: 0x0000000000000001  rcx: 0x0000000000000000  rdx: 0x0000000000116920
-  rdi: 0x0000000108390080  rsi: 0x00000000e35c034a  rbp: 0x00007ff7bf073770  rsp: 0x00007ff7bf073760
-   r8: 0x000000000000d4db   r9: 0x0000000000000005  r10: 0x00007f8030100000  r11: 0x00007f80301c9a20
-  r12: 0x0000000000000002  r13: 0x0000000000000001  r14: 0x000000000000023f  r15: 0x0000000000000001
-  rip: 0x00007ff819c36ff8  rfl: 0x0000000000010206  cr2: 0x0000000000000000
+Thread 0::  Dispatch queue: com.apple.main-thread
+0   AppKit                        	    0x7ff8073d1902 DYLD-STUB$$CFArrayGetCount + 0
+1   AppKit                        	    0x7ff8069fc17e _NSGestureRecognizerUpdate + 52
+2   CoreFoundation                	    0x7ff803e4a450 __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__ + 23
+3   CoreFoundation                	    0x7ff803e4a2e2 __CFRunLoopDoObservers + 543
+4   CoreFoundation                	    0x7ff803e49897 __CFRunLoopRun + 1131
+5   CoreFoundation                	    0x7ff803e48d6c CFRunLoopRunSpecific + 562
+6   HIToolbox                     	    0x7ff80cafb5e6 RunCurrentEventLoopInMode + 292
+7   HIToolbox                     	    0x7ff80cafb34a ReceiveNextEventCommon + 594
+8   HIToolbox                     	    0x7ff80cafb0e5 _BlockUntilNextEventMatchingListInModeWithFilter + 70
+9   AppKit                        	    0x7ff806887aa9 _DPSNextEvent + 927
+10  AppKit                        	    0x7ff806886166 -[NSApplication(NSEvent) _nextEventMatchingEventMask:untilDate:inMode:dequeue:] + 1394
+11  AppKit                        	    0x7ff806878818 -[NSApplication run] + 586
+12  AppKit                        	    0x7ff80684c79a NSApplicationMain + 817
+13  SwiftUI                       	    0x7ff90f39d09c specialized runApp(_:) + 161
+14  SwiftUI                       	    0x7ff90fdff424 runApp<A>(_:) + 164
+15  SwiftUI                       	    0x7ff90f8f7c5f static App.main() + 63
+16  RedLemon                      	       0x10a018923 static RedLemonApp.$main() + 35 (RedLemonApp.swift:31)
+17  RedLemon                      	       0x10a0189a9 RedLemon_main + 9
+18  dyld                          	       0x119d1752e start + 462
+
+Thread 1:: com.apple.NSEventThread
+0   libsystem_kernel.dylib        	    0x7ff803d4793a mach_msg_trap + 10
+1   libsystem_kernel.dylib        	    0x7ff803d47ca8 mach_msg + 56
+2   SkyLight                      	    0x7ff808d5cd54 CGSSnarfAndDispatchDatagrams + 152
+3   SkyLight                      	    0x7ff809023ef2 SLSGetNextEventRecordInternal + 258
+4   SkyLight                      	    0x7ff808e6f26d SLEventCreateNextEvent + 9
+5   HIToolbox                     	    0x7ff80cb08039 PullEventsFromWindowServerOnConnection(unsigned int, unsigned char, __CFMachPortBoost*) + 45
+6   HIToolbox                     	    0x7ff80cb07fd5 MessageHandler(__CFMachPort*, void*, long, void*) + 48
+7   CoreFoundation                	    0x7ff803e784b0 __CFMachPortPerform + 250
+8   CoreFoundation                	    0x7ff803e4b854 __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE1_PERFORM_FUNCTION__ + 41
+9   CoreFoundation                	    0x7ff803e4b734 __CFRunLoopDoSource1 + 619
+10  CoreFoundation                	    0x7ff803e49d9b __CFRunLoopRun + 2415
+11  CoreFoundation                	    0x7ff803e48d6c CFRunLoopRunSpecific + 562
+12  AppKit                        	    0x7ff8069f5572 _NSEventThread + 132
+13  libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+14  libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 2:: com.apple.NSURLConnectionLoader
+0   libsystem_kernel.dylib        	    0x7ff803d4793a mach_msg_trap + 10
+1   libsystem_kernel.dylib        	    0x7ff803d47ca8 mach_msg + 56
+2   CoreFoundation                	    0x7ff803e4b29d __CFRunLoopServiceMachPort + 319
+3   CoreFoundation                	    0x7ff803e49928 __CFRunLoopRun + 1276
+4   CoreFoundation                	    0x7ff803e48d6c CFRunLoopRunSpecific + 562
+5   CFNetwork                     	    0x7ff808a77964 0x7ff80882f000 + 2394468
+6   Foundation                    	    0x7ff804ca0724 __NSThread__start__ + 1009
+7   libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+8   libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 3:: NIO-SGLTN-0-#0
+0   libsystem_kernel.dylib        	    0x7ff803d4c30e kevent + 10
+1   RedLemon                      	       0x109d5c309 @nonobjc kevent(_:_:_:_:_:_:) + 9
+2   RedLemon                      	       0x109d6622f closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 95 (System.swift:911)
+3   RedLemon                      	       0x109d66884 partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 36
+4   RedLemon                      	       0x109d5cfbb syscall<A>(blocking:where:_:) + 395 (System.swift:247)
+5   RedLemon                      	       0x109d66128 static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 312 (System.swift:910)
+6   RedLemon                      	       0x109d42bf6 closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 230 (SelectorKqueue.swift:212)
+7   RedLemon                      	       0x109d43c5f partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 15
+8   RedLemon                      	       0x109d34be2 closure #1 in Optional.withUnsafeOptionalPointer<A>(_:) + 50 (SelectorGeneric.swift:28)
+9   RedLemon                      	       0x109d34c37 partial apply for closure #1 in Optional.withUnsafeOptionalPointer<A>(_:) + 39
+10  libswiftCore.dylib            	    0x7ff81135d72c withUnsafePointer<A, B>(to:_:) + 12
+11  RedLemon                      	       0x109d34aaa Optional.withUnsafeOptionalPointer<A>(_:) + 346 (SelectorGeneric.swift:27)
+12  RedLemon                      	       0x109d4140d Selector.whenReady0(strategy:onLoopBegin:_:) + 1053 (SelectorKqueue.swift:211)
+13  RedLemon                      	       0x109d3ad34 Selector.whenReady(strategy:onLoopBegin:_:) + 100 (SelectorGeneric.swift:288)
+14  RedLemon                      	       0x109d2f5ee closure #2 in SelectableEventLoop.run() + 158 (SelectableEventLoop.swift:653)
+15  RedLemon                      	       0x109d32a14 partial apply for closure #2 in SelectableEventLoop.run() + 20
+16  RedLemon                      	       0x109d275a2 closure #1 in withAutoReleasePool<A>(_:) + 34 (SelectableEventLoop.swift:27)
+17  RedLemon                      	       0x109d275ec partial apply for closure #1 in withAutoReleasePool<A>(_:) + 28
+18  libswiftObjectiveC.dylib      	    0x7ff818d4ce7c autoreleasepool<A>(invoking:) + 44
+19  RedLemon                      	       0x109d27549 withAutoReleasePool<A>(_:) + 57 (SelectableEventLoop.swift:26)
+20  RedLemon                      	       0x109d2e66f SelectableEventLoop.run() + 591 (SelectableEventLoop.swift:652)
+21  RedLemon                      	       0x109cd0388 static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:) + 856 (MultiThreadedEventLoopGroup.swift:93)
+22  RedLemon                      	       0x109cd0ada closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 282 (MultiThreadedEventLoopGroup.swift:111)
+23  RedLemon                      	       0x109cd6db3 partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 51
+24  RedLemon                      	       0x109d66c7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
+25  RedLemon                      	       0x109d697ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
+26  RedLemon                      	       0x109d698a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
+27  libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+28  libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 4:: NIO-SGLTN-0-#1
+0   libsystem_kernel.dylib        	    0x7ff803d4c30e kevent + 10
+1   RedLemon                      	       0x109d5c309 @nonobjc kevent(_:_:_:_:_:_:) + 9
+2   RedLemon                      	       0x109d6622f closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 95 (System.swift:911)
+3   RedLemon                      	       0x109d66884 partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 36
+4   RedLemon                      	       0x109d5cfbb syscall<A>(blocking:where:_:) + 395 (System.swift:247)
+5   RedLemon                      	       0x109d66128 static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 312 (System.swift:910)
+6   RedLemon                      	       0x109d42bf6 closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 230 (SelectorKqueue.swift:212)
+7   RedLemon                      	       0x109d43c5f partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 15
+8   RedLemon                      	       0x109d34be2 closure #1 in Optional.withUnsafeOptionalPointer<A>(_:) + 50 (SelectorGeneric.swift:28)
+9   RedLemon                      	       0x109d34c37 partial apply for closure #1 in Optional.withUnsafeOptionalPointer<A>(_:) + 39
+10  libswiftCore.dylib            	    0x7ff81135d72c withUnsafePointer<A, B>(to:_:) + 12
+11  RedLemon                      	       0x109d34aaa Optional.withUnsafeOptionalPointer<A>(_:) + 346 (SelectorGeneric.swift:27)
+12  RedLemon                      	       0x109d4140d Selector.whenReady0(strategy:onLoopBegin:_:) + 1053 (SelectorKqueue.swift:211)
+13  RedLemon                      	       0x109d3ad34 Selector.whenReady(strategy:onLoopBegin:_:) + 100 (SelectorGeneric.swift:288)
+14  RedLemon                      	       0x109d2f5ee closure #2 in SelectableEventLoop.run() + 158 (SelectableEventLoop.swift:653)
+15  RedLemon                      	       0x109d32a14 partial apply for closure #2 in SelectableEventLoop.run() + 20
+16  RedLemon                      	       0x109d275a2 closure #1 in withAutoReleasePool<A>(_:) + 34 (SelectableEventLoop.swift:27)
+17  RedLemon                      	       0x109d275ec partial apply for closure #1 in withAutoReleasePool<A>(_:) + 28
+18  libswiftObjectiveC.dylib      	    0x7ff818d4ce7c autoreleasepool<A>(invoking:) + 44
+19  RedLemon                      	       0x109d27549 withAutoReleasePool<A>(_:) + 57 (SelectableEventLoop.swift:26)
+20  RedLemon                      	       0x109d2e66f SelectableEventLoop.run() + 591 (SelectableEventLoop.swift:652)
+21  RedLemon                      	       0x109cd0388 static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:) + 856 (MultiThreadedEventLoopGroup.swift:93)
+22  RedLemon                      	       0x109cd0ada closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 282 (MultiThreadedEventLoopGroup.swift:111)
+23  RedLemon                      	       0x109cd6db3 partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 51
+24  RedLemon                      	       0x109d66c7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
+25  RedLemon                      	       0x109d697ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
+26  RedLemon                      	       0x109d698a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
+27  libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+28  libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 5:: NIO-SGLTN-0-#2
+0   libsystem_kernel.dylib        	    0x7ff803d4c30e kevent + 10
+1   RedLemon                      	       0x109d5c309 @nonobjc kevent(_:_:_:_:_:_:) + 9
+2   RedLemon                      	       0x109d6622f closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 95 (System.swift:911)
+3   RedLemon                      	       0x109d66884 partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 36
+4   RedLemon                      	       0x109d5cfbb syscall<A>(blocking:where:_:) + 395 (System.swift:247)
+5   RedLemon                      	       0x109d66128 static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 312 (System.swift:910)
+6   RedLemon                      	       0x109d42bf6 closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 230 (SelectorKqueue.swift:212)
+7   RedLemon                      	       0x109d43c5f partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 15
+8   RedLemon                      	       0x109d34be2 closure #1 in Optional.withUnsafeOptionalPointer<A>(_:) + 50 (SelectorGeneric.swift:28)
+9   RedLemon                      	       0x109d34c37 partial apply for closure #1 in Optional.withUnsafeOptionalPointer<A>(_:) + 39
+10  libswiftCore.dylib            	    0x7ff81135d72c withUnsafePointer<A, B>(to:_:) + 12
+11  RedLemon                      	       0x109d34aaa Optional.withUnsafeOptionalPointer<A>(_:) + 346 (SelectorGeneric.swift:27)
+12  RedLemon                      	       0x109d4140d Selector.whenReady0(strategy:onLoopBegin:_:) + 1053 (SelectorKqueue.swift:211)
+13  RedLemon                      	       0x109d3ad34 Selector.whenReady(strategy:onLoopBegin:_:) + 100 (SelectorGeneric.swift:288)
+14  RedLemon                      	       0x109d2f5ee closure #2 in SelectableEventLoop.run() + 158 (SelectableEventLoop.swift:653)
+15  RedLemon                      	       0x109d32a14 partial apply for closure #2 in SelectableEventLoop.run() + 20
+16  RedLemon                      	       0x109d275a2 closure #1 in withAutoReleasePool<A>(_:) + 34 (SelectableEventLoop.swift:27)
+17  RedLemon                      	       0x109d275ec partial apply for closure #1 in withAutoReleasePool<A>(_:) + 28
+18  libswiftObjectiveC.dylib      	    0x7ff818d4ce7c autoreleasepool<A>(invoking:) + 44
+19  RedLemon                      	       0x109d27549 withAutoReleasePool<A>(_:) + 57 (SelectableEventLoop.swift:26)
+20  RedLemon                      	       0x109d2e66f SelectableEventLoop.run() + 591 (SelectableEventLoop.swift:652)
+21  RedLemon                      	       0x109cd0388 static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:) + 856 (MultiThreadedEventLoopGroup.swift:93)
+22  RedLemon                      	       0x109cd0ada closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 282 (MultiThreadedEventLoopGroup.swift:111)
+23  RedLemon                      	       0x109cd6db3 partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 51
+24  RedLemon                      	       0x109d66c7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
+25  RedLemon                      	       0x109d697ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
+26  RedLemon                      	       0x109d698a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
+27  libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+28  libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 6:: NIO-SGLTN-0-#3
+0   libsystem_kernel.dylib        	    0x7ff803d4c30e kevent + 10
+1   RedLemon                      	       0x109d5c309 @nonobjc kevent(_:_:_:_:_:_:) + 9
+2   RedLemon                      	       0x109d6622f closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 95 (System.swift:911)
+3   RedLemon                      	       0x109d66884 partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 36
+4   RedLemon                      	       0x109d5cfbb syscall<A>(blocking:where:_:) + 395 (System.swift:247)
+5   RedLemon                      	       0x109d66128 static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:) + 312 (System.swift:910)
+6   RedLemon                      	       0x109d42bf6 closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 230 (SelectorKqueue.swift:212)
+7   RedLemon                      	       0x109d43c5f partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:) + 15
+8   RedLemon                      	       0x109d34be2 closure #1 in Optional.withUnsafeOptionalPointer<A>(_:) + 50 (SelectorGeneric.swift:28)
+9   RedLemon                      	       0x109d34c37 partial apply for closure #1 in Optional.withUnsafeOptionalPointer<A>(_:) + 39
+10  libswiftCore.dylib            	    0x7ff81135d72c withUnsafePointer<A, B>(to:_:) + 12
+11  RedLemon                      	       0x109d34aaa Optional.withUnsafeOptionalPointer<A>(_:) + 346 (SelectorGeneric.swift:27)
+12  RedLemon                      	       0x109d4140d Selector.whenReady0(strategy:onLoopBegin:_:) + 1053 (SelectorKqueue.swift:211)
+13  RedLemon                      	       0x109d3ad34 Selector.whenReady(strategy:onLoopBegin:_:) + 100 (SelectorGeneric.swift:288)
+14  RedLemon                      	       0x109d2f5ee closure #2 in SelectableEventLoop.run() + 158 (SelectableEventLoop.swift:653)
+15  RedLemon                      	       0x109d32a14 partial apply for closure #2 in SelectableEventLoop.run() + 20
+16  RedLemon                      	       0x109d275a2 closure #1 in withAutoReleasePool<A>(_:) + 34 (SelectableEventLoop.swift:27)
+17  RedLemon                      	       0x109d275ec partial apply for closure #1 in withAutoReleasePool<A>(_:) + 28
+18  libswiftObjectiveC.dylib      	    0x7ff818d4ce7c autoreleasepool<A>(invoking:) + 44
+19  RedLemon                      	       0x109d27549 withAutoReleasePool<A>(_:) + 57 (SelectableEventLoop.swift:26)
+20  RedLemon                      	       0x109d2e66f SelectableEventLoop.run() + 591 (SelectableEventLoop.swift:652)
+21  RedLemon                      	       0x109cd0388 static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:) + 856 (MultiThreadedEventLoopGroup.swift:93)
+22  RedLemon                      	       0x109cd0ada closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 282 (MultiThreadedEventLoopGroup.swift:111)
+23  RedLemon                      	       0x109cd6db3 partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:) + 51
+24  RedLemon                      	       0x109d66c7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
+25  RedLemon                      	       0x109d697ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
+26  RedLemon                      	       0x109d698a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
+27  libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+28  libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 7:: TP-#0
+0   libsystem_kernel.dylib        	    0x7ff803d47976 semaphore_wait_trap + 10
+1   libdispatch.dylib             	    0x7ff803bcc7ce _dispatch_sema4_wait + 16
+2   libdispatch.dylib             	    0x7ff803bccc9d _dispatch_semaphore_wait_slow + 98
+3   RedLemon                      	       0x109cd927f NIOThreadPool.process(identifier:) + 143 (NIOThreadPool.swift:186)
+4   RedLemon                      	       0x109cda14e closure #3 in NIOThreadPool._start(threadNamePrefix:) + 222 (NIOThreadPool.swift:252)
+5   RedLemon                      	       0x109d66c7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
+6   RedLemon                      	       0x109d697ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
+7   RedLemon                      	       0x109d698a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
+8   libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+9   libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 8:: TP-#1
+0   libsystem_kernel.dylib        	    0x7ff803d47976 semaphore_wait_trap + 10
+1   libdispatch.dylib             	    0x7ff803bcc7ce _dispatch_sema4_wait + 16
+2   libdispatch.dylib             	    0x7ff803bccc9d _dispatch_semaphore_wait_slow + 98
+3   RedLemon                      	       0x109cd927f NIOThreadPool.process(identifier:) + 143 (NIOThreadPool.swift:186)
+4   RedLemon                      	       0x109cda14e closure #3 in NIOThreadPool._start(threadNamePrefix:) + 222 (NIOThreadPool.swift:252)
+5   RedLemon                      	       0x109d66c7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
+6   RedLemon                      	       0x109d697ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
+7   RedLemon                      	       0x109d698a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
+8   libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+9   libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 9:: TP-#2
+0   libsystem_kernel.dylib        	    0x7ff803d47976 semaphore_wait_trap + 10
+1   libdispatch.dylib             	    0x7ff803bcc7ce _dispatch_sema4_wait + 16
+2   libdispatch.dylib             	    0x7ff803bccc9d _dispatch_semaphore_wait_slow + 98
+3   RedLemon                      	       0x109cd927f NIOThreadPool.process(identifier:) + 143 (NIOThreadPool.swift:186)
+4   RedLemon                      	       0x109cda14e closure #3 in NIOThreadPool._start(threadNamePrefix:) + 222 (NIOThreadPool.swift:252)
+5   RedLemon                      	       0x109d66c7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
+6   RedLemon                      	       0x109d697ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
+7   RedLemon                      	       0x109d698a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
+8   libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+9   libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 10:: TP-#3
+0   libsystem_kernel.dylib        	    0x7ff803d47976 semaphore_wait_trap + 10
+1   libdispatch.dylib             	    0x7ff803bcc7ce _dispatch_sema4_wait + 16
+2   libdispatch.dylib             	    0x7ff803bccc9d _dispatch_semaphore_wait_slow + 98
+3   RedLemon                      	       0x109cd927f NIOThreadPool.process(identifier:) + 143 (NIOThreadPool.swift:186)
+4   RedLemon                      	       0x109cda14e closure #3 in NIOThreadPool._start(threadNamePrefix:) + 222 (NIOThreadPool.swift:252)
+5   RedLemon                      	       0x109d66c7f thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> () + 15
+6   RedLemon                      	       0x109d697ef closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 1007 (ThreadPosix.swift:116)
+7   RedLemon                      	       0x109d698a9 @objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:) + 9
+8   libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+9   libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 11:
+0   libsystem_pthread.dylib       	    0x7ff803d7ff48 start_wqthread + 0
+
+Thread 12:
+0   libsystem_pthread.dylib       	    0x7ff803d7ff48 start_wqthread + 0
+
+Thread 13:
+0   libsystem_pthread.dylib       	    0x7ff803d7ff48 start_wqthread + 0
+
+Thread 14::  Dispatch queue: com.apple.CFNetwork.LoaderQ
+0   libobjc.A.dylib               	    0x7ff803c1723c objc_msgSend + 60
+1   CFNetwork                     	    0x7ff80884fc14 0x7ff80882f000 + 134164
+2   CFNetwork                     	    0x7ff80884c330 0x7ff80882f000 + 119600
+3   CFNetwork                     	    0x7ff8089cb527 0x7ff80882f000 + 1688871
+4   CFNetwork                     	    0x7ff8088cb2f5 0x7ff80882f000 + 639733
+5   libdispatch.dylib             	    0x7ff803bcb0cc _dispatch_call_block_and_release + 12
+6   libdispatch.dylib             	    0x7ff803bcc317 _dispatch_client_callout + 8
+7   libdispatch.dylib             	    0x7ff803bd2317 _dispatch_lane_serial_drain + 672
+8   libdispatch.dylib             	    0x7ff803bd2e30 _dispatch_lane_invoke + 417
+9   libdispatch.dylib             	    0x7ff803bd40f6 _dispatch_workloop_invoke + 1987
+10  libdispatch.dylib             	    0x7ff803bdceee _dispatch_workloop_worker_thread + 753
+11  libsystem_pthread.dylib       	    0x7ff803d80fd0 _pthread_wqthread + 326
+12  libsystem_pthread.dylib       	    0x7ff803d7ff57 start_wqthread + 15
+
+Thread 15:: worker
+0   libsystem_kernel.dylib        	    0x7ff803d4a3aa __psynch_cvwait + 10
+1   libsystem_pthread.dylib       	    0x7ff803d84a6f _pthread_cond_wait + 1249
+2   libmpv.2.dylib                	       0x110d8247d worker_thread + 173
+3   libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+4   libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 16:: com.apple.coremedia.rootQueue.47
+0   libsystem_kernel.dylib        	    0x7ff803d4798e semaphore_timedwait_trap + 10
+1   libdispatch.dylib             	    0x7ff803bcc848 _dispatch_sema4_timedwait + 72
+2   libdispatch.dylib             	    0x7ff803bccc75 _dispatch_semaphore_wait_slow + 58
+3   libdispatch.dylib             	    0x7ff803bdb8ef _dispatch_worker_thread + 308
+4   libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+5   libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 17:: AMCP Logging Spool
+0   libsystem_kernel.dylib        	    0x7ff803d47976 semaphore_wait_trap + 10
+1   caulk                         	    0x7ff80c8882e6 caulk::mach::semaphore::wait_or_error() + 16
+2   caulk                         	    0x7ff80c870148 caulk::concurrent::details::worker_thread::run() + 36
+3   caulk                         	    0x7ff80c86fe0c void* caulk::thread_proxy<std::__1::tuple<caulk::thread::attributes, void (caulk::concurrent::details::worker_thread::*)(), std::__1::tuple<caulk::concurrent::details::worker_thread*> > >(void*) + 41
+4   libsystem_pthread.dylib       	    0x7ff803d844e1 _pthread_start + 125
+5   libsystem_pthread.dylib       	    0x7ff803d7ff6b thread_start + 15
+
+Thread 18 Crashed::  Dispatch queue: com.apple.root.background-qos.cooperative
+0   libsystem_kernel.dylib        	    0x7ff803d4dfce __pthread_kill + 10
+1   libsystem_pthread.dylib       	    0x7ff803d841ff pthread_kill + 263
+2   libsystem_c.dylib             	    0x7ff803ccfd14 abort + 123
+3   libmpv.2.dylib                	       0x110e498dd mp_clients_destroy.cold.1 + 29
+4   libmpv.2.dylib                	       0x110d9903d mp_clients_destroy + 77
+5   libmpv.2.dylib                	       0x110db7bdd mp_destroy + 93
+6   libmpv.2.dylib                	       0x110d99e73 mp_destroy_client + 1043
+7   RedLemon                      	       0x10a9f40be (1) suspend resume partial function for closure #1 in MPVWrapper.destroy() + 302 (MPVWrapper.swift:1427)
+8   RedLemon                      	       0x10a9f54d1 (1) await resume partial function for partial apply for closure #1 in MPVWrapper.destroy() + 1
+
+Thread 19:
+0   libsystem_pthread.dylib       	    0x7ff803d7ff48 start_wqthread + 0
+
+Thread 20:
+0   libsystem_pthread.dylib       	    0x7ff803d7ff48 start_wqthread + 0
+
+Thread 21:
+0   libsystem_pthread.dylib       	    0x7ff803d7ff48 start_wqthread + 0
+
+Thread 22:
+0   libsystem_pthread.dylib       	    0x7ff803d7ff48 start_wqthread + 0
+
+
+Thread 18 crashed with X86 Thread State (64-bit):
+  rax: 0x0000000000000000  rbx: 0x0000700006d0a000  rcx: 0x0000700006d09c18  rdx: 0x0000000000000000
+  rdi: 0x000000000001d12b  rsi: 0x0000000000000006  rbp: 0x0000700006d09c40  rsp: 0x0000700006d09c18
+   r8: 0x00007f81e6da9848   r9: 0x0000000000000000  r10: 0x0000000000000000  r11: 0x0000000000000246
+  r12: 0x000000000001d12b  r13: 0x00007f81e73c57e8  r14: 0x0000000000000006  r15: 0x0000000000000016
+  rip: 0x00007ff803d4dfce  rfl: 0x0000000000000246  cr2: 0x0000000000000000
   
 Logical CPU:     0
-Error Code:      0x00000000 
-Trap Number:     6
+Error Code:      0x02000148 
+Trap Number:     133
 
-Thread 0 instruction stream:
-  8d 05 2a 0b 42 00 48 8d-3d 67 9f 41 00 48 8d 0d  ..*.B.H.=g.A.H..
-  7c a2 41 00 be 0b 00 00-00 41 b8 39 00 00 00 ba  |.A......A.9....
-  02 00 00 00 41 b9 02 00-00 00 6a 01 6a 5e e9 fb  ....A.....j.j^..
-  fe ff ff 4d 85 d2 79 4a-48 be ff ff ff 7f ff ff  ...M..yJH.......
-  ff ff 49 39 f2 7f 44 48-83 ec 08 48 8d 05 6e 9f  ..I9..DH...H..n.
-  41 00 48 8d 3d 1b 9f 41-00 48 8d 0d 80 9f 41 00  A.H.=..A.H....A.
-  be 0b 00 00 00 41 b8 2b-00 00 00 ba 02 00 00 00  .....A.+........
-  41 b9 02 00 00 00 6a 01-68 e6 0d 00 00 e9 0e ff  A.....j.h.......
-  ff ff 49 39 f2 0f 83 cf-fe ff ff 4c 8b 5d 10 4c  ..I9.......L.].L
-  89 de 48 c1 ee 20 75 22-8b 5d 18 48 89 d7 89 ce  ..H.. u".].H....
-  4c 89 c2 44 89 c9 49 89-c0 45 89 d1 53 41 53 e8  L..D..I..E..SAS.
-  7c 26 36 00 48 83 c4 10-0f]0b 48 83 ec 08 48 8d  |&6.H.....H...H.	<==
 
 Binary Images:
-    0x7ff819c04000 -     0x7ff81a07dfff libswiftCore.dylib (*) <222d44bb-076b-3be8-a051-cddfc2b961dc> /usr/lib/swift/libswiftCore.dylib
-       0x100e82000 -        0x1037fdfff com.redlemon.app (1.0.59) <299dc480-4956-3e49-8a33-960c24323cab> /Users/USER/Desktop/*/RedLemon.app/Contents/MacOS/RedLemon
-    0x7ff917ce3000 -     0x7ff918b82fff com.apple.SwiftUI (3.5.2) <4270a4c3-e15f-3953-8f17-abb3b351219f> /System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI
-    0x7ff918b83000 -     0x7ff918bb9fff com.apple.AttributeGraph (3.2.1) <e9337c46-2775-39dc-ae3d-14ccf80d629f> /System/Library/PrivateFrameworks/AttributeGraph.framework/Versions/A/AttributeGraph
-    0x7ff82170e000 -     0x7ff82170ffff libswiftObjectiveC.dylib (*) <ad175d32-3dba-3e98-bed0-f37aedd82ff6> /usr/lib/swift/libswiftObjectiveC.dylib
-    0x7ff80c78d000 -     0x7ff80cc8ffff com.apple.CoreFoundation (6.9) <fdd28505-5456-3c40-a5ba-7890b064db39> /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
-    0x7ff81548f000 -     0x7ff815782fff com.apple.HIToolbox (2.1.1) <913d3d2e-4e4c-3907-98fe-8f4abd551297> /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox
-    0x7ff80f20b000 -     0x7ff81009afff com.apple.AppKit (6.9) <5dd484cf-ed6a-3633-b42e-6518aeecd5b9> /System/Library/Frameworks/AppKit.framework/Versions/C/AppKit
-       0x10f67b000 -        0x10f6e6fff dyld (*) <eea022bb-a6ab-3cd1-8ac1-54ce8cfd3333> /usr/lib/dyld
-    0x7ff80c740000 -     0x7ff80c74bfff libsystem_pthread.dylib (*) <5a5f7316-85b7-315e-baf3-76211ee65604> /usr/lib/system/libsystem_pthread.dylib
-    0x7ff80c708000 -     0x7ff80c73ffff libsystem_kernel.dylib (*) <2fe67e94-4a5e-3506-9e02-502f7270f7ef> /usr/lib/system/libsystem_kernel.dylib
-    0x7ff80c58b000 -     0x7ff80c5d1fff libdispatch.dylib (*) <37860d89-d337-3140-8973-ac199acbc361> /usr/lib/system/libdispatch.dylib
-    0x7ff8111f1000 -     0x7ff81167ffff com.apple.CFNetwork (1335.5) <1498ec5d-cbe9-352b-8b10-030e042445c5> /System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork
-    0x7ff80d60a000 -     0x7ff80d9c6fff com.apple.Foundation (6.9) <61133096-d5f9-34bd-94b1-1e526ea018b1> /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
-    0x7ff813feb000 -     0x7ff81403cfff com.apple.CoreVideo (1.8) <fe89c8c7-c939-3115-afdb-7a6190835819> /System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo
+    0x7ff806849000 -     0x7ff8076d8fff com.apple.AppKit (6.9) <5dd484cf-ed6a-3633-b42e-6518aeecd5b9> /System/Library/Frameworks/AppKit.framework/Versions/C/AppKit
+    0x7ff803dcb000 -     0x7ff8042cdfff com.apple.CoreFoundation (6.9) <fdd28505-5456-3c40-a5ba-7890b064db39> /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+    0x7ff80cacd000 -     0x7ff80cdc0fff com.apple.HIToolbox (2.1.1) <913d3d2e-4e4c-3907-98fe-8f4abd551297> /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/HIToolbox
+    0x7ff90f321000 -     0x7ff9101c0fff com.apple.SwiftUI (3.5.2) <4270a4c3-e15f-3953-8f17-abb3b351219f> /System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI
+       0x108ed2000 -        0x10b8fdfff com.redlemon.app (1.0.76) <c1caaacb-093e-35e3-b352-6e61f008c954> /Users/USER/Desktop/*/RedLemon.app/Contents/MacOS/RedLemon
+       0x119d12000 -        0x119d7dfff dyld (*) <eea022bb-a6ab-3cd1-8ac1-54ce8cfd3333> /usr/lib/dyld
+    0x7ff803d46000 -     0x7ff803d7dfff libsystem_kernel.dylib (*) <2fe67e94-4a5e-3506-9e02-502f7270f7ef> /usr/lib/system/libsystem_kernel.dylib
+    0x7ff808d53000 -     0x7ff8090f1fff com.apple.SkyLight (1.600.0) <02f1d11d-315c-3bbe-934a-d58ba3cedbe5> /System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight
+    0x7ff803d7e000 -     0x7ff803d89fff libsystem_pthread.dylib (*) <5a5f7316-85b7-315e-baf3-76211ee65604> /usr/lib/system/libsystem_pthread.dylib
+    0x7ff80882f000 -     0x7ff808cbdfff com.apple.CFNetwork (1335.5) <1498ec5d-cbe9-352b-8b10-030e042445c5> /System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork
+    0x7ff804c48000 -     0x7ff805004fff com.apple.Foundation (6.9) <61133096-d5f9-34bd-94b1-1e526ea018b1> /System/Library/Frameworks/Foundation.framework/Versions/C/Foundation
+    0x7ff811242000 -     0x7ff8116bbfff libswiftCore.dylib (*) <222d44bb-076b-3be8-a051-cddfc2b961dc> /usr/lib/swift/libswiftCore.dylib
+    0x7ff818d4c000 -     0x7ff818d4dfff libswiftObjectiveC.dylib (*) <ad175d32-3dba-3e98-bed0-f37aedd82ff6> /usr/lib/swift/libswiftObjectiveC.dylib
+    0x7ff803bc9000 -     0x7ff803c0ffff libdispatch.dylib (*) <37860d89-d337-3140-8973-ac199acbc361> /usr/lib/system/libdispatch.dylib
+    0x7ff803c10000 -     0x7ff803c4afff libobjc.A.dylib (*) <b36a2b52-68a9-3e44-b927-71c24be1272f> /usr/lib/libobjc.A.dylib
+       0x110cdb000 -        0x110f9afff libmpv.2.dylib (*) <e355e4d8-dcc6-3439-90d2-abf0776cc6ac> /Users/USER/Desktop/*/RedLemon.app/Contents/Frameworks/libmpv.2.dylib
+    0x7ff80c86e000 -     0x7ff80c88ffff com.apple.audio.caulk (1.0) <f04b5c91-d0ec-33c6-8a81-b80a3ebf827f> /System/Library/PrivateFrameworks/caulk.framework/Versions/A/caulk
+    0x7ff803c4e000 -     0x7ff803cd6fff libsystem_c.dylib (*) <202d7260-ea46-3956-a471-19c9bcf45274> /usr/lib/system/libsystem_c.dylib
 
 External Modification Summary:
   Calls made by other processes targeting this process:
@@ -345,47 +371,49 @@ External Modification Summary:
 
 VM Region Summary:
 ReadOnly portion of Libraries: Total=1.3G resident=0K(0%) swapped_out_or_unallocated=1.3G(100%)
-Writable regions: Total=161.9M written=0K(0%) resident=0K(0%) swapped_out=0K(0%) unallocated=161.9M(100%)
+Writable regions: Total=239.5M written=0K(0%) resident=0K(0%) swapped_out=0K(0%) unallocated=239.5M(100%)
 
                                 VIRTUAL   REGION 
 REGION TYPE                        SIZE    COUNT (non-coalesced) 
 ===========                     =======  ======= 
-Accelerate framework               256K        2 
+Accelerate framework               384K        3 
 Activity Tracing                   256K        1 
 CG backing stores                 1920K        4 
-CG image                           280K        8 
-CG raster data                     348K       15 
-ColorSync                          220K       26 
-CoreAnimation                     1904K       57 
+CG image                           228K       14 
+CG raster data                     220K       26 
+ColorSync                          228K       28 
+CoreAnimation                     1980K       41 
 CoreGraphics                        12K        2 
-CoreUI image data                 1916K       14 
+CoreUI image data                 1328K       10 
 Dispatch continuations            32.0M        1 
 Foundation                          16K        1 
 IOKit                             7940K        1 
-Image IO                          2200K        3 
+Image IO                          2344K       18 
 Kernel Alloc Once                    8K        1 
-MALLOC                            68.4M       84 
-MALLOC guard page                   48K        8 
-SQLite page cache                  320K        5 
-STACK GUARD                       56.1M       16 
-Stack                             15.6M       16 
-VM_ALLOCATE                       3116K       10 
+MALLOC                           122.0M      165 
+MALLOC guard page                   48K       11 
+OpenGL GLSL                        384K        5 
+SQLite page cache                 1024K       16 
+STACK GUARD                       56.1M       23 
+Stack                             19.2M       24 
+VM_ALLOCATE                       13.5M       41 
 __CTF                               756        1 
-__DATA                            55.1M      602 
-__DATA_CONST                      33.3M      406 
-__DATA_DIRTY                      1651K      202 
+__DATA                            55.4M      611 
+__DATA_CONST                      33.7M      416 
+__DATA_DIRTY                      1658K      205 
 __FONT_DATA                          4K        1 
-__LINKEDIT                       729.5M       83 
+__GLSLBUILTINS                    5176K        1 
+__LINKEDIT                       730.6M       85 
 __OBJC_RO                         82.9M        1 
 __OBJC_RW                         3200K        2 
-__TEXT                           592.9M      605 
+__TEXT                           604.0M      615 
 __UNICODE                          592K        1 
 dyld private memory               1024K        3 
-libnetwork                        13.6M       40 
-mapped file                      165.5M       32 
-shared memory                     2840K       22 
+libnetwork                        14.6M       48 
+mapped file                      344.1M       38 
+shared memory                      9.8M       29 
 ===========                     =======  ======= 
-TOTAL                              1.8G     2276 
+TOTAL                              2.1G     2493 
 
 
 
@@ -393,104 +421,62 @@ TOTAL                              1.8G     2276
 Full Report
 -----------
 
-{"app_name":"RedLemon","timestamp":"2026-01-11 14:54:05.00 -0500","app_version":"1.0.59","slice_uuid":"299dc480-4956-3e49-8a33-960c24323cab","build_version":"59","platform":1,"bundleID":"com.redlemon.app","share_with_app_devs":0,"is_first_party":0,"bug_type":"309","os_version":"macOS 12.7.6 (21H1320)","incident_id":"5AA4F1C6-32BD-423A-BA41-6A0BC0622EE7","name":"RedLemon"}
+{"app_name":"RedLemon","timestamp":"2026-01-13 19:00:09.00 -0500","app_version":"1.0.76","slice_uuid":"c1caaacb-093e-35e3-b352-6e61f008c954","build_version":"76","platform":1,"bundleID":"com.redlemon.app","share_with_app_devs":0,"is_first_party":0,"bug_type":"309","os_version":"macOS 12.7.6 (21H1320)","incident_id":"0AB0EA5F-011F-4636-84CA-A327905507D9","name":"RedLemon"}
 {
-  "uptime" : 7900,
-  "procLaunch" : "2026-01-11 14:53:26.1122 -0500",
+  "uptime" : 22000,
+  "procLaunch" : "2026-01-13 18:54:40.0292 -0500",
   "procRole" : "Foreground",
   "version" : 2,
   "userID" : 501,
   "deployVersion" : 210,
   "modelCode" : "MacBookPro12,1",
-  "procStartAbsTime" : 7956876233625,
-  "coalitionID" : 562,
+  "procStartAbsTime" : 22552513921695,
+  "coalitionID" : 545,
   "osVersion" : {
     "train" : "macOS 12.7.6",
     "build" : "21H1320",
     "releaseType" : "User"
   },
-  "captureTime" : "2026-01-11 14:53:43.8332 -0500",
-  "incident" : "5AA4F1C6-32BD-423A-BA41-6A0BC0622EE7",
+  "captureTime" : "2026-01-13 18:59:51.7411 -0500",
+  "incident" : "0AB0EA5F-011F-4636-84CA-A327905507D9",
   "bug_type" : "309",
-  "pid" : 26799,
-  "procExitAbsTime" : 7974474836663,
+  "pid" : 93785,
+  "procExitAbsTime" : 22864171103918,
   "cpuType" : "X86-64",
   "procName" : "RedLemon",
   "procPath" : "\/Users\/USER\/Desktop\/*\/RedLemon.app\/Contents\/MacOS\/RedLemon",
-  "bundleInfo" : {"CFBundleShortVersionString":"1.0.59","CFBundleVersion":"59","CFBundleIdentifier":"com.redlemon.app"},
+  "bundleInfo" : {"CFBundleShortVersionString":"1.0.76","CFBundleVersion":"76","CFBundleIdentifier":"com.redlemon.app"},
   "storeInfo" : {"deviceIdentifierForVendor":"7507F017-DDD6-5FDF-B711-BDBB2B3F58A9","thirdParty":true},
   "parentProc" : "Exited process",
-  "parentPid" : 26685,
+  "parentPid" : 93094,
   "coalitionName" : "com.google.antigravity",
   "crashReporterKey" : "C28F189C-26A5-9231-FF60-5D500339B5DA",
-  "responsiblePid" : 482,
+  "responsiblePid" : 475,
   "responsibleProc" : "Electron",
   "sip" : "enabled",
   "isCorpse" : 1,
-  "exception" : {"codes":"0x0000000000000001, 0x0000000000000000","rawCodes":[1,0],"type":"EXC_BAD_INSTRUCTION","signal":"SIGILL"},
-  "termination" : {"flags":0,"code":4,"namespace":"SIGNAL","indicator":"Illegal instruction: 4","byProc":"exc handler","byPid":26799},
+  "exception" : {"codes":"0x0000000000000000, 0x0000000000000000","rawCodes":[0,0],"type":"EXC_CRASH","signal":"SIGABRT"},
+  "asi" : {"libsystem_c.dylib":["abort() called"]},
   "extMods" : {"caller":{"thread_create":0,"thread_set_state":0,"task_for_pid":0},"system":{"thread_create":0,"thread_set_state":0,"task_for_pid":0},"targeted":{"thread_create":0,"thread_set_state":0,"task_for_pid":0},"warnings":0},
-  "faultingThread" : 0,
-  "threads" : [{"triggered":true,"id":139057,"instructionState":{"instructionStream":{"bytes":[141,5,42,11,66,0,72,141,61,103,159,65,0,72,141,13,124,162,65,0,190,11,0,0,0,65,184,57,0,0,0,186,2,0,0,0,65,185,2,0,0,0,106,1,106,94,233,251,254,255,255,77,133,210,121,74,72,190,255,255,255,127,255,255,255,255,73,57,242,127,68,72,131,236,8,72,141,5,110,159,65,0,72,141,61,27,159,65,0,72,141,13,128,159,65,0,190,11,0,0,0,65,184,43,0,0,0,186,2,0,0,0,65,185,2,0,0,0,106,1,104,230,13,0,0,233,14,255,255,255,73,57,242,15,131,207,254,255,255,76,139,93,16,76,137,222,72,193,238,32,117,34,139,93,24,72,137,215,137,206,76,137,194,68,137,201,73,137,192,69,137,209,83,65,83,232,124,38,54,0,72,131,196,16,15,11,72,131,236,8,72,141],"offset":184}},"threadState":{"r13":{"value":1},"rax":{"value":259},"rflags":{"value":66054},"cpu":{"value":0},"r14":{"value":575},"rsi":{"value":3814458186},"r8":{"value":54491},"cr2":{"value":0},"rdx":{"value":1141024},"r10":{"value":140188538896384},"r9":{"value":5},"r15":{"value":1},"rbx":{"value":1},"trap":{"value":6},"err":{"value":0},"r11":{"value":140188539722272},"rip":{"value":140703560855544,"matchesCrashFrame":1},"rbp":{"value":140702038570864},"rsp":{"value":140702038570848},"r12":{"value":2},"rcx":{"value":0},"flavor":"x86_THREAD_STATE","rdi":{"value":4432920704}},"queue":"com.apple.main-thread","frames":[{"imageOffset":208888,"symbol":"closure #1 in closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:)","symbolLocation":456,"imageIndex":0},{"imageOffset":208139,"symbol":"closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:)","symbolLocation":267,"imageIndex":0},{"imageOffset":207613,"symbol":"closure #1 in _assertionFailure(_:_:file:line:flags:)","symbolLocation":333,"imageIndex":0},{"imageOffset":206453,"symbol":"_assertionFailure(_:_:file:line:flags:)","symbolLocation":309,"imageIndex":0},{"imageOffset":75021,"symbol":"_ArrayBuffer._checkInoutAndNativeTypeCheckedBounds(_:wasNativeTypeChecked:)","symbolLocation":253,"imageIndex":0},{"imageOffset":89310,"symbol":"Array.subscript.getter","symbolLocation":78,"imageIndex":0},{"imageOffset":17492334,"sourceLine":78,"sourceFile":"AppOnboardingView.swift","symbol":"closure #1 in AppOnboardingView.body.getter","imageIndex":1,"symbolLocation":1166},{"imageOffset":17494333,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in AppOnboardingView.body.getter","symbolLocation":13,"imageIndex":1},{"imageOffset":12883144,"symbol":"ZStack.init(alignment:content:)","symbolLocation":152,"imageIndex":2},{"imageOffset":17490866,"sourceLine":71,"sourceFile":"AppOnboardingView.swift","symbol":"AppOnboardingView.body.getter","imageIndex":1,"symbolLocation":978},{"imageOffset":17605447,"sourceFile":"<compiler-generated>","symbol":"protocol witness for View.body.getter in conformance AppOnboardingView","symbolLocation":55,"imageIndex":1},{"imageOffset":2799352,"symbol":"partial apply for closure #1 in ViewBodyAccessor.updateBody(of:changed:)","symbolLocation":22,"imageIndex":2},{"imageOffset":6657130,"symbol":"closure #1 in BodyAccessor.setBody(_:)","symbolLocation":34,"imageIndex":2},{"imageOffset":2799119,"symbol":"ViewBodyAccessor.updateBody(of:changed:)","symbolLocation":1371,"imageIndex":2},{"imageOffset":6658715,"symbol":"DynamicBody.updateValue()","symbolLocation":479,"imageIndex":2},{"imageOffset":1282570,"symbol":"partial apply for implicit closure #2 in implicit closure #1 in closure #1 in closure #1 in Attribute.init<A>(_:)","symbolLocation":26,"imageIndex":2},{"imageOffset":22359,"symbol":"AG::Graph::UpdateStack::update()","symbolLocation":559,"imageIndex":3},{"imageOffset":23895,"symbol":"AG::Graph::update_attribute(AG::data::ptr<AG::Node>, unsigned int)","symbolLocation":421,"imageIndex":3},{"imageOffset":66398,"symbol":"AG::Subgraph::update(unsigned int)","symbolLocation":904,"imageIndex":3},{"imageOffset":12793003,"symbol":"GraphHost.flushTransactions()","symbolLocation":495,"imageIndex":2},{"imageOffset":12796676,"symbol":"closure #1 in closure #1 in closure #1 in GraphHost.asyncTransaction<A>(_:mutation:style:mayDeferUpdate:)","symbolLocation":15,"imageIndex":2},{"imageOffset":2655914,"symbol":"partial apply for closure #1 in ViewGraphDelegate.updateGraph<A>(body:)","symbolLocation":17,"imageIndex":2},{"imageOffset":11115688,"symbol":"closure #1 in ViewRendererHost.updateViewGraph<A>(body:)","symbolLocation":69,"imageIndex":2},{"imageOffset":11110623,"symbol":"ViewRendererHost.updateViewGraph<A>(body:)","symbolLocation":78,"imageIndex":2},{"imageOffset":11168976,"symbol":"protocol witness for ViewGraphDelegate.updateViewGraph<A>(body:) in conformance NSHostingView<A1>","symbolLocation":25,"imageIndex":2},{"imageOffset":2626212,"symbol":"ViewGraphDelegate.updateGraph<A>(body:)","symbolLocation":55,"imageIndex":2},{"imageOffset":2655715,"symbol":"protocol witness for GraphDelegate.updateGraph<A>(body:) in conformance NSHostingView<A1>","symbolLocation":25,"imageIndex":2},{"imageOffset":12796640,"symbol":"closure #1 in GraphHost.init(data:)","symbolLocation":122,"imageIndex":2},{"imageOffset":12800334,"symbol":"partial apply for closure #1 in closure #1 in GraphHost.asyncTransaction<A>(_:mutation:style:mayDeferUpdate:)","symbolLocation":19,"imageIndex":2},{"imageOffset":2661948,"symbol":"thunk for @escaping @callee_guaranteed () -> ()","symbolLocation":12,"imageIndex":2},{"imageOffset":11637339,"symbol":"partial apply for thunk for @escaping @callee_guaranteed () -> ()","symbolLocation":17,"imageIndex":2},{"imageOffset":11627296,"symbol":"static NSRunLoop.flushObservers()","symbolLocation":118,"imageIndex":2},{"imageOffset":11637208,"symbol":"closure #1 in closure #1 in static NSRunLoop.addObserver(_:)","symbolLocation":16,"imageIndex":2},{"imageOffset":11613974,"symbol":"specialized thunk for @callee_guaranteed () -> (@error @owned Error)","symbolLocation":14,"imageIndex":2},{"imageOffset":3708,"symbol":"autoreleasepool<A>(invoking:)","symbolLocation":44,"imageIndex":4},{"imageOffset":11637184,"symbol":"closure #1 in static NSRunLoop.addObserver(_:)","symbolLocation":35,"imageIndex":2},{"imageOffset":11637253,"symbol":"@objc closure #1 in static NSRunLoop.addObserver(_:)","symbolLocation":43,"imageIndex":2},{"imageOffset":521296,"symbol":"__CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__","symbolLocation":23,"imageIndex":5},{"imageOffset":520930,"symbol":"__CFRunLoopDoObservers","symbolLocation":543,"imageIndex":5},{"imageOffset":515552,"symbol":"CFRunLoopRunSpecific","symbolLocation":678,"imageIndex":5},{"imageOffset":189926,"symbol":"RunCurrentEventLoopInMode","symbolLocation":292,"imageIndex":6},{"imageOffset":188947,"symbol":"ReceiveNextEventCommon","symbolLocation":283,"imageIndex":6},{"imageOffset":188645,"symbol":"_BlockUntilNextEventMatchingListInModeWithFilter","symbolLocation":70,"imageIndex":6},{"imageOffset":256681,"symbol":"_DPSNextEvent","symbolLocation":927,"imageIndex":7},{"imageOffset":250214,"symbol":"-[NSApplication(NSEvent) _nextEventMatchingEventMask:untilDate:inMode:dequeue:]","symbolLocation":1394,"imageIndex":7},{"imageOffset":194584,"symbol":"-[NSApplication run]","symbolLocation":586,"imageIndex":7},{"imageOffset":14234,"symbol":"NSApplicationMain","symbolLocation":817,"imageIndex":7},{"imageOffset":508060,"symbol":"specialized runApp(_:)","symbolLocation":161,"imageIndex":2},{"imageOffset":11396132,"symbol":"runApp<A>(_:)","symbolLocation":164,"imageIndex":2},{"imageOffset":6122591,"symbol":"static App.main()","symbolLocation":63,"imageIndex":2},{"imageOffset":17803203,"sourceLine":31,"sourceFile":"RedLemonApp.swift","symbol":"static RedLemonApp.$main()","imageIndex":1,"symbolLocation":35},{"imageOffset":17803337,"sourceFile":"RedLemonApp.swift","symbol":"RedLemon_main","symbolLocation":9,"imageIndex":1},{"imageOffset":21806,"symbol":"start","symbolLocation":462,"imageIndex":8}]},{"id":139062,"frames":[{"imageOffset":8008,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":9}]},{"id":139063,"frames":[{"imageOffset":8008,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":9}]},{"id":139064,"frames":[{"imageOffset":8008,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":9}]},{"id":139080,"frames":[{"imageOffset":8008,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":9}]},{"id":139089,"name":"com.apple.NSEventThread","frames":[{"imageOffset":6458,"symbol":"mach_msg_trap","symbolLocation":10,"imageIndex":10},{"imageOffset":7336,"symbol":"mach_msg","symbolLocation":56,"imageIndex":10},{"imageOffset":524957,"symbol":"__CFRunLoopServiceMachPort","symbolLocation":319,"imageIndex":5},{"imageOffset":518440,"symbol":"__CFRunLoopRun","symbolLocation":1276,"imageIndex":5},{"imageOffset":515436,"symbol":"CFRunLoopRunSpecific","symbolLocation":562,"imageIndex":5},{"imageOffset":1754482,"symbol":"_NSEventThread","symbolLocation":132,"imageIndex":7},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":9},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":9}]},{"id":139100,"name":"NIO-SGLTN-0-#0","frames":[{"imageOffset":25358,"symbol":"kevent","symbolLocation":10,"imageIndex":10},{"imageOffset":15233545,"sourceFile":"<compiler-generated>","symbol":"@nonobjc kevent(_:_:_:_:_:_:)","symbolLocation":9,"imageIndex":1},{"imageOffset":15274287,"sourceLine":911,"sourceFile":"System.swift","symbol":"closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":1,"symbolLocation":95},{"imageOffset":15275908,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","symbolLocation":36,"imageIndex":1},{"imageOffset":15236795,"sourceLine":247,"sourceFile":"System.swift","symbol":"syscall<A>(blocking:where:_:)","imageIndex":1,"symbolLocation":395},{"imageOffset":15274024,"sourceLine":910,"sourceFile":"System.swift","symbol":"static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":1,"symbolLocation":312},{"imageOffset":15129334,"sourceLine":212,"sourceFile":"SelectorKqueue.swift","symbol":"closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":230},{"imageOffset":15133535,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","symbolLocation":15,"imageIndex":1},{"imageOffset":15071779,"sourceLine":31,"sourceFile":"SelectorGeneric.swift","symbol":"Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":1,"symbolLocation":467},{"imageOffset":15123213,"sourceLine":211,"sourceFile":"SelectorKqueue.swift","symbol":"Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":1053},{"imageOffset":15096884,"sourceLine":288,"sourceFile":"SelectorGeneric.swift","symbol":"Selector.whenReady(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":100},{"imageOffset":15049966,"sourceLine":653,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #2 in SelectableEventLoop.run()","imageIndex":1,"symbolLocation":158},{"imageOffset":15063316,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #2 in SelectableEventLoop.run()","symbolLocation":20,"imageIndex":1},{"imageOffset":15017122,"sourceLine":27,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #1 in withAutoReleasePool<A>(_:)","imageIndex":1,"symbolLocation":34},{"imageOffset":15017196,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in withAutoReleasePool<A>(_:)","symbolLocation":28,"imageIndex":1},{"imageOffset":3708,"symbol":"autoreleasepool<A>(invoking:)","symbolLocation":44,"imageIndex":4},{"imageOffset":15017033,"sourceLine":26,"sourceFile":"SelectableEventLoop.swift","symbol":"withAutoReleasePool<A>(_:)","imageIndex":1,"symbolLocation":57},{"imageOffset":15045999,"sourceLine":652,"sourceFile":"SelectableEventLoop.swift","symbol":"SelectableEventLoop.run()","imageIndex":1,"symbolLocation":591},{"imageOffset":14660232,"sourceLine":93,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:)","imageIndex":1,"symbolLocation":856},{"imageOffset":14662106,"sourceLine":111,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","imageIndex":1,"symbolLocation":282},{"imageOffset":14687411,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","symbolLocation":51,"imageIndex":1},{"imageOffset":15276927,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":1},{"imageOffset":15288047,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":1,"symbolLocation":1007},{"imageOffset":15288233,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":1},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":9},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":9}]},{"id":139101,"name":"NIO-SGLTN-0-#1","frames":[{"imageOffset":25358,"symbol":"kevent","symbolLocation":10,"imageIndex":10},{"imageOffset":15233545,"sourceFile":"<compiler-generated>","symbol":"@nonobjc kevent(_:_:_:_:_:_:)","symbolLocation":9,"imageIndex":1},{"imageOffset":15274287,"sourceLine":911,"sourceFile":"System.swift","symbol":"closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":1,"symbolLocation":95},{"imageOffset":15275908,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","symbolLocation":36,"imageIndex":1},{"imageOffset":15236795,"sourceLine":247,"sourceFile":"System.swift","symbol":"syscall<A>(blocking:where:_:)","imageIndex":1,"symbolLocation":395},{"imageOffset":15274024,"sourceLine":910,"sourceFile":"System.swift","symbol":"static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":1,"symbolLocation":312},{"imageOffset":15129334,"sourceLine":212,"sourceFile":"SelectorKqueue.swift","symbol":"closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":230},{"imageOffset":15133535,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","symbolLocation":15,"imageIndex":1},{"imageOffset":15071779,"sourceLine":31,"sourceFile":"SelectorGeneric.swift","symbol":"Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":1,"symbolLocation":467},{"imageOffset":15123213,"sourceLine":211,"sourceFile":"SelectorKqueue.swift","symbol":"Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":1053},{"imageOffset":15096884,"sourceLine":288,"sourceFile":"SelectorGeneric.swift","symbol":"Selector.whenReady(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":100},{"imageOffset":15049966,"sourceLine":653,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #2 in SelectableEventLoop.run()","imageIndex":1,"symbolLocation":158},{"imageOffset":15063316,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #2 in SelectableEventLoop.run()","symbolLocation":20,"imageIndex":1},{"imageOffset":15017122,"sourceLine":27,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #1 in withAutoReleasePool<A>(_:)","imageIndex":1,"symbolLocation":34},{"imageOffset":15017196,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in withAutoReleasePool<A>(_:)","symbolLocation":28,"imageIndex":1},{"imageOffset":3708,"symbol":"autoreleasepool<A>(invoking:)","symbolLocation":44,"imageIndex":4},{"imageOffset":15017033,"sourceLine":26,"sourceFile":"SelectableEventLoop.swift","symbol":"withAutoReleasePool<A>(_:)","imageIndex":1,"symbolLocation":57},{"imageOffset":15045999,"sourceLine":652,"sourceFile":"SelectableEventLoop.swift","symbol":"SelectableEventLoop.run()","imageIndex":1,"symbolLocation":591},{"imageOffset":14660232,"sourceLine":93,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:)","imageIndex":1,"symbolLocation":856},{"imageOffset":14662106,"sourceLine":111,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","imageIndex":1,"symbolLocation":282},{"imageOffset":14687411,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","symbolLocation":51,"imageIndex":1},{"imageOffset":15276927,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":1},{"imageOffset":15288047,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":1,"symbolLocation":1007},{"imageOffset":15288233,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":1},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":9},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":9}]},{"id":139102,"name":"NIO-SGLTN-0-#2","frames":[{"imageOffset":25358,"symbol":"kevent","symbolLocation":10,"imageIndex":10},{"imageOffset":15233545,"sourceFile":"<compiler-generated>","symbol":"@nonobjc kevent(_:_:_:_:_:_:)","symbolLocation":9,"imageIndex":1},{"imageOffset":15274287,"sourceLine":911,"sourceFile":"System.swift","symbol":"closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":1,"symbolLocation":95},{"imageOffset":15275908,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","symbolLocation":36,"imageIndex":1},{"imageOffset":15236795,"sourceLine":247,"sourceFile":"System.swift","symbol":"syscall<A>(blocking:where:_:)","imageIndex":1,"symbolLocation":395},{"imageOffset":15274024,"sourceLine":910,"sourceFile":"System.swift","symbol":"static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":1,"symbolLocation":312},{"imageOffset":15129334,"sourceLine":212,"sourceFile":"SelectorKqueue.swift","symbol":"closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":230},{"imageOffset":15133535,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","symbolLocation":15,"imageIndex":1},{"imageOffset":15071779,"sourceLine":31,"sourceFile":"SelectorGeneric.swift","symbol":"Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":1,"symbolLocation":467},{"imageOffset":15123213,"sourceLine":211,"sourceFile":"SelectorKqueue.swift","symbol":"Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":1053},{"imageOffset":15096884,"sourceLine":288,"sourceFile":"SelectorGeneric.swift","symbol":"Selector.whenReady(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":100},{"imageOffset":15049966,"sourceLine":653,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #2 in SelectableEventLoop.run()","imageIndex":1,"symbolLocation":158},{"imageOffset":15063316,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #2 in SelectableEventLoop.run()","symbolLocation":20,"imageIndex":1},{"imageOffset":15017122,"sourceLine":27,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #1 in withAutoReleasePool<A>(_:)","imageIndex":1,"symbolLocation":34},{"imageOffset":15017196,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in withAutoReleasePool<A>(_:)","symbolLocation":28,"imageIndex":1},{"imageOffset":3708,"symbol":"autoreleasepool<A>(invoking:)","symbolLocation":44,"imageIndex":4},{"imageOffset":15017033,"sourceLine":26,"sourceFile":"SelectableEventLoop.swift","symbol":"withAutoReleasePool<A>(_:)","imageIndex":1,"symbolLocation":57},{"imageOffset":15045999,"sourceLine":652,"sourceFile":"SelectableEventLoop.swift","symbol":"SelectableEventLoop.run()","imageIndex":1,"symbolLocation":591},{"imageOffset":14660232,"sourceLine":93,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:)","imageIndex":1,"symbolLocation":856},{"imageOffset":14662106,"sourceLine":111,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","imageIndex":1,"symbolLocation":282},{"imageOffset":14687411,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","symbolLocation":51,"imageIndex":1},{"imageOffset":15276927,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":1},{"imageOffset":15288047,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":1,"symbolLocation":1007},{"imageOffset":15288233,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":1},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":9},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":9}]},{"id":139103,"name":"NIO-SGLTN-0-#3","frames":[{"imageOffset":25358,"symbol":"kevent","symbolLocation":10,"imageIndex":10},{"imageOffset":15233545,"sourceFile":"<compiler-generated>","symbol":"@nonobjc kevent(_:_:_:_:_:_:)","symbolLocation":9,"imageIndex":1},{"imageOffset":15274287,"sourceLine":911,"sourceFile":"System.swift","symbol":"closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":1,"symbolLocation":95},{"imageOffset":15275908,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","symbolLocation":36,"imageIndex":1},{"imageOffset":15236795,"sourceLine":247,"sourceFile":"System.swift","symbol":"syscall<A>(blocking:where:_:)","imageIndex":1,"symbolLocation":395},{"imageOffset":15274024,"sourceLine":910,"sourceFile":"System.swift","symbol":"static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":1,"symbolLocation":312},{"imageOffset":15129334,"sourceLine":212,"sourceFile":"SelectorKqueue.swift","symbol":"closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":230},{"imageOffset":15133535,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","symbolLocation":15,"imageIndex":1},{"imageOffset":15071779,"sourceLine":31,"sourceFile":"SelectorGeneric.swift","symbol":"Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":1,"symbolLocation":467},{"imageOffset":15123213,"sourceLine":211,"sourceFile":"SelectorKqueue.swift","symbol":"Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":1053},{"imageOffset":15096884,"sourceLine":288,"sourceFile":"SelectorGeneric.swift","symbol":"Selector.whenReady(strategy:onLoopBegin:_:)","imageIndex":1,"symbolLocation":100},{"imageOffset":15049966,"sourceLine":653,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #2 in SelectableEventLoop.run()","imageIndex":1,"symbolLocation":158},{"imageOffset":15063316,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #2 in SelectableEventLoop.run()","symbolLocation":20,"imageIndex":1},{"imageOffset":15017122,"sourceLine":27,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #1 in withAutoReleasePool<A>(_:)","imageIndex":1,"symbolLocation":34},{"imageOffset":15017196,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in withAutoReleasePool<A>(_:)","symbolLocation":28,"imageIndex":1},{"imageOffset":3708,"symbol":"autoreleasepool<A>(invoking:)","symbolLocation":44,"imageIndex":4},{"imageOffset":15017033,"sourceLine":26,"sourceFile":"SelectableEventLoop.swift","symbol":"withAutoReleasePool<A>(_:)","imageIndex":1,"symbolLocation":57},{"imageOffset":15045999,"sourceLine":652,"sourceFile":"SelectableEventLoop.swift","symbol":"SelectableEventLoop.run()","imageIndex":1,"symbolLocation":591},{"imageOffset":14660232,"sourceLine":93,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:)","imageIndex":1,"symbolLocation":856},{"imageOffset":14662106,"sourceLine":111,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","imageIndex":1,"symbolLocation":282},{"imageOffset":14687411,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","symbolLocation":51,"imageIndex":1},{"imageOffset":15276927,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":1},{"imageOffset":15288047,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":1,"symbolLocation":1007},{"imageOffset":15288233,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":1},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":9},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":9}]},{"id":139104,"name":"TP-#0","frames":[{"imageOffset":6518,"symbol":"semaphore_wait_trap","symbolLocation":10,"imageIndex":10},{"imageOffset":14286,"symbol":"_dispatch_sema4_wait","symbolLocation":16,"imageIndex":11},{"imageOffset":15517,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":98,"imageIndex":11},{"imageOffset":14696831,"sourceLine":186,"sourceFile":"NIOThreadPool.swift","symbol":"NIOThreadPool.process(identifier:)","imageIndex":1,"symbolLocation":143},{"imageOffset":14700622,"sourceLine":252,"sourceFile":"NIOThreadPool.swift","symbol":"closure #3 in NIOThreadPool._start(threadNamePrefix:)","imageIndex":1,"symbolLocation":222},{"imageOffset":15276927,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":1},{"imageOffset":15288047,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":1,"symbolLocation":1007},{"imageOffset":15288233,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":1},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":9},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":9}]},{"id":139105,"name":"TP-#1","frames":[{"imageOffset":6518,"symbol":"semaphore_wait_trap","symbolLocation":10,"imageIndex":10},{"imageOffset":14286,"symbol":"_dispatch_sema4_wait","symbolLocation":16,"imageIndex":11},{"imageOffset":15517,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":98,"imageIndex":11},{"imageOffset":14696831,"sourceLine":186,"sourceFile":"NIOThreadPool.swift","symbol":"NIOThreadPool.process(identifier:)","imageIndex":1,"symbolLocation":143},{"imageOffset":14700622,"sourceLine":252,"sourceFile":"NIOThreadPool.swift","symbol":"closure #3 in NIOThreadPool._start(threadNamePrefix:)","imageIndex":1,"symbolLocation":222},{"imageOffset":15276927,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":1},{"imageOffset":15288047,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":1,"symbolLocation":1007},{"imageOffset":15288233,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":1},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":9},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":9}]},{"id":139106,"name":"TP-#2","frames":[{"imageOffset":6518,"symbol":"semaphore_wait_trap","symbolLocation":10,"imageIndex":10},{"imageOffset":14286,"symbol":"_dispatch_sema4_wait","symbolLocation":16,"imageIndex":11},{"imageOffset":15517,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":98,"imageIndex":11},{"imageOffset":14696831,"sourceLine":186,"sourceFile":"NIOThreadPool.swift","symbol":"NIOThreadPool.process(identifier:)","imageIndex":1,"symbolLocation":143},{"imageOffset":14700622,"sourceLine":252,"sourceFile":"NIOThreadPool.swift","symbol":"closure #3 in NIOThreadPool._start(threadNamePrefix:)","imageIndex":1,"symbolLocation":222},{"imageOffset":15276927,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":1},{"imageOffset":15288047,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":1,"symbolLocation":1007},{"imageOffset":15288233,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":1},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":9},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":9}]},{"id":139107,"name":"TP-#3","frames":[{"imageOffset":6518,"symbol":"semaphore_wait_trap","symbolLocation":10,"imageIndex":10},{"imageOffset":14286,"symbol":"_dispatch_sema4_wait","symbolLocation":16,"imageIndex":11},{"imageOffset":15517,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":98,"imageIndex":11},{"imageOffset":14696831,"sourceLine":186,"sourceFile":"NIOThreadPool.swift","symbol":"NIOThreadPool.process(identifier:)","imageIndex":1,"symbolLocation":143},{"imageOffset":14700622,"sourceLine":252,"sourceFile":"NIOThreadPool.swift","symbol":"closure #3 in NIOThreadPool._start(threadNamePrefix:)","imageIndex":1,"symbolLocation":222},{"imageOffset":15276927,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":1},{"imageOffset":15288047,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":1,"symbolLocation":1007},{"imageOffset":15288233,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":1},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":9},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":9}]},{"id":139174,"name":"com.apple.NSURLConnectionLoader","frames":[{"imageOffset":6458,"symbol":"mach_msg_trap","symbolLocation":10,"imageIndex":10},{"imageOffset":7336,"symbol":"mach_msg","symbolLocation":56,"imageIndex":10},{"imageOffset":524957,"symbol":"__CFRunLoopServiceMachPort","symbolLocation":319,"imageIndex":5},{"imageOffset":518440,"symbol":"__CFRunLoopRun","symbolLocation":1276,"imageIndex":5},{"imageOffset":515436,"symbol":"CFRunLoopRunSpecific","symbolLocation":562,"imageIndex":5},{"imageOffset":2394468,"imageIndex":12},{"imageOffset":362276,"symbol":"__NSThread__start__","symbolLocation":1009,"imageIndex":13},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":9},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":9}]},{"id":139295,"name":"CVDisplayLink","frames":[{"imageOffset":17322,"symbol":"__psynch_cvwait","symbolLocation":10,"imageIndex":10},{"imageOffset":27300,"symbol":"_pthread_cond_wait","symbolLocation":1302,"imageIndex":9},{"imageOffset":11872,"symbol":"CVDisplayLink::waitUntil(unsigned long long)","symbolLocation":370,"imageIndex":14},{"imageOffset":7644,"symbol":"CVDisplayLink::runIOThread()","symbolLocation":526,"imageIndex":14},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":9},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":9}]}],
+  "faultingThread" : 18,
+  "threads" : [{"id":352028,"queue":"com.apple.main-thread","frames":[{"imageOffset":12093698,"symbol":"DYLD-STUB$$CFArrayGetCount","symbolLocation":0,"imageIndex":0},{"imageOffset":1782142,"symbol":"_NSGestureRecognizerUpdate","symbolLocation":52,"imageIndex":0},{"imageOffset":521296,"symbol":"__CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__","symbolLocation":23,"imageIndex":1},{"imageOffset":520930,"symbol":"__CFRunLoopDoObservers","symbolLocation":543,"imageIndex":1},{"imageOffset":518295,"symbol":"__CFRunLoopRun","symbolLocation":1131,"imageIndex":1},{"imageOffset":515436,"symbol":"CFRunLoopRunSpecific","symbolLocation":562,"imageIndex":1},{"imageOffset":189926,"symbol":"RunCurrentEventLoopInMode","symbolLocation":292,"imageIndex":2},{"imageOffset":189258,"symbol":"ReceiveNextEventCommon","symbolLocation":594,"imageIndex":2},{"imageOffset":188645,"symbol":"_BlockUntilNextEventMatchingListInModeWithFilter","symbolLocation":70,"imageIndex":2},{"imageOffset":256681,"symbol":"_DPSNextEvent","symbolLocation":927,"imageIndex":0},{"imageOffset":250214,"symbol":"-[NSApplication(NSEvent) _nextEventMatchingEventMask:untilDate:inMode:dequeue:]","symbolLocation":1394,"imageIndex":0},{"imageOffset":194584,"symbol":"-[NSApplication run]","symbolLocation":586,"imageIndex":0},{"imageOffset":14234,"symbol":"NSApplicationMain","symbolLocation":817,"imageIndex":0},{"imageOffset":508060,"symbol":"specialized runApp(_:)","symbolLocation":161,"imageIndex":3},{"imageOffset":11396132,"symbol":"runApp<A>(_:)","symbolLocation":164,"imageIndex":3},{"imageOffset":6122591,"symbol":"static App.main()","symbolLocation":63,"imageIndex":3},{"imageOffset":18114851,"sourceLine":31,"sourceFile":"RedLemonApp.swift","symbol":"static RedLemonApp.$main()","imageIndex":4,"symbolLocation":35},{"imageOffset":18114985,"sourceFile":"RedLemonApp.swift","symbol":"RedLemon_main","symbolLocation":9,"imageIndex":4},{"imageOffset":21806,"symbol":"start","symbolLocation":462,"imageIndex":5}]},{"id":352073,"name":"com.apple.NSEventThread","frames":[{"imageOffset":6458,"symbol":"mach_msg_trap","symbolLocation":10,"imageIndex":6},{"imageOffset":7336,"symbol":"mach_msg","symbolLocation":56,"imageIndex":6},{"imageOffset":40276,"symbol":"CGSSnarfAndDispatchDatagrams","symbolLocation":152,"imageIndex":7},{"imageOffset":2952946,"symbol":"SLSGetNextEventRecordInternal","symbolLocation":258,"imageIndex":7},{"imageOffset":1163885,"symbol":"SLEventCreateNextEvent","symbolLocation":9,"imageIndex":7},{"imageOffset":241721,"symbol":"PullEventsFromWindowServerOnConnection(unsigned int, unsigned char, __CFMachPortBoost*)","symbolLocation":45,"imageIndex":2},{"imageOffset":241621,"symbol":"MessageHandler(__CFMachPort*, void*, long, void*)","symbolLocation":48,"imageIndex":2},{"imageOffset":709808,"symbol":"__CFMachPortPerform","symbolLocation":250,"imageIndex":1},{"imageOffset":526420,"symbol":"__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE1_PERFORM_FUNCTION__","symbolLocation":41,"imageIndex":1},{"imageOffset":526132,"symbol":"__CFRunLoopDoSource1","symbolLocation":619,"imageIndex":1},{"imageOffset":519579,"symbol":"__CFRunLoopRun","symbolLocation":2415,"imageIndex":1},{"imageOffset":515436,"symbol":"CFRunLoopRunSpecific","symbolLocation":562,"imageIndex":1},{"imageOffset":1754482,"symbol":"_NSEventThread","symbolLocation":132,"imageIndex":0},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":352287,"name":"com.apple.NSURLConnectionLoader","frames":[{"imageOffset":6458,"symbol":"mach_msg_trap","symbolLocation":10,"imageIndex":6},{"imageOffset":7336,"symbol":"mach_msg","symbolLocation":56,"imageIndex":6},{"imageOffset":524957,"symbol":"__CFRunLoopServiceMachPort","symbolLocation":319,"imageIndex":1},{"imageOffset":518440,"symbol":"__CFRunLoopRun","symbolLocation":1276,"imageIndex":1},{"imageOffset":515436,"symbol":"CFRunLoopRunSpecific","symbolLocation":562,"imageIndex":1},{"imageOffset":2394468,"imageIndex":9},{"imageOffset":362276,"symbol":"__NSThread__start__","symbolLocation":1009,"imageIndex":10},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":352288,"name":"NIO-SGLTN-0-#0","frames":[{"imageOffset":25358,"symbol":"kevent","symbolLocation":10,"imageIndex":6},{"imageOffset":15246089,"sourceFile":"<compiler-generated>","symbol":"@nonobjc kevent(_:_:_:_:_:_:)","symbolLocation":9,"imageIndex":4},{"imageOffset":15286831,"sourceLine":911,"sourceFile":"System.swift","symbol":"closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":4,"symbolLocation":95},{"imageOffset":15288452,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","symbolLocation":36,"imageIndex":4},{"imageOffset":15249339,"sourceLine":247,"sourceFile":"System.swift","symbol":"syscall<A>(blocking:where:_:)","imageIndex":4,"symbolLocation":395},{"imageOffset":15286568,"sourceLine":910,"sourceFile":"System.swift","symbol":"static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":4,"symbolLocation":312},{"imageOffset":15141878,"sourceLine":212,"sourceFile":"SelectorKqueue.swift","symbol":"closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":230},{"imageOffset":15146079,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","symbolLocation":15,"imageIndex":4},{"imageOffset":15084514,"sourceLine":28,"sourceFile":"SelectorGeneric.swift","symbol":"closure #1 in Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":4,"symbolLocation":50},{"imageOffset":15084599,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Optional.withUnsafeOptionalPointer<A>(_:)","symbolLocation":39,"imageIndex":4},{"imageOffset":1161004,"symbol":"withUnsafePointer<A, B>(to:_:)","symbolLocation":12,"imageIndex":11},{"imageOffset":15084202,"sourceLine":27,"sourceFile":"SelectorGeneric.swift","symbol":"Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":4,"symbolLocation":346},{"imageOffset":15135757,"sourceLine":211,"sourceFile":"SelectorKqueue.swift","symbol":"Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":1053},{"imageOffset":15109428,"sourceLine":288,"sourceFile":"SelectorGeneric.swift","symbol":"Selector.whenReady(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":100},{"imageOffset":15062510,"sourceLine":653,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #2 in SelectableEventLoop.run()","imageIndex":4,"symbolLocation":158},{"imageOffset":15075860,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #2 in SelectableEventLoop.run()","symbolLocation":20,"imageIndex":4},{"imageOffset":15029666,"sourceLine":27,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #1 in withAutoReleasePool<A>(_:)","imageIndex":4,"symbolLocation":34},{"imageOffset":15029740,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in withAutoReleasePool<A>(_:)","symbolLocation":28,"imageIndex":4},{"imageOffset":3708,"symbol":"autoreleasepool<A>(invoking:)","symbolLocation":44,"imageIndex":12},{"imageOffset":15029577,"sourceLine":26,"sourceFile":"SelectableEventLoop.swift","symbol":"withAutoReleasePool<A>(_:)","imageIndex":4,"symbolLocation":57},{"imageOffset":15058543,"sourceLine":652,"sourceFile":"SelectableEventLoop.swift","symbol":"SelectableEventLoop.run()","imageIndex":4,"symbolLocation":591},{"imageOffset":14672776,"sourceLine":93,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:)","imageIndex":4,"symbolLocation":856},{"imageOffset":14674650,"sourceLine":111,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","imageIndex":4,"symbolLocation":282},{"imageOffset":14699955,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","symbolLocation":51,"imageIndex":4},{"imageOffset":15289471,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":4},{"imageOffset":15300591,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":4,"symbolLocation":1007},{"imageOffset":15300777,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":4},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":352290,"name":"NIO-SGLTN-0-#1","frames":[{"imageOffset":25358,"symbol":"kevent","symbolLocation":10,"imageIndex":6},{"imageOffset":15246089,"sourceFile":"<compiler-generated>","symbol":"@nonobjc kevent(_:_:_:_:_:_:)","symbolLocation":9,"imageIndex":4},{"imageOffset":15286831,"sourceLine":911,"sourceFile":"System.swift","symbol":"closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":4,"symbolLocation":95},{"imageOffset":15288452,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","symbolLocation":36,"imageIndex":4},{"imageOffset":15249339,"sourceLine":247,"sourceFile":"System.swift","symbol":"syscall<A>(blocking:where:_:)","imageIndex":4,"symbolLocation":395},{"imageOffset":15286568,"sourceLine":910,"sourceFile":"System.swift","symbol":"static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":4,"symbolLocation":312},{"imageOffset":15141878,"sourceLine":212,"sourceFile":"SelectorKqueue.swift","symbol":"closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":230},{"imageOffset":15146079,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","symbolLocation":15,"imageIndex":4},{"imageOffset":15084514,"sourceLine":28,"sourceFile":"SelectorGeneric.swift","symbol":"closure #1 in Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":4,"symbolLocation":50},{"imageOffset":15084599,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Optional.withUnsafeOptionalPointer<A>(_:)","symbolLocation":39,"imageIndex":4},{"imageOffset":1161004,"symbol":"withUnsafePointer<A, B>(to:_:)","symbolLocation":12,"imageIndex":11},{"imageOffset":15084202,"sourceLine":27,"sourceFile":"SelectorGeneric.swift","symbol":"Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":4,"symbolLocation":346},{"imageOffset":15135757,"sourceLine":211,"sourceFile":"SelectorKqueue.swift","symbol":"Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":1053},{"imageOffset":15109428,"sourceLine":288,"sourceFile":"SelectorGeneric.swift","symbol":"Selector.whenReady(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":100},{"imageOffset":15062510,"sourceLine":653,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #2 in SelectableEventLoop.run()","imageIndex":4,"symbolLocation":158},{"imageOffset":15075860,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #2 in SelectableEventLoop.run()","symbolLocation":20,"imageIndex":4},{"imageOffset":15029666,"sourceLine":27,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #1 in withAutoReleasePool<A>(_:)","imageIndex":4,"symbolLocation":34},{"imageOffset":15029740,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in withAutoReleasePool<A>(_:)","symbolLocation":28,"imageIndex":4},{"imageOffset":3708,"symbol":"autoreleasepool<A>(invoking:)","symbolLocation":44,"imageIndex":12},{"imageOffset":15029577,"sourceLine":26,"sourceFile":"SelectableEventLoop.swift","symbol":"withAutoReleasePool<A>(_:)","imageIndex":4,"symbolLocation":57},{"imageOffset":15058543,"sourceLine":652,"sourceFile":"SelectableEventLoop.swift","symbol":"SelectableEventLoop.run()","imageIndex":4,"symbolLocation":591},{"imageOffset":14672776,"sourceLine":93,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:)","imageIndex":4,"symbolLocation":856},{"imageOffset":14674650,"sourceLine":111,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","imageIndex":4,"symbolLocation":282},{"imageOffset":14699955,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","symbolLocation":51,"imageIndex":4},{"imageOffset":15289471,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":4},{"imageOffset":15300591,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":4,"symbolLocation":1007},{"imageOffset":15300777,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":4},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":352291,"name":"NIO-SGLTN-0-#2","frames":[{"imageOffset":25358,"symbol":"kevent","symbolLocation":10,"imageIndex":6},{"imageOffset":15246089,"sourceFile":"<compiler-generated>","symbol":"@nonobjc kevent(_:_:_:_:_:_:)","symbolLocation":9,"imageIndex":4},{"imageOffset":15286831,"sourceLine":911,"sourceFile":"System.swift","symbol":"closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":4,"symbolLocation":95},{"imageOffset":15288452,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","symbolLocation":36,"imageIndex":4},{"imageOffset":15249339,"sourceLine":247,"sourceFile":"System.swift","symbol":"syscall<A>(blocking:where:_:)","imageIndex":4,"symbolLocation":395},{"imageOffset":15286568,"sourceLine":910,"sourceFile":"System.swift","symbol":"static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":4,"symbolLocation":312},{"imageOffset":15141878,"sourceLine":212,"sourceFile":"SelectorKqueue.swift","symbol":"closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":230},{"imageOffset":15146079,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","symbolLocation":15,"imageIndex":4},{"imageOffset":15084514,"sourceLine":28,"sourceFile":"SelectorGeneric.swift","symbol":"closure #1 in Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":4,"symbolLocation":50},{"imageOffset":15084599,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Optional.withUnsafeOptionalPointer<A>(_:)","symbolLocation":39,"imageIndex":4},{"imageOffset":1161004,"symbol":"withUnsafePointer<A, B>(to:_:)","symbolLocation":12,"imageIndex":11},{"imageOffset":15084202,"sourceLine":27,"sourceFile":"SelectorGeneric.swift","symbol":"Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":4,"symbolLocation":346},{"imageOffset":15135757,"sourceLine":211,"sourceFile":"SelectorKqueue.swift","symbol":"Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":1053},{"imageOffset":15109428,"sourceLine":288,"sourceFile":"SelectorGeneric.swift","symbol":"Selector.whenReady(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":100},{"imageOffset":15062510,"sourceLine":653,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #2 in SelectableEventLoop.run()","imageIndex":4,"symbolLocation":158},{"imageOffset":15075860,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #2 in SelectableEventLoop.run()","symbolLocation":20,"imageIndex":4},{"imageOffset":15029666,"sourceLine":27,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #1 in withAutoReleasePool<A>(_:)","imageIndex":4,"symbolLocation":34},{"imageOffset":15029740,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in withAutoReleasePool<A>(_:)","symbolLocation":28,"imageIndex":4},{"imageOffset":3708,"symbol":"autoreleasepool<A>(invoking:)","symbolLocation":44,"imageIndex":12},{"imageOffset":15029577,"sourceLine":26,"sourceFile":"SelectableEventLoop.swift","symbol":"withAutoReleasePool<A>(_:)","imageIndex":4,"symbolLocation":57},{"imageOffset":15058543,"sourceLine":652,"sourceFile":"SelectableEventLoop.swift","symbol":"SelectableEventLoop.run()","imageIndex":4,"symbolLocation":591},{"imageOffset":14672776,"sourceLine":93,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:)","imageIndex":4,"symbolLocation":856},{"imageOffset":14674650,"sourceLine":111,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","imageIndex":4,"symbolLocation":282},{"imageOffset":14699955,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","symbolLocation":51,"imageIndex":4},{"imageOffset":15289471,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":4},{"imageOffset":15300591,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":4,"symbolLocation":1007},{"imageOffset":15300777,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":4},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":352292,"name":"NIO-SGLTN-0-#3","frames":[{"imageOffset":25358,"symbol":"kevent","symbolLocation":10,"imageIndex":6},{"imageOffset":15246089,"sourceFile":"<compiler-generated>","symbol":"@nonobjc kevent(_:_:_:_:_:_:)","symbolLocation":9,"imageIndex":4},{"imageOffset":15286831,"sourceLine":911,"sourceFile":"System.swift","symbol":"closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":4,"symbolLocation":95},{"imageOffset":15288452,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","symbolLocation":36,"imageIndex":4},{"imageOffset":15249339,"sourceLine":247,"sourceFile":"System.swift","symbol":"syscall<A>(blocking:where:_:)","imageIndex":4,"symbolLocation":395},{"imageOffset":15286568,"sourceLine":910,"sourceFile":"System.swift","symbol":"static KQueue.kevent(kq:changelist:nchanges:eventlist:nevents:timeout:)","imageIndex":4,"symbolLocation":312},{"imageOffset":15141878,"sourceLine":212,"sourceFile":"SelectorKqueue.swift","symbol":"closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":230},{"imageOffset":15146079,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Selector.whenReady0(strategy:onLoopBegin:_:)","symbolLocation":15,"imageIndex":4},{"imageOffset":15084514,"sourceLine":28,"sourceFile":"SelectorGeneric.swift","symbol":"closure #1 in Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":4,"symbolLocation":50},{"imageOffset":15084599,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in Optional.withUnsafeOptionalPointer<A>(_:)","symbolLocation":39,"imageIndex":4},{"imageOffset":1161004,"symbol":"withUnsafePointer<A, B>(to:_:)","symbolLocation":12,"imageIndex":11},{"imageOffset":15084202,"sourceLine":27,"sourceFile":"SelectorGeneric.swift","symbol":"Optional.withUnsafeOptionalPointer<A>(_:)","imageIndex":4,"symbolLocation":346},{"imageOffset":15135757,"sourceLine":211,"sourceFile":"SelectorKqueue.swift","symbol":"Selector.whenReady0(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":1053},{"imageOffset":15109428,"sourceLine":288,"sourceFile":"SelectorGeneric.swift","symbol":"Selector.whenReady(strategy:onLoopBegin:_:)","imageIndex":4,"symbolLocation":100},{"imageOffset":15062510,"sourceLine":653,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #2 in SelectableEventLoop.run()","imageIndex":4,"symbolLocation":158},{"imageOffset":15075860,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #2 in SelectableEventLoop.run()","symbolLocation":20,"imageIndex":4},{"imageOffset":15029666,"sourceLine":27,"sourceFile":"SelectableEventLoop.swift","symbol":"closure #1 in withAutoReleasePool<A>(_:)","imageIndex":4,"symbolLocation":34},{"imageOffset":15029740,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in withAutoReleasePool<A>(_:)","symbolLocation":28,"imageIndex":4},{"imageOffset":3708,"symbol":"autoreleasepool<A>(invoking:)","symbolLocation":44,"imageIndex":12},{"imageOffset":15029577,"sourceLine":26,"sourceFile":"SelectableEventLoop.swift","symbol":"withAutoReleasePool<A>(_:)","imageIndex":4,"symbolLocation":57},{"imageOffset":15058543,"sourceLine":652,"sourceFile":"SelectableEventLoop.swift","symbol":"SelectableEventLoop.run()","imageIndex":4,"symbolLocation":591},{"imageOffset":14672776,"sourceLine":93,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"static MultiThreadedEventLoopGroup.runTheLoop(thread:parentGroup:canEventLoopBeShutdownIndividually:selectorFactory:initializer:_:)","imageIndex":4,"symbolLocation":856},{"imageOffset":14674650,"sourceLine":111,"sourceFile":"MultiThreadedEventLoopGroup.swift","symbol":"closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","imageIndex":4,"symbolLocation":282},{"imageOffset":14699955,"sourceFile":"<compiler-generated>","symbol":"partial apply for closure #1 in static MultiThreadedEventLoopGroup.setupThreadAndEventLoop(name:parentGroup:selectorFactory:initializer:)","symbolLocation":51,"imageIndex":4},{"imageOffset":15289471,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":4},{"imageOffset":15300591,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":4,"symbolLocation":1007},{"imageOffset":15300777,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":4},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":352294,"name":"TP-#0","frames":[{"imageOffset":6518,"symbol":"semaphore_wait_trap","symbolLocation":10,"imageIndex":6},{"imageOffset":14286,"symbol":"_dispatch_sema4_wait","symbolLocation":16,"imageIndex":13},{"imageOffset":15517,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":98,"imageIndex":13},{"imageOffset":14709375,"sourceLine":186,"sourceFile":"NIOThreadPool.swift","symbol":"NIOThreadPool.process(identifier:)","imageIndex":4,"symbolLocation":143},{"imageOffset":14713166,"sourceLine":252,"sourceFile":"NIOThreadPool.swift","symbol":"closure #3 in NIOThreadPool._start(threadNamePrefix:)","imageIndex":4,"symbolLocation":222},{"imageOffset":15289471,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":4},{"imageOffset":15300591,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":4,"symbolLocation":1007},{"imageOffset":15300777,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":4},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":352295,"name":"TP-#1","frames":[{"imageOffset":6518,"symbol":"semaphore_wait_trap","symbolLocation":10,"imageIndex":6},{"imageOffset":14286,"symbol":"_dispatch_sema4_wait","symbolLocation":16,"imageIndex":13},{"imageOffset":15517,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":98,"imageIndex":13},{"imageOffset":14709375,"sourceLine":186,"sourceFile":"NIOThreadPool.swift","symbol":"NIOThreadPool.process(identifier:)","imageIndex":4,"symbolLocation":143},{"imageOffset":14713166,"sourceLine":252,"sourceFile":"NIOThreadPool.swift","symbol":"closure #3 in NIOThreadPool._start(threadNamePrefix:)","imageIndex":4,"symbolLocation":222},{"imageOffset":15289471,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":4},{"imageOffset":15300591,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":4,"symbolLocation":1007},{"imageOffset":15300777,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":4},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":352296,"name":"TP-#2","frames":[{"imageOffset":6518,"symbol":"semaphore_wait_trap","symbolLocation":10,"imageIndex":6},{"imageOffset":14286,"symbol":"_dispatch_sema4_wait","symbolLocation":16,"imageIndex":13},{"imageOffset":15517,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":98,"imageIndex":13},{"imageOffset":14709375,"sourceLine":186,"sourceFile":"NIOThreadPool.swift","symbol":"NIOThreadPool.process(identifier:)","imageIndex":4,"symbolLocation":143},{"imageOffset":14713166,"sourceLine":252,"sourceFile":"NIOThreadPool.swift","symbol":"closure #3 in NIOThreadPool._start(threadNamePrefix:)","imageIndex":4,"symbolLocation":222},{"imageOffset":15289471,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":4},{"imageOffset":15300591,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":4,"symbolLocation":1007},{"imageOffset":15300777,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":4},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":352297,"name":"TP-#3","frames":[{"imageOffset":6518,"symbol":"semaphore_wait_trap","symbolLocation":10,"imageIndex":6},{"imageOffset":14286,"symbol":"_dispatch_sema4_wait","symbolLocation":16,"imageIndex":13},{"imageOffset":15517,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":98,"imageIndex":13},{"imageOffset":14709375,"sourceLine":186,"sourceFile":"NIOThreadPool.swift","symbol":"NIOThreadPool.process(identifier:)","imageIndex":4,"symbolLocation":143},{"imageOffset":14713166,"sourceLine":252,"sourceFile":"NIOThreadPool.swift","symbol":"closure #3 in NIOThreadPool._start(threadNamePrefix:)","imageIndex":4,"symbolLocation":222},{"imageOffset":15289471,"sourceFile":"<compiler-generated>","symbol":"thunk for @escaping @callee_guaranteed (@guaranteed NIOThread) -> ()","symbolLocation":15,"imageIndex":4},{"imageOffset":15300591,"sourceLine":116,"sourceFile":"ThreadPosix.swift","symbol":"closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","imageIndex":4,"symbolLocation":1007},{"imageOffset":15300777,"sourceFile":"<compiler-generated>","symbol":"@objc closure #1 in static ThreadOpsPosix.run(handle:args:detachThread:)","symbolLocation":9,"imageIndex":4},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":356108,"frames":[{"imageOffset":8008,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":8}]},{"id":356334,"frames":[{"imageOffset":8008,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":8}]},{"id":356615,"frames":[{"imageOffset":8008,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":8}]},{"id":356656,"queue":"com.apple.CFNetwork.LoaderQ","frames":[{"imageOffset":29244,"symbol":"objc_msgSend","symbolLocation":60,"imageIndex":14},{"imageOffset":134164,"imageIndex":9},{"imageOffset":119600,"imageIndex":9},{"imageOffset":1688871,"imageIndex":9},{"imageOffset":639733,"imageIndex":9},{"imageOffset":8396,"symbol":"_dispatch_call_block_and_release","symbolLocation":12,"imageIndex":13},{"imageOffset":13079,"symbol":"_dispatch_client_callout","symbolLocation":8,"imageIndex":13},{"imageOffset":37655,"symbol":"_dispatch_lane_serial_drain","symbolLocation":672,"imageIndex":13},{"imageOffset":40496,"symbol":"_dispatch_lane_invoke","symbolLocation":417,"imageIndex":13},{"imageOffset":45302,"symbol":"_dispatch_workloop_invoke","symbolLocation":1987,"imageIndex":13},{"imageOffset":81646,"symbol":"_dispatch_workloop_worker_thread","symbolLocation":753,"imageIndex":13},{"imageOffset":12240,"symbol":"_pthread_wqthread","symbolLocation":326,"imageIndex":8},{"imageOffset":8023,"symbol":"start_wqthread","symbolLocation":15,"imageIndex":8}]},{"id":356658,"name":"worker","frames":[{"imageOffset":17322,"symbol":"__psynch_cvwait","symbolLocation":10,"imageIndex":6},{"imageOffset":27247,"symbol":"_pthread_cond_wait","symbolLocation":1249,"imageIndex":8},{"imageOffset":685181,"symbol":"worker_thread","symbolLocation":173,"imageIndex":15},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":356667,"name":"com.apple.coremedia.rootQueue.47","frames":[{"imageOffset":6542,"symbol":"semaphore_timedwait_trap","symbolLocation":10,"imageIndex":6},{"imageOffset":14408,"symbol":"_dispatch_sema4_timedwait","symbolLocation":72,"imageIndex":13},{"imageOffset":15477,"symbol":"_dispatch_semaphore_wait_slow","symbolLocation":58,"imageIndex":13},{"imageOffset":76015,"symbol":"_dispatch_worker_thread","symbolLocation":308,"imageIndex":13},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"id":356681,"name":"AMCP Logging Spool","frames":[{"imageOffset":6518,"symbol":"semaphore_wait_trap","symbolLocation":10,"imageIndex":6},{"imageOffset":107238,"symbol":"caulk::mach::semaphore::wait_or_error()","symbolLocation":16,"imageIndex":16},{"imageOffset":8520,"symbol":"caulk::concurrent::details::worker_thread::run()","symbolLocation":36,"imageIndex":16},{"imageOffset":7692,"symbol":"void* caulk::thread_proxy<std::__1::tuple<caulk::thread::attributes, void (caulk::concurrent::details::worker_thread::*)(), std::__1::tuple<caulk::concurrent::details::worker_thread*> > >(void*)","symbolLocation":41,"imageIndex":16},{"imageOffset":25825,"symbol":"_pthread_start","symbolLocation":125,"imageIndex":8},{"imageOffset":8043,"symbol":"thread_start","symbolLocation":15,"imageIndex":8}]},{"triggered":true,"id":356783,"threadState":{"r13":{"value":140195907000296},"rax":{"value":0},"rflags":{"value":582},"cpu":{"value":0},"r14":{"value":6},"rsi":{"value":6},"r8":{"value":140195900594248},"cr2":{"value":0},"rdx":{"value":0},"r10":{"value":0},"r9":{"value":0},"r15":{"value":22},"rbx":{"value":123145416646656},"trap":{"value":133},"err":{"value":33554760},"r11":{"value":582},"rip":{"value":140703192899534,"matchesCrashFrame":1},"rbp":{"value":123145416645696},"rsp":{"value":123145416645656},"r12":{"value":119083},"rcx":{"value":123145416645656},"flavor":"x86_THREAD_STATE","rdi":{"value":119083}},"queue":"com.apple.root.background-qos.cooperative","frames":[{"imageOffset":32718,"symbol":"__pthread_kill","symbolLocation":10,"imageIndex":6},{"imageOffset":25087,"symbol":"pthread_kill","symbolLocation":263,"imageIndex":8},{"imageOffset":531732,"symbol":"abort","symbolLocation":123,"imageIndex":17},{"imageOffset":1501405,"symbol":"mp_clients_destroy.cold.1","symbolLocation":29,"imageIndex":15},{"imageOffset":778301,"symbol":"mp_clients_destroy","symbolLocation":77,"imageIndex":15},{"imageOffset":904157,"symbol":"mp_destroy","symbolLocation":93,"imageIndex":15},{"imageOffset":781939,"symbol":"mp_destroy_client","symbolLocation":1043,"imageIndex":15},{"imageOffset":28451006,"sourceLine":1427,"sourceFile":"MPVWrapper.swift","symbol":"(1) suspend resume partial function for closure #1 in MPVWrapper.destroy()","imageIndex":4,"symbolLocation":302},{"imageOffset":28456145,"sourceFile":"<compiler-generated>","symbol":"(1) await resume partial function for partial apply for closure #1 in MPVWrapper.destroy()","symbolLocation":1,"imageIndex":4}]},{"id":356784,"frames":[{"imageOffset":8008,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":8}]},{"id":356867,"frames":[{"imageOffset":8008,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":8}]},{"id":356868,"frames":[{"imageOffset":8008,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":8}]},{"id":356869,"frames":[{"imageOffset":8008,"symbol":"start_wqthread","symbolLocation":0,"imageIndex":8}]}],
   "usedImages" : [
   {
     "source" : "P",
     "arch" : "x86_64",
-    "base" : 140703560646656,
-    "size" : 4694016,
-    "uuid" : "222d44bb-076b-3be8-a051-cddfc2b961dc",
-    "path" : "\/usr\/lib\/swift\/libswiftCore.dylib",
-    "name" : "libswiftCore.dylib"
-  },
-  {
-    "source" : "P",
-    "arch" : "x86_64",
-    "base" : 4310179840,
-    "CFBundleShortVersionString" : "1.0.59",
-    "CFBundleIdentifier" : "com.redlemon.app",
-    "size" : 43499520,
-    "uuid" : "299dc480-4956-3e49-8a33-960c24323cab",
-    "path" : "\/Users\/USER\/Desktop\/*\/RedLemon.app\/Contents\/MacOS\/RedLemon",
-    "name" : "RedLemon",
-    "CFBundleVersion" : "59"
-  },
-  {
-    "source" : "P",
-    "arch" : "x86_64",
-    "base" : 140707822972928,
-    "CFBundleShortVersionString" : "3.5.2",
-    "CFBundleIdentifier" : "com.apple.SwiftUI",
-    "size" : 15335424,
-    "uuid" : "4270a4c3-e15f-3953-8f17-abb3b351219f",
-    "path" : "\/System\/Library\/Frameworks\/SwiftUI.framework\/Versions\/A\/SwiftUI",
-    "name" : "SwiftUI",
-    "CFBundleVersion" : "3.5.2"
-  },
-  {
-    "source" : "P",
-    "arch" : "x86_64",
-    "base" : 140707838308352,
-    "CFBundleShortVersionString" : "3.2.1",
-    "CFBundleIdentifier" : "com.apple.AttributeGraph",
-    "size" : 225280,
-    "uuid" : "e9337c46-2775-39dc-ae3d-14ccf80d629f",
-    "path" : "\/System\/Library\/PrivateFrameworks\/AttributeGraph.framework\/Versions\/A\/AttributeGraph",
-    "name" : "AttributeGraph",
-    "CFBundleVersion" : "3.2.1"
-  },
-  {
-    "source" : "P",
-    "arch" : "x86_64",
-    "base" : 140703689662464,
-    "size" : 8192,
-    "uuid" : "ad175d32-3dba-3e98-bed0-f37aedd82ff6",
-    "path" : "\/usr\/lib\/swift\/libswiftObjectiveC.dylib",
-    "name" : "libswiftObjectiveC.dylib"
+    "base" : 140703237967872,
+    "CFBundleShortVersionString" : "6.9",
+    "CFBundleIdentifier" : "com.apple.AppKit",
+    "size" : 15269888,
+    "uuid" : "5dd484cf-ed6a-3633-b42e-6518aeecd5b9",
+    "path" : "\/System\/Library\/Frameworks\/AppKit.framework\/Versions\/C\/AppKit",
+    "name" : "AppKit",
+    "CFBundleVersion" : "2113.65.150"
   },
   {
     "source" : "P",
     "arch" : "x86_64h",
-    "base" : 140703337861120,
+    "base" : 140703193411584,
     "CFBundleShortVersionString" : "6.9",
     "CFBundleIdentifier" : "com.apple.CoreFoundation",
     "size" : 5255168,
@@ -502,7 +488,7 @@ Full Report
   {
     "source" : "P",
     "arch" : "x86_64",
-    "base" : 140703485718528,
+    "base" : 140703341268992,
     "CFBundleShortVersionString" : "2.1.1",
     "CFBundleIdentifier" : "com.apple.HIToolbox",
     "size" : 3096576,
@@ -513,19 +499,31 @@ Full Report
   {
     "source" : "P",
     "arch" : "x86_64",
-    "base" : 140703382417408,
-    "CFBundleShortVersionString" : "6.9",
-    "CFBundleIdentifier" : "com.apple.AppKit",
-    "size" : 15269888,
-    "uuid" : "5dd484cf-ed6a-3633-b42e-6518aeecd5b9",
-    "path" : "\/System\/Library\/Frameworks\/AppKit.framework\/Versions\/C\/AppKit",
-    "name" : "AppKit",
-    "CFBundleVersion" : "2113.65.150"
+    "base" : 140707678523392,
+    "CFBundleShortVersionString" : "3.5.2",
+    "CFBundleIdentifier" : "com.apple.SwiftUI",
+    "size" : 15335424,
+    "uuid" : "4270a4c3-e15f-3953-8f17-abb3b351219f",
+    "path" : "\/System\/Library\/Frameworks\/SwiftUI.framework\/Versions\/A\/SwiftUI",
+    "name" : "SwiftUI",
+    "CFBundleVersion" : "3.5.2"
   },
   {
     "source" : "P",
     "arch" : "x86_64",
-    "base" : 4553420800,
+    "base" : 4444725248,
+    "CFBundleShortVersionString" : "1.0.76",
+    "CFBundleIdentifier" : "com.redlemon.app",
+    "size" : 44220416,
+    "uuid" : "c1caaacb-093e-35e3-b352-6e61f008c954",
+    "path" : "\/Users\/USER\/Desktop\/*\/RedLemon.app\/Contents\/MacOS\/RedLemon",
+    "name" : "RedLemon",
+    "CFBundleVersion" : "76"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 4728102912,
     "size" : 442368,
     "uuid" : "eea022bb-a6ab-3cd1-8ac1-54ce8cfd3333",
     "path" : "\/usr\/lib\/dyld",
@@ -534,16 +532,7 @@ Full Report
   {
     "source" : "P",
     "arch" : "x86_64",
-    "base" : 140703337545728,
-    "size" : 49152,
-    "uuid" : "5a5f7316-85b7-315e-baf3-76211ee65604",
-    "path" : "\/usr\/lib\/system\/libsystem_pthread.dylib",
-    "name" : "libsystem_pthread.dylib"
-  },
-  {
-    "source" : "P",
-    "arch" : "x86_64",
-    "base" : 140703337316352,
+    "base" : 140703192866816,
     "size" : 229376,
     "uuid" : "2fe67e94-4a5e-3506-9e02-502f7270f7ef",
     "path" : "\/usr\/lib\/system\/libsystem_kernel.dylib",
@@ -552,16 +541,27 @@ Full Report
   {
     "source" : "P",
     "arch" : "x86_64",
-    "base" : 140703335755776,
-    "size" : 290816,
-    "uuid" : "37860d89-d337-3140-8973-ac199acbc361",
-    "path" : "\/usr\/lib\/system\/libdispatch.dylib",
-    "name" : "libdispatch.dylib"
+    "base" : 140703276806144,
+    "CFBundleShortVersionString" : "1.600.0",
+    "CFBundleIdentifier" : "com.apple.SkyLight",
+    "size" : 3796992,
+    "uuid" : "02f1d11d-315c-3bbe-934a-d58ba3cedbe5",
+    "path" : "\/System\/Library\/PrivateFrameworks\/SkyLight.framework\/Versions\/A\/SkyLight",
+    "name" : "SkyLight"
   },
   {
     "source" : "P",
     "arch" : "x86_64",
-    "base" : 140703415865344,
+    "base" : 140703193096192,
+    "size" : 49152,
+    "uuid" : "5a5f7316-85b7-315e-baf3-76211ee65604",
+    "path" : "\/usr\/lib\/system\/libsystem_pthread.dylib",
+    "name" : "libsystem_pthread.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 140703271415808,
     "CFBundleShortVersionString" : "1335.5",
     "CFBundleIdentifier" : "com.apple.CFNetwork",
     "size" : 4780032,
@@ -573,7 +573,7 @@ Full Report
   {
     "source" : "P",
     "arch" : "x86_64",
-    "base" : 140703353053184,
+    "base" : 140703208603648,
     "CFBundleShortVersionString" : "6.9",
     "CFBundleIdentifier" : "com.apple.Foundation",
     "size" : 3919872,
@@ -585,25 +585,78 @@ Full Report
   {
     "source" : "P",
     "arch" : "x86_64",
-    "base" : 140703464075264,
-    "CFBundleShortVersionString" : "1.8",
-    "CFBundleIdentifier" : "com.apple.CoreVideo",
-    "size" : 335872,
-    "uuid" : "fe89c8c7-c939-3115-afdb-7a6190835819",
-    "path" : "\/System\/Library\/Frameworks\/CoreVideo.framework\/Versions\/A\/CoreVideo",
-    "name" : "CoreVideo",
-    "CFBundleVersion" : "480.1"
+    "base" : 140703416197120,
+    "size" : 4694016,
+    "uuid" : "222d44bb-076b-3be8-a051-cddfc2b961dc",
+    "path" : "\/usr\/lib\/swift\/libswiftCore.dylib",
+    "name" : "libswiftCore.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 140703545212928,
+    "size" : 8192,
+    "uuid" : "ad175d32-3dba-3e98-bed0-f37aedd82ff6",
+    "path" : "\/usr\/lib\/swift\/libswiftObjectiveC.dylib",
+    "name" : "libswiftObjectiveC.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 140703191306240,
+    "size" : 290816,
+    "uuid" : "37860d89-d337-3140-8973-ac199acbc361",
+    "path" : "\/usr\/lib\/system\/libdispatch.dylib",
+    "name" : "libdispatch.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64h",
+    "base" : 140703191597056,
+    "size" : 241664,
+    "uuid" : "b36a2b52-68a9-3e44-b927-71c24be1272f",
+    "path" : "\/usr\/lib\/libobjc.A.dylib",
+    "name" : "libobjc.A.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 4576882688,
+    "size" : 2883584,
+    "uuid" : "e355e4d8-dcc6-3439-90d2-abf0776cc6ac",
+    "path" : "\/Users\/USER\/Desktop\/*\/RedLemon.app\/Contents\/Frameworks\/libmpv.2.dylib",
+    "name" : "libmpv.2.dylib"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 140703338782720,
+    "CFBundleShortVersionString" : "1.0",
+    "CFBundleIdentifier" : "com.apple.audio.caulk",
+    "size" : 139264,
+    "uuid" : "f04b5c91-d0ec-33c6-8a81-b80a3ebf827f",
+    "path" : "\/System\/Library\/PrivateFrameworks\/caulk.framework\/Versions\/A\/caulk",
+    "name" : "caulk"
+  },
+  {
+    "source" : "P",
+    "arch" : "x86_64",
+    "base" : 140703191851008,
+    "size" : 561152,
+    "uuid" : "202d7260-ea46-3956-a471-19c9bcf45274",
+    "path" : "\/usr\/lib\/system\/libsystem_c.dylib",
+    "name" : "libsystem_c.dylib"
   }
 ],
   "sharedCache" : {
-  "base" : 140703334285312,
+  "base" : 140703189835776,
   "size" : 19331678208,
   "uuid" : "246818c3-4b9f-3462-bcaf-fdf71975e5fe"
 },
-  "vmSummary" : "ReadOnly portion of Libraries: Total=1.3G resident=0K(0%) swapped_out_or_unallocated=1.3G(100%)\nWritable regions: Total=161.9M written=0K(0%) resident=0K(0%) swapped_out=0K(0%) unallocated=161.9M(100%)\n\n                                VIRTUAL   REGION \nREGION TYPE                        SIZE    COUNT (non-coalesced) \n===========                     =======  ======= \nAccelerate framework               256K        2 \nActivity Tracing                   256K        1 \nCG backing stores                 1920K        4 \nCG image                           280K        8 \nCG raster data                     348K       15 \nColorSync                          220K       26 \nCoreAnimation                     1904K       57 \nCoreGraphics                        12K        2 \nCoreUI image data                 1916K       14 \nDispatch continuations            32.0M        1 \nFoundation                          16K        1 \nIOKit                             7940K        1 \nImage IO                          2200K        3 \nKernel Alloc Once                    8K        1 \nMALLOC                            68.4M       84 \nMALLOC guard page                   48K        8 \nSQLite page cache                  320K        5 \nSTACK GUARD                       56.1M       16 \nStack                             15.6M       16 \nVM_ALLOCATE                       3116K       10 \n__CTF                               756        1 \n__DATA                            55.1M      602 \n__DATA_CONST                      33.3M      406 \n__DATA_DIRTY                      1651K      202 \n__FONT_DATA                          4K        1 \n__LINKEDIT                       729.5M       83 \n__OBJC_RO                         82.9M        1 \n__OBJC_RW                         3200K        2 \n__TEXT                           592.9M      605 \n__UNICODE                          592K        1 \ndyld private memory               1024K        3 \nlibnetwork                        13.6M       40 \nmapped file                      165.5M       32 \nshared memory                     2840K       22 \n===========                     =======  ======= \nTOTAL                              1.8G     2276 \n",
+  "vmSummary" : "ReadOnly portion of Libraries: Total=1.3G resident=0K(0%) swapped_out_or_unallocated=1.3G(100%)\nWritable regions: Total=239.5M written=0K(0%) resident=0K(0%) swapped_out=0K(0%) unallocated=239.5M(100%)\n\n                                VIRTUAL   REGION \nREGION TYPE                        SIZE    COUNT (non-coalesced) \n===========                     =======  ======= \nAccelerate framework               384K        3 \nActivity Tracing                   256K        1 \nCG backing stores                 1920K        4 \nCG image                           228K       14 \nCG raster data                     220K       26 \nColorSync                          228K       28 \nCoreAnimation                     1980K       41 \nCoreGraphics                        12K        2 \nCoreUI image data                 1328K       10 \nDispatch continuations            32.0M        1 \nFoundation                          16K        1 \nIOKit                             7940K        1 \nImage IO                          2344K       18 \nKernel Alloc Once                    8K        1 \nMALLOC                           122.0M      165 \nMALLOC guard page                   48K       11 \nOpenGL GLSL                        384K        5 \nSQLite page cache                 1024K       16 \nSTACK GUARD                       56.1M       23 \nStack                             19.2M       24 \nVM_ALLOCATE                       13.5M       41 \n__CTF                               756        1 \n__DATA                            55.4M      611 \n__DATA_CONST                      33.7M      416 \n__DATA_DIRTY                      1658K      205 \n__FONT_DATA                          4K        1 \n__GLSLBUILTINS                    5176K        1 \n__LINKEDIT                       730.6M       85 \n__OBJC_RO                         82.9M        1 \n__OBJC_RW                         3200K        2 \n__TEXT                           604.0M      615 \n__UNICODE                          592K        1 \ndyld private memory               1024K        3 \nlibnetwork                        14.6M       48 \nmapped file                      344.1M       38 \nshared memory                      9.8M       29 \n===========                     =======  ======= \nTOTAL                              2.1G     2493 \n",
   "legacyInfo" : {
   "threadTriggered" : {
-    "queue" : "com.apple.main-thread"
+    "queue" : "com.apple.root.background-qos.cooperative"
   }
 },
   "trialInfo" : {
@@ -641,10 +694,3 @@ Network Service: Wi-Fi, AirPort, en0
 USB Device: USB30Bus
 USB Device: Bluetooth USB Host Controller
 Thunderbolt Bus: MacBook Pro, Apple Inc., 27.1
-
-
-
-
-
-
-

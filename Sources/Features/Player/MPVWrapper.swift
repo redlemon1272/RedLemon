@@ -1411,10 +1411,21 @@ class MPVWrapper: ObservableObject {
 
         // Clean up MPV resources
         if let handle = mpvHandle {
-            // Explicitly clear render context pointer to prevent any further access
+            // Capture render context
+            let contextToFree = renderContext
+
+            // Explicitly clear render context pointer to prevent any further access from potential render callbacks
             renderContext = nil
             // Clear handle immediately so no other calls can use it
             mpvHandle = nil
+            
+            // CRITICAL FIX: Free render context BEFORE destroying handle
+            // MPV documentation states: "If you used mpv_render_context_create(), you should call mpv_render_context_free() before mpv_destroy()."
+            // Failure to do this causes a SIGABRT in mp_clients_destroy (Thread 18 crash).
+            if let context = contextToFree {
+                LoggingManager.shared.debug(.videoRendering, message: "Freeing render context...")
+                mpv_render_context_free(context)
+            }
 
             let wasInitialized = isInitialized
 

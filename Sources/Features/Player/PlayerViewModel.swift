@@ -189,6 +189,7 @@ class PlayerViewModel: ObservableObject {
 
             if let pre = resolvedStream {
                  NSLog("🚀 PlayerVM: Using pre-resolved stream (Zero-Wait Start)")
+                 NSLog("   Pre-resolved URL: %@", String(pre.url?.prefix(80) ?? "nil"))
                  // Clear it after use so we don't reuse it for next media
                  self.preResolvedStream = nil
             } else {

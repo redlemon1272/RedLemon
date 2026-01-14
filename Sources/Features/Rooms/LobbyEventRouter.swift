@@ -590,13 +590,26 @@ class LobbyEventRouter: ObservableObject {
         }
         
         do {
-            try await viewModel.appState?.player.preloadStream(
+            // DEBUG: Check if appState is available
+            guard let player = viewModel.appState?.player else {
+                NSLog("❌ Guest: CRITICAL - viewModel.appState?.player is nil! Cannot preload stream.")
+                return
+            }
+            
+            try await player.preloadStream(
                 mediaItem: mediaItem,
                 quality: .fullHD,
                 streamHash: effectiveHash,
                 season: roomState.season,
                 episode: roomState.episode
             )
+            
+            // DEBUG: Log the URL that was preloaded
+            if let preloadedURL = player.preResolvedStream?.url {
+                NSLog("✅ Guest: Stream preloaded with URL: %@", String(preloadedURL.prefix(80)))
+            } else {
+                NSLog("⚠️ Guest: preResolvedStream or URL is nil after preload!")
+            }
             
             // 5. Report Ready
             NSLog("✅ Guest: Stream preloaded. Sending READY signal.")

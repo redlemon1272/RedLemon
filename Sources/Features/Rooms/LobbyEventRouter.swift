@@ -82,30 +82,34 @@ class LobbyEventRouter: ObservableObject {
     private func handleLobbyCommand(_ chatText: String, syncMessage: SyncMessage) async {
         guard let viewModel = viewModel else { return }
 
-        if chatText == "LOBBY_JOIN" {
+        // Sanitize command text to remove accidental whitespace/newlines
+        let command = chatText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if command == "LOBBY_JOIN" {
             await handleLobbyJoin(syncMessage)
-        } else if chatText == "LOBBY_READY" {
+        } else if command == "LOBBY_READY" {
             handleLobbyReadyChange(syncMessage, isReady: true)
-        } else if chatText == "LOBBY_UNREADY" {
+        } else if command == "LOBBY_UNREADY" {
             handleLobbyReadyChange(syncMessage, isReady: false)
-        } else if chatText.hasPrefix("LOBBY_VOTE:") {
-            handleLobbyVote(chatText, syncMessage: syncMessage, isVoting: true)
-        } else if chatText.hasPrefix("LOBBY_UNVOTE:") {
-            handleLobbyVote(chatText, syncMessage: syncMessage, isVoting: false)
-        } else if chatText.starts(with: "LOBBY_KICK:") {
-            await handleLobbyKick(chatText)
-        } else if chatText == "LOBBY_START_COUNTDOWN" {
+        } else if command.hasPrefix("LOBBY_VOTE:") {
+            handleLobbyVote(command, syncMessage: syncMessage, isVoting: true)
+        } else if command.hasPrefix("LOBBY_UNVOTE:") {
+            handleLobbyVote(command, syncMessage: syncMessage, isVoting: false)
+        } else if command.starts(with: "LOBBY_KICK:") {
+            await handleLobbyKick(command)
+        } else if command == "LOBBY_START_COUNTDOWN" {
             await handleLobbyStartCountdown(syncMessage)
-        } else if chatText == "LOBBY_PREPARE_PLAYBACK" || chatText.hasPrefix("LOBBY_PREPARE_PLAYBACK|") {
+        } else if command == "LOBBY_PREPARE_PLAYBACK" || command.hasPrefix("LOBBY_PREPARE_PLAYBACK|") {
              await handleLobbyPreparePlayback(syncMessage)
-        } else if chatText == "LOBBY_READY_FOR_PLAYBACK" {
+        } else if command == "LOBBY_READY_FOR_PLAYBACK" {
              handleLobbyReadyForPlayback(syncMessage)
-        } else if chatText == "LOBBY_RESOLVING" {
+        } else if command == "LOBBY_RESOLVING" {
              await handleLobbyResolving(syncMessage)
         } else {
-             // Unknown LOBBY command - log warning
+             // Unknown LOBBY command - log warning with detailed scalar analysis for debug
              let senderInfo = syncMessage.chatUsername ?? syncMessage.senderId ?? "Unknown"
-             NSLog("⚠️ Unknown lobby command received: '\(chatText)' from \(senderInfo)")
+             let scalars = command.unicodeScalars.map { String(format: "%02x", $0.value) }.joined(separator: " ")
+             NSLog("⚠️ Unknown lobby command received: '\(command)' from \(senderInfo) (Hex: \(scalars))")
         }
     }
 

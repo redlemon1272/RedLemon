@@ -6,6 +6,28 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.78 -->
+        <item>
+            <title>Version 1.0.78</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix: add filename-based blocking for hashless streams</li>
+<li>fix: use currentStreamHash when saving watch history</li>
+<li>fix: lowercase provider hash before blocked stream check</li>
+<li>fix: lowercase blocked stream hashes for comparison (Landmine #37)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 22:12:59 -0500</pubDate>
+            <sparkle:version>78</sparkle:version>
+            <sparkle:shortVersionString>1.0.78</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.78.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="z9maaKN05KUTWFS1Hh9NTqtQIBZPa1d7XP5v9qPBvOfvzC057/FwhS1a9blUKlzMSVB6iQTIGbWd7S9lyLPUDA==" length="72868524"
+            />
+        </item>
         <!-- v1.0.77 -->
         <item>
             <title>Version 1.0.77</title>

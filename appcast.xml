@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.89 -->
+        <item>
+            <title>Version 1.0.89</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Scroll compatibility for macOS 15+</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 18:25:39 -0500</pubDate>
+            <sparkle:version>89</sparkle:version>
+            <sparkle:shortVersionString>1.0.89</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.89.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="MvRHhCrL2QyiF0r16BEUSp+P/6C2fT3555D4U7KQXlsT8q22zI7GyxWcsx3741rPXaZzkjQk5si5ivf9+fUvDQ==" length="72817033"
+            />
+        </item>
         <!-- v1.0.88 -->
         <item>
             <title>Version 1.0.88</title>

@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 14, 2026
+> **Last Updated:** January 14, 2026 (Added Server Backup & Migration)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -64,7 +64,7 @@
 5.  **Realtime Sync**: **Rule**: Copy ALL properties when re-creating `SyncMessage` for drift compensation to prevent data loss.
 
 ### 6-10: SwiftUI & Services
-6.  **Compiler Timeouts**: Complex `ForEach`. **Rule**: Extract logic to private funcs/subviews.
+6.  **Compiler Timeouts**: Complex `ForEach`. **Rule**: Extract logic to separate `struct` Views. `ViewBuilder` functions remain fragile in large files.
 7.  **Service Isolation**: Services cannot see `AppState`. **Rule**: Dependencies flow DOWN (UI -> Service).
 8.  **Date Decoding**: Postgres timestamps vary. **Rule**: Use `.withFractionalSeconds` and `.withInternetDateTime`.
 9.  **RLS Policies**: Implicit deny. **Rule**: Create `SELECT` policies for public tables.
@@ -453,6 +453,141 @@ expect -c 'spawn scp supabase/migrations/YOUR_MIGRATION.sql root@151.243.109.243
 `/root/supabase/docker/volumes/functions/[name]/index.ts`
 
 Functions: `assign-address`, `check-payment`, `sweep-payments`, `cleanup-rooms`, `recover-account`
+
+## Server Backup & Migration
+
+### Overview
+The server is **fully containerized** using Docker Compose. All services (Supabase, Edge Functions, Caddy) run in containers. Zilean runs as a native service.
+
+**Current Server Specs:**
+- **IP**: `151.243.109.243`
+- **Provider**: AnonVM
+- **Disk**: 240 GB (using ~31 GB)
+- **OS**: Ubuntu 24.04 LTS
+
+### Backup Scripts (Located in repo root)
+
+| Script | Purpose |
+|--------|---------|
+| `backup-server-to-mac.sh` | Full server backup (~2 min, ~624MB) |
+| `restore-to-new-server.sh` | Deploy backup to fresh Ubuntu server |
+| `remote_download.sh` | Download files from server |
+| `remote_exec.sh` | Execute commands on server |
+| `remote_scp.sh` | Upload files to server |
+
+### What Gets Backed Up
+
+| Item | Size | Importance |
+|------|------|------------|
+| **database.sql** | ~622 MB | 🔴 Critical - all users, payments, streams |
+| **docker/.env** | 4 KB | 🔴 Critical - all secrets/API keys |
+| **docker/functions/** | ~12 KB | 🟠 High - edge functions |
+| **docker/docker-compose.yml** | 13 KB | 🟡 Medium |
+| **zilean/*.sh** | ~5 KB | 🟡 Medium - startup scripts |
+| **crontab_backup.txt** | 168 B | 🟢 Low - cron jobs |
+
+### Automatic Backups
+
+```
+Cron: 0 3 * * * (3:00 AM daily)
+Location: ~/Desktop/RedLemon-ServerBackup/
+Retention: Last 7 backups kept
+Log: ~/Desktop/RedLemon-ServerBackup/backup.log
+```
+
+**Note**: Mac must be awake at 3 AM for backup to run.
+
+### Manual Backup
+
+```bash
+cd /path/to/RedLemon-Native
+./backup-server-to-mac.sh
+```
+
+Backups are saved to: `~/Desktop/RedLemon-ServerBackup/redlemon_backup_YYYYMMDD_HHMMSS/`
+
+### Migration to New Server
+
+**Prerequisites:**
+- Fresh Ubuntu 22.04/24.04 VPS
+- SSH access as root
+- Recent backup on Mac
+
+**Steps:**
+```bash
+# 1. Update password in restore script if needed
+nano restore-to-new-server.sh
+
+# 2. Run restore
+./restore-to-new-server.sh <new-server-ip>
+
+# Script automatically:
+# - Installs Docker
+# - Uploads all configs
+# - Starts Supabase containers
+# - Restores database
+# - Sets up Caddy SSL
+# - Restores Zilean startup scripts
+```
+
+**Post-Migration Checklist:**
+1. Test login and data integrity
+2. Update `remote_exec.sh` and `remote_scp.sh` with new IP
+3. Update this file (AI_BIBLE.md) with new server info
+4. Set up Zilean (clone from GitHub, build, run `start_zilean.sh`)
+5. Test edge functions (`/system/status`, `/system/disk`)
+6. Update DNS if using custom domain
+
+### Zilean Migration
+
+Zilean binary is NOT backed up (large, can be rebuilt). What IS backed up:
+- `start_zilean.sh` - Environment variables and startup command
+- `maintain_zilean.sh` - Maintenance/janitor script
+- `zilean_heartbeat.sh` - Health check script
+
+**To set up Zilean on new server:**
+```bash
+# 1. Clone Zilean
+git clone https://github.com/iPromKnight/zilean /root/zilean_src
+
+# 2. Install .NET 9.0
+wget https://dot.net/v1/dotnet-install.sh
+chmod +x dotnet-install.sh
+./dotnet-install.sh --version 9.0.0
+
+# 3. Build Zilean
+cd /root/zilean_src
+dotnet publish -c Release -o /root/zilean_bin
+
+# 4. Start (script already restored from backup)
+screen -dmS zilean /root/start_zilean.sh
+```
+
+### Disk Monitoring
+
+The Admin Dashboard Server tab shows real-time disk usage via `/system/disk` edge function.
+
+Stats file updated every 5 minutes: `/root/supabase/docker/volumes/functions/disk_stats.json`
+
+Cron job on server:
+```bash
+*/5 * * * * /root/update_disk_stats.sh
+```
+
+### Docker Containers (Reference)
+
+```
+supabase-db          postgres:15.8.1        Database
+supabase-auth        gotrue                 Authentication
+supabase-rest        postgrest              REST API
+supabase-realtime    realtime               WebSocket sync
+supabase-edge-functions edge-runtime        Edge Functions
+supabase-storage     storage-api            File Storage
+supabase-kong        kong                   API Gateway
+supabase-pooler      supavisor              Connection Pooling
+supabase-studio      studio                 Admin Dashboard
+caddy-proxy          caddy:2-alpine         HTTPS/SSL Proxy
+```
 
 ---
 

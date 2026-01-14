@@ -7,6 +7,7 @@ struct AdminServerView: View {
     @State private var lastBackup: BackupLog?
     @State private var lastJanitor: SystemJobLog?
     @State private var lastSweep: SystemJobLog?
+    @State private var diskUsage: DiskUsage?
     @State private var isLoading = false
     @State private var lastRefreshed: Date?
     
@@ -181,7 +182,80 @@ struct AdminServerView: View {
                 .background(Color(NSColor.controlBackgroundColor))
                 .cornerRadius(12)
                 
-                // 3. Environment Info
+                // 3. Disk Usage
+                VStack(alignment: .leading, spacing: 16) {
+                    Label("Disk Usage", systemImage: "internaldrive.fill")
+                        .font(.headline)
+                    
+                    if let disk = diskUsage {
+                        VStack(spacing: 12) {
+                            // Progress bar
+                            GeometryReader { geometry in
+                                ZStack(alignment: .leading) {
+                                    // Background
+                                    RoundedRectangle(cornerRadius: 6)
+                                        .fill(Color.gray.opacity(0.2))
+                                        .frame(height: 12)
+                                    
+                                    // Used portion
+                                    RoundedRectangle(cornerRadius: 6)
+                                        .fill(disk.usagePercent > 80 ? Color.red : disk.usagePercent > 60 ? Color.orange : Color.green)
+                                        .frame(width: geometry.size.width * CGFloat(disk.usagePercent) / 100, height: 12)
+                                }
+                            }
+                            .frame(height: 12)
+                            
+                            // Stats row
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("Used")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                    Text(ByteCountFormatter.string(fromByteCount: disk.usedBytes, countStyle: .file))
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(disk.usagePercent > 80 ? .red : .primary)
+                                }
+                                
+                                Spacer()
+                                
+                                VStack {
+                                    Text("Total")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                    Text(ByteCountFormatter.string(fromByteCount: disk.totalBytes, countStyle: .file))
+                                        .font(.system(size: 14, weight: .semibold))
+                                }
+                                
+                                Spacer()
+                                
+                                VStack(alignment: .trailing) {
+                                    Text("Free")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                    Text(ByteCountFormatter.string(fromByteCount: disk.freeBytes, countStyle: .file))
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(.green)
+                                }
+                            }
+                            
+                            Text("\(String(format: "%.1f", disk.usagePercent))% used")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding()
+                        .background(Color(NSColor.windowBackgroundColor))
+                        .cornerRadius(8)
+                    } else {
+                        Text("Checking disk usage...")
+                            .foregroundColor(.secondary)
+                            .italic()
+                    }
+                }
+                .padding()
+                .background(Color(NSColor.controlBackgroundColor))
+                .cornerRadius(12)
+                
+                // 4. Environment Info
                 VStack(alignment: .leading, spacing: 16) {
                     Label("Environment", systemImage: "server.rack")
                         .font(.headline)
@@ -254,6 +328,16 @@ struct AdminServerView: View {
                 print("System Logs Error: \(error)")
             }
             
+            // 5. Get Disk Usage
+            do {
+                let disk: DiskUsage = try await SupabaseClient.shared.invokeFunction(name: "system/disk")
+                diskUsage = disk
+            } catch {
+                print("Disk Usage Error: \(error)")
+                // Fallback with mock data if endpoint not available
+                diskUsage = nil
+            }
+            
             lastRefreshed = Date()
             isLoading = false
         }
@@ -289,6 +373,20 @@ struct BackupLog: Codable {
         case filename
         case status
         case createdAt = "created_at"
+    }
+}
+
+struct DiskUsage: Codable {
+    let totalBytes: Int64
+    let usedBytes: Int64
+    let freeBytes: Int64
+    let usagePercent: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case totalBytes = "total_bytes"
+        case usedBytes = "used_bytes"
+        case freeBytes = "free_bytes"
+        case usagePercent = "usage_percent"
     }
 }
 

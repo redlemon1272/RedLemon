@@ -552,41 +552,14 @@ struct AdminEventsView: View {
                             .italic()
                     } else {
                         ForEach(activeEventRooms, id: \.id) { room in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(room.name)
-                                        .font(.system(size: 13, weight: .medium))
-                                    Text(room.id)
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                }
-                                
-                                Spacer()
-                                
-                                Text("\(room.participantsCount) Active")
-                                    .font(.caption)
-                                    .monospacedDigit()
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 4)
-                                    .background(Color.blue.opacity(0.1))
-                                    .cornerRadius(4)
-                                
-                                Button("Reset") {
-                                    debugEventId = room.id
-                                    resetEventStream()
-                                }
-                                .font(.caption)
-                                
-                                Button("Delete") {
-                                    deleteEventRoom(roomId: room.id)
-                                }
-                                .font(.caption)
-                                .foregroundColor(.red)
-                                .disabled(isDeletingRoom)
-                            }
-                            .padding()
-                            .background(Color(NSColor.controlBackgroundColor))
-                            .cornerRadius(8)
+                            ActiveEventRowView(
+                                room: room,
+                                isDeletingRoom: isDeletingRoom,
+                                debugEventId: $debugEventId,
+                                onReset: resetEventStream,
+                                onDelete: deleteEventRoom,
+                                onBlockAndReset: blockAndReset
+                            )
                         }
                     }
                 }
@@ -627,6 +600,36 @@ struct AdminEventsView: View {
             _ = try? await EventsConfigService.shared.refreshConfig(type: "movie_events")
             loadData()
             isLoading = false
+        }
+    }
+    
+
+    
+
+
+    private func blockAndReset(roomId: String, hash: String) {
+        isResettingStream = true
+        resetMessage = nil
+        
+        Task { @MainActor in
+            do {
+                // 1. Block the stream
+                try await SupabaseClient.shared.blockStream(
+                    hash: hash,
+                    filename: nil,
+                    provider: nil,
+                    reason: "Blocked via Admin Dashboard (Bad Stream)"
+                )
+                
+                // 2. Reset the room to force re-resolution
+                try await SupabaseClient.shared.resetRoomStream(roomId: roomId)
+                
+                resetMessage = "Success: Blocked hash \(hash.prefix(8))... and reset room."
+                loadData()
+            } catch {
+                resetMessage = "Error: \(error.localizedDescription)"
+            }
+            isResettingStream = false
         }
     }
     
@@ -1857,5 +1860,146 @@ struct DisputeResolverView: View {
             }
             isGranting = false
         }
+    }
+}
+
+// Helper struct to isolate compiler complexity
+struct BlockResetButton: View {
+    let roomId: String
+    let hash: String
+    let performBlock: (String, String) -> Void
+    
+    var body: some View {
+        Button("Block & Reset") {
+            performBlock(roomId, hash)
+        }
+        .font(.caption2)
+        .foregroundColor(.red)
+        .buttonStyle(.bordered)
+        .controlSize(.mini)
+        .padding(.top, 2)
+    }
+}
+
+struct ActiveEventRowView: View {
+    let room: SupabaseRoom
+    let isDeletingRoom: Bool
+    @Binding var debugEventId: String
+    let onReset: () -> Void
+    let onDelete: (String) -> Void
+    let onBlockAndReset: (String, String) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(room.name)
+                        .font(.system(size: 13, weight: .medium))
+                    Text(room.id)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                Text("\(room.participantsCount) Active")
+                    .font(.caption)
+                    .monospacedDigit()
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.blue.opacity(0.1))
+                    .cornerRadius(4)
+                
+                Button("Reset") {
+                    debugEventId = room.id
+                    onReset()
+                }
+                .font(.caption)
+                
+                Button("Delete") {
+                    onDelete(room.id)
+                }
+                .font(.caption)
+                .foregroundColor(.red)
+                .disabled(isDeletingRoom)
+            }
+            
+            // Seeded Stream Info
+            if room.streamHash != nil || room.unlockedStreamUrl != nil {
+                Divider()
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Image(systemName: "lock.fill")
+                            .foregroundColor(.green)
+                            .font(.caption2)
+                        Text("Seeded Stream")
+                            .font(.caption.weight(.semibold))
+                            .foregroundColor(.green)
+                    }
+                    
+                    if let hash = room.streamHash {
+                        HStack {
+                            Text("Hash:")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                            Text(hash.prefix(16) + "...")
+                                .font(.system(.caption2, design: .monospaced))
+                                .foregroundColor(.orange)
+                            
+                            Button(action: {
+                                NSPasteboard.general.clearContents()
+                                NSPasteboard.general.setString(hash, forType: .string)
+                            }) {
+                                Image(systemName: "doc.on.doc")
+                                    .font(.caption2)
+                            }
+                            .buttonStyle(.plain)
+                            .help("Copy full hash")
+                        }
+                    }
+                    
+                    if let quality = room.quality {
+                        HStack {
+                            Text("Quality:")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                            Text(quality)
+                                .font(.caption2.weight(.medium))
+                                .foregroundColor(.cyan)
+                        }
+                    }
+                    
+                    if room.unlockedStreamUrl != nil {
+                        HStack {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.green)
+                                .font(.caption2)
+                            Text("URL Unlocked")
+                                .font(.caption2)
+                                .foregroundColor(.green)
+                        }
+                    }
+                    
+                    if let hash = room.streamHash {
+                        BlockResetButton(roomId: room.id, hash: hash, performBlock: onBlockAndReset)
+                    }
+                }
+                .padding(.leading, 8)
+            } else {
+                // No seeded stream
+                HStack {
+                    Image(systemName: "lock.open")
+                        .foregroundColor(.secondary)
+                    Text("No stream locked")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.leading, 8)
+            }
+        }
+        .padding(.vertical, 4)
+        .padding(.horizontal, 8)
+        .background(Color(NSColor.controlBackgroundColor))
+        .cornerRadius(6)
     }
 }

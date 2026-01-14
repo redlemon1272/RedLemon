@@ -312,9 +312,9 @@ class SupabaseClient: RoomManager, UserManager {
     private func handleResponse(data: Data, response: URLResponse, path: String) throws -> Data {
         // DEBUG: Print raw JSON for room requests to verify season/episode
         if path.contains("/rooms") {
-            if let jsonString = String(data: data, encoding: .utf8) {
-               // print("🔍 Supabase Response for \(path): \(jsonString)")
-            }
+            // if let jsonString = String(data: data, encoding: .utf8) {
+            //    print("🔍 Supabase Response for \(path): \(jsonString)")
+            // }
         }
 
         guard let httpResponse = response as? HTTPURLResponse else {

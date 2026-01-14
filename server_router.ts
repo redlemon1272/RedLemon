@@ -28,6 +28,43 @@ serve(async (req: Request) => {
             region: 'self-hosted'
         }), { headers: { 'Content-Type': 'application/json' } })
     }
+    if (path === '/system/disk') {
+        try {
+            // Execute df command to get disk usage for root filesystem
+            const cmd = new Deno.Command("df", {
+                args: ["-B1", "/"],  // -B1 for bytes, / for root filesystem
+                stdout: "piped",
+                stderr: "piped",
+            });
+            const { stdout } = await cmd.output();
+            const output = new TextDecoder().decode(stdout);
+
+            // Parse df output: Filesystem 1B-blocks Used Available Use% Mounted
+            const lines = output.trim().split('\n');
+            if (lines.length >= 2) {
+                const parts = lines[1].split(/\s+/);
+                // parts: [filesystem, total, used, available, use%, mount]
+                const totalBytes = parseInt(parts[1]) || 0;
+                const usedBytes = parseInt(parts[2]) || 0;
+                const freeBytes = parseInt(parts[3]) || 0;
+                const usagePercent = totalBytes > 0 ? (usedBytes / totalBytes) * 100 : 0;
+
+                return new Response(JSON.stringify({
+                    total_bytes: totalBytes,
+                    used_bytes: usedBytes,
+                    free_bytes: freeBytes,
+                    usage_percent: Math.round(usagePercent * 10) / 10
+                }), { headers: { 'Content-Type': 'application/json' } });
+            }
+            throw new Error("Failed to parse df output");
+        } catch (error) {
+            console.error("Disk usage error:", error);
+            return new Response(JSON.stringify({
+                error: "Failed to get disk usage",
+                message: error instanceof Error ? error.message : String(error)
+            }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+        }
+    }
     if (path.includes('hello')) return hello();
 
     return new Response("Function not found: " + path, { status: 404 });

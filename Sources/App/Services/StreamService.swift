@@ -635,65 +635,85 @@ actor StreamService: StreamResolving {
     // MARK: - Stream Unlocking
 
     func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> Stream {
+        // CRITICAL FIX (v1.0.79): When we have an infoHash, ALWAYS use the proper unlock flow.
+        // Torrentio's /resolve/ redirects return user-specific RealDebrid links that are IP-locked.
+        // If we resolve a redirect, we might get a cached URL that belongs to a different user,
+        // which causes immediate EOF when the guest tries to play it (their IP doesn't match).
+        // The proper unlock flow ensures each user gets their own fresh, valid download link.
+        
+        // Only skip unlock if: (1) URL is direct AND (2) no infoHash available for proper unlock
+        let hasInfoHash = stream.infoHash != nil && !stream.infoHash!.isEmpty
+        
         // Check for direct HTTP URL (Pre-unlocked)
         if let url = stream.url, (url.hasPrefix("http://") || url.hasPrefix("https://")) {
+            
+            // If we have an infoHash, prefer proper unlock flow (skip resolve redirect)
+            // This ensures IP-compatibility for watch party guests
+            if hasInfoHash && url.contains("/resolve/") {
+                print("🔒 StreamService: Has infoHash - forcing proper unlock flow (bypass redirect)")
+                // Fall through to infoHash unlock logic below
+            } else if hasInfoHash && url.contains("real-debrid.com") {
+                // Also force unlock for direct RealDebrid URLs if we have hash (might be stale/cached)
+                print("🔒 StreamService: Has infoHash - forcing proper unlock flow (bypass cached URL)")
+                // Fall through to infoHash unlock logic below
+            } else {
+                // No infoHash available, must try to use the URL directly
+                // NEW: Resolve "resolve" URLs (Debrid Search) to final direct links
+                // These URLs are redirects (302) to the actual file. MPV fails on them, so we must resolve them now.
+                var finalURL = url
+                if url.contains("/resolve/") {
+                     print("🔍 StreamService: Resolving redirect URL: \(url)")
+                     if let resolved = await resolveRedirect(url: url) {
+                         print("✅ StreamService: Resolved to: \(resolved)")
 
-            // NEW: Resolve "resolve" URLs (Debrid Search) to final direct links
-            // These URLs are redirects (302) to the actual file. MPV fails on them, so we must resolve them now.
-            var finalURL = url
-            if url.contains("/resolve/") {
-                 print("🔍 StreamService: Resolving redirect URL: \(url)")
-                 if let resolved = await resolveRedirect(url: url) {
-                     print("✅ StreamService: Resolved to: \(resolved)")
+                         // CRITICAL: Validate resolved URL is a valid video file
+                         if isBlockedFileExtension(url: resolved) {
+                             print("🚫 StreamService: Blocked suspicious file extension in resolved URL. Skipping stream.")
+                             throw APIError.invalidStream
+                         }
 
-                     // CRITICAL: Validate resolved URL is a valid video file
-                     if isBlockedFileExtension(url: resolved) {
-                         print("🚫 StreamService: Blocked suspicious file extension in resolved URL. Skipping stream.")
+                         finalURL = resolved
+                     } else {
+                         // FIX: Throw error instead of using invalid redirect URL (Bible: Silent Retry)
+                         // The invalid resolve URL cannot be played by MPV - it's a 302 redirect
+                         print("❌ StreamService: Failed to resolve redirect URL (Timeout or Error). Stream unusable, trying next candidate.")
+                         await SessionRecorder.shared.log(category: .error, message: "Stream Resolution Failed", metadata: ["url": url, "error": "redirect_resolution_failed"])
                          throw APIError.invalidStream
                      }
+                }
 
-                     finalURL = resolved
-                 } else {
-                     // FIX: Throw error instead of using invalid redirect URL (Bible: Silent Retry)
-                     // The invalid resolve URL cannot be played by MPV - it's a 302 redirect
-                     print("❌ StreamService: Failed to resolve redirect URL (Timeout or Error). Stream unusable, trying next candidate.")
-                     await SessionRecorder.shared.log(category: .error, message: "Stream Resolution Failed", metadata: ["url": url, "error": "redirect_resolution_failed"])
-                     throw APIError.invalidStream
-                 }
+                print("⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.")
+
+                // Still process subtitles
+                var finalStream = stream
+
+                // Update URL if resolved
+                if finalURL != url {
+                    finalStream = Stream(
+                         url: finalURL,
+                         title: stream.title,
+                         quality: stream.quality,
+                         seeders: stream.seeders,
+                         size: stream.size,
+                         provider: stream.provider,
+                         infoHash: stream.infoHash,
+                         fileIdx: stream.fileIdx,
+                         ext: stream.ext,
+                         behaviorHints: stream.behaviorHints,
+                         subtitles: stream.subtitles
+                     )
+                }
+
+                if let subtitles = finalStream.subtitles, !subtitles.isEmpty {
+                    // Optimize: Cap at 5 subtitles to prevent blocking playback start
+                    let limitedSubtitles = Array(subtitles.prefix(5))
+                    NSLog("📥 StreamService: Pre-downloading %d (capped from %d) subtitles for direct stream...", limitedSubtitles.count, subtitles.count)
+                    let downloadedSubs = await downloadSubtitlesInParallel(subtitles: limitedSubtitles, season: season, episode: episode)
+                    finalStream.subtitles = downloadedSubs
+                }
+                return finalStream
             }
-
-            print("⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.")
-
-            // Still process subtitles
-            var finalStream = stream
-
-            // Update URL if resolved
-            if finalURL != url {
-                finalStream = Stream(
-                     url: finalURL,
-                     title: stream.title,
-                     quality: stream.quality,
-                     seeders: stream.seeders,
-                     size: stream.size,
-                     provider: stream.provider,
-                     infoHash: stream.infoHash,
-                     fileIdx: stream.fileIdx,
-                     ext: stream.ext,
-                     behaviorHints: stream.behaviorHints,
-                     subtitles: stream.subtitles
-                 )
-            }
-
-             if let subtitles = finalStream.subtitles, !subtitles.isEmpty {
-                // Optimize: Cap at 5 subtitles to prevent blocking playback start
-                let limitedSubtitles = Array(subtitles.prefix(5))
-                NSLog("📥 StreamService: Pre-downloading %d (capped from %d) subtitles for direct stream...", limitedSubtitles.count, subtitles.count)
-                let downloadedSubs = await downloadSubtitlesInParallel(subtitles: limitedSubtitles, season: season, episode: episode)
-                finalStream.subtitles = downloadedSubs
-            }
-            return finalStream
         }
-
         guard let infoHash = stream.infoHash else {
             throw APIError.noStreamsFound
         }

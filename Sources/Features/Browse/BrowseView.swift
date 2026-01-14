@@ -76,7 +76,7 @@ struct BrowseView: View {
                 .padding()
             } else {
                 ScrollViewReader { proxy in
-                    ScrollView {
+                    ScrollView(.vertical) {
                         VStack(alignment: .leading, spacing: 24) {
                             // Continue Watching section
                             continueWatchingView

@@ -56,8 +56,10 @@ actor StreamResolver {
         // FIX: Landmine #37 - Hash case sensitivity
         // Provider hashes are lowercased, so we must lowercase blocked hashes for comparison
         var blockedHashes: Set<String> = []
+        var blockedFilenames: Set<String> = [] // For hashless streams (DebridSearch)
         if let blockedList = try? await SupabaseClient.shared.getBlockedStreams() {
             blockedHashes = Set(blockedList.map { $0.streamHash.lowercased() })
+            blockedFilenames = Set(blockedList.compactMap { $0.filename?.lowercased() })
             print("🛡️ StreamResolver: Loaded \(blockedHashes.count) blocked streams from blacklist")
         }
 
@@ -203,14 +205,30 @@ actor StreamResolver {
         var filteredStreams = rawStreams
 
         // CRITICAL: Filter Blocked Streams immediately
-        if !blockedHashes.isEmpty {
+        if !blockedHashes.isEmpty || !blockedFilenames.isEmpty {
             let beforeBlockFilter = filteredStreams.count
             filteredStreams = filteredStreams.filter { stream in
-                guard let hash = stream.infoHash?.lowercased() else { return true }
-                if blockedHashes.contains(hash) {
+                // First check by hash (most accurate)
+                if let hash = stream.infoHash?.lowercased(), blockedHashes.contains(hash) {
                     print("   🛡️ RESOLVER BLOCKING blacklisted stream: \(stream.title) (Hash: \(hash))")
                     return false
                 }
+
+                // Fallback: Check by filename for hashless streams (DebridSearch)
+                // This ensures blocking works even for pre-resolved direct download URLs
+                let streamTitle = stream.title.lowercased()
+                for blockedFile in blockedFilenames {
+                    // Remove extension for flexible matching
+                    let baseName = blockedFile
+                        .replacingOccurrences(of: ".mkv", with: "")
+                        .replacingOccurrences(of: ".mp4", with: "")
+                        .replacingOccurrences(of: ".avi", with: "")
+                    if streamTitle.contains(baseName) {
+                        print("   🛡️ RESOLVER BLOCKING by FILENAME: \(stream.title)")
+                        return false
+                    }
+                }
+
                 return true
             }
             if filteredStreams.count < beforeBlockFilter {

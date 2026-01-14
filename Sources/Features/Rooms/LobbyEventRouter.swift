@@ -398,6 +398,13 @@ class LobbyEventRouter: ObservableObject {
         viewModel.appState?.player.currentWatchPartyRoom = targetRoom
 
         NSLog("✅ Guest: Synced stream info from Host (Hash: \(roomState.streamHash?.prefix(8) ?? "nil")) - URL cleared for fresh unlock")
+        
+        // FIX (v1.0.81): CRITICAL - Also clear preResolvedStream!
+        // preloadStream() cached the host's RD URL during LOBBY_PREPARE_PLAYBACK.
+        // Clearing preResolvedStream forces playMedia() to call resolveStream()
+        // which gets a FRESH download link for the guest.
+        viewModel.appState?.player.preResolvedStream = nil
+        NSLog("🛡️ Guest: preResolvedStream cleared to force fresh RD link")
 
         // Also ensure currentRoomId is set so PlayerVM knows we are in a room
         viewModel.appState?.player.currentRoomId = viewModel.room.id

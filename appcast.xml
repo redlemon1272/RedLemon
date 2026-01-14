@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.83 -->
+        <item>
+            <title>Version 1.0.83</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix(rd): prioritize provider fileIdx for unlocking to fix uncached season packs (Landmine #45)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 03:58:17 -0500</pubDate>
+            <sparkle:version>83</sparkle:version>
+            <sparkle:shortVersionString>1.0.83</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.83.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="5v2Wib7mh9gM7cv8dmglBV9CyBYiDPzTQ/9lC/CE6SyLlGcdgXQ0Fa0ajzrNI42cii1vhU3xh2MXdX92PouWBQ==" length="72817902"
+            />
+        </item>
         <!-- v1.0.82 -->
         <item>
             <title>Version 1.0.82</title>

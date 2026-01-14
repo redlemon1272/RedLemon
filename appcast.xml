@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.84 -->
+        <item>
+            <title>Version 1.0.84</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix(Comet): Block invalid error URLs (Landmine 46) & unblock trusted streams</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 04:21:18 -0500</pubDate>
+            <sparkle:version>84</sparkle:version>
+            <sparkle:shortVersionString>1.0.84</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.84.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="yrTBqZO2zP6VVoAAFq9m3zwpy26NlHNSJ0+dK9oXYLQN8BoqGLheYcX7gUjWieEqMfxqG9GDXJMRe7YvYBPxAw==" length="72931437"
+            />
+        </item>
         <!-- v1.0.83 -->
         <item>
             <title>Version 1.0.83</title>

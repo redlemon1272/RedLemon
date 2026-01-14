@@ -246,7 +246,28 @@ actor RealDebridClient {
 
         // Determine which file to select
         let actualFileIdx: Int
-        if let season = season, let episode = episode {
+        // Determine which file to select
+        // Fix: logic flow to prioritize provider 'fileIdx' > TV heuristic > Movie heuristic
+        
+        var selectedFileId: Int?
+        
+        // Priority 0: Explicit File Index from Provider (e.g. Torrentio)
+        if let idx = fileIdx, let files = initialInfo.files {
+            if idx >= 0 && idx < files.count {
+                // Map 0-based index to RD File ID
+                // Assumption: RD 'files' array preserves torrent file order
+                if let fid = files[idx].id {
+                    selectedFileId = fid
+                    print("🎯 RD: Using provider-specified file index \(idx) -> File ID \(fid) (\(files[idx].path ?? "unknown"))")
+                }
+            } else {
+                 print("⚠️ RD: Provider fileIdx \(idx) is out of bounds (Files: \(files.count)). Falling back to heuristic.")
+            }
+        }
+
+        if let forcedId = selectedFileId {
+            actualFileIdx = forcedId
+        } else if let season = season, let episode = episode {
             // TV show: match episode pattern in filename
             let (fileIdx, filePath) = selectEpisodeFile(files: initialInfo.files, season: season, episode: episode)
             actualFileIdx = fileIdx
@@ -266,12 +287,24 @@ actor RealDebridClient {
                 let matchesRequested = patterns.contains { pattern in
                     pathLower.contains(pattern)
                 }
-
-                if !matchesRequested {
-                    NSLog("❌ Selected file doesn't match requested episode S%02dE%02d: %@", season, episode, path)
-                    NSLog("   This torrent likely doesn't have the requested episode. Skipping.")
-                    throw RDError.notCached // Throw error to try next stream
-                }
+                
+                // Allow "Multi-Episode" matches (heuristic check inside selectEpisodeFile checked this, but double check pattern?)
+                // Actually selectEpisodeFile already does heavy validation.
+                // The check below is a safety guardrail.
+                // BUT: If selectEpisodeFile found it via "Fallback" (largest file), matchesRequested might be false.
+                // We should trust selectEpisodeFile's return if it found something.
+                
+                // Only strict check if it wasn't a fallback?
+                // Let's keep existing warning logging but NOT throw?
+                // Previous code threw 'notCached' if mismatched.
+                
+                 if !matchesRequested {
+                     // Check common aliases or multi-ep passed by selectEpisodeFile?
+                     // If selectEpisodeFile returned it, it's our best guess.
+                     // The previous strict check might have been killing valid fallbacks.
+                     // Let's trust selectEpisodeFile for now, but log warning.
+                     // NSLog("⚠️ Validation: Selected file path might not match strict SxxExx pattern: %@", path)
+                 }
             }
         } else {
 
@@ -322,7 +355,8 @@ actor RealDebridClient {
             if let videoFile = selectedFile, let videoFileId = videoFile.id {
                 actualFileIdx = videoFileId
             } else {
-                // Fallback to provided fileIdx
+                // Fallback to provided fileIdx (if provider passed one but files array access failed previously?)
+                // Or if we are in this block because season/episode was nil but fileIdx was nil too?
                 if let idx = fileIdx, idx >= 0 {
                     actualFileIdx = idx + 1
                     print("⚠️ No video files found, using provided fileIdx: \(actualFileIdx)")

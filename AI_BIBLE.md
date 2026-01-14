@@ -51,6 +51,7 @@
 | **Play-Buffer-Play Flash** | Subtitle track changed during playback | #41 |
 | **Host Stuck Buffering (Audio Plays)** | Recovery logic excludes Watch Party Host | #42 |
 | **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call | #43 |
+| **Server Fail: Torrent not cached** | Heuristic ignored provider fileIdx (Season Pack) | #45 |
 
 ## 🚨 Critical Landmines
 
@@ -157,6 +158,10 @@
     *   **Rule**: Guests must NEVER use `room.unlockedStreamURL` from the host. The guest must unlock their own stream using the `streamHash`. In `LobbyEventRouter.handleGuestStartLogic()`, explicitly set `targetRoom.unlockedStreamURL = nil` to force fresh guest unlock.
     *   **Related Code**: `LobbyEventRouter.swift` - `handleGuestStartLogic()` and `handleLobbyPreparePlayback()`.
     *   **Fix Applied**: v1.0.80 removed the v1.0.77 shortcut that used host's URL directly and now forces guest resolution via hash.
+45. **Debrid File Selection (The "Season Pack" Trap)**: *(Added v1.0.82)*
+    *   **Trigger**: User gets "Server Fail: Torrent not cached" error for a Season Pack that the provider (Torrentio) claims is cached.
+    *   **Cause**: The app ignores the provider's `fileIdx` and attempts to "guess" the correct file via string matching (e.g., matching "S01E05"). The heuristic accidentally targets an uncached file (e.g., "S01E05 Repack.mkv" or a sample) instead of the main file.
+    *   **Rule**: If the Provider supplies a `fileIdx`, **TRUST IT**. Map it directly to the Debrid service's File ID. Only use filename heuristics as a fallback when no index is provided.
 
 
 ## 🪦 Resolved Landmines (Archived)

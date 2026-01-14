@@ -346,6 +346,14 @@ class MPVWrapper: ObservableObject {
     }
 
     private func handleMPVEvent(eventId: mpv_event_id, eventPtr: UnsafePointer<mpv_event>) {
+        // CRITICAL SAFETY CHECK:
+        // If mpvHandle is nil, destroy() has been called and mpv_terminate_destroy is running
+        // in the background. Accessing eventPtr or its data is now unsafe (SIGSEGV risk).
+        guard mpvHandle != nil else {
+            LoggingManager.shared.debug(.videoRendering, message: "MPV: Ignoring event \(eventId.rawValue) (Handle destroyed)")
+            return
+        }
+
         switch eventId {
         case MPV_EVENT_NONE: break
         case MPV_EVENT_START_FILE:

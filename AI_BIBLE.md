@@ -49,6 +49,7 @@
 | **Date Decoding Error** | Wrong Formatter (Missing Fractional) | #8 |
 | **Anime: No Streams Found** | Kitsu ID not resolved to IMDB | #40 |
 | **Play-Buffer-Play Flash** | Subtitle track changed during playback | #41 |
+| **Host Stuck Buffering (Audio Plays)** | Recovery logic excludes Watch Party Host | #42 |
 
 ## 🚨 Critical Landmines
 
@@ -125,6 +126,10 @@
 41. **Subtitle Track Selection Timing**: *(Added v1.0.75)*
     *   **Trigger**: Changing subtitle tracks (via `refreshSubtitleSelection`) DURING playback causes MPV to rebuffer, creating a visible "play-buffer-play" flash.
     *   **Rule**: Track selection MUST happen BEFORE playback starts. `MPVWrapper.pollForTracksAndResume()` handles this. `SubtitleService.loadExternalSubtitles()` must NEVER call `refreshSubtitleSelection()` after playback has begun.
+42. **Watch Party Host Recovery Logic**: *(Added v1.0.76)*
+    *   **Trigger**: Host gets stuck on "Buffering..." with audio playing after returning to lobby and restarting playback.
+    *   **Cause**: Hosts are "authoritative" and filter out their own sync messages (Line ~2710 in `MPVPlayerViewModel`). Recovery logic that uses `!isInWatchParty` excludes hosts from failsafe state clearing.
+    *   **Rule**: Any recovery/failsafe logic in `MPVPlayerViewModel` that clears `isLoading`, `isBuffering`, or `isRefiningInitialSeek` MUST use `(!isInWatchParty || isWatchPartyHost)` to include the host. Guests are excluded because they wait for sync messages to reveal video (prevents frame 0 flash).
 
 
 ## 🪦 Resolved Landmines (Archived)

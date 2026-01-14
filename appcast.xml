@@ -6,6 +6,36 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.77 -->
+        <item>
+            <title>Version 1.0.77</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>chore: update MPV player view model</li>
+<li>chore: add application log file</li>
+<li>fix: use host's unlocked URL when stream hash is unavailable</li>
+<li>refactor: move watch party ready gate reset to sync initialization</li>
+<li>fix: reset watch party ready gate state between stream sessions</li>
+<li>fix: free render context before destroying MPV handle to prevent crash</li>
+<li>fix: prevent event guests from being kicked to lobby during host transitions</li>
+<li>fix: add explicit MPV instance destruction to prevent resource leaks</li>
+<li>fix: clear ghost streams on host exit to prevent guests from loading stale content</li>
+<li>feat: optimize guest handshake with hash payload transmission</li>
+<li>feat: add stream preloading and guest handshake for watch party</li>
+<li>fix: disable host URL reuse for watch party guests (RealDebrid IP locking)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 20:53:34 -0500</pubDate>
+            <sparkle:version>77</sparkle:version>
+            <sparkle:shortVersionString>1.0.77</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.77.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="6KvGRd/pi6zA42GrymB2K1vha0UNGQRZWq6XDN5/u1wbhgV/1cxfywcpeglwadxnoszmCkQTQJn+JQRG02K5AA==" length="72839537"
+            />
+        </item>
         <!-- v1.0.76 -->
         <item>
             <title>Version 1.0.76</title>

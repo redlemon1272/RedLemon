@@ -111,14 +111,14 @@ struct BrowseView: View {
                             }
                         }
                         .padding(.bottom)
-                    }
-                    .onAppear {
-                        // Restore scroll position if coming back from detail
-                        if let scrollTo = appState.browseScrollPosition {
-                            Task { @MainActor in
-                                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
-                                withAnimation {
-                                    proxy.scrollTo(scrollTo, anchor: .center)
+                        .onAppear {
+                            // Restore scroll position if coming back from detail
+                            if let scrollTo = appState.browseScrollPosition {
+                                Task { @MainActor in
+                                    try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
+                                    withAnimation {
+                                        proxy.scrollTo(scrollTo, anchor: .center)
+                                    }
                                 }
                             }
                         }

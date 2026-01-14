@@ -61,20 +61,20 @@ class PlayerViewModel: ObservableObject {
     var preResolvedStream: Stream?
 
     func preloadStream(mediaItem: MediaItem, quality: VideoQuality, streamHash: String?, season: Int?, episode: Int?) async throws {
-        // Run on main actor to update published properties if needed, 
+        // Run on main actor to update published properties if needed,
         // though we are mostly updating internal state here.
         await MainActor.run {
              self.isResolvingStream = true
         }
-        defer { 
+        defer {
             Task { @MainActor in self.isResolvingStream = false }
         }
-        
+
         LoggingManager.shared.info(.watchParty, message: "⚡️ PlayerVM: Pre-loading stream for hash: \(streamHash ?? "nil")")
-        
+
         // Fetch metadata
         let metadata = try await metadataProvider.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
-        
+
         // Resolve using hash
         let result = try await streamResolver.resolveStream(
             item: mediaItem,
@@ -86,7 +86,7 @@ class PlayerViewModel: ObservableObject {
             filterExtended: false,
             triggerSource: "preload"
         )
-        
+
         await MainActor.run {
             self.preResolvedStream = result.stream
         }
@@ -108,7 +108,7 @@ class PlayerViewModel: ObservableObject {
 
     // MARK: - Playback Logic
 
-    func playMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false, isEvent: Bool = false, triggerSource: String = "manual") async {
+    func playMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false, isEvent: Bool = false, triggerSource: String = "manual", preferredStreamHash: String? = nil) async {
         streamError = nil
 
         // Step 0: Clear state IMMEDIATELY to prevent stale UI
@@ -195,14 +195,55 @@ class PlayerViewModel: ObservableObject {
             } else {
                 // ... Normal Logic ...
 
+            // GUEST DIRECT UNLOCK OPTIMIZATION (v1.0.83)
+            // If we have a preferredStreamHash from the host, skip full resolution and unlock directly.
+            // This saves 8-10 seconds by avoiding redundant provider queries.
+            // Bible Landmine #44 compliance: We still get a fresh RD URL (IP-locked to guest),
+            // we just skip the stream discovery phase since we already know the exact hash.
+            if let directHash = preferredStreamHash, !directHash.isEmpty, !isHost, watchMode == .watchParty {
+                NSLog("🚀 PlayerVM: Using DIRECT UNLOCK path (Guest Optimization)")
+                NSLog("   Hash: %@...", String(directHash.prefix(12)))
+
+                // CRITICAL: Clear RD cache BEFORE unlock to prevent IP-locked URL reuse
+                // This fixes the race condition where LobbyEventRouter's async cache clear
+                // hasn't completed yet when we call unlockStream.
+                await RealDebridClient.shared.clearCache(forHash: directHash)
+                NSLog("🗑️ PlayerVM: RD cache cleared for direct unlock")
+
+                // Create synthetic stream with just the hash for unlocking
+                let syntheticStream = Stream(
+                    title: "Shared Stream (Direct)",
+                    provider: "direct",
+                    infoHash: directHash
+                )
+
+                do {
+                    let unlockedStream = try await streamResolver.unlockStream(
+                        stream: syntheticStream,
+                        item: item,
+                        season: effectiveSeason,
+                        episode: effectiveEpisode
+                    )
+                    resolvedStream = unlockedStream
+                    resolvedMetadata = metadata
+                    NSLog("✅ PlayerVM: Direct unlock succeeded! URL: %@", String(unlockedStream.url?.prefix(60) ?? "nil"))
+                } catch {
+                    NSLog("⚠️ PlayerVM: Direct unlock failed (%@), falling back to full resolution...", error.localizedDescription)
+                    // resolvedStream stays nil, falls through to normal resolution below
+                }
+            }
+
+            // CRITICAL: Skip remaining resolution if we already have a stream (from direct unlock)
+            if resolvedStream == nil {
+
             // GUEST OPTIMIZATION
             // First check if host's URL is still valid (RD links expire after ~30min inactivity)
             var validatedHostURL: String? = nil
-            /* 
+            /*
             // GUEST OPTIMIZATION - DISABLED (Causes EOF on RealDebrid due to IP Locking)
             // RealDebrid links are IP-locked to the creator. If we reuse the Host's URL, remote guests get dropped.
             // We must force resolution via the Hash fallback below.
-            
+
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
                (roomId == nil || watchPartyRoom.id == roomId),
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
@@ -421,6 +462,8 @@ class PlayerViewModel: ObservableObject {
                     throw lastError ?? APIError.noStreamsFound
                 }
             }
+
+            } // End: if resolvedStream == nil (skip if already resolved from direct unlock)
 
             }
 

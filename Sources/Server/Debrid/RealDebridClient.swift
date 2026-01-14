@@ -84,6 +84,21 @@ actor RealDebridClient {
 
     private init() {}
 
+    // MARK: - Cache Management
+
+    /// Clears all cached unlock results for a specific infoHash.
+    /// Used for Watch Party guests to bypass cached host URLs (IP-locked).
+    func clearCache(forHash infoHash: String) {
+        let prefix = "\(infoHash):"
+        let keysToRemove = cache.keys.filter { $0.hasPrefix(prefix) }
+        for key in keysToRemove {
+            cache.removeValue(forKey: key)
+        }
+        if !keysToRemove.isEmpty {
+            print("🗑️ RD cache cleared for hash: \(infoHash.prefix(12))... (\(keysToRemove.count) entries)")
+        }
+    }
+
     // MARK: - Health Check
 
     /// Quick health check - verifies RD API is reachable

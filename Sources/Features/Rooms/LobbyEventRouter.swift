@@ -398,13 +398,25 @@ class LobbyEventRouter: ObservableObject {
         viewModel.appState?.player.currentWatchPartyRoom = targetRoom
 
         NSLog("✅ Guest: Synced stream info from Host (Hash: \(roomState.streamHash?.prefix(8) ?? "nil")) - URL cleared for fresh unlock")
-        
+
         // FIX (v1.0.81): CRITICAL - Also clear preResolvedStream!
         // preloadStream() cached the host's RD URL during LOBBY_PREPARE_PLAYBACK.
         // Clearing preResolvedStream forces playMedia() to call resolveStream()
         // which gets a FRESH download link for the guest.
         viewModel.appState?.player.preResolvedStream = nil
         NSLog("🛡️ Guest: preResolvedStream cleared to force fresh RD link")
+
+        // FIX (v1.0.82): CRITICAL - Also clear RealDebridClient's in-memory cache!
+        // The RD client caches unlock results for 60 minutes. When the host preloaded,
+        // their URL was cached. If we don't clear it, playMedia() calls unlock() again,
+        // which returns the CACHED host URL instead of generating a fresh one.
+        // This is the REAL root cause of the EOF issue.
+        if let hash = roomState.streamHash {
+            Task {
+                await RealDebridClient.shared.clearCache(forHash: hash)
+                NSLog("🗑️ Guest: RD cache cleared for hash: \(hash.prefix(8))...")
+            }
+        }
 
         // Also ensure currentRoomId is set so PlayerVM knows we are in a room
         viewModel.appState?.player.currentRoomId = viewModel.room.id

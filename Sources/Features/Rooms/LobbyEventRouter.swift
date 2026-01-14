@@ -100,6 +100,8 @@ class LobbyEventRouter: ObservableObject {
              await handleLobbyPreparePlayback(syncMessage)
         } else if chatText == "LOBBY_READY_FOR_PLAYBACK" {
              handleLobbyReadyForPlayback(syncMessage)
+        } else if chatText == "LOBBY_RESOLVING" {
+             await handleLobbyResolving(syncMessage)
         } else {
              // Unknown LOBBY command - log warning
              let senderInfo = syncMessage.chatUsername ?? syncMessage.senderId ?? "Unknown"
@@ -628,5 +630,14 @@ class LobbyEventRouter: ObservableObject {
              NSLog("%@", "❌ Guest: Failed to preload stream: \(error)")
              viewModel.chatManager.addSystemMessage(.systemError, userName: "System", data: ["message": "Failed to prepare stream", "error": error.localizedDescription])
         }
+    }
+    private func handleLobbyResolving(_ syncMessage: SyncMessage) async {
+        guard let viewModel = viewModel, !viewModel.isHost else { return }
+
+        // Ignore for events
+        if viewModel.room.type == .event { return }
+
+        NSLog("🎬 Guest: Received RESOLVING signal")
+        viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host is resolving stream..."])
     }
 }

@@ -919,6 +919,21 @@ class LobbyViewModel: ObservableObject {
         }
         addMessage(.systemInfo, userName: "System", data: ["message": startMsg])
 
+
+        // 0. Broadcast "Resolving" signal immediately to guests (so they don't see dead air)
+        Task { [weak self] in
+            guard let self = self else { return }
+            let resolvingMsg = SyncMessage(
+                type: .chat,
+                timestamp: Date().timeIntervalSince1970,
+                isPlaying: nil,
+                senderId: self.participantId,
+                chatText: "LOBBY_RESOLVING",
+                chatUsername: "Host"
+            )
+            try? await self.realtimeManager?.sendSyncMessage(resolvingMsg)
+        }
+
         // 1. Resolve and persist stream explicitly BEFORE broadcasting signal
         // This ensures guests don't fetch nil stream details
         isResolvingStream = true

@@ -150,7 +150,9 @@ class MPVPlayerViewModel: ObservableObject {
                     // CRITICAL FIX: Playback Progress Recovery
                     // If time is advancing but UI thinks we are buffering, force clear the buffering state.
                     // This handles cases where MPV misses the "buffering end" event (e.g. paused-for-cache glitch).
-                    if (self.isBuffering || self.isLoading) && self.mpvWrapper.isPlaying && !self.isInWatchParty {
+                    // NOTE: Also applies to Watch Party HOST (who doesn't receive sync messages to clear state).
+                    // Guests are excluded - they wait for sync message to reveal video (prevents frame 0 flash).
+                    if (self.isBuffering || self.isLoading) && self.mpvWrapper.isPlaying && (!self.isInWatchParty || self.isWatchPartyHost) {
                          LoggingManager.shared.info(.videoRendering, message: "Time advancing (time: \(time)) while buffering - Forcing UI unlock")
                          self.isBuffering = false
                          // Also clear the "Refining Initial Seek" lock if it's stuck
@@ -1960,9 +1962,9 @@ class MPVPlayerViewModel: ObservableObject {
         LoggingManager.shared.info(.videoRendering, message: "Stopping MPV playback...")
         mpvWrapper.pause() // Ensure paused state before hard stop
         mpvWrapper.stop()
-        
+
         // CRITICAL FIX: Manually destroy MPV instance.
-        // This ensures the underlying libmpv instance and render context are freed 
+        // This ensures the underlying libmpv instance and render context are freed
         // even if this ViewModel is retained by a lingering closure or cycle.
         mpvWrapper.destroy()
     }

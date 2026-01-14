@@ -718,6 +718,19 @@ class MPVPlayerViewModel: ObservableObject {
         self.hasVideoReadyTriggered = false
         self.hasAutoSelectedSubtitles = false // Reset auto-selection flag
 
+        // FIX (v1.0.77): Reset Watch Party Ready Gate state between sessions
+        // AI_BIBLE #35 (Ghost Streams): Stale state from previous session causes Ready Gate malfunction
+        // Symptom: Black screen with audio on second playback (isLoading stays true)
+        // Root Cause: hasSentReadySignal/connectedGuestIds not cleared → startSynchronizedPlayback() never called
+        if self.isInWatchParty {
+            LoggingManager.shared.debug(.watchParty, message: "Resetting Watch Party Ready Gate state for new stream")
+            self.hasSentReadySignal = false
+            self.connectedGuestIds.removeAll()
+            self.readyGuestIds.removeAll()
+            self.readySignalsSentCount = 0
+            self.isRefiningInitialSeek = false // Will be re-set in VP mode below if needed
+        }
+
         // SOFT TIMEOUT: If video doesn't load, trigger fallback (faster than MPV 40s)
         // Watch Parties get 25s to allow for large HDR file buffering; solo playback gets 10s
         let timeoutSeconds: UInt64 = isInWatchParty ? 25_000_000_000 : 10_000_000_000

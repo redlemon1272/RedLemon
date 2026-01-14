@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.91 -->
+        <item>
+            <title>Version 1.0.91</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>debug: add scroll event logging for macOS 26 diagnosis</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 18:47:16 -0500</pubDate>
+            <sparkle:version>91</sparkle:version>
+            <sparkle:shortVersionString>1.0.91</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.91.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="9r0x/b2PoHz3B7sgrfmaVWLO0DEPcrffU7szVaTlGJl6P5KaP7ijmLOANGoXPjzHQSA8P1ofxjB6Wdt/E9BKAg==" length="72805590"
+            />
+        </item>
         <!-- v1.0.89 -->
         <item>
             <title>Version 1.0.89</title>

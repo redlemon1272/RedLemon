@@ -64,12 +64,15 @@ private struct ScrollEventForwarderView<Content: View>: NSViewRepresentable {
     }
 }
 
+// File-level throttle for scroll debug logging (avoids generic type static property issue)
+@available(macOS 15, *)
+private var scrollDebugLogThrottleDate: Date = .distantPast
+
 /// Custom container view that intercepts scroll events and forwards vertical scrolls
 /// to the parent scroll view while allowing horizontal scrolls to pass through normally.
 @available(macOS 15, *)
 private class ScrollForwardingContainerView<Content: View>: NSView {
     var hostingView: NSHostingView<Content>?
-    private static var logThrottleDate: Date = .distantPast
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -125,8 +128,8 @@ private class ScrollForwardingContainerView<Content: View>: NSView {
 
         // Throttle logging to avoid spam (max once per second)
         let now = Date()
-        if now.timeIntervalSince(Self.logThrottleDate) > 1.0 {
-            Self.logThrottleDate = now
+        if now.timeIntervalSince(scrollDebugLogThrottleDate) > 1.0 {
+            scrollDebugLogThrottleDate = now
             NSLog("%@", "🔧 [SCROLL-DEBUG] scrollWheel called: deltaY=\(String(format: "%.2f", deltaY)) deltaX=\(String(format: "%.2f", deltaX)) isVertical=\(isVerticalScroll)")
             debugPrintHierarchy()
         }

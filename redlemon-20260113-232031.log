@@ -1,0 +1,1142 @@
+2026-01-13 23:20:38.778 RedLemon[43837:295916] 🪟 Set initial window to expanded size: (0.0, 148.0, 1366.0, 595.0)
+2026-01-13 23:20:38.778 RedLemon[43837:295916] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-13 23:20:38.901 RedLemon[43837:295916] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-13 23:20:38.907 RedLemon[43837:295916] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-13 23:20:38.945 RedLemon[43837:295916] ✅ Playback state reset complete - starting in browse view
+2026-01-13 23:20:38.945 RedLemon[43837:295916] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-13 23:20:38.946 RedLemon[43837:295916] 🧪 Testing Profile: debug
+2026-01-13 23:20:38.954 RedLemon[43837:296008] 📂 Loaded 5 credential(s) from cache
+2026-01-13 23:20:38.958 RedLemon[43837:295916] ✅ Keychain: Found stored username: ursinho
+2026-01-13 23:20:38.959 RedLemon[43837:295916] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-13 23:20:38.959 RedLemon[43837:296008] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-13 23:20:39.400 RedLemon[43837:296007] 📡 SupabaseClient: User lookup response received (399 bytes)
+2026-01-13 23:20:39.410 RedLemon[43837:296007] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-13 23:20:39.410 RedLemon[43837:296007] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-13 23:20:39.458 RedLemon[43837:295916] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-13 23:20:39.458 RedLemon[43837:295916] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 23:20:41.597 RedLemon[43837:295916] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 23:20:41.600 RedLemon[43837:295916] 🚀 RedLemon: Starting HTTP server...
+2026-01-13 23:20:41.600 RedLemon[43837:295916] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-13 23:20:41.621 RedLemon[43837:295916] ✅ RedLemon: HTTPServer instance created
+2026-01-13 23:20:41.621 RedLemon[43837:296005] 📡 RedLemon: Server starting on port 47253...
+2026-01-13 23:20:41.622 RedLemon[43837:295916] ✅ RedLemon: Server marked as ready (Optimistic)
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"80068C19-D010-4DA5-AAC1-FCEEEA84357F","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+📦 Current build: 79, Latest build: 79
+✅ App is up to date (current: 79, latest: 79)
+✅ [EventsConfig] Fetched movie_events version 1527 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1527, 412 movies)
+✅ [EventsView] Loaded 412 movies from config version 1527
+🗓 AppState: Updated schedule epoch to 2025-12-25 20:34:21 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-14 05:51:21 +0000
+⏰ AppState: Scheduling update in 5442 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt4589218/img (1018059 bytes)
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+⏰ AppState: Next schedule update set for Event End: 2026-01-14 05:51:21 +0000
+⏰ AppState: Scheduling update in 5441 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-14 05:51:21 +0000
+⏰ AppState: Scheduling update in 5441 seconds
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"A84F7F09-43E4-4A49-B04B-D60075E4F7FE","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"3655f93c-f100-11f0-b77f-ee9e47993347":{"metas":[{"phx_ref":"GIp-EniJLis6AiwB","phx_ref_prev":"GIp-DKRNCZo6Aiph","is_premium":true,"last_seen":"2026-01-14T04:20:21.409Z","room_id":"DEDH","started_at":"2026-01-14T04:19:40.324Z","status":"In Lobby: Roofman","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-FwOjIu46Ai-B","is_premium":true,"last_seen":"2026-01-14T04:20:40.898Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+📨 Received: {"ref":"56CC0790-DE00-446D-BA46-5F4389B9401D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+✅ SocialService: Connected to DM channel
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-13 23:20:41.676 RedLemon[43837:295916] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-13 23:20:41.677 RedLemon[43837:295916] 🏥 [AppState] Starting global provider health check...
+2026-01-13 23:20:41.677 RedLemon[43837:295916] 🔍 Performing startup checks...
+2026-01-13 23:20:41.677 RedLemon[43837:295916] ✅ Username-based authentication ready
+2026-01-13 23:20:41.692 RedLemon[43837:296006] 🔐 Signed request to /check-payment
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+📡 Joined channel: realtime:rooms_updates
+✅ RoomListView: Connected to rooms realtime updates
+📨 Received: {"ref":"58FDD5F2-739A-476F-A2E9-0F219FC584D7","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+[ INFO ] GET /api/metadata/meta/movie/tt4627382 [request-id: A3A75347-6C9A-4D9F-9EE9-38737A700D83]
+[ INFO ] GET /api/metadata/meta/movie/tt4627382 [request-id: 1B18EBD2-C8E4-4559-9D0A-76852E031C76]
+[ INFO ] GET /api/metadata/meta/movie/tt4627382 [request-id: DB353A70-3425-4A41-B06F-BF4BA1E47C14]
+[ INFO ] GET /api/metadata/meta/movie/tt4627382 [request-id: 1C4E6BDD-3A0F-4510-BEC7-7018C46CBACA]
+2026-01-13 23:20:42.227 RedLemon[43837:296077] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-13 23:20:42.227 RedLemon[43837:296077] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-13 23:20:42.385 RedLemon[43837:296076] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-13 23:20:42.385 RedLemon[43837:296008] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-13 23:20:42.386 RedLemon[43837:296076] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-13 23:20:42.386 RedLemon[43837:296020] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-13 23:20:42.590 RedLemon[43837:295916] 🔄 Checking for app updates...
+2026-01-13 23:20:43.462 RedLemon[43837:295916] ✅ [AppState] Provider health check complete (found 7 services)
+💾 Cache SET: Metadata[meta_movie_tt4627382]
+💾 Cache SET: Metadata[meta_movie_tt4627382]
+💾 Cache SET: Metadata[meta_movie_tt4627382]
+✅ Loaded 2 rooms (total: 2)
+💾 Cache SET: Metadata[meta_movie_tt4627382]
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt4627382/img (607400 bytes)
+👤 LicenseManager: Profile expiry: Optional(2026-02-11 06:00:30 +0000)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt4627382/img (607400 bytes)
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+🎉 License updated! Expires: 2026-02-11 06:00:30 +0000
+📦 Current build: 79, Latest build: 79
+✅ App is up to date (current: 79, latest: 79)
+✅ Loaded 2 rooms (total: 2)
+✅ TimeService: Synced! Offset: 0.041s (RTT: 125ms)
+   Local:  2026-01-14 04:20:42 +0000
+   Server: 2026-01-14 04:20:42 +0000
+✅ SubDLClient initialized
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+🔌 Disconnecting from Supabase Realtime
+✅ Disconnected from Supabase Realtime
+❌ Heartbeat failed: CancellationError()
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: 455C7218-61BB-4771-A6FA-907D19A0B831]
+2026-01-13 23:20:46.881 RedLemon[43837:296007] 📝 [APP] 🎟️ Joining event: Five Nights at Freddy's (Live: true) ["file": "EventsView.swift", "level": "INFO", "line": "253"]
+2026-01-13 23:20:46.881 RedLemon[43837:296007] 📝 [APP] SessionRecorder initialized
+2026-01-13 23:20:47.005 RedLemon[43837:296008] 📡 StreamService: Fetching metadata for tt4589218...
+2026-01-13 23:20:47.005 RedLemon[43837:296020] 📝 [APP] 🎬 StreamService: Starting resolution for: Five Nights at Freddy's ["file": "StreamService.swift", "level": "INFO", "line": "104"]
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+📡 SocialService: Updated status - Browsing: 
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+✅ Loaded 15 movies
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-F-5zz0w6AjGh","phx_ref_prev":"GIp-FwOjIu46Ai-B","is_premium":true,"last_seen":"2026-01-14T04:20:44.847Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-FwOjIu46Ai-B","is_premium":true,"last_seen":"2026-01-14T04:20:40.898Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🧹 Deduplication: 50 → 49 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31227572/img (35380 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26581740/img (9526 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3498820/img (28788 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0372784/img (26368 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0274166/img (13556 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0430304/img (22788 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4589218/img (19872 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0770828/img (19307 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1457767/img (35574 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0117571/img (17703 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29780866/img (35175 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0800080/img (15696 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1645170/img (30172 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1396484/img (14825 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (53296 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301118658/s332/img (22517 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175492990/s332/img (36315 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338574331/s332/img (29464 bytes)
+🖼️ [CACHE] Cached image data for key: https://m.media-amazon.com/images/M/MV5BMjU1ODQ5NzA0N15BMl5BanBnXkFtZTgwMDg5MTA5NzE@._V1_SX250.jpg (15074 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for trending
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📅 EventsView appeared
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+📡 SocialService: Updated status - Browsing Events: 
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-GDUAGD86AjhC","phx_ref_prev":"GIp-F-5zz0w6AjGh","is_premium":true,"last_seen":"2026-01-14T04:20:46.006Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-F-5zz0w6AjGh","phx_ref_prev":"GIp-FwOjIu46Ai-B","is_premium":true,"last_seen":"2026-01-14T04:20:44.847Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-GDUHkco6Ajhi","phx_ref_prev":"GIp-GDUAGD86AjhC","is_premium":true,"last_seen":"2026-01-14T04:20:46.006Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-GDUAGD86AjhC","phx_ref_prev":"GIp-F-5zz0w6AjGh","is_premium":true,"last_seen":"2026-01-14T04:20:46.006Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[2026-01-14T04:20:46Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Five Nights at Freddy's (Live: true)
+   Event start time: 2026-01-14 03:51:21 +0000
+   Event duration: 7200.0s
+   Current time: 2026-01-14 04:20:46 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt4589218
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY - Re-unlocking for fresh URL 🔑
+   Stored Hash: 45bd62a89441b7cef27c3a49f494d40fcb68c1b7
+   Cached URL: https://chi2-4.download.real-d...
+[2026-01-14T04:20:47Z] [INFO] [StreamService.swift:104] 🎬 StreamService: Starting resolution for: Five Nights at Freddy's
+[ INFO ] GET /api/metadata/meta/movie/tt4589218 [request-id: 91206F5C-6726-491C-8497-586FE5CE9341]
+2026-01-13 23:20:47.048 RedLemon[43837:296008] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-13 23:20:47.048 RedLemon[43837:296008] ✅ StreamService: Metadata loaded: Five Nights at Freddy's
+2026-01-13 23:20:47.048 RedLemon[43837:296008] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-13 23:20:47.049 RedLemon[43837:296008] ⚡️ StreamResolver: Resolving streams for tt4589218 (S0E0)
+2026-01-13 23:20:47.049 RedLemon[43837:296008] 📝 [APP] New Session Started ["app_version": "1.0.79", "build": "79", "session_id": "C8B6E4E9-A610-4139-B77B-CE01EEBEE96D", "trigger_source": "manual", "user_id": "656DAA91-33B4-4688-9135-C982EA52D7C9"]
+2026-01-13 23:20:47.049 RedLemon[43837:296008] 📝 [APP] Target Content Set ["imdb_id": "tt4589218"]
+2026-01-13 23:20:47.049 RedLemon[43837:296008] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-13 23:20:47.178 RedLemon[43837:296007]    📅 Filtering by year: 2023
+2026-01-13 23:20:47.303 RedLemon[43837:296007] 📝 [RESOLVER] Found Verified Stream ["hash": "45bd62a89441b7cef27c3a49f494d40fcb68c1b7", "vote_count": "1"]
+💾 Cache SET: Metadata[meta_movie_tt4589218]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 4 blocked streams from blacklist
+⚡️ StreamResolver: Found Community Verified stream with 1 votes!
+   ℹ️ Hash: 45bd62a89441b7cef27c3a49f494d40fcb68c1b7
+   ℹ️ Last Verified: 2026-01-14 04:11:34 +0000
+🔍 Searching SubDL: tt4589218 (movie)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.
+⚡️ StreamService: Testing verified stream viability...
+🔓 StreamService: Unlocking with infoHash: 45bd62a89441...
+[ INFO ] POST /api/streams/unlock [request-id: 60AF4D14-1B21-4FDC-84EF-A83124C3B788]
+2026-01-13 23:20:47.542 RedLemon[43837:296020] 🔓 Unlock request: infoHash=45bd62a89441..., fileIdx=0
+2026-01-13 23:20:47.542 RedLemon[43837:296020] ✅ Token found, attempting unlock...
+2026-01-13 23:20:48.868 RedLemon[43837:296006] ✅ Unlocked successfully: Five.Nights.at.Freddys.2023.1080.WEB-DL.mkv
+2026-01-13 23:20:48.871 RedLemon[43837:296020] 📝 [RESOLVER] Stream Unlocked ["filename": "Five.Nights.at.Freddys.2023.1080.WEB-DL.mkv", "is_generic": "false", "original_title": "Community Verified Stream (1080p)", "url_host": "chi1-4.download.real-debrid.com"]
+2026-01-13 23:20:48.872 RedLemon[43837:296020] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles...
+2026-01-13 23:20:48.872 RedLemon[43837:296020] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-13 23:20:48.872 RedLemon[43837:296006] 🔍 DEBUG: Processing subtitle URL: /subtitle/3228475-3245778.zip
+2026-01-13 23:20:48.872 RedLemon[43837:296005] 🔍 DEBUG: Processing subtitle URL: /subtitle/3228503-3245813.zip
+2026-01-13 23:20:48.872 RedLemon[43837:296007] 🔍 DEBUG: Processing subtitle URL: /subtitle/3219859-3236844.zip
+2026-01-13 23:20:48.872 RedLemon[43837:296020] 🔍 DEBUG: Processing subtitle URL: /subtitle/3189052-3205007.zip
+2026-01-13 23:20:48.873 RedLemon[43837:296006] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:20:48.873 RedLemon[43837:296007] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:20:48.873 RedLemon[43837:296005] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:20:48.873 RedLemon[43837:296020] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:20:48.874 RedLemon[43837:296020] 🔍 DEBUG: Processing subtitle URL: /subtitle/3219813-3236793.zip
+2026-01-13 23:20:48.874 RedLemon[43837:296020] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:20:49.017 RedLemon[43837:296007] ✅ Persisted stream selection to room event_tt4589218
+2026-01-13 23:20:49.298 RedLemon[43837:295916] ✅ PlayerVM: currentWatchPartyRoom set to event_tt4589218
+2026-01-13 23:20:49.428 RedLemon[43837:295916] 📡 Fetching metadata for tt4589218...
+2026-01-13 23:20:49.470 RedLemon[43837:296020] ✅ StreamService: Using provided metadata: Five Nights at Freddy's
+2026-01-13 23:20:49.470 RedLemon[43837:296020] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-13 23:20:49.470 RedLemon[43837:296007] 📝 [APP] 🎬 StreamService: Starting resolution for: Five Nights at Freddy's ["file": "StreamService.swift", "level": "INFO", "line": "104"]
+2026-01-13 23:20:49.471 RedLemon[43837:296020] ⚡️ StreamResolver: Resolving streams for tt4589218 (S0E0)
+2026-01-13 23:20:49.471 RedLemon[43837:296020] 📝 [APP] New Session Started ["app_version": "1.0.79", "build": "79", "session_id": "F2990276-0101-46B0-B97C-D6A0F31F7F0D", "trigger_source": "manual", "user_id": "656DAA91-33B4-4688-9135-C982EA52D7C9"]
+2026-01-13 23:20:49.472 RedLemon[43837:296020] 📝 [APP] Target Content Set ["imdb_id": "tt4589218"]
+2026-01-13 23:20:49.472 RedLemon[43837:296020] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-13 23:20:49.603 RedLemon[43837:296007]    📅 Filtering by year: 2023
+2026-01-13 23:20:49.730 RedLemon[43837:296006] 📝 [RESOLVER] Found Verified Stream ["hash": "45bd62a89441b7cef27c3a49f494d40fcb68c1b7", "vote_count": "1"]
+✅ RD addMagnet: ZT4BOF43SFUHY
+⚠️ Movie: No file matched title 'Five Nights at Freddy's', falling back to largest file
+🎬 Movie: Auto-selected largest video file: /Five.Nights.at.Freddys.2023.1080.WEB-DL.mkv (ID: 1, size: 6845003420 bytes)
+📝 RD: Selecting file ID 1 for torrent ZT4BOF43SFUHY
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/G5COUQEMRZDU4A20
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Verified stream is VIABLE. Returning immediately.
+   ✅ Fresh URL obtained: https://chi1-4.download.real-debrid.com/...
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3655f93c-f100-11f0-b77f-ee9e47993347":{"metas":[{"phx_ref":"GIp-GN-ai-86AjiC","phx_ref_prev":"GIp-EniJLis6AiwB","is_premium":true,"last_seen":"2026-01-14T04:20:48.903Z","room_id":"DEDH","started_at":"2026-01-14T04:19:40.324Z","status":"In Lobby: Roofman","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}},"leaves":{"3655f93c-f100-11f0-b77f-ee9e47993347":{"metas":[{"phx_ref":"GIp-EniJLis6AiwB","phx_ref_prev":"GIp-DKRNCZo6Aiph","is_premium":true,"last_seen":"2026-01-14T04:20:21.409Z","room_id":"DEDH","started_at":"2026-01-14T04:19:40.324Z","status":"In Lobby: Roofman","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+   ✅ Database updated with fresh URL
+
+🎬 Live event - calculating position: 1768.3389959335327 seconds
+   Event start time: 2026-01-14 03:51:21 +0000
+   Current time: 2026-01-14 04:20:49 +0000
+   Room createdAt: 2026-01-14 03:51:21 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 1768.3389959335327
+🎬 Live event - starting playback immediately (no lobby)
+✅ Cache HIT: Metadata[meta_movie_tt4589218]
+[2026-01-14T04:20:49Z] [INFO] [StreamService.swift:104] 🎬 StreamService: Starting resolution for: Five Nights at Freddy's
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 4 blocked streams from blacklist
+⚡️ StreamResolver: Found Community Verified stream with 1 votes!
+   ℹ️ Hash: 45bd62a89441b7cef27c3a49f494d40fcb68c1b7
+   ℹ️ Last Verified: 2026-01-14 04:11:34 +0000
+🔍 Searching SubDL: tt4589218 (movie)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.
+⚡️ StreamService: Testing verified stream viability...
+🔓 StreamService: Unlocking with infoHash: 45bd62a89441...
+[ INFO ] POST /api/streams/unlock [request-id: 460B7C81-2BB5-4E18-BF90-685F20A296EE]
+2026-01-13 23:20:49.979 RedLemon[43837:296006] 🔓 Unlock request: infoHash=45bd62a89441..., fileIdx=0
+2026-01-13 23:20:49.979 RedLemon[43837:296006] ✅ Token found, attempting unlock...
+2026-01-13 23:20:49.980 RedLemon[43837:296006] ✅ Unlocked successfully: Five.Nights.at.Freddys.2023.1080.WEB-DL.mkv
+2026-01-13 23:20:49.981 RedLemon[43837:296008] 📝 [RESOLVER] Stream Unlocked ["filename": "Five.Nights.at.Freddys.2023.1080.WEB-DL.mkv", "is_generic": "false", "original_title": "Community Verified Stream (1080p)", "url_host": "chi1-4.download.real-debrid.com"]
+2026-01-13 23:20:49.981 RedLemon[43837:296008] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles...
+2026-01-13 23:20:49.981 RedLemon[43837:296008] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-13 23:20:49.982 RedLemon[43837:296008] 🔍 DEBUG: Processing subtitle URL: /subtitle/3219859-3236844.zip
+2026-01-13 23:20:49.982 RedLemon[43837:296006] 🔍 DEBUG: Processing subtitle URL: /subtitle/3228475-3245778.zip
+2026-01-13 23:20:49.982 RedLemon[43837:296005] 🔍 DEBUG: Processing subtitle URL: /subtitle/3189052-3205007.zip
+2026-01-13 23:20:49.982 RedLemon[43837:296020] 🔍 DEBUG: Processing subtitle URL: /subtitle/3228503-3245813.zip
+2026-01-13 23:20:49.982 RedLemon[43837:296008] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:20:49.982 RedLemon[43837:296006] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:20:49.982 RedLemon[43837:296020] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:20:49.982 RedLemon[43837:296005] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:20:49.982 RedLemon[43837:296005] 🔍 DEBUG: Processing subtitle URL: /subtitle/3219813-3236793.zip
+2026-01-13 23:20:49.982 RedLemon[43837:296005] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:20:50.062 RedLemon[43837:295916] ✅ Stream ready, starting playback...
+2026-01-13 23:20:50.232 RedLemon[43837:296020] 📝 [PLAYER] Resumed
+2026-01-13 23:20:50.243 RedLemon[43837:296008] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi1-4.download.real-debrid.com/d/GRWZPLBRD32VI113/Five.Nights.at.Freddys.2023.1080.WEB-DL.mkv"]
+✅ RD cache hit: 45bd62a89441
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Verified stream is VIABLE. Returning immediately.
+🔌 Setting up Realtime channel: watch-party:event_tt4589218
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt4589218
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_movie_tt4589218]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMyMTk4NTktMzIzNjg0NC56aXA= [request-id: 75640EE6-C403-448E-8E3F-66ABF7E215FA]
+2026-01-13 23:20:50.368 RedLemon[43837:296005] 📝 [PLAYER] Load Video (Event) ["url": "https://chi1-4.download.real-debrid.com/d/GRWZPLBRD32VI113/Five.Nights.at.Freddys.2023.1080.WEB-DL.mkv"]
+2026-01-13 23:20:50.466 RedLemon[43837:296020] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-13 23:20:50.466 RedLemon[43837:296020] 📝 [PLAYER] Buffering Started
+📄 Subtitle request: L3N1YnRpdGxlLzMyMTk4... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3219859-3236844.zip
+📨 Received: {"ref":"790C47A3-BAFB-4D0B-9DAE-B41BD10F2B76","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"68754170-f100-11f0-bf9e-ee9e47993347":{"metas":[{"phx_ref":"GIp-GS9mvybY-TIB","is_host":false,"joined_at":1768364450.227653,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-GTAYN1Q6AjIh","phx_ref_prev":"GIp-GDUHkco6Ajhi","is_premium":true,"last_seen":"2026-01-14T04:20:50.236Z","room_id":"event_tt4589218","started_at":"2026-01-14T04:20:50.236Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4589218","watching_title":"Five Nights at Freddy's","watching_type":"movie"}]}},"leaves":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-GDUHkco6Ajhi","phx_ref_prev":"GIp-GDUAGD86AjhC","is_premium":true,"last_seen":"2026-01-14T04:20:46.006Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📡 SocialService: Updated status - online: Five Nights at Freddy's
+⏰ AppState: Next schedule update set for Event End: 2026-01-14 05:51:21 +0000
+⏰ AppState: Scheduling update in 5431 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ Download complete: 39151 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+⚠️ No strong compatibility match (Best: 0 for Five.Nights.at.Freddy's.2023.1080p.10bit.BluRay.x265.Quickie4u.srt)
+⚠️ No specific match found, using first file: Five.Nights.at.Freddy's.2023.1080p.10bit.BluRay.x265.Quickie4u.srt
+📦 Extracting specific file: Five.Nights.at.Freddy's.2023.1080p.10bit.BluRay.x265.Quickie4u.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxODkwNTItMzIwNTAwNy56aXA= [request-id: 85B7F1D2-D66C-4306-B777-2BD3A0F8AC42]
+📄 Subtitle request: L3N1YnRpdGxlLzMxODkw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3189052-3205007.zip
+📊 AppState: Polled participant counts - Active: ["tt4589218": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-14 05:51:21 +0000
+⏰ AppState: Scheduling update in 5431 seconds
+✅ [EventsConfig] Fetched movie_events version 1527 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1527, 412 movies)
+✅ SocialService: Event event_tt4589218 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1527 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1527, 412 movies)
+✅ SocialService: Event event_tt4589218 is JOINABLE (Live or Next Up) - allowing join
+✅ Download complete: 30938 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+⚠️ No strong compatibility match (Best: 0 for Five.Nights.at.Freddys.2023.1080p.PCOK.WEBRip.1400MB.DD5.1.x264-GalaxyRG.srt)
+⚠️ No specific match found, using first file: Five.Nights.at.Freddys.2023.1080p.PCOK.WEBRip.1400MB.DD5.1.x264-GalaxyRG.srt
+📦 Extracting specific file: Five.Nights.at.Freddys.2023.1080p.PCOK.WEBRip.1400MB.DD5.1.x264-GalaxyRG.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMyMjg1MDMtMzI0NTgxMy56aXA= [request-id: 8E0F4398-F894-4EEE-8501-9910A1883E60]
+2026-01-13 23:20:53.885 RedLemon[43837:296076] 📝 [PLAYER] File Loaded ["duration": "6568.576"]
+2026-01-13 23:20:54.745 RedLemon[43837:296008] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-13 23:21:00.148 RedLemon[43837:295916] 🚪 Joining room: DEDH
+2026-01-13 23:21:00.258 RedLemon[43837:296005] 🔐 SupabaseClient: Signing Identity Payload: '1768364460656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-13 23:21:00.259 RedLemon[43837:296005] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-13 23:21:01.297 RedLemon[43837:295916] 🚪 Room is in lobby
+📄 Subtitle request: L3N1YnRpdGxlLzMyMjg1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3228503-3245813.zip
+✅ Download complete: 30959 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+⚠️ No strong compatibility match (Best: 0 for Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX].srt)
+⚠️ No specific match found, using first file: Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX].srt
+📦 Extracting specific file: Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-\[YTS.MX\].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📡 [EventsConfig] Checking server for movie_events config version...
+📊 AppState: Polled participant counts - Active: ["tt4589218": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-14 05:51:21 +0000
+⏰ AppState: Scheduling update in 5421 seconds
+✅ [EventsConfig] Fetched movie_events version 1527 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1527, 412 movies)
+🎭 Lobby: Connecting to room DEDH...
+🚦 Lobby State: connecting
+✅ Cache HIT: Metadata[meta_movie_tt4627382]
+🔄 Lobby: Fetching fresh room state from Supabase...
+[ INFO ] GET /api/metadata/meta/movie/tt4627382 [request-id: 06AA804A-2D2B-45D0-BE02-705C2FEBE3DF]
+2026-01-13 23:21:01.785 RedLemon[43837:295916] ✅ Guest joined room DEDH in database
+2026-01-13 23:21:01.866 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:01.867 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:01.895 RedLemon[43837:295916] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656DAA91-33B4-4688-9135-C982EA52D7C9, New=GIp-G9nxdFDY-Tki)
+2026-01-13 23:21:01.961 RedLemon[43837:296008] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 23:21:01.961 RedLemon[43837:296008]    Payload keys: type, chatText, timestamp, senderId, position, chatUsername
+2026-01-13 23:21:01.961 RedLemon[43837:296008] ✅ Realtime: Message broadcast complete
+2026-01-13 23:21:01.963 RedLemon[43837:296008] 🔐 SupabaseClient: Signing Identity Payload: '1768364461656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-13 23:21:01.963 RedLemon[43837:296008] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-13 23:21:02.077 RedLemon[43837:296020] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:02.077 RedLemon[43837:296020]    Payload keys: position, type, chatText, senderId, timestamp, chatUsername
+2026-01-13 23:21:02.077 RedLemon[43837:296020] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 23:21:02.077 RedLemon[43837:296020] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 23:21:02.078 RedLemon[43837:296020] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:02.078 RedLemon[43837:295916] 👋 Received: Guest 'ursinho' joined room DEDH
+2026-01-13 23:21:02.174 RedLemon[43837:295916] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIp-G-lm9lzY-TPB)
+2026-01-13 23:21:02.174 RedLemon[43837:295916] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIp-G-lm9lzY-TPB)
+2026-01-13 23:21:02.207 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:02.207 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+DEBUG: MPVPlayerViewModel.cleanup called - forcing cleanup
+📡 SocialService: Updated status - In Lobby: Roofman: Roofman
+🧹 Cleaning up Realtime channel for room: event_tt4589218
+🔄 Untracking presence...
+🔌 Setting up Realtime channel: watch-party:DEDH
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+✅ Presence untracked
+🔄 Leaving channel...
+📡 Joined channel: realtime:watch-party:DEDH
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+📡 Connection state: disconnected
+✅ Realtime channel cleanup complete
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Loaded metadata for Roofman
+✅ Lobby: Connected to Realtime
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-G9W9ICw6AjLh","phx_ref_prev":"GIp-GTAYN1Q6AjIh","is_premium":true,"last_seen":"2026-01-14T04:21:01.599Z","room_id":"DEDH","started_at":"2026-01-14T04:21:01.600Z","status":"In Lobby: Roofman","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}},"leaves":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-GTAYN1Q6AjIh","phx_ref_prev":"GIp-GDUHkco6Ajhi","is_premium":true,"last_seen":"2026-01-14T04:20:50.236Z","room_id":"event_tt4589218","started_at":"2026-01-14T04:20:50.236Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4589218","watching_title":"Five Nights at Freddy's","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"68754170-f100-11f0-bf9e-ee9e47993347":{"metas":[{"phx_ref":"GIp-GS9mvybY-TIB","is_host":false,"joined_at":1768364450.227653,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Received: {"ref":"FB1AC1B8-437E-40E1-8C59-AFD2609AB579","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":59426851,"event":"*","filter":"id=eq.DEDH","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Unknown event: phx_close
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:DEDH"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"3ed03c26-f100-11f0-8fb3-ee9e47993347":{"metas":[{"phx_ref":"GIp-CPi2O1TY-dgD","phx_ref_prev":"GIp-COt-EkbY-Tei","is_host":true,"joined_at":1768364380.606132,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f465c96-f100-11f0-a269-ee9e47993347":{"metas":[{"phx_ref":"GIp-G9nxdFDY-Tki","is_host":false,"joined_at":1768364461.656577,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DEDH"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DEDH", "name": "Roofman", "season": null, "episode": null, "imdb_id": "tt4627382", "playlist": [{"id": "4A50366F-E446-4D75-BD22-527573FF0447", "mediaItem": {"id": "tt4627382", "name": "Roofman", "type": "movie", "year": "2025", "poster": "https://images.justwatch.com/poster/338574331/s332/img", "imdbRating": "7.0", "releaseInfo": "2025"}}], "is_public": true, "created_at": "2026-01-14T04:19:39.894452", "is_playing": false, "poster_url": "https://images.justwatch.com/poster/338574331/s332/img", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-14T04:20:51.742278", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-14T04:21:01.720Z","old_record":{"id": "DEDH"}},"ids":[59426851]},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DEDH", "name": "Roofman", "season": null, "episode": null, "imdb_id": "tt4627382", "playlist": [{"id": "4A50366F-E446-4D75-BD22-527573FF0447", "mediaItem": {"id": "tt4627382", "name": "Roofman", "type": "movie", "year": "2025", "poster": "https://images.justwatch.com/poster/338574331/s332/img", "imdbRating": "7.0", "releaseInfo": "2025"}}], "is_public": true, "created_at": "2026-01-14T04:19:39.894452", "is_playing": false, "poster_url": "https://images.justwatch.com/poster/338574331/s332/img", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-14T04:20:51.742278", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-14T04:21:01.720Z","old_record":{"id": "DEDH"}},"ids":[59426851]},"topic":"realtime:watch-party:DEDH"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+🔌 Setting up Realtime channel: watch-party:DEDH
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:DEDH, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f465c96-f100-11f0-a269-ee9e47993347":{"metas":[{"phx_ref":"GIp-G-lm9lzY-TPB","phx_ref_prev":"GIp-G9nxdFDY-Tki","is_host":false,"joined_at":1768364461.934175,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"6f465c96-f100-11f0-a269-ee9e47993347":{"metas":[{"phx_ref":"GIp-G9nxdFDY-Tki","is_host":false,"joined_at":1768364461.656577,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DEDH", "name": "Roofman", "season": null, "episode": null, "imdb_id": "tt4627382", "playlist": [{"id": "4A50366F-E446-4D75-BD22-527573FF0447", "mediaItem": {"id": "tt4627382", "name": "Roofman", "type": "movie", "year": "2025", "poster": "https://images.justwatch.com/poster/338574331/s332/img", "imdbRating": "7.0", "releaseInfo": "2025"}}], "is_public": true, "created_at": "2026-01-14T04:19:39.894452", "is_playing": false, "poster_url": "https://images.justwatch.com/poster/338574331/s332/img", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-14T04:21:02.070385", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-14T04:21:02.072Z","old_record":{"id": "DEDH"}},"ids":[59426851]},"topic":"realtime:watch-party:DEDH"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+💓 Heartbeat sent
+📊 AppState: Polled participant counts - Active: ["tt4589218": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-14 05:51:21 +0000
+⏰ AppState: Scheduling update in 5411 seconds
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-HgZStTU6AjQh","phx_ref_prev":"GIp-G9W9ICw6AjLh","is_premium":true,"last_seen":"2026-01-14T04:21:11.013Z","room_id":"DEDH","started_at":"2026-01-14T04:21:01.600Z","status":"In Lobby: Roofman","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}},"leaves":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-G9W9ICw6AjLh","phx_ref_prev":"GIp-GTAYN1Q6AjIh","is_premium":true,"last_seen":"2026-01-14T04:21:01.599Z","room_id":"DEDH","started_at":"2026-01-14T04:21:01.600Z","status":"In Lobby: Roofman","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DEDH", "name": "Roofman", "season": null, "episode": null, "imdb_id": "tt4627382", "playlist": [{"id": "4A50366F-E446-4D75-BD22-527573FF0447", "mediaItem": {"id": "tt4627382", "name": "Roofman", "type": "movie", "year": "2025", "poster": "https://images.justwatch.com/poster/338574331/s332/img", "imdbRating": "7.0", "releaseInfo": "2025"}}], "is_public": true, "created_at": "2026-01-14T04:19:39.894452", "is_playing": false, "poster_url": "https://images.justwatch.com/poster/338574331/s332/img", "description": null, "stream_hash": "950d16d8120b896a12af3542a2c9b029df95f512", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-14T04:21:11", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/FJWRJOBZZFOUC44/Roofman.2025.1080p.WEB-DL.x264.6CH.ENG%20YG.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "i2026-01-13 23:21:11.485 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:11.486 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:11.642 RedLemon[43837:296007] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:11.642 RedLemon[43837:296007]    Payload keys: type, position, timestamp, senderId, chatText, chatUsername
+2026-01-13 23:21:11.643 RedLemon[43837:296007] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-13 23:21:11.643 RedLemon[43837:296007] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 23:21:11.643 RedLemon[43837:296007] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:11.647 RedLemon[43837:295916] 🎬 Guest: Received PREPARE signal: LOBBY_PREPARE_PLAYBACK|950d16d8120b896a12af3542a2c9b029df95f512|0
+2026-01-13 23:21:11.647 RedLemon[43837:295916] ✅ Guest: Extracted Hash from Payload: 950d16d8120b896a12af3542a2c9b029df95f512
+2026-01-13 23:21:11.811 RedLemon[43837:296008] ✅ StreamService: Using provided metadata: Roofman
+2026-01-13 23:21:11.811 RedLemon[43837:296008] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-13 23:21:11.811 RedLemon[43837:296008] ⚡️ StreamResolver: Resolving streams for tt4627382 (S0E0)
+2026-01-13 23:21:11.811 RedLemon[43837:296280] 📝 [APP] 🎬 StreamService: Starting resolution for: Roofman ["file": "StreamService.swift", "level": "INFO", "line": "104"]
+2026-01-13 23:21:11.811 RedLemon[43837:296280] 📝 [APP] New Session Started ["app_version": "1.0.79", "build": "79", "session_id": "613DE0A6-03F0-4980-B98E-572A49CE72DB", "trigger_source": "preload", "user_id": "656DAA91-33B4-4688-9135-C982EA52D7C9"]
+2026-01-13 23:21:11.811 RedLemon[43837:296280] 📝 [APP] Target Content Set ["imdb_id": "tt4627382"]
+2026-01-13 23:21:11.811 RedLemon[43837:296280] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-13 23:21:11.938 RedLemon[43837:296008]    📅 Filtering by year: 2025
+2026-01-13 23:21:12.066 RedLemon[43837:296076] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-13 23:21:12.066 RedLemon[43837:296076] 🔍 ProviderManager: Fetching streams for tt4627382...
+2026-01-13 23:21:12.067 RedLemon[43837:296076] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-13 23:21:12.067 RedLemon[43837:296008] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-13 23:21:12.067 RedLemon[43837:296280] 🔍 Zilean: Searching via IMDB ID: tt4627382
+2026-01-13 23:21:12.067 RedLemon[43837:296076] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22***%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt4627382.json
+2026-01-13 23:21:12.067 RedLemon[43837:296008] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-13 23:21:12.067 RedLemon[43837:296076] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt4627382.json
+2026-01-13 23:21:12.067 RedLemon[43837:296008] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt4627382.json...
+2026-01-13 23:21:12.067 RedLemon[43837:296008] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt4627382.json
+2026-01-13 23:21:12.076 RedLemon[43837:296076] 📡 Torrentio: HTTP 200, received 30006 bytes
+2026-01-13 23:21:12.097 RedLemon[43837:296076] ✅ Torrentio: Parsed 64 streams from 64 raw
+2026-01-13 23:21:12.590 RedLemon[43837:296076] ✅ Zilean: Got 19 results
+2026-01-13 23:21:17.107 RedLemon[43837:296320] ✅ DebridSearch: Parsed 7 streams
+2026-01-13 23:21:17.107 RedLemon[43837:296076] ✅ ProviderManager: Fetched 91 raw, returning 81 unique streams
+2026-01-13 23:21:17.108 RedLemon[43837:296076] 📦 StreamResolver: Received 1 raw streams, bucketing...
+2026-01-13 23:21:17.108 RedLemon[43837:296076] 📝 [RESOLVER] Providers Fetched ["torrentio": "1"]
+2026-01-13 23:21:17.343 RedLemon[43837:296076] 📝 [RESOLVER] Resolution Complete ["1080p": "1", "2160p": "0", "720p": "0", "selected_provider": "torrentio", "selected_title": "Roofman.2025.1080p.WEB-DL.x264.6CH.ENG.YG⭐
+👤 2 💾 2.73 GB ⚙️ ThePirateBay"]
+2026-01-13 23:21:17.344 RedLemon[43837:296076] 📝 [RESOLVER] Host Stream Match ["hash": "950d16d8120b896a12af3542a2c9b029df95f512"]
+2026-01-13 23:21:17.345 RedLemon[43837:296321] 📝 [APP] 📦 StreamService: Found 1 total streams to try (across all qualities) ["file": "StreamService.swift", "level": "INFO", "line": "279"]
+2026-01-13 23:21:18.223 RedLemon[43837:296007] 📥 StreamService: Pre-downloading 4 (capped from 4) subtitles for direct stream...
+2026-01-13 23:21:18.223 RedLemon[43837:296007] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 4
+2026-01-13 23:21:18.223 RedLemon[43837:296007] 🔍 DEBUG: Processing subtitle URL: /subtitle/3514980-8437594.zip
+2026-01-13 23:21:18.223 RedLemon[43837:296280] 🔍 DEBUG: Processing subtitle URL: /subtitle/3514981-8437593.zip
+2026-01-13 23:21:18.224 RedLemon[43837:296280] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:21:18.224 RedLemon[43837:296007] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:21:18.224 RedLemon[43837:296076] 🔍 DEBUG: Processing subtitle URL: /subtitle/3509978-8432514.zip
+2026-01-13 23:21:18.224 RedLemon[43837:296076] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:21:18.224 RedLemon[43837:296321] 🔍 DEBUG: Processing subtitle URL: /subtitle/3509735-8432252.zip
+2026-01-13 23:21:18.224 RedLemon[43837:296321] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:21:18.226 RedLemon[43837:295916] ✅ Guest: Stream preloaded. Sending READY signal.
+2026-01-13 23:21:18.226 RedLemon[43837:296321] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 23:21:18.226 RedLemon[43837:296321]    Payload keys: senderId, chatUsername, timestamp, chatText, type, position
+2026-01-13 23:21:18.227 RedLemon[43837:296007] ✅ Realtime: Message broadcast complete
+2026-01-13 23:21:18.350 RedLemon[43837:296280] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:18.350 RedLemon[43837:296280]    Payload keys: position, chatText, chatUsername, timestamp, senderId, type
+2026-01-13 23:21:18.351 RedLemon[43837:296280] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 23:21:18.351 RedLemon[43837:296280] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 23:21:18.351 RedLemon[43837:296280] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:18.991 RedLemon[43837:296280] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:18.991 RedLemon[43837:296280]    Payload keys: chatUsername, senderId, chatText, position, type, timestamp
+2026-01-13 23:21:18.991 RedLemon[43837:296280] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-13 23:21:18.992 RedLemon[43837:296280] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 23:21:18.992 RedLemon[43837:296280] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:18.992 RedLemon[43837:295916] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2026-01-13 23:21:18.992 RedLemon[43837:295916] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing
+2026-01-13 23:21:19.124 RedLemon[43837:295916] ✅ Guest: Forced stream sync from Host (Hash: 950d16d8)
+2026-01-13 23:21:19.387 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:19.388 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:22.377 RedLemon[43837:295916] 🎬 Guest: Fetch took 0.167s, finished countdown loop
+2026-01-13 23:21:22.470 RedLemon[43837:295916] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIp-IJ9U8T_Y-dlj)
+2026-01-13 23:21:22.470 RedLemon[43837:295916] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIp-IJ9U8T_Y-dlj)
+2026-01-13 23:21:22.502 RedLemon[43837:295916] 🎬 Guest: Starting playback after countdown
+2026-01-13 23:21:22.502 RedLemon[43837:295916] 🎬 Guest: Launching player for Roofman
+2026-01-13 23:21:22.600 RedLemon[43837:295916] 📡 Fetching metadata for tt4627382...
+2026-01-13 23:21:22.635 RedLemon[43837:295916] 🎬 PlayerVM: Using Playlist Metadata: S0E0
+2026-01-13 23:21:22.636 RedLemon[43837:295916] 🚀 PlayerVM: Using pre-resolved stream (Zero-Wait Start)
+2026-01-13 23:21:22.677 RedLemon[43837:295916] ✅ Stream ready, starting playback...
+2026-01-13 23:21:22.694 RedLemon[43837:296007] 📝 [PLAYER] Resumed
+2026-01-13 23:21:22.730 RedLemon[43837:296007] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi9-4.download.real-debrid.com/d/FJWRJOBZZFOUC44/Roofman.2025.1080p.WEB-DL.x264.6CH.ENG%20YG.mkv"]
+nt4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-14T04:21:11.443Z","old_record":{"id": "DEDH"}},"ids":[59426851]},"topic":"realtime:watch-party:DEDH"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_PREPARE_PLAYBACK|950d16d8120b896a12af3542a2c9b029df95f512|0","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":1768364471.534937,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Cache HIT: Metadata[meta_movie_tt4627382]
+[2026-01-14T04:21:11Z] [INFO] [StreamService.swift:104] 🎬 StreamService: Starting resolution for: Roofman
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 4 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt4627382.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+⚠️ MediaFusion: HTTP 418
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+✅ Comet: Parsed 1 valid streams
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3655f93c-f100-11f0-b77f-ee9e47993347":{"metas":[{"phx_ref":"GIp-HtSSdJA6AjRB","phx_ref_prev":"GIp-GN-ai-86AjiC","is_premium":true,"last_seen":"2026-01-14T04:21:14.490Z","room_id":"DEDH","started_at":"2026-01-14T04:19:40.324Z","status":"In Lobby: Roofman","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}},"leaves":{"3655f93c-f100-11f0-b77f-ee9e47993347":{"metas":[{"phx_ref":"GIp-GN-ai-86AjiC","phx_ref_prev":"GIp-EniJLis6AiwB","is_premium":true,"last_seen":"2026-01-14T04:20:48.903Z","room_id":"DEDH","started_at":"2026-01-14T04:19:40.324Z","status":"In Lobby: Roofman","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+⚡️ StreamResolver: Optimizing for preferred hash: 950d16d8120b896a12af3542a2c9b029df95f512
+   ✅ Found target stream immediately. Discarding everything else.
+📊 StreamResolver: Provider Stats: [torrentio:1]
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt4627382.json
+✅ Metadata fetched from Cinemeta for tt4627382: Roofman (2025)
+🎯 Target title for matching: Roofman
+   📅 Year filter (2025): 1 → 1 streams
+🔍 Searching SubDL: tt4627382 (movie)
+   ℹ️ Fallback Name: Roofman (2025)
+✅ Found 4 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+   --- Processing Bucket: 2160p (Input: 0) ---
+   ✅ Bucket 2160p Final Count: 0
+   --- Processing Bucket: 1080p (Input: 1) ---
+   ✅ Bucket 1080p Final Count: 1
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 0) ---
+   ✅ Bucket 480p Final Count: 0
+📦 1080p Primary: Roofman.2025.1080p.WEB-DL.x264.6CH.ENG.YG⭐
+👤 2 💾 2.73 GB ⚙️ ThePirateBay
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: 950d16d8120b896a12af3542a2c9b029df95f512
+✅ StreamService: Found requested stream hash! Locking selection.
+[2026-01-14T04:21:17Z] [INFO] [StreamService.swift:279] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Roofman.2025.1080p.WEB-DL.x264.6CH.ENG.YG⭐
+👤 2 💾 2.73 GB ⚙️ ThePirateBay
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/950d16d8120b896a12af3542a2c9b029df95f512/null/3/Roofman.2025.1080p.WEB-DL.x264.6CH.ENG%20YG.mkv
+✅ StreamService: Resolved to: https://chi9-4.download.real-debrid.com/d/FJWRJOBZZFOUC44/Roofman.2025.1080p.WEB-DL.x264.6CH.ENG%20YG.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Roofman.2025.1080p.WEB-DL.x264.6CH.ENG.YG⭐
+👤 2 💾 2.73 GB ⚙️ ThePirateBay
+📊 Stream Size: 2.73 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_READY_FOR_PLAYBACK","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":1768364478.226152,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📝 Guest: Marked session as started (Idempotency Lock): 950d16d8120b896a12af3542a2c9b029df95f512_1768364471.0
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DEDH", "name": "Roofman", "season": null, "episode": null, "imdb_id": "tt4627382", "playlist": [{"id": "4A50366F-E446-4D75-BD22-527573FF0447", "mediaItem": {"id": "tt4627382", "name": "Roofman", "type": "movie", "year": "2025", "poster": "https://images.justwatch.com/poster/338574331/s332/img", "imdbRating": "7.0", "releaseInfo": "2025"}}], "is_public": true, "created_at": "2026-01-14T04:19:39.894452", "is_playing": true, "poster_url": "https://images.justwatch.com/poster/338574331/s332/img", "description": null, "stream_hash": "950d16d8120b896a12af3542a2c9b029df95f512", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-14T04:21:18", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/FJWRJOBZZFOUC44/Roofman.2025.1080p.WEB-DL.x264.6CH.ENG%20YG.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-14T04:21:19.141Z","old_record":{"id": "DEDH"}},"ids":[59426851]},"topic":"realtime:watch-party:DEDH"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt4589218": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-14 05:51:21 +0000
+⏰ AppState: Scheduling update in 5401 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3ed03c26-f100-11f0-8fb3-ee9e47993347":{"metas":[{"phx_ref":"GIp-IJ9U8T_Y-dlj","phx_ref_prev":"GIp-CPi2O1TY-dgD","is_host":true,"joined_at":1768364482.1860409,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"3ed03c26-f100-11f0-8fb3-ee9e47993347":{"metas":[{"phx_ref":"GIp-CPi2O1TY-dgD","phx_ref_prev":"GIp-COt-EkbY-Tei","is_host":true,"joined_at":1768364380.606132,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3655f93c-f100-11f0-b77f-ee9e47993347":{"metas":[{"phx_ref":"GIp-IKJ8rAw6AjTh","phx_ref_prev":"GIp-HtSSdJA6AjRB","is_premium":true,"last_seen":"2026-01-14T04:21:22.237Z","room_id":"DEDH","started_at":"2026-01-14T04:21:22.237Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}},"leaves":{"3655f93c-f100-11f0-b77f-ee9e47993347":{"metas":[{"phx_ref":"GIp-HtSSdJA6AjRB","phx_ref_prev":"GIp-GN-ai-86AjiC","is_premium":true,"last_seen":"2026-01-14T04:21:14.490Z","room_id":"DEDH","started_at":"2026-01-14T04:19:40.324Z","status":"In Lobby: Roofman","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Cache HIT: Metadata[meta_movie_tt4627382]
+🔌 Setting up Realtime channel: watch-party:DEDH
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:DEDH, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_movie_tt4627382]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MTQ5ODEtODQzNzU5My56aXA= [request-id: D94DE937-B3B8-4FC1-A75E-C42E94F40FAB]
+2026-01-13 23:21:22.878 RedLemon[43837:296321] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-13 23:21:22.878 RedLemon[43837:296321] 📝 [PLAYER] Buffering Started
+2026-01-13 23:21:22.987 RedLemon[43837:295916] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIp-IL6EDJrY-TUB)
+2026-01-13 23:21:22.987 RedLemon[43837:295916] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIp-IL6EDJrY-TUB)
+📄 Subtitle request: L3N1YnRpdGxlLzM1MTQ5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3514981-8437593.zip
+📡 SocialService: Updated status - online: Roofman
+⏰ AppState: Next schedule update set for Event End: 2026-01-14 05:51:21 +0000
+⏰ AppState: Scheduling update in 5399 seconds
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6f465c96-f100-11f0-a269-ee9e47993347":{"metas":[{"phx_ref":"GIp-IL6EDJrY-TUB","phx_ref_prev":"GIp-G-lm9lzY-TPB","is_host":false,"joined_at":1768364482.692562,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"6f465c96-f100-11f0-a269-ee9e47993347":{"metas":[{"phx_ref":"GIp-G-lm9lzY-TPB","phx_ref_prev":"GIp-G9nxdFDY-Tki","is_host":false,"joined_at":1768364461.934175,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-IMBmdMY6AjUh","phx_ref_prev":"GIp-HgZStTU6AjQh","is_premium":true,"last_seen":"2026-01-14T04:21:22.729Z","room_id":"DEDH","started_at":"2026-01-14T04:21:22.729Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}},"leaves":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-HgZStTU6AjQh","phx_ref_prev":"GIp-G9W9ICw6AjLh","is_premium":true,"last_seen":"2026-01-14T04:21:11.013Z","room_id":"DEDH","started_at":"2026-01-14T04:21:01.600Z","status":"In Lobby: Roofman","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Download complete: 57990 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): Roofman.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264.srt
+📦 Extracting specific file: Roofman.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MDk5NzgtODQzMjUxNC56aXA= [request-id: 332BA859-5FAA-408D-8D64-AB11067C8883]
+📄 Subtitle request: L3N1YnRpdGxlLzM1MDk5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3509978-8432514.zip
+✅ Download complete: 46314 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+⚠️ No strong compatibility match (Best: 0 for RoofMan.2025.1080p.TELESYNC.x264-SyncUP.srt)
+⚠️ No specific match found, using first file: RoofMan.2025.1080p.TELESYNC.x264-SyncUP.srt
+📦 Extracting specific file: RoofMan.2025.1080p.TELESYNC.x264-SyncUP.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MTQ5ODAtODQzNzU5NC56aXA= [request-id: 89EC0F27-07EE-4004-BFA5-4B412042595D]
+2026-01-13 23:21:24.296 RedLemon[43837:296321] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:24.296 RedLemon[43837:296321]    Payload keys: position, isPlaying, senderId, type, timestamp
+2026-01-13 23:21:24.297 RedLemon[43837:296321] ✅ Realtime: Decoded message type: playbackState, sender: DEDH
+2026-01-13 23:21:24.297 RedLemon[43837:296321] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 23:21:24.297 RedLemon[43837:296321] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:24.678 RedLemon[43837:296323] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:24.678 RedLemon[43837:296323]    Payload keys: position, isPlaying, senderId, timestamp, type
+2026-01-13 23:21:24.678 RedLemon[43837:296323] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 23:21:24.679 RedLemon[43837:296323] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-13 23:21:24.679 RedLemon[43837:296323] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:24.786 RedLemon[43837:296280] 📝 [PLAYER] File Loaded ["duration": "7559.594"]
+2026-01-13 23:21:25.027 RedLemon[43837:296323] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 23:21:25.028 RedLemon[43837:296323]    Payload keys: senderId, position, isPlaying, type, timestamp
+2026-01-13 23:21:25.030 RedLemon[43837:296322] ✅ Realtime: Message broadcast complete
+2026-01-13 23:21:25.148 RedLemon[43837:296007] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:25.149 RedLemon[43837:296007]    Payload keys: position, isPlaying, senderId, timestamp, type
+2026-01-13 23:21:25.149 RedLemon[43837:296007] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 23:21:25.149 RedLemon[43837:296007] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-13 23:21:25.149 RedLemon[43837:296007] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:25.976 RedLemon[43837:296323] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:25.976 RedLemon[43837:296323]    Payload keys: timestamp, isPlaying, position, type, senderId
+2026-01-13 23:21:25.976 RedLemon[43837:296323] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 23:21:25.977 RedLemon[43837:296323] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-13 23:21:25.977 RedLemon[43837:296323] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:26.117 RedLemon[43837:296321] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-13 23:21:26.301 RedLemon[43837:296323] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:26.301 RedLemon[43837:296323]    Payload keys: position, type, timestamp, senderId, isPlaying
+2026-01-13 23:21:26.302 RedLemon[43837:296323] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 23:21:26.302 RedLemon[43837:296323] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-13 23:21:26.302 RedLemon[43837:296323] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:26.302 RedLemon[43837:296321] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:26.302 RedLemon[43837:296321]    Payload keys: isPlaying, timestamp, position, type, senderId
+2026-01-13 23:21:26.303 RedLemon[43837:296321] ✅ Realtime: Decoded message type: playbackState, sender: DEDH
+2026-01-13 23:21:26.303 RedLemon[43837:296321] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 23:21:26.303 RedLemon[43837:296321] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:28.182 RedLemon[43837:296280] 📝 [PLAYER] Playback Finished (EOF)
+2026-01-13 23:21:28.193 RedLemon[43837:296280] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-13 23:21:28.446 RedLemon[43837:296280] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:28.447 RedLemon[43837:296280]    Payload keys: isPlaying, senderId, timestamp, position, type
+2026-01-13 23:21:28.447 RedLemon[43837:296280] ✅ Realtime: Decoded message type: playbackState, sender: DEDH
+2026-01-13 23:21:28.447 RedLemon[43837:296280] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 23:21:28.448 RedLemon[43837:296280] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:28.890 RedLemon[43837:296007] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-13 23:21:28.891 RedLemon[43837:296322] ❌ [23:21:28.891] [SUBTITLES] [MPVWrapper.swift:755] getSubtitleTracks: MPV not initialized
+2026-01-13 23:21:28.903 RedLemon[43837:296076] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-13 23:21:29.009 RedLemon[43837:296076] ❌ [23:21:29.009] [NETWORK] [SupabaseClient.swift:336] Supabase API Error: duplicate key value violates unique constraint "room_participants_pkey"
+2026-01-13 23:21:29.013 RedLemon[43837:295916] ℹ️ Lobby: Join failed with conflict (409/Duplicate) - assuming user already joined. Proceeding...
+2026-01-13 23:21:29.250 RedLemon[43837:296280] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 23:21:29.251 RedLemon[43837:296280]    Payload keys: senderId, chatText, chatUsername, position, timestamp, type
+2026-01-13 23:21:29.251 RedLemon[43837:296320] ✅ Realtime: Message broadcast complete
+2026-01-13 23:21:29.252 RedLemon[43837:296076] 🔐 SupabaseClient: Signing Identity Payload: '1768364489656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-13 23:21:29.253 RedLemon[43837:296076] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-13 23:21:29.253 RedLemon[43837:295916] 👋 User synced from database
+2026-01-13 23:21:29.369 RedLemon[43837:296321] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:29.369 RedLemon[43837:296321]    Payload keys: chatText, type, position, senderId, chatUsername, timestamp
+2026-01-13 23:21:29.369 RedLemon[43837:296321] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-13 23:21:29.369 RedLemon[43837:296321] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-13 23:21:29.369 RedLemon[43837:296321] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:29.401 RedLemon[43837:295916] 👋 Received: Guest 'ursinho' joined room DEDH
+2026-01-13 23:21:29.476 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:29.476 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:29.476 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:30.344 RedLemon[43837:296321] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:30.344 RedLemon[43837:296321]    Payload keys: type, position, timestamp, isPlaying, senderId
+2026-01-13 23:21:30.345 RedLemon[43837:296321] ✅ Realtime: Decoded message type: playbackState, sender: DEDH
+2026-01-13 23:21:30.345 RedLemon[43837:296321] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 23:21:30.345 RedLemon[43837:296321] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:30.345 RedLemon[43837:295916] ⚠️ Received Realtime message with no chat text
+2026-01-13 23:21:30.925 RedLemon[43837:295916] 📡 Fetching metadata for tt4627382...
+2026-01-13 23:21:30.975 RedLemon[43837:295916] 🎬 PlayerVM: Using Playlist Metadata: S0E0
+2026-01-13 23:21:30.975 RedLemon[43837:296321] ✅ StreamService: Using provided metadata: Roofman
+2026-01-13 23:21:30.975 RedLemon[43837:296076] 📝 [APP] 🎬 StreamService: Starting resolution for: Roofman ["file": "StreamService.swift", "level": "INFO", "line": "104"]
+2026-01-13 23:21:30.975 RedLemon[43837:296321] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-13 23:21:30.976 RedLemon[43837:296321] ⚡️ StreamResolver: Resolving streams for tt4627382 (S0E0)
+2026-01-13 23:21:30.976 RedLemon[43837:296321] 📝 [APP] New Session Started ["app_version": "1.0.79", "build": "79", "session_id": "8430BF58-0D42-48C7-8272-95EA5BAA7FA4", "trigger_source": "lobby_auto_start", "user_id": "656DAA91-33B4-4688-9135-C982EA52D7C9"]
+2026-01-13 23:21:30.976 RedLemon[43837:296321] 📝 [APP] Target Content Set ["imdb_id": "tt4627382"]
+2026-01-13 23:21:30.976 RedLemon[43837:296321] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-13 23:21:31.108 RedLemon[43837:296320]    📅 Filtering by year: 2025
+2026-01-13 23:21:31.232 RedLemon[43837:296320] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-13 23:21:31.232 RedLemon[43837:296320] 🔍 ProviderManager: Fetching streams for tt4627382...
+2026-01-13 23:21:31.232 RedLemon[43837:296321] 🔍 Zilean: Searching via IMDB ID: tt4627382
+2026-01-13 23:21:31.232 RedLemon[43837:296280] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-13 23:21:31.232 RedLemon[43837:296280] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22***%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt4627382.json
+2026-01-13 23:21:31.232 RedLemon[43837:296280] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt4627382.json
+2026-01-13 23:21:31.234 RedLemon[43837:296323] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-13 23:21:31.234 RedLemon[43837:296323] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-13 23:21:31.234 RedLemon[43837:296323] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt4627382.json...
+2026-01-13 23:21:31.234 RedLemon[43837:296323] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt4627382.json
+2026-01-13 23:21:31.238 RedLemon[43837:296322] 📡 Torrentio: HTTP 200, received 30006 bytes
+2026-01-13 23:21:31.242 RedLemon[43837:296323] ✅ DebridSearch: Parsed 7 streams
+2026-01-13 23:21:31.261 RedLemon[43837:296322] ✅ Torrentio: Parsed 64 streams from 64 raw
+2026-01-13 23:21:31.768 RedLemon[43837:296321] ✅ Zilean: Got 19 results
+2026-01-13 23:21:31.769 RedLemon[43837:296320] ✅ ProviderManager: Fetched 91 raw, returning 81 unique streams
+2026-01-13 23:21:31.769 RedLemon[43837:296320] 📦 StreamResolver: Received 1 raw streams, bucketing...
+2026-01-13 23:21:31.769 RedLemon[43837:296320] 📝 [RESOLVER] Providers Fetched ["torrentio": "1"]
+2026-01-13 23:21:31.998 RedLemon[43837:296076] 📝 [RESOLVER] Resolution Complete ["1080p": "1", "2160p": "0", "720p": "0", "selected_provider": "torrentio", "selected_title": "Roofman.2025.1080p.WEB-DL.x264.6CH.ENG.YG⭐
+👤 2 💾 2.73 GB ⚙️ ThePirateBay"]
+2026-01-13 23:21:31.998 RedLemon[43837:296076] 📝 [RESOLVER] Host Stream Match ["hash": "950d16d8120b896a12af3542a2c9b029df95f512"]
+2026-01-13 23:21:32.000 RedLemon[43837:296321] 📝 [APP] 📦 StreamService: Found 1 total streams to try (across all qualities) ["file": "StreamService.swift", "level": "INFO", "line": "279"]
+2026-01-13 23:21:32.352 RedLemon[43837:296321] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:32.353 RedLemon[43837:296321]    Payload keys: timestamp, isPlaying, senderId, position, type
+2026-01-13 23:21:32.353 RedLemon[43837:296321] ✅ Realtime: Decoded message type: playbackState, sender: DEDH
+2026-01-13 23:21:32.353 RedLemon[43837:296321] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 23:21:32.353 RedLemon[43837:296321] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:32.353 RedLemon[43837:295916] ⚠️ Received Realtime message with no chat text
+2026-01-13 23:21:32.570 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:32.570 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:32.570 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+📄 Subtitle request: L3N1YnRpdGxlLzM1MTQ5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3514980-8437594.zip
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"DEDH","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+✅ Download complete: 66466 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): Roofman.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264 (SDH).srt
+📦 Extracting specific file: Roofman.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264 (SDH).srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768364484.5484982,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1768364484.786828,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768364485.8584418,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768364486.183609,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DEDH","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+🔄 Lobby: markPlaybackEnded - resetting connection status for reconnection
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DEDH","timestamp":1.835,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+DEBUG: MPVPlayerViewModel.cleanup called - forcing cleanup
+🎭 Lobby: Connecting to room DEDH...
+🚦 Lobby State: connecting
+🧹 Cleaning up Realtime channel for room: DEDH
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+📡 Connection state: disconnected
+✅ Realtime channel cleanup complete
+📡 SocialService: Updated status - In Lobby: Roofman: Roofman
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"6f465c96-f100-11f0-a269-ee9e47993347":{"metas":[{"phx_ref":"GIp-IL6EDJrY-TUB","phx_ref_prev":"GIp-G-lm9lzY-TPB","is_host":false,"joined_at":1768364482.692562,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:DEDH"}
+📨 Unknown event: phx_close
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-Ii7fbF46AtmD","phx_ref_prev":"GIp-IMBmdMY6AjUh","is_premium":true,"last_seen":"2026-01-14T04:21:28.872Z","room_id":"DEDH","started_at":"2026-01-14T04:21:28.872Z","status":"In Lobby: Roofman","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}},"leaves":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-IMBmdMY6AjUh","phx_ref_prev":"GIp-HgZStTU6AjQh","is_premium":true,"last_seen":"2026-01-14T04:21:22.729Z","room_id":"DEDH","started_at":"2026-01-14T04:21:22.729Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Lobby: Refreshed room state. isPlaying: true
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+▶️ Room already playing - auto-starting playback
+🤖 Lobby: Checking auto-start for system event
+🤖 Lobby: Auto-starting system event now
+🔌 Setting up Realtime channel: watch-party:DEDH
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:DEDH
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+📨 Received: {"ref":"638BED9D-7FC3-4E51-BB5C-6553034D7787","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":59426851,"event":"*","filter":"id=eq.DEDH","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:DEDH"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"3ed03c26-f100-11f0-8fb3-ee9e47993347":{"metas":[{"phx_ref":"GIp-IJ9U8T_Y-dlj","phx_ref_prev":"GIp-CPi2O1TY-dgD","is_host":true,"joined_at":1768364482.1860409,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"7fb3c906-f100-11f0-b26c-ee9e47993347":{"metas":[{"phx_ref":"GIp-IkSvRgPY-TZB","is_host":false,"joined_at":1768364489.217033,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DEDH", "name": "Roofman", "season": null, "episode": null, "imdb_id": "tt4627382", "playlist": [{"id": "4A50366F-E446-4D75-BD22-527573FF0447", "mediaItem": {"id": "tt4627382", "name": "Roofman", "type": "movie", "year": "2025", "poster": "https://images.justwatch.com/poster/338574331/s332/img", "imdbRating": "7.0", "releaseInfo": "2025"}}], "is_public": true, "created_at": "2026-01-14T04:19:39.894452", "is_playing": true, "poster_url": "https://images.justwatch.com/poster/338574331/s332/img", "description": null, "stream_hash": "950d16d8120b896a12af3542a2c9b029df95f512", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-14T04:21:29.359661", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/FJWRJOBZZFOUC44/Roofman.2025.1080p.WEB-DL.x264.6CH.ENG%20YG.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-14T04:21:29.361Z","old_record":{"id": "DEDH"}},"ids":[59426851]},"topic":"realtime:watch-party:DEDH"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DEDH","timestamp":3.879,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📊 AppState: Polled participant counts - Active: ["tt4589218": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-14 05:51:21 +0000
+⏰ AppState: Scheduling update in 5391 seconds
+📝 Lobby: Marking session as auto-started: 950d16d8120b896a12af3542a2c9b029df95f512_1768364478.0
+🛑 LobbyPresence: Polling stopped
+🛑 LobbyDatabase: Polling stopped
+🛑 Lobby: Polling stopped (chat via Realtime only)
+✅ Cache HIT: Metadata[meta_movie_tt4627382]
+[2026-01-14T04:21:30Z] [INFO] [StreamService.swift:104] 🎬 StreamService: Starting resolution for: Roofman
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 4 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt4627382.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+✅ Comet: Parsed 1 valid streams
+⚠️ MediaFusion: HTTP 418
+⚡️ StreamResolver: Optimizing for preferred hash: 950d16d8120b896a12af3542a2c9b029df95f512
+   ✅ Found target stream immediately. Discarding everything else.
+📊 StreamResolver: Provider Stats: [torrentio:1]
+✅ Metadata cache hit for tt4627382: Roofman
+🎯 Target title for matching: Roofman
+   📅 Year filter (2025): 1 → 1 streams
+🔍 Searching SubDL: tt4627382 (movie)
+   ℹ️ Fallback Name: Roofman (2025)
+✅ Found 4 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+   --- Processing Bucket: 2160p (Input: 0) ---
+   ✅ Bucket 2160p Final Count: 0
+   --- Processing Bucket: 1080p (Input: 1) ---
+   ✅ Bucket 1080p Final Count: 1
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 0) ---
+   ✅ Bucket 480p Final Count: 0
+📦 1080p Primary: Roofman.2025.1080p.WEB-DL.x264.6CH.ENG.YG⭐
+👤 2 💾 2.73 GB ⚙️ ThePirateBay
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: 950d16d8120b896a12af3542a2c9b029df95f512
+✅ StreamService: Found requested stream hash! Locking selection.
+[2026-01-14T04:21:31Z] [INFO] [StreamService.swift:279] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Roofman.2025.1080p.WEB-DL.x264.6CH.ENG.YG⭐
+👤 2 💾 2.73 GB ⚙️ ThePirateBay
+🔍 StreamService: Resolving redirect URL: https://torrentio.strem.fun/resolve/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/950d16d8120b896a12af3542a2c9b029df95f512/null/3/Roofman.2025.1080p.WEB-DL.x264.6CH.ENG%20YG.mkv
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DEDH","timestamp":5.923,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DEDH", "name": "Roofman", "season": null, "episode": null, "imdb_id": "tt4627382", "playlist": [{"id": "4A50366F-E446-4D75-BD22-527573FF0447", "mediaItem": {"id": "tt4627382", "name": "Roofman", "type": "movie", "year": "2025", "poster": "https://images.justwatch.com/poster/338574331/s332/img", "imdbRating": "7.0", "releaseInfo": "2025"}}], "is_public": true, "created_at": "2026-01-14T04:19:39.894452", "is_playing": true, "poster_url": "https://images.justwatch.com/poster/338574331/s332/img", "description": null, "stream_hash": "950d16d8120b896a12af3542a2c9b029df95f512", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-14T04:21:32", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/FJWRJOBZZFOUC44/Roofman.2025.1080p.WEB-DL.x264.6CH.ENG%20YG.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-14T04:21:32.509Z","old_record":{"id": "DEDH"}},"ids":[59426851]},"topic":"realtime:watch-party:DEDH"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DEDH", "name": "Roofman", "season": null, "episode": null, "imdb_id": "tt4627382", "playlist": [{"id": "4A50366F-E446-4D75-BD22-527573FF0447", "mediaItem": {"id": "tt4627382", "name": "Roofman", "type": "movie", "year": "2025", "poster": "https://images.justwatch.com/poster/338574331/s332/img", "imdbRating": "7.0", "releaseInfo": "2025"}}], "is_public": true, "created_at": "2026-01-14T04:19:39.894452", "is_playing": true, "poster_url": "https://images.justwatch.com/poster/338574331/s332/img", "description": null, "stream_hash": "950d16d8120b896a12af3542a2c9b029df95f512", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-142026-01-13 23:21:32.601 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:32.602 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:32.602 RedLemon[43837:295916] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-13 23:21:32.846 RedLemon[43837:296320] 📥 StreamService: Pre-downloading 4 (capped from 4) subtitles for direct stream...
+2026-01-13 23:21:32.846 RedLemon[43837:296320] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 4
+2026-01-13 23:21:32.846 RedLemon[43837:296322] 🔍 DEBUG: Processing subtitle URL: /subtitle/3514981-8437593.zip
+2026-01-13 23:21:32.846 RedLemon[43837:296322] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:21:32.846 RedLemon[43837:296320] 🔍 DEBUG: Processing subtitle URL: /subtitle/3509735-8432252.zip
+2026-01-13 23:21:32.846 RedLemon[43837:296076] 🔍 DEBUG: Processing subtitle URL: /subtitle/3509978-8432514.zip
+2026-01-13 23:21:32.846 RedLemon[43837:296320] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:21:32.846 RedLemon[43837:296076] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:21:32.846 RedLemon[43837:296007] 🔍 DEBUG: Processing subtitle URL: /subtitle/3514980-8437594.zip
+2026-01-13 23:21:32.846 RedLemon[43837:296007] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-13 23:21:32.895 RedLemon[43837:295916] ✅ Stream ready, starting playback...
+2026-01-13 23:21:33.002 RedLemon[43837:296322] 📝 [PLAYER] Resumed
+2026-01-13 23:21:33.062 RedLemon[43837:296321] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi9-4.download.real-debrid.com/d/FJWRJOBZZFOUC44/Roofman.2025.1080p.WEB-DL.x264.6CH.ENG%20YG.mkv"]
+T04:21:32.507846", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/FJWRJOBZZFOUC44/Roofman.2025.1080p.WEB-DL.x264.6CH.ENG%20YG.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-14T04:21:32.530Z","old_record":{"id": "DEDH"}},"ids":[59426851]},"topic":"realtime:watch-party:DEDH"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ StreamService: Resolved to: https://chi9-4.download.real-debrid.com/d/FJWRJOBZZFOUC44/Roofman.2025.1080p.WEB-DL.x264.6CH.ENG%20YG.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Roofman.2025.1080p.WEB-DL.x264.6CH.ENG.YG⭐
+👤 2 💾 2.73 GB ⚙️ ThePirateBay
+📊 Stream Size: 2.73 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+🔌 Setting up Realtime channel: watch-party:DEDH
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:DEDH, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_movie_tt4627382]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MTQ5ODEtODQzNzU5My56aXA= [request-id: 58E015FE-9500-419E-A859-7E7711F82862]
+2026-01-13 23:21:33.263 RedLemon[43837:296321] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-13 23:21:33.263 RedLemon[43837:296321] 📝 [PLAYER] Buffering Started
+2026-01-13 23:21:33.265 RedLemon[43837:295916] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIp-IyQw1fPY-TZh)
+2026-01-13 23:21:33.265 RedLemon[43837:295916] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIp-IyQw1fPY-TZh)
+2026-01-13 23:21:33.265 RedLemon[43837:295916] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIp-IyQw1fPY-TZh)
+📄 Subtitle request: L3N1YnRpdGxlLzM1MTQ5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3514981-8437593.zip
+📨 Received: {"ref":"15","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"7fb3c906-f100-11f0-b26c-ee9e47993347":{"metas":[{"phx_ref":"GIp-IyQw1fPY-TZh","phx_ref_prev":"GIp-IkSvRgPY-TZB","is_host":false,"joined_at":1768364492.993855,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"7fb3c906-f100-11f0-b26c-ee9e47993347":{"metas":[{"phx_ref":"GIp-IkSvRgPY-TZB","is_host":false,"joined_at":1768364489.217033,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:DEDH"}
+📡 SocialService: Updated status - online: Roofman
+⏰ AppState: Next schedule update set for Event End: 2026-01-14 05:51:21 +0000
+⏰ AppState: Scheduling update in 5388 seconds
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-IyjUqWU6AjaB","phx_ref_prev":"GIp-Ii7fbF46AtmD","is_premium":true,"last_seen":"2026-01-14T04:21:33.060Z","room_id":"DEDH","started_at":"2026-01-14T04:21:33.060Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}},"leaves":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-Ii7fbF46AtmD","phx_ref_prev":"GIp-IMBmdMY6AjUh","is_premium":true,"last_seen":"2026-01-14T04:21:28.872Z","room_id":"DEDH","started_at":"2026-01-14T04:21:28.872Z","status":"In Lobby: Roofman","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Download complete: 57990 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): Roofman.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264.srt
+📦 Extracting specific file: Roofman.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MDk3MzUtODQzMjI1Mi56aXA= [request-id: F63EFB8C-02B7-4A72-AAE3-E1D2FF2411B9]
+📄 Subtitle request: L3N1YnRpdGxlLzM1MDk3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3509735-8432252.zip
+✅ Download complete: 40138 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+⚠️ No strong compatibility match (Best: 0 for Roofman.2025.TS.EN-RGB.srt)
+⚠️ No specific match found, using first file: Roofman.2025.TS.EN-RGB.srt
+📦 Extracting specific file: Roofman.2025.TS.EN-RGB.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MDk5NzgtODQzMjUxNC56aXA= [request-id: AC79EA48-A4B3-430D-8869-588200F292F8]
+2026-01-13 23:21:34.356 RedLemon[43837:296280] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:34.356 RedLemon[43837:296280]    Payload keys: position, timestamp, senderId, isPlaying, type
+2026-01-13 23:21:34.357 RedLemon[43837:296280] ✅ Realtime: Decoded message type: playbackState, sender: DEDH
+2026-01-13 23:21:34.357 RedLemon[43837:296280] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 23:21:34.357 RedLemon[43837:296280] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:35.295 RedLemon[43837:296076] 📝 [PLAYER] File Loaded ["duration": "7559.594"]
+2026-01-13 23:21:35.546 RedLemon[43837:296280] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 23:21:35.547 RedLemon[43837:296280]    Payload keys: senderId, timestamp, type, position, isPlaying
+2026-01-13 23:21:35.547 RedLemon[43837:296280] ✅ Realtime: Message broadcast complete
+2026-01-13 23:21:35.663 RedLemon[43837:296280] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:35.663 RedLemon[43837:296280]    Payload keys: timestamp, senderId, type, isPlaying, position
+2026-01-13 23:21:35.663 RedLemon[43837:296280] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-13 23:21:35.663 RedLemon[43837:296280] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-13 23:21:35.664 RedLemon[43837:296280] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:36.445 RedLemon[43837:296280] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:36.445 RedLemon[43837:296280]    Payload keys: position, type, isPlaying, senderId, timestamp
+2026-01-13 23:21:36.446 RedLemon[43837:296280] ✅ Realtime: Decoded message type: playbackState, sender: DEDH
+2026-01-13 23:21:36.446 RedLemon[43837:296280] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 23:21:36.446 RedLemon[43837:296280] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:36.936 RedLemon[43837:296076] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:36.936 RedLemon[43837:296076]    Payload keys: timestamp, type, position, senderId, isPlaying
+2026-01-13 23:21:36.937 RedLemon[43837:296076] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-13 23:21:36.937 RedLemon[43837:296076] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-13 23:21:36.937 RedLemon[43837:296076] ✅ Realtime: syncCallback invoked successfully
+2026-01-13 23:21:36.962 RedLemon[43837:296280] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-13 23:21:38.433 RedLemon[43837:296076] 📨 Realtime: Received broadcast message
+2026-01-13 23:21:38.433 RedLemon[43837:296076]    Payload keys: isPlaying, type, senderId, position, timestamp
+2026-01-13 23:21:38.434 RedLemon[43837:296076] ✅ Realtime: Decoded message type: playbackState, sender: DEDH
+2026-01-13 23:21:38.434 RedLemon[43837:296076] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-13 23:21:38.434 RedLemon[43837:296076] ✅ Realtime: syncCallback invoked successfully
+📄 Subtitle request: L3N1YnRpdGxlLzM1MDk5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3509978-8432514.zip
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DEDH","timestamp":7.965999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+✅ Download complete: 46314 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+⚠️ No strong compatibility match (Best: 0 for RoofMan.2025.1080p.TELESYNC.x264-SyncUP.srt)
+⚠️ No specific match found, using first file: RoofMan.2025.1080p.TELESYNC.x264-SyncUP.srt
+📦 Extracting specific file: RoofMan.2025.1080p.TELESYNC.x264-SyncUP.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1768364495.296008,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-I9iuPUw6Ajah","phx_ref_prev":"GIp-IyjUqWU6AjaB","is_premium":true,"last_seen":"2026-01-14T04:21:36.016Z","room_id":"DEDH","started_at":"2026-01-14T04:21:33.060Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}},"leaves":{"62e68b24-f100-11f0-828d-ee9e47993347":{"metas":[{"phx_ref":"GIp-IyjUqWU6AjaB","phx_ref_prev":"GIp-Ii7fbF46AtmD","is_premium":true,"last_seen":"2026-01-14T04:21:33.060Z","room_id":"DEDH","started_at":"2026-01-14T04:21:33.060Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DEDH","timestamp":10.052,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":10.344,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768364496.788546,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DEDH","timestamp":11.802999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DEDH"}
+💓 Heartbeat sent
+📨 Received: {"ref":"17","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1527 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1527, 412 movies)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3655f93c-f100-11f0-b77f-ee9e47993347":{"metas":[{"phx_ref":"GIp-JLPpMlw6AjbB","phx_ref_prev":"GIp-IKJ8rAw6AjTh","is_premium":true,"last_seen":"2026-01-14T04:21:39.708Z","room_id":"DEDH","started_at":"2026-01-14T04:21:22.237Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}},"leaves":{"3655f93c-f100-11f0-b77f-ee9e47993347":{"metas":[{"phx_ref":"GIp-IKJ8rAw6AjTh","phx_ref_prev":"GIp-HtSSdJA6AjRB","is_premium":true,"last_seen":"2026-01-14T04:21:22.237Z","room_id":"DEDH","started_at":"2026-01-14T04:21:22.237Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4627382","watching_title":"Roofman","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}

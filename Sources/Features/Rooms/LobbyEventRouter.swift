@@ -295,12 +295,12 @@ class LobbyEventRouter: ObservableObject {
             NSLog("🛡️ Guest: Ignoring LOBBY_RETURN for system event")
             return
         }
-        
+
         NSLog("🎬 Guest: Received LOBBY_RETURN signal from Host")
-        
+
         // Add a system message
         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host returned to lobby"])
-        
+
         await MainActor.run {
             // RACE CONDITION FIX: Flag next connect() to wait for DB propagation
             viewModel.shouldDelayConnectAfterLobbyReturn = true
@@ -310,7 +310,7 @@ class LobbyEventRouter: ObservableObject {
             if viewModel.appState?.currentView == .player {
                 NSLog("🔄 Guest: Switching from Player to Lobby due to host return")
                 viewModel.appState?.currentView = .watchPartyLobby
-                
+
                 // Reset player state if needed
                 // viewModel.appState?.player.resetState() // If such method exists
             }
@@ -386,12 +386,18 @@ class LobbyEventRouter: ObservableObject {
         targetRoom.selectedStreamHash = roomState.streamHash
         targetRoom.selectedFileIdx = roomState.fileIdx
         targetRoom.selectedQuality = roomState.quality
-        targetRoom.unlockedStreamURL = roomState.unlockedStreamUrl
+
+        // FIX (v1.0.80): Do NOT copy host's unlockedStreamURL!
+        // Real-Debrid URLs are IP-locked to the user who unlocked them.
+        // If we copy the host's URL, the guest's playback will hit EOF immediately
+        // because RD rejects requests from non-owner IPs.
+        // The guest will resolve their own URL using streamHash in playMedia().
+        targetRoom.unlockedStreamURL = nil
 
         // Push update to AppState
         viewModel.appState?.player.currentWatchPartyRoom = targetRoom
 
-        NSLog("✅ Guest: Forced stream sync from Host (Hash: \(roomState.streamHash?.prefix(8) ?? "nil"))")
+        NSLog("✅ Guest: Synced stream info from Host (Hash: \(roomState.streamHash?.prefix(8) ?? "nil")) - URL cleared for fresh unlock")
 
         // Also ensure currentRoomId is set so PlayerVM knows we are in a room
         viewModel.appState?.player.currentRoomId = viewModel.room.id
@@ -517,10 +523,10 @@ class LobbyEventRouter: ObservableObject {
 
     private func handleLobbyPreparePlayback(_ syncMessage: SyncMessage) async {
         guard let viewModel = viewModel, !viewModel.isHost else { return }
-        
+
         // Ignore for events (Auto-start handles it)
         if viewModel.room.type == .event { return }
-        
+
         let chatText = syncMessage.chatText ?? ""
         NSLog("🎬 Guest: Received PREPARE signal: \(chatText)")
         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host is preparing playback..."])
@@ -543,59 +549,35 @@ class LobbyEventRouter: ObservableObject {
             NSLog("❌ Guest: Failed to fetch room state during prepare")
             return
         }
-        
+
         // 3. Sync Media/Metadata
         await viewModel.updateMediaItemFromRoomState(roomState)
-        
+
         guard let mediaItem = viewModel.room.mediaItem else { return }
-        
+
         // 4. Preload Stream
         // Priority: Payload Hash > DB Hash > Unlocked URL (Direct) > Best Match (Double Fallback)
         let effectiveHash = targetHash ?? roomState.streamHash
-        
-        // FIX (v1.0.77): When host's stream has no infoHash (e.g., cached DebridSearch links),
-        // use the unlocked_stream_url directly instead of resolving independently.
-        // This prevents host and guest from playing different videos (stream mismatch bug).
-        // Symptom: Guest plays old cached stream while host plays new resolved stream.
-        // Root Cause: DebridSearch streams don't have torrent hashes, so LOBBY_PREPARE_PLAYBACK
-        // sends an empty hash, causing guest to resolve independently and find a different stream.
-        if effectiveHash == nil, let hostUnlockedURL = roomState.unlockedStreamUrl, !hostUnlockedURL.isEmpty {
-            NSLog("⚡️ Guest: No stream hash available, using host's unlocked URL directly")
-            
-            // Sync the unlocked URL to the room so playMedia can use it
-            await MainActor.run {
-                viewModel.room.unlockedStreamURL = hostUnlockedURL
-                viewModel.room.selectedStreamHash = nil // Clear any stale hash
-                viewModel.room.selectedQuality = roomState.quality
-                
-                // Also update AppState's currentWatchPartyRoom if it exists
-                viewModel.appState?.player.currentWatchPartyRoom?.unlockedStreamURL = hostUnlockedURL
-                viewModel.appState?.player.currentWatchPartyRoom?.selectedStreamHash = nil
-                viewModel.appState?.player.currentWatchPartyRoom?.selectedQuality = roomState.quality
-            }
-            
-            // Skip resolution - the URL will be used directly in playMedia
-            // Report Ready immediately since we trust the host's URL
-            NSLog("✅ Guest: Using host's direct URL. Sending READY signal.")
-            let readyMsg = SyncMessage(
-                type: .chat,
-                timestamp: Date().timeIntervalSince1970,
-                isPlaying: nil,
-                senderId: viewModel.participantId,
-                chatText: "LOBBY_READY_FOR_PLAYBACK",
-                chatUsername: viewModel.appState?.currentUsername
-            )
-            try? await viewModel.realtimeManager?.sendSyncMessage(readyMsg)
-            return
+
+        // FIX (v1.0.80): Removed v1.0.77 code that used host's unlocked URL directly.
+        // Real-Debrid URLs are IP-locked to the user who unlocked them.
+        // Guests MUST unlock their own stream, even if no hash is available.
+        // If no hash is available and guest can't resolve, playback will fail gracefully.
+        //
+        // Previous v1.0.77 behavior caused immediate EOF because the guest's IP didn't match
+        // the IP that unlocked the URL (the host's IP).
+        if effectiveHash == nil {
+            NSLog("⚠️ Guest: No stream hash available. Guests cannot use host's URL (IP-locked). Will attempt fresh resolution.")
+            // Don't use host's URL - force fresh resolution which may find the same content
         }
-        
+
         do {
             // DEBUG: Check if appState is available
             guard let player = viewModel.appState?.player else {
                 NSLog("❌ Guest: CRITICAL - viewModel.appState?.player is nil! Cannot preload stream.")
                 return
             }
-            
+
             try await player.preloadStream(
                 mediaItem: mediaItem,
                 quality: .fullHD,
@@ -603,14 +585,14 @@ class LobbyEventRouter: ObservableObject {
                 season: roomState.season,
                 episode: roomState.episode
             )
-            
+
             // DEBUG: Log the URL that was preloaded
             if let preloadedURL = player.preResolvedStream?.url {
                 NSLog("✅ Guest: Stream preloaded with URL: %@", String(preloadedURL.prefix(80)))
             } else {
                 NSLog("⚠️ Guest: preResolvedStream or URL is nil after preload!")
             }
-            
+
             // 5. Report Ready
             NSLog("✅ Guest: Stream preloaded. Sending READY signal.")
             let readyMsg = SyncMessage(
@@ -622,7 +604,7 @@ class LobbyEventRouter: ObservableObject {
                 chatUsername: viewModel.appState?.currentUsername
             )
             try? await viewModel.realtimeManager?.sendSyncMessage(readyMsg)
-            
+
         } catch {
              NSLog("%@", "❌ Guest: Failed to preload stream: \(error)")
              viewModel.chatManager.addSystemMessage(.systemError, userName: "System", data: ["message": "Failed to prepare stream", "error": error.localizedDescription])

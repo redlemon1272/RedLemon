@@ -140,7 +140,7 @@
     // ❌ WRONG: Silent failure if appState is nil
     try await viewModel.appState?.player.preloadStream(...)
     NSLog("Stream preloaded!") // RUNS EVEN IF PRELOAD NEVER EXECUTED
-    
+
     // ✅ RIGHT: Explicit guard with early return
     guard let player = viewModel.appState?.player else {
         NSLog("CRITICAL: player is nil!")
@@ -150,6 +150,13 @@
     NSLog("Stream preloaded!") // Only runs if preload actually completed
     ```
     *   **Debug Pattern**: Add logging IMMEDIATELY after async calls to verify they ran: log the input AND output state. If the "success" log prints but the state is wrong, the async call was silently skipped.
+44. **Guest IP-Locked URLs**: *(Added v1.0.80)*
+    *   **Trigger**: Guest joins watch party, playback starts but hits EOF in 2-5 seconds despite duration being correct.
+    *   **Cause**: Real-Debrid download URLs are **IP-locked** to the user who unlocked them. If the guest receives and uses the host's `unlockedStreamURL` directly (via database sync), their IP doesn't match and RD terminates the connection.
+    *   **Symptom**: Guest's log shows `📝 [PLAYER] File Loaded ["duration": "7559.594"]` (correct duration), then `📝 [PLAYER] Playback Finished (EOF)` within seconds.
+    *   **Rule**: Guests must NEVER use `room.unlockedStreamURL` from the host. The guest must unlock their own stream using the `streamHash`. In `LobbyEventRouter.handleGuestStartLogic()`, explicitly set `targetRoom.unlockedStreamURL = nil` to force fresh guest unlock.
+    *   **Related Code**: `LobbyEventRouter.swift` - `handleGuestStartLogic()` and `handleLobbyPreparePlayback()`.
+    *   **Fix Applied**: v1.0.80 removed the v1.0.77 shortcut that used host's URL directly and now forces guest resolution via hash.
 
 
 ## 🪦 Resolved Landmines (Archived)

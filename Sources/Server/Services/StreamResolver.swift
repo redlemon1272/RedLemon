@@ -206,7 +206,7 @@ actor StreamResolver {
         if !blockedHashes.isEmpty {
             let beforeBlockFilter = filteredStreams.count
             filteredStreams = filteredStreams.filter { stream in
-                guard let hash = stream.infoHash else { return true }
+                guard let hash = stream.infoHash?.lowercased() else { return true }
                 if blockedHashes.contains(hash) {
                     print("   🛡️ RESOLVER BLOCKING blacklisted stream: \(stream.title) (Hash: \(hash))")
                     return false

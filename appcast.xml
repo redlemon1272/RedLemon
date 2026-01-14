@@ -6,6 +6,30 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.80 -->
+        <item>
+            <title>Version 1.0.80</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>docs: update AI_BIBLE with latest landmines and patterns</li>
+<li>chore: update view models for lobby and player features</li>
+<li>chore: update lobby feature components</li>
+<li>chore: update StreamService</li>
+<li>fix: restore vertical scrolling on Browse page for macOS 13+</li>
+<li>fix: move onAppear inside ScrollViewReader scope</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 01:30:38 -0500</pubDate>
+            <sparkle:version>80</sparkle:version>
+            <sparkle:shortVersionString>1.0.80</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.80.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="TCjzeC6xqQKNXhSCNUmMk/Zc6tM+SmbdRiFbQGoe0RmjMliFmvdRq3fm2JVNz14uVvtCtnxbGUu3ZLiXobH7AQ==" length="72955089"
+            />
+        </item>
         <!-- v1.0.79 -->
         <item>
             <title>Version 1.0.79</title>

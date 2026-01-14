@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 13, 2026
+> **Last Updated:** January 14, 2026
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -50,6 +50,7 @@
 | **Anime: No Streams Found** | Kitsu ID not resolved to IMDB | #40 |
 | **Play-Buffer-Play Flash** | Subtitle track changed during playback | #41 |
 | **Host Stuck Buffering (Audio Plays)** | Recovery logic excludes Watch Party Host | #42 |
+| **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call | #43 |
 
 ## 🚨 Critical Landmines
 
@@ -130,6 +131,25 @@
     *   **Trigger**: Host gets stuck on "Buffering..." with audio playing after returning to lobby and restarting playback.
     *   **Cause**: Hosts are "authoritative" and filter out their own sync messages (Line ~2710 in `MPVPlayerViewModel`). Recovery logic that uses `!isInWatchParty` excludes hosts from failsafe state clearing.
     *   **Rule**: Any recovery/failsafe logic in `MPVPlayerViewModel` that clears `isLoading`, `isBuffering`, or `isRefiningInitialSeek` MUST use `(!isInWatchParty || isWatchPartyHost)` to include the host. Guests are excluded because they wait for sync messages to reveal video (prevents frame 0 flash).
+43. **Silent Async Failure (Optional Chaining on Async Functions)**: *(Added v1.0.80)*
+    *   **Trigger**: Guest joins watch party, playback starts but immediately hits EOF or plays the wrong stream (host's URL instead of guest's).
+    *   **Cause**: Swift optional chaining on async throwing functions (e.g., `try await obj?.asyncFunc()`) **silently returns nil** if `obj` is nil—**no error is thrown**. The `try` is satisfied because "nothing happened" is not an error. Subsequent code runs as if the async function completed successfully.
+    *   **Symptom**: `preloadStream()` never actually runs, so `preResolvedStream` is nil. `playMedia()` then falls through to a different code path that resolves the wrong stream or uses the host's cached URL.
+    *   **Rule**: NEVER use optional chaining on critical async functions. Always use explicit guards:
+    ```swift
+    // ❌ WRONG: Silent failure if appState is nil
+    try await viewModel.appState?.player.preloadStream(...)
+    NSLog("Stream preloaded!") // RUNS EVEN IF PRELOAD NEVER EXECUTED
+    
+    // ✅ RIGHT: Explicit guard with early return
+    guard let player = viewModel.appState?.player else {
+        NSLog("CRITICAL: player is nil!")
+        return
+    }
+    try await player.preloadStream(...)
+    NSLog("Stream preloaded!") // Only runs if preload actually completed
+    ```
+    *   **Debug Pattern**: Add logging IMMEDIATELY after async calls to verify they ran: log the input AND output state. If the "success" log prints but the state is wrong, the async call was silently skipped.
 
 
 ## 🪦 Resolved Landmines (Archived)

@@ -204,6 +204,12 @@ class PlayerViewModel: ObservableObject {
                 NSLog("🚀 PlayerVM: Using DIRECT UNLOCK path (Guest Optimization)")
                 NSLog("   Hash: %@...", String(directHash.prefix(12)))
 
+                // CRITICAL: Clear RD cache BEFORE unlock to prevent IP-locked URL reuse
+                // This fixes the race condition where LobbyEventRouter's async cache clear
+                // hasn't completed yet when we call unlockStream.
+                await RealDebridClient.shared.clearCache(forHash: directHash)
+                NSLog("🗑️ PlayerVM: RD cache cleared for direct unlock")
+
                 // Create synthetic stream with just the hash for unlocking
                 let syntheticStream = Stream(
                     title: "Shared Stream (Direct)",

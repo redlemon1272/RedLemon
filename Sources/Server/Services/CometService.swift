@@ -144,7 +144,13 @@ class CometService: ProviderService {
             // Validate URL is a playback URL, not an error/redirect page
             // Comet returns Reddit URLs when streams aren't available
             if let urlStr = url {
-                let invalidUrls = ["reddit.com", "github.com", "stremio.com/addon", "elfhosted.com/docs"]
+                let invalidUrls = [
+                    "reddit.com",
+                    "github.com",
+                    "stremio.com/addon",
+                    "elfhosted.com/docs",
+                    "elfhosted_addons_disabling_nondebrid_modes" // Fix: Filter out Comet error/disabled notifications
+                ]
                 for invalid in invalidUrls {
                     if urlStr.contains(invalid) {
                         print("⚠️ Comet: Skipping invalid redirect URL: \(urlStr.prefix(60))...")
@@ -153,7 +159,14 @@ class CometService: ProviderService {
                 }
             }
 
-            let title = stream.name ?? ""
+            var title = stream.name ?? ""
+            
+            // Fix: Mark debrid streams with lightning bolt to bypass strict StreamResolver filters
+            // (StreamResolver trusts "⚡" streams for Season/Episode matching)
+            if url != nil && !title.contains("⚡") {
+                title += " ⚡"
+            }
+            
             let quality = extractQuality(from: title) ?? extractQuality(from: stream.description ?? "")
             let seeders = extractSeeders(from: stream.description ?? "")
             let size = extractSize(from: stream.description ?? "")

@@ -52,6 +52,7 @@
 | **Host Stuck Buffering (Audio Plays)** | Recovery logic excludes Watch Party Host | #42 |
 | **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call | #43 |
 | **Server Fail: Torrent not cached** | Heuristic ignored provider fileIdx (Season Pack) | #45 |
+| **Player Start -> Immediate Fail** | Fake 'Direct' URL (Comet Error Stream) | #46 |
 
 ## 🚨 Critical Landmines
 
@@ -166,6 +167,12 @@
     *   **Trigger**: User gets "Server Fail: Torrent not cached" error for a Season Pack that the provider (Torrentio) claims is cached.
     *   **Cause**: The app ignores the provider's `fileIdx` and attempts to "guess" the correct file via string matching (e.g., matching "S01E05"). The heuristic accidentally targets an uncached file (e.g., "S01E05 Repack.mkv" or a sample) instead of the main file.
     *   **Rule**: If the Provider supplies a `fileIdx`, **TRUST IT**. Map it directly to the Debrid service's File ID. Only use filename heuristics as a fallback when no index is provided.
+
+46. **The "Direct URL" Trojan Horse (Comet Error Streams)**: *(Added v1.0.83)*
+    *   **Trigger**: A specific Provider (e.g., Comet) returns a stream with a direct HTTP URL that is actually an error/placeholder page (e.g. `.../elfhosted_addons_disabling_nondebrid_modes`) instead of a video file.
+    *   **Cause**: `StreamResolver.sort` logic prioritizes Direct URLs (instant playback) over Torrents (need resolving). A "fake" stream appearing to be a Direct URL bypasses all other valid torrents and gets sent to the player, causing immediate failure.
+    *   **Symptom**: Player loads quickly, immediately pauses/ends with Error Code 4 ("Failed to recognize file format"). Logs show a URL that looks like an error message path.
+    *   **Rule**: All `ProviderServices` MUST validate direct URLs before returning them. Explicitly blacklist known error patterns (e.g., `elfhosted_...`, `reddit.com`) in the Service itself to prevent them from reaching the Resolver.
 
 
 ## 🪦 Resolved Landmines (Archived)

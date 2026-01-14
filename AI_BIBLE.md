@@ -150,13 +150,17 @@
     NSLog("Stream preloaded!") // Only runs if preload actually completed
     ```
     *   **Debug Pattern**: Add logging IMMEDIATELY after async calls to verify they ran: log the input AND output state. If the "success" log prints but the state is wrong, the async call was silently skipped.
-44. **Guest IP-Locked URLs**: *(Added v1.0.80)*
+44. **Guest IP-Locked URLs + RD Cache**: *(Added v1.0.80, Fixed v1.0.82)*
     *   **Trigger**: Guest joins watch party, playback starts but hits EOF in 2-5 seconds despite duration being correct.
-    *   **Cause**: Real-Debrid download URLs are **IP-locked** to the user who unlocked them. If the guest receives and uses the host's `unlockedStreamURL` directly (via database sync), their IP doesn't match and RD terminates the connection.
-    *   **Symptom**: Guest's log shows `📝 [PLAYER] File Loaded ["duration": "7559.594"]` (correct duration), then `📝 [PLAYER] Playback Finished (EOF)` within seconds.
-    *   **Rule**: Guests must NEVER use `room.unlockedStreamURL` from the host. The guest must unlock their own stream using the `streamHash`. In `LobbyEventRouter.handleGuestStartLogic()`, explicitly set `targetRoom.unlockedStreamURL = nil` to force fresh guest unlock.
-    *   **Related Code**: `LobbyEventRouter.swift` - `handleGuestStartLogic()` and `handleLobbyPreparePlayback()`.
-    *   **Fix Applied**: v1.0.80 removed the v1.0.77 shortcut that used host's URL directly and now forces guest resolution via hash.
+    *   **Cause (Layer 1)**: Real-Debrid download URLs are **IP-locked** to the user who unlocked them.
+    *   **Cause (Layer 2)**: `RealDebridClient` has a **60-minute in-memory cache** (`cache[hash:fileIdx:season:episode]`). When the guest calls `unlock()` in `playMedia()`, it returns the **cached host URL** instead of generating a fresh one.
+    *   **Symptom**: Guest's log shows `📝 [PLAYER] File Loaded ["duration": "7559.594"]` (correct duration), then `📝 [PLAYER] Playback Finished (EOF)` within seconds. Also: `✅ RD cache hit: <hash>` appearing when guest unlocks.
+    *   **Rule**: In `LobbyEventRouter.handleGuestStartLogic()`:
+        1. Set `targetRoom.unlockedStreamURL = nil` (force fresh unlock)
+        2. Set `viewModel.appState?.player.preResolvedStream = nil` (bypass preloaded URL)
+        3. Call `await RealDebridClient.shared.clearCache(forHash: hash)` (evict cached host URL)
+    *   **Related Code**: `LobbyEventRouter.swift`, `RealDebridClient.swift`
+    *   **Fix Applied**: v1.0.82 added `clearCache(forHash:)` to `RealDebridClient` and calls it from `handleGuestStartLogic()` to evict cached host URLs.
 
 
 ## 🪦 Resolved Landmines (Archived)

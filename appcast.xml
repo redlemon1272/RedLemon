@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.88 -->
+        <item>
+            <title>Version 1.0.88</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Guest immediate playback for Watch Parties (Direct Unlock optimization) - saves 8-10s</li><li>Fix: Prevent IP-Lock errors by forcing fresh Real-Debrid links for guests</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 17:53:19 -0500</pubDate>
+            <sparkle:version>88</sparkle:version>
+            <sparkle:shortVersionString>1.0.88</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.88.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="d1vhxYe8iWTq8cfvoEEvmmzxxud7nZZd9NnMNY25lD1qLVJixHcQDGn9ZtScTFD3Ln6S2Z/gVxEwkY/ziQrXAg==" length="72429260"
+            />
+        </item>
         <!-- v1.0.87 -->
         <item>
             <title>Version 1.0.87</title>

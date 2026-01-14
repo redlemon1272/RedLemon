@@ -64,6 +64,10 @@ private struct ScrollEventForwarderView<Content: View>: NSViewRepresentable {
     }
 }
 
+// File-level throttle for scroll debug logging (avoids generic type static property issue)
+@available(macOS 15, *)
+private var scrollDebugLogThrottleDate: Date = .distantPast
+
 /// Custom container view that intercepts scroll events and forwards vertical scrolls
 /// to the parent scroll view while allowing horizontal scrolls to pass through normally.
 @available(macOS 15, *)
@@ -72,6 +76,7 @@ private class ScrollForwardingContainerView<Content: View>: NSView {
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
+        NSLog("%@", "🔧 [SCROLL-DEBUG] ScrollForwardingContainerView initialized")
     }
 
     required init?(coder: NSCoder) {
@@ -82,31 +87,61 @@ private class ScrollForwardingContainerView<Content: View>: NSView {
     private func findParentScrollView() -> NSScrollView? {
         var currentView: NSView? = self.superview
         var foundFirst = false
+        var depth = 0
 
         while let view = currentView {
+            depth += 1
             if let scrollView = view as? NSScrollView {
                 if foundFirst {
                     // This is the outer (parent) scroll view
+                    NSLog("%@", "🔧 [SCROLL-DEBUG] Found PARENT scroll view at depth \(depth): \(type(of: scrollView))")
                     return scrollView
                 } else {
                     // This is the inner horizontal scroll view, skip it
+                    NSLog("%@", "🔧 [SCROLL-DEBUG] Found INNER scroll view at depth \(depth): \(type(of: scrollView)) - skipping")
                     foundFirst = true
                 }
             }
             currentView = view.superview
         }
+        NSLog("%@", "🔧 [SCROLL-DEBUG] ⚠️ NO parent scroll view found after \(depth) levels. foundFirst=\(foundFirst)")
         return nil
     }
 
+    /// Debug: Print view hierarchy
+    private func debugPrintHierarchy() {
+        var hierarchy: [String] = []
+        var currentView: NSView? = self
+        while let view = currentView {
+            let name = String(describing: type(of: view))
+            let isScroll = view is NSScrollView ? " [NSScrollView]" : ""
+            hierarchy.append("\(name)\(isScroll)")
+            currentView = view.superview
+        }
+        NSLog("%@", "🔧 [SCROLL-DEBUG] View hierarchy (self → root):\n  \(hierarchy.joined(separator: "\n  → "))")
+    }
+
     override func scrollWheel(with event: NSEvent) {
-        // Check if this is primarily a vertical scroll
-        let isVerticalScroll = abs(event.scrollingDeltaY) > abs(event.scrollingDeltaX)
+        let deltaY = event.scrollingDeltaY
+        let deltaX = event.scrollingDeltaX
+        let isVerticalScroll = abs(deltaY) > abs(deltaX)
+
+        // Throttle logging to avoid spam (max once per second)
+        let now = Date()
+        if now.timeIntervalSince(scrollDebugLogThrottleDate) > 1.0 {
+            scrollDebugLogThrottleDate = now
+            NSLog("%@", "🔧 [SCROLL-DEBUG] scrollWheel called: deltaY=\(String(format: "%.2f", deltaY)) deltaX=\(String(format: "%.2f", deltaX)) isVertical=\(isVerticalScroll)")
+            debugPrintHierarchy()
+        }
 
         if isVerticalScroll {
             // Forward vertical scroll events to the parent scroll view
             if let parentScrollView = findParentScrollView() {
+                NSLog("%@", "🔧 [SCROLL-DEBUG] ✅ Forwarding to parent scroll view")
                 parentScrollView.scrollWheel(with: event)
                 return
+            } else {
+                NSLog("%@", "🔧 [SCROLL-DEBUG] ❌ No parent found, calling super")
             }
         }
 
@@ -114,3 +149,4 @@ private class ScrollForwardingContainerView<Content: View>: NSView {
         super.scrollWheel(with: event)
     }
 }
+

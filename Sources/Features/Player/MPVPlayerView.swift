@@ -1065,7 +1065,7 @@ struct MPVPlayerView: View {
                          season: season ?? -1,      // Pass for episode-specific decay
                          episode: episode ?? -1,   // Pass for episode-specific decay
                          quality: streamQuality,
-                         streamHash: streamHash ?? "",
+                         streamHash: viewModel.currentStreamHash ?? streamHash ?? "",
                          movieTitle: streamTitle, // Pass title for admin visibility
                          filename: URL(string: viewModel.videoURL)?.lastPathComponent,
                          provider: viewModel.streamTitle, // usually holds release name

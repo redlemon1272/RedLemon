@@ -29,7 +29,7 @@ actor StreamResolver {
         triggerSource: String? = nil
     ) async throws -> QualityBucketsResponse {
         NSLog("⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
-        
+
         // MARK: - Kitsu → IMDB Resolution
         // Most stream providers (Torrentio, Zilean, DebridSearch) require IMDB IDs.
         // If we receive a Kitsu ID, try to resolve it to an IMDB ID first.
@@ -46,16 +46,18 @@ actor StreamResolver {
         } else {
             effectiveId = imdbId
         }
-        
+
         let userId = await KeychainManager.shared.get(service: "user_id")
         await SessionRecorder.shared.startNewSession(imdbId: effectiveId, userId: userId, triggerSource: triggerSource)
         await SessionRecorder.shared.log(category: .resolver, message: "Started Resolution", metadata: ["type": type, "season": "\(season ?? 0)", "episode": "\(episode ?? 0)"])
-        
+
         // Fetch Blacklisted Streams (Parallel)
         // We fetch this fresh every time to ensure blocks are immediate
+        // FIX: Landmine #37 - Hash case sensitivity
+        // Provider hashes are lowercased, so we must lowercase blocked hashes for comparison
         var blockedHashes: Set<String> = []
         if let blockedList = try? await SupabaseClient.shared.getBlockedStreams() {
-            blockedHashes = Set(blockedList.map { $0.streamHash })
+            blockedHashes = Set(blockedList.map { $0.streamHash.lowercased() })
             print("🛡️ StreamResolver: Loaded \(blockedHashes.count) blocked streams from blacklist")
         }
 
@@ -127,7 +129,7 @@ actor StreamResolver {
                         try await Task.sleep(nanoseconds: 3_000_000_000) // 3s Timeout
                         throw URLError(.timedOut)
                     }
-                    
+
                     guard let result = try await group.next() else {
                         return verifiedStreamsToAttach
                     }
@@ -162,7 +164,7 @@ actor StreamResolver {
             season: season,
             episode: episode
         )
-        
+
         // OPTIMIZATION: If preferredHash is set (Sync Mode), filter immediately to avoid processing/subtitling 100+ streams
         var rawStreams = streams
         if let targetHash = preferredHash, !targetHash.isEmpty {
@@ -176,7 +178,7 @@ actor StreamResolver {
         }
 
         NSLog("📦 StreamResolver: Received \(rawStreams.count) raw streams, bucketing...")
-        
+
         // LOGGING: Provider Breakdown
         let providerCounts = rawStreams.reduce(into: [String: Int]()) { counts, stream in
             counts[stream.provider, default: 0] += 1
@@ -184,7 +186,7 @@ actor StreamResolver {
         let providerStats = providerCounts.map { "\($0.key):\($0.value)" }.joined(separator: ", ")
         print("📊 StreamResolver: Provider Stats: [\(providerStats)]")
         await SessionRecorder.shared.log(category: .resolver, message: "Providers Fetched", metadata: providerCounts.mapValues { String($0) })
-        
+
         // For movies only, pull canonical title to prioritize correct matches
         let targetTitle: String?
         if type == "movie" {
@@ -237,7 +239,7 @@ actor StreamResolver {
                     guard !yearsInTitle.isEmpty else { return true }
 
                     let hasAllowedYear = yearsInTitle.contains { allowedYears.contains($0) }
-                    
+
                     // FIX: If the "wrong year" is actually part of the show's title (e.g. "1923", "2012"), allow it.
                     if !hasAllowedYear {
                          // Check if any of the "wrong" years are present in the target title
@@ -250,7 +252,7 @@ actor StreamResolver {
                                  return true
                              }
                          }
-                        
+
                         print("   🚫 RESOLVER BLOCKING wrong-year series stream: \(stream.title) (years: \(yearsInTitle.joined(separator: ",")))")
                     } else {
                         print("   ✅ RESOLVER KEEPING correct-year series stream: \(stream.title)")
@@ -260,7 +262,7 @@ actor StreamResolver {
                 let afterCount = filteredStreams.count
                 if type == "movie" {
                     print("   📅 Year filter (\(year)): \(beforeCount) → \(afterCount) streams")
-                    
+
                     // FIX: If year filter removed EVERYTHING or ALMOST EVERYTHING, it was likely too strict
                     // (e.g. valid streams missing year in title).
                     // Restore streams and let title matching handle it.
@@ -302,37 +304,37 @@ actor StreamResolver {
         // CRITICAL: Filter Samples, Trailers, and Extras
         let beforeSampleFilter = filteredStreams.count
         let sampleTerms = ["sample", "trailer", "featurette", "teaser", "bonus", "making of", "deleted scenes"]
-        
+
         let targetLower = targetTitle?.lowercased() ?? ""
-        
+
         filteredStreams = filteredStreams.filter { stream in
             let titleLower = getExtendedSearchText(for: stream)
-            
+
             // Check for terms with delimiters to avoid false positives (e.g. "teasers" -> "teaser" is okay, but "sample" in "example" is not)
-            // Actually "example" doesn't contain "sample". 
+            // Actually "example" doesn't contain "sample".
             // But strict delimiters are safer.
             // Terms to check strictly: "sample", "trailer", "teaser", "bonus"
             // Terms to check loosely: "featurette", "making of", "deleted scenes"
-            
+
             let isSample = sampleTerms.contains { term in
                 // Optimization: Ignore if term is in the official title (e.g. "Sample People", "Trailer Park Boys")
                 if !targetLower.isEmpty && targetLower.contains(term) {
                     return false
                 }
-                
+
                 if term == "featurette" || term == "making of" || term == "deleted scenes" {
                     return titleLower.contains(term)
                 }
                 // For short words, use delimiters
-                return titleLower.contains(" \(term) ") || 
-                       titleLower.contains(".\(term).") || 
-                       titleLower.contains("-\(term)-") || 
+                return titleLower.contains(" \(term) ") ||
+                       titleLower.contains(".\(term).") ||
+                       titleLower.contains("-\(term)-") ||
                        titleLower.hasSuffix("-\(term)") ||
                        titleLower.hasSuffix(".\(term)") ||
                        titleLower.hasSuffix(" \(term)") ||
                        titleLower == term
             }
-            
+
             if isSample {
                 print("   🚫 RESOLVER BLOCKING Sample/Trailer: \(stream.title)")
                 return false
@@ -353,12 +355,12 @@ actor StreamResolver {
                 if !targetLower.isEmpty && targetLower.contains(group) {
                     return false
                 }
-                
+
                 // Use strict delimiters for "le production" to prevent "Simple Production" matches
                 if group == "le production" || group == "le-production" {
                      return titleLower.contains(" le production ") || titleLower.contains(".le.production.") || titleLower.contains("-le-production-")
                 }
-                
+
                 return titleLower.contains(group)
             }
             if isBadGroup {
@@ -471,7 +473,7 @@ actor StreamResolver {
                 String(format: "%dx%02d", season!, episode!),     // 1x01
                 String(format: "season %d episode %d", season!, episode!) // season 1 episode 1
             ]
-            
+
             // FIX: Special handling for "Pilot" / "Unaired Pilot" often labeled as 1x00
             // If we are looking for Season 0, Episode 1 (S00E01), allow searching for 1x00 (S01E00) patterns
             if season == 0 && episode == 1 {
@@ -526,7 +528,7 @@ actor StreamResolver {
                     try await Task.sleep(nanoseconds: 3_000_000_000) // 3s Timeout
                     throw URLError(.timedOut)
                 }
-                
+
                 guard let result = try await group.next() else {
                     return filteredStreams
                 }
@@ -664,18 +666,18 @@ actor StreamResolver {
                         )
                      }
 
-                     
+
                      var newStream = stream
                      newStream.subtitles = Array(mappedSubs)
                      return newStream
                  }
                  return stream
              }
-             
+
              // Log summary instead of per-stream spam
              let streamsWithSubs = attachedStreams.filter { ($0.subtitles?.count ?? 0) > 0 }
              print("✅ StreamResolver: Processed subtitles for \(streams.count) streams (Attached to \(streamsWithSubs.count))")
-             
+
              return attachedStreams
          } catch {
              print("❌ StreamResolver: Subtitle error: \(error)")
@@ -776,7 +778,7 @@ actor StreamResolver {
         // FIX: Use stricter matching for bad patterns to avoid frequent false positives
         // REMOVED: Hard filtering of 'bad patterns' (CAM, TS, etc.)
         // We now allow these as last resorts but penalize them heavily in sorting logic below.
-        
+
         var filtered = streams.filter { stream in
              // Check EXCLUDED hashes (Smart Retry)
              if let hash = stream.infoHash, excludedHashes.contains(hash) {
@@ -878,7 +880,7 @@ actor StreamResolver {
                         score -= 10
                     }
                 }
-                
+
                 // 6. CAM / TS Penalty (Last Resort)
                 // We want these allowed but ALWAYS at the bottom
                 // Use strict regex for CAM/TS to avoid false positives
@@ -890,7 +892,7 @@ actor StreamResolver {
                      let camRegex = try? NSRegularExpression(pattern: "\\bcam\\b")
                      let tsRegex = try? NSRegularExpression(pattern: "\\bts\\b|\\.ts$")
                      let range = NSRange(location: 0, length: title.utf16.count)
-                     
+
                      if camRegex?.firstMatch(in: title, options: [], range: range) != nil {
                          score -= 5000
                      } else if tsRegex?.firstMatch(in: title, options: [], range: range) != nil {
@@ -904,7 +906,7 @@ actor StreamResolver {
                 let tenBitTerms = ["10bit", "10-bit", "10 bit", "hi10p"]
                 if tenBitTerms.contains(where: { title.contains($0) }) {
                     score -= 2000 // Significant penalty (below normal streams, but above CAM)
-                } 
+                }
 
 
                 return score
@@ -929,7 +931,7 @@ actor StreamResolver {
             let title = stream.title.lowercased()
             return adGroups.contains(where: { title.contains($0) })
         }.count
-        
+
         if penalizedCount > 0 {
              print("   📉 Penalized \(penalizedCount) Ad-Supported Releases (YTS/MX)")
         }
@@ -982,7 +984,7 @@ actor StreamResolver {
 
     private func getExtendedSearchText(for stream: Stream) -> String {
         var text = stream.title
-        
+
         if let filename = stream.behaviorHints?.filename {
             text += " " + filename
         } else if let urlStr = stream.url, !urlStr.lowercased().hasPrefix("magnet:") {
@@ -993,7 +995,7 @@ actor StreamResolver {
                 text += " " + urlFilename
              }
         }
-        
+
         return text.lowercased()
     }
 
@@ -1003,12 +1005,12 @@ actor StreamResolver {
         // 0. Explicit Whitelist for known Multi-Audio groups
         // 'Alusia' releases always include original audio + local dub
         if lower.contains("alusia") { return true }
-        
+
         // 0.1. Allow CAM/Screener streams (User request: last resort fallback, even if dubbed/foreign)
         let camKeywords = ["camrip", "cam-rip", "cam rip", "hdcam", "hd-cam", "screener", "dvdscr", "telesync", "hdtc"]
         // Check strict "cam" separately to avoid false positives
         let isSimpleCam = lower.contains(".cam.") || lower.contains(" cam ") || lower.contains("-cam-") || lower.hasSuffix(".cam")
-        
+
         if isSimpleCam || camKeywords.contains(where: { lower.contains($0) }) {
             // It's a CAM! Allow it regardless of language.
             return true
@@ -1022,16 +1024,16 @@ actor StreamResolver {
         if hasEnglish { return true }
 
         // 2. Explicit foreign language indicators (primary audio is NOT English)
-        
+
         let targetLower = targetTitle?.lowercased() ?? ""
-        
+
         let foreignKeywords = [
              "french", "german", "spanish", "latino", "castellano", "italian", "portuguese",
              "dublado", "doblado", "doblada", "doppiato", "doublé", "dablyazh", "russian",
              "japanese", "korean", "chinese", "国粤", "中文字幕", "韓文", "polish", "lektor", "polski",
              "swha"
         ]
-        
+
         // Special case for Polish flag patterns
         let polishFlags = [" pl ", "-pl-", ".pl."]
 
@@ -1056,7 +1058,7 @@ actor StreamResolver {
         if isRussian && !isMulti {
             return false
         }
-        
+
         if isForeign { return false }
 
         // 3. French-specific audio indicators (VF = Version Française)
@@ -1106,24 +1108,24 @@ actor StreamResolver {
     }
 
     // MARK: - Title Matching Helpers
-    
+
     private func calculateTitleMatchScore(streamTitle: String, targetTitle: String) -> Int {
         let sTitle = cleanTitleForMatching(streamTitle)
         let tTitle = cleanTitleForMatching(targetTitle)
-        
+
         // 1. Exact Match (Highest honors)
         // e.g. "Contact" == "Contact"
         if sTitle == tTitle {
             return 1000
         }
-        
+
         // 2. Exact start (Very good)
         // e.g. "Contact 1997..." starts with "Contact"
         // We look for "Target + Space" or just "Target" to avoid partial word matches like "Contacting"
         if sTitle.hasPrefix(tTitle + " ") || sTitle == tTitle {
             return 500
         }
-        
+
         // 3. Containment with delimiters (Good)
         // e.g. "The Contact" contains " Contact "
         if sTitle.contains(" " + tTitle + " ") {
@@ -1132,11 +1134,11 @@ actor StreamResolver {
             // We penalize based on extra length to favor the most concise match mechanism
             return 100
         }
-        
+
         // 4. Fuzzy / Partial (Neutral)
         return 0
     }
-    
+
     private func cleanTitleForMatching(_ text: String) -> String {
         return text.lowercased()
             // Replace dots/underscores with spaces

@@ -99,7 +99,7 @@ struct BrowseView: View {
             } else {
                 ScrollViewReader { proxy in
                     ScrollView(.vertical, showsIndicators: true) {
-                        LazyVStack(alignment: .leading, spacing: 24) {
+                        VStack(alignment: .leading, spacing: 24) {
                             // Continue Watching section
                             continueWatchingView
                                 .id("continue-watching")

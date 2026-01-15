@@ -15,8 +15,36 @@ actor SupabaseRealtimeClient {
 
     // MARK: - Message Handling
     private var messageHandlers: [String: (String, [String: Any]) -> Void] = [:]
-    private var presenceHandlers: [(PresenceAction, String, [String: Any]?) -> Void] = []
-    private var connectionHandlers: [(Bool) -> Void] = []
+    private var presenceHandlers: [UUID: (PresenceAction, String, [String: Any]?) -> Void] = [:]
+    private var connectionHandlers: [UUID: (Bool) -> Void] = [:]
+
+    // MARK: - Event Handlers
+
+    func onBroadcast(event: String, handler: @escaping (String, [String: Any]) -> Void) {
+        messageHandlers[event] = handler
+    }
+
+    @discardableResult
+    func onPresence(handler: @escaping (PresenceAction, String, [String: Any]?) -> Void) -> UUID {
+        let id = UUID()
+        presenceHandlers[id] = handler
+        return id
+    }
+
+    func removePresenceHandler(id: UUID) {
+        presenceHandlers.removeValue(forKey: id)
+    }
+
+    @discardableResult
+    func onConnectionChange(handler: @escaping (Bool) -> Void) -> UUID {
+        let id = UUID()
+        connectionHandlers[id] = handler
+        return id
+    }
+
+    func removeConnectionHandler(id: UUID) {
+        connectionHandlers.removeValue(forKey: id)
+    }
 
     // MARK: - Channel State
     private var channelName: String?
@@ -80,7 +108,7 @@ actor SupabaseRealtimeClient {
         print("✅ Connected to Supabase Realtime")
 
         // Notify connection handlers
-        for handler in connectionHandlers {
+        for handler in connectionHandlers.values {
             handler(true)
         }
 
@@ -113,7 +141,7 @@ actor SupabaseRealtimeClient {
         self.isConnected = false
 
         // Notify connection handlers
-        for handler in connectionHandlers {
+        for handler in connectionHandlers.values {
             handler(false)
         }
 
@@ -247,17 +275,6 @@ actor SupabaseRealtimeClient {
 
     // MARK: - Event Handlers
 
-    func onBroadcast(event: String, handler: @escaping (String, [String: Any]) -> Void) {
-        messageHandlers[event] = handler
-    }
-
-    func onPresence(handler: @escaping (PresenceAction, String, [String: Any]?) -> Void) {
-        presenceHandlers.append(handler)
-    }
-
-    func onConnectionChange(handler: @escaping (Bool) -> Void) {
-        connectionHandlers.append(handler)
-    }
 
     // MARK: - Private Methods
 
@@ -373,7 +390,7 @@ actor SupabaseRealtimeClient {
                 }
 
                 // Notify postgres handlers with standardized payload
-                for handler in postgresHandlers {
+                for handler in postgresHandlers.values {
                     handler(mappedPayload)
                 }
             }
@@ -392,10 +409,17 @@ actor SupabaseRealtimeClient {
         }
     }
 
-    private var postgresHandlers: [([String: Any]) -> Void] = []
+    private var postgresHandlers: [UUID: ([String: Any]) -> Void] = [:]
 
-    func onPostgresChange(handler: @escaping ([String: Any]) -> Void) {
-        postgresHandlers.append(handler)
+    @discardableResult
+    func onPostgresChange(handler: @escaping ([String: Any]) -> Void) -> UUID {
+        let id = UUID()
+        postgresHandlers[id] = handler
+        return id
+    }
+
+    func removePostgresChange(id: UUID) {
+        postgresHandlers.removeValue(forKey: id)
     }
 
     private func handlePresenceEvent(_ json: [String: Any]) {
@@ -405,37 +429,44 @@ actor SupabaseRealtimeClient {
         if event == "presence_diff" {
             // Handle joins
             if let joins = payload["joins"] as? [String: Any] {
-                for (key, data) in joins {
-                    let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
-                    let metadata = metas?.first
-
-                    // Pass the Phoenix map key as 'userId' to ensure unique connection tracking.
-                    // The actual user's UUID is still inside the metadata dictionary.
-                    for handler in presenceHandlers {
-                        handler(.join, key, metadata)
+                for (_, data) in joins {
+                    if let metas = (data as? [String: Any])?["metas"] as? [[String: Any]] {
+                        for metadata in metas {
+                            if let phxRef = metadata["phx_ref"] as? String {
+                                for handler in presenceHandlers.values {
+                                    handler(.join, phxRef, metadata)
+                                }
+                            }
+                        }
                     }
                 }
             }
 
             // Handle leaves
             if let leaves = payload["leaves"] as? [String: Any] {
-                for (key, data) in leaves {
-                    let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
-                    let metadata = metas?.first
-
-                    for handler in presenceHandlers {
-                        handler(.leave, key, metadata)
+                for (_, data) in leaves {
+                    if let metas = (data as? [String: Any])?["metas"] as? [[String: Any]] {
+                        for metadata in metas {
+                            if let phxRef = metadata["phx_ref"] as? String {
+                                for handler in presenceHandlers.values {
+                                    handler(.leave, phxRef, metadata)
+                                }
+                            }
+                        }
                     }
                 }
             }
         } else if event == "presence_state" {
             // Initial state - treat all as joins
-            for (key, data) in payload {
-                let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
-                let metadata = metas?.first
-
-                for handler in presenceHandlers {
-                    handler(.join, key, metadata)
+            for (_, data) in payload {
+                if let metas = (data as? [String: Any])?["metas"] as? [[String: Any]] {
+                    for metadata in metas {
+                        if let phxRef = metadata["phx_ref"] as? String {
+                            for handler in presenceHandlers.values {
+                                handler(.join, phxRef, metadata)
+                            }
+                        }
+                    }
                 }
             }
         }

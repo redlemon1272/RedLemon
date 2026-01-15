@@ -6,6 +6,27 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.105 -->
+        <item>
+            <title>Version 1.0.105</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    - Fix: Resolve 'User Left' regression by preventing Phoenix Ref Collision (Landmine #51).
+- Fix: Use stable 'phx_ref' for presence tracking to stop offline flickering.
+- Internal: Add architecture scan to prevent future presence regressions.
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 16:21:04 -0500</pubDate>
+            <sparkle:version>105</sparkle:version>
+            <sparkle:shortVersionString>1.0.105</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.105.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="pcrLOtyLtcgWRKy+SO91lIsrVPueFGqcIqNn6Og99XEgdi1GZYIjY0/WX+s/mQHep7CXo118t/F5Hz+Ey2FlCg==" length="72817692"
+            />
+        </item>
         <!-- v1.0.104 -->
         <item>
             <title>Version 1.0.104</title>

@@ -2254,9 +2254,9 @@ extension MPVPlayerViewModel {
                         let leavingPhxRef = userId
 
                         let task: Task<Void, Never> = Task { @MainActor [weak self, actualUserId, leavingPhxRef] in
-                            // Wait 2 seconds (nano) - reduced from 10s to fix "Missing Leave Message" bug
+                            // Wait 5 seconds (nano) - increased from 2s to fix "User Left" regression during Lobby->Player transition
                             // This allows quick refreshes to be debounced but ensures actual leaves are reported promptly.
-                            try? await Task.sleep(nanoseconds: 2_000_000_000)
+                            try? await Task.sleep(nanoseconds: 5_000_000_000)
 
                             guard let self = self else { return }
 
@@ -2858,7 +2858,13 @@ extension MPVPlayerViewModel {
             // 3. If drift > 2.0s -> "Drift: -5.2s 🔴"
 
             if (isBuffering || isSeeking || isCurrentlyAdjustingSpeed) && absSmoothedDrift > 0.5 {
-                syncStatus = "Syncing... 🟡"
+                if isCurrentlyAdjustingSpeed {
+                    // Show speed adjustment clearly if active (User Request)
+                    let speedText = String(format: "%.2fx", currentSpeedAdjustment)
+                    syncStatus = "Syncing (\(speedText))... 🟡"
+                } else {
+                    syncStatus = "Syncing... 🟡"
+                }
             } else if absSmoothedDrift < 2.0 {
                  // Fade out "Synced" after a while? For now keep it static as requested.
                  syncStatus = "Synced 🟢"

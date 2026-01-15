@@ -147,7 +147,7 @@ class LobbyPresenceManager: ObservableObject {
 
                     // Defer leave processing to avoid false positives from metadata updates
                     Task { @MainActor in
-                        try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+                        try? await Task.sleep(nanoseconds: 3_000_000_000) // 3s
 
                         guard let viewModel = self.viewModel else { return }
 

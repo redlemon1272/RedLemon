@@ -62,6 +62,7 @@
 | **Scroll Restore Fails** | Race condition (Scroll happens on empty list) | #48 |
 | **Can't Scroll Vertically (macOS 15)** | NSScrollView swallowing events | #49 |
 | **Labored/Laggy Scrolling** | 60fps @Published state updates | #50 |
+| **User Flapping (Join/Left/Join)** | Presence keyed by ID instead of Ref | #51 |
 
 ## 🚨 Critical Landmines
 
@@ -195,10 +196,15 @@
     *   **Rule**: You MUST subclass `NSScrollView` and override `scrollWheel` to forward vertical deltas (`deltaY`) to `nextResponder` manually.
     *   **Note**: On macOS 12-14, the standard `NSScrollView` works fine, and sometimes the custom subclass actually *breaks* it. Use version checks (`if #available(macOS 15, *)`) to apply the fix conditionally.
 50. **The High-Frequency State Trap (60fps Re-renders)**:
-    *   **Trigger**: Binding a high-frequency real-time value (like Scroll Offset `CGFloat`) directly to a Global `@Published` property in `AppState`.
-    *   **Symptom**: Application becomes extremely sluggish/labored while interacting. CPU usage spikes.
-    *   **Cause**: `@Published` triggers `objectWillChange`, forcing **every view in the app observing AppState** to re-evaluate its body 60-120 times per second.
-    *   **Rule**: **DEBOUNCE** high-frequency inputs. Do not update `AppState` on every frame. Use a `DispatchWorkItem` to wait for the interaction to *stop* (e.g., 150ms delay) before committing the value to the global state.
+198:     *   **Trigger**: Binding a high-frequency real-time value (like Scroll Offset `CGFloat`) directly to a Global `@Published` property in `AppState`.
+199:     *   **Symptom**: Application becomes extremely sluggish/labored while interacting. CPU usage spikes.
+200:     *   **Cause**: `@Published` triggers `objectWillChange`, forcing **every view in the app observing AppState** to re-evaluate its body 60-120 times per second.
+201:     *   **Rule**: **DEBOUNCE** high-frequency inputs. Do not update `AppState` on every frame. Use a `DispatchWorkItem` to wait for the interaction to *stop* (e.g., 150ms delay) before committing the value to the global state.
+202: 51. **Phoenix Ref Collision Trap (Presence Flapping)**: *(Added v1.0.84)*
+203:     *   **Trigger**: Using `userId` as the key for Realtime Presence handlers instead of the unique `phx_ref`.
+204:     *   **Symptom**: Users erroneously appear to "Leave" and then "Join" instantly (flap) during metadata updates (e.g., status change).
+205:     *   **Cause**: Phoenix Presence updates send a `leave` (old ref) and `join` (new ref) simultaneously. If keyed by `userId`, the `leave` event for the *old* ref deletes the dictionary entry entirely, momentarily removing the user before the `join` (new ref) is processed.
+206:     *   **Rule**: `SupabaseRealtimeClient` MUST iterate over the `metas` array and use `phx_ref` as the unique key for callbacks. Consumers (like `SocialService`) must manage a set of refs per user (`[UserId: [PhxRef: Metadata]]`). User is "Offline" only when their ref count drops to zero.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

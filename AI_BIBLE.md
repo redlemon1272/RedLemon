@@ -62,6 +62,7 @@
 | **Scroll Restore Fails** | Race condition (Scroll happens on empty list) | #48 |
 | **Can't Scroll Vertically (macOS 15)** | NSScrollView swallowing events | #49 |
 | **Labored/Laggy Scrolling** | 60fps @Published state updates | #50 |
+| **User Flapping (Join/Left/Join)** | Presence keyed by ID instead of Ref | #51 |
 
 ## 🚨 Critical Landmines
 

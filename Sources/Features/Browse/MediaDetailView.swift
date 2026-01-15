@@ -222,18 +222,42 @@ struct MediaDetailView: View {
                                 }
                                 .padding(.top, 30)
 
-                                // Episode Synopsis
-                                if let currentEpisode = episodesInSeason.first(where: { $0.episode == selectedEpisode }),
-                                   let overview = currentEpisode.overview, !overview.isEmpty {
-                                    Text(overview)
-                                        .font(.subheadline)
-                                        .foregroundColor(.white.opacity(0.7))
-                                        .multilineTextAlignment(.center)
-                                        .lineLimit(3)
-                                        .frame(maxWidth: min(geometry.size.width * 0.75, 800))
-                                        .padding(.horizontal, max(30, geometry.size.width * 0.05))
-                                        .padding(.top, 16)
-                                }
+                                    // Episode Synopsis
+                                    if let currentEpisode = episodesInSeason.first(where: { $0.episode == selectedEpisode }) {
+                                        
+                                        // Release Date
+                                        if let released = currentEpisode.released {
+                                            let isFuture = isDateInFuture(released)
+                                            HStack(spacing: 6) {
+                                                Image(systemName: "calendar")
+                                                    .font(.caption)
+                                                    .foregroundColor(.white.opacity(0.6))
+                                                Text(formatDate(released))
+                                                    .font(.caption)
+                                                    .fontWeight(isFuture ? .bold : .medium)
+                                                    .foregroundColor(isFuture ? .orange : .white.opacity(0.8))
+                                                
+                                                if isFuture {
+                                                    Text("(Unreleased)")
+                                                        .font(.caption)
+                                                        .fontWeight(.bold)
+                                                        .foregroundColor(.orange)
+                                                }
+                                            }
+                                            .padding(.top, 8)
+                                        }
+
+                                        if let overview = currentEpisode.overview, !overview.isEmpty {
+                                            Text(overview)
+                                                .font(.subheadline)
+                                                .foregroundColor(.white.opacity(0.7))
+                                                .multilineTextAlignment(.center)
+                                                .lineLimit(3)
+                                                .frame(maxWidth: min(geometry.size.width * 0.75, 800))
+                                                .padding(.horizontal, max(30, geometry.size.width * 0.05))
+                                                .padding(.top, 16)
+                                        }
+                                    }
                             }
 
                             // Watch Now Button
@@ -334,6 +358,46 @@ struct MediaDetailView: View {
         }
     }
 
+    private func formatDate(_ dateString: String) -> String {
+        // Handle ISO8601 variations
+        // Kitsu/Cinemeta usually returns "2024-10-12" or "2024-10-12T14:30:00.000Z"
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate]
+        
+        if let date = formatter.date(from: dateString) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateStyle = .medium
+            return displayFormatter.string(from: date)
+        }
+        
+        // Try simplified YYYY-MM-DD parser if ISO fails
+        let simpleFormatter = DateFormatter()
+        simpleFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = simpleFormatter.date(from: dateString) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateStyle = .medium
+            return displayFormatter.string(from: date)
+        }
+        
+        return dateString // Fallback
+    }
+    
+    private func isDateInFuture(_ dateString: String) -> Bool {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate]
+        
+        var date: Date? = formatter.date(from: dateString)
+        
+        if date == nil {
+            let simpleFormatter = DateFormatter()
+            simpleFormatter.dateFormat = "yyyy-MM-dd"
+            date = simpleFormatter.date(from: dateString)
+        }
+        
+        guard let validDate = date else { return false }
+        return validDate > Date()
+    }
+
     private func updateEpisodesForSeason(_ season: Int) {
         guard let videos = metadata?.videos else {
             print("❌ No videos available when trying to load season \(season)")
@@ -344,9 +408,14 @@ struct MediaDetailView: View {
         let episodes = videos.filter { $0.season == season }.sorted { $0.episode < $1.episode }
         self.episodesInSeason = episodes
 
-        // Set first episode as default
+        // Set first episode as default, or try to keep previous selection if valid
         if let firstEpisode = episodes.first {
-            self.selectedEpisode = firstEpisode.episode
+            // Logic to keep same episode number if possible, else reset to 1
+            if episodes.contains(where: { $0.episode == selectedEpisode }) {
+                // Keep current selection
+            } else {
+                self.selectedEpisode = firstEpisode.episode
+            }
         }
 
         print("📺 Season \(season) has \(episodes.count) episodes")

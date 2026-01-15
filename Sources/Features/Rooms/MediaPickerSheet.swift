@@ -400,6 +400,28 @@ struct MediaPickerSheet: View {
                                             .font(.headline)
                                             .foregroundColor(.white)
                                             .lineLimit(1)
+                                        
+                                        // Air Date
+                                        if let released = episode.released {
+                                            let isFuture = isDateInFuture(released)
+                                            HStack(spacing: 6) {
+                                                Text(formatDate(released))
+                                                    .font(.caption2)
+                                                    .foregroundColor(isFuture ? .orange : .white.opacity(0.6))
+                                                    .fontWeight(isFuture ? .bold : .regular)
+                                                
+                                                if isFuture {
+                                                    Text("UNRELEASED")
+                                                        .font(.caption2)
+                                                        .fontWeight(.bold)
+                                                        .foregroundColor(.orange)
+                                                        .padding(.horizontal, 4)
+                                                        .padding(.vertical, 1)
+                                                        .background(Color.orange.opacity(0.2))
+                                                        .cornerRadius(2)
+                                                }
+                                            }
+                                        }
 
                                         if let overview = episode.overview, !overview.isEmpty {
                                             Text(overview)
@@ -428,6 +450,42 @@ struct MediaPickerSheet: View {
     }
 
     // MARK: - Logic
+
+    private func formatDate(_ dateString: String) -> String {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate]
+        
+        if let date = formatter.date(from: dateString) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateStyle = .medium
+            return displayFormatter.string(from: date)
+        }
+        
+        let simpleFormatter = DateFormatter()
+        simpleFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = simpleFormatter.date(from: dateString) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateStyle = .medium
+            return displayFormatter.string(from: date)
+        }
+        
+        return dateString
+    }
+    
+    private func isDateInFuture(_ dateString: String) -> Bool {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate]
+        var date: Date? = formatter.date(from: dateString)
+        
+        if date == nil {
+            let simpleFormatter = DateFormatter()
+            simpleFormatter.dateFormat = "yyyy-MM-dd"
+            date = simpleFormatter.date(from: dateString)
+        }
+        
+        guard let validDate = date else { return false }
+        return validDate > Date()
+    }
 
     private func loadTrending() {
         Task {

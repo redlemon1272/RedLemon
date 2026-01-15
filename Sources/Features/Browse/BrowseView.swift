@@ -5,9 +5,10 @@ struct BrowseView: View {
     @StateObject private var apiClient = LocalAPIClient.shared
 
     // Consolidated streaming service data structure
-    @State private var streamingCatalogs: [String: [MediaItem]] = [:]
-    @State private var movies: [MediaItem] = []
-    @State private var shows: [MediaItem] = []
+    // Persisted in AppState:
+    // @State private var streamingCatalogs: [String: [MediaItem]] = [:]
+    // @State private var movies: [MediaItem] = []
+    // @State private var shows: [MediaItem] = []
     @State private var recentlyWatched: [WatchHistoryItem] = []
 
     @State private var isLoading = false
@@ -17,7 +18,7 @@ struct BrowseView: View {
 
     // Performance optimization states
     @State private var visibleSections: Set<String> = []
-    @State private var isLoadingCatalogs: Set<String> = []
+    // @State private var isLoadingCatalogs: Set<String> = [] -> Moved to AppState
     @State private var memoryCleanupTimer: Timer?
     @State private var tabSwitchTask: Task<Void, Never>?
     @State private var lastTabSwitchTime: Date = Date()
@@ -106,7 +107,11 @@ struct BrowseView: View {
                             // Popular section - horizontal row
                             StreamingServiceRow(
                                 title: selectedTab == .movies ? "Popular Movies" : "Popular TV Shows",
-                                items: selectedTab == .movies ? movies : shows,
+                                items: selectedTab == .movies ? appState.popularMovies : appState.popularShows,
+                                scrollOffset: Binding(
+                                    get: { appState.browseRowScrollPositions["popular"] ?? 0 },
+                                    set: { appState.browseRowScrollPositions["popular"] = $0 }
+                                ),
                                 onTap: { item in selectMedia(item, fromRow: "popular") }
                             )
                             .id("popular")
@@ -115,8 +120,12 @@ struct BrowseView: View {
                             LazyStreamingServiceRow(
                                 title: selectedTab == .movies ? "Trending Movies" : "Trending TV Shows",
                                 catalogKey: "trending",
-                                items: streamingCatalogs[getStorageKey("trending")] ?? [],
-                                isLoading: isLoadingCatalogs.contains(getStorageKey("trending")),
+                                items: appState.browseCatalogs[getStorageKey("trending")] ?? [],
+                                isLoading: appState.browseIsLoadingCatalogs.contains(getStorageKey("trending")),
+                                scrollOffset: Binding(
+                                    get: { appState.browseRowScrollPositions[getStorageKey("trending")] ?? 0 },
+                                    set: { appState.browseRowScrollPositions[getStorageKey("trending")] = $0 }
+                                ),
                                 onTap: { item in selectMedia(item, fromRow: "trending") },
                                 onAppear: { await loadCatalogIfNeeded(key: "trending", isTrending: true) }
                             )
@@ -127,8 +136,12 @@ struct BrowseView: View {
                                 LazyStreamingServiceRow(
                                     title: getServiceDisplayName(serviceKey),
                                     catalogKey: serviceKey,
-                                    items: streamingCatalogs[getStorageKey(serviceKey)] ?? [],
-                                    isLoading: isLoadingCatalogs.contains(getStorageKey(serviceKey)),
+                                    items: appState.browseCatalogs[getStorageKey(serviceKey)] ?? [],
+                                    isLoading: appState.browseIsLoadingCatalogs.contains(getStorageKey(serviceKey)),
+                                    scrollOffset: Binding(
+                                        get: { appState.browseRowScrollPositions[getStorageKey(serviceKey)] ?? 0 },
+                                        set: { appState.browseRowScrollPositions[getStorageKey(serviceKey)] = $0 }
+                                    ),
                                     onTap: { item in selectMedia(item, fromRow: serviceKey) },
                                     onAppear: { await loadCatalogIfNeeded(key: serviceKey) }
                                 )
@@ -140,8 +153,8 @@ struct BrowseView: View {
                 .onAppear {
                     restoreScrollPosition(using: proxy)
                 }
-                .onChange(of: movies) { _ in restoreScrollPosition(using: proxy) }
-                .onChange(of: shows) { _ in restoreScrollPosition(using: proxy) }
+                .onChange(of: appState.popularMovies) { _ in restoreScrollPosition(using: proxy) }
+                .onChange(of: appState.popularShows) { _ in restoreScrollPosition(using: proxy) }
                 }             }
          }
 
@@ -157,8 +170,8 @@ struct BrowseView: View {
             }
 
             // Only load if content is missing
-            if (selectedTab == .movies && movies.isEmpty) ||
-               (selectedTab == .shows && shows.isEmpty) {
+            if (selectedTab == .movies && appState.popularMovies.isEmpty) ||
+               (selectedTab == .shows && appState.popularShows.isEmpty) {
                 await loadContent()
             } else {
             }
@@ -218,10 +231,10 @@ struct BrowseView: View {
             tabSwitchTask?.cancel()
 
             // Cancel all ongoing catalog loading tasks
-            for key in isLoadingCatalogs {
+            for key in appState.browseIsLoadingCatalogs {
                 // This will trigger the defer block in loadCatalogIfNeeded
                 Task { @MainActor in
-                    isLoadingCatalogs.remove(key)
+                    appState.browseIsLoadingCatalogs.remove(key)
                 }
             }
 
@@ -239,7 +252,7 @@ struct BrowseView: View {
         guard let scrollTo = appState.browseScrollPosition else { return }
 
         // Ensure main content is loaded so the layout (and "popular" row) exists
-        let isContentReady = selectedTab == .movies ? !movies.isEmpty : !shows.isEmpty
+        let isContentReady = selectedTab == .movies ? !appState.popularMovies.isEmpty : !appState.popularShows.isEmpty
         guard isContentReady else {
             return
         }
@@ -257,26 +270,28 @@ struct BrowseView: View {
     }
 
     private func loadContent() async {
-        isLoading = true
+        // Only trigger full loading state if we have no content for the selected tab
+        let shouldShowLoader = (selectedTab == .movies && appState.popularMovies.isEmpty) || 
+                               (selectedTab == .shows && appState.popularShows.isEmpty)
+        
+        if shouldShowLoader {
+            isLoading = true
+        }
+        
         errorMessage = nil
-
-
-        // Clear catalogs when switching tabs to free memory
-        // Optimization: Don't clear catalogs to prevent white flash (Optimistic UI)
-        // clearCatalogs()
 
         do {
             if selectedTab == .movies {
-                if movies.isEmpty {
+                if appState.popularMovies.isEmpty {
                     print("📽️ Fetching popular movies...")
-                    movies = try await apiClient.fetchPopularMovies()
-                    print("✅ Loaded \(movies.count) movies")
+                    appState.popularMovies = try await apiClient.fetchPopularMovies()
+                    print("✅ Loaded \(appState.popularMovies.count) movies")
                 }
             } else if selectedTab == .shows {
-                if shows.isEmpty {
+                if appState.popularShows.isEmpty {
                     print("📺 Fetching popular shows...")
-                    shows = try await apiClient.fetchPopularShows()
-                    print("✅ Loaded \(shows.count) shows")
+                    appState.popularShows = try await apiClient.fetchPopularShows()
+                    print("✅ Loaded \(appState.popularShows.count) shows")
                 }
             }
         } catch {
@@ -641,12 +656,12 @@ struct BrowseView: View {
         let storageKey = getStorageKey(key)
 
         // Load if not currently loading
-        guard !isLoadingCatalogs.contains(storageKey) else {
+        guard !appState.browseIsLoadingCatalogs.contains(storageKey) else {
             return
         }
 
         // Always load if catalog is nil, empty, force reload is requested, or if this is a fresh tab switch
-        let currentCatalog = streamingCatalogs[storageKey]
+        let currentCatalog = appState.browseCatalogs[storageKey]
         let shouldLoad = forceReload ||
                          currentCatalog == nil ||
                          currentCatalog?.isEmpty == true ||
@@ -657,13 +672,13 @@ struct BrowseView: View {
         }
 
         await MainActor.run {
-            isLoadingCatalogs.insert(storageKey)
+            appState.browseIsLoadingCatalogs.insert(storageKey)
             return ()
         }
 
         defer {
             Task { @MainActor in
-                isLoadingCatalogs.remove(storageKey)
+                appState.browseIsLoadingCatalogs.remove(storageKey)
             }
         }
 
@@ -685,12 +700,12 @@ struct BrowseView: View {
         // First, load a small batch quickly for immediate display
         let quickBatch = await fetchCatalogWithLimit(from: urlString, limit: 7)
         if !quickBatch.isEmpty {
-            streamingCatalogs[storageKey] = quickBatch
+            appState.browseCatalogs[storageKey] = quickBatch
         }
 
         // Then load full catalog in background
         let fullBatch = await fetchCatalog(from: urlString)
-        streamingCatalogs[storageKey] = fullBatch
+        appState.browseCatalogs[storageKey] = fullBatch
     }
 
     /// Progressive loading for streaming service content
@@ -721,12 +736,12 @@ struct BrowseView: View {
         // First, try quick batch from cache or limited fetch
         let quickBatch = await fetchCatalogWithLimit(from: urlString, limit: 7)
         if !quickBatch.isEmpty {
-            streamingCatalogs[storageKey] = quickBatch
+            appState.browseCatalogs[storageKey] = quickBatch
         }
 
         // Then load full catalog with fallback
         let fullBatch = await fetchCatalogWithFallback(from: urlString, serviceKey: key)
-        streamingCatalogs[storageKey] = fullBatch
+        appState.browseCatalogs[storageKey] = fullBatch
     }
 
     /// Fetch catalog with limited items for quick loading
@@ -804,9 +819,10 @@ struct BrowseView: View {
 
     /// Clear all catalogs when switching tabs
     private func clearCatalogs() {
-        streamingCatalogs.removeAll()
-        isLoadingCatalogs.removeAll()
-        print("🗑️ Cleared all streaming catalogs")
+        // DISABLED: Persistence is enabled.
+        // appState.browseCatalogs.removeAll()
+        // appState.browseIsLoadingCatalogs.removeAll()
+        print("🗑️ Persisting all streaming catalogs session-wide.")
     }
 
     /// Smart reload - only reload if cache is expired or empty
@@ -817,7 +833,7 @@ struct BrowseView: View {
 
         // Check which services need reloading
         for serviceKey in serviceKeys {
-            let currentCatalog = streamingCatalogs[getStorageKey(serviceKey)]
+            let currentCatalog = appState.browseCatalogs[getStorageKey(serviceKey)]
 
             // Reload if catalog is empty, nil, or if it's been more than 30 minutes since last tab switch
             let shouldReload = currentCatalog == nil ||
@@ -844,7 +860,7 @@ struct BrowseView: View {
         try? await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
 
         // Check trending first
-        let trendingCatalog = streamingCatalogs[getStorageKey("trending")]
+        let trendingCatalog = appState.browseCatalogs[getStorageKey("trending")]
         let shouldReloadTrending = trendingCatalog == nil ||
                                  trendingCatalog?.isEmpty == true ||
                                  (Date().timeIntervalSince(lastTabSwitchTime) > 1800)
@@ -1368,6 +1384,7 @@ struct MediaCard: View {
 struct StreamingServiceRow: View {
     let title: String
     let items: [MediaItem]
+    let scrollOffset: Binding<CGFloat>?
     let onTap: (MediaItem) -> Void
 
     var body: some View {
@@ -1379,7 +1396,7 @@ struct StreamingServiceRow: View {
                     .padding(.horizontal)
 
                 // Version-aware horizontal scroll view (Custom NSScrollView for macOS 15+, native for others)
-                VersionAwareHorizontalScrollView {
+                VersionAwareHorizontalScrollView(scrollOffset: scrollOffset) {
                     LazyHStack(spacing: 16) {
                         ForEach(items) { item in
                             MediaCard(item: item)
@@ -1402,6 +1419,7 @@ struct LazyStreamingServiceRow: View {
     let catalogKey: String
     let items: [MediaItem]
     let isLoading: Bool
+    let scrollOffset: Binding<CGFloat>?
     let onTap: (MediaItem) -> Void
     let onAppear: () async -> Void
 
@@ -1432,7 +1450,7 @@ struct LazyStreamingServiceRow: View {
                 .frame(height: 240)
             } else if !items.isEmpty {
                 // Version-aware horizontal scroll view (Custom NSScrollView for macOS 15+, native for others)
-                VersionAwareHorizontalScrollView {
+                VersionAwareHorizontalScrollView(scrollOffset: scrollOffset) {
                     LazyHStack(spacing: 16) {
                         ForEach(items) { item in
                             OptimizedMediaCard(item: item)

@@ -31,8 +31,9 @@
 5.  **Versioning**: Update logic relies on **Integer Build Numbers**, not Version Strings.
 6.  **Codification Protocol**: When a major bug or "Landmine" is discovered and fixed, the assistant MUST:
     - (a) Document it in **Part 1** with a new ID.
-    - (b) Add a regression check to `scripts/architecture-scan.sh` (if possible via regex).
-    - (c) Update the **Last Updated** date at the top.
+    - (b) Add the observed symptom to the **Symptom Checker** (Part 1).
+    - (c) Add a regression check to `scripts/architecture-scan.sh` (if possible via regex).
+    - (d) Update the **Last Updated** date at the top.
 
 ---
 

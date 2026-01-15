@@ -61,7 +61,7 @@ class DebridSearchService: ProviderService {
         let result = try JSONDecoder().decode(DebridSearchResponse.self, from: data)
         
         let streams = parseStreams(result.streams ?? [])
-        NSLog("✅ DebridSearch: Parsed \(streams.count) streams")
+        NSLog("%@", "✅ DebridSearch: Parsed \(streams.count) streams")
         return streams
     }
     
@@ -92,7 +92,7 @@ class DebridSearchService: ProviderService {
         
         if let season = season, let episode = episode {
             path += ":\(season):\(episode)"
-            NSLog("📺 DebridSearch: Building URL for S\(String(format: "%02d", season))E\(String(format: "%02d", episode))")
+            NSLog("%@", "📺 DebridSearch: Building URL for S\(String(format: "%02d", season))E\(String(format: "%02d", episode))")
         } else {
             NSLog("🎬 DebridSearch: Building URL for movie (no season/episode)")
         }
@@ -126,7 +126,7 @@ class DebridSearchService: ProviderService {
             // FILTER: Malformed URLs from addon (ending in /undefined)
             // This happens when the addon fails to resolve the source link
             if let url = debridStream.url, url.hasSuffix("/undefined") {
-                NSLog("⚠️ DebridSearch: Dropping stream with malformed URL (undefined): \(title)")
+                NSLog("%@", "⚠️ DebridSearch: Dropping stream with malformed URL (undefined): \(title)")
                 return nil
             }
             

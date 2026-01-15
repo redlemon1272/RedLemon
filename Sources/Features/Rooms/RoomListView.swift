@@ -301,7 +301,7 @@ struct RoomListView: View {
                 )
             } else {
                 // ZOMBIE CHECK: Verify host is in the participant list
-                guard let hostData = roomParticipants.first(where: { $0.userId.uuidString.lowercased() == hostIdString }) else {
+                guard let hostData = roomParticipants.first(where: { $0.userId.uuidString.caseInsensitiveCompare(hostIdString) == .orderedSame }) else {
                     print("👻 Room anomaly detected: \(room.id) (Host \(room.hostUsername) missing). Hiding from list but preserving.")
                     return nil
                 }

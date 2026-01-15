@@ -2152,7 +2152,7 @@ extension MPVPlayerViewModel {
 
 
                         // Check if already exists using actualUserId (stable ID)
-                        if let index = updatedParticipants.firstIndex(where: { $0.id == actualUserId }) {
+                        if let index = updatedParticipants.firstIndex(where: { $0.id.caseInsensitiveCompare(actualUserId) == .orderedSame }) {
                             // User exists - update their timestamp
                             // Capture offline state before update (True if phxRef was nil)
                             let wasOffline = updatedParticipants[index].phxRef == nil
@@ -2216,7 +2216,7 @@ extension MPVPlayerViewModel {
                                 LoggingManager.shared.warn(.watchParty, message: "Self (\(currentId)) was missing from list - restoring.")
                                 // CRITICAL FIX: Only use 'userId' (closure arg) as phxRef if this event was FOR SELF.
                                 // Otherwise, use nil (we don't know our own ref from someone else's join).
-                                var selfRef = (actualUserId == currentId) ? (metadata?["phx_ref"] as? String) : nil
+                                var selfRef = (actualUserId.caseInsensitiveCompare(currentId) == .orderedSame) ? (metadata?["phx_ref"] as? String) : nil
 
                                 // Last Ditch: Check if we have a stale ref for self in the OLD list
                                 if selfRef == nil {
@@ -2297,11 +2297,11 @@ extension MPVPlayerViewModel {
 
                             // Find username before removing for the message
                             let defaultsName = metadata?["username"] as? String ?? "User"
-                            let username = self.appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == actualUserId })?.name ?? defaultsName
+                            let username = self.appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id.caseInsensitiveCompare(actualUserId) == .orderedSame })?.name ?? defaultsName
 
                             // Remove using actualUserId (Force remove even if not in list, just in case)
                             if var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants {
-                                currentParticipants.removeAll(where: { $0.id == actualUserId })
+                                currentParticipants.removeAll(where: { $0.id.caseInsensitiveCompare(actualUserId) == .orderedSame })
                                 self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
                             }
 
@@ -2971,7 +2971,7 @@ extension MPVPlayerViewModel {
             // EXCEPTION: Allow LOBBY_JOIN to pass through so we see "You joined"
             let isJoinMessage = message.chatText == "LOBBY_JOIN"
 
-            if message.senderId == currentUserId && !isJoinMessage {
+            if (message.senderId ?? "").caseInsensitiveCompare(currentUserId ?? "") == .orderedSame && !isJoinMessage {
                 LoggingManager.shared.debug(.social, message: "Skipping own message (already displayed locally)")
                 return
             }
@@ -2987,7 +2987,7 @@ extension MPVPlayerViewModel {
                 var displayUsername = username
                 let displayText: String
                 if text == "LOBBY_JOIN" {
-                    if message.senderId == currentUserId {
+                    if (message.senderId ?? "").caseInsensitiveCompare(currentUserId ?? "") == .orderedSame {
                         displayUsername = "You"
                         displayText = "joined the party! 👋"
                     } else {
@@ -3168,7 +3168,7 @@ extension MPVPlayerViewModel {
         case .reaction:
             // Handle incoming reaction
             // CRITICAL: Skip reactions from self (already shown locally when sent)
-            if message.senderId == currentUserId {
+            if (message.senderId ?? "").caseInsensitiveCompare(currentUserId ?? "") == .orderedSame {
                 return
             }
 
@@ -3204,7 +3204,7 @@ extension MPVPlayerViewModel {
         // CRITICAL FIX: Ensure file is ACTUALLY loaded before sending ready signal
         // This prevents premature signals (e.g. from durationPub) that race with buffering/loading
         guard mpvWrapper.isFileLoaded else {
-             NSLog("⚠️ Watch Party: sendReadySignal blocked - File not loaded yet")
+             NSLog("%@", "⚠️ Watch Party: sendReadySignal blocked - File not loaded yet")
              return
         }
 

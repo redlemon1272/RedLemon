@@ -843,7 +843,7 @@ class LobbyViewModel: ObservableObject {
 
     /// Kick user by ID (Used by Context Menu)
     func kickUser(userId: String) {
-        if let participant = participants.first(where: { $0.id == userId }) {
+        if let participant = participants.first(where: { $0.id.caseInsensitiveCompare(userId) == .orderedSame }) {
             kickParticipant(participant)
         } else {
             // Create dummy for signaling (ID is what matters)
@@ -864,7 +864,7 @@ class LobbyViewModel: ObservableObject {
     /// Block user by ID (Used by Context Menu when participant might not be in the list)
     func blockUser(_ userId: String, username: String? = nil) {
         // Check if participant is in the list
-        if let participant = participants.first(where: { $0.id == userId }) {
+        if let participant = participants.first(where: { $0.id.caseInsensitiveCompare(userId) == .orderedSame }) {
             blockParticipant(participant)
         } else {
             // Not in list (or event room), but still block via service

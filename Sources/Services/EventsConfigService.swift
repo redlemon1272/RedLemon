@@ -369,7 +369,7 @@ class EventsConfigService {
             totalCycleDuration += duration
             
             // LOGGING for Drift Debugging
-            NSLog("🗓 Schedule Calc: \(movie.name) | RuntimeStr: \(movie.runtime ?? "nil") -> \(runtimeMinutes)m | Duration: \(duration)s")
+            NSLog("%@", "🗓 Schedule Calc: \(movie.name) | RuntimeStr: \(movie.runtime ?? "nil") -> \(runtimeMinutes)m | Duration: \(duration)s")
         }
         
         

@@ -86,7 +86,7 @@ func registerStreamRoutes(_ app: Application) {
             throw Abort(.badRequest, reason: "No RealDebrid token stored")
         }
 
-        NSLog("📺 Fetching episodes for torrent: \(body.infoHash.prefix(12))...")
+        NSLog("%@", "📺 Fetching episodes for torrent: \(body.infoHash.prefix(12))...")
 
         // Create a temporary task to fetch torrent info
         // Note: We don't have the torrentId, so we need to add the magnet first
@@ -111,7 +111,7 @@ func registerStreamRoutes(_ app: Application) {
             let (addData, addResponse) = try await URLSession.shared.data(for: addRequest)
 
             guard let httpResponse = addResponse as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                NSLog("❌ Failed to add magnet: HTTP \((addResponse as? HTTPURLResponse)?.statusCode ?? 0)")
+                NSLog("%@", "❌ Failed to add magnet: HTTP \((addResponse as? HTTPURLResponse)?.statusCode ?? 0)")
                 throw Abort(.badGateway, reason: "Failed to add torrent to RealDebrid")
             }
 
@@ -129,7 +129,7 @@ func registerStreamRoutes(_ app: Application) {
             let (infoData, infoResponse) = try await URLSession.shared.data(for: infoRequest)
 
             guard let httpResponse = infoResponse as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                NSLog("❌ Failed to get torrent info: HTTP \((infoResponse as? HTTPURLResponse)?.statusCode ?? 0)")
+                NSLog("%@", "❌ Failed to get torrent info: HTTP \((infoResponse as? HTTPURLResponse)?.statusCode ?? 0)")
                 throw Abort(.badGateway, reason: "Failed to fetch torrent information")
             }
 
@@ -143,7 +143,7 @@ func registerStreamRoutes(_ app: Application) {
             // Log torrent status for debugging
             // Status: "waiting_files_selection", "queued", "downloading", "downloaded", "error", "virus", "dead"
             if let status = torrentInfo.status {
-                NSLog("📺 Torrent status: \(status)")
+                NSLog("%@", "📺 Torrent status: \(status)")
             }
 
             // Parse episodes from filenames
@@ -187,7 +187,7 @@ func registerStreamRoutes(_ app: Application) {
                 return a.episode < b.episode
             }
 
-            NSLog("✅ Found \(sortedEpisodes.count) episodes")
+            NSLog("%@", "✅ Found \(sortedEpisodes.count) episodes")
 
             let jsonData = try JSONEncoder().encode(sortedEpisodes)
             let episodesResponse = Response(status: .ok)
@@ -197,7 +197,7 @@ func registerStreamRoutes(_ app: Application) {
             return episodesResponse
 
         } catch {
-            NSLog("❌ Episodes endpoint error: \(error)")
+            NSLog("%@", "❌ Episodes endpoint error: \(error)")
             throw Abort(.badGateway, reason: "Failed to fetch episodes: \(error)")
         }
     }
@@ -594,7 +594,7 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
     // CRITICAL DEBUG: Log input to attachSubtitles
     NSLog("🔍 DEBUG: attachSubtitles INPUT - streams.count: \(streams.count)")
     for (idx, stream) in streams.enumerated() {
-        NSLog("   INPUT[\(idx)]: \(stream.title) | \(stream.quality ?? "unknown") | \(stream.provider)")
+        NSLog("%@", "   INPUT[\(idx)]: \(stream.title) | \(stream.quality ?? "unknown") | \(stream.provider)")
     }
 
     // Get SubDL API key from Keychain

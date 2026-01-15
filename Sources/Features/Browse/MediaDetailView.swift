@@ -44,18 +44,26 @@ struct MediaDetailView: View {
                     Button(action: {
                         appState.goBack()  // Use goBack() for proper navigation history
                     }) {
-                        HStack(spacing: 4) {
+                        HStack(spacing: 6) {
                             Image(systemName: "chevron.left")
+                                .font(.system(size: 14, weight: .semibold))
                             Text("Back")
+                                .font(.system(size: 15, weight: .semibold))
                         }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(Color.red.opacity(0.8))
+                        .cornerRadius(8)
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .padding()
+                    .padding(.horizontal, 16)
+                    .padding(.top, 40) // Avoid window traffic lights
 
                     Spacer()
                 }
                 .frame(maxWidth: .infinity)
-                .background(.ultraThinMaterial)
+                // Removed ultraThinMaterial background to match Lobby style (transparent/overlay)
 
                 // Content
                 ScrollView {

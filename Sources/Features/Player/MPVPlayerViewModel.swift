@@ -2858,7 +2858,13 @@ extension MPVPlayerViewModel {
             // 3. If drift > 2.0s -> "Drift: -5.2s 🔴"
 
             if (isBuffering || isSeeking || isCurrentlyAdjustingSpeed) && absSmoothedDrift > 0.5 {
-                syncStatus = "Syncing... 🟡"
+                if isCurrentlyAdjustingSpeed {
+                    // Show speed adjustment clearly if active (User Request)
+                    let speedText = String(format: "%.2fx", currentSpeedAdjustment)
+                    syncStatus = "Syncing (\(speedText))... 🟡"
+                } else {
+                    syncStatus = "Syncing... 🟡"
+                }
             } else if absSmoothedDrift < 2.0 {
                  // Fade out "Synced" after a while? For now keep it static as requested.
                  syncStatus = "Synced 🟢"

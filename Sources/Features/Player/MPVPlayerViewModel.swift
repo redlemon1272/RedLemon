@@ -2171,20 +2171,12 @@ extension MPVPlayerViewModel {
 
                             updatedParticipants[index].joinedAt = Date()
 
-                            // Prefer phx_ref from metadata.
-                            if let newPhxRef = metadata?["phx_ref"] as? String {
-                                updatedParticipants[index].phxRef = newPhxRef
-                                self.activeConnectionRefs[actualUserId] = newPhxRef // Track officially
-                                LoggingManager.shared.info(.watchParty, message: "Updated existing participant \(actualUserId) with Ref: \(newPhxRef)")
-                            } else {
-                                LoggingManager.shared.warn(.watchParty, message: "Join event for \(actualUserId) missing phx_ref - preserving existing Ref: \(updatedParticipants[index].phxRef ?? "nil")")
-                                // If we don't have a new ref, do we keep the old one in `activeConnectionRefs`?
-                                // Yes, assume same session.
-                            }
+                            // Use the Phoenix map key as the stable connection ref.
+                            updatedParticipants[index].phxRef = userId
+                            self.activeConnectionRefs[actualUserId] = userId // Track officially
+                            LoggingManager.shared.info(.watchParty, message: "Updated existing participant \(actualUserId) with Ref: \(userId)")
 
                             // If upgrading from DB-only (Offline) to Realtime (Online), announce it
-                            // This fixes the race condition where DB Polling adds them first (no Ref)
-                            // and suppresses the Join message because they are "already in list".
                             if wasOffline && actualUserId != self.currentUserId {
                                 self.addSystemMessage("\(updatedParticipants[index].name) joined")
                             }
@@ -2194,15 +2186,11 @@ extension MPVPlayerViewModel {
                             }
                         } else {
                             // New user - create with actualUserId
-                            let phxRefVal = metadata?["phx_ref"] as? String
-                            if let ref = phxRefVal {
-                                self.activeConnectionRefs[actualUserId] = ref
-                            }
+                            self.activeConnectionRefs[actualUserId] = userId
 
                             let username = metaUsername ?? "User"
                             let isHostVal = metadata?["is_host"] as? Bool ?? false
                             let joinedAtVal = metadata?["joined_at"] as? TimeInterval ?? Date().timeIntervalSince1970
-
 
                             let newParticipant = Participant(
                                 id: actualUserId, // Use stable ID
@@ -2210,10 +2198,10 @@ extension MPVPlayerViewModel {
                                 isHost: isHostVal,
                                 isReady: false,
                                 joinedAt: Date(timeIntervalSince1970: joinedAtVal),
-                                phxRef: phxRefVal
+                                phxRef: userId // Store Connection ID (Map Key)
                             )
                             updatedParticipants.append(newParticipant)
-                            LoggingManager.shared.info(.watchParty, message: "Added new participant \(actualUserId) (Ref: \(phxRefVal ?? "nil"))")
+                            LoggingManager.shared.info(.watchParty, message: "Added new participant \(actualUserId) (Ref: \(userId))")
 
                             // 💬 System Message: Join
                             if actualUserId != self.currentUserId {
@@ -2226,9 +2214,8 @@ extension MPVPlayerViewModel {
                             let isSelfPresent = updatedParticipants.contains(where: { (p: Participant) in p.id == currentId })
                             if !isSelfPresent {
                                 LoggingManager.shared.warn(.watchParty, message: "Self (\(currentId)) was missing from list - restoring.")
-                                // CRITICAL FIX: Only use 'userId' (closure arg) as phxRef if this event was FOR SELF.
-                                // Otherwise, use nil (we don't know our own ref from someone else's join).
-                                var selfRef = (actualUserId.caseInsensitiveCompare(currentId) == .orderedSame) ? (metadata?["phx_ref"] as? String) : nil
+                                // CRITICAL: Only use closure userId if this event was for self
+                                var selfRef = (actualUserId.caseInsensitiveCompare(currentId) == .orderedSame) ? userId : nil
 
                                 // Last Ditch: Check if we have a stale ref for self in the OLD list
                                 if selfRef == nil {
@@ -2263,8 +2250,8 @@ extension MPVPlayerViewModel {
                         // This handles flaky connections and Lobby->Player transitions
                         LoggingManager.shared.info(.watchParty, message: "Participant leaving (grace period started): \(actualUserId)")
 
-                        // Extract ref immediately for closure capture
-                        let leavingPhxRef = metadata?["phx_ref"] as? String
+                        // Extract map key immediately for closure capture
+                        let leavingPhxRef = userId
 
                         let task: Task<Void, Never> = Task { @MainActor [weak self, actualUserId, leavingPhxRef] in
                             // Wait 2 seconds (nano) - reduced from 10s to fix "Missing Leave Message" bug
@@ -2280,20 +2267,18 @@ extension MPVPlayerViewModel {
                             }
 
                             // Fetch FRESH list to avoid stale data race
-                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                            guard self.appState?.player.currentWatchPartyRoom?.participants != nil else { return }
 
                             // Check against our authoritative Ref Map
                             // If we have a record of this user's Active Ref, it must match the Leaving Ref.
                             if let trackedRef = self.activeConnectionRefs[actualUserId] {
-                                if let leavingRef = leavingPhxRef {
-                                     if trackedRef != leavingRef {
-                                         LoggingManager.shared.debug(.watchParty, message: "Ignoring stale LEAVE event for \(actualUserId) (Tracked: \(trackedRef) != Leaving: \(leavingRef))")
-                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                         return
-                                     } else {
-                                         LoggingManager.shared.debug(.watchParty, message: "LEAVE MATCHED tracked ref: \(trackedRef)")
-                                     }
-                                }
+                                 if trackedRef != leavingPhxRef {
+                                     LoggingManager.shared.debug(.watchParty, message: "Ignoring stale LEAVE event for \(actualUserId) (Tracked: \(trackedRef) != Leaving: \(leavingPhxRef))")
+                                     self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                     return
+                                 } else {
+                                     LoggingManager.shared.debug(.watchParty, message: "LEAVE MATCHED tracked ref: \(trackedRef)")
+                                 }
                             } else {
                                  // We have NO record of this user's ref.
                                  // This likely means they are already gone (removed by DB poll?).

@@ -92,42 +92,36 @@ class LobbyPresenceManager: ObservableObject {
                     // Check if already exists (CASE INSENSITIVE)
                     if let index = viewModel.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
                         viewModel.participants[index].joinedAt = Date()
-                        // Use phx_ref from metadata if available
-                        let newPhxRef = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
-                        viewModel.participants[index].phxRef = newPhxRef // Update Connection ID
+                        viewModel.participants[index].phxRef = userId // Update connection ID (Map Key)
 
                         // Parse metadata
                         if let dict = metadata as? [String: Any] {
                             if let username = dict["username"] as? String {
                                 viewModel.participants[index].name = username
                             }
-                            // FIX: Update host status from metadata
                             if let isHost = dict["is_host"] as? Bool {
                                 viewModel.participants[index].isHost = isHost
                             }
+                        }
 
-                            // If it's a new Realtime connection, show the toast even if they were in DB list
-                            if isNewConnection {
-                                viewModel.chatManager.addSystemMessage(.userJoined, userName: viewModel.participants[index].name)
-                            }
+                        // If it's a new Realtime connection, show the toast even if they were in DB list
+                        if isNewConnection {
+                            viewModel.chatManager.addSystemMessage(.userJoined, userName: viewModel.participants[index].name)
                         }
                     } else {
                         // New user
                         var username = "Guest"
                         var isHost = false // Default
-
+                        
                         // Parse metadata
                         if let dict = metadata as? [String: Any] {
                             if let name = dict["username"] as? String {
                                 username = name
                             }
-                            // FIX: Get host status from metadata
                             if let hostStatus = dict["is_host"] as? Bool {
                                 isHost = hostStatus
                             }
                         }
-
-                        let phxRefVal = (metadata as? [String: Any])?["phx_ref"] as? String ?? userId
 
                         let newParticipant = Participant(
                             id: normalizedID,
@@ -135,7 +129,7 @@ class LobbyPresenceManager: ObservableObject {
                             isHost: isHost,
                             isReady: false,
                             joinedAt: Date(),
-                            phxRef: phxRefVal // Store Connection ID
+                            phxRef: userId // Store Connection ID (Map Key)
                         )
                         viewModel.participants.append(newParticipant)
                         if isNewConnection {

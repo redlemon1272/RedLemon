@@ -101,12 +101,12 @@ class SocialService: ObservableObject {
         await setupConnectionMonitoring(for: client, isPresence: true)
 
         // Subscribe to presence events
-        await client.onPresence { [weak self] action, userId, metadata in
+        await client.onPresence { [weak self] action, presenceKey, metadata in
             Task { @MainActor [weak self] in
                 if action == .join {
-                    self?.handlePresenceJoin(userId: userId, metadata: metadata)
+                    self?.handlePresenceJoin(mapKey: presenceKey, metadata: metadata)
                 } else {
-                    self?.handlePresenceLeave(userId: userId, metadata: metadata)
+                    self?.handlePresenceLeave(mapKey: presenceKey, metadata: metadata)
                 }
             }
         }
@@ -173,31 +173,36 @@ class SocialService: ObservableObject {
 
     // MARK: - Presence Handlers
 
-    private func handlePresenceJoin(userId: String, metadata: [String: Any]?) {
+    private func handlePresenceJoin(mapKey: String, metadata: [String: Any]?) {
+        guard let userId = metadata?["user_id"] as? String else { return }
         let normalizedUserId = userId.lowercased()
 
-        // 1. Track specific connection ref with its metadata
-        if let phxRef = metadata?["phx_ref"] as? String, let meta = metadata {
-            if userPresenceRefs[normalizedUserId] == nil {
-                userPresenceRefs[normalizedUserId] = [:]
-            }
-            userPresenceRefs[normalizedUserId]?[phxRef] = meta
+        // 1. Track specific connection ref (Map Key) with its metadata
+        if userPresenceRefs[normalizedUserId] == nil {
+            userPresenceRefs[normalizedUserId] = [:]
         }
+        userPresenceRefs[normalizedUserId]?[mapKey] = metadata ?? [:]
 
         // 2. Recalculate best state based on most recent timestamp
         recalculateUserActivity(userId: normalizedUserId)
     }
 
-    private func handlePresenceLeave(userId: String, metadata: [String: Any]?) {
-        let normalizedUserId = userId.lowercased()
-
-        // 1. Remove specific connection ref
-        if let phxRef = metadata?["phx_ref"] as? String {
-            userPresenceRefs[normalizedUserId]?.removeValue(forKey: phxRef)
+    private func handlePresenceLeave(mapKey: String, metadata: [String: Any]?) {
+        // If metadata is nil (some LEAVE events), we must scan all users for this mapKey
+        if let userId = metadata?["user_id"] as? String {
+             let normalizedUserId = userId.lowercased()
+             userPresenceRefs[normalizedUserId]?.removeValue(forKey: mapKey)
+             recalculateUserActivity(userId: normalizedUserId)
+        } else {
+             // Fallback: Scan all tracking buckets for this mapKey
+             for (userId, var refs) in userPresenceRefs {
+                 if refs[mapKey] != nil {
+                     refs.removeValue(forKey: mapKey)
+                     userPresenceRefs[userId] = refs
+                     recalculateUserActivity(userId: userId)
+                 }
+             }
         }
-
-        // 2. Recalculate or mark offline
-        recalculateUserActivity(userId: normalizedUserId)
     }
 
     private func recalculateUserActivity(userId: String) {

@@ -429,37 +429,44 @@ actor SupabaseRealtimeClient {
         if event == "presence_diff" {
             // Handle joins
             if let joins = payload["joins"] as? [String: Any] {
-                for (key, data) in joins {
-                    let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
-                    let metadata = metas?.first
-
-                    // Pass the Phoenix map key as 'userId' to ensure unique connection tracking.
-                    // The actual user's UUID is still inside the metadata dictionary.
-                    for handler in presenceHandlers.values {
-                        handler(.join, key, metadata)
+                for (_, data) in joins {
+                    if let metas = (data as? [String: Any])?["metas"] as? [[String: Any]] {
+                        for metadata in metas {
+                            if let phxRef = metadata["phx_ref"] as? String {
+                                for handler in presenceHandlers.values {
+                                    handler(.join, phxRef, metadata)
+                                }
+                            }
+                        }
                     }
                 }
             }
 
             // Handle leaves
             if let leaves = payload["leaves"] as? [String: Any] {
-                for (key, data) in leaves {
-                    let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
-                    let metadata = metas?.first
-
-                    for handler in presenceHandlers.values {
-                        handler(.leave, key, metadata)
+                for (_, data) in leaves {
+                    if let metas = (data as? [String: Any])?["metas"] as? [[String: Any]] {
+                        for metadata in metas {
+                            if let phxRef = metadata["phx_ref"] as? String {
+                                for handler in presenceHandlers.values {
+                                    handler(.leave, phxRef, metadata)
+                                }
+                            }
+                        }
                     }
                 }
             }
         } else if event == "presence_state" {
             // Initial state - treat all as joins
-            for (key, data) in payload {
-                let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
-                let metadata = metas?.first
-
-                for handler in presenceHandlers.values {
-                    handler(.join, key, metadata)
+            for (_, data) in payload {
+                if let metas = (data as? [String: Any])?["metas"] as? [[String: Any]] {
+                    for metadata in metas {
+                        if let phxRef = metadata["phx_ref"] as? String {
+                            for handler in presenceHandlers.values {
+                                handler(.join, phxRef, metadata)
+                            }
+                        }
+                    }
                 }
             }
         }

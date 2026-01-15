@@ -28,9 +28,9 @@ func registerUnlockRoutes(_ app: Application) {
         let body = try req.content.decode(UnlockRequest.self)
         let serviceKey = body.service ?? body.debridService ?? "realdebrid"
 
-        NSLog("🔓 Unlock request: infoHash=\(body.infoHash.prefix(12))..., fileIdx=\(body.fileIdx ?? 0)")
+        NSLog("%@", "🔓 Unlock request: infoHash=\(body.infoHash.prefix(12))..., fileIdx=\(body.fileIdx ?? 0)")
         if let season = body.season, let episode = body.episode {
-            NSLog("   📺 TV Show: S\(season)E\(episode)")
+            NSLog("%@", "   📺 TV Show: S\(season)E\(episode)")
         }
 
         guard !body.infoHash.isEmpty else {
@@ -40,7 +40,7 @@ func registerUnlockRoutes(_ app: Application) {
 
         // Get token from keychain
         guard let token = await keychain.get(service: serviceKey) else {
-            NSLog("❌ No token for service: \(serviceKey)")
+            NSLog("%@", "❌ No token for service: \(serviceKey)")
             throw Abort(.badRequest, reason: "No token stored for service: \(serviceKey)")
         }
 
@@ -69,7 +69,7 @@ func registerUnlockRoutes(_ app: Application) {
             response.body = .init(data: json)
             response.headers.contentType = .json
 
-            NSLog("✅ Unlocked successfully: \(result.filename)")
+            NSLog("%@", "✅ Unlocked successfully: \(result.filename)")
 
             return response
 
@@ -80,10 +80,10 @@ func registerUnlockRoutes(_ app: Application) {
             NSLog("❌ RealDebrid: timeout - treating as not cached to try next stream")
             throw Abort(.badGateway, reason: "RealDebrid timeout - trying next stream")
         } catch RDError.addMagnetFailed(let status, let message) { // FIXED: Use both parameters properly
-            NSLog("❌ RealDebrid: invalid torrent (status \(status)): \(message) - trying next stream")
+            NSLog("%@", "❌ RealDebrid: invalid torrent (status \(status)): \(message) - trying next stream")
             throw Abort(.badGateway, reason: "Invalid torrent - trying next stream")
         } catch {
-            NSLog("❌ Unlock error: \(error)")
+            NSLog("%@", "❌ Unlock error: \(error)")
             throw Abort(.internalServerError, reason: "Unlock failed: \(error.localizedDescription)")
         }
     }

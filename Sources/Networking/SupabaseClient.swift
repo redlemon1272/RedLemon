@@ -297,7 +297,7 @@ class SupabaseClient: RoomManager, UserManager {
         let sessionToUse: URLSession
         if useEphemeralSession {
             let config = URLSessionConfiguration.ephemeral
-            config.timeoutIntervalForRequest = 10.0
+            config.timeoutIntervalForRequest = 30.0
             config.timeoutIntervalForResource = 30.0
             sessionToUse = URLSession(configuration: config)
         } else {

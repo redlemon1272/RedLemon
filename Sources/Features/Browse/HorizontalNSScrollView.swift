@@ -30,7 +30,7 @@ struct VersionAwareHorizontalScrollView<Content: View>: View {
 /// A custom horizontal scroll view backed by AppKit's NSScrollView.
 /// Used to resolve nested scroll behavior issues on macOS 15+ where
 /// SwiftUI's native ScrollView consumes vertical scroll events.
-private struct HorizontalNSScrollView<Content: View>: NSViewRepresentable {
+private struct HorizontalNSScrollView<Content: View>: NSViewRepresentable { // OK: Landmine #49 checked (CustomNSScrollView implements scrollWheel)
     let content: Content
     let scrollOffset: Binding<CGFloat>?
 
@@ -79,7 +79,8 @@ private struct HorizontalNSScrollView<Content: View>: NSViewRepresentable {
         if let initialOffset = scrollOffset?.wrappedValue, initialOffset > 0 {
             // Schedule a check to restore scroll once layout happens
             // We use a slight delay to ensure SwiftUI has calculated frames
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
                 // Only scroll if content is wide enough
                 if let docView = scrollView.documentView, docView.frame.width > initialOffset {
                      scrollView.contentView.bounds.origin = NSPoint(x: initialOffset, y: 0)
@@ -134,7 +135,7 @@ private struct HorizontalNSScrollView<Content: View>: NSViewRepresentable {
     class Coordinator: NSObject {
         var scrollOffset: Binding<CGFloat>?
         weak var scrollView: NSScrollView?
-        private var updateWorkItem: DispatchWorkItem?
+        private var updateTask: Task<Void, Never>?
         
         init(scrollOffset: Binding<CGFloat>?) {
             self.scrollOffset = scrollOffset
@@ -161,15 +162,13 @@ private struct HorizontalNSScrollView<Content: View>: NSViewRepresentable {
             }
             
             // Debounce updates to prevent high-frequency state changes (60fps) triggering expensive View re-renders
-            updateWorkItem?.cancel()
-            
-            let item = DispatchWorkItem { [weak self] in
-                self?.scrollOffset?.wrappedValue = newX
+            updateTask?.cancel()
+            updateTask = Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 150_000_000) // 0.15s
+                if !Task.isCancelled {
+                    self.scrollOffset?.wrappedValue = newX
+                }
             }
-            updateWorkItem = item
-            
-            // 0.15s delay is enough to capture "stop" but fast enough to feel responsive
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: item)
         }
     }
 }

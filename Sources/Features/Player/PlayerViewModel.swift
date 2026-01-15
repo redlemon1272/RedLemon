@@ -1937,7 +1937,7 @@ class PlayerViewModel: ObservableObject {
 
             // 2. The Timeout Task
             Task {
-                try? await Task.sleep(nanoseconds: 8_000_000_000) // 8 seconds
+                try? await Task.sleep(nanoseconds: 35_000_000_000) // 35 seconds
                 NSLog("Background: ⏰ Timeout fired! Attempting to fail continuation...")
                 continuationWrapper.resume(throwing: NSError(domain: "PlayerViewModel", code: -2, userInfo: [NSLocalizedDescriptionKey: "Room creation timed out"]))
             }

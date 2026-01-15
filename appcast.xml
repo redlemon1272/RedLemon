@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.93 -->
+        <item>
+            <title>Version 1.0.93</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: restore horizontal scrolling for macOS 26 (Option C)</li><li>fix: prevent clipping of poster art in browse rows</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 19:51:07 -0500</pubDate>
+            <sparkle:version>93</sparkle:version>
+            <sparkle:shortVersionString>1.0.93</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.93.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="9wb4+/Hh1Gr7177NeWw4MapbZrpEEfXj78+P4Ydf33pT7nDOr5OLBZLl53dpT7k7GyjumzSyPTLZWtSqd/FmBQ==" length="72352075"
+            />
+        </item>
         <!-- v1.0.92 -->
         <item>
             <title>Version 1.0.92</title>

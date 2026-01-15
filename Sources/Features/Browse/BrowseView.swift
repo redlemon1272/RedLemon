@@ -517,20 +517,23 @@ struct BrowseView: View {
                     .fontWeight(.bold)
                     .padding(.horizontal)
 
-                // Grid layout for macOS 15+ compatibility (replaces horizontal scroll)
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), spacing: 16)], spacing: 16) {
-                    ForEach(history.prefix(14)) { historyItem in
-                        RecentlyWatchedCard(historyItem: historyItem)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                print("🖱️ Continue Watching clicked for: \(historyItem.mediaItem.name)")
-                                Task { @MainActor in
-                                    showWatchModeSelection(for: historyItem)
+                // Version-aware horizontal scroll view (Custom NSScrollView for macOS 15+, native for others)
+                VersionAwareHorizontalScrollView {
+                    HStack(spacing: 16) {
+                        ForEach(history) { historyItem in
+                            RecentlyWatchedCard(historyItem: historyItem)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    print("🖱️ Continue Watching clicked for: \(historyItem.mediaItem.name)")
+                                    Task { @MainActor in
+                                        showWatchModeSelection(for: historyItem)
+                                    }
                                 }
-                            }
+                        }
                     }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
+                .frame(height: 280) // Increased height to prevent clipping (MediaCard is ~260pt)
             }
             .padding(.top)
         }
@@ -1318,16 +1321,19 @@ struct StreamingServiceRow: View {
                     .fontWeight(.bold)
                     .padding(.horizontal)
 
-                // Grid layout for macOS 15+ compatibility (replaces horizontal scroll)
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), spacing: 16)], spacing: 16) {
-                    ForEach(items.prefix(14)) { item in
-                        MediaCard(item: item)
-                            .onTapGesture {
-                                onTap(item)
-                            }
+                // Version-aware horizontal scroll view (Custom NSScrollView for macOS 15+, native for others)
+                VersionAwareHorizontalScrollView {
+                    LazyHStack(spacing: 16) {
+                        ForEach(items) { item in
+                            MediaCard(item: item)
+                                .onTapGesture {
+                                    onTap(item)
+                                }
+                        }
                     }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
+                .frame(height: 280) // Increased height to prevent clipping (MediaCard is ~260pt)
             }
         }
     }
@@ -1368,16 +1374,19 @@ struct LazyStreamingServiceRow: View {
                 .padding(.horizontal)
                 .frame(height: 240)
             } else if !items.isEmpty {
-                // Grid layout for macOS 15+ compatibility (replaces horizontal scroll)
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), spacing: 16)], spacing: 16) {
-                    ForEach(items.prefix(14)) { item in
-                        OptimizedMediaCard(item: item)
-                            .onTapGesture {
-                                onTap(item)
-                            }
+                // Version-aware horizontal scroll view (Custom NSScrollView for macOS 15+, native for others)
+                VersionAwareHorizontalScrollView {
+                    LazyHStack(spacing: 16) {
+                        ForEach(items) { item in
+                            OptimizedMediaCard(item: item)
+                                .onTapGesture {
+                                    onTap(item)
+                                }
+                        }
                     }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
+                .frame(height: 280) // Increased height to prevent clipping (MediaCard is ~260pt)
             }
         }
         .onAppear {

@@ -818,15 +818,16 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 4. **Key Verification**: Agents MUST verify presence of Private Sparkle Key in Keychain (`./.build/artifacts/sparkle/bin/sign_update` check) BEFORE starting build.
 
 ## Release Protocol (The "Part 19" Standard)
-**Mandatory 5-Step Sequence:**
+**Mandatory 8-Step Sequence:**
 1.  **Code & Build**: Run `./build-app-debug.sh`. Verify 0 errors.
-2.  **User Validation (GATE)**: Ask user to test. **DO NOT PROCEED** without confirmation.
-3.  **Git Sync**: `git pull` (Change Log depends on this!) then `git push origin <branch>`.
-4.  **Generate Notes**: Run `./scripts/get-changelog.sh` to grab the list of changes since the last release. Copy the output.
-5.  **Release Script**: Run `./scripts/release.sh <VERSION> <BUILD> "<PASTE_NOTES_HERE>"`.
+2.  **Security Scan**: Run `./scripts/security-scan.sh`. Fix any **CRITICAL** issues immediately. Review WARNINGS.
+3.  **User Validation (GATE)**: Ask user to test. **DO NOT PROCEED** without confirmation.
+4.  **Git Sync**: `git pull` (Change Log depends on this!) then `git push origin <branch>`.
+5.  **Generate Notes**: Run `./scripts/get-changelog.sh` to grab the list of changes since the last release. Copy the output.
+6.  **Release Script**: Run `./scripts/release.sh <VERSION> <BUILD> "<PASTE_NOTES_HERE>"`.
     -   *Action*: Builds -> Packages DMG -> Signs -> Deploys to Server.
-6.  **Appcast Sync**: Push the auto-updated `appcast.xml` to GitHub.
-7.  **Merge & Tag**: Run `./scripts/merge-and-tag.sh <VERSION>` (e.g., `v1.0.71`) to merge the feature branch into `main` and create the release tag.
+7.  **Appcast Sync**: Push the auto-updated `appcast.xml` to GitHub.
+8.  **Merge & Tag**: Run `./scripts/merge-and-tag.sh <VERSION>` (e.g., `v1.0.71`) to merge the feature branch into `main` and create the release tag.
     -   *Action*: Fetches origin -> Checkouts main -> Merges branch -> Tags -> Pushes Main & Tag -> Returns to Branch.
 
 ## Manual Key Recovery (New Device)

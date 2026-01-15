@@ -59,7 +59,7 @@ class LobbyEventRouter: ObservableObject {
 
         // FIX: Ignore room closed messages for event rooms (they are persistent)
         if viewModel.room.type == .event {
-             NSLog("⚠️ Ignoring Room Closed signal for event room: \(viewModel.room.id)")
+             NSLog("⚠️ Ignoring Room Closed signal for event room: %@", viewModel.room.id)
              return
         }
 
@@ -109,7 +109,7 @@ class LobbyEventRouter: ObservableObject {
              // Unknown LOBBY command - log warning with detailed scalar analysis for debug
              let senderInfo = syncMessage.chatUsername ?? syncMessage.senderId ?? "Unknown"
              let scalars = command.unicodeScalars.map { String(format: "%02x", $0.value) }.joined(separator: " ")
-             NSLog("⚠️ Unknown lobby command received: '\(command)' from \(senderInfo) (Hex: \(scalars))")
+             NSLog("⚠️ Unknown lobby command received: '%@' from %@ (Hex: %@)", command, senderInfo, scalars)
         }
     }
 
@@ -119,8 +119,8 @@ class LobbyEventRouter: ObservableObject {
         if viewModel.isHost {
              let guestUsername = syncMessage.chatUsername ?? "Guest"
              let guestId = syncMessage.senderId ?? UUID().uuidString
-             NSLog("👋 Host received: Guest '\(guestUsername)' joined room \(viewModel.room.id)")
-             NSLog("   Guest ID: \(guestId), Total participants: \(viewModel.participants.count + 1)")
+             NSLog("👋 Host received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
+             NSLog("   Guest ID: %@, Total participants: %d", guestId, viewModel.participants.count + 1)
 
              // Presence callback handles this already. Removing to prevent double messages.
              // But we add to local list just in case (though presence should sync it)
@@ -135,7 +135,7 @@ class LobbyEventRouter: ObservableObject {
 
              // Log updated room status
              let readyCount = viewModel.participants.filter { $0.isReady }.count
-             NSLog("👥 Room status after join: \(viewModel.participants.count) participants, \(readyCount) ready")
+             NSLog("👥 Room status after join: %d participants, %d ready", viewModel.participants.count, readyCount)
 
              // VOTE SYNC: Re-broadcast host's current vote so late joiners see it
              // (AI Bible Landmine #13: ephemeral state must be re-synced on join)
@@ -143,7 +143,7 @@ class LobbyEventRouter: ObservableObject {
          } else {
              // Non-host received guest join notification
              let guestUsername = syncMessage.chatUsername ?? "Guest"
-             NSLog("👋 Received: Guest '\(guestUsername)' joined room \(viewModel.room.id)")
+             NSLog("👋 Received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
          }
     }
 
@@ -163,7 +163,7 @@ class LobbyEventRouter: ObservableObject {
                     chatUsername: viewModel.appState?.currentUsername ?? "Host"
                 )
                 try? await viewModel.realtimeManager?.sendSyncMessage(syncMsg)
-                NSLog("📡 Vote sync: Re-broadcasted vote for item \(itemId.prefix(8)) to new joiner")
+                NSLog("📡 Vote sync: Re-broadcasted vote for item %@ to new joiner", String(itemId.prefix(8)))
             }
         }
     }
@@ -186,18 +186,18 @@ class LobbyEventRouter: ObservableObject {
             let recipientRole = viewModel.isHost ? "Host" : "Guest"
             let stateStr = isReady ? "READY" : "NOT READY"
 
-            NSLog("📡 \(recipientRole) received: '\(username)' marked as \(stateStr) via Realtime")
-            NSLog("   Sender ID: \(senderId), Room: \(viewModel.room.id)")
+            NSLog("📡 %@ received: '%@' marked as %@ via Realtime", recipientRole, username, stateStr)
+            NSLog("   Sender ID: %@, Room: %@", senderId, viewModel.room.id)
 
             // Log room-wide ready status
             let readyCount = viewModel.participants.filter { $0.isReady }.count
             let totalCount = viewModel.participants.count
-            NSLog("👥 Room ready status updated: \(readyCount)/\(totalCount) participants ready")
+            NSLog("👥 Room ready status updated: %d/%d participants ready", readyCount, totalCount)
 
             viewModel.chatManager.addSystemMessage(isReady ? .userReady : .userNotReady, userName: username, data: [:])
         } else {
             let stateStr = isReady ? "LOBBY_READY" : "LOBBY_UNREADY"
-            NSLog("⚠️ Received \(stateStr) from unknown participant: \(syncMessage.senderId ?? "unknown")")
+            NSLog("⚠️ Received %@ from unknown participant: %@", stateStr, syncMessage.senderId ?? "unknown")
         }
     }
 
@@ -233,7 +233,7 @@ class LobbyEventRouter: ObservableObject {
 
         let action = isVoting ? "voted for" : "unvoted from"
         let username = syncMessage.chatUsername ?? "User"
-        NSLog("👍 Received: \(username) \(action) playlist item \(itemId.prefix(8))")
+        NSLog("👍 Received: %@ %@ playlist item %@", username, action, String(itemId.prefix(8)))
     }
 
     private func handleLobbyKick(_ chatText: String) async {
@@ -351,7 +351,7 @@ class LobbyEventRouter: ObservableObject {
                         print("🛡️ Guest: Cleared stale stream optimization data (Fallback Mode)")
                     }
                 }
-                NSLog("📺 Guest: Set season/episode from local state: S\(season)E\(episode)")
+                NSLog("📺 Guest: Set season/episode from local state: S%dE%d", season, episode)
             }
             // Continue with playback even if we couldn't fetch fresh state
             guard let mediaItem = viewModel.room.mediaItem, let appState = viewModel.appState else {
@@ -406,7 +406,7 @@ class LobbyEventRouter: ObservableObject {
         // Push update to AppState
         viewModel.appState?.player.currentWatchPartyRoom = targetRoom
 
-        NSLog("✅ Guest: Synced stream info from Host (Hash: \(roomState.streamHash?.prefix(8) ?? "nil")) - URL cleared for fresh unlock")
+        NSLog("✅ Guest: Synced stream info from Host (Hash: %@) - URL cleared for fresh unlock", String(roomState.streamHash?.prefix(8) ?? "nil"))
 
         // FIX (v1.0.81): CRITICAL - Also clear preResolvedStream!
         // preloadStream() cached the host's RD URL during LOBBY_PREPARE_PLAYBACK.
@@ -423,7 +423,7 @@ class LobbyEventRouter: ObservableObject {
         if let hash = roomState.streamHash {
             Task {
                 await RealDebridClient.shared.clearCache(forHash: hash)
-                NSLog("🗑️ Guest: RD cache cleared for hash: \(hash.prefix(8))...")
+                NSLog("🗑️ Guest: RD cache cleared for hash: %@...", String(hash.prefix(8)))
             }
         }
 
@@ -461,7 +461,7 @@ class LobbyEventRouter: ObservableObject {
                 viewModel.room.season = season
                 viewModel.room.episode = episode
             }
-            NSLog("📺 Guest: Set season/episode from DB (Realtime path): S\(season)E\(episode)")
+            NSLog("📺 Guest: Set season/episode from DB (Realtime path): S%dE%d", season, episode)
         } else {
             // Only warn if it's a series
             if viewModel.room.mediaItem?.type == "series" {
@@ -497,7 +497,7 @@ class LobbyEventRouter: ObservableObject {
         // Final sync wait if needed (though loop is approx 3s)
         // We just proceed now.
 
-        NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, finished countdown loop")
+        NSLog("🎬 Guest: Fetch took %@s, finished countdown loop", String(format: "%.3f", fetchDuration))
 
         // Final validation: Room still exists and is still playing?
         // (Prevent race condition where host stopped while guest was counting down)
@@ -531,7 +531,7 @@ class LobbyEventRouter: ObservableObject {
             return
         }
 
-        NSLog("🎬 Guest: Launching player for \(mediaItem.name)")
+        NSLog("🎬 Guest: Launching player for %@", mediaItem.name)
 
         await appState.player.playMedia(
             mediaItem,
@@ -557,7 +557,7 @@ class LobbyEventRouter: ObservableObject {
         if viewModel.room.type == .event { return }
 
         let chatText = syncMessage.chatText ?? ""
-        NSLog("🎬 Guest: Received PREPARE signal: \(chatText)")
+        NSLog("🎬 Guest: Received PREPARE signal: %@", chatText)
         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host is preparing playback..."])
 
         // 1. Extract Hash/FileIdx from Payload (Fast Path)
@@ -569,7 +569,7 @@ class LobbyEventRouter: ObservableObject {
         if parts.count >= 2 {
             targetHash = parts[1]
             if targetHash?.isEmpty == true { targetHash = nil } // Handle empty string
-            NSLog("✅ Guest: Extracted Hash from Payload: \(targetHash ?? "nil")")
+            NSLog("✅ Guest: Extracted Hash from Payload: %@", targetHash ?? "nil")
         }
 
         // 2. Fetch fresh room state (Fallback / Hydration)

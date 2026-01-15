@@ -193,7 +193,7 @@ class LobbyDatabaseManager: ObservableObject {
         // 3. Check for stale "is_playing" signal (e.g. Host crashed or failed to clear DB)
         let activityAge = Date().timeIntervalSince(roomState.lastActivity)
         if activityAge > 60 {
-            NSLog("🛑 Guest: Ignoring stale playback signal (Age: \(Int(activityAge))s)")
+            NSLog("🛑 Guest: Ignoring stale playback signal (Age: %ds)", Int(activityAge))
             return
         }
 
@@ -225,13 +225,13 @@ class LobbyDatabaseManager: ObservableObject {
                 viewModel.countdown = i
                 try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
             }
-            
+
             // Mark session as started (Idempotency)
             // We use ONLY the streamHash (not lastActivity) to prevent loops when Host keeps playing
             let sessionId = roomState.streamHash ?? ""
             if !sessionId.isEmpty {
                 viewModel.lastAutoStartedSessionId = sessionId
-                NSLog("✅ Guest: Idempotency Lock Set -> \(sessionId.prefix(8))")
+                NSLog("✅ Guest: Idempotency Lock Set -> %@", String(sessionId.prefix(8)))
             }
 
             NSLog("🎬 Guest: Starting playback after database fallback detection")
@@ -282,7 +282,7 @@ class LobbyDatabaseManager: ObservableObject {
                 currentRoom.unlockedStreamURL = roomState.unlockedStreamUrl
 
                 appState.player.currentWatchPartyRoom = currentRoom
-                NSLog("✅ Guest: Synced stream details from DB fallback (Hash: \(roomState.streamHash?.prefix(8) ?? "nil"))")
+                NSLog("✅ Guest: Synced stream details from DB fallback (Hash: %@)", String(roomState.streamHash?.prefix(8) ?? "nil"))
             }
 
             // CRITICAL: Set season/episode from room BEFORE playMedia()
@@ -298,7 +298,7 @@ class LobbyDatabaseManager: ObservableObject {
                     viewModel.room.season = season
                     viewModel.room.episode = episode
                 }
-                NSLog("📺 Guest: Set season/episode from DB: S\(season)E\(episode)")
+                NSLog("📺 Guest: Set season/episode from DB: S%dE%d", season, episode)
             } else {
                 // Only warn if it's a series
                 if viewModel.room.mediaItem?.type == "series" {
@@ -310,7 +310,7 @@ class LobbyDatabaseManager: ObservableObject {
             if roomState.playbackPosition > 5 {
                 await MainActor.run {
                     appState.player.resumeFromTimestamp = TimeInterval(roomState.playbackPosition)
-                    NSLog("⏩ Guest: Pre-setting start time to host position: \(roomState.playbackPosition)s")
+                    NSLog("⏩ Guest: Pre-setting start time to host position: %ds", roomState.playbackPosition)
                 }
             }
 

@@ -35,7 +35,7 @@ class LobbyPresenceManager: ObservableObject {
 
                          // FIX: Ignore room closed messages for event rooms (they are persistent)
                          if viewModel.room.type == .event {
-                             NSLog("⚠️ Ignoring Room DELETE signal for event room: \(viewModel.room.id)")
+                             NSLog("⚠️ Ignoring Room DELETE signal for event room: %@", viewModel.room.id)
                              return
                          }
 
@@ -178,7 +178,7 @@ class LobbyPresenceManager: ObservableObject {
                             // If the participant in the list has a DIFFERENT phxRef, they have already re-connected/updated.
                             // So this leave is for their OLD session.
                             if let currentPhxRef = participant.phxRef, currentPhxRef != leavingPhxRef {
-                                NSLog("🛡️ Ignoring stale LEAVE for \(participant.name) (Ref mismatch: Old=\(leavingPhxRef), New=\(currentPhxRef))")
+                                NSLog("🛡️ Ignoring stale LEAVE for %@ (Ref mismatch: Old=%@, New=%@)", participant.name, leavingPhxRef, currentPhxRef)
                                 return
                             }
 
@@ -215,9 +215,9 @@ class LobbyPresenceManager: ObservableObject {
         // Update participant ready state locally
         if let index = viewModel.participants.firstIndex(where: { $0.id == viewModel.participantId }) {
             viewModel.participants[index].isReady = isReady
-            NSLog("✅ Updated local participant ready state for \(currentUsername)")
+            NSLog("✅ Updated local participant ready state for %@", currentUsername)
         } else {
-            NSLog("⚠️ Could not find participant with ID \(viewModel.participantId) to update ready state")
+            NSLog("⚠️ Could not find participant with ID %@ to update ready state", viewModel.participantId)
         }
 
         // Broadcast ready state via Realtime
@@ -236,18 +236,18 @@ class LobbyPresenceManager: ObservableObject {
             do {
                 if let manager = viewModel.realtimeManager, await manager.isRealtimeConnected() {
                     try await manager.sendSyncMessage(syncMsg)
-                    NSLog("📡 Successfully broadcasted \(readyStatus) state via Realtime to room \(viewModel.room.id)")
+                    NSLog("📡 Successfully broadcasted %@ state via Realtime to room %@", readyStatus, viewModel.room.id)
                 } else {
-                    NSLog("⚠️ Realtime not connected, falling back to database polling for \(readyStatus) state")
+                    NSLog("⚠️ Realtime not connected, falling back to database polling for %@ state", readyStatus)
                 }
 
                 // Log room-wide ready status
                 let readyCount = viewModel.participants.filter { $0.isReady }.count
                 let totalCount = viewModel.participants.count
-                NSLog("👥 Room ready status updated: \(readyCount)/\(totalCount) participants ready")
+                NSLog("👥 Room ready status updated: %d/%d participants ready", readyCount, totalCount)
 
             } catch {
-                NSLog("❌ Failed to broadcast \(readyStatus) state via Realtime: \(error)")
+                NSLog("❌ Failed to broadcast %@ state via Realtime: %@", readyStatus, String(describing: error))
                 // Continue with database polling fallback
             }
         }
@@ -259,11 +259,11 @@ class LobbyPresenceManager: ObservableObject {
         guard let viewModel = viewModel else { return }
 
         if viewModel.mutedUserIds.contains(participantId) {
-            NSLog("🔊 Lobby: Unmuting participant \(participantId)")
+            NSLog("🔊 Lobby: Unmuting participant %@", participantId)
             viewModel.mutedUserIds.remove(participantId)
             viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Unmuted participant"])
         } else {
-            NSLog("🔇 Lobby: Muting participant \(participantId)")
+            NSLog("🔇 Lobby: Muting participant %@", participantId)
             viewModel.mutedUserIds.insert(participantId)
             viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Muted participant"])
         }
@@ -285,7 +285,7 @@ class LobbyPresenceManager: ObservableObject {
                 if otherItemId != itemId && otherVotes.contains(userId) {
                     otherVotes.remove(userId)
                     viewModel.playlistVotes[otherItemId] = otherVotes
-                    NSLog("👍 Lobby: Removed previous vote from item \(otherItemId.prefix(8)) (single vote enforcement)")
+                    NSLog("👍 Lobby: Removed previous vote from item %@ (single vote enforcement)", String(otherItemId.prefix(8)))
                 }
             }
             votes.insert(userId)
@@ -295,7 +295,7 @@ class LobbyPresenceManager: ObservableObject {
         viewModel.playlistVotes[itemId] = votes
 
         let action = isVoting ? "voted for" : "unvoted from"
-        NSLog("👍 Lobby: \(currentUsername) \(action) playlist item \(itemId.prefix(8))")
+        NSLog("👍 Lobby: %@ %@ playlist item %@", currentUsername, action, String(itemId.prefix(8)))
 
         // Broadcast via Realtime
         Task { [weak self] in
@@ -316,7 +316,7 @@ class LobbyPresenceManager: ObservableObject {
                     NSLog("📡 Successfully broadcasted vote state via Realtime")
                 }
             } catch {
-                NSLog("❌ Failed to broadcast vote state: \(error)")
+                NSLog("❌ Failed to broadcast vote state: %@", String(describing: error))
             }
         }
     }
@@ -510,7 +510,7 @@ class LobbyPresenceManager: ObservableObject {
                     // This is a legitimate "User Left" event
                     viewModel.chatManager.addSystemMessage(.userLeft, userName: localP.name, data: [:])
                     viewModel.connectedUserIds.remove(localP.id) // Ensure we track this disconnect
-                    NSLog("👋 \(localP.name) left room (confirmed by DB polling)")
+                    NSLog("👋 %@ left room (confirmed by DB polling)", localP.name)
                 }
             }
 
@@ -520,7 +520,7 @@ class LobbyPresenceManager: ObservableObject {
                 if !currentIds.contains(p.id.lowercased()) {
                      // We don't log here to avoid double-logging if Realtime caught it
                      // specific logging could happen if needed
-                     NSLog("👋 \(p.name) synced from database")
+                     NSLog("👋 %@ synced from database", p.name)
                 }
             }
 
@@ -542,17 +542,17 @@ class LobbyPresenceManager: ObservableObject {
                                 let errStr = String(describing: error)
                                 print("🔍 Lobby: Self-Heal Error Debug: '\(errStr)'") // Trap log
 
-                                if errStr.localizedCaseInsensitiveContains("foreign key constraint") || 
+                                if errStr.localizedCaseInsensitiveContains("foreign key constraint") ||
                                    errStr.localizedCaseInsensitiveContains("room_participants_room_id_fkey") {
                                      print("💀 Lobby: Room deleted during Host Self-Heal. Exiting.")
-                                     await MainActor.run { 
+                                     await MainActor.run {
                                          viewModel.appState?.currentView = .browse
                                          // Clear invalid room state
                                          viewModel.appState?.player.currentRoomId = nil
                                          viewModel.appState?.player.currentWatchPartyRoom = nil
                                      }
                                      viewModel.stopPolling() // Stop this loop
-                                     return 
+                                     return
                                 }
                             }
                          }
@@ -560,7 +560,7 @@ class LobbyPresenceManager: ObservableObject {
                 }
 
         } catch {
-            NSLog("⚠️ Lobby: Failed to poll participants: \(error)")
+            NSLog("⚠️ Lobby: Failed to poll participants: %@", String(describing: error))
         }
     }
 }

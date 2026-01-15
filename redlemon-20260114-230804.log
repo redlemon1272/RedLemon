@@ -1,0 +1,884 @@
+2026-01-14 23:08:05.406 RedLemon[10693:462178] 🪟 Set initial window to expanded size: (0.0, 120.0, 1280.0, 655.0)
+2026-01-14 23:08:05.406 RedLemon[10693:462178] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-14 23:08:05.455 RedLemon[10693:462178] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-14 23:08:05.456 RedLemon[10693:462178] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-14 23:08:05.488 RedLemon[10693:462178] ✅ Playback state reset complete - starting in browse view
+2026-01-14 23:08:05.488 RedLemon[10693:462178] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-14 23:08:05.488 RedLemon[10693:462178] 🧪 Testing Profile: debug
+2026-01-14 23:08:05.490 RedLemon[10693:462185] 📂 Loaded 5 credential(s) from cache
+2026-01-14 23:08:05.491 RedLemon[10693:462178] ✅ Keychain: Found stored username: lemontom
+2026-01-14 23:08:05.492 RedLemon[10693:462178] 🔍 Supabase: Looking up user 'lemontom' in database...
+2026-01-14 23:08:05.492 RedLemon[10693:462185] 🔍 SupabaseClient: Looking up user by username 'lemontom'
+2026-01-14 23:08:06.174 RedLemon[10693:462183] 📡 SupabaseClient: User lookup response received (400 bytes)
+2026-01-14 23:08:06.182 RedLemon[10693:462183] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-14 23:08:06.182 RedLemon[10693:462183] 👤 SupabaseClient: Found user - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-14 23:08:06.221 RedLemon[10693:462178] ✅ AUTH SUCCESS: User authenticated - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-14 23:08:06.221 RedLemon[10693:462178] 🎯 AppState: currentUsername=lemontom, currentUserId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-14 23:08:09.106 RedLemon[10693:462178] 🏁 AUTH COMPLETE: Final state - username=lemontom, userId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-14 23:08:09.111 RedLemon[10693:462178] 🚀 RedLemon: Starting HTTP server...
+2026-01-14 23:08:09.112 RedLemon[10693:462178] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/RedLemon-Native
+2026-01-14 23:08:09.125 RedLemon[10693:462178] ✅ RedLemon: HTTPServer instance created
+2026-01-14 23:08:09.125 RedLemon[10693:462178] ✅ RedLemon: Server marked as ready (Optimistic)
+2026-01-14 23:08:09.125 RedLemon[10693:462184] 📡 RedLemon: Server starting on port 47253...
+2026-01-14 23:08:09.155 RedLemon[10693:462178] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-14 23:08:09.155 RedLemon[10693:462178] 🏥 [AppState] Starting global provider health check...
+2026-01-14 23:08:09.155 RedLemon[10693:462178] 🔍 Performing startup checks...
+2026-01-14 23:08:09.155 RedLemon[10693:462178] ✅ Username-based authentication ready
+2026-01-14 23:08:09.218 RedLemon[10693:462263] 🔐 Signed request to /check-payment
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"422D74C9-0176-448E-996E-2C5B0EBE0A44","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+📦 Current build: 96, Latest build: 96
+✅ App is up to date (current: 96, latest: 96)
+✅ [EventsConfig] Fetched movie_events version 1536 with 409 movies
+✅ [EventsConfig] Using cached movie_events config (version 1536, 409 movies)
+✅ [EventsView] Loaded 409 movies from config version 1536
+🗓 AppState: Updated schedule epoch to 2026-01-08 16:09:26 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-15 04:34:26 +0000
+⏰ AppState: Scheduling update in 1580 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0480687/img (901283 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt29268110/img (759160 bytes)
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+⏰ AppState: Next schedule update set for Event End: 2026-01-15 04:34:26 +0000
+⏰ AppState: Scheduling update in 1578 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-15 04:34:26 +0000
+⏰ AppState: Scheduling update in 1578 seconds
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"7F1EF14B-78E4-4230-872B-41232A830F90","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrL_F-ZRX46AhmB","is_premium":true,"last_seen":"2026-01-15T04:08:08.316Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"B0A61745-4EBC-43CC-9E9C-89710BF2B572","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":6798732,"event":"INSERT","filter":"receiver_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"},{"id":83853945,"event":"INSERT","filter":"sender_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+💰 LicenseManager: Starting hybrid license check...
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-14 23:08:09.718 RedLemon[10693:462263] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-14 23:08:09.718 RedLemon[10693:462263] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-14 23:08:10.332 RedLemon[10693:462178] 🔄 Checking for app updates...
+2026-01-14 23:08:11.261 RedLemon[10693:462178] ✅ [AppState] Provider health check complete (found 7 services)
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+👤 LicenseManager: Profile expiry: Optional(2026-01-18 17:23:32 +0000)
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+🎉 License updated! Expires: 2026-01-18 17:23:32 +0000
+📦 Current build: 96, Latest build: 96
+✅ App is up to date (current: 96, latest: 96)
+✅ SubDLClient initialized
+✅ TimeService: Synced! Offset: 0.167s (RTT: 407ms)
+   Local:  2026-01-15 04:08:10 +0000
+   Server: 2026-01-15 04:08:10 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrL_Y_8MzE6AhsB","phx_ref_prev":"GIrL_F-ZRX46AhmB","is_premium":true,"last_seen":"2026-01-15T04:08:13.428Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrL_F-ZRX46AhmB","is_premium":true,"last_seen":"2026-01-15T04:08:08.316Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-15 04:34:26 +0000
+⏰ AppState: Scheduling update in 1568 seconds
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+📡 SocialService: Updated status - Browsing: 
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: 1EE2C462-2E81-4300-A75B-168EF2EF94A6]
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for trending
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+✅ Loaded 15 movies
+🧹 Deduplication: 50 → 49 items
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrL_6hd9Vs6AhvB","phx_ref_prev":"GIrL_Y_8MzE6AhsB","is_premium":true,"last_seen":"2026-01-15T04:08:22.024Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrL_Y_8MzE6AhsB","phx_ref_prev":"GIrL_F-ZRX46AhmB","is_premium":true,"last_seen":"2026-01-15T04:08:13.428Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/326223302/s332/img (38315 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/169344232/s332/img (26394 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315083639/s332/img (51317 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/77205086/s332/img (61880 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/62371097/s332/img (36484 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/258767348/s332/img (56259 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/333077339/s332/img (29437 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302976085/s332/img (50443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/305242261/s332/img (33518 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300722936/s332/img (40206 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/180011634/s332/img (21463 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/239183975/s332/img (58750 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/275806222/s332/img (48443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/306827298/s332/img (48823 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336520273/s332/img (57416 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/79413112/s332/img (31550 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/304178275/s332/img (55529 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328602380/s332/img (48174 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336226499/s332/img (50399 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336729532/s332/img (61907 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338574331/s332/img (29464 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/10568015/s332/img (26635 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334037963/s332/img (44500 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/326347301/s332/img (45225 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302218887/s332/img (43813 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/304360454/s332/img (34028 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330298309/s332/img (59242 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302993962/s332/img (64972 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330575949/s332/img (33224 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/153857355/s332/img (21435 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/240269951/s332/img (32641 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176227378/s332/img (58036 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/166839313/s332/img (47328 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331994893/s332/img (37258 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/123900901/s332/img (51674 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321552009/s332/img (34807 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328819711/s332/img (37494 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340816823/s332/img (34607 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/239897076/s332/img (38227 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/178334676/s332/img (43560 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/79413112/s332/img (31550 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/70540361/s332/img (62623 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/72162486/s332/img (30273 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320977032/s332/img (29350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/306827298/s332/img (48823 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/270724834/s332/img (40466 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/254439975/s332/img (35178 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331924998/s332/img (45255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336393313/s332/img (35742 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335800041/s332/img (48278 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338962154/s332/img (51864 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340662430/s332/img (70566 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31227572/img (35380 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12300742/img (13162 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32916440/img (25874 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29780866/img (35175 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (19892026-01-14 23:08:30.076 RedLemon[10693:462178] 🎬 Creating Watch Party for: Smile 2
+2026-01-14 23:08:30.076 RedLemon[10693:462186] Background: ⏳ Starting room creation (Unstructured Race)...
+2026-01-14 23:08:30.077 RedLemon[10693:462186] Background: ▶️ createRoom task started (Direct Singleton Access)
+2026-01-14 23:08:30.077 RedLemon[10693:462186] 🎬 SupabaseClient: createRoom called for id: DW9B - ENTRY
+2026-01-14 23:08:30.077 RedLemon[10693:462186] 🎬 SupabaseClient: Creating room 'DW9B' for host 'lemontom'...
+2026-01-14 23:08:30.078 RedLemon[10693:462186] 🔐 Signed request to /rooms
+2026-01-14 23:08:30.678 RedLemon[10693:462489] ✅ SupabaseClient: Room creation request completed (received response)
+2026-01-14 23:08:30.679 RedLemon[10693:462489] Background: ✅ createRoom task finished
+2026-01-14 23:08:31.735 RedLemon[10693:462178] ✅ PlayerVM: currentWatchPartyRoom set to DW9B
+4 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31227572/img (35380 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29567915/img (28516 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (53296 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0372784/img (26368 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0266915/img (29028 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1457767/img (35574 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/44829556/s332/img (35592 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/180860009/s332/img (39178 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/304178275/s332/img (55529 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0328107/img (29449 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338574331/s332/img (29464 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt6604188/img (14626 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt8041270/img (19790 bytes)
+🖼️ [CACHE] Cached image data for key: https://m.media-amazon.com/images/M/MV5BNTEyNmEwOWUtYzkyOC00ZTQ4LTllZmUtMjk0Y2YwOGUzYjRiXkEyXkFqcGc@._V1_SX250.jpg (20215 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29268110/img (20494 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt28015403/img (17099 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt22740896/img (31424 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29927663/img (36770 bytes)
+⏭️ Skipping load for showtime - already loaded 15 items
+⏭️ Skipping load for starz - already loaded 15 items
+⏭️ Skipping load for peacock - already loaded 15 items
+⏭️ Skipping load for hulu - already loaded 15 items
+⏭️ Skipping load for paramount - already loaded 15 items
+⏭️ Skipping load for appleTv - already loaded 15 items
+⏭️ Skipping load for hbo - already loaded 15 items
+⏭️ Skipping load for disney - already loaded 15 items
+⏭️ Skipping load for prime - already loaded 15 items
+⏭️ Skipping load for netflix - already loaded 15 items
+⏭️ Skipping load for trending - already loaded 15 items
+🖱️ Continue Watching clicked for: Smile 2
+📼 Resume playback called - mode: watchParty, shouldResume: false, timestamp: 3130.252s
+✅ Cleared resumeFromTimestamp - starting from beginning
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+⏰ AppState: Next schedule update set for Event End: 2026-01-15 04:34:26 +0000
+⏰ AppState: Scheduling update in 1558 seconds
+🎭 Lobby: Connecting to room DW9B...
+🚦 Lobby State: connecting
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+🔄 Lobby: Fetching fresh room state from Supabase...
+[ INFO ] GET /api/metadata/meta/movie/tt29268110 [request-id: 2C0A3EC6-0866-4FB6-8419-62C5DB0E79AC]
+[ INFO ] GET /api/metadata/meta/movie/tt29268110 [request-id: A6412BE3-772C-4142-9533-90860A758CAF]
+2026-01-14 23:08:32.056 RedLemon[10693:462490] 📡 SupabaseClient: updateRoomPlaylist called for room DW9B with 1 items, index: 0
+2026-01-14 23:08:32.107 RedLemon[10693:462184] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-14 23:08:32.142 RedLemon[10693:462186] ❌ [23:08:32.142] [NETWORK] [SupabaseClient.swift:336] Supabase API Error: duplicate key value violates unique constraint "room_participants_pkey"
+2026-01-14 23:08:32.159 RedLemon[10693:462184] ✅ SupabaseClient: Updated room playback (Playing: false, Pos: 0s, ClearedStream: false)
+2026-01-14 23:08:32.188 RedLemon[10693:462178] ✅ Host re-joined room DW9B in database (refreshing presence)
+2026-01-14 23:08:32.198 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:32.230 RedLemon[10693:462186] 🔐 SupabaseClient: Signing Identity Payload: '176845011296e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-14 23:08:32.230 RedLemon[10693:462186] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-14 23:08:32.288 RedLemon[10693:462208] ✅ SupabaseClient: Playlist updated successfully
+2026-01-14 23:08:32.335 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:32.335 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:32.426 RedLemon[10693:462178] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIrMAe6vj12QMB0h)
+2026-01-14 23:08:32.426 RedLemon[10693:462178] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIrMAe6vj12QMB0h)
+2026-01-14 23:08:32.473 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:32.473 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:38.184 RedLemon[10693:462184] Background: ⏰ Timeout fired! Attempting to fail continuation...
+📡 SocialService: Updated status - In Lobby: Smile 2: Smile 2
+🔌 Setting up Realtime channel: watch-party:DW9B
+   Role: Host
+   User ID: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:DW9B
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrMAds-vfw6AhxB","phx_ref_prev":"GIrL_6hd9Vs6AhvB","is_premium":true,"last_seen":"2026-01-15T04:08:31.874Z","room_id":"DW9B","started_at":"2026-01-15T04:08:31.874Z","status":"In Lobby: Smile 2","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}},"leaves":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrL_6hd9Vs6AhvB","phx_ref_prev":"GIrL_Y_8MzE6AhsB","is_premium":true,"last_seen":"2026-01-15T04:08:22.024Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🆕 Lobby: Auto-adding initial item to playlist: Smile 2
+📨 Received: {"ref":"777FE5E7-B300-4429-B5EB-E7832EFD29CC","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":98542851,"event":"*","filter":"id=eq.DW9B","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:DW9B"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"dad62078-f1c7-11f0-80fb-ee9e47993347":{"metas":[{"phx_ref":"GIrMAd3mJjCQMAzC","is_host":true,"joined_at":1768450111.899685,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:DW9B"}
+✅ Lobby: Loaded metadata for Smile 2
+💾 Cache SET: Metadata[meta_movie_tt29268110]
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:08:31", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:08:32.179Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Setting up Realtime channel: watch-party:DW9B
+   Role: Host
+   User ID: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:DW9B, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+✅ Lobby: Persisted initial playlist item
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"dad62078-f1c7-11f0-80fb-ee9e47993347":{"metas":[{"phx_ref":"GIrMAe6vj12QMB0h","phx_ref_prev":"GIrMAd3mJjCQMAzC","is_host":true,"joined_at":1768450112.1993709,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"dad62078-f1c7-11f0-80fb-ee9e47993347":{"metas":[{"phx_ref":"GIrMAd3mJjCQMAzC","is_host":true,"joined_at":1768450111.899685,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:08:31", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:08:32.317Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:08:32.456863", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:08:32.468Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-15 04:34:26 +0000
+⏰ AppState: Scheduling update in 1548 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"de7ebd84-f1c7-11f0-9d6c-ee9e47993347":{"metas":[{"phx_ref":"GIrMA0sUvBQ6Ah7B","is_premium":true,"last_seen":"2026-01-15T04:08:38.034Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrMA3r3bOE6AiAB","phx_ref_prev":"GIrMAds-vfw6AhxB","is_premium":true,"last_seen":"2026-01-15T04:08:38.821Z","room_id":"DW9B","started_at":"2026-01-15T04:08:31.874Z","status":"In Lobby: Smile 2","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}},"leaves":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrMAds-vfw6AhxB","phx_ref_prev":"GIrL_6hd9Vs6AhvB","is_premium":true,"last_seen":"2026-01-15T04:08:31.874Z","room_id":"DW9B","started_at":"2026-01-15T04:08:31.874Z","status":"In Lobby: Smile 2","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"de7ebd84-f1c7-11f0-9d6c-ee9e47993347":{"metas":[{"phx_ref":"GIrMBCydj-06AiAh","phx_ref_prev":"GIrMA0sUvBQ6Ah7B","is_premium":true,"last_seen":"2026-01-15T04:08:41.822Z","room_id":"DW9B","started_at":"2026-01-15T04:08:41.822Z","status":"In Lobby: Smile 2","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}},"leaves":{"de7ebd84-f1c7-11f0-9d6c-ee9e47993347":{"metas":[{"phx_ref":"GIrMA0sUvBQ6Ah7B","is_premium":true,"last_seen":"2026-01-15T04:08:38.034Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:08:32.456863", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"2026-01-14 23:08:42.038 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:42.038 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:42.038 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:42.039 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:42.287 RedLemon[10693:462490] 📨 Realtime: Received broadcast message
+2026-01-14 23:08:42.287 RedLemon[10693:462490]    Payload keys: position, chatUsername, senderId, timestamp, chatText, type
+2026-01-14 23:08:42.289 RedLemon[10693:462490] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-14 23:08:42.289 RedLemon[10693:462490] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-14 23:08:42.289 RedLemon[10693:462490] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:08:42.294 RedLemon[10693:462178] 👋 Host received: Guest 'ursinho' joined room DW9B
+2026-01-14 23:08:42.294 RedLemon[10693:462178]    Guest ID: 656daa91-33b4-4688-9135-c982ea52d7c9, Total participants: 3
+2026-01-14 23:08:42.294 RedLemon[10693:462178] 👥 Room status after join: 3 participants, 0 ready
+2026-01-14 23:08:42.356 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:42.356 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:42.404 RedLemon[10693:462178] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIrMBD5gjvOQMCEh)
+2026-01-14 23:08:42.404 RedLemon[10693:462178] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIrMBD5gjvOQMCEh)
+2026-01-14 23:08:43.128 RedLemon[10693:462178] 🎬 Host: Starting movie for 3 participants
+2026-01-14 23:08:43.198 RedLemon[10693:462209] 📤 Realtime: Sending message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-14 23:08:43.198 RedLemon[10693:462209]    Payload keys: chatUsername, chatText, type, timestamp, position, senderId
+2026-01-14 23:08:43.199 RedLemon[10693:462490] ✅ Realtime: Message broadcast complete
+2026-01-14 23:08:43.258 RedLemon[10693:462491] ✅ StreamService: Using provided metadata: Smile 2
+2026-01-14 23:08:43.258 RedLemon[10693:462491] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-14 23:08:43.258 RedLemon[10693:462491] ⚡️ StreamResolver: Resolving streams for tt29268110 (S0E0)
+2026-01-14 23:08:43.258 RedLemon[10693:462208] 📝 [APP] 🎬 StreamService: Starting resolution for: Smile 2 ["file": "StreamService.swift", "level": "INFO", "line": "104"]
+2026-01-14 23:08:43.258 RedLemon[10693:462208] 📝 [APP] SessionRecorder initialized
+2026-01-14 23:08:43.258 RedLemon[10693:462208] 📝 [APP] New Session Started ["app_version": "1.0.96", "build": "96", "session_id": "E05F4DF2-6980-4322-B89F-F5FCBEEAB7A4", "trigger_source": "watch_party_resolve", "user_id": "96E01CDB-36C0-4228-A6E4-A29A3C66BC8E"]
+2026-01-14 23:08:43.258 RedLemon[10693:462208] 📝 [APP] Target Content Set ["imdb_id": "tt29268110"]
+2026-01-14 23:08:43.259 RedLemon[10693:462208] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-14 23:08:43.319 RedLemon[10693:462490] 📨 Realtime: Received broadcast message
+2026-01-14 23:08:43.319 RedLemon[10693:462490]    Payload keys: senderId, chatUsername, position, timestamp, chatText, type
+2026-01-14 23:08:43.320 RedLemon[10693:462490] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-14 23:08:43.320 RedLemon[10693:462490] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-14 23:08:43.320 RedLemon[10693:462490] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:08:43.511 RedLemon[10693:462184]    📅 Filtering by year: 2024
+2026-01-14 23:08:43.920 RedLemon[10693:462208] 📝 [RESOLVER] Found Verified Stream ["hash": "e9c6725c74e4549b7bb4dc722419459814615c5a", "vote_count": "8"]
+name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:08:42.009Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:08:32.456863", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:08:42.009Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e0c9da88-f1c7-11f0-8ebe-ee9e47993347":{"metas":[{"phx_ref":"GIrMBDMCHrmQMCEB","is_host":false,"joined_at":1768450121.8860369,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e0c9da88-f1c7-11f0-8ebe-ee9e47993347":{"metas":[{"phx_ref":"GIrMBD5gjvOQMCEh","phx_ref_prev":"GIrMBDMCHrmQMCEB","is_host":false,"joined_at":1768450122.120267,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"e0c9da88-f1c7-11f0-8ebe-ee9e47993347":{"metas":[{"phx_ref":"GIrMBDMCHrmQMCEB","is_host":false,"joined_at":1768450121.8860369,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+ForEach<Array<Participant>, String, ParticipantRow>: the ID 656daa91-33b4-4688-9135-c982ea52d7c9 occurs multiple times within the collection, this will give undefined results!
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:08:42.33115", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:08:42.341Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"de7ebd84-f1c7-11f0-9d6c-ee9e47993347":{"metas":[{"phx_ref":"GIrMBHnEHsg6AiFB","phx_ref_prev":"GIrMBCydj-06AiAh","is_premium":true,"last_seen":"2026-01-15T04:08:43.118Z","room_id":"DW9B","started_at":"2026-01-15T04:08:41.822Z","status":"In Lobby: Smile 2","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}},"leaves":{"de7ebd84-f1c7-11f0-9d6c-ee9e47993347":{"metas":[{"phx_ref":"GIrMBCydj-06AiAh","phx_ref_prev":"GIrMA0sUvBQ6Ah7B","is_premium":true,"last_seen":"2026-01-15T04:08:41.822Z","room_id":"DW9B","started_at":"2026-01-15T04:08:41.822Z","status":"In Lobby: Smile 2","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Cache HIT: Metadata[meta_movie_tt29268110]
+[2026-01-15T04:08:43Z] [INFO] [StreamService.swift:104] 🎬 StreamService: Starting resolution for: Smile 2
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_RESOLVING","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":1768450123.1982942,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+🛡️ StreamResolver: Loaded 4 blocked streams from blacklist
+⚡️ StreamResolver: Found Community Verified stream with 8 votes!
+   ℹ️ Hash: e9c6725c74e4549b7bb4dc722419459814615c5a
+   ℹ️ Last Verified: 2026-01-15 03:17:05 +0000
+🔍 Searching SubDL: tt29268110 (movie)
+✅ Found 6 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.
+⚡️ StreamService: Testing verified stream viability...
+🔓 StreamService: Unlocking with infoHash: e9c6725c74e4...
+[ INFO ] POST /api/streams/unlock [request-id: A2C9E01D-446B-4B2F-998B-4ACC5F7C1EDF]
+2026-01-14 23:08:44.162 RedLemon[10693:462184] 🔓 Unlock request: infoHash=e9c6725c74e4..., fileIdx=0
+2026-01-14 23:08:44.162 RedLemon[10693:462184] ✅ Token found, attempting unlock...
+2026-01-14 23:08:46.173 RedLemon[10693:462184] ✅ Unlocked successfully: Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+2026-01-14 23:08:46.175 RedLemon[10693:462490] 📝 [RESOLVER] Stream Unlocked ["filename": "Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv", "is_generic": "false", "original_title": "Community Verified Stream (1080p)", "url_host": "chi3-4.download.real-debrid.com"]
+2026-01-14 23:08:46.175 RedLemon[10693:462490] 📥 StreamService: Pre-downloading 5 (capped from 6) subtitles...
+2026-01-14 23:08:46.175 RedLemon[10693:462490] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-14 23:08:46.176 RedLemon[10693:462491] 🔍 DEBUG: Processing subtitle URL: /subtitle/3419342-8342854.zip
+2026-01-14 23:08:46.176 RedLemon[10693:462208] 🔍 DEBUG: Processing subtitle URL: /subtitle/3433052-8356778.zip
+2026-01-14 23:08:46.176 RedLemon[10693:462490] 🔍 DEBUG: Processing subtitle URL: /subtitle/3422522-8346079.zip
+2026-01-14 23:08:46.176 RedLemon[10693:462184] 🔍 DEBUG: Processing subtitle URL: /subtitle/3419343-8342855.zip
+2026-01-14 23:08:46.176 RedLemon[10693:462490] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-14 23:08:46.176 RedLemon[10693:462208] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-14 23:08:46.176 RedLemon[10693:462184] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-14 23:08:46.176 RedLemon[10693:462491] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-14 23:08:46.176 RedLemon[10693:462490] 🔍 DEBUG: Processing subtitle URL: /subtitle/3434589-8358331.zip
+2026-01-14 23:08:46.176 RedLemon[10693:462490] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+✅ RD addMagnet: K3BQUZKASN5UA
+🎬 Movie: Found matching file for title 'Smile 2': /Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+📝 RD: Selecting file ID 1 for torrent K3BQUZKASN5UA
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/NETLUDXLUFO26978
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Verified stream is VIABLE. Returning immediately.
+🔒 StreamService: Has infoHash - forcing proper unlock flow (bypass cached URL)
+🔓 StreamService: Unlocking with infoHash: e9c6725c74e4...
+[ INFO ] POST /api/streams/unlock [request-id: 98D9B11B-EB01-4137-979E-D5FB64762B36]
+2026-01-14 23:08:46.181 RedLemon[10693:462184] 🔓 Unlock request: infoHash=e9c6725c74e4..., fileIdx=0
+2026-01-14 23:08:46.181 RedLemon[10693:462184] ✅ Token found, attempting unlock...
+2026-01-14 23:08:46.182 RedLemon[10693:462184] ✅ Unlocked successfully: Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+2026-01-14 23:08:46.184 RedLemon[10693:462490] 📝 [RESOLVER] Stream Unlocked ["filename": "Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv", "is_generic": "false", "original_title": "Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv", "url_host": "chi3-4.download.real-debrid.com"]
+2026-01-14 23:08:46.184 RedLemon[10693:462490] 📥 StreamService: Pre-downloading 5 (capped from 5) subtitles...
+2026-01-14 23:08:46.184 RedLemon[10693:462490] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-14 23:08:46.184 RedLemon[10693:462208] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0MTkzNDMtODM0Mjg1NS56aXA=?token=A1FFFD4F-7579-434A-B80E-1D5DAC65A2CA&filename=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+2026-01-14 23:08:46.184 RedLemon[10693:462491] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0MjI1MjItODM0NjA3OS56aXA=?token=A1FFFD4F-7579-434A-B80E-1D5DAC65A2CA&filename=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+2026-01-14 23:08:46.184 RedLemon[10693:462208] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2026-01-14 23:08:46.184 RedLemon[10693:462209] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0MzMwNTItODM1Njc3OC56aXA=?token=A1FFFD4F-7579-434A-B80E-1D5DAC65A2CA&filename=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+2026-01-14 23:08:46.184 RedLemon[10693:462490] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0MTkzNDItODM0Mjg1NC56aXA=?token=A1FFFD4F-7579-434A-B80E-1D5DAC65A2CA&filename=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+2026-01-14 23:08:46.184 RedLemon[10693:462490] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2026-01-14 23:08:46.185 RedLemon[10693:462209] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2026-01-14 23:08:46.185 RedLemon[10693:462491] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2026-01-14 23:08:46.185 RedLemon[10693:462208] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0MzQ1ODktODM1ODMzMS56aXA=?token=A1FFFD4F-7579-434A-B80E-1D5DAC65A2CA&filename=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+2026-01-14 23:08:46.185 RedLemon[10693:462208] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2026-01-14 23:08:46.224 RedLemon[10693:462184] 🔄 SupabaseClient: Resetting playback state for room DW9B
+2026-01-14 23:08:46.581 RedLemon[10693:462208] ✅ Persisted stream selection to room DW9B
+2026-01-14 23:08:46.581 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:46.581 RedLemon[10693:462178] ✅ Host: Stream resolved and persisted OK
+2026-01-14 23:08:46.581 RedLemon[10693:462178] ⏳ Host: Initiating handshake for 1 guests...
+2026-01-14 23:08:46.582 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:46.599 RedLemon[10693:462209] 📤 Realtime: Sending message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-14 23:08:46.600 RedLemon[10693:462209]    Payload keys: position, type, chatUsername, timestamp, chatText, senderId
+2026-01-14 23:08:46.600 RedLemon[10693:462208] ✅ Realtime: Message broadcast complete
+2026-01-14 23:08:46.718 RedLemon[10693:462490] 📨 Realtime: Received broadcast message
+2026-01-14 23:08:46.718 RedLemon[10693:462490]    Payload keys: timestamp, chatUsername, position, senderId, type, chatText
+2026-01-14 23:08:46.719 RedLemon[10693:462490] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-14 23:08:46.719 RedLemon[10693:462490] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-14 23:08:46.719 RedLemon[10693:462490] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:08:49.244 RedLemon[10693:462209] 📨 Realtime: Received broadcast message
+2026-01-14 23:08:49.245 RedLemon[10693:462209]    Payload keys: senderId, chatUsername, timestamp, chatText, type, position
+2026-01-14 23:08:49.245 RedLemon[10693:462209] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-14 23:08:49.245 RedLemon[10693:462209] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-14 23:08:49.245 RedLemon[10693:462209] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:08:49.245 RedLemon[10693:462178] ✅ Lobby: Participant 656daa91-33b4-4688-9135-c982ea52d7c9 is ready for stream
+2026-01-14 23:08:49.787 RedLemon[10693:462178] ✅ Host: All guests ready (1/1)! Starting countdown.
+2026-01-14 23:08:49.813 RedLemon[10693:462209] 📤 Realtime: Sending message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-14 23:08:49.814 RedLemon[10693:462209]    Payload keys: chatText, position, timestamp, chatUsername, senderId, type
+2026-01-14 23:08:49.814 RedLemon[10693:462490] ✅ Realtime: Message broadcast complete
+2026-01-14 23:08:49.814 RedLemon[10693:462178] ✅ Host: Successfully broadcast LOBBY_START_COUNTDOWN via Realtime
+2026-01-14 23:08:49.815 RedLemon[10693:462178] 📡 Realtime delivery confirmed for 2 guests
+2026-01-14 23:08:49.930 RedLemon[10693:462209] 📨 Realtime: Received broadcast message
+2026-01-14 23:08:49.930 RedLemon[10693:462209]    Payload keys: timestamp, chatUsername, position, senderId, type, chatText
+2026-01-14 23:08:49.931 RedLemon[10693:462209] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-14 23:08:49.931 RedLemon[10693:462209] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-14 23:08:49.931 RedLemon[10693:462209] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:08:50.027 RedLemon[10693:462178] ✅ Host: Set room playback state in database as fallback
+2026-01-14 23:08:50.100 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:50.100 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:08:52.822 RedLemon[10693:462178] 🎬 Host: Launching player for Smile 2
+2026-01-14 23:08:53.133 RedLemon[10693:462186] 📝 [PLAYER] Resumed
+2026-01-14 23:08:53.138 RedLemon[10693:462209] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi3-4.download.real-debrid.com/d/W5EKI5SNNOUMY41/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv"]
+✅ RD cache hit: e9c6725c74e4
+✅ StreamService: Stream unlocked successfully!
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": "e9c6725c74e4549b7bb4dc722419459814615c5a", "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:08:46", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi3-4.download.real-debrid.com/d/W5EKI5SNNOUMY41/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:08:46.553Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_PREPARE_PLAYBACK|e9c6725c74e4549b7bb4dc722419459814615c5a|0","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":1768450126.5995631,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+⏰ AppState: Next schedule update set for Event End: 2026-01-15 04:34:26 +0000
+⏰ AppState: Scheduling update in 1539 seconds
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_READY_FOR_PLAYBACK","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":1768450129.043493,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": "e9c6725c74e4549b7bb4dc722419459814615c5a", "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:08:49", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi3-4.download.real-debrid.com/d/W5EKI5SNNOUMY41/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:08:50.053Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🛑 LobbyPresence: Polling stopped
+🛑 LobbyDatabase: Polling stopped
+🛑 Lobby: Polling stopped (chat via Realtime only)
+✅ Host: Synced playlist state to AppState (Index: 0)
+🔌 Setting up Realtime channel: watch-party:DW9B
+   Role: Host
+   User ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:DW9B, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_movie_tt29268110]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0MTkzNDMtODM0Mjg1NS56aXA= [request-id: 0C94DC9C-2EFA-411D-974E-F59B42D354DA]
+2026-01-14 23:08:53.375 RedLemon[10693:462178] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIrMBsoD53SQMCGB)
+2026-01-14 23:08:53.375 RedLemon[10693:462178] 🛡️ Ignoring stale LEAVE for lemontom (Ref mismatch: Old=96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, New=GIrMBsoD53SQMCGB)
+2026-01-14 23:08:53.386 RedLemon[10693:462491] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-14 23:08:53.386 RedLemon[10693:462491] 📝 [PLAYER] Buffering Started
+📄 Subtitle request: L3N1YnRpdGxlLzM0MTkz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3419343-8342855.zip
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"dad62078-f1c7-11f0-80fb-ee9e47993347":{"metas":[{"phx_ref":"GIrMBsoD53SQMCGB","phx_ref_prev":"GIrMAe6vj12QMB0h","is_host":true,"joined_at":1768450133.060773,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"dad62078-f1c7-11f0-80fb-ee9e47993347":{"metas":[{"phx_ref":"GIrMAe6vj12QMB0h","phx_ref_prev":"GIrMAd3mJjCQMAzC","is_host":true,"joined_at":1768450112.1993709,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:DW9B"}
+📡 SocialService: Updated status - online: Smile 2
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrMBs5uK-s6AiGh","phx_ref_prev":"GIrMA3r3bOE6AiAB","is_premium":true,"last_seen":"2026-01-15T04:08:53.112Z","room_id":"DW9B","started_at":"2026-01-15T04:08:53.112Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}},"leaves":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrMA3r3bOE6AiAB","phx_ref_prev":"GIrMAds-vfw6AhxB","is_premium":true,"last_seen":"2026-01-15T04:08:38.821Z","room_id":"DW9B","started_at":"2026-01-15T04:08:31.874Z","status":"In Lobby: Smile 2","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-15 04:34:26 +0000
+⏰ AppState: Scheduling update in 1533 seconds
+✅ Download complete: 41598 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (620): Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH).srt
+📦 Extracting specific file: Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH).srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0MTkzNDItODM0Mjg1NC56aXA= [request-id: 861B6B42-1FC2-401C-AE13-A864DCBF31B9]
+📄 Subtitle request: L3N1YnRpdGxlLzM0MTkz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3419342-8342854.zip
+✅ Download complete: 33138 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (620): Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264.srt
+📦 Extracting specific file: Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0MzMwNTItODM1Njc3OC56aXA= [request-id: 9502D3C1-B790-4988-95FB-B74334F2EDFF]
+2026-01-14 23:08:55.064 RedLemon[10693:462186] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:08:55.064 RedLemon[10693:462186]    Payload keys: timestamp, isPlaying, type, position, senderId
+2026-01-14 23:08:55.065 RedLemon[10693:462208] ✅ Realtime: Message broadcast complete
+2026-01-14 23:08:55.183 RedLemon[10693:462208] 📨 Realtime: Received broadcast message
+2026-01-14 23:08:55.183 RedLemon[10693:462208]    Payload keys: timestamp, position, isPlaying, type, senderId
+2026-01-14 23:08:55.183 RedLemon[10693:462208] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:08:55.183 RedLemon[10693:462208] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:08:55.183 RedLemon[10693:462208] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:08:55.212 RedLemon[10693:462178] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIrMBzzyjRGQMCHB)
+2026-01-14 23:08:55.212 RedLemon[10693:462178] 🛡️ Ignoring stale LEAVE for ursinho (Ref mismatch: Old=656daa91-33b4-4688-9135-c982ea52d7c9, New=GIrMBzzyjRGQMCHB)
+2026-01-14 23:08:55.652 RedLemon[10693:462490] 📝 [PLAYER] File Loaded ["duration": "7758.251"]
+2026-01-14 23:08:55.660 RedLemon[10693:462490] 📤 Realtime: Sending message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-14 23:08:55.660 RedLemon[10693:462490]    Payload keys: timestamp, isPlaying, senderId, position, type
+2026-01-14 23:08:55.661 RedLemon[10693:462490] ✅ Realtime: Message broadcast complete
+2026-01-14 23:08:55.786 RedLemon[10693:462739] 📨 Realtime: Received broadcast message
+2026-01-14 23:08:55.786 RedLemon[10693:462739]    Payload keys: timestamp, isPlaying, type, position, senderId
+2026-01-14 23:08:55.786 RedLemon[10693:462739] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-14 23:08:55.786 RedLemon[10693:462739] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-14 23:08:55.786 RedLemon[10693:462739] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:08:56.147 RedLemon[10693:462769] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-14 23:08:56.148 RedLemon[10693:462769] 📝 [PLAYER] Buffering State ["buffering": "true"]
+2026-01-14 23:08:56.163 RedLemon[10693:462769] 📝 [PLAYER] Buffering Started
+2026-01-14 23:08:56.898 RedLemon[10693:462769] 📤 Realtime: Sending message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-14 23:08:56.898 RedLemon[10693:462769]    Payload keys: position, isPlaying, timestamp, senderId, type
+2026-01-14 23:08:56.899 RedLemon[10693:462769] ✅ Realtime: Message broadcast complete
+2026-01-14 23:08:57.019 RedLemon[10693:462491] 📨 Realtime: Received broadcast message
+2026-01-14 23:08:57.019 RedLemon[10693:462491]    Payload keys: senderId, type, timestamp, isPlaying, position
+2026-01-14 23:08:57.019 RedLemon[10693:462491] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-14 23:08:57.019 RedLemon[10693:462491] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-14 23:08:57.019 RedLemon[10693:462491] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:08:57.063 RedLemon[10693:462491] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:08:57.063 RedLemon[10693:462491]    Payload keys: senderId, timestamp, position, isPlaying, type
+2026-01-14 23:08:57.064 RedLemon[10693:462769] ✅ Realtime: Message broadcast complete
+2026-01-14 23:08:57.190 RedLemon[10693:462769] 📨 Realtime: Received broadcast message
+2026-01-14 23:08:57.190 RedLemon[10693:462769]    Payload keys: position, timestamp, senderId, isPlaying, type
+2026-01-14 23:08:57.191 RedLemon[10693:462769] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:08:57.191 RedLemon[10693:462769] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:08:57.191 RedLemon[10693:462769] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:08:57.452 RedLemon[10693:462769] 📝 [PLAYER] Buffering State ["buffering": "false"]
+2026-01-14 23:08:58.809 RedLemon[10693:462208] 📨 Realtime: Received broadcast message
+2026-01-14 23:08:58.809 RedLemon[10693:462208]    Payload keys: isPlaying, type, senderId, position, timestamp
+2026-01-14 23:08:58.810 RedLemon[10693:462208] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-14 23:08:58.810 RedLemon[10693:462208] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-14 23:08:58.811 RedLemon[10693:462208] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:08:59.272 RedLemon[10693:462491] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:08:59.272 RedLemon[10693:462491]    Payload keys: senderId, position, isPlaying, timestamp, type
+2026-01-14 23:08:59.274 RedLemon[10693:462491] ✅ Realtime: Message broadcast complete
+2026-01-14 23:08:59.392 RedLemon[10693:462208] 📨 Realtime: Received broadcast message
+2026-01-14 23:08:59.392 RedLemon[10693:462208]    Payload keys: type, position, timestamp, isPlaying, senderId
+2026-01-14 23:08:59.392 RedLemon[10693:462208] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:08:59.393 RedLemon[10693:462208] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:08:59.393 RedLemon[10693:462208] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:08:59.899 RedLemon[10693:462208] 📤 Realtime: Sending message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-14 23:08:59.899 RedLemon[10693:462208]    Payload keys: isPlaying, position, senderId, type, timestamp
+2026-01-14 23:08:59.900 RedLemon[10693:462491] ✅ Realtime: Message broadcast complete
+2026-01-14 23:09:00.099 RedLemon[10693:462208] 📨 Realtime: Received broadcast message
+2026-01-14 23:09:00.099 RedLemon[10693:462208]    Payload keys: position, timestamp, isPlaying, type, senderId
+2026-01-14 23:09:00.099 RedLemon[10693:462208] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-14 23:09:00.100 RedLemon[10693:462208] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-14 23:09:00.100 RedLemon[10693:462208] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:09:01.108 RedLemon[10693:462208] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:09:01.108 RedLemon[10693:462208]    Payload keys: senderId, isPlaying, timestamp, position, type
+2026-01-14 23:09:01.109 RedLemon[10693:462208] ✅ Realtime: Message broadcast complete
+2026-01-14 23:09:01.252 RedLemon[10693:462208] 📨 Realtime: Received broadcast message
+2026-01-14 23:09:01.252 RedLemon[10693:462208]    Payload keys: timestamp, type, isPlaying, position, senderId
+2026-01-14 23:09:01.252 RedLemon[10693:462208] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:09:01.252 RedLemon[10693:462208] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:09:01.252 RedLemon[10693:462208] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:09:03.073 RedLemon[10693:462491] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:09:03.075 RedLemon[10693:462491]    Payload keys: position, senderId, type, timestamp, isPlaying
+2026-01-14 23:09:03.077 RedLemon[10693:462769] ✅ Realtime: Message broadcast complete
+2026-01-14 23:09:03.079 RedLemon[10693:462208] 🔐 SupabaseClient: Signing Identity Payload: '176845014396e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-14 23:09:03.080 RedLemon[10693:462208] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-14 23:09:03.195 RedLemon[10693:462769] 📨 Realtime: Received broadcast message
+2026-01-14 23:09:03.195 RedLemon[10693:462769]    Payload keys: type, position, timestamp, isPlaying, senderId
+2026-01-14 23:09:03.195 RedLemon[10693:462769] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:09:03.196 RedLemon[10693:462769] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:09:03.196 RedLemon[10693:462769] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:09:03.612 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:09:03.612 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:09:03.612 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:09:03.612 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:09:05.079 RedLemon[10693:462208] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:09:05.080 RedLemon[10693:462208]    Payload keys: position, isPlaying, senderId, timestamp, type
+2026-01-14 23:09:05.081 RedLemon[10693:462209] ✅ Realtime: Message broadcast complete
+2026-01-14 23:09:05.206 RedLemon[10693:462739] 📨 Realtime: Received broadcast message
+2026-01-14 23:09:05.206 RedLemon[10693:462739]    Payload keys: position, type, senderId, isPlaying, timestamp
+2026-01-14 23:09:05.207 RedLemon[10693:462739] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:09:05.208 RedLemon[10693:462739] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:09:05.208 RedLemon[10693:462739] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:09:05.446 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:09:05.446 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:09:07.154 RedLemon[10693:462769] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:09:07.155 RedLemon[10693:462769]    Payload keys: type, senderId, timestamp, position, isPlaying
+2026-01-14 23:09:07.156 RedLemon[10693:462769] ✅ Realtime: Message broadcast complete
+2026-01-14 23:09:07.276 RedLemon[10693:462769] 📨 Realtime: Received broadcast message
+2026-01-14 23:09:07.276 RedLemon[10693:462769]    Payload keys: position, type, senderId, isPlaying, timestamp
+2026-01-14 23:09:07.277 RedLemon[10693:462769] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:09:07.277 RedLemon[10693:462769] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:09:07.277 RedLemon[10693:462769] ✅ Realtime: syncCallback invoked successfully
+📄 Subtitle request: L3N1YnRpdGxlLzM0MzMw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3433052-8356778.zip
+✅ Download complete: 75907 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 2 files...
+⚠️ No strong compatibility match (Best: 0 for Smile 2 SDH.srt)
+⚠️ No specific match found, using first file: Smile 2 SDH.srt
+📦 Extracting specific file: Smile 2 SDH.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e0c9da88-f1c7-11f0-8ebe-ee9e47993347":{"metas":[{"phx_ref":"GIrMBzzyjRGQMCHB","phx_ref_prev":"GIrMBD5gjvOQMCEh","is_host":false,"joined_at":1768450134.98455,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"e0c9da88-f1c7-11f0-8ebe-ee9e47993347":{"metas":[{"phx_ref":"GIrMBD5gjvOQMCEh","phx_ref_prev":"GIrMBDMCHrmQMCEB","is_host":false,"joined_at":1768450122.120267,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"de7ebd84-f1c7-11f0-9d6c-ee9e47993347":{"metas":[{"phx_ref":"GIrMB0BcdgU6AiHh","phx_ref_prev":"GIrMBHnEHsg6AiFB","is_premium":true,"last_seen":"2026-01-15T04:08:55.042Z","room_id":"DW9B","started_at":"2026-01-15T04:08:55.042Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}},"leaves":{"de7ebd84-f1c7-11f0-9d6c-ee9e47993347":{"metas":[{"phx_ref":"GIrMBHnEHsg6AiFB","phx_ref_prev":"GIrMBCydj-06AiAh","is_premium":true,"last_seen":"2026-01-15T04:08:43.118Z","room_id":"DW9B","started_at":"2026-01-15T04:08:41.822Z","status":"In Lobby: Smile 2","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"DW9B","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768450135.652828,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768450136.8911,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DW9B","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-15 04:34:26 +0000
+⏰ AppState: Scheduling update in 1529 seconds
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1768450138.662885,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DW9B","timestamp":1.543,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":2.127,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1768450139.870298,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DW9B","timestamp":3.3369999999999997,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DW9B","timestamp":5.38,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": "e9c6725c74e4549b7bb4dc722419459814615c5a", "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:09:03", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi3-4.download.real-debrid.com/d/W5EKI5SNNOUMY41/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:09:03.415Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": "e9c6725c74e4549b7bb4dc722419459814615c5a", "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:09:03.412393", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi3-4.download.real-debrid.com/d/W5EKI5SNNOUMY41/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:09:03.421Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrMCU6b2PE6AiIh","phx_ref_prev":"GIrMBs5uK-s6AiGh","is_premium":true,"last_seen":"2026-01-15T04:09:03.862Z","room_id":"DW9B","started_at":"2026-01-15T04:08:53.112Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}},"leaves":{"ccc703e4-f1c7-11f0-8c0e-ee9e47993347":{"metas":[{"phx_ref":"GIrMBs5uK-s6AiGh","phx_ref_prev":"GIrMA3r3bOE6AiAB","is_premium":true,"last_seen":"2026-01-15T04:08:53.112Z","room_id":"DW9B","started_at":"2026-01-15T04:08:53.112Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DW9B","timestamp":7.382,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+💓 Heartbeat sent
+📨 Received: {"ref":"17","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": "e9c6725c74e4549b7bb4dc722419459814615c5a", "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:09:05.372041", "max_participants": 50, "selected_quality": "1080p", "playback_position": 5, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi3-4.download.real-debrid.com/d/W5EKI5SNNOUMY41/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:09:05.382Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Fetched movie_events version 1536 with 409 movies
+✅ [EventsConfig] Using cached movie_events config (version 1536, 409 movies)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DW9B","timestamp":9.384,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+⏰ AppState: Next schedule update set for Event End: 2026-01-15 04:34:26 +0000
+⏰ AppState: Scheduling update in 1519 seconds
+💓 Heartbeat sent
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"de7ebd84-f1c7-11f0-9d6c-ee9e47993347":{"metas":[{"phx_ref":"GIrMCkyjTQk6AiKB","phx_ref_prev":"GIrMB0BcdgU6AiHh","is_premium":true,"last_seen":"2026-01-15T04:09:08.132Z","room_id":"DW9B","started_at":"2026-01-15T04:08:55.042Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}},"leaves":{"de7ebd84-f1c7-11f0-9d2026-01-14 23:09:09.285 RedLemon[10693:462739] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:09:09.286 RedLemon[10693:462739]    Payload keys: position, type, isPlaying, senderId, timestamp
+2026-01-14 23:09:09.287 RedLemon[10693:462891] ✅ Realtime: Message broadcast complete
+2026-01-14 23:09:09.416 RedLemon[10693:462739] 📨 Realtime: Received broadcast message
+2026-01-14 23:09:09.416 RedLemon[10693:462739]    Payload keys: type, position, isPlaying, senderId, timestamp
+2026-01-14 23:09:09.417 RedLemon[10693:462739] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:09:09.417 RedLemon[10693:462739] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:09:09.418 RedLemon[10693:462739] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:09:11.119 RedLemon[10693:462739] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:09:11.119 RedLemon[10693:462739]    Payload keys: isPlaying, position, timestamp, type, senderId
+2026-01-14 23:09:11.121 RedLemon[10693:462739] ✅ Realtime: Message broadcast complete
+2026-01-14 23:09:11.258 RedLemon[10693:462739] 📨 Realtime: Received broadcast message
+2026-01-14 23:09:11.258 RedLemon[10693:462739]    Payload keys: position, senderId, timestamp, isPlaying, type
+2026-01-14 23:09:11.258 RedLemon[10693:462739] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:09:11.258 RedLemon[10693:462739] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:09:11.258 RedLemon[10693:462739] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:09:13.120 RedLemon[10693:462891] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:09:13.120 RedLemon[10693:462891]    Payload keys: type, timestamp, senderId, isPlaying, position
+2026-01-14 23:09:13.121 RedLemon[10693:462891] ✅ Realtime: Message broadcast complete
+2026-01-14 23:09:13.245 RedLemon[10693:462208] 📨 Realtime: Received broadcast message
+2026-01-14 23:09:13.245 RedLemon[10693:462208]    Payload keys: senderId, timestamp, isPlaying, position, type
+2026-01-14 23:09:13.245 RedLemon[10693:462208] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:09:13.246 RedLemon[10693:462208] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:09:13.246 RedLemon[10693:462208] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:09:13.551 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:09:13.551 RedLemon[10693:462178] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-14 23:09:15.126 RedLemon[10693:462209] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:09:15.128 RedLemon[10693:462209]    Payload keys: type, timestamp, senderId, position, isPlaying
+2026-01-14 23:09:15.128 RedLemon[10693:462209] ✅ Realtime: Message broadcast complete
+2026-01-14 23:09:15.248 RedLemon[10693:462891] 📨 Realtime: Received broadcast message
+2026-01-14 23:09:15.248 RedLemon[10693:462891]    Payload keys: senderId, type, timestamp, isPlaying, position
+2026-01-14 23:09:15.249 RedLemon[10693:462891] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:09:15.249 RedLemon[10693:462891] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:09:15.249 RedLemon[10693:462891] ✅ Realtime: syncCallback invoked successfully
+2026-01-14 23:09:17.124 RedLemon[10693:462891] 📤 Realtime: Sending message type: playbackState, sender: DW9B
+2026-01-14 23:09:17.125 RedLemon[10693:462891]    Payload keys: position, type, isPlaying, senderId, timestamp
+2026-01-14 23:09:17.125 RedLemon[10693:462209] ✅ Realtime: Message broadcast complete
+2026-01-14 23:09:17.244 RedLemon[10693:462739] 📨 Realtime: Received broadcast message
+2026-01-14 23:09:17.244 RedLemon[10693:462739]    Payload keys: isPlaying, timestamp, senderId, position, type
+2026-01-14 23:09:17.244 RedLemon[10693:462739] ✅ Realtime: Decoded message type: playbackState, sender: DW9B
+2026-01-14 23:09:17.244 RedLemon[10693:462739] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-14 23:09:17.245 RedLemon[10693:462739] ✅ Realtime: syncCallback invoked successfully
+6c-ee9e47993347":{"metas":[{"phx_ref":"GIrMB0BcdgU6AiHh","phx_ref_prev":"GIrMBHnEHsg6AiFB","is_premium":true,"last_seen":"2026-01-15T04:08:55.042Z","room_id":"DW9B","started_at":"2026-01-15T04:08:55.042Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DW9B","timestamp":11.719999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DW9B","timestamp":13.472,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DW9B","timestamp":15.516,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": "e9c6725c74e4549b7bb4dc722419459814615c5a", "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:09:13", "max_participants": 50, "selected_quality": "1080p", "playback_position": 15, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi3-4.download.real-debrid.com/d/W5EKI5SNNOUMY41/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:09:13.462Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DW9B","timestamp":17.558999999999997,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"DW9B","timestamp":19.311,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:DW9B"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "DW9B", "name": "Smile 2", "season": null, "episode": null, "imdb_id": "tt29268110", "playlist": [{"id": "D2E74A8B-9342-4865-9A6B-DA5AF90A39E6", "mediaItem": {"id": "tt29268110", "logo": "https://images.metahub.space/logo/medium/tt29268110/img", "name": "Smile 2", "type": "movie", "year": "2024", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt29268110/img", "runtime": "127 min", "background": "https://images.metahub.space/background/medium/tt29268110/img", "imdbRating": "6.7", "description": "About to embark on a world tour, global pop sensation Skye Riley begins experiencing increasingly terrifying and inexplicable events. Overwhelmed by the escalating horrors and the pressures of fame, Skye is forced to face her past.", "releaseInfo": "2024"}}], "is_public": true, "created_at": "2026-01-15T04:08:30.682429", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt29268110/img", "description": null, "stream_hash": "e9c6725c74e4549b7bb4dc722419459814615c5a", "backdrop_url": "https://images.metahub.space/background/medium/tt29268110/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-15T04:09:17.518473", "max_participants": 50, "selected_quality": "1080p", "playback_position": 15, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi3-4.download.real-debrid.com/d/W5EKI5SNNOUMY41/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-15T04:09:17.528Z","old_record":{"id": "DW9B"}},"ids":[98542851]},"topic":"realtime:watch-party:DW9B"}

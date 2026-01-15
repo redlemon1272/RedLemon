@@ -86,7 +86,7 @@ func registerStreamRoutes(_ app: Application) {
             throw Abort(.badRequest, reason: "No RealDebrid token stored")
         }
 
-        NSLog("📺 Fetching episodes for torrent: \(body.infoHash.prefix(12))...")
+        NSLog("%@", "📺 Fetching episodes for torrent: \(body.infoHash.prefix(12))...")
 
         // Create a temporary task to fetch torrent info
         // Note: We don't have the torrentId, so we need to add the magnet first
@@ -111,7 +111,7 @@ func registerStreamRoutes(_ app: Application) {
             let (addData, addResponse) = try await URLSession.shared.data(for: addRequest)
 
             guard let httpResponse = addResponse as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                NSLog("❌ Failed to add magnet: HTTP \((addResponse as? HTTPURLResponse)?.statusCode ?? 0)")
+                NSLog("%@", "❌ Failed to add magnet: HTTP \((addResponse as? HTTPURLResponse)?.statusCode ?? 0)")
                 throw Abort(.badGateway, reason: "Failed to add torrent to RealDebrid")
             }
 
@@ -129,7 +129,7 @@ func registerStreamRoutes(_ app: Application) {
             let (infoData, infoResponse) = try await URLSession.shared.data(for: infoRequest)
 
             guard let httpResponse = infoResponse as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                NSLog("❌ Failed to get torrent info: HTTP \((infoResponse as? HTTPURLResponse)?.statusCode ?? 0)")
+                NSLog("%@", "❌ Failed to get torrent info: HTTP \((infoResponse as? HTTPURLResponse)?.statusCode ?? 0)")
                 throw Abort(.badGateway, reason: "Failed to fetch torrent information")
             }
 
@@ -143,7 +143,7 @@ func registerStreamRoutes(_ app: Application) {
             // Log torrent status for debugging
             // Status: "waiting_files_selection", "queued", "downloading", "downloaded", "error", "virus", "dead"
             if let status = torrentInfo.status {
-                NSLog("📺 Torrent status: \(status)")
+                NSLog("%@", "📺 Torrent status: \(status)")
             }
 
             // Parse episodes from filenames
@@ -187,7 +187,7 @@ func registerStreamRoutes(_ app: Application) {
                 return a.episode < b.episode
             }
 
-            NSLog("✅ Found \(sortedEpisodes.count) episodes")
+            NSLog("%@", "✅ Found \(sortedEpisodes.count) episodes")
 
             let jsonData = try JSONEncoder().encode(sortedEpisodes)
             let episodesResponse = Response(status: .ok)
@@ -197,7 +197,7 @@ func registerStreamRoutes(_ app: Application) {
             return episodesResponse
 
         } catch {
-            NSLog("❌ Episodes endpoint error: \(error)")
+            NSLog("%@", "❌ Episodes endpoint error: \(error)")
             throw Abort(.badGateway, reason: "Failed to fetch episodes: \(error)")
         }
     }
@@ -224,13 +224,13 @@ func registerStreamRoutes(_ app: Application) {
             name: name,
             year: year
         )
-        
+
         // Encode response
         let jsonData = try JSONEncoder().encode(bucketsResponse)
         let httpResponse = Response(status: .ok)
         httpResponse.body = .init(data: jsonData)
         httpResponse.headers.contentType = .json
-        
+
         return httpResponse
     }
 
@@ -546,12 +546,12 @@ func registerStreamRoutes(_ app: Application) {
             // Identify low quality sources
             let s1LowQuality = isLowQuality(s1.title)
             let s2LowQuality = isLowQuality(s2.title)
-            
+
             // 1. If one is low quality and the other isn't, prefer the high quality one
             if s1LowQuality != s2LowQuality {
                 return !s1LowQuality // If s1 is NOT low quality, it comes first
             }
-            
+
             // 2. Otherwise sort by seeders
             let seeders1 = s1.seeders ?? 0
             let seeders2 = s2.seeders ?? 0
@@ -592,9 +592,9 @@ func registerStreamRoutes(_ app: Application) {
 private func attachSubtitles(to streams: [Stream], imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, name: String? = nil, year: Int? = nil) async -> [Stream] {
 
     // CRITICAL DEBUG: Log input to attachSubtitles
-    NSLog("🔍 DEBUG: attachSubtitles INPUT - streams.count: \(streams.count)")
+    NSLog("🔍 DEBUG: attachSubtitles INPUT - streams.count: %d", streams.count)
     for (idx, stream) in streams.enumerated() {
-        NSLog("   INPUT[\(idx)]: \(stream.title) | \(stream.quality ?? "unknown") | \(stream.provider)")
+        NSLog("%@", "   INPUT[\(idx)]: \(stream.title) | \(stream.quality ?? "unknown") | \(stream.provider)")
     }
 
     // Get SubDL API key from Keychain
@@ -721,16 +721,16 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
                 // We use regex to find any SxxExx pattern in the release name
                 let seasonEpisodePattern = "s(\\d{1,2})e(\\d{1,2})"
                 var isExplicitMismatch = false
-                
+
                 if let regex = try? NSRegularExpression(pattern: seasonEpisodePattern, options: []) {
                     let nsString = releaseName as NSString
                     let results = regex.matches(in: releaseName, options: [], range: NSRange(location: 0, length: nsString.length))
-                    
+
                     for result in results {
                         if result.numberOfRanges >= 3 {
                             let subSeason = Int(nsString.substring(with: result.range(at: 1))) ?? 0
                             let subEpisode = Int(nsString.substring(with: result.range(at: 2))) ?? 0
-                            
+
                             // If it specifies a DIFFERENT episode, it's a mismatch
                             // (Unless it's a multi-episode file like S05E01-E02, but simple logic first)
                             if subSeason == season && subEpisode != episode {
@@ -745,7 +745,7 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
                         }
                     }
                 }
-                
+
                 if isExplicitMismatch {
                     NSLog("  ❌ EXPLICIT MISMATCH: %@", sub.releaseName ?? "unknown")
                     continue
@@ -756,26 +756,26 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
                 // a) It contains the target episode pattern (S05E02)
                 // b) OR it contains the Season pattern (S05) AND NO specific episode pattern (Season Pack)
                 // c) OR it contains "Complete" and "S05"
-                
+
                 let targetEpisodePatterns = [
                     String(format: "s%02de%02d", season, episode),
                     String(format: "s%de%d", season, episode),
                     String(format: "%dx%02d", season, episode)
                 ]
-                
+
                 let hasTargetEpisode = targetEpisodePatterns.contains { releaseName.contains($0) }
-                
+
                 let seasonPatterns = [
                     String(format: "s%02d", season),
                     String(format: "season %d", season)
                 ]
                 let hasSeason = seasonPatterns.contains { releaseName.contains($0) }
-                
+
                 // Check if it looks like a season pack (Has season, but NO "E01", "E02" etc patterns)
                 // Actually, we already filtered out explicit mismatches above.
                 // So if we are here, it either has OUR episode, or NO episode (season pack), or a different episode format we missed.
                 // Let's be permissive: If it has the Season, keep it.
-                
+
                 if hasTargetEpisode {
                     NSLog("  ✅ MATCH (Episode): %@", sub.releaseName ?? "unknown")
                     filteredSubtitles.append(sub)
@@ -852,18 +852,18 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
                 let subReleaseLower = (sub.releaseName ?? "").lowercased()
 
                 let encodedPath = Data(sub.url.utf8).base64EncodedString()
-                
+
                 // Route through our proxy to handle zip extraction and VTT conversion
                 // We append season/episode info so the proxy knows which file to extract from a season pack
                 var proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)"
                 var queryItems: [String] = []
                 if let season = season { queryItems.append("season=\(season)") }
                 if let episode = episode { queryItems.append("episode=\(episode)") }
-                
+
                 if !queryItems.isEmpty {
                     proxyURL += "?" + queryItems.joined(separator: "&")
                 }
-                
+
                 let subtitle = Subtitle(
                     id: encodedPath,
                     url: proxyURL,
@@ -948,9 +948,9 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
             )
         }
 
-        NSLog("🔍 DEBUG: attachSubtitles OUTPUT - streams.count: \(result.count)")
+        NSLog("🔍 DEBUG: attachSubtitles OUTPUT - streams.count: %d", result.count)
         for (idx, stream) in result.enumerated() {
-            NSLog("   OUTPUT[\(idx)]: \(stream.title) | \(stream.quality ?? "unknown") | \(stream.provider) | Subtitles: \(stream.subtitles?.count ?? 0)")
+            NSLog("   OUTPUT[%d]: %@ | %@ | %@ | Subtitles: %d", idx, stream.title, stream.quality ?? "unknown", stream.provider, stream.subtitles?.count ?? 0)
         }
 
         return result
@@ -1273,16 +1273,16 @@ private func detectAudioLanguage(_ title: String) -> (String, Bool, Bool, Int) {
 /// Returns: (hasEnglishSubtitles, subtitleScore)
 private func detectSubtitleLanguage(_ title: String) -> (Bool, Int) {
     let titleLower = title.lowercased()
-    
+
     // English subtitle indicators
     let englishSubPatterns = ["sub.eng", "eng.sub", "english.sub", "sub.english", "engsub", "eng-sub", "english-sub"]
-    
+
     // Multi-sub indicators (usually include English)
     let multiSubPatterns = ["multisub", "multi.sub", "multi-sub", "subs"]
-    
+
     var hasEnglish = false
     var score = 0
-    
+
     // Check for explicit English subs
     for pattern in englishSubPatterns {
         if titleLower.contains(pattern) {
@@ -1291,7 +1291,7 @@ private func detectSubtitleLanguage(_ title: String) -> (Bool, Int) {
             break
         }
     }
-    
+
     // Check for multi-subs (if no explicit English found yet)
     if !hasEnglish {
         for pattern in multiSubPatterns {
@@ -1302,7 +1302,7 @@ private func detectSubtitleLanguage(_ title: String) -> (Bool, Int) {
             }
         }
     }
-    
+
     return (hasEnglish, score)
 }
 
@@ -1413,7 +1413,7 @@ private func processBucket(
     if beforeFilter > yearAndCodecFiltered.count {
         print("  ✅ BLOCKED \(beforeFilter - yearAndCodecFiltered.count) streams (x265/YIFY/etc) for \(quality)")
     }
-    
+
     // For MOVIES ONLY: Remove collection/pack torrents to avoid file index issues
     // Collections can cause Real-Debrid to return wrong file from multi-file torrents
     if targetTitle != nil {
@@ -1429,7 +1429,7 @@ private func processBucket(
             }
             return !isCollection
         }
-        
+
         if beforeCollectionFilter > yearAndCodecFiltered.count {
             print("  ✅ BLOCKED \(beforeCollectionFilter - yearAndCodecFiltered.count) collection torrents for \(quality)")
         }
@@ -1498,7 +1498,7 @@ private func processBucket(
         // NEW: SUBTITLE PRIORITY - Prefer streams with English subtitles (tie-breaker)
         let subScoreA = detectSubtitleLanguage(a.title).1
         let subScoreB = detectSubtitleLanguage(b.title).1
-        
+
         if subScoreA != subScoreB {
             // Only log if it makes a difference
             // print("  📝 Subtitle Score: \(a.title) (\(subScoreA)) vs \(b.title) (\(subScoreB))")
@@ -1838,7 +1838,7 @@ private func isLowQuality(_ title: String) -> Bool {
 // Helper function to extract season and episode numbers from file path
 func extractSeasonEpisode(from filename: String) -> (season: Int, episode: Int)? {
     let pathLower = filename.lowercased()
-    
+
     // Pattern 1: S##E## (case-insensitive)
     if let regex = try? NSRegularExpression(pattern: "s(\\d{1,2})e(\\d{1,2})", options: []) {
         let nsString = pathLower as NSString

@@ -45,7 +45,7 @@ actor UserResetManager {
         // Clear ALL app data using persistent domain
         if let bundleID = Bundle.main.bundleIdentifier {
             UserDefaults.standard.removePersistentDomain(forName: bundleID)
-            NSLog("   - Removed persistent domain for \(bundleID)")
+            NSLog("%@", "   - Removed persistent domain for \(bundleID)")
         } else {
             // Fallback: Clear known keys if bundle ID fails
             let userDefaultsKeys = [
@@ -75,7 +75,7 @@ actor UserResetManager {
             try await KeychainManager.shared.deleteUsername()
             NSLog("   - Removed username from KeychainManager")
         } catch {
-            NSLog("   ⚠️ Failed to clear keychain username: \(error)")
+            NSLog("%@", "   ⚠️ Failed to clear keychain username: \(error)")
         }
 
         // Clear any cached credentials
@@ -83,9 +83,9 @@ actor UserResetManager {
         for service in services {
             do {
                 try await KeychainManager.shared.delete(service: service)
-                NSLog("   - Removed keychain service: \(service)")
+                NSLog("%@", "   - Removed keychain service: \(service)")
             } catch {
-                NSLog("   ⚠️ Failed to clear keychain service \(service): \(error)")
+                NSLog("%@", "   ⚠️ Failed to clear keychain service \(service): \(error)")
             }
         }
 
@@ -103,7 +103,7 @@ actor UserResetManager {
             return
         }
 
-        NSLog("   - Looking up user record for username: \(username)")
+        NSLog("%@", "   - Looking up user record for username: \(username)")
 
         do {
             // Get user by username
@@ -112,7 +112,7 @@ actor UserResetManager {
                 return
             }
 
-            NSLog("   - Found user record: \(user.id)")
+            NSLog("%@", "   - Found user record: \(user.id)")
 
             // Delete user's room participations
             // Note: This would require additional API endpoints in SupabaseClient
@@ -132,7 +132,7 @@ actor UserResetManager {
             NSLog("   - Skipping actual remote deletion for safety")
 
         } catch {
-            NSLog("   ❌ Failed to clear remote user data: \(error)")
+            NSLog("%@", "   ❌ Failed to clear remote user data: \(error)")
             // Don't throw error here - local cleanup is more important
         }
 

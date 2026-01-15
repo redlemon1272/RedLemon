@@ -6,14 +6,14 @@ import SwiftUI
 enum UnifiedLobbyMessage: Identifiable {
     case system(LobbyMessage)
     case chat(ChatMessage)
-    
+
     var id: String {
         switch self {
         case .system(let m): return m.id
         case .chat(let m): return m.id
         }
     }
-    
+
     var timestamp: Date {
         switch self {
         case .system(let m): return m.timestamp
@@ -28,7 +28,7 @@ enum UnifiedLobbyMessage: Identifiable {
 class LobbyChatManager: ObservableObject {
     // Unified storage for chronological display
     @Published var unifiedMessages: [UnifiedLobbyMessage] = []
-    
+
     // Legacy support (computed filters) - or we can remove if we update View
     var messages: [LobbyMessage] {
         unifiedMessages.compactMap {
@@ -36,41 +36,41 @@ class LobbyChatManager: ObservableObject {
             return nil
         }
     }
-    
+
     var chatMessages: [ChatMessage] {
         unifiedMessages.compactMap {
             if case .chat(let m) = $0 { return m }
             return nil
         }
     }
-    
+
     @Published var chatInput: String = ""
-    
+
     // Limits
     private let maxMessages = 150
-    
+
     // Dependencies
     // The handler is responsible for the actual network transmission
     private let sendMessageHandler: (SyncMessage) async throws -> Void
-    
+
     init(sendMessageHandler: @escaping (SyncMessage) async throws -> Void) {
         self.sendMessageHandler = sendMessageHandler
     }
-    
+
     // MARK: - Actions
-    
+
     func send(senderId: String, username: String) async {
         let trimmed = chatInput.trimmingCharacters(in: .whitespaces)
         guard !trimmed.isEmpty else { return }
-        
+
         // Optimistic clear
         chatInput = ""
-        
+
         let isPremium = LicenseManager.shared.isPremium
-        
+
         // Add message locally for instant feedback (optimistic UI)
         addLocalMessage(username: username, text: trimmed, senderId: senderId, isPremium: isPremium)
-        
+
         // Construct SyncMessage
         let syncMsg = SyncMessage(
             type: .chat,
@@ -81,26 +81,26 @@ class LobbyChatManager: ObservableObject {
             chatUsername: username,
             isPremium: isPremium
         )
-        
+
         // Delegate actual sending to the owner
         do {
             try await sendMessageHandler(syncMsg)
             NSLog("📡 ChatManager: Chat message sent via Realtime")
         } catch {
-            NSLog("❌ ChatManager: Failed to send chat message: \(error)")
+            NSLog("❌ ChatManager: Failed to send chat message: %@", String(describing: error))
         }
     }
-    
+
     func handleIncomingChat(chatText: String, senderId: String?, username: String?, timestamp: TimeInterval, currentUserId: String, mutedUserIds: Set<String>, blockedUserIds: Set<String>, isPremium: Bool) {
         guard let validSenderId = senderId else { return }
-        
+
         // Block check
         if blockedUserIds.contains(validSenderId.lowercased()) {
              return
         }
-        
+
         // Mute check - removed (handled by UI)
-        
+
         // Skip own messages (optimistically added)
         if validSenderId == currentUserId {
             return
@@ -115,11 +115,11 @@ class LobbyChatManager: ObservableObject {
             senderId: validSenderId,
             isPremium: isPremium
         )
-        
+
         addChatMessage(chatMessage)
         // print("💬 ChatManager: Received chat: [\(username ?? "Unknown")] \(chatText)")
     }
-    
+
     func addSystemMessage(_ type: LobbyMessageType, userName: String, data: [String: String] = [:]) {
         let message = LobbyMessage(
             id: UUID().uuidString,
@@ -129,25 +129,25 @@ class LobbyChatManager: ObservableObject {
             timestamp: Date(),
             data: data
         )
-        
+
         withAnimation {
             addUnified(.system(message))
         }
     }
-    
+
     func addChatMessage(_ message: ChatMessage) {
         withAnimation {
             addUnified(.chat(message))
         }
     }
-    
+
     private func addUnified(_ item: UnifiedLobbyMessage) {
         unifiedMessages.append(item)
         if unifiedMessages.count > maxMessages {
             unifiedMessages.removeFirst()
         }
     }
-    
+
     // Helper to add a local optimistic message
     public func addLocalMessage(username: String, text: String, senderId: String? = nil, isPremium: Bool = false) {
         let msg = ChatMessage(
@@ -161,7 +161,7 @@ class LobbyChatManager: ObservableObject {
         )
         addChatMessage(msg)
     }
-    
+
     func clearMessages() {
         unifiedMessages.removeAll()
     }

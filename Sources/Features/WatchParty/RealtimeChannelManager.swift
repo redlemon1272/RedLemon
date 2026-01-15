@@ -215,18 +215,18 @@ actor RealtimeChannelManager: RealtimeService {
 
     private func handleBroadcastMessage(_ payload: [String: Any]) async {
         NSLog("📨 Realtime: Received broadcast message")
-        NSLog("   Payload keys: \(payload.keys.joined(separator: ", "))")
+        NSLog("   Payload keys: %@", payload.keys.joined(separator: ", "))
 
         // Decode the sync message
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: payload)
             let message = try JSONDecoder().decode(SyncMessage.self, from: jsonData)
-            NSLog("✅ Realtime: Decoded message type: \(message.type), sender: \(message.senderId ?? "unknown")")
+            NSLog("✅ Realtime: Decoded message type: %@, sender: %@", String(describing: message.type), message.senderId ?? "unknown")
             handleSyncMessage(message)
         } catch {
             let errorMsg = "Failed to decode broadcast message: \(error)"
-            NSLog("❌ Realtime: \(errorMsg)")
-            NSLog("   Payload: \(payload)")
+            NSLog("❌ Realtime: %@", errorMsg)
+            NSLog("   Payload: %@", String(describing: payload))
             logError(errorMsg + " Payload keys: \(payload.keys)")
         }
     }
@@ -253,13 +253,13 @@ actor RealtimeChannelManager: RealtimeService {
             return
         }
 
-        NSLog("📤 Realtime: Sending message type: \(message.type), sender: \(message.senderId ?? "unknown")")
+        NSLog("📤 Realtime: Sending message type: %@, sender: %@", String(describing: message.type), message.senderId ?? "unknown")
 
         // Convert message to dictionary
         let jsonData = try JSONEncoder().encode(message)
         let payload = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] ?? [:]
 
-        NSLog("   Payload keys: \(payload.keys.joined(separator: ", "))")
+        NSLog("   Payload keys: %@", payload.keys.joined(separator: ", "))
 
         // Broadcast to channel
         try await realtimeClient.broadcast(event: eventName, payload: payload)
@@ -299,11 +299,11 @@ actor RealtimeChannelManager: RealtimeService {
 
         // CRITICAL: Log callback status before invoking
         if syncCallback == nil {
-            NSLog("❌ Realtime: syncCallback is NIL, cannot deliver message type: \(message.type)")
+            NSLog("❌ Realtime: syncCallback is NIL, cannot deliver message type: %@", String(describing: message.type))
             return
         }
 
-        NSLog("📞 Realtime: Invoking syncCallback for message type: \(message.type)")
+        NSLog("📞 Realtime: Invoking syncCallback for message type: %@", String(describing: message.type))
 
         // Pass to callback
         syncCallback?(compensatedMessage)

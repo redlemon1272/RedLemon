@@ -60,11 +60,11 @@ struct RedLemonApp: App {
                 .task {
                     // Wiring up PlayerViewModel callbacks
                     appState.setupPlayerBindings()
-                    
+
                     // 0. Reset state EARLY to prevent automatic playback of last watched content
                     // and ensure UI starts in a clean state before loading user data.
                     await resetPlaybackState()
-                    
+
                     // 1. Check for First Run Onboarding IMMEDIATELY
                     // This ensures the modal appears instantly without waiting for Keychain/DB checks
                     let hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding_v1")
@@ -78,7 +78,7 @@ struct RedLemonApp: App {
                     } else {
                         // 2. Returning User: Load credentials normally
                         await loadStoredUser()
-                        
+
                         // 3. Username fallback if loading failed
                         if appState.currentUserId == nil {
                             await MainActor.run {
@@ -110,13 +110,13 @@ struct RedLemonApp: App {
     }
 
     func handleURL(_ url: URL) {
-        NSLog("🔗 Received URL: \(url.absoluteString)")
+        NSLog("🔗 Received URL: %@", url.absoluteString)
 
         // Handle redlemon://auth/callback?principal=xxx
         if url.scheme == "redlemon" && url.host == "auth" && url.path == "/callback" {
             if let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
                let principal = components.queryItems?.first(where: { $0.name == "principal" })?.value {
-                NSLog("✅ Received principal from II: \(principal)")
+                NSLog("✅ Received principal from II: %@", principal)
 
                 // No-op: currentPrincipal is now managed by Internet Identity only
                 // Principal is set via setInternetIdentityPrincipal() from InternetIdentityView
@@ -132,11 +132,11 @@ struct RedLemonApp: App {
 
     func loadStoredUser() async {
         NSLog("🔐 APP STARTUP: Loading stored user credentials...")
-        NSLog("🧪 Testing Profile: \(userProfile.rawValue)")
+        NSLog("🧪 Testing Profile: %@", userProfile.rawValue)
 
         // For testing profiles, override normal user loading
         if userProfile != .debug {
-            NSLog("🧪 Using test profile: \(userProfile.displayName)")
+            NSLog("🧪 Using test profile: %@", userProfile.displayName)
             await MainActor.run {
                 appState.currentUsername = userProfile.displayName
                 appState.currentUserId = userProfile.userId
@@ -146,18 +146,18 @@ struct RedLemonApp: App {
                 userId: userProfile.userId.uuidString,
                 username: userProfile.displayName
             )
-            NSLog("✅ TEST PROFILE: Set username=\(userProfile.displayName), userId=\(userProfile.userId)")
+            NSLog("✅ TEST PROFILE: Set username=%@, userId=%@", userProfile.displayName, userProfile.userId.uuidString)
             return
         }
 
         // First try to get username from Keychain/UserDefaults
         if let username = await KeychainManager.shared.getUsername() {
-            NSLog("✅ Keychain: Found stored username: \(username)")
+            NSLog("✅ Keychain: Found stored username: %@", username)
 
             // 🔐 CRITICAL SECURITY: Verify we have the Signing Keys for this user
             // Without keys, we cannot sign requests (heartbeat, etc), leading to "Zombie" sessions.
             if await KeychainManager.shared.getKeyPair() == nil {
-                NSLog("⚠️ KEYCHAIN ERROR: Username '\(username)' found but Signing Keys are missing!")
+                NSLog("⚠️ KEYCHAIN ERROR: Username '%@' found but Signing Keys are missing!", username)
                 NSLog("   Regenerating keys to prevent infinite login loop (Legacy backup fix).")
 
                 // Instead of deleting the user, regenerate keys.
@@ -165,12 +165,12 @@ struct RedLemonApp: App {
                 // Note: Server-side signature checks may fail until they re-register or update their public key.
                 let (priv, pub) = CryptoManager.shared.generateKeyPair()
                 try? await KeychainManager.shared.saveKeyPair(privateKey: priv, publicKey: pub)
-                NSLog("✅ REGENERATED: New keys created and saved for '\(username)'.")
+                NSLog("✅ REGENERATED: New keys created and saved for '%@'.", username)
             }
 
             // Verify user exists in database
             do {
-                NSLog("🔍 Supabase: Looking up user '\(username)' in database...")
+                NSLog("🔍 Supabase: Looking up user '%@' in database...", username)
                 if let user = try await SupabaseClient.shared.getUserByUsername(username: username) {
                     await MainActor.run {
                         appState.currentUsername = username
@@ -185,8 +185,8 @@ struct RedLemonApp: App {
                         isPremium: user.isPremium ?? false
                     )
 
-                    NSLog("✅ AUTH SUCCESS: User authenticated - \(username) (ID: \(user.id))")
-                    NSLog("🎯 AppState: currentUsername=\(username), currentUserId=\(user.id)")
+                    NSLog("✅ AUTH SUCCESS: User authenticated - %@ (ID: %@)", username, user.id.uuidString)
+                    NSLog("🎯 AppState: currentUsername=%@, currentUserId=%@", username, user.id.uuidString)
 
                     // Connect Social Service (Realtime, Friends, Presence)
                     await SocialService.shared.connect(
@@ -194,14 +194,14 @@ struct RedLemonApp: App {
                         username: username
                     )
                 } else {
-                    NSLog("⚠️  DB LOOKUP FAILED: Username '\(username)' not found in database")
+                    NSLog("⚠️  DB LOOKUP FAILED: Username '%@' not found in database", username)
                     NSLog("   Clearing stored credentials so user can create a new one")
                     // Username exists locally but not in database - clear it so user can create a new one
                     try? await KeychainManager.shared.deleteUsername()
                 }
             } catch {
-                NSLog("❌ DB ERROR: Failed to verify user in database: \(error)")
-                NSLog("   Error details: \(String(describing: error))")
+                NSLog("❌ DB ERROR: Failed to verify user in database: %@", String(describing: error))
+                NSLog("   Error details: %@", String(describing: error))
                 // Clear invalid username
                 try? await KeychainManager.shared.deleteUsername()
                 NSLog("   Cleared stored credentials - user will need to create new username")
@@ -212,7 +212,7 @@ struct RedLemonApp: App {
             // FALLBACK: Check if we have a UUID in UserDefaults (manual override for debugging)
             if let uuidString = UserDefaults.standard.string(forKey: "currentUserId"),
                let uuid = UUID(uuidString: uuidString) {
-                NSLog("🔄 FALLBACK: Found UUID in UserDefaults: \(uuid)")
+                NSLog("🔄 FALLBACK: Found UUID in UserDefaults: %@", uuid.uuidString)
                 NSLog("   This allows debugging without Keychain username")
                 await MainActor.run {
                     appState.currentUserId = uuid
@@ -223,14 +223,14 @@ struct RedLemonApp: App {
                     userId: uuid.uuidString,
                     username: "debug_user"
                 )
-                NSLog("✅ FALLBACK SUCCESS: Set currentUserId=\(uuid), currentUsername=debug_user")
+                NSLog("✅ FALLBACK SUCCESS: Set currentUserId=%@, currentUsername=debug_user", uuid.uuidString)
             } else {
                 NSLog("❌ NO FALLBACK: No UUID found in UserDefaults either")
                 NSLog("   User will need to create a new username")
             }
         }
 
-        NSLog("🏁 AUTH COMPLETE: Final state - username=\(appState.currentUsername), userId=\(appState.currentUserId?.uuidString ?? "nil")")
+        NSLog("🏁 AUTH COMPLETE: Final state - username=%@, userId=%@", appState.currentUsername ?? "nil", appState.currentUserId?.uuidString ?? "nil")
     }
 
     func startServer() async {
@@ -244,9 +244,9 @@ struct RedLemonApp: App {
             // Start server in a background task that keeps running
             Task.detached(priority: .userInitiated) {
                 do {
-                    NSLog("📡 RedLemon: Server starting on port \(Config.serverPort)...")
+                    NSLog("📡 RedLemon: Server starting on port %d...", Config.serverPort)
                     try await server.start()
-                    NSLog("🎉 RedLemon: Server successfully started on port \(Config.serverPort)!")
+                    NSLog("🎉 RedLemon: Server successfully started on port %d!", Config.serverPort)
                 } catch {
                     NSLog("❌ RedLemon: Server error: %@", error.localizedDescription)
                 }
@@ -256,13 +256,13 @@ struct RedLemonApp: App {
             // LocalAPIClient has built-in retry logic (3 attempts with backoff).
             // We enable isServerReady immediately so BrowseView can start its retry loop.
             // This prevents the UI from waiting 2 seconds unnecessarily and potentially deadlock.
-            
+
             await MainActor.run {
                 appState.isServerReady = true
                 NSLog("✅ RedLemon: Server marked as ready (Optimistic)")
             }
 
-            NSLog("✅ RedLemon: Server should be running on \(Config.serverURL)")
+            NSLog("✅ RedLemon: Server should be running on %@", Config.serverURL)
         } catch {
             NSLog("❌ RedLemon: Failed to initialize server: %@", error.localizedDescription)
         }

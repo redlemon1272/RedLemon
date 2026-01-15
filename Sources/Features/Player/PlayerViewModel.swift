@@ -29,7 +29,7 @@ class PlayerViewModel: ObservableObject {
             if currentWatchPartyRoom == nil {
                 NSLog("⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.")
             } else if oldValue == nil {
-                NSLog("✅ PlayerVM: currentWatchPartyRoom set to \(currentWatchPartyRoom?.id ?? "unknown")")
+                NSLog("✅ PlayerVM: currentWatchPartyRoom set to %@", currentWatchPartyRoom?.id ?? "unknown")
             }
         }
     }
@@ -161,7 +161,7 @@ class PlayerViewModel: ObservableObject {
             LoggingManager.shared.debug(.videoRendering, message: "   Mode: \(watchMode)")
 
             // Step 1: Fetch metadata immediately for UI feedback
-            NSLog("📡 Fetching metadata for \(item.id)...")
+            NSLog("📡 Fetching metadata for %@...", item.id)
             let metadata = try await metadataProvider.fetchMetadata(type: item.type, id: item.id)
 
             // Update UI immediately so background art shows
@@ -180,7 +180,7 @@ class PlayerViewModel: ObservableObject {
                  // Use specific season/episode from playlist if available (Highest Priority)
                  if let s = playlistItem.season { effectiveSeason = s }
                  if let e = playlistItem.episode { effectiveEpisode = e }
-                 NSLog("🎬 PlayerVM: Using Playlist Metadata: S\(effectiveSeason ?? 0)E\(effectiveEpisode ?? 0)")
+                 NSLog("🎬 PlayerVM: Using Playlist Metadata: S%dE%d", effectiveSeason ?? 0, effectiveEpisode ?? 0)
             }
 
             // Step 2: Resolve stream (Optimized for Guest)
@@ -218,15 +218,71 @@ class PlayerViewModel: ObservableObject {
                 )
 
                 do {
-                    let unlockedStream = try await streamResolver.unlockStream(
+                    var unlockedStream = try await streamResolver.unlockStream(
                         stream: syntheticStream,
                         item: item,
                         season: effectiveSeason,
                         episode: effectiveEpisode
                     )
+                    NSLog("✅ PlayerVM: Direct unlock succeeded! URL: %@", String(unlockedStream.url?.prefix(60) ?? "nil"))
+
+                    // FIX: Fetch SubDL subtitles for direct unlock path (Landmine #45)
+                    // The direct unlock optimization bypasses resolveStream() where subtitles are normally attached.
+                    // We need to fetch them separately to ensure guests see SubDL subtitles in the menu.
+                    do {
+                        // Build stream hint from room data (RD URLs are truncated)
+                        var streamHint = item.name.replacingOccurrences(of: " ", with: ".")
+                        if let room = currentWatchPartyRoom {
+                            let sourceQuality = room.sourceQuality ?? ""
+                            let quality = room.selectedQuality ?? ""
+                            if !sourceQuality.isEmpty || !quality.isEmpty {
+                                streamHint = "\(item.name.replacingOccurrences(of: " ", with: ".")).\(quality).\(sourceQuality)".lowercased()
+                            }
+                        }
+
+                        let subDLSubtitles = try await LocalAPIClient.shared.searchSubtitles(
+                            imdbId: item.id,
+                            type: item.type,
+                            season: effectiveSeason,
+                            episode: effectiveEpisode,
+                            name: item.name,
+                            year: (item.year ?? metadata.year).flatMap { Int($0) },
+                            streamFilename: streamHint
+                        )
+
+                        if !subDLSubtitles.isEmpty {
+                            NSLog("✅ Direct Unlock: Found %d SubDL subtitles", subDLSubtitles.count)
+
+                            let externalSubs = subDLSubtitles.map { sub -> Subtitle in
+                                let encodedPath = Data(sub.url.utf8).base64EncodedString()
+                                var proxyURL = LocalAPIClient.shared.getSubtitleURL(
+                                    downloadPath: sub.url,
+                                    season: effectiveSeason,
+                                    episode: effectiveEpisode
+                                )
+                                proxyURL += (proxyURL.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
+
+                                return Subtitle(
+                                    id: encodedPath,
+                                    url: proxyURL,
+                                    lang: sub.language ?? "en",
+                                    label: sub.releaseName ?? "English",
+                                    srclang: sub.language ?? "en",
+                                    kind: "subtitles",
+                                    provider: "SubDL"
+                                )
+                            }
+
+                            unlockedStream.subtitles = (unlockedStream.subtitles ?? []) + externalSubs
+                            NSLog("✅ Direct Unlock: Attached %d SubDL subtitles to stream", externalSubs.count)
+                        }
+                    } catch {
+                        NSLog("⚠️ Direct Unlock: Subtitle search failed: %@", error.localizedDescription)
+                        // Non-fatal: Continue with stream even without SubDL subtitles
+                    }
+
                     resolvedStream = unlockedStream
                     resolvedMetadata = metadata
-                    NSLog("✅ PlayerVM: Direct unlock succeeded! URL: %@", String(unlockedStream.url?.prefix(60) ?? "nil"))
                 } catch {
                     NSLog("⚠️ PlayerVM: Direct unlock failed (%@), falling back to full resolution...", error.localizedDescription)
                     // resolvedStream stays nil, falls through to normal resolution below
@@ -293,7 +349,7 @@ class PlayerViewModel: ObservableObject {
                 var finalQuality = hostQuality
                 if hostQuality == "Unknown" || hostQuality.isEmpty {
                     finalQuality = Stream.detectVideoQuality(from: filename)
-                    NSLog("⚠️ GUEST: Detected quality from filename: \(finalQuality)")
+                    NSLog("⚠️ GUEST: Detected quality from filename: %@", finalQuality)
                 }
 
                 var hostStream = Stream(
@@ -317,62 +373,55 @@ class PlayerViewModel: ObservableObject {
                 // Build stream filename for subtitle matching
                 // Real-Debrid URLs are truncated (e.g., /d/xxx/TR), so use room's sourceQuality as hint
                 var streamHint = filename
-                NSLog("📝 GUEST: Extracted filename='\(filename)' (len=\(filename.count)), sourceQuality=\(watchPartyRoom.sourceQuality ?? "nil"), selectedQuality=\(watchPartyRoom.selectedQuality ?? "nil")")
+                NSLog("%@", "📝 GUEST: Extracted filename='\(filename)' (len=\(filename.count)), sourceQuality=\(watchPartyRoom.sourceQuality ?? "nil"), selectedQuality=\(watchPartyRoom.selectedQuality ?? "nil")")
                 if filename.count < 10 || filename == "Host Stream" {
                     // URL filename is truncated, construct from room data
                     let sourceQuality = watchPartyRoom.sourceQuality ?? ""
                     let quality = watchPartyRoom.selectedQuality ?? ""
                     // Build a release-like string: "Movie.Name.1080p.WEB-DL"
                     streamHint = "\(item.name.replacingOccurrences(of: " ", with: ".")).\(quality).\(sourceQuality)".lowercased()
-                    NSLog("📝 GUEST: Using room sourceQuality for subtitle matching: \(streamHint)")
+                    NSLog("%@", "📝 GUEST: Using room sourceQuality for subtitle matching: \(streamHint)")
                 }
 
-                if let subDLSubtitles = try? await LocalAPIClient.shared.searchSubtitles(
-                    imdbId: item.id,
-                    type: item.type,
-                    season: effectiveSeason, // Use derived playlist metadata
-                    episode: effectiveEpisode, // Use derived playlist metadata
-                    name: item.name,
-                    year: item.year.flatMap { Int($0) },
-                    streamFilename: streamHint // Pass stream hint for release-type matching
-                ) {
-                     NSLog("✅ GUEST: Found \(subDLSubtitles.count) subtitles")
+                do {
+                    let subDLSubtitles = try await LocalAPIClient.shared.searchSubtitles(
+                        imdbId: item.id,
+                        type: item.type,
+                        season: effectiveSeason, // Use derived playlist metadata
+                        episode: effectiveEpisode, // Use derived playlist metadata
+                        name: item.name,
+                        year: (item.year ?? metadata.year).flatMap { Int($0) }, // Fallback to metadata year
+                        streamFilename: streamHint // Pass stream hint for release-type matching
+                    )
 
-                     // Convert to Subtitle objects
-                     // Convert to Subtitle objects
-                     let externalSubs = subDLSubtitles.enumerated().map { (index, sub) -> Subtitle in
-                         let encodedPath = Data(sub.url.utf8).base64EncodedString()
+                    NSLog("✅ GUEST: Found %d subtitles", subDLSubtitles.count)
 
-                         // Route through local server proxy to handle zip extraction and VTT conversion
-                         // This is CRITICAL for MPV to be able to read the files, as it cannot handle
-                         // raw relative paths or zip files directly without this proxy.
-                         let pUrl = LocalAPIClient.shared.getSubtitleURL(downloadPath: sub.url, season: watchPartyRoom.season, episode: watchPartyRoom.episode)
-                         // Add token manually or let getSubtitleURL handle it? getSubtitleURL does NOT add token currently, so we add it here?
-                         // Wait, StreamService adds token. PlayerViewModel logic I saw earlier did NOT add token?
-                         // Line 179: var proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)"
-                         // It did NOT add token! Is token optional for local requests?
-                         // Server middleware might require it.
-                         // Let's add it to be safe if StreamService adds it.
-                         // But if I add it, I need access to Config.localAuthToken.
-                         // PlayerViewModel imports... checking if Config is available. `Config.serverURL` is used so Config is available.
-                         // But `Config.localAuthToken`?
+                    // Convert to Subtitle objects
+                    let externalSubs = subDLSubtitles.enumerated().map { (index, sub) -> Subtitle in
+                        let encodedPath = Data(sub.url.utf8).base64EncodedString()
 
-                         var proxyURL = pUrl
-                         // Safe append
-                         proxyURL += (proxyURL.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
+                        // Route through local server proxy to handle zip extraction and VTT conversion
+                        let pUrl = LocalAPIClient.shared.getSubtitleURL(downloadPath: sub.url, season: watchPartyRoom.season, episode: watchPartyRoom.episode)
 
-                         return Subtitle(
-                            id: encodedPath,
-                            url: proxyURL,
-                            lang: sub.language ?? "en",
-                            label: sub.releaseName ?? "English",
-                            srclang: sub.language ?? "en",
-                            kind: "subtitles",
-                            provider: "SubDL"
-                         )
-                     }
+                        var proxyURL = pUrl
+                        // Safe append
+                        proxyURL += (proxyURL.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
 
-                     hostStream.subtitles = (hostStream.subtitles ?? []) + externalSubs
+                        return Subtitle(
+                           id: encodedPath,
+                           url: proxyURL,
+                           lang: sub.language ?? "en",
+                           label: sub.releaseName ?? "English",
+                           srclang: sub.language ?? "en",
+                           kind: "subtitles",
+                           provider: "SubDL"
+                        )
+                    }
+
+                    hostStream.subtitles = (hostStream.subtitles ?? []) + externalSubs
+
+                } catch {
+                    NSLog("❌ GUEST: Subtitle search failed for %@: %@", item.name, error.localizedDescription)
                 }
 
                 resolvedStream = hostStream
@@ -818,7 +867,7 @@ class PlayerViewModel: ObservableObject {
 
             // Step 4: If hosting Watch Party, persist stream selection to specific room
             if isHost, let roomId = currentRoomId, watchMode == .watchParty {
-                NSLog("📡 Persisting stream selection to room \(roomId)")
+                NSLog("📡 Persisting stream selection to room %@", roomId)
 
                 // Update local room object
                 if var room = self.currentWatchPartyRoom {
@@ -1366,7 +1415,7 @@ class PlayerViewModel: ObservableObject {
                 finalEpisode = episode ?? 1
             }
 
-            NSLog("🎬 Creating Watch Party for: \(mediaItem.name)")
+            NSLog("🎬 Creating Watch Party for: %@", mediaItem.name)
 
             let roomName = mediaItem.name
             let roomId = generateRoomCode()
@@ -1394,7 +1443,7 @@ class PlayerViewModel: ObservableObject {
                 createdAt: nil
             )
              } catch {
-                NSLog("❌ Creation failed or timed out: \(error)")
+                NSLog("❌ Creation failed or timed out: %@", String(describing: error))
                 throw error
              }
 
@@ -1467,7 +1516,7 @@ class PlayerViewModel: ObservableObject {
             }
 
             } catch {
-                NSLog("❌ Failed to create room: \(error)")
+                NSLog("❌ Failed to create room: %@", String(describing: error))
                 let msg = "\(error)"
                 // Handle various limit error formats (Postgres P0001 or standard API error)
                 if msg.contains("Limit Reached") || msg.contains("P0001") || msg.contains("one room every 72 hours") {
@@ -1490,7 +1539,7 @@ class PlayerViewModel: ObservableObject {
 
     func joinRoom(roomId: String) async {
         guard let appState = appState else { return }
-        NSLog("🚪 Joining room: \(roomId)")
+        NSLog("🚪 Joining room: %@", roomId)
 
         await MainActor.run { appState.isLoadingRoom = true }
 
@@ -1502,9 +1551,9 @@ class PlayerViewModel: ObservableObject {
 
                 if EventsConfigService.shared.isEventJoinable(eventId: roomId, config: config) {
                     // Valid to join (either Live or Next Up)
-                    NSLog("✅ PlayerVM: Event \(roomId) is JOINABLE (Live or Next Up)")
+                    NSLog("✅ PlayerVM: Event %@ is JOINABLE (Live or Next Up)", roomId)
                 } else {
-                    NSLog("🚫 PlayerVM: Blocking join to STALE event room \(roomId).")
+                    NSLog("🚫 PlayerVM: Blocking join to STALE event room %@.", roomId)
                     await MainActor.run {
                         appState.isLoadingRoom = false
                     }
@@ -1518,7 +1567,7 @@ class PlayerViewModel: ObservableObject {
 
             // REVIVAL LOGIC: If Event Room is missing, recreate it JIT so friend can join
             if room == nil, roomId.hasPrefix("event_") {
-                 NSLog("👻 Room \(roomId) not found - Attempting REVIVAL for Event Join...")
+                 NSLog("👻 Room %@ not found - Attempting REVIVAL for Event Join...", roomId)
                  let imdbId = roomId.replacingOccurrences(of: "event_", with: "")
                  if !imdbId.isEmpty {
                      // 1. Fetch Metadata
@@ -1547,7 +1596,7 @@ class PlayerViewModel: ObservableObject {
                              description: "System Event",
                              createdAt: nil
                          ) {
-                             NSLog("✨ REVIVAL SUCCESS: Room \(roomId) restored!")
+                             NSLog("✨ REVIVAL SUCCESS: Room %@ restored!", roomId)
                              room = newRoom
                          }
                      }
@@ -1555,7 +1604,7 @@ class PlayerViewModel: ObservableObject {
             }
 
             guard let room = room else {
-                NSLog("❌ Room not found (and revival failed): \(roomId)")
+                NSLog("❌ Room not found (and revival failed): %@", roomId)
                 await MainActor.run { appState.isLoadingRoom = false }
                 return
             }
@@ -1631,7 +1680,7 @@ class PlayerViewModel: ObservableObject {
                let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
                liveEvent.mediaItem.id == (room.imdbId ?? "") {
 
-                NSLog("🛡️ PlayerVM: Overriding Room createdAt (\(watchPartyRoom.createdAt)) with Scheduled Start (\(liveEvent.startTime))")
+                NSLog("🛡️ PlayerVM: Overriding Room createdAt (%@) with Scheduled Start (%@)", String(describing: watchPartyRoom.createdAt), String(describing: liveEvent.startTime))
                 watchPartyRoom.createdAt = liveEvent.startTime
                 watchPartyRoom.lastActivity = liveEvent.startTime
             }
@@ -1653,13 +1702,13 @@ class PlayerViewModel: ObservableObject {
                      // REDLEMON: If room is already in playback (e.g. friend is watching), trust that over strict schedule
                      if isActuallyPlaying {
                          shouldJoinPlayback = true
-                         NSLog("✅ Event Join: \(rawId) is already PLAYING. Joining Playback.")
+                         NSLog("✅ Event Join: %@ is already PLAYING. Joining Playback.", rawId)
                      } else if let config = eventsConfig,
                         let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
                         liveEvent.mediaItem.id == rawId {
                          // Matched current live event
                          shouldJoinPlayback = true
-                         NSLog("✅ Event Join: \(rawId) is LIVE according to schedule. Joining Playback.")
+                         NSLog("✅ Event Join: %@ is LIVE according to schedule. Joining Playback.", rawId)
                      } else {
                          // Future/Past or No Config
                          shouldJoinPlayback = false
@@ -1696,7 +1745,7 @@ class PlayerViewModel: ObservableObject {
                             self.eventStartTime = room.createdAt
                             self.resumeFromTimestamp = max(0, TimeService.shared.now.timeIntervalSince(room.createdAt) - Double(eventsConfig?.bufferBetweenMoviesSeconds ?? 600))
                         }
-                        NSLog("🎉 Detected Event Room join! StartTime: \(self.eventStartTime ?? Date())")
+                        NSLog("🎉 Detected Event Room join! StartTime: %@", String(describing: self.eventStartTime ?? Date()))
                     } else {
                         self.isEventPlayback = false
                         self.resumeFromTimestamp = Double(room.playbackPosition)
@@ -1760,7 +1809,7 @@ class PlayerViewModel: ObservableObject {
 
             }
         } catch {
-            NSLog("❌ Failed to join room: \(error)")
+            NSLog("❌ Failed to join room: %@", String(describing: error))
             await MainActor.run { appState.isLoadingRoom = false }
         }
     }
@@ -1872,7 +1921,7 @@ class PlayerViewModel: ObservableObject {
                     NSLog("Background: ✅ createRoom task finished")
                     continuationWrapper.resume(returning: r)
                 } catch {
-                     NSLog("Background: ❌ createRoom task failed: \(error)")
+                     NSLog("Background: ❌ createRoom task failed: %@", String(describing: error))
                      continuationWrapper.resume(throwing: error)
                 }
             }

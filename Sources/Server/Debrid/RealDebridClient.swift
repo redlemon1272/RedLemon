@@ -131,7 +131,7 @@ actor RealDebridClient {
         // CRITICAL: Block known x265 torrents
         let hashPrefix = String(infoHash.prefix(12)).lowercased()
         if x265Blocklist.contains(where: { hashPrefix.hasPrefix($0) }) {
-            NSLog("🚫 BLOCKLIST: Rejecting known x265 torrent: \(infoHash.prefix(12))...")
+            NSLog("%@", "🚫 BLOCKLIST: Rejecting known x265 torrent: \(infoHash.prefix(12))...")
             throw RDError.notCached // Throw error to try next stream
         }
 
@@ -643,7 +643,7 @@ actor RealDebridClient {
         guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
             let errorMsg = String(data: data, encoding: .utf8) ?? "Unknown error"
             let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-            NSLog("❌ RealDebrid unrestrict failed: HTTP \(statusCode) - \(errorMsg)")
+            NSLog("%@", "❌ RealDebrid unrestrict failed: HTTP \(statusCode) - \(errorMsg)")
             throw RDError.unrestrictFailed
         }
 

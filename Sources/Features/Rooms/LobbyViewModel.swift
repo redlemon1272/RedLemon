@@ -47,7 +47,7 @@ class LobbyViewModel: ObservableObject {
 
     func markStreamReady(participantId: String) {
         streamReadyParticipantIds.insert(participantId.lowercased())
-        NSLog("✅ Lobby: Participant \(participantId) is ready for stream")
+        NSLog("✅ Lobby: Participant %@ is ready for stream", participantId)
     }
 
 
@@ -76,7 +76,7 @@ class LobbyViewModel: ObservableObject {
     // Delegated to AppState.player to persist across View recreations (Guest Loop Fix)
     var playbackEndedTimestamp: Date? {
         get { appState?.player.playbackEndedTimestamp }
-        set { 
+        set {
             if let appState = appState {
                 appState.player.playbackEndedTimestamp = newValue
             }
@@ -90,7 +90,7 @@ class LobbyViewModel: ObservableObject {
     // Delegated to AppState.player to persist across View recreations (Guest Loop Fix)
     var lastAutoStartedSessionId: String? {
         get { appState?.player.lastAutoStartedSessionId }
-        set { 
+        set {
             if let appState = appState {
                 appState.player.lastAutoStartedSessionId = newValue
             }
@@ -531,7 +531,7 @@ class LobbyViewModel: ObservableObject {
                                 // Check if we have already auto-started this stream.
                                 // We use ONLY the streamHash (not lastActivity) because lastActivity updates constantly.
                                 let sessionId = freshRoom.streamHash ?? ""
-                                
+
                                 if !sessionId.isEmpty && sessionId == self.lastAutoStartedSessionId {
                                     print("🚫 Lobby: Blocking auto-start loop. Already played stream: \(sessionId.prefix(8))")
                                 } else {
@@ -843,7 +843,7 @@ class LobbyViewModel: ObservableObject {
 
     /// Kick user by ID (Used by Context Menu)
     func kickUser(userId: String) {
-        if let participant = participants.first(where: { $0.id == userId }) {
+        if let participant = participants.first(where: { $0.id.caseInsensitiveCompare(userId) == .orderedSame }) {
             kickParticipant(participant)
         } else {
             // Create dummy for signaling (ID is what matters)
@@ -864,7 +864,7 @@ class LobbyViewModel: ObservableObject {
     /// Block user by ID (Used by Context Menu when participant might not be in the list)
     func blockUser(_ userId: String, username: String? = nil) {
         // Check if participant is in the list
-        if let participant = participants.first(where: { $0.id == userId }) {
+        if let participant = participants.first(where: { $0.id.caseInsensitiveCompare(userId) == .orderedSame }) {
             blockParticipant(participant)
         } else {
             // Not in list (or event room), but still block via service
@@ -978,12 +978,12 @@ class LobbyViewModel: ObservableObject {
         // This prevents the host from starting playback while guests are still resolving (3-10s delay)
         let guests = participants.filter { !$0.isHost && $0.id.lowercased() != self.participantId.lowercased() }
         if !guests.isEmpty && room.type == .userRoom { // Only for user rooms, maintain fast start for events
-             NSLog("⏳ Host: Initiating handshake for \(guests.count) guests...")
+             NSLog("⏳ Host: Initiating handshake for %d guests...", guests.count)
 
              // 1. Send PREPARE signal (with Hash/FileIdx payload)
              // Payload format: LOBBY_PREPARE_PLAYBACK|<Hash>|<FileIdx>
              let payload = "LOBBY_PREPARE_PLAYBACK|\(preResolvedStream?.infoHash ?? "")|\(preResolvedStream?.fileIdx ?? 0)"
-             
+
              Task { [weak self] in
                  guard let self = self else { return }
                  let prepMsg = SyncMessage(
@@ -1004,16 +1004,16 @@ class LobbyViewModel: ObservableObject {
              let timeout = Date().addingTimeInterval(15)
              await MainActor.run { self.isAwaitingGuests = true } // Show "Waiting for guests..." in UI
              addMessage(.systemInfo, userName: "System", data: ["message": "Waiting for guests to synchronize stream..."])
-             
+
              while Date() < timeout {
                  if Task.isCancelled { return }
-                 
+
                  let readyCount = guests.filter { self.streamReadyParticipantIds.contains($0.id.lowercased()) }.count
                  if readyCount >= guests.count {
-                     NSLog("✅ Host: All guests ready (\(readyCount)/\(guests.count))! Starting countdown.")
+                     NSLog("✅ Host: All guests ready (%d/%d)! Starting countdown.", readyCount, guests.count)
                      break
                  }
-                 
+
                  // if readyCount > 0 {
                  //    NSLog("⏳ Host: Waiting for guests... (\(readyCount)/\(guests.count) ready)")
                  // }
@@ -1021,7 +1021,7 @@ class LobbyViewModel: ObservableObject {
                  // Sleep 1s
                  try? await Task.sleep(nanoseconds: 1_000_000_000)
              }
-             
+
              if Date() >= timeout {
                  NSLog("⚠️ Host: Handshake timed out. Starting anyway.")
                  addMessage(.systemInfo, userName: "System", data: ["message": "Starting playback (Guest timeout exceeded)"])
@@ -1441,7 +1441,7 @@ class LobbyViewModel: ObservableObject {
         }
 
         print("🤖 Lobby: Checking auto-start for system event")
-        
+
         let now = Date()
         let timeUntilStart = room.createdAt.timeIntervalSince(now)
 
@@ -1492,7 +1492,7 @@ class LobbyViewModel: ObservableObject {
         print("🤖 Lobby: Auto-starting system event now")
 
         let elapsed = now.timeIntervalSince(room.createdAt)
-        
+
         // Dynamic Seeking Setup
         appState.player.eventStartTime = room.createdAt
         appState.player.resumeFromTimestamp = nil
@@ -1515,7 +1515,7 @@ class LobbyViewModel: ObservableObject {
                      self.lastAutoStartedSessionId = hash
                      print("📝 Lobby: Marking session as auto-started (Hash): \(hash.prefix(8))")
                  }
-                 
+
                  self.stopPolling()
 
                  await self.appState?.player.playMedia(

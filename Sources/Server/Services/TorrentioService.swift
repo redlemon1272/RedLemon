@@ -60,22 +60,22 @@ class TorrentioService: ProviderService {
                 throw ProviderError.httpError(statusCode: 0)
             }
             
-            NSLog("📡 Torrentio: HTTP \(httpResponse.statusCode), received \(data.count) bytes")
+            NSLog("%@", "📡 Torrentio: HTTP \(httpResponse.statusCode), received \(data.count) bytes")
             
             guard httpResponse.statusCode == 200 else {
-                NSLog("❌ Torrentio: HTTP error \(httpResponse.statusCode)")
+                NSLog("%@", "❌ Torrentio: HTTP error \(httpResponse.statusCode)")
                 throw ProviderError.httpError(statusCode: httpResponse.statusCode)
             }
 
             let result = try JSONDecoder().decode(TorrentioResponse.self, from: data)
             let streams = parseStreams(result.streams ?? [])
-            NSLog("✅ Torrentio: Parsed \(streams.count) streams from \(result.streams?.count ?? 0) raw")
+            NSLog("%@", "✅ Torrentio: Parsed \(streams.count) streams from \(result.streams?.count ?? 0) raw")
             
             return streams
         } catch let error as ProviderError {
             throw error
         } catch {
-            NSLog("❌ Torrentio: Request failed - \(error.localizedDescription)")
+            NSLog("%@", "❌ Torrentio: Request failed - \(error.localizedDescription)")
             throw ProviderError.httpError(statusCode: 0)
         }
     }
@@ -121,7 +121,7 @@ class TorrentioService: ProviderService {
         var mediaId = imdbId
         if let season = season, let episode = episode {
             mediaId += ":\(season):\(episode)"
-            NSLog("📺 Torrentio: Building URL for S\(String(format: "%02d", season))E\(String(format: "%02d", episode))")
+            NSLog("%@", "📺 Torrentio: Building URL for S\(String(format: "%02d", season))E\(String(format: "%02d", episode))")
         } else {
             NSLog("🎬 Torrentio: Building URL for movie (no season/episode)")
         }
@@ -132,10 +132,10 @@ class TorrentioService: ProviderService {
         let path = "/" + pathComponents.joined(separator: "/")
         let fullUrl = baseUrl + path
         
-        NSLog("🔗 Torrentio URL (length: \(fullUrl.count)): \(fullUrl.prefix(150))...")
+        NSLog("%@", "🔗 Torrentio URL (length: \(fullUrl.count)): \(fullUrl.prefix(150))...")
         
         guard let url = URL(string: fullUrl) else {
-            NSLog("❌ Torrentio: Failed to create URL from: \(fullUrl)")
+            NSLog("%@", "❌ Torrentio: Failed to create URL from: \(fullUrl)")
             // Fallback to basic URL without config
             let fallbackPath = "/stream/\(type)/\(imdbId).json"
             return URL(string: baseUrl + fallbackPath)!

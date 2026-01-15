@@ -992,13 +992,13 @@ class SupabaseClient: RoomManager, UserManager {
             "is_playing": isPlaying,
             "last_activity": ISO8601DateFormatter().string(from: Date())
         ]
-        
+
         // Landmine #35: Explicitly nil query-able stream properties to prevent Ghost Streams
         if shouldClearStream {
             body["stream_hash"] = NSNull()
             body["unlocked_stream_url"] = NSNull()
         }
-        
+
         _ = try await makeRequest(
             path: "/rooms",
             method: "PATCH",
@@ -1072,7 +1072,7 @@ class SupabaseClient: RoomManager, UserManager {
         if resetPlayback {
             body["is_playing"] = false
             body["playback_position"] = 0
-            NSLog("🔄 SupabaseClient: Resetting playback state for room \(roomId)")
+            NSLog("🔄 SupabaseClient: Resetting playback state for room %@", roomId)
         }
 
         if let streamHash = streamHash { body["stream_hash"] = streamHash }
@@ -1109,7 +1109,7 @@ class SupabaseClient: RoomManager, UserManager {
             query: ["id": "eq.\(roomId)"]
         )
 
-        NSLog("✅ Reset/Cleared stream selection for room \(roomId)")
+        NSLog("✅ Reset/Cleared stream selection for room %@", roomId)
     }
 
     /// Update room playlist (Host only)
@@ -1118,7 +1118,7 @@ class SupabaseClient: RoomManager, UserManager {
         playlist: [PlaylistItem],
         currentIndex: Int
     ) async throws {
-        NSLog("📡 SupabaseClient: updateRoomPlaylist called for room \(roomId) with \(playlist.count) items, index: \(currentIndex)")
+        NSLog("📡 SupabaseClient: updateRoomPlaylist called for room %@ with %d items, index: %d", roomId, playlist.count, currentIndex)
 
         do {
             // Serialize playlist items to dictionaries for JSONB column
@@ -1162,7 +1162,7 @@ class SupabaseClient: RoomManager, UserManager {
             NSLog("✅ SupabaseClient: Playlist updated (Fallback mode: No Index persisted)")
 
         } catch {
-             NSLog("❌ SupabaseClient: Failed to update playlist: \(error)")
+             NSLog("❌ SupabaseClient: Failed to update playlist: %@", String(describing: error))
              throw error
         }
     }
@@ -1311,7 +1311,7 @@ class SupabaseClient: RoomManager, UserManager {
                 body: body
             )
         } catch {
-            NSLog("❌ Failed to upload log: \(error)")
+            NSLog("❌ Failed to upload log: %@", String(describing: error))
         }
     }
 

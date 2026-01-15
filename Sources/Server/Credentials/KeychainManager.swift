@@ -117,7 +117,7 @@ actor KeychainManager {
 
     /// Store username (uses UserDefaults to avoid keychain prompts on debug builds)
     func saveUsername(_ username: String) async throws {
-        NSLog("💾 KeychainManager: Saving username '\(username)' to UserDefaults")
+        NSLog("%@", "💾 KeychainManager: Saving username '\(username)' to UserDefaults")
         UserDefaults.standard.set(username, forKey: "redlemon.username")
         UserDefaults.standard.synchronize() // Force immediate flush to disk
 
@@ -305,7 +305,7 @@ actor KeychainManager {
         }
 
         cache = json
-        NSLog("📂 Loaded \(cache.count) credential(s) from cache")
+        NSLog("%@", "📂 Loaded \(cache.count) credential(s) from cache")
     }
 
     private func saveToEncryptedCache() async {

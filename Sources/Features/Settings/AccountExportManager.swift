@@ -97,7 +97,7 @@ class AccountExportManager {
             try await KeychainManager.shared.saveKeyPair(privateKey: priv, publicKey: pub)
         } else {
             // 🔄 LACKING KEYS: Generate new ones for legacy backups
-            NSLog("🔄 Restoration: Keys missing from backup. Generating new keys for '\(exportData.username)'.")
+            NSLog("🔄 Restoration: Keys missing from backup. Generating new keys for '%@'.", exportData.username)
             let (priv, pub) = CryptoManager.shared.generateKeyPair()
             try await KeychainManager.shared.saveKeyPair(privateKey: priv, publicKey: pub)
         }

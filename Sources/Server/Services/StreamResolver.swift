@@ -28,7 +28,7 @@ actor StreamResolver {
         preferredHash: String? = nil,
         triggerSource: String? = nil
     ) async throws -> QualityBucketsResponse {
-        NSLog("⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
+        NSLog("%@", "⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
 
         // MARK: - Kitsu → IMDB Resolution
         // Most stream providers (Torrentio, Zilean, DebridSearch) require IMDB IDs.
@@ -65,7 +65,7 @@ actor StreamResolver {
 
         if let year = year {
 
-            NSLog("   📅 Filtering by year: \(year)")
+            NSLog("%@", "   📅 Filtering by year: \(year)")
         }
 
         // Fetch all streams from providers
@@ -179,7 +179,7 @@ actor StreamResolver {
             }
         }
 
-        NSLog("📦 StreamResolver: Received \(rawStreams.count) raw streams, bucketing...")
+        NSLog("%@", "📦 StreamResolver: Received \(rawStreams.count) raw streams, bucketing...")
 
         // LOGGING: Provider Breakdown
         let providerCounts = rawStreams.reduce(into: [String: Int]()) { counts, stream in

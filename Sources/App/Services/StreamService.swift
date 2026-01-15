@@ -113,12 +113,12 @@ actor StreamService: StreamResolving {
         // Step 1: Load metadata
         let finalMetadata: MediaMetadata
         if let metadata = metadata {
-            NSLog("✅ StreamService: Using provided metadata: \(metadata.title)")
+            NSLog("✅ StreamService: Using provided metadata: %@", metadata.title)
             finalMetadata = metadata
         } else {
-            NSLog("📡 StreamService: Fetching metadata for \(item.id)...")
+            NSLog("📡 StreamService: Fetching metadata for %@...", item.id)
             finalMetadata = try await LocalAPIClient.shared.fetchMetadata(type: item.type, id: item.id)
-            NSLog("✅ StreamService: Metadata loaded: \(finalMetadata.title)")
+            NSLog("✅ StreamService: Metadata loaded: %@", finalMetadata.title)
         }
 
         // FIX: Defensive check - ensure movies don't have season/episode
@@ -640,13 +640,13 @@ actor StreamService: StreamResolving {
         // If we resolve a redirect, we might get a cached URL that belongs to a different user,
         // which causes immediate EOF when the guest tries to play it (their IP doesn't match).
         // The proper unlock flow ensures each user gets their own fresh, valid download link.
-        
+
         // Only skip unlock if: (1) URL is direct AND (2) no infoHash available for proper unlock
         let hasInfoHash = stream.infoHash != nil && !stream.infoHash!.isEmpty
-        
+
         // Check for direct HTTP URL (Pre-unlocked)
         if let url = stream.url, (url.hasPrefix("http://") || url.hasPrefix("https://")) {
-            
+
             // If we have an infoHash, prefer proper unlock flow (skip resolve redirect)
             // This ensures IP-compatibility for watch party guests
             if hasInfoHash && url.contains("/resolve/") {
@@ -933,16 +933,16 @@ actor StreamService: StreamResolving {
         let tempDir = FileManager.default.temporaryDirectory
         let zipPath = tempDir.appendingPathComponent("temp_\(UUID().uuidString).zip")
         let extractDir = tempDir.appendingPathComponent("extract_\(UUID().uuidString)")
-        
+
         // Ensure cleanup occurs even if errors happen
         defer {
             try? FileManager.default.removeItem(at: zipPath)
-            // Note: We might want to keep the extracted srt? 
+            // Note: We might want to keep the extracted srt?
             // The original code returns srtFile.path. If we delete extractDir, the file is gone!
             // We should Move the srt file out before deleting headers?
             // Actually, the current implementation returns a path to a file inside extractDir.
             // If we delete extractDir, the returned path is invalid.
-            
+
             // Re-reading logic:
             // The caller receives the path and likely reads it immediately or passes it to MPV?
             // MPV reads from the path. If we delete it, MPV fails.

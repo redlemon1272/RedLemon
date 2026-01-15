@@ -46,11 +46,11 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
 
         let url = URL(string: "\(baseURL)/api/metadata/catalog/movie/popular")!
         let request = makeAuthorizedRequest(url: url)
-        
+
         // APPLY HOLY PATTERN #82: Run network and decoding off-thread
         return try await Task.detached(priority: .userInitiated) {
             let (data, _) = try await self.session.data(for: request)
-            
+
             // Heavy decoding on background thread
             let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
 
@@ -77,11 +77,11 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
 
         let url = URL(string: "\(baseURL)/api/metadata/catalog/series/popular")!
         let request = makeAuthorizedRequest(url: url)
-        
+
         // APPLY HOLY PATTERN #82: Run network and decoding off-thread
         return try await Task.detached(priority: .userInitiated) {
             let (data, _) = try await self.session.data(for: request)
-            
+
             // Heavy decoding on background thread
             let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
 
@@ -97,7 +97,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
 
     func fetchTopMoviesForEvents() async throws -> EventsConfig {
         print("🎬 [EventsView] Fetching movie events from centralized config...")
-        
+
         // Fetch centralized config from Supabase
         // This ensures ALL RedLemon instances show identical movie lists
         do {
@@ -110,7 +110,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
             throw APIError.networkError(error)
         }
     }
-    
+
     func fetchLargeCatalogForAdmin() async throws -> [MediaItem] {
         // Use a specific cache key for the large admin catalog
         // Use a specific cache key for the large admin catalog
@@ -127,33 +127,33 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         var currentSkip = 0
         let targetCount = 2000
         let maxPages = 40 // Safety break
-        
+
         for page in 0..<maxPages {
             if allItems.count >= targetCount { break }
-            
+
             // Try to request 100 items, but the API might return fewer
             let urlString = "\(baseURL)/api/metadata/catalog/movie/popular?skip=\(currentSkip)&limit=100"
             guard let url = URL(string: urlString) else { continue }
-            
+
             do {
                 print("   [Admin] Fetching page \(page + 1) (skip=\(currentSkip))...")
                 let (data, _) = try await session.data(for: makeAuthorizedRequest(url: url))
                 let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
-                
+
                 let pageItems = response.metas.map { MediaItem(from: $0) }
                 if pageItems.isEmpty {
                     print("   [Admin] No more items found at skip \(currentSkip). Stopping.")
-                    break 
+                    break
                 }
-                
+
                 allItems.append(contentsOf: pageItems)
                 print("   [Admin] Received \(pageItems.count) items. Total: \(allItems.count)")
-                
+
                 // Increment skip by the ACTUAL number of items received to ensure no gaps
                 // If the API supports limit, we might get 100. If not, we might get 20 or 50.
                 // This adapts to whatever the server gives us.
                 currentSkip += pageItems.count
-                
+
                 // Small delay to be nice to the server
                 try await Task.sleep(nanoseconds: 200_000_000) // 0.2s
             } catch {
@@ -162,11 +162,11 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
                 break
             }
         }
-        
+
         // Deduplicate based on ID
         var uniqueItems: [MediaItem] = []
         var seenIds: Set<String> = []
-        
+
         for item in allItems {
             if !seenIds.contains(item.id) {
                 seenIds.insert(item.id)
@@ -186,64 +186,64 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
     /// This becomes the single source of truth for ALL clients
     func generateAndUploadSchedule() async throws -> Int {
         print("🎲 [Admin] Generating new global schedule...")
-        
+
         // Fetch a LARGE pool of movies (100+) to ensure variety
         // We do NOT use the standard fetchPopularMovies() because it's limited to 15 for older devices
         let allMovies = try await fetchLargeCatalogForAdmin()
         print("   [Admin] Pool size: \(allMovies.count) movies")
-        
+
         // Fetch current config to preserve exclusions
         // FORCE REFRESH to ensure we have the latest exclusions (e.g. from a recent delete)
         NSLog("📝 [Admin] Fetching current config to retrieve exclusions...")
         let currentConfig = try await EventsConfigService.shared.refreshConfig(type: "movie_events")
         let previouslyExcludedIds = Set(currentConfig.excludedMovieIds ?? [])
-        
-        NSLog("📝 [Admin] Found \(previouslyExcludedIds.count) previously excluded movies")
+
+        NSLog("📝 [Admin] Found %d previously excluded movies", previouslyExcludedIds.count)
         if !previouslyExcludedIds.isEmpty {
-            NSLog("📝 [Admin] Exclusions list: \(previouslyExcludedIds)")
+            NSLog("📝 [Admin] Exclusions list: %@", String(describing: previouslyExcludedIds))
         } else {
             NSLog("⚠️ [Admin] Exclusions list is EMPTY. If you just deleted a movie, this is WRONG.")
         }
         if !previouslyExcludedIds.isEmpty {
-            NSLog("📝 [Admin] Exclusions: \(previouslyExcludedIds.joined(separator: ", "))")
+            NSLog("📝 [Admin] Exclusions: %@", previouslyExcludedIds.joined(separator: ", "))
         }
-        
+
         // Filter for "Thrilling" content
         let thrillingGenres: Set<String> = ["action", "adventure", "sci-fi", "thriller", "mystery", "crime", "horror"]
         // excludedTitles removed as it was unused
         // For now, popular movies is a good start.
-        
+
         // 2. (REMOVED) Paramount Specific Fetching
         // User requested to remove specific Paramount movies and let it be random.
-        
+
         // 3. Enrich and Filter for Thrilling Genres
         print("   [Admin] Processing \(allMovies.count) movies (fetching metadata if needed)...")
-        
+
         var filteredMovies: [MediaItem] = []
 
-        
+
         // Batch processing to avoid rate limiting
         let batchSize = 20
         let batches = allMovies.chunked(into: batchSize)
-        
+
         // Debug counters
         var totalProcessed = 0
         var kept = 0
-        
+
         for (batchIndex, batch) in batches.enumerated() {
             print("   [Admin] Processing batch \(batchIndex + 1)/\(batches.count) (\(batch.count) items)...")
-            
+
             await withTaskGroup(of: MediaItem?.self) { group in
                 for movie in batch {
                     group.addTask {
                         // Check persistent exclusions first
                         let cleanMovieId = movie.id.trimmingCharacters(in: .whitespacesAndNewlines)
-                        
+
                         if previouslyExcludedIds.contains(cleanMovieId) || previouslyExcludedIds.contains(movie.id) {
                             // NSLog("🚫 [Admin] Skipping excluded movie: \(movie.name) (ID: \(cleanMovieId))")
                             return nil
                         }
-                        
+
                         // Exclude specific titles
                         let excludedTitles = [
                             "the stringer: the man who took the photo",
@@ -251,11 +251,11 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
                             "deaf president now"
                         ]
                         if excludedTitles.contains(movie.name.lowercased()) { return nil }
-                        
+
                         // Check if we need to fetch full metadata
                         var movieToUse = movie
                         let needsMetadata = (movie.genres?.isEmpty ?? true) || movie.background == nil || movie.logo == nil
-                        
+
                         if needsMetadata {
                             if let fullItem = try? await self.fetchMediaDetails(imdbId: movie.id, type: "movie") {
                                 movieToUse = fullItem
@@ -266,11 +266,11 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
                                 }
                             }
                         }
-                        
+
                         // Filter by genre
                         let genres = (movieToUse.genres ?? []).map { $0.lowercased() }
                         let movieGenresSet = Set(genres)
-                        
+
                         if !movieGenresSet.isDisjoint(with: thrillingGenres) {
                             return movieToUse
                         } else {
@@ -278,7 +278,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
                         }
                     }
                 }
-                
+
                 for await movie in group {
                     totalProcessed += 1
                     if let movie = movie {
@@ -287,57 +287,57 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
                     }
                 }
             }
-            
+
             // Small delay between batches
             try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s
         }
-        
+
         print("📊 [Admin] Filtering Report:")
         print("   Total Processed: \(totalProcessed)")
         print("   Kept: \(kept)")
         print("   Total movies after filtering: \(filteredMovies.count)")
-        
+
         // SAFETY CHECK: Never upload an empty list!
         guard !filteredMovies.isEmpty else {
             print("❌ [Admin] Generated list is empty! Aborting upload.")
             throw APIError.invalidResponse
         }
-        
+
         // 6. Sort and Shuffle
         // Sort by popularity (vote_count) first to ensure quality
         // Then shuffle deterministically based on date seed
         // But for now, we want a random shuffle for the schedule since we are generating a static list
         // The admin can regenerate if they don't like it.
         var shuffledMovies = filteredMovies.shuffled()
-        
+
         // Ensure we have enough movies
         if shuffledMovies.isEmpty {
             print("⚠️ [Admin] No movies found after filtering!")
             // Fallback to raw list if filtering was too aggressive
             shuffledMovies = allMovies.prefix(20).map { $0 }
         }
-        
+
         // Log the final list for verification
-        NSLog("✅ [Admin] Final list contains \(shuffledMovies.count) movies:")
+        NSLog("✅ [Admin] Final list contains %d movies:", shuffledMovies.count)
         for (index, movie) in shuffledMovies.enumerated() {
-            NSLog("   \(index + 1). \(movie.name) (ID: \(movie.id))")
+            NSLog("   %d. %@ (ID: %@)", index + 1, movie.name, movie.id)
         }
-        
+
         // 7. Upload to Supabase
         print("📤 [Admin] Uploading new schedule with \(shuffledMovies.count) movies...")
-        
+
         // Pass the preserved excludedMovieIds to the upload function
         // This ensures they are persisted in the new config row
         let exclusionsToPersist = Array(previouslyExcludedIds)
-        NSLog("📤 [Admin] Persisting \(exclusionsToPersist.count) exclusions: \(exclusionsToPersist)")
-        
+        NSLog("📤 [Admin] Persisting %d exclusions: %@", exclusionsToPersist.count, String(describing: exclusionsToPersist))
+
         let newVersion = try await EventsConfigService.shared.uploadNewConfig(
             movies: shuffledMovies,
             excludedMovieIds: exclusionsToPersist
         )
-        
+
         print("✅ [Admin] Schedule generated and uploaded successfully! Version: \(newVersion)")
-        
+
         return newVersion
     }
 
@@ -436,7 +436,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
                     print("🔍 [DEBUG] Network attempt \(attempt)/\(maxRetries) for \(url.lastPathComponent)")
                 }
 
-                
+
                 let request = makeAuthorizedRequest(url: url)
                 let (data, response) = try await session.data(for: request)
 
@@ -549,7 +549,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
     }
 
     // MARK: - Helper Methods
-    
+
     func fetchMetadata(type: String, id: String) async throws -> MediaMetadata {
         // Check cache first
         let cacheKey = "meta_\(type)_\(id)"
@@ -615,7 +615,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
 
         return metadata
     }
-    
+
 
 
     // MARK: - Stream Resolution
@@ -641,7 +641,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         }
 
         components.queryItems = queryItems
-        
+
         let request = makeAuthorizedRequest(url: components.url!)
         let (data, _) = try await session.data(for: request)
         let response = try JSONDecoder().decode(AllStreamsResponse.self, from: data)
@@ -692,7 +692,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
             URLQueryItem(name: "type", value: type),
             URLQueryItem(name: "languages", value: "en")
         ]
-        
+
         if let season = season {
              queryItems.append(URLQueryItem(name: "season", value: "\(season)"))
         }
@@ -708,22 +708,22 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         if let streamFilename = streamFilename {
             queryItems.append(URLQueryItem(name: "filename", value: streamFilename))
         }
-        
+
         components.queryItems = queryItems
-        
+
         guard let url = components.url else {
             throw APIError.invalidURL
         }
-        
+
         var request = URLRequest(url: url)
-        request.timeoutInterval = 10 
-        
+        request.timeoutInterval = 10
+
         let (data, response) = try await URLSession.shared.data(for: request)
-        
+
         guard let httpResponse = response as? HTTPURLResponse else {
              throw APIError.invalidResponse
         }
-        
+
         if httpResponse.statusCode != 200 {
             // Try to read error from body
             if let errorMsg = String(data: data, encoding: .utf8) {
@@ -731,7 +731,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
             }
              throw APIError.serverError(statusCode: httpResponse.statusCode)
         }
-        
+
         let subtitles = try JSONDecoder().decode([SubDLSubtitle].self, from: data)
         return subtitles
     }
@@ -740,20 +740,20 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
     func getSubtitleURL(downloadPath: String, season: Int? = nil, episode: Int? = nil) -> String {
         // Encode download path as base64
         let base64 = Data(downloadPath.utf8).base64EncodedString()
-        
+
         // Percent encode the base64 string to ensure it doesn't break path routing (e.g. '/' or '+')
         let encodedPath = base64.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? base64
-        
+
         var url = "\(baseURL)/subtitles/subdl/\(encodedPath)"
-        
+
         var queryItems: [String] = []
         if let s = season { queryItems.append("season=\(s)") }
         if let e = episode { queryItems.append("episode=\(e)") }
-        
+
         if !queryItems.isEmpty {
             url += "?" + queryItems.joined(separator: "&")
         }
-        
+
         return url
     }
 
@@ -856,7 +856,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         if let sizeStr = stream.size {
              let sizeUpper = sizeStr.uppercased()
              var sizeGB: Double = 0.0
-             
+
              if sizeUpper.contains("GB") {
                  let numStr = sizeUpper.replacingOccurrences(of: " GB", with: "").trimmingCharacters(in: .whitespaces)
                  sizeGB = Double(numStr) ?? 0.0
@@ -864,12 +864,12 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
                  let numStr = sizeUpper.replacingOccurrences(of: " MB", with: "").trimmingCharacters(in: .whitespaces)
                  sizeGB = (Double(numStr) ?? 0.0) / 1024.0
              }
-             
+
              // Sweet Spot Bonus (High quality rips, manageable size)
              if sizeGB >= 2.5 && sizeGB <= 12.0 {
                  score += 15
              }
-             
+
              // "Heavy" Penalty (Only for 1080p)
              // If 4K, 15GB+ is normal, so don't penalize
              let is4K = lowerTitle.contains("2160p") || lowerTitle.contains("4k")
@@ -1010,10 +1010,10 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
     }
 
     // MARK: - Specific Movie Fetching
-    
+
     private func fetchParamountHorrorMovies() async -> [MediaItem] {
         let cacheKey = "cached_paramount_horror_movies"
-        
+
         // 1. Try to load from cache first (Fast & Consistent)
         if let data = UserDefaults.standard.data(forKey: cacheKey),
            let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: data) {
@@ -1023,44 +1023,44 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
             // We can add a TTL later if needed, but these specific movies are static.
             return cachedMovies
         }
-        
+
         // 2. Fetch from Network
         // Paramount catalog URL from DiscoverView
         let baseURL = "https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky"
         let urlString = "\(baseURL)/catalog/movie/pmp.json"
-        
+
         guard let url = URL(string: urlString) else {
             print("❌ [Paramount] Invalid URL")
             return []
         }
-        
+
         do {
             print("☁️ [Paramount] Fetching from network...")
             let (data, _) = try await session.data(from: url)
             let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data) // Reusing CinemetaSearchResponse as structure is likely similar (metas array)
-            
+
             let targetTitles = ["smile", "smile 2", "longlegs"]
-            
+
             var foundMovies: [MediaItem] = []
-            
+
             for meta in response.metas {
                 // Check title
                 if targetTitles.contains(meta.name.lowercased()) {
                     print("🔍 [Paramount] Found candidate: \(meta.name)")
-                    
+
                     var movie = MediaItem(from: meta)
-                    
+
                     // Fetch full metadata to verify rating and genre if needed
                     if let fullItem = try? await fetchMediaDetails(imdbId: movie.id, type: "movie") {
                         movie = fullItem // Update with full details
-                        
+
                         // Verify Genre
                         let genres = (movie.genres ?? []).map { $0.lowercased() }
                         if !genres.contains("horror") {
                             print("   🚫 Not Horror (Genres: \(genres))")
                             continue
                         }
-                        
+
                         // Verify Rating (6.5+)
                         if let ratingStr = movie.imdbRating, let rating = Double(ratingStr) {
                             if rating < 6.5 {
@@ -1068,13 +1068,13 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
                                 continue
                             }
                         }
-                        
+
                         print("   ✅ Matches criteria! Adding to list.")
                         foundMovies.append(movie)
                     }
                 }
             }
-            
+
             // 3. Save to Cache
             if !foundMovies.isEmpty {
                 if let encoded = try? JSONEncoder().encode(foundMovies) {
@@ -1082,9 +1082,9 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
                     print("💾 [Paramount] Cached \(foundMovies.count) movies for future runs")
                 }
             }
-            
+
             return foundMovies
-            
+
         } catch {
             print("❌ [Paramount] Failed to fetch catalog: \(error)")
             return []
@@ -1176,7 +1176,7 @@ struct MediaItem: Identifiable, Codable, Equatable {
 
     // HARDWARE-SAFE initializer from MediaMetadata
     init(from meta: MediaMetadata) {
-        
+
         self.id = meta.id
         self.type = meta.type
         self.name = meta.title
@@ -1189,7 +1189,7 @@ struct MediaItem: Identifiable, Codable, Equatable {
         self.imdbRating = meta.imdbRating.map { String($0) }
         self.genres = meta.genres
         self.runtime = meta.runtime
-        
+
     }
 
     // Cinemeta returns full URLs, no need for construction
@@ -1266,7 +1266,7 @@ enum StreamError: LocalizedError {
     case networkError(underlying: Error)
     case timeout
     case unknownError(message: String)
-    
+
     /// User-friendly error title
     var title: String {
         switch self {
@@ -1290,7 +1290,7 @@ enum StreamError: LocalizedError {
             return "Playback Error"
         }
     }
-    
+
     /// Detailed explanation for the user
     var errorDescription: String? {
         switch self {
@@ -1314,7 +1314,7 @@ enum StreamError: LocalizedError {
             return message
         }
     }
-    
+
     /// Actionable solution for the user
     var solution: String {
         switch self {
@@ -1338,7 +1338,7 @@ enum StreamError: LocalizedError {
             return "Try again or select a different stream."
         }
     }
-    
+
     /// SF Symbol icon for the error type
     var icon: String {
         switch self {
@@ -1356,7 +1356,7 @@ enum StreamError: LocalizedError {
             return "exclamationmark.triangle.fill"
         }
     }
-    
+
     /// Whether Settings button should be shown
     var showSettingsButton: Bool {
         switch self {

@@ -830,6 +830,16 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 8.  **Merge & Tag**: Run `./scripts/merge-and-tag.sh <VERSION>` (e.g., `v1.0.71`) to merge the feature branch into `main` and create the release tag.
     -   *Action*: Fetches origin -> Checkouts main -> Merges branch -> Tags -> Pushes Main & Tag -> Returns to Branch.
 
+## Anti-Regression Shield (Advisory)
+To prevent reintroducing known bugs ("Landmines"), run the architecture scanner during development:
+- **Command**: `./scripts/architecture-scan.sh`
+- **Checks**:
+  - **Landmine #11**: Unsafe `NSLog` usage (Risk: Crash).
+  - **Landmine #37**: Case-sensitive ID comparisons (Risk: Ghost Bugs).
+  - **Landmine #43**: Optional chaining on `try await` (Risk: Silent Failure).
+  - **Legacy Patterns**: `LazyVStack` (macOS 12 Stutter), `DispatchQueue.main` (MainActor Violation).
+- **Policy**: Fix **Errors** immediately. Review **Warnings**. Use `// OK` or `// legacy` to suppress false positives.
+
 ## Manual Key Recovery (New Device)
 To sign releases on a new machine, you must import the **Sparkle Private Key** into the Keychain.
 

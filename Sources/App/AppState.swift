@@ -178,6 +178,9 @@ class AppState: ObservableObject {
     @Published var discoverScrollPosition: String? = nil  // Track scroll position in discover view
     @Published var browseSelectedTab: Int = 0  // 0 = Movies, 1 = TV Shows - persisted across navigation
     @Published var discoverSelectedTab: Int = 0  // 0 = Movies, 1 = TV Shows - persisted across navigation
+    @Published var discoverSelectedCatalog: String = "Netflix" // Persist selected provider
+    @Published var discoverSelectedGenre: String = "All" // Persist selected genre
+    @Published var browseRowScrollPositions: [String: CGFloat] = [:] // Persist horizontal scroll positions for Browse rows
     @Published var activeRooms: [WatchPartyRoom] = []  // Track all active rooms locally
     @Published var isLoadingRoom: Bool = false  // Track room loading state
     @Published var shouldAutoJoinLobby: Bool = false  // Flag to auto-join lobby for live events

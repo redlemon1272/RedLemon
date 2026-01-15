@@ -107,6 +107,10 @@ struct BrowseView: View {
                             StreamingServiceRow(
                                 title: selectedTab == .movies ? "Popular Movies" : "Popular TV Shows",
                                 items: selectedTab == .movies ? movies : shows,
+                                scrollOffset: Binding(
+                                    get: { appState.browseRowScrollPositions["popular"] ?? 0 },
+                                    set: { appState.browseRowScrollPositions["popular"] = $0 }
+                                ),
                                 onTap: { item in selectMedia(item, fromRow: "popular") }
                             )
                             .id("popular")
@@ -117,6 +121,10 @@ struct BrowseView: View {
                                 catalogKey: "trending",
                                 items: streamingCatalogs[getStorageKey("trending")] ?? [],
                                 isLoading: isLoadingCatalogs.contains(getStorageKey("trending")),
+                                scrollOffset: Binding(
+                                    get: { appState.browseRowScrollPositions[getStorageKey("trending")] ?? 0 },
+                                    set: { appState.browseRowScrollPositions[getStorageKey("trending")] = $0 }
+                                ),
                                 onTap: { item in selectMedia(item, fromRow: "trending") },
                                 onAppear: { await loadCatalogIfNeeded(key: "trending", isTrending: true) }
                             )
@@ -129,6 +137,10 @@ struct BrowseView: View {
                                     catalogKey: serviceKey,
                                     items: streamingCatalogs[getStorageKey(serviceKey)] ?? [],
                                     isLoading: isLoadingCatalogs.contains(getStorageKey(serviceKey)),
+                                    scrollOffset: Binding(
+                                        get: { appState.browseRowScrollPositions[getStorageKey(serviceKey)] ?? 0 },
+                                        set: { appState.browseRowScrollPositions[getStorageKey(serviceKey)] = $0 }
+                                    ),
                                     onTap: { item in selectMedia(item, fromRow: serviceKey) },
                                     onAppear: { await loadCatalogIfNeeded(key: serviceKey) }
                                 )
@@ -1368,6 +1380,7 @@ struct MediaCard: View {
 struct StreamingServiceRow: View {
     let title: String
     let items: [MediaItem]
+    let scrollOffset: Binding<CGFloat>?
     let onTap: (MediaItem) -> Void
 
     var body: some View {
@@ -1379,7 +1392,7 @@ struct StreamingServiceRow: View {
                     .padding(.horizontal)
 
                 // Version-aware horizontal scroll view (Custom NSScrollView for macOS 15+, native for others)
-                VersionAwareHorizontalScrollView {
+                VersionAwareHorizontalScrollView(scrollOffset: scrollOffset) {
                     LazyHStack(spacing: 16) {
                         ForEach(items) { item in
                             MediaCard(item: item)
@@ -1402,6 +1415,7 @@ struct LazyStreamingServiceRow: View {
     let catalogKey: String
     let items: [MediaItem]
     let isLoading: Bool
+    let scrollOffset: Binding<CGFloat>?
     let onTap: (MediaItem) -> Void
     let onAppear: () async -> Void
 
@@ -1432,7 +1446,7 @@ struct LazyStreamingServiceRow: View {
                 .frame(height: 240)
             } else if !items.isEmpty {
                 // Version-aware horizontal scroll view (Custom NSScrollView for macOS 15+, native for others)
-                VersionAwareHorizontalScrollView {
+                VersionAwareHorizontalScrollView(scrollOffset: scrollOffset) {
                     LazyHStack(spacing: 16) {
                         ForEach(items) { item in
                             OptimizedMediaCard(item: item)

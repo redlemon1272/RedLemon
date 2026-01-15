@@ -5,26 +5,24 @@ import QuartzCore
 /// A wrapper that chooses the correct horizontal scroll implementation based on macOS version.
 /// - macOS 15+: Uses HorizontalNSScrollView to fix nested scroll event issues.
 /// - macOS 12-14: Uses standard SwiftUI ScrollView.
+/// A wrapper that chooses the correct horizontal scroll implementation based on macOS version.
+/// - macOS 15+: Uses HorizontalNSScrollView to fix nested scroll event issues.
+/// - macOS 12-14: Uses standard SwiftUI ScrollView.
 struct VersionAwareHorizontalScrollView<Content: View>: View {
     let content: Content
+    let scrollOffset: Binding<CGFloat>?
 
-    init(@ViewBuilder content: () -> Content) {
+    init(scrollOffset: Binding<CGFloat>? = nil, @ViewBuilder content: () -> Content) {
+        self.scrollOffset = scrollOffset
         self.content = content()
     }
 
     var body: some View {
-        if #available(macOS 15, *) {
-            // macOS 15+ requires custom NSScrollView to handle nested scrolling correctly
-            HorizontalNSScrollView {
-                content
-            }
-            // Explicitly set height to prevent collapsing, though fittingSize should handle it
-            // The content usually has its own frame/padding
-        } else {
-            // macOS 12-14 works perfectly with native SwiftUI
-            ScrollView(.horizontal, showsIndicators: false) {
-                content
-            }
+        // Use custom NSScrollView wrapper for ALL versions to ensure we can bind pixel offsets.
+        // We handle the "scroll works" issue by using a vanilla NSScrollView on macOS 12-14
+        // and the custom forwarding one on macOS 15+.
+        HorizontalNSScrollView(scrollOffset: scrollOffset) {
+            content
         }
     }
 }
@@ -34,13 +32,28 @@ struct VersionAwareHorizontalScrollView<Content: View>: View {
 /// SwiftUI's native ScrollView consumes vertical scroll events.
 private struct HorizontalNSScrollView<Content: View>: NSViewRepresentable {
     let content: Content
+    let scrollOffset: Binding<CGFloat>?
 
-    init(@ViewBuilder content: () -> Content) {
+    init(scrollOffset: Binding<CGFloat>? = nil, @ViewBuilder content: () -> Content) {
+        self.scrollOffset = scrollOffset
         self.content = content()
     }
 
+    func makeCoordinator() -> Coordinator {
+        Coordinator(scrollOffset: scrollOffset)
+    }
+
     func makeNSView(context: Context) -> NSScrollView {
-        let scrollView = CustomNSScrollView()
+        // CONDITIONAL CLASS SELELCTION:
+        // macOS 15+: Use CustomNSScrollView to fix nested scroll event swallowing.
+        // macOS 12-14: Use standard NSScrollView. The Custom subclass breaks scrolling on these versions.
+        let scrollView: NSScrollView
+        if #available(macOS 15, *) {
+            scrollView = CustomNSScrollView()
+        } else {
+            scrollView = NSScrollView()
+        }
+        
         scrollView.hasVerticalScroller = false
         scrollView.hasHorizontalScroller = false // Hide scrollbars to match SwiftUI style
         scrollView.drawsBackground = false
@@ -55,8 +68,24 @@ private struct HorizontalNSScrollView<Content: View>: NSViewRepresentable {
         let documentView = FlippedView()
         documentView.translatesAutoresizingMaskIntoConstraints = false
         documentView.addSubview(hostingView)
+        
+        // Notify coordinator about the content view to set up observation
+        context.coordinator.setupObservation(for: scrollView.contentView)
+        context.coordinator.scrollView = scrollView // Keep reference for width checks
 
         scrollView.documentView = documentView
+        
+        // Initial scroll restoration
+        if let initialOffset = scrollOffset?.wrappedValue, initialOffset > 0 {
+            // Schedule a check to restore scroll once layout happens
+            // We use a slight delay to ensure SwiftUI has calculated frames
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                // Only scroll if content is wide enough
+                if let docView = scrollView.documentView, docView.frame.width > initialOffset {
+                     scrollView.contentView.bounds.origin = NSPoint(x: initialOffset, y: 0)
+                }
+            }
+        }
 
         // Constrain hosting view to document view edges
         NSLayoutConstraint.activate([
@@ -74,14 +103,73 @@ private struct HorizontalNSScrollView<Content: View>: NSViewRepresentable {
            let hostingView = documentView.subviews.first as? NSHostingView<Content> {
             hostingView.rootView = content
 
-            // Allow the hosting view to update its size based on content
-            hostingView.layoutSubtreeIfNeeded()
+            // Performance: Do NOT force full layout pass here.
+            // hostingView.layoutSubtreeIfNeeded() 
 
             // Critical: Update document view frame to match content size
+            // fittingSize calculation is optimized in NSHostingView
             let size = hostingView.fittingSize
             if documentView.frame.size != size {
                 documentView.setFrameSize(size)
             }
+            
+            // Restore scroll position if needed and different
+            if let targetOffset = scrollOffset?.wrappedValue {
+                let currentOffset = nsView.contentView.bounds.origin.x
+                
+                // Only attempt restoration if we are significantly off target
+                if abs(currentOffset - targetOffset) > 1.0 {
+                    // CRITICAL: Only scroll if the document is wide enough
+                    if documentView.frame.width >= targetOffset {
+                        nsView.contentView.bounds.origin = NSPoint(x: targetOffset, y: 0)
+                    }
+                }
+            }
+        }
+        
+        // Update coordinator binding reference
+        context.coordinator.scrollOffset = scrollOffset
+    }
+    
+    class Coordinator: NSObject {
+        var scrollOffset: Binding<CGFloat>?
+        weak var scrollView: NSScrollView?
+        private var updateWorkItem: DispatchWorkItem?
+        
+        init(scrollOffset: Binding<CGFloat>?) {
+            self.scrollOffset = scrollOffset
+        }
+        
+        func setupObservation(for contentView: NSClipView) {
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(boundsDidChange(_:)),
+                name: NSView.boundsDidChangeNotification,
+                object: contentView
+            )
+        }
+        
+        @objc func boundsDidChange(_ notification: Notification) {
+            guard let clipView = notification.object as? NSClipView else { return }
+            let newX = clipView.bounds.origin.x
+            
+            // CRITICAL: Protect against overwriting the saved offset with 0 during load
+            if newX == 0 {
+                if let docView = scrollView?.documentView, docView.frame.width < 100 {
+                    return
+                }
+            }
+            
+            // Debounce updates to prevent high-frequency state changes (60fps) triggering expensive View re-renders
+            updateWorkItem?.cancel()
+            
+            let item = DispatchWorkItem { [weak self] in
+                self?.scrollOffset?.wrappedValue = newX
+            }
+            updateWorkItem = item
+            
+            // 0.15s delay is enough to capture "stop" but fast enough to feel responsive
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: item)
         }
     }
 }

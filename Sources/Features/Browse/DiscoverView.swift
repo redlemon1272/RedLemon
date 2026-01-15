@@ -93,7 +93,8 @@ struct DiscoverView: View {
                         }
                     }
                     .pickerStyle(.menu)
-                    .onChange(of: selectedCatalog) { _ in
+                    .onChange(of: selectedCatalog) { newValue in
+                        appState.discoverSelectedCatalog = newValue.rawValue
                         Task {
                             await loadContent()
                         }
@@ -107,10 +108,7 @@ struct DiscoverView: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                .onAppear {
-                    // Restore tab selection from AppState
-                    selectedTab = MediaType.from(index: appState.discoverSelectedTab)
-                }
+
                 .onChange(of: selectedTab) { newValue in
                     // Persist tab selection to AppState
                     appState.discoverSelectedTab = newValue.index
@@ -129,7 +127,8 @@ struct DiscoverView: View {
                         }
                     }
                     .pickerStyle(.menu)
-                    .onChange(of: selectedGenre) { _ in
+                    .onChange(of: selectedGenre) { newValue in
+                        appState.discoverSelectedGenre = newValue
                         Task {
                             await loadContent()
                         }
@@ -207,7 +206,33 @@ struct DiscoverView: View {
         }
         .navigationTitle("Discover")
         .onAppear {
-            if mediaItems.isEmpty {
+            // Restore state from AppState
+            var stateChanged = false
+            
+            // 1. Restore Tab
+            let savedTab = MediaType.from(index: appState.discoverSelectedTab)
+            if selectedTab != savedTab {
+                selectedTab = savedTab
+                stateChanged = true
+            }
+            
+            // 2. Restore Catalog (Provider)
+            if let savedCatalog = CatalogProvider(rawValue: appState.discoverSelectedCatalog),
+               selectedCatalog != savedCatalog {
+                selectedCatalog = savedCatalog
+                stateChanged = true
+            }
+            
+            // 3. Restore Genre
+            if selectedGenre != appState.discoverSelectedGenre {
+                selectedGenre = appState.discoverSelectedGenre
+                stateChanged = true
+            }
+            
+            // 4. Load Content
+            // If state changed, the .onChange handlers above will trigger loadContent().
+            // If state DID NOT change (e.g. defaults match AppState), no onChange fires, so we must load manually if empty.
+            if !stateChanged && mediaItems.isEmpty {
                 Task {
                     await loadContent()
                 }

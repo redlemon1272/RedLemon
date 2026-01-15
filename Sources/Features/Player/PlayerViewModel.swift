@@ -153,6 +153,15 @@ class PlayerViewModel: ObservableObject {
             if let appState = appState {
                 appState.currentView = .player
             }
+
+            // FIX: Enter fullscreen immediately for Watch Party mode
+            // This ensures guests see the full-screen loading overlay with chat (matching host experience)
+            // Previously, enterFullscreen() was only called after stream resolution (line ~548),
+            // causing guests to see windowed mode with background art first.
+            // Host path (navigateToPlayer) already enters fullscreen immediately.
+            if watchMode == .watchParty {
+                enterFullscreen()
+            }
         }
 
         do {

@@ -183,19 +183,24 @@ done < <(grep -rnE "$HIGH_RISK_VARS" "$SOURCES_DIR" --include="*.swift" | grep "
 
 
 # =============================================================================
-# CHECK 7: Realtime Presence IDs (Landmine #47)
+# CHECK 11: Phoenix Ref Collision (Landmine #51)
 # =============================================================================
-# Metadata 'phx_ref' is not the authoritative session ID. The passed Map Key is.
-print_header "Check 7: Realtime Presence IDs (Landmine #47)"
+# Trigger: Passing 'key' (UserId) to handlers causes flapping on metadata updates.
+# Rule: Must use 'phx_ref' as the unique session ID.
+print_header "Check 11: Phoenix Ref Collision (Landmine #51)"
 
-while IFS=: read -r file line code; do
-    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+REALTIME_CLIENT="$SOURCES_DIR/Networking/SupabaseRealtimeClient.swift"
+if [[ -f "$REALTIME_CLIENT" ]]; then
+    # Look for handler calls passing 'key' as the second argument
+    # Regex captures: handler( .*, key ,
+    VIOLATIONS=$(grep -n "handler(.*, key," "$REALTIME_CLIENT" | grep -v "//" || true)
 
-    # If code is manually extracting phx_ref from metadata (legacy/buggy pattern)
-    if [[ "$code" =~ metadata\?\[\"phx_ref\"\] ]]; then
-         report "WARNING" "Landmine #47" "Authoritative Session ID is the Map Key (passed as userId). Avoid using metadata['phx_ref']." "$file" "$line" "$code"
+    if [[ -n "$VIOLATIONS" ]]; then
+        while IFS=: read -r line code; do
+            report "ERROR" "Landmine #51" "Presence Flap Risk: Do not pass 'key' (UserId) to handler. Use 'phx_ref' from metadata." "$REALTIME_CLIENT" "$line" "$code"
+        done <<< "$VIOLATIONS"
     fi
-done < <(grep -rn "metadata?\[\"phx_ref\"\]" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
+fi
 
 # =============================================================================
 # CHECK 8: Async Scroll Race (Landmine #48)

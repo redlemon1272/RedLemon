@@ -517,26 +517,20 @@ struct BrowseView: View {
                     .fontWeight(.bold)
                     .padding(.horizontal)
 
-                // VerticalScrollForwarder: version-aware fix for macOS 15+ nested scroll issue (Landmine #47)
-                // On macOS 12-14: passes through unchanged. On macOS 15+: forwards vertical scroll events.
-                VerticalScrollForwarder {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 16) {
-                            ForEach(history) { historyItem in
-                                    RecentlyWatchedCard(historyItem: historyItem)
-                                        .contentShape(Rectangle())
-                                        .onTapGesture {
-                                            print("🖱️ Continue Watching clicked for: \(historyItem.mediaItem.name)")
-                                            Task { @MainActor in
-                                                showWatchModeSelection(for: historyItem)
-                                            }
-                                        }
+                // Grid layout for macOS 15+ compatibility (replaces horizontal scroll)
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), spacing: 16)], spacing: 16) {
+                    ForEach(history.prefix(14)) { historyItem in
+                        RecentlyWatchedCard(historyItem: historyItem)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                print("🖱️ Continue Watching clicked for: \(historyItem.mediaItem.name)")
+                                Task { @MainActor in
+                                    showWatchModeSelection(for: historyItem)
+                                }
                             }
-                        }
-                        .padding(.horizontal)
                     }
                 }
-                .frame(height: 200) // Fixed height helps macOS gesture system with nested scroll boundaries
+                .padding(.horizontal)
             }
             .padding(.top)
         }
@@ -1324,21 +1318,16 @@ struct StreamingServiceRow: View {
                     .fontWeight(.bold)
                     .padding(.horizontal)
 
-                // VerticalScrollForwarder: version-aware fix for macOS 15+ nested scroll issue (Landmine #47)
-                VerticalScrollForwarder {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack(spacing: 16) {
-                            ForEach(items) { item in
-                                MediaCard(item: item)
-                                    .onTapGesture {
-                                        onTap(item)
-                                    }
+                // Grid layout for macOS 15+ compatibility (replaces horizontal scroll)
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), spacing: 16)], spacing: 16) {
+                    ForEach(items.prefix(14)) { item in
+                        MediaCard(item: item)
+                            .onTapGesture {
+                                onTap(item)
                             }
-                        }
-                        .padding(.horizontal, 8)
                     }
                 }
-                .frame(height: 240) // Fixed height helps macOS gesture system with nested scroll boundaries
+                .padding(.horizontal)
             }
         }
     }
@@ -1379,21 +1368,16 @@ struct LazyStreamingServiceRow: View {
                 .padding(.horizontal)
                 .frame(height: 240)
             } else if !items.isEmpty {
-                // VerticalScrollForwarder: version-aware fix for macOS 15+ nested scroll issue (Landmine #47)
-                VerticalScrollForwarder {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack(spacing: 16) {
-                            ForEach(items) { item in
-                                OptimizedMediaCard(item: item)
-                                    .onTapGesture {
-                                        onTap(item)
-                                    }
+                // Grid layout for macOS 15+ compatibility (replaces horizontal scroll)
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 140), spacing: 16)], spacing: 16) {
+                    ForEach(items.prefix(14)) { item in
+                        OptimizedMediaCard(item: item)
+                            .onTapGesture {
+                                onTap(item)
                             }
-                        }
-                        .padding(.horizontal, 8)
                     }
                 }
-                .frame(height: 240) // Fixed height helps macOS gesture system with nested scroll boundaries
+                .padding(.horizontal)
             }
         }
         .onAppear {

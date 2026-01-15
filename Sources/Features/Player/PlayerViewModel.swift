@@ -218,15 +218,71 @@ class PlayerViewModel: ObservableObject {
                 )
 
                 do {
-                    let unlockedStream = try await streamResolver.unlockStream(
+                    var unlockedStream = try await streamResolver.unlockStream(
                         stream: syntheticStream,
                         item: item,
                         season: effectiveSeason,
                         episode: effectiveEpisode
                     )
+                    NSLog("✅ PlayerVM: Direct unlock succeeded! URL: %@", String(unlockedStream.url?.prefix(60) ?? "nil"))
+
+                    // FIX: Fetch SubDL subtitles for direct unlock path (Landmine #45)
+                    // The direct unlock optimization bypasses resolveStream() where subtitles are normally attached.
+                    // We need to fetch them separately to ensure guests see SubDL subtitles in the menu.
+                    do {
+                        // Build stream hint from room data (RD URLs are truncated)
+                        var streamHint = item.name.replacingOccurrences(of: " ", with: ".")
+                        if let room = currentWatchPartyRoom {
+                            let sourceQuality = room.sourceQuality ?? ""
+                            let quality = room.selectedQuality ?? ""
+                            if !sourceQuality.isEmpty || !quality.isEmpty {
+                                streamHint = "\(item.name.replacingOccurrences(of: " ", with: ".")).\(quality).\(sourceQuality)".lowercased()
+                            }
+                        }
+
+                        let subDLSubtitles = try await LocalAPIClient.shared.searchSubtitles(
+                            imdbId: item.id,
+                            type: item.type,
+                            season: effectiveSeason,
+                            episode: effectiveEpisode,
+                            name: item.name,
+                            year: (item.year ?? metadata.year).flatMap { Int($0) },
+                            streamFilename: streamHint
+                        )
+
+                        if !subDLSubtitles.isEmpty {
+                            NSLog("✅ Direct Unlock: Found \(subDLSubtitles.count) SubDL subtitles")
+
+                            let externalSubs = subDLSubtitles.map { sub -> Subtitle in
+                                let encodedPath = Data(sub.url.utf8).base64EncodedString()
+                                var proxyURL = LocalAPIClient.shared.getSubtitleURL(
+                                    downloadPath: sub.url,
+                                    season: effectiveSeason,
+                                    episode: effectiveEpisode
+                                )
+                                proxyURL += (proxyURL.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
+
+                                return Subtitle(
+                                    id: encodedPath,
+                                    url: proxyURL,
+                                    lang: sub.language ?? "en",
+                                    label: sub.releaseName ?? "English",
+                                    srclang: sub.language ?? "en",
+                                    kind: "subtitles",
+                                    provider: "SubDL"
+                                )
+                            }
+
+                            unlockedStream.subtitles = (unlockedStream.subtitles ?? []) + externalSubs
+                            NSLog("✅ Direct Unlock: Attached \(externalSubs.count) SubDL subtitles to stream")
+                        }
+                    } catch {
+                        NSLog("⚠️ Direct Unlock: Subtitle search failed: \(error.localizedDescription)")
+                        // Non-fatal: Continue with stream even without SubDL subtitles
+                    }
+
                     resolvedStream = unlockedStream
                     resolvedMetadata = metadata
-                    NSLog("✅ PlayerVM: Direct unlock succeeded! URL: %@", String(unlockedStream.url?.prefix(60) ?? "nil"))
                 } catch {
                     NSLog("⚠️ PlayerVM: Direct unlock failed (%@), falling back to full resolution...", error.localizedDescription)
                     // resolvedStream stays nil, falls through to normal resolution below
@@ -346,7 +402,7 @@ class PlayerViewModel: ObservableObject {
 
                         // Route through local server proxy to handle zip extraction and VTT conversion
                         let pUrl = LocalAPIClient.shared.getSubtitleURL(downloadPath: sub.url, season: watchPartyRoom.season, episode: watchPartyRoom.episode)
-                        
+
                         var proxyURL = pUrl
                         // Safe append
                         proxyURL += (proxyURL.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"

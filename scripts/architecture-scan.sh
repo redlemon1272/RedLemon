@@ -214,6 +214,41 @@ done < <(grep -rn "proxy\.scrollTo" "$SOURCES_DIR" --include="*.swift" | grep -v
 
 
 # =============================================================================
+# CHECK 9: High-Freq State Thrashing (Landmine #50)
+# =============================================================================
+# Binding scroll offsets directly to AppState without debouncing kills performance.
+print_header "Check 9: High-Frequency State (Landmine #50)"
+
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+    # Pattern: Binding(get: { appState.someVal }, set: { appState.someVal = $0 })
+    # We warn on any manual Binding creation involving 'appState' and 'scroll' keywords
+    if [[ "$code" =~ Binding && "$code" =~ appState && "$code" =~ scroll ]]; then
+         report "WARNING" "Landmine #50" "Perf Trap: High-frequency binding to AppState? Ensure this is DEBOUNCED or use local state." "$file" "$line" "$code"
+    fi
+done < <(grep -rn "Binding" "$SOURCES_DIR" --include="*.swift" | grep "appState" | grep "scroll" | grep -v "//")
+
+
+# =============================================================================
+# CHECK 10: macOS 15 Nested Scroll (Landmine #49)
+# =============================================================================
+# Custom NSScrollViews must verify they forward events.
+print_header "Check 10: macOS 15 Scroll Swallowing (Landmine #49)"
+
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+    # If defining a struct that implements NSViewRepresentable and is named like *ScrollView
+    if [[ "$code" =~ struct.*:.*NSViewRepresentable ]]; then
+        if [[ "$file" =~ ScrollView ]]; then
+             report "WARNING" "Landmine #49" "Custom NSScrollView detected. Verify 'scrollWheel' forwards events for macOS 15+." "$file" "$line" "$code"
+        fi
+    fi
+done < <(grep -rn "NSViewRepresentable" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
+
+
+# =============================================================================
 # SUMMARY
 # =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"

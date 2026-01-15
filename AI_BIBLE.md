@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 15, 2026 (Added Landmine #48 - Async Scroll Race)
+> **Last Updated:** January 15, 2026 (Added Landmine #49 & #50 - Scroll & Performance Traps)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -60,6 +60,8 @@
 | **Player Start -> Immediate Fail** | Fake 'Direct' URL (Comet Error Stream) | #46 |
 | **Ghost Participant (Lobby)** | User list doesn't update / 'Left' msg missing | #47 |
 | **Scroll Restore Fails** | Race condition (Scroll happens on empty list) | #48 |
+| **Can't Scroll Vertically (macOS 15)** | NSScrollView swallowing events | #49 |
+| **Labored/Laggy Scrolling** | 60fps @Published state updates | #50 |
 
 ## 🚨 Critical Landmines
 
@@ -187,6 +189,16 @@
         1. Check `!items.isEmpty` before scrolling.
         2. Add `.onChange(of: items)` to trigger the scroll once data arrives.
         3. **Optimistic UI**: NEVER `removeAll()` data before reloading (Atomic replacement) to maintain scroll anchor.
+49. **macOS 15 Nested Scroll Event Swallowing**:
+    *   **Trigger**: Using a custom `NSScrollView` (via `NSViewRepresentable`) inside a vertical native SwiftUI `ScrollView` on macOS 15+.
+    *   **Symptom**: Vertical scrolling stops working when the mouse is over the horizontal row. The inner implementation "eats" the scroll events.
+    *   **Rule**: You MUST subclass `NSScrollView` and override `scrollWheel` to forward vertical deltas (`deltaY`) to `nextResponder` manually.
+    *   **Note**: On macOS 12-14, the standard `NSScrollView` works fine, and sometimes the custom subclass actually *breaks* it. Use version checks (`if #available(macOS 15, *)`) to apply the fix conditionally.
+50. **The High-Frequency State Trap (60fps Re-renders)**:
+    *   **Trigger**: Binding a high-frequency real-time value (like Scroll Offset `CGFloat`) directly to a Global `@Published` property in `AppState`.
+    *   **Symptom**: Application becomes extremely sluggish/labored while interacting. CPU usage spikes.
+    *   **Cause**: `@Published` triggers `objectWillChange`, forcing **every view in the app observing AppState** to re-evaluate its body 60-120 times per second.
+    *   **Rule**: **DEBOUNCE** high-frequency inputs. Do not update `AppState` on every frame. Use a `DispatchWorkItem` to wait for the interaction to *stop* (e.g., 150ms delay) before committing the value to the global state.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

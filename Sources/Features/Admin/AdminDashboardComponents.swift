@@ -1516,7 +1516,8 @@ struct SessionLogRow: View {
         _ = NSPasteboard.general.setString(text, forType: .string)
         
         withAnimation { isCopied = true }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
             withAnimation { isCopied = false }
         }
     }

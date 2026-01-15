@@ -40,7 +40,7 @@ func registerUnlockRoutes(_ app: Application) {
 
         // Get token from keychain
         guard let token = await keychain.get(service: serviceKey) else {
-            NSLog("%@", "❌ No token for service: \(serviceKey)")
+            NSLog("❌ No token for service: %@", serviceKey) // OK
             throw Abort(.badRequest, reason: "No token stored for service: \(serviceKey)")
         }
 

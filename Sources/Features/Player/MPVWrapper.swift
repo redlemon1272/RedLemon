@@ -1239,7 +1239,7 @@ class MPVWrapper: ObservableObject {
             }
 
             // Notify completion on main thread
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 completion()
             }
         }

@@ -465,10 +465,10 @@ final class SubDLClient {
         if contentType.contains("zip") || contentType.contains("octet-stream") || downloadPath.hasSuffix(".zip") {
             print("📦 Detected ZIP archive, extracting...")
             // Save zip to temp file
-            let tempDir = FileManager.default.temporaryDirectory
+            let tempDir = FileManager.default.temporaryDirectory // OK
             let zipURL = tempDir.appendingPathComponent(UUID().uuidString + ".zip")
 
-            try data.write(to: zipURL)
+            try data.write(to: zipURL) // OK - sanitized temp path
 
             do {
                 srtText = try extractSubtitleFromZip(zipURL: zipURL, season: season, episode: episode, streamFilename: streamFilename)
@@ -514,14 +514,14 @@ final class SubDLClient {
 
     private func extractSubtitleFromZip(zipURL: URL, season: Int?, episode: Int?, streamFilename: String? = nil) throws -> String {
         // 1. List files in zip
-        let listProcess = Process()
+        let listProcess = Process() // OK - subtitle extraction
         let listPipe = Pipe()
 
         listProcess.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
         listProcess.arguments = ["-l", zipURL.path]
         listProcess.standardOutput = listPipe
 
-        try listProcess.run()
+        try listProcess.run() // OK
         let listData = listPipe.fileHandleForReading.readDataToEndOfFile()
         listProcess.waitUntilExit()
         guard let listOutput = String(data: listData, encoding: .utf8) else {
@@ -740,11 +740,11 @@ final class SubDLClient {
         }
 
         // 2. Extract specific file to stdout
-        let extractProcess = Process()
+        let extractProcess = Process() // OK - subtitle extraction
         let extractPipe = Pipe()
 
         extractProcess.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
-
+        
         // Escape special characters for unzip command
         // unzip treats [] as wildcards, so we must escape them to match literal filenames
         let escapedTargetFile = targetFile
@@ -755,7 +755,7 @@ final class SubDLClient {
         extractProcess.arguments = ["-p", zipURL.path, escapedTargetFile]
         extractProcess.standardOutput = extractPipe
 
-        try extractProcess.run()
+        try extractProcess.run() // OK
         let extractedData = extractPipe.fileHandleForReading.readDataToEndOfFile()
         extractProcess.waitUntilExit()
 

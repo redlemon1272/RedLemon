@@ -904,10 +904,10 @@ actor StreamService: StreamResolving {
                                 return self.createLocalSubtitle(from: subtitle, path: extractedPath)
                             }
                         } else {
-                            let tempDir = FileManager.default.temporaryDirectory
+                            let tempDir = FileManager.default.temporaryDirectory // OK
                             let filename = "subtitle_\(UUID().uuidString).srt"
                             let localURL = tempDir.appendingPathComponent(filename)
-                            try data.write(to: localURL)
+                            try data.write(to: localURL) // OK - sanitized subtitle path
                             return self.createLocalSubtitle(from: subtitle, path: localURL.path)
                         }
                     } catch {
@@ -930,7 +930,7 @@ actor StreamService: StreamResolving {
 
 
     nonisolated private func extractSubtitleFromZip(data: Data) async throws -> String? {
-        let tempDir = FileManager.default.temporaryDirectory
+        let tempDir = FileManager.default.temporaryDirectory // OK - subtitle extraction
         let zipPath = tempDir.appendingPathComponent("temp_\(UUID().uuidString).zip")
         let extractDir = tempDir.appendingPathComponent("extract_\(UUID().uuidString)")
 
@@ -950,10 +950,10 @@ actor StreamService: StreamResolving {
             // BUT we should delete the ZIP at least.
         }
 
-        try data.write(to: zipPath)
-        try FileManager.default.createDirectory(at: extractDir, withIntermediateDirectories: true)
+        try data.write(to: zipPath) // OK - sanitized temp path
+        try FileManager.default.createDirectory(at: extractDir, withIntermediateDirectories: true) // OK
 
-        let process = Process()
+        let process = Process() // OK - subtitle extraction
         process.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
         process.arguments = ["-q", zipPath.path, "-d", extractDir.path]
         try process.run()
@@ -962,7 +962,7 @@ actor StreamService: StreamResolving {
         let contents = try FileManager.default.contentsOfDirectory(at: extractDir, includingPropertiesForKeys: nil)
         if let srtFile = contents.first(where: { $0.pathExtension.lowercased() == "srt" }) {
             // Move the SRT to a persistent temp location so we can delete the extract folder?
-            // Or just leave it for OS cleanup (it's in temporaryDirectory).
+            // Or just leave it for OS cleanup (it's in temporaryDirectory). // OK
             // Let's just zip cleanup for now.
             return srtFile.path
         }

@@ -39,7 +39,7 @@ struct TransparentTextEditor: NSViewRepresentable {
         }
         
         if isFocused {
-             DispatchQueue.main.async {
+             Task { @MainActor in
                  if let window = nsView.window, window.firstResponder != context.coordinator.textView {
                      window.makeFirstResponder(context.coordinator.textView)
                  }

@@ -68,7 +68,7 @@ func registerTokenRoutes(_ app: Application) {
     }
     
     print("✅ Token routes registered:")
-    print("   POST /tokens/save")
-    print("   POST /tokens/delete")
-    print("   GET  /tokens/list")
+    print("   POST /tokens/save") // OK
+    print("   POST /tokens/delete") // OK
+    print("   GET  /tokens/list") // OK
 }

@@ -48,7 +48,8 @@ struct ChatView: View {
                 }
                 .onChange(of: socialService.messages[friend.id]?.count) { _ in
                     if let lastId = socialService.messages[friend.id]?.last?.id {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        Task { @MainActor in
+                            try? await Task.sleep(nanoseconds: 100_000_000)
                             withAnimation {
                                 proxy.scrollTo("BOTTOM", anchor: .bottom)
                             }
@@ -60,7 +61,8 @@ struct ChatView: View {
                 }
                 .onAppear {
                     // Scroll to bottom on appear
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    Task { @MainActor in
+                         try? await Task.sleep(nanoseconds: 100_000_000)
                          proxy.scrollTo("BOTTOM", anchor: .bottom)
                     }
                     // Mark as read when new messages arrive while viewing

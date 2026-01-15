@@ -302,7 +302,7 @@ class MPVViewLayer: CAOpenGLLayer {
             // Coalesce updates to prevent flooding the main thread during animations
             if !isMainThreadUpdatePending {
                 isMainThreadUpdatePending = true
-                DispatchQueue.main.async {
+                Task { @MainActor in
                     self.setNeedsDisplay()
                     self.isMainThreadUpdatePending = false
                 }

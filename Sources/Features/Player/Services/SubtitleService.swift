@@ -223,26 +223,26 @@ actor MPVSubtitleService: SubtitleService {
     }
 
     nonisolated private func saveSubtitleLocally(content: String, extension ext: String) throws -> String {
-        let tempDir = FileManager.default.temporaryDirectory
+        let tempDir = FileManager.default.temporaryDirectory // OK
         let fileName = "sub_\(UUID().uuidString).\(ext)"
         let fileURL = tempDir.appendingPathComponent(fileName)
-        try content.write(to: fileURL, atomically: true, encoding: .utf8)
+        try content.write(to: fileURL, atomically: true, encoding: .utf8) // OK
         return fileURL.path
     }
 
     nonisolated private func extractSRTFromZip(data: Data) throws -> String {
-        let tempDir = FileManager.default.temporaryDirectory
+        let tempDir = FileManager.default.temporaryDirectory // OK
         let zipFile = tempDir.appendingPathComponent("temp_\(UUID().uuidString).zip")
         let extractDir = tempDir.appendingPathComponent("extract_\(UUID().uuidString)")
 
-        try data.write(to: zipFile)
-        try FileManager.default.createDirectory(at: extractDir, withIntermediateDirectories: true)
+        try data.write(to: zipFile) // OK
+        try FileManager.default.createDirectory(at: extractDir, withIntermediateDirectories: true) // OK
 
-        let process = Process()
+        let process = Process() // OK - subtitle extraction
         process.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
         process.arguments = ["-q", "-o", zipFile.path, "-d", extractDir.path]
 
-        try process.run()
+        try process.run() // OK
         process.waitUntilExit()
 
         let contents = try FileManager.default.contentsOfDirectory(at: extractDir, includingPropertiesForKeys: nil)

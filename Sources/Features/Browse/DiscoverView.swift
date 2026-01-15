@@ -252,7 +252,7 @@ struct DiscoverView: View {
     func loadContent() async {
         isLoading = true
         errorMessage = nil
-        mediaItems = []
+        // mediaItems = [] // Optimization: Keep existing items visible while loading new ones to prevent flashing
 
         let type = selectedTab == .movies ? "movie" : "series"
         let catalogId = selectedCatalog.catalogId

@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.99 -->
+        <item>
+            <title>Version 1.0.99</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Synchronized Realtime Presence handling to use stable Phoenix map keys. Fixed ghost participants and missing leave messages.</li><li>Fix: Resolved Ghost Participant issue by filtering stale DB heartbeats when Realtime is active</li><li>Security: Resolved critical security warnings and enhanced suppression support in scanner</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 02:51:04 -0500</pubDate>
+            <sparkle:version>99</sparkle:version>
+            <sparkle:shortVersionString>1.0.99</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.99.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="SRlYrb4Zt335jSFcMvzjrPr51ewQVFXfPnwSRGthxqNejAXob7oce1xTIeO2ARJQHDON9X240lCW4ZGID0SUBQ==" length="73057276"
+            />
+        </item>
         <!-- v1.0.98 -->
         <item>
             <title>Version 1.0.98</title>

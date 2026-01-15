@@ -56,10 +56,10 @@ func registerTokenRoutes(_ app: Application) {
     }
     
     // GET /tokens/list
-    app.get("tokens", "list") { req async -> Response in
+    app.get("tokens", "list") { req async throws -> Response in
         let services = await keychain.listServices()
         
-        let json = try! JSONEncoder().encode(["services": services])
+        let json = try JSONEncoder().encode(["services": services])
         
         let response = Response(status: .ok)
         response.body = .init(data: json)

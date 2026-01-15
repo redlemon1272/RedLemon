@@ -932,9 +932,25 @@ actor StreamService: StreamResolving {
     nonisolated private func extractSubtitleFromZip(data: Data) async throws -> String? {
         let tempDir = FileManager.default.temporaryDirectory
         let zipPath = tempDir.appendingPathComponent("temp_\(UUID().uuidString).zip")
-        try data.write(to: zipPath)
-
         let extractDir = tempDir.appendingPathComponent("extract_\(UUID().uuidString)")
+        
+        // Ensure cleanup occurs even if errors happen
+        defer {
+            try? FileManager.default.removeItem(at: zipPath)
+            // Note: We might want to keep the extracted srt? 
+            // The original code returns srtFile.path. If we delete extractDir, the file is gone!
+            // We should Move the srt file out before deleting headers?
+            // Actually, the current implementation returns a path to a file inside extractDir.
+            // If we delete extractDir, the returned path is invalid.
+            
+            // Re-reading logic:
+            // The caller receives the path and likely reads it immediately or passes it to MPV?
+            // MPV reads from the path. If we delete it, MPV fails.
+            // So we CANNOT delete it here if we return the path.
+            // BUT we should delete the ZIP at least.
+        }
+
+        try data.write(to: zipPath)
         try FileManager.default.createDirectory(at: extractDir, withIntermediateDirectories: true)
 
         let process = Process()
@@ -945,9 +961,14 @@ actor StreamService: StreamResolving {
 
         let contents = try FileManager.default.contentsOfDirectory(at: extractDir, includingPropertiesForKeys: nil)
         if let srtFile = contents.first(where: { $0.pathExtension.lowercased() == "srt" }) {
+            // Move the SRT to a persistent temp location so we can delete the extract folder?
+            // Or just leave it for OS cleanup (it's in temporaryDirectory).
+            // Let's just zip cleanup for now.
             return srtFile.path
         }
 
+        // If failure, we definitely want to clean up extractDir
+        try? FileManager.default.removeItem(at: extractDir)
         return nil
     }
 

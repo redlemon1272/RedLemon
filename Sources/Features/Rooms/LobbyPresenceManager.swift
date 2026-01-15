@@ -430,6 +430,7 @@ class LobbyPresenceManager: ObservableObject {
 
             var dbParticipants: [Participant] = []
             let currentParticipants = viewModel.participants
+            var consumedLocalIds = Set<String>() // Track which local participants matched DB rows (by ID or Heuristic)
 
             for participant in roomParticipants {
                 var username = "User"
@@ -437,11 +438,26 @@ class LobbyPresenceManager: ObservableObject {
                     username = user.username
                 }
 
-                // CASE-INSENSITIVE MATCH: Find if this DB participant exists locally
-                // This is CRITICAL because DB returns lowercase UUIDs but local generated ones might be Uppercase
-                let existingLocal = currentParticipants.first(where: {
+                // 1. Primary Match: UUID Case-Insensitive (Canonical Match)
+                var existingLocal = currentParticipants.first(where: {
                     $0.id.caseInsensitiveCompare(participant.userId.uuidString) == .orderedSame
                 })
+
+                // 2. Secondary Match: Name + Ephemeral ID Fallback (Fix for Ghost Duplicates)
+                // If we match by name but ID is ephemeral (not UUID), assume it's the same user and merge.
+                if existingLocal == nil {
+                     existingLocal = currentParticipants.first(where: {
+                         $0.name.caseInsensitiveCompare(username) == .orderedSame &&
+                         $0.id.count != 36 
+                     })
+                     if let found = existingLocal {
+                         NSLog("🔄 Lobby: Upgrading ephemeral participant '%@' (Ref: %@) to DB ID: %@", found.name, found.id, participant.userId.uuidString)
+                     }
+                }
+
+                if let found = existingLocal {
+                    consumedLocalIds.insert(found.id)
+                }
 
                 // Preserve existing ready state
                 let isReady = existingLocal?.isReady ?? false
@@ -475,8 +491,11 @@ class LobbyPresenceManager: ObservableObject {
             var finalParticipants = dbParticipants
             let dbIds = Set(dbParticipants.map { $0.id.lowercased() })
 
-            // Check for locally existing participants that are missing from DB
-            let localOnly = viewModel.participants.filter { !dbIds.contains($0.id.lowercased()) }
+            // Check for locally existing participants that are missing from DB AND weren't merged
+            let localOnly = viewModel.participants.filter { 
+                !consumedLocalIds.contains($0.id) && 
+                !dbIds.contains($0.id.lowercased()) 
+            }
 
             for localP in localOnly {
                 // Host Protection: Host logic is authoritative locally.

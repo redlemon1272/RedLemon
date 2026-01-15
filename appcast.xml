@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.98 -->
+        <item>
+            <title>Version 1.0.98</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Lobby ghost participants and duplicate entries (Ursinho bug)</li><li>Refactor: Critical Fixes for Landmine #37 (ID) and #43 (Async)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 01:38:45 -0500</pubDate>
+            <sparkle:version>98</sparkle:version>
+            <sparkle:shortVersionString>1.0.98</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.98.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="KAQLTM/cvpjSSc626EGGsOKdzbogd0iGFEgpvbV3Cvp7KOPY/wDw9ud8vFRIEcmP3vLa1CRS49CrSGYpSz+uBg==" length="72664817"
+            />
+        </item>
         <!-- v1.0.97 -->
         <item>
             <title>Version 1.0.97</title>

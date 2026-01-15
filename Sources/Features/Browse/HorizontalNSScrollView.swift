@@ -1,5 +1,6 @@
 import SwiftUI
 import AppKit
+import QuartzCore
 
 /// A wrapper that chooses the correct horizontal scroll implementation based on macOS version.
 /// - macOS 15+: Uses HorizontalNSScrollView to fix nested scroll event issues.
@@ -87,10 +88,21 @@ private struct HorizontalNSScrollView<Content: View>: NSViewRepresentable {
 
 /// Custom NSScrollView subclass that handles scroll wheel events correctly for nested scenarios
 private class CustomNSScrollView: NSScrollView {
+    // Throttle scroll logging to prevent spam (log max once per second)
+    private var lastScrollLogTime: CFTimeInterval = 0
+    private let scrollLogInterval: CFTimeInterval = 1.0
 
     override func scrollWheel(with event: NSEvent) {
         // Determine the dominant axis of scrolling
         let isVertical = abs(event.scrollingDeltaY) > abs(event.scrollingDeltaX)
+
+        // Diagnostic logging (throttled to prevent spam)
+        let currentTime = CACurrentMediaTime()
+        if currentTime - lastScrollLogTime > scrollLogInterval {
+            lastScrollLogTime = currentTime
+            let direction = isVertical ? "VERTICAL" : "HORIZONTAL"
+            LoggingManager.shared.scrollEvent(direction, forwarded: isVertical, location: "HorizontalNSScrollView")
+        }
 
         if isVertical {
             // Forward vertical scrolling to the next responder (likely the parent vertical NSScrollView)

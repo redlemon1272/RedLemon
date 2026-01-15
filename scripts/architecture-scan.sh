@@ -183,6 +183,22 @@ done < <(grep -rnE "$HIGH_RISK_VARS" "$SOURCES_DIR" --include="*.swift" | grep "
 
 
 # =============================================================================
+# CHECK 7: Realtime Presence IDs (Landmine #47)
+# =============================================================================
+# Metadata 'phx_ref' is not the authoritative session ID. The passed Map Key is.
+print_header "Check 7: Realtime Presence IDs (Landmine #47)"
+
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+    
+    # If code is manually extracting phx_ref from metadata (legacy/buggy pattern)
+    if [[ "$code" =~ metadata\?\[\"phx_ref\"\] ]]; then
+         report "WARNING" "Landmine #47" "Authoritative Session ID is the Map Key (passed as userId). Avoid using metadata['phx_ref']." "$file" "$line" "$code"
+    fi
+done < <(grep -rn "metadata?\[\"phx_ref\"\]" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
+
+
+# =============================================================================
 # SUMMARY
 # =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"

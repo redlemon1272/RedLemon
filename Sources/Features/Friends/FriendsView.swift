@@ -11,13 +11,13 @@ struct FriendsView: View {
     @EnvironmentObject var appState: AppState
     @ObservedObject var socialService = SocialService.shared
     @StateObject private var viewModel = FriendsViewModel()
-    
+
     @State private var showingAddFriend = false
     @State private var selectedFriend: Friend?
     @State private var joiningFriendId: String?
 
     // Tabs are now just for view logic, handled by VM
-    
+
     var body: some View {
         VStack(spacing: 0) {
             // Header
@@ -160,21 +160,21 @@ struct FriendsView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .padding(.bottom, 4)
-                        
+
                     ForEach(viewModel.displayedFriends) { friend in
                         friendRow(for: friend)
                     }
-                    
+
                     if viewModel.displayedFriends.isEmpty {
                         Text("All quiet right now.")
                             .font(.body)
                             .foregroundColor(.secondary)
                             .padding(.top, 20)
                     }
-                    
+
                     Divider()
                         .padding(.vertical, 8)
-                        
+
                     Text("Search to find offline friends")
                         .font(.caption)
                         .italic()
@@ -188,7 +188,7 @@ struct FriendsView: View {
             }
         }
     }
-    
+
     private func friendRow(for friend: Friend) -> some View {
         Button(action: {
             selectedFriend = friend
@@ -281,7 +281,7 @@ struct FriendsView: View {
 
     private var emptyState: some View {
         VStack(spacing: 20) {
-            
+
             if viewModel.selectedTab == .online {
                 Image(systemName: "moon.zzz")
                     .font(.system(size: 64))
@@ -300,11 +300,11 @@ struct FriendsView: View {
                  Image(systemName: "person.crop.circle.badge.questionmark")
                      .font(.system(size: 64))
                      .foregroundColor(.secondary)
-                     
+
                  Text("Find a Friend")
                      .font(.title2)
                      .fontWeight(.semibold)
-                     
+
                  Text("You have many friends! Use the search bar to find someone specific.")
                      .font(.body)
                      .foregroundColor(.secondary)
@@ -335,7 +335,7 @@ struct FriendsView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(40)
     }
-    
+
     // MARK: - Legacy FriendTab for View State (kept for compatibility)
     enum FriendTab {
        case all, online, requests, blocked
@@ -366,17 +366,17 @@ struct FriendsView: View {
              print("⚠️ Cannot invite: Not in a room")
         }
     }
-    
+
     private func joinFriend(_ friend: Friend) {
         guard let activity = socialService.friendActivity[friend.id],
               let watching = activity.currentlyWatching,
               let roomId = watching.roomId else {
             return
         }
-        
+
         print("🚀 Joining friend \(friend.username) in room: \(roomId)")
         joiningFriendId = friend.id
-        
+
         Task {
             await appState.player.joinRoom(roomId: roomId)
             joiningFriendId = nil
@@ -398,7 +398,7 @@ struct FriendRow: View {
     let onInvite: () -> Void
     let onJoin: (() -> Void)? // Optional join action
     let isJoining: Bool
-    
+
     init(friend: Friend, activity: FriendActivity?, unreadCount: Int = 0, onToggleFavorite: @escaping () async -> Void, onRemove: @escaping () async -> Void, onInvite: @escaping () -> Void, onJoin: (() -> Void)? = nil, isJoining: Bool = false) {
         self.friend = friend
         self.activity = activity
@@ -491,7 +491,7 @@ struct FriendRow: View {
                         .foregroundColor(.secondary)
                 }
             }
-            
+
             // Unread Badge
             if unreadCount > 0 {
                 Text("\(unreadCount)")
@@ -744,7 +744,7 @@ struct AddFriendSheet: View {
             }
         } catch {
             errorMessage = "Search failed: \(error.localizedDescription)"
-            NSLog("❌ User search error: \(error)")
+            NSLog("❌ User search error: %@", String(describing: error))
         }
 
         isSearching = false

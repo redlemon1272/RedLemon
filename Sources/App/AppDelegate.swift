@@ -10,7 +10,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 let screenFrame = screen.visibleFrame
                 // Use full screen visible frame as default (expanded state)
                 window.setFrame(screenFrame, display: true, animate: false)
-                NSLog("🪟 Set initial window to expanded size: \(screenFrame)")
+                NSLog("🪟 Set initial window to expanded size: %@", String(describing: screenFrame))
             }
         }
 
@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func application(_ application: NSApplication, open urls: [URL]) {
         for url in urls {
-            NSLog("🔗 AppDelegate received URL: \(url.absoluteString)")
+            NSLog("🔗 AppDelegate received URL: %@", url.absoluteString)
             // URL will be handled by RedLemonApp.handleURL via onOpenURL
         }
     }

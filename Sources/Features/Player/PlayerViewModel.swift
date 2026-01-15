@@ -29,7 +29,7 @@ class PlayerViewModel: ObservableObject {
             if currentWatchPartyRoom == nil {
                 NSLog("⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.")
             } else if oldValue == nil {
-                NSLog("✅ PlayerVM: currentWatchPartyRoom set to \(currentWatchPartyRoom?.id ?? "unknown")")
+                NSLog("✅ PlayerVM: currentWatchPartyRoom set to %@", currentWatchPartyRoom?.id ?? "unknown")
             }
         }
     }
@@ -161,7 +161,7 @@ class PlayerViewModel: ObservableObject {
             LoggingManager.shared.debug(.videoRendering, message: "   Mode: \(watchMode)")
 
             // Step 1: Fetch metadata immediately for UI feedback
-            NSLog("📡 Fetching metadata for \(item.id)...")
+            NSLog("📡 Fetching metadata for %@...", item.id)
             let metadata = try await metadataProvider.fetchMetadata(type: item.type, id: item.id)
 
             // Update UI immediately so background art shows
@@ -180,7 +180,7 @@ class PlayerViewModel: ObservableObject {
                  // Use specific season/episode from playlist if available (Highest Priority)
                  if let s = playlistItem.season { effectiveSeason = s }
                  if let e = playlistItem.episode { effectiveEpisode = e }
-                 NSLog("🎬 PlayerVM: Using Playlist Metadata: S\(effectiveSeason ?? 0)E\(effectiveEpisode ?? 0)")
+                 NSLog("🎬 PlayerVM: Using Playlist Metadata: S%dE%d", effectiveSeason ?? 0, effectiveEpisode ?? 0)
             }
 
             // Step 2: Resolve stream (Optimized for Guest)
@@ -251,7 +251,7 @@ class PlayerViewModel: ObservableObject {
                         )
 
                         if !subDLSubtitles.isEmpty {
-                            NSLog("✅ Direct Unlock: Found \(subDLSubtitles.count) SubDL subtitles")
+                            NSLog("✅ Direct Unlock: Found %d SubDL subtitles", subDLSubtitles.count)
 
                             let externalSubs = subDLSubtitles.map { sub -> Subtitle in
                                 let encodedPath = Data(sub.url.utf8).base64EncodedString()
@@ -274,10 +274,10 @@ class PlayerViewModel: ObservableObject {
                             }
 
                             unlockedStream.subtitles = (unlockedStream.subtitles ?? []) + externalSubs
-                            NSLog("✅ Direct Unlock: Attached \(externalSubs.count) SubDL subtitles to stream")
+                            NSLog("✅ Direct Unlock: Attached %d SubDL subtitles to stream", externalSubs.count)
                         }
                     } catch {
-                        NSLog("⚠️ Direct Unlock: Subtitle search failed: \(error.localizedDescription)")
+                        NSLog("⚠️ Direct Unlock: Subtitle search failed: %@", error.localizedDescription)
                         // Non-fatal: Continue with stream even without SubDL subtitles
                     }
 
@@ -349,7 +349,7 @@ class PlayerViewModel: ObservableObject {
                 var finalQuality = hostQuality
                 if hostQuality == "Unknown" || hostQuality.isEmpty {
                     finalQuality = Stream.detectVideoQuality(from: filename)
-                    NSLog("⚠️ GUEST: Detected quality from filename: \(finalQuality)")
+                    NSLog("⚠️ GUEST: Detected quality from filename: %@", finalQuality)
                 }
 
                 var hostStream = Stream(
@@ -394,7 +394,7 @@ class PlayerViewModel: ObservableObject {
                         streamFilename: streamHint // Pass stream hint for release-type matching
                     )
 
-                    NSLog("✅ GUEST: Found \(subDLSubtitles.count) subtitles")
+                    NSLog("✅ GUEST: Found %d subtitles", subDLSubtitles.count)
 
                     // Convert to Subtitle objects
                     let externalSubs = subDLSubtitles.enumerated().map { (index, sub) -> Subtitle in
@@ -421,7 +421,7 @@ class PlayerViewModel: ObservableObject {
                     hostStream.subtitles = (hostStream.subtitles ?? []) + externalSubs
 
                 } catch {
-                    NSLog("❌ GUEST: Subtitle search failed for \(item.name): \(error.localizedDescription)")
+                    NSLog("❌ GUEST: Subtitle search failed for %@: %@", item.name, error.localizedDescription)
                 }
 
                 resolvedStream = hostStream
@@ -867,7 +867,7 @@ class PlayerViewModel: ObservableObject {
 
             // Step 4: If hosting Watch Party, persist stream selection to specific room
             if isHost, let roomId = currentRoomId, watchMode == .watchParty {
-                NSLog("📡 Persisting stream selection to room \(roomId)")
+                NSLog("📡 Persisting stream selection to room %@", roomId)
 
                 // Update local room object
                 if var room = self.currentWatchPartyRoom {
@@ -1415,7 +1415,7 @@ class PlayerViewModel: ObservableObject {
                 finalEpisode = episode ?? 1
             }
 
-            NSLog("🎬 Creating Watch Party for: \(mediaItem.name)")
+            NSLog("🎬 Creating Watch Party for: %@", mediaItem.name)
 
             let roomName = mediaItem.name
             let roomId = generateRoomCode()
@@ -1443,7 +1443,7 @@ class PlayerViewModel: ObservableObject {
                 createdAt: nil
             )
              } catch {
-                NSLog("❌ Creation failed or timed out: \(error)")
+                NSLog("❌ Creation failed or timed out: %@", String(describing: error))
                 throw error
              }
 
@@ -1516,7 +1516,7 @@ class PlayerViewModel: ObservableObject {
             }
 
             } catch {
-                NSLog("❌ Failed to create room: \(error)")
+                NSLog("❌ Failed to create room: %@", String(describing: error))
                 let msg = "\(error)"
                 // Handle various limit error formats (Postgres P0001 or standard API error)
                 if msg.contains("Limit Reached") || msg.contains("P0001") || msg.contains("one room every 72 hours") {
@@ -1539,7 +1539,7 @@ class PlayerViewModel: ObservableObject {
 
     func joinRoom(roomId: String) async {
         guard let appState = appState else { return }
-        NSLog("🚪 Joining room: \(roomId)")
+        NSLog("🚪 Joining room: %@", roomId)
 
         await MainActor.run { appState.isLoadingRoom = true }
 
@@ -1551,9 +1551,9 @@ class PlayerViewModel: ObservableObject {
 
                 if EventsConfigService.shared.isEventJoinable(eventId: roomId, config: config) {
                     // Valid to join (either Live or Next Up)
-                    NSLog("✅ PlayerVM: Event \(roomId) is JOINABLE (Live or Next Up)")
+                    NSLog("✅ PlayerVM: Event %@ is JOINABLE (Live or Next Up)", roomId)
                 } else {
-                    NSLog("🚫 PlayerVM: Blocking join to STALE event room \(roomId).")
+                    NSLog("🚫 PlayerVM: Blocking join to STALE event room %@.", roomId)
                     await MainActor.run {
                         appState.isLoadingRoom = false
                     }
@@ -1567,7 +1567,7 @@ class PlayerViewModel: ObservableObject {
 
             // REVIVAL LOGIC: If Event Room is missing, recreate it JIT so friend can join
             if room == nil, roomId.hasPrefix("event_") {
-                 NSLog("👻 Room \(roomId) not found - Attempting REVIVAL for Event Join...")
+                 NSLog("👻 Room %@ not found - Attempting REVIVAL for Event Join...", roomId)
                  let imdbId = roomId.replacingOccurrences(of: "event_", with: "")
                  if !imdbId.isEmpty {
                      // 1. Fetch Metadata
@@ -1596,7 +1596,7 @@ class PlayerViewModel: ObservableObject {
                              description: "System Event",
                              createdAt: nil
                          ) {
-                             NSLog("✨ REVIVAL SUCCESS: Room \(roomId) restored!")
+                             NSLog("✨ REVIVAL SUCCESS: Room %@ restored!", roomId)
                              room = newRoom
                          }
                      }
@@ -1604,7 +1604,7 @@ class PlayerViewModel: ObservableObject {
             }
 
             guard let room = room else {
-                NSLog("❌ Room not found (and revival failed): \(roomId)")
+                NSLog("❌ Room not found (and revival failed): %@", roomId)
                 await MainActor.run { appState.isLoadingRoom = false }
                 return
             }
@@ -1680,7 +1680,7 @@ class PlayerViewModel: ObservableObject {
                let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
                liveEvent.mediaItem.id == (room.imdbId ?? "") {
 
-                NSLog("🛡️ PlayerVM: Overriding Room createdAt (\(watchPartyRoom.createdAt)) with Scheduled Start (\(liveEvent.startTime))")
+                NSLog("🛡️ PlayerVM: Overriding Room createdAt (%@) with Scheduled Start (%@)", String(describing: watchPartyRoom.createdAt), String(describing: liveEvent.startTime))
                 watchPartyRoom.createdAt = liveEvent.startTime
                 watchPartyRoom.lastActivity = liveEvent.startTime
             }
@@ -1702,13 +1702,13 @@ class PlayerViewModel: ObservableObject {
                      // REDLEMON: If room is already in playback (e.g. friend is watching), trust that over strict schedule
                      if isActuallyPlaying {
                          shouldJoinPlayback = true
-                         NSLog("✅ Event Join: \(rawId) is already PLAYING. Joining Playback.")
+                         NSLog("✅ Event Join: %@ is already PLAYING. Joining Playback.", rawId)
                      } else if let config = eventsConfig,
                         let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
                         liveEvent.mediaItem.id == rawId {
                          // Matched current live event
                          shouldJoinPlayback = true
-                         NSLog("✅ Event Join: \(rawId) is LIVE according to schedule. Joining Playback.")
+                         NSLog("✅ Event Join: %@ is LIVE according to schedule. Joining Playback.", rawId)
                      } else {
                          // Future/Past or No Config
                          shouldJoinPlayback = false
@@ -1745,7 +1745,7 @@ class PlayerViewModel: ObservableObject {
                             self.eventStartTime = room.createdAt
                             self.resumeFromTimestamp = max(0, TimeService.shared.now.timeIntervalSince(room.createdAt) - Double(eventsConfig?.bufferBetweenMoviesSeconds ?? 600))
                         }
-                        NSLog("🎉 Detected Event Room join! StartTime: \(self.eventStartTime ?? Date())")
+                        NSLog("🎉 Detected Event Room join! StartTime: %@", String(describing: self.eventStartTime ?? Date()))
                     } else {
                         self.isEventPlayback = false
                         self.resumeFromTimestamp = Double(room.playbackPosition)
@@ -1809,7 +1809,7 @@ class PlayerViewModel: ObservableObject {
 
             }
         } catch {
-            NSLog("❌ Failed to join room: \(error)")
+            NSLog("❌ Failed to join room: %@", String(describing: error))
             await MainActor.run { appState.isLoadingRoom = false }
         }
     }
@@ -1921,7 +1921,7 @@ class PlayerViewModel: ObservableObject {
                     NSLog("Background: ✅ createRoom task finished")
                     continuationWrapper.resume(returning: r)
                 } catch {
-                     NSLog("Background: ❌ createRoom task failed: \(error)")
+                     NSLog("Background: ❌ createRoom task failed: %@", String(describing: error))
                      continuationWrapper.resume(throwing: error)
                 }
             }

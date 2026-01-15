@@ -44,6 +44,8 @@ enum LogCategory: String, CaseIterable {
     case watchParty = "watchparty"
     case general = "general"
     case social = "social"
+    case performance = "perf"       // NEW: For timing diagnostics
+    case ui = "ui"                  // NEW: For UI event diagnostics (scroll, render)
 }
 
 /// Centralized logging manager with throttling and level control
@@ -59,6 +61,8 @@ class LoggingManager: ObservableObject {
     @Published var enableWatchPartyLogs: Bool = true
     @Published var enableGeneralLogs: Bool = true
     @Published var enableSocialLogs: Bool = true
+    @Published var enablePerformanceLogs: Bool = true  // NEW: Always on by default for diagnostics
+    @Published var enableUILogs: Bool = true           // NEW: Always on by default for diagnostics
 
     // Throttling intervals (seconds)
     private let videoRenderingInterval: TimeInterval = 10.0
@@ -182,6 +186,27 @@ class LoggingManager: ObservableObject {
         }
     }
 
+    // MARK: - Performance & Diagnostic Logging
+    
+    /// Log a performance timing measurement (always logged - not throttled)
+    /// Use this for diagnosing lag and timing issues
+    func performance(_ operation: String, durationMs: Double, file: String = #file, function: String = #function, line: Int = #line) {
+        let status = durationMs > 100 ? "🔴 SLOW" : (durationMs > 50 ? "🟡 MODERATE" : "🟢 FAST")
+        info(.performance, message: "\(status) \(operation): \(String(format: "%.2f", durationMs))ms", file: file, function: function, line: line)
+    }
+    
+    /// Log a scroll event (useful for diagnosing macOS 26 scroll issues)
+    func scrollEvent(_ direction: String, forwarded: Bool, location: String, file: String = #file, function: String = #function, line: Int = #line) {
+        let action = forwarded ? "FORWARDED to parent" : "HANDLED locally"
+        debug(.ui, message: "Scroll \(direction) \(action) [\(location)]", file: file, function: function, line: line)
+    }
+    
+    /// Log a UI render/layout event
+    func uiEvent(_ event: String, context: String? = nil, file: String = #file, function: String = #function, line: Int = #line) {
+        let contextStr = context != nil ? " [\(context!)]" : ""
+        debug(.ui, message: "\(event)\(contextStr)", file: file, function: function, line: line)
+    }
+
     // MARK: - Private Methods
 
     private func isCategoryEnabled(_ category: LogCategory) -> Bool {
@@ -194,6 +219,8 @@ class LoggingManager: ObservableObject {
         case .watchParty: return enableWatchPartyLogs
         case .general: return enableGeneralLogs
         case .social: return enableSocialLogs
+        case .performance: return enablePerformanceLogs
+        case .ui: return enableUILogs
         }
     }
 

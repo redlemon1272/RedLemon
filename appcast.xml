@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.95 -->
+        <item>
+            <title>Version 1.0.95</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li><strong>Performance:</strong> Smoother scrolling on Browse page for all macOS versions.</li><li><strong>Note:</strong> macOS 26 scroll fix from v1.0.94 is preserved.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 21:10:27 -0500</pubDate>
+            <sparkle:version>95</sparkle:version>
+            <sparkle:shortVersionString>1.0.95</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.95.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ddN52tl3tJKi9UMRYpyZqKwfSOiqdvKBOrqBAW+CLYPR6RCJCO+S6jIpa8z+NT/CDBeq5ctF5uSm8NPZXq7fCw==" length="72527480"
+            />
+        </item>
         <!-- v1.0.94 -->
         <item>
             <title>Version 1.0.94</title>

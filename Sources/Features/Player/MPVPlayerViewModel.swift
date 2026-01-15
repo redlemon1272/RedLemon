@@ -2056,6 +2056,9 @@ extension MPVPlayerViewModel {
         await realtimeManager?.setPresenceCallback { [weak self] (action: PresenceAction, userId: String, metadata: [String: Any]?) in
             _ = Task { @MainActor in
                 guard let self = self else { return }
+                
+                // PERFORMANCE DIAGNOSTIC: Track how long participant updates take
+                let startTime = CACurrentMediaTime()
 
                 // FALLBACK: If room is missing locally (e.g. host started quickly), fetch it
                 if self.appState?.player.currentWatchPartyRoom == nil {
@@ -2239,6 +2242,10 @@ extension MPVPlayerViewModel {
                         // NOTE: SwiftUI automatically detects this change - no need for objectWillChange.send()
                         // Forcing objectWillChange causes full view hierarchy re-render (lag on macOS 26)
                         self.appState?.player.currentWatchPartyRoom?.participants = updatedParticipants
+                        
+                        // PERFORMANCE DIAGNOSTIC: Log how long the join processing took
+                        let joinDurationMs = (CACurrentMediaTime() - startTime) * 1000
+                        LoggingManager.shared.performance("Participant JOIN processing", durationMs: joinDurationMs)
 
                     case .leave:
                         // This handles flaky connections and Lobby->Player transitions

@@ -15,6 +15,14 @@ struct DiscoverView: View {
     enum MediaType: String, CaseIterable {
         case movies = "Movies"
         case shows = "TV Shows"
+
+        var index: Int {
+            self == .movies ? 0 : 1
+        }
+
+        static func from(index: Int) -> MediaType {
+            index == 0 ? .movies : .shows
+        }
     }
 
     enum CatalogProvider: String, CaseIterable {
@@ -99,7 +107,13 @@ struct DiscoverView: View {
                     }
                 }
                 .pickerStyle(.segmented)
-                .onChange(of: selectedTab) { _ in
+                .onAppear {
+                    // Restore tab selection from AppState
+                    selectedTab = MediaType.from(index: appState.discoverSelectedTab)
+                }
+                .onChange(of: selectedTab) { newValue in
+                    // Persist tab selection to AppState
+                    appState.discoverSelectedTab = newValue.index
                     Task {
                         await loadContent()
                     }
@@ -161,18 +175,33 @@ struct DiscoverView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(filteredItems, id: \.id) { item in
-                            Button(action: {
-                                selectMedia(item)
-                            }) {
-                                DiscoverMediaCard(item: item)
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(filteredItems, id: \.id) { item in
+                                Button(action: {
+                                    selectMedia(item)
+                                }) {
+                                    DiscoverMediaCard(item: item)
+                                }
+                                .buttonStyle(.plain)
+                                .id(item.id)  // Add ID for scroll position tracking
                             }
-                            .buttonStyle(.plain)
+                        }
+                        .padding()
+                    }
+                    .onAppear {
+                        // Restore scroll position instantly (no animation) when coming back from detail
+                        if let scrollTo = appState.discoverScrollPosition {
+                            Task { @MainActor in
+                                // Minimal delay just for view to render
+                                try? await Task.sleep(nanoseconds: 50_000_000) // 0.05s
+                                proxy.scrollTo(scrollTo, anchor: .top)  // Instant, no animation
+                                // Clear scroll position after use
+                                appState.discoverScrollPosition = nil
+                            }
                         }
                     }
-                    .padding()
                 }
             }
         }
@@ -257,9 +286,13 @@ struct DiscoverView: View {
     private func selectMedia(_ item: MediaItem) {
         // Navigate to detail view in main content area (same as BrowseView)
         // CRITICAL: Must be synchronous to prevent Landmine #24 race conditions
+
+        // Save scroll position for restoration when coming back
+        appState.discoverScrollPosition = item.id
+
         // Direct assignment - gesture handlers already run on MainActor
         appState.player.selectedMediaItem = item
-        appState.currentView = .mediaDetail
+        appState.navigateTo(.mediaDetail)  // Use navigateTo for back navigation support
     }
 }
 

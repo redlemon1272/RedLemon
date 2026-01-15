@@ -499,7 +499,7 @@ struct SearchView: View {
         print("🔍 [DEBUG] selectMedia called for: \(item.name)")
         // Navigate to detail view in main content area
         appState.player.selectedMediaItem = item
-        appState.currentView = .mediaDetail
+        appState.navigateTo(.mediaDetail)  // Use navigateTo for back navigation support
         print("🔍 [DEBUG] Navigation to mediaDetail completed")
     }
 }

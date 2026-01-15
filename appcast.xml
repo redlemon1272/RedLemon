@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.97 -->
+        <item>
+            <title>Version 1.0.97</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed 119 Unsafe NSLog violations (Landmine #11)</li><li>Fixed Guest Subtitles Regression (Landmine #45)</li><li>Added Architecture Scanner to prevent regressions</li><li>Security Hardening</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 00:12:03 -0500</pubDate>
+            <sparkle:version>97</sparkle:version>
+            <sparkle:shortVersionString>1.0.97</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.97.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="wacWpFPBqXPpVDvocTaugD0diSAt9JgnJJdk2e/FOI30i6MRyJVyc2/26QLw2GXhAekGMRUeq3CxrUUUH5YCBw==" length="72777322"
+            />
+        </item>
         <!-- v1.0.96 -->
         <item>
             <title>Version 1.0.96</title>

@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.100 -->
+        <item>
+            <title>Version 1.0.100</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Guest watch party now enters fullscreen immediately (matching host experience)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 05:07:54 -0500</pubDate>
+            <sparkle:version>100</sparkle:version>
+            <sparkle:shortVersionString>1.0.100</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.100.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="DnkCsHL8jvsbhblf1WrHvt3QtHTDyMcI9R6HbF+J5SgGZt4cJsOZSG+FENApT+1UWQQ4XTKJO+EodB2rKKX4Dg==" length="72511985"
+            />
+        </item>
         <!-- v1.0.99 -->
         <item>
             <title>Version 1.0.99</title>

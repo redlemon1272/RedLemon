@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 14, 2026 (Added Server Backup & Migration)
+> **Last Updated:** January 15, 2026 (Added Codification Rule & Landmine #47)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -29,6 +29,11 @@
 3.  **Deployment**: Ship ONLY via **Part 19** (Release Workflow). Manual releases corrupt the repo.
 4.  **Privacy**: Logs go to `.applicationSupportDirectory`, NOT Documents.
 5.  **Versioning**: Update logic relies on **Integer Build Numbers**, not Version Strings.
+6.  **Codification Protocol**: When a major bug or "Landmine" is discovered and fixed, the assistant MUST:
+    - (a) Document it in **Part 1** with a new ID.
+    - (b) Add the observed symptom to the **Symptom Checker** (Part 1).
+    - (c) Add a regression check to `scripts/architecture-scan.sh` (if possible via regex).
+    - (d) Update the **Last Updated** date at the top.
 
 ---
 
@@ -53,6 +58,7 @@
 | **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call | #43 |
 | **Server Fail: Torrent not cached** | Heuristic ignored provider fileIdx (Season Pack) | #45 |
 | **Player Start -> Immediate Fail** | Fake 'Direct' URL (Comet Error Stream) | #46 |
+| **Ghost Participant (Lobby)** | User list doesn't update / 'Left' msg missing | #47 |
 
 ## 🚨 Critical Landmines
 
@@ -167,13 +173,15 @@
     *   **Trigger**: User gets "Server Fail: Torrent not cached" error for a Season Pack that the provider (Torrentio) claims is cached.
     *   **Cause**: The app ignores the provider's `fileIdx` and attempts to "guess" the correct file via string matching (e.g., matching "S01E05"). The heuristic accidentally targets an uncached file (e.g., "S01E05 Repack.mkv" or a sample) instead of the main file.
     *   **Rule**: If the Provider supplies a `fileIdx`, **TRUST IT**. Map it directly to the Debrid service's File ID. Only use filename heuristics as a fallback when no index is provided.
-
 46. **The "Direct URL" Trojan Horse (Comet Error Streams)**: *(Added v1.0.83)*
     *   **Trigger**: A specific Provider (e.g., Comet) returns a stream with a direct HTTP URL that is actually an error/placeholder page (e.g. `.../elfhosted_addons_disabling_nondebrid_modes`) instead of a video file.
     *   **Cause**: `StreamResolver.sort` logic prioritizes Direct URLs (instant playback) over Torrents (need resolving). A "fake" stream appearing to be a Direct URL bypasses all other valid torrents and gets sent to the player, causing immediate failure.
     *   **Symptom**: Player loads quickly, immediately pauses/ends with Error Code 4 ("Failed to recognize file format"). Logs show a URL that looks like an error message path.
     *   **Rule**: All `ProviderServices` MUST validate direct URLs before returning them. Explicitly blacklist known error patterns (e.g., `elfhosted_...`, `reddit.com`) in the Service itself to prevent them from reaching the Resolver.
-
+47. **Realtime Presence: Ghost Participants**: *(Added v1.0.99)*
+    *   **Trigger**: User joins a lobby and leaves, but still appears in the participant list for others. Or "User left" chat message never appears.
+    *   **Cause**: Using non-unique metadata (like UUID) to track presence callbacks. Phoenix Channels use a specific **Map Key** for each unique connection session.
+    *   **Rule**: Presence handlers (`SupabaseRealtimeClient`) MUST pass the Phoenix map key as the primary session ID. UI Managers (`LobbyPresenceManager`, `MPVPlayerViewModel`) MUST use this key to match JOIN and LEAVE events. Never rely on the User UUID alone to resolve a leave event, as stale heartbeats or rotation-reconnects will cause "ghost" entries or ignored leaves.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

@@ -250,7 +250,7 @@ struct BrowseView: View {
 
             // Double check position still exists (race condition protection)
             if appState.browseScrollPosition == scrollTo {
-                proxy.scrollTo(scrollTo, anchor: .top)
+                proxy.scrollTo(scrollTo, anchor: .top) // OK: Guarded by !items.isEmpty checks above
                 appState.browseScrollPosition = nil
             }
         }

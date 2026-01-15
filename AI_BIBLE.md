@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 15, 2026 (Added Codification Rule & Landmine #47)
+> **Last Updated:** January 15, 2026 (Added Landmine #48 - Async Scroll Race)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -59,6 +59,7 @@
 | **Server Fail: Torrent not cached** | Heuristic ignored provider fileIdx (Season Pack) | #45 |
 | **Player Start -> Immediate Fail** | Fake 'Direct' URL (Comet Error Stream) | #46 |
 | **Ghost Participant (Lobby)** | User list doesn't update / 'Left' msg missing | #47 |
+| **Scroll Restore Fails** | Race condition (Scroll happens on empty list) | #48 |
 
 ## 🚨 Critical Landmines
 
@@ -178,10 +179,14 @@
     *   **Cause**: `StreamResolver.sort` logic prioritizes Direct URLs (instant playback) over Torrents (need resolving). A "fake" stream appearing to be a Direct URL bypasses all other valid torrents and gets sent to the player, causing immediate failure.
     *   **Symptom**: Player loads quickly, immediately pauses/ends with Error Code 4 ("Failed to recognize file format"). Logs show a URL that looks like an error message path.
     *   **Rule**: All `ProviderServices` MUST validate direct URLs before returning them. Explicitly blacklist known error patterns (e.g., `elfhosted_...`, `reddit.com`) in the Service itself to prevent them from reaching the Resolver.
-47. **Realtime Presence: Ghost Participants**: *(Added v1.0.99)*
-    *   **Trigger**: User joins a lobby and leaves, but still appears in the participant list for others. Or "User left" chat message never appears.
-    *   **Cause**: Using non-unique metadata (like UUID) to track presence callbacks. Phoenix Channels use a specific **Map Key** for each unique connection session.
     *   **Rule**: Presence handlers (`SupabaseRealtimeClient`) MUST pass the Phoenix map key as the primary session ID. UI Managers (`LobbyPresenceManager`, `MPVPlayerViewModel`) MUST use this key to match JOIN and LEAVE events. Never rely on the User UUID alone to resolve a leave event, as stale heartbeats or rotation-reconnects will cause "ghost" entries or ignored leaves.
+48. **Async Scroll Race Condition (The "Empty List" Trap)**:
+    *   **Trigger**: Triggering `proxy.scrollTo` inside `onAppear` while content is loading asynchronously (e.g., via `.task`).
+    *   **Symptom**: Scroll restoration works ~50% of the time. Fails when the list is empty/cleared during the scroll command.
+    *   **Rule**: Scrolls MUST be **Content-Aware**.
+        1. Check `!items.isEmpty` before scrolling.
+        2. Add `.onChange(of: items)` to trigger the scroll once data arrives.
+        3. **Optimistic UI**: NEVER `removeAll()` data before reloading (Atomic replacement) to maintain scroll anchor.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

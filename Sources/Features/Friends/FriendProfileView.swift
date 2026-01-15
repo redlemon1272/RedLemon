@@ -11,38 +11,38 @@ struct FriendProfileView: View {
     let friend: Friend
     @StateObject private var socialService = SocialService.shared
     @EnvironmentObject var appState: AppState // For navigation to media
-    
+
     @State private var friendHistory: [SupabaseWatchHistoryEntry] = []
     @State private var isLoadingHistory = false
-    
+
     @Environment(\.dismiss) var dismiss
-    
+
     // Chat state
     @State private var messageText = ""
     @FocusState private var isFocused: Bool
     @State private var showEmojiPicker = false
-    
+
     // Common emojis (same as player chat)
     private let emojis = ["\u{1F602}", "\u{1F60D}", "\u{1F525}", "\u{1F44D}", "\u{2764}\u{FE0F}", "\u{1F60E}", "\u{1F389}", "\u{1F4AF}", "\u{1F62D}", "\u{1F914}", "\u{1F440}", "\u{2728}", "\u{1F3AC}", "\u{1F37F}", "\u{1F631}", "\u{1F923}"]
-    
+
     @State private var showDeleteConfirmation = false
     @State private var isDeleting = false
     @State private var deleteError: String?
-    
+
     var body: some View {
         VStack(spacing: 0) {
             // Header
             headerView
-            
+
             Divider()
-            
+
             HStack(spacing: 0) {
                 // Left: Chat Interface (Main focus)
                 chatInterface
                     .frame(maxWidth: .infinity)
-                
+
                 Divider()
-                
+
                 // Right: Profile & History (Side panel)
                 profileSidebar
                     .frame(width: 320) // Slightly wider sidebar
@@ -89,16 +89,16 @@ struct FriendProfileView: View {
             // Load messages
             await socialService.loadMessages(friendId: friend.id)
             socialService.clearUnread(friendId: friend.id)
-            
+
             // Load history
             isLoadingHistory = true
             friendHistory = await socialService.fetchFriendHistory(friendId: friend.id)
             isLoadingHistory = false
         }
     }
-    
+
     // MARK: - Header
-    
+
     private var headerView: some View {
         HStack(spacing: 16) {
             // Avatar
@@ -106,12 +106,12 @@ struct FriendProfileView: View {
                 Circle()
                     .fill(Color.blue.opacity(0.2))
                     .frame(width: 40, height: 40)
-                
+
                 Text(friend.username.prefix(1).uppercased())
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
-                
+
                 // Online indicator
                 if isOnline {
                      Circle()
@@ -120,12 +120,12 @@ struct FriendProfileView: View {
                          .offset(x: 14, y: 14)
                  }
             }
-            
+
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 4) {
                     Text(friend.username)
                         .font(.headline)
-                    
+
                     // Premium Host Badge
                     if friend.isPremium == true {
                         Text("👑")
@@ -133,7 +133,7 @@ struct FriendProfileView: View {
                             .help("Premium Host")
                     }
                 }
-                
+
                 if let activity = socialService.friendActivity[friend.id] {
                     // Check for custom status first (e.g., "In Lobby")
                     if let status = activity.customStatus, !status.isEmpty, status != "online" {
@@ -159,9 +159,9 @@ struct FriendProfileView: View {
                         .foregroundColor(.secondary)
                 }
             }
-            
+
             Spacer()
-            
+
             // Close Button
             Button(action: { dismiss() }) {
                 Image(systemName: "xmark.circle.fill")
@@ -174,13 +174,13 @@ struct FriendProfileView: View {
         .padding()
         .background(Color(NSColor.windowBackgroundColor))
     }
-    
+
     private var isOnline: Bool {
         socialService.onlineUserIds.contains(friend.id) || socialService.friendActivity[friend.id] != nil
     }
-    
+
     // MARK: - Chat Interface
-    
+
     private var chatInterface: some View {
         VStack(spacing: 0) {
             // Messages List
@@ -188,7 +188,7 @@ struct FriendProfileView: View {
                 ScrollView {
                     LazyVStack(spacing: 12) {
                         let messages = socialService.messages[friend.id] ?? []
-                        
+
                         if messages.isEmpty {
                             VStack(spacing: 12) {
                                 Image(systemName: "bubble.left.and.bubble.right")
@@ -210,16 +210,16 @@ struct FriendProfileView: View {
                 .onChange(of: socialService.messages[friend.id]?.count) { _ in
                     if let lastId = socialService.messages[friend.id]?.last?.id {
                         withAnimation {
-                            proxy.scrollTo(lastId, anchor: .bottom)
+                            proxy.scrollTo(lastId, anchor: .bottom) // OK: Guarded by lastId check
                         }
                     }
                     // Clear unread count when new messages arrive while viewing
                     socialService.clearUnread(friendId: friend.id)
                 }
             }
-            
+
             Divider()
-            
+
             // Emoji Picker (Slide up)
             if showEmojiPicker {
                 emojiPicker
@@ -228,7 +228,7 @@ struct FriendProfileView: View {
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                 Divider()
             }
-            
+
             // Input Area
             HStack(spacing: 8) {
                 // Emoji Button
@@ -257,7 +257,7 @@ struct FriendProfileView: View {
                     .onSubmit {
                         sendMessage()
                     }
-                
+
                 Button(action: sendMessage) {
                     Image(systemName: "paperplane.fill")
                         .font(.title3)
@@ -286,7 +286,7 @@ struct FriendProfileView: View {
                  .buttonStyle(.plain)
              }
              .padding(.horizontal, 4)
-             
+
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 8) {
                 ForEach(emojis, id: \.self) { emoji in
                     Button(action: {
@@ -306,17 +306,17 @@ struct FriendProfileView: View {
         }
         .frame(maxHeight: 160)
     }
-    
+
     private func sendMessage() {
         guard !messageText.isEmpty else { return }
         let content = messageText
         messageText = ""
-        
+
         Task {
             await socialService.sendMessage(to: friend.id, content: content)
         }
     }
-    
+
     private func deleteAllMessages() async {
         isDeleting = true
         do {
@@ -326,19 +326,19 @@ struct FriendProfileView: View {
         }
         isDeleting = false
     }
-    
+
     // MARK: - Profile Sidebar (History)
-    
+
     private var profileSidebar: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                
+
                 // Continue Watching Section
                 VStack(alignment: .leading, spacing: 12) {
                     Label("Continue Watching", systemImage: "clock")
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(.secondary)
-                    
+
                     if isLoadingHistory {
                         ProgressView()
                             .scaleEffect(0.8)
@@ -364,7 +364,7 @@ struct FriendProfileView: View {
 
 struct HistoryItemRow: View {
     let item: SupabaseWatchHistoryEntry
-    
+
     var body: some View {
         HStack(spacing: 10) {
             // Poster
@@ -376,12 +376,12 @@ struct HistoryItemRow: View {
             .aspectRatio(2/3, contentMode: .fill)
             .frame(width: 40, height: 60)
             .cornerRadius(4)
-            
+
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.title)
                     .font(.callout)
                     .lineLimit(2)
-                
+
                 if let season = item.season, season > 0, let episode = item.episode, episode > 0 {
                     Text("S\(season) E\(episode)")
                         .font(.caption2)
@@ -391,13 +391,13 @@ struct HistoryItemRow: View {
                         .font(.caption2)
                         .foregroundColor(.secondary)
                 }
-                
+
                 // Progress Bar (Visual only)
                 GeometryReader { geo in
                     ZStack(alignment: .leading) {
                         Rectangle()
                             .fill(Color.gray.opacity(0.2))
-                        
+
                         Rectangle()
                             .fill(Color.blue)
                             .frame(width: geo.size.width * item.progress)
@@ -406,7 +406,7 @@ struct HistoryItemRow: View {
                 .frame(height: 2)
                 .padding(.top, 4)
             }
-            
+
             Spacer()
         }
         .padding(8)

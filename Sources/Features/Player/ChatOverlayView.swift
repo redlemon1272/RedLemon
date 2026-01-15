@@ -426,7 +426,7 @@ struct ChatOverlayView: View {
             }
             .onChange(of: eventChatService.messages.count) { _ in
                 if let lastId = eventChatService.messages.last?.id {
-                     withAnimation { proxy.scrollTo(lastId, anchor: .bottom) }
+                     withAnimation { proxy.scrollTo(lastId, anchor: .bottom) } // OK: Guarded by lastId check
                 }
             }
         }
@@ -591,7 +591,7 @@ struct ChatOverlayView: View {
             try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
             if let id = lastId {
                 withAnimation {
-                    proxy.scrollTo(id, anchor: .bottom)
+                    proxy.scrollTo(id, anchor: .bottom) // OK: Guarded by lastId check
                 }
             }
         }

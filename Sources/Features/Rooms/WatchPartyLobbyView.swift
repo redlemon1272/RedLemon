@@ -996,8 +996,8 @@ struct WatchPartyLobbyView: View {
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(room.id, forType: .string)
         viewModel.didCopyRoomID = true
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
             viewModel.didCopyRoomID = false
         }
     }

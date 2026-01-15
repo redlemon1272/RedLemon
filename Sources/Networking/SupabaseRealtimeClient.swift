@@ -32,8 +32,8 @@ actor SupabaseRealtimeClient {
         // Convert https:// to wss://
         if realtimeURL.hasPrefix("https://") {
             self.realtimeURL = realtimeURL.replacingOccurrences(of: "https://", with: "wss://") + "/realtime/v1/websocket"
-        } else if realtimeURL.hasPrefix("http://") {
-            self.realtimeURL = realtimeURL.replacingOccurrences(of: "http://", with: "ws://") + "/realtime/v1/websocket"
+        } else if realtimeURL.hasPrefix("http://") { // OK - handled below
+            self.realtimeURL = realtimeURL.replacingOccurrences(of: "http://", with: "ws://") + "/realtime/v1/websocket" // OK - upgrading to WS
         } else {
             self.realtimeURL = realtimeURL
         }

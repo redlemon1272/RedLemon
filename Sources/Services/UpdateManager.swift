@@ -143,7 +143,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
     /// Called when an update is found
     func updater(_ updater: SPUUpdater, didFindValidUpdate item: SUAppcastItem) {
         print("📦 Update found: \(item.displayVersionString)")
-        DispatchQueue.main.async {
+        Task { @MainActor in
             self.updateAvailable = true
             self.lastCheckedDate = Date()
         }
@@ -152,7 +152,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
     /// Called when no update is found
     func updaterDidNotFindUpdate(_ updater: SPUUpdater) {
         print("✅ No updates available")
-        DispatchQueue.main.async {
+        Task { @MainActor in
             self.updateAvailable = false
             self.lastCheckedDate = Date()
         }

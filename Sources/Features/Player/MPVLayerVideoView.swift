@@ -186,7 +186,7 @@ struct MPVLayerVideoView: NSViewRepresentable {
         let view = MPVLayerHostView(frame: .zero)
 
         // Setup with wrapper once view is created
-        DispatchQueue.main.async {
+        Task { @MainActor in
             view.setupWithWrapper(wrapper)
         }
 

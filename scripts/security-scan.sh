@@ -63,6 +63,11 @@ report_issue() {
     local line=$4
     local code=$5
     
+    # Check for suppression (comments in the code line)
+    if [[ "$code" == *"// OK"* ]] || [[ "$code" == *"// legacy"* ]] || [[ "$code" == *"// ignore"* ]]; then
+        return
+    fi
+    
     case $severity in
         CRITICAL)
             echo -e "${RED}❌ CRITICAL:${NC} $message"

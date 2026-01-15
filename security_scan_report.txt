@@ -1,0 +1,128 @@
+[0;34m[1m
+╔════════════════════════════════════════════════════════════════╗
+║              🔍 RedLemon Security Scanner                      ║
+╚════════════════════════════════════════════════════════════════╝
+[0m
+Scanning: /Users/danielnoble/Desktop/RedLemon-Native/Sources
+Mode: Normal
+
+[1m[1/18] Checking for hardcoded secrets...[0m
+[1m[2/18] Checking for insecure logging (Landmine #11)...[0m
+[1;33m⚠️  WARNING:[0m Potentially logging sensitive data
+   [1m→ Sources/Server/Routes/UnlockRoutes.swift[0m:43
+   [0;34m            NSLog("%@", "❌ No token for service: \(serviceKey)")[0m
+
+[1;33m⚠️  WARNING:[0m Potentially logging sensitive data
+   [1m→ Sources/Server/Routes/TokenRoutes.swift[0m:71
+   [0;34m    print("   POST /tokens/save")[0m
+
+[1;33m⚠️  WARNING:[0m Potentially logging sensitive data
+   [1m→ Sources/Server/Routes/TokenRoutes.swift[0m:72
+   [0;34m    print("   POST /tokens/delete")[0m
+
+[1;33m⚠️  WARNING:[0m Potentially logging sensitive data
+   [1m→ Sources/Server/Routes/TokenRoutes.swift[0m:73
+   [0;34m    print("   GET  /tokens/list")[0m
+
+[1m[3/18] Checking for insecure HTTP URLs...[0m
+[1;33m⚠️  WARNING:[0m Insecure HTTP URL (should be HTTPS)
+   [1m→ Sources/Networking/SupabaseRealtimeClient.swift[0m:35
+   [0;34m        } else if realtimeURL.hasPrefix("http://") {[0m
+
+[1;33m⚠️  WARNING:[0m Insecure HTTP URL (should be HTTPS)
+   [1m→ Sources/Networking/SupabaseRealtimeClient.swift[0m:36
+   [0;34m            self.realtimeURL = realtimeURL.replacingOccurrences(of: "http://", with: "ws://") + "/realtime/v1/websocket"[0m
+
+[1m[4/18] Checking for sensitive data in UserDefaults...[0m
+[1m[5/18] Checking for disabled SSL validation...[0m
+[1m[6/18] Checking for SQL injection patterns...[0m
+[1m[7/18] Checking Keychain access patterns...[0m
+[1m[8/18] Checking for risky force unwrapping in auth code...[0m
+[1m[9/18] Checking for cryptographic issues...[0m
+[1m[10/18] Checking for input validation issues...[0m
+[0;34mℹ️  INFO:[0m Dynamic URL construction - ensure input is validated
+   [1m→ Sources/App/Config.swift[0m:29
+   [0;34m        URL(string: "\(serverURL)/api/metadata/meta/movie/\(imdbId)")[0m
+
+[0;34mℹ️  INFO:[0m Dynamic URL construction - ensure input is validated
+   [1m→ Sources/App/Config.swift[0m:33
+   [0;34m        URL(string: "\(serverURL)/api/metadata/meta/tv/\(imdbId)/\(season)/\(episode)")[0m
+
+[0;34mℹ️  INFO:[0m Dynamic URL construction - ensure input is validated
+   [1m→ Sources/App/Services/StreamService.swift[0m:724
+   [0;34m        let unlockURL = URL(string: "\(Config.serverURL)/api/streams/unlock")![0m
+
+[1m[11/18] Checking for path traversal risks...[0m
+[0;34mℹ️  INFO:[0m File write operation - verify path is sanitized
+   [1m→ Sources/App/Services/StreamService.swift[0m:910
+   [0;34m                            try data.write(to: localURL)[0m
+
+[0;34mℹ️  INFO:[0m File write operation - verify path is sanitized
+   [1m→ Sources/App/Services/StreamService.swift[0m:953
+   [0;34m        try data.write(to: zipPath)[0m
+
+[0;34mℹ️  INFO:[0m File write operation - verify path is sanitized
+   [1m→ Sources/Features/Settings/AccountExportManager.swift[0m:74
+   [0;34m        try json.write(to: url, atomically: true, encoding: .utf8)[0m
+
+[1m[12/18] Checking for command injection risks...[0m
+[1;33m⚠️  WARNING:[0m Process execution - ensure arguments are sanitized
+   [1m→ Sources/App/Services/StreamService.swift[0m:956
+   [0;34m        let process = Process()[0m
+
+[1;33m⚠️  WARNING:[0m Process execution - ensure arguments are sanitized
+   [1m→ Sources/Features/Player/Services/SubtitleService.swift[0m:241
+   [0;34m        let process = Process()[0m
+
+[1;33m⚠️  WARNING:[0m Process execution - ensure arguments are sanitized
+   [1m→ Sources/Server/Services/SubDLClient.swift[0m:517
+   [0;34m        let listProcess = Process()[0m
+
+[1;33m⚠️  WARNING:[0m Process execution - ensure arguments are sanitized
+   [1m→ Sources/Server/Services/SubDLClient.swift[0m:743
+   [0;34m        let extractProcess = Process()[0m
+
+[1m[13/18] Checking for debug code patterns...[0m
+[0;34mℹ️  INFO:[0m Debug print statement - consider removing for release
+   [1m→ Sources/Features/Player/MPVPlayerViewModel.swift[0m:1864
+   [0;34m        print("DEBUG: MPVPlayerViewModel.cleanup called - forcing cleanup")[0m
+
+[1m[14/18] Checking for try! in security code...[0m
+[1m[15/18] Checking for deep link handling...[0m
+[0;34mℹ️  INFO:[0m URL scheme handler - ensure deep link input is validated
+   [1m→ Sources/App/AppDelegate.swift[0m:28
+   [0;34m    func application(_ application: NSApplication, open urls: [URL]) {[0m
+
+[1m[16/18] Checking for temporary file security...[0m
+[1;33m⚠️  WARNING:[0m Writing to temp directory - ensure sensitive data is cleaned up
+   [1m→ Sources/App/Services/StreamService.swift[0m:907
+   [0;34m                            let tempDir = FileManager.default.temporaryDirectory[0m
+
+[1;33m⚠️  WARNING:[0m Writing to temp directory - ensure sensitive data is cleaned up
+   [1m→ Sources/App/Services/StreamService.swift[0m:933
+   [0;34m        let tempDir = FileManager.default.temporaryDirectory[0m
+
+[1;33m⚠️  WARNING:[0m Writing to temp directory - ensure sensitive data is cleaned up
+   [1m→ Sources/App/Services/StreamService.swift[0m:965
+   [0;34m            // Or just leave it for OS cleanup (it's in temporaryDirectory).[0m
+
+[1;33m⚠️  WARNING:[0m Writing to temp directory - ensure sensitive data is cleaned up
+   [1m→ Sources/Features/Player/Services/SubtitleService.swift[0m:226
+   [0;34m        let tempDir = FileManager.default.temporaryDirectory[0m
+
+[1;33m⚠️  WARNING:[0m Writing to temp directory - ensure sensitive data is cleaned up
+   [1m→ Sources/Features/Player/Services/SubtitleService.swift[0m:234
+   [0;34m        let tempDir = FileManager.default.temporaryDirectory[0m
+
+[1m[17/18] Checking for timing side-channel risks...[0m
+[1m[18/18] Checking for insecure deserialization...[0m
+
+[1m════════════════════════════════════════════════════════════════[0m
+[1m                        SCAN COMPLETE                           [0m
+[1m════════════════════════════════════════════════════════════════[0m
+
+[0;32m✅ Critical Issues: 0[0m
+[1;33m⚠️  Warnings: 15[0m
+[0;34mℹ️  Info: 8[0m
+
+[0;32m[1m✅ PASSED: No blocking security issues found.[0m

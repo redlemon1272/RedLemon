@@ -68,8 +68,8 @@ class EventsConfigService {
         print("⏲️ [EventsConfig] Starting polling fallback (every 60s)")
         
         // Poll every 60 seconds
-        DispatchQueue.main.async { [weak self] in
-            self?.pollingTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+        Task { @MainActor in
+            self.pollingTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
                 Task { [weak self] in
                     await self?.checkForUpdates()
                 }
@@ -88,7 +88,7 @@ class EventsConfigService {
             let serverConfig = try await fetchConfig(type: "movie_events")
             if serverConfig.version > currentVersion {
                 print("🔔 [EventsConfig] Polling found new version \(serverConfig.version) (current: \(currentVersion))")
-                DispatchQueue.main.async {
+                Task { @MainActor in
                     NotificationCenter.default.post(name: Notification.Name("ScheduleDidUpdate"), object: nil)
                 }
             }
@@ -113,7 +113,7 @@ class EventsConfigService {
             print("🔔 [EventsConfig] Realtime notification: New schedule version \(newVersion) available (current: \(currentVersion))")
             
             // Post notification on main thread
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 NotificationCenter.default.post(name: Notification.Name("ScheduleDidUpdate"), object: nil)
             }
         }

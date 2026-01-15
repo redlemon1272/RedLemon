@@ -52,7 +52,8 @@ struct BackupPhraseView: View {
                     NSPasteboard.general.clearContents()
                     NSPasteboard.general.setString(recoveryPhrase, forType: .string)
                     showCopiedAlert = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    Task { @MainActor in
+                        try? await Task.sleep(nanoseconds: 2_000_000_000)
                         showCopiedAlert = false
                     }
                 }) {

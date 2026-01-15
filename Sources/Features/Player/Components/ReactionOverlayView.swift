@@ -140,7 +140,8 @@ struct ReactionParticleView: View {
             }
 
             // 4. Cleanup
-            DispatchQueue.main.asyncAfter(deadline: .now() + floatDuration) {
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: UInt64(floatDuration * 1_000_000_000))
                 onComplete(model.id)
             }
         }

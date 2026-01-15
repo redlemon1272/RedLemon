@@ -1045,7 +1045,8 @@ struct SettingsView: View {
                 messageType = .success
 
                 // Clear message after delay
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                Task { @MainActor in
+                    try? await Task.sleep(nanoseconds: 3_000_000_000)
                     if saveMessage == "Session log sent! Thank you." {
                         saveMessage = nil
                     }
@@ -1378,7 +1379,9 @@ struct SettingsView: View {
                 isResetting = false
 
                 // Clear error message after 5 seconds
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                // Clear error message after 5 seconds
+                Task { @MainActor in
+                    try? await Task.sleep(nanoseconds: 5_000_000_000)
                     withAnimation {
                         resetMessage = nil
                     }
@@ -1405,7 +1408,8 @@ struct SettingsView: View {
 
                 await MainActor.run {
                     copyMessage = "✅ Backup saved successfully!"
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    Task { @MainActor in
+                        try? await Task.sleep(nanoseconds: 3_000_000_000)
                         copyMessage = nil
                     }
                 }

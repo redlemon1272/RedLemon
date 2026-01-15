@@ -66,6 +66,11 @@ actor RealtimeChannelManager: RealtimeService {
     // Postgres tracking
     private var postgresCallback: (([String: Any]) -> Void)?
 
+    // Handler IDs for cleanup
+    private var presenceHandlerId: UUID?
+    private var connectionHandlerId: UUID?
+    private var postgresHandlerId: UUID?
+
     // MARK: - Initialization
 
     init(realtimeClient: SupabaseRealtimeClient) {
@@ -128,21 +133,21 @@ actor RealtimeChannelManager: RealtimeService {
         }
 
         // Handle presence changes
-        await realtimeClient.onPresence { action, userId, metadata in
+        self.presenceHandlerId = await realtimeClient.onPresence { action, userId, metadata in
             Task { @MainActor in
                 await self.handlePresenceUpdate(action: action, userId: userId, metadata: metadata)
             }
         }
 
         // Handle connection changes
-        await realtimeClient.onConnectionChange { connected in
+        self.connectionHandlerId = await realtimeClient.onConnectionChange { connected in
             Task { [weak self] in
                 await self?.handleConnectionChange(connected)
             }
         }
 
         // Handle postgres changes
-        await realtimeClient.onPostgresChange { payload in
+        self.postgresHandlerId = await realtimeClient.onPostgresChange { payload in
             Task { [weak self] in
                await self?.handlePostgresChange(payload)
             }
@@ -434,6 +439,20 @@ actor RealtimeChannelManager: RealtimeService {
         presenceCallback = nil
         postgresCallback = nil // CRITICAL: Stop receiving DB changes
         connectionStateCallback = nil
+
+        // Clean up handlers
+        if let id = presenceHandlerId {
+            await realtimeClient.removePresenceHandler(id: id)
+            presenceHandlerId = nil
+        }
+        if let id = connectionHandlerId {
+            await realtimeClient.removeConnectionHandler(id: id)
+            connectionHandlerId = nil
+        }
+        if let id = postgresHandlerId {
+            await realtimeClient.removePostgresChange(id: id)
+            postgresHandlerId = nil
+        }
 
         print("✅ Realtime channel cleanup complete")
     }

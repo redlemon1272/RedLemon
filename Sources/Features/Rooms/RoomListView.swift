@@ -6,7 +6,7 @@ struct RoomListView: View {
     @State private var errorMessage: String?
     @State private var showJoinDialog = false
     @State private var roomCodeInput = ""
-    @State private var realtimeClient: SupabaseRealtimeClient?
+    @State private var postgresHandlerId: UUID?
 
     @State private var offset = 0
     @State private var hasMore = true
@@ -527,24 +527,22 @@ struct RoomListView: View {
     private func setupRealtimeSubscription() async {
         print("🔌 RoomListView: Setting up realtime subscription for rooms...")
 
-        let client = SupabaseRealtimeClient(
-            realtimeURL: Config.supabaseURL,
-            apiKey: Config.supabaseAnonKey
-        )
-
-        await MainActor.run {
-            self.realtimeClient = client
-        }
+        // CRITICAL FIX: Use shared client to avoid duplicate sockets and disconnection issues
+        let client = SupabaseClient.shared.realtimeClient
 
         // Subscribe to Postgres Changes on rooms table
-        await client.onPostgresChange { payload in
+        let handlerId = await client.onPostgresChange { payload in
             Task { @MainActor in
                 await self.handleRoomUpdate(payload)
             }
         }
 
+        await MainActor.run {
+            self.postgresHandlerId = handlerId
+        }
+
         do {
-            try await client.connect()
+            try await client.connect() // Idempotent check inside
 
             // Listen for UPDATEs on rooms table (state, playback_position changes)
             let changesConfig: [[String: Any]] = [
@@ -563,12 +561,18 @@ struct RoomListView: View {
     }
 
     private func disconnectRealtime() async {
-        if let client = realtimeClient {
-            await client.disconnect()
+        let client = SupabaseClient.shared.realtimeClient
+        
+        // Remove handler to prevent leaks
+        if let id = postgresHandlerId {
+            await client.removePostgresChange(id: id)
             await MainActor.run {
-                self.realtimeClient = nil
+                self.postgresHandlerId = nil
             }
         }
+        
+        // Leave the channel, but DO NOT disconnect the socket (connection is shared)
+        try? await client.leaveChannel(topic: "realtime:rooms_updates")
     }
 
     @MainActor

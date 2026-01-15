@@ -6,6 +6,82 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.93 -->
+        <item>
+            <title>Version 1.0.93</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: restore horizontal scrolling for macOS 26 (Option C)</li><li>fix: prevent clipping of poster art in browse rows</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 19:51:07 -0500</pubDate>
+            <sparkle:version>93</sparkle:version>
+            <sparkle:shortVersionString>1.0.93</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.93.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="9wb4+/Hh1Gr7177NeWw4MapbZrpEEfXj78+P4Ydf33pT7nDOr5OLBZLl53dpT7k7GyjumzSyPTLZWtSqd/FmBQ==" length="72352075"
+            />
+        </item>
+        <!-- v1.0.92 -->
+        <item>
+            <title>Version 1.0.92</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: convert browse to grid layout (max 14 items) for macos 26 compatibility</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 19:36:32 -0500</pubDate>
+            <sparkle:version>92</sparkle:version>
+            <sparkle:shortVersionString>1.0.92</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.92.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="I5UVwF/pZsHBNkTLDqzOjexQs5Kj2K3ALo2LlFhVUFbATbnYqyC3iQR2+5dOdXY/v/+cWeSo9/3miPthzzS/Dg==" length="72587342"
+            />
+        </item>
+        <!-- v1.0.91 -->
+        <item>
+            <title>Version 1.0.91</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>debug: add scroll event logging for macOS 26 diagnosis</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 18:47:16 -0500</pubDate>
+            <sparkle:version>91</sparkle:version>
+            <sparkle:shortVersionString>1.0.91</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.91.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="9r0x/b2PoHz3B7sgrfmaVWLO0DEPcrffU7szVaTlGJl6P5KaP7ijmLOANGoXPjzHQSA8P1ofxjB6Wdt/E9BKAg==" length="72805590"
+            />
+        </item>
+        <!-- v1.0.89 -->
+        <item>
+            <title>Version 1.0.89</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Scroll compatibility for macOS 15+</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 18:25:39 -0500</pubDate>
+            <sparkle:version>89</sparkle:version>
+            <sparkle:shortVersionString>1.0.89</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.89.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="MvRHhCrL2QyiF0r16BEUSp+P/6C2fT3555D4U7KQXlsT8q22zI7GyxWcsx3741rPXaZzkjQk5si5ivf9+fUvDQ==" length="72817033"
+            />
+        </item>
         <!-- v1.0.88 -->
         <item>
             <title>Version 1.0.88</title>

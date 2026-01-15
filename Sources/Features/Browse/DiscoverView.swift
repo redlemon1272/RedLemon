@@ -88,7 +88,14 @@ struct DiscoverView: View {
                     Text("Provider:")
                         .font(.headline)
                     Picker("Provider", selection: $selectedCatalog) {
-                        ForEach(CatalogProvider.allCases, id: \.self) { provider in
+                        ForEach(CatalogProvider.allCases.filter { provider in
+                            // Discovery+ only has TV Shows, not Movies.
+                            // Hide it when Movies tab is active to prevent empty/error state.
+                            if selectedTab == .movies && provider == .discovery {
+                                return false
+                            }
+                            return true
+                        }, id: \.self) { provider in
                             Text(provider.rawValue).tag(provider)
                         }
                     }

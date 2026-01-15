@@ -1210,7 +1210,9 @@ class MPVPlayerViewModel: ObservableObject {
             Task { [weak self] in
                 guard let self = self else { return }
                 do {
-                    try await self.realtimeManager?.sendSyncMessage(syncMessage)
+                    if let manager = self.realtimeManager {
+                        try await manager.sendSyncMessage(syncMessage)
+                    }
                     LoggingManager.shared.info(.watchParty, message: "Sent play message to guests (pre-delay)")
                 } catch {
                     LoggingManager.shared.error(.watchParty, message: "Failed to send play sync message: \(error)")
@@ -1263,7 +1265,9 @@ class MPVPlayerViewModel: ObservableObject {
             Task { [weak self] in
                 guard let self = self else { return }
                 do {
-                    try await self.realtimeManager?.sendSyncMessage(syncMessage)
+                    if let manager = self.realtimeManager {
+                        try await manager.sendSyncMessage(syncMessage)
+                    }
                     LoggingManager.shared.info(.watchParty, message: "Sent explicit \(messageType) message to guests")
                 } catch {
                     LoggingManager.shared.error(.watchParty, message: "Failed to send \(messageType) sync message: \(error)")
@@ -1300,7 +1304,9 @@ class MPVPlayerViewModel: ObservableObject {
             Task { [weak self] in
                 guard let self = self else { return }
                 do {
-                    try await self.realtimeManager?.sendSyncMessage(syncMessage)
+                    if let manager = self.realtimeManager {
+                        try await manager.sendSyncMessage(syncMessage)
+                    }
                     LoggingManager.shared.info(.watchParty, message: "Sent explicit seek message to guests: \(Int(time))s")
                 } catch {
                     LoggingManager.shared.error(.watchParty, message: "Failed to send seek sync message: \(error)")
@@ -1712,7 +1718,9 @@ class MPVPlayerViewModel: ObservableObject {
                 )
 
                 do {
-                    try await self.realtimeManager?.sendSyncMessage(syncMessage)
+                    if let manager = self.realtimeManager {
+                        try await manager.sendSyncMessage(syncMessage)
+                    }
                     LoggingManager.shared.info(.social, message: "Chat message sent via Realtime")
                 } catch {
                     LoggingManager.shared.error(.social, message: "Failed to send chat message: \(error)")
@@ -1757,7 +1765,9 @@ class MPVPlayerViewModel: ObservableObject {
             reactionTriggers.send(emoji)
 
             Task { [weak self] in
-                try? await self?.realtimeManager?.sendSyncMessage(syncMessage)
+                if let manager = self?.realtimeManager {
+                    try? await manager.sendSyncMessage(syncMessage)
+                }
             }
             return
         }
@@ -1789,7 +1799,9 @@ class MPVPlayerViewModel: ObservableObject {
         )
 
         Task { [weak self] in
-            try? await self?.realtimeManager?.sendSyncMessage(syncMessage)
+            if let manager = self?.realtimeManager {
+                try? await manager.sendSyncMessage(syncMessage)
+            }
         }
     }
 
@@ -2377,17 +2389,19 @@ extension MPVPlayerViewModel {
         // Get username from appState
         let username = appState?.currentUsername ?? "User"
 
-        try await realtimeManager?.setup(
-            roomId: roomId,
-            isHost: isHost,
-            userId: userId,
-            username: username,
-            onSync: { [weak self] syncMessage in
-                Task { @MainActor in
-                    await self?.handleSyncMessage(syncMessage)
+        if let realtimeManager = realtimeManager {
+            try await realtimeManager.setup(
+                roomId: roomId,
+                isHost: isHost,
+                userId: userId,
+                username: username,
+                onSync: { [weak self] syncMessage in
+                    Task { @MainActor in
+                        await self?.handleSyncMessage(syncMessage)
+                    }
                 }
-            }
-        )
+            )
+        }
 
         // If host, start broadcasting playback state
         if isHost {
@@ -2453,7 +2467,9 @@ extension MPVPlayerViewModel {
             )
 
             do {
-                try await self.realtimeManager?.sendSyncMessage(message)
+                if let realtimeManager = self.realtimeManager {
+                    try await realtimeManager.sendSyncMessage(message)
+                }
                 LoggingManager.shared.info(.watchParty, message: "Host sent returnToLobby message to guests")
             } catch {
                 LoggingManager.shared.error(.watchParty, message: "Host failed to send returnToLobby message: \(error)")
@@ -2502,7 +2518,9 @@ extension MPVPlayerViewModel {
         )
 
         do {
-            try await realtimeManager?.sendSyncMessage(message)
+            if let realtimeManager = realtimeManager {
+                try await realtimeManager.sendSyncMessage(message)
+            }
             LoggingManager.shared.info(.watchParty, message: "Host sent returnToLobby message due to error")
         } catch {
             LoggingManager.shared.error(.watchParty, message: "Failed to notify guests of host error: \(error)")
@@ -3105,7 +3123,9 @@ extension MPVPlayerViewModel {
 
                 Task {
                     do {
-                        try await realtimeManager?.sendSyncMessage(streamInfoMessage)
+                        if let realtimeManager = realtimeManager {
+                            try await realtimeManager.sendSyncMessage(streamInfoMessage)
+                        }
                         LoggingManager.shared.debug(.watchParty, message: "Sent stream info to requesting guest")
                     } catch {
                         LoggingManager.shared.error(.watchParty, message: "Failed to send stream info: \(error)")

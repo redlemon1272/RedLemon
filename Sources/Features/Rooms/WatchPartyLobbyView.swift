@@ -317,7 +317,7 @@ struct WatchPartyLobbyView: View {
                                             participant: participant,
                                             canKick: isHost && !participant.isHost,
                                             canBlock: !participant.isHost, // Allow everyone to block others (except host blocking themselves handled by isSelf check)
-                                            canAddFriend: participant.id != (appState.currentUserId?.uuidString.lowercased() ?? "") && !socialService.friends.contains(where: { $0.id == participant.id }),
+                                            canAddFriend: participant.id.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") != .orderedSame && !socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(participant.id) == .orderedSame }),
                                             onKick: { viewModel.kickParticipant(participant) },
                                             onBlock: { viewModel.blockParticipant(participant) },
                                             onMute: {
@@ -683,7 +683,7 @@ struct WatchPartyLobbyView: View {
                                                                         Menu {
                                                                         if let senderId = chatMsg.senderId {
                                                                             // Add Friend
-                                                                            if !socialService.friends.contains(where: { $0.id == senderId }) && senderId != appState.currentUserId?.uuidString.lowercased() {
+                                                                            if !socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(senderId) == .orderedSame }) && senderId.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") != .orderedSame {
                                                                                 Button {
                                                                                     viewModel.addFriend(participantId: senderId)
                                                                                 } label: {

@@ -2509,8 +2509,8 @@ extension SupabaseClient {
 
         // 2. Extract friend IDs
         let friendIds = friendships.compactMap { friendship -> UUID? in
-            if friendship.userId1 == userId { return friendship.userId2 }
-            if friendship.userId2 == userId { return friendship.userId1 }
+            if friendship.userId1 == userId { return friendship.userId2 } // OK
+            if friendship.userId2 == userId { return friendship.userId1 } // OK
             return nil
         }
 

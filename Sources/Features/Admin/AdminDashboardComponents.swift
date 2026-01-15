@@ -661,7 +661,7 @@ struct AdminEventsView: View {
                 try await SupabaseClient.shared.deleteRoom(roomId: roomId)
                 deleteMessage = "Success: Deleted room \(roomId)"
                 // Remove locally to update UI immediately
-                activeEventRooms.removeAll(where: { $0.id == roomId })
+                activeEventRooms.removeAll(where: { $0.id.caseInsensitiveCompare(roomId) == .orderedSame })
             } catch {
                 deleteMessage = "Error deleting: \(error.localizedDescription)"
             }

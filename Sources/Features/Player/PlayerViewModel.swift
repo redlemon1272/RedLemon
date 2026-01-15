@@ -301,7 +301,7 @@ class PlayerViewModel: ObservableObject {
             // We must force resolution via the Hash fallback below.
 
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
-               (roomId == nil || watchPartyRoom.id == roomId),
+               (roomId == nil || watchPartyRoom.id.caseInsensitiveCompare(roomId ?? "") == .orderedSame), // OK
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
 
                 // Quick HEAD request to validate URL (Bible #27: 3s timeout)
@@ -332,7 +332,7 @@ class PlayerViewModel: ObservableObject {
             */
 
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
-               (roomId == nil || watchPartyRoom.id == roomId),
+               (roomId == nil || watchPartyRoom.id.caseInsensitiveCompare(roomId ?? "") == .orderedSame), // OK
                let hostUnlockedURL = validatedHostURL { // Use VALIDATED URL
 
                 let hostStreamHash = watchPartyRoom.selectedStreamHash
@@ -427,7 +427,7 @@ class PlayerViewModel: ObservableObject {
                 resolvedStream = hostStream
 
             } else if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
-                      (roomId == nil || watchPartyRoom.id == roomId),
+                      (roomId == nil || watchPartyRoom.id.caseInsensitiveCompare(roomId ?? "") == .orderedSame), // OK
                       let hostStreamHash = watchPartyRoom.selectedStreamHash {
 
                  // PARTIAL LOCK (Hash only)

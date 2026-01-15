@@ -41,21 +41,23 @@ class EventChatService: ObservableObject {
         self.realtimeManager = RealtimeChannelManager(realtimeClient: client)
         
         do {
-            try await realtimeManager?.setup(
-                roomId: eventId, // Treating Event ID as a Room ID for chat purposes
-                isHost: false,   // Public events have no "Host" in this context
-                userId: userId,
-                username: username,
-                onSync: { [weak self] message in
-                    Task { @MainActor [weak self] in
-                        if message.type == .reaction {
-                            self?.handleReaction(message)
-                        } else {
-                            self?.handleSyncMessage(message)
+            if let manager = realtimeManager {
+                try await manager.setup(
+                    roomId: eventId, // Treating Event ID as a Room ID for chat purposes
+                    isHost: false,   // Public events have no "Host" in this context
+                    userId: userId,
+                    username: username,
+                    onSync: { [weak self] message in
+                        Task { @MainActor [weak self] in
+                            if message.type == .reaction {
+                                self?.handleReaction(message)
+                            } else {
+                                self?.handleSyncMessage(message)
+                            }
                         }
                     }
-                }
-            )
+                )
+            }
             self.isConnected = true
             LoggingManager.shared.info(.social, message: "EventChatService: Connected!")
             
@@ -108,7 +110,9 @@ class EventChatService: ObservableObject {
         )
         
         do {
-            try await realtimeManager?.sendSyncMessage(syncMsg)
+            if let manager = realtimeManager {
+                try await manager.sendSyncMessage(syncMsg)
+            }
         } catch {
             LoggingManager.shared.error(.social, message: "EventChatService: Failed to send message: \(error)")
             self.messages.removeAll { $0.id == tempId }
@@ -142,7 +146,9 @@ class EventChatService: ObservableObject {
          )
 
          Task {
-             try? await realtimeManager?.sendSyncMessage(syncMsg)
+             if let manager = realtimeManager {
+                 try? await manager.sendSyncMessage(syncMsg)
+             }
          }
      }
     

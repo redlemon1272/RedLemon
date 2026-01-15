@@ -64,7 +64,9 @@ class HTTPServer {
         print("")
 
         // Wait for shutdown signal
-        try await app.running?.onStop.get()
+        if let running = app.running {
+            try await running.onStop.get()
+        }
     }
 
     private func initializeProviders() async {

@@ -516,33 +516,9 @@ struct ChatOverlayView: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 12) {
-                    if case .dm(let friend) = chatMode, let messages = socialService.messages[friend.id] {
+                    if case .dm(let activeFriend) = chatMode, let messages = socialService.messages[activeFriend.id] {
                         ForEach(messages) { message in
-                            let isMe = message.senderId.uuidString.lowercased() != friend.id.lowercased()
-                            HStack {
-                                if isMe { Spacer() }
-
-                                if message.content.hasPrefix("INVITE|") {
-                                    InviteMessageView(message: message, isMe: isMe)
-                                } else {
-                                    VStack(alignment: isMe ? .trailing : .leading, spacing: 4) {
-                                        Text(message.content)
-                                            .font(.body)
-                                            .foregroundColor(.white)
-                                            .padding(10)
-                                            .background(isMe ? Color.blue : Color(white: 0.2))
-                                            .cornerRadius(12)
-
-                                        Text(message.createdAt.toMessageTime())
-                                            .font(.caption2)
-                                            .foregroundColor(.white.opacity(0.4))
-                                            .padding(.horizontal, 4)
-                                    }
-                                }
-
-                                if !isMe { Spacer() }
-                            }
-                            .id(message.id)
+                            dmMessageRow(message: message, friendId: activeFriend.id)
                         }
                     } else {
                         // Pending state or empty
@@ -567,6 +543,35 @@ struct ChatOverlayView: View {
                 }
             }
         }
+    }
+
+    @ViewBuilder
+    private func dmMessageRow(message: DirectMessage, friendId: String) -> some View {
+        let isMe = message.senderId.uuidString.caseInsensitiveCompare(friendId) != .orderedSame
+        HStack {
+            if isMe { Spacer() }
+
+            if message.content.hasPrefix("INVITE|") {
+                InviteMessageView(message: message, isMe: isMe)
+            } else {
+                VStack(alignment: isMe ? .trailing : .leading, spacing: 4) {
+                    Text(message.content)
+                        .font(.body)
+                        .foregroundColor(.white)
+                        .padding(10)
+                        .background(isMe ? Color.blue : Color(white: 0.2))
+                        .cornerRadius(12)
+
+                    Text(message.createdAt.toMessageTime())
+                        .font(.caption2)
+                        .foregroundColor(.white.opacity(0.4))
+                        .padding(.horizontal, 4)
+                }
+            }
+
+            if !isMe { Spacer() }
+        }
+        .id(message.id)
     }
 
     private func openDM(_ friend: Friend) {
@@ -866,17 +871,17 @@ struct ChatOverlayView: View {
 
     private func resolveUsername(userId: String) -> String {
         // 1. Check Friends
-        if let friend = socialService.friends.first(where: { $0.id == userId }) {
+        if let friend = socialService.friends.first(where: { $0.id.caseInsensitiveCompare(userId) == .orderedSame }) {
             return friend.username
         }
 
         // 2. Check Room Messages
-        if let msg = viewModel.messages.first(where: { $0.senderId == userId }) {
+        if let msg = viewModel.messages.first(where: { $0.senderId?.caseInsensitiveCompare(userId) == .orderedSame }) {
             return msg.username
         }
 
         // 3. Check Event Messages
-        if let msg = eventChatService.messages.first(where: { $0.senderId == userId }) {
+        if let msg = eventChatService.messages.first(where: { $0.senderId?.caseInsensitiveCompare(userId) == .orderedSame }) {
             return msg.username
         }
 
@@ -1112,7 +1117,7 @@ struct FriendRowButton: View {
 
     private func isMessageSenderHost(_ message: ChatMessage) -> Bool {
         guard let senderId = message.senderId else { return false }
-        return senderId == appState.player.currentWatchPartyRoom?.hostId
+        return senderId.caseInsensitiveCompare(appState.player.currentWatchPartyRoom?.hostId ?? "") == .orderedSame
     }
 }
 

@@ -172,7 +172,7 @@ class LobbyEventRouter: ObservableObject {
         guard let viewModel = viewModel else { return }
 
         if let senderId = syncMessage.senderId,
-           let index = viewModel.participants.firstIndex(where: { $0.id == senderId }) {
+           let index = viewModel.participants.firstIndex(where: { $0.id.caseInsensitiveCompare(senderId) == .orderedSame }) {
 
             // Fix: Duplicate messages (Echo check)
             // If sender is ME, I already updated my local state and added a system message.

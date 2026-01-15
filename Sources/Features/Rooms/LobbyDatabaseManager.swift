@@ -173,7 +173,7 @@ class LobbyDatabaseManager: ObservableObject {
         // We use ONLY the streamHash (not lastActivity) because lastActivity updates constantly during playback.
         // The only way to bypass this is if the Host changes the stream (different hash).
         let sessionId = roomState.streamHash ?? ""
-        if !sessionId.isEmpty && sessionId == viewModel.lastAutoStartedSessionId {
+        if !sessionId.isEmpty && sessionId.caseInsensitiveCompare(viewModel.lastAutoStartedSessionId ?? "") == .orderedSame {
              NSLog("%@", "🛑 Guest: Blocking auto-start loop. Already played stream: \(sessionId.prefix(8))")
              return
         }

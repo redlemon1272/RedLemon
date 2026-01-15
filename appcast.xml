@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.96 -->
+        <item>
+            <title>Version 1.0.96</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li><b>Security:</b> Added comprehensive vulnerability scanner and hardened API safety.</li><li><b>Security:</b> Improved temporary file cleanup for subtitles.</li><li><b>Protocol:</b> Updated release process to include mandatory security checks.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 21:43:36 -0500</pubDate>
+            <sparkle:version>96</sparkle:version>
+            <sparkle:shortVersionString>1.0.96</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.96.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ZfY6lFo6ujYnRZQk3lWUOpj+geh+rEAEDcVB4oYuKiW6jqa/RxUACDbIqiAwb2CMzJsuc8+ZWK0KgVrCjU9gCA==" length="72681093"
+            />
+        </item>
         <!-- v1.0.95 -->
         <item>
             <title>Version 1.0.95</title>

@@ -77,7 +77,9 @@ struct BrowseView: View {
             } else {
                 ScrollView(.vertical, showsIndicators: true) {
                     ScrollViewReader { proxy in
-                        VStack(alignment: .leading, spacing: 24) {
+                        // CRITICAL FIX (macOS 26): Use LazyVStack for proper scroll gesture handling
+                        // VStack captures all gestures; LazyVStack properly separates vertical/horizontal domains
+                        LazyVStack(alignment: .leading, spacing: 24) {
                             // Continue Watching section
                             continueWatchingView
 
@@ -518,7 +520,7 @@ struct BrowseView: View {
                     .padding(.horizontal)
 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 16) {
+                    LazyHStack(spacing: 16) {
                         ForEach(history) { historyItem in
                                 RecentlyWatchedCard(historyItem: historyItem)
                                     .contentShape(Rectangle())
@@ -532,7 +534,9 @@ struct BrowseView: View {
                     }
                     .padding(.horizontal)
                 }
-                .frame(height: 200) // Fixed height helps macOS gesture system with nested scroll boundaries
+                // CRITICAL FIX (macOS 26): contentShape tells gesture system this is a distinct scroll region
+                .contentShape(Rectangle())
+                .frame(height: 200)
             }
             .padding(.top)
         }
@@ -1331,7 +1335,9 @@ struct StreamingServiceRow: View {
                     }
                     .padding(.horizontal, 8)
                 }
-                .frame(height: 240) // Fixed height helps macOS gesture system with nested scroll boundaries
+                // CRITICAL FIX (macOS 26): contentShape isolates horizontal scroll gestures
+                .contentShape(Rectangle())
+                .frame(height: 240)
             }
         }
     }
@@ -1384,7 +1390,9 @@ struct LazyStreamingServiceRow: View {
                     }
                     .padding(.horizontal, 8)
                 }
-                .frame(height: 240) // Fixed height helps macOS gesture system with nested scroll boundaries
+                // CRITICAL FIX (macOS 26): contentShape isolates horizontal scroll gestures
+                .contentShape(Rectangle())
+                .frame(height: 240)
             }
         }
         .onAppear {

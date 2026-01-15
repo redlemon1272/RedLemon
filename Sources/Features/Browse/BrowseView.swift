@@ -77,7 +77,9 @@ struct BrowseView: View {
             } else {
                 ScrollView(.vertical, showsIndicators: true) {
                     ScrollViewReader { proxy in
-                        VStack(alignment: .leading, spacing: 24) {
+                        // CRITICAL FIX (macOS 26): Use LazyVStack for proper scroll gesture handling
+                        // VStack captures all gestures; LazyVStack properly separates vertical/horizontal domains
+                        LazyVStack(alignment: .leading, spacing: 24) {
                             // Continue Watching section
                             continueWatchingView
 

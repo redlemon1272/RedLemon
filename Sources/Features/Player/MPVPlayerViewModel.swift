@@ -2236,8 +2236,9 @@ extension MPVPlayerViewModel {
                         }
 
                         // ✅ Update room state with fresh list
+                        // NOTE: SwiftUI automatically detects this change - no need for objectWillChange.send()
+                        // Forcing objectWillChange causes full view hierarchy re-render (lag on macOS 26)
                         self.appState?.player.currentWatchPartyRoom?.participants = updatedParticipants
-                        self.appState?.objectWillChange.send() // Force UI update
 
                     case .leave:
                         // This handles flaky connections and Lobby->Player transitions
@@ -2312,7 +2313,8 @@ extension MPVPlayerViewModel {
                                 }
                             }
 
-                            self.appState?.objectWillChange.send() // Force UI update
+                            // NOTE: SwiftUI automatically detects participant changes - no objectWillChange.send() needed
+                            // Removing this eliminates lag spike on macOS 26 during user join/leave
                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                         }
 

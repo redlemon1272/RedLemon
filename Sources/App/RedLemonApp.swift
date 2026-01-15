@@ -80,7 +80,7 @@ struct RedLemonApp: App {
                         await loadStoredUser()
 
                         // 3. Username fallback if loading failed
-                        if appState.currentUserId == nil {
+                        if appState.currentUserId == nil { // OK
                             await MainActor.run {
                                 appState.showOnboarding = true
                             }

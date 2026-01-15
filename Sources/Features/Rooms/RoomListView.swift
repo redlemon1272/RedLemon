@@ -319,7 +319,7 @@ struct RoomListView: View {
             // Convert guests
             for participant in roomParticipants {
                 let pId = participant.userId.uuidString.lowercased()
-                if pId == hostIdString { continue }
+                if pId.caseInsensitiveCompare(hostIdString) == .orderedSame { continue }
 
                 if let user = try? await SupabaseClient.shared.getUserById(userId: participant.userId) {
                     let guest = Participant(
@@ -405,7 +405,7 @@ struct RoomListView: View {
             await MainActor.run {
                 var updatedRooms = appState.activeRooms
                 for (roomId, updatedRoom) in roomUpdates {
-                    if let index = updatedRooms.firstIndex(where: { $0.id == roomId }) {
+                    if let index = updatedRooms.firstIndex(where: { $0.id.caseInsensitiveCompare(roomId) == .orderedSame }) {
                         updatedRooms[index] = updatedRoom
                     }
                 }
@@ -487,7 +487,7 @@ struct RoomListView: View {
         if code.isEmpty { return }
 
         // 1. Try local list first (fast path)
-        if let room = appState.activeRooms.first(where: { $0.id == code }) {
+        if let room = appState.activeRooms.first(where: { $0.id.caseInsensitiveCompare(code) == .orderedSame }) {
             Task {
                 await joinRoom(room: room)
             }
@@ -585,7 +585,7 @@ struct RoomListView: View {
                 return
             }
             print("🗑️ RoomListView: Detected DELETE for room \(roomId) - Removing from list")
-            if let index = appState.activeRooms.firstIndex(where: { $0.id == roomId }) {
+            if let index = appState.activeRooms.firstIndex(where: { $0.id.caseInsensitiveCompare(roomId) == .orderedSame }) {
                 appState.activeRooms.remove(at: index)
             }
             return
@@ -600,14 +600,14 @@ struct RoomListView: View {
         // CHECK: If room became private (Soft Close), remove it
         if let isPublic = newRecord["is_public"] as? Bool, !isPublic {
             print("🙈 RoomListView: Room \(roomId) is now private (Soft Closed) - Removing from list")
-            if let index = appState.activeRooms.firstIndex(where: { $0.id == roomId }) {
+            if let index = appState.activeRooms.firstIndex(where: { $0.id.caseInsensitiveCompare(roomId) == .orderedSame }) {
                 appState.activeRooms.remove(at: index)
             }
             return
         }
 
         // Find the room in active rooms
-        let index = appState.activeRooms.firstIndex(where: { $0.id == roomId })
+        let index = appState.activeRooms.firstIndex(where: { $0.id.caseInsensitiveCompare(roomId) == .orderedSame })
 
         // NEW: If INSERT or Missing Room Update -> Fetch and Add
         if eventType == "INSERT" || (eventType == "UPDATE" && index == nil) {
@@ -688,7 +688,7 @@ struct RoomListView: View {
                 Task { @MainActor in
                     let (_, enrichedRoom) = await RoomListView.fetchPosterForRoom(room: room)
                     if let enriched = enrichedRoom {
-                        if let idx = state.activeRooms.firstIndex(where: { $0.id == roomId }) {
+                        if let idx = state.activeRooms.firstIndex(where: { $0.id.caseInsensitiveCompare(roomId) == .orderedSame }) {
                             state.activeRooms[idx] = enriched
                         }
                     }
@@ -745,7 +745,7 @@ struct RoomListView: View {
 
             await MainActor.run {
                 // Double check uniqueness
-                if !appState.activeRooms.contains(where: { $0.id == roomId }) {
+                if !appState.activeRooms.contains(where: { $0.id.caseInsensitiveCompare(roomId) == .orderedSame }) {
                     appState.activeRooms.append(finalRoom)
                     print("✅ RoomListView: Added new room \(roomId) from Realtime")
                 }
@@ -789,7 +789,7 @@ struct RoomListView: View {
                         var hasChanges = false
 
                         for (roomId, count) in updates {
-                            if let index = updatedRooms.firstIndex(where: { $0.id == roomId }) {
+                            if let index = updatedRooms.firstIndex(where: { $0.id.caseInsensitiveCompare(roomId) == .orderedSame }) {
                                 if updatedRooms[index].participantCount != count {
                                     updatedRooms[index].participantCount = count
                                     hasChanges = true

@@ -661,7 +661,7 @@ class SocialService: ObservableObject {
 
          // Update local list regardless of backend success (optimistic / fallback)
          await MainActor.run {
-             blockedUsers.removeAll { $0.id.uuidString.lowercased() == userId.lowercased() }
+            blockedUsers.removeAll { $0.id.uuidString.caseInsensitiveCompare(userId) == .orderedSame }
              localBlockedIds.remove(userId.lowercased())
          }
     }
@@ -810,7 +810,7 @@ class SocialService: ObservableObject {
         // Determine which friend conversation this belongs to
         // Determine which friend conversation this belongs to
         // INFO: Normalize to lowercase to match Friend.id
-        let friendId = (senderIdStr == currentUserId) ? receiverIdStr : senderIdStr
+        let friendId = (senderIdStr.caseInsensitiveCompare(currentUserId ?? "") == .orderedSame) ? receiverIdStr : senderIdStr
         let normalizedFriendId = friendId.lowercased()
 
         var currentMsgs = self.messages[normalizedFriendId] ?? []
@@ -835,10 +835,10 @@ class SocialService: ObservableObject {
         } else {
             // New message logic
             // Deduplicate optimistic message from self
-            if senderIdStr == currentUserId {
+            if senderIdStr.caseInsensitiveCompare(currentUserId ?? "") == .orderedSame {
                 // Look for a message with same content and diff ID (assumed to be the temp one)
                 if let idx = currentMsgs.lastIndex(where: {
-                    $0.senderId.uuidString.lowercased() == currentUserId &&
+                    $0.senderId.uuidString.caseInsensitiveCompare(currentUserId ?? "") == .orderedSame &&
                     $0.content == content &&
                     $0.id != id
                 }) {

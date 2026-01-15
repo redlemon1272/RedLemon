@@ -316,19 +316,21 @@ class LobbyViewModel: ObservableObject {
             // This prevents split-brain logic and ensures we handle DELETE events correctly.
 
 
-            try await realtimeManager?.setup(
-                roomId: room.id,
-                isHost: isHost,
-                userId: participantId,
-                username: appState?.currentUsername ?? "User",
-                postgresChanges: roomUpdatesConfig,
-                onSync: { [weak self] message in
-                    Task { @MainActor [weak self] in
-                        guard let self = self else { return }
-                        await self.handleLobbyMessage(message)
+            if let manager = realtimeManager {
+                try await manager.setup(
+                    roomId: room.id,
+                    isHost: isHost,
+                    userId: participantId,
+                    username: appState?.currentUsername ?? "User",
+                    postgresChanges: roomUpdatesConfig,
+                    onSync: { [weak self] message in
+                        Task { @MainActor [weak self] in
+                            guard let self = self else { return }
+                            await self.handleLobbyMessage(message)
+                        }
                     }
-                }
-            )
+                )
+            }
             print("✅ Lobby: Connected to Realtime")
         } catch {
             print("❌ Lobby: Failed to connect to Realtime: \(error)")
@@ -532,7 +534,7 @@ class LobbyViewModel: ObservableObject {
                                 // We use ONLY the streamHash (not lastActivity) because lastActivity updates constantly.
                                 let sessionId = freshRoom.streamHash ?? ""
 
-                                if !sessionId.isEmpty && sessionId == self.lastAutoStartedSessionId {
+                                if !sessionId.isEmpty && sessionId.caseInsensitiveCompare(self.lastAutoStartedSessionId ?? "") == .orderedSame {
                                     print("🚫 Lobby: Blocking auto-start loop. Already played stream: \(sessionId.prefix(8))")
                                 } else {
                                     print("▶️ Room already playing - auto-starting playback")
@@ -583,7 +585,9 @@ class LobbyViewModel: ObservableObject {
                          chatText: "LOBBY_JOIN",
                          chatUsername: guestName
                      )
-                     try? await realtimeManager?.sendSyncMessage(joinMsg)
+                     if let manager = realtimeManager {
+                         try? await manager.sendSyncMessage(joinMsg)
+                     }
                 }
 
             } catch {
@@ -733,7 +737,9 @@ class LobbyViewModel: ObservableObject {
                     chatText: "Room Closed",
                     chatUsername: "Host"
                 )
-                try? await self.realtimeManager?.sendSyncMessage(syncMsg)
+                if let manager = self.realtimeManager {
+                    try? await manager.sendSyncMessage(syncMsg)
+                }
 
                 // Short wait to ensure message delivery
                 try? await Task.sleep(nanoseconds: 1_000_000_000) // 1.0s
@@ -772,7 +778,9 @@ class LobbyViewModel: ObservableObject {
                 chatText: "LOBBY_RETURN",
                 chatUsername: "Host"
             )
-            try? await self.realtimeManager?.sendSyncMessage(syncMsg)
+            if let manager = self.realtimeManager {
+                try? await manager.sendSyncMessage(syncMsg)
+            }
         }
     }
 
@@ -931,7 +939,9 @@ class LobbyViewModel: ObservableObject {
                 chatText: "LOBBY_RESOLVING",
                 chatUsername: "Host"
             )
-            try? await self.realtimeManager?.sendSyncMessage(resolvingMsg)
+            if let manager = self.realtimeManager {
+                try? await manager.sendSyncMessage(resolvingMsg)
+            }
         }
 
         // 1. Resolve and persist stream explicitly BEFORE broadcasting signal
@@ -1041,7 +1051,11 @@ class LobbyViewModel: ObservableObject {
                 chatUsername: "Host"
             )
             do {
-                try await self.realtimeManager?.sendSyncMessage(syncMsg)
+                if let manager = self.realtimeManager {
+                    try await manager.sendSyncMessage(syncMsg)
+                } else {
+                     throw RealtimeError.channelNotReady
+                }
                 realtimeSuccess = true
                 NSLog("✅ Host: Successfully broadcast LOBBY_START_COUNTDOWN via Realtime")
                 NSLog("%@", "📡 Realtime delivery confirmed for \(self.participants.count) guests")

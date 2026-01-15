@@ -102,7 +102,7 @@ class LobbyChatManager: ObservableObject {
         // Mute check - removed (handled by UI)
 
         // Skip own messages (optimistically added)
-        if validSenderId == currentUserId {
+        if validSenderId.caseInsensitiveCompare(currentUserId) == .orderedSame {
             return
         }
 

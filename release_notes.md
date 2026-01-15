@@ -1,4 +1,4 @@
-# Release v1.0.102
+# Release v1.0.103
 
 ## 🛡️ Architecture & Stability
 - **Fixed Async Scroll Race Conditions (Landmine #48)**: Resolved potential race conditions where auto-scroll commands could fire before content loaded, leading to erratic scroll behavior.

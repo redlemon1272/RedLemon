@@ -820,7 +820,9 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 ## Release Protocol (The "Part 19" Standard)
 **Mandatory 8-Step Sequence:**
 1.  **Code & Build**: Run `./build-app-debug.sh`. Verify 0 errors.
-2.  **Security Scan**: Run `./scripts/security-scan.sh`. Fix any **CRITICAL** issues immediately. Review WARNINGS.
+2.  **Scans (Mandatory)**: Run `./scripts/security-scan.sh` AND `./scripts/architecture-scan.sh`.
+    -   **Security**: Fix **CRITICAL** issues immediately.
+    -   **Architecture**: Fix **ERRORS** (e.g. Landmines #11, #37, #43). Warnings for legacy code (#25) are acceptable if labeled `// legacy`.
 3.  **User Validation (GATE)**: Ask user to test. **DO NOT PROCEED** without confirmation.
 4.  **Git Sync**: `git pull` (Change Log depends on this!) then `git push origin <branch>`.
 5.  **Generate Notes**: Run `./scripts/get-changelog.sh` to grab the list of changes since the last release. Copy the output.

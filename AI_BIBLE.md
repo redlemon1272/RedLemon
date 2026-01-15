@@ -57,7 +57,7 @@
 | **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call | #43 |
 | **Server Fail: Torrent not cached** | Heuristic ignored provider fileIdx (Season Pack) | #45 |
 | **Player Start -> Immediate Fail** | Fake 'Direct' URL (Comet Error Stream) | #46 |
-| **Ghost Participant** | Realtime presence uses non-unique ID | #47 |
+| **Ghost Participant (Lobby)** | User list doesn't update / 'Left' msg missing | #47 |
 
 ## 🚨 Critical Landmines
 

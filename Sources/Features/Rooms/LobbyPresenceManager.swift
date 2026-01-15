@@ -438,50 +438,52 @@ class LobbyPresenceManager: ObservableObject {
                     username = user.username
                 }
 
+                // Match DB row to local participant state
                 // 1. Primary Match: UUID Case-Insensitive (Canonical Match)
                 var existingLocal = currentParticipants.first(where: {
                     $0.id.caseInsensitiveCompare(participant.userId.uuidString) == .orderedSame
                 })
 
                 // 2. Secondary Match: Name + Ephemeral ID Fallback (Fix for Ghost Duplicates)
-                // If we match by name but ID is ephemeral (not UUID), assume it's the same user and merge.
                 if existingLocal == nil {
                      existingLocal = currentParticipants.first(where: {
                          $0.name.caseInsensitiveCompare(username) == .orderedSame &&
                          $0.id.count != 36 
                      })
-                     if let found = existingLocal {
-                         NSLog("🔄 Lobby: Upgrading ephemeral participant '%@' (Ref: %@) to DB ID: %@", found.name, found.id, participant.userId.uuidString)
-                     }
                 }
 
                 if let found = existingLocal {
                     consumedLocalIds.insert(found.id)
                 }
 
+                // GHOST PROTECTION: 
+                // If Realtime is active, only add DB participants that are also tracked in Realtime Presence.
+                // This prevents stale DB heartbeat rows (which last 35s) from re-adding users who just left via Realtime.
+                let isRealtimeActive = viewModel.realtimeConnectionStatus == .connected
+                let isTrackingInRealtime = viewModel.connectedUserIds.contains(participant.userId.uuidString.lowercased())
+                
+                if isRealtimeActive && !isTrackingInRealtime && !participant.isHost {
+                    // Skip stale row - user left Realtime but DB row is still lingering.
+                    continue
+                }
+
                 // Preserve existing ready state
                 let isReady = existingLocal?.isReady ?? false
 
-                // Fix for "Left Room" bug: Use the NEWER of the two joinedAt times
-                // If user re-connected via Realtime, their local `joinedAt` is newer.
-                // If we overwrite with old DB `joinedAt`, grace period logic might fail.
+                // Use the NEWER of the two joinedAt times
                 let localJoinedAt = existingLocal?.joinedAt ?? Date.distantPast
                 let dbJoinedAt = participant.joinedAt
                 let finalJoinedAt = localJoinedAt > dbJoinedAt ? localJoinedAt : dbJoinedAt
 
                 let p = Participant(
-                    id: existingLocal?.id ?? participant.userId.uuidString.lowercased(), // Use local ID (Stable ID) if found to preserve casing
+                    id: existingLocal?.id ?? participant.userId.uuidString.lowercased(),
                     name: username,
                     isHost: participant.isHost,
                     isReady: isReady,
-                    joinedAt: finalJoinedAt
+                    joinedAt: finalJoinedAt,
+                    phxRef: existingLocal?.phxRef
                 )
                 dbParticipants.append(p)
-
-                // Self-discovery logging (reduced)
-                if p.id == viewModel.participantId {
-                     // NSLog("🔍 Current guest participant found...")
-                }
             }
 
             // MERGE LOGIC: Combine DB participants with recent local joiners (Grace Period)

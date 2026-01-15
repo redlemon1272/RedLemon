@@ -777,8 +777,10 @@ struct WatchPartyLobbyView: View {
                                             // Scroll to bottom whenever messages change
                                             Task { @MainActor in
                                                 try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
-                                                withAnimation {
-                                                    proxy.scrollTo("BOTTOM", anchor: .bottom)
+                                                if !viewModel.unifiedMessages.isEmpty {
+                                                    withAnimation {
+                                                        proxy.scrollTo("BOTTOM", anchor: .bottom) // OK: Guarded by !isEmpty check
+                                                    }
                                                 }
                                             }
                                         }

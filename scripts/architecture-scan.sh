@@ -47,7 +47,7 @@ report() {
     local file=$4
     local line=$5
     local code=$6
-    
+
     # Check for suppression (comments in the code line)
     if [[ "$code" == *"// OK"* ]] || [[ "$code" == *"// legacy"* ]] || [[ "$code" == *"// ignore"* ]]; then
         return
@@ -60,7 +60,7 @@ report() {
         echo -e "${YELLOW}⚠️  WARNING [$rule]:${NC} $msg"
         ((WARNING_COUNT++))
     fi
-    
+
     if [[ -n "$file" ]]; then
         # Format: Sources/Path/File.swift:Line
         echo -e "   📍 $file:$line"
@@ -89,7 +89,7 @@ BROWSE_VIEW="$SOURCES_DIR/Features/Browse/BrowseView.swift"
 if [[ -f "$BROWSE_VIEW" ]]; then
     # count lines with LazyVStack that don't satisfy // comment
     VIOLATIONS=$(grep -n "LazyVStack" "$BROWSE_VIEW" | grep -v "//" || true)
-    
+
     if [[ -n "$VIOLATIONS" ]]; then
         while IFS=: read -r line code; do
             report "ERROR" "No-LazyVStack" "BrowseView MUST use VStack (Fixes macOS 12 Scroll Stutter)" "$BROWSE_VIEW" "$line" "$code"
@@ -109,7 +109,7 @@ print_header "Check 2: Modern Concurrency (Landmine #25)"
 while IFS=: read -r file line code; do
     # Skip if it's a comment
     if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
-    
+
     report "WARNING" "Landmine #25" "Avoid DispatchQueue.main.async. Use Task { @MainActor }." "$file" "$line" "$code"
 done < <(grep -rn "DispatchQueue.main.async" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
 
@@ -122,7 +122,7 @@ print_header "Check 3: Privacy & Path Safety (Landmine #29)"
 
 while IFS=: read -r file line code; do
     if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
-    
+
     report "ERROR" "Landmine #29" "Do NOT use .documentDirectory. Use .applicationSupportDirectory (Hidden)." "$file" "$line" "$code"
 done < <(grep -rn "\.documentDirectory" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
 
@@ -135,7 +135,7 @@ print_header "Check 4: Safe Logging (Landmine #11)"
 
 while IFS=: read -r file line code; do
     if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
-    
+
     # Heuristic: Check for NSLog( followed by anything NOT starting with quote-%-@
     # And specifically containing string interpolation \(
     if [[ "$code" =~ NSLog\( && "$code" =~ \\\( ]]; then
@@ -154,7 +154,7 @@ print_header "Check 5: Silent Async Failures (Landmine #43)"
 
 while IFS=: read -r file line code; do
     if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
-    
+
     # Regex: try await [something]?[dot]
     if [[ "$code" =~ try[[:space:]]+await[[:space:]]+.*\?\.[a-zA-Z] ]]; then
         report "WARNING" "Landmine #43" "Silent Failure Risk: Optional chaining on async call. Use 'guard let' instead." "$file" "$line" "$code"
@@ -174,7 +174,7 @@ HIGH_RISK_VARS="(userId|hostId|roomId|sessionId|senderId|currentUserId|actualUse
 
 while IFS=: read -r file line code; do
     if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
-    
+
     # If code contains HighRiskVar == ... or ... == HighRiskVar
     if [[ "$code" =~ $HIGH_RISK_VARS[[:space:]]*== ]] || [[ "$code" =~ ==[[:space:]]*$HIGH_RISK_VARS ]]; then
          report "WARNING" "Landmine #37" "ID comparison using '=='. String IDs must use .caseInsensitiveCompare()" "$file" "$line" "$code"
@@ -190,12 +190,27 @@ print_header "Check 7: Realtime Presence IDs (Landmine #47)"
 
 while IFS=: read -r file line code; do
     if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
-    
+
     # If code is manually extracting phx_ref from metadata (legacy/buggy pattern)
     if [[ "$code" =~ metadata\?\[\"phx_ref\"\] ]]; then
          report "WARNING" "Landmine #47" "Authoritative Session ID is the Map Key (passed as userId). Avoid using metadata['phx_ref']." "$file" "$line" "$code"
     fi
 done < <(grep -rn "metadata?\[\"phx_ref\"\]" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
+
+# =============================================================================
+# CHECK 8: Async Scroll Race (Landmine #48)
+# =============================================================================
+# Scrolls MUST be content-aware (check !isEmpty) to avoid race conditions.
+print_header "Check 8: Async Scroll Race (Landmine #48)"
+
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+    # Check for direct usage of proxy.scrollTo
+    if [[ "$code" =~ proxy\.scrollTo ]]; then
+         report "WARNING" "Landmine #48" "Scroll Race Risk: Verify this is guarded by '!items.isEmpty'. See AI Bible." "$file" "$line" "$code"
+    fi
+done < <(grep -rn "proxy\.scrollTo" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
 
 
 # =============================================================================

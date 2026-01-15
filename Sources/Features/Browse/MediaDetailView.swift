@@ -42,7 +42,7 @@ struct MediaDetailView: View {
                 // Back button toolbar
                 HStack {
                     Button(action: {
-                        appState.currentView = .browse
+                        appState.goBack()  // Use goBack() for proper navigation history
                     }) {
                         HStack(spacing: 4) {
                             Image(systemName: "chevron.left")

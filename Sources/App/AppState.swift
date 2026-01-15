@@ -133,6 +133,26 @@ class AppState: ObservableObject {
     }
 
     @Published var currentView: AppView = .events
+    @Published var previousView: AppView? = nil  // Track where user came from for back navigation
+
+    /// Navigate to a view while preserving navigation history
+    /// Use this instead of directly setting currentView when you want back navigation to work
+    func navigateTo(_ view: AppView) {
+        // Only track history for views that support "back" navigation
+        // Don't overwrite previousView when navigating to player/lobby (they have their own exit logic)
+        let trackableViews: Set<AppView> = [.browse, .discover, .events, .search, .friends, .rooms, .settings]
+
+        if trackableViews.contains(currentView) {
+            previousView = currentView
+        }
+        currentView = view
+    }
+
+    /// Go back to the previous view, or fallback to browse
+    func goBack() {
+        currentView = previousView ?? .browse
+        previousView = nil
+    }
 
     // MOVED TO PlayerViewModel:
     // selectedStream, selectedMediaItem, selectedMetadata, showPlayer
@@ -155,6 +175,9 @@ class AppState: ObservableObject {
     @Published var currentEventId: String? = nil // Track ID of current event
 
     @Published var browseScrollPosition: String? = nil  // Track scroll position in browse view
+    @Published var discoverScrollPosition: String? = nil  // Track scroll position in discover view
+    @Published var browseSelectedTab: Int = 0  // 0 = Movies, 1 = TV Shows - persisted across navigation
+    @Published var discoverSelectedTab: Int = 0  // 0 = Movies, 1 = TV Shows - persisted across navigation
     @Published var activeRooms: [WatchPartyRoom] = []  // Track all active rooms locally
     @Published var isLoadingRoom: Bool = false  // Track room loading state
     @Published var shouldAutoJoinLobby: Bool = false  // Flag to auto-join lobby for live events

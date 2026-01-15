@@ -22,6 +22,7 @@ struct BrowseView: View {
     @State private var tabSwitchTask: Task<Void, Never>?
     @State private var lastTabSwitchTime: Date = Date()
 
+
     // Alert state for global messages (e.g. Watch Party disconnect)
     @State private var showMessageAlert = false
     @State private var alertMessage = ""
@@ -29,6 +30,14 @@ struct BrowseView: View {
     enum MediaType: String, CaseIterable {
         case movies = "Movies"
         case shows = "TV Shows"
+
+        var index: Int {
+            self == .movies ? 0 : 1
+        }
+
+        static func from(index: Int) -> MediaType {
+            index == 0 ? .movies : .shows
+        }
     }
 
     // Helper for filtered history to reduce body complexity
@@ -52,6 +61,18 @@ struct BrowseView: View {
             }
             .pickerStyle(.segmented)
             .padding()
+            .onAppear {
+                // Restore tab selection from AppState without triggering onChange reload
+                let savedTab = MediaType.from(index: appState.browseSelectedTab)
+                if selectedTab != savedTab {
+                    selectedTab = savedTab
+                }
+            }
+            .onChange(of: selectedTab) { newValue in
+                // Persist tab selection to AppState
+                appState.browseSelectedTab = newValue.index
+
+            }
 
             if isLoading {
                 ProgressView("Loading...")
@@ -75,58 +96,57 @@ struct BrowseView: View {
                 }
                 .padding()
             } else {
-                ScrollView(.vertical, showsIndicators: true) {
-                    ScrollViewReader { proxy in
+                ScrollViewReader { proxy in
+                    ScrollView(.vertical, showsIndicators: true) {
                         VStack(alignment: .leading, spacing: 24) {
                             // Continue Watching section
                             continueWatchingView
+                                .id("continue-watching")
 
                             // Popular section - horizontal row
                             StreamingServiceRow(
                                 title: selectedTab == .movies ? "Popular Movies" : "Popular TV Shows",
                                 items: selectedTab == .movies ? movies : shows,
-                                onTap: selectMedia
+                                onTap: { item in selectMedia(item, fromRow: "popular") }
                             )
+                            .id("popular")
 
                             // Trending section with lazy loading
                             LazyStreamingServiceRow(
                                 title: selectedTab == .movies ? "Trending Movies" : "Trending TV Shows",
                                 catalogKey: "trending",
-                                items: streamingCatalogs["trending"] ?? [],
-                                isLoading: isLoadingCatalogs.contains("trending"),
-                                onTap: selectMedia,
+                                items: streamingCatalogs[getStorageKey("trending")] ?? [],
+                                isLoading: isLoadingCatalogs.contains(getStorageKey("trending")),
+                                onTap: { item in selectMedia(item, fromRow: "trending") },
                                 onAppear: { await loadCatalogIfNeeded(key: "trending", isTrending: true) }
                             )
+                            .id("trending")
 
                             // Streaming service catalogs with lazy loading
                             ForEach(getStreamingServiceKeys(), id: \.self) { serviceKey in
                                 LazyStreamingServiceRow(
                                     title: getServiceDisplayName(serviceKey),
                                     catalogKey: serviceKey,
-                                    items: streamingCatalogs[serviceKey] ?? [],
-                                    isLoading: isLoadingCatalogs.contains(serviceKey),
-                                    onTap: selectMedia,
+                                    items: streamingCatalogs[getStorageKey(serviceKey)] ?? [],
+                                    isLoading: isLoadingCatalogs.contains(getStorageKey(serviceKey)),
+                                    onTap: { item in selectMedia(item, fromRow: serviceKey) },
                                     onAppear: { await loadCatalogIfNeeded(key: serviceKey) }
                                 )
+                                .id(serviceKey)
                             }
                         }
                         .padding(.bottom)
-                        .onAppear {
-                            // Restore scroll position if coming back from detail
-                            if let scrollTo = appState.browseScrollPosition {
-                                Task { @MainActor in
-                                    try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
-                                    withAnimation {
-                                        proxy.scrollTo(scrollTo, anchor: .center)
-                                    }
-                                }
-                            }
-                        }
                     }
+                .onAppear {
+                    restoreScrollPosition(using: proxy)
                 }
-            }
-        }
+                .onChange(of: movies) { _ in restoreScrollPosition(using: proxy) }
+                .onChange(of: shows) { _ in restoreScrollPosition(using: proxy) }
+                }             }
+         }
+
         .navigationTitle(selectedTab == .movies ? "Browse Movies" : "Browse TV Shows")
+        // ...
         .sheet(item: $selectedHistoryItem) { historyItem in
             WatchModeSelectionView(historyItem: historyItem, appState: appState)
         }
@@ -135,11 +155,23 @@ struct BrowseView: View {
             while !appState.isServerReady {
                 try? await Task.sleep(nanoseconds: 100_000_000) //100ms
             }
-            print("✅ BrowseView: Server is ready, loading content...")
-            await loadContent()
+
+            // Only load if content is missing
+            if (selectedTab == .movies && movies.isEmpty) ||
+               (selectedTab == .shows && shows.isEmpty) {
+                await loadContent()
+            } else {
+            }
+
             loadRecentlyWatched()
         }
         .onChange(of: selectedTab) { _ in
+            // Skip reload if this is a navigation restore (back from detail page)
+            // Skip reload if we are restoring scroll position (back navigation)
+            if appState.browseScrollPosition != nil {
+                return
+            }
+
             // Cancel any existing tab switch task
             tabSwitchTask?.cancel()
 
@@ -202,14 +234,36 @@ struct BrowseView: View {
         }
     }
 
+    // Helper to restore scroll position safety (accepting proxy)
+    private func restoreScrollPosition(using proxy: ScrollViewProxy) {
+        guard let scrollTo = appState.browseScrollPosition else { return }
+
+        // Ensure main content is loaded so the layout (and "popular" row) exists
+        let isContentReady = selectedTab == .movies ? !movies.isEmpty : !shows.isEmpty
+        guard isContentReady else {
+            return
+        }
+
+        Task { @MainActor in
+            // Minimal delay for layout settlement
+            try? await Task.sleep(nanoseconds: 50_000_000) // 0.05s
+
+            // Double check position still exists (race condition protection)
+            if appState.browseScrollPosition == scrollTo {
+                proxy.scrollTo(scrollTo, anchor: .top)
+                appState.browseScrollPosition = nil
+            }
+        }
+    }
+
     private func loadContent() async {
         isLoading = true
         errorMessage = nil
 
-        print("🔍 BrowseView: Loading content for tab: \(selectedTab.rawValue)")
 
         // Clear catalogs when switching tabs to free memory
-        clearCatalogs()
+        // Optimization: Don't clear catalogs to prevent white flash (Optimistic UI)
+        // clearCatalogs()
 
         do {
             if selectedTab == .movies {
@@ -448,17 +502,22 @@ struct BrowseView: View {
         print("🚨 SERVICE FAILURE LOG: \(logEntry)")
     }
 
-    private func selectMedia(_ item: MediaItem) {
+    private func selectMedia(_ item: MediaItem, fromRow rowId: String? = nil) {
         // Navigate to detail view in main content area
         // CRITICAL: This function MUST be synchronous (not async) to prevent Landmine #24
         // Making it async keeps the calling Task alive, which gets cancelled by onDisappear,
         // causing intermittent freezes during navigation.
-        print("👆 Selected media item: \(item.name)")
+        print("👆 Selected media item: \(item.name) from row: \(rowId ?? "unknown")")
+
+        // Save scroll position for restoration when coming back
+        if let rowId = rowId {
+            appState.browseScrollPosition = rowId
+        }
 
         // Direct assignment - gesture handlers already run on MainActor
         // AppState is @MainActor isolated, so this is safe from SwiftUI gesture context
         appState.player.selectedMediaItem = item
-        appState.currentView = .mediaDetail
+        appState.navigateTo(.mediaDetail)  // Use navigateTo for back navigation support
     }
 
     private func loadRecentlyWatched() {
@@ -572,67 +631,70 @@ struct BrowseView: View {
         }
     }
 
+    /// Get unique storage key for catalog based on service and current tab
+    private func getStorageKey(_ key: String) -> String {
+        return "\(key)_\(selectedTab.rawValue)"
+    }
+
     /// Load catalog only if needed (lazy loading) with improved tab switching logic and progressive loading
     private func loadCatalogIfNeeded(key: String, isTrending: Bool = false, forceReload: Bool = false) async {
+        let storageKey = getStorageKey(key)
+
         // Load if not currently loading
-        guard !isLoadingCatalogs.contains(key) else {
+        guard !isLoadingCatalogs.contains(storageKey) else {
             return
         }
 
         // Always load if catalog is nil, empty, force reload is requested, or if this is a fresh tab switch
-        let currentCatalog = streamingCatalogs[key]
+        let currentCatalog = streamingCatalogs[storageKey]
         let shouldLoad = forceReload ||
                          currentCatalog == nil ||
                          currentCatalog?.isEmpty == true ||
                          (currentCatalog?.count == 0) // Always reload empty catalogs
 
         guard shouldLoad else {
-            print("⏭️ Skipping load for \(key) - already loaded \(currentCatalog?.count ?? 0) items")
             return
         }
 
         await MainActor.run {
-            isLoadingCatalogs.insert(key)
+            isLoadingCatalogs.insert(storageKey)
             return ()
         }
 
         defer {
             Task { @MainActor in
-                isLoadingCatalogs.remove(key)
+                isLoadingCatalogs.remove(storageKey)
             }
         }
 
         if isTrending {
             // Load trending from Cinemeta with progressive loading
-            await loadTrendingProgressively(key: key)
+            await loadTrendingProgressively(key: key, storageKey: storageKey)
         } else {
             // Load streaming service catalog with fallback and progressive loading
-            await loadStreamingServiceProgressively(key: key)
+            await loadStreamingServiceProgressively(key: key, storageKey: storageKey)
         }
 
-        print("✅ Progressive loading completed for \(key)")
     }
 
     /// Progressive loading for trending content
-    private func loadTrendingProgressively(key: String) async {
+    private func loadTrendingProgressively(key: String, storageKey: String) async {
         let cinemetaURL = "https://v3-cinemeta.strem.io"
         let urlString = "\(cinemetaURL)/catalog/\(selectedTab == .movies ? "movie" : "series")/top.json"
 
         // First, load a small batch quickly for immediate display
         let quickBatch = await fetchCatalogWithLimit(from: urlString, limit: 7)
         if !quickBatch.isEmpty {
-            streamingCatalogs[key] = quickBatch
-            print("🚀 Quick batch loaded: \(quickBatch.count) items for \(key)")
+            streamingCatalogs[storageKey] = quickBatch
         }
 
         // Then load full catalog in background
         let fullBatch = await fetchCatalog(from: urlString)
-        streamingCatalogs[key] = fullBatch
-        print("📦 Full batch loaded: \(fullBatch.count) items for \(key)")
+        streamingCatalogs[storageKey] = fullBatch
     }
 
     /// Progressive loading for streaming service content
-    private func loadStreamingServiceProgressively(key: String) async {
+    private func loadStreamingServiceProgressively(key: String, storageKey: String) async {
         let baseURL = "https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky"
 
         let mediaType = selectedTab == .movies ? "movie" : "series"
@@ -659,14 +721,12 @@ struct BrowseView: View {
         // First, try quick batch from cache or limited fetch
         let quickBatch = await fetchCatalogWithLimit(from: urlString, limit: 7)
         if !quickBatch.isEmpty {
-            streamingCatalogs[key] = quickBatch
-            print("🚀 Quick batch loaded: \(quickBatch.count) items for \(key)")
+            streamingCatalogs[storageKey] = quickBatch
         }
 
         // Then load full catalog with fallback
         let fullBatch = await fetchCatalogWithFallback(from: urlString, serviceKey: key)
-        streamingCatalogs[key] = fullBatch
-        print("📦 Full batch loaded: \(fullBatch.count) items for \(key)")
+        streamingCatalogs[storageKey] = fullBatch
     }
 
     /// Fetch catalog with limited items for quick loading
@@ -725,7 +785,6 @@ struct BrowseView: View {
 
     /// Perform memory cleanup
     private func performMemoryCleanup() async {
-        print("🧹 Performing memory cleanup...")
 
         // Clear expired cache items
         await CacheManager.shared.clearExpired()
@@ -752,14 +811,13 @@ struct BrowseView: View {
 
     /// Smart reload - only reload if cache is expired or empty
     private func smartReloadStreamingServices() async {
-        print("🧠 Smart reload checking streaming services for tab: \(selectedTab.rawValue)")
 
         let serviceKeys = getStreamingServiceKeys()
         var servicesNeedingReload: [String] = []
 
         // Check which services need reloading
         for serviceKey in serviceKeys {
-            let currentCatalog = streamingCatalogs[serviceKey]
+            let currentCatalog = streamingCatalogs[getStorageKey(serviceKey)]
 
             // Reload if catalog is empty, nil, or if it's been more than 30 minutes since last tab switch
             let shouldReload = currentCatalog == nil ||
@@ -786,7 +844,7 @@ struct BrowseView: View {
         try? await Task.sleep(nanoseconds: 300_000_000) // 0.3 seconds
 
         // Check trending first
-        let trendingCatalog = streamingCatalogs["trending"]
+        let trendingCatalog = streamingCatalogs[getStorageKey("trending")]
         let shouldReloadTrending = trendingCatalog == nil ||
                                  trendingCatalog?.isEmpty == true ||
                                  (Date().timeIntervalSince(lastTabSwitchTime) > 1800)
@@ -1067,7 +1125,6 @@ struct WatchModeSelectionView: View {
             if let season = historyItem.season, let episode = historyItem.episode {
                 appState.selectedSeason = season
                 appState.selectedEpisode = episode
-                print("✅ BrowseView: Set season \(season) episode \(episode) (via AppState)")
             }
         }
 

@@ -386,7 +386,16 @@ class LobbyViewModel: ObservableObject {
         // But this function may be called BEFORE cleanup finishes, so realtimeConnectionStatus
         // is stale (.connected) while the channel is actually dead.
         // Per Bible Rule #13: WebSockets fail on reconnect, don't trust stale state.
-        if realtimeConnectionStatus == .connected || realtimeConnectionStatus == .connecting {
+        // CRITICAL FIX: Debounce connection attempts
+        // If we are actively connecting, do NOT perform the "stale check" because isActuallyConnected
+        // will naturally be false during handshake, causing a recursive restart loop (Double Connect).
+        if realtimeConnectionStatus == .connecting {
+            print("⚠️ Lobby: Connection already in progress - skipping duplicate connect call")
+            return
+        }
+
+        // Handle .connected state (Stale Check)
+        if realtimeConnectionStatus == .connected {
             // Verify the actual underlying connection state
             Task { [weak self] in
                 guard let self = self else { return }
@@ -398,7 +407,7 @@ class LobbyViewModel: ObservableObject {
                         self.realtimeConnectionStatus = .disconnected
                         self.connect() // Recursive call with corrected status
                     } else {
-                        print("⚠️ Lobby: Already connected or connecting - skipping duplicate connect call")
+                        print("⚠️ Lobby: Already connected - skipping duplicate connect call")
                     }
                 }
             }

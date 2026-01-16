@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 16, 2026 (Updated Release Protocol - Pre-Flight Sync)
+> **Last Updated:** January 16, 2026 (Updated Landmine #59 - Async State Debouncing)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -69,6 +69,7 @@
 | **Wallet doesn't autofill amount** | Missing EIP-681 'value' in URI | #55 |
 | **Screensaver/Sleep during Playback** | Missing `.idleDisplaySleepDisabled` | #56 |
 | **Video Stutter/Drop when Menu Open** | Native `Menu` blocking main thread (Modal Loop) | #57 |
+| **Double Join / Message Echo** | Race Condition in Connection Logic (Debounce Missing) | #59 |
 
 ## 🚨 Critical Landmines
 
@@ -214,6 +215,10 @@
     *   **Symptom**: Users erroneously appear to "Leave" and then "Join" instantly (flap) during metadata updates (e.g., status change).
     *   **Cause**: Phoenix Presence updates send a `leave` (old ref) and `join` (new ref) simultaneously. If keyed by `userId`, the `leave` event for the *old* ref deletes the dictionary entry entirely, momentarily removing the user before the `join` (new ref) is processed.
     *   **Rule**: `SupabaseRealtimeClient` MUST iterate over the `metas` array and use `phx_ref` as the unique key for callbacks. Consumers (like `SocialService`) must manage a set of refs per user (`[UserId: [PhxRef: Metadata]]`). User is "Offline" only when their ref count drops to zero.
+59. **Async State Debouncing (The "Double Connect" Trap)**: *(Added v1.0.115)*
+    *   **Trigger**: User joins lobby, "User Joined" message appears twice.
+    *   **Cause**: Connection logic checked `if status == .connected || status == .connecting` and then verified the *underlying* socket state. Since the socket is `false` (not connected *yet*) during `.connecting`, the logic treated it as a "Stale Zombie" and forced a reconnect, launching two parallel connection flows.
+    *   **Rule**: Never validate health during a transitional state (`.connecting`). Explicitly **DEBOUNCE** by returning early: `if status == .connecting { return }`. Only perform stale/zombie checks if the high-level status is stable (`.connected`).
 
 ### 52-55: Payments & HD Wallets
 52. **HD Wallet Derivation Depth (XPRV Trap)**: *(Added v1.0.85)*

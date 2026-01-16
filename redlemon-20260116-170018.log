@@ -1,0 +1,218 @@
+2026-01-16 17:00:19.156 RedLemon[22713:107808] 🪟 Set initial window to expanded size: (0.0, 120.0, 1280.0, 655.0)
+2026-01-16 17:00:19.156 RedLemon[22713:107808] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-16 17:00:19.204 RedLemon[22713:107808] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-16 17:00:19.207 RedLemon[22713:107808] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-16 17:00:19.239 RedLemon[22713:107808] ✅ Playback state reset complete - starting in browse view
+2026-01-16 17:00:19.239 RedLemon[22713:107808] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-16 17:00:19.239 RedLemon[22713:107808] 🧪 Testing Profile: debug
+2026-01-16 17:00:19.242 RedLemon[22713:107814] 📂 Loaded 5 credential(s) from cache
+2026-01-16 17:00:19.243 RedLemon[22713:107808] ✅ Keychain: Found stored username: lemontom
+2026-01-16 17:00:19.243 RedLemon[22713:107808] 🔍 Supabase: Looking up user 'lemontom' in database...
+2026-01-16 17:00:19.243 RedLemon[22713:107814] 🔍 SupabaseClient: Looking up user by username 'lemontom'
+2026-01-16 17:00:19.592 RedLemon[22713:107813] 📡 SupabaseClient: User lookup response received (400 bytes)
+2026-01-16 17:00:19.596 RedLemon[22713:107813] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-16 17:00:19.597 RedLemon[22713:107813] 👤 SupabaseClient: Found user - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-16 17:00:19.618 RedLemon[22713:107808] ✅ AUTH SUCCESS: User authenticated - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-16 17:00:19.618 RedLemon[22713:107808] 🎯 AppState: currentUsername=lemontom, currentUserId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-16 17:00:21.900 RedLemon[22713:107808] 🏁 AUTH COMPLETE: Final state - username=lemontom, userId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-16 17:00:21.904 RedLemon[22713:107808] 🚀 RedLemon: Starting HTTP server...
+2026-01-16 17:00:21.904 RedLemon[22713:107808] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/RedLemon-Native
+2026-01-16 17:00:21.917 RedLemon[22713:107808] ✅ RedLemon: HTTPServer instance created
+2026-01-16 17:00:21.917 RedLemon[22713:107808] ✅ RedLemon: Server marked as ready (Optimistic)
+2026-01-16 17:00:21.917 RedLemon[22713:107880] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"D236DCE4-70BA-49E1-BDB8-27BBCDE19851","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+📦 Current build: 114, Latest build: 114
+✅ App is up to date (current: 114, latest: 114)
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ [EventsConfig] Fetched movie_events version 1539 with 409 movies
+✅ [EventsConfig] Using cached movie_events config (version 1539, 409 movies)
+✅ [EventsView] Loaded 409 movies from config version 1539
+🗓 AppState: Updated schedule epoch to 2026-01-16 07:41:21 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-16 23:15:21 +0000
+⏰ AppState: Scheduling update in 4501 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt29644189/img (793673 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0480687/img (901283 bytes)
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📊 AppState: Polled participant counts - Active: ["tt0480687": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-16 23:15:21 +0000
+⏰ AppState: Scheduling update in 4500 seconds
+📊 AppState: Polled participant counts - Active: ["tt0480687": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-16 23:15:21 +0000
+⏰ AppState: Scheduling update in 4500 seconds
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"71132BA6-021E-48B0-A355-61BA9C8FC6F7","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"7bc9cb1a-f326-11f0-bf5c-ee9e47993347":{"metas":[{"phx_ref":"GItVEoHLNzU6AgBC","phx_ref_prev":"GItVDJ9hMsc6Av8i","is_premium":true,"last_seen":"2026-01-16T22:00:16.493Z","room_id":"F85H","started_at":"2026-01-16T21:58:42.024Z","status":"In Lobby: Talladega Nights: The Ballad of Ricky Bobby","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0415306","watching_title":"Talladega Nights: The Ballad of Ricky Bobby","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c0b59556-f326-11f0-b3f5-ee9e47993347":{"metas":[{"phx_ref":"GItVE6jU5jo6AgHi","is_premium":true,"last_seen":"2026-01-16T22:00:21.282Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"CD8235DB-EEFF-43B5-A951-A3DC521982AC","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":6798732,"event":"INSERT","filter":"receiver_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"},{"id":83853945,"event":"INSERT","filter":"sender_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-16 17:00:21.942 RedLemon[22713:107808] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-16 17:00:21.942 RedLemon[22713:107808] 🏥 [AppState] Starting global provider health check...
+2026-01-16 17:00:21.942 RedLemon[22713:107808] 🔍 Performing startup checks...
+2026-01-16 17:00:21.942 RedLemon[22713:107808] ✅ Username-based authentication ready
+2026-01-16 17:00:21.944 RedLemon[22713:107880] 🔐 Signed request to /check-payment
+2026-01-16 17:00:22.460 RedLemon[22713:107814] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-16 17:00:22.460 RedLemon[22713:107814] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-16 17:00:23.330 RedLemon[22713:107808] ✅ [AppState] Provider health check complete (found 7 services)
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+✅ SubDLClient initialized
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+📡 Joined channel: realtime:rooms_updates
+✅ RoomListView: Connected to rooms realtime updates
+📨 Received: {"ref":"EA3F5D2D-3928-4780-94AF-39F9638A6894","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c0b59556-f326-11f0-b3f5-ee9e47993347":{"metas":[{"phx_ref":"GItVFNULN586AgNC","phx_ref_prev":"GItVE6jU5jo6AgHi","is_premium":true,"last_seen":"2026-01-16T22:00:26.327Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"c0b59556-f326-11f0-b3f5-ee9e47993347":{"metas":[{"phx_ref":"GItVE6jU5jo6AgHi","is_premium":true,"last_seen":"2026-01-16T22:00:21.282Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+[ INFO ] GET /api/metadata/meta/movie/tt0415306 [request-id: 06D31581-60B7-40DB-85AB-82C66BED01AC]
+[ INFO ] GET /api/metadata/meta/movie/tt0415306 [request-id: 9CD145E2-9967-4484-AE8C-D0FEFE197F92]
+2026-01-16 17:00:26.628 RedLemon[22713:107812] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-16 17:00:26.628 RedLemon[22713:107814] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-16 17:00:27.381 RedLemon[22713:107808] 🚪 Joining room: F85H
+2026-01-16 17:00:27.979 RedLemon[22713:107808] 🚪 Room is in lobby
+2026-01-16 17:00:27.979 RedLemon[22713:107808] ✅ PlayerVM: currentWatchPartyRoom set to F85H
+💾 Cache SET: Metadata[meta_movie_tt0415306]
+💾 Cache SET: Metadata[meta_movie_tt0415306]
+✅ Loaded 1 rooms (total: 1)
+✅ Loaded 1 rooms (total: 1)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0415306/img (451442 bytes)
+🚪 Joining room: F85H
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1539 with 409 movies
+✅ [EventsConfig] Using cached movie_events config (version 1539, 409 movies)
+🎭 Lobby: Connecting to room F85H...
+🚦 Lobby State: connecting
+✅ Cache HIT: Metadata[meta_movie_tt0415306]
+🔄 Lobby: Fetching fresh room state from Supabase...
+[ INFO ] GET /api/metadata/meta/movie/tt0415306 [request-id: E6E245C5-EE2E-4819-B8A7-7B01CB20A524]
+2026-01-16 17:00:28.283 RedLemon[22713:107808] ✅ Guest joined room F85H in database
+2026-01-16 17:00:28.426 RedLemon[22713:107808] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-16 17:00:28.430 RedLemon[22713:107808] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-16 17:00:28.431 RedLemon[22713:107815] 📤 Realtime: Sending message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-16 17:00:28.431 RedLemon[22713:107815]    Payload keys: chatUsername, chatText, senderId, timestamp, position, type
+2026-01-16 17:00:28.432 RedLemon[22713:107814] ✅ Realtime: Message broadcast complete
+2026-01-16 17:00:28.434 RedLemon[22713:107822] 🔐 SupabaseClient: Signing Identity Payload: '176860082896e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-16 17:00:28.435 RedLemon[22713:107822] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-16 17:00:28.564 RedLemon[22713:107815] 📨 Realtime: Received broadcast message
+2026-01-16 17:00:28.564 RedLemon[22713:107815]    Payload keys: position, timestamp, chatUsername, senderId, chatText, type
+2026-01-16 17:00:28.565 RedLemon[22713:107815] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-16 17:00:28.565 RedLemon[22713:107815] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-16 17:00:28.565 RedLemon[22713:107815] ✅ Realtime: syncCallback invoked successfully
+2026-01-16 17:00:28.593 RedLemon[22713:107808] 👋 Received: Guest 'lemontom' joined room F85H
+2026-01-16 17:00:28.766 RedLemon[22713:107808] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-16 17:00:33.364 RedLemon[22713:107808] 📨 Lobby: Received Room UPDATE from Realtime
+📡 SocialService: Updated status - In Lobby: Talladega Nights: The Ballad of Ricky Bobby: Talladega Nights: The Ballad of Ricky Bobby
+🔌 Setting up Realtime channel: watch-party:F85H
+   Role: Guest
+   User ID: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:F85H
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Loaded metadata for Talladega Nights: The Ballad of Ricky Bobby
+✅ Lobby: Connected to Realtime
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c0b59556-f326-11f0-b3f5-ee9e47993347":{"metas":[{"phx_ref":"GItVFT-FfwU6AgNi","phx_ref_prev":"GItVFNULN586AgNC","is_premium":true,"last_seen":"2026-01-16T22:00:28.114Z","room_id":"F85H","started_at":"2026-01-16T22:00:28.114Z","status":"In Lobby: Talladega Nights: The Ballad of Ricky Bobby","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0415306","watching_title":"Talladega Nights: The Ballad of Ricky Bobby","watching_type":"movie"}]}},"leaves":{"c0b59556-f326-11f0-b3f5-ee9e47993347":{"metas":[{"phx_ref":"GItVFNULN586AgNC","phx_ref_prev":"GItVE6jU5jo6AgHi","is_premium":true,"last_seen":"2026-01-16T22:00:26.327Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:rooms_updates"}
+📨 Unknown event: phx_close
+📨 Received: {"ref":"C950D95D-4CB3-4845-811B-E92D7D1DD38F","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":32586694,"event":"*","filter":"id=eq.F85H","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:F85H"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:F85H"},"topic":"realtime:watch-party:F85H"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"8579c00c-f326-11f0-8070-ee9e47993347":{"metas":[{"phx_ref":"GItU_IaZF4NF_YwB","is_host":true,"joined_at":1768600722.050009,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"topic":"realtime:watch-party:F85H"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:F85H"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c4d06468-f326-11f0-adaa-ee9e47993347":{"metas":[{"phx_ref":"GItVFUQft7JF_Y1h","is_host":false,"joined_at":1768600828.172318,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:F85H"}
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+ℹ️ RealtimeChannelManager: Already setup for room F85H, filtering duplicate setup call.
+📡 Connection state: connected
+✅ Lobby: Connected to Realtime
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "F85H", "name": "Talladega Nights: The Ballad of Ricky Bobby", "season": null, "episode": null, "imdb_id": "tt0415306", "playlist": [{"id": "2C7792D4-01E6-4385-95EF-D66B53B2F414", "mediaItem": {"id": "tt0415306", "logo": "https://images.metahub.space/logo/medium/tt0415306/img", "name": "Talladega Nights: The Ballad of Ricky Bobby", "type": "movie", "year": "2006", "genres": ["Comedy", "Sport"], "poster": "https://images.metahub.space/poster/small/tt0415306/img", "runtime": "108 min", "background": "https://images.metahub.space/background/medium/tt0415306/img", "imdbRating": "6.6", "description": "Number one NASCAR driver Ricky Bobby stays atop the heap thanks to a pact with his best friend and teammate, Cal Naughton, Jr. But when a French Formula One driver, makes his way up the ladder, Ricky Bobby's talent and devotion ar...", "releaseInfo": "2006"}}], "is_public": true, "created_at": "2026-01-16T21:58:41.725877", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt0415306/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt0415306/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-16T21:59:55.182099", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-16T22:00:28.426Z","old_record":{"id": "F85H"}},"ids":[32586694]},"topic":"realtime:watch-party:F85H"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "F85H", "name": "Talladega Nights: The Ballad of Ricky Bobby", "season": null, "episode": null, "imdb_id": "tt0415306", "playlist": [{"id": "2C7792D4-01E6-4385-95EF-D66B53B2F414", "mediaItem": {"id": "tt0415306", "logo": "https://images.metahub.space/logo/medium/tt0415306/img", "name": "Talladega Nights: The Ballad of Ricky Bobby", "type": "movie", "year": "2006", "genres": ["Comedy", "Sport"], "poster": "https://images.metahub.space/poster/small/tt0415306/img", "runtime": "108 min", "background": "https://images.metahub.space/background/medium/tt0415306/img", "imdbRating": "6.6", "description": "Number one NASCAR driver Ricky Bobby stays atop the heap thanks to a pact with his best friend and teammate, Cal Naughton, Jr. But when a French Formula One driver, makes his way up the ladder, Ricky Bobby's talent and devotion ar...", "releaseInfo": "2006"}}], "is_public": true, "created_at": "2026-01-16T21:58:41.725877", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt0415306/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt0415306/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-16T21:59:55.182099", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-16T22:00:28.426Z","old_record":{"id": "F85H"}},"ids":[32586694]},"topic":"realtime:watch-party:F85H"}
+🚦 Lobby State: connected
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"lemontom","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:F85H"}
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "F85H", "name": "Talladega Nights: The Ballad of Ricky Bobby", "season": null, "episode": null, "imdb_id": "tt0415306", "playlist": [{"id": "2C7792D4-01E6-4385-95EF-D66B53B2F414", "mediaItem": {"id": "tt0415306", "logo": "https://images.metahub.space/logo/medium/tt0415306/img", "name": "Talladega Nights: The Ballad of Ricky Bobby", "type": "movie", "year": "2006", "genres": ["Comedy", "Sport"], "poster": "https://images.metahub.space/poster/small/tt0415306/img", "runtime": "108 min", "background": "https://images.metahub.space/background/medium/tt0415306/img", "imdbRating": "6.6", "description": "Number one NASCAR driver Ricky Bobby stays atop the heap thanks to a pact with his best friend and teammate, Cal Naughton, Jr. But when a French Formula One driver, makes his way up the ladder, Ricky Bobby's talent and devotion ar...", "releaseInfo": "2006"}}], "is_public": true, "created_at": "2026-01-16T21:58:41.725877", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt0415306/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt0415306/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-16T22:00:28.747312", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-16T22:00:28.755Z","old_record":{"id": "F85H"}},"ids":[32586694]},"topic":"realtime:watch-party:F85H"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0480687": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-16 23:15:21 +0000
+⏰ AppState: Scheduling update in 4491 seconds
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "F85H", "name": "Talladega Nights: The Ballad of Ricky Bobby", "season": null, "episode": null, "imdb_id": "tt0415306", "playlist": [{"id": "2C7792D4-01E6-4385-95EF-D66B53B2F414", "mediaItem": {"id": "tt0415306", "logo": "https://images.metahub.space/logo/medium/tt0415306/img", "name": "Talladega Nights: The Ballad of Ricky Bobby", "type": "movie", "year": "2006", "genres": ["Comedy", "Sport"], "poster": "https://images.metahub.space/poster/small/tt0415306/img", "runtime": "108 min", "background": "https://images.metahub.space/background/medium/tt0415306/img", "imdbRating": "6.6", "description": "Number one NASCAR driver Ricky Bobby stays atop the heap thanks to a pact with his best friend and teammate, Cal Naughton, Jr. But when a French Formula One driver, makes his way up the ladder, Ricky Bobby's talent and devotion ar...", "releaseInfo": "2006"}}], "is_public": true, "created_at": "2026-01-16T21:58:41.725877", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt0415306/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt0415306/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2026-01-16T22:00:33.33989", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-16T22:00:33.342Z","old_record":{"id": "F85H"}},"ids":[32586694]},"topic":"realtime:watch-party:F85H"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📊 AppState: Polled participant counts - Active: ["tt0480687": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-16 23:15:21 +0000
+⏰ AppState: Scheduling update in 4480 seconds
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"7bc9cb1a-f326-11f0-bf5c-ee9e47993347":{"metas":[{"phx_ref":"GItVGGCLM7A6AgTC","phx_ref_prev":"GItVEoHLNzU6AgBC","is_premium":true,"last_seen":"2026-01-16T22:00:41.697Z","room_id":"F85H","started_at":"2026-01-16T21:58:42.024Z","status":"In Lobby: Talladega Nights: The Ballad of Ricky Bobby","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0415306","watching_title":"Talladega Nights: The Ballad of Ricky Bobby","watching_type":"movie"}]}},"leaves":{"7bc9cb1a-f326-11f0-bf5c-ee9e47993347":{"metas":[{"phx_ref":"GItVEoHLNzU6AgBC","phx_ref_prev":"GItVDJ9hMsc6Av8i","is_premium":true,"last_seen":"2026-01-16T22:00:16.493Z","room_id":"F85H","started_at":"2026-01-16T21:58:42.024Z","status":"In Lobby: Talladega Nights: The Ballad of Ricky Bobby","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0415306","watching_title":"Talladega Nights: The Ballad of Ricky Bobby","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}

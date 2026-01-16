@@ -81,6 +81,17 @@ class LicenseManager: ObservableObject {
                let user = try await SupabaseClient.shared.getUserById(userId: userId) {
                 profileExpiry = user.subscriptionExpiresAt
                 print("👤 LicenseManager: Profile expiry: \(String(describing: profileExpiry))")
+
+                // Refresh Auth Context to update Hosting Streak in UI immediately
+                await MainActor.run {
+                    SupabaseClient.shared.auth.currentUser = AuthUser(
+                        id: user.id,
+                        username: user.username,
+                        isAdmin: user.isAdmin ?? false,
+                        isPremium: user.isPremium ?? false,
+                        hostingStreak: user.hostingStreak ?? 0
+                    )
+                }
             }
         } catch {
             print("⚠️ LicenseManager: Profile check failed (non-fatal): \(error)")

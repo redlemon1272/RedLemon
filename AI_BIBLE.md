@@ -388,7 +388,7 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 | `payment_pools` | Maps address → user |
 | `payment_transactions` | Logs detected payments |
 | `payment_sweeps` | Logs sweep operations |
-| `users` | Stores `subscription_expires_at` |
+| `users` | Stores `subscription_expires_at`, `hosting_streak` |
 
 ## Edge Functions
 
@@ -398,10 +398,14 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 
 ### `check-payment`
 - **Trigger**: App polling.
-- **Logic**: Scans all chains (multi-asset: ETH, USDC, USDT), calculates USD value via Coinbase API, grants access:
-  - **$4.00+** = 30 days
-  - **$7.00+** = 60 days
-  - **$10.00+** = 90 days
+- **Logic**:
+  1.  Scans all chains (multi-asset: ETH, USDC, USDT).
+  2.  **Swept Fund Reconstruction**: Calculates `NewAmount = (CurrentBalance + TotalSwept) - TotalLoggedHistory`. This ensures payments are detected even after funds have been swept to the Master Wallet.
+  3.  Calculates USD value via Coinbase API.
+  4.  Grants access:
+      - **$4.00+** = 30 days
+      - **$7.00+** = 60 days
+      - **$10.00+** = 90 days
 - **Note**: Actual code thresholds are slightly lower ($3.80/$6.80/$9.80) to account for price fluctuations.
 
 ### `sweep-payments` (The "Janitor")
@@ -426,14 +430,20 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 2.  **Database Profile** (`users.subscription_expires_at`): Persists valid subscriptions and Admin Grants.
 **Rule:** Always check BOTH. The latest date wins. Never rely solely on the edge function, or Admin Grants will be ignored.
 
-## Payment Stacking (Extend License)
-The `check-payment` edge function **automatically stacks** new payments onto existing subscriptions:
+## Payment Stacking & Prestige (Prestige Emojis)
+The `check-payment` edge function handles **Stacking** and **Streaks**:
+
+### Stacking Logic
 ```typescript
 let currentExpiry = userData?.subscription_expires_at ? new Date(userData.subscription_expires_at) : new Date()
 if (currentExpiry < new Date()) currentExpiry = new Date()  // Reset if expired
 const newExpiry = new Date(currentExpiry.getTime() + (daysToAdd * 24 * 60 * 60 * 1000))  // ADDS days
 ```
-**Example:** User with 60 days remaining pays $10 → Gets 90 days added → Now has 150 days total.
+
+### Prestige Logic (Hosting Streak)
+- **Extend Active**: If user extends *before* expiry, `hosting_streak` increments (+1).
+- **New/Expired**: If user buys fresh or after expiry, `hosting_streak` resets to 0 (Base Premium).
+- **UI**: Higher streaks unlock cooler emoji badges in Chat/Lobby.
 
 **UI:** Premium users see "Extend License" button in Settings when < 365 days remain (`SettingsView.swift`).
 
@@ -510,6 +520,9 @@ docker exec -it supabase-db psql -U postgres
 
 ## Database Migrations
 
+> [!IMPORTANT]
+> **DO NOT USE CLI:** `supabase db push` will fail (403 Forbidden). You MUST use the manual protocol below.
+
 **Step 1: Copy file to server**
 ```bash
 expect -c 'spawn scp supabase/migrations/YOUR_MIGRATION.sql root@151.243.109.243:/tmp/migration.sql; expect "password:"; send "123Scarface123!\r"; expect eof'
@@ -525,7 +538,20 @@ expect -c 'spawn scp supabase/migrations/YOUR_MIGRATION.sql root@151.243.109.243
 ./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT * FROM users LIMIT 5;\""
 ```
 
-## Edge Functions Location
+## Edge Function Deployment
+**Protocol:** The `supabase functions deploy` CLI command works LOCALLY but fails relative to the production server. Use this manual update method:
+
+**1. Copy Source to Server Volume**
+```bash
+expect -c 'spawn scp supabase/functions/[FUNCTION_NAME]/index.ts root@151.243.109.243:/root/supabase/docker/volumes/functions/[FUNCTION_NAME]/index.ts; expect "password:"; send "123Scarface123!\r"; expect eof'
+```
+
+**2. Restart Functions Container (Hot Reload)**
+```bash
+./remote_exec.sh "cd /root/supabase/docker && docker compose restart functions"
+```
+
+## Edge Functions Location (Reference)
 `/root/supabase/docker/volumes/functions/[name]/index.ts`
 
 Functions: `assign-address`, `check-payment`, `sweep-payments`, `cleanup-rooms`, `recover-account`

@@ -126,11 +126,16 @@ struct FriendProfileView: View {
                     Text(friend.username)
                         .font(.headline)
 
-                    // Premium Host Badge
-                    if friend.isPremium == true {
+                    // Prestige Badge
+                    if let streak = friend.hostingStreak, streak > 0 {
+                        Text(prestigeEmoji(rank: streak))
+                            .font(.system(size: 12))
+                            .help(prestigeTitle(rank: streak))
+                    } else if friend.isPremium == true {
+                        // Fallback: Legacy Premium Badge
                         Text("👑")
                             .font(.system(size: 12))
-                            .help("Premium Host")
+                            .help("Premium User")
                     }
                 }
 

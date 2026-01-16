@@ -14,6 +14,7 @@ struct Friend: Codable, Identifiable, Equatable {
     var isFavorite: Bool
     var status: FriendStatus
     var isPremium: Bool? // Premium hosting status (nil = unknown, true = has hosting, false = free user)
+    var hostingStreak: Int? // Prestige System: Consecutive hosting streak
 
     enum FriendStatus: String, Codable {
         case pending // Friend request sent, awaiting acceptance
@@ -59,6 +60,7 @@ struct FriendActivity: Identifiable, Codable {
     // If currentlyWatching is nil, this string is shown.
     var customStatus: String? = nil
     var isPremium: Bool? = nil
+    var hostingStreak: Int? = nil
     
     struct WatchingInfo: Codable, Equatable {
         let mediaTitle: String

@@ -182,7 +182,8 @@ struct RedLemonApp: App {
                         id: user.id,
                         username: user.username,
                         isAdmin: user.isAdmin ?? false,
-                        isPremium: user.isPremium ?? false
+                        isPremium: user.isPremium ?? false,
+                        hostingStreak: user.hostingStreak ?? 0
                     )
 
                     NSLog("✅ AUTH SUCCESS: User authenticated - %@ (ID: %@)", username, user.id.uuidString)

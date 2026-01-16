@@ -1,7 +1,11 @@
--- PostgreSQL function to grant premium hosting to a user by username
--- PRODUCTION-READY: Includes admin authentication check
--- This function should be created in your Supabase SQL Editor
+-- Migration: Add hosting_streak to users and update admin_grant_premium
+-- Description: Tracks the number of successful watch parties hosted by a user to award prestige badges.
 
+-- 1. Add hosting_streak column
+ALTER TABLE users
+ADD COLUMN IF NOT EXISTS hosting_streak INTEGER DEFAULT 0;
+
+-- 2. Update admin_grant_premium function to handle streaks
 -- Drop existing function if it exists (handles upgrades)
 DROP FUNCTION IF EXISTS admin_grant_premium(text, integer);
 DROP FUNCTION IF EXISTS admin_grant_premium(uuid, text, integer);
@@ -101,25 +105,7 @@ END;
 $$;
 
 -- Grant execute permission only to authenticated users
--- The function itself handles admin verification
 GRANT EXECUTE ON FUNCTION admin_grant_premium(UUID, TEXT, INTEGER) TO authenticated;
 
--- Optional: Create an admin_logs table to track admin actions
--- Run this separately if you want to track admin actions
-/*
-CREATE TABLE IF NOT EXISTS admin_logs (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    admin_user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    action TEXT NOT NULL,
-    target_user_id UUID REFERENCES users(id) ON DELETE SET NULL,
-    details JSONB,
-    created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE INDEX idx_admin_logs_admin_user ON admin_logs(admin_user_id);
-CREATE INDEX idx_admin_logs_created_at ON admin_logs(created_at DESC);
-*/
-
--- Example usage:
--- SELECT admin_grant_premium('ursinho', 30);
-
+-- Refresh schema cache if needed
+notify pgrst, 'reload schema';

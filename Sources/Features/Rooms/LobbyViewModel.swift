@@ -814,7 +814,10 @@ class LobbyViewModel: ObservableObject {
                 return
             }
 
-            await chatManager.send(senderId: participantId, username: username)
+            // PRESTIGE: Get current user's hosting streak
+            let hostingStreak = SupabaseClient.shared.auth.currentUser?.hostingStreak ?? 0
+            
+            await chatManager.send(senderId: participantId, username: username, hostingStreak: hostingStreak)
         }
 
 

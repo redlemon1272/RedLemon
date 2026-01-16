@@ -577,7 +577,8 @@ struct AppOnboardingView: View {
                         id: user.id,
                         username: user.username,
                         isAdmin: user.isAdmin ?? false,
-                        isPremium: user.isPremium ?? false
+                        isPremium: user.isPremium ?? false,
+                        hostingStreak: user.hostingStreak ?? 0
                     )
                     
                     isCheckingUsername = false

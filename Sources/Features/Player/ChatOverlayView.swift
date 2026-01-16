@@ -257,7 +257,7 @@ struct ChatOverlayView: View {
 
     // MARK: - List Views
 
-    private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, isSenderHost: Bool, timestamp: String? = nil) -> some View {
+    private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, hostingStreak: Int, isSenderHost: Bool, timestamp: String? = nil) -> some View {
         let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: username))
 
         if isSystem {
@@ -291,7 +291,10 @@ struct ChatOverlayView: View {
                             .cornerRadius(4)
                     }
 
-                    if isPremium {
+                    if hostingStreak > 0 {
+                        Text(prestigeEmoji(rank: hostingStreak))
+                            .font(.system(size: 10))
+                    } else if isPremium {
                         Text("👑")
                             .font(.system(size: 10))
                             .help("Premium User")
@@ -323,7 +326,10 @@ struct ChatOverlayView: View {
                         .cornerRadius(4)
                 }
 
-                if isPremium {
+                if hostingStreak > 0 {
+                    Text(prestigeEmoji(rank: hostingStreak))
+                        .font(.system(size: 10))
+                } else if isPremium {
                     Text("👑")
                         .font(.system(size: 10))
                         .help("Premium User")
@@ -397,7 +403,7 @@ struct ChatOverlayView: View {
 
                         // Show message (masked if muted)
                         VStack(alignment: .leading, spacing: 4) {
-                            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: false, isPremium: message.isPremium, isSenderHost: false)
+                            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: false, isPremium: message.isPremium, hostingStreak: message.hostingStreak, isSenderHost: false)
 
                             if isMuted {
                                 Text("Message muted")
@@ -454,7 +460,7 @@ struct ChatOverlayView: View {
         let isSenderHost = (message.senderId != nil && hostId != nil && message.senderId!.caseInsensitiveCompare(hostId!) == .orderedSame)
 
         return VStack(alignment: .leading, spacing: 4) {
-            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost, isPremium: message.isPremium, isSenderHost: isSenderHost, timestamp: message.timestamp.toMessageTime())
+            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost, isPremium: message.isPremium, hostingStreak: message.hostingStreak, isSenderHost: isSenderHost, timestamp: message.timestamp.toMessageTime())
 
             if isMuted {
                 Text("Message muted")

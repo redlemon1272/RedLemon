@@ -474,7 +474,8 @@ class SupabaseClient: RoomManager, UserManager {
                 id: fullUser.id,
                 username: fullUser.username,
                 isAdmin: fullUser.isAdmin ?? false,
-                isPremium: fullUser.isPremium ?? false
+                isPremium: fullUser.isPremium ?? false,
+                hostingStreak: fullUser.hostingStreak ?? 0
             )
             return fullUser
         } else {
@@ -487,7 +488,8 @@ class SupabaseClient: RoomManager, UserManager {
                 id: response.id,
                 username: response.username,
                 isAdmin: false,
-                isPremium: false
+                isPremium: false,
+                hostingStreak: 0
             )
 
             // We return a constructed SupabaseUser.
@@ -501,7 +503,8 @@ class SupabaseClient: RoomManager, UserManager {
                 lastSeen: Date(),
                 isAdmin: false,
                 isPremium: false,
-                subscriptionExpiresAt: nil
+                subscriptionExpiresAt: nil,
+                hostingStreak: nil
             )
         }
     }
@@ -526,7 +529,8 @@ class SupabaseClient: RoomManager, UserManager {
             id: user.id,
             username: user.username,
             isAdmin: user.isAdmin ?? false,
-            isPremium: user.isPremium ?? false
+            isPremium: user.isPremium ?? false,
+            hostingStreak: user.hostingStreak ?? 0
         )
 
         return user
@@ -2183,6 +2187,7 @@ struct SupabaseUser: Codable {
     let isAdmin: Bool?
     let isPremium: Bool?
     let subscriptionExpiresAt: Date?
+    let hostingStreak: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, username
@@ -2193,6 +2198,7 @@ struct SupabaseUser: Codable {
         case isAdmin = "is_admin"
         case isPremium = "is_premium"
         case subscriptionExpiresAt = "subscription_expires_at"
+        case hostingStreak = "hosting_streak"
     }
 }
 
@@ -2754,6 +2760,7 @@ struct AuthUser {
     let username: String
     let isAdmin: Bool
     let isPremium: Bool
+    let hostingStreak: Int
 }
 
 // MARK: - Edge Functions API

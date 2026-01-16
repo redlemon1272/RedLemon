@@ -88,13 +88,16 @@ class EventChatService: ObservableObject {
         // Optimistic update
         let tempId = UUID().uuidString
         let isPremium = LicenseManager.shared.isPremium
+        let hostingStreak = SupabaseClient.shared.auth.currentUser?.hostingStreak ?? 0
+        
         let message = ChatMessage(
             id: tempId,
             username: username,
             text: text,
             timestamp: Date(),
             senderId: userId,
-            isPremium: isPremium
+            isPremium: isPremium,
+            hostingStreak: hostingStreak
         )
         self.messages.append(message)
         
@@ -106,7 +109,8 @@ class EventChatService: ObservableObject {
             senderId: userId,
             chatText: text,
             chatUsername: username,
-            isPremium: isPremium
+            isPremium: isPremium,
+            hostingStreak: hostingStreak
         )
         
         do {
@@ -172,7 +176,8 @@ class EventChatService: ObservableObject {
             text: text,
             timestamp: Date(timeIntervalSince1970: message.timestamp),
             senderId: message.senderId,
-            isPremium: message.isPremium ?? false
+            isPremium: message.isPremium ?? false,
+            hostingStreak: message.hostingStreak ?? 0
         )
         self.messages.append(chatMessage)
         

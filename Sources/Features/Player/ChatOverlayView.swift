@@ -23,16 +23,15 @@ struct ChatOverlayView: View {
     @State private var didCopyRoomCode: Bool = false // Room code copy confirmation
 
     // Chat Modes
-    enum ChatMode: Equatable {
-        case event
-        case room
-        case friends
-        case dm(Friend)
-    }
+    // Global Chat Mode from MPVPlayerViewModel
+    typealias ChatMode = PlayerChatMode
     @State private var chatMode: ChatMode
 
     init(viewModel: MPVPlayerViewModel, initialChatMode: ChatMode = .friends) {
         self.viewModel = viewModel
+        // If we have a saved mode, try to use it (unless overridden by init param?)
+        // Actually, init param is rarely used except default.
+        // We'll let setupInitialMode override this anyway onAppear.
         self._chatMode = State(initialValue: initialChatMode)
     }
 
@@ -79,6 +78,11 @@ struct ChatOverlayView: View {
             LoggingManager.shared.debug(.social, message: "ChatOverlayView appeared - UI UPDATE ROUND 6")
             setupInitialMode()
 
+            // Restore DM messages if necessary
+            if case .dm(let friend) = chatMode {
+                Task { await socialService.loadMessages(friendId: friend.id) }
+            }
+
             // Connect to event chat if applicable
             if appState.isEventPlayback, let eventId = appState.currentEventId, let userId = appState.currentUserId {
                 Task {
@@ -106,10 +110,32 @@ struct ChatOverlayView: View {
                 chatMode = .event
             }
         }
+        .onChange(of: chatMode) { newMode in
+            // Persist state
+            viewModel.lastActiveChatMode = newMode
+        }
     }
 
     private func setupInitialMode() {
         // Intelligence to pick the best default tab
+        
+        // 1. Check persistence FIRST
+        if let saved = viewModel.lastActiveChatMode {
+            // Validate availability
+            var isValid = true
+            switch saved {
+            case .event: isValid = appState.isEventPlayback
+            case .room: isValid = viewModel.isInWatchParty
+            default: break
+            }
+            if isValid {
+                chatMode = saved
+                LoggingManager.shared.debug(.social, message: "Restored previous chat mode: \(saved)")
+                return
+            }
+        }
+
+        // 2. Fallbacks
         if appState.isEventPlayback {
             chatMode = .event
         } else if viewModel.isInWatchParty {

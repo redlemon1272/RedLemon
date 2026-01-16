@@ -274,6 +274,27 @@ if [[ -d "$PLAYER_DIR" ]]; then
 fi
 
 
+
+# =============================================================================
+# CHECK 13: Event Chat Thrashing (Landmine #58)
+# =============================================================================
+# Direct appending of chat messages blocks the main thread.
+print_header "Check 13: Event Chat Thrashing (Landmine #58)"
+
+MPV_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
+if [[ -f "$MPV_VM" ]]; then
+    # Look for singular 'messages.append(' NOT followed by 'contentsOf' or 'pending'
+    # Use grep to find all appends to 'messages'
+    VIOLATIONS=$(grep -n "messages.append(" "$MPV_VM" | grep -v "contentsOf" | grep -v "pending" | grep -v "//" || true)
+
+    if [[ -n "$VIOLATIONS" ]]; then
+        while IFS=: read -r line code; do
+            report "ERROR" "Landmine #58" "Chat Thrashing Risk: Do NOT append single messages to UI. Use a batched 'pending' array and flush with 'append(contentsOf:)'." "$MPV_VM" "$line" "$code"
+        done <<< "$VIOLATIONS"
+    fi
+fi
+
+
 # =============================================================================
 # SUMMARY
 # =============================================================================

@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 16, 2026 (Added Landmines #52-55 - Payment & HD Wallet Traps)
+> **Last Updated:** January 16, 2026 (Added Landmine #56 - Display Sleep Trap)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -67,6 +67,7 @@
 | **Funds detected but not credited** | Aggregate vs Per-Address Reconciliation | #53 |
 | **Payment Success immediately loops** | Missing NEW payment flag distinction | #54 |
 | **Wallet doesn't autofill amount** | Missing EIP-681 'value' in URI | #55 |
+| **Screensaver/Sleep during Playback** | Missing `.idleDisplaySleepDisabled` | #56 |
 
 ## 🚨 Critical Landmines
 
@@ -229,6 +230,11 @@
     *   **Trigger**: Wallet apps (MetaMask, Trust, Ledger) show "0 ETH" instead of the requested amount.
     *   **Rule**: Crypto URIs must include BOTH `value` (in WEI for modern EIP-681) and `amount` (in ETH for legacy/human-readable).
     *   **Format**: `ethereum:ADDRESS?value=WEI&amount=ETH`
+56. **Display Sleep vs System Sleep Trap**: *(Added v1.0.86)*
+    *   **Trigger**: Using only `.idleSystemSleepDisabled` in `MPVPlaybackService`.
+    *   **Symptom**: Audio continues playing, but the screen goes black or screensaver activates.
+    *   **Cause**: Preventing *System Sleep* does not prevent *Display Sleep*. macOS treats them separately to save power while keeping background tasks running.
+    *   **Rule**: You MUST use `[.userInitiated, .idleSystemSleepDisabled, .idleDisplaySleepDisabled]` (ALL THREE) when asserting playback activity.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)
@@ -393,7 +399,7 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 
 ### `sweep-payments` (The "Janitor")
 - **Trigger**: Daily cron (9:10 AM UTC).
-- **Scanner Logic**: 
+- **Scanner Logic**:
   - Iterates through `payment_pools` with status `assigned` or `used`.
   - Verifies Private Key against stored Address before processing.
   - Sweeps any balance >$1.50 after ensuring master wallet gas holds.

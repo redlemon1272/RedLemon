@@ -157,6 +157,7 @@ class EventChatService: ObservableObject {
     private var isFlushingChat: Bool = false
 
     private func handleSyncMessage(_ message: SyncMessage) {
+        print("!!! [EventChatService] handleSyncMessage called! Type: \(message.type)") // FORENSIC TRACE
         guard message.type == .chat,
               let text = message.chatText,
               let username = message.chatUsername,

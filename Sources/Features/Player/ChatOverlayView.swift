@@ -284,7 +284,108 @@ struct ChatOverlayView: View {
 
     // MARK: - List Views
 
+    private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, hostingStreak: Int, isSenderHost: Bool, timestamp: String? = nil) -> some View {
+        let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: username))
 
+        if isSystem {
+            return AnyView(
+                Text(username)
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(nameColor)
+            )
+        }
+
+        let uid = userId ?? ""
+        let myId = appState.currentUserId?.uuidString ?? ""
+        let isMe = uid.caseInsensitiveCompare(myId) == .orderedSame
+        let isFriend = socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(uid) == .orderedSame })
+
+        // If it's me, just show text (no actions)
+        if isMe {
+            return AnyView(
+                HStack(spacing: 4) {
+                    Text(username)
+                        .font(.caption.weight(.semibold))
+                        .foregroundColor(nameColor)
+
+                    if isSenderHost {
+                        Text("Host")
+                            .font(.caption2.weight(.bold))
+                            .foregroundColor(.accentColor)
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 1)
+                            .background(Color.accentColor.opacity(0.15))
+                            .cornerRadius(4)
+                    }
+
+                    if hostingStreak > 0 {
+                        Text(prestigeEmoji(rank: hostingStreak))
+                            .font(.system(size: 10))
+                    } else if isPremium {
+                        Text("👑")
+                            .font(.system(size: 10))
+                            .help("Premium User")
+                    }
+
+                    if let timestamp = timestamp {
+                        Text(timestamp)
+                            .font(.caption2)
+                            .foregroundColor(.white.opacity(0.4))
+                            .padding(.leading, 4)
+                    }
+                }
+            )
+        }
+
+        return AnyView(
+            HStack(spacing: 4) {
+                Text(username)
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(nameColor)
+
+                if isSenderHost {
+                    Text("Host")
+                        .font(.caption2.weight(.bold))
+                        .foregroundColor(DesignSystem.Colors.accent)
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 1)
+                        .background(DesignSystem.Colors.accent.opacity(0.15))
+                        .cornerRadius(4)
+                }
+
+                if hostingStreak > 0 {
+                    Text(prestigeEmoji(rank: hostingStreak))
+                        .font(.system(size: 10))
+                } else if isPremium {
+                    Text("👑")
+                        .font(.system(size: 10))
+                        .help("Premium User")
+                }
+
+                if let timestamp = timestamp {
+                    Text(timestamp)
+                        .font(.caption2)
+                        .foregroundColor(.white.opacity(0.4))
+                        .padding(.leading, 4)
+                }
+
+                // Custom Menu Trigger (Non-Blocking)
+                Button(action: {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        self.activeMenuTarget = MenuTarget(id: uid, username: username, isFriend: isFriend, isHost: isHost)
+                    }
+                }) {
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(.white.opacity(0.5))
+                        .frame(width: 16, height: 16)
+                        .background(Color.white.opacity(0.1))
+                        .clipShape(Circle())
+                }
+                .buttonStyle(.plain)
+            }
+        )
+    }
     private var eventChatList: some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -737,6 +838,7 @@ struct ChatOverlayView: View {
 
     @State private var activeMenuTarget: MenuTarget? = nil
 
+
     // OPTIMIZATION: Extracted to Struct to enable View caching
     struct UserMenuView: View, Equatable {
         let username: String
@@ -824,6 +926,7 @@ struct ChatOverlayView: View {
             }
         }
     }
+
 
     // Custom Overlay View
     private var customUserMenuOverlay: some View {

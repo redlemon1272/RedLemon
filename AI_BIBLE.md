@@ -48,6 +48,7 @@
 | **"Ghost" / Zombie Room** | Host quit without strong capture | #21, #32 |
 | **Guests Auto-Join Dead Stream** | Stale DB state (is_playing=true) | #35 |
 | **Ghost Join (Host Left)** | Missing DB Verification on Join | #33 |
+| **Missing "Self" Messages** | Expecting Broadcast Echo | #59 |
 | **Updates Fail** | String comparison used instead of Int | #30 |
 | **Missing Streams** | Hardcoded blocklists active | #4 |
 | **Binge Prompt Flicker** | Global Status Reset used | #34 |
@@ -247,6 +248,11 @@
     *   **Cause**: Native macOS menus (`NSMenu`) run in a **nested modal event loop** (`waitingForUser`). This hijacking of the main run loop prevents `libmpv` (and high-frequency `Timer` publishers) from dispatching render events on the main thread, starving the video renderer.
     *   **Rule**: **NEVER** use native `Menu` or `ContextMenu` on player views. You MUST implement **Custom SwiftUI Overlays** (ZStack + Overlay) that mimic menu behavior but remain within the standard SwiftUI render loop.
     *   **Fix Applied**: v1.0.112 replaced Chat Overlay's `NSMenu` with a custom `VStack` overlay to fix stutter.
+59. **The Invisible Join Trap (Lack of Local Echo)**: *(Added v1.0.115)*
+    *   **Trigger**: Relying on Realtime Broadcasts or Presence updates to confirm the sender's own actions.
+    *   **Symptom**: "User Joined" or "Message Sent" appears for everyone *else* but not the sender.
+    *   **Cause**: Supabase Realtime Broadcasts do NOT echo back to the sender by default. Presence events are also unreliable for self-confirmation due to potential race conditions (see #51).
+    *   **Rule**: **Hybrid Strategy**. For any user action (Join/Message), you MUST: (1) **Send** the Broadcast for others, AND (2) **Immediately Update** local state for the sender. Never wait for the network to confirm your own action.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)
@@ -393,7 +399,7 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 | `payment_pools` | Maps address → user |
 | `payment_transactions` | Logs detected payments |
 | `payment_sweeps` | Logs sweep operations |
-| `users` | Stores `subscription_expires_at` |
+| `users` | Stores `subscription_expires_at`, `hosting_streak` |
 
 ## Edge Functions
 
@@ -403,10 +409,14 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 
 ### `check-payment`
 - **Trigger**: App polling.
-- **Logic**: Scans all chains (multi-asset: ETH, USDC, USDT), calculates USD value via Coinbase API, grants access:
-  - **$4.00+** = 30 days
-  - **$7.00+** = 60 days
-  - **$10.00+** = 90 days
+- **Logic**:
+  1.  Scans all chains (multi-asset: ETH, USDC, USDT).
+  2.  **Swept Fund Reconstruction**: Calculates `NewAmount = (CurrentBalance + TotalSwept) - TotalLoggedHistory`. This ensures payments are detected even after funds have been swept to the Master Wallet.
+  3.  Calculates USD value via Coinbase API.
+  4.  Grants access:
+      - **$4.00+** = 30 days
+      - **$7.00+** = 60 days
+      - **$10.00+** = 90 days
 - **Note**: Actual code thresholds are slightly lower ($3.80/$6.80/$9.80) to account for price fluctuations.
 
 ### `sweep-payments` (The "Janitor")
@@ -431,14 +441,20 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 2.  **Database Profile** (`users.subscription_expires_at`): Persists valid subscriptions and Admin Grants.
 **Rule:** Always check BOTH. The latest date wins. Never rely solely on the edge function, or Admin Grants will be ignored.
 
-## Payment Stacking (Extend License)
-The `check-payment` edge function **automatically stacks** new payments onto existing subscriptions:
+## Payment Stacking & Prestige (Prestige Emojis)
+The `check-payment` edge function handles **Stacking** and **Streaks**:
+
+### Stacking Logic
 ```typescript
 let currentExpiry = userData?.subscription_expires_at ? new Date(userData.subscription_expires_at) : new Date()
 if (currentExpiry < new Date()) currentExpiry = new Date()  // Reset if expired
 const newExpiry = new Date(currentExpiry.getTime() + (daysToAdd * 24 * 60 * 60 * 1000))  // ADDS days
 ```
-**Example:** User with 60 days remaining pays $10 → Gets 90 days added → Now has 150 days total.
+
+### Prestige Logic (Hosting Streak)
+- **Extend Active**: If user extends *before* expiry, `hosting_streak` increments (+1).
+- **New/Expired**: If user buys fresh or after expiry, `hosting_streak` resets to 0 (Base Premium).
+- **UI**: Higher streaks unlock cooler emoji badges in Chat/Lobby.
 
 **UI:** Premium users see "Extend License" button in Settings when < 365 days remain (`SettingsView.swift`).
 
@@ -515,6 +531,9 @@ docker exec -it supabase-db psql -U postgres
 
 ## Database Migrations
 
+> [!IMPORTANT]
+> **DO NOT USE CLI:** `supabase db push` will fail (403 Forbidden). You MUST use the manual protocol below.
+
 **Step 1: Copy file to server**
 ```bash
 expect -c 'spawn scp supabase/migrations/YOUR_MIGRATION.sql root@151.243.109.243:/tmp/migration.sql; expect "password:"; send "123Scarface123!\r"; expect eof'
@@ -530,7 +549,20 @@ expect -c 'spawn scp supabase/migrations/YOUR_MIGRATION.sql root@151.243.109.243
 ./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT * FROM users LIMIT 5;\""
 ```
 
-## Edge Functions Location
+## Edge Function Deployment
+**Protocol:** The `supabase functions deploy` CLI command works LOCALLY but fails relative to the production server. Use this manual update method:
+
+**1. Copy Source to Server Volume**
+```bash
+expect -c 'spawn scp supabase/functions/[FUNCTION_NAME]/index.ts root@151.243.109.243:/root/supabase/docker/volumes/functions/[FUNCTION_NAME]/index.ts; expect "password:"; send "123Scarface123!\r"; expect eof'
+```
+
+**2. Restart Functions Container (Hot Reload)**
+```bash
+./remote_exec.sh "cd /root/supabase/docker && docker compose restart functions"
+```
+
+## Edge Functions Location (Reference)
 `/root/supabase/docker/volumes/functions/[name]/index.ts`
 
 Functions: `assign-address`, `check-payment`, `sweep-payments`, `cleanup-rooms`, `recover-account`
@@ -902,16 +934,17 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 **Mandatory 9-Step Sequence:**
 1.  **Sync Main (Pre-Flight)**: Run `git pull origin main`. Resolve any merge conflicts **HERE**, on the feature branch.
     -   *Why*: Prevents "Merge Conflict" landmines during Step 9.
-2.  **Code & Build**: Run `./build-app-debug.sh`. Verify 0 errors.
-3.  **Scans (Mandatory)**: Run `./scripts/security-scan.sh` AND `./scripts/architecture-scan.sh`.
+2.  **Scans (Fast Fail)**: Run `./scripts/security-scan.sh` AND `./scripts/architecture-scan.sh`.
+    -   **Why**: Instant feedback. Fails immediately if landmines exist. Saves build time.
     -   **Security**: Fix **CRITICAL** issues immediately.
     -   **Architecture**: Fix **ERRORS** (e.g. Landmines #11, #37, #43). Warnings for legacy code (#25) are acceptable if labeled `// legacy`.
+3.  **Code & Build (Dry Run)**: Run `./build-app-debug.sh`. Verify 0 errors.
 4.  **User Validation (GATE)**: Ask user to test. **DO NOT PROCEED** without confirmation.
 5.  **Git Push**: Run `git push origin <branch>` to ensure remote is up to date (Change Log depends on this!).
 6.  **Generate Notes**: Run `./scripts/get-changelog.sh` to grab the list of changes since the last release. Copy the output.
 7.  **Release Script**: Run `./scripts/release.sh <VERSION> <BUILD> "<PASTE_NOTES_HERE>"`.
     -   *Action*: Builds -> Packages DMG -> Signs -> Deploys to Server.
-8.  **Appcast Sync**: Commit and push the auto-updated `appcast.xml`, `README.md`, and `build-app-debug.sh` to GitHub.
+8.  **Appcast Sync**: Commit and push the auto-updated `appcast.xml`, `README.md`, `build-app-debug.sh`, and `RedLemon-Installer.sha256` to GitHub.
 9.  **Merge & Tag**: Run `./scripts/merge-and-tag.sh <VERSION>` (e.g., `v1.0.71`) to merge the feature branch into `main` and create the release tag.
     -   *Action*: Fetches origin -> Checkouts main -> Merges branch (Fast-Forward) -> Tags -> Pushes Main & Tag -> Returns to Branch.
 

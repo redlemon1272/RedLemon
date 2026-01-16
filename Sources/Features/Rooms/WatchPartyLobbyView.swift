@@ -642,124 +642,8 @@ struct WatchPartyLobbyView: View {
                                                         LobbyMessageRow(message: message)
                                                             .id(item.id)
                                                     case .chat(let chatMsg):
-                                                        // 1. FILTER: Active Block Check
-                                                        // If socialService says blocked, do not show AT ALL
-                                                        if let senderId = chatMsg.senderId,
-                                                           socialService.blockedUserIds.contains(senderId) {
-                                                            EmptyView()
-                                                        } else {
-                                                            // 2. MUTE CHECK: Local Mute from Lobby
-                                                            let isMuted = chatMsg.senderId.map { viewModel.mutedUserIds.contains($0) } ?? false
-
-                                                            VStack(alignment: .leading, spacing: 4) {
-                                                                HStack {
-                                                                    // Username / Menu
-                                                                     HStack(spacing: 4) {
-                                                                         let isSenderHost = chatMsg.senderId.map { $0.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame } ?? false
-                                                                         let nameColor: Color = isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: chatMsg.username)
-
-                                                                         Text(chatMsg.username)
-                                                                             .font(.caption.weight(.semibold))
-                                                                             .foregroundColor(nameColor)
-
-                                                                        if let senderId = chatMsg.senderId, senderId.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame {
-                                                                            Text("Host")
-                                                                                .font(.caption2.weight(.bold))
-                                                                                .foregroundColor(DesignSystem.Colors.accent)
-                                                                                .padding(.horizontal, 4)
-                                                                                .padding(.vertical, 1)
-                                                                                .background(DesignSystem.Colors.accent.opacity(0.15))
-                                                                                .cornerRadius(4)
-                                                                        }
-
-                                                                        if chatMsg.isPremium {
-                                                                            Text("👑")
-                                                                                .font(.system(size: 10))
-                                                                                .help("Premium User")
-                                                                        }
-                                                                    }
-
-                                                                    if let senderId = chatMsg.senderId, senderId.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") != .orderedSame {
-                                                                        Menu {
-                                                                        if let senderId = chatMsg.senderId {
-                                                                            // Add Friend
-                                                                            if !socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(senderId) == .orderedSame }) && senderId.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") != .orderedSame {
-                                                                                Button {
-                                                                                    viewModel.addFriend(participantId: senderId)
-                                                                                } label: {
-                                                                                    Label("Add Friend", systemImage: "person.badge.plus")
-                                                                                }
-                                                                            }
-
-                                                                            // Mute Toggle
-                                                                            if isMuted {
-                                                                                Button {
-                                                                                    Task { @MainActor in
-                                                                                        viewModel.toggleMute(participantId: senderId)
-                                                                                    }
-                                                                                } label: {
-                                                                                    Label("Unmute User", systemImage: "speaker.wave.2.fill")
-                                                                                }
-                                                                            } else {
-                                                                                Button {
-                                                                                    Task { @MainActor in
-                                                                                        viewModel.toggleMute(participantId: senderId)
-                                                                                    }
-                                                                                } label: {
-                                                                                    Label("Mute User", systemImage: "speaker.slash.fill")
-                                                                                }
-                                                                            }
-
-                                                                            // Kick (Host Only)
-                                                                            if isHost {
-                                                                                Divider()
-                                                                                Button(role: .destructive) {
-                                                                                    viewModel.kickUser(userId: senderId)
-                                                                                } label: {
-                                                                                    Label("Kick User", systemImage: "xmark.circle")
-                                                                                }
-                                                                            }
-
-                                                                            // Block (Always available for strangers)
-                                                                            Button(role: .destructive) {
-                                                                                viewModel.blockUser(senderId, username: chatMsg.username)
-                                                                            } label: {
-                                                                                Label("Block User", systemImage: "slash.circle")
-                                                                            }
-                                                                        }
-                                                                    } label: {
-                                                                            Image(systemName: "chevron.down")
-                                                                                .font(.system(size: 10, weight: .bold))
-                                                                                .foregroundColor(.white.opacity(0.5))
-                                                                                .frame(width: 16, height: 16)
-                                                                                .background(Color.white.opacity(0.1))
-                                                                                .clipShape(Circle())
-                                                                        }
-                                                                        .menuStyle(.borderlessButton)
-                                                                        .menuIndicator(.hidden)
-                                                                    }
-
-                                                                    Spacer()
-                                                                    Text(chatMsg.timestamp, style: .time)
-                                                                        .font(.caption2)
-                                                                        .foregroundColor(.white.opacity(0.4))
-                                                                }
-
-                                                                if isMuted {
-                                                                    Text("(Message hidden - User muted)")
-                                                                        .font(.body.italic())
-                                                                        .foregroundColor(.white.opacity(0.5))
-                                                                } else {
-                                                                    Text(chatMsg.text)
-                                                                        .font(.body)
-                                                                        .foregroundColor(.white)
-                                                                }
-                                                            }
-                                                            .padding(8)
-                                                            .background(Color.white.opacity(0.1))
-                                                            .cornerRadius(8)
+                                                        renderChatMessageRow(chatMsg)
                                                             .id(item.id)
-                                                        }
                                                     }
                                                 }
 
@@ -994,6 +878,133 @@ struct WatchPartyLobbyView: View {
         }
 
     }  // Close lobbyContent function
+
+    // MARK: - Chat Row Rendering
+    @ViewBuilder
+    private func renderChatMessageRow(_ chatMsg: ChatMessage) -> some View {
+        // 1. FILTER: Active Block Check
+        if let senderId = chatMsg.senderId,
+           socialService.blockedUserIds.contains(senderId) {
+            EmptyView()
+        } else {
+            // 2. MUTE CHECK: Local Mute from Lobby
+            let isMuted = chatMsg.senderId.map { viewModel.mutedUserIds.contains($0) } ?? false
+
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    // Username / Menu
+                    HStack(spacing: 4) {
+                        let isSenderHost = chatMsg.senderId.map { $0.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame } ?? false
+                        let nameColor: Color = isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: chatMsg.username)
+
+                        Text(chatMsg.username)
+                            .font(.caption.weight(.semibold))
+                            .foregroundColor(nameColor)
+
+                        if let senderId = chatMsg.senderId, senderId.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame {
+                            Text("Host")
+                                .font(.caption2.weight(.bold))
+                                .foregroundColor(DesignSystem.Colors.accent)
+                                .padding(.horizontal, 4)
+                                .padding(.vertical, 1)
+                                .background(DesignSystem.Colors.accent.opacity(0.15))
+                                .cornerRadius(4)
+                        }
+
+                        // Prestige Badge
+                        if chatMsg.hostingStreak > 0 {
+                            Text(prestigeEmoji(rank: chatMsg.hostingStreak))
+                                .font(.system(size: 10))
+                                .help(prestigeTitle(rank: chatMsg.hostingStreak))
+                        }
+                        
+                        // Premium Badge (Legacy, optional if using Prestige)
+                        if chatMsg.isPremium && chatMsg.hostingStreak == 0 {
+                            Text("👑")
+                                .font(.system(size: 10))
+                                .help("Premium User")
+                        }
+                    }
+
+                    if let senderId = chatMsg.senderId, senderId.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") != .orderedSame {
+                        Menu {
+                            // Add Friend
+                            if !socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(senderId) == .orderedSame }) {
+                                Button {
+                                    viewModel.addFriend(participantId: senderId)
+                                } label: {
+                                    Label("Add Friend", systemImage: "person.badge.plus")
+                                }
+                            }
+
+                            // Mute Toggle
+                            if isMuted {
+                                Button {
+                                    Task { @MainActor in
+                                        viewModel.toggleMute(participantId: senderId)
+                                    }
+                                } label: {
+                                    Label("Unmute User", systemImage: "speaker.wave.2.fill")
+                                }
+                            } else {
+                                Button {
+                                    Task { @MainActor in
+                                        viewModel.toggleMute(participantId: senderId)
+                                    }
+                                } label: {
+                                    Label("Mute User", systemImage: "speaker.slash.fill")
+                                }
+                            }
+
+                            // Kick (Host Only)
+                            if isHost {
+                                Divider()
+                                Button(role: .destructive) {
+                                    viewModel.kickUser(userId: senderId)
+                                } label: {
+                                    Label("Kick User", systemImage: "xmark.circle")
+                                }
+                            }
+
+                            // Block (Always available)
+                            Button(role: .destructive) {
+                                viewModel.blockUser(senderId, username: chatMsg.username)
+                            } label: {
+                                Label("Block User", systemImage: "slash.circle")
+                            }
+                        } label: {
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundColor(.white.opacity(0.5))
+                                .frame(width: 16, height: 16)
+                                .background(Color.white.opacity(0.1))
+                                .clipShape(Circle())
+                        }
+                        .menuStyle(.borderlessButton)
+                        .menuIndicator(.hidden)
+                    }
+
+                    Spacer()
+                    Text(chatMsg.timestamp, style: .time)
+                        .font(.caption2)
+                        .foregroundColor(.white.opacity(0.4))
+                }
+
+                if isMuted {
+                    Text("(Message hidden - User muted)")
+                        .font(.body.italic())
+                        .foregroundColor(.white.opacity(0.5))
+                } else {
+                    Text(chatMsg.text)
+                        .font(.body)
+                        .foregroundColor(.white)
+                }
+            }
+            .padding(8)
+            .background(Color.white.opacity(0.1))
+            .cornerRadius(8)
+        }
+    }
 
     private func copyRoomID() {
         NSPasteboard.general.clearContents()

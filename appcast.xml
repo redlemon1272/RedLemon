@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.114 -->
+        <item>
+            <title>Version 1.0.114</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat(player): Implement chat tab persistence (restores active tab/DM on toggle)</li><li>fix(build): Fix visibility build error</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 16:08:03 -0500</pubDate>
+            <sparkle:version>114</sparkle:version>
+            <sparkle:shortVersionString>1.0.114</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.114.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="XbEuw5VzZi4GP/uiAPyF7VDSfSFWMJ8NkULtQOmpmLhrs8A+n1f5JFphnXs27TqGNhpIOJo1H12Rfzn1hEGhBQ==" length="73516259"
+            />
+        </item>
         <!-- v1.0.113 -->
         <item>
             <title>Version 1.0.113</title>

@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.109 -->
+        <item>
+            <title>Version 1.0.109</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: show premium hosting remaining days in Admin user list</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 02:22:32 -0500</pubDate>
+            <sparkle:version>109</sparkle:version>
+            <sparkle:shortVersionString>1.0.109</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.109.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="qh0/Y2jW0u0nPrl0MTs+tPy2K1WVo+uztrDJtZXwKrWZlvJgmQtV5eb11fTMoxJ6NRaPcRvMXzej/osRB3RCDg==" length="72790104"
+            />
+        </item>
         <!-- v1.0.108 -->
         <item>
             <title>Version 1.0.108</title>

@@ -285,6 +285,14 @@ struct AdminUsersView: View {
                                             .font(.caption2)
                                             .foregroundColor(.yellow)
                                             .help("Premium User")
+                                        
+                                        if let expiry = user.subscriptionExpiresAt {
+                                            let days = Calendar.current.dateComponents([.day], from: Date(), to: expiry).day ?? 0
+                                            Text(days > 36000 ? "(Lifetime)" : "(\(max(0, days))d)")
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.secondary)
+                                                .monospacedDigit()
+                                        }
                                     }
                                 }
                                 

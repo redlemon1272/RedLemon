@@ -80,6 +80,20 @@ actor RealtimeChannelManager: RealtimeService {
     // MARK: - Setup
 
     func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]? = nil, onSync: @escaping (SyncMessage) -> Void) async throws {
+        // PREVENT DUPLICATE SETUP:
+        // If we represent the SAME room and user, and are already connected, just update callback.
+        if self.roomId == roomId && self.userId == userId && isConnected {
+            print("ℹ️ RealtimeChannelManager: Already setup for room \(roomId), filtering duplicate setup call.")
+            self.syncCallback = onSync // Update callback just in case
+            return
+        }
+
+        // AUTO-CLEANUP: If setting up a new room or re-setting up, ensure we clean up old handlers first
+        if self.presenceHandlerId != nil || self.connectionHandlerId != nil {
+            print("🧹 RealtimeChannelManager: Cleaning up previous handlers before new setup...")
+            await removeHandlers()
+        }
+
         self.roomId = roomId
         self.isHost = isHost
         self.userId = userId
@@ -441,18 +455,7 @@ actor RealtimeChannelManager: RealtimeService {
         connectionStateCallback = nil
 
         // Clean up handlers
-        if let id = presenceHandlerId {
-            await realtimeClient.removePresenceHandler(id: id)
-            presenceHandlerId = nil
-        }
-        if let id = connectionHandlerId {
-            await realtimeClient.removeConnectionHandler(id: id)
-            connectionHandlerId = nil
-        }
-        if let id = postgresHandlerId {
-            await realtimeClient.removePostgresChange(id: id)
-            postgresHandlerId = nil
-        }
+        await removeHandlers()
 
         print("✅ Realtime channel cleanup complete")
     }
@@ -497,5 +500,21 @@ extension RealtimeChannelManager {
         let timeSinceLastUpdate = Date().timeIntervalSince(lastRemoteUpdateTime)
         // Assume playback continues at normal speed
         return lastRemoteTimestamp + timeSinceLastUpdate
+    }
+
+    // Extracted removeHandlers method to be used by both setup() and cleanup()
+    private func removeHandlers() async {
+        if let id = presenceHandlerId {
+            await realtimeClient.removePresenceHandler(id: id)
+            presenceHandlerId = nil
+        }
+        if let id = connectionHandlerId {
+            await realtimeClient.removeConnectionHandler(id: id)
+            connectionHandlerId = nil
+        }
+        if let id = postgresHandlerId {
+            await realtimeClient.removePostgresChange(id: id)
+            postgresHandlerId = nil
+        }
     }
 }

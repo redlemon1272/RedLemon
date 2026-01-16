@@ -987,6 +987,7 @@ struct WatchPartyLobbyView: View {
                     }
                 }
             )
+            .environmentObject(appState)
         }
         .sheet(isPresented: $showPaymentGate) {
             PremiumPaymentView()

@@ -3,6 +3,7 @@ import SwiftUI
 struct MediaDetailView: View {
     let mediaItem: MediaItem
     @EnvironmentObject var appState: AppState
+    @ObservedObject var libraryManager = LibraryManager.shared
     @State private var metadata: MediaMetadata?
     @State private var isLoading = true
     @State private var selectedSeason: Int = 1
@@ -224,7 +225,7 @@ struct MediaDetailView: View {
 
                                     // Episode Synopsis
                                     if let currentEpisode = episodesInSeason.first(where: { $0.episode == selectedEpisode }) {
-                                        
+
                                         // Release Date
                                         if let released = currentEpisode.released {
                                             let isFuture = isDateInFuture(released)
@@ -236,7 +237,7 @@ struct MediaDetailView: View {
                                                     .font(.caption)
                                                     .fontWeight(isFuture ? .bold : .medium)
                                                     .foregroundColor(isFuture ? .orange : .white.opacity(0.8))
-                                                
+
                                                 if isFuture {
                                                     Text("(Unreleased)")
                                                         .font(.caption)
@@ -260,6 +261,8 @@ struct MediaDetailView: View {
                                     }
                             }
 
+
+                            HStack(spacing: 24) {
                             // Watch Now Button
                             Button(action: {
                                 appState.player.selectedMediaItem = mediaItem
@@ -295,6 +298,42 @@ struct MediaDetailView: View {
                             .buttonStyle(.plain)
                             .padding(.top, 40)
                             .padding(.bottom, 60)
+
+                                // Add to Library Button
+                                Button(action: {
+                                    if libraryManager.contains(mediaItem.id) {
+                                        libraryManager.removeFromLibrary(id: mediaItem.id)
+                                    } else {
+                                        libraryManager.addToLibrary(
+                                            item: mediaItem,
+                                            posterURL: metadata?.posterURL,
+                                            year: metadata?.year
+                                        )
+                                    }
+                                }) {
+                                    VStack(spacing: 6) {
+                                        Image(systemName: libraryManager.contains(mediaItem.id) ? "checkmark" : "plus")
+                                            .font(.system(size: 22, weight: .bold))
+                                        Text(libraryManager.contains(mediaItem.id) ? "My Library" : "Add to Library")
+                                            .font(.system(size: 11, weight: .bold))
+                                    }
+                                    .foregroundColor(.white)
+                                    .frame(width: 80, height: 56)
+                                    .background(
+                                        libraryManager.contains(mediaItem.id)
+                                        ? Color.green.opacity(0.8)
+                                        : Color.white.opacity(0.15)
+                                    )
+                                    .cornerRadius(12)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                                    )
+                                }
+                                .buttonStyle(.plain)
+                                .padding(.top, 40)
+                                .padding(.bottom, 60)
+                            } // End HStack
                         }
                         .frame(maxWidth: .infinity)
                     }
@@ -363,13 +402,13 @@ struct MediaDetailView: View {
         // Kitsu/Cinemeta usually returns "2024-10-12" or "2024-10-12T14:30:00.000Z"
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullDate]
-        
+
         if let date = formatter.date(from: dateString) {
             let displayFormatter = DateFormatter()
             displayFormatter.dateStyle = .medium
             return displayFormatter.string(from: date)
         }
-        
+
         // Try simplified YYYY-MM-DD parser if ISO fails
         let simpleFormatter = DateFormatter()
         simpleFormatter.dateFormat = "yyyy-MM-dd"
@@ -378,22 +417,22 @@ struct MediaDetailView: View {
             displayFormatter.dateStyle = .medium
             return displayFormatter.string(from: date)
         }
-        
+
         return dateString // Fallback
     }
-    
+
     private func isDateInFuture(_ dateString: String) -> Bool {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullDate]
-        
+
         var date: Date? = formatter.date(from: dateString)
-        
+
         if date == nil {
             let simpleFormatter = DateFormatter()
             simpleFormatter.dateFormat = "yyyy-MM-dd"
             date = simpleFormatter.date(from: dateString)
         }
-        
+
         guard let validDate = date else { return false }
         return validDate > Date()
     }

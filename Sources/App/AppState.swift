@@ -181,13 +181,13 @@ class AppState: ObservableObject {
     @Published var discoverSelectedCatalog: String = "Netflix" // Persist selected provider
     @Published var discoverSelectedGenre: String = "All" // Persist selected genre
     @Published var browseRowScrollPositions: [String: CGFloat] = [:] // Persist horizontal scroll positions for Browse rows
-    
+
     // Browse Page Persistence (Session-scoped)
     @Published var popularMovies: [MediaItem] = []
     @Published var popularShows: [MediaItem] = []
-    @Published var browseCatalogs: [String: [MediaItem]] = [:] 
+    @Published var browseCatalogs: [String: [MediaItem]] = [:]
     @Published var browseIsLoadingCatalogs: Set<String> = []
-    
+
     @Published var activeRooms: [WatchPartyRoom] = []  // Track all active rooms locally
     @Published var isLoadingRoom: Bool = false  // Track room loading state
     @Published var shouldAutoJoinLobby: Bool = false  // Flag to auto-join lobby for live events
@@ -226,6 +226,7 @@ class AppState: ObservableObject {
         case friends
         case rooms
         case settings
+        case library
         case mediaDetail
         case seasonEpisodeSelector
         case qualitySelection

@@ -14,6 +14,9 @@ struct AccountExportData: Codable {
     // Secure Auth
     let privateKey: String?
     let publicKey: String?
+
+    // Library (v2.1)
+    let libraryItems: [LibraryItem]?
 }
 
 class AccountExportManager {
@@ -47,6 +50,9 @@ class AccountExportManager {
             history = decoded
         }
 
+        // Fetch Library
+        let library = LibraryManager.shared.libraryItems
+
         return AccountExportData(
             userId: userId,
             username: username,
@@ -55,7 +61,8 @@ class AccountExportManager {
             playbackHistory: history,
             timestamp: Date(),
             privateKey: privKey,
-            publicKey: pubKey
+            publicKey: pubKey,
+            libraryItems: library
         )
     }
 
@@ -116,6 +123,10 @@ class AccountExportManager {
              if let encoded = try? JSONEncoder().encode(history) {
                 UserDefaults.standard.set(encoded, forKey: "watchHistory")
             }
+        }
+
+        if let library = exportData.libraryItems, !library.isEmpty {
+            LibraryManager.shared.restoreFromBackup(items: library)
         }
 
         return exportData

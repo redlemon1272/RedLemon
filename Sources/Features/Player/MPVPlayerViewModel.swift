@@ -2975,12 +2975,16 @@ extension MPVPlayerViewModel {
             await playbackService.seek(to: timestamp)
 
         case .chat:
+            print("XXX [MPV] handleSyncMessage: .chat") // FORENSIC
             // Receive chat message from other participants
             // CRITICAL: Skip messages from self (already added locally when sent)
             // EXCEPTION: Allow LOBBY_JOIN to pass through so we see "You joined"
             let isJoinMessage = message.chatText == "LOBBY_JOIN"
+            
+            print("XXX [MPV] sender: \(message.senderId ?? "?"), me: \(currentUserId ?? "?"), isJoin: \(isJoinMessage)") // FORENSIC
 
             if (message.senderId ?? "").caseInsensitiveCompare(currentUserId ?? "") == .orderedSame && !isJoinMessage {
+                print("XXX [MPV] Skipping own message") // FORENSIC
                 LoggingManager.shared.debug(.social, message: "Skipping own message (already displayed locally)")
                 return
             }
@@ -3052,16 +3056,19 @@ extension MPVPlayerViewModel {
                 // Batch chat updates to avoid UI thrashing
                 await MainActor.run {
                     pendingChatMessages.append(chatMessage)
+                    print("XXX [MPV] Appended to pending. Count: \(pendingChatMessages.count), Flushing: \(isFlushingChat)")
 
                     if !isFlushingChat {
                         isFlushingChat = true
                         Task { @MainActor [weak self] in
                             try? await Task.sleep(nanoseconds: 200_000_000)
                             guard let self = self else { return }
+                            print("XXX [MPV] Woke up. Pending: \(self.pendingChatMessages.count)")
                             if !self.pendingChatMessages.isEmpty {
                                 self.messages.append(contentsOf: self.pendingChatMessages)
                                 // FORENSIC LOG: Validate batching efficiency
                                 LoggingManager.shared.debug(.social, message: "⚖️ [BATCH FLUSH] Added \(self.pendingChatMessages.count) messages in single UI update")
+                                print("XXX [MPV] ⚖️ [BATCH FLUSH] Added \(self.pendingChatMessages.count) messages")
                                 self.pendingChatMessages.removeAll()
                                 self.trimChatMessages()
                             }

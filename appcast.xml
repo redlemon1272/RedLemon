@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.116 -->
+        <item>
+            <title>Version 1.0.116</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Optimized WebSocket connection logic to prevent double-connection attempts (Landmine #59).</li><li>Fix: Resolved a race condition that caused creating or joining a lobby to display duplicate 'User Joined' messages.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 18:32:57 -0500</pubDate>
+            <sparkle:version>116</sparkle:version>
+            <sparkle:shortVersionString>1.0.116</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.116.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="67jMuG22pOrG8aspVT9JG3btZc/kMAmNVFc4Ei8scJFE7WmpltdPQd8VRNGBO7a8qYQl5OZU6MAKZliVr6D2BQ==" length="73336605"
+            />
+        </item>
         <!-- v1.0.115 -->
         <item>
             <title>Version 1.0.115</title>

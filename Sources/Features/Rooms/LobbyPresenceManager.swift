@@ -15,6 +15,87 @@ class LobbyPresenceManager: ObservableObject {
         self.viewModel = viewModel
     }
 
+    // MARK: - Update Buffering (Landmine #50 Defense)
+    private var pendingJoins: [Participant] = []
+    private var pendingLeaves: Set<String> = []
+    private var flushTask: Task<Void, Never>?
+    private let flushInterval: UInt64 = 500_000_000 // 500ms
+
+    private func scheduleFlush() {
+        if flushTask == nil {
+            flushTask = Task { @MainActor [weak self] in
+                try? await Task.sleep(nanoseconds: self?.flushInterval ?? 500_000_000)
+                self?.flushUpdates()
+                self?.flushTask = nil
+            }
+        }
+    }
+
+    private func flushUpdates() {
+        guard let viewModel = viewModel else { return }
+
+        // 1. Process Leaves first
+        if !pendingLeaves.isEmpty {
+            viewModel.participants.removeAll { participant in
+                if pendingLeaves.contains(participant.id) {
+                    // Double check grace period (in case they rejoined during buffer)
+                    let timeSinceJoin = Date().timeIntervalSince(participant.joinedAt)
+                    if timeSinceJoin > 1.0 {
+                         return true
+                    }
+                }
+                return false
+            }
+
+            // Log System Message for Leaves (Batched?)
+            // For now, simple loop is fine as leaves are less frequent than joins
+            for id in pendingLeaves {
+                // Determine name from deleted participants? Too late.
+                // We'll rely on the original leave event trigger for logs if needed,
+                // but ChatManager handles messages.
+                // Actually, existing logic logged immediately.
+                // Let's iterate leaves to log? N/A - we don't have names anymore easily.
+                // Compromise: We log "User Left" when adding to pendingLeaves because names are available then.
+            }
+            pendingLeaves.removeAll()
+        }
+
+        // 2. Process Joins
+        if !pendingJoins.isEmpty {
+            // Deduplicate pending joins against CURRENT participants
+            // (in case they were already added by polling or re-join)
+            var toAdd: [Participant] = []
+            var namesToLog: [String] = []
+
+            for newP in pendingJoins {
+                // Update existing
+                if let index = viewModel.participants.firstIndex(where: { $0.id == newP.id }) {
+                    viewModel.participants[index] = newP
+                } else {
+                    toAdd.append(newP)
+                    namesToLog.append(newP.name)
+                }
+            }
+
+            if !toAdd.isEmpty {
+                viewModel.participants.append(contentsOf: toAdd)
+            }
+
+            // Batched System Message
+            if !namesToLog.isEmpty {
+                if namesToLog.count > 3 {
+                    viewModel.chatManager.addSystemMessage(.userJoined, userName: "\(namesToLog.count) users")
+                } else {
+                    for name in namesToLog {
+                         viewModel.chatManager.addSystemMessage(.userJoined, userName: name)
+                    }
+                }
+            }
+
+            pendingJoins.removeAll()
+        }
+    }
+
     // MARK: - Realtime Presence
 
     func setupPresence(realtimeManager: any RealtimeService) async {
@@ -112,7 +193,7 @@ class LobbyPresenceManager: ObservableObject {
                         // New user
                         var username = "Guest"
                         var isHost = false // Default
-                        
+
                         // Parse metadata
                         if let dict = metadata as? [String: Any] {
                             if let name = dict["username"] as? String {
@@ -131,9 +212,19 @@ class LobbyPresenceManager: ObservableObject {
                             joinedAt: Date(),
                             phxRef: userId // Store Connection ID (Map Key)
                         )
-                        viewModel.participants.append(newParticipant)
-                        if isNewConnection {
-                            viewModel.chatManager.addSystemMessage(.userJoined, userName: username)
+
+                        // BUFFERED UPDATE:
+                        // 1. Update immediate logic state (connectedUserIds)
+                         if isNewConnection {
+                            // Already done above: viewModel.connectedUserIds.insert(normalizedID)
+                            // Queue for visual update
+                            self.pendingJoins.append(newParticipant)
+                            self.scheduleFlush()
+                        } else {
+                            // If they are just reconnecting (not new), update immediately without toast
+                            // or maybe buffer this too? consistently buffer everything.
+                            self.pendingJoins.append(newParticipant)
+                            self.scheduleFlush()
                         }
                     }
                 case .leave:
@@ -179,10 +270,15 @@ class LobbyPresenceManager: ObservableObject {
                             let timeSinceJoin = Date().timeIntervalSince(participant.joinedAt)
 
                             // If they joined recently (< 1 second), it's a metadata update, not a real leave
+                            // If they joined recently (< 1 second), it's a metadata update, not a real leave
                             if timeSinceJoin > 1.0 {
-                                viewModel.participants.remove(at: index)
-                                viewModel.connectedUserIds.remove(normalizedID) // Remove from tracking
-                                viewModel.chatManager.addSystemMessage(.userLeft, userName: participant.name)
+                                // BUFFERED UPDATE:
+                                // viewModel.participants.remove(at: index)
+                                self.pendingLeaves.insert(normalizedID)
+
+                                viewModel.connectedUserIds.remove(normalizedID) // Remove from tracking IMMEDIATE
+                                viewModel.chatManager.addSystemMessage(.userLeft, userName: participant.name) // Log immediate so we have name
+                                self.scheduleFlush()
                             }
                         }
                     }
@@ -367,7 +463,7 @@ class LobbyPresenceManager: ObservableObject {
     // MARK: - Polling
 
     func startPolling() {
-        guard let viewModel = viewModel else { return }
+        guard viewModel != nil else { return }
 
         // Start Heartbeat (Host only or everyone? Logic says check appState currentUserId)
         startHeartbeatLoop()
@@ -394,7 +490,7 @@ class LobbyPresenceManager: ObservableObject {
     }
 
     private func startHeartbeatLoop() {
-        guard let viewModel = viewModel else { return }
+        guard viewModel != nil else { return }
         print("💓 Lobby: Starting heartbeat loop...")
 
         heartbeatTask?.cancel()
@@ -442,7 +538,7 @@ class LobbyPresenceManager: ObservableObject {
                 if existingLocal == nil {
                      existingLocal = currentParticipants.first(where: {
                          $0.name.caseInsensitiveCompare(username) == .orderedSame &&
-                         $0.id.count != 36 
+                         $0.id.count != 36
                      })
                 }
 
@@ -450,12 +546,12 @@ class LobbyPresenceManager: ObservableObject {
                     consumedLocalIds.insert(found.id)
                 }
 
-                // GHOST PROTECTION: 
+                // GHOST PROTECTION:
                 // If Realtime is active, only add DB participants that are also tracked in Realtime Presence.
                 // This prevents stale DB heartbeat rows (which last 35s) from re-adding users who just left via Realtime.
                 let isRealtimeActive = viewModel.realtimeConnectionStatus == .connected
                 let isTrackingInRealtime = viewModel.connectedUserIds.contains(participant.userId.uuidString.lowercased())
-                
+
                 if isRealtimeActive && !isTrackingInRealtime && !participant.isHost {
                     // Skip stale row - user left Realtime but DB row is still lingering.
                     continue
@@ -488,9 +584,9 @@ class LobbyPresenceManager: ObservableObject {
             let dbIds = Set(dbParticipants.map { $0.id.lowercased() })
 
             // Check for locally existing participants that are missing from DB AND weren't merged
-            let localOnly = viewModel.participants.filter { 
-                !consumedLocalIds.contains($0.id) && 
-                !dbIds.contains($0.id.lowercased()) 
+            let localOnly = viewModel.participants.filter {
+                !consumedLocalIds.contains($0.id) &&
+                !dbIds.contains($0.id.lowercased())
             }
 
             for localP in localOnly {

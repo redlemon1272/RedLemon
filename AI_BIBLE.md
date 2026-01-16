@@ -68,6 +68,7 @@
 | **Payment Success immediately loops** | Missing NEW payment flag distinction | #54 |
 | **Wallet doesn't autofill amount** | Missing EIP-681 'value' in URI | #55 |
 | **Screensaver/Sleep during Playback** | Missing `.idleDisplaySleepDisabled` | #56 |
+| **Video Stutter/Drop when Menu Open** | Native `Menu` blocking main thread (Modal Loop) | #57 |
 
 ## 🚨 Critical Landmines
 
@@ -235,6 +236,12 @@
     *   **Symptom**: Audio continues playing, but the screen goes black or screensaver activates.
     *   **Cause**: Preventing *System Sleep* does not prevent *Display Sleep*. macOS treats them separately to save power while keeping background tasks running.
     *   **Rule**: You MUST use `[.userInitiated, .idleSystemSleepDisabled, .idleDisplaySleepDisabled]` (ALL THREE) when asserting playback activity.
+57. **The Modal Loop Trap (Native Menus of Death)**: *(Added v1.0.112)*
+    *   **Trigger**: Opening a `Menu { ... }` or `ContextMenu` on top of an active MPV video player.
+    *   **Symptom**: Video playback immediately stutters, drops frames, or freezes completely while the menu is open. Resumes normal playback only when menu closes.
+    *   **Cause**: Native macOS menus (`NSMenu`) run in a **nested modal event loop** (`waitingForUser`). This hijacking of the main run loop prevents `libmpv` (and high-frequency `Timer` publishers) from dispatching render events on the main thread, starving the video renderer.
+    *   **Rule**: **NEVER** use native `Menu` or `ContextMenu` on player views. You MUST implement **Custom SwiftUI Overlays** (ZStack + Overlay) that mimic menu behavior but remain within the standard SwiftUI render loop.
+    *   **Fix Applied**: v1.0.112 replaced Chat Overlay's `NSMenu` with a custom `VStack` overlay to fix stutter.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

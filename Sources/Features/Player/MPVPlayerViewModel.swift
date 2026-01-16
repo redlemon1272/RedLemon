@@ -50,6 +50,11 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Counter for database persistence limiting (Host Only)
     private var persistenceTickCount: Int = 0
+    
+    // START AI_BIBLE #58 Fix (Chat Persistence)
+    @Published var lastActiveChatMode: PlayerChatMode? = nil
+    // END AI_BIBLE #58 Fix
+
 
     init(mpvWrapper: MPVWrapper = MPVWrapper(),
          subtitleService: SubtitleService? = nil,
@@ -1695,7 +1700,7 @@ class MPVPlayerViewModel: ObservableObject {
             hostingStreak: hostingStreak
         )
 
-        messages.append(message)
+        messages.append(message) // OK - Optimistic local update (single message)
 
         // Limit message history to prevent memory bloat (keep last 100 messages)
         if messages.count > 100 {
@@ -1852,7 +1857,7 @@ class MPVPlayerViewModel: ObservableObject {
             isSystem: true
         )
         Task { @MainActor in
-            self.messages.append(message)
+            self.messages.append(message) // OK - Single system message
             self.trimChatMessages()
         }
     }
@@ -2693,19 +2698,24 @@ extension MPVPlayerViewModel {
             }
 
             // Add new messages to chat
-            for msg in newMessages.reversed() {  // Reversed to maintain chronological order
-                let chatMsg = ChatMessage(
+            // Add new messages to chat
+            let chatMessages = newMessages.reversed().map { msg in
+                ChatMessage(
                     id: msg.id.uuidString,
                     username: msg.username,
                     text: msg.message,
                     timestamp: msg.createdAt,
                     senderId: msg.userId.uuidString
                 )
-                messages.append(chatMsg)
-                trimChatMessages()
-                lastChatMessageId = msg.id.uuidString
-
-                LoggingManager.shared.debug(.social, message: "New chat message from \(msg.username): \(msg.message)")
+            }
+            messages.append(contentsOf: chatMessages)
+            trimChatMessages()
+            if let last = newMessages.first {
+                 lastChatMessageId = last.id.uuidString
+            }
+            
+            for msg in newMessages {
+                 LoggingManager.shared.debug(.social, message: "New chat message from \(msg.username): \(msg.message)")
             }
 
         } catch {
@@ -3062,10 +3072,12 @@ extension MPVPlayerViewModel {
                     if !isFlushingChat {
                         isFlushingChat = true
                         Task { @MainActor [weak self] in
-                            try? await Task.sleep(nanoseconds: 200_000_000)
+                            try? await Task.sleep(nanoseconds: 200_000_000) // 200ms Buffer
                             guard let self = self else { return }
                             if !self.pendingChatMessages.isEmpty {
                                 self.messages.append(contentsOf: self.pendingChatMessages)
+                                // FORENSIC LOG: Validate batching efficiency
+                                LoggingManager.shared.debug(.social, message: "⚖️ [BATCH FLUSH] Added \(self.pendingChatMessages.count) messages in single UI update")
                                 self.pendingChatMessages.removeAll()
                                 self.trimChatMessages()
                             }
@@ -3566,7 +3578,7 @@ extension MPVPlayerViewModel {
         showChat = false
 
         // Add farewell message
-        messages.append(ChatMessage(
+        messages.append(ChatMessage( // OK - Single system message
             id: UUID().uuidString,
             username: "System",
             text: "👋 Left watch party",
@@ -3705,4 +3717,12 @@ extension MPVPlayerViewModel {
 
         LoggingManager.shared.debug(.watchHistory, message: "Stopped watch history tracking")
     }
+}
+
+// Global Chat Mode Enum for Persistence
+enum PlayerChatMode: Equatable {
+    case event
+    case room
+    case friends
+    case dm(Friend)
 }

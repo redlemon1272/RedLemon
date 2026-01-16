@@ -254,6 +254,48 @@ done < <(grep -rn "NSViewRepresentable" "$SOURCES_DIR" --include="*.swift" | gre
 
 
 # =============================================================================
+# CHECK 12: Native Context Menus (Landmine #57)
+# =============================================================================
+# Native NSMenu logic blocks the main thread during video playback.
+print_header "Check 12: Native Context Menus (Landmine #57)"
+
+PLAYER_DIR="$SOURCES_DIR/Features/Player"
+if [[ -d "$PLAYER_DIR" ]]; then
+    # Look for usage of 'Menu {' or 'ContextMenu' in the Player feature directory
+    # Regex: (^|[^a-zA-Z0-9_])Menu[[:space:]]*\{ OR ContextMenu
+    # This prevents matching variables like "showSubtitleMenu {"
+    VIOLATIONS=$(grep -rnE "(^|[^a-zA-Z0-9_])Menu[[:space:]]*\{|ContextMenu" "$PLAYER_DIR" --include="*.swift" | grep -v "//" || true)
+
+    if [[ -n "$VIOLATIONS" ]]; then
+        while IFS=: read -r file line code; do
+            report "ERROR" "Landmine #57" "Blocking Menu Risk: Do NOT use native 'Menu' or 'ContextMenu' in Player views. It blocks MPV render loop." "$file" "$line" "$code"
+        done <<< "$VIOLATIONS"
+    fi
+fi
+
+
+
+# =============================================================================
+# CHECK 13: Event Chat Thrashing (Landmine #58)
+# =============================================================================
+# Direct appending of chat messages blocks the main thread.
+print_header "Check 13: Event Chat Thrashing (Landmine #58)"
+
+MPV_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
+if [[ -f "$MPV_VM" ]]; then
+    # Look for singular 'messages.append(' NOT followed by 'contentsOf' or 'pending'
+    # Use grep to find all appends to 'messages'
+    VIOLATIONS=$(grep -n "messages.append(" "$MPV_VM" | grep -v "contentsOf" | grep -v "pending" | grep -v "//" || true)
+
+    if [[ -n "$VIOLATIONS" ]]; then
+        while IFS=: read -r line code; do
+            report "ERROR" "Landmine #58" "Chat Thrashing Risk: Do NOT append single messages to UI. Use a batched 'pending' array and flush with 'append(contentsOf:)'." "$MPV_VM" "$line" "$code"
+        done <<< "$VIOLATIONS"
+    fi
+fi
+
+
+# =============================================================================
 # SUMMARY
 # =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"

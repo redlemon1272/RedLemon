@@ -23,16 +23,15 @@ struct ChatOverlayView: View {
     @State private var didCopyRoomCode: Bool = false // Room code copy confirmation
 
     // Chat Modes
-    enum ChatMode: Equatable {
-        case event
-        case room
-        case friends
-        case dm(Friend)
-    }
+    // Global Chat Mode from MPVPlayerViewModel
+    typealias ChatMode = PlayerChatMode
     @State private var chatMode: ChatMode
 
     init(viewModel: MPVPlayerViewModel, initialChatMode: ChatMode = .friends) {
         self.viewModel = viewModel
+        // If we have a saved mode, try to use it (unless overridden by init param?)
+        // Actually, init param is rarely used except default.
+        // We'll let setupInitialMode override this anyway onAppear.
         self._chatMode = State(initialValue: initialChatMode)
     }
 
@@ -79,6 +78,11 @@ struct ChatOverlayView: View {
             LoggingManager.shared.debug(.social, message: "ChatOverlayView appeared - UI UPDATE ROUND 6")
             setupInitialMode()
 
+            // Restore DM messages if necessary
+            if case .dm(let friend) = chatMode {
+                Task { await socialService.loadMessages(friendId: friend.id) }
+            }
+
             // Connect to event chat if applicable
             if appState.isEventPlayback, let eventId = appState.currentEventId, let userId = appState.currentUserId {
                 Task {
@@ -106,10 +110,32 @@ struct ChatOverlayView: View {
                 chatMode = .event
             }
         }
+        .onChange(of: chatMode) { newMode in
+            // Persist state
+            viewModel.lastActiveChatMode = newMode
+        }
     }
 
     private func setupInitialMode() {
         // Intelligence to pick the best default tab
+        
+        // 1. Check persistence FIRST
+        if let saved = viewModel.lastActiveChatMode {
+            // Validate availability
+            var isValid = true
+            switch saved {
+            case .event: isValid = appState.isEventPlayback
+            case .room: isValid = viewModel.isInWatchParty
+            default: break
+            }
+            if isValid {
+                chatMode = saved
+                LoggingManager.shared.debug(.social, message: "Restored previous chat mode: \(saved)")
+                return
+            }
+        }
+
+        // 2. Fallbacks
         if appState.isEventPlayback {
             chatMode = .event
         } else if viewModel.isInWatchParty {
@@ -369,7 +395,22 @@ struct ChatOverlayView: View {
 
                         // Show message (masked if muted)
                         VStack(alignment: .leading, spacing: 4) {
-                            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: false, isPremium: message.isPremium, hostingStreak: message.hostingStreak, isSenderHost: false)
+                            UserMenuView(
+                                username: message.username,
+                                userId: message.senderId,
+                                isSystem: message.isSystem,
+                                isHost: false,
+                                isPremium: message.isPremium,
+                                isSenderHost: false,
+                                timestamp: message.timestamp.toMessageTime(),
+                                currentUserId: appState.currentUserId?.uuidString,
+                                friends: socialService.friends,
+                                onMenuTrigger: { target in
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        self.activeMenuTarget = target
+                                    }
+                                }
+                            )
 
                             if isMuted {
                                 Text("Message muted")
@@ -398,7 +439,8 @@ struct ChatOverlayView: View {
             }
             .onChange(of: eventChatService.messages.count) { _ in
                 if let lastId = eventChatService.messages.last?.id {
-                     withAnimation { proxy.scrollTo(lastId, anchor: .bottom) } // OK: Guarded by lastId check
+                     // OPTIMIZATION: Remove animation for join events to prevent thrashing
+                     proxy.scrollTo(lastId, anchor: .bottom) // OK: Guarded by lastId check
                 }
             }
         }
@@ -426,7 +468,22 @@ struct ChatOverlayView: View {
         let isSenderHost = (message.senderId != nil && hostId != nil && message.senderId!.caseInsensitiveCompare(hostId!) == .orderedSame)
 
         return VStack(alignment: .leading, spacing: 4) {
-            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost, isPremium: message.isPremium, hostingStreak: message.hostingStreak, isSenderHost: isSenderHost, timestamp: message.timestamp.toMessageTime())
+            UserMenuView(
+                username: message.username,
+                userId: message.senderId,
+                isSystem: message.isSystem,
+                isHost: viewModel.isWatchPartyHost,
+                isPremium: message.isPremium,
+                isSenderHost: isSenderHost,
+                timestamp: message.timestamp.toMessageTime(),
+                currentUserId: appState.currentUserId?.uuidString,
+                friends: socialService.friends,
+                onMenuTrigger: { target in
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        self.activeMenuTarget = target
+                    }
+                }
+            )
 
             if isMuted {
                 Text("Message muted")
@@ -781,6 +838,94 @@ struct ChatOverlayView: View {
 
     @State private var activeMenuTarget: MenuTarget? = nil
 
+
+    // OPTIMIZATION: Extracted to Struct to enable View caching
+    struct UserMenuView: View, Equatable {
+        let username: String
+        let userId: String?
+        let isSystem: Bool
+        let isHost: Bool
+        let isPremium: Bool
+        let isSenderHost: Bool
+        let timestamp: String?
+        let currentUserId: String?
+        let friends: [Friend] // Needed for isFriend check
+        let onMenuTrigger: (MenuTarget) -> Void
+
+        // Custom Equatable conformance to prevent re-renders when parent changes unrelated state
+        static func == (lhs: UserMenuView, rhs: UserMenuView) -> Bool {
+            return lhs.username == rhs.username &&
+                   (lhs.userId ?? "").caseInsensitiveCompare(rhs.userId ?? "") == .orderedSame &&
+                   lhs.isSystem == rhs.isSystem &&
+                   lhs.isHost == rhs.isHost &&
+                   lhs.isPremium == rhs.isPremium &&
+                   lhs.isSenderHost == rhs.isSenderHost &&
+                   lhs.timestamp == rhs.timestamp &&
+                   (lhs.currentUserId ?? "").caseInsensitiveCompare(rhs.currentUserId ?? "") == .orderedSame &&
+                   // Deep check friends list? No, check if friendship status for THIS user changed.
+                   // Approximate: if friends count changed, re-render.
+                   lhs.friends.count == rhs.friends.count
+        }
+
+        var body: some View {
+            let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: username))
+
+            if isSystem {
+                 Text(username)
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(nameColor)
+            } else {
+                let uid = userId ?? ""
+                let myId = currentUserId ?? ""
+                let isMe = uid.caseInsensitiveCompare(myId) == .orderedSame
+                let isFriend = friends.contains(where: { $0.id.caseInsensitiveCompare(uid) == .orderedSame })
+
+                HStack(spacing: 4) {
+                    Text(username)
+                        .font(.caption.weight(.semibold))
+                        .foregroundColor(nameColor)
+
+                    if isSenderHost {
+                        Text("Host")
+                            .font(.caption2.weight(.bold))
+                            .foregroundColor(DesignSystem.Colors.accent)
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 1)
+                            .background(DesignSystem.Colors.accent.opacity(0.15))
+                            .cornerRadius(4)
+                    }
+
+                    if isPremium {
+                        Text("👑")
+                            .font(.system(size: 10))
+                            .help("Premium User")
+                    }
+
+                    if let timestamp = timestamp {
+                        Text(timestamp)
+                            .font(.caption2)
+                            .foregroundColor(.white.opacity(0.4))
+                            .padding(.leading, 4)
+                    }
+
+                    if !isMe {
+                        // Custom Menu Trigger (Non-Blocking)
+                        Button(action: {
+                            onMenuTrigger(MenuTarget(id: uid, username: username, isFriend: isFriend, isHost: isHost))
+                        }) {
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundColor(.white.opacity(0.5))
+                                .frame(width: 16, height: 16)
+                                .background(Color.white.opacity(0.1))
+                                .clipShape(Circle())
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+        }
+    }
 
 
     // Custom Overlay View

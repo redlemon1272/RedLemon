@@ -202,8 +202,16 @@ struct MPVPlayerView: View {
 
             // Chat overlay (Pop in/out)
             if viewModel.showChat {
-                // Determine initial mode based on context to prevent flash
+                // Determine initial mode based on context/persistence to prevent flash
                 let initialMode: ChatOverlayView.ChatMode = {
+                    if let saved = viewModel.lastActiveChatMode {
+                        switch saved {
+                        case .event: if appState.isEventPlayback { return .event }
+                        case .room: if viewModel.isInWatchParty { return .room }
+                        default: return saved
+                        }
+                    }
+                    
                     if appState.isEventPlayback { return .event }
                     if viewModel.isInWatchParty { return .room }
                     return .friends

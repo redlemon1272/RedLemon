@@ -82,9 +82,13 @@ actor RealtimeChannelManager: RealtimeService {
     func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]? = nil, onSync: @escaping (SyncMessage) -> Void) async throws {
         // PREVENT DUPLICATE SETUP:
         // If we represent the SAME room and user, and are already connected, just update callback.
-        if self.roomId == roomId && self.userId == userId && isConnected {
+        if self.roomId?.caseInsensitiveCompare(roomId) == .orderedSame &&
+           self.userId?.caseInsensitiveCompare(userId) == .orderedSame &&
+           isConnected {
             print("ℹ️ RealtimeChannelManager: Already setup for room \(roomId), filtering duplicate setup call.")
             self.syncCallback = onSync // Update callback just in case
+            // CRITICAL FIX: Notify caller that we are connected, otherwise UI stays in "Connecting..." state
+            await notifyConnectionStateChange(.connected)
             return
         }
 

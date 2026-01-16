@@ -1764,7 +1764,7 @@ struct ReportedStream: Identifiable, Codable {
 
     /// Check payment status via Edge Function
     /// Check payment status via Edge Function
-    func checkPaymentStatus() async throws -> (Bool, Date?) {
+    func checkPaymentStatus() async throws -> (Bool, Date?, Bool) {
         // Fix: Client uses custom auth, so we must pass user_id explicitly since we have no JWT
         let userId = auth.currentUser?.id.uuidString ?? ""
         let body = ["user_id": userId]
@@ -1773,6 +1773,7 @@ struct ReportedStream: Identifiable, Codable {
             path: "/check-payment",
             method: "POST",
             body: body,
+            useEphemeralSession: true, // Use longer 30s timeout for multi-chain scan
             sign: true,
             isFunction: true
         )
@@ -1780,6 +1781,7 @@ struct ReportedStream: Identifiable, Codable {
         struct PaymentResponse: Decodable {
             let success: Bool
             let premium: Bool?
+            let new_payment: Bool?
             let new_expiry: String? // ISO8601 string
         }
 
@@ -1789,13 +1791,14 @@ struct ReportedStream: Identifiable, Codable {
         }
 
         let result = try JSONDecoder().decode(PaymentResponse.self, from: response)
+        let isNew = result.new_payment ?? false
 
         if let expiryString = result.new_expiry,
            let date = SupabaseClient.isoFormatter.date(from: expiryString) {
-            return (result.premium ?? false, date)
+            return (result.premium ?? false, date, isNew)
         }
 
-        return (result.premium ?? false, nil)
+        return (result.premium ?? false, nil, isNew)
     }
 
     /// Trigger manual sweep of funds to master wallet
@@ -1804,6 +1807,7 @@ struct ReportedStream: Identifiable, Codable {
             path: "/sweep-payments",
             method: "POST",
             body: [:],
+            useEphemeralSession: true, // Use longer 30s timeout for multi-chain txs
             sign: true,
             isFunction: true
         )

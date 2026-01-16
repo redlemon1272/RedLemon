@@ -45,7 +45,7 @@ export const handler = async (req: Request) => {
             .from('payment_pools')
             .select('*')
             .eq('assigned_to_user_id', userId)
-            .eq('status', 'assigned')
+            .in('status', ['assigned', 'used'])
 
         if (poolError || !pools || pools.length === 0) {
             return new Response(JSON.stringify({ success: false, message: 'No active payment found' }), {
@@ -56,6 +56,7 @@ export const handler = async (req: Request) => {
 
         // 3. Check Balances (Multi-Asset / Multi-Chain)
         interface AssetBalance {
+            address: string
             chain: string
             currency: string // 'BTC', 'ETH', 'USDC', 'USDT'
             amount: number
@@ -91,17 +92,17 @@ export const handler = async (req: Request) => {
                 debugLogs.push(`BTC Response: ${JSON.stringify(data).substring(0, 100)}...`)
                 const funded = (data.chain_stats?.funded_txo_sum || 0) + (data.mempool_stats?.funded_txo_sum || 0)
                 if (funded > 0) {
-                    currentAssets.push({ chain: 'btc', currency: 'BTC', amount: funded, amountFloat: funded / 1e8 })
+                    currentAssets.push({ address, chain: 'btc', currency: 'BTC', amount: funded, amountFloat: funded / 1e8 })
                     debugLogs.push(`BTC Funded: ${funded}`)
                 }
 
             } else if (chain === 'evm') {
                 const CHAINS = [
-                    { name: 'eth', rpc: 'https://rpc.ankr.com/eth', usdc: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', usdt: '0xdac17f958d2ee523a2206206994597c13d831ec7' },
-                    { name: 'base', rpc: 'https://base.publicnode.com', usdc: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913', usdt: null },
+                    { name: 'eth', rpc: 'https://eth.llamarpc.com', usdc: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', usdt: '0xdac17f958d2ee523a2206206994597c13d831ec7' },
+                    { name: 'base', rpc: 'https://mainnet.base.org', usdc: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913', usdt: null },
                     { name: 'arb', rpc: 'https://arb1.arbitrum.io/rpc', usdc: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831', usdt: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9' },
-                    { name: 'opt', rpc: 'https://rpc.ankr.com/optimism', usdc: '0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85', usdt: '0x94b008aa00579c1307b0ef2c499ad98a8ce58e58' },
-                    { name: 'poly', rpc: 'https://rpc.ankr.com/polygon', usdc: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359', usdt: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f' }
+                    { name: 'opt', rpc: 'https://mainnet.optimism.io', usdc: '0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85', usdt: '0x94b008aa00579c1307b0ef2c499ad98a8ce58e58' },
+                    { name: 'poly', rpc: 'https://polygon-rpc.com', usdc: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359', usdt: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f' }
                 ]
 
                 const paddedAddr = address.replace('0x', '').padStart(64, '0')
@@ -110,18 +111,18 @@ export const handler = async (req: Request) => {
                 const results = await Promise.all(CHAINS.map(async (c) => {
                     // Native
                     const nativeHex = await rpcCall(c.rpc, 'eth_getBalance', [address, 'latest'])
-                    debugLogs.push(`${c.name} eth_getBalance: ${nativeHex}`)
+                    debugLogs.push(`${c.name} eth_getBalance for ${address}: ${nativeHex}`)
                     if (nativeHex && nativeHex !== '0x' && nativeHex !== '0x0') {
-                        const wei = parseInt(nativeHex, 16)
-                        currentAssets.push({ chain: c.name, currency: 'ETH', amount: wei, amountFloat: wei / 1e18 })
+                        const wei = BigInt(nativeHex)
+                        currentAssets.push({ address, chain: c.name, currency: 'ETH', amount: Number(wei), amountFloat: Number(wei) / 1e18 })
                     }
 
                     // USDC
                     if (c.usdc) {
                         const hex = await rpcCall(c.rpc, 'eth_call', [{ to: c.usdc, data: balanceOfPayload }, 'latest'])
                         if (hex && hex !== '0x' && hex.length > 2) {
-                            const val = parseInt(hex, 16)
-                            if (val > 0) currentAssets.push({ chain: c.name, currency: 'USDC', amount: val, amountFloat: val / 1e6 })
+                            const val = BigInt(hex)
+                            if (val > 0n) currentAssets.push({ address, chain: c.name, currency: 'USDC', amount: Number(val), amountFloat: Number(val) / 1e6 })
                         }
                     }
 
@@ -129,8 +130,8 @@ export const handler = async (req: Request) => {
                     if (c.usdt) {
                         const hex = await rpcCall(c.rpc, 'eth_call', [{ to: c.usdt, data: balanceOfPayload }, 'latest'])
                         if (hex && hex !== '0x' && hex.length > 2) {
-                            const val = parseInt(hex, 16)
-                            if (val > 0) currentAssets.push({ chain: c.name, currency: 'USDT', amount: val, amountFloat: val / 1e6 })
+                            const val = BigInt(hex)
+                            if (val > 0n) currentAssets.push({ address, chain: c.name, currency: 'USDT', amount: Number(val), amountFloat: Number(val) / 1e6 })
                         }
                     }
                 }))
@@ -164,9 +165,9 @@ export const handler = async (req: Request) => {
 
         // For each current asset, subtract what we've already seen
         for (const asset of currentAssets) {
-            // Find sum of previous logs for this specific Chain+Currency
+            // Find sum of previous logs for THIS specific Address + Chain + Currency
             const prevSum = txs
-                ?.filter((t: any) => t.chain === asset.chain && t.currency === asset.currency)
+                ?.filter((t: any) => t.payment_address === asset.address && t.chain === asset.chain && t.currency === asset.currency)
                 .reduce((sum: number, t: any) => sum + Number(t.amount), 0) || 0
 
             const newAmount = asset.amountFloat - prevSum // Compare Floats logic.
@@ -186,11 +187,12 @@ export const handler = async (req: Request) => {
 
                 newTransactionsToLog.push({
                     user_id: userId,
+                    payment_address: asset.address,
                     chain: asset.chain,
                     currency: asset.currency,
                     amount: newAmount, // Log the DELTA
                     duration_days: durationDays,
-                    tx_hash: `detected_${Date.now()}_${asset.chain}_${asset.currency}`
+                    tx_hash: `detected_${Date.now()}_${asset.chain}_${asset.currency}_${asset.address.substring(0, 8)}`
                 })
 
                 if (asset.currency === 'BTC') {
@@ -245,6 +247,7 @@ export const handler = async (req: Request) => {
 
                 return new Response(JSON.stringify({
                     success: true,
+                    new_payment: true, // Distinct flag for new detection
                     premium: true,
                     added_days: daysToAdd,
                     new_expiry: newExpiry
@@ -257,14 +260,23 @@ export const handler = async (req: Request) => {
             }
         }
 
+        // Final Fallback: Fetch latest profile status to ensure app syncs even if no *new* payment found
+        const { data: userProfile } = await supabaseAdmin
+            .from('users')
+            .select('is_premium, subscription_expires_at')
+            .eq('id', userId)
+            .single()
+
         return new Response(JSON.stringify({
             success: false,
+            new_payment: false, // User is premium but no NEW payment was found in this call
             message: 'No new payments detected',
+            premium: userProfile?.is_premium || false,
+            new_expiry: userProfile?.subscription_expires_at,
             debug: {
                 checked_count: pools.length,
                 assets_found: currentAssets,
                 prices: { btc: btcPrice, eth: ethPrice },
-                logs: newTransactionsToLog,
                 rpc_logs: debugLogs
             }
         }), {

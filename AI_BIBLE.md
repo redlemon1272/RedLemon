@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 15, 2026 (Added Landmine #49 & #50 - Scroll & Performance Traps)
+> **Last Updated:** January 16, 2026 (Added Landmines #52-55 - Payment & HD Wallet Traps)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -63,6 +63,10 @@
 | **Can't Scroll Vertically (macOS 15)** | NSScrollView swallowing events | #49 |
 | **Labored/Laggy Scrolling** | 60fps @Published state updates | #50 |
 | **User Flapping (Join/Left/Join)** | Presence keyed by ID instead of Ref | #51 |
+| **"Insufficient funds for gas" on sweep** | Key/Derivation Depth Mismatch | #52 |
+| **Funds detected but not credited** | Aggregate vs Per-Address Reconciliation | #53 |
+| **Payment Success immediately loops** | Missing NEW payment flag distinction | #54 |
+| **Wallet doesn't autofill amount** | Missing EIP-681 'value' in URI | #55 |
 
 ## 🚨 Critical Landmines
 
@@ -199,12 +203,32 @@
 198:     *   **Trigger**: Binding a high-frequency real-time value (like Scroll Offset `CGFloat`) directly to a Global `@Published` property in `AppState`.
 199:     *   **Symptom**: Application becomes extremely sluggish/labored while interacting. CPU usage spikes.
 200:     *   **Cause**: `@Published` triggers `objectWillChange`, forcing **every view in the app observing AppState** to re-evaluate its body 60-120 times per second.
-201:     *   **Rule**: **DEBOUNCE** high-frequency inputs. Do not update `AppState` on every frame. Use a `DispatchWorkItem` to wait for the interaction to *stop* (e.g., 150ms delay) before committing the value to the global state.
-202: 51. **Phoenix Ref Collision Trap (Presence Flapping)**: *(Added v1.0.84)*
-203:     *   **Trigger**: Using `userId` as the key for Realtime Presence handlers instead of the unique `phx_ref`.
-204:     *   **Symptom**: Users erroneously appear to "Leave" and then "Join" instantly (flap) during metadata updates (e.g., status change).
-205:     *   **Cause**: Phoenix Presence updates send a `leave` (old ref) and `join` (new ref) simultaneously. If keyed by `userId`, the `leave` event for the *old* ref deletes the dictionary entry entirely, momentarily removing the user before the `join` (new ref) is processed.
-206:     *   **Rule**: `SupabaseRealtimeClient` MUST iterate over the `metas` array and use `phx_ref` as the unique key for callbacks. Consumers (like `SocialService`) must manage a set of refs per user (`[UserId: [PhxRef: Metadata]]`). User is "Offline" only when their ref count drops to zero.
+    *   **Trigger**: Binding a high-frequency real-time value (like Scroll Offset `CGFloat`) directly to a Global `@Published` property in `AppState`.
+    *   **Symptom**: Application becomes extremely sluggish/labored while interacting. CPU usage spikes.
+    *   **Cause**: `@Published` triggers `objectWillChange`, forcing **every view in the app observing AppState** to re-evaluate its body 60-120 times per second.
+    *   **Rule**: **DEBOUNCE** high-frequency inputs. Do not update `AppState` on every frame. Use a `DispatchWorkItem` to wait for the interaction to *stop* (e.g., 150ms delay) before committing the value to the global state.
+51. **Phoenix Ref Collision Trap (Presence Flapping)**: *(Added v1.0.84)*
+    *   **Trigger**: Using `userId` as the key for Realtime Presence handlers instead of the unique `phx_ref`.
+    *   **Symptom**: Users erroneously appear to "Leave" and then "Join" instantly (flap) during metadata updates (e.g., status change).
+    *   **Cause**: Phoenix Presence updates send a `leave` (old ref) and `join` (new ref) simultaneously. If keyed by `userId`, the `leave` event for the *old* ref deletes the dictionary entry entirely, momentarily removing the user before the `join` (new ref) is processed.
+    *   **Rule**: `SupabaseRealtimeClient` MUST iterate over the `metas` array and use `phx_ref` as the unique key for callbacks. Consumers (like `SocialService`) must manage a set of refs per user (`[UserId: [PhxRef: Metadata]]`). User is "Offline" only when their ref count drops to zero.
+
+### 52-55: Payments & HD Wallets
+52. **HD Wallet Derivation Depth (XPRV Trap)**: *(Added v1.0.85)*
+    *   **Trigger**: Sweep function fails with "Insufficient funds" or "Key mismatch" when address balance is clearly > 0.
+    *   **Cause**: If the `XPRV_EVM` is derived at the "External/Change" level (`m/44'/60'/0'/0`), you **must** use `deriveChild(index)`. Using a path string like `m/0/index` relative to that key will result in the wrong private key.
+    *   **Rule**: Always verify the derived public address against the database address before attempting a sweep. If they don't match, FAIL and log "Key mismatch".
+53. **Per-Address Reconciliation**: *(Added v1.0.85)*
+    *   **Trigger**: User pays, but credit isn't applied or is applied incorrectly across multiple addresses.
+    *   **Cause**: Checking the "Total User Balance" (aggregate) fails if old "legacy" addresses still have tiny remnants of funds. The logic confuses old dust with new payments.
+    *   **Rule**: Scan all active pools, but subtract `prevSum` of transactions **only for that specific address+currency**. This isolates payments to the current active address.
+54. **Success Confirmation Robustness**: *(Added v1.0.85)*
+    *   **Trigger**: UI immediately skips to "Success" for an already premium user, or stays stuck on "Waiting" even after payment.
+    *   **Rule**: (1) Server must return a `new_payment` boolean flag. (2) UI must capture `initialExpiry` on appear. SUCCESS is triggered if `new_payment == true` OR `currentExpiry > initialExpiry`.
+55. **EIP-681 URI Compatibility**: *(Added v1.0.85)*
+    *   **Trigger**: Wallet apps (MetaMask, Trust, Ledger) show "0 ETH" instead of the requested amount.
+    *   **Rule**: Crypto URIs must include BOTH `value` (in WEI for modern EIP-681) and `amount` (in ETH for legacy/human-readable).
+    *   **Format**: `ethereum:ADDRESS?value=WEI&amount=ETH`
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)
@@ -367,9 +391,17 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
   - **$10.00+** = 90 days
 - **Note**: Actual code thresholds are slightly lower ($3.80/$6.80/$9.80) to account for price fluctuations.
 
-### `sweep-payments`
+### `sweep-payments` (The "Janitor")
 - **Trigger**: Daily cron (9:10 AM UTC).
-- **Logic**: Sweeps balances >$1.50 to master wallet.
+- **Scanner Logic**: 
+  - Iterates through `payment_pools` with status `assigned` or `used`.
+  - Verifies Private Key against stored Address before processing.
+  - Sweeps any balance >$1.50 after ensuring master wallet gas holds.
+
+## 🩺 Payment Symptom Checker (Vitals)
+- **Pulse Check**: If `check-payment` finds funds but doesn't credit, check `payment_transactions` for the address.
+- **Gas Check**: If sweeps fail, verify Master Wallet has native ETH on the target chain.
+- **Key Check**: Run `scripts/derive-xprv.js` with the master seed to verify the derivation chain matches `assign-address`.
 
 ## Master Wallet
 - **Address**: `0x33E53714ef5dc4d28A5Ea1FD3df16E86cf6223b9`

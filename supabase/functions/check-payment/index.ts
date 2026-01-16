@@ -153,10 +153,19 @@ export const handler = async (req: Request) => {
 
 
         // 5. Compare with DB History
-        const { data: txs } = await supabaseAdmin
-            .from('payment_transactions')
-            .select('*')
-            .eq('user_id', userId)
+        const [txsResult, sweepsResult] = await Promise.all([
+            supabaseAdmin
+                .from('payment_transactions')
+                .select('*')
+                .eq('user_id', userId),
+            supabaseAdmin
+                .from('payment_sweeps')
+                .select('*')
+                .eq('user_id', userId)
+        ])
+
+        const txs = txsResult.data || []
+        const sweeps = sweepsResult.data || []
 
         let totalNewUsdValue = 0
         const newTransactionsToLog: any[] = []
@@ -166,10 +175,20 @@ export const handler = async (req: Request) => {
         for (const asset of currentAssets) {
             // Find sum of previous logs for this specific Chain+Currency
             const prevSum = txs
-                ?.filter((t: any) => t.chain === asset.chain && t.currency === asset.currency)
+                .filter((t: any) => t.chain === asset.chain && t.currency === asset.currency)
                 .reduce((sum: number, t: any) => sum + Number(t.amount), 0) || 0
 
-            const newAmount = asset.amountFloat - prevSum // Compare Floats logic.
+            // Find sum of swept funds (ONLY for Native Assets like ETH)
+            // Function currently only sweeps Native ETH
+            let sweptSum = 0
+            if (asset.currency === 'ETH') {
+                 sweptSum = sweeps
+                    .filter((s: any) => s.chain === asset.chain) // Sweeps store 'chain' (e.g. 'base')
+                    .reduce((sum: number, s: any) => sum + Number(s.amount), 0) || 0
+            }
+
+            // Calculation: (Current Balance + Swept Amount) - Total Logged History
+            const newAmount = (asset.amountFloat + sweptSum) - prevSum
 
             if (newAmount > 0.000001) { // Epsilon check
                 let usdVal = 0
@@ -217,12 +236,23 @@ export const handler = async (req: Request) => {
             if (daysToAdd > 0) {
                 const { data: userData } = await supabaseAdmin
                     .from('users')
-                    .select('subscription_expires_at')
+                    .select('subscription_expires_at, hosting_streak')
                     .eq('id', userId)
                     .single()
 
                 let currentExpiry = userData?.subscription_expires_at ? new Date(userData.subscription_expires_at) : new Date()
-                if (currentExpiry < new Date()) currentExpiry = new Date()
+                const currentStreak = userData?.hosting_streak || 0
+                let newStreak = currentStreak
+
+                // PRESTIGE LOGIC:
+                // If extending an active subscription (currentExpiry > now), increment streak.
+                // If expired or new (currentExpiry < now), reset streak to 0 (Base Premium).
+                if (currentExpiry > new Date()) {
+                    newStreak += 1
+                } else {
+                    currentExpiry = new Date() // Reset expiry start to now
+                    newStreak = 0
+                }
 
                 const newExpiry = new Date(currentExpiry.getTime() + (daysToAdd * 24 * 60 * 60 * 1000))
 
@@ -230,7 +260,8 @@ export const handler = async (req: Request) => {
                     .from('users')
                     .update({
                         subscription_expires_at: newExpiry.toISOString(),
-                        is_premium: true
+                        is_premium: true,
+                        hosting_streak: newStreak
                     })
                     .eq('id', userId)
 

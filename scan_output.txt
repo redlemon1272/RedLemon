@@ -1,0 +1,59 @@
+[0;34m[1m
+╔════════════════════════════════════════════════════════════════╗
+║          🏗️  RedLemon Architecture Scanner                     ║
+╚════════════════════════════════════════════════════════════════╝
+[0m
+
+[0;36m[1m>>> Check 1: Regression Prevention (BrowseView)[0m
+[0;36m------------------------------------------------------------[0m
+[0;32m✅ BrowseView is clean (No LazyVStack).[0m
+
+[0;36m[1m>>> Check 2: Modern Concurrency (Landmine #25)[0m
+[0;36m------------------------------------------------------------[0m
+
+[0;36m[1m>>> Check 3: Privacy & Path Safety (Landmine #29)[0m
+[0;36m------------------------------------------------------------[0m
+
+[0;36m[1m>>> Check 4: Safe Logging (Landmine #11)[0m
+[0;36m------------------------------------------------------------[0m
+
+[0;36m[1m>>> Check 5: Silent Async Failures (Landmine #43)[0m
+[0;36m------------------------------------------------------------[0m
+
+[0;36m[1m>>> Check 6: ID Case Sensitivity (Landmine #37)[0m
+[0;36m------------------------------------------------------------[0m
+[1;33m⚠️  WARNING [Landmine #37]:[0m ID comparison using '=='. String IDs must use .caseInsensitiveCompare()
+   📍 Sources/Features/Player/ChatOverlayView.swift:730
+   [0;34m"lhs.userId == rhs.userId &&"[0m
+
+[1;33m⚠️  WARNING [Landmine #37]:[0m ID comparison using '=='. String IDs must use .caseInsensitiveCompare()
+   📍 Sources/Features/Player/ChatOverlayView.swift:736
+   [0;34m"lhs.currentUserId == rhs.currentUserId &&"[0m
+
+
+[0;36m[1m>>> Check 11: Phoenix Ref Collision (Landmine #51)[0m
+[0;36m------------------------------------------------------------[0m
+
+[0;36m[1m>>> Check 8: Async Scroll Race (Landmine #48)[0m
+[0;36m------------------------------------------------------------[0m
+[1;33m⚠️  WARNING [Landmine #48]:[0m Scroll Race Risk: Verify this is guarded by '!items.isEmpty'. See AI Bible.
+   📍 Sources/Features/Player/ChatOverlayView.swift:316
+   [0;34m"proxy.scrollTo(lastId, anchor: .bottom)"[0m
+
+
+[0;36m[1m>>> Check 9: High-Frequency State (Landmine #50)[0m
+[0;36m------------------------------------------------------------[0m
+
+[0;36m[1m>>> Check 10: macOS 15 Scroll Swallowing (Landmine #49)[0m
+[0;36m------------------------------------------------------------[0m
+
+[0;36m[1m>>> Check 12: Native Context Menus (Landmine #57)[0m
+[0;36m------------------------------------------------------------[0m
+
+[1m════════════════════════════════════════════════════════════════[0m
+[1m                     SCAN COMPLETE                              [0m
+[1m════════════════════════════════════════════════════════════════[0m
+[0;32m✅ ERRORS: 0[0m
+[1;33m⚠️  WARNINGS: 3[0m
+
+💡 To suppress a violation, append [1m// OK[0m or [1m// legacy[0m to the line.

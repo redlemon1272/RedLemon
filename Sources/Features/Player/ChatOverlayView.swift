@@ -268,7 +268,22 @@ struct ChatOverlayView: View {
 
                         // Show message (masked if muted)
                         VStack(alignment: .leading, spacing: 4) {
-                            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: false, isPremium: message.isPremium, isSenderHost: false)
+                            UserMenuView(
+                                username: message.username,
+                                userId: message.senderId,
+                                isSystem: message.isSystem,
+                                isHost: false,
+                                isPremium: message.isPremium,
+                                isSenderHost: false,
+                                timestamp: message.timestamp.toMessageTime(),
+                                currentUserId: appState.currentUserId?.uuidString,
+                                friends: socialService.friends,
+                                onMenuTrigger: { target in
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        self.activeMenuTarget = target
+                                    }
+                                }
+                            )
 
                             if isMuted {
                                 Text("Message muted")
@@ -297,7 +312,8 @@ struct ChatOverlayView: View {
             }
             .onChange(of: eventChatService.messages.count) { _ in
                 if let lastId = eventChatService.messages.last?.id {
-                     withAnimation { proxy.scrollTo(lastId, anchor: .bottom) } // OK: Guarded by lastId check
+                     // OPTIMIZATION: Remove animation for join events to prevent thrashing
+                     proxy.scrollTo(lastId, anchor: .bottom) // OK: Guarded by lastId check
                 }
             }
         }
@@ -325,7 +341,22 @@ struct ChatOverlayView: View {
         let isSenderHost = (message.senderId != nil && hostId != nil && message.senderId!.caseInsensitiveCompare(hostId!) == .orderedSame)
 
         return VStack(alignment: .leading, spacing: 4) {
-            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost, isPremium: message.isPremium, isSenderHost: isSenderHost, timestamp: message.timestamp.toMessageTime())
+            UserMenuView(
+                username: message.username,
+                userId: message.senderId,
+                isSystem: message.isSystem,
+                isHost: viewModel.isWatchPartyHost,
+                isPremium: message.isPremium,
+                isSenderHost: isSenderHost,
+                timestamp: message.timestamp.toMessageTime(),
+                currentUserId: appState.currentUserId?.uuidString,
+                friends: socialService.friends,
+                onMenuTrigger: { target in
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        self.activeMenuTarget = target
+                    }
+                }
+            )
 
             if isMuted {
                 Text("Message muted")
@@ -680,25 +711,47 @@ struct ChatOverlayView: View {
 
     @State private var activeMenuTarget: MenuTarget? = nil
 
-    private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, isSenderHost: Bool, timestamp: String? = nil) -> some View {
-        let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: username))
+    // OPTIMIZATION: Extracted to Struct to enable View caching
+    struct UserMenuView: View, Equatable {
+        let username: String
+        let userId: String?
+        let isSystem: Bool
+        let isHost: Bool
+        let isPremium: Bool
+        let isSenderHost: Bool
+        let timestamp: String?
+        let currentUserId: String?
+        let friends: [Friend] // Needed for isFriend check
+        let onMenuTrigger: (MenuTarget) -> Void
 
-        if isSystem {
-            return AnyView(
-                Text(username)
-                    .font(.caption.weight(.semibold))
-                    .foregroundColor(nameColor)
-            )
+        // Custom Equatable conformance to prevent re-renders when parent changes unrelated state
+        static func == (lhs: UserMenuView, rhs: UserMenuView) -> Bool {
+            return lhs.username == rhs.username &&
+                   (lhs.userId ?? "").caseInsensitiveCompare(rhs.userId ?? "") == .orderedSame &&
+                   lhs.isSystem == rhs.isSystem &&
+                   lhs.isHost == rhs.isHost &&
+                   lhs.isPremium == rhs.isPremium &&
+                   lhs.isSenderHost == rhs.isSenderHost &&
+                   lhs.timestamp == rhs.timestamp &&
+                   (lhs.currentUserId ?? "").caseInsensitiveCompare(rhs.currentUserId ?? "") == .orderedSame &&
+                   // Deep check friends list? No, check if friendship status for THIS user changed.
+                   // Approximate: if friends count changed, re-render.
+                   lhs.friends.count == rhs.friends.count
         }
 
-        let uid = userId ?? ""
-        let myId = appState.currentUserId?.uuidString ?? ""
-        let isMe = uid.caseInsensitiveCompare(myId) == .orderedSame
-        let isFriend = socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(uid) == .orderedSame })
+        var body: some View {
+            let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: username))
 
-        // If it's me, just show text (no actions)
-        if isMe {
-            return AnyView(
+            if isSystem {
+                 Text(username)
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(nameColor)
+            } else {
+                let uid = userId ?? ""
+                let myId = currentUserId ?? ""
+                let isMe = uid.caseInsensitiveCompare(myId) == .orderedSame
+                let isFriend = friends.contains(where: { $0.id.caseInsensitiveCompare(uid) == .orderedSame })
+
                 HStack(spacing: 4) {
                     Text(username)
                         .font(.caption.weight(.semibold))
@@ -707,10 +760,10 @@ struct ChatOverlayView: View {
                     if isSenderHost {
                         Text("Host")
                             .font(.caption2.weight(.bold))
-                            .foregroundColor(.accentColor)
+                            .foregroundColor(DesignSystem.Colors.accent)
                             .padding(.horizontal, 4)
                             .padding(.vertical, 1)
-                            .background(Color.accentColor.opacity(0.15))
+                            .background(DesignSystem.Colors.accent.opacity(0.15))
                             .cornerRadius(4)
                     }
 
@@ -726,55 +779,24 @@ struct ChatOverlayView: View {
                             .foregroundColor(.white.opacity(0.4))
                             .padding(.leading, 4)
                     }
-                }
-            )
-        }
 
-        return AnyView(
-            HStack(spacing: 4) {
-                Text(username)
-                    .font(.caption.weight(.semibold))
-                    .foregroundColor(nameColor)
-
-                if isSenderHost {
-                    Text("Host")
-                        .font(.caption2.weight(.bold))
-                        .foregroundColor(DesignSystem.Colors.accent)
-                        .padding(.horizontal, 4)
-                        .padding(.vertical, 1)
-                        .background(DesignSystem.Colors.accent.opacity(0.15))
-                        .cornerRadius(4)
-                }
-
-                if isPremium {
-                    Text("👑")
-                        .font(.system(size: 10))
-                        .help("Premium User")
-                }
-
-                if let timestamp = timestamp {
-                    Text(timestamp)
-                        .font(.caption2)
-                        .foregroundColor(.white.opacity(0.4))
-                        .padding(.leading, 4)
-                }
-
-                // Custom Menu Trigger (Non-Blocking)
-                Button(action: {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        self.activeMenuTarget = MenuTarget(id: uid, username: username, isFriend: isFriend, isHost: isHost)
+                    if !isMe {
+                        // Custom Menu Trigger (Non-Blocking)
+                        Button(action: {
+                            onMenuTrigger(MenuTarget(id: uid, username: username, isFriend: isFriend, isHost: isHost))
+                        }) {
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundColor(.white.opacity(0.5))
+                                .frame(width: 16, height: 16)
+                                .background(Color.white.opacity(0.1))
+                                .clipShape(Circle())
+                        }
+                        .buttonStyle(.plain)
                     }
-                }) {
-                    Image(systemName: "chevron.down")
-                        .font(.system(size: 10, weight: .bold))
-                        .foregroundColor(.white.opacity(0.5))
-                        .frame(width: 16, height: 16)
-                        .background(Color.white.opacity(0.1))
-                        .clipShape(Circle())
                 }
-                .buttonStyle(.plain)
             }
-        )
+        }
     }
 
     // Custom Overlay View

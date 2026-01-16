@@ -89,13 +89,13 @@ struct MediaDetailView: View {
                                             .shadow(color: .black.opacity(0.8), radius: 20, x: 0, y: 10)
                                     } placeholder: {
                                         Text(mediaItem.name)
-                                            .font(.system(size: 48, weight: .bold))
+                                            .font(.system(size: 56, weight: .bold))
                                             .foregroundColor(.white)
                                             .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 5)
                                     }
                                 } else {
                                     Text(mediaItem.name)
-                                        .font(.system(size: 48, weight: .bold))
+                                        .font(.system(size: 56, weight: .bold))
                                         .foregroundColor(.white)
                                         .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 5)
                                         .multilineTextAlignment(.center)
@@ -108,7 +108,7 @@ struct MediaDetailView: View {
                             HStack(spacing: 20) {
                                 if let year = metadata?.year {
                                     Text(year)
-                                        .font(.title3)
+                                        .font(.title2)
                                         .fontWeight(.medium)
                                         .foregroundColor(.white.opacity(0.9))
                                 }
@@ -118,7 +118,7 @@ struct MediaDetailView: View {
                                         Image(systemName: "star.fill")
                                             .foregroundColor(.yellow)
                                         Text(String(format: "%.1f", imdbRating))
-                                            .font(.title3)
+                                            .font(.title2)
                                             .fontWeight(.medium)
                                             .foregroundColor(.white.opacity(0.9))
                                     }
@@ -126,7 +126,7 @@ struct MediaDetailView: View {
 
                                 if let genres = metadata?.genres, !genres.isEmpty {
                                     Text(genres.prefix(2).joined(separator: " • "))
-                                        .font(.title3)
+                                        .font(.title2)
                                         .foregroundColor(.white.opacity(0.7))
                                 }
                             }
@@ -135,10 +135,10 @@ struct MediaDetailView: View {
                             // Synopsis
                             if let description = metadata?.description {
                                 Text(description)
-                                    .font(.body)
+                                    .font(.title3)
                                     .foregroundColor(.white.opacity(0.85))
                                     .multilineTextAlignment(.center)
-                                    .lineLimit(4)
+                                    .lineLimit(6)
                                     .frame(maxWidth: min(geometry.size.width * 0.8, 900))
                                     .padding(.horizontal, max(30, geometry.size.width * 0.05))
                                     .padding(.top, 24)
@@ -149,11 +149,11 @@ struct MediaDetailView: View {
                                 if let director = metadata?.director {
                                     VStack(spacing: 4) {
                                         Text("DIRECTOR")
-                                            .font(.caption)
+                                            .font(.subheadline)
                                             .fontWeight(.semibold)
                                             .foregroundColor(.white.opacity(0.5))
                                         Text(director)
-                                            .font(.subheadline)
+                                            .font(.body)
                                             .foregroundColor(.white.opacity(0.9))
                                     }
                                 }
@@ -161,11 +161,11 @@ struct MediaDetailView: View {
                                 if let cast = metadata?.cast, !cast.isEmpty {
                                     VStack(spacing: 4) {
                                         Text("STARRING")
-                                            .font(.caption)
+                                            .font(.subheadline)
                                             .fontWeight(.semibold)
                                             .foregroundColor(.white.opacity(0.5))
                                         Text(cast.prefix(3).joined(separator: ", "))
-                                            .font(.subheadline)
+                                            .font(.body)
                                             .foregroundColor(.white.opacity(0.9))
                                             .multilineTextAlignment(.center)
                                             .lineLimit(2)
@@ -181,7 +181,7 @@ struct MediaDetailView: View {
                                     // Season Picker
                                     VStack(alignment: .leading, spacing: 8) {
                                         Text("SEASON")
-                                            .font(.caption)
+                                            .font(.subheadline)
                                             .fontWeight(.semibold)
                                             .foregroundColor(.white.opacity(0.7))
 
@@ -204,7 +204,7 @@ struct MediaDetailView: View {
                                     if !episodesInSeason.isEmpty {
                                         VStack(alignment: .leading, spacing: 8) {
                                             Text("EPISODE")
-                                                .font(.caption)
+                                                .font(.subheadline)
                                                 .fontWeight(.semibold)
                                                 .foregroundColor(.white.opacity(0.7))
 
@@ -231,16 +231,16 @@ struct MediaDetailView: View {
                                             let isFuture = isDateInFuture(released)
                                             HStack(spacing: 6) {
                                                 Image(systemName: "calendar")
-                                                    .font(.caption)
+                                                    .font(.subheadline)
                                                     .foregroundColor(.white.opacity(0.6))
                                                 Text(formatDate(released))
-                                                    .font(.caption)
+                                                    .font(.subheadline)
                                                     .fontWeight(isFuture ? .bold : .medium)
                                                     .foregroundColor(isFuture ? .orange : .white.opacity(0.8))
 
                                                 if isFuture {
                                                     Text("(Unreleased)")
-                                                        .font(.caption)
+                                                        .font(.subheadline)
                                                         .fontWeight(.bold)
                                                         .foregroundColor(.orange)
                                                 }
@@ -250,7 +250,7 @@ struct MediaDetailView: View {
 
                                         if let overview = currentEpisode.overview, !overview.isEmpty {
                                             Text(overview)
-                                                .font(.subheadline)
+                                                .font(.body)
                                                 .foregroundColor(.white.opacity(0.7))
                                                 .multilineTextAlignment(.center)
                                                 .lineLimit(3)
@@ -262,42 +262,41 @@ struct MediaDetailView: View {
                             }
 
 
-                            HStack(spacing: 24) {
-                            // Watch Now Button
-                            Button(action: {
-                                appState.player.selectedMediaItem = mediaItem
-                                if mediaItem.type == "series" {
-                                    appState.selectedSeason = selectedSeason
-                                    appState.selectedEpisode = selectedEpisode
-                                }
-                                appState.currentView = .qualitySelection
-                            }) {
-                                HStack(spacing: 12) {
-                                    Image(systemName: "play.fill")
-                                        .font(.system(size: 18, weight: .semibold))
+                            // Action Buttons
+                            VStack(spacing: 16) {
+                                // Watch Now Button
+                                Button(action: {
+                                    appState.player.selectedMediaItem = mediaItem
                                     if mediaItem.type == "series" {
-                                        Text("Watch S\(selectedSeason)E\(selectedEpisode)")
-                                            .font(.system(size: 18, weight: .semibold))
-                                    } else {
-                                        Text("Watch Now")
-                                            .font(.system(size: 18, weight: .semibold))
+                                        appState.selectedSeason = selectedSeason
+                                        appState.selectedEpisode = selectedEpisode
                                     }
-                                }
-                                .foregroundColor(.white)
-                                .frame(width: min(max(240, geometry.size.width * 0.3), 350), height: 56)
-                                .background(
-                                    LinearGradient(
-                                        colors: [Color.blue, Color.blue.opacity(0.8)],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
+                                    appState.currentView = .qualitySelection
+                                }) {
+                                    HStack(spacing: 12) {
+                                        Image(systemName: "play.fill")
+                                            .font(.system(size: 18, weight: .semibold))
+                                        if mediaItem.type == "series" {
+                                            Text("Watch S\(selectedSeason)E\(selectedEpisode)")
+                                                .font(.system(size: 18, weight: .semibold))
+                                        } else {
+                                            Text("Watch Now")
+                                                .font(.system(size: 18, weight: .semibold))
+                                        }
+                                    }
+                                    .foregroundColor(.white)
+                                    .frame(width: min(max(240, geometry.size.width * 0.3), 350), height: 56)
+                                    .background(
+                                        LinearGradient(
+                                            colors: [Color.blue, Color.blue.opacity(0.8)],
+                                            startPoint: .leading,
+                                            endPoint: .trailing
+                                        )
                                     )
-                                )
-                                .cornerRadius(12)
-                                .shadow(color: .blue.opacity(0.5), radius: 20, x: 0, y: 10)
-                            }
-                            .buttonStyle(.plain)
-                            .padding(.top, 40)
-                            .padding(.bottom, 60)
+                                    .cornerRadius(12)
+                                    .shadow(color: .blue.opacity(0.5), radius: 20, x: 0, y: 10)
+                                }
+                                .buttonStyle(.plain)
 
                                 // Add to Library Button
                                 Button(action: {
@@ -311,14 +310,14 @@ struct MediaDetailView: View {
                                         )
                                     }
                                 }) {
-                                    VStack(spacing: 6) {
-                                        Image(systemName: libraryManager.contains(mediaItem.id) ? "checkmark" : "plus")
-                                            .font(.system(size: 22, weight: .bold))
-                                        Text(libraryManager.contains(mediaItem.id) ? "My Library" : "Add to Library")
-                                            .font(.system(size: 11, weight: .bold))
+                                    HStack(spacing: 10) {
+                                        Image(systemName: libraryManager.contains(mediaItem.id) ? "checkmark.circle.fill" : "plus.circle")
+                                            .font(.system(size: 20, weight: .bold))
+                                        Text(libraryManager.contains(mediaItem.id) ? "In Your Library" : "Add to Library")
+                                            .font(.system(size: 15, weight: .bold))
                                     }
                                     .foregroundColor(.white)
-                                    .frame(width: 80, height: 56)
+                                    .frame(width: min(max(240, geometry.size.width * 0.3), 350), height: 56)
                                     .background(
                                         libraryManager.contains(mediaItem.id)
                                         ? Color.green.opacity(0.8)
@@ -331,9 +330,9 @@ struct MediaDetailView: View {
                                     )
                                 }
                                 .buttonStyle(.plain)
-                                .padding(.top, 40)
-                                .padding(.bottom, 60)
-                            } // End HStack
+                            }
+                            .padding(.top, 40)
+                            .padding(.bottom, 60)
                         }
                         .frame(maxWidth: .infinity)
                     }

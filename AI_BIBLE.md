@@ -923,16 +923,17 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 **Mandatory 9-Step Sequence:**
 1.  **Sync Main (Pre-Flight)**: Run `git pull origin main`. Resolve any merge conflicts **HERE**, on the feature branch.
     -   *Why*: Prevents "Merge Conflict" landmines during Step 9.
-2.  **Code & Build**: Run `./build-app-debug.sh`. Verify 0 errors.
-3.  **Scans (Mandatory)**: Run `./scripts/security-scan.sh` AND `./scripts/architecture-scan.sh`.
+2.  **Scans (Fast Fail)**: Run `./scripts/security-scan.sh` AND `./scripts/architecture-scan.sh`.
+    -   **Why**: Instant feedback. Fails immediately if landmines exist. Saves build time.
     -   **Security**: Fix **CRITICAL** issues immediately.
     -   **Architecture**: Fix **ERRORS** (e.g. Landmines #11, #37, #43). Warnings for legacy code (#25) are acceptable if labeled `// legacy`.
+3.  **Code & Build (Dry Run)**: Run `./build-app-debug.sh`. Verify 0 errors.
 4.  **User Validation (GATE)**: Ask user to test. **DO NOT PROCEED** without confirmation.
 5.  **Git Push**: Run `git push origin <branch>` to ensure remote is up to date (Change Log depends on this!).
 6.  **Generate Notes**: Run `./scripts/get-changelog.sh` to grab the list of changes since the last release. Copy the output.
 7.  **Release Script**: Run `./scripts/release.sh <VERSION> <BUILD> "<PASTE_NOTES_HERE>"`.
     -   *Action*: Builds -> Packages DMG -> Signs -> Deploys to Server.
-8.  **Appcast Sync**: Commit and push the auto-updated `appcast.xml`, `README.md`, and `build-app-debug.sh` to GitHub.
+8.  **Appcast Sync**: Commit and push the auto-updated `appcast.xml`, `README.md`, `build-app-debug.sh`, and `RedLemon-Installer.sha256` to GitHub.
 9.  **Merge & Tag**: Run `./scripts/merge-and-tag.sh <VERSION>` (e.g., `v1.0.71`) to merge the feature branch into `main` and create the release tag.
     -   *Action*: Fetches origin -> Checkouts main -> Merges branch (Fast-Forward) -> Tags -> Pushes Main & Tag -> Returns to Branch.
 

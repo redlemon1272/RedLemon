@@ -68,8 +68,22 @@ export async function handler(req: Request): Promise<Response> {
         // Process each pool address
         for (const pool of pools ?? []) {
             try {
-                // Derive the wallet for this index
-                const userWallet = masterNode.derivePath(`${pool.derivation_path_index}`)
+                // Derive the wallet for this index - matching the derivation used in assign-address
+                // Since XPRV_EVM is already at m/44'/60'/0'/0, we only need to derive the final index.
+                const userWallet = masterNode.deriveChild(pool.derivation_path_index)
+                console.log(`[Sweep] Pool ${pool.id} (Index ${pool.derivation_path_index}): DB=${pool.address}, Derived=${userWallet.address}`)
+
+                // SAFETY CHECK: Verify derived address matches the recorded address
+                if (userWallet.address.toLowerCase() !== pool.address.toLowerCase()) {
+                    console.warn(`[Sweep] Key mismatch for pool ${pool.id}: DB=${pool.address}, Derived=${userWallet.address}. Skipping sweep.`)
+                    sweepResults.push({
+                        chain: 'all',
+                        from: pool.address,
+                        status: 'skipped',
+                        message: 'Key mismatch (XPRV changed)'
+                    })
+                    continue;
+                }
 
                 // Check balance on each chain
                 for (const [chainName, rpcUrl] of Object.entries(RPC_ENDPOINTS)) {
@@ -96,43 +110,55 @@ export async function handler(req: Request): Promise<Response> {
                             // Calculate amount to send (balance - gas with buffer)
                             const amountToSend = balance - gasCostWithBuffer
 
-                            console.log(`[Sweep] Balance: ${balance}, Gas cost (with 20% buffer): ${gasCostWithBuffer}, Amount to send: ${amountToSend}`)
+                            console.log(`[Sweep] ${chainName} Balance: ${balance}, Gas cost: ${gasCostWithBuffer}, Amount: ${amountToSend}`)
 
                             if (amountToSend > 0n) {
-                                // Send transaction using EIP-1559 format for better compatibility
-                                const tx = await connectedWallet.sendTransaction({
-                                    to: masterAddress,
-                                    value: amountToSend,
-                                    gasLimit: gasLimit,
-                                    maxFeePerGas: feeData.maxFeePerGas ?? feeData.gasPrice,
-                                    maxPriorityFeePerGas: feeData.maxPriorityFeePerGas ?? 0n
-                                })
+                                // Send transaction
+                                try {
+                                    const tx = await connectedWallet.sendTransaction({
+                                        to: masterAddress,
+                                        value: amountToSend,
+                                        gasLimit: gasLimit,
+                                        maxFeePerGas: feeData.maxFeePerGas ?? feeData.gasPrice,
+                                        maxPriorityFeePerGas: feeData.maxPriorityFeePerGas ?? 0n
+                                    })
 
-                                console.log(`[Sweep] TX sent: ${tx.hash}`)
+                                    console.log(`[Sweep] ${chainName} TX sent: ${tx.hash}`)
 
-                                // Wait for confirmation
-                                const receipt = await tx.wait()
+                                    // Wait for confirmation (short timeout for edge function)
+                                    const receipt = await tx.wait(1)
 
-                                sweepResults.push({
-                                    chain: chainName,
-                                    from: pool.address,
-                                    to: masterAddress,
-                                    amount: formatEther(amountToSend),
-                                    txHash: tx.hash,
-                                    status: receipt?.status === 1 ? 'success' : 'failed',
-                                    user_id: pool.assigned_to_user_id
-                                })
+                                    sweepResults.push({
+                                        chain: chainName,
+                                        from: pool.address,
+                                        to: masterAddress,
+                                        amount: formatEther(amountToSend),
+                                        txHash: tx.hash,
+                                        status: receipt?.status === 1 ? 'success' : 'failed',
+                                        user_id: pool.assigned_to_user_id
+                                    })
 
-                                // Log to database
-                                await supabase.from('payment_sweeps').insert({
-                                    from_address: pool.address,
-                                    to_address: masterAddress,
-                                    chain: chainName,
-                                    amount: formatEther(amountToSend),
-                                    tx_hash: tx.hash,
-                                    user_id: pool.assigned_to_user_id,
-                                    status: receipt?.status === 1 ? 'success' : 'failed'
-                                })
+                                    // Log to database
+                                    await supabase.from('payment_sweeps').insert({
+                                        from_address: pool.address,
+                                        to_address: masterAddress,
+                                        chain: chainName,
+                                        amount: formatEther(amountToSend),
+                                        tx_hash: tx.hash,
+                                        user_id: pool.assigned_to_user_id,
+                                        status: receipt?.status === 1 ? 'success' : 'failed'
+                                    })
+                                } catch (txError: any) {
+                                    console.error(`[Sweep] ${chainName} TX failed: ${txError.message}`)
+                                    sweepResults.push({
+                                        chain: chainName,
+                                        from: pool.address,
+                                        status: 'failed',
+                                        error: txError.message
+                                    })
+                                }
+                            } else {
+                                console.warn(`[Sweep] ${chainName} balance too low to cover gas: ${balanceEth} ETH`)
                             }
                         }
                     } catch (chainError: any) {

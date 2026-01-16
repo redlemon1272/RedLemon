@@ -69,7 +69,7 @@ class LicenseManager: ObservableObject {
         var sweepExpiry: Date? = nil
 
         do {
-            (sweepPremium, sweepExpiry) = try await SupabaseClient.shared.checkPaymentStatus()
+            (sweepPremium, sweepExpiry, _) = try await SupabaseClient.shared.checkPaymentStatus()
         } catch {
              print("⚠️ LicenseManager: Payment sweep failed (non-fatal): \(error)")
         }

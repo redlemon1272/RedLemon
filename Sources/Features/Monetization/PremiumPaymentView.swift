@@ -17,6 +17,7 @@ struct PremiumPaymentView: View {
     @State private var selectedPlan: String = "$4"
     @State private var exchangeRates: (btc: Double, eth: Double)?
     @State private var freeLimitSeconds: TimeInterval?
+    @State private var initialExpiry: Date?
 
     enum Chain: String, CaseIterable, Identifiable {
         case evm = "evm"
@@ -287,6 +288,11 @@ struct PremiumPaymentView: View {
             , alignment: .topTrailing
         )
         .onAppear {
+            // Capture initial expiry to detect extensions
+            if licenseManager.subscriptionExpiresAt > 0 {
+                initialExpiry = Date(timeIntervalSince1970: licenseManager.subscriptionExpiresAt)
+            }
+
             Task {
                 await loadAddress()
                 await fetchRates()
@@ -335,18 +341,25 @@ struct PremiumPaymentView: View {
         isCheckingPayment = true
 
         do {
-            let (isPremium, newExpiry) = try await SupabaseClient.shared.checkPaymentStatus()
+            let (isPremium, newExpiry, isNewPayment) = try await SupabaseClient.shared.checkPaymentStatus()
 
+            // Update LicenseManager silently
             if isPremium {
-                LogManager.shared.info("✅ Payment Confirmed! Expires: \(String(describing: newExpiry))")
-                stopPolling()
                 licenseManager.refreshLicense(premium: true, expiresAt: newExpiry)
+            }
+
+            // Check if payment was successful (either flag is true OR expiry date advanced)
+            let expiryAdvanced = (newExpiry != nil && initialExpiry != nil && newExpiry! > initialExpiry!)
+                                || (newExpiry != nil && initialExpiry == nil && isPremium)
+
+            if isNewPayment || expiryAdvanced {
+                LogManager.shared.info("✅ Payment Success Detected! (New: \(isNewPayment), Advanced: \(expiryAdvanced))")
+                stopPolling()
                 withAnimation {
                     showSuccess = true
                 }
             } else if manual {
-                 // Creating a simple alert via state or just log
-                 LogManager.shared.warning("⚠️ Manual payment check: Not confirmed yet")
+                 LogManager.shared.warning("⚠️ Manual check: No new payment or expiry advancement detected")
             }
         } catch {
             LogManager.shared.error("❌ Check payment failed", error: error)

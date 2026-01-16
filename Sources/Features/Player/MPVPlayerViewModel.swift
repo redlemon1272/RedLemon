@@ -3060,6 +3060,8 @@ extension MPVPlayerViewModel {
                             guard let self = self else { return }
                             if !self.pendingChatMessages.isEmpty {
                                 self.messages.append(contentsOf: self.pendingChatMessages)
+                                // FORENSIC LOG: Validate batching efficiency
+                                LoggingManager.shared.debug(.social, message: "⚖️ [BATCH FLUSH] Added \(self.pendingChatMessages.count) messages in single UI update")
                                 self.pendingChatMessages.removeAll()
                                 self.trimChatMessages()
                             }

@@ -65,7 +65,7 @@ class LobbyPresenceManager: ObservableObject {
             // Deduplicate pending joins against CURRENT participants
             // (in case they were already added by polling or re-join)
             var toAdd: [Participant] = []
-            var namesToLog: [String] = []
+
 
             for newP in pendingJoins {
                 // Update existing
@@ -73,7 +73,7 @@ class LobbyPresenceManager: ObservableObject {
                     viewModel.participants[index] = newP
                 } else {
                     toAdd.append(newP)
-                    namesToLog.append(newP.name)
+
                 }
             }
 
@@ -81,16 +81,9 @@ class LobbyPresenceManager: ObservableObject {
                 viewModel.participants.append(contentsOf: toAdd)
             }
 
-            // Batched System Message
-            if !namesToLog.isEmpty {
-                if namesToLog.count > 3 {
-                    viewModel.chatManager.addSystemMessage(.userJoined, userName: "\(namesToLog.count) users")
-                } else {
-                    for name in namesToLog {
-                         viewModel.chatManager.addSystemMessage(.userJoined, userName: name)
-                    }
-                }
-            }
+            // DUPLICATE PREVENTION:
+            // We rely on the explicit LOBBY_JOIN broadcast (handled in LobbyEventRouter.swift) for "User Joined" messages.
+            // This prevents duplicate messages during connection flapping or re-syncs.
 
             pendingJoins.removeAll()
         }
@@ -185,10 +178,8 @@ class LobbyPresenceManager: ObservableObject {
                             }
                         }
 
-                        // If it's a new Realtime connection, show the toast even if they were in DB list
-                        if isNewConnection {
-                            viewModel.chatManager.addSystemMessage(.userJoined, userName: viewModel.participants[index].name)
-                        }
+                        // If it's a new Realtime connection, we accept it for connection tracking.
+                        // Chat Notification is handled by LOBBY_JOIN broadcast to prevent duplicates.
                     } else {
                         // New user
                         var username = "Guest"

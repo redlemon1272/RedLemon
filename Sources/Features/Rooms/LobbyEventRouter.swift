@@ -122,7 +122,9 @@ class LobbyEventRouter: ObservableObject {
              NSLog("👋 Host received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
              NSLog("   Guest ID: %@, Total participants: %d", guestId, viewModel.participants.count + 1)
 
-             // Presence callback handles this already. Removing to prevent double messages.
+             // Presence callback handles this already, BUT it may suppress the message if the user is reconnecting (flapping).
+             // We explicitly add the message here on LOBBY_JOIN to ensure the intent is logged in chat.
+             viewModel.chatManager.addSystemMessage(.userJoined, userName: guestUsername)
              // But we add to local list just in case (though presence should sync it)
              let guest = Participant(
                  id: guestId,

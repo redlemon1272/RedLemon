@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.108 -->
+        <item>
+            <title>Version 1.0.108</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix(payments): Corrected HD wallet derivation path depth (Landmine #52).</li><li>fix(payments): Implemented per-address reconciliation to prevent legacy balance interference (Landmine #53).</li><li>feat(payments): Added new_payment flag to server and enhanced UI confirmation logic (Landmine #54).</li><li>feat(payments): Added EIP-681 compatible URIs for better wallet app support (Landmine #55).</li><li>fix(build): Resolved build failure in LicenseManager.swift due to changed return signature.</li><li>docs: Updated AI Bible with new Payment & HD Wallet safety mandates.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 00:48:48 -0500</pubDate>
+            <sparkle:version>108</sparkle:version>
+            <sparkle:shortVersionString>1.0.108</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.108.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="7H2da6fCUj0yzMjF3D8IxaJ3klQwNAb1WYGOyqYDLNnAGSEmd2tQ/4TXAeBFf4XtayynENXWYB+ygSQqNRMJBA==" length="72674796"
+            />
+        </item>
         <!-- v1.0.107 -->
         <item>
             <title>Version 1.0.107</title>

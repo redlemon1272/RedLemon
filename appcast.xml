@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.112 -->
+        <item>
+            <title>Version 1.0.112</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <ul><li>Fix: Replace native context menu with custom overlay to eliminate video stutter/frame drops (Landmine #25 Main Thread Block).</li></ul>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 04:32:20 -0500</pubDate>
+            <sparkle:version>112</sparkle:version>
+            <sparkle:shortVersionString>1.0.112</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.112.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="/vRqtr2QhXnGvfQYjDhzTtMjYYQcDiIz9RdMORUqEc5VVUmeSmgcF3mg4GvT13MRZAzsabcxntNsnksoG89ZCg==" length="72972513"
+            />
+        </item>
         <!-- v1.0.111 -->
         <item>
             <title>Version 1.0.111</title>

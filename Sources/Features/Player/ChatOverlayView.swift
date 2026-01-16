@@ -74,6 +74,7 @@ struct ChatOverlayView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black)
         .compositingGroup() // Optimize transparency blending
+        .overlay(customUserMenuOverlay) // Attach custom non-blocking menu
         .onAppear {
             LoggingManager.shared.debug(.social, message: "ChatOverlayView appeared - UI UPDATE ROUND 6")
             setupInitialMode()
@@ -342,58 +343,23 @@ struct ChatOverlayView: View {
                         .padding(.leading, 4)
                 }
 
-                Menu {
-                Text(username) // Header
-
-                // Friend Actions
-                if isFriend {
-                    Button(action: {
-                        Task { await socialService.removeFriend(friendId: uid) }
-                    }) {
-                        Label("Remove Friend", systemImage: "person.badge.minus")
-                    }
-                } else {
-                    Button(action: {
-                        Task { _ = await socialService.sendRequest(toUserId: uid) }
-                    }) {
-                        Label("Add Friend", systemImage: "person.badge.plus")
-                    }
-                }
-
-                // Mute (Always available)
+                // Custom Menu Trigger (Non-Blocking)
                 Button(action: {
-                    viewModel.toggleMute(userId: uid)
-                }) {
-                    Label(viewModel.mutedUserIds.contains(uid) ? "Unmute User" : "Mute User",
-                          systemImage: viewModel.mutedUserIds.contains(uid) ? "speaker.wave.2" : "speaker.slash")
-                }
-
-                // Block (Always available)
-                 Button(role: .destructive, action: { viewModel.blockUser(uid, username: username) }) {
-                    Label("Block User", systemImage: "slash.circle")
-                }
-
-                // Kick (Host Only)
-                if isHost {
-                    Divider()
-                    Button(role: .destructive, action: { viewModel.kickUser(uid) }) {
-                        Label("Kick User", systemImage: "xmark.circle")
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        self.activeMenuTarget = MenuTarget(id: uid, username: username, isFriend: isFriend, isHost: isHost)
                     }
+                }) {
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(.white.opacity(0.5))
+                        .frame(width: 16, height: 16)
+                        .background(Color.white.opacity(0.1))
+                        .clipShape(Circle())
                 }
-            } label: {
-                Image(systemName: "chevron.down")
-                    .font(.system(size: 10, weight: .bold))
-                    .foregroundColor(.white.opacity(0.5))
-                    .frame(width: 16, height: 16)
-                    .background(Color.white.opacity(0.1))
-                    .clipShape(Circle())
-            }
-            .menuStyle(.borderlessButton)
-            .menuIndicator(.hidden)
+                .buttonStyle(.plain)
             }
         )
     }
-
     private var eventChatList: some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -797,6 +763,144 @@ struct ChatOverlayView: View {
 
     private var totalUnreadCount: Int {
         socialService.unreadCounts.values.reduce(0, +)
+    }
+
+    private var rxEmojiBar: some View {
+        EmptyView()
+    }
+
+    // MARK: - Custom User Menu (Non-Blocking)
+
+    // Identify target user for menu
+    struct MenuTarget: Equatable, Identifiable {
+        let id: String // userId
+        let username: String
+        let isFriend: Bool
+        let isHost: Bool // Is the user a host?
+    }
+
+    @State private var activeMenuTarget: MenuTarget? = nil
+
+
+
+    // Custom Overlay View
+    private var customUserMenuOverlay: some View {
+        ZStack {
+            if let target = activeMenuTarget {
+                // Dimmed Background - Click to dismiss
+                Color.black.opacity(0.4)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        withAnimation { activeMenuTarget = nil }
+                    }
+
+                // Menu Content
+                VStack(spacing: 0) {
+                    Text(target.username)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding(.vertical, 12)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.white.opacity(0.1))
+
+                    Divider().background(Color.white.opacity(0.1))
+
+                    // Add/Remove Friend
+                    Button(action: {
+                        if target.isFriend {
+                            Task { await socialService.removeFriend(friendId: target.id) }
+                        } else {
+                            Task { _ = await socialService.sendRequest(toUserId: target.id) }
+                        }
+                        withAnimation { activeMenuTarget = nil }
+                    }) {
+                        HStack {
+                            Image(systemName: target.isFriend ? "person.badge.minus" : "person.badge.plus")
+                            Text(target.isFriend ? "Remove Friend" : "Add Friend")
+                            Spacer()
+                        }
+                        .padding(12)
+                        .foregroundColor(.white)
+                    }
+                    .buttonStyle(.plain)
+
+                    Divider().background(Color.white.opacity(0.1))
+
+                    // Mute
+                    let isMuted = viewModel.mutedUserIds.contains(target.id)
+                    Button(action: {
+                        viewModel.toggleMute(userId: target.id)
+                        withAnimation { activeMenuTarget = nil } // Optional: Keep open? Better to close.
+                    }) {
+                        HStack {
+                            Image(systemName: isMuted ? "speaker.wave.2" : "speaker.slash")
+                            Text(isMuted ? "Unmute User" : "Mute User")
+                            Spacer()
+                        }
+                        .padding(12)
+                        .foregroundColor(.white)
+                    }
+                    .buttonStyle(.plain)
+
+                    Divider().background(Color.white.opacity(0.1))
+
+                    // Block
+                    Button(action: {
+                        viewModel.blockUser(target.id, username: target.username)
+                        withAnimation { activeMenuTarget = nil }
+                    }) {
+                        HStack {
+                            Image(systemName: "slash.circle")
+                            Text("Block User")
+                            Spacer()
+                        }
+                        .padding(12)
+                        .foregroundColor(.red.opacity(0.8))
+                    }
+                    .buttonStyle(.plain)
+
+                    // Host Options
+                    if viewModel.isWatchPartyHost { // I am host
+                        Divider().background(Color.white.opacity(0.1))
+                        Button(action: {
+                            viewModel.kickUser(target.id)
+                            withAnimation { activeMenuTarget = nil }
+                        }) {
+                             HStack {
+                                Image(systemName: "xmark.circle")
+                                Text("Kick User")
+                                Spacer()
+                            }
+                            .padding(12)
+                            .foregroundColor(.red)
+                        }
+                        .buttonStyle(.plain)
+                    }
+
+                    // Cancel/Close
+                    Divider().background(Color.white.opacity(0.1))
+                    Button(action: {
+                        withAnimation { activeMenuTarget = nil }
+                    }) {
+                        Text("Close")
+                            .font(.caption)
+                            .foregroundColor(.white.opacity(0.5))
+                            .padding(10)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.plain)
+                }
+                .frame(width: 220)
+                .background(Color(red: 0.1, green: 0.1, blue: 0.1).opacity(0.95))
+                .cornerRadius(12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                )
+                .shadow(radius: 20)
+                .transition(.scale(scale: 0.9).combined(with: .opacity))
+            }
+        }
     }
 
     private var reactionBar: some View {

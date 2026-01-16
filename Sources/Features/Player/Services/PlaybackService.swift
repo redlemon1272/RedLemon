@@ -12,7 +12,7 @@ protocol PlaybackService: Actor {
     var volume: Double { get }
     var isBuffering: Bool { get }
     var isFileLoaded: Bool { get }
-    
+
     // Actions
     func loadVideo(url: String, autoplay: Bool, expectedSubtitleCount: Int) async
     func play() async
@@ -22,7 +22,7 @@ protocol PlaybackService: Actor {
     func seek(to time: Double) async
     func setVolume(_ level: Double) async
     func setSpeed(_ speed: Double) async
-    
+
     // Publishers
     // Publishers
     var isPlayingPublisher: AnyPublisher<Bool, Never> { get }
@@ -36,7 +36,7 @@ protocol PlaybackService: Actor {
 
 /// Actor-based implementation of PlaybackService
 actor MPVPlaybackService: PlaybackService {
-    
+
     // MARK: - State
     @Published var videoURL: String = ""
     @Published var isPlaying: Bool = false
@@ -46,7 +46,7 @@ actor MPVPlaybackService: PlaybackService {
     @Published var volume: Double = 100.0
     @Published var isBuffering: Bool = false
     @Published var isFileLoaded: Bool = false
-    
+
     // MARK: - Publishers
     var isPlayingPublisher: AnyPublisher<Bool, Never> { $isPlaying.eraseToAnyPublisher() }
     var playbackFinishedPublisher: AnyPublisher<Bool, Never> { $playbackFinished.eraseToAnyPublisher() }
@@ -55,119 +55,119 @@ actor MPVPlaybackService: PlaybackService {
     var videoURLPublisher: AnyPublisher<String, Never> { $videoURL.eraseToAnyPublisher() }
     var isBufferingPublisher: AnyPublisher<Bool, Never> { $isBuffering.eraseToAnyPublisher() }
     var isFileLoadedPublisher: AnyPublisher<Bool, Never> { $isFileLoaded.eraseToAnyPublisher() }
-    
+
     // MARK: - Dependencies
     private weak var mpvController: (any MPVController)?
     private var observers: [Task<Void, Never>] = []
-    
+
     // MARK: - Initialization
     init(mpvController: any MPVController) {
         self.mpvController = mpvController
         Task { await setupObservers() }
     }
-    
+
     deinit {
         for observer in observers {
             observer.cancel()
         }
-        
+
         // Ensure assertion is released if actor is deallocated while playing
         if let assertion = sleepAssertion {
             ProcessInfo.processInfo.endActivity(assertion)
         }
     }
-    
+
     // MARK: - Protocol Implementation
-    
+
     func loadVideo(url: String, autoplay: Bool, expectedSubtitleCount: Int) async {
         self.videoURL = url
         mpvController?.loadVideo(url: url, autoplay: autoplay, expectedSubtitleCount: expectedSubtitleCount)
     }
-    
+
     func play() async {
         mpvController?.play()
     }
-    
+
     func pause() async {
         mpvController?.pause()
     }
-    
+
     func togglePlayPause() async {
         mpvController?.togglePlayPause()
     }
-    
+
     func stop() async {
         mpvController?.stop()
     }
-    
+
     func seek(to time: Double) async {
         mpvController?.seek(to: time)
     }
-    
+
     func setVolume(_ level: Double) async {
         self.volume = level
         mpvController?.setVolume(Int(level))
     }
-    
+
     func setSpeed(_ speed: Double) async {
         mpvController?.setSpeed(speed)
     }
-    
+
     // MARK: - Observers
-    
+
     private func setupObservers() {
         guard let mpv = mpvController else { return }
-        
+
         observers.append(Task { [weak self] in
             for await playing in mpv.isPlayingPublisher.values {
                 await self?.updateIsPlaying(playing)
             }
         })
-        
+
         observers.append(Task { [weak self] in
             for await finished in mpv.playbackFinishedPublisher.values {
                 await self?.updatePlaybackFinished(finished)
             }
         })
-        
+
         observers.append(Task { [weak self] in
             for await time in mpv.currentTimePublisher.values {
                 await self?.updateCurrentTime(time)
             }
         })
-        
+
         observers.append(Task { [weak self] in
             for await dur in mpv.durationPublisher.values {
                 await self?.updateDuration(dur)
             }
         })
-        
+
         observers.append(Task { [weak self] in
             for await buffering in mpv.isBufferingPublisher.values {
                 await self?.updateIsBuffering(buffering)
             }
         })
-        
+
         observers.append(Task { [weak self] in
             for await loaded in mpv.isFileLoadedPublisher.values {
                 await self?.updateIsFileLoaded(loaded)
             }
         })
     }
-    
+
     // MARK: - State Updates (Internal)
-    
+
     // Sleep Prevention
     private var sleepAssertion: NSObjectProtocol?
 
-    private func updateIsPlaying(_ playing: Bool) { 
+    private func updateIsPlaying(_ playing: Bool) {
         self.isPlaying = playing
-        
+
         if playing {
             if sleepAssertion == nil {
                 LoggingManager.shared.debug(.videoRendering, message: "PlaybackService: creating sleep assertion (preventing idle sleep)")
                 sleepAssertion = ProcessInfo.processInfo.beginActivity(
-                    options: [.userInitiated, .idleSystemSleepDisabled], 
+                    options: [.userInitiated, .idleSystemSleepDisabled, .idleDisplaySleepDisabled],
                     reason: "RedLemon Video Playback"
                 )
             }

@@ -152,6 +152,10 @@ class EventChatService: ObservableObject {
          }
      }
     
+    // Batching State
+    private var pendingChatMessages: [ChatMessage] = []
+    private var isFlushingChat: Bool = false
+
     private func handleSyncMessage(_ message: SyncMessage) {
         guard message.type == .chat,
               let text = message.chatText,
@@ -174,11 +178,29 @@ class EventChatService: ObservableObject {
             senderId: message.senderId,
             isPremium: message.isPremium ?? false
         )
-        self.messages.append(chatMessage)
         
-        // Limit message count
-        if self.messages.count > 100 {
-            self.messages.removeFirst(self.messages.count - 100)
+        // BATCHING LOGIC (Ported from MPVPlayerViewModel)
+        pendingChatMessages.append(chatMessage)
+
+        if !isFlushingChat {
+            isFlushingChat = true
+            Task { @MainActor [weak self] in
+                try? await Task.sleep(nanoseconds: 200_000_000) // 200ms Buffer
+                guard let self = self else { return }
+                
+                if !self.pendingChatMessages.isEmpty {
+                    self.messages.append(contentsOf: self.pendingChatMessages)
+                    // FORENSIC LOG: Validate batching efficiency
+                    LoggingManager.shared.debug(.social, message: "⚖️ [EVENT BATCH] Added \(self.pendingChatMessages.count) messages in single UI update")
+                    self.pendingChatMessages.removeAll()
+                    
+                    // Limit message count
+                    if self.messages.count > 100 {
+                        self.messages.removeFirst(self.messages.count - 100)
+                    }
+                }
+                self.isFlushingChat = false
+            }
         }
     }
     

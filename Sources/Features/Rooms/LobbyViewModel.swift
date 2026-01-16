@@ -587,6 +587,11 @@ class LobbyViewModel: ObservableObject {
                      )
                      if let manager = realtimeManager {
                          try? await manager.sendSyncMessage(joinMsg)
+
+                         // Echo join message locally for the sender (since we don't receive our own broadcast)
+                         await MainActor.run {
+                             self.addMessage(.userJoined, userName: guestName)
+                         }
                      }
                 }
 

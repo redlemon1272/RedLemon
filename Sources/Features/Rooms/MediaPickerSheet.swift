@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MediaPickerSheet: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var appState: AppState
     @StateObject private var apiClient = LocalAPIClient.shared
 
     // Search State
@@ -20,6 +21,13 @@ struct MediaPickerSheet: View {
     @State private var isLoadingEpisodes = false
     @State private var seriesMetadata: MediaMetadata?
     @State private var selectedEpisodes: Set<Int> = [] // Helper for multi-select
+
+    // Picker Mode
+    enum PickerMode {
+        case browse
+        case library
+    }
+    @State private var selectedMode: PickerMode = .browse
 
     // Callback now supports bulk
     let onSelect: (MediaItem, Int?, Int?) -> Void
@@ -44,8 +52,28 @@ struct MediaPickerSheet: View {
                 // EPISODE SELECTION VIEW
                 episodeSelectionView(series: series)
             } else {
-                // SEARCH / DISCOVERY VIEW
-                searchAndDiscoveryView
+                // MODE SWITCHER
+                 VStack(spacing: 0) {
+                     Picker("Mode", selection: $selectedMode) {
+                         Text("Search & Trending").tag(PickerMode.browse)
+                         Text("My Library").tag(PickerMode.library)
+                     }
+                     .pickerStyle(.segmented)
+                     .padding()
+                     .background(Color.white.opacity(0.05))
+                     .onChange(of: selectedMode) { _ in
+                         // Reset search query when switching to Library to show full filter opts
+                         if selectedMode == .library {
+                             searchQuery = "" // Defaults to "All"
+                         }
+                     }
+
+                     if selectedMode == .browse {
+                         searchAndDiscoveryView
+                     } else {
+                         libraryView
+                     }
+                 }
             }
         }
         .frame(width: 1100, height: 550) // Fixed size contained within app
@@ -400,7 +428,7 @@ struct MediaPickerSheet: View {
                                             .font(.headline)
                                             .foregroundColor(.white)
                                             .lineLimit(1)
-                                        
+
                                         // Air Date
                                         if let released = episode.released {
                                             let isFuture = isDateInFuture(released)
@@ -409,7 +437,7 @@ struct MediaPickerSheet: View {
                                                     .font(.caption2)
                                                     .foregroundColor(isFuture ? .orange : .white.opacity(0.6))
                                                     .fontWeight(isFuture ? .bold : .regular)
-                                                
+
                                                 if isFuture {
                                                     Text("UNRELEASED")
                                                         .font(.caption2)
@@ -451,16 +479,85 @@ struct MediaPickerSheet: View {
 
     // MARK: - Logic
 
+    // MARK: - Library View
+
+    var libraryView: some View {
+        VStack(spacing: 20) {
+            // Filter
+             HStack {
+                 Spacer()
+                 Picker("Filter", selection: $searchQuery) { // Reusing searchQuery as filter binding for simplicity or add new state
+                     Text("All").tag("")
+                     Text("Movies").tag("movie")
+                     Text("TV Shows").tag("series")
+                 }
+                 .pickerStyle(.segmented)
+                 .frame(width: 300)
+                 Spacer()
+             }
+             .padding(.top, 10)
+
+            ScrollView {
+                 let items = LibraryManager.shared.libraryItems.filter { item in
+                     if searchQuery == "movie" { return item.type == "movie" }
+                     if searchQuery == "series" { return item.type == "series" }
+                     return true
+                 }
+
+                 if items.isEmpty {
+                     VStack(spacing: 16) {
+                         Spacer().frame(height: 50)
+                         Image(systemName: "books.vertical")
+                             .font(.system(size: 48))
+                             .foregroundColor(.white.opacity(0.3))
+                         Text("Your library is empty")
+                             .font(.title3)
+                             .foregroundColor(.white.opacity(0.5))
+                         Text(searchQuery.isEmpty ? "Add items from the detail view." : "No items match your filter.")
+                             .font(.caption)
+                             .foregroundColor(.white.opacity(0.4))
+                     }
+                 } else {
+                     LazyVGrid(columns: columns, spacing: 20) {
+                         ForEach(items, id: \.id) { item in
+                             // Convert LibraryItem to MediaItem
+                             let mediaItem = MediaItem(
+                                id: item.id,
+                                type: item.type,
+                                name: item.name,
+                                poster: item.posterURL, // Correct property
+                                background: nil,
+                                logo: nil,
+                                description: nil,
+                                releaseInfo: nil,
+                                year: item.year,
+                                imdbRating: nil,
+                                genres: nil,
+                                runtime: nil
+                             )
+
+                             Button(action: { handleSelection(mediaItem) }) {
+                                 MediaPickerCard(item: mediaItem)
+                             }
+                             .buttonStyle(PlainButtonStyle())
+                         }
+                     }
+                     .padding(20)
+                 }
+            }
+        }
+    }
+
     private func formatDate(_ dateString: String) -> String {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullDate]
-        
+
         if let date = formatter.date(from: dateString) {
             let displayFormatter = DateFormatter()
             displayFormatter.dateStyle = .medium
             return displayFormatter.string(from: date)
         }
-        
+
         let simpleFormatter = DateFormatter()
         simpleFormatter.dateFormat = "yyyy-MM-dd"
         if let date = simpleFormatter.date(from: dateString) {
@@ -468,40 +565,61 @@ struct MediaPickerSheet: View {
             displayFormatter.dateStyle = .medium
             return displayFormatter.string(from: date)
         }
-        
+
         return dateString
     }
-    
+
     private func isDateInFuture(_ dateString: String) -> Bool {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withFullDate]
         var date: Date? = formatter.date(from: dateString)
-        
+
         if date == nil {
             let simpleFormatter = DateFormatter()
             simpleFormatter.dateFormat = "yyyy-MM-dd"
             date = simpleFormatter.date(from: dateString)
         }
-        
+
         guard let validDate = date else { return false }
         return validDate > Date()
     }
 
+    // MARK: - Logic Implementation
+
     private func loadTrending() {
+        // Only load if in browse mode
+        guard selectedMode == .browse else { return }
+
+        // Use AppState's popular movies if available (same as Browse View)
+        if !appState.popularMovies.isEmpty {
+            self.trendingItems = appState.popularMovies
+            return
+        }
+
         Task {
             do {
-                // Just search for a common term or use a fixed list if API supported trending.
-                // For simplified "Trending", we can search for a popular keyword or year.
-                // Or let's just leave it empty if we don't have a dedicated trending endpoint,
-                // but user asked for "Browse view".  We can try query "2024" or "A".
-                // Better: Let's search for "popular" manually if needed.
-                // Actually, let's try an empty search if the API supports it, or "the".
-                let movies = try await apiClient.searchMedia(query: "the", type: "movie")
+                // Fetch popular movies to match Browse View
+                let movies = try await apiClient.fetchPopularMovies()
+
                 await MainActor.run {
-                    self.trendingItems = Array(movies.prefix(12))
+                    // Update local state
+                    self.trendingItems = movies
+                    // Update AppState for consistency
+                    if self.appState.popularMovies.isEmpty {
+                        self.appState.popularMovies = movies
+                    }
                 }
             } catch {
                 print("Failed to load trending: \(error)")
+                // Fallback to simple search if fetchPopular fails
+                 do {
+                    let fallback = try await apiClient.searchMedia(query: "the", type: "movie")
+                    await MainActor.run {
+                         self.trendingItems = Array(fallback.prefix(12))
+                    }
+                 } catch {
+                     print("Fallback failed: \(error)")
+                 }
             }
         }
     }

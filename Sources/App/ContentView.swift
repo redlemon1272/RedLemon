@@ -70,6 +70,14 @@ struct ContentView: View {
                         }
 
                         SidebarButton(
+                            title: "Library",
+                            icon: "books.vertical.fill",
+                            isSelected: appState.currentView == .library
+                        ) {
+                            appState.currentView = .library
+                        }
+
+                        SidebarButton(
                             title: "Search",
                             icon: "magnifyingglass",
                             isSelected: appState.currentView == .search
@@ -138,6 +146,8 @@ struct ContentView: View {
                         EventsView()
                     case .discover:
                         DiscoverView()
+                    case .library:
+                        LibraryView()
                     case .search:
                         SearchView()
                     case .friends:
@@ -242,7 +252,7 @@ struct ContentView: View {
                             let vmId = appState.activeLobbyViewModel?.room.id ?? "nil"
                             LoggingManager.shared.warn(.watchParty, message: "⚠️ Lobby: Session mismatch (AppState: \(vmId) vs Room: \(room.id)) - Creating fallback VM")
                         }()
-                        
+
                         let isHost = appState.player.isWatchPartyHost
                         let newVM = LobbyViewModel(room: room, isHost: isHost)
                         // Trigger async update to store it
@@ -736,7 +746,7 @@ struct StreamErrorView: View {
                         .buttonStyle(.plain)
                         .disabled(isReporting)
                         .shadow(radius: 5)
-                        
+
                         if let errorMessage = errorMessage {
                             Text(errorMessage)
                                 .font(.caption)
@@ -782,20 +792,20 @@ struct StreamErrorView: View {
             )
         }
     }
-    
+
     // Logic to upload the log
     private func submitReport() {
         isReporting = true
         errorMessage = nil
-        
+
         Task {
             // 1. Capture the log
             let log = await SessionRecorder.shared.getSanitizedLog()
-            
+
             do {
                 // 2. Upload to Supabase 'session_logs' table
                 try await SupabaseClient.shared.uploadSessionLog(log: log)
-                
+
                 // 3. Update UI to show Success
                 await MainActor.run {
                     isReporting = false
@@ -803,10 +813,10 @@ struct StreamErrorView: View {
                         reportSent = true
                     }
                 }
-                
+
                 // 4. Wait 2 seconds then Close Player
                 try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
-                
+
                 await MainActor.run {
                     appState.player.streamError = nil
                     appState.currentView = .mediaDetail

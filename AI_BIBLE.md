@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 16, 2026 (Updated Landmine #59 - Async State Debouncing)
+> **Last Updated:** January 16, 2026 (Part 19: Satellite-First Release Protocol)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -930,23 +930,23 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 3. **Forcing**: Use `sparkle:criticalUpdate="true"` for mandatory fixes.
 4. **Key Verification**: Agents MUST verify presence of Private Sparkle Key in Keychain (`./.build/artifacts/sparkle/bin/sign_update` check) BEFORE starting build.
 
-## Release Protocol (The "Part 19" Standard)
-**Mandatory 9-Step Sequence:**
-1.  **Sync Main (Pre-Flight)**: Run `git pull origin main`. Resolve any merge conflicts **HERE**, on the feature branch.
-    -   *Why*: Prevents "Merge Conflict" landmines during Step 9.
-2.  **Scans (Fast Fail)**: Run `./scripts/security-scan.sh` AND `./scripts/architecture-scan.sh`.
-    -   **Why**: Instant feedback. Fails immediately if landmines exist. Saves build time.
-    -   **Security**: Fix **CRITICAL** issues immediately.
-    -   **Architecture**: Fix **ERRORS** (e.g. Landmines #11, #37, #43). Warnings for legacy code (#25) are acceptable if labeled `// legacy`.
-3.  **Code & Build (Dry Run)**: Run `./build-app-debug.sh`. Verify 0 errors.
+## Release Protocol (The "Satellite-First" Standard)
+**Mandatory 10-Step Sequence:**
+1.  **Sync & Tags (Deep Fetch)**: Run `git fetch origin --tags` and `git pull origin <current_branch>`.
+    -   *Why*: Prevents "Ghost Tags" or version collisions from other sessions.
+2.  **Determine High-Water Mark**: Run `git describe --tags --abbrev=0`.
+    -   **Rule**: Your next Version/Build MUST be strictly greater than this value.
+3.  **Architecture Scan**: Run `./scripts/architecture-scan.sh`.
+    -   *Action*: Fix all **ERRORS** before proceeding.
 4.  **User Validation (GATE)**: Ask user to test. **DO NOT PROCEED** without confirmation.
-5.  **Git Push**: Run `git push origin <branch>` to ensure remote is up to date (Change Log depends on this!).
-6.  **Generate Notes**: Run `./scripts/get-changelog.sh` to grab the list of changes since the last release. Copy the output.
-7.  **Release Script**: Run `./scripts/release.sh <VERSION> <BUILD> "<PASTE_NOTES_HERE>"`.
-    -   *Action*: Builds -> Packages DMG -> Signs -> Deploys to Server.
-8.  **Appcast Sync**: Commit and push the auto-updated `appcast.xml`, `README.md`, `build-app-debug.sh`, and `RedLemon-Installer.sha256` to GitHub.
-9.  **Merge & Tag**: Run `./scripts/merge-and-tag.sh <VERSION>` (e.g., `v1.0.71`) to merge the feature branch into `main` and create the release tag.
-    -   *Action*: Fetches origin -> Checkouts main -> Merges branch (Fast-Forward) -> Tags -> Pushes Main & Tag -> Returns to Branch.
+5.  **Git Push**: Run `git push origin <branch>` to ensure the remote has the latest commits (Changelog relies on this).
+6.  **Generate Notes**: Run `./scripts/get-changelog.sh`. Copy the output.
+7.  **Atomic Release**: Run `./scripts/release.sh <VERSION> <BUILD> "<li><NOTES></li>"`.
+    -   *Action*: Bumps local files -> Builds -> Signs -> Deploys to Server -> Updates `appcast.xml`.
+8.  **Commit Local State**: `git commit -am "chore: release v<VERSION>"` to capture the auto-updated `appcast.xml` and build numbers.
+9.  **Merge & Tag**: Run `./scripts/merge-and-tag.sh v<VERSION>`.
+    -   *Action*: Merges to `main` -> Tags -> Pushes Main & Tags.
+10. **Verify Public Update**: Run `curl -f https://151.243.109.243.nip.io/updates/appcast.xml` to confirm the update is live for users.
 
 ## Anti-Regression Shield (Advisory)
 To prevent reintroducing known bugs ("Landmines"), run the architecture scanner during development:

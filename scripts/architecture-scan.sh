@@ -296,6 +296,22 @@ fi
 
 
 # =============================================================================
+# CHECK 14: Invisible Join Trap (Landmine #59)
+# =============================================================================
+# Trigger: Relying on Broadcast to confirm self-action.
+# Rule: Must have local echo for LOBBY_JOIN.
+print_header "Check 14: Invisible Join Trap (Landmine #59)"
+
+LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
+if [[ -f "$LOBBY_VM" ]]; then
+    # We check for the specific comment indicating local echo logic
+    if ! grep -q "Echo join message locally" "$LOBBY_VM"; then
+         report "ERROR" "Landmine #59" "Missing local echo for LOBBY_JOIN. Ensure LobbyViewModel adds message locally for sender." "$LOBBY_VM" "0" "Missing 'Echo join message locally'"
+    fi
+fi
+
+
+# =============================================================================
 # SUMMARY
 # =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"

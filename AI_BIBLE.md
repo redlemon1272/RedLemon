@@ -48,6 +48,7 @@
 | **"Ghost" / Zombie Room** | Host quit without strong capture | #21, #32 |
 | **Guests Auto-Join Dead Stream** | Stale DB state (is_playing=true) | #35 |
 | **Ghost Join (Host Left)** | Missing DB Verification on Join | #33 |
+| **Missing "Self" Messages** | Expecting Broadcast Echo | #59 |
 | **Updates Fail** | String comparison used instead of Int | #30 |
 | **Missing Streams** | Hardcoded blocklists active | #4 |
 | **Binge Prompt Flicker** | Global Status Reset used | #34 |
@@ -242,6 +243,11 @@
     *   **Cause**: Native macOS menus (`NSMenu`) run in a **nested modal event loop** (`waitingForUser`). This hijacking of the main run loop prevents `libmpv` (and high-frequency `Timer` publishers) from dispatching render events on the main thread, starving the video renderer.
     *   **Rule**: **NEVER** use native `Menu` or `ContextMenu` on player views. You MUST implement **Custom SwiftUI Overlays** (ZStack + Overlay) that mimic menu behavior but remain within the standard SwiftUI render loop.
     *   **Fix Applied**: v1.0.112 replaced Chat Overlay's `NSMenu` with a custom `VStack` overlay to fix stutter.
+59. **The Invisible Join Trap (Lack of Local Echo)**: *(Added v1.0.115)*
+    *   **Trigger**: Relying on Realtime Broadcasts or Presence updates to confirm the sender's own actions.
+    *   **Symptom**: "User Joined" or "Message Sent" appears for everyone *else* but not the sender.
+    *   **Cause**: Supabase Realtime Broadcasts do NOT echo back to the sender by default. Presence events are also unreliable for self-confirmation due to potential race conditions (see #51).
+    *   **Rule**: **Hybrid Strategy**. For any user action (Join/Message), you MUST: (1) **Send** the Broadcast for others, AND (2) **Immediately Update** local state for the sender. Never wait for the network to confirm your own action.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

@@ -126,7 +126,7 @@ actor RealtimeChannelManager: RealtimeService {
         }
 
         // Track presence
-        try await realtimeClient.track(userId: userId, metadata: [
+        try await realtimeClient.track(topic: channelName, userId: userId, metadata: [
             "is_host": isHost,
             "joined_at": Date().timeIntervalSince1970,
             "username": username,
@@ -143,15 +143,18 @@ actor RealtimeChannelManager: RealtimeService {
     // MARK: - Message Subscription
 
     private func setupHandlers() async {
+        guard let roomId = self.roomId else { return }
+        let channelName = "watch-party:\(roomId)"
+
         // Handle broadcast messages
-        await realtimeClient.onBroadcast(event: eventName) { _, payload in
+        await realtimeClient.onBroadcast(topic: channelName, event: eventName) { _, payload in
             Task { [weak self] in
                 await self?.handleBroadcastMessage(payload)
             }
         }
 
         // Handle presence changes
-        self.presenceHandlerId = await realtimeClient.onPresence { action, userId, metadata in
+        self.presenceHandlerId = await realtimeClient.onPresence(topic: channelName) { action, userId, metadata in
             Task { @MainActor in
                 await self.handlePresenceUpdate(action: action, userId: userId, metadata: metadata)
             }
@@ -164,8 +167,8 @@ actor RealtimeChannelManager: RealtimeService {
             }
         }
 
-        // Handle postgres changes
-        self.postgresHandlerId = await realtimeClient.onPostgresChange { payload in
+        // Handle postgres changes (topic-scoped)
+        self.postgresHandlerId = await realtimeClient.onPostgresChange(topic: channelName) { payload in
             Task { [weak self] in
                await self?.handlePostgresChange(payload)
             }
@@ -285,7 +288,8 @@ actor RealtimeChannelManager: RealtimeService {
         NSLog("   Payload keys: %@", payload.keys.joined(separator: ", "))
 
         // Broadcast to channel
-        try await realtimeClient.broadcast(event: eventName, payload: payload)
+        let channelName = "watch-party:\(roomId!)"
+        try await realtimeClient.broadcast(topic: channelName, event: eventName, payload: payload)
         NSLog("✅ Realtime: Message broadcast complete")
     }
 
@@ -352,8 +356,9 @@ actor RealtimeChannelManager: RealtimeService {
     // MARK: - Presence Tracking
 
     private func trackPresence(state: [String: Any]) async throws {
-        guard let userId = userId else { return }
-        try await realtimeClient.track(userId: userId, metadata: state)
+        guard let userId = userId, let roomId = roomId else { return }
+        let channelName = "watch-party:\(roomId)"
+        try await realtimeClient.track(topic: channelName, userId: userId, metadata: state)
     }
 
     func onPresenceChange(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void) {
@@ -406,29 +411,22 @@ actor RealtimeChannelManager: RealtimeService {
         let topic: String? = capturedRoomId.map { "realtime:watch-party:\($0)" }
 
         do {
-            // Only untrack if we are connected
-            if isConnected {
-                print("🔄 Untracking presence...")
-                // CRITICAL FIX: explicit topic to avoid untracking global presence if topic changed
-                if let t = topic {
+            // Only untrack/leave if we have a topic
+            if let t = topic {
+                // Only untrack if we are connected
+                if isConnected {
+                    print("🔄 Untracking presence on \(t)...")
                     try await realtimeClient.untrack(topic: t)
-                } else {
-                    try await realtimeClient.untrack()
+                    print("✅ Presence untracked")
                 }
-                print("✅ Presence untracked")
-            }
 
-            if leaveChannel {
-                print("🔄 Leaving channel...")
-                // CRITICAL FIX: explicit topic to avoid leaving wrong channel
-                if let t = topic {
+                if leaveChannel {
+                    print("🔄 Leaving channel \(t)...")
                     try await realtimeClient.leaveChannel(topic: t)
+                    print("✅ Channel left")
                 } else {
-                    try await realtimeClient.leaveChannel()
+                    print("ℹ️ Keeping channel joined (leaveChannel=false)")
                 }
-                print("✅ Channel left")
-            } else {
-                print("ℹ️ Keeping channel joined (leaveChannel=false)")
             }
 
             if disconnectClient {

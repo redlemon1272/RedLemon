@@ -45,7 +45,7 @@ class EventsConfigService {
                     try await client.connect()
                     try await client.joinChannel("events_config_updates", postgresChanges: changes)
                     
-                    await client.onPostgresChange { [weak self] payload in
+                    await client.onPostgresChange(topic: "events_config_updates") { [weak self] payload in
                         self?.handleRealtimeUpdate(payload)
                     }
                     print("✅ [EventsConfig] Subscribed to realtime schedule updates")

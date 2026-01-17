@@ -530,8 +530,8 @@ struct RoomListView: View {
         // CRITICAL FIX: Use shared client to avoid duplicate sockets and disconnection issues
         let client = SupabaseClient.shared.realtimeClient
 
-        // Subscribe to Postgres Changes on rooms table
-        let handlerId = await client.onPostgresChange { payload in
+        // Subscribe to Postgres Changes on rooms table (topic-scoped)
+        let handlerId = await client.onPostgresChange(topic: "rooms_updates") { payload in
             Task { @MainActor in
                 await self.handleRoomUpdate(payload)
             }

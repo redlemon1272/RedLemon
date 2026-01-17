@@ -71,6 +71,8 @@
 | **Screensaver/Sleep during Playback** | Missing `.idleDisplaySleepDisabled` | #56 |
 | **Video Stutter/Drop when Menu Open** | Native `Menu` blocking main thread (Modal Loop) | #57 |
 | **Double Join / Message Echo** | Race Condition in Connection Logic (Debounce Missing) | #59 |
+| **"Realtime not connected" on Transition** | Multi-channel Interest Collision | #60 |
+| **Join Failed (Duplicate Key)** | Race Condition in `room_participants` Join | #61 |
 
 ## 🚨 Critical Landmines
 
@@ -220,6 +222,17 @@
     *   **Trigger**: User joins lobby, "User Joined" message appears twice.
     *   **Cause**: Connection logic checked `if status == .connected || status == .connecting` and then verified the *underlying* socket state. Since the socket is `false` (not connected *yet*) during `.connecting`, the logic treated it as a "Stale Zombie" and forced a reconnect, launching two parallel connection flows.
     *   **Rule**: Never validate health during a transitional state (`.connecting`). Explicitly **DEBOUNCE** by returning early: `if status == .connecting { return }`. Only perform stale/zombie checks if the high-level status is stable (`.connected`).
+223: 60. **Realtime Multi-Channel Conflicts**: *(Added v1.0.117)*
+224:     *   **Trigger**: Multiple managers (Lobby, Player, Chat) sharing a single `SupabaseRealtimeClient` instance. One manager calls `cleanup()` or `leaveChannel()` during a transition while another still needs the connection.
+225:     *   **Cause**: Global event handlers or global channel management causing one manager to "kill" another's connection or overwrite its handlers.
+226:     *   **Rule**: `SupabaseRealtimeClient` MUST implement **Reference Counting** for topics and **Topic-Scoped Handlers**.
+227:         1. `joinChannel` increments an interest count; `leaveChannel` decrements and only sends `phx_leave` when count is 1.
+228:         2. All handlers (`onBroadcast`, `onPresence`, `onPostgresChange`) MUST be registered with a `topic` key.
+229:         3. Managers MUST call `leaveChannel(topic:)` with an explicit topic.
+230: 61. **Room Participant Duplicate Key (The "Re-Join" Race)**: *(Added v1.0.117)*
+231:     *   **Trigger**: Host returns to Lobby from Player and immediately attempts to `joinRoom` (to ensure presence) while a previous DELETE or staleness check is pending.
+232:     *   **Symptom**: `Supabase API Error: duplicate key value violates unique constraint "room_participants_pkey"`.
+233:     *   **Rule**: `SupabaseClient.joinRoom` MUST be **Idempotent**. It must catch Postgres error `23505` (Unique Violation) and HTTP `409 Conflict` and treat them as success. Never block connection flow due to "user already in room".
 
 ### 52-55: Payments & HD Wallets
 52. **HD Wallet Derivation Depth (XPRV Trap)**: *(Added v1.0.85)*

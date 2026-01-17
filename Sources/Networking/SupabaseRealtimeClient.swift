@@ -14,25 +14,48 @@ actor SupabaseRealtimeClient {
     private var isConnected = false
 
     // MARK: - Message Handling
-    private var messageHandlers: [String: (String, [String: Any]) -> Void] = [:]
-    private var presenceHandlers: [UUID: (PresenceAction, String, [String: Any]?) -> Void] = [:]
+    private var broadcastHandlers: [String: [UUID: (String, [String: Any]) -> Void]] = [:] // topic -> id -> handler
+    private var presenceHandlers: [String: [UUID: (PresenceAction, String, [String: Any]?) -> Void]] = [:] // topic -> id -> handler
     private var connectionHandlers: [UUID: (Bool) -> Void] = [:]
 
     // MARK: - Event Handlers
 
-    func onBroadcast(event: String, handler: @escaping (String, [String: Any]) -> Void) {
-        messageHandlers[event] = handler
+    @discardableResult
+    func onBroadcast(topic: String, event: String, handler: @escaping (String, [String: Any]) -> Void) -> UUID {
+        let id = UUID()
+        let t = topic.hasPrefix("realtime:") ? topic : "realtime:\(topic)"
+        if broadcastHandlers[t] == nil {
+            broadcastHandlers[t] = [:]
+        }
+        broadcastHandlers[t]?[id] = handler
+        return id
+    }
+
+    func removeBroadcastHandler(id: UUID) {
+        for topic in broadcastHandlers.keys {
+            if broadcastHandlers[topic]?.removeValue(forKey: id) != nil {
+                return
+            }
+        }
     }
 
     @discardableResult
-    func onPresence(handler: @escaping (PresenceAction, String, [String: Any]?) -> Void) -> UUID {
+    func onPresence(topic: String, handler: @escaping (PresenceAction, String, [String: Any]?) -> Void) -> UUID {
         let id = UUID()
-        presenceHandlers[id] = handler
+        let t = topic.hasPrefix("realtime:") ? topic : "realtime:\(topic)"
+        if presenceHandlers[t] == nil {
+            presenceHandlers[t] = [:]
+        }
+        presenceHandlers[t]?[id] = handler
         return id
     }
 
     func removePresenceHandler(id: UUID) {
-        presenceHandlers.removeValue(forKey: id)
+        for topic in presenceHandlers.keys {
+            if presenceHandlers[topic]?.removeValue(forKey: id) != nil {
+                return
+            }
+        }
     }
 
     @discardableResult
@@ -47,9 +70,8 @@ actor SupabaseRealtimeClient {
     }
 
     // MARK: - Channel State
-    private var channelName: String?
-    private var realtimeTopic: String?  // Full "realtime:*" topic name
-    private var joinRef: String?
+    private var joinedTopics: [String: String] = [:] // topic -> joinRef
+    private var topicInterestCount: [String: Int] = [:] // topic -> count
     private var heartbeatTask: Task<Void, Error>?
     private var receiveTask: Task<Void, Error>?
     private var messageRef = 0
@@ -145,6 +167,10 @@ actor SupabaseRealtimeClient {
             handler(false)
         }
 
+        // Clear local topic state on full disconnect
+        joinedTopics.removeAll()
+        topicInterestCount.removeAll()
+
         print("✅ Disconnected from Supabase Realtime")
     }
 
@@ -155,12 +181,21 @@ actor SupabaseRealtimeClient {
             throw RealtimeError.notConnected
         }
 
-        self.channelName = channelName
-        self.joinRef = UUID().uuidString
-
         // Supabase Realtime expects channels in format "realtime:*"
         let topic = channelName.hasPrefix("realtime:") ? channelName : "realtime:\(channelName)"
-        self.realtimeTopic = topic
+        
+        // Reference counting
+        let currentCount = topicInterestCount[topic] ?? 0
+        topicInterestCount[topic] = currentCount + 1
+        
+        // If already joined, don't send phx_join again
+        if currentCount > 0 && joinedTopics[topic] != nil {
+            print("📡 Topic \(topic) already joined (interest count: \(currentCount + 1)), skipping phx_join")
+            return
+        }
+
+        let joinRef = UUID().uuidString
+        self.joinedTopics[topic] = joinRef
 
         var config: [String: Any] = [
             "broadcast": ["self": true],
@@ -177,16 +212,27 @@ actor SupabaseRealtimeClient {
             "payload": [
                 "config": config
             ],
-            "ref": joinRef!
+            "ref": joinRef
         ]
 
         try await sendMessage(message)
-        print("📡 Joined channel: \(topic)")
+        print("📡 Joined channel: \(topic) (interest count: 1)")
     }
 
-    func leaveChannel(topic: String? = nil) async throws {
-        // Use provided topic or fall back to current
-        guard let targetTopic = topic ?? realtimeTopic else { return }
+    func leaveChannel(topic: String) async throws {
+        let targetTopic = topic.hasPrefix("realtime:") ? topic : "realtime:\(topic)"
+        
+        // Reference counting
+        let currentCount = topicInterestCount[targetTopic] ?? 0
+        if currentCount > 1 {
+            topicInterestCount[targetTopic] = currentCount - 1
+            print("📡 Topic \(targetTopic) still in use by other managers (interest count: \(currentCount - 1)), skipping phx_leave")
+            return
+        }
+        
+        // Last one out, turn off the lights
+        topicInterestCount.removeValue(forKey: targetTopic)
+        guard joinedTopics[targetTopic] != nil else { return }
 
         let message: [String: Any] = [
             "topic": targetTopic,
@@ -197,28 +243,31 @@ actor SupabaseRealtimeClient {
 
         try await sendMessage(message)
 
-        // Only clear local state if we left the currently tracked channel
-        if targetTopic == self.realtimeTopic {
-            self.channelName = nil
-            self.realtimeTopic = nil
-            self.joinRef = nil
-        }
+        // Clear local state for this topic
+        self.joinedTopics.removeValue(forKey: targetTopic)
+        // Also clear handlers for this topic to prevent memory leaks
+        self.broadcastHandlers.removeValue(forKey: targetTopic)
+        self.presenceHandlers.removeValue(forKey: targetTopic)
+        self.postgresHandlersByTopic.removeValue(forKey: targetTopic)
+        
+        print("📡 Left channel: \(targetTopic)")
     }
 
     func isJoined(to channel: String) -> Bool {
         let topic = channel.hasPrefix("realtime:") ? channel : "realtime:\(channel)"
-        return isConnected && realtimeTopic == topic
+        return isConnected && joinedTopics[topic] != nil
     }
 
     // MARK: - Broadcasting
 
-    func broadcast(event: String, payload: [String: Any]) async throws {
-        guard let topic = realtimeTopic else {
+    func broadcast(topic: String, event: String, payload: [String: Any]) async throws {
+        let t = topic.hasPrefix("realtime:") ? topic : "realtime:\(topic)"
+        guard joinedTopics[t] != nil else {
             throw RealtimeError.notJoined
         }
 
         let message: [String: Any] = [
-            "topic": topic,
+            "topic": t,
             "event": "broadcast",
             "payload": [
                 "type": "broadcast",
@@ -233,13 +282,14 @@ actor SupabaseRealtimeClient {
 
     // MARK: - Presence
 
-    func track(userId: String, metadata: [String: Any]) async throws {
-        guard let topic = realtimeTopic else {
+    func track(topic: String, userId: String, metadata: [String: Any]) async throws {
+        let t = topic.hasPrefix("realtime:") ? topic : "realtime:\(topic)"
+        guard joinedTopics[t] != nil else {
             throw RealtimeError.notJoined
         }
 
         let message: [String: Any] = [
-            "topic": topic,
+            "topic": t,
             "event": "presence",
             "payload": [
                 "type": "presence",
@@ -254,14 +304,14 @@ actor SupabaseRealtimeClient {
         try await sendMessage(message)
     }
 
-    func untrack(topic: String? = nil) async throws {
-        // Use provided topic or fall back to current
-        guard let targetTopic = topic ?? realtimeTopic else {
+    func untrack(topic: String) async throws {
+        let t = topic.hasPrefix("realtime:") ? topic : "realtime:\(topic)"
+        guard joinedTopics[t] != nil else {
             throw RealtimeError.notJoined
         }
 
         let message: [String: Any] = [
-            "topic": targetTopic,
+            "topic": t,
             "event": "presence",
             "payload": [
                 "type": "presence",
@@ -272,9 +322,6 @@ actor SupabaseRealtimeClient {
 
         try await sendMessage(message)
     }
-
-    // MARK: - Event Handlers
-
 
     // MARK: - Private Methods
 
@@ -303,11 +350,11 @@ actor SupabaseRealtimeClient {
 
                     switch message {
                     case .string(let text):
-                        print("📨 Received: \(text)")
+                        // print("📨 Received: \(text)")
                         handleIncomingMessage(text)
                     case .data(let data):
                         if let text = String(data: data, encoding: .utf8) {
-                            print("📨 Received (binary): \(text)")
+                            // print("📨 Received (binary): \(text)")
                             handleIncomingMessage(text)
                         }
                     @unknown default:
@@ -330,7 +377,8 @@ actor SupabaseRealtimeClient {
     private func handleIncomingMessage(_ text: String) {
         guard let data = text.data(using: .utf8),
               let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let event = json["event"] as? String else {
+              let event = json["event"] as? String,
+              let topic = json["topic"] as? String else {
             return
         }
 
@@ -343,16 +391,21 @@ actor SupabaseRealtimeClient {
         case "broadcast":
             if let payload = json["payload"] as? [String: Any],
                let eventName = payload["event"] as? String,
-               let eventPayload = payload["payload"] as? [String: Any],
-               let handler = messageHandlers[eventName] {
-                handler(eventName, eventPayload)
+               let eventPayload = payload["payload"] as? [String: Any] {
+                
+                // Notify topic-specific handlers for this event
+                if let handlers = broadcastHandlers[topic] {
+                    for handler in handlers.values {
+                        handler(eventName, eventPayload)
+                    }
+                }
             }
 
         case "presence_state", "presence_diff":
-            handlePresenceEvent(json)
+            handlePresenceEvent(json, topic: topic)
 
         case "phx_error":
-            print("❌ Realtime error: \(json)")
+            print("❌ Realtime error on \(topic): \(json)")
 
         case "heartbeat":
             // Heartbeat response
@@ -363,35 +416,23 @@ actor SupabaseRealtimeClient {
                let data = payload["data"] as? [String: Any] {
 
                 // CRITICAL STANDARDIZATION: Map raw WebSocket keys to "Standard" Supabase SDK format
-                // This allows consumers to use payload["new"] and payload["eventType"] reliably.
                 var mappedPayload = payload
+                if let type = data["type"] as? String { mappedPayload["eventType"] = type }
+                if let record = data["record"] as? [String: Any] { mappedPayload["new"] = record }
+                if let oldRecord = data["old_record"] as? [String: Any] { mappedPayload["old"] = oldRecord }
+                if let schema = data["schema"] as? String { mappedPayload["schema"] = schema }
+                if let table = data["table"] as? String { mappedPayload["table"] = table }
 
-                // 1. Map event type (UPDATE, INSERT, DELETE)
-                if let type = data["type"] as? String {
-                    mappedPayload["eventType"] = type
-                }
-
-                // 2. Map new record (for INSERT/UPDATE)
-                if let record = data["record"] as? [String: Any] {
-                    mappedPayload["new"] = record
-                }
-
-                // 3. Map old record (for UPDATE/DELETE)
-                if let oldRecord = data["old_record"] as? [String: Any] {
-                    mappedPayload["old"] = oldRecord
-                }
-
-                // 4. Inject schema and table at top level for convenience
-                if let schema = data["schema"] as? String {
-                    mappedPayload["schema"] = schema
-                }
-                if let table = data["table"] as? String {
-                    mappedPayload["table"] = table
-                }
-
-                // Notify postgres handlers with standardized payload
+                // Notify global handlers
                 for handler in postgresHandlers.values {
                     handler(mappedPayload)
+                }
+                
+                // Notify topic-specific handlers
+                if let handlers = postgresHandlersByTopic[topic] {
+                    for handler in handlers.values {
+                        handler(mappedPayload)
+                    }
                 }
             }
 
@@ -400,31 +441,45 @@ actor SupabaseRealtimeClient {
                let status = payload["status"] as? String,
                status == "error" {
                 let msg = payload["message"] as? String ?? "Unknown error"
-                print("❌ Realtime System Error: \(msg)")
-                // We could broadcast this error if needed, but for now just logging it clearly is enough
+                print("❌ Realtime System Error (\(topic)): \(msg)")
             }
 
         default:
-            print("📨 Unknown event: \(event)")
+            print("📨 Unknown event: \(event) on \(topic)")
         }
     }
 
     private var postgresHandlers: [UUID: ([String: Any]) -> Void] = [:]
+    private var postgresHandlersByTopic: [String: [UUID: ([String: Any]) -> Void]] = [:]
 
     @discardableResult
-    func onPostgresChange(handler: @escaping ([String: Any]) -> Void) -> UUID {
+    func onPostgresChange(topic: String? = nil, handler: @escaping ([String: Any]) -> Void) -> UUID {
         let id = UUID()
-        postgresHandlers[id] = handler
+        if let t = topic {
+            let topicName = t.hasPrefix("realtime:") ? t : "realtime:\(t)"
+            if postgresHandlersByTopic[topicName] == nil {
+                postgresHandlersByTopic[topicName] = [:]
+            }
+            postgresHandlersByTopic[topicName]?[id] = handler
+        } else {
+            postgresHandlers[id] = handler
+        }
         return id
     }
 
     func removePostgresChange(id: UUID) {
         postgresHandlers.removeValue(forKey: id)
+        for topic in postgresHandlersByTopic.keys {
+            postgresHandlersByTopic[topic]?.removeValue(forKey: id)
+        }
     }
 
-    private func handlePresenceEvent(_ json: [String: Any]) {
+    private func handlePresenceEvent(_ json: [String: Any], topic: String) {
         guard let payload = json["payload"] as? [String: Any],
               let event = json["event"] as? String else { return }
+
+        // Get handlers for this specific topic
+        guard let handlers = presenceHandlers[topic]?.values, !handlers.isEmpty else { return }
 
         if event == "presence_diff" {
             // Handle joins
@@ -433,7 +488,7 @@ actor SupabaseRealtimeClient {
                     if let metas = (data as? [String: Any])?["metas"] as? [[String: Any]] {
                         for metadata in metas {
                             if let phxRef = metadata["phx_ref"] as? String {
-                                for handler in presenceHandlers.values {
+                                for handler in handlers {
                                     handler(.join, phxRef, metadata)
                                 }
                             }
@@ -448,7 +503,7 @@ actor SupabaseRealtimeClient {
                     if let metas = (data as? [String: Any])?["metas"] as? [[String: Any]] {
                         for metadata in metas {
                             if let phxRef = metadata["phx_ref"] as? String {
-                                for handler in presenceHandlers.values {
+                                for handler in handlers {
                                     handler(.leave, phxRef, metadata)
                                 }
                             }
@@ -462,7 +517,7 @@ actor SupabaseRealtimeClient {
                 if let metas = (data as? [String: Any])?["metas"] as? [[String: Any]] {
                     for metadata in metas {
                         if let phxRef = metadata["phx_ref"] as? String {
-                            for handler in presenceHandlers.values {
+                            for handler in handlers {
                                 handler(.join, phxRef, metadata)
                             }
                         }
@@ -489,7 +544,7 @@ actor SupabaseRealtimeClient {
                     ]
 
                     try await sendMessage(message)
-                    print("💓 Heartbeat sent")
+                    // print("💓 Heartbeat sent")
                 } catch {
                     print("❌ Heartbeat failed: \(error)")
                     if isConnected {

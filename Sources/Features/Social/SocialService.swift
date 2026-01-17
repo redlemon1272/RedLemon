@@ -101,7 +101,7 @@ class SocialService: ObservableObject {
         await setupConnectionMonitoring(for: client, isPresence: true)
 
         // Subscribe to presence events
-        await client.onPresence { [weak self] action, presenceKey, metadata in
+        await client.onPresence(topic: "global-presence") { [weak self] action, presenceKey, metadata in
             Task { @MainActor [weak self] in
                 if action == .join {
                     self?.handlePresenceJoin(mapKey: presenceKey, metadata: metadata)
@@ -123,7 +123,7 @@ class SocialService: ObservableObject {
                 "is_premium": LicenseManager.shared.isPremium
             ]
             self.currentMetadata = initialMeta
-            try await client.track(userId: userId, metadata: initialMeta)
+            try await client.track(topic: "global-presence", userId: userId, metadata: initialMeta)
 
             isConnected = true
             startHeartbeat()
@@ -157,7 +157,7 @@ class SocialService: ObservableObject {
 
         do {
             self.currentMetadata = metadata
-            try await client.track(userId: userId, metadata: metadata)
+            try await client.track(topic: "global-presence", userId: userId, metadata: metadata)
             print("📡 SocialService: Updated status - \(metadata["status"] as? String ?? "Unknown"): \(mediaTitle ?? "")")
         } catch {
             print("❌ SocialService: Failed to update status: \(error)")
@@ -426,10 +426,10 @@ class SocialService: ObservableObject {
         if let client = presenceClient {
             let isJoined = await client.isJoined(to: "global-presence")
             if !isJoined {
-                 do {
+                  do {
                      try await client.connect()
                      try await client.joinChannel("global-presence")
-                     try await client.track(userId: userId, metadata: currentMetadata)
+                     try await client.track(topic: "global-presence", userId: userId, metadata: currentMetadata)
                      print("✅ SocialService: Reconnected to presence")
                  } catch {
                      print("❌ SocialService: Presence reconnection failed: \(error)")
@@ -463,7 +463,7 @@ class SocialService: ObservableObject {
 
         do {
             // print("💓 SocialService: Sending heartbeat...") (Silent unless debug)
-            try await client.track(userId: userId, metadata: metadata)
+            try await client.track(topic: "global-presence", userId: userId, metadata: metadata)
         } catch {
             print("❌ SocialService: Heartbeat failed: \(error)")
         }
@@ -745,7 +745,7 @@ class SocialService: ObservableObject {
         await setupConnectionMonitoring(for: client, isPresence: false)
 
         // Subscribe to Postgres Changes on direct_messages table
-        await client.onPostgresChange { [weak self] payload in
+        await client.onPostgresChange(topic: "direct_messages") { [weak self] payload in
             Task { @MainActor [weak self] in
                 self?.handleIncomingMessage(payload)
             }

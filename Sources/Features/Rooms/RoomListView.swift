@@ -59,8 +59,8 @@ struct RoomListView: View {
                             .font(.system(size: 60))
                             .foregroundColor(.secondary)
                         Text("No rooms found")
-                            .font(.title2)
-                            .fontWeight(.bold)
+                            .font(.title2.weight(.bold))
+                            
                         Text("Try a different search term")
                             .foregroundColor(.secondary)
                     } else {
@@ -68,8 +68,8 @@ struct RoomListView: View {
                             .font(.system(size: 60))
                             .foregroundColor(.secondary)
                         Text("No Active Rooms")
-                            .font(.title2)
-                            .fontWeight(.bold)
+                            .font(.title2.weight(.bold))
+                            
                         Text("Be the first to start a watch party!")
                             .foregroundColor(.secondary)
                         Button("Refresh") {
@@ -839,8 +839,8 @@ struct JoinRoomDialog: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("Join Watch Party")
-                .font(.title)
-                .fontWeight(.bold)
+                .font(.title.weight(.bold))
+                
 
             Text("Enter the room code shared by the host")
                 .foregroundColor(.secondary)

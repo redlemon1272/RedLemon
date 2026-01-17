@@ -106,7 +106,7 @@ struct ReportStreamView: View {
                         submitReport()
                     }) {
                         Text(isSubmitting ? "Submitting..." : "Submit Report")
-                            .fontWeight(.semibold)
+                            .font(.body.weight(.semibold))
                             .foregroundColor(.white)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)

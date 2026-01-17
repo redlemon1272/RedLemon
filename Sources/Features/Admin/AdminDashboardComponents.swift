@@ -1433,8 +1433,8 @@ struct SessionLogRow: View {
                     VStack(alignment: .leading, spacing: 2) {
                         HStack {
                            Text("📣 Feedback Report")
-                               .font(.caption)
-                               .fontWeight(.bold)
+                               .font(.caption.weight(.bold))
+                               
                                .foregroundColor(.orange)
                            
                            if let email = report.contactEmail {
@@ -1695,8 +1695,8 @@ struct DisputeResolverView: View {
                         // 1. Verify On-Chain
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Step 1: Check Blockchain")
-                                .font(.subheadline)
-                                .fontWeight(.medium)
+                                .font(.subheadline.weight(.medium))
+                                
                             
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 12) {
@@ -1714,8 +1714,8 @@ struct DisputeResolverView: View {
                         // 2. Resolve (Grant)
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Step 2: Resolve Dispute")
-                                .font(.subheadline)
-                                .fontWeight(.medium)
+                                .font(.subheadline.weight(.medium))
+                                
                             
                             HStack(alignment: .top, spacing: 12) {
                                 VStack(alignment: .leading, spacing: 4) {

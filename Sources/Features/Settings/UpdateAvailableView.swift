@@ -14,8 +14,8 @@ struct UpdateAvailableView: View {
 
             // Title
             Text("Check for Updates")
-                .font(.title)
-                .fontWeight(.bold)
+                .font(.title.weight(.bold))
+                
 
             Text("Sparkle will check for updates automatically")
                 .font(.subheadline)

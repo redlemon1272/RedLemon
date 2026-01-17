@@ -46,8 +46,8 @@ struct WatchPartyLobbyView: View {
                             .scaleEffect(1.5)
                             .tint(.white)
                         Text(room.type == .userRoom ? "Joining Room..." : "Joining Live Event...")
-                            .font(.title3)
-                            .fontWeight(.medium)
+                            .font(.title3.weight(.medium))
+                            
                             .foregroundColor(.white)
                     }
                 }
@@ -181,9 +181,8 @@ struct WatchPartyLobbyView: View {
                             } else {
                                 // Fallback to title if no logo
                                 Text(viewModel.room.mediaItem?.name ?? "Select Media")
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                    .fontWeight(.bold)
+                                    .font(.title.weight(.bold))
+                                    
                                     .foregroundColor(.white)
 
                                 if let description = viewModel.room.description {
@@ -197,8 +196,8 @@ struct WatchPartyLobbyView: View {
                             // Season & Episode info for TV series
                             if viewModel.room.mediaItem?.type == "series", let season = viewModel.room.season, let episode = viewModel.room.episode {
                                 Text("Season \(season) • Episode \(episode)")
-                                    .font(.title3)
-                                    .fontWeight(.medium)
+                                    .font(.title3.weight(.medium))
+                                    
                                     .foregroundColor(.white.opacity(0.9))
                                     .padding(.horizontal, 14)
                                     .padding(.vertical, 6)
@@ -212,8 +211,8 @@ struct WatchPartyLobbyView: View {
                             HStack(spacing: 10) {
                                 if let year = viewModel.room.mediaItem?.year {
                                     Text(year)
-                                        .font(.caption)
-                                        .fontWeight(.medium)
+                                        .font(.caption.weight(.medium))
+                                        
                                         .padding(.horizontal, 10)
                                         .padding(.vertical, 5)
                                         .background(Color.white.opacity(0.15))
@@ -222,8 +221,8 @@ struct WatchPartyLobbyView: View {
                                 }
 
                                 Text(viewModel.room.quality.displayName)
-                                    .font(.caption)
-                                    .fontWeight(.semibold)
+                                    .font(.caption.weight(.semibold))
+                                    
                                     .padding(.horizontal, 10)
                                     .padding(.vertical, 5)
                                     .background(Color.accentColor.opacity(0.3))
@@ -234,7 +233,7 @@ struct WatchPartyLobbyView: View {
                                 if room.type == .userRoom {
                                     Text(room.id)
                                         .font(.system(.caption, design: .monospaced))
-                                        .fontWeight(.bold)
+                                        .font(.body.weight(.bold))
                                         .foregroundColor(.white)
                                         .padding(.horizontal, 10)
                                         .padding(.vertical, 5)
@@ -828,18 +827,18 @@ struct WatchPartyLobbyView: View {
                                 // Show different text for events vs playlists
                                 if room.type == .event {
                                     Text("Event starts in \(formatDuration(viewModel.timeUntilStart))")
-                                        .font(.title3)
-                                        .fontWeight(.semibold)
+                                        .font(.title3.weight(.semibold))
+                                        
                                         .monospacedDigit()
                                 } else if viewModel.isPlaylistMode {
                                     Text("Next item in \(formatDuration(viewModel.timeUntilStart))")
-                                        .font(.title3)
-                                        .fontWeight(.semibold)
+                                        .font(.title3.weight(.semibold))
+                                        
                                         .monospacedDigit()
                                 } else {
                                     Text("Starting in \(formatDuration(viewModel.timeUntilStart))")
-                                        .font(.title3)
-                                        .fontWeight(.semibold)
+                                        .font(.title3.weight(.semibold))
+                                        
                                         .monospacedDigit()
                                 }
                             }
@@ -1243,8 +1242,8 @@ struct ConnectionStatusRow: View {
 
             // Status text
             Text(status.displayText)
-                .font(.caption)
-                .fontWeight(.medium)
+                .font(.caption.weight(.medium))
+                
                 .foregroundColor(statusColor)
 
             Spacer()
@@ -1345,8 +1344,8 @@ struct PlaylistItemRow: View {
         HStack(spacing: 12) {
             // Index number
             Text("\(index + 1)")
-                .font(.caption)
-                .fontWeight(.bold)
+                .font(.caption.weight(.bold))
+                
                 .foregroundColor(isCurrent ? .accentColor : .white.opacity(0.5))
                 .frame(width: 24)
 
@@ -1364,8 +1363,8 @@ struct PlaylistItemRow: View {
             // Title
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.displayTitle)
-                    .font(.subheadline)
-                    .fontWeight(isCurrent ? .semibold : .regular)
+                    .font(.subheadline.weight(isCurrent ? .semibold : .regular))
+                    
                     .foregroundColor(.white)
                     .lineLimit(1)
 

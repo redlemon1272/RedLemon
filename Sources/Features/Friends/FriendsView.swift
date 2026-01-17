@@ -288,8 +288,8 @@ struct FriendsView: View {
                     .foregroundColor(.secondary)
 
                 Text("No friends online")
-                    .font(.title2)
-                    .fontWeight(.semibold)
+                    .font(.title2.weight(.semibold))
+                    
 
                 Text("None of your friends are currently online.")
                     .font(.body)
@@ -302,8 +302,8 @@ struct FriendsView: View {
                      .foregroundColor(.secondary)
 
                  Text("Find a Friend")
-                     .font(.title2)
-                     .fontWeight(.semibold)
+                     .font(.title2.weight(.semibold))
+                     
 
                  Text("You have many friends! Use the search bar to find someone specific.")
                      .font(.body)
@@ -316,8 +316,8 @@ struct FriendsView: View {
                     .foregroundColor(.secondary)
 
                 Text("No friends yet")
-                    .font(.title2)
-                    .fontWeight(.semibold)
+                    .font(.title2.weight(.semibold))
+                    
 
                 Text("Add friends to watch together and see what they're watching")
                     .font(.body)
@@ -421,8 +421,8 @@ struct FriendRow: View {
                     .frame(width: 50, height: 50)
 
                 Text(friend.username.prefix(1).uppercased())
-                    .font(.title2)
-                    .fontWeight(.semibold)
+                    .font(.title2.weight(.semibold))
+                    
                     .foregroundColor(friend.isFavorite ? .yellow : .blue)
 
                 // Online indicator
@@ -499,8 +499,8 @@ struct FriendRow: View {
             // Unread Badge
             if unreadCount > 0 {
                 Text("\(unreadCount)")
-                    .font(.caption)
-                    .fontWeight(.bold)
+                    .font(.caption.weight(.bold))
+                    
                     .foregroundColor(.white)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
@@ -572,8 +572,8 @@ struct FriendRequestRow: View {
                 .frame(width: 50, height: 50)
                 .overlay(
                     Text(request.fromUsername.prefix(1).uppercased())
-                        .font(.title2)
-                        .fontWeight(.semibold)
+                        .font(.title2.weight(.semibold))
+                        
                         .foregroundColor(.purple)
                 )
 
@@ -663,8 +663,8 @@ struct AddFriendSheet: View {
                         .frame(width: 60, height: 60)
                         .overlay(
                             Text(user.username.prefix(1).uppercased())
-                                .font(.title)
-                                .fontWeight(.semibold)
+                                .font(.title.weight(.semibold))
+                                
                                 .foregroundColor(.blue)
                         )
 

@@ -572,8 +572,8 @@ struct SettingsView: View {
                 HStack(spacing: 8) {
                     // Chain badge
                     Text(tx.chain.uppercased())
-                        .font(.caption2)
-                        .fontWeight(.bold)
+                        .font(.caption2.weight(.bold))
+                        
                         .foregroundColor(.white)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
@@ -582,8 +582,8 @@ struct SettingsView: View {
 
                     // Status Badge
                     Text("COMPLETED")
-                        .font(.caption2)
-                        .fontWeight(.bold)
+                        .font(.caption2.weight(.bold))
+                        
                         .foregroundColor(.green)
                         .padding(.horizontal, 4)
                         .padding(.vertical, 2)
@@ -595,8 +595,8 @@ struct SettingsView: View {
                     // Duration Badge
                     if let days = tx.durationDays {
                         Text("\(days) DAYS")
-                            .font(.caption2)
-                            .fontWeight(.bold)
+                            .font(.caption2.weight(.bold))
+                            
                             .foregroundColor(.cyan)
                             .padding(.horizontal, 4)
                             .padding(.vertical, 2)
@@ -636,7 +636,7 @@ struct SettingsView: View {
 
             VStack(alignment: .trailing, spacing: 2) {
                 Text(String(format: "%.6f %@", tx.amount, tx.currency))
-                    .fontWeight(.medium)
+                    .font(.body.weight(.medium))
                     .foregroundColor(.primary)
 
                 Text(tx.createdAt, style: .date)
@@ -728,8 +728,7 @@ struct SettingsView: View {
 
                             HStack {
                                 Text("@\(currentUsername)")
-                                    .font(.system(.title3, design: .monospaced))
-                                    .fontWeight(.semibold)
+                                    .font(.system(.title3, design: .monospaced).weight(.semibold))
                                     .foregroundColor(.primary)
 
                                 Spacer()

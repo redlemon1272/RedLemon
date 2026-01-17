@@ -9,8 +9,8 @@ struct SourceQualityBadge: View {
         HStack(spacing: 2) {
             Text(stream.sourceQualityEmoji)
             Text(stream.sourceQuality)
-                .font(.caption)
-                .fontWeight(.medium)
+                .font(.caption.weight(.medium))
+                
         }
         .padding(.horizontal, 6)
         .padding(.vertical, 2)
@@ -28,12 +28,12 @@ struct SeederBadge: View {
             Text(stream.seederEmoji)
             if let seeders = stream.seeders {
                 Text("\(seeders)")
-                    .font(.caption)
-                    .fontWeight(.medium)
+                    .font(.caption.weight(.medium))
+                    
             } else {
                 Text("No seeders")
-                    .font(.caption)
-                    .fontWeight(.medium)
+                    .font(.caption.weight(.medium))
+                    
             }
         }
         .padding(.horizontal, 6)
@@ -51,8 +51,8 @@ struct SizeBadge: View {
         HStack(spacing: 2) {
             Text("💾")
             Text(stream.formattedSize)
-                .font(.caption)
-                .fontWeight(.medium)
+                .font(.caption.weight(.medium))
+                
         }
         .padding(.horizontal, 6)
         .padding(.vertical, 2)
@@ -69,8 +69,8 @@ struct ProviderBadge: View {
         HStack(spacing: 2) {
             Text(stream.providerEmoji)
             Text(stream.provider)
-                .font(.caption)
-                .fontWeight(.medium)
+                .font(.caption.weight(.medium))
+                
                 .textCase(.uppercase)
         }
         .padding(.horizontal, 6)
@@ -88,8 +88,8 @@ struct VideoCodecBadge: View {
         HStack(spacing: 2) {
             Text(stream.videoCodecEmoji)
             Text(stream.videoCodec)
-                .font(.caption)
-                .fontWeight(.medium)
+                .font(.caption.weight(.medium))
+                
         }
         .padding(.horizontal, 6)
         .padding(.vertical, 2)
@@ -107,8 +107,8 @@ struct QualityResolutionBadge: View {
             HStack(spacing: 2) {
                 Text("📺")
                 Text(quality)
-                    .font(.caption)
-                    .fontWeight(.medium)
+                    .font(.caption.weight(.medium))
+                    
             }
             .padding(.horizontal, 6)
             .padding(.vertical, 2)
@@ -124,8 +124,8 @@ struct PackBadge: View {
         HStack(spacing: 2) {
             Text("📦")
             Text("PACK")
-                .font(.caption)
-                .fontWeight(.medium)
+                .font(.caption.weight(.medium))
+                
         }
         .padding(.horizontal, 6)
         .padding(.vertical, 2)

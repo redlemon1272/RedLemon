@@ -245,8 +245,8 @@ struct DMMessageRow: View {
 
         return VStack(spacing: 8) {
             Text("🎬 Watch Party Invite")
-                .font(.caption)
-                .fontWeight(.bold)
+                .font(.caption.weight(.bold))
+                
                 .foregroundColor(isMe ? .white.opacity(0.8) : .secondary)
 
             Text(roomName)
@@ -261,7 +261,7 @@ struct DMMessageRow: View {
                     }
                 }) {
                     Text("Join Party")
-                        .fontWeight(.semibold)
+                        .font(.body.weight(.semibold))
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
                         .background(Color.green)

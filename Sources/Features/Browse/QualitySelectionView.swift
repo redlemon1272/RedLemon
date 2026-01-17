@@ -43,8 +43,8 @@ struct QualitySelectionView: View {
                 // Header
                 VStack(spacing: 8) {
                     Text(mediaItem.name)
-                        .font(.title2)
-                        .fontWeight(.bold)
+                        .font(.title2.weight(.bold))
+                        
 
                     if let year = mediaItem.year {
                         Text(year)
@@ -99,8 +99,8 @@ struct QualitySelectionView: View {
                                     .foregroundColor(.orange)
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text("Starting will use your free watch party")
-                                        .font(.subheadline)
-                                        .fontWeight(.medium)
+                                        .font(.subheadline.weight(.medium))
+                                        
                                     Text("Free users can host 1 room every 72 hours")
                                         .font(.caption)
                                         .foregroundColor(.secondary)
@@ -167,7 +167,7 @@ struct QualitySelectionView: View {
                             HStack {
                                 Image(systemName: "play.fill")
                                 Text("Start Watching")
-                                    .fontWeight(.semibold)
+                                    .font(.body.weight(.semibold))
                             }
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)

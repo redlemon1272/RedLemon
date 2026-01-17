@@ -11,8 +11,8 @@ struct ExclusionManagementView: View {
             // Header
             HStack {
                 Text("Manage Exclusions")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.title2.weight(.bold))
+                    
                 
                 Spacer()
                 
@@ -45,8 +45,8 @@ struct ExclusionManagementView: View {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(movie.name)
-                                    .font(.body)
-                                    .fontWeight(.medium)
+                                    .font(.body.weight(.medium))
+                                    
                                 Text(movie.id)
                                     .font(.caption)
                                     .foregroundColor(.secondary)

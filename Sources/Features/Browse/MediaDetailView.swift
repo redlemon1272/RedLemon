@@ -108,8 +108,8 @@ struct MediaDetailView: View {
                             HStack(spacing: 20) {
                                 if let year = metadata?.year {
                                     Text(year)
-                                        .font(.title2)
-                                        .fontWeight(.medium)
+                                        .font(.title2.weight(.medium))
+                                        
                                         .foregroundColor(.white.opacity(0.9))
                                 }
 
@@ -118,8 +118,8 @@ struct MediaDetailView: View {
                                         Image(systemName: "star.fill")
                                             .foregroundColor(.yellow)
                                         Text(String(format: "%.1f", imdbRating))
-                                            .font(.title2)
-                                            .fontWeight(.medium)
+                                            .font(.title2.weight(.medium))
+                                            
                                             .foregroundColor(.white.opacity(0.9))
                                     }
                                 }
@@ -149,8 +149,8 @@ struct MediaDetailView: View {
                                 if let director = metadata?.director {
                                     VStack(spacing: 4) {
                                         Text("DIRECTOR")
-                                            .font(.subheadline)
-                                            .fontWeight(.semibold)
+                                            .font(.subheadline.weight(.semibold))
+                                            
                                             .foregroundColor(.white.opacity(0.5))
                                         Text(director)
                                             .font(.body)
@@ -161,8 +161,8 @@ struct MediaDetailView: View {
                                 if let cast = metadata?.cast, !cast.isEmpty {
                                     VStack(spacing: 4) {
                                         Text("STARRING")
-                                            .font(.subheadline)
-                                            .fontWeight(.semibold)
+                                            .font(.subheadline.weight(.semibold))
+                                            
                                             .foregroundColor(.white.opacity(0.5))
                                         Text(cast.prefix(3).joined(separator: ", "))
                                             .font(.body)
@@ -181,8 +181,8 @@ struct MediaDetailView: View {
                                     // Season Picker
                                     VStack(alignment: .leading, spacing: 8) {
                                         Text("SEASON")
-                                            .font(.subheadline)
-                                            .fontWeight(.semibold)
+                                            .font(.subheadline.weight(.semibold))
+                                            
                                             .foregroundColor(.white.opacity(0.7))
 
                                         Picker("Season", selection: $selectedSeason) {
@@ -204,8 +204,8 @@ struct MediaDetailView: View {
                                     if !episodesInSeason.isEmpty {
                                         VStack(alignment: .leading, spacing: 8) {
                                             Text("EPISODE")
-                                                .font(.subheadline)
-                                                .fontWeight(.semibold)
+                                                .font(.subheadline.weight(.semibold))
+                                                
                                                 .foregroundColor(.white.opacity(0.7))
 
                                             Picker("Episode", selection: $selectedEpisode) {
@@ -234,14 +234,14 @@ struct MediaDetailView: View {
                                                     .font(.subheadline)
                                                     .foregroundColor(.white.opacity(0.6))
                                                 Text(formatDate(released))
-                                                    .font(.subheadline)
-                                                    .fontWeight(isFuture ? .bold : .medium)
+                                                    .font(.subheadline.weight(isFuture ? .bold : .medium))
+                                                    
                                                     .foregroundColor(isFuture ? .orange : .white.opacity(0.8))
 
                                                 if isFuture {
                                                     Text("(Unreleased)")
-                                                        .font(.subheadline)
-                                                        .fontWeight(.bold)
+                                                        .font(.subheadline.weight(.bold))
+                                                        
                                                         .foregroundColor(.orange)
                                                 }
                                             }

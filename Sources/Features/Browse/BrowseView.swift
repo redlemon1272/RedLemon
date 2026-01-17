@@ -587,8 +587,8 @@ struct BrowseView: View {
         if !history.isEmpty {
             VStack(alignment: .leading, spacing: 12) {
                 Text("Continue Watching")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.title2.weight(.bold))
+                    
                     .padding(.horizontal)
 
                 // Version-aware horizontal scroll view (Custom NSScrollView for macOS 15+, native for others)
@@ -940,8 +940,8 @@ struct WatchModeSelectionView: View {
                 // Header
                 VStack(spacing: 8) {
                     Text("Continue Watching")
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(.title.weight(.bold))
+                        
 
                     Text(historyItem.mediaItem.name)
                         .font(.title3)
@@ -1242,8 +1242,8 @@ struct RecentlyWatchedCard: View {
 
             // Title
             Text(historyItem.mediaItem.name)
-                .font(.subheadline)
-                .fontWeight(.medium)
+                .font(.subheadline.weight(.medium))
+                
                 .lineLimit(2)
 
             // Progress percentage
@@ -1331,8 +1331,8 @@ struct MediaCard: View {
 
             // Title
             Text(item.name)
-                .font(.subheadline)
-                .fontWeight(.medium)
+                .font(.subheadline.weight(.medium))
+                
                 .lineLimit(2)
 
             // Year
@@ -1391,8 +1391,8 @@ struct StreamingServiceRow: View {
         if !items.isEmpty {
             VStack(alignment: .leading, spacing: 12) {
                 Text(title)
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.title2.weight(.bold))
+                    
                     .padding(.horizontal)
 
                 // Version-aware horizontal scroll view (Custom NSScrollView for macOS 15+, native for others)
@@ -1434,8 +1434,8 @@ struct LazyStreamingServiceRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
-                .font(.title2)
-                .fontWeight(.bold)
+                .font(.title2.weight(.bold))
+                
                 .padding(.horizontal)
 
             if isLoading {
@@ -1539,8 +1539,8 @@ struct OptimizedMediaCard: View {
 
             // Title
             Text(item.name)
-                .font(.subheadline)
-                .fontWeight(.medium)
+                .font(.subheadline.weight(.medium))
+                
                 .lineLimit(2)
 
             // Year

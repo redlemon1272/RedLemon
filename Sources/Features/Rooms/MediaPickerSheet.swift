@@ -436,12 +436,12 @@ struct MediaPickerSheet: View {
                                                 Text(formatDate(released))
                                                     .font(.caption2)
                                                     .foregroundColor(isFuture ? .orange : .white.opacity(0.6))
-                                                    .fontWeight(isFuture ? .bold : .regular)
+                                                    .font(.body.weight(isFuture ? .bold : .regular))
 
                                                 if isFuture {
                                                     Text("UNRELEASED")
-                                                        .font(.caption2)
-                                                        .fontWeight(.bold)
+                                                        .font(.caption2.weight(.bold))
+                                                        
                                                         .foregroundColor(.orange)
                                                         .padding(.horizontal, 4)
                                                         .padding(.vertical, 1)

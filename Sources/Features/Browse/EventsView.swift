@@ -82,8 +82,8 @@ struct EventsView: View {
                                     if appState.eventsSchedule.count > 1 {
                                         VStack(alignment: .leading, spacing: 16) {
                                             Text("Upcoming Events")
-                                                .font(.title2)
-                                                .fontWeight(.bold)
+                                                .font(.title2.weight(.bold))
+                                                
                                                 .foregroundColor(.primary)
                                                 .padding(.horizontal, 4)
 
@@ -1033,15 +1033,15 @@ struct EventLobbyStatusBadge: View {
                     .frame(width: 8, height: 8)
                     .shadow(color: .yellow.opacity(0.6), radius: 4)
                 Text("Lobby Open")
-                    .fontWeight(.bold)
+                    .font(.body.weight(.bold))
                     .foregroundColor(.white)
             }
 
             // Add countdown timer
             if event.startTime.timeIntervalSince(now) > 0 {
                 Text("Starts in \(formatDuration(event.startTime.timeIntervalSince(now)))")
-                    .font(.system(size: 11))
-                    .fontWeight(.semibold)
+                    .font(.system(size: 11, weight: .semibold))
+                    
                     .foregroundColor(.white.opacity(0.9))
                     .monospacedDigit()
             }

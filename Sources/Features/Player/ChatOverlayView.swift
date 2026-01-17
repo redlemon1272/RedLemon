@@ -244,8 +244,7 @@ struct ChatOverlayView: View {
 
                     HStack(spacing: 6) {
                         Text(room.id)
-                            .font(.system(.caption, design: .monospaced))
-                            .fontWeight(.bold)
+                            .font(.system(.caption, design: .monospaced).weight(.bold))
                             .foregroundColor(.white)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
@@ -1157,13 +1156,13 @@ struct InviteMessageView: View {
 
             VStack(spacing: 4) {
                 Text("🎬 Watch Party Invite")
-                    .font(.caption2)
-                    .fontWeight(.bold)
+                    .font(.caption2.weight(.bold))
+                    
                     .foregroundColor(isMe ? .white.opacity(0.8) : .secondary)
 
                 Text(roomName)
-                    .font(.caption)
-                    .fontWeight(.semibold)
+                    .font(.caption.weight(.semibold))
+                    
                     .foregroundColor(.white)
                     .lineLimit(1)
 

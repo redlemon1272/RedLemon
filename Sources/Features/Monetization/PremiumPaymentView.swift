@@ -114,7 +114,7 @@ struct PremiumPaymentView: View {
                                     Image(systemName: chain.icon)
                                         .foregroundColor(selectedChain == chain ? .white : chain.color)
                                     Text(chain.displayName)
-                                        .fontWeight(selectedChain == chain ? .medium : .regular)
+                                        .font(.body.weight(selectedChain == chain ? .medium : .regular))
                                 }
                                 .padding(.vertical, 10)
                                 .padding(.horizontal, 16)
@@ -148,7 +148,7 @@ struct PremiumPaymentView: View {
                             Text("• Ethereum Mainnet\n• Base\n• Arbitrum One\n• Optimism\n• Polygon PoS")
                                 .font(.caption)
                                 .foregroundColor(.primary)
-                                .fontWeight(.medium)
+                                .font(.body.weight(.medium))
                         }
                         .padding(12)
                         .background(Color.green.opacity(0.1))

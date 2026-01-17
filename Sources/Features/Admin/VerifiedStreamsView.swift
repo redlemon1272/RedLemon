@@ -469,7 +469,7 @@ struct ReportedStreamRow: View {
                     HStack(spacing: 4) {
                         Image(systemName: "chart.bar.fill")
                         Text("Current Score: \(votes)")
-                            .fontWeight(.bold)
+                            .font(.body.weight(.bold))
                     }
                     .font(.caption)
                     .foregroundColor(votes < 0 ? .red : .green)

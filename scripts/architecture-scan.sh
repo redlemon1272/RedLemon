@@ -336,6 +336,42 @@ if [[ -f "$LOBBY_VM" ]]; then
          report "ERROR" "Landmine #61" "Race Condition Risk: LobbyViewModel join logic MUST handle 'duplicate key' (23505) errors." "$LOBBY_VM" "0" "Missing error handler"
     fi
 fi
+
+# =============================================================================
+# CHECK 16: Sleep Assertion Safety (Landmine #56)
+# =============================================================================
+# Trigger: preventing system sleep but NOT display sleep, causing black screen with audio.
+# Rule: Must use .userInitiated AND .idleSystemSleepDisabled AND .idleDisplaySleepDisabled
+print_header "Check 16: Sleep Assertion Safety (Landmine #56)"
+
+while IFS=: read -r file line code; do
+   if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+   # logical check: if code has one sleep disable flag, it better have the others or be part of a set
+   # heuristic: warn if we see 'idleSystemSleepDisabled' but not 'idleDisplaySleepDisabled' in the same file/context
+   # This is a bit coarse, checking per-file.
+   if [[ "$code" =~ "idleSystemSleepDisabled" ]] && [[ ! "$code" =~ "idleDisplaySleepDisabled" ]]; then
+        # Check if the file actually contains the other key elsewhere?
+        if ! grep -q "idleDisplaySleepDisabled" "$file"; then
+             report "WARNING" "Landmine #56" "Sleep Risk: Found 'idleSystemSleepDisabled' without 'idleDisplaySleepDisabled'. This allows screen to go black while audio plays." "$file" "$line" "$code"
+        fi
+   fi
+done < <(grep -rn "idleSystemSleepDisabled" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
+
+# =============================================================================
+# CHECK 17: Safe Modifiers (Landmine #12)
+# =============================================================================
+# Trigger: Using .fontWeight() (macOS 13+) instead of .font(.system(weight:)) (macOS 12 safe)
+print_header "Check 17: Safe Modifiers (Landmine #12)"
+
+while IFS=: read -r file line code; do
+   if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+   if [[ "$code" =~ \.fontWeight\( ]]; then
+        report "WARNING" "Landmine #12" "Compatibility Risk: Avoid '.fontWeight()'. Use '.font(.system(size: X, weight: Y))' for better macOS 12 support." "$file" "$line" "$code"
+   fi
+done < <(grep -rn "\.fontWeight(" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
+
 # =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"

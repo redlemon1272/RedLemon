@@ -108,8 +108,8 @@ struct FriendProfileView: View {
                     .frame(width: 40, height: 40)
 
                 Text(friend.username.prefix(1).uppercased())
-                    .font(.title3)
-                    .fontWeight(.bold)
+                    .font(.title3.weight(.bold))
+                    
                     .foregroundColor(.blue)
 
                 // Online indicator

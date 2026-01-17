@@ -149,10 +149,10 @@ struct MPVPlayerView: View {
 
                     // MPV video output - IINA-style CAOpenGLLayer
                     MPVLayerVideoView(wrapper: viewModel.mpvWrapper)
-                        .opacity(viewModel.isLoading ? 0 : (viewModel.isExitingSolo || viewModel.isExitingToLobby ? 0.4 : 1))
-                        .blur(radius: viewModel.isExitingSolo || viewModel.isExitingToLobby ? 20 : 0)
-                        .scaleEffect(viewModel.isExitingSolo || viewModel.isExitingToLobby ? 1.05 : 1)
-                        .animation(.easeInOut(duration: 0.4), value: viewModel.isExitingSolo || viewModel.isExitingToLobby)
+                        .opacity(viewModel.isLoading ? 0 : (viewModel.isExitingSession || viewModel.isExitingToLobby ? 0.4 : 1))
+                        .blur(radius: viewModel.isExitingSession || viewModel.isExitingToLobby ? 20 : 0)
+                        .scaleEffect(viewModel.isExitingSession || viewModel.isExitingToLobby ? 1.05 : 1)
+                        .animation(.easeInOut(duration: 0.4), value: viewModel.isExitingSession || viewModel.isExitingToLobby)
                         .contentShape(Rectangle()) // Capture all clicks in this area
                         .onTapGesture {
                             // Swallow clicks to prevent falling through to sidebar
@@ -400,10 +400,18 @@ struct MPVPlayerView: View {
         .onChange(of: viewModel.playbackFinished) { finished in
             LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView: onChange triggered - playbackFinished = \(finished)")
             if finished {
+                // Pre-exit stabilization: Show closing overlay based on mode
+                let isWatchParty = appState.player.currentWatchMode == .watchParty
+                let isEvent = appState.player.isEventPlayback
+                
+                if isWatchParty && !isEvent {
+                    viewModel.isExitingToLobby = true
+                } else {
+                    viewModel.isExitingSession = true
+                }
+
                 LoggingManager.shared.info(.videoRendering, message: "MPVPlayerView: Playback finished, triggering callback")
-                LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView: onPlaybackFinished callback exists: \(onPlaybackFinished != nil)")
                 onPlaybackFinished?()
-                LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView: Callback invoked")
             }
         }
         .onReceive(viewModel.playbackErrorTrigger) { error in
@@ -465,6 +473,7 @@ struct MPVPlayerView: View {
 
             // Exit player and return to events
             Task {
+                viewModel.isExitingSession = true
                 await appState.player.handleMovieFinished()
             }
             return
@@ -483,6 +492,7 @@ struct MPVPlayerView: View {
 
             // Exit player and return to events
             Task {
+                viewModel.isExitingSession = true
                 await appState.player.handleMovieFinished()
             }
         }
@@ -541,7 +551,7 @@ struct MPVPlayerView: View {
         // Loading overlay
         if viewModel.isExitingToLobby {
             LoadingOverlay(streamTitle: "", message: "Returning to Lobby...")
-        } else if viewModel.isExitingSolo {
+        } else if viewModel.isExitingSession {
             LoadingOverlay(streamTitle: "", message: "Closing...")
         } else if viewModel.isLoading {
             let message = (viewModel.isBuffering && viewModel.mpvWrapper.isFileLoaded) ? "Buffering..." : "Loading stream..."

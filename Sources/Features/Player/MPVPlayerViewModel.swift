@@ -512,11 +512,11 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var syncStatus: String? = nil
     @Published var isBuffering: Bool = false
     @Published var isSeeking: Bool = false
-    @Published var isExitingSolo: Bool = false {
+    @Published var isExitingSession: Bool = false {
         didSet {
-            if isExitingSolo {
+            if isExitingSession {
                 mpvWrapper.pause() // Pause immediately on exit
-                LoggingManager.shared.info(.videoRendering, message: "Playback paused for Solo exit stabilization")
+                LoggingManager.shared.info(.videoRendering, message: "Playback paused for Session exit stabilization")
             }
         }
     }
@@ -735,6 +735,8 @@ class MPVPlayerViewModel: ObservableObject {
         self.backgroundURL = nil
         self.posterURL = nil
         self.logoURL = nil
+        self.isExitingSession = false
+        self.isExitingToLobby = false
 
         // Reset resume handling flag for new video loads
         self.hasVideoReadyTriggered = false
@@ -3049,7 +3051,11 @@ extension MPVPlayerViewModel {
                         Task { @MainActor [weak self] in
                             guard let self = self else { return }
 
-                            // 1. Cleanup first (Await disconnection)
+                            // 1. Stabilization & Cleanup
+                            self.isExitingSession = true
+                            try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s stabilization
+
+                            // Ensure playback is killed
                             await self.cleanup()
                             await self.appState?.player.exitPlayer(keepRoomState: false)
 
@@ -3172,9 +3178,15 @@ extension MPVPlayerViewModel {
             LoggingManager.shared.info(.watchParty, message: "Received Room Closed signal in Player")
             Task { @MainActor [weak self] in
                 guard let self = self else { return }
+                
+                // 1. Stabilization & Cleanup
+                self.isExitingSession = true
+                try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s stabilization
+
                 await self.cleanup()
                 // Force full exit to browse
                 await self.appState?.player.exitPlayer(keepRoomState: false)
+                
                 await MainActor.run {
                     self.appState?.currentView = .browse
                 }

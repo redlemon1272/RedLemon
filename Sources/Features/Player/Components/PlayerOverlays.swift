@@ -90,12 +90,10 @@ struct ExitButton: View {
                      viewModel.triggerReturnToLobby()
                 } else {
                      // Solo / Event / Guest exit
-                     if !isEvent && !viewModel.isInWatchParty {
-                         // Solo preparation: prevent "horrific" transition jitter
-                         // by showing a stable state before the heavy window/view switch
-                         viewModel.isExitingSolo = true
-                         try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s
-                     }
+                     // Preparation: prevent "horrific" transition jitter
+                     // by showing a stable state before the heavy window/view switch
+                     viewModel.isExitingSession = true
+                     try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s stabilization buffer
                      
                      await appState.player.exitPlayer()
                 }

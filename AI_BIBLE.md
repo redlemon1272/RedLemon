@@ -1231,7 +1231,8 @@ The `./scripts/release.sh` script handles the heavy lifting, but you must invoke
 1. **Idempotency Guard**: Always `guard showPlayer else { return }` at the top of `exitPlayer` to prevent double-triggers (e.g. from `onDisappear` + click).
 2. **Sequential Transitions**:
    - `exitFullscreen()` MUST be called first.
-   - For Solo Playback, a **0.3s delay** (`Task.sleep`) MUST be injected *after* `exitFullscreen` and *before* setting `showPlayer = false`. This allows the OS window animation to start smoothly before the view hierarchy changes.
+   - For **Solo, Guest, and Event** exits, a **0.3s delay** (`Task.sleep`) MUST be injected *after* `exitFullscreen` and *before* setting `showPlayer = false`. This allows the OS window animation to start smoothly before the view hierarchy changes.
+   - Set `isExitingSession = true` in the UI view model to provide a "Closing..." overlay and cinematic (blur/scale) visual during this delay.
    - **Never** call `restoreWindowSize()` if the window was previously in fullscreen; the OS handles the frame restoration. Calling it manually causes a competing animation.
 
 ### 2. State Snapshots

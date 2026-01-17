@@ -1101,12 +1101,13 @@ class PlayerViewModel: ObservableObject {
         // 2. Start window transition IMMEDIATELY
         exitFullscreen()
 
-        // 3. CRITICAL: Solo Exit Stabilization (Landmine #82)
-        // For solo playback, we MUST wait for the OS to start the fullscreen exit animation
+        // 3. CRITICAL: Exit Stabilization (Landmine #82)
+        // For Solo, Guest, and Event exits, we MUST wait for the OS to start the fullscreen exit animation
         // before we clear 'showPlayer' or change 'currentView'. 
-        // If we don't, the Browse view (with Sidebar) tries to layout inside the Fullscreen window,
+        // If we don't, the destination view (with Sidebar) tries to layout inside the Fullscreen window,
         // then is immediately yanked by the window resize. This causes the "horrific" jitter.
-        if isSolo && wasFullscreen {
+        let shouldDelayExit = !keepRoomState
+        if shouldDelayExit && wasFullscreen {
             try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s buffer
         }
 

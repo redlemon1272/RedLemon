@@ -149,7 +149,10 @@ struct MPVPlayerView: View {
 
                     // MPV video output - IINA-style CAOpenGLLayer
                     MPVLayerVideoView(wrapper: viewModel.mpvWrapper)
-                        .opacity(viewModel.isLoading ? 0 : 1)
+                        .opacity(viewModel.isLoading ? 0 : (viewModel.isExitingSolo || viewModel.isExitingToLobby ? 0.4 : 1))
+                        .blur(radius: viewModel.isExitingSolo || viewModel.isExitingToLobby ? 20 : 0)
+                        .scaleEffect(viewModel.isExitingSolo || viewModel.isExitingToLobby ? 1.05 : 1)
+                        .animation(.easeInOut(duration: 0.4), value: viewModel.isExitingSolo || viewModel.isExitingToLobby)
                         .contentShape(Rectangle()) // Capture all clicks in this area
                         .onTapGesture {
                             // Swallow clicks to prevent falling through to sidebar
@@ -538,6 +541,8 @@ struct MPVPlayerView: View {
         // Loading overlay
         if viewModel.isExitingToLobby {
             LoadingOverlay(streamTitle: "", message: "Returning to Lobby...")
+        } else if viewModel.isExitingSolo {
+            LoadingOverlay(streamTitle: "", message: "Closing...")
         } else if viewModel.isLoading {
             let message = (viewModel.isBuffering && viewModel.mpvWrapper.isFileLoaded) ? "Buffering..." : "Loading stream..."
             LoadingOverlay(streamTitle: viewModel.streamTitle, message: message)

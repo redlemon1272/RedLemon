@@ -512,7 +512,22 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var syncStatus: String? = nil
     @Published var isBuffering: Bool = false
     @Published var isSeeking: Bool = false
-    @Published var isExitingToLobby: Bool = false
+    @Published var isExitingSolo: Bool = false {
+        didSet {
+            if isExitingSolo {
+                mpvWrapper.pause() // Pause immediately on exit
+                LoggingManager.shared.info(.videoRendering, message: "Playback paused for Solo exit stabilization")
+            }
+        }
+    }
+    @Published var isExitingToLobby: Bool = false {
+        didSet {
+            if isExitingToLobby {
+                mpvWrapper.pause() // Pause immediately on exit
+                LoggingManager.shared.info(.videoRendering, message: "Playback paused for Lobby exit stabilization")
+            }
+        }
+    }
 
     // Chat state
     @Published var showChat: Bool = false

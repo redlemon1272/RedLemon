@@ -1220,3 +1220,19 @@ The `./scripts/release.sh` script handles the heavy lifting, but you must invoke
     *   **Failure**: Notarization failed. Rollback immediately.
 
 ---
+
+## Part 20: Stability & Polish Protocol (Mac Native)
+
+### 1. The "Horrific Closing Animation" (Landmine #82)
+**Symptom**: User sees window jitter, layout "jumps", or a flash of the loading screen when exiting solo playback.
+
+**Root Cause**: Conflict between the macOS native fullscreen exit animation and SwiftUI layout switches (like showing the Sidebar or `restoreWindowSize()`).
+**Mandatory Fix (Satellite Protocol)**:
+1. **Idempotency Guard**: Always `guard showPlayer else { return }` at the top of `exitPlayer` to prevent double-triggers (e.g. from `onDisappear` + click).
+2. **Sequential Transitions**:
+   - `exitFullscreen()` MUST be called first.
+   - For Solo Playback, a **0.3s delay** (`Task.sleep`) MUST be injected *after* `exitFullscreen` and *before* setting `showPlayer = false`. This allows the OS window animation to start smoothly before the view hierarchy changes.
+   - **Never** call `restoreWindowSize()` if the window was previously in fullscreen; the OS handles the frame restoration. Calling it manually causes a competing animation.
+
+### 2. State Snapshots
+When performing async cleanup (WS disconnect, DB updates), always capture property snapshots (e.g. `let wasEvent = isEventPlayback`) at the VERY START of the function. This prevents logic errors if the underlying properties are modified by subsequent `MainActor.run` blocks during the delay.

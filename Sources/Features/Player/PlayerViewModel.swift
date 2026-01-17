@@ -1084,70 +1084,89 @@ class PlayerViewModel: ObservableObject {
     }
 
     func exitPlayer(keepRoomState: Bool = false) async {
+        // 1. Idempotency Check - prevent multiple simultaneous exit calls
+        // This stops the dual-trigger from MPVPlayerView (onDisappear + manual click)
+        guard showPlayer else { 
+            LoggingManager.shared.debug(.general, message: "Player already exited/exiting, skipping duplicate call")
+            return 
+        }
+
         LoggingManager.shared.info(.videoRendering, message: "PlayerVM: exitPlayer called (keepRoomState: \(keepRoomState))")
 
-        // CRITICAL: Lobby State Sync
-        // When returning to the lobby, ensure the LobbyViewModel knows we are done with playback.
-        // This resets 'isStarting' flags and sets the 'playbackEndedTimestamp' for grace periods.
+        // Capture state before ANY property resets
+        let wasFullscreen = NSApplication.shared.windows.first(where: { $0.isVisible && $0.styleMask.contains(.fullScreen) }) != nil
+        let wasEvent = isEventPlayback
+        let isSolo = !keepRoomState && !wasEvent
+
+        // 2. Start window transition IMMEDIATELY
+        exitFullscreen()
+
+        // 3. CRITICAL: Solo Exit Stabilization (Landmine #82)
+        // For solo playback, we MUST wait for the OS to start the fullscreen exit animation
+        // before we clear 'showPlayer' or change 'currentView'. 
+        // If we don't, the Browse view (with Sidebar) tries to layout inside the Fullscreen window,
+        // then is immediately yanked by the window resize. This causes the "horrific" jitter.
+        if isSolo && wasFullscreen {
+            try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s buffer
+        }
+
+        // CRITICAL: Lobby State Sync (Keep this before clearing showPlayer)
         if keepRoomState {
              appState?.activeLobbyViewModel?.markPlaybackEnded()
-
              if isWatchPartyHost {
                   appState?.activeLobbyViewModel?.announceReturnToLobby()
              }
+        } else {
+             if let roomId = currentRoomId {
+                 LoggingManager.shared.info(.watchParty, message: "Leaving room: \(roomId)")
+             }
         }
 
-        if !keepRoomState {
-            if let roomId = currentRoomId {
-                LoggingManager.shared.info(.watchParty, message: "Leaving room: \(roomId)")
+        // 4. Update UI State - now that window has stabilized
+        await MainActor.run {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                showPlayer = false
+                selectedStream = nil
+                selectedMediaItem = nil
+                // Note: We don't clear selectedMetadata immediately as it looks nice for transitions
+
+                if !keepRoomState {
+                    currentRoomId = nil
+                    currentWatchPartyRoom = nil // Clear stale room state
+                    currentWatchMode = .solo
+                    isWatchPartyHost = false
+
+                    // Clear persistent lobby session
+                    if let appState = appState {
+                        appState.activeLobbyViewModel = nil
+                    }
+                }
+
+                isEventPlayback = false // Reset event flag
+                eventStartTime = nil // FIX: Clear event start time on explicit exit
+                resumeFromTimestamp = nil // FIX: Clear resume timestamp
+
+                // 5. Navigate back
+                if !keepRoomState {
+                    if wasEvent {
+                       appState?.currentView = .events
+                    } else {
+                       appState?.currentView = .browse
+                    }
+                }
             }
-        }
 
-        // Clean up player state
-        showPlayer = false
-        selectedStream = nil
-        selectedMediaItem = nil
-        // Note: We don't clear selectedMetadata immediately as it looks nice for transitions
-
-
-        if !keepRoomState {
-            currentRoomId = nil
-            currentWatchPartyRoom = nil // Clear stale room state
-            currentWatchMode = .solo
-            isWatchPartyHost = false
-
-            // Clear persistent lobby session
-            if let appState = appState {
-                appState.activeLobbyViewModel = nil
+            // 6. Final Window Polish
+            // ONLY restore window size if we were NOT in fullscreen.
+            // If we WERE in fullscreen, exitFullscreen() (via toggleFullScreen) handles the restore.
+            // Calling this during the OS switch creates a second, competing animation (horrific jitter).
+            if !wasFullscreen {
+                WindowManager.shared.restoreWindowSize()
             }
-
+            
+            // Check for deferred schedule update notification
+            appState?.checkPendingScheduleUpdate()
         }
-
-        // Capture event state before resetting
-        let wasEventPlayback = isEventPlayback
-        isEventPlayback = false // Reset event flag
-        eventStartTime = nil // FIX: Clear event start time on explicit exit
-        resumeFromTimestamp = nil // FIX: Clear resume timestamp
-
-        exitFullscreen()
-
-        // Navigate back
-        if !keepRoomState {
-            if wasEventPlayback {
-               if let appState = appState {
-                   appState.currentView = .events
-               }
-            } else {
-               if let appState = appState {
-                   appState.currentView = .browse
-               }
-            }
-        }
-
-        WindowManager.shared.restoreWindowSize()
-
-        // Check for deferred schedule update notification (Context-Aware Notifications)
-        appState?.checkPendingScheduleUpdate()
     }
 
     func handleMovieFinished() async {

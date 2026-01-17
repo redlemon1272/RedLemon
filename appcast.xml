@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- vv1.0.119 -->
+        <item>
+            <title>Version v1.0.119</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: Robust click handling to prevent accidental double-clicks.</li><li>UI: Polished waiting gates and exit transitions.</li><li>Performance: Optimized exit animations and stabilization logic.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 17 Jan 2026 01:36:47 -0500</pubDate>
+            <sparkle:version>119</sparkle:version>
+            <sparkle:shortVersionString>v1.0.119</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.119.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="6cknyXQPW54whQAoDuD7kNQ4LRMhYrSbGWvKXEqDBdvjC4jc8R3XZvQgGFhZ1efbXr2Qp8zZtAryenahnxvpBg==" length="73045314"
+            />
+        </item>
         <!-- v1.0.118 -->
         <item>
             <title>Version 1.0.118</title>

@@ -72,6 +72,7 @@ actor SupabaseRealtimeClient {
     // MARK: - Channel State
     private var joinedTopics: [String: String] = [:] // topic -> joinRef
     private var topicInterestCount: [String: Int] = [:] // topic -> count
+    private var topicPresenceCount: [String: Int] = [:] // topic -> count
     private var heartbeatTask: Task<Void, Error>?
     private var receiveTask: Task<Void, Error>?
     private var messageRef = 0
@@ -232,6 +233,7 @@ actor SupabaseRealtimeClient {
         
         // Last one out, turn off the lights
         topicInterestCount.removeValue(forKey: targetTopic)
+        topicPresenceCount.removeValue(forKey: targetTopic)
         guard joinedTopics[targetTopic] != nil else { return }
 
         let message: [String: Any] = [
@@ -288,6 +290,10 @@ actor SupabaseRealtimeClient {
             throw RealtimeError.notJoined
         }
 
+        // Reference counting
+        let currentCount = topicPresenceCount[t] ?? 0
+        topicPresenceCount[t] = currentCount + 1
+
         let message: [String: Any] = [
             "topic": t,
             "event": "presence",
@@ -307,8 +313,19 @@ actor SupabaseRealtimeClient {
     func untrack(topic: String) async throws {
         let t = topic.hasPrefix("realtime:") ? topic : "realtime:\(topic)"
         guard joinedTopics[t] != nil else {
-            throw RealtimeError.notJoined
+            return
         }
+
+        // Reference counting
+        let currentCount = topicPresenceCount[t] ?? 0
+        if currentCount > 1 {
+            topicPresenceCount[t] = currentCount - 1
+            print("📡 Topic \(t) presence still tracked by other managers (count: \(currentCount - 1)), skipping phx_leave for presence")
+            return
+        }
+
+        // Last one out
+        topicPresenceCount.removeValue(forKey: t)
 
         let message: [String: Any] = [
             "topic": t,

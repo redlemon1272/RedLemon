@@ -457,11 +457,12 @@ class LobbyViewModel: ObservableObject {
                         try await self.dataService.joinRoom(roomId: room.id, userId: userId, isHost: false)
                         NSLog("%@", "✅ Guest joined room \(room.id) in database")
                     } catch {
-                        // If join failed, check if it's because we're already in the room
-                        let errorStr = String(describing: error)
-                        if errorStr.contains("409") || errorStr.contains("23505") || errorStr.contains("duplicate key") {
-                             NSLog("ℹ️ Lobby: Join failed with conflict (409/Duplicate) - assuming user already joined. Proceeding...")
-                             // Proceed as success
+                        let errorStr = String(describing: error).lowercased()
+                        let msg = error.localizedDescription.lowercased()
+                        if errorStr.contains("409") || errorStr.contains("23505") || errorStr.contains("duplicate key") ||
+                           msg.contains("409") || msg.contains("23505") || msg.contains("duplicate key") {
+                             NSLog("ℹ️ Lobby: Join failed with conflict (duplicate) - assuming user already in room. Proceeding to Realtime setup...")
+                             // Proceed as success - do NOT throw
                         } else if room.type == .event {
                             // Event Fallback Logic (Keep existing logic for events)
                             // Check if room exists
@@ -607,14 +608,22 @@ class LobbyViewModel: ObservableObject {
             } catch {
                 NSLog("%@", "❌ Lobby: Failed to connect - \(error)")
 
-                let errStr = String(describing: error)
+                let errStr = String(describing: error).lowercased()
+                let msg = error.localizedDescription.lowercased()
 
                 // CRITICAL FIX: Handle "Already Joined" (Duplicate Key) as SUCCESS
-                if errStr.localizedCaseInsensitiveContains("duplicate key") ||
-                   errStr.localizedCaseInsensitiveContains("unique constraint") ||
-                   errStr.localizedCaseInsensitiveContains("room_participants_pkey") {
-                    print("ℹ️ Lobby: User already in room (Duplicate Key) - Proceeding as connected.")
-                    // Fallback to success state
+                if errStr.contains("duplicate key") ||
+                   errStr.contains("unique constraint") ||
+                   errStr.contains("room_participants_pkey") ||
+                   errStr.contains("23505") ||
+                   msg.contains("duplicate key") ||
+                   msg.contains("unique constraint") ||
+                   msg.contains("23505") {
+                    print("ℹ️ Lobby: User already in room (Duplicate Key) - Proceeding to setup Realtime.")
+                    
+                    // Proceed to Realtime setup even in catch block if it's just a duplicate key error
+                    await self.setupRealtimeSubscription()
+
                     await MainActor.run {
                         self.stateMachine.transition(to: .connected)
                     }

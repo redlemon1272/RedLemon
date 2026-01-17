@@ -70,6 +70,7 @@ actor RealtimeChannelManager: RealtimeService {
     private var presenceHandlerId: UUID?
     private var connectionHandlerId: UUID?
     private var postgresHandlerId: UUID?
+    private var broadcastHandlerId: UUID?
 
     // MARK: - Initialization
 
@@ -117,13 +118,8 @@ actor RealtimeChannelManager: RealtimeService {
         await notifyConnectionStateChange(.connecting)
         try await realtimeClient.connect()
 
-        // Check if already joined
-        if await realtimeClient.isJoined(to: channelName) {
-            print("ℹ️ Already joined channel \(channelName), skipping join")
-        } else {
-            // Join the channel
-            try await realtimeClient.joinChannel(channelName, postgresChanges: postgresChanges)
-        }
+        // Join the channel (joinChannel handles reference counting and deduplication)
+        try await realtimeClient.joinChannel(channelName, postgresChanges: postgresChanges)
 
         // Track presence
         try await realtimeClient.track(topic: channelName, userId: userId, metadata: [
@@ -147,7 +143,7 @@ actor RealtimeChannelManager: RealtimeService {
         let channelName = "watch-party:\(roomId)"
 
         // Handle broadcast messages
-        await realtimeClient.onBroadcast(topic: channelName, event: eventName) { _, payload in
+        self.broadcastHandlerId = await realtimeClient.onBroadcast(topic: channelName, event: eventName) { _, payload in
             Task { [weak self] in
                 await self?.handleBroadcastMessage(payload)
             }
@@ -180,40 +176,7 @@ actor RealtimeChannelManager: RealtimeService {
 
     /// Monitors connection state and attempts to reconnect if dropped unexpectedly
     private func monitorConnection() async {
-        await realtimeClient.onConnectionChange { [weak self] connected in
-            guard let self = self else { return }
-
-            Task {
-                // Update local state
-                await self.handleConnectionChange(connected)
-
-                // Auto-Reconnect Logic
-                let isDisconnectingLocal = await self.isDisconnecting
-
-                if !connected && !isDisconnectingLocal {
-                    print("⚠️ Realtime: Connection lost. Attempting auto-reconnect in 2s...")
-                    await self.logError("Realtime connection lost unexpectedly. Reconnecting...")
-
-                    try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s
-
-                    // Double check we haven't started disconnecting in the meantime
-                    // We must re-fetch the actor state
-                    let isDisconnectingNow = await self.isDisconnecting
-                    let isConnectedNow = await self.isConnected
-
-                    if !isDisconnectingNow && !isConnectedNow {
-                        print("🔄 Realtime: Reconnecting now...")
-                        do {
-                            try await self.realtimeClient.connect()
-                            print("✅ Realtime: Rejoin requested")
-                        } catch {
-                            print("❌ Realtime: Reconnect failed: \(error)")
-                            await self.logError("Auto-reconnect failed: \(error.localizedDescription)")
-                        }
-                    }
-                }
-            }
-        }
+        // Handled by connectionHandler in setupHandlers -> handleConnectionChange
     }
 
     // MARK: - Telemetry
@@ -265,6 +228,31 @@ actor RealtimeChannelManager: RealtimeService {
     private func handleConnectionChange(_ connected: Bool) async {
         isConnected = connected
         await notifyConnectionStateChange(connected ? .connected : .disconnected)
+
+        // Auto-Reconnect Logic
+        if !connected && !isDisconnecting {
+            print("⚠️ Realtime: Connection lost. Attempting auto-reconnect in 2s...")
+            Task { [weak self] in
+                guard let self = self else { return }
+                
+                try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s
+                
+                // Check state again
+                let disconnecting = await self.isDisconnecting
+                let alreadyConnected = await self.isConnected
+                
+                if !disconnecting && !alreadyConnected {
+                    print("🔄 Realtime: Reconnecting now...")
+                    do {
+                        try await self.realtimeClient.connect()
+                        print("✅ Realtime: Rejoin requested")
+                    } catch {
+                        print("❌ Realtime: Reconnect failed: \(error)")
+                        await self.logError("Auto-reconnect failed: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
     }
 
     // MARK: - Sending Messages
@@ -517,6 +505,10 @@ extension RealtimeChannelManager {
         if let id = postgresHandlerId {
             await realtimeClient.removePostgresChange(id: id)
             postgresHandlerId = nil
+        }
+        if let id = broadcastHandlerId {
+            await realtimeClient.removeBroadcastHandler(id: id)
+            broadcastHandlerId = nil
         }
     }
 }

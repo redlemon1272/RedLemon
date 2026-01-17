@@ -1975,8 +1975,13 @@ class MPVPlayerViewModel: ObservableObject {
             // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected
             // CRITICAL FIX: Do NOT disconnect the shared client, only leave the channel.
             // Disconnecting the client kills the connection for the LobbyViewModel too.
-            await realtimeManager?.disconnect(leaveChannel: true, disconnectClient: false)
-            LoggingManager.shared.info(.watchParty, message: "Realtime manager channel left (client connection preserved)")
+            // ONLY disconnect if we're NOT returning to lobby, to allow the Lobby connection to persist smoothly.
+            if !returningToLobby {
+                await realtimeManager?.disconnect(leaveChannel: true, disconnectClient: false)
+                LoggingManager.shared.info(.watchParty, message: "Realtime manager channel left (not returning to lobby, client connection preserved)")
+            } else {
+                LoggingManager.shared.info(.watchParty, message: "Returning to lobby - skipping realtime disconnect to preserve shared connection")
+            }
         }
 
         // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected

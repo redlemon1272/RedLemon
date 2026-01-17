@@ -162,6 +162,12 @@ actor RealtimeChannelManager: RealtimeService {
                 await self?.handleConnectionChange(connected)
             }
         }
+        
+        // CRITICAL FIX: Initial state check to ensure UI sync
+        // If the shared client is already connected, callbacks won't fire automatically until a change.
+        if await realtimeClient.isSocketConnected {
+            await handleConnectionChange(true)
+        }
 
         // Handle postgres changes (topic-scoped)
         self.postgresHandlerId = await realtimeClient.onPostgresChange(topic: channelName) { payload in

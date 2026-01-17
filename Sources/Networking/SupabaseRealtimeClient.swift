@@ -12,6 +12,7 @@ actor SupabaseRealtimeClient {
     // MARK: - WebSocket State
     private var webSocketTask: URLSessionWebSocketTask?
     private var isConnected = false
+    public var isSocketConnected: Bool { return isConnected }
 
     // MARK: - Message Handling
     private var broadcastHandlers: [String: [UUID: (String, [String: Any]) -> Void]] = [:] // topic -> id -> handler

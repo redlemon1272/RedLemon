@@ -14,12 +14,36 @@ NC='\033[0m'
 
 VERSION=$1
 BUILD_NUMBER=$2
+# 0. Pre-Flight Checks (The "Satellite" Protocol)
+echo -e "${BLUE}🛡️  Running Pre-Flight Checks...${NC}"
 
-if [ -z "$VERSION" ] || [ -z "$BUILD_NUMBER" ]; then
-    echo "Usage: ./scripts/release.sh <version> <build_number>"
-    echo "Example: ./scripts/release.sh 1.0.15 15"
+# A. Architecture Scan
+echo -e "${YELLOW}   Running Architecture Scan...${NC}"
+./scripts/architecture-scan.sh
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Architecture Scan FAILED. Release Aborted.${NC}"
     exit 1
 fi
+
+# B. Landmine Logic Tests
+echo -e "${YELLOW}   Running Landmine Logic Tests...${NC}"
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$(pwd)/Frameworks
+if swift test --filter LandmineTests; then
+    echo -e "${GREEN}   ✅ Landmine Tests Passed${NC}"
+else
+    echo -e "${RED}❌ Landmine Tests FAILED. Release Aborted.${NC}"
+    exit 1
+fi
+
+# C. Security Scan
+echo -e "${YELLOW}   Running Security Scan...${NC}"
+./scripts/security-scan.sh
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Security Scan FAILED. Release Aborted.${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}✅ All Systems Green. Proceeding to Release.${NC}"
 
 # 0. Safety Check: Verify Version Increment
 CURRENT_BUILD=$(grep "Current Version:\*\*" README.md | sed -E 's/.*build ([0-9]+).*/\1/')

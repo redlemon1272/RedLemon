@@ -51,6 +51,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
     }
 
     /// Check for updates manually
+    @MainActor
     func checkForUpdates() {
         print("🔍 Manual update check requested...")
         // Update the timestamp immediately to show user something happened

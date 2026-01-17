@@ -1,0 +1,314 @@
+objc[64884]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x111011730). One of the two will be used. Which one is undefined.
+warning: 'redlemon-native': objc[64908]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x107edd730). One of the two will be used. Which one is undefined.objc[64914]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x105a9c730). One of the two will be used. Which one is undefined.
+warning: 'sparkle': objc[64915]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x109495730). One of the two will be used. Which one is undefined.objc[64944]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10dac1730). One of the two will be used. Which one is undefined.
+warning: 'swift-nio-http2': objc[64918]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x1050b6730). One of the two will be used. Which one is undefined.objc[64945]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10c71c730). One of the two will be used. Which one is undefined.
+warning: 'swift-nio-ssl': objc[64917]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10b9c6730). One of the two will be used. Which one is undefined.objc[64947]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10680d730). One of the two will be used. Which one is undefined.
+warning: 'swift-nio-extras': objc[64916]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10d74c730). One of the two will be used. Which one is undefined.objc[64949]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x109a7e730). One of the two will be used. Which one is undefined.
+warning: 'vapor': objc[64946]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x1045d4730). One of the two will be used. Which one is undefined.objc[64955]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10e855730). One of the two will be used. Which one is undefined.
+warning: 'swift-algorithms': objc[64957]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x105d87730). One of the two will be used. Which one is undefined.objc[64981]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x103b8b730). One of the two will be used. Which one is undefined.
+warning: 'multipart-kit': objc[64958]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x1026ff730). One of the two will be used. Which one is undefined.objc[64980]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x103d33730). One of the two will be used. Which one is undefined.
+warning: 'console-kit': objc[64959]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x107d8e730). One of the two will be used. Which one is undefined.objc[64982]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10bb8e730). One of the two will be used. Which one is undefined.
+warning: 'swift-crypto': objc[64956]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x105ff5730). One of the two will be used. Which one is undefined.objc[64983]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x100df3730). One of the two will be used. Which one is undefined.
+warning: 'routing-kit': objc[64986]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x105e36730). One of the two will be used. Which one is undefined.objc[65010]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x105216730). One of the two will be used. Which one is undefined.
+warning: 'swift-metrics': objc[64987]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10750e730). One of the two will be used. Which one is undefined.objc[65011]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10ce08730). One of the two will be used. Which one is undefined.
+warning: 'async-kit': objc[64985]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10cfd9730). One of the two will be used. Which one is undefined.objc[65012]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10856b730). One of the two will be used. Which one is undefined.
+warning: 'async-http-client': objc[64984]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x102389730). One of the two will be used. Which one is undefined.objc[65013]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10cbfb730). One of the two will be used. Which one is undefined.
+warning: 'swift-log': objc[65016]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10a105730). One of the two will be used. Which one is undefined.objc[65038]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10b8bb730). One of the two will be used. Which one is undefined.
+warning: 'websocket-kit': objc[65017]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10bcae730). One of the two will be used. Which one is undefined.objc[65039]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10a096730). One of the two will be used. Which one is undefined.
+warning: 'swift-backtrace': objc[65014]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x105f0d730). One of the two will be used. Which one is undefined.objc[65044]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10bbc5730). One of the two will be used. Which one is undefined.
+warning: 'swift-nio': objc[65015]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10659f730). One of the two will be used. Which one is undefined.objc[65045]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x103a4f730). One of the two will be used. Which one is undefined.
+warning: 'swift-atomics': objc[65040]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10795a730). One of the two will be used. Which one is undefined.objc[65048]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10c5a8730). One of the two will be used. Which one is undefined.
+warning: 'swift-nio-transport-services': objc[65049]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10e499730). One of the two will be used. Which one is undefined.objc[65055]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10f9bb730). One of the two will be used. Which one is undefined.
+warning: 'swift-system': objc[65057]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10d15d730). One of the two will be used. Which one is undefined.objc[65068]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x100703730). One of the two will be used. Which one is undefined.
+warning: 'swift-collections': objc[65056]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x103b4e730). One of the two will be used. Which one is undefined.objc[65069]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x1073f2730). One of the two will be used. Which one is undefined.
+warning: 'swift-http-types': objc[65070]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x103ff7730). One of the two will be used. Which one is undefined.objc[65076]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10a698730). One of the two will be used. Which one is undefined.
+warning: 'swift-numerics': objc[65077]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10fc04730). One of the two will be used. Which one is undefined.objc[65083]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x100358730). One of the two will be used. Which one is undefined.
+[0/1] Planning build
+Building for debugging...
+objc[65101]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10ceac730). One of the two will be used. Which one is undefined.objc[65102]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x104b65730). One of the two will be used. Which one is undefined.objc[65100]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10486c730). One of the two will be used. Which one is undefined.objc[65099]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10ae4c730). One of the two will be used. Which one is undefined.objc[65115]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x1093b5730). One of the two will be used. Which one is undefined.objc[65116]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x109075730). One of the two will be used. Which one is undefined.objc[65117]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10fd23730). One of the two will be used. Which one is undefined.objc[65126]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x101262730). One of the two will be used. Which one is undefined.objc[65129]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x103621730). One of the two will be used. Which one is undefined.objc[65131]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10ea26730). One of the two will be used. Which one is undefined.objc[65134]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10ce05730). One of the two will be used. Which one is undefined.objc[65142]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10fb40730). One of the two will be used. Which one is undefined.objc[65144]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x102b32730). One of the two will be used. Which one is undefined.objc[65147]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10f55b730). One of the two will be used. Which one is undefined.objc[65152]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10c49a730). One of the two will be used. Which one is undefined.objc[65158]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x11075d730). One of the two will be used. Which one is undefined.objc[65161]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x1076fe730). One of the two will be used. Which one is undefined.objc[65162]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x106331730). One of the two will be used. Which one is undefined.objc[65168]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x103242730). One of the two will be used. Which one is undefined.objc[65175]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x106cc8730). One of the two will be used. Which one is undefined.objc[65176]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10d4c3730). One of the two will be used. Which one is undefined.objc[65183]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x107aa4730). One of the two will be used. Which one is undefined.objc[65184]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x106796730). One of the two will be used. Which one is undefined.objc[65186]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x1043c0730). One of the two will be used. Which one is undefined.objc[65194]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10ecd1730). One of the two will be used. Which one is undefined.objc[65200]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10f957730). One of the two will be used. Which one is undefined.objc[65199]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10c63e730). One of the two will be used. Which one is undefined.objc[65201]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10e01e730). One of the two will be used. Which one is undefined.objc[65211]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10afb9730). One of the two will be used. Which one is undefined.objc[65212]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10b124730). One of the two will be used. Which one is undefined.objc[65219]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x1025d7730). One of the two will be used. Which one is undefined.objc[65221]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10d7f4730). One of the two will be used. Which one is undefined.objc[65220]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10cd41730). One of the two will be used. Which one is undefined.objc[65228]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x11026c730). One of the two will be used. Which one is undefined.objc[65235]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x106a1e730). One of the two will be used. Which one is undefined.objc[65237]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10ad82730). One of the two will be used. Which one is undefined.objc[65238]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x102aef730). One of the two will be used. Which one is undefined.objc[65239]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x103261730). One of the two will be used. Which one is undefined.objc[65251]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10d82b730). One of the two will be used. Which one is undefined.objc[65252]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10801a730). One of the two will be used. Which one is undefined.objc[65253]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10ddea730). One of the two will be used. Which one is undefined.objc[65254]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10921c730). One of the two will be used. Which one is undefined.objc[65267]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x101404730). One of the two will be used. Which one is undefined.objc[65271]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10fd51730). One of the two will be used. Which one is undefined.objc[65275]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x102e1e730). One of the two will be used. Which one is undefined.objc[65279]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10bdf0730). One of the two will be used. Which one is undefined.objc[65287]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x108c2d730). One of the two will be used. Which one is undefined.Build complete! (22.57s)
+objc[65291]: Class SwiftNativeNSObject is implemented in both /usr/lib/swift/libswiftCore.dylib (0x7ff8482b3168) and /Users/danielnoble/Desktop/RedLemon-Native/Frameworks/libswift_Concurrency.dylib (0x10df31730). One of the two will be used. Which one is undefined.
+Test Suite 'All tests' started at 2026-01-16 21:39:36.174
+Test Suite 'RedLemonPackageTests.xctest' started at 2026-01-16 21:39:36.175
+Test Suite 'AppStateTests' started at 2026-01-16 21:39:36.175
+Test Case '-[RedLemonTests.AppStateTests testExitPlayer_ClearsState]' started.
+2026-01-16 21:39:36.186 xctest[65291:310551] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/AppStateTests.swift:102: error: -[RedLemonTests.AppStateTests testExitPlayer_ClearsState] : XCTAssertEqual failed: ("player") is not equal to ("browse")
+Test Case '-[RedLemonTests.AppStateTests testExitPlayer_ClearsState]' failed (0.087 seconds).
+Test Case '-[RedLemonTests.AppStateTests testHandleMovieFinished_Event_ReturnsToEvents]' started.
+2026-01-16 21:39:36.264 xctest[65291:310551] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/AppStateTests.swift:83: error: -[RedLemonTests.AppStateTests testHandleMovieFinished_Event_ReturnsToEvents] : XCTAssertEqual failed: ("player") is not equal to ("events")
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/AppStateTests.swift:84: error: -[RedLemonTests.AppStateTests testHandleMovieFinished_Event_ReturnsToEvents] : XCTAssertFalse failed
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/AppStateTests.swift:85: error: -[RedLemonTests.AppStateTests testHandleMovieFinished_Event_ReturnsToEvents] : XCTAssertNil failed: "event_123"
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/AppStateTests.swift:86: error: -[RedLemonTests.AppStateTests testHandleMovieFinished_Event_ReturnsToEvents] : XCTAssertTrue failed
+Test Case '-[RedLemonTests.AppStateTests testHandleMovieFinished_Event_ReturnsToEvents]' failed (0.004 seconds).
+Test Case '-[RedLemonTests.AppStateTests testHandleMovieFinished_PersistentRoom_ReturnsToLobby]' started.
+2026-01-16 21:39:36.267 xctest[65291:310551] ✅ PlayerVM: currentWatchPartyRoom set to room_123
+2026-01-16 21:39:36.267 xctest[65291:310551] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/AppStateTests.swift:69: error: -[RedLemonTests.AppStateTests testHandleMovieFinished_PersistentRoom_ReturnsToLobby] : XCTAssertEqual failed: ("player") is not equal to ("watchPartyLobby")
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/AppStateTests.swift:70: error: -[RedLemonTests.AppStateTests testHandleMovieFinished_PersistentRoom_ReturnsToLobby] : XCTAssertEqual failed: ("nil") is not equal to ("Optional("room_123")")
+Test Case '-[RedLemonTests.AppStateTests testHandleMovieFinished_PersistentRoom_ReturnsToLobby]' failed (0.003 seconds).
+Test Suite 'AppStateTests' failed at 2026-01-16 21:39:36.270.
+	 Executed 3 tests, with 7 failures (0 unexpected) in 0.095 (0.095) seconds
+Test Suite 'LandmineTests' started at 2026-01-16 21:39:36.270
+Test Case '-[RedLemonTests.LandmineTests testDateDecodingFlexibility]' started.
+Test Case '-[RedLemonTests.LandmineTests testDateDecodingFlexibility]' passed (0.006 seconds).
+Test Case '-[RedLemonTests.LandmineTests testStreamResolverRejectsFakeDirectURLs]' started.
+Test Case '-[RedLemonTests.LandmineTests testStreamResolverRejectsFakeDirectURLs]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.LandmineTests testUUIDCaseSensitivity]' started.
+Test Case '-[RedLemonTests.LandmineTests testUUIDCaseSensitivity]' passed (0.001 seconds).
+Test Suite 'LandmineTests' passed at 2026-01-16 21:39:36.278.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.008 (0.008) seconds
+Test Suite 'LobbyIntegrationTests' started at 2026-01-16 21:39:36.278
+Test Case '-[RedLemonTests.LobbyIntegrationTests testCloseRoom]' started.
+2026-01-16 21:39:36.281 xctest[65291:310551] 🎭 Lobby: Disconnected from room test-room-123
+2026-01-16 21:39:36.281 xctest[65291:310551] 🙈 Host leaving explicitly: Deleting room test-room-123
+2026-01-16 21:39:36.281 xctest[65291:310551] ✅ Host DELETED room test-room-123
+Test Case '-[RedLemonTests.LobbyIntegrationTests testCloseRoom]' passed (0.114 seconds).
+Test Case '-[RedLemonTests.LobbyIntegrationTests testConnectTransition]' started.
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/LobbyIntegrationTests.swift:120: error: -[RedLemonTests.LobbyIntegrationTests testConnectTransition] : XCTAssertEqual failed: ("0") is not equal to ("1")
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/LobbyIntegrationTests.swift:123: error: -[RedLemonTests.LobbyIntegrationTests testConnectTransition] : XCTAssertEqual failed: ("initializing") is not equal to ("connected")
+Test Case '-[RedLemonTests.LobbyIntegrationTests testConnectTransition]' failed (0.109 seconds).
+Test Case '-[RedLemonTests.LobbyIntegrationTests testInitialState]' started.
+Test Case '-[RedLemonTests.LobbyIntegrationTests testInitialState]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.LobbyIntegrationTests testKickParticipant]' started.
+Test Case '-[RedLemonTests.LobbyIntegrationTests testKickParticipant]' passed (0.115 seconds).
+Test Case '-[RedLemonTests.LobbyIntegrationTests testPresenceDuringPlayback]' started.
+2026-01-16 21:39:36.618 xctest[65291:310551] 👋 Leaver left room (confirmed by DB polling)
+Test Case '-[RedLemonTests.LobbyIntegrationTests testPresenceDuringPlayback]' passed (0.002 seconds).
+Test Case '-[RedLemonTests.LobbyIntegrationTests testStartCountdown]' started.
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/LobbyIntegrationTests.swift:137: error: -[RedLemonTests.LobbyIntegrationTests testStartCountdown] : failed - State should be startingCountdown, got initializing
+Test Case '-[RedLemonTests.LobbyIntegrationTests testStartCountdown]' failed (0.005 seconds).
+Test Suite 'LobbyIntegrationTests' failed at 2026-01-16 21:39:36.624.
+	 Executed 6 tests, with 3 failures (0 unexpected) in 0.346 (0.346) seconds
+Test Suite 'LobbyViewModelTests' started at 2026-01-16 21:39:36.624
+Test Case '-[RedLemonTests.LobbyViewModelTests testChatSyncMessage]' started.
+Test Case '-[RedLemonTests.LobbyViewModelTests testChatSyncMessage]' passed (0.207 seconds).
+Test Case '-[RedLemonTests.LobbyViewModelTests testInitialState]' started.
+Test Case '-[RedLemonTests.LobbyViewModelTests testInitialState]' passed (0.002 seconds).
+Test Case '-[RedLemonTests.LobbyViewModelTests testPresenceJoin]' started.
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/LobbyViewModelTests.swift:75: error: -[RedLemonTests.LobbyViewModelTests testPresenceJoin] : XCTAssertTrue failed - Participant list should contain new user
+/Users/danielnoble/Desktop/RedLemon-Native/Tests/RedLemonTests/LobbyViewModelTests.swift:76: error: -[RedLemonTests.LobbyViewModelTests testPresenceJoin] : XCTAssertEqual failed: ("nil") is not equal to ("Optional("GuestUser")")
+Test Case '-[RedLemonTests.LobbyViewModelTests testPresenceJoin]' failed (0.210 seconds).
+Test Case '-[RedLemonTests.LobbyViewModelTests testSingleVotePerUser]' started.
+2026-01-16 21:39:37.059 xctest[65291:310574] ✅ SupabaseClient: Updated room playback (Playing: false, Pos: 0s, ClearedStream: false)
+2026-01-16 21:39:37.060 xctest[65291:310573] ✅ SupabaseClient: Updated room playback (Playing: false, Pos: 0s, ClearedStream: false)
+2026-01-16 21:39:37.147 xctest[65291:310551] 👍 Lobby: Guest voted for playlist item item_1
+2026-01-16 21:39:37.147 xctest[65291:310551] 👍 Lobby: Removed previous vote from item item_1 (single vote enforcement)
+2026-01-16 21:39:37.147 xctest[65291:310551] 👍 Lobby: Guest voted for playlist item item_2
+Test Case '-[RedLemonTests.LobbyViewModelTests testSingleVotePerUser]' passed (0.105 seconds).
+Test Case '-[RedLemonTests.LobbyViewModelTests testStartCountdown]' started.
+2026-01-16 21:39:37.150 xctest[65291:310551] 📡 Successfully broadcasted vote state via Realtime
+2026-01-16 21:39:37.150 xctest[65291:310551] 📡 Successfully broadcasted vote state via Realtime
+2026-01-16 21:39:37.169 xctest[65291:310554] ✅ SupabaseClient: Updated room playback (Playing: false, Pos: 0s, ClearedStream: false)
+2026-01-16 21:39:37.177 xctest[65291:310554] ✅ SupabaseClient: Updated room playback (Playing: false, Pos: 0s, ClearedStream: false)
+2026-01-16 21:39:37.286 xctest[65291:310554] ✅ SupabaseClient: Updated room playback (Playing: false, Pos: 0s, ClearedStream: false)
+Test Case '-[RedLemonTests.LobbyViewModelTests testStartCountdown]' passed (3.218 seconds).
+Test Suite 'LobbyViewModelTests' failed at 2026-01-16 21:39:40.367.
+	 Executed 5 tests, with 2 failures (0 unexpected) in 3.742 (3.743) seconds
+Test Suite 'PlaybackServiceTests' started at 2026-01-16 21:39:40.367
+Test Case '-[RedLemonTests.PlaybackServiceTests testLoadVideo]' started.
+Test Case '-[RedLemonTests.PlaybackServiceTests testLoadVideo]' passed (0.002 seconds).
+Test Case '-[RedLemonTests.PlaybackServiceTests testPlaybackControls]' started.
+Test Case '-[RedLemonTests.PlaybackServiceTests testPlaybackControls]' passed (0.003 seconds).
+Test Case '-[RedLemonTests.PlaybackServiceTests testSeekAndVolume]' started.
+Test Case '-[RedLemonTests.PlaybackServiceTests testSeekAndVolume]' passed (0.002 seconds).
+Test Case '-[RedLemonTests.PlaybackServiceTests testStatePropagation]' started.
+Test Case '-[RedLemonTests.PlaybackServiceTests testStatePropagation]' passed (0.003 seconds).
+Test Suite 'PlaybackServiceTests' passed at 2026-01-16 21:39:40.378.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.011 (0.011) seconds
+Test Suite 'RedLemonTests' started at 2026-01-16 21:39:40.378
+Test Case '-[RedLemonTests.RedLemonTests testExample]' started.
+Test Case '-[RedLemonTests.RedLemonTests testExample]' passed (0.001 seconds).
+Test Suite 'RedLemonTests' passed at 2026-01-16 21:39:40.379.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'StreamResolverFilterTests' started at 2026-01-16 21:39:40.379
+Test Case '-[RedLemonTests.StreamResolverFilterTests testCAMPatternShouldBlockCAMRips]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testCAMPatternShouldBlockCAMRips]' passed (0.002 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testCAMPatternShouldNOTBlockLegitimateMovies]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testCAMPatternShouldNOTBlockLegitimateMovies]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testFiveNightsAtFreddysShouldPass]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testFiveNightsAtFreddysShouldPass]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testHarryPotterPrisonerShouldPass]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testHarryPotterPrisonerShouldPass]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testISOPatternShouldBlockActualISOFiles]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testISOPatternShouldBlockActualISOFiles]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testISOPatternShouldNOTBlockMoviesWithISOInTitle]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testISOPatternShouldNOTBlockMoviesWithISOInTitle]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testScreamAudioFiltering]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testScreamAudioFiltering]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testShouldAllowEnglishAudio]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testShouldAllowEnglishAudio]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testShouldAllowMultiAudio]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testShouldAllowMultiAudio]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testShouldBlockItalianDubbed]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testShouldBlockItalianDubbed]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testShouldBlockPortugueseDubbed]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testShouldBlockPortugueseDubbed]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testShouldBlockSpanishDubbed]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testShouldBlockSpanishDubbed]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testTSPatternShouldBlockTeleSync]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testTSPatternShouldBlockTeleSync]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamResolverFilterTests testTSPatternShouldNOTBlockNormalTitles]' started.
+Test Case '-[RedLemonTests.StreamResolverFilterTests testTSPatternShouldNOTBlockNormalTitles]' passed (0.002 seconds).
+Test Suite 'StreamResolverFilterTests' passed at 2026-01-16 21:39:40.392.
+	 Executed 14 tests, with 0 failures (0 unexpected) in 0.012 (0.013) seconds
+Test Suite 'StreamServiceExtensionTests' started at 2026-01-16 21:39:40.392
+Test Case '-[RedLemonTests.StreamServiceExtensionTests testShouldAllowValidVideoFiles]' started.
+Test Case '-[RedLemonTests.StreamServiceExtensionTests testShouldAllowValidVideoFiles]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamServiceExtensionTests testShouldBlockMalwareExtensions]' started.
+2026-01-16 21:39:40.393 xctest[65291:310573] 📝 [ERROR] Blocked Extension ["ext": ".iso", "url": "http://bad.com/movie.iso"]
+2026-01-16 21:39:40.393 xctest[65291:310557] 📝 [APP] SessionRecorder initialized
+2026-01-16 21:39:40.393 xctest[65291:310557] 📝 [ERROR] Blocked Extension ["ext": ".exe", "url": "https://hack.com/game_of_thrones.exe"]
+Test Case '-[RedLemonTests.StreamServiceExtensionTests testShouldBlockMalwareExtensions]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamServiceExtensionTests testShouldBlockStandardSampleFiles]' started.
+2026-01-16 21:39:40.394 xctest[65291:310557] 📝 [ERROR] Blocked Extension ["ext": ".vbs", "url": "https://test.com/script.vbs"]
+2026-01-16 21:39:40.394 xctest[65291:310555] 📝 [ERROR] Blocked Sample Video ["url": "https://debrid.com/d/1234/movie.sample.mkv"]
+2026-01-16 21:39:40.394 xctest[65291:310555] 📝 [ERROR] Blocked Sample Video ["url": "http://server.com/Something.2024.1080p-sample.mp4"]
+2026-01-16 21:39:40.394 xctest[65291:310555] 📝 [ERROR] Blocked Sample Video ["url": "https://cdn.real-debrid.com/file/Margin.Call.2011.1080p.BluRay.x265-RARBG-sample.mkv"]
+2026-01-16 21:39:40.394 xctest[65291:310555] 📝 [ERROR] Blocked Sample Video ["url": "https://test.com/file_sample.avi"]
+2026-01-16 21:39:40.395 xctest[65291:310555] 📝 [ERROR] Blocked Sample Video ["url": "https://test.com/video.sample.qt"]
+Test Case '-[RedLemonTests.StreamServiceExtensionTests testShouldBlockStandardSampleFiles]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamServiceExtensionTests testShouldBlockTorrentioPlaceholders]' started.
+2026-01-16 21:39:40.395 xctest[65291:310574] 📝 [ERROR] Blocked Torrentio Placeholder ["url": "https://torrentio.strem.fun/videos/failed_1234.mp4"]
+2026-01-16 21:39:40.395 xctest[65291:310574] 📝 [ERROR] Blocked Torrentio Placeholder ["url": "https://torrentio.strem.fun/videos/failed_conversion"]
+Test Case '-[RedLemonTests.StreamServiceExtensionTests testShouldBlockTorrentioPlaceholders]' passed (0.001 seconds).
+Test Case '-[RedLemonTests.StreamServiceExtensionTests testShouldBlockTrailerFiles]' started.
+2026-01-16 21:39:40.396 xctest[65291:310555] 📝 [ERROR] Blocked Trailer Video ["url": "https://debrid.com/d/1234/movie.trailer.mkv"]
+2026-01-16 21:39:40.396 xctest[65291:310555] 📝 [ERROR] Blocked Trailer Video ["url": "http://server.com/Something.2024.1080p_trailer.mp4"]
+2026-01-16 21:39:40.396 xctest[65291:310555] 📝 [ERROR] Blocked Trailer Video ["url": "https://cdn.real-debrid.com/file/Margin.Call.2011.trailer.mov"]
+Test Case '-[RedLemonTests.StreamServiceExtensionTests testShouldBlockTrailerFiles]' passed (0.001 seconds).
+Test Suite 'StreamServiceExtensionTests' passed at 2026-01-16 21:39:40.397.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.004 (0.005) seconds
+Test Suite 'SubtitleServiceTests' started at 2026-01-16 21:39:40.397
+Test Case '-[RedLemonTests.SubtitleServiceTests testLoadLocalSubtitles]' started.
+Test Case '-[RedLemonTests.SubtitleServiceTests testLoadLocalSubtitles]' passed (4.072 seconds).
+Test Case '-[RedLemonTests.SubtitleServiceTests testScanTracks]' started.
+Test Case '-[RedLemonTests.SubtitleServiceTests testScanTracks]' passed (4.153 seconds).
+Test Case '-[RedLemonTests.SubtitleServiceTests testSelectTrack]' started.
+Test Case '-[RedLemonTests.SubtitleServiceTests testSelectTrack]' passed (0.002 seconds).
+Test Case '-[RedLemonTests.SubtitleServiceTests testSetOffset]' started.
+Test Case '-[RedLemonTests.SubtitleServiceTests testSetOffset]' passed (0.001 seconds).
+Test Suite 'SubtitleServiceTests' passed at 2026-01-16 21:39:48.625.
+	 Executed 4 tests, with 0 failures (0 unexpected) in 8.227 (8.228) seconds
+Test Suite 'RedLemonPackageTests.xctest' failed at 2026-01-16 21:39:48.625.
+	 Executed 45 tests, with 12 failures (0 unexpected) in 12.445 (12.450) seconds
+Test Suite 'All tests' failed at 2026-01-16 21:39:48.625.
+	 Executed 45 tests, with 12 failures (0 unexpected) in 12.445 (12.451) seconds
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+⚠️ LobbyStateMachine: Invalid transition from initializing to connected
+🛑 LobbyPresence: Polling stopped
+🛑 LobbyDatabase: Polling stopped
+🛑 Lobby: Polling stopped (chat via Realtime only)
+🚦 Lobby State: closed
+🆕 Lobby: Auto-adding initial item to playlist: Test Movie
+✅ Lobby: Persisted initial playlist item
+✅ Lobby: Connected to Realtime
+❌ Lobby: Failed to load metadata: keyNotFound(CodingKeys(stringValue: "meta", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"meta\", intValue: nil) (\"meta\").", underlyingError: nil))
+☠️ LobbyViewModel deinit
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+⚠️ Lobby: Connection already in progress - skipping duplicate connect call
+🆕 Lobby: Auto-adding initial item to playlist: Test Movie
+✅ Lobby: Connected to Realtime
+✅ Lobby: Persisted initial playlist item
+❌ Lobby: Failed to load metadata: keyNotFound(CodingKeys(stringValue: "meta", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"meta\", intValue: nil) (\"meta\").", underlyingError: nil))
+☠️ LobbyViewModel deinit
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+🆕 Lobby: Auto-adding initial item to playlist: Test Movie
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+⚠️ LobbyStateMachine: Invalid transition from initializing to connected
+❌ Lobby: Failed to load metadata: keyNotFound(CodingKeys(stringValue: "meta", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"meta\", intValue: nil) (\"meta\").", underlyingError: nil))
+✅ Lobby: Persisted initial playlist item
+✅ Lobby: Connected to Realtime
+☠️ LobbyViewModel deinit
+🆕 Lobby: Auto-adding initial item to playlist: Test Movie
+✅ Kicked participant Bad Guest from database
+✅ Lobby: Persisted initial playlist item
+✅ Lobby: Connected to Realtime
+❌ Lobby: Failed to load metadata: keyNotFound(CodingKeys(stringValue: "meta", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"meta\", intValue: nil) (\"meta\").", underlyingError: nil))
+☠️ LobbyViewModel deinit
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+⚠️ LobbyStateMachine: Invalid transition from initializing to connected
+⚠️ Lobby: Host missing from DB participants list - attempting self-heal re-join
+🆕 Lobby: Auto-adding initial item to playlist: Test Movie
+⚠️ LobbyStateMachine: Invalid transition from initializing to connected
+⚠️ LobbyStateMachine: Invalid transition from initializing to startingCountdown(secondsRemaining: 3)
+✅ Lobby: Connected to Realtime
+✅ Lobby: Persisted initial playlist item
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+❌ Lobby: Failed to load metadata: keyNotFound(CodingKeys(stringValue: "meta", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"meta\", intValue: nil) (\"meta\").", underlyingError: nil))
+☠️ LobbyViewModel de
+init
+⚠️ Lobby: No media selected yet
+🆕 Lobby: Auto-adding initial item to playlist: Test Movie
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+✅ Lobby: Connected to Realtime
+✅ Lobby: Persisted initial playlist item
+✅ Lobby: Connected to Realtime
+❌ Lobby: Failed to load metadata: keyNotFound(CodingKeys(stringValue: "meta", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"meta\", intValue: nil) (\"meta\").", underlyingError: nil))
+☠️ LobbyViewModel deinit
+📡 Joined channel: realtime:events_config_updates (interest count: 1)
+✅ [EventsConfig] Subscribed to realtime schedule updates
+⚠️ Lobby: No media selected yet
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+⚠️ Lobby: No media selected yet
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+✅ Lobby: Connected to Realtime
+✅ Lobby: Connected to Realtime
+⚠️ Lobby: No media selected yet
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+✅ Lobby: Connected to Realtime
+❌ Lobby: Failed to fetch fresh room state (not found)
+❌ Lobby: Failed to fetch fresh room state (not found)
+☠️ LobbyViewModel deinit
+❌ Lobby: Failed to fetch fresh room state (not found)
+☠️ LobbyViewModel deinit
+⚠️ Lobby: No media selected yet
+⚠️ LobbyStateMachine: Invalid transition from initializing to startingCountdown(secondsRemaining: 3)
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+✅ Lobby: Connected to Realtime
+☠️ LobbyViewModel deinit
+❌ Lobby: Failed to fetch fresh room state (not found)
+☠️ LobbyViewModel deinit
+❌ Lobby: Failed to fetch fresh room state (not found)
+☠️ LobbyViewModel deinit
+🚫 StreamService: Blocked restricted extension: .exe in https://hack.com/game_of_thrones.exe
+🚫 StreamService: Blocked restricted extension: .iso in http://bad.com/movie.iso
+🚫 StreamService: Blocked restricted extension: .vbs in https://test.com/script.vbs
+🚫 StreamService: Detected Sample video: https://debrid.com/d/1234/movie.sample.mkv
+🚫 StreamService: Detected Sample video: http://server.com/Something.2024.1080p-sample.mp4
+🚫 StreamService: Detected Sample video: https://cdn.real-debrid.com/file/Margin.Call.2011.1080p.BluRay.x265-RARBG-sample.mkv
+🚫 StreamService: Detected Sample video: https://test.com/file_sample.avi
+🚫 StreamService: Detected Sample video: https://test.com/video.sample.qt
+🚫 StreamService: Detected Torrentio error placeholder video: https://torrentio.strem.fun/videos/failed_1234.mp4
+🚫 StreamService: Detected Torrentio error placeholder video: https://torrentio.strem.fun/videos/failed_conversion
+🚫 StreamService: Detected Trailer video: https://debrid.com/d/1234/movie.trailer.mkv
+🚫 StreamService: Detected Trailer video: http://server.com/Something.2024.1080p_trailer.mp4
+🚫 StreamService: Detected Trailer video: https://cdn.real-debrid.com/file/Margin.Call.2011.trailer.mov
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🛡️ Lobby: Aut
+o-Join safety delay passed (8s). Enabled for late joiners.
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.

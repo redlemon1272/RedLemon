@@ -47,6 +47,7 @@ struct TransparentTextEditor: NSViewRepresentable {
         }
     }
 
+    @MainActor
     class Coordinator: NSObject, NSTextViewDelegate {
         var parent: TransparentTextEditor
         lazy var textView: NSTextView = {

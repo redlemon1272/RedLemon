@@ -131,7 +131,7 @@ class MockStreamResolver: StreamResolving {
     var resolvedStream: RedLemon.Stream?
     var unlockedStream: RedLemon.Stream?
 
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, filterExtended: Bool) async throws -> StreamResolutionResult {
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, filterExtended: Bool, triggerSource: String = "test") async throws -> StreamResolutionResult {
         let stream = resolvedStream ?? RedLemon.Stream(
             url: "https://example.com/stream",
             title: "Mock Stream",

@@ -1176,3 +1176,47 @@ Users can report broken streams. The system captures:
 Run `./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT jobname, schedule FROM cron.job;\""`
 
 
+
+# Part 19: Satellite-First Release Protocol
+
+> **CRITICAL**: Do NOT release RedLemon unless ALL steps below are green. A broken release requires a manual rollback and database cleanup.
+
+## 1. The Pre-Flight Checklist (Automated)
+Before touching any build scripts, the code MUST pass the **Regression Prevention System**.
+1.  **Architecture Scan**: Run `./scripts/architecture-scan.sh`.
+    *   **Pass**: "✅ ERRORS: 0"
+    *   **Fail**: Any error stops the release. Fix the code.
+2.  **Landmine Tests**: Run `export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$(pwd)/Frameworks && swift test --filter LandmineTests`.
+    *   **Pass**: All tests passed.
+    *   **Fail**: A known logic bug has regressed. Fix the code.
+3.  **Security Scan**: Run `./scripts/security-scan.sh`.
+    *   **Pass**: No hardcoded secrets found.
+
+## 2. The Build Process (`release.sh`)
+The `./scripts/release.sh` script handles the heavy lifting, but you must invoke it correctly.
+*   **Command**: `./scripts/release.sh "v1.0.X" "<li>Release Note 1</li><li>Release Note 2</li>"`
+*   **What it does**:
+    1.  Bumps `CFBundleVersion` in `Info.plist`.
+    2.  Compiles the Release Build (Optimized).
+    3.  Signs the binary with "Developer ID Application".
+    4.  Notarizes the app with Apple (Staples ticket).
+    5.  Generates the Sparkle `appcast.xml` and `delta` updates.
+
+## 3. Deployment & Sync
+*   **Upload**: The script syncs the `appcast.xml` and `.dmg` to the production server via `rsync`.
+*   **Documentation**:
+    *   Update `README.md` with the new Version and Build Number.
+    *   Commit the `appcast.xml` changes.
+*   **Git State**:
+    *   Create a tag: `git tag v1.0.X`
+    *   Merge strict: `git checkout main && git merge solo-launch && git push`
+
+## 4. Post-Release Verification
+1.  **Update Check**: Launch the *previous* version of RedLemon. Run "Check for Updates".
+    *   **Success**: The new update prompt appears with your release notes.
+    *   **Failure**: Appcast XML is malformed or S3 cache is stale.
+2.  **Launch Test**: Launch the *new* version.
+    *   **Success**: App opens without "Malicious Software" warning (Notarization check).
+    *   **Failure**: Notarization failed. Rollback immediately.
+
+---

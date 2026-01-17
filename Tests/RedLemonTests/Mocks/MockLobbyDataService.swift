@@ -100,8 +100,12 @@ class MockLobbyDataService: LobbyDataService {
         startRoomPlaybackCallCount += 1
     }
     
-    func updateRoomPlayback(roomId: String, position: Int, isPlaying: Bool) async throws {
+    func updateRoomPlayback(roomId: String, position: Int, isPlaying: Bool, shouldClearStream: Bool) async throws {
         updateRoomPlaybackCallCount += 1
+    }
+    
+    func resetRoomStream(roomId: String) async throws {
+        // Mock Implementation
     }
     
     func updateRoomMetadata(

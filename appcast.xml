@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.118 -->
+        <item>
+            <title>Version 1.0.118</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed 75+ Font Weight Crashes (Landmine #12)</li><li>Added Sleep Assertion Safety (Landmine #56)</li><li>Implemented Automated Regression Prevention System</li><li>Enforced Strict Concurrency on Update & Text Services</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 22:07:15 -0500</pubDate>
+            <sparkle:version>118</sparkle:version>
+            <sparkle:shortVersionString>1.0.118</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.118.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="LUZIcWH2bZQuWbdy5ZTZS7qr5UFA9FfYbHRRr7GC7UDNWz+BO5ytfVTq8NRESBB5+C5mPZzD2b67OoFBYNy4AQ==" length="73316766"
+            />
+        </item>
         <!-- v1.0.117 -->
         <item>
             <title>Version 1.0.117</title>

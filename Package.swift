@@ -37,9 +37,8 @@ let package = Package(
             // Removed cSettings header search path as LibMPV handles it
             swiftSettings: [
                 .unsafeFlags([
-                    // Removed explicit include and bridging header
                     "-DGL_SILENCE_DEPRECATION",
-                    "-Xfrontend", "-disable-objc-attr-requires-foundation-module", // Keep this?
+                    "-Xfrontend", "-disable-objc-attr-requires-foundation-module", 
                     "-DMACOS_MODERN_COMPATIBILITY"
                 ])
             ],

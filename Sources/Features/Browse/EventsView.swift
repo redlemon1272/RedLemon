@@ -713,7 +713,7 @@ struct HeroEventCard: View {
                 height: height
             )
         }
-        .buttonStyle(PlainButtonStyle())
+        .buttonStyle(.scalableMedia)
         .opacity(event.isFinished ? 0.6 : 1.0)
         // Timer removed - relying on parent passing currentTime
         // Timer removed - relying on parent passing currentTime

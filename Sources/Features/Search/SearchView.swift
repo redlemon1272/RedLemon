@@ -6,6 +6,7 @@ struct SearchView: View {
 
     @State private var searchQuery = ""
     @State private var isSearching = false
+    @State private var isNavigating = false
 
     // Grid layout columns - same as DiscoverView
     let columns = [
@@ -90,7 +91,7 @@ struct SearchView: View {
                                 }) {
                                     SearchMediaCard(item: item)
                                 }
-                                .buttonStyle(.plain)
+                                .buttonStyle(.scalableMedia)
                             }
                         }
                         .padding()
@@ -114,6 +115,7 @@ struct SearchView: View {
         }
         .navigationTitle("Search")
         .onAppear {
+            isNavigating = false
             // Restore last search query when view appears
             if !appState.lastSearchQuery.isEmpty && searchQuery.isEmpty {
                 searchQuery = appState.lastSearchQuery
@@ -497,6 +499,10 @@ struct SearchView: View {
 
     private func selectMedia(_ item: MediaItem) {
         print("🔍 [DEBUG] selectMedia called for: \(item.name)")
+        
+        guard !isNavigating else { return }
+        isNavigating = true
+        
         // Navigate to detail view in main content area
         appState.player.selectedMediaItem = item
         appState.navigateTo(.mediaDetail)  // Use navigateTo for back navigation support

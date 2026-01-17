@@ -4,6 +4,7 @@ struct LibraryView: View {
     @ObservedObject var libraryManager = LibraryManager.shared
     @EnvironmentObject var appState: AppState
     @State private var filter: String = "All" // "All", "Movies", "TV Shows"
+    @State private var isNavigating = false
 
     // Grid columns (adaptable)
     let columns = [
@@ -73,6 +74,9 @@ struct LibraryView: View {
                     LazyVGrid(columns: columns, spacing: 24) {
                         ForEach(filteredItems) { item in
                             Button(action: {
+                                guard !isNavigating else { return }
+                                isNavigating = true
+                                
                                 // Navigate to Detail
                                 let mediaItem = MediaItem(
                                     id: item.id,
@@ -127,13 +131,16 @@ struct LibraryView: View {
                                         .foregroundColor(.primary)
                                 }
                             }
-                            .buttonStyle(PlainButtonStyle())
+                            .buttonStyle(.scalableMedia)
                         }
                     }
                     .padding(.horizontal)
                 }
             }
             .padding(.bottom, 40)
+        }
+        .onAppear {
+            isNavigating = false
         }
     }
 }

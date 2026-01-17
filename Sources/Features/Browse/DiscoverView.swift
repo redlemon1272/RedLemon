@@ -11,6 +11,7 @@ struct DiscoverView: View {
     @State private var mediaItems: [MediaItem] = []
     @State private var isLoading = false
     @State private var errorMessage: String?
+    @State private var isNavigating = false
 
     enum MediaType: String, CaseIterable {
         case movies = "Movies"
@@ -190,7 +191,7 @@ struct DiscoverView: View {
                                 }) {
                                     DiscoverMediaCard(item: item)
                                 }
-                                .buttonStyle(.plain)
+                                .buttonStyle(.scalableMedia)
                                 .id(item.id)  // Add ID for scroll position tracking
                             }
                         }
@@ -213,6 +214,7 @@ struct DiscoverView: View {
         }
         .navigationTitle("Discover")
         .onAppear {
+            isNavigating = false
             // Restore state from AppState
             var stateChanged = false
             
@@ -318,6 +320,9 @@ struct DiscoverView: View {
     private func selectMedia(_ item: MediaItem) {
         // Navigate to detail view in main content area (same as BrowseView)
         // CRITICAL: Must be synchronous to prevent Landmine #24 race conditions
+
+        guard !isNavigating else { return }
+        isNavigating = true
 
         // Save scroll position for restoration when coming back
         appState.discoverScrollPosition = item.id

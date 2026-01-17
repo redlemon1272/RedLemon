@@ -27,6 +27,7 @@ struct BrowseView: View {
     // Alert state for global messages (e.g. Watch Party disconnect)
     @State private var showMessageAlert = false
     @State private var alertMessage = ""
+    @State private var isNavigating = false
 
     enum MediaType: String, CaseIterable {
         case movies = "Movies"
@@ -208,6 +209,7 @@ struct BrowseView: View {
             }
         }
         .onAppear {
+            isNavigating = false
             // Check for pending messages from other views (e.g. Watch Party timeout)
             if let message = appState.pendingLobbyMessage {
                 print("📢 BrowseView: Found pending message: \(message)")
@@ -522,6 +524,10 @@ struct BrowseView: View {
         // CRITICAL: This function MUST be synchronous (not async) to prevent Landmine #24
         // Making it async keeps the calling Task alive, which gets cancelled by onDisappear,
         // causing intermittent freezes during navigation.
+        
+        guard !isNavigating else { return }
+        isNavigating = true
+        
         print("👆 Selected media item: \(item.name) from row: \(rowId ?? "unknown")")
 
         // Save scroll position for restoration when coming back
@@ -595,14 +601,19 @@ struct BrowseView: View {
                 VersionAwareHorizontalScrollView {
                     HStack(spacing: 16) {
                         ForEach(history) { historyItem in
-                            RecentlyWatchedCard(historyItem: historyItem)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    print("🖱️ Continue Watching clicked for: \(historyItem.mediaItem.name)")
-                                    Task { @MainActor in
-                                        showWatchModeSelection(for: historyItem)
-                                    }
+                            Button(action: {
+                                print("🖱️ Continue Watching clicked for: \(historyItem.mediaItem.name)")
+                                guard !isNavigating else { return }
+                                isNavigating = true
+                                Task { @MainActor in
+                                    showWatchModeSelection(for: historyItem)
+                                    isNavigating = false // Reset since this opens a sheet, doesn't navigate away
                                 }
+                            }) {
+                                RecentlyWatchedCard(historyItem: historyItem)
+                                    .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.scalableMedia)
                         }
                     }
                     .padding(.horizontal)
@@ -1399,10 +1410,12 @@ struct StreamingServiceRow: View {
                 VersionAwareHorizontalScrollView(scrollOffset: scrollOffset) {
                     LazyHStack(spacing: 16) {
                         ForEach(items) { item in
-                            MediaCard(item: item)
-                                .onTapGesture {
-                                    onTap(item)
-                                }
+                            Button(action: {
+                                onTap(item)
+                            }) {
+                                MediaCard(item: item)
+                            }
+                            .buttonStyle(.scalableMedia)
                         }
                     }
                     .padding(.horizontal)
@@ -1453,10 +1466,12 @@ struct LazyStreamingServiceRow: View {
                 VersionAwareHorizontalScrollView(scrollOffset: scrollOffset) {
                     LazyHStack(spacing: 16) {
                         ForEach(items) { item in
-                            OptimizedMediaCard(item: item)
-                                .onTapGesture {
-                                    onTap(item)
-                                }
+                            Button(action: {
+                                onTap(item)
+                            }) {
+                                OptimizedMediaCard(item: item)
+                            }
+                            .buttonStyle(.scalableMedia)
                         }
                     }
                     .padding(.horizontal)

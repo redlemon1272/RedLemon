@@ -290,7 +290,52 @@ fi
 
 
 # =============================================================================
-# SUMMARY
+# CHECK 14: Realtime Topic Scoping (Landmine #60)
+# =============================================================================
+# Trigger: Using global handlers instead of topic-scoped handlers.
+# Rule: onBroadcast, onPresence, onPostgresChange must use 'topic:' parameter.
+print_header "Check 14: Realtime Topic Scoping (Landmine #60)"
+
+REALTIME_CLIENT="$SOURCES_DIR/Networking/SupabaseRealtimeClient.swift"
+if [[ -f "$REALTIME_CLIENT" ]]; then
+    # Look for generic onBroadcast/onPresence calls that might be missing topic scoping
+    # This is a bit tricky to verify globally, so we check usage in Managers.
+    
+    # Actually, let's check RealtimeChannelManager for correct usage.
+    # It must call calls with 'topic: channelName'
+    
+    # We grep for calls that do NOT have the topic label.
+    # Pattern: .onBroadcast(params... without topic:)
+    # Swift arg labels are mandatory if defined, so we check for missing label.
+    
+    VIOLATIONS=$(grep -rn "onBroadcast(" "$SOURCES_DIR" --include="*.swift" | grep -v "topic:" | grep -v "func onBroadcast" | grep -v "//" || true)
+    
+    if [[ -n "$VIOLATIONS" ]]; then
+        while IFS=: read -r file line code; do
+             report "ERROR" "Landmine #60" "Global Handler Risk: onBroadcast MUST specify 'topic:' parameter." "$file" "$line" "$code"
+        done <<< "$VIOLATIONS"
+    fi
+    
+    VIOLATIONS_PRESENCE=$(grep -rn "onPresence(" "$SOURCES_DIR" --include="*.swift" | grep -v "topic:" | grep -v "func onPresence" | grep -v "//" || true)
+     if [[ -n "$VIOLATIONS_PRESENCE" ]]; then
+        while IFS=: read -r file line code; do
+             report "ERROR" "Landmine #60" "Global Handler Risk: onPresence MUST specify 'topic:' parameter." "$file" "$line" "$code"
+        done <<< "$VIOLATIONS_PRESENCE"
+    fi
+fi
+
+# =============================================================================
+# CHECK 15: Idempotent Join (Landmine #61)
+# =============================================================================
+# Trigger: joinRoom logic that lacks duplicate key handling.
+print_header "Check 15: Idempotent Join (Landmine #61)"
+
+LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
+if [[ -f "$LOBBY_VM" ]]; then
+    if ! grep -q "duplicate key" "$LOBBY_VM" && ! grep -q "23505" "$LOBBY_VM"; then
+         report "ERROR" "Landmine #61" "Race Condition Risk: LobbyViewModel join logic MUST handle 'duplicate key' (23505) errors." "$LOBBY_VM" "0" "Missing error handler"
+    fi
+fi
 # =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"

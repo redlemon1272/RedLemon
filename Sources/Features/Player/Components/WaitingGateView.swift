@@ -14,9 +14,7 @@ struct WaitingGateView: View {
         VStack(spacing: 20) {
             Spacer()
 
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                .scaleEffect(1.5)
+
 
 
 

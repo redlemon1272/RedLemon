@@ -118,7 +118,7 @@ struct ChatOverlayView: View {
 
     private func setupInitialMode() {
         // Intelligence to pick the best default tab
-        
+
         // 1. Check persistence FIRST
         if let saved = viewModel.lastActiveChatMode {
             // Validate availability
@@ -190,40 +190,60 @@ struct ChatOverlayView: View {
                     .padding(2)
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(8)
-                    // Dynamic width based on tabs
-                }
 
-                if case .dm = chatMode {
-                    // No extra controls in DM header for now
-                } else {
                     Spacer()
 
-
-                    // Reaction Toggle
-                    Button(action: {
-                        withAnimation {
-                            viewModel.areReactionsEnabled.toggle()
+                    // Right-side icon buttons (compact group)
+                    HStack(spacing: 4) {
+                        // Participants Button (Rooms & Events only)
+                        if appState.isEventPlayback || viewModel.isInWatchParty {
+                            Button(action: {
+                                withAnimation {
+                                    showParticipantsList.toggle()
+                                }
+                            }) {
+                                Image(systemName: "person.2.fill")
+                                    .font(.system(size: 13))
+                                    .foregroundColor(showParticipantsList ? .white : .white.opacity(0.7))
+                                    .frame(width: 28, height: 28)
+                                    .background(showParticipantsList ? Color.white.opacity(0.2) : Color.white.opacity(0.1))
+                                    .clipShape(Circle())
+                            }
+                            .buttonStyle(.plain)
+                            .help("View Participants (\(participantCount))")
+                            .popover(isPresented: $showParticipantsList, arrowEdge: .bottom) {
+                                participantsPopover
+                            }
                         }
-                    }) {
-                        Image(systemName: viewModel.areReactionsEnabled ? "eye.fill" : "eye.slash.fill")
-                            .font(.system(size: 14))
-                            .foregroundColor(viewModel.areReactionsEnabled ? .white.opacity(0.8) : .white.opacity(0.4))
-                            .padding(6)
-                            .background(Color.white.opacity(0.1))
-                            .clipShape(Circle())
-                    }
-                    .buttonStyle(.plain)
-                    .help(viewModel.areReactionsEnabled ? "Hide Reactions" : "Show Reactions")
-                    .padding(.trailing, 4)
 
-                    // Close Button
-                    Button(action: { viewModel.toggleChat() }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 16))
-                            .foregroundColor(.white.opacity(0.7))
+                        // Reaction Toggle
+                        Button(action: {
+                            withAnimation {
+                                viewModel.areReactionsEnabled.toggle()
+                            }
+                        }) {
+                            Image(systemName: viewModel.areReactionsEnabled ? "eye.fill" : "eye.slash.fill")
+                                .font(.system(size: 14))
+                                .foregroundColor(viewModel.areReactionsEnabled ? .white.opacity(0.8) : .white.opacity(0.4))
+                                .frame(width: 28, height: 28)
+                                .background(Color.white.opacity(0.1))
+                                .clipShape(Circle())
+                        }
+                        .buttonStyle(.plain)
+                        .help(viewModel.areReactionsEnabled ? "Hide Reactions" : "Show Reactions")
+
+                        // Close Button
+                        Button(action: { viewModel.toggleChat() }) {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(.white.opacity(0.7))
+                                .frame(width: 28, height: 28)
+                                .background(Color.white.opacity(0.1))
+                                .clipShape(Circle())
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
-                    .padding(.trailing, 8)
+                    .padding(.trailing, 6)
                 }
             }
             .padding(10)
@@ -1097,18 +1117,18 @@ struct ChatOverlayView: View {
 
     private func tabButton(title: String, mode: ChatMode, badge: Int = 0) -> some View {
         Button(action: { chatMode = mode }) {
-            HStack(spacing: 4) {
+            HStack(spacing: 3) {
                 Text(title)
-                    .font(.system(size: 13, weight: .medium))
+                    .font(.system(size: 12, weight: .medium))
 
                 if badge > 0 {
                     Text("\(badge)")
-                        .font(.system(size: 10, weight: .bold))
+                        .font(.system(size: 9, weight: .bold))
                         .foregroundColor(.white)
                         .padding(.horizontal, 4)
                         .padding(.vertical, 2)
                         .background(Color.red)
-                        .cornerRadius(8)
+                        .cornerRadius(6)
                 }
             }
             .foregroundColor(chatMode == mode ? .white : .white.opacity(0.5))
@@ -1141,6 +1161,103 @@ struct ChatOverlayView: View {
 
         return "Unknown User"
     }
+
+    // MARK: - Participants
+
+    private var participantCount: Int {
+        if appState.isEventPlayback {
+            // For events, use the observed count from EventChatService
+            return eventChatService.participantCount > 0 ? eventChatService.participantCount : 1
+        } else if let room = appState.player.currentWatchPartyRoom {
+            // For watch parties, use the room participant list
+            return room.participants.count
+        }
+        return 0
+    }
+
+    private var participantsPopover: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // Header
+            HStack {
+                Text(appState.isEventPlayback ? "Event Viewers" : "Room Participants")
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                Spacer()
+                Text("\(participantCount)")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
+            .background(Color(NSColor.windowBackgroundColor))
+
+            Divider()
+
+            if appState.isEventPlayback {
+                // Event mode: just show count since we don't have the full list
+                VStack(spacing: 12) {
+                    Image(systemName: "person.3.fill")
+                        .font(.system(size: 32))
+                        .foregroundColor(.secondary)
+                    Text("\(participantCount) viewer\(participantCount == 1 ? "" : "s") watching")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 24)
+            } else if let room = appState.player.currentWatchPartyRoom {
+                // Watch Party mode: show actual participant list
+                ScrollView {
+                    LazyVStack(spacing: 4) {
+                        ForEach(room.participants, id: \.id) { participant in
+                            participantRow(participant, hostId: room.hostId)
+                        }
+                    }
+                    .padding(12)
+                }
+                .frame(maxHeight: 300)
+            } else {
+                Text("No participants")
+                    .foregroundColor(.secondary)
+                    .padding()
+            }
+        }
+        .frame(width: 260)
+        .background(Color(NSColor.windowBackgroundColor))
+    }
+
+    private func participantRow(_ participant: Participant, hostId: String) -> some View {
+        let isHost = participant.id.caseInsensitiveCompare(hostId) == .orderedSame
+        let isMe = participant.id.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") == .orderedSame
+
+        return HStack(spacing: 6) {
+            // Name
+            Text(participant.name)
+                .font(.subheadline)
+                .foregroundColor(.primary)
+
+            // Host badge (like in chat)
+            if isHost {
+                Text("Host")
+                    .font(.caption2.weight(.bold))
+                    .foregroundColor(DesignSystem.Colors.accent)
+                    .padding(.horizontal, 4)
+                    .padding(.vertical, 1)
+                    .background(DesignSystem.Colors.accent.opacity(0.15))
+                    .cornerRadius(4)
+            }
+
+            if isMe {
+                Text("(You)")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            }
+
+            Spacer()
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+    }
 }
 
 struct InviteMessageView: View {
@@ -1157,12 +1274,12 @@ struct InviteMessageView: View {
             VStack(spacing: 4) {
                 Text("🎬 Watch Party Invite")
                     .font(.caption2.weight(.bold))
-                    
+
                     .foregroundColor(isMe ? .white.opacity(0.8) : .secondary)
 
                 Text(roomName)
                     .font(.caption.weight(.semibold))
-                    
+
                     .foregroundColor(.white)
                     .lineLimit(1)
 
@@ -1367,11 +1484,6 @@ struct FriendRowButton: View {
             }
         }
         .padding(0) // Inner padding handles it
-    }
-
-    private func isMessageSenderHost(_ message: ChatMessage) -> Bool {
-        guard let senderId = message.senderId else { return false }
-        return senderId.caseInsensitiveCompare(appState.player.currentWatchPartyRoom?.hostId ?? "") == .orderedSame
     }
 }
 

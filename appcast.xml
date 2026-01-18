@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.120 -->
+        <item>
+            <title>Version 1.0.120</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Moved Join with Code button to top</li><li>Fixed participant count polling</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 18 Jan 2026 01:13:29 -0500</pubDate>
+            <sparkle:version>120</sparkle:version>
+            <sparkle:shortVersionString>1.0.120</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.120.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="MYzTZsnu735xIwpkNA01HQFg66Ucu4BKubhrRP2rMh2S0OkNjz/T4vGDOdWRiYkKLzepbFh0AV5hJ7j6S22PBQ==" length="73038477"
+            />
+        </item>
         <!-- vv1.0.119 -->
         <item>
             <title>Version v1.0.119</title>

@@ -11,10 +11,25 @@ actor MockRealtimeManager: RealtimeService {
     // Test verification properties
     var sentMessages: [SyncMessage] = []
 
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]? = nil, onSync: @escaping (SyncMessage) -> Void) async throws {
-        self.syncCallback = onSync
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]? = nil) async throws {
         self.isConnected = true
         connectionStateCallback?(.connected)
+    }
+
+    func registerObserver(id: String, onPresence: ((PresenceAction, String, [String: Any]?) -> Void)?, onSync: ((SyncMessage) -> Void)?, onConnectionState: ((RealtimeConnectionState) -> Void)?) async {
+        if let onPresence = onPresence {
+            self.presenceCallback = onPresence
+        }
+        if let onSync = onSync {
+            self.syncCallback = onSync
+        }
+        if let onConnectionState = onConnectionState {
+            self.connectionStateCallback = onConnectionState
+        }
+    }
+
+    func unregisterObserver(id: String) async {
+        // No-op for mock simple implementation
     }
 
     func sendSyncMessage(_ message: SyncMessage) async throws {

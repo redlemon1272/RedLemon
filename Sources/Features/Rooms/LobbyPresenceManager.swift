@@ -577,18 +577,12 @@ class LobbyPresenceManager: ObservableObject {
                     continue
                 }
 
-                // REALTIME PROTECTION:
-                // If the user was added via Realtime (has phxRef) and Realtime is currently active,
-                // do NOT remove them via DB Polling. Trust the Realtime `.leave` event instead.
-                // This prevents "Ghost Leaves" during refresh race conditions where DB row is gone
-                // but Realtime is just switching connection IDs.
-                let isRealtimeActive = await viewModel.realtimeManager?.isRealtimeConnected() ?? false
-                if !(localP.phxRefs.isEmpty) && isRealtimeActive {
-                     // NSLog("🛡️ Preserving Realtime participant '\(localP.name)' despite missing from DB poll (Trusting Realtime)")
-                     finalParticipants.append(localP)
-                     continue
-                }
-
+                // REALTIME PROTECTION REMOVED:
+                // We previously trusted Realtime to keep users in the list even if DB missed them.
+                // However, this caused "Ghost/Zombie" users if Realtime missed a 'leave' event.
+                // We now allow DB Polling to authoritative remove users who are gone > 3s.
+                // The Realtime 'leave' event is still the primary fast-path, but DB is the garbage collector.
+                
                 let timeSinceJoin = Date().timeIntervalSince(localP.joinedAt)
                 if timeSinceJoin < 3.0 {
                     // KEEP THEM: They joined less than 3 seconds ago (Grace Period)
@@ -600,7 +594,7 @@ class LobbyPresenceManager: ObservableObject {
                     // This is a legitimate "User Left" event
                     viewModel.chatManager.addSystemMessage(.userLeft, userName: localP.name, data: [:])
                     viewModel.connectedUserIds.remove(localP.id) // Ensure we track this disconnect
-                    NSLog("👋 %@ left room (confirmed by DB polling)", localP.name)
+                    NSLog("👋 %@ left room (confirmed by DB polling - Zombie Cleanup)", localP.name)
                 }
             }
 

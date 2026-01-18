@@ -420,6 +420,9 @@ actor RealtimeChannelManager: RealtimeService {
                 } else {
                     print("ℹ️ Keeping channel joined (leaveChannel=false)")
                 }
+                
+                // CRITICAL FIX: Flush delay to ensure 'untrack'/'leave' frames are sent
+                try? await Task.sleep(nanoseconds: 200_000_000) // 200ms
             }
 
             if disconnectClient {

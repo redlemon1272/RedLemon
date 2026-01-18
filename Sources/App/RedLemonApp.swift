@@ -57,6 +57,7 @@ struct RedLemonApp: App {
                 .environmentObject(appState)
                 .environmentObject(updateManager)
                 .environmentObject(SocialService.shared)
+                .frame(minWidth: 900, idealWidth: 1000, maxWidth: .infinity, minHeight: 600, idealHeight: 700, maxHeight: .infinity)
                 .task {
                     // Wiring up PlayerViewModel callbacks
                     appState.setupPlayerBindings()

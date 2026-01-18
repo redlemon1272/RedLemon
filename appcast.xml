@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- vv1.0.121 -->
+        <item>
+            <title>Version v1.0.121</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix: remove host startup delay in watch party (resolves jump-ahead sync issue)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 18 Jan 2026 14:28:14 -0500</pubDate>
+            <sparkle:version>121</sparkle:version>
+            <sparkle:shortVersionString>v1.0.121</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.121.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="+2KBV3vqpMyCuAdOf5K2pDcfoYiYPF/bepMbLV1NdT8hAW9wQ3BxHUgK4hZ+A/Fo7qg5IeaSiynA0WsOVEd9Cw==" length="72919790"
+            />
+        </item>
         <!-- v1.0.120 -->
         <item>
             <title>Version 1.0.120</title>

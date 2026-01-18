@@ -256,10 +256,13 @@ class LobbyViewModel: ObservableObject {
         print("☠️ LobbyViewModel deinit")
         countdownTask?.cancel()
 
-        // Capture client for async cleanup
-        if let client = realtimeClient {
-            Task {
-                await client.disconnect()
+        // Capture manager for async cleanup
+        // CRITICAL FIX: Use detached task to ensure cleanup runs even if ViewModel is dying.
+        // We capture 'realtimeManager' strongly here so it stays alive long enough to send the 'untrack' message.
+        if let manager = realtimeManager {
+            Task.detached {
+                print("🧹 LobbyViewModel: Triggering detached cleanup task...")
+                await manager.disconnect(leaveChannel: true, disconnectClient: false)
             }
         }
     }

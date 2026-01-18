@@ -2090,7 +2090,7 @@ extension MPVPlayerViewModel {
         self.readyGuestIds.removeAll()
         self.readySignalsSentCount = 0
 
-        self.currentUserId = userId
+        self.currentUserId = userId.lowercased()
 
         // Initialize Realtime manager
         self.realtimeManager = RealtimeChannelManager(realtimeClient: RedLemon.SupabaseClient.shared.realtimeClient)
@@ -2186,7 +2186,6 @@ extension MPVPlayerViewModel {
                     switch action {
                     case .join:
                         // Cancel any pending leave for this user
-                        // Cancel any pending leave for this user
                         if let existingTask = self.pendingLeaveTasks[actualUserId] {
                             LoggingManager.shared.info(.watchParty, message: "User \(actualUserId) reconnected within grace period - cancelling leave")
                             existingTask.cancel()
@@ -2242,7 +2241,7 @@ extension MPVPlayerViewModel {
                         }
 
                         // ENSURE SELF IS IN LIST
-                        if let currentId = localCurrentUserId?.lowercased() {
+                        if let currentId = localCurrentUserId {
                             let isSelfPresent = updatedParticipants.contains(where: { (p: Participant) in p.id == currentId })
                             if !isSelfPresent {
                                 LoggingManager.shared.warn(.watchParty, message: "Self (\(currentId)) was missing from list - restoring.")
@@ -2282,13 +2281,13 @@ extension MPVPlayerViewModel {
                         // This handles flaky connections and Lobby->Player transitions
                         LoggingManager.shared.info(.watchParty, message: "Participant leaving (grace period started): \(actualUserId)")
 
-                        // Extract map key immediately for closure capture
+                        // Extract map key and username immediately for closure capture
                         let leavingPhxRef = userId
+                        let leavingUsername = metaUsername ?? "User"
 
-                        let task: Task<Void, Never> = Task { @MainActor [weak self, actualUserId, leavingPhxRef] in
-                            // Wait 5 seconds (nano) - increased from 2s to fix "User Left" regression during Lobby->Player transition
-                            // This allows quick refreshes to be debounced but ensures actual leaves are reported promptly.
-                            try? await Task.sleep(nanoseconds: 5_000_000_000)
+                        let task: Task<Void, Never> = Task { @MainActor [weak self, actualUserId, leavingPhxRef, leavingUsername] in
+                            // Wait 3 seconds (nano) - lowered from 5s to improve responsiveness while still handling flutters
+                            try? await Task.sleep(nanoseconds: 3_000_000_000)
 
                             guard let self = self else { return }
 
@@ -2298,9 +2297,6 @@ extension MPVPlayerViewModel {
                                 return
                             }
 
-                            // Fetch FRESH list to avoid stale data race
-                            guard self.appState?.player.currentWatchPartyRoom?.participants != nil else { return }
-
                             // Check against our authoritative Ref Map
                             // If we have a record of this user's Active Ref, it must match the Leaving Ref.
                             if let trackedRef = self.activeConnectionRefs[actualUserId] {
@@ -2308,55 +2304,43 @@ extension MPVPlayerViewModel {
                                      LoggingManager.shared.debug(.watchParty, message: "Ignoring stale LEAVE event for \(actualUserId) (Tracked: \(trackedRef) != Leaving: \(leavingPhxRef))")
                                      self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                      return
-                                 } else {
-                                     LoggingManager.shared.debug(.watchParty, message: "LEAVE MATCHED tracked ref: \(trackedRef)")
                                  }
                             } else {
-                                 // We have NO record of this user's ref.
-                                 // This likely means they are already gone (removed by DB poll?).
-                                 // If we assume "True Leave", we should announce it.
-                                 // But if it's "Ghost Leave" (rotation), we should have the NEW ref in the map (from Join).
-                                 // So if map is empty, it means they are NOT currently connected with ANY ref.
-                                 // So it's safe to process the leave.
-                                 LoggingManager.shared.warn(.watchParty, message: "Participant \(actualUserId) not in Ref Map. Assuming valid leave (or already processed).")
+                                 // We have NO record of this user's ref in activeConnectionRefs.
+                                 // This means they either already left or were removed by a poll.
+                                 // Proceeding to ensure cleanup of connectedGuestIds and UI lists.
+                                 LoggingManager.shared.debug(.watchParty, message: "Participant \(actualUserId) not in Ref Map. Proceeding with leave cleanup.")
                             }
 
                             // Clean up ref map
                             self.activeConnectionRefs.removeValue(forKey: actualUserId)
 
                             // Find username before removing for the message
-                            let defaultsName = metadata?["username"] as? String ?? "User"
-                            let username = self.appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id.caseInsensitiveCompare(actualUserId) == .orderedSame })?.name ?? defaultsName
+                            let username = self.appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id.caseInsensitiveCompare(actualUserId) == .orderedSame })?.name ?? leavingUsername
 
-                            // Remove using actualUserId (Force remove even if not in list, just in case)
+                            // Remove using actualUserId (Force remove from UI list)
                             if var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants {
                                 currentParticipants.removeAll(where: { $0.id.caseInsensitiveCompare(actualUserId) == .orderedSame })
                                 self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
                             }
 
-                            // 💬 System Message: Leave
-                            if actualUserId != self.currentUserId {
-                                self.addSystemMessage("\(username) left")
-                            }
-                            LoggingManager.shared.info(.watchParty, message: "Participant left (confirmed): \(actualUserId)")
-
-                            // Post-Load Gate Logic
+                            // Post-Load Gate Logic Cleanup
                             if actualUserId != self.currentUserId {
                                 self.connectedGuestIds.remove(actualUserId)
                                 self.readyGuestIds.remove(actualUserId)
+                                
+                                // 💬 System Message: Leave (Only for others)
+                                self.addSystemMessage("\(username) left")
+                                
                                 if self.isWatchPartyHost {
                                     self.checkIfAllGuestsReady()
                                 }
                             }
-
-                            // NOTE: SwiftUI automatically detects participant changes - no objectWillChange.send() needed
-                            // Removing this eliminates lag spike on macOS 26 during user join/leave
+                            
                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                            LoggingManager.shared.info(.watchParty, message: "Participant left (confirmed): \(actualUserId)")
                         }
-
                         self.pendingLeaveTasks[actualUserId] = task
-                        return
-
                     }
 
                     // Deduplicate participants by ID (preferring entries with phxRef or newer joinedAt)

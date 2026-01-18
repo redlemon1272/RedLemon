@@ -220,58 +220,49 @@ class LobbyPresenceManager: ObservableObject {
                     }
                 case .leave:
                     // RESOLVE TRUE USER ID (Same as Join)
-                    var trueUserId = userId
-                    if let dict = metadata as? [String: Any],
-                       let metaUserId = dict["user_id"] as? String {
-                        trueUserId = metaUserId
-                    }
-                    let normalizedID = trueUserId.lowercased()
+                    let metaDict = metadata as? [String: Any]
+                    let metaUserId = metaDict?["user_id"] as? String
+                    let metaUsername = metaDict?["username"] as? String
+                    
+                    let leavingPhxRef = userId
+                    let normalizedID = (metaUserId ?? userId).lowercased()
+                    let capturedUsername = metaUsername ?? "User"
 
                     // Defer leave processing to avoid false positives from metadata updates
-                    Task { @MainActor in
+                    Task { @MainActor [weak self, leavingPhxRef, normalizedID, capturedUsername] in
                         try? await Task.sleep(nanoseconds: 3_000_000_000) // 3s
 
-                        guard let viewModel = self.viewModel else { return }
+                        guard let self = self, let viewModel = self.viewModel else { return }
 
-                        // Only remove if they're still not in participants (actual leave)
-                        // If they rejoined (metadata update), they'll already be in the list
-                        // CASE INSENSITIVE CHECK
-                        if let index = viewModel.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
-                            // Double-check they're actually gone by verifying no recent join
-                            let participant = viewModel.participants[index]
+                        // 1. Check against active participants list
+                        let currentParticipants = viewModel.participants
+                        if let index = currentParticipants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
+                            let participant = currentParticipants[index]
 
                             // PHX_REF CHECK:
-                            // If the leave event is for an old connection ID (phx_ref), but the user
-                            // has a newer phx_ref in the list (from a recent join/update), IGNORE the leave.
-                            // This handles the "Disconnect Old -> Connect New" race condition.
-                            // The `userId` in the callback IS the phx_ref (connection ID) if not overridden,
-                            // but Supabase SDK passes the connection ref as the second arg usually?
-                            // Actually, in our `LobbyPresenceManager` wrapper, `userId` is the connection ref.
-
-                            // Let's get the ref that represents THIS leave event
-                            let leavingPhxRef = userId // The raw ID passed from Supabase is the presence ref
-
                             // If the participant in the list has a DIFFERENT phxRef, they have already re-connected/updated.
-                            // So this leave is for their OLD session.
                             if let currentPhxRef = participant.phxRef, currentPhxRef != leavingPhxRef {
                                 NSLog("🛡️ Ignoring stale LEAVE for %@ (Ref mismatch: Old=%@, New=%@)", participant.name, leavingPhxRef, currentPhxRef)
                                 return
                             }
-
-                            let timeSinceJoin = Date().timeIntervalSince(participant.joinedAt)
-
-                            // If they joined recently (< 1 second), it's a metadata update, not a real leave
-                            // If they joined recently (< 1 second), it's a metadata update, not a real leave
-                            if timeSinceJoin > 1.0 {
-                                // BUFFERED UPDATE:
-                                // viewModel.participants.remove(at: index)
-                                self.pendingLeaves.insert(normalizedID)
-
-                                viewModel.connectedUserIds.remove(normalizedID) // Remove from tracking IMMEDIATE
-                                viewModel.chatManager.addSystemMessage(.userLeft, userName: participant.name) // Log immediate so we have name
-                                self.scheduleFlush()
+                            
+                            // 2. Final removal from UI list (via buffer)
+                            self.pendingLeaves.insert(normalizedID)
+                            
+                            // 💬 Log: User Left
+                            viewModel.chatManager.addSystemMessage(.userLeft, userName: participant.name)
+                            self.scheduleFlush()
+                        } else {
+                            // User already missing from participants list (e.g. removed by DB poll)
+                            // We still need to announce it if they were tracked in Realtime
+                            if viewModel.connectedUserIds.contains(normalizedID) {
+                                viewModel.chatManager.addSystemMessage(.userLeft, userName: capturedUsername)
+                                NSLog("📉 User %@ left (removed from tracking, was missing from list)", normalizedID)
                             }
                         }
+                        
+                        // 3. Update logical state IMMEDIATELY
+                        viewModel.connectedUserIds.remove(normalizedID)
                     }
                 }
             }

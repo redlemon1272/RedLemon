@@ -17,14 +17,14 @@ struct LoadingOverlay: View {
             Rectangle()
                 .fill(.ultraThinMaterial)
                 .ignoresSafeArea()
-            
+
             VStack(spacing: 24) {
                 // Enhanced spinner with subtle glow
                 ZStack {
                     Circle()
                         .stroke(Color.white.opacity(0.1), lineWidth: 4)
                         .frame(width: 54, height: 54)
-                    
+
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         .scaleEffect(1.3)
@@ -36,7 +36,7 @@ struct LoadingOverlay: View {
                         .font(.system(size: 22, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
                         .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
-                    
+
                     if !streamTitle.isEmpty {
                         Text(streamTitle)
                             .font(.system(size: 15, weight: .medium))
@@ -93,8 +93,8 @@ struct ExitButton: View {
                      // Preparation: prevent "horrific" transition jitter
                      // by showing a stable state before the heavy window/view switch
                      viewModel.isExitingSession = true
-                     try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s stabilization buffer
-                     
+                     // Removed 0.3s delay here - relying on exitPlayer internal stabilization for responsiveness
+
                      await appState.player.exitPlayer()
                 }
             }

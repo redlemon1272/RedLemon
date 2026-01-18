@@ -1086,9 +1086,9 @@ class PlayerViewModel: ObservableObject {
     func exitPlayer(keepRoomState: Bool = false) async {
         // 1. Idempotency Check - prevent multiple simultaneous exit calls
         // This stops the dual-trigger from MPVPlayerView (onDisappear + manual click)
-        guard showPlayer else { 
+        guard showPlayer else {
             LoggingManager.shared.debug(.general, message: "Player already exited/exiting, skipping duplicate call")
-            return 
+            return
         }
 
         LoggingManager.shared.info(.videoRendering, message: "PlayerVM: exitPlayer called (keepRoomState: \(keepRoomState))")
@@ -1103,7 +1103,7 @@ class PlayerViewModel: ObservableObject {
 
         // 3. CRITICAL: Exit Stabilization (Landmine #82)
         // For Solo, Guest, and Event exits, we MUST wait for the OS to start the fullscreen exit animation
-        // before we clear 'showPlayer' or change 'currentView'. 
+        // before we clear 'showPlayer' or change 'currentView'.
         // If we don't, the destination view (with Sidebar) tries to layout inside the Fullscreen window,
         // then is immediately yanked by the window resize. This causes the "horrific" jitter.
         let shouldDelayExit = !keepRoomState
@@ -1152,7 +1152,11 @@ class PlayerViewModel: ObservableObject {
                     if wasEvent {
                        appState?.currentView = .events
                     } else {
+                       // Optimization: Signal BrowseView to defer heavy rendering
+                       appState?.isReturningFromPlayer = true
                        appState?.currentView = .browse
+
+                       // Reset flag after transition (handled by View but good safety)
                     }
                 }
             }
@@ -1164,7 +1168,7 @@ class PlayerViewModel: ObservableObject {
             if !wasFullscreen {
                 WindowManager.shared.restoreWindowSize()
             }
-            
+
             // Check for deferred schedule update notification
             appState?.checkPendingScheduleUpdate()
         }

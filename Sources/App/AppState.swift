@@ -23,6 +23,9 @@ class AppState: ObservableObject {
     @Published var showScheduleUpdatePrompt: Bool = false
     @Published var hasPendingScheduleUpdate: Bool = false  // Deferred notification for users in playback
 
+    // Optimization: Flag to signal BrowseView to defer heavy rendering when returning from player
+    @Published var isReturningFromPlayer = false
+
     // Sub-ViewModels
     let player: PlayerViewModel
     private var cancellables = Set<AnyCancellable>()
@@ -180,6 +183,7 @@ class AppState: ObservableObject {
     @Published var discoverSelectedTab: Int = 0  // 0 = Movies, 1 = TV Shows - persisted across navigation
     @Published var discoverSelectedCatalog: String = "Netflix" // Persist selected provider
     @Published var discoverSelectedGenre: String = "All" // Persist selected genre
+    @Published var discoverCatalogs: [String: [MediaItem]] = [:] // Session cache for discover results
     @Published var browseRowScrollPositions: [String: CGFloat] = [:] // Persist horizontal scroll positions for Browse rows
 
     // Browse Page Persistence (Session-scoped)

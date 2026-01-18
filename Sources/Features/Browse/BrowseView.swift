@@ -53,10 +53,18 @@ struct BrowseView: View {
         GridItem(.adaptive(minimum: 150), spacing: 20)
     ]
 
+    // Gate for Deferred Rendering (Optimized Exit)
+    @State private var isStabilizing = false
+
     var body: some View {
-        VStack(spacing: 0) {
-            // Tab selector
-            Picker("Media Type", selection: $selectedTab) {
+        ZStack {
+            if isStabilizing {
+                // Lightweight shim for window resize transition
+                Color.clear
+            } else {
+                VStack(spacing: 0) {
+                    // Tab selector
+                    Picker("Media Type", selection: $selectedTab) {
                 ForEach(MediaType.allCases, id: \.self) { type in
                     Text(type.rawValue).tag(type)
                 }
@@ -100,7 +108,7 @@ struct BrowseView: View {
             } else {
                 ScrollViewReader { proxy in
                     ScrollView(.vertical, showsIndicators: true) {
-                        VStack(alignment: .leading, spacing: 24) {
+                        LazyVStack(alignment: .leading, spacing: 24) {
                             // Continue Watching section
                             continueWatchingView
                                 .id("continue-watching")
@@ -157,8 +165,9 @@ struct BrowseView: View {
                 .onChange(of: appState.popularMovies) { _ in restoreScrollPosition(using: proxy) }
                 .onChange(of: appState.popularShows) { _ in restoreScrollPosition(using: proxy) }
                 }             }
-         }
-
+            } // End of VStack
+            } // End of outer else
+        } // End of ZStack
         .navigationTitle(selectedTab == .movies ? "Browse Movies" : "Browse TV Shows")
         // ...
         .sheet(item: $selectedHistoryItem) { historyItem in
@@ -210,6 +219,24 @@ struct BrowseView: View {
         }
         .onAppear {
             isNavigating = false
+
+            // Optimization: Check if we are returning from player
+            if appState.isReturningFromPlayer {
+                print("🏁 returning from player - deferring render")
+                self.isStabilizing = true
+
+                // Clear the flag immediately so future visits are normal
+                appState.isReturningFromPlayer = false
+
+                // Trigger stabilization delay
+                Task { @MainActor in
+                    try? await Task.sleep(nanoseconds: 400_000_000) // 0.4s buffer for window animation
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        self.isStabilizing = false
+                    }
+                }
+            }
+
             // Check for pending messages from other views (e.g. Watch Party timeout)
             if let message = appState.pendingLobbyMessage {
                 print("📢 BrowseView: Found pending message: \(message)")
@@ -273,13 +300,13 @@ struct BrowseView: View {
 
     private func loadContent() async {
         // Only trigger full loading state if we have no content for the selected tab
-        let shouldShowLoader = (selectedTab == .movies && appState.popularMovies.isEmpty) || 
+        let shouldShowLoader = (selectedTab == .movies && appState.popularMovies.isEmpty) ||
                                (selectedTab == .shows && appState.popularShows.isEmpty)
-        
+
         if shouldShowLoader {
             isLoading = true
         }
-        
+
         errorMessage = nil
 
         do {
@@ -524,10 +551,10 @@ struct BrowseView: View {
         // CRITICAL: This function MUST be synchronous (not async) to prevent Landmine #24
         // Making it async keeps the calling Task alive, which gets cancelled by onDisappear,
         // causing intermittent freezes during navigation.
-        
+
         guard !isNavigating else { return }
         isNavigating = true
-        
+
         print("👆 Selected media item: \(item.name) from row: \(rowId ?? "unknown")")
 
         // Save scroll position for restoration when coming back
@@ -594,7 +621,7 @@ struct BrowseView: View {
             VStack(alignment: .leading, spacing: 12) {
                 Text("Continue Watching")
                     .font(.title2.weight(.bold))
-                    
+
                     .padding(.horizontal)
 
                 // Version-aware horizontal scroll view (Custom NSScrollView for macOS 15+, native for others)
@@ -846,11 +873,11 @@ struct BrowseView: View {
         for serviceKey in serviceKeys {
             let currentCatalog = appState.browseCatalogs[getStorageKey(serviceKey)]
 
-            // Reload if catalog is empty, nil, or if it's been more than 30 minutes since last tab switch
+            // Reload if catalog is empty or nil
             let shouldReload = currentCatalog == nil ||
                              currentCatalog?.isEmpty == true ||
-                             (currentCatalog?.count == 0) ||
-                             (Date().timeIntervalSince(lastTabSwitchTime) > 1800) // 30 minutes
+                             (currentCatalog?.count == 0)
+                             // Removed: Timeout check. Cache persists for session.
 
             if shouldReload {
                 servicesNeedingReload.append(serviceKey)
@@ -873,8 +900,8 @@ struct BrowseView: View {
         // Check trending first
         let trendingCatalog = appState.browseCatalogs[getStorageKey("trending")]
         let shouldReloadTrending = trendingCatalog == nil ||
-                                 trendingCatalog?.isEmpty == true ||
-                                 (Date().timeIntervalSince(lastTabSwitchTime) > 1800)
+                                 trendingCatalog?.isEmpty == true
+                                 // Removed: Timeout check. Cache persists for session.
 
         if shouldReloadTrending {
             await loadCatalogIfNeeded(key: "trending", isTrending: true, forceReload: false)
@@ -952,7 +979,7 @@ struct WatchModeSelectionView: View {
                 VStack(spacing: 8) {
                     Text("Continue Watching")
                         .font(.title.weight(.bold))
-                        
+
 
                     Text(historyItem.mediaItem.name)
                         .font(.title3)
@@ -1254,7 +1281,7 @@ struct RecentlyWatchedCard: View {
             // Title
             Text(historyItem.mediaItem.name)
                 .font(.subheadline.weight(.medium))
-                
+
                 .lineLimit(2)
 
             // Progress percentage
@@ -1343,7 +1370,7 @@ struct MediaCard: View {
             // Title
             Text(item.name)
                 .font(.subheadline.weight(.medium))
-                
+
                 .lineLimit(2)
 
             // Year
@@ -1403,7 +1430,7 @@ struct StreamingServiceRow: View {
             VStack(alignment: .leading, spacing: 12) {
                 Text(title)
                     .font(.title2.weight(.bold))
-                    
+
                     .padding(.horizontal)
 
                 // Version-aware horizontal scroll view (Custom NSScrollView for macOS 15+, native for others)
@@ -1448,7 +1475,7 @@ struct LazyStreamingServiceRow: View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
                 .font(.title2.weight(.bold))
-                
+
                 .padding(.horizontal)
 
             if isLoading {
@@ -1555,7 +1582,7 @@ struct OptimizedMediaCard: View {
             // Title
             Text(item.name)
                 .font(.subheadline.weight(.medium))
-                
+
                 .lineLimit(2)
 
             // Year

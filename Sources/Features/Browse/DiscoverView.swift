@@ -217,27 +217,27 @@ struct DiscoverView: View {
             isNavigating = false
             // Restore state from AppState
             var stateChanged = false
-            
+
             // 1. Restore Tab
             let savedTab = MediaType.from(index: appState.discoverSelectedTab)
             if selectedTab != savedTab {
                 selectedTab = savedTab
                 stateChanged = true
             }
-            
+
             // 2. Restore Catalog (Provider)
             if let savedCatalog = CatalogProvider(rawValue: appState.discoverSelectedCatalog),
                selectedCatalog != savedCatalog {
                 selectedCatalog = savedCatalog
                 stateChanged = true
             }
-            
+
             // 3. Restore Genre
             if selectedGenre != appState.discoverSelectedGenre {
                 selectedGenre = appState.discoverSelectedGenre
                 stateChanged = true
             }
-            
+
             // 4. Load Content
             // If state changed, the .onChange handlers above will trigger loadContent().
             // If state DID NOT change (e.g. defaults match AppState), no onChange fires, so we must load manually if empty.
@@ -267,6 +267,17 @@ struct DiscoverView: View {
         let catalogId = selectedCatalog.catalogId
         let baseURL = selectedCatalog.baseURL
 
+        // unique cache key
+        let cacheKey = "\(selectedCatalog.rawValue)_\(type)_\(selectedGenre)"
+
+        // 1. Check Cache
+        if let cachedItems = appState.discoverCatalogs[cacheKey], !cachedItems.isEmpty {
+            print("📦 Using cached discover results for: \(cacheKey)")
+            self.mediaItems = cachedItems
+            self.isLoading = false
+            return
+        }
+
         // Build catalog URL
         let urlString: String
         if selectedCatalog == .anime {
@@ -290,7 +301,7 @@ struct DiscoverView: View {
 
             if let metas = response.metas {
                 print("📊 Loaded \(metas.count) items from \(selectedCatalog.rawValue)")
-                mediaItems = metas.map { meta in
+                let items = metas.map { meta in
                     MediaItem(
                         id: meta.id,
                         type: meta.type,
@@ -306,6 +317,11 @@ struct DiscoverView: View {
                         runtime: nil
                     )
                 }
+                self.mediaItems = items
+
+                // 2. Write to Cache
+                appState.discoverCatalogs[cacheKey] = items
+
                 print("✅ Displaying \(mediaItems.count) total items")
             }
 

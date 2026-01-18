@@ -37,6 +37,19 @@ struct RoomListView: View {
             .padding(.horizontal)
             .padding(.top, 10)
 
+            // Header Actions
+            HStack {
+                Spacer()
+                Button(action: { showJoinDialog = true }) {
+                    Label("Join with Code", systemImage: "number.circle.fill")
+                        .font(.headline)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                Spacer()
+            }
+            .padding(.bottom, 10)
+
             if isLoading && appState.activeRooms.isEmpty {
                 ProgressView("Loading rooms...")
                     .padding()
@@ -107,12 +120,7 @@ struct RoomListView: View {
                 }
             }
 
-            Button(action: { showJoinDialog = true }) {
-                Label("Join with Code", systemImage: "number.circle.fill")
-                    .font(.headline)
-            }
-            .buttonStyle(.borderedProminent)
-            .padding()
+
         }
         .navigationTitle("Watch Party Rooms")
         .toolbar {

@@ -214,7 +214,7 @@ struct MPVPlayerView: View {
                         default: return saved
                         }
                     }
-                    
+
                     if appState.isEventPlayback { return .event }
                     if viewModel.isInWatchParty { return .room }
                     return .friends
@@ -403,7 +403,7 @@ struct MPVPlayerView: View {
                 // Pre-exit stabilization: Show closing overlay based on mode
                 let isWatchParty = appState.player.currentWatchMode == .watchParty
                 let isEvent = appState.player.isEventPlayback
-                
+
                 if isWatchParty && !isEvent {
                     viewModel.isExitingToLobby = true
                 } else {
@@ -1096,6 +1096,11 @@ struct MPVPlayerView: View {
                              withAnimation(.easeInOut(duration: 0.15)) {
                                  showReportSheet = false
                              }
+                         },
+                         // Solo playback only: show "Try Another Stream" if alternatives exist
+                         hasAlternativeStreams: !viewModel.isInWatchParty && !appState.isEventPlayback && appState.player.streamQueue.count > 0,
+                         onTryAnother: {
+                             appState.player.tryNextStream()
                          }
                      )
                      Spacer()

@@ -18,6 +18,10 @@ struct ReportStreamView: View {
     let provider: String? // Captured from metadata
     let onDismiss: () -> Void
 
+    // Optional: For "Try Another Stream" feature (solo playback only)
+    var hasAlternativeStreams: Bool = false
+    var onTryAnother: (() -> Void)? = nil
+
     @State private var selectedReason: String?
     @State private var isSubmitting = false
     @State private var showSuccess = false
@@ -112,6 +116,27 @@ struct ReportStreamView: View {
                     .disabled(selectedReason == nil || isSubmitting)
                 }
                 .padding(.top, 10)
+
+                // Try Another Stream button (solo playback only)
+                if hasAlternativeStreams {
+                    Button(action: {
+                        onTryAnother?()
+                        onDismiss()
+                    }) {
+                        HStack(spacing: 6) {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                            Text("Try Another Stream")
+                        }
+                        .font(.body.weight(.medium))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 10)
+                        .background(Color.blue.opacity(0.8))
+                        .cornerRadius(8)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.top, 8)
+                }
             }
         }
         .padding(30)

@@ -334,7 +334,8 @@ actor StreamService: StreamResolving {
 
         // Step 3.5: Apply Keyword Safety Filter (Remux, etc) AND Extended Cut Filter
         // User reported performance issues (spinning beach ball) with Remux files
-        var blockedKeywords = ["remux"]
+        // Also blocking low-quality cam rips to ensure premium experience
+        var blockedKeywords = ["remux", "telesync", "cam", "hdts", "hd-ts", "hc", "hdtc"]
 
         // NEW: Filter extended cuts if requested (for events)
         if filterExtended {

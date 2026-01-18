@@ -17,19 +17,17 @@ struct ReportStreamView: View {
     let filename: String? // Captured from player
     let provider: String? // Captured from metadata
     let onDismiss: () -> Void
-    
+
     @State private var selectedReason: String?
-    @State private var otherReasonText: String = ""
     @State private var isSubmitting = false
     @State private var showSuccess = false
-    
+
     let reasons = [
         "Different Movie/Show",
         "Poor Quality / CAM",
-        "Playback Error / Corrupt",
-        "Other"
+        "Playback Error / Corrupt"
     ]
-    
+
     var body: some View {
         VStack(spacing: 20) {
             if showSuccess {
@@ -53,11 +51,11 @@ struct ReportStreamView: View {
             } else {
                 Text("Report Stream")
                     .font(.title2.bold())
-                
+
                 Text("What's wrong with this stream?")
                     .font(.subheadline)
                     .foregroundColor(.gray)
-                
+
                 VStack(spacing: 12) {
                     ForEach(reasons, id: \.self) { reason in
                         Button(action: {
@@ -81,13 +79,9 @@ struct ReportStreamView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                 }
-                
-                if selectedReason == "Other" {
-                    TextField("Please describe the issue...", text: $otherReasonText)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(maxWidth: .infinity)
-                }
-                
+
+
+
                 HStack(spacing: 16) {
                     Button(action: {
                         onDismiss()
@@ -101,7 +95,7 @@ struct ReportStreamView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .keyboardShortcut(.cancelAction)
-                    
+
                     Button(action: {
                         submitReport()
                     }) {
@@ -112,10 +106,10 @@ struct ReportStreamView: View {
                             .padding(.vertical, 8)
                             .background(Color.accentColor)
                             .cornerRadius(8)
-                            .opacity((selectedReason == nil || (selectedReason == "Other" && otherReasonText.isEmpty) || isSubmitting) ? 0.5 : 1.0)
+                            .opacity((selectedReason == nil || isSubmitting) ? 0.5 : 1.0)
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .disabled(selectedReason == nil || (selectedReason == "Other" && otherReasonText.isEmpty) || isSubmitting)
+                    .disabled(selectedReason == nil || isSubmitting)
                 }
                 .padding(.top, 10)
             }
@@ -126,13 +120,13 @@ struct ReportStreamView: View {
         .frame(width: 400)
         .preferredColorScheme(.dark)
     }
-    
+
     func submitReport() {
         guard let reason = selectedReason else { return }
         isSubmitting = true
-        
-        let finalReason = reason == "Other" ? otherReasonText : reason
-        
+
+        let finalReason = reason
+
         Task {
             await SupabaseClient.shared.reportStream(
                 imdbId: imdbId,

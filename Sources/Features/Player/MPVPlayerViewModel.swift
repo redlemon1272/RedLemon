@@ -2016,10 +2016,16 @@ class MPVPlayerViewModel: ObservableObject {
 
     deinit {
         LoggingManager.shared.info(.general, message: "MPVPlayerViewModel deinit")
-        // ✅ Don't create async tasks in deinit - cleanup() is already called before deallocation
-        // The Task with [weak self] creates a race condition where self may be deallocated
-        // between the guard check and the MainActor.run execution, causing a crash in Swift's
-        // reference counting system (decrementStrong). All necessary cleanup is handled by cleanup().
+        
+        // Safety Net: If cleanup wasn't called (e.g. implicit back navigation),
+        // ensure Realtime is disconnected so presence updates happen.
+        // We use a DETACHED task to effectively "fire and forget" the network call from a dying object.
+        if !hasCleanedUp, let manager = realtimeManager {
+             Task.detached {
+                 LoggingManager.shared.info(.watchParty, message: "MPVPlayerViewModel deinit: Triggering detached cleanup task for Realtime...")
+                 await manager.disconnect(leaveChannel: true, disconnectClient: false)
+             }
+        }
     }
 
     // MARK: - Subtitle Download

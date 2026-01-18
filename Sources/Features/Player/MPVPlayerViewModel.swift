@@ -470,7 +470,7 @@ class MPVPlayerViewModel: ObservableObject {
     private var isCurrentlyAdjustingSpeed: Bool = false
 
     // Startup synchronization: Give guest time to spin up video pipeline
-    private let hostStartupDelay: Double = 0.25  // 250ms delay for guest to prepare
+    // private let hostStartupDelay: Double = 0.25  // REMOVED: Caused guest to start before host
     private var pendingPlayTask: Task<Void, Never>?
     private var playbackTimeoutTask: Task<Void, Never>? // NEW: Soft timeout for loading
     private var playbackHeartbeatTask: Task<Void, Never>? // Heartbeat to keep host presence during playback
@@ -1210,15 +1210,15 @@ class MPVPlayerViewModel: ObservableObject {
 
 
     func togglePlayPause() {
-        // Special handling for watch party host: Add startup delay when transitioning to play
+        // Special handling for watch party host: Sync Logic
+        // REMOVED Startup Delay: Caused guests to jump ahead of host
         if isInWatchParty && isWatchPartyHost && !isPlaying {
             // Cancel any pending play task
             pendingPlayTask?.cancel()
 
-            // Host is about to play - add brief delay for guest synchronization
-            LoggingManager.shared.info(.watchParty, message: "Host initiating play with \(Int(hostStartupDelay * 1000))ms startup delay for guest sync")
+            LoggingManager.shared.info(.watchParty, message: "Host initiating play (Immediate)")
 
-            // Send play message FIRST (before actually playing)
+            // Send play message
             let syncMessage = SyncMessage(
                 type: .play,
                 timestamp: Date().timeIntervalSince1970,
@@ -1235,7 +1235,7 @@ class MPVPlayerViewModel: ObservableObject {
                     if let manager = self.realtimeManager {
                         try await manager.sendSyncMessage(syncMessage)
                     }
-                    LoggingManager.shared.info(.watchParty, message: "Sent play message to guests (pre-delay)")
+                    LoggingManager.shared.info(.watchParty, message: "Sent play message to guests")
                 } catch {
                     LoggingManager.shared.error(.watchParty, message: "Failed to send play sync message: \(error)")
                 }
@@ -1244,17 +1244,8 @@ class MPVPlayerViewModel: ObservableObject {
             // Mark local action to prevent echo
             markLocalAction()
 
-            // Then delay before actually starting playback
-            pendingPlayTask = Task { @MainActor in
-                try? await Task.sleep(nanoseconds: UInt64(hostStartupDelay * 1_000_000_000))
-
-                // Check if task wasn't cancelled
-                guard !Task.isCancelled else {
-                    LoggingManager.shared.debug(.watchParty, message: "Startup delay cancelled")
-                    return
-                }
-
-                LoggingManager.shared.info(.watchParty, message: "Host starting playback after startup delay")
+            // Play immediately
+            Task { @MainActor in
                 await playbackService.togglePlayPause()
             }
 

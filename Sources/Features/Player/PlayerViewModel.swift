@@ -1489,7 +1489,8 @@ class PlayerViewModel: ObservableObject {
                 name: appState.currentUsername,
                 isHost: true,
                 isReady: false,
-                joinedAt: Date()
+                joinedAt: Date(),
+                phxRefs: []
             )
 
             let watchPartyRoom = WatchPartyRoom(
@@ -1666,7 +1667,8 @@ class PlayerViewModel: ObservableObject {
                      name: "User", // Placeholder, Lobby will refresh
                      isHost: p.isHost,
                      isReady: false,
-                     joinedAt: p.joinedAt
+                     joinedAt: p.joinedAt,
+                     phxRefs: []
                 ))
             }
 

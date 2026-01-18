@@ -10,15 +10,19 @@ enum RealtimeConnectionState {
 
 /// Protocol for RealtimeChannelManager to enable mocking
 protocol RealtimeService: Actor {
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]?, onSync: @escaping (SyncMessage) -> Void) async throws
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]?) async throws
     func sendSyncMessage(_ message: SyncMessage) async throws
     func disconnect(leaveChannel: Bool, disconnectClient: Bool) async
     func cleanup(leaveChannel: Bool, disconnectClient: Bool) async
     func isRealtimeConnected() async -> Bool
+    
+    // Multi-Observer Support
+    func registerObserver(id: String, onPresence: ((PresenceAction, String, [String: Any]?) -> Void)?, onSync: ((SyncMessage) -> Void)?, onConnectionState: ((RealtimeConnectionState) -> Void)?) async
+    func unregisterObserver(id: String) async
+    
+    // Compatibility (should internally call registerObserver with id "default")
     func setConnectionStateCallback(_ callback: @escaping (RealtimeConnectionState) -> Void)
     func setPresenceCallback(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void)
-    func onPresenceChange(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void)
-    func onConnectionStateChange(_ callback: @escaping (RealtimeConnectionState) -> Void)
     func setPostgresCallback(_ callback: @escaping ([String: Any]) -> Void)
 }
 
@@ -55,16 +59,16 @@ actor RealtimeChannelManager: RealtimeService {
     // Sync state
     private var lastRemoteTimestamp: TimeInterval = 0
     private var lastRemoteUpdateTime: Date = Date()
-    private var syncCallback: ((SyncMessage) -> Void)?
+    private var syncCallbacks: [String: (SyncMessage) -> Void] = [:]
 
-    // Connection status callback
-    private var connectionStateCallback: ((RealtimeConnectionState) -> Void)?
+    // Connection status callbacks
+    private var connectionStateCallbacks: [String: (RealtimeConnectionState) -> Void] = [:]
 
     // Presence tracking
-    private var presenceCallback: ((PresenceAction, String, [String: Any]?) -> Void)?
+    private var presenceCallbacks: [String: (PresenceAction, String, [String: Any]?) -> Void] = [:]
 
     // Postgres tracking
-    private var postgresCallback: (([String: Any]) -> Void)?
+    private var postgresCallbacks: [String: ([String: Any]) -> Void] = [:]
 
     // Handler IDs for cleanup
     private var presenceHandlerId: UUID?
@@ -80,14 +84,13 @@ actor RealtimeChannelManager: RealtimeService {
 
     // MARK: - Setup
 
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]? = nil, onSync: @escaping (SyncMessage) -> Void) async throws {
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]? = nil) async throws {
         // PREVENT DUPLICATE SETUP:
-        // If we represent the SAME room and user, and are already connected, just update callback.
+        // If we represent the SAME room and user, and are already connected, just return.
         if self.roomId?.caseInsensitiveCompare(roomId) == .orderedSame &&
            self.userId?.caseInsensitiveCompare(userId) == .orderedSame &&
            isConnected {
             print("ℹ️ RealtimeChannelManager: Already setup for room \(roomId), filtering duplicate setup call.")
-            self.syncCallback = onSync // Update callback just in case
             // CRITICAL FIX: Notify caller that we are connected, otherwise UI stays in "Connecting..." state
             await notifyConnectionStateChange(.connected)
             return
@@ -102,7 +105,6 @@ actor RealtimeChannelManager: RealtimeService {
         self.roomId = roomId
         self.isHost = isHost
         self.userId = userId
-        self.syncCallback = onSync
 
         // Create channel with room-specific name
         let channelName = "watch-party:\(roomId)"
@@ -201,11 +203,15 @@ actor RealtimeChannelManager: RealtimeService {
 
     // New method to handle postgres changes
     private func handlePostgresChange(_ payload: [String: Any]) async {
-        postgresCallback?(payload)
+        for callback in postgresCallbacks.values {
+            callback(payload)
+        }
     }
 
     private func handlePresenceUpdate(action: PresenceAction, userId: String, metadata: [String: Any]?) {
-        presenceCallback?(action, userId, metadata)
+        for callback in presenceCallbacks.values {
+            callback(action, userId, metadata)
+        }
     }
 
     private func handleBroadcastMessage(_ payload: [String: Any]) async {
@@ -228,7 +234,9 @@ actor RealtimeChannelManager: RealtimeService {
 
     private func handlePresenceChange(_ action: PresenceAction, userId: String, metadata: [String: Any]?) async {
         print("👥 Presence \(action == .join ? "joined" : "left"): \(userId)")
-        presenceCallback?(action, userId, metadata)
+        for callback in presenceCallbacks.values {
+            callback(action, userId, metadata)
+        }
     }
 
     private func handleConnectionChange(_ connected: Bool) async {
@@ -264,7 +272,7 @@ actor RealtimeChannelManager: RealtimeService {
     // MARK: - Sending Messages
 
     func setPostgresCallback(_ callback: @escaping ([String: Any]) -> Void) {
-        self.postgresCallback = callback
+        self.postgresCallbacks["default"] = callback
     }
 
     func sendSyncMessage(_ message: SyncMessage) async throws {
@@ -318,18 +326,13 @@ actor RealtimeChannelManager: RealtimeService {
         lastRemoteTimestamp = compensatedMessage.position
         lastRemoteUpdateTime = Date()
 
-        // CRITICAL: Log callback status before invoking
-        if syncCallback == nil {
-            NSLog("❌ Realtime: syncCallback is NIL, cannot deliver message type: %@", String(describing: message.type))
-            return
+        // Pass to all registered observers
+        for observerId in syncCallbacks.keys {
+            if let callback = syncCallbacks[observerId] {
+                // NSLog("📞 Realtime: Delivering sync message to observer: \(observerId)")
+                callback(compensatedMessage)
+            }
         }
-
-        NSLog("📞 Realtime: Invoking syncCallback for message type: %@", String(describing: message.type))
-
-        // Pass to callback
-        syncCallback?(compensatedMessage)
-
-        NSLog("✅ Realtime: syncCallback invoked successfully")
     }
 
     // MARK: - Latency Tracking
@@ -355,19 +358,15 @@ actor RealtimeChannelManager: RealtimeService {
         try await realtimeClient.track(topic: channelName, userId: userId, metadata: state)
     }
 
-    func onPresenceChange(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void) {
-        self.presenceCallback = callback
-    }
+    // Compatibility (handled via registerObserver)
 
     // MARK: - Connection State
 
     private func notifyConnectionStateChange(_ state: RealtimeConnectionState) async {
         print("📡 Connection state: \(state)")
-        connectionStateCallback?(state)
-    }
-
-    func onConnectionStateChange(_ callback: @escaping (RealtimeConnectionState) -> Void) {
-        self.connectionStateCallback = callback
+        for callback in connectionStateCallbacks.values {
+            callback(state)
+        }
     }
 
     private func waitForConnection(timeout: TimeInterval = 10.0) async throws {
@@ -445,10 +444,11 @@ actor RealtimeChannelManager: RealtimeService {
         isDisconnecting = false
         roomId = nil
         userId = nil
-        syncCallback = nil
-        presenceCallback = nil
-        postgresCallback = nil // CRITICAL: Stop receiving DB changes
-        connectionStateCallback = nil
+        // Stop callbacks
+        postgresCallbacks.removeAll()
+        connectionStateCallbacks.removeAll()
+        syncCallbacks.removeAll()
+        presenceCallbacks.removeAll()
 
         // Clean up handlers
         await removeHandlers()
@@ -473,16 +473,38 @@ actor RealtimeChannelManager: RealtimeService {
         return await realtimeClient.isJoined(to: channelName)
     }
 
+    /// Multi-Observer Implementation
+    func registerObserver(id: String, onPresence: ((PresenceAction, String, [String: Any]?) -> Void)?, onSync: ((SyncMessage) -> Void)?, onConnectionState: ((RealtimeConnectionState) -> Void)?) async {
+        if let onPresence = onPresence {
+            presenceCallbacks[id] = onPresence
+        }
+        if let onSync = onSync {
+            syncCallbacks[id] = onSync
+        }
+        if let onConnectionState = onConnectionState {
+            connectionStateCallbacks[id] = onConnectionState
+        }
+        NSLog("📝 Realtime: Registered observer '%@' (Presence: %@, Sync: %@, Status: %@)", 
+              id, onPresence != nil ? "YES" : "NO", onSync != nil ? "YES" : "NO", onConnectionState != nil ? "YES" : "NO")
+    }
+
+    func unregisterObserver(id: String) async {
+        presenceCallbacks.removeValue(forKey: id)
+        syncCallbacks.removeValue(forKey: id)
+        connectionStateCallbacks.removeValue(forKey: id)
+        NSLog("📝 Realtime: Unregistered observer '%@'", id)
+    }
+
     /// Set connection state callback (for compatibility)
     func setConnectionStateCallback(_ callback: @escaping (RealtimeConnectionState) -> Void) {
-        self.connectionStateCallback = callback
+        connectionStateCallbacks["default"] = callback
     }
 
     /// Set presence callback (for compatibility)
     func setPresenceCallback(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void) {
-        self.presenceCallback = callback
+        presenceCallbacks["default"] = callback
     }
-
+    
     deinit {
         print("♻️ RealtimeChannelManager deinitialized")
     }

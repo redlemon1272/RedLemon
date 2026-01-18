@@ -46,7 +46,12 @@ class EventChatService: ObservableObject {
                     roomId: eventId, // Treating Event ID as a Room ID for chat purposes
                     isHost: false,   // Public events have no "Host" in this context
                     userId: userId,
-                    username: username,
+                    username: username
+                )
+                
+                await manager.registerObserver(
+                    id: "event-chat",
+                    onPresence: nil,
                     onSync: { [weak self] message in
                         Task { @MainActor [weak self] in
                             if message.type == .reaction {
@@ -55,7 +60,8 @@ class EventChatService: ObservableObject {
                                 self?.handleSyncMessage(message)
                             }
                         }
-                    }
+                    },
+                    onConnectionState: nil
                 )
             }
             self.isConnected = true

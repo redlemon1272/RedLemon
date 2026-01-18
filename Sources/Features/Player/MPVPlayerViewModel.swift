@@ -46,7 +46,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Track connection IDs (phx_ref) independently of the participants list
     // This protects against "Ghost Leaves" (stale refs) AND "True Leaves" where the user is wiped from the list by DB polling before the Leave event processes.
-    private var activeConnectionRefs: [String: String] = [:]
+    private var activeConnectionRefs: [String: Set<String>] = [:] // ParticipantId -> Set of PhxRefs
 
     // Counter for database persistence limiting (Host Only)
     private var persistenceTickCount: Int = 0
@@ -1995,9 +1995,11 @@ class MPVPlayerViewModel: ObservableObject {
             // ONLY disconnect if we're NOT returning to lobby, to allow the Lobby connection to persist smoothly.
             if !returningToLobby {
                 await realtimeManager?.disconnect(leaveChannel: true, disconnectClient: false)
-                LoggingManager.shared.info(.watchParty, message: "Realtime manager channel left (not returning to lobby, client connection preserved)")
+                await realtimeManager?.unregisterObserver(id: "player")
+                LoggingManager.shared.info(.watchParty, message: "Realtime manager channel left and observer unregistered")
             } else {
-                LoggingManager.shared.info(.watchParty, message: "Returning to lobby - skipping realtime disconnect to preserve shared connection")
+                await realtimeManager?.unregisterObserver(id: "player")
+                LoggingManager.shared.info(.watchParty, message: "Returning to lobby - unregistered player observer but preserved shared connection")
             }
         }
 
@@ -2097,7 +2099,7 @@ extension MPVPlayerViewModel {
 
         // But prepare welcome message for when they do open it
         // CRITICAL: Set up presence callback BEFORE setup() so we don't miss any presence events
-        await realtimeManager?.setPresenceCallback { [weak self] (action: PresenceAction, userId: String, metadata: [String: Any]?) in
+        await realtimeManager?.registerObserver(id: "player", onPresence: { [weak self] (action: PresenceAction, userId: String, metadata: [String: Any]?) in
             _ = Task { @MainActor in
                 guard let self = self else { return }
                 
@@ -2133,7 +2135,7 @@ extension MPVPlayerViewModel {
                             isHost: true,
                             isReady: true,
                             joinedAt: Date(),
-                            phxRef: nil
+                            phxRefs: []
                         )
 
                         let fetchedRoom = WatchPartyRoom(
@@ -2197,15 +2199,15 @@ extension MPVPlayerViewModel {
                         // Check if already exists using actualUserId (stable ID)
                         if let index = updatedParticipants.firstIndex(where: { $0.id.caseInsensitiveCompare(actualUserId) == .orderedSame }) {
                             // User exists - update their timestamp
-                            // Capture offline state before update (True if phxRef was nil)
-                            let wasOffline = updatedParticipants[index].phxRef == nil
+                            // Capture offline state before update (True if phxRefs were empty)
+                            let wasOffline = updatedParticipants[index].phxRefs.isEmpty
 
                             updatedParticipants[index].joinedAt = Date()
 
                             // Use the Phoenix map key as the stable connection ref.
-                            updatedParticipants[index].phxRef = userId
-                            self.activeConnectionRefs[actualUserId] = userId // Track officially
-                            LoggingManager.shared.info(.watchParty, message: "Updated existing participant \(actualUserId) with Ref: \(userId)")
+                            updatedParticipants[index].phxRefs.insert(userId)
+                            self.activeConnectionRefs[actualUserId, default: []].insert(userId) // Track officially
+                            LoggingManager.shared.info(.watchParty, message: "Updated existing participant \(actualUserId) with Ref: \(userId) (Total Refs: \(updatedParticipants[index].phxRefs.count))")
 
                             // If upgrading from DB-only (Offline) to Realtime (Online), announce it
                             if wasOffline && actualUserId != self.currentUserId {
@@ -2217,7 +2219,7 @@ extension MPVPlayerViewModel {
                             }
                         } else {
                             // New user - create with actualUserId
-                            self.activeConnectionRefs[actualUserId] = userId
+                            self.activeConnectionRefs[actualUserId] = [userId]
 
                             let username = metaUsername ?? "User"
                             let isHostVal = metadata?["is_host"] as? Bool ?? false
@@ -2229,7 +2231,7 @@ extension MPVPlayerViewModel {
                                 isHost: isHostVal,
                                 isReady: false,
                                 joinedAt: Date(timeIntervalSince1970: joinedAtVal),
-                                phxRef: userId // Store Connection ID (Map Key)
+                                phxRefs: [userId] // Store Connection ID (Map Key)
                             )
                             updatedParticipants.append(newParticipant)
                             LoggingManager.shared.info(.watchParty, message: "Added new participant \(actualUserId) (Ref: \(userId))")
@@ -2251,7 +2253,7 @@ extension MPVPlayerViewModel {
                                 // Last Ditch: Check if we have a stale ref for self in the OLD list
                                 if selfRef == nil {
                                     if let oldSelf = self.appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == currentId }) {
-                                        selfRef = oldSelf.phxRef
+                                        selfRef = oldSelf.phxRefs.first
                                         LoggingManager.shared.debug(.watchParty, message: "Restored stale phx_ref for Self: \(selfRef ?? "nil")")
                                     }
                                 }
@@ -2262,7 +2264,7 @@ extension MPVPlayerViewModel {
                                     isHost: self.isWatchPartyHost,
                                     isReady: true,
                                     joinedAt: Date(),
-                                    phxRef: selfRef
+                                    phxRefs: selfRef != nil ? [selfRef!] : []
                                 )
                                 updatedParticipants.append(selfParticipant)
                             }
@@ -2298,21 +2300,20 @@ extension MPVPlayerViewModel {
                             }
 
                             // Check against our authoritative Ref Map
-                            // If we have a record of this user's Active Ref, it must match the Leaving Ref.
-                            if let trackedRef = self.activeConnectionRefs[actualUserId] {
-                                 if trackedRef != leavingPhxRef {
-                                     LoggingManager.shared.debug(.watchParty, message: "Ignoring stale LEAVE event for \(actualUserId) (Tracked: \(trackedRef) != Leaving: \(leavingPhxRef))")
-                                     self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                     return
-                                 }
-                            } else {
-                                 // We have NO record of this user's ref in activeConnectionRefs.
-                                 // This means they either already left or were removed by a poll.
-                                 // Proceeding to ensure cleanup of connectedGuestIds and UI lists.
-                                 LoggingManager.shared.debug(.watchParty, message: "Participant \(actualUserId) not in Ref Map. Proceeding with leave cleanup.")
+                            // 1. Remove this specific Ref
+                            if var refs = self.activeConnectionRefs[actualUserId] {
+                                refs.remove(leavingPhxRef)
+                                self.activeConnectionRefs[actualUserId] = refs
+                                
+                                // 2. Bible Landmine #51: Only consider Offline when count hits Zero
+                                if !refs.isEmpty {
+                                    LoggingManager.shared.info(.watchParty, message: "🛡️ Ignoring leave for \(actualUserId) - User still has \(refs.count) active connections")
+                                    self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                    return
+                                }
                             }
-
-                            // Clean up ref map
+                            
+                            // User is truly gone
                             self.activeConnectionRefs.removeValue(forKey: actualUserId)
 
                             // Find username before removing for the message
@@ -2320,8 +2321,17 @@ extension MPVPlayerViewModel {
 
                             // Remove using actualUserId (Force remove from UI list)
                             if var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants {
-                                currentParticipants.removeAll(where: { $0.id.caseInsensitiveCompare(actualUserId) == .orderedSame })
-                                self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
+                                if let index = currentParticipants.firstIndex(where: { $0.id.caseInsensitiveCompare(actualUserId) == .orderedSame }) {
+                                    let name = currentParticipants[index].name
+                                    currentParticipants.remove(at: index)
+                                    self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
+                                    
+                                    // 💬 System Message: Leave (Only for others)
+                                    if actualUserId != self.currentUserId {
+                                        self.addSystemMessage("\(name) left")
+                                    }
+                                    LoggingManager.shared.info(.watchParty, message: "Participant \(name) (\(actualUserId)) officially removed from UI")
+                                }
                             }
 
                             // Post-Load Gate Logic Cleanup
@@ -2329,8 +2339,7 @@ extension MPVPlayerViewModel {
                                 self.connectedGuestIds.remove(actualUserId)
                                 self.readyGuestIds.remove(actualUserId)
                                 
-                                // 💬 System Message: Leave (Only for others)
-                                self.addSystemMessage("\(username) left")
+                                // self.addSystemMessage("\(username) left") // Already handled above
                                 
                                 if self.isWatchPartyHost {
                                     self.checkIfAllGuestsReady()
@@ -2350,13 +2359,13 @@ extension MPVPlayerViewModel {
                     for p in updatedParticipants {
                         let normalizedId = p.id.lowercased()
                         if let existing = uniqueParticipants[normalizedId] {
-                            // Merge logic: Keep the one with phxRef, or the newer one
-                            if existing.phxRef == nil && p.phxRef != nil {
+                            // Merge logic: Keep the one with phxRefs, or the newer one
+                            if existing.phxRefs.isEmpty && !p.phxRefs.isEmpty {
                                 uniqueParticipants[normalizedId] = p
-                            } else if existing.phxRef != nil && p.phxRef == nil {
+                            } else if !existing.phxRefs.isEmpty && p.phxRefs.isEmpty {
                                 // Keep existing
                             } else {
-                                // Both have ref or neither; keep newest
+                                // Both have refs or neither; keep newest
                                 if p.joinedAt > existing.joinedAt {
                                     uniqueParticipants[normalizedId] = p
                                 }
@@ -2373,7 +2382,8 @@ extension MPVPlayerViewModel {
                     self.appState?.player.currentWatchPartyRoom?.participants = dedupedList
                 }
             }
-        }
+        }, onSync: nil, onConnectionState: nil)
+        
 
         // Now setup the channel with callbacks already in place
         // Don't auto-open chat - let user toggle it with spacebar or chat button
@@ -2395,12 +2405,19 @@ extension MPVPlayerViewModel {
                 roomId: roomId,
                 isHost: isHost,
                 userId: userId,
-                username: username,
+                username: username
+            )
+            
+            // Register as player observer (Presence is already registered above, but we update it with Sync here)
+            await realtimeManager.registerObserver(
+                id: "player",
+                onPresence: nil, // Don't overwrite existing presence callback if possible, but registerObserver overwrites.
                 onSync: { [weak self] syncMessage in
-                    Task { @MainActor in
+                    _ = Task { @MainActor [weak self] in
                         await self?.handleSyncMessage(syncMessage)
                     }
-                }
+                },
+                onConnectionState: nil
             )
         }
 
@@ -2641,7 +2658,7 @@ extension MPVPlayerViewModel {
                         isHost: p.isHost,
                         isReady: false, // Default to false for DB poll
                         joinedAt: p.joinedAt,
-                        phxRef: nil // No ref from DB
+                        phxRefs: [] // No ref from DB
                     )
                     currentMap[pId] = newParticipant
                     hasChanges = true
@@ -2655,7 +2672,7 @@ extension MPVPlayerViewModel {
             // If they HAVE phxRef (online), we KEEP them regardless of DB.
 
             let idsToRemove = currentMap.keys.filter { id in
-                let isOnline = currentMap[id]?.phxRef != nil
+                let isOnline = !(currentMap[id]?.phxRefs.isEmpty ?? true)
                 let isInDB = dbUserIds.contains(id)
 
                 // If Online: Keep (Source of Truth is Realtime)
@@ -3472,13 +3489,16 @@ extension MPVPlayerViewModel {
             self.persistenceTickCount += 1
             if self.persistenceTickCount >= 5 {
                 self.persistenceTickCount = 0
+                let rid = self.currentRoomId
+                let ctime = self.currentTime
+                let playing = self.isPlaying
                 Task {
-                    if let roomId = self.currentRoomId {
+                    if let roomId = rid {
                         // Fire and forget db update
                          try? await SupabaseClient.shared.updateRoomPlayback(
                             roomId: roomId,
-                            position: Int(self.currentTime),
-                            isPlaying: self.isPlaying
+                            position: Int(ctime),
+                            isPlaying: playing
                         )
                     }
                 }

@@ -66,8 +66,8 @@ class LobbyEventRouter: ObservableObject {
 
         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host has left the room"])
 
-        // FIX: Don't show alert for the host who initiated the leave
-        if !viewModel.isHost {
+        // FIX: Don't show alert for the host who initiated the leave, or if we are already leaving
+        if !viewModel.isHost && !viewModel.isDisconnecting {
             // Global Alert + Immediate Exit
             viewModel.appState?.activeAlert = AppState.AppAlert(
                  title: "Room Closed",
@@ -126,13 +126,13 @@ class LobbyEventRouter: ObservableObject {
              // Presence callback handles this already, BUT it may suppress the message if the user is reconnecting (flapping).
              // We explicitly add the message here on LOBBY_JOIN to ensure the intent is logged in chat.
              viewModel.chatManager.addSystemMessage(.userJoined, userName: guestUsername)
-             // But we add to local list just in case (though presence should sync it)
              let guest = Participant(
                  id: guestId,
                  name: guestUsername,
                  isHost: false,
                  isReady: false,
-                 joinedAt: Date()
+                 joinedAt: Date(),
+                 phxRefs: []
              )
              viewModel.participants.append(guest)
 

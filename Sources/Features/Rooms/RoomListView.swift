@@ -297,7 +297,8 @@ struct RoomListView: View {
                     name: room.hostUsername,
                     isHost: true,
                     isReady: true,
-                    joinedAt: room.createdAt
+                    joinedAt: room.createdAt,
+                    phxRefs: []
                 )
             } else {
                 // ZOMBIE CHECK: Verify host is in the participant list
@@ -312,7 +313,8 @@ struct RoomListView: View {
                     name: room.hostUsername,
                     isHost: true,
                     isReady: true,
-                    joinedAt: hostData.joinedAt
+                    joinedAt: hostData.joinedAt,
+                    phxRefs: []
                 )
             }
 
@@ -327,7 +329,8 @@ struct RoomListView: View {
                         name: user.username,
                         isHost: participant.isHost,
                         isReady: false,
-                        joinedAt: participant.joinedAt
+                        joinedAt: participant.joinedAt,
+                        phxRefs: []
                     )
                     guests.append(guest)
                 } else {
@@ -336,7 +339,8 @@ struct RoomListView: View {
                         name: "Unknown User",
                         isHost: participant.isHost,
                         isReady: false,
-                        joinedAt: participant.joinedAt
+                        joinedAt: participant.joinedAt,
+                        phxRefs: []
                     )
                     guests.append(guest)
                 }

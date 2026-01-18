@@ -71,7 +71,7 @@ class LobbyViewModel: ObservableObject {
     // NOTE: roomStatePollingTask moved to LobbyDatabaseManager
     var lastRoomPlayingState: Bool = false // Made var for LobbyDatabaseManager access
     var participantId: String
-    private var isDisconnecting: Bool = false
+    var isDisconnecting: Bool = false
     var realtimeManager: (any RealtimeService)?
     // Delegated to AppState.player to persist across View recreations (Guest Loop Fix)
     var playbackEndedTimestamp: Date? {
@@ -162,7 +162,7 @@ class LobbyViewModel: ObservableObject {
                 isHost: p.isHost,
                 isReady: p.isReady,
                 joinedAt: p.joinedAt,
-                phxRef: nil
+                phxRefs: []
             )
         }
 
@@ -322,13 +322,19 @@ class LobbyViewModel: ObservableObject {
                     isHost: isHost,
                     userId: participantId,
                     username: appState?.currentUsername ?? "User",
-                    postgresChanges: roomUpdatesConfig,
+                    postgresChanges: roomUpdatesConfig
+                )
+                
+                await manager.registerObserver(
+                    id: "lobby",
+                    onPresence: nil,
                     onSync: { [weak self] message in
                         Task { @MainActor [weak self] in
                             guard let self = self else { return }
                             await self.handleLobbyMessage(message)
                         }
-                    }
+                    },
+                    onConnectionState: nil
                 )
             }
             print("✅ Lobby: Connected to Realtime")
@@ -881,7 +887,7 @@ class LobbyViewModel: ObservableObject {
             kickParticipant(participant)
         } else {
             // Create dummy for signaling (ID is what matters)
-            let dummy = Participant(id: userId, name: "User", isHost: false, isReady: false, joinedAt: Date(), phxRef: nil)
+            let dummy = Participant(id: userId, name: "User", isHost: false, isReady: false, joinedAt: Date(), phxRefs: [])
             kickParticipant(dummy)
         }
     }
@@ -904,7 +910,7 @@ class LobbyViewModel: ObservableObject {
             // Not in list (or event room), but still block via service
             // If we are host, we can still try to send a kick command by ID
             if isHost {
-                 let dummy = Participant(id: userId, name: username ?? "User", isHost: false, isReady: false, joinedAt: Date(), phxRef: nil)
+                 let dummy = Participant(id: userId, name: username ?? "User", isHost: false, isReady: false, joinedAt: Date(), phxRefs: [])
                  kickParticipant(dummy)
             }
             Task {

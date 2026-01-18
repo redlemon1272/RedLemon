@@ -113,8 +113,8 @@ class LobbyPresenceManager: ObservableObject {
                              return
                          }
 
-                         // FIX: Don't show alert for the host who initiated the delete
-                         if !viewModel.isHost {
+                         // FIX: Don't show alert for the host who initiated the delete, or if we are already leaving
+                         if !viewModel.isHost && !viewModel.isDisconnecting {
                              // Global Alert + Immediate Exit
                              viewModel.appState?.activeAlert = AppState.AppAlert(
                                  title: "Room Closed",
@@ -138,9 +138,10 @@ class LobbyPresenceManager: ObservableObject {
         }
 
 
-        await realtimeManager.setPresenceCallback { [weak self] action, userId, metadata in
-            Task { @MainActor [weak self] in
-                guard let self = self, let viewModel = self.viewModel else { return }
+        await realtimeManager.registerObserver(id: "lobby", onPresence: { [weak self] (action: PresenceAction, userId: String, metadata: [String: Any]?) in
+            _ = Task { @MainActor [weak self] in
+                guard let strongSelf = self else { return }
+                guard let strongViewModel = strongSelf.viewModel else { return }
 
                 // Update participants list
                 switch action {
@@ -149,8 +150,7 @@ class LobbyPresenceManager: ObservableObject {
                     // The `userId` param here is the Presence Ref (Connection ID), NOT the user's UUID.
                     // We must extract the actual user_id from metadata if available.
                     var trueUserId = userId
-                    if let dict = metadata as? [String: Any],
-                       let metaUserId = dict["user_id"] as? String {
+                    if let metaUserId = metadata?["user_id"] as? String {
                         trueUserId = metaUserId
                     }
 
@@ -158,24 +158,22 @@ class LobbyPresenceManager: ObservableObject {
 
                     // Determine if we should show a notification (New Connection)
                     // We use `connectedUserIds` to track distinct active sessions
-                    let isNewConnection = !viewModel.connectedUserIds.contains(normalizedID)
+                    let isNewConnection = !strongViewModel.connectedUserIds.contains(normalizedID)
                     if isNewConnection {
-                        viewModel.connectedUserIds.insert(normalizedID)
+                        strongViewModel.connectedUserIds.insert(normalizedID)
                     }
 
                     // Check if already exists (CASE INSENSITIVE)
-                    if let index = viewModel.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
-                        viewModel.participants[index].joinedAt = Date()
-                        viewModel.participants[index].phxRef = userId // Update connection ID (Map Key)
+                    if let index = strongViewModel.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
+                        strongViewModel.participants[index].joinedAt = Date()
+                        strongViewModel.participants[index].phxRefs.insert(userId) // Add connection ID (Map Key)
 
                         // Parse metadata
-                        if let dict = metadata as? [String: Any] {
-                            if let username = dict["username"] as? String {
-                                viewModel.participants[index].name = username
-                            }
-                            if let isHost = dict["is_host"] as? Bool {
-                                viewModel.participants[index].isHost = isHost
-                            }
+                        if let username = metadata?["username"] as? String {
+                            strongViewModel.participants[index].name = username
+                        }
+                        if let isHost = metadata?["is_host"] as? Bool {
+                            strongViewModel.participants[index].isHost = isHost
                         }
 
                         // If it's a new Realtime connection, we accept it for connection tracking.
@@ -186,13 +184,11 @@ class LobbyPresenceManager: ObservableObject {
                         var isHost = false // Default
 
                         // Parse metadata
-                        if let dict = metadata as? [String: Any] {
-                            if let name = dict["username"] as? String {
-                                username = name
-                            }
-                            if let hostStatus = dict["is_host"] as? Bool {
-                                isHost = hostStatus
-                            }
+                        if let name = metadata?["username"] as? String {
+                            username = name
+                        }
+                        if let hostStatus = metadata?["is_host"] as? Bool {
+                            isHost = hostStatus
                         }
 
                         let newParticipant = Participant(
@@ -201,72 +197,73 @@ class LobbyPresenceManager: ObservableObject {
                             isHost: isHost,
                             isReady: false,
                             joinedAt: Date(),
-                            phxRef: userId // Store Connection ID (Map Key)
+                            phxRefs: Set([userId]) // Store Connection ID (Map Key)
                         )
 
                         // BUFFERED UPDATE:
                         // 1. Update immediate logic state (connectedUserIds)
                          if isNewConnection {
-                            // Already done above: viewModel.connectedUserIds.insert(normalizedID)
+                            // Already done above: strongViewModel.connectedUserIds.insert(normalizedID)
                             // Queue for visual update
-                            self.pendingJoins.append(newParticipant)
-                            self.scheduleFlush()
+                            strongSelf.pendingJoins.append(newParticipant)
+                            strongSelf.scheduleFlush()
                         } else {
                             // If they are just reconnecting (not new), update immediately without toast
                             // or maybe buffer this too? consistently buffer everything.
-                            self.pendingJoins.append(newParticipant)
-                            self.scheduleFlush()
+                            strongSelf.pendingJoins.append(newParticipant)
+                            strongSelf.scheduleFlush()
                         }
                     }
                 case .leave:
                     // RESOLVE TRUE USER ID (Same as Join)
-                    let metaDict = metadata as? [String: Any]
-                    let metaUserId = metaDict?["user_id"] as? String
-                    let metaUsername = metaDict?["username"] as? String
+                    let metaUserId = metadata?["user_id"] as? String
+                    let metaUsername = metadata?["username"] as? String
                     
                     let leavingPhxRef = userId
                     let normalizedID = (metaUserId ?? userId).lowercased()
                     let capturedUsername = metaUsername ?? "User"
 
                     // Defer leave processing to avoid false positives from metadata updates
-                    Task { @MainActor [weak self, leavingPhxRef, normalizedID, capturedUsername] in
+                    _ = Task { @MainActor [weak self, leavingPhxRef, normalizedID, capturedUsername] in
                         try? await Task.sleep(nanoseconds: 3_000_000_000) // 3s
 
-                        guard let self = self, let viewModel = self.viewModel else { return }
+                        guard let strongSelf = self else { return }
+                        guard let strongViewModel = strongSelf.viewModel else { return }
 
                         // 1. Check against active participants list
-                        let currentParticipants = viewModel.participants
-                        if let index = currentParticipants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
-                            let participant = currentParticipants[index]
-
-                            // PHX_REF CHECK:
-                            // If the participant in the list has a DIFFERENT phxRef, they have already re-connected/updated.
-                            if let currentPhxRef = participant.phxRef, currentPhxRef != leavingPhxRef {
-                                NSLog("🛡️ Ignoring stale LEAVE for %@ (Ref mismatch: Old=%@, New=%@)", participant.name, leavingPhxRef, currentPhxRef)
-                                return
+                        if let index = strongViewModel.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
+                            // Landmine #51: Only consider user Offline when their ref count drops to zero
+                            strongViewModel.participants[index].phxRefs.remove(leavingPhxRef)
+                            
+                            if strongViewModel.participants[index].phxRefs.isEmpty {
+                                let name = strongViewModel.participants[index].name
+                                // 2. Final removal from UI list (via buffer)
+                                strongSelf.pendingLeaves.insert(normalizedID)
+                                
+                                // 💬 Log: User Left
+                                strongViewModel.chatManager.addSystemMessage(.userLeft, userName: name)
+                                strongSelf.scheduleFlush()
+                                
+                                // 3. Update logical state IMMEDIATELY
+                                strongViewModel.connectedUserIds.remove(normalizedID)
+                            } else {
+                                NSLog("🛡️ Lobby: User %@ remains online (Remaining Refs: %d)", normalizedID, strongViewModel.participants[index].phxRefs.count)
                             }
-                            
-                            // 2. Final removal from UI list (via buffer)
-                            self.pendingLeaves.insert(normalizedID)
-                            
-                            // 💬 Log: User Left
-                            viewModel.chatManager.addSystemMessage(.userLeft, userName: participant.name)
-                            self.scheduleFlush()
                         } else {
                             // User already missing from participants list (e.g. removed by DB poll)
                             // We still need to announce it if they were tracked in Realtime
-                            if viewModel.connectedUserIds.contains(normalizedID) {
-                                viewModel.chatManager.addSystemMessage(.userLeft, userName: capturedUsername)
+                            if strongViewModel.connectedUserIds.contains(normalizedID) {
+                                strongViewModel.chatManager.addSystemMessage(.userLeft, userName: capturedUsername)
                                 NSLog("📉 User %@ left (removed from tracking, was missing from list)", normalizedID)
                             }
+                            strongViewModel.connectedUserIds.remove(normalizedID)
+                            strongSelf.pendingLeaves.insert(normalizedID)
+                            strongSelf.scheduleFlush()
                         }
-                        
-                        // 3. Update logical state IMMEDIATELY
-                        viewModel.connectedUserIds.remove(normalizedID)
                     }
                 }
             }
-        }
+        }, onSync: nil, onConnectionState: nil)
     }
 
     // MARK: - user Actions
@@ -294,13 +291,13 @@ class LobbyPresenceManager: ObservableObject {
 
         // Broadcast ready state via Realtime
         Task { [weak self] in
-            guard let self = self, let viewModel = self.viewModel else { return }
+            guard let self = self, let strongViewModel = self.viewModel else { return }
 
             let syncMsg = SyncMessage(
                 type: .chat,
                 timestamp: 0,
                 isPlaying: nil,
-                senderId: viewModel.participantId,
+                senderId: strongViewModel.participantId,
                 chatText: isReady ? "LOBBY_READY" : "LOBBY_UNREADY",
                 chatUsername: currentUsername
             )
@@ -401,18 +398,18 @@ class LobbyPresenceManager: ObservableObject {
 
         // Send kick command via Realtime
         Task { [weak self] in
-            guard let self = self, let viewModel = self.viewModel else { return }
+            guard let self = self, let strongViewModel = self.viewModel else { return }
 
             // 1. Private Command: Kick the target user
             let kickCmd = SyncMessage(
                 type: .chat,
                 timestamp: 0,
                 isPlaying: nil,
-                senderId: viewModel.participantId,
+                senderId: strongViewModel.participantId,
                 chatText: "LOBBY_KICK:\(participant.id)",
                 chatUsername: "Host"
             )
-            try? await viewModel.realtimeManager?.sendSyncMessage(kickCmd)
+            try? await strongViewModel.realtimeManager?.sendSyncMessage(kickCmd)
 
             // 2. Public Announcement: Inform room
             try? await Task.sleep(nanoseconds: 100_000_000) // Slight delay to ensure order
@@ -420,19 +417,19 @@ class LobbyPresenceManager: ObservableObject {
                 type: .chat,
                 timestamp: 0,
                 isPlaying: nil,
-                senderId: viewModel.participantId,
+                senderId: strongViewModel.participantId,
                 chatText: "\(participant.name) has been kicked.",
                 chatUsername: "System"
             )
-            try? await viewModel.realtimeManager?.sendSyncMessage(publicMsg)
+            try? await strongViewModel.realtimeManager?.sendSyncMessage(publicMsg)
         }
 
         // Kick via Database (Remove from room_participants)
         Task { [weak self] in
-            guard let self = self, let viewModel = self.viewModel else { return }
+            guard let self = self, let strongViewModel = self.viewModel else { return }
             do {
-                try await viewModel.dataService.leaveRoom(
-                    roomId: viewModel.room.id,
+                try await strongViewModel.dataService.leaveRoom(
+                    roomId: strongViewModel.room.id,
                     userId: UUID(uuidString: participant.id) ?? UUID()
                 )
                 print("✅ Kicked participant \(participant.name) from database")
@@ -478,11 +475,11 @@ class LobbyPresenceManager: ObservableObject {
         heartbeatTask?.cancel()
         heartbeatTask = Task { [weak self] in
             while !Task.isCancelled {
-                guard let self = self, let viewModel = self.viewModel else { return }
+                guard let self = self, let strongViewModel = self.viewModel else { return }
 
-                if let userId = viewModel.appState?.currentUserId {
+                if let userId = strongViewModel.appState?.currentUserId {
                     do {
-                        try await viewModel.dataService.sendHeartbeat(roomId: viewModel.room.id, userId: userId)
+                        try await strongViewModel.dataService.sendHeartbeat(roomId: strongViewModel.room.id, userId: userId)
                     } catch {
                         print("⚠️ Heartbeat failed: \(error)")
                     }
@@ -553,7 +550,7 @@ class LobbyPresenceManager: ObservableObject {
                     isHost: participant.isHost,
                     isReady: isReady,
                     joinedAt: finalJoinedAt,
-                    phxRef: existingLocal?.phxRef
+                    phxRefs: existingLocal?.phxRefs ?? []
                 )
                 dbParticipants.append(p)
             }
@@ -586,7 +583,7 @@ class LobbyPresenceManager: ObservableObject {
                 // This prevents "Ghost Leaves" during refresh race conditions where DB row is gone
                 // but Realtime is just switching connection IDs.
                 let isRealtimeActive = await viewModel.realtimeManager?.isRealtimeConnected() ?? false
-                if localP.phxRef != nil && isRealtimeActive {
+                if !(localP.phxRefs.isEmpty) && isRealtimeActive {
                      // NSLog("🛡️ Preserving Realtime participant '\(localP.name)' despite missing from DB poll (Trusting Realtime)")
                      finalParticipants.append(localP)
                      continue

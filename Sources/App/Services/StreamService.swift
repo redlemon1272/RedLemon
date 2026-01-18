@@ -335,37 +335,70 @@ actor StreamService: StreamResolving {
         // Step 3.5: Apply Keyword Safety Filter (Remux, etc) AND Extended Cut Filter
         // User reported performance issues (spinning beach ball) with Remux files
         // Also blocking low-quality cam rips to ensure premium experience
-        var blockedKeywords = ["remux", "telesync", "cam", "hdts", "hd-ts", "hc", "hdtc"]
+        
+        // Keywords that are ALWAYS blocked (Performance/Critical issues)
+        let alwaysBlocked = ["remux"]
+        
+        // Keywords blocked for QUALITY (Telesync/Cam/HDRip)
+        // These are unacceptable for Events, but acceptable for Solo if nothing else exists
+        let qualityBlocked = ["telesync", "cam", "hdts", "hd-ts", "hc", "hdtc", "hdrip"]
+        
+        // Keywords blocked for RUNTIME/EDITION (Events only)
+        let extendedBlocked = ["extended", "director", "uncut", "unrated", "special edition"]
 
-        // NEW: Filter extended cuts if requested (for events)
+        var activeBlockedKeywords = alwaysBlocked
+
+        // Event Mode: Strict Quality & Runtime Control
         if filterExtended {
-            print("🚫 StreamService: Applying Extended Cut Filter (Event Mode)")
-            blockedKeywords.append(contentsOf: ["extended", "director", "uncut", "unrated", "special edition"])
+            print("🚫 StreamService: Event Mode detected. Activating STRICT quality and runtime filters.")
+            activeBlockedKeywords.append(contentsOf: qualityBlocked)
+            activeBlockedKeywords.append(contentsOf: extendedBlocked)
+        } else {
+             // Solo Mode: Prefer quality, but don't force it if it means 0 results
+             // We start by blocking Cams/HDRips to try and find a clean Web-DL/Bluray
+             activeBlockedKeywords.append(contentsOf: qualityBlocked)
         }
 
-        let keywordFiltered = filteredStreams.compactMap { stream -> Stream? in
+        var keywordFiltered = filteredStreams.compactMap { stream -> Stream? in
             let titleLower = stream.title.lowercased()
-            if blockedKeywords.contains(where: { titleLower.contains($0) }) {
+            if activeBlockedKeywords.contains(where: { titleLower.contains($0) }) {
                 // Whitelist DebridSearch (User Cloud)
                 if stream.provider == "debridsearch" {
                     print("🛡️ StreamService: Allowing restricted keyword for DebridSearch: \(stream.title)")
                     return stream
                 }
-                print("🚫 StreamService: Blocking stream with restricted keyword: \(stream.title)")
+                // print("🚫 StreamService: Blocking stream with restricted keyword: \(stream.title)")
                 return nil
             }
             return stream
         }
+        
+        // FALLBACK LOGIC (Solo Mode Only)
+        // If we filtered everything out in Solo mode (likely because only Cams/HDRips exist),
+        // we relax the filter to allow them.
+        if keywordFiltered.isEmpty {
+            if filterExtended {
+                // Event Mode: Fail strict. No Cams allowed for events.
+                LogManager.shared.error("❌ StreamService: No streams passed Strict Event Filter (No Cams/HDRips/Extended allowed).")
+                throw APIError.noStreamsFound
+            } else {
+                // Solo Mode: Relax quality filter
+                print("⚠️ StreamService: No streams passed Quality Filter. Relaxing to allow Cam/HDRip for Solo playback.")
+                activeBlockedKeywords = alwaysBlocked // Reset to only block Remux
+                
+                keywordFiltered = filteredStreams.compactMap { stream -> Stream? in
+                    let titleLower = stream.title.lowercased()
+                    if activeBlockedKeywords.contains(where: { titleLower.contains($0) }) {
+                        if stream.provider == "debridsearch" { return stream }
+                        return nil
+                    }
+                    return stream
+                }
+            }
+        }
 
         guard !keywordFiltered.isEmpty else {
             LogManager.shared.error("❌ StreamService: No streams available after keyword filter")
-
-            // Fallback: If we filtered everything because of "extended" but we have no other choice,
-            // we should probably fail rather than play the wrong runtime event?
-            // User requested explicit filtering for schedule accuracy.
-
-            // However, if it's just REMUX blocking that caused empty, maybe we relax?
-            // For now, let's strict fail to respect the user's intent to avoid issues.
             throw APIError.noStreamsFound
         }
 

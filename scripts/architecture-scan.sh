@@ -373,6 +373,26 @@ while IFS=: read -r file line code; do
 done < <(grep -rn "\.fontWeight(" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
 
 # =============================================================================
+# CHECK 18: Deinit Cleanup Trap (Landmine #63)
+# =============================================================================
+print_header "Check 18: Deinit Cleanup Trap (Landmine #63)"
+
+while IFS= read -r file; do
+    if [[ "$file" == *"Tests"* ]]; then continue; fi
+
+    # Use Perl to match deinit blocks containing 'Task {'
+    # recursive regex (?0) matches balanced braces
+    if perl -0777 -ne 'exit 0 if /deinit\s*\{(?:[^{}]++|(?0))*\}/ && $& =~ /\bTask\s*\{/ ; exit 1' "$file"; then
+         # Found violation. Get line number of deinit.
+         LINE=$(grep -n "deinit" "$file" | head -n 1 | cut -d: -f1)
+         # Grab snippet
+         CODE=$(grep -A 2 "deinit" "$file" | head -3 | xargs)
+         report "ERROR" "Landmine #63" "Deinit Trap: Do NOT use 'Task { }' in deinit. It will be cancelled. Use 'Task.detached { }'." "$file" "$LINE" "$CODE"
+    fi
+done < <(find "$SOURCES_DIR" -name "*.swift")
+
+
+# =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

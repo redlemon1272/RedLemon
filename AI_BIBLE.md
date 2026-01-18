@@ -1237,3 +1237,30 @@ The `./scripts/release.sh` script handles the heavy lifting, but you must invoke
 
 ### 2. State Snapshots
 When performing async cleanup (WS disconnect, DB updates), always capture property snapshots (e.g. `let wasEvent = isEventPlayback`) at the VERY START of the function. This prevents logic errors if the underlying properties are modified by subsequent `MainActor.run` blocks during the delay.
+
+## Part 21: Critical Async Patterns
+
+### 1. The Deinit Cleanup Trap (Landmine #63)
+**Context**: You need to perform a network cleanup action (e.g. `leaveChannel`) when a View Model or Actor is deinitialized (e.g. user taps "Back").
+
+**The Trap**: A standard `Task { }` inside `deinit` will be implicitly cancelled or fail to execute because the parent context is dying. `[weak self]` is already nil, and `[strong self]` can create erratic race conditions.
+
+**Mandatory Solution**:
+1.  **Use `Task.detached`**: This creates a new top-level task independent of the dying actor's lifecycle.
+2.  **Capture Dependencies Strong**: Explicitly capture the **Dependency** (e.g. `realtimeManager`) strongly, NOT `self`.
+3.  **Fire and Forget**: The task ensures the dependency lives just long enough to send the final message.
+
+```swift
+deinit {
+    // ❌ WRONG: Task is cancelled immediately or self is nil
+    // Task { await self.realtimeManager.disconnect() }
+
+    // ✅ CORRECT: Detached task with captured dependency
+    if let manager = realtimeManager {
+        Task.detached {
+            // Manager is kept alive by this closure just long enough
+            await manager.disconnect(leaveChannel: true)
+        }
+    }
+}
+```

@@ -1589,6 +1589,13 @@ struct ReportedStream: Identifiable, Codable {
                 method: "POST",
                 body: body
             )
+            
+            // Broadcast alert for real-time admin notification
+            Task {
+                try? await realtimeClient.connect()
+                try? await realtimeClient.joinChannel("admin:alerts")
+                try? await realtimeClient.broadcast(topic: "admin:alerts", event: "new_report", payload: [:])
+            }
             LoggingManager.shared.info(.social, message: "Reported stream: \(streamHash) Reason: \(reason)")
         } catch {
             LoggingManager.shared.error(.social, message: "Failed to report stream: \(error)")
@@ -1937,6 +1944,14 @@ struct ReportedStream: Identifiable, Codable {
                 method: "POST",
                 body: body
             )
+            
+            // Broadcast alert for real-time admin notification
+            Task {
+                try? await realtimeClient.connect()
+                try? await realtimeClient.joinChannel("admin:alerts")
+                try? await realtimeClient.broadcast(topic: "admin:alerts", event: "new_feedback", payload: [:])
+            }
+
             LoggingManager.shared.info(.social, message: "Feedback sent successfully")
         } catch {
             LoggingManager.shared.error(.social, message: "Failed to send feedback: \(error)")

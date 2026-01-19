@@ -6,8 +6,12 @@ import Combine
 class AdminRealtimeService: ObservableObject {
     static let shared = AdminRealtimeService()
     
-    private let realtimeClient: SupabaseRealtimeClient
-    private var postgresHandlerId: UUID?
+    private var reportClient: SupabaseRealtimeClient?
+    private var feedbackClient: SupabaseRealtimeClient?
+    private var alertClient: SupabaseRealtimeClient?
+    private var reportHandlerId: UUID?
+    private var feedbackHandlerId: UUID?
+    private var alertHandlerId: UUID?
     private var isSubscribed = false
     
     // Using a weak reference or closure to update AppState
@@ -15,9 +19,7 @@ class AdminRealtimeService: ObservableObject {
     var onNewFeedback: (() -> Void)?
     var onInitialCounts: ((Int, Int) -> Void)?
     
-    private init() {
-        self.realtimeClient = SupabaseClient.shared.realtimeClient
-    }
+    private init() {}
     
     func start() async {
         guard !isSubscribed else { return }
@@ -27,10 +29,29 @@ class AdminRealtimeService: ObservableObject {
             return
         }
         
-        NSLog("🛡️ AdminRealtimeService: Starting report listener...")
+        NSLog("🛡️ AdminRealtimeService: Starting authenticated listeners...")
         
-        let reportTopic = "admin:reports"
-        let feedbackTopic = "admin:feedback"
+        let reportTopic = "reported_streams"
+        let feedbackTopic = "feedback_reports"
+        let alertTopic = "admin:alerts"
+        
+        // Create dedicated clients (matches SocialService pattern)
+        let rClient = SupabaseRealtimeClient(
+            realtimeURL: Config.supabaseURL,
+            apiKey: Config.supabaseAnonKey
+        )
+        let fClient = SupabaseRealtimeClient(
+            realtimeURL: Config.supabaseURL,
+            apiKey: Config.supabaseAnonKey
+        )
+        let aClient = SupabaseRealtimeClient(
+            realtimeURL: Config.supabaseURL,
+            apiKey: Config.supabaseAnonKey
+        )
+        
+        self.reportClient = rClient
+        self.feedbackClient = fClient
+        self.alertClient = aClient
         
         // Setup Postgres change listeners
         let reportChanges: [[String: Any]] = [[
@@ -46,49 +67,81 @@ class AdminRealtimeService: ObservableObject {
         ]]
         
         do {
-            // Register handlers
-            self.postgresHandlerId = await realtimeClient.onPostgresChange { [weak self] payload in
+            // 1. Register Postgres handlers
+            self.reportHandlerId = await rClient.onPostgresChange(topic: reportTopic) { [weak self] payload in
                 Task { @MainActor in
-                    self?.handlePostgresPayload(payload)
+                    self?.handleNewReport(payload)
                 }
             }
             
-            // Connect and Join both channels
-            try await realtimeClient.connect()
-            try await realtimeClient.joinChannel(reportTopic, postgresChanges: reportChanges)
-            try await realtimeClient.joinChannel(feedbackTopic, postgresChanges: feedbackChanges)
+            self.feedbackHandlerId = await fClient.onPostgresChange(topic: feedbackTopic) { [weak self] payload in
+                Task { @MainActor in
+                    self?.handleNewFeedback(payload)
+                }
+            }
+            
+            // 2. Register Broadcast handlers (High-speed fallback)
+            self.alertHandlerId = await aClient.onBroadcast(topic: alertTopic, event: "new_report") { [weak self] _, _ in
+                Task { @MainActor in
+                    NSLog("📡 AdminRealtimeService: Broadcast alert received (new_report)")
+                    self?.onNewReport?()
+                }
+            }
+            
+            _ = await aClient.onBroadcast(topic: alertTopic, event: "new_feedback") { [weak self] _, _ in
+                Task { @MainActor in
+                    NSLog("📡 AdminRealtimeService: Broadcast alert received (new_feedback)")
+                    self?.onNewFeedback?()
+                }
+            }
+            
+            // Connect and Join
+            try await rClient.connect()
+            try await rClient.joinChannel(reportTopic, postgresChanges: reportChanges)
+            
+            try await fClient.connect()
+            try await fClient.joinChannel(feedbackTopic, postgresChanges: feedbackChanges)
+            
+            try await aClient.connect()
+            try await aClient.joinChannel(alertTopic)
             
             isSubscribed = true
-            NSLog("✅ AdminRealtimeService: Subscribed to reported_streams and feedback_reports")
+            NSLog("✅ AdminRealtimeService: Subscribed to reported_streams, feedback_reports, and broadcast alerts")
             
             // 4. Fetch initial counts for "Offline" persistence
             await fetchInitialCounts()
             
         } catch {
             NSLog("❌ AdminRealtimeService error: %@", error.localizedDescription)
+            isSubscribed = false
         }
     }
     
     func stop() async {
-        if let id = postgresHandlerId {
-            await realtimeClient.removePostgresChange(id: id)
-            postgresHandlerId = nil
+        if let client = reportClient, let id = reportHandlerId {
+            await client.removePostgresChange(id: id)
+            await client.disconnect()
         }
         
-        try? await realtimeClient.leaveChannel(topic: "admin:reports")
-        try? await realtimeClient.leaveChannel(topic: "admin:feedback")
+        if let client = feedbackClient, let id = feedbackHandlerId {
+            await client.removePostgresChange(id: id)
+            await client.disconnect()
+        }
+        
+        if let client = alertClient, let id = alertHandlerId {
+            await client.removeBroadcastHandler(id: id)
+            await client.disconnect()
+        }
+        
+        reportHandlerId = nil
+        feedbackHandlerId = nil
+        alertHandlerId = nil
+        reportClient = nil
+        feedbackClient = nil
+        alertClient = nil
         isSubscribed = false
     }
     
-    private func handlePostgresPayload(_ payload: [String: Any]) {
-        guard let table = payload["table"] as? String else { return }
-        
-        if table == "reported_streams" {
-            handleNewReport(payload)
-        } else if table == "feedback_reports" {
-            handleNewFeedback(payload)
-        }
-    }
     
     private func handleNewReport(_ payload: [String: Any]) {
         NSLog("🚨 AdminRealtimeService: New report detected!")

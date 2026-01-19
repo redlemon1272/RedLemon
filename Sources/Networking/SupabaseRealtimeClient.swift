@@ -7,6 +7,7 @@ actor SupabaseRealtimeClient {
     // MARK: - Configuration
     private let realtimeURL: String
     private let apiKey: String
+    private let accessToken: String?
     private let session: URLSession
 
     // MARK: - WebSocket State
@@ -15,7 +16,7 @@ actor SupabaseRealtimeClient {
     public var isSocketConnected: Bool { return isConnected }
 
     // MARK: - Message Handling
-    private var broadcastHandlers: [String: [UUID: (String, [String: Any]) -> Void]] = [:] // topic -> id -> handler
+    private var broadcastHandlers: [String: [String: [UUID: (String, [String: Any]) -> Void]]] = [:] // topic -> event -> id -> handler
     private var presenceHandlers: [String: [UUID: (PresenceAction, String, [String: Any]?) -> Void]] = [:] // topic -> id -> handler
     private var connectionHandlers: [UUID: (Bool) -> Void] = [:]
 
@@ -28,14 +29,18 @@ actor SupabaseRealtimeClient {
         if broadcastHandlers[t] == nil {
             broadcastHandlers[t] = [:]
         }
-        broadcastHandlers[t]?[id] = handler
+        if broadcastHandlers[t]?[event] == nil {
+            broadcastHandlers[t]?[event] = [:]
+        }
+        broadcastHandlers[t]?[event]?[id] = handler
         return id
     }
 
     func removeBroadcastHandler(id: UUID) {
         for topic in broadcastHandlers.keys {
-            if broadcastHandlers[topic]?.removeValue(forKey: id) != nil {
-                return
+            guard let topicHandlers = broadcastHandlers[topic] else { continue }
+            for event in topicHandlers.keys {
+                broadcastHandlers[topic]?[event]?.removeValue(forKey: id)
             }
         }
     }
@@ -80,7 +85,7 @@ actor SupabaseRealtimeClient {
 
     // MARK: - Initialization
 
-    init(realtimeURL: String, apiKey: String) {
+    init(realtimeURL: String, apiKey: String, accessToken: String? = nil) {
         // Convert https:// to wss://
         if realtimeURL.hasPrefix("https://") {
             self.realtimeURL = realtimeURL.replacingOccurrences(of: "https://", with: "wss://") + "/realtime/v1/websocket"
@@ -90,6 +95,7 @@ actor SupabaseRealtimeClient {
             self.realtimeURL = realtimeURL
         }
         self.apiKey = apiKey
+        self.accessToken = accessToken
 
         // Initialize shared session
         let config = URLSessionConfiguration.default
@@ -112,6 +118,10 @@ actor SupabaseRealtimeClient {
             URLQueryItem(name: "apikey", value: apiKey),
             URLQueryItem(name: "vsn", value: "1.0.0")
         ]
+
+        if let token = accessToken {
+            urlComponents.queryItems?.append(URLQueryItem(name: "access_token", value: token))
+        }
 
         guard let url = urlComponents.url else {
             throw RealtimeError.invalidURL
@@ -412,8 +422,8 @@ actor SupabaseRealtimeClient {
                let eventPayload = payload["payload"] as? [String: Any] {
                 
                 // Notify topic-specific handlers for this event
-                if let handlers = broadcastHandlers[topic] {
-                    for handler in handlers.values {
+                if let eventHandlers = broadcastHandlers[topic]?[eventName] {
+                    for handler in eventHandlers.values {
                         handler(eventName, eventPayload)
                     }
                 }

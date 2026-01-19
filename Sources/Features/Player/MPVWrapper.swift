@@ -415,6 +415,22 @@ class MPVWrapper: ObservableObject {
                         Task { await SessionRecorder.shared.log(category: .player, message: "Ignoring Placeholder EOF", metadata: ["duration": "\(duration)"]) }
                         return // Don't trigger EOF handling
                     }
+
+                    // FIX: Premature EOF check (Network Drop masked as EOF)
+                    // If we receive EOF but are nowhere near the end (e.g. < 95% watched and > 1 min remaining),
+                    // this is likely a network drop that MPV misinterpreted as end of stream.
+                    // We should treat this as an ERROR to trigger retry/failover, or at minimum NOT exit.
+                    let timeRemaining = duration - currentTime
+                    let progress = (duration > 0) ? (currentTime / duration) : 0
+                    
+                    if duration > 300 && timeRemaining > 60 && progress < 0.95 {
+                        LoggingManager.shared.warn(.videoRendering, message: "MPV: SUSPICIOUS EOF detected! Pos: \(Int(currentTime))s / Dur: \(Int(duration))s. Treating as ERROR to prevent exit.")
+                         Task { await SessionRecorder.shared.log(category: .error, message: "Suspicious EOF (False Positive)", metadata: ["pos": "\(currentTime)", "dur": "\(duration)"]) }
+                        
+                        // Treat as error to potentially trigger auto-rejoin/resume logic in ViewModel instead of "Finished" exit
+                        self.mpvError = "Connection Dropped (False EOF)"
+                        return
+                    }
                     
                     LoggingManager.shared.debug(.videoRendering, message: "MPV: Playback finished (EOF - reason: \(reason.rawValue))")
                     LoggingManager.shared.debug(.videoRendering, message: "MPV: Setting playbackFinished = true")

@@ -125,6 +125,27 @@ build_with_retry() {
     local attempt=1
     local last_error=""
 
+    # CRITICAL: Pull latest code before building to ensure you have all fixes
+    log_info "Pulling latest code from git..."
+    cd "$PROJECT_ROOT"
+
+    # Check if we're in a git repo and on the correct branch
+    if [ -d ".git" ]; then
+        # Get current branch
+        CURRENT_BRANCH=$(git branch --show-current | awk '{print $2}')
+
+        log_info "Current branch: $CURRENT_BRANCH"
+
+        # Pull latest changes
+        if git pull origin "$CURRENT_BRANCH"; then
+            log_success "Latest code pulled successfully"
+        else
+            log_warning "Git pull failed or failed to fast-forward. Using existing code."
+        fi
+    else
+        log_warning "Not a git repository, skipping git pull. If this is a development machine, consider: git pull origin main-4-GLM"
+    fi
+
     while [ $attempt -le $MAX_RETRIES ]; do
         log_info "Build attempt $attempt of $MAX_RETRIES..."
 

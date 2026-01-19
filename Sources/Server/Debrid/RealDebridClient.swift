@@ -137,18 +137,8 @@ actor RealDebridClient {
 
         let cacheKey = "\(infoHash):\(fileIdx ?? -1):\(season ?? 0):\(episode ?? 0)"
 
-        // CRITICAL FIX (Landmine #44): Watch Party Guests must bypass torrent cache
-        // When a guest uses the add/select/unrestrict flow, Real-Debrid may return the same
-        // cached download URL that was generated for the host, which is IP-locked.
-        // Solution: Bypass the RD memory cache when bypassTorrentCache=true, forcing
-        // a fresh unlock that generates a new unrestricted link for the guest's IP.
-        if bypassTorrentCache {
-            // Clear any cached entry for this torrent to force fresh unlock
-            cache.removeValue(forKey: cacheKey)
-        }
-
-        // Check cache first (only if not bypassing)
-        if !bypassTorrentCache, let cached = cache[cacheKey], cached.expiry > Date() {
+        // Check cache first
+        if let cached = cache[cacheKey], cached.expiry > Date() {
             print("✅ RD cache hit: \(infoHash.prefix(12))")
             return cached.result
         }
@@ -161,7 +151,7 @@ actor RealDebridClient {
 
         // Create new unlock task
         let task = Task<UnlockResult?, Error> {
-            try await self._rdUnlock(infoHash: infoHash, fileIdx: fileIdx, token: token, maxPolls: maxPolls, season: season, episode: episode, title: title, bypassTorrentCache: bypassTorrentCache)
+            try await self._rdUnlock(infoHash: infoHash, fileIdx: fileIdx, token: token, maxPolls: maxPolls, season: season, episode: episode, title: title)
         }
 
         inflightRequests[cacheKey] = task
@@ -172,8 +162,8 @@ actor RealDebridClient {
 
         let result = try await task.value
 
-        // Cache successful result (but NOT for guests who bypass cache - they need fresh URLs each time)
-        if let result = result, !bypassTorrentCache {
+        // Cache successful result
+        if let result = result {
             cache[cacheKey] = CachedResult(
                 result: result,
                 expiry: Date().addingTimeInterval(60 * 60) // 60 minutes
@@ -204,7 +194,7 @@ actor RealDebridClient {
 
     // MARK: - Core Unlock Logic (ports Node.js _rdUnlock)
 
-    private func _rdUnlock(infoHash: String, fileIdx: Int?, token: String, maxPolls: Int, season: Int?, episode: Int?, title: String?, bypassTorrentCache: Bool = false) async throws -> UnlockResult? {
+    private func _rdUnlock(infoHash: String, fileIdx: Int?, token: String, maxPolls: Int, season: Int?, episode: Int?, title: String?) async throws -> UnlockResult? {
         let pollDelay: UInt64 = 1_000_000_000 // 1 second
 
         // Build magnet with trackers
@@ -216,42 +206,6 @@ actor RealDebridClient {
         ]
         let trParams = trackers.map { "tr=\($0.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")" }.joined(separator: "&")
         let magnet = "magnet:?xt=urn:btih:\(infoHash)&dn=\(infoHash)&\(trParams)"
-
-        // CRITICAL FIX (Landmine #44): For watch party guests, delete any existing torrent
-        // so we get a fresh torrent ID and a new unrestricted link that isn't IP-locked to the host.
-        if bypassTorrentCache {
-            NSLog("%@", "🛡️ Guest mode: Deleting existing torrent to force fresh unlock (IP-locked URL fix)")
-
-            // Get list of torrents to find if this magnet already exists
-            let listURL = URL(string: "\(baseURL)/torrents")!
-            var listRequest = URLRequest(url: listURL)
-            listRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
-            do {
-                let (listData, listResponse) = try await URLSession.shared.data(for: listRequest)
-                if let httpResponse = listResponse as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                    if let torrents = try? JSONDecoder().decode([TorrentInfo].self, from: listData) {
-                        // Find torrent with matching hash
-                        if let existingTorrent = torrents.first(where: { $0.hash == infoHash }) {
-                            let torrentId = existingTorrent.id
-                            // Delete the existing torrent
-                            let deleteURL = URL(string: "\(baseURL)/torrents/delete/\(torrentId)")!
-                            var deleteRequest = URLRequest(url: deleteURL)
-                            deleteRequest.httpMethod = "DELETE"
-                            deleteRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
-                            let (_, deleteResponse) = try await URLSession.shared.data(for: deleteRequest)
-                            if let httpResponse = deleteResponse as? HTTPURLResponse, httpResponse.statusCode == 204 {
-                                NSLog("%@", "🗑️ Deleted existing torrent \(torrentId) - will add fresh copy for guest")
-                            }
-                        }
-                    }
-                }
-            } catch {
-                // If delete fails, continue anyway - the add might still work
-                NSLog("%@", "⚠️ Failed to delete existing torrent (non-critical): \(error)")
-            }
-        }
 
         // Step 1: Add magnet
         let addURL = URL(string: "\(baseURL)/torrents/addMagnet")!

@@ -56,6 +56,7 @@ class MPVWrapper: ObservableObject {
         }
 
         LoggingManager.shared.info(.videoRendering, message: "MPV handle created")
+        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper initialized - Build Version: 2026-01-19-FIX-FALSE-EOF-v2")
     }
 
     func setupVideo(in view: NSView) {

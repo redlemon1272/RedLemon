@@ -690,8 +690,14 @@ actor RealDebridClient {
 
         let (data, response) = try await URLSession.shared.data(for: request)
 
-        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-            return nil
+        // DIAGNOSTIC: Log response details for debugging magnet endpoint failures
+        if let httpResponse = response as? HTTPURLResponse {
+            if !(200...299).contains(httpResponse.statusCode) {
+                let errorMsg = String(data: data, encoding: .utf8) ?? "no response body"
+                NSLog("%@", "⚠️ RD Magnet endpoint HTTP error: \(httpResponse.statusCode) - \(errorMsg)") // OK
+                return nil
+            }
+            NSLog("%@", "✅ RD Magnet endpoint HTTP \(httpResponse.statusCode), response size: \(data.count) bytes") // OK
         }
 
         struct MagnetResponse: Codable {
@@ -701,8 +707,14 @@ actor RealDebridClient {
             let filename: String?
         }
 
-        guard let result = try? JSONDecoder().decode(MagnetResponse.self, from: data),
-              let directUrl = result.download ?? result.link ?? result.href else {
+        guard let result = try? JSONDecoder().decode(MagnetResponse.self, from: data) else {
+            let responseStr = String(data: data, encoding: .utf8) ?? "unable to decode as UTF-8"
+            NSLog("%@", "⚠️ RD Magnet endpoint JSON decode failed. Response: \(responseStr.prefix(200))") // OK
+            return nil
+        }
+
+        guard let directUrl = result.download ?? result.link ?? result.href else {
+            NSLog("%@", "⚠️ RD Magnet endpoint response missing download/link/href fields. Response: \(String(describing: result))") // OK
             return nil
         }
 

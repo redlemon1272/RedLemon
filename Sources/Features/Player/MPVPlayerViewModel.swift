@@ -51,6 +51,9 @@ class MPVPlayerViewModel: ObservableObject {
     // Counter for database persistence limiting (Host Only)
     private var persistenceTickCount: Int = 0
     
+    // Prevent multiple concurrent guest delays
+    private var isGuestDelayActive: Bool = false
+    
     // START AI_BIBLE #58 Fix (Chat Persistence)
     @Published var lastActiveChatMode: PlayerChatMode? = nil
     // END AI_BIBLE #58 Fix
@@ -2596,6 +2599,19 @@ extension MPVPlayerViewModel {
     }
 
     /// Start polling chat messages from Supabase
+    /// Internal helper to ensure Guests wait for Host to lead playback initiation.
+    /// This prevents guests from hitting EOF before the host and triggering premature lobby return.
+    private func applyGuestDelayIfRequired() async {
+        guard isInWatchParty && !isWatchPartyHost && !isPlaying && !isGuestDelayActive && currentTime < 5.0 else { 
+            return 
+        }
+        
+        isGuestDelayActive = true
+        LoggingManager.shared.info(.watchParty, message: "Sync: Guest delay active (ensuring Host leads) - waiting 2.0s...")
+        try? await Task.sleep(nanoseconds: 2_000_000_000)
+        isGuestDelayActive = false
+    }
+
     private func startChatPolling() {
         guard let roomId = currentRoomId else { return }
 
@@ -2810,10 +2826,7 @@ extension MPVPlayerViewModel {
             // CRITICAL FIX: To prevent "Race to EOF" on guests where they finish before host,
             // we implement an unconditional artificial delay for guests near the start of the video.
             // This ensures the Host ALWAYS initiates playback first, establishing authority.
-            if isInWatchParty && !isWatchPartyHost && currentTime < 5.0 {
-                LoggingManager.shared.info(.watchParty, message: "Sync: Guest delay active (ensuring Host leads) - waiting 2.0s...")
-                try? await Task.sleep(nanoseconds: 2_000_000_000)
-            }
+            await applyGuestDelayIfRequired()
 
             if showWaitingForGuests {
                 LoggingManager.shared.info(.watchParty, message: "Received PLAY signal - All guests ready! Starting playback.")
@@ -3012,6 +3025,7 @@ extension MPVPlayerViewModel {
             // "self.isPlaying" is our current local state.
             if remoteIsPlaying && !self.isPlaying {
                 LoggingManager.shared.info(.watchParty, message: "Sync: Resuming playback to match Host")
+                await applyGuestDelayIfRequired()
                 await playbackService.play()
             } else if !remoteIsPlaying && self.isPlaying {
                 LoggingManager.shared.info(.watchParty, message: "Sync: Pausing playback to match Host")
@@ -3548,7 +3562,7 @@ extension MPVPlayerViewModel {
                 type: .playbackState,
                 timestamp: self.currentTime,
                 isPlaying: self.isPlaying,
-                senderId: self.currentRoomId,
+                senderId: self.appState?.currentUserId?.uuidString ?? self.currentRoomId, // Prefer UserID, fallback to RoomID for legacy
                 chatText: nil,
                 chatUsername: nil
             )

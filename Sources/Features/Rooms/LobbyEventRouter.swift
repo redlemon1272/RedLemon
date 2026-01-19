@@ -105,6 +105,8 @@ class LobbyEventRouter: ObservableObject {
              handleLobbyReadyForPlayback(syncMessage)
         } else if command == "LOBBY_RESOLVING" {
              await handleLobbyResolving(syncMessage)
+        } else if command == "LOBBY_PLAYBACK_STARTED" {
+             await handleLobbyPlaybackStarted(syncMessage)
         } else {
              // Unknown LOBBY command - log warning with detailed scalar analysis for debug
              let senderInfo = syncMessage.chatUsername ?? syncMessage.senderId ?? "Unknown"
@@ -514,26 +516,38 @@ class LobbyEventRouter: ObservableObject {
             }
         }
 
-        NSLog("🎬 Guest: Starting playback after countdown")
+        NSLog("🎬 Guest: Countdown finished. Waiting for Host PLAYBACK_STARTED signal...")
+        
+        // RACE CONDITION FIX: Do NOT start playback yet.
+        // Wait for LOBBY_PLAYBACK_STARTED to ensure Host has successfully entered the player.
+        // This prevents the Guest from starting before the Host and being returned to lobby.
+        viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Waiting for host to start playback..."])
+    }
 
-        // Start playback
-        guard let mediaItem = viewModel.room.mediaItem else {
-            NSLog("❌ Guest: Cannot start playback - no media selected")
-            await MainActor.run {
-                viewModel.isStarting = false
-            }
+    private func handleLobbyPlaybackStarted(_ syncMessage: SyncMessage) async {
+        guard let viewModel = viewModel else { return }
+        
+        // Host has already started; Guests only.
+        if viewModel.isHost { return }
+
+        // Ignore for events (Auto-start handles it)
+        if viewModel.room.type == .event {
+            NSLog("🛡️ Guest: Ignoring LOBBY_PLAYBACK_STARTED for system event")
             return
         }
 
-        guard let appState = viewModel.appState else {
-            NSLog("❌ Guest: Cannot start playback - no appState")
-            await MainActor.run {
-                viewModel.isStarting = false
-            }
+        NSLog("🎬 Guest: Received LOBBY_PLAYBACK_STARTED signal from Host")
+
+        guard let appState = viewModel.appState,
+              let mediaItem = viewModel.room.mediaItem else {
+            NSLog("❌ Guest: Cannot start playback - no appState or mediaItem")
             return
         }
-
-        NSLog("🎬 Guest: Launching player for %@", mediaItem.name)
+        
+        // Use the stream hash that was synced in handleGuestStartLogic
+        let preferredHash = appState.player.currentWatchPartyRoom?.selectedStreamHash
+        
+        logging("🎬 Guest: Launching player for %@ (Synced Start)", mediaItem.name)
 
         await appState.player.playMedia(
             mediaItem,
@@ -541,10 +555,14 @@ class LobbyEventRouter: ObservableObject {
             watchMode: .watchParty,
             roomId: viewModel.room.id,
             isHost: false,
-            isEvent: (viewModel.room.type == .event),
-            triggerSource: "watch_party_sync",
-            preferredStreamHash: roomState.streamHash  // v1.0.83: Direct unlock optimization
+            isEvent: false,
+            triggerSource: "watch_party_sync_signal",
+            preferredStreamHash: preferredHash
         )
+    }
+
+    private func logging(_ format: String, _ args: CVarArg...) {
+        NSLog(String(format: format, arguments: args))
     }
 
     private func handleLobbyReadyForPlayback(_ syncMessage: SyncMessage) {

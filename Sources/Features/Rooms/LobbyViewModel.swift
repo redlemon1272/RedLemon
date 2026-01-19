@@ -1170,6 +1170,22 @@ class LobbyViewModel: ObservableObject {
             }
 
             appState.player.navigateToPlayer(stream: finalStream)
+
+            // CRITICAL FIX: Signal start to guests
+            // We send this AFTER calling navigateToPlayer to ensure the host has officially started the transition.
+            // Guests wait for this signal before calling playMedia() to prevent race conditions.
+            Task {
+                let startMsg = SyncMessage(
+                    type: .chat,
+                    timestamp: Date().timeIntervalSince1970,
+                    isPlaying: nil,
+                    senderId: self.participantId,
+                    chatText: "LOBBY_PLAYBACK_STARTED",
+                    chatUsername: "Host"
+                )
+                try? await self.realtimeManager?.sendSyncMessage(startMsg)
+                NSLog("✅ Host: Sent LOBBY_PLAYBACK_STARTED signal")
+            }
         }
 
     }

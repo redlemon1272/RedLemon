@@ -400,6 +400,12 @@ struct MPVPlayerView: View {
         .onChange(of: viewModel.playbackFinished) { finished in
             LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView: onChange triggered - playbackFinished = \(finished)")
             if finished {
+                // CRITICAL FIX: Ignore finish event if we are explicitly cleaning up (e.g. User Exit)
+                // This prevents "Host Exiting" from triggering "Movie Finished" logic which sends everyone to lobby.
+                if viewModel.hasCleanedUp || viewModel.isExitingSession || viewModel.isExitingToLobby {
+                    LoggingManager.shared.info(.videoRendering, message: "MPVPlayerView: Ignoring playbackFinished (Cleanup/Exit in progress)")
+                    return
+                }
                 // Pre-exit stabilization: Show closing overlay based on mode
                 let isWatchParty = appState.player.currentWatchMode == .watchParty
                 let isEvent = appState.player.isEventPlayback

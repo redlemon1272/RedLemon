@@ -446,7 +446,7 @@ class MPVPlayerViewModel: ObservableObject {
     weak var appState: AppState?
 
     // Cleanup state
-    private var hasCleanedUp: Bool = false
+    var hasCleanedUp: Bool = false
 
     // Resume state tracking
     private var hasVideoReadyTriggered: Bool = false

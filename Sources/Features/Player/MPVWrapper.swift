@@ -237,22 +237,28 @@ class MPVWrapper: ObservableObject {
         
         // 1. Poll loop
         while Date() < timeout {
+            // CRITICAL CHECK: Ensure we haven't been deallocated or cancelled
+            guard !Task.isCancelled, let safeHandle = mpvHandle else {
+                LoggingManager.shared.debug(.videoRendering, message: "SMART-LOAD: Polling cancelled or handle destroyed")
+                return
+            }
+
             var trackCount: Int64 = 0
-            mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
+            mpv_get_property(safeHandle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
             
             // Count external subtitles
             var externalSubCount = 0
             for i in 0..<Int(trackCount) {
                 let typeKey = "track-list/\(i)/type"
                 var typeStr: UnsafeMutablePointer<CChar>?
-                mpv_get_property(handle, typeKey, MPV_FORMAT_STRING, &typeStr)
+                mpv_get_property(safeHandle, typeKey, MPV_FORMAT_STRING, &typeStr)
                 let type = typeStr.map({ String(cString: $0) })
                 mpv_free(typeStr)
                 
                 if type == "sub" {
                     let externalKey = "track-list/\(i)/external"
                     var isExternal: Int32 = 0
-                    mpv_get_property(handle, externalKey, MPV_FORMAT_FLAG, &isExternal)
+                    mpv_get_property(safeHandle, externalKey, MPV_FORMAT_FLAG, &isExternal)
                     if isExternal != 0 {
                         externalSubCount += 1
                     }
@@ -316,8 +322,10 @@ class MPVWrapper: ObservableObject {
         if self.shouldResumeAfterLoad {
             LoggingManager.shared.debug(.videoRendering, message: "SMART-LOAD: Resuming playback (Autoplay requested)")
              await MainActor.run {
-                 mpv_set_property_string(handle, "pause", "no")
-                 self.isPlaying = true
+                if let safeHandle = self.mpvHandle {
+                    mpv_set_property_string(safeHandle, "pause", "no")
+                    self.isPlaying = true
+                }
              }
         } else {
              LoggingManager.shared.debug(.videoRendering, message: "SMART-LOAD: Staying paused (Watch Party / User Request)")

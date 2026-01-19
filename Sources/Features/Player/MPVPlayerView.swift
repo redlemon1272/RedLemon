@@ -125,7 +125,8 @@ struct MPVPlayerView: View {
                     Color.black
 
                     // Poster/Background art (during loading)
-                    if viewModel.showPoster, let backgroundURL = viewModel.backgroundURL {
+                    // Always show background art with premium feel, chat overlay appears on top
+                    if let backgroundURL = viewModel.backgroundURL {
                         AsyncImage(url: URL(string: backgroundURL)) { phase in
                             switch phase {
                             case .success(let image):
@@ -143,7 +144,7 @@ struct MPVPlayerView: View {
                                 placeholderBackground
                             }
                         }
-                        .opacity(viewModel.showPoster ? 1 : 0)
+                        .opacity(1)
                         .animation(.easeOut(duration: 0.5), value: viewModel.showPoster)
                     }
 

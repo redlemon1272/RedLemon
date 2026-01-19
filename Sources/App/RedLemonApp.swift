@@ -59,9 +59,6 @@ struct RedLemonApp: App {
                 .environmentObject(SocialService.shared)
                 .frame(minWidth: 900, idealWidth: 1000, maxWidth: .infinity, minHeight: 600, idealHeight: 700, maxHeight: .infinity)
                 .task {
-                    // Start notification permissions request
-                    NotificationManager.shared.requestAuthorization()
-                    
                     // Wiring up PlayerViewModel callbacks
                     appState.setupPlayerBindings()
 

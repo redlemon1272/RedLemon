@@ -92,57 +92,13 @@ class AdminRealtimeService: ObservableObject {
     
     private func handleNewReport(_ payload: [String: Any]) {
         NSLog("🚨 AdminRealtimeService: New report detected!")
-        
-        // Extract basic info for notification if possible
-        // Payload format depends on Supabase Realtime output
-        var movieTitle = "Unknown Content"
-        var reason = "New issue reported"
-        
-        if let record = payload["new"] as? [String: Any] {
-            if let imdbId = record["imdb_id"] as? String {
-                movieTitle = "IMDB: \(imdbId)"
-            }
-            if let reportedReason = record["reason"] as? String {
-                reason = reportedReason.components(separatedBy: "\n").first ?? "Issue reported"
-            }
-        }
-        
-        // 1. Show native notification
-        NotificationManager.shared.showNotification(
-            title: "New Stream Report",
-            subtitle: movieTitle,
-            body: reason,
-            categoryIdentifier: "STREAM_REPORT"
-        )
-        
-        // 2. Notify internal listeners (to update UI badges)
+        // Notify internal listeners (to update UI badges)
         onNewReport?()
     }
     
     private func handleNewFeedback(_ payload: [String: Any]) {
         NSLog("🚨 AdminRealtimeService: New feedback detected!")
-        
-        var message = "A user submitted feedback"
-        var type = "Feedback"
-        
-        if let record = payload["new"] as? [String: Any] {
-            if let feedbackType = record["type"] as? String {
-                type = feedbackType
-            }
-            if let feedbackMessage = record["message"] as? String {
-                message = feedbackMessage
-            }
-        }
-        
-        // 1. Show native notification
-        NotificationManager.shared.showNotification(
-            title: "New User Feedback",
-            subtitle: type,
-            body: message,
-            categoryIdentifier: "USER_FEEDBACK"
-        )
-        
-        // 2. Notify internal listeners
+        // Notify internal listeners (to update UI badges)
         onNewFeedback?()
     }
     

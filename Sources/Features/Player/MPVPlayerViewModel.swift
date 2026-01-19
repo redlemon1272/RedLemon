@@ -2602,8 +2602,16 @@ extension MPVPlayerViewModel {
     /// Internal helper to ensure Guests wait for Host to lead playback initiation.
     /// This prevents guests from hitting EOF before the host and triggering premature lobby return.
     private func applyGuestDelayIfRequired() async {
-        guard isInWatchParty && !isWatchPartyHost && !isPlaying && !isGuestDelayActive && currentTime < 5.0 else { 
+        // Only apply delay if nearby the start of video (or if we think we might be race-conditions at start)
+        guard isInWatchParty && !isWatchPartyHost && !isGuestDelayActive && currentTime < 5.0 else { 
             return 
+        }
+        
+        // If we are ALREADY playing, we must PAUSE first to let host lead
+        if isPlaying {
+            LoggingManager.shared.info(.watchParty, message: "Sync: Guest already playing near start - forcing pause for delay.")
+            await playbackService.pause()
+            isPlaying = false
         }
         
         isGuestDelayActive = true

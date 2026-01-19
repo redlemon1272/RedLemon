@@ -433,12 +433,13 @@ class MPVWrapper: ObservableObject {
                     print("!!! MPV EOF DETECTED !!! Duration: \(duration), CurrentTime: \(currentTime), TimeRemaining: \(timeRemaining), Progress: \(progress)")
                     LoggingManager.shared.warn(.videoRendering, message: "Forensic EOF Check: Dur=\(duration), Cur=\(currentTime), Rem=\(timeRemaining), Prog=\(progress)")
 
-                    if duration > 300 && timeRemaining > 60 && progress < 0.95 {
-                        LoggingManager.shared.warn(.videoRendering, message: "MPV: SUSPICIOUS EOF detected! Pos: \(Int(currentTime))s / Dur: \(Int(duration))s. Treating as ERROR to prevent exit.")
+                    if (duration > 30 && progress < 0.1) || (duration > 300 && timeRemaining > 60 && progress < 0.95) {
+                        LoggingManager.shared.warn(.videoRendering, message: "MPV: SUSPICIOUS EOF detected! Pos: \(Int(currentTime))s / Dur: \(Int(duration))s. Ignoring as False EOF.")
                          Task { await SessionRecorder.shared.log(category: .error, message: "Suspicious EOF (False Positive)", metadata: ["pos": "\(currentTime)", "dur": "\(duration)"]) }
                         
-                        // Treat as error to potentially trigger auto-rejoin/resume logic in ViewModel instead of "Finished" exit
-                        self.mpvError = "Connection Dropped (False EOF)"
+                        // Treat as error to prevent exit, but don't set mpvError if it's just a skip-able glitch
+                        // Set a specific error string that ViewModel can ignore or handle as 'auto-resume'
+                        self.mpvError = "Transient EOF Glitch"
                         return
                     }
                     

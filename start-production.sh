@@ -132,7 +132,7 @@ build_with_retry() {
     # Check if we're in a git repo and on the correct branch
     if [ -d ".git" ]; then
         # Get current branch
-        CURRENT_BRANCH=$(git branch --show-current | awk '{print $2}')
+        CURRENT_BRANCH=$(git branch --show-current)
 
         log_info "Current branch: $CURRENT_BRANCH"
 

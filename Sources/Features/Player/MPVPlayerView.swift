@@ -435,7 +435,7 @@ struct MPVPlayerView: View {
             // Stop playback when view disappears - use Task for async
             Task {
                 let isWatchParty = appState.player.currentWatchMode == .watchParty
-                await viewModel.cleanup(returningToLobby: isWatchParty)
+                await viewModel.cleanup(returningToLobby: isWatchParty, reason: "VIEW_DISAPPEAR")
             }
 
             // ✅ Use centralized timer cleanup
@@ -453,7 +453,7 @@ struct MPVPlayerView: View {
     }
 
     private func exitPlayer() async {
-        await viewModel.cleanup()
+        await viewModel.cleanup(reason: "USER_EXIT_KEY")
         await appState.player.exitPlayer()
     }
 

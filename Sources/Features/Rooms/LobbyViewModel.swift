@@ -791,6 +791,8 @@ class LobbyViewModel: ObservableObject {
         Task { [weak self] in
             guard let self = self else { return }
             LoggingManager.shared.info(.watchParty, message: "📣 Host returning to lobby, notifying guests...")
+            LoggingManager.shared.info(.watchParty, message: "⚠️ FORENSIC: announceReturnToLobby called. isHost: \(isHost), ParticipantId: \(participantId)")
+
 
             // 1. Update Database (Prevent Guest auto-start loop)
             // ⚠️ AI_BIBLE #35: Ghost Streams - MUST nil stream_hash on lobby return to prevent Zombie Playback

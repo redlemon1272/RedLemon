@@ -142,7 +142,14 @@ class MPVPlayerViewModel: ObservableObject {
             // PlaybackFinished
             playbackFinishedPub
                 .receive(on: DispatchQueue.main)
-                .assign(to: &$playbackFinished)
+                .sink { [weak self] finished in
+                    guard let self = self else { return }
+                    if finished {
+                        LoggingManager.shared.info(.videoRendering, message: "⚠️ FORENSIC: playbackFinishedPub fired! CurrentTime: \(self.currentTime), Duration: \(self.duration)")
+                    }
+                    self.playbackFinished = finished
+                }
+                .store(in: &serviceCancellables)
 
             // CurrentTime: Throttled update
             currentTimePub
@@ -233,7 +240,9 @@ class MPVPlayerViewModel: ObservableObject {
                         self.bufferingTimer = Timer.scheduledTimer(withTimeInterval: 45.0, repeats: false) { [weak self] _ in
                              LoggingManager.shared.error(.videoRendering, message: "Buffering Timeout (45s) - Connection too slow, triggering Failover")
                              self?.playbackErrorTrigger.send("Connection Timeout")
+                             self?.playbackErrorTrigger.send("Connection Timeout")
                              Task { await SessionRecorder.shared.log(category: .player, message: "Buffering Timeout (45s) - Connection too slow") }
+                             LoggingManager.shared.error(.videoRendering, message: "⚠️ FORENSIC: Buffering Timeout Triggered Error")
                         }
                         Task { await SessionRecorder.shared.log(category: .player, message: "Buffering Started") }
                     } else {
@@ -299,6 +308,7 @@ class MPVPlayerViewModel: ObservableObject {
                             // self.isLoading = false // Keep loading overlay visible during retry fallbacks
 
                             // Trigger Error Feedback to View
+                            LoggingManager.shared.error(.videoRendering, message: "⚠️ FORENSIC: Buffering stopped but file NOT loaded - Triggering Playback Failed")
                             self.playbackErrorTrigger.send("Playback Failed")
                         }
                     }
@@ -525,6 +535,9 @@ class MPVPlayerViewModel: ObservableObject {
             if isExitingToLobby {
                 mpvWrapper.pause() // Pause immediately on exit
                 LoggingManager.shared.info(.videoRendering, message: "Playback paused for Lobby exit stabilization")
+            }
+            if isExitingToLobby {
+                 LoggingManager.shared.info(.videoRendering, message: "⚠️ FORENSIC: isExitingToLobby set to TRUE")
             }
         }
     }
@@ -760,6 +773,7 @@ class MPVPlayerViewModel: ObservableObject {
                      }
 
                      self.playbackErrorTrigger.send("Playback Timeout")
+                     LoggingManager.shared.error(.videoRendering, message: "⚠️ FORENSIC: Soft Timeout Triggered - Sending Playback Timeout")
                  }
              }
         }
@@ -1870,14 +1884,16 @@ class MPVPlayerViewModel: ObservableObject {
 
     // MARK: - Cleanup
 
-    func cleanup(returningToLobby: Bool = false) async {
-        // Prevent double cleanup
-        guard !hasCleanedUp else {
-            LoggingManager.shared.warn(.general, message: "Cleanup already performed, skipping")
+    func cleanup(returningToLobby: Bool = false, reason: String = "Generic") async {
+        if hasCleanedUp {
+            LoggingManager.shared.warn(.general, message: "Cleanup already performed, skipping. Reason: \(reason)")
             return
         }
-        print("DEBUG: MPVPlayerViewModel.cleanup called - forcing cleanup")
         hasCleanedUp = true
+
+        LoggingManager.shared.info(.general, message: "⚠️ FORENSIC: cleanup() called. Reason: \(reason), ReturningToLobby: \(returningToLobby)")
+        LoggingManager.shared.info(.general, message: "   Current State - Playing: \(isPlaying), Duration: \(duration), Time: \(currentTime)")
+        print("DEBUG: MPVPlayerViewModel.cleanup called - forcing cleanup. Reason: \(reason)")
 
         LoggingManager.shared.info(.general, message: "Cleaning up MPV player...")
 
@@ -3051,7 +3067,7 @@ extension MPVPlayerViewModel {
                             try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s stabilization
 
                             // Ensure playback is killed
-                            await self.cleanup()
+                            await self.cleanup(reason: "LOBBY_KICK")
                             await self.appState?.player.exitPlayer(keepRoomState: false)
 
                             // 2. Switch View AND Show Alert on the destination screen
@@ -3177,7 +3193,12 @@ extension MPVPlayerViewModel {
                 self.isExitingSession = true
                 try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s stabilization
 
-                await self.cleanup()
+                // 1. Stabilization & Cleanup
+                self.isExitingSession = true
+                try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s stabilization
+
+                await self.cleanup(reason: "ROOM_CLOSED")
+                // Force full exit to browse
                 // Force full exit to browse
                 await self.appState?.player.exitPlayer(keepRoomState: false)
                 
@@ -3213,7 +3234,10 @@ extension MPVPlayerViewModel {
                 // Slight delay to allow overlay to be seen (optional, but good for UX)
                 try? await Task.sleep(nanoseconds: 500_000_000)
 
-                await self.cleanup(returningToLobby: true)
+                // Slight delay to allow overlay to be seen (optional, but good for UX)
+                try? await Task.sleep(nanoseconds: 500_000_000)
+
+                await self.cleanup(returningToLobby: true, reason: "RETURN_TO_LOBBY_SIGNAL")
                 await self.appState?.player.exitPlayer(keepRoomState: true)
                 await MainActor.run {
                     self.appState?.currentView = .watchPartyLobby
@@ -3309,6 +3333,15 @@ extension MPVPlayerViewModel {
         readyLoopTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
 
+            // FORENSIC: Check if we are playing despite waiting
+            if self.isPlaying {
+                LoggingManager.shared.warn(.watchParty, message: "⚠️ FORENSIC: Player is playing but showWaitingForGuests was TRUE. Cancelled Ready Loop to prevent ejection.")
+                self.showWaitingForGuests = false
+                self.readyLoopTimer?.invalidate()
+                self.readyLoopTimer = nil
+                return
+            }
+
             // Only continue loop if we are still waiting for guests (waiting for host to start)
             if self.showWaitingForGuests {
                 self.readySignalsSentCount += 1
@@ -3338,7 +3371,7 @@ extension MPVPlayerViewModel {
     /// Called when the ready gate times out waiting for host response.
     /// Returns guest to browse with an informative message.
     private func triggerHostAbsentExit() {
-        LoggingManager.shared.warn(.watchParty, message: "Ready Gate Timeout: Returning to browse (host absent)")
+        LoggingManager.shared.warn(.watchParty, message: "Ready Gate Timeout: Returning to browse (host absent). isPlaying: \(self.isPlaying)")
 
         // Stop flags
         self.showWaitingForGuests = false
@@ -3361,7 +3394,9 @@ extension MPVPlayerViewModel {
 
             try? await Task.sleep(nanoseconds: 500_000_000)
 
-            await self.cleanup(returningToLobby: true)
+            try? await Task.sleep(nanoseconds: 500_000_000)
+
+            await self.cleanup(returningToLobby: true, reason: "HOST_ABSENT_TIMEOUT")
             await self.appState?.player.exitPlayer(keepRoomState: false)
             await MainActor.run {
                 self.appState?.currentView = .browse
@@ -3597,6 +3632,7 @@ extension MPVPlayerViewModel {
         }
 
         // Reset state
+        LoggingManager.shared.info(.watchParty, message: "⚠️ FORENSIC: stopWatchPartySync called. Clearing room state.")
         currentRoomId = nil
         currentUserId = nil
         isWatchPartyHost = false

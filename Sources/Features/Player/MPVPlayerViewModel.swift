@@ -50,10 +50,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Counter for database persistence limiting (Host Only)
     private var persistenceTickCount: Int = 0
-    
-    // Prevent multiple concurrent guest delays
-    private var isGuestDelayActive: Bool = false
-    
+
     // START AI_BIBLE #58 Fix (Chat Persistence)
     @Published var lastActiveChatMode: PlayerChatMode? = nil
     // END AI_BIBLE #58 Fix
@@ -2598,28 +2595,6 @@ extension MPVPlayerViewModel {
         LoggingManager.shared.debug(.watchParty, message: "Stopped playback heartbeat loop")
     }
 
-    /// Start polling chat messages from Supabase
-    /// Internal helper to ensure Guests wait for Host to lead playback initiation.
-    /// This prevents guests from hitting EOF before the host and triggering premature lobby return.
-    private func applyGuestDelayIfRequired() async {
-        // Only apply delay if nearby the start of video (or if we think we might be race-conditions at start)
-        guard isInWatchParty && !isWatchPartyHost && !isGuestDelayActive && currentTime < 5.0 else { 
-            return 
-        }
-        
-        // If we are ALREADY playing, we must PAUSE first to let host lead
-        if isPlaying {
-            LoggingManager.shared.info(.watchParty, message: "Sync: Guest already playing near start - forcing pause for delay.")
-            await playbackService.pause()
-            isPlaying = false
-        }
-        
-        isGuestDelayActive = true
-        LoggingManager.shared.info(.watchParty, message: "Sync: Guest delay active (ensuring Host leads) - waiting 2.0s...")
-        try? await Task.sleep(nanoseconds: 2_000_000_000)
-        isGuestDelayActive = false
-    }
-
     private func startChatPolling() {
         guard let roomId = currentRoomId else { return }
 
@@ -2830,12 +2805,6 @@ extension MPVPlayerViewModel {
 
         case .play:
             // Handle Play signal (Start of movie or manual resume)
-            
-            // CRITICAL FIX: To prevent "Race to EOF" on guests where they finish before host,
-            // we implement an unconditional artificial delay for guests near the start of the video.
-            // This ensures the Host ALWAYS initiates playback first, establishing authority.
-            await applyGuestDelayIfRequired()
-
             if showWaitingForGuests {
                 LoggingManager.shared.info(.watchParty, message: "Received PLAY signal - All guests ready! Starting playback.")
                 showWaitingForGuests = false
@@ -3033,7 +3002,6 @@ extension MPVPlayerViewModel {
             // "self.isPlaying" is our current local state.
             if remoteIsPlaying && !self.isPlaying {
                 LoggingManager.shared.info(.watchParty, message: "Sync: Resuming playback to match Host")
-                await applyGuestDelayIfRequired()
                 await playbackService.play()
             } else if !remoteIsPlaying && self.isPlaying {
                 LoggingManager.shared.info(.watchParty, message: "Sync: Pausing playback to match Host")

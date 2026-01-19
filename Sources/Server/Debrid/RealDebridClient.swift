@@ -135,26 +135,20 @@ actor RealDebridClient {
             throw RDError.notCached // Throw error to try next stream
         }
 
-        // CRITICAL FIX (Landmine #44): Watch Party Guests must bypass torrent cache
-        // When a guest uses the add/select/unrestrict flow, Real-Debrid deduplicates the magnet
-        // and returns the same link ID that the host used. The /unrestrict/link endpoint then
-        // returns the host's cached download URL (IP-locked), causing immediate EOF for the guest.
-        // Solution: Use /unrestrict/magnet endpoint which bypasses torrent deduplication.
-        if bypassTorrentCache {
-            print("🛡️ RD: Using magnet endpoint for guest (IP-locked URL fix)")
-            let magnet = "magnet:?xt=urn:btih:\(infoHash)"
-            if let result = try await unrestrictMagnetFallback(magnet: magnet, token: token) {
-                // Don't cache magnet endpoint results - each guest needs fresh URL
-                return result
-            }
-            // Fallback to normal flow if magnet endpoint fails
-            print("⚠️ RD: Magnet endpoint failed, falling back to add/select flow")
-        }
-
         let cacheKey = "\(infoHash):\(fileIdx ?? -1):\(season ?? 0):\(episode ?? 0)"
 
-        // Check cache first
-        if let cached = cache[cacheKey], cached.expiry > Date() {
+        // CRITICAL FIX (Landmine #44): Watch Party Guests must bypass torrent cache
+        // When a guest uses the add/select/unrestrict flow, Real-Debrid may return the same
+        // cached download URL that was generated for the host, which is IP-locked.
+        // Solution: Bypass the RD memory cache when bypassTorrentCache=true, forcing
+        // a fresh unlock that generates a new unrestricted link for the guest's IP.
+        if bypassTorrentCache {
+            // Clear any cached entry for this torrent to force fresh unlock
+            cache.removeValue(forKey: cacheKey)
+        }
+
+        // Check cache first (only if not bypassing)
+        if !bypassTorrentCache, let cached = cache[cacheKey], cached.expiry > Date() {
             print("✅ RD cache hit: \(infoHash.prefix(12))")
             return cached.result
         }
@@ -178,8 +172,8 @@ actor RealDebridClient {
 
         let result = try await task.value
 
-        // Cache successful result
-        if let result = result {
+        // Cache successful result (but NOT for guests who bypass cache - they need fresh URLs each time)
+        if let result = result, !bypassTorrentCache {
             cache[cacheKey] = CachedResult(
                 result: result,
                 expiry: Date().addingTimeInterval(60 * 60) // 60 minutes
@@ -240,13 +234,6 @@ actor RealDebridClient {
         // Handle addMagnet failure with fallback
         if !(200...299).contains(httpResponse.statusCode) {
             let errorMsg = String(data: addData, encoding: .utf8) ?? ""
-
-            // Fallback: try unrestrict/magnet or existing torrents
-            if httpResponse.statusCode == 509 || errorMsg.contains("too_many_active_downloads") {
-                print("⚠️ RD addMagnet blocked (509), trying fallback...")
-                return try await unrestrictMagnetFallback(magnet: magnet, token: token)
-            }
-
             throw RDError.addMagnetFailed(status: httpResponse.statusCode, message: errorMsg)
         }
 
@@ -674,54 +661,6 @@ actor RealDebridClient {
 
         return UnlockResult(
             url: result.download,
-            filename: result.filename ?? "",
-            ext: ext
-        )
-    }
-
-    private func unrestrictMagnetFallback(magnet: String, token: String) async throws -> UnlockResult? {
-        // Try unrestrict/magnet (works for cached torrents only)
-        let url = URL(string: "\(baseURL)/unrestrict/magnet")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "magnet=\(magnet.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")".data(using: .utf8)
-
-        let (data, response) = try await URLSession.shared.data(for: request)
-
-        // DIAGNOSTIC: Log response details for debugging magnet endpoint failures
-        if let httpResponse = response as? HTTPURLResponse {
-            if !(200...299).contains(httpResponse.statusCode) {
-                let errorMsg = String(data: data, encoding: .utf8) ?? "no response body"
-                NSLog("%@", "⚠️ RD Magnet endpoint HTTP error: \(httpResponse.statusCode) - \(errorMsg)") // OK
-                return nil
-            }
-            NSLog("%@", "✅ RD Magnet endpoint HTTP \(httpResponse.statusCode), response size: \(data.count) bytes") // OK
-        }
-
-        struct MagnetResponse: Codable {
-            let download: String?
-            let link: String?
-            let href: String?
-            let filename: String?
-        }
-
-        guard let result = try? JSONDecoder().decode(MagnetResponse.self, from: data) else {
-            let responseStr = String(data: data, encoding: .utf8) ?? "unable to decode as UTF-8"
-            NSLog("%@", "⚠️ RD Magnet endpoint JSON decode failed. Response: \(responseStr.prefix(200))") // OK
-            return nil
-        }
-
-        guard let directUrl = result.download ?? result.link ?? result.href else {
-            NSLog("%@", "⚠️ RD Magnet endpoint response missing download/link/href fields. Response: \(String(describing: result))") // OK
-            return nil
-        }
-
-        let ext = extractExtension(from: result.filename ?? "")
-
-        return UnlockResult(
-            url: directUrl,
             filename: result.filename ?? "",
             ext: ext
         )

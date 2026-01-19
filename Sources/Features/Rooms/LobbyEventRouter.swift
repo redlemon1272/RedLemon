@@ -536,29 +536,14 @@ class LobbyEventRouter: ObservableObject {
             return
         }
 
-        // ⚠️ FORENSIC LOG: Track guest playback start
-        NSLog("🎬 [GUEST_START] Received LOBBY_PLAYBACK_STARTED signal from Host")
-        NSLog("   - Timestamp: %@", Date().description)
-        NSLog("   - Room ID: %@", viewModel.room.id)
-        NSLog("   - Expected Media: %@", viewModel.room.mediaItem?.name ?? "nil")
-
         guard let appState = viewModel.appState,
               let mediaItem = viewModel.room.mediaItem else {
-            NSLog("❌ [GUEST_START] Cannot start playback - no appState or mediaItem")
+            NSLog("❌ Cannot start playback - no appState or mediaItem")
             return
         }
 
-        // ⚠️ FORENSIC LOG: Check for stale PlayerVM state
-        NSLog("🔍 [GUEST_START] Checking PlayerVM state BEFORE playMedia:")
-        NSLog("   - selectedStream: %@", appState.player.selectedStream?.title ?? "nil")
-        NSLog("   - selectedMediaItem: %@", appState.player.selectedMediaItem?.name ?? "nil")
-        NSLog("   - showPlayer: %@", appState.player.showPlayer.description)
-        NSLog("   - currentView: %@", String(describing: appState.currentView))
-
         // Use the stream hash that was synced in handleGuestStartLogic
         let preferredHash = appState.player.currentWatchPartyRoom?.selectedStreamHash
-        let hashPreview = preferredHash.map { String($0.prefix(8)) } ?? "nil"
-        NSLog("   - preferredStreamHash: %@", hashPreview)
 
         logging("🎬 Guest: Launching player for %@ (Synced Start)", mediaItem.name)
 
@@ -572,12 +557,6 @@ class LobbyEventRouter: ObservableObject {
             triggerSource: "watch_party_sync_signal",
             preferredStreamHash: preferredHash
         )
-
-        // ⚠️ FORENSIC LOG: Verify state AFTER playMedia
-        NSLog("🔍 [GUEST_START] PlayerVM state AFTER playMedia:")
-        NSLog("   - selectedStream: %@", appState.player.selectedStream?.title ?? "nil")
-        NSLog("   - selectedMediaItem: %@", appState.player.selectedMediaItem?.name ?? "nil")
-        NSLog("   - showPlayer: %@", appState.player.showPlayer.description)
     }
 
     private func logging(_ format: String, _ args: CVarArg...) {

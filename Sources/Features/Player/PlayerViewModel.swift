@@ -111,19 +111,6 @@ class PlayerViewModel: ObservableObject {
     func playMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false, isEvent: Bool = false, triggerSource: String = "manual", preferredStreamHash: String? = nil) async {
         streamError = nil
 
-        // ⚠️ FORENSIC LOG: Entry point - check for stale state BEFORE clearing
-        let isGuestInWatchParty = (watchMode == .watchParty && !isHost)
-        if isGuestInWatchParty {
-            NSLog("🔍 [PLAY_MEDIA] Guest entry - BEFORE state clear:")
-            NSLog("   - Requested Item: %@", item.name)
-            NSLog("   - Current selectedStream: %@", selectedStream?.title ?? "nil")
-            NSLog("   - Current selectedMediaItem: %@", selectedMediaItem?.name ?? "nil")
-            NSLog("   - Trigger: %@", triggerSource)
-            let hashPreview = preferredStreamHash.map { String($0.prefix(8)) } ?? "nil"
-            NSLog("   - Preferred Hash: %@", hashPreview)
-            NSLog("   - showPlayer: %@", showPlayer.description)
-        }
-
         // Step 0: Clear state IMMEDIATELY to prevent stale UI
         await MainActor.run {
             selectedStream = nil // Clear previous stream to prevent stale playback
@@ -175,14 +162,6 @@ class PlayerViewModel: ObservableObject {
             if watchMode == .watchParty {
                 enterFullscreen()
             }
-        }
-
-        // ⚠️ FORENSIC LOG: After state clear
-        if isGuestInWatchParty {
-            NSLog("🔍 [PLAY_MEDIA] Guest entry - AFTER state clear:")
-            NSLog("   - selectedStream: %@", selectedStream?.title ?? "nil")
-            NSLog("   - selectedMediaItem: %@", selectedMediaItem?.name ?? "nil")
-            NSLog("   - showPlayer: %@", showPlayer.description)
         }
 
         do {
@@ -1118,15 +1097,6 @@ class PlayerViewModel: ObservableObject {
             return
         }
 
-        // ⚠️ FORENSIC LOG: Track guest exit (keepRoomState = true means returning to lobby)
-        let isGuestReturningToLobby = (keepRoomState && !isWatchPartyHost)
-        if isGuestReturningToLobby {
-            NSLog("🔄 [GUEST_EXIT] exitPlayer called (returning to lobby)")
-            NSLog("   - selectedStream: %@", selectedStream?.title ?? "nil")
-            NSLog("   - selectedMediaItem: %@", selectedMediaItem?.name ?? "nil")
-            NSLog("   - currentRoomId: %@", currentRoomId ?? "nil")
-        }
-
         LoggingManager.shared.info(.videoRendering, message: "PlayerVM: exitPlayer called (keepRoomState: \(keepRoomState))")
 
         // Capture state before ANY property resets
@@ -1161,14 +1131,6 @@ class PlayerViewModel: ObservableObject {
 
         // 4. Update UI State - now that window has stabilized
         await MainActor.run {
-            // ⚠️ FORENSIC LOG: BEFORE clearing state
-            if isGuestReturningToLobby {
-                NSLog("🔍 [GUEST_EXIT] BEFORE MainActor state clear:")
-                NSLog("   - selectedStream: %@", selectedStream?.title ?? "nil")
-                NSLog("   - selectedMediaItem: %@", selectedMediaItem?.name ?? "nil")
-                NSLog("   - showPlayer: %@", showPlayer.description)
-            }
-
             withAnimation(.easeInOut(duration: 0.3)) {
                 showPlayer = false
                 selectedStream = nil
@@ -1203,14 +1165,6 @@ class PlayerViewModel: ObservableObject {
                        // Reset flag after transition (handled by View but good safety)
                     }
                 }
-            }
-
-            // ⚠️ FORENSIC LOG: AFTER clearing state
-            if isGuestReturningToLobby {
-                NSLog("🔍 [GUEST_EXIT] AFTER MainActor state clear:")
-                NSLog("   - selectedStream: %@", selectedStream?.title ?? "nil")
-                NSLog("   - selectedMediaItem: %@", selectedMediaItem?.name ?? "nil")
-                NSLog("   - showPlayer: %@", showPlayer.description)
             }
 
             // 6. Final Window Polish

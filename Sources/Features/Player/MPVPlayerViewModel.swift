@@ -2956,7 +2956,7 @@ extension MPVPlayerViewModel {
 
             // CRITICAL: Avoid seeks on weaker hardware - they cause video pipeline stalls
             // EVENTS: Disable speed sync (adaptive sync) as requested - rely on initial seek and large drift correction only
-            let isEvent = appState?.player.isEventPlayback == true
+            _ = appState?.player.isEventPlayback == true
 
             if absSmoothedDrift < 0.1 {
                 // Perfect sync (<100ms smoothed drift)
@@ -3706,7 +3706,7 @@ extension MPVPlayerViewModel {
     private func saveWatchHistory(force: Bool = false) {
         guard !imdbId.isEmpty, currentTime > 0, duration > 0 else { return }
 
-        let progress = currentTime / duration
+        let _ = currentTime / duration
 
         // Update accumulator if playing
         if isPlaying && !isBuffering && !isSeeking {

@@ -125,6 +125,10 @@ class MPVWrapper: ObservableObject {
         mpv_set_option_string(handle, "border", "no")
         mpv_set_option_string(handle, "ontop", "no")
         mpv_set_option_string(handle, "keepaspect", "yes")
+        mpv_set_option_string(handle, "video-zoom", "0")
+        mpv_set_option_string(handle, "panscan", "0")
+        mpv_set_option_string(handle, "video-align-x", "0")
+        mpv_set_option_string(handle, "video-align-y", "0")
 
         // Language preferences: English audio and subtitles by default
         mpv_set_option_string(handle, "alang", "eng,en,english")

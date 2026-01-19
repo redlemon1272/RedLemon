@@ -214,9 +214,14 @@ class MPVViewLayer: CAOpenGLLayer {
         var i: GLint = 0
         glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
 
-        // Get viewport dimensions
-        var dims: [GLint] = [0, 0, 0, 0]
-        glGetIntegerv(GLenum(GL_VIEWPORT), &dims)
+        // Calculate dimensions manually to ensure consistency with contentsScale
+        // Querying GL_VIEWPORT can return physical pixels even if contentsScale is 1.0,
+        // causing mpv to render a frame too large for the buffer (the "zoom" bug).
+        let scale = self.contentsScale
+        let w = Int32(self.bounds.width * scale)
+        let h = Int32(self.bounds.height * scale)
+        
+        guard w > 0 && h > 0 else { return }
 
         // Render MPV frame directly (thread-safe per MPV docs)
         renderLock.lock()
@@ -226,9 +231,9 @@ class MPVViewLayer: CAOpenGLLayer {
 
         var flip: CInt = 1
         var data = mpv_opengl_fbo(
-            fbo: Int32(i != 0 ? i : fbo),
-            w: Int32(dims[2]),
-            h: Int32(dims[3]),
+            fbo: Int32(i), // i is the current DRAW_FRAMEBUFFER_BINDING
+            w: w,
+            h: h,
             internal_format: 0
         )
 

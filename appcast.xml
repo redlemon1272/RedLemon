@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.123 -->
+        <item>
+            <title>Version 1.0.123</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Admin Notification Badges (Instant responsiveness via broadcast)</li><li>Refactored Admin Realtime Service for improved reliability</li><li>Added event-specific filtering to Realtime Client</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 18 Jan 2026 23:03:55 -0500</pubDate>
+            <sparkle:version>123</sparkle:version>
+            <sparkle:shortVersionString>1.0.123</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.123.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="hhu8CQTqeOJHl6+RQcUbXgNUBxW5FysDDN86EC4DKykw25VtQfRc9HDY/+GhPQ/DuNazMUyZnnBy/PFEHSM9Bg==" length="73515197"
+            />
+        </item>
         <!-- v1.0.122 -->
         <item>
             <title>Version 1.0.122</title>

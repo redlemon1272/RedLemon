@@ -2805,10 +2805,18 @@ extension MPVPlayerViewModel {
             }
 
         case .play:
-            // Handle Play signal (Start of movie)
+            // Handle Play signal (Start of movie or manual resume)
+            
+            // CRITICAL FIX: To prevent "Race to EOF" on guests where they finish before host,
+            // we implement an unconditional artificial delay for guests near the start of the video.
+            // This ensures the Host ALWAYS initiates playback first, establishing authority.
+            if isInWatchParty && !isWatchPartyHost && currentTime < 5.0 {
+                LoggingManager.shared.info(.watchParty, message: "Sync: Guest delay active (ensuring Host leads) - waiting 2.0s...")
+                try? await Task.sleep(nanoseconds: 2_000_000_000)
+            }
+
             if showWaitingForGuests {
                 LoggingManager.shared.info(.watchParty, message: "Received PLAY signal - All guests ready! Starting playback.")
-                showWaitingForGuests = false
                 showWaitingForGuests = false
                 readySignalsSentCount = 0 // Reset timeout counter
                 await playbackService.play()
@@ -2825,6 +2833,7 @@ extension MPVPlayerViewModel {
                     isPlaying = true
                 }
             }
+
 
             // FORCE PLAY SAFETY NET (GUEST): Retrigger play if still at 0.0 after 1.5s
             Task { @MainActor [weak self] in

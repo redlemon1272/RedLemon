@@ -742,7 +742,12 @@ class MPVPlayerViewModel: ObservableObject {
         }
         self.subtitles = subtitles
         self.isLoading = true
-        self.showPoster = true
+
+        // VISUAL FIX: Match guest experience to host in watch parties
+        // Guests should see the chat overlay during loading (not just poster art)
+        // This creates a consistent visual experience where both host and guests see
+        // the loading overlay with chat immediately upon entering the player.
+        self.showPoster = !isInWatchParty || isWatchPartyHost
 
         // Fix: Reset background/poster URLs to prevent flashing previous image if ViewModel is reused
         self.backgroundURL = nil

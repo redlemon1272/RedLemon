@@ -127,12 +127,28 @@ actor RealDebridClient {
 
     // MARK: - Public API
 
-    func unlock(infoHash: String, fileIdx: Int? = nil, token: String, maxPolls: Int = 3, season: Int? = nil, episode: Int? = nil, title: String? = nil) async throws -> UnlockResult? {
+    func unlock(infoHash: String, fileIdx: Int? = nil, token: String, maxPolls: Int = 3, season: Int? = nil, episode: Int? = nil, title: String? = nil, bypassTorrentCache: Bool = false) async throws -> UnlockResult? {
         // CRITICAL: Block known x265 torrents
         let hashPrefix = String(infoHash.prefix(12)).lowercased()
         if x265Blocklist.contains(where: { hashPrefix.hasPrefix($0) }) {
             NSLog("%@", "🚫 BLOCKLIST: Rejecting known x265 torrent: \(infoHash.prefix(12))...")
             throw RDError.notCached // Throw error to try next stream
+        }
+
+        // CRITICAL FIX (Landmine #44): Watch Party Guests must bypass torrent cache
+        // When a guest uses the add/select/unrestrict flow, Real-Debrid deduplicates the magnet
+        // and returns the same link ID that the host used. The /unrestrict/link endpoint then
+        // returns the host's cached download URL (IP-locked), causing immediate EOF for the guest.
+        // Solution: Use /unrestrict/magnet endpoint which bypasses torrent deduplication.
+        if bypassTorrentCache {
+            print("🛡️ RD: Using magnet endpoint for guest (IP-locked URL fix)")
+            let magnet = "magnet:?xt=urn:btih:\(infoHash)"
+            if let result = try await unrestrictMagnetFallback(magnet: magnet, token: token) {
+                // Don't cache magnet endpoint results - each guest needs fresh URL
+                return result
+            }
+            // Fallback to normal flow if magnet endpoint fails
+            print("⚠️ RD: Magnet endpoint failed, falling back to add/select flow")
         }
 
         let cacheKey = "\(infoHash):\(fileIdx ?? -1):\(season ?? 0):\(episode ?? 0)"

@@ -12,7 +12,7 @@ struct StreamResolutionResult {
 /// Protocol for resolving and unlocking streams
 protocol StreamResolving {
     func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, filterExtended: Bool, triggerSource: String) async throws -> StreamResolutionResult
-    func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> Stream
+    func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?, bypassTorrentCache: Bool?) async throws -> Stream
 }
 
 /// Manages stream resolution, unlocking, and subtitle downloading
@@ -160,7 +160,7 @@ actor StreamService: StreamResolving {
         if let primary = bucketsResponse.buckets.fullHD?.primary, primary.provider == "verified" {
             print("⚡️ StreamService: Testing verified stream viability...")
             do {
-                let unlocked = try await unlockStream(stream: primary, item: item, season: finalSeason, episode: finalEpisode)
+                let unlocked = try await unlockStream(stream: primary, item: item, season: finalSeason, episode: finalEpisode, bypassTorrentCache: nil)
                 print("✅ StreamService: Verified stream is VIABLE. Returning immediately.")
                 return StreamResolutionResult(stream: unlocked, metadata: finalMetadata, candidateStreams: [])
             } catch {
@@ -560,7 +560,7 @@ actor StreamService: StreamResolving {
             print("🔄 StreamService: Trying stream \(index + 1)/\(finalStreams.count): \(stream.title)")
 
             do {
-                let unlockedStream = try await unlockStream(stream: stream, item: item, season: finalSeason, episode: finalEpisode)
+                let unlockedStream = try await unlockStream(stream: stream, item: item, season: finalSeason, episode: finalEpisode, bypassTorrentCache: nil)
                 print("✅ StreamService: Selected stream: \(stream.title)")
                 if let sizeString = stream.size {
                     let sizeBytes = parseSizeToBytes(sizeString)
@@ -668,7 +668,17 @@ actor StreamService: StreamResolving {
 
     // MARK: - Stream Unlocking
 
-    func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> Stream {
+    func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?, bypassTorrentCache: Bool? = nil) async throws -> Stream {
+        // CRITICAL FIX (Landmine #44): Watch party guests must bypass Real-Debrid's torrent cache
+        // When guests use the add/select/unrestrict flow, Real-Debrid deduplicates magnets and returns
+        // cached link IDs that generate IP-locked URLs (belonging to the host who first added the magnet).
+        // This causes immediate EOF for guests. The fix is to use the /unrestrict/magnet endpoint
+        // which bypasses torrent deduplication and generates fresh IP-specific URLs for each guest.
+        let shouldBypassCache = bypassTorrentCache ?? false
+        if shouldBypassCache {
+            print("🛡️ StreamService: Using magnet endpoint unlock (watch party guest - IP-locked URL fix)")
+        }
+
         // CRITICAL FIX (v1.0.79): When we have an infoHash, ALWAYS use the proper unlock flow.
         // Torrentio's /resolve/ redirects return user-specific RealDebrid links that are IP-locked.
         // If we resolve a redirect, we might get a cached URL that belongs to a different user,
@@ -774,6 +784,11 @@ actor StreamService: StreamResolving {
         if item.type == "series" {
             if let season = season { unlockBody["season"] = season }
             if let episode = episode { unlockBody["episode"] = episode }
+        }
+
+        // CRITICAL FIX (Landmine #44): Pass bypassTorrentCache flag for watch party guests
+        if shouldBypassCache {
+            unlockBody["bypassTorrentCache"] = true
         }
 
         request.httpBody = try JSONSerialization.data(withJSONObject: unlockBody)

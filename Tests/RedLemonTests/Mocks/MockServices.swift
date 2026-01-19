@@ -163,7 +163,7 @@ class MockStreamResolver: StreamResolving {
         return StreamResolutionResult(stream: stream, metadata: metadata!)
     }
 
-    func unlockStream(stream: RedLemon.Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> RedLemon.Stream {
+    func unlockStream(stream: RedLemon.Stream, item: MediaItem, season: Int?, episode: Int?, bypassTorrentCache: Bool? = nil) async throws -> RedLemon.Stream {
         return unlockedStream ?? stream
     }
 }

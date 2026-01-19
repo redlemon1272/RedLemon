@@ -248,11 +248,14 @@ class PlayerViewModel: ObservableObject {
                 )
 
                 do {
+                    // CRITICAL FIX (Landmine #44): Watch party guests must bypass Real-Debrid's torrent cache
+                    // to get their own IP-specific download URL instead of the host's cached URL.
                     var unlockedStream = try await streamResolver.unlockStream(
                         stream: syntheticStream,
                         item: item,
                         season: effectiveSeason,
-                        episode: effectiveEpisode
+                        episode: effectiveEpisode,
+                        bypassTorrentCache: true // Use /unrestrict/magnet endpoint for guests
                     )
                     NSLog("✅ PlayerVM: Direct unlock succeeded! URL: %@", String(unlockedStream.url?.prefix(60) ?? "nil"))
 
@@ -778,7 +781,8 @@ class PlayerViewModel: ObservableObject {
                             stream: stream,
                             item: mediaItem,
                             season: targetSeason,
-                            episode: targetEpisode
+                            episode: targetEpisode,
+                            bypassTorrentCache: nil
                         )
 
                         LoggingManager.shared.info(.videoRendering, message: "Successfully unlocked stream on attempt \(attempt) (Candidate #\(index))")
@@ -873,7 +877,8 @@ class PlayerViewModel: ObservableObject {
                 stream: stream,
                 item: mediaItem,
                 season: season,
-                episode: episode
+                episode: episode,
+                bypassTorrentCache: nil
             )
 
             // Step 3: Update UI
@@ -1047,7 +1052,8 @@ class PlayerViewModel: ObservableObject {
                     stream: nextStream,
                     item: item,
                     season: season,
-                    episode: episode
+                    episode: episode,
+                    bypassTorrentCache: nil
                 )
 
                 // Step 2: Update Selected Stream (Triggers Player Reload)

@@ -23,6 +23,7 @@ func registerUnlockRoutes(_ app: Application) {
             let season: Int?
             let episode: Int?
             let title: String?
+            let bypassTorrentCache: Bool? // CRITICAL: For watch party guests (Landmine #44)
         }
 
         let body = try req.content.decode(UnlockRequest.self)
@@ -31,6 +32,11 @@ func registerUnlockRoutes(_ app: Application) {
         NSLog("%@", "🔓 Unlock request: infoHash=\(body.infoHash.prefix(12))..., fileIdx=\(body.fileIdx ?? 0)")
         if let season = body.season, let episode = body.episode {
             NSLog("%@", "   📺 TV Show: S\(season)E\(episode)")
+        }
+
+        // CRITICAL FIX (Landmine #44): Log when using magnet endpoint for guests
+        if body.bypassTorrentCache == true {
+            NSLog("%@", "🛡️ Using magnet endpoint (watch party guest - IP-locked URL fix)")
         }
 
         guard !body.infoHash.isEmpty else {
@@ -55,7 +61,8 @@ func registerUnlockRoutes(_ app: Application) {
                 maxPolls: 2, // Reduced from 3 - pre-validated streams should be faster
                 season: body.season,
                 episode: body.episode,
-                title: body.title
+                title: body.title,
+                bypassTorrentCache: body.bypassTorrentCache ?? false
             ) else {
                 NSLog("❌ Unlock failed - torrent not cached")
                 throw Abort(.badGateway, reason: "Unlock failed - torrent may not be cached")

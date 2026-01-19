@@ -1696,7 +1696,7 @@ class MPVPlayerViewModel: ObservableObject {
         let username = appState?.currentUsername ?? "Guest"
         let userId = appState?.currentUserId ?? UUID()
 
-        let hostingStreak = SupabaseClient.shared.auth.currentUser?.hostingStreak ?? 0
+
         
         let message = ChatMessage(
             id: UUID().uuidString,
@@ -1704,8 +1704,7 @@ class MPVPlayerViewModel: ObservableObject {
             text: text,
             timestamp: Date(),
             senderId: userId.uuidString,
-            isPremium: LicenseManager.shared.isPremium,
-            hostingStreak: hostingStreak
+            isPremium: LicenseManager.shared.isPremium
         )
 
         messages.append(message) // OK - Optimistic local update (single message)
@@ -1730,8 +1729,7 @@ class MPVPlayerViewModel: ObservableObject {
                     senderId: userId.uuidString,
                     chatText: text,
                     chatUsername: username,
-                    isPremium: LicenseManager.shared.isPremium,
-                    hostingStreak: hostingStreak
+                    isPremium: LicenseManager.shared.isPremium
                 )
 
                 do {
@@ -2036,7 +2034,6 @@ struct ChatMessage: Identifiable {
     var isSystem: Bool = false
     var senderId: String? = nil
     var isPremium: Bool = false
-    var hostingStreak: Int = 0
 }
 
 
@@ -3086,8 +3083,7 @@ extension MPVPlayerViewModel {
                     text: displayText,
                     timestamp: Date(timeIntervalSince1970: message.timestamp),
                     senderId: message.senderId,
-                    isPremium: message.isPremium ?? false,
-                    hostingStreak: message.hostingStreak ?? 0
+                    isPremium: message.isPremium ?? false
                 )
                 // Batch chat updates to avoid UI thrashing
                 await MainActor.run {

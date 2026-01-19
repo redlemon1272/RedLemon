@@ -94,7 +94,6 @@ class EventChatService: ObservableObject {
         // Optimistic update
         let tempId = UUID().uuidString
         let isPremium = LicenseManager.shared.isPremium
-        let hostingStreak = SupabaseClient.shared.auth.currentUser?.hostingStreak ?? 0
         
         let message = ChatMessage(
             id: tempId,
@@ -102,8 +101,7 @@ class EventChatService: ObservableObject {
             text: text,
             timestamp: Date(),
             senderId: userId,
-            isPremium: isPremium,
-            hostingStreak: hostingStreak
+            isPremium: isPremium
         )
         self.messages.append(message)
         
@@ -115,8 +113,7 @@ class EventChatService: ObservableObject {
             senderId: userId,
             chatText: text,
             chatUsername: username,
-            isPremium: isPremium,
-            hostingStreak: hostingStreak
+            isPremium: isPremium
         )
         
         do {
@@ -186,8 +183,7 @@ class EventChatService: ObservableObject {
             text: text,
             timestamp: Date(timeIntervalSince1970: message.timestamp),
             senderId: message.senderId,
-            isPremium: message.isPremium ?? false,
-            hostingStreak: message.hostingStreak ?? 0
+            isPremium: message.isPremium ?? false
         )
         
         // BATCHING LOGIC (Ported from MPVPlayerViewModel)

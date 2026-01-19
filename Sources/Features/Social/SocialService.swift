@@ -646,8 +646,7 @@ class SocialService: ObservableObject {
                      lastSeen: Date(),
                      isAdmin: false,
                      isPremium: false,
-                     subscriptionExpiresAt: nil,
-                     hostingStreak: nil
+                     subscriptionExpiresAt: nil
                  )
                  self.blockedUsers.append(blockedUser)
              }

@@ -412,7 +412,7 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 | `payment_pools` | Maps address → user |
 | `payment_transactions` | Logs detected payments |
 | `payment_sweeps` | Logs sweep operations |
-| `users` | Stores `subscription_expires_at`, `hosting_streak` |
+| `users` | Stores `subscription_expires_at` |
 
 ## Edge Functions
 
@@ -464,10 +464,8 @@ if (currentExpiry < new Date()) currentExpiry = new Date()  // Reset if expired
 const newExpiry = new Date(currentExpiry.getTime() + (daysToAdd * 24 * 60 * 60 * 1000))  // ADDS days
 ```
 
-### Prestige Logic (Hosting Streak)
-- **Extend Active**: If user extends *before* expiry, `hosting_streak` increments (+1).
-- **New/Expired**: If user buys fresh or after expiry, `hosting_streak` resets to 0 (Base Premium).
-- **UI**: Higher streaks unlock cooler emoji badges in Chat/Lobby.
+### Prestige Logic
+- **UI**: Higher tiers (based on internal metrics or manual grant) unlock cooler emoji badges in Chat/Lobby.
 
 **UI:** Premium users see "Extend License" button in Settings when < 365 days remain (`SettingsView.swift`).
 

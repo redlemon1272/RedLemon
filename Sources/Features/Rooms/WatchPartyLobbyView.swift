@@ -911,14 +911,7 @@ struct WatchPartyLobbyView: View {
                         }
 
                         // Prestige Badge
-                        if chatMsg.hostingStreak > 0 {
-                            Text(prestigeEmoji(rank: chatMsg.hostingStreak))
-                                .font(.system(size: 10))
-                                .help(prestigeTitle(rank: chatMsg.hostingStreak))
-                        }
-                        
-                        // Premium Badge (Legacy, optional if using Prestige)
-                        if chatMsg.isPremium && chatMsg.hostingStreak == 0 {
+                        if chatMsg.isPremium {
                             Text("👑")
                                 .font(.system(size: 10))
                                 .help("Premium User")

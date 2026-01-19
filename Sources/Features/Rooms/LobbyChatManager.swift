@@ -59,7 +59,7 @@ class LobbyChatManager: ObservableObject {
 
     // MARK: - Actions
 
-    func send(senderId: String, username: String, hostingStreak: Int = 0) async {
+    func send(senderId: String, username: String) async {
         let trimmed = chatInput.trimmingCharacters(in: .whitespaces)
         guard !trimmed.isEmpty else { return }
 
@@ -69,7 +69,7 @@ class LobbyChatManager: ObservableObject {
         let isPremium = LicenseManager.shared.isPremium
 
         // Add message locally for instant feedback (optimistic UI)
-        addLocalMessage(username: username, text: trimmed, senderId: senderId, isPremium: isPremium, hostingStreak: hostingStreak)
+        addLocalMessage(username: username, text: trimmed, senderId: senderId, isPremium: isPremium)
 
         // Construct SyncMessage
         let syncMsg = SyncMessage(
@@ -79,8 +79,7 @@ class LobbyChatManager: ObservableObject {
             senderId: senderId,
             chatText: trimmed,
             chatUsername: username,
-            isPremium: isPremium,
-            hostingStreak: hostingStreak
+            isPremium: isPremium
         )
 
         // Delegate actual sending to the owner
@@ -92,7 +91,7 @@ class LobbyChatManager: ObservableObject {
         }
     }
 
-    func handleIncomingChat(chatText: String, senderId: String?, username: String?, timestamp: TimeInterval, currentUserId: String, mutedUserIds: Set<String>, blockedUserIds: Set<String>, isPremium: Bool, hostingStreak: Int) {
+    func handleIncomingChat(chatText: String, senderId: String?, username: String?, timestamp: TimeInterval, currentUserId: String, mutedUserIds: Set<String>, blockedUserIds: Set<String>, isPremium: Bool) {
         guard let validSenderId = senderId else { return }
 
         // Block check
@@ -114,8 +113,7 @@ class LobbyChatManager: ObservableObject {
             timestamp: Date(timeIntervalSince1970: timestamp),
             isSystem: false,
             senderId: validSenderId,
-            isPremium: isPremium,
-            hostingStreak: hostingStreak
+            isPremium: isPremium
         )
 
         addChatMessage(chatMessage)
@@ -151,7 +149,7 @@ class LobbyChatManager: ObservableObject {
     }
 
     // Helper to add a local optimistic message
-    public func addLocalMessage(username: String, text: String, senderId: String? = nil, isPremium: Bool = false, hostingStreak: Int = 0) {
+    public func addLocalMessage(username: String, text: String, senderId: String? = nil, isPremium: Bool = false) {
         let msg = ChatMessage(
             id: UUID().uuidString,
             username: username,
@@ -159,8 +157,7 @@ class LobbyChatManager: ObservableObject {
             timestamp: Date(),
             isSystem: false,
             senderId: senderId,
-            isPremium: isPremium,
-            hostingStreak: hostingStreak
+            isPremium: isPremium
         )
         addChatMessage(msg)
     }

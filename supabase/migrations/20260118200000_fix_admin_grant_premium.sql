@@ -1,10 +1,5 @@
--- PostgreSQL function to grant premium hosting to a user by username
--- PRODUCTION-READY: Includes admin authentication check
--- This function should be created in your Supabase SQL Editor
-
--- Drop existing function if it exists (handles upgrades)
-DROP FUNCTION IF EXISTS admin_grant_premium(text, integer);
-DROP FUNCTION IF EXISTS admin_grant_premium(uuid, text, integer);
+-- Migration: Remove hosting_streak logic from admin_grant_premium
+-- Description: Reverts the admin_grant_premium function to its original state, removing all hosting_streak calculations.
 
 CREATE OR REPLACE FUNCTION admin_grant_premium(
     caller_user_id UUID,
@@ -74,7 +69,7 @@ BEGIN
         new_expiry := NOW() + (days_to_add || ' days')::INTERVAL;
     END IF;
 
-    -- Update the user's premium expiry and status
+    -- Update the user's premium expiry and status (WITHOUT hosting_streak)
     UPDATE users
     SET subscription_expires_at = new_expiry,
         is_premium = true
@@ -95,26 +90,5 @@ EXCEPTION
 END;
 $$;
 
--- Grant execute permission only to authenticated users
--- The function itself handles admin verification
-GRANT EXECUTE ON FUNCTION admin_grant_premium(UUID, TEXT, INTEGER) TO authenticated;
-
--- Optional: Create an admin_logs table to track admin actions
--- Run this separately if you want to track admin actions
-/*
-CREATE TABLE IF NOT EXISTS admin_logs (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    admin_user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    action TEXT NOT NULL,
-    target_user_id UUID REFERENCES users(id) ON DELETE SET NULL,
-    details JSONB,
-    created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE INDEX idx_admin_logs_admin_user ON admin_logs(admin_user_id);
-CREATE INDEX idx_admin_logs_created_at ON admin_logs(created_at DESC);
-*/
-
--- Example usage:
--- SELECT admin_grant_premium('ursinho', 30);
-
+-- Refresh schema cache
+notify pgrst, 'reload schema';

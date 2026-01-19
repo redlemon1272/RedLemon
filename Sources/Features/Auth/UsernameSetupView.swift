@@ -498,8 +498,7 @@ struct ProfileCreationStepView: View {
                         id: user.id,
                         username: user.username,
                         isAdmin: user.isAdmin ?? false,
-                        isPremium: user.isPremium ?? false,
-                        hostingStreak: user.hostingStreak ?? 0
+                        isPremium: user.isPremium ?? false
                     )
                     
                     isCreating = false

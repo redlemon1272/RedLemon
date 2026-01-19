@@ -447,11 +447,7 @@ struct FriendRow: View {
                     Text(friend.username)
                         .font(.headline)
 
-                    let streak = activity?.hostingStreak ?? friend.hostingStreak ?? 0
-                    if streak > 0 {
-                        Text(prestigeEmoji(rank: streak))
-                            .font(.system(size: 12))
-                    } else if activity?.isPremium == true || friend.isPremium == true {
+                    if activity?.isPremium == true || friend.isPremium == true {
                         Text("👑")
                             .font(.system(size: 12))
                             .help("Premium Host")

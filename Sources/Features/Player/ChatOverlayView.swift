@@ -303,7 +303,7 @@ struct ChatOverlayView: View {
 
     // MARK: - List Views
 
-    private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, hostingStreak: Int, isSenderHost: Bool, timestamp: String? = nil) -> some View {
+    private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, isSenderHost: Bool, timestamp: String? = nil) -> some View {
         let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: username))
 
         if isSystem {
@@ -337,10 +337,7 @@ struct ChatOverlayView: View {
                             .cornerRadius(4)
                     }
 
-                    if hostingStreak > 0 {
-                        Text(prestigeEmoji(rank: hostingStreak))
-                            .font(.system(size: 10))
-                    } else if isPremium {
+                    if isPremium {
                         Text("👑")
                             .font(.system(size: 10))
                             .help("Premium User")
@@ -372,10 +369,7 @@ struct ChatOverlayView: View {
                         .cornerRadius(4)
                 }
 
-                if hostingStreak > 0 {
-                    Text(prestigeEmoji(rank: hostingStreak))
-                        .font(.system(size: 10))
-                } else if isPremium {
+                if isPremium {
                     Text("👑")
                         .font(.system(size: 10))
                         .help("Premium User")

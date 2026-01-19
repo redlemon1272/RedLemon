@@ -1173,10 +1173,19 @@ class LobbyViewModel: ObservableObject {
 
             appState.player.navigateToPlayer(stream: finalStream)
 
+            // ⚠️ FORENSIC LOG: Host player transition initiated
+            NSLog("🎬 [HOST_START] navigateToPlayer called")
+            NSLog("   - Stream: %@", finalStream.title ?? "unknown")
+            NSLog("   - Room: %@", self.room.id)
+            NSLog("   - Media: %@", mediaItem.name)
+
             // CRITICAL FIX: Signal start to guests
             // We send this AFTER calling navigateToPlayer to ensure the host has officially started the transition.
             // Guests wait for this signal before calling playMedia() to prevent race conditions.
             Task {
+                // Small delay to ensure host's view transition has begun
+                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
+
                 let startMsg = SyncMessage(
                     type: .chat,
                     timestamp: Date().timeIntervalSince1970,
@@ -1186,7 +1195,7 @@ class LobbyViewModel: ObservableObject {
                     chatUsername: "Host"
                 )
                 try? await self.realtimeManager?.sendSyncMessage(startMsg)
-                NSLog("✅ Host: Sent LOBBY_PLAYBACK_STARTED signal")
+                NSLog("✅ [HOST_START] Sent LOBBY_PLAYBACK_STARTED signal (0.1s after navigateToPlayer)")
             }
         }
 

@@ -56,8 +56,8 @@ class MPVWrapper: ObservableObject {
         }
 
         LoggingManager.shared.info(.videoRendering, message: "MPV handle created")
-        print("!!! MPVWrapper initialized - Build Version: 2026-01-19-FIX-FALSE-EOF-v3 !!!") 
-        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper initialized - Build Version: 2026-01-19-FIX-FALSE-EOF-v3")
+        print("!!! MPVWrapper initialized - Build Version: 2026-01-19-FIX-FALSE-EOF-v4 !!!") 
+        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper initialized - Build Version: 2026-01-19-FIX-FALSE-EOF-v4")
     }
 
     func setupVideo(in view: NSView) {
@@ -608,13 +608,15 @@ class MPVWrapper: ObservableObject {
 
         LoggingManager.shared.debug(.videoRendering, message: "MPV loading file (Safe Array Command): \(url.prefix(60)) start=\(startTime)")
 
+        // Use property-based start time setting as backup
+        // This affects the next loadfile command
+        mpv_set_property_string(handle, "start", "\(startTime)")
+
         // Use array-based command to prevent injection/parsing issues
-        // Force replace and start time to ensure predictable behavior
+        // We use 2 arguments here as it's the most widely supported array-command format for loadfile
         var args: [UnsafePointer<CChar>?] = [
             UnsafePointer(strdup("loadfile")),
             UnsafePointer(strdup(url)),
-            UnsafePointer(strdup("replace")),
-            UnsafePointer(strdup("start=\(startTime)")),
             nil
         ]
 
@@ -622,8 +624,8 @@ class MPVWrapper: ObservableObject {
             mpv_command(handle, ptr.baseAddress)
         }
 
-        // Free strings
-        for i in 0..<4 { // Update count since we added args
+        // Free strings (index 0 and 1)
+        for i in 0..<2 { 
             if let arg = args[i] { free(UnsafeMutablePointer(mutating: arg)) }
         }
         

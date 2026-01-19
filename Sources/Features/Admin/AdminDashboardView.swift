@@ -41,6 +41,9 @@ struct AdminDashboardView: View {
                             AdminSidebarRow(category: category, isSelected: selectedCategory == category)
                                 .onTapGesture {
                                     selectedCategory = category
+                                    if category == .content {
+                                        appState.reportedCount = 0
+                                    }
                                 }
                         }
                     }
@@ -145,6 +148,7 @@ struct AdminDashboardView: View {
 struct AdminSidebarRow: View {
     let category: AdminCategory
     let isSelected: Bool
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         HStack {
@@ -154,6 +158,17 @@ struct AdminSidebarRow: View {
             Text(category.rawValue)
                 .font(.system(size: 13, weight: isSelected ? .medium : .regular))
                 .foregroundColor(isSelected ? .white : .primary)
+            
+            if category == .content && appState.reportedCount > 0 {
+                Text("\(appState.reportedCount)")
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(Color.red)
+                    .clipShape(Capsule())
+            }
+            
             Spacer()
         }
         .padding(.vertical, 8)

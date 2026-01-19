@@ -571,6 +571,7 @@ struct AppOnboardingView: View {
                     // 4. Update AppState
                     appState.currentUserId = user.id
                     appState.currentUsername = user.username
+                    appState.isAdmin = user.isAdmin ?? false
                     
                     // Update auth context for LicenseManager
                     SupabaseClient.shared.auth.currentUser = AuthUser(
@@ -580,13 +581,20 @@ struct AppOnboardingView: View {
                         isPremium: user.isPremium ?? false
                     )
                     
+                    // If admin, start the report listener
+                    if user.isAdmin == true {
+                        Task {
+                            await AdminRealtimeService.shared.start()
+                        }
+                    }
+                    
                     isCheckingUsername = false
                     showSuccess = true
-                    
-                    // 5. Connect Social
-                    Task {
-                         await SocialService.shared.connect(userId: user.id.uuidString, username: trimmed)
-                    }
+                }
+                
+                // 5. Connect Social
+                Task {
+                    await SocialService.shared.connect(userId: user.id.uuidString, username: trimmed)
                 }
             } catch {
                 await MainActor.run {

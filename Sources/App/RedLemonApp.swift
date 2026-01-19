@@ -59,6 +59,9 @@ struct RedLemonApp: App {
                 .environmentObject(SocialService.shared)
                 .frame(minWidth: 900, idealWidth: 1000, maxWidth: .infinity, minHeight: 600, idealHeight: 700, maxHeight: .infinity)
                 .task {
+                    // Start notification permissions request
+                    NotificationManager.shared.requestAuthorization()
+                    
                     // Wiring up PlayerViewModel callbacks
                     appState.setupPlayerBindings()
 
@@ -185,6 +188,17 @@ struct RedLemonApp: App {
                         isAdmin: user.isAdmin ?? false,
                         isPremium: user.isPremium ?? false
                     )
+
+                    await MainActor.run {
+                        appState.isAdmin = user.isAdmin ?? false
+                    }
+
+                    // If admin, start the report listener
+                    if user.isAdmin == true {
+                        Task {
+                            await AdminRealtimeService.shared.start()
+                        }
+                    }
 
                     NSLog("✅ AUTH SUCCESS: User authenticated - %@ (ID: %@)", username, user.id.uuidString)
                     NSLog("🎯 AppState: currentUsername=%@, currentUserId=%@", username, user.id.uuidString)

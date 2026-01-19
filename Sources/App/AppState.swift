@@ -66,6 +66,26 @@ class AppState: ObservableObject {
                 self?.objectWillChange.send()
             }
             .store(in: &cancellables)
+
+        // Setup Admin Notifications
+        AdminRealtimeService.shared.onNewReport = { [weak self] in
+            Task { @MainActor in
+                self?.reportedCount += 1
+            }
+        }
+        
+        AdminRealtimeService.shared.onNewFeedback = { [weak self] in
+            Task { @MainActor in
+                self?.feedbackCount += 1
+            }
+        }
+        
+        AdminRealtimeService.shared.onInitialCounts = { [weak self] rCount, fCount in
+            Task { @MainActor in
+                self?.reportedCount = rCount
+                self?.feedbackCount = fCount
+            }
+        }
     }
 
     func restartApplication() {
@@ -203,6 +223,13 @@ class AppState: ObservableObject {
     // User authentication (simple username)
     @Published var currentUsername: String = ""
     @Published var currentUserId: UUID?
+    @Published var isAdmin: Bool = false
+    @Published var reportedCount: Int = 0
+    @Published var feedbackCount: Int = 0
+    
+    var totalAdminNotifications: Int {
+        isAdmin ? (reportedCount + feedbackCount) : 0
+    }
 
     // Message passing (Player -> Lobby)
     @Published var pendingLobbyMessage: String? = nil

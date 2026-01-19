@@ -107,21 +107,7 @@ struct ContentView: View {
                     Spacer()
 
                     // Settings at bottom
-                    VStack(spacing: 8) {
-                        Divider()
-                            .background(DesignSystem.Colors.glassBorder)
-                            .padding(.horizontal, 16)
-                            .padding(.bottom, 8)
-
-                        SidebarButton(
-                            title: "Settings",
-                            icon: "gearshape.fill",
-                            isSelected: appState.currentView == .settings,
-                            showBadge: updateManager.updateAvailable
-                        ) {
-                            appState.currentView = .settings
-                        }
-                    }
+                    settingsButton
                     .padding(.horizontal, 16)
                     .padding(.bottom, 20)
                 }
@@ -217,6 +203,29 @@ struct ContentView: View {
             // Do NOT check username here - it causes a race condition where this
             // task runs before loadStoredUser() completes, showing the login modal
             // for existing users. See: Race condition fix (Jan 2026)
+        }
+    }
+
+    private var settingsButton: some View {
+        VStack(spacing: 8) {
+            Divider()
+                .background(DesignSystem.Colors.glassBorder)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 8)
+
+            SidebarButton(
+                title: "Settings",
+                icon: "gearshape.fill",
+                isSelected: appState.currentView == .settings,
+                showBadge: updateManager.updateAvailable,
+                badgeCount: appState.totalAdminNotifications
+            ) {
+                appState.currentView = .settings
+                if appState.isAdmin {
+                    appState.feedbackCount = 0
+                    appState.reportedCount = 0
+                }
+            }
         }
     }
 

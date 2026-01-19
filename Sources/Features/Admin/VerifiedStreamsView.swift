@@ -12,6 +12,7 @@ struct VerifiedStreamsView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedTab = "streams"
     var isEmbedded: Bool = false
+    @EnvironmentObject var appState: AppState // NEW
     
     // Data Storage
     @State private var verifiedStreams: [SupabaseClient.VerifiedStream] = []
@@ -61,6 +62,9 @@ struct VerifiedStreamsView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity) // Ensure it fills the container in embedded mode
         .task(id: selectedTab) {
             await loadData()
+            if selectedTab == "feedback" {
+                appState.feedbackCount = 0
+            }
         }
     }
     

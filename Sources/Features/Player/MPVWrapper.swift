@@ -133,6 +133,10 @@ class MPVWrapper: ObservableObject {
         // Network: Fail faster on bad streams (default is often too long)
         mpv_set_option_string(handle, "network-timeout", "15")
 
+        // CRITICAL FIX: Disable built-in resume to prevent files starting at EOF (False EOF)
+        // We handle resume manually in the ViewModel.
+        mpv_set_option_string(handle, "save-position-on-quit", "no")
+
         let initResult = mpv_initialize(handle)
         guard initResult >= 0 else {
             LoggingManager.shared.error(.videoRendering, message: "MPV initialization failed: \(initResult)")
@@ -574,7 +578,7 @@ class MPVWrapper: ObservableObject {
 
     // MARK: - Public Controls
 
-    func loadVideo(url: String, autoplay: Bool = true, expectedSubtitleCount: Int = 0) {
+    func loadVideo(url: String, autoplay: Bool = true, expectedSubtitleCount: Int = 0, startTime: Double = 0) {
         // Extract filename for subtitle matching (e.g. "Movie.2023.1080p.WEBRip.mp4")
         if let urlObj = URL(string: url) {
         LoggingManager.shared.debug(.videoRendering, message: "MPV: Current video filename set to: \(self.currentVideoFilename)")
@@ -583,10 +587,10 @@ class MPVWrapper: ObservableObject {
         }
 
         // Execute load immediately (Array-based command handles spaces/quotes safely)
-        executeLoadVideo(url: url, autoplay: autoplay)
+        executeLoadVideo(url: url, autoplay: autoplay, startTime: startTime)
     }
 
-    private func executeLoadVideo(url: String, autoplay: Bool) {
+    private func executeLoadVideo(url: String, autoplay: Bool, startTime: Double) {
         guard let handle = mpvHandle else {
             LoggingManager.shared.error(.videoRendering, message: "MPV handle is nil!")
             return
@@ -602,12 +606,15 @@ class MPVWrapper: ObservableObject {
         // CRITICAL: Always set pause=yes BEFORE loading
         mpv_set_property_string(handle, "pause", "yes")
 
-        LoggingManager.shared.debug(.videoRendering, message: "MPV loading file (Safe Array Command): \(url.prefix(60))")
+        LoggingManager.shared.debug(.videoRendering, message: "MPV loading file (Safe Array Command): \(url.prefix(60)) start=\(startTime)")
 
         // Use array-based command to prevent injection/parsing issues
+        // Force replace and start time to ensure predictable behavior
         var args: [UnsafePointer<CChar>?] = [
             UnsafePointer(strdup("loadfile")),
             UnsafePointer(strdup(url)),
+            UnsafePointer(strdup("replace")),
+            UnsafePointer(strdup("start=\(startTime)")),
             nil
         ]
 
@@ -616,7 +623,7 @@ class MPVWrapper: ObservableObject {
         }
 
         // Free strings
-        for i in 0..<2 {
+        for i in 0..<4 { // Update count since we added args
             if let arg = args[i] { free(UnsafeMutablePointer(mutating: arg)) }
         }
         

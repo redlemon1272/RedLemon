@@ -4,7 +4,7 @@ import Combine
 /// Protocol abstracting MPVWrapper interactions for testability
 protocol MPVController: AnyObject {
     // Actions
-    func loadVideo(url: String, autoplay: Bool, expectedSubtitleCount: Int)
+    func loadVideo(url: String, autoplay: Bool, expectedSubtitleCount: Int, startTime: Double)
     func play()
     func pause()
     func togglePlayPause()
@@ -33,4 +33,10 @@ protocol MPVController: AnyObject {
     // Services currently use .values on the @Published property.
     // If we expose publishers, services can use .values on them?
     // Publisher.values requires generic AsyncPublisher.
+}
+
+extension MPVController {
+    func loadVideo(url: String, autoplay: Bool, expectedSubtitleCount: Int, startTime: Double = 0) {
+        loadVideo(url: url, autoplay: autoplay, expectedSubtitleCount: expectedSubtitleCount, startTime: startTime)
+    }
 }

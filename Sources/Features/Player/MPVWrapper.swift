@@ -56,7 +56,8 @@ class MPVWrapper: ObservableObject {
         }
 
         LoggingManager.shared.info(.videoRendering, message: "MPV handle created")
-        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper initialized - Build Version: 2026-01-19-FIX-FALSE-EOF-v2")
+        print("!!! MPVWrapper initialized - Build Version: 2026-01-19-FIX-FALSE-EOF-v3 !!!") 
+        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper initialized - Build Version: 2026-01-19-FIX-FALSE-EOF-v3")
     }
 
     func setupVideo(in view: NSView) {
@@ -424,6 +425,10 @@ class MPVWrapper: ObservableObject {
                     let timeRemaining = duration - currentTime
                     let progress = (duration > 0) ? (currentTime / duration) : 0
                     
+                    // FORENSIC LOGGING
+                    print("!!! MPV EOF DETECTED !!! Duration: \(duration), CurrentTime: \(currentTime), TimeRemaining: \(timeRemaining), Progress: \(progress)")
+                    LoggingManager.shared.warn(.videoRendering, message: "Forensic EOF Check: Dur=\(duration), Cur=\(currentTime), Rem=\(timeRemaining), Prog=\(progress)")
+
                     if duration > 300 && timeRemaining > 60 && progress < 0.95 {
                         LoggingManager.shared.warn(.videoRendering, message: "MPV: SUSPICIOUS EOF detected! Pos: \(Int(currentTime))s / Dur: \(Int(duration))s. Treating as ERROR to prevent exit.")
                          Task { await SessionRecorder.shared.log(category: .error, message: "Suspicious EOF (False Positive)", metadata: ["pos": "\(currentTime)", "dur": "\(duration)"]) }

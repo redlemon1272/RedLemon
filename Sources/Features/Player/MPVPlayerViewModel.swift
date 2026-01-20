@@ -55,6 +55,9 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var lastActiveChatMode: PlayerChatMode? = nil
     // END AI_BIBLE #58 Fix
 
+    // Landmine #44: Track playback start time to detect "Instant EOF"
+    private var lastPlaybackResumeTime: Date?
+
 
     init(mpvWrapper: MPVWrapper = MPVWrapper(),
          subtitleService: SubtitleService? = nil,
@@ -131,6 +134,12 @@ class MPVPlayerViewModel: ObservableObject {
                 .sink { [weak self] isPlaying in
                     guard let self = self else { return }
                     self.isPlaying = isPlaying
+                    
+                    // Landmine #44: Track resume time
+                    if isPlaying {
+                        self.lastPlaybackResumeTime = Date()
+                    }
+                    
                     if isPlaying && self.isLoading {
                         // Video started playing - hide poster
                         self.onVideoReady()
@@ -145,6 +154,25 @@ class MPVPlayerViewModel: ObservableObject {
                 .sink { [weak self] finished in
                     guard let self = self else { return }
                     if finished {
+                        // CRITICAL FIX (Landmine #44): Detect Premature EOF (IP Lock / Cache Issue)
+                        if let start = self.lastPlaybackResumeTime {
+                            let playedDuration = Date().timeIntervalSince(start)
+                            
+                            // Check: Early exit (<5s) on long content (>5m) for Watch Party Guest
+                            if playedDuration < 5.0 && self.duration > 300 && self.isInWatchParty && !self.isWatchPartyHost {
+                                LoggingManager.shared.error(.videoRendering, message: "🛑 PREMATURE EOF DETECTED! (Played: \(String(format: "%.2f", playedDuration))s). Triggering Retry.")
+                                
+                                // Show loading state immediately to prevent flicker
+                                self.isLoading = true
+                                self.showPoster = true
+                                // self.statusMessage = "Connection lost. Retrying..."
+                                
+                                // Trigger Retry Logic via Error Channel
+                                self.playbackErrorTrigger.send("PREMATURE_EOF")
+                                return // ABORT: Do not set playbackFinished = true
+                            }
+                        }
+                        
                         LoggingManager.shared.info(.videoRendering, message: "⚠️ FORENSIC: playbackFinishedPub fired! CurrentTime: \(self.currentTime), Duration: \(self.duration)")
                     }
                     self.playbackFinished = finished

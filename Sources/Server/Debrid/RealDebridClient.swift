@@ -151,7 +151,7 @@ actor RealDebridClient {
 
         // Create new unlock task
         let task = Task<UnlockResult?, Error> {
-            try await self._rdUnlock(infoHash: infoHash, fileIdx: fileIdx, token: token, maxPolls: maxPolls, season: season, episode: episode, title: title)
+            try await self._rdUnlock(infoHash: infoHash, fileIdx: fileIdx, token: token, maxPolls: maxPolls, season: season, episode: episode, title: title, forceFresh: bypassTorrentCache)
         }
 
         inflightRequests[cacheKey] = task
@@ -194,8 +194,18 @@ actor RealDebridClient {
 
     // MARK: - Core Unlock Logic (ports Node.js _rdUnlock)
 
-    private func _rdUnlock(infoHash: String, fileIdx: Int?, token: String, maxPolls: Int, season: Int?, episode: Int?, title: String?) async throws -> UnlockResult? {
+    private func _rdUnlock(infoHash: String, fileIdx: Int?, token: String, maxPolls: Int, season: Int?, episode: Int?, title: String?, forceFresh: Bool = false) async throws -> UnlockResult? {
         let pollDelay: UInt64 = 1_000_000_000 // 1 second
+
+        // CRITICAL FIX (Landmine #44): Force Fresh Torrent Container
+        // If forceFresh is true (Guest Mode), we aggressively delete any existing torrents
+        // with this hash from the user's account before adding the magnet.
+        // This forces RD to generate a new Torrent ID and (hopefully) a fresh Unrestrict link
+        // that isn't IP-locked to a previous session or Host.
+        if forceFresh {
+            print("🛡️ RD: Force Fresh requested - purging existing torrents for has \(infoHash.prefix(8))...")
+            try? await purgeTorrents(hash: infoHash, token: token)
+        }
 
         // Build magnet with trackers
         let trackers = [
@@ -657,6 +667,59 @@ actor RealDebridClient {
     }
 
     // MARK: - Utilities
+
+    /// Deletes all torrents matching the given hash
+    private func purgeTorrents(hash: String, token: String) async throws {
+        // 1. Get recent torrents (limit 50 should be enough for recent activity)
+        let torrents = try await getTorrents(limit: 50, token: token)
+        
+        // 2. Filter by hash
+        let targetHash = hash.lowercased()
+        let matches = torrents.filter { ($0.hash ?? "").lowercased() == targetHash }
+        
+        // 3. Delete matches
+        if !matches.isEmpty {
+            print("🗑️ RD: Found \(matches.count) existing torrents for hash \(targetHash.prefix(8)). Deleting...")
+            for torrent in matches {
+                try await deleteTorrent(id: torrent.id, token: token)
+            }
+            print("✅ RD: Purge complete.")
+        } else {
+            print("ℹ️ RD: No existing torrents found for hash \(targetHash.prefix(8)) to purge.")
+        }
+    }
+
+    private func getTorrents(limit: Int, token: String) async throws -> [TorrentInfo] {
+        let url = URL(string: "\(baseURL)/torrents?limit=\(limit)")!
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            // Non-critical, return empty list if failed
+            print("⚠️ RD: Failed to list torrents (HTTP \((response as? HTTPURLResponse)?.statusCode ?? 0))")
+            return []
+        }
+        
+        // Response is array of TorrentInfo-like objects (minimal fields)
+        return try JSONDecoder().decode([TorrentInfo].self, from: data)
+    }
+
+    private func deleteTorrent(id: String, token: String) async throws {
+        let url = URL(string: "\(baseURL)/torrents/delete/\(id)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (_, response) = try await URLSession.shared.data(for: request)
+        
+        if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+            print("⚠️ RD: Failed to delete torrent \(id) (HTTP \(httpResponse.statusCode))")
+        } else {
+            print("🗑️ RD: Deleted torrent \(id)")
+        }
+    }
 
     private func extractExtension(from filename: String) -> String {
         let pattern = #"\.([a-z0-9]{2,5})(?:$|\s)"#

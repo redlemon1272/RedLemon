@@ -34,9 +34,9 @@ func registerUnlockRoutes(_ app: Application) {
             NSLog("%@", "   📺 TV Show: S\(season)E\(episode)")
         }
 
-        // CRITICAL FIX (Landmine #44): Log when using magnet endpoint for guests
+        // CRITICAL FIX (Landmine #44): Log when using Purge Strategy for guests
         if body.bypassTorrentCache == true {
-            NSLog("%@", "🛡️ Using magnet endpoint (watch party guest - IP-locked URL fix)")
+            NSLog("%@", "🛡️ Using Purge Strategy (watch party guest - IP-locked URL fix)")
         }
 
         guard !body.infoHash.isEmpty else {

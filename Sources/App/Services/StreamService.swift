@@ -669,11 +669,15 @@ actor StreamService: StreamResolving {
     // MARK: - Stream Unlocking
 
     func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?, bypassTorrentCache: Bool? = nil) async throws -> Stream {
-        // CRITICAL UPDATE (Landmine #44): Real-Debrid IP-Lock & Server-Side Cache
-        // Real-Debrid caches unrestricted links at the magnet hash level, causing guests to get IP-locked URLs.
-        // Attempts to bypass this using a hypothetical "magnet unrestrict" endpoint failed (404 Unknown Method).
-        // We currently accept this limitation: Watch Parties work best when the Host doesn't restart playback.
-        let shouldBypassCache = false // Force disabled as endpoint is dead
+        // CRITICAL UPDATE (Landmine #44): Real-Debrid IP-Lock Bypass (Purge Strategy)
+        // Since the 'magnet unrestrict' endpoint doesn't exist, we must use the standard flow.
+        // However, standard flow hits RD's server-side cache (returning Host's IP-locked link).
+        // FIX: If this is a Watch Party Guest, we strictly DELETE any existing torrents with this hash
+        // from the user's RD account before adding the magnet. This forces a fresh container ID.
+        let forceFresh = bypassTorrentCache ?? false
+        if forceFresh {
+            print("🛡️ StreamService: Using 'Purge Strategy' for fresh RD link (Watch Party Guest)")
+        }
 
         // CRITICAL FIX (v1.0.79): When we have an infoHash, ALWAYS use the proper unlock flow.
         // Torrentio's /resolve/ redirects return user-specific RealDebrid links that are IP-locked.
@@ -783,7 +787,7 @@ actor StreamService: StreamResolving {
         }
 
         // CRITICAL FIX (Landmine #44): Pass bypassTorrentCache flag for watch party guests
-        if shouldBypassCache {
+        if forceFresh {
             unlockBody["bypassTorrentCache"] = true
         }
 

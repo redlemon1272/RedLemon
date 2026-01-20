@@ -823,7 +823,7 @@ class PlayerViewModel: ObservableObject {
         return finalStream
     }
 
-    func playSelectedStream(_ stream: Stream, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {
+    func playSelectedStream(_ stream: Stream, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false, forceFresh: Bool = false) async {
         guard let mediaItem = selectedMediaItem else {
             streamError = "No media item selected"
             return
@@ -857,7 +857,7 @@ class PlayerViewModel: ObservableObject {
                 item: mediaItem,
                 season: season,
                 episode: episode,
-                bypassTorrentCache: nil
+                bypassTorrentCache: forceFresh
             )
 
             // Step 3: Update UI
@@ -940,6 +940,21 @@ class PlayerViewModel: ObservableObject {
                 return
             } else {
                  LoggingManager.shared.warn(.videoRendering, message: "Timeout retry limit reached or no stream selected. Proceeding to fallback.")
+            }
+        }
+
+        // CRITICAL FIX (Landmine #44): Premature EOF Logic (Purge Retry)
+        if error == "PREMATURE_EOF" {
+            LoggingManager.shared.error(.videoRendering, message: "PlayerVM: Handling PREMATURE_EOF - Triggering PURGE retry.")
+            
+            // If we have a stream selected, try to replay it with FORCE FRESH (Purge) mode
+            if let stream = self.selectedStream {
+                Task { @MainActor in
+                     // Wait a moment for UI to reflect loading
+                     try? await Task.sleep(nanoseconds: 500_000_000)
+                     await self.playSelectedStream(stream, watchMode: self.currentWatchMode, roomId: self.currentRoomId, isHost: self.isWatchPartyHost, forceFresh: true)
+                }
+                return
             }
         }
 

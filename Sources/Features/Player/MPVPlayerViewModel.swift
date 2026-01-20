@@ -388,9 +388,12 @@ class MPVPlayerViewModel: ObservableObject {
                             if isRoomPlaying {
                                 LoggingManager.shared.info(.watchParty, message: "Watch Party: File loaded (late join), skipping Ready Gate")
                                 self.hasSentReadySignal = true
-                            } else {
-                                LoggingManager.shared.warn(.watchParty, message: "Watch Party: File loaded signal received (fallback trigger), sending Ready signal")
+                            } else if self.isWatchPartyHost {
+                                LoggingManager.shared.warn(.watchParty, message: "Watch Party: File loaded signal received (Host), sending Ready signal")
                                 self.sendReadySignal()
+                            } else {
+                                // Guest: Do NOT send ready signal here. Wait for durationPub -> validateStreamIntegrity().
+                                LoggingManager.shared.info(.watchParty, message: "Watch Party: File loaded (Guest). Waiting for duration to trigger validation.")
                             }
                         }
                     }
@@ -2493,11 +2496,19 @@ extension MPVPlayerViewModel {
 
         LoggingManager.shared.info(.watchParty, message: "Watch party sync initialized with Realtime")
 
-        // Post-Setup Check: If video already loaded, send ready signal now
+        // Post-Setup Check: If video already loaded, send ready signal (Host) or validate (Guest)
         // This handles the race condition where duration loaded before Realtime was ready
         if duration > 0 && !hasSentReadySignal {
-             LoggingManager.shared.info(.watchParty, message: "Watch Party: Setup complete, sending delayed READY signal")
-             sendReadySignal()
+             if isWatchPartyHost {
+                 LoggingManager.shared.info(.watchParty, message: "Watch Party: Setup complete (Host), sending delayed READY signal")
+                 sendReadySignal()
+             } else {
+                 // Guest: Trigger validation if not already running
+                 if !isValidatingStream {
+                     LoggingManager.shared.info(.watchParty, message: "Watch Party: Setup complete (Guest), triggering stream validation")
+                     validateStreamIntegrity()
+                 }
+             }
         }
     }
 

@@ -617,6 +617,51 @@ struct MPVPlayerView: View {
             .padding(.horizontal, 24)
             .padding(.top, 20)
 
+            // SubDL Status Check (Added for visibility when subtitles are missing)
+            HStack {
+                Text("SubDL Status:")
+                    .foregroundColor(.secondary)
+                    .font(.system(size: 14))
+
+                Spacer()
+                
+                let subdlStatus = appState.providerHealth["subdl"] ?? "Unknown"
+                let isChecking = appState.isCheckingProviders
+                
+                if isChecking {
+                    ProgressView()
+                        .controlSize(.small)
+                        .scaleEffect(0.7)
+                } else {
+                    HStack(spacing: 6) {
+                        Circle()
+                            .fill(subdlStatus == "Online" ? Color.green : Color.red)
+                            .frame(width: 8, height: 8)
+                        
+                        Text(subdlStatus)
+                            .foregroundColor(subdlStatus == "Online" ? .green : .red)
+                            .font(.system(size: 12, weight: .semibold))
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.black.opacity(0.2))
+                    .cornerRadius(4)
+                    
+                    // Refresh button
+                    Button(action: {
+                        appState.checkProviderHealth()
+                    }) {
+                        Image(systemName: "arrow.clockwise")
+                             .font(.system(size: 12))
+                             .foregroundColor(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Check Status")
+                }
+            }
+            .padding(.horizontal, 24)
+            .padding(.bottom, 4)
+
             // Current track info
             if let currentTrack = viewModel.currentSubtitleTrack {
                 HStack {

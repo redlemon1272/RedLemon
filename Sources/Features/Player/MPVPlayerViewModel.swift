@@ -124,12 +124,14 @@ class MPVPlayerViewModel: ObservableObject {
                         let isEvent = self.appState?.player.isEventPlayback == true
                         NSLog("%@", "[ERROR_HANDLER] isEvent: \(isEvent), isEventPlayback: \(self.appState?.player.isEventPlayback ?? false)")
                         if isEvent {
-                            // Try lastPlaybackResumeTime first, fallback to eventStartTime
-                            let startTime = self.lastPlaybackResumeTime ?? self.appState?.player.eventStartTime
-                            NSLog("%@", "[ERROR_HANDLER] startTime: \(String(describing: startTime))")
+                            // CRITICAL: For events, ALWAYS use eventStartTime (wall clock), not lastPlaybackResumeTime
+                            // lastPlaybackResumeTime is when THIS USER joined, but eventStartTime is when the EVENT STARTED
+                            // All viewers sync to eventStartTime regardless of when they joined
+                            let startTime = self.appState?.player.eventStartTime
+                            NSLog("%@", "[ERROR_HANDLER] eventStartTime: \(String(describing: startTime))")
                             if let start = startTime {
                                 let playedDuration = Date().timeIntervalSince(start)
-                                NSLog("%@", "[ERROR_HANDLER] playedDuration: \(Int(playedDuration))s, duration: \(Int(self.duration))s, 80%: \(Int(self.duration * 0.8))s")
+                                NSLog("%@", "[ERROR_HANDLER] playedDuration (since event start): \(Int(playedDuration))s, duration: \(Int(self.duration))s, 80%: \(Int(self.duration * 0.8))s")
                                 // If we've played more than 80% of the duration, this is a natural end, not an error
                                 if playedDuration > (self.duration * 0.8) {
                                     NSLog("%@", "[ERROR_HANDLER] Event EOF after playing \(Int(playedDuration))s - IGNORING, allowing natural exit")
@@ -140,8 +142,8 @@ class MPVPlayerViewModel: ObservableObject {
                                     LoggingManager.shared.warn(.videoRendering, message: "Event EOF early at \(Int(playedDuration))s/\(Int(self.duration))s - Triggering retry")
                                 }
                             } else {
-                                NSLog("%@", "[ERROR_HANDLER] Event EOF but no start time - Allowing retry")
-                                LoggingManager.shared.warn(.videoRendering, message: "Event EOF but no start time available - Allowing retry")
+                                NSLog("%@", "[ERROR_HANDLER] Event EOF but no eventStartTime set - Allowing retry")
+                                LoggingManager.shared.warn(.videoRendering, message: "Event EOF but no eventStartTime available - Allowing retry")
                             }
                         }
                     }

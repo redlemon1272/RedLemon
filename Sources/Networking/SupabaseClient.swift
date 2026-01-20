@@ -2682,8 +2682,30 @@ extension SupabaseClient {
 
     func sendFriendRequest(from senderId: UUID, to receiverId: UUID) async throws {
         // Check if there's any existing friendship between these two users
-        let checkPath = "/friendships?or=(and(user_id_1.eq.\(senderId.uuidString.lowercased()),user_id_2.eq.\(receiverId.uuidString.lowercased())),and(user_id_1.eq.\(receiverId.uuidString.lowercased()),user_id_2.eq.\(senderId.uuidString.lowercased())))&select=id,status,user_id_1"
-        let existingData = try await makeRequest(path: checkPath, method: "GET")
+        // URL-encode the complex OR query to prevent parsing issues
+        let senderIdStr = senderId.uuidString.lowercased()
+        let receiverIdStr = receiverId.uuidString.lowercased()
+        let orFilter = "or=(and(user_id_1.eq.\(senderIdStr),user_id_2.eq.\(receiverIdStr)),and(user_id_1.eq.\(receiverIdStr),user_id_2.eq.\(senderIdStr)))"
+        
+        // Use URLComponents to properly encode the query
+        var components = URLComponents(string: "\(baseURL)/rest/v1/friendships")!
+        components.queryItems = [
+            URLQueryItem(name: "or", value: "(and(user_id_1.eq.\(senderIdStr),user_id_2.eq.\(receiverIdStr)),and(user_id_1.eq.\(receiverIdStr),user_id_2.eq.\(senderIdStr)))"),
+            URLQueryItem(name: "select", value: "id,status,user_id_1")
+        ]
+        
+        guard let checkURL = components.url else {
+            throw SupabaseError.invalidURL
+        }
+        
+        var request = URLRequest(url: checkURL)
+        request.httpMethod = "GET"
+        request.setValue(apiKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        print("🔍 FriendRequest Check URL: \(checkURL.absoluteString)")
+        
+        let (existingData, _) = try await URLSession.shared.data(for: request)
         
         // DEBUG: Log the response
         if let jsonString = String(data: existingData, encoding: .utf8) {

@@ -1117,7 +1117,6 @@ class PlayerViewModel: ObservableObject {
         // Capture state before ANY property resets
         let wasFullscreen = NSApplication.shared.windows.first(where: { $0.isVisible && $0.styleMask.contains(.fullScreen) }) != nil
         let wasEvent = isEventPlayback
-        let isSolo = !keepRoomState && !wasEvent
 
         // 2. Start window transition IMMEDIATELY
         exitFullscreen()
@@ -1179,6 +1178,10 @@ class PlayerViewModel: ObservableObject {
 
                        // Reset flag after transition (handled by View but good safety)
                     }
+                } else {
+                    // CRITICAL: Return to lobby if keeping room state (Watch Party)
+                    // This ensures guests see the lobby UI instead of a black screen after video ends
+                    appState?.currentView = .watchPartyLobby
                 }
             }
 

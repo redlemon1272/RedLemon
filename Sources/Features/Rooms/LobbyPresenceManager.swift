@@ -49,7 +49,7 @@ class LobbyPresenceManager: ObservableObject {
 
             // Log System Message for Leaves (Batched?)
             // For now, simple loop is fine as leaves are less frequent than joins
-            for id in pendingLeaves {
+            for _ in pendingLeaves {
                 // Determine name from deleted participants? Too late.
                 // We'll rely on the original leave event trigger for logs if needed,
                 // but ChatManager handles messages.
@@ -271,7 +271,6 @@ class LobbyPresenceManager: ObservableObject {
     func toggleReady() {
         guard let viewModel = viewModel else { return }
 
-        let wasReady = viewModel.isReady
         viewModel.isReady.toggle()
 
         let currentUsername = viewModel.appState?.currentUsername ?? "Guest"

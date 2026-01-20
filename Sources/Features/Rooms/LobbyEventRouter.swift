@@ -13,9 +13,22 @@ class LobbyEventRouter: ObservableObject {
     }
 
     func handle(_ syncMessage: SyncMessage) async {
-        guard let viewModel = viewModel else { return }
+        guard viewModel != nil else { return }
+        
+        // Handle TYPED messages first (which might not have chatText)
+        if syncMessage.type == .returnToLobby {
+             // Host returned to lobby (Typed)
+             await handleLobbyReturn(syncMessage)
+             return
+        } else if syncMessage.type == .roomClosed {
+             // Host closed the room (Typed)
+             await handleRoomClosed()
+             return
+        }
+
         guard let chatText = syncMessage.chatText else {
-            NSLog("⚠️ Received Realtime message with no chat text")
+            // Only log warning if it's NOT a known typed message handled above
+            NSLog("%@", "⚠️ Received Realtime message with no chat text (Type: \(syncMessage.type))")
             return
         }
 
@@ -25,12 +38,9 @@ class LobbyEventRouter: ObservableObject {
         // Handle special lobby commands
         if chatText.starts(with: "LOBBY_") {
             await handleLobbyCommand(chatText, syncMessage: syncMessage)
-        } else if syncMessage.type == .returnToLobby || chatText == "LOBBY_RETURN" {
-             // Host returned to lobby
+        } else if chatText == "LOBBY_RETURN" {
+             // Host returned to lobby (Legacy Text Fallback)
              await handleLobbyReturn(syncMessage)
-        } else if syncMessage.type == .roomClosed {
-             // Host closed the room
-             await handleRoomClosed()
         } else {
             // Regular chat message - add to chat UI
             handleRegularChatMessage(chatText, syncMessage: syncMessage)
@@ -80,7 +90,7 @@ class LobbyEventRouter: ObservableObject {
     }
 
     private func handleLobbyCommand(_ chatText: String, syncMessage: SyncMessage) async {
-        guard let viewModel = viewModel else { return }
+        guard viewModel != nil else { return }
 
         // Sanitize command text to remove accidental whitespace/newlines
         let command = chatText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -107,6 +117,9 @@ class LobbyEventRouter: ObservableObject {
              await handleLobbyResolving(syncMessage)
         } else if command == "LOBBY_PLAYBACK_STARTED" {
              await handleLobbyPlaybackStarted(syncMessage)
+        } else if command == "LOBBY_RETURN" {
+             // Explicit handler for text-based command (Redundancy)
+             await handleLobbyReturn(syncMessage)
         } else {
              // Unknown LOBBY command - log warning with detailed scalar analysis for debug
              let senderInfo = syncMessage.chatUsername ?? syncMessage.senderId ?? "Unknown"
@@ -121,6 +134,15 @@ class LobbyEventRouter: ObservableObject {
         if viewModel.isHost {
              let guestUsername = syncMessage.chatUsername ?? "Guest"
              let guestId = syncMessage.senderId ?? UUID().uuidString
+             
+             // Check if participant already exists to prevent duplicates
+             if let index = viewModel.participants.firstIndex(where: { $0.id.caseInsensitiveCompare(guestId) == .orderedSame }) {
+                 NSLog("ℹ️ Guest '%@' re-joined (Already in list at index %d)", guestUsername, index)
+                 // Update any stale data if needed
+                 viewModel.participants[index].name = guestUsername
+                 return
+             }
+             
              NSLog("👋 Host received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
              NSLog("   Guest ID: %@, Total participants: %d", guestId, viewModel.participants.count + 1)
 
@@ -320,9 +342,10 @@ class LobbyEventRouter: ObservableObject {
             if viewModel.appState?.currentView == .player {
                 NSLog("🔄 Guest: Switching from Player to Lobby due to host return")
                 viewModel.appState?.currentView = .watchPartyLobby
-
-                // Reset player state if needed
-                // viewModel.appState?.player.resetState() // If such method exists
+                
+                // CRITICAL FIX: Ensure playback state is marked as ended locally
+                // This resets isReady, canAutoJoin, and sets endedAt timestamp for causality checks
+                viewModel.markPlaybackEnded()
             }
         }
     }
@@ -379,9 +402,10 @@ class LobbyEventRouter: ObservableObject {
         await viewModel.updateMediaItemFromRoomState(roomState) // Requires this to be internal
 
         // Re-fetch mediaItem as it might have changed
-        guard let currentMediaItem = viewModel.room.mediaItem else {
-             NSLog("❌ Guest: Media item missing after update check")
-             return
+        // Check if item exists in playlist
+        guard viewModel.room.mediaItem != nil else {
+            NSLog("⚠️ prepareNextItem: No media item in room")
+            return
         }
 
         // Use fresh DB state
@@ -479,9 +503,9 @@ class LobbyEventRouter: ObservableObject {
         // but here we just rely on the '3' from the message minus fetch time.
         // We add a visual countdown loop here.
 
-        let totalWaitTime = max(0, 3.25 - fetchDuration)
-
-        // Visual Countdown Loop
+        // Total wait time: 3.25 seconds total wait (from resolve start) to ensure host has buffer
+        let remainingWait = max(0, 3.25 - fetchDuration)
+        NSLog("⏱️ Step 3: Artificial Delay - Waiting additional %.2fs to ensure Host buffer...", remainingWait)
         let startCount = 3
 
         Task { @MainActor in

@@ -823,6 +823,12 @@ class LobbyViewModel: ObservableObject {
         self.playbackEndedTimestamp = Date()
         self.isStarting = false
         self.transitionState.isStarting = false
+        
+        // CRITICAL FIX: Mark client as NOT READY after playback finishes. 
+        // This ensures they stay in the lobby until they (or the host) decide to start again.
+        // It also prevents the "Auto-start Loop" if the host stays in 'Playing' state.
+        self.isReady = false
+        self.canAutoJoin = false
 
         // CRITICAL FIX (v5): Reset connection status BEFORE view transition.
         // This function is called from PlayerViewModel.exitPlayer() BEFORE

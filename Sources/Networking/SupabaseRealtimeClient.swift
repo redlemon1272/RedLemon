@@ -7,7 +7,7 @@ actor SupabaseRealtimeClient {
     // MARK: - Configuration
     private let realtimeURL: String
     private let apiKey: String
-    private let accessToken: String?
+    private var accessToken: String?
     private let session: URLSession
 
     // MARK: - WebSocket State
@@ -102,6 +102,11 @@ actor SupabaseRealtimeClient {
         self.session = URLSession(configuration: config)
     }
 
+    /// Update the access token used for connection (must be called before connect())
+    func setAuth(_ token: String) {
+        self.accessToken = token
+    }
+
     // MARK: - Connection Management
 
     func connect() async throws {
@@ -130,6 +135,7 @@ actor SupabaseRealtimeClient {
         // Create WebSocket task using shared session
         var request = URLRequest(url: url)
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
 
         let task = session.webSocketTask(with: request)
         self.webSocketTask = task

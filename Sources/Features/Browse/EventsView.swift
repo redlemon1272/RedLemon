@@ -196,8 +196,8 @@ struct EventsView: View {
         }) {
             print("🚀 Auto-joining NEXT event lobby: \(lobbyEvent.mediaItem.name) (index: \(lobbyEvent.index))")
 
-            // Reset flag immediately to prevent loops
-            appState.shouldAutoJoinLobby = false
+            // Reset flag should happen in the destination view to ensure it can use it for instant join
+            // appState.shouldAutoJoinLobby = false
 
             Task {
                 // Determine wait time if needed (optional polish, but immediate is fine for lobby)
@@ -211,8 +211,8 @@ struct EventsView: View {
         }) {
             print("🚀 Auto-joining LIVE event: \(liveEvent.mediaItem.name)")
 
-            // Reset flag
-            appState.shouldAutoJoinLobby = false
+            // Reset flag should happen in the destination view
+            // appState.shouldAutoJoinLobby = false
 
             Task {
                 await self.joinEvent(liveEvent)

@@ -583,9 +583,14 @@ class LobbyPresenceManager: ObservableObject {
                 // The Realtime 'leave' event is still the primary fast-path, but DB is the garbage collector.
                 
                 let timeSinceJoin = Date().timeIntervalSince(localP.joinedAt)
-                if timeSinceJoin < 3.0 {
-                    // KEEP THEM: They joined less than 3 seconds ago (Grace Period)
-                    // This protects against "blips" where Realtime connects before DB syncs
+                
+                // ISOLATION: Only extend grace period for Events (due to high concurrency/lag)
+                // Regular Watch Parties keep strict 3s cleanup to avoid ghosts.
+                let gracePeriod: TimeInterval = (viewModel.room.type == .event) ? 10.0 : 3.0
+                
+                if timeSinceJoin < gracePeriod {
+                    // KEEP THEM: They joined less than N seconds ago (Grace Period)
+                    // This protects against "blips" where Realtime connects before DB syncs or replication lag
                    //  NSLog("🛡️ Preserving recent joiner '\(localP.name)' (joined \(String(format: "%.1f", timeSinceJoin))s ago)")
                     finalParticipants.append(localP)
                 } else {

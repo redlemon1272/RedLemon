@@ -1329,6 +1329,10 @@ class PlayerViewModel: ObservableObject {
             if let appState = appState {
                  appState.currentView = .events
                  appState.shouldAutoJoinLobby = true
+                 
+                 // CRITICAL FIX: Reset idempotency lock for events
+                 // This ensures the NEXT event can start even if it uses the same stream/media
+                 lastAutoStartedSessionId = nil
             }
             return
         }

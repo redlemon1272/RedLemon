@@ -531,16 +531,25 @@ class LobbyViewModel: ObservableObject {
                              self.room.episode = e
                              print("📺 Lobby: Synced season/episode: S\(s)E\(e)")
                         }
+                        
+                        // FIX: Sync createdAt and update timeUntilStart for events
+                        // This ensures the countdown is accurate even if the room instance had stale data
+                        if room.type == .event {
+                             self.room.createdAt = freshRoom.createdAt
+                             self.timeUntilStart = freshRoom.createdAt.timeIntervalSince(Date())
+                             print("⏳ Lobby: Synced event start time. Time until start: \(self.timeUntilStart)")
+                        }
 
                         // CRITICAL FIX: Grace Period Check
                         // If we JUST returned from playback, do not auto-start immediately.
                         // This prevents the "Flash" where the guest returns to lobby and bounces back instantly.
+                        // AI_BIBLE: Bypass this for System Events to ensure seamless progression.
                         var isGracePeriodActive = false
-                        if let endedAt = self.playbackEndedTimestamp, Date().timeIntervalSince(endedAt) < 5.0 {
+                        if room.type != .event, let endedAt = self.playbackEndedTimestamp, Date().timeIntervalSince(endedAt) < 5.0 {
                              print("🛑 Lobby: Ignoring auto-start on connect - Grace Period active")
                              isGracePeriodActive = true
                         }
-
+                        
                         // Auto-start for event rooms (always) or regular rooms that are already playing
                         // BUT respect grace period
                         if !isGracePeriodActive {
@@ -827,8 +836,12 @@ class LobbyViewModel: ObservableObject {
         // CRITICAL FIX: Mark client as NOT READY after playback finishes. 
         // This ensures they stay in the lobby until they (or the host) decide to start again.
         // It also prevents the "Auto-start Loop" if the host stays in 'Playing' state.
-        self.isReady = false
-        self.canAutoJoin = false
+        // AI_BIBLE: System events are wall-clock synced and ignore these flags; 
+        // resetting them here can cause a 10s 'dwell time' loop on the next event.
+        if room.type != .event {
+            self.isReady = false
+            self.canAutoJoin = false
+        }
 
         // CRITICAL FIX (v5): Reset connection status BEFORE view transition.
         // This function is called from PlayerViewModel.exitPlayer() BEFORE

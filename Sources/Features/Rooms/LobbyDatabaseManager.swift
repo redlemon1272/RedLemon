@@ -161,9 +161,10 @@ class LobbyDatabaseManager: ObservableObject {
         // CRITICAL FIX: Race Condition Checks
 
         // 1. Check if we just finished playback (grace period)
-        if let endedAt = viewModel.playbackEndedTimestamp,
+        // AI_BIBLE: Bypass for events to ensure seamless progression
+        if viewModel.room.type != .event, 
+           let endedAt = viewModel.playbackEndedTimestamp,
            Date().timeIntervalSince(endedAt) < 5 {
-            NSLog("%@", "🛑 Guest: Ignoring playback signal - just finished playback (Grace Period)")
             NSLog("%@", "🛑 Guest: Ignoring playback signal - just finished playback (Grace Period)")
             return
         }
@@ -180,7 +181,8 @@ class LobbyDatabaseManager: ObservableObject {
 
         // 2. Causality Check (The Reference Fix)
         // If we have a record of when we LAST finished playback, verify the DB signal is NEWER.
-        if let endedAt = viewModel.playbackEndedTimestamp {
+        // AI_BIBLE: Bypass for events
+        if viewModel.room.type != .event, let endedAt = viewModel.playbackEndedTimestamp {
             // CRITICAL FIX: Add 3s buffer. Updates happening *during* teardown (like "Host returned to lobby")
             // might have a slightly later timestamp but are part of the 'end' event, not a new 'start'.
             if roomState.lastActivity < endedAt.addingTimeInterval(3.0) {
@@ -198,7 +200,8 @@ class LobbyDatabaseManager: ObservableObject {
         }
 
         // 4. Safety delay check (prevent immediate auto-join)
-        guard viewModel.canAutoJoin else {
+        // AI_BIBLE: Bypass for events
+        guard viewModel.room.type == .event || viewModel.canAutoJoin else {
             NSLog("🛡️ Guest: Suppressing auto-join (safety delay active)")
             return
         }

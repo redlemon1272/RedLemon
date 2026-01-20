@@ -1,0 +1,634 @@
+import SwiftUI
+
+// MARK: - Components for BrowseView
+
+// Watch Mode Selection Sheet
+struct WatchModeSelectionView: View {
+    let historyItem: WatchHistoryItem
+    let appState: AppState
+    @Environment(\.dismiss) var dismiss
+    @State private var isCreatingRoom = false
+
+    var body: some View {
+        ZStack {
+            VStack(spacing: 24) {
+                // Header
+                VStack(spacing: 8) {
+                    Text("Continue Watching")
+                        .font(.title.weight(.bold))
+
+                    Text(historyItem.mediaItem.name)
+                        .font(.title3)
+                        .foregroundColor(.secondary)
+
+                    // Progress info
+                    HStack(spacing: 12) {
+                        Text("\(historyItem.progressPercent)% watched")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+
+                        if let season = historyItem.season, let episode = historyItem.episode {
+                            Text("•")
+                                .foregroundColor(.secondary)
+                            Text("S\(season) E\(episode)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                .padding(.top, 32)
+
+                Spacer()
+
+                // Watch mode buttons
+                VStack(spacing: 16) {
+                    // Solo options
+                    VStack(spacing: 12) {
+                        Text("Solo Options")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+
+                        HStack(spacing: 12) {
+                            // Continue button
+                            Button(action: {
+                                Task {
+                                    await resumePlayback(mode: .solo, shouldResume: true)
+                                }
+                            }) {
+                                VStack(spacing: 4) {
+                                    Image(systemName: "play.fill")
+                                    Text("Continue")
+                                        .font(.caption)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.accentColor)
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                            }
+                            .buttonStyle(.plain)
+
+                            // Start from beginning button
+                            Button(action: {
+                                Task {
+                                    await resumePlayback(mode: .solo, shouldResume: false)
+                                }
+                            }) {
+                                VStack(spacing: 4) {
+                                    Image(systemName: "play.circle.fill")
+                                    Text("Start from Beginning")
+                                        .font(.caption)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+
+                    // Watch Party options
+                    VStack(spacing: 12) {
+                        Text("Watch Party Options")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+
+                        HStack(spacing: 12) {
+                            // Resume button
+                            Button(action: {
+                                Task {
+                                    await resumePlayback(mode: .watchParty, shouldResume: true)
+                                }
+                            }) {
+                                VStack(spacing: 4) {
+                                    Image(systemName: "person.2.fill")
+                                    Text("Continue from \(formatTime(historyItem.timestamp))")
+                                        .font(.caption)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.purple)
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                            }
+                            .buttonStyle(.plain)
+
+                            // Start from beginning button
+                            Button(action: {
+                                Task {
+                                    await resumePlayback(mode: .watchParty, shouldResume: false)
+                                }
+                            }) {
+                                VStack(spacing: 4) {
+                                    Image(systemName: "person.2.fill")
+                                    Text("Start from Beginning")
+                                        .font(.caption)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+
+                    // Go to Detail Page button
+                    Button(action: {
+                        goToDetailPage()
+                    }) {
+                        HStack {
+                            Image(systemName: "info.circle")
+                            Text("Go to Detail Page")
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.gray.opacity(0.8))
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                    }
+                    .buttonStyle(.plain)
+                }
+                .padding(.horizontal, 32)
+
+                Spacer()
+
+                // Cancel button
+                Button("Cancel") {
+                    dismiss()
+                }
+                .padding(.bottom, 24)
+            }
+            .frame(width: 450, height: 550)
+            .disabled(isCreatingRoom)
+
+            // Loading overlay
+            if isCreatingRoom {
+                ZStack {
+                    Color.black.opacity(0.5)
+                        .edgesIgnoringSafeArea(.all)
+
+                    VStack(spacing: 16) {
+                        ProgressView()
+                            .scaleEffect(1.5)
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+
+                        Text("Creating room...")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                    }
+                    .padding(32)
+                    .background(Color(white: 0.2))
+                    .cornerRadius(16)
+                }
+            }
+        }
+    }
+
+    private func resumePlayback(mode: WatchMode, shouldResume: Bool = true) async {
+        if mode == .watchParty {
+            await MainActor.run {
+                isCreatingRoom = true
+            }
+        }
+
+        await MainActor.run {
+            appState.player.selectedMediaItem = historyItem.mediaItem
+            if shouldResume {
+                appState.player.resumeFromTimestamp = historyItem.timestamp
+            } else {
+                appState.player.resumeFromTimestamp = nil
+            }
+
+            if let season = historyItem.season, let episode = historyItem.episode {
+                appState.selectedSeason = season
+                appState.selectedEpisode = episode
+            }
+        }
+
+        let quality = VideoQuality(rawValue: historyItem.quality ?? "1080p") ?? .fullHD
+
+        if mode == .watchParty {
+            await MainActor.run {
+                appState.player.currentWatchMode = .watchParty
+                appState.currentView = .qualitySelection
+                isCreatingRoom = false
+            }
+            dismiss()
+        } else {
+            dismiss()
+            await appState.player.playMedia(
+                historyItem.mediaItem,
+                quality: quality,
+                watchMode: .solo
+            )
+        }
+    }
+
+    private func goToDetailPage() {
+        Task { @MainActor in
+            appState.player.selectedMediaItem = historyItem.mediaItem
+            if let season = historyItem.season, let episode = historyItem.episode {
+                appState.selectedSeason = season
+                appState.selectedEpisode = episode
+            }
+            appState.currentView = .mediaDetail
+            dismiss()
+        }
+    }
+
+    private func formatTime(_ seconds: Double) -> String {
+        let hours = Int(seconds) / 3600
+        let minutes = Int(seconds) % 3600 / 60
+        let secs = Int(seconds) % 60
+        if hours > 0 {
+            return String(format: "%d:%02d:%02d", hours, minutes, secs)
+        } else {
+            return String(format: "%d:%02d", minutes, secs)
+        }
+    }
+}
+
+/// Card for recently watched items with progress bar
+struct RecentlyWatchedCard: View {
+    let historyItem: WatchHistoryItem
+    @State private var imageData: Data?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            // Poster image with progress overlay
+            ZStack(alignment: .bottom) {
+                if let imageData = imageData, let nsImage = NSImage(data: imageData) {
+                    Image(nsImage: nsImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 150, height: 220)
+                        .clipped()
+                        .cornerRadius(8)
+                } else {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.gray.opacity(0.3))
+                        .frame(width: 150, height: 220)
+                        .overlay(
+                            ProgressView()
+                        )
+                }
+
+                // Progress bar
+                GeometryReader { geometry in
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .fill(Color.black.opacity(0.5))
+                            .frame(height: 4)
+
+                        Rectangle()
+                            .fill(Color.accentColor)
+                            .frame(width: geometry.size.width * historyItem.progress, height: 4)
+                    }
+                }
+                .frame(height: 4)
+                .cornerRadius(2)
+            }
+
+            // Title
+            Text(historyItem.mediaItem.name)
+                .font(.subheadline.weight(.medium))
+                .lineLimit(2)
+
+            // Progress percentage
+            Text("\(historyItem.progressPercent)% watched")
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+        .frame(width: 150)
+        .task {
+            await loadPoster()
+        }
+    }
+
+    private func loadPoster() async {
+        guard let posterURL = historyItem.mediaItem.posterURL else { return }
+        let cacheKey = posterURL.absoluteString
+
+        // Check cache and load image in detached task to avoid actor isolation issues
+        let data: Data? = await Task.detached {
+            // Check cache first
+            if let cachedData = await CacheManager.shared.getImageData(key: cacheKey) {
+                return cachedData
+            }
+
+            do {
+                let (data, _) = try await URLSession.shared.data(from: posterURL)
+                // Cache
+                await CacheManager.shared.setImageData(key: cacheKey, value: data)
+                return data
+            } catch {
+                print("Failed to load poster: \(error)")
+                return nil
+            }
+        }.value
+
+        // Update UI on main actor
+        if let data = data {
+            await MainActor.run {
+                self.imageData = data
+            }
+        }
+    }
+}
+
+/// Standard Media Card
+struct MediaCard: View {
+    let item: MediaItem
+    @State private var imageData: Data?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            // Poster image
+            ZStack {
+                if let imageData = imageData, let nsImage = NSImage(data: imageData) {
+                    Image(nsImage: nsImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 220)
+                        .clipped()
+                        .cornerRadius(8)
+                } else {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.gray.opacity(0.3))
+                        .frame(height: 220)
+                        .overlay(
+                            ProgressView()
+                        )
+                }
+
+                // Rating badge
+                if let rating = item.imdbRating {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Text("⭐️ \(rating)")
+                                .font(.caption)
+                                .padding(6)
+                                .background(.ultraThinMaterial)
+                                .cornerRadius(6)
+                                .padding(8)
+                        }
+                        Spacer()
+                    }
+                }
+            }
+
+            // Title
+            Text(item.name)
+                .font(.subheadline.weight(.medium))
+                .lineLimit(2)
+
+            // Year
+            if let year = item.year {
+                Text(year)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .frame(width: 150)
+        .task {
+            await loadPoster()
+        }
+    }
+
+    private func loadPoster() async {
+        guard let posterURL = item.posterURL else { return }
+
+        let cacheKey = posterURL.absoluteString
+
+        // Check cache and load image in detached task to avoid actor isolation issues
+        let data: Data? = await Task.detached {
+            // Check cache first
+            if let cachedData = await CacheManager.shared.getImageData(key: cacheKey) {
+                return cachedData
+            }
+
+            do {
+                let (data, _) = try await URLSession.shared.data(from: posterURL)
+
+                // Cache image data
+                await CacheManager.shared.setImageData(key: cacheKey, value: data)
+
+                return data
+            } catch {
+                print("Failed to load poster: \(error)")
+                return nil
+            }
+        }.value
+
+        // Update UI on main actor
+        if let data = data {
+            await MainActor.run {
+                self.imageData = data
+            }
+        }
+    }
+}
+
+/// Optimized MediaCard with memory management
+struct OptimizedMediaCard: View {
+    let item: MediaItem
+    @State private var imageData: Data?
+    @State private var imageLoadTask: Task<Void, Never>?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            // Poster image with memory optimization
+            ZStack {
+                if let imageData = imageData, let nsImage = NSImage(data: imageData) {
+                    Image(nsImage: nsImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 220)
+                        .clipped()
+                        .cornerRadius(8)
+                } else {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.gray.opacity(0.3))
+                        .frame(height: 220)
+                        .overlay(
+                            ProgressView()
+                                .scaleEffect(0.8)
+                        )
+                }
+
+                // Rating badge
+                if let rating = item.imdbRating {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Text("⭐️ \(rating)")
+                                .font(.caption)
+                                .padding(6)
+                                .background(.ultraThinMaterial)
+                                .cornerRadius(6)
+                                .padding(8)
+                        }
+                        Spacer()
+                    }
+                }
+            }
+
+            // Title
+            Text(item.name)
+                .font(.subheadline.weight(.medium))
+                .lineLimit(2)
+
+            // Year
+            if let year = item.year {
+                Text(year)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+        .frame(width: 150)
+        .onAppear {
+            loadImage()
+        }
+        .onDisappear {
+            // Cancel image loading when view disappears
+            imageLoadTask?.cancel()
+            imageData = nil // Memory optimization: release image data when not visible
+        }
+    }
+
+    private func loadImage() {
+        guard let posterURL = item.posterURL else { return }
+        let cacheKey = posterURL.absoluteString
+
+        imageLoadTask?.cancel()
+        imageLoadTask = Task {
+            // Check cache first
+            if let cachedData = await CacheManager.shared.getImageData(key: cacheKey) {
+                if !Task.isCancelled {
+                    self.imageData = cachedData
+                }
+                return
+            }
+
+            // Download
+            do {
+                let (data, _) = try await URLSession.shared.data(from: posterURL)
+                if !Task.isCancelled {
+                    // Cache
+                    await CacheManager.shared.setImageData(key: cacheKey, value: data)
+                    self.imageData = data
+                }
+            } catch {
+                if !Task.isCancelled {
+                    print("Failed to load optimized poster: \(error)")
+                }
+            }
+        }
+    }
+}
+
+/// Horizontal row for streaming services
+struct StreamingServiceRow: View {
+    let title: String
+    let items: [MediaItem]
+    let scrollOffset: Binding<CGFloat>?
+    let onTap: (MediaItem) -> Void
+
+    var body: some View {
+        if !items.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(title)
+                    .font(.title2.weight(.bold))
+                    .padding(.horizontal)
+
+                VersionAwareHorizontalScrollView(scrollOffset: scrollOffset) {
+                    LazyHStack(spacing: 16) {
+                        ForEach(items) { item in
+                            Button(action: {
+                                onTap(item)
+                            }) {
+                                MediaCard(item: item)
+                            }
+                            .buttonStyle(.scalableMedia)
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+                .frame(height: 280)
+            }
+        }
+    }
+}
+
+/// Lazy loading streaming service row
+struct LazyStreamingServiceRow: View {
+    let title: String
+    let catalogKey: String
+    let items: [MediaItem]
+    let isLoading: Bool
+    let scrollOffset: Binding<CGFloat>?
+    let onTap: (MediaItem) -> Void
+    let onAppear: () async -> Void
+
+    @State private var hasAppeared = false
+    @State private var lastKnownItemCount = 0
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(title)
+                .font(.title2.weight(.bold))
+                .padding(.horizontal)
+
+            if isLoading {
+                HStack {
+                    ProgressView()
+                        .scaleEffect(0.8)
+                    Text("Loading...")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.horizontal)
+                .frame(height: 240)
+            } else if !items.isEmpty {
+                VersionAwareHorizontalScrollView(scrollOffset: scrollOffset) {
+                    LazyHStack(spacing: 16) {
+                        ForEach(items) { item in
+                            Button(action: {
+                                onTap(item)
+                            }) {
+                                OptimizedMediaCard(item: item)
+                            }
+                            .buttonStyle(.scalableMedia)
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+                .frame(height: 280)
+            }
+        }
+        .onAppear {
+            let shouldLoad = !hasAppeared || items.isEmpty || lastKnownItemCount == 0
+            if shouldLoad {
+                hasAppeared = true
+                Task {
+                    await onAppear()
+                }
+            }
+            lastKnownItemCount = items.count
+        }
+        .onChange(of: items.count) { newCount in
+            if newCount == 0 && lastKnownItemCount > 0 {
+                Task {
+                    try? await Task.sleep(nanoseconds: 2_000_000_000)
+                    await onAppear()
+                }
+            }
+            lastKnownItemCount = newCount
+        }
+    }
+}

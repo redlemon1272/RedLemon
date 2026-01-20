@@ -169,6 +169,14 @@ class MPVPlayerViewModel: ObservableObject {
                                 
                                 // Trigger Retry Logic via Error Channel
                                 self.playbackErrorTrigger.send("PREMATURE_EOF")
+                                
+                                // Validation Cleanup: If we were validating, cancel the success task
+                                if self.isValidatingStream {
+                                    LoggingManager.shared.warn(.watchParty, message: "Validation Failed (EOF). Retrying...")
+                                    self.validationTask?.cancel()
+                                    self.isValidatingStream = false
+                                }
+                                
                                 return // ABORT: Do not set playbackFinished = true
                             }
                         }
@@ -240,8 +248,14 @@ class MPVPlayerViewModel: ObservableObject {
                              LoggingManager.shared.warn(.watchParty, message: "Watch Party: Room playing but I am HOST - Force sending ready signal (Recovery)")
                              self.sendReadySignal()
                         } else {
-                            LoggingManager.shared.info(.watchParty, message: "Watch Party: Duration available (\(String(format: "%.1f", dur))s), triggering ready signal")
-                            self.sendReadySignal()
+                            // Validate stream before sending ready (Guest only)
+                            if !self.isWatchPartyHost {
+                                LoggingManager.shared.info(.watchParty, message: "Watch Party: Duration available (\(String(format: "%.1f", dur))s), starting stream validation...")
+                                self.validateStreamIntegrity()
+                            } else {
+                                LoggingManager.shared.info(.watchParty, message: "Watch Party: Duration available (\(String(format: "%.1f", dur))s), triggering ready signal (Host)")
+                                self.sendReadySignal()
+                            }
                         }
                     }
                 }
@@ -622,6 +636,10 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var readyGuestIds: Set<String> = []
     private var pendingLeaveTasks: [String: Task<Void, Never>] = [:] // Debounce map for leaving guests
     private var hasSentReadySignal: Bool = false
+    
+    // Stream Integrity Validation (Landmine #44 Fix)
+    private var isValidatingStream: Bool = false
+    private var validationTask: Task<Void, Never>?
 
     // MARK: - Verified Stream Logic
     @Published var currentStreamHash: String?
@@ -3431,6 +3449,48 @@ extension MPVPlayerViewModel {
         }
     }
 
+    // MARK: - Stream Integrity Validation (Landmine #44)
+
+    private func validateStreamIntegrity() {
+        guard !isValidatingStream else { return }
+        isValidatingStream = true
+        
+        LoggingManager.shared.info(.watchParty, message: "🔍 Validating stream integrity (Silent Play)...")
+        
+        // Mute and Play
+        let previousVolume = self.volume
+        mpvWrapper.setVolume(0)
+        
+        Task { @MainActor [weak self] in
+            guard let self = self else { return }
+            await self.playbackService.play()
+            
+            // Monitor for stability (2 seconds)
+            // If EOF happens, the checking logic in playbackFinishedPub will catch it and trigger retry
+            self.validationTask = Task {
+                try? await Task.sleep(nanoseconds: 2_000_000_000)
+                guard !Task.isCancelled else { return }
+                
+                // If we are here, we survived 2 seconds without EOF!
+                await MainActor.run { [weak self] in
+                    guard let self = self else { return }
+                    if self.isValidatingStream {
+                        LoggingManager.shared.info(.watchParty, message: "✅ Stream Validation Passed! Proceeding to READY.")
+                        
+                        // Reset
+                        self.mpvWrapper.pause()
+                        self.mpvWrapper.seek(to: 0)
+                        self.mpvWrapper.setVolume(Int(previousVolume))
+                        self.isValidatingStream = false
+                        
+                        // Proceed
+                        self.sendReadySignal()
+                    }
+                }
+            }
+        }
+    }
+
     private func checkIfAllGuestsReady() {
         guard isWatchPartyHost else { return }
 
@@ -3454,8 +3514,19 @@ extension MPVPlayerViewModel {
 
         // CRITICAL FIX: Ensure we have at least one guest before starting
         // Without this, fast hosts would start immediately if guests haven't joined presence yet
+        
+        // RECOVERY: If connectedGuestIds is empty, check participants list
+        if connectedGuestIds.isEmpty, let participants = appState?.player.currentWatchPartyRoom?.participants {
+             let userId = self.currentUserId ?? ""
+             let others = participants.filter { $0.id.lowercased() != userId.lowercased() }
+             if !others.isEmpty {
+                 LoggingManager.shared.info(.watchParty, message: "Restoring connectedGuestIds from participants list: \(others.map { $0.id })")
+                 for p in others { connectedGuestIds.insert(p.id.lowercased()) }
+             }
+        }
+
         guard !connectedGuestIds.isEmpty else {
-            LoggingManager.shared.debug(.watchParty, message: "No guests connected yet (waiting for presence updates)")
+            LoggingManager.shared.debug(.watchParty, message: "No guests connected yet (waiting for presence updates/participants)")
             return
         }
 

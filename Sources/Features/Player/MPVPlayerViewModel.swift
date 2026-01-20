@@ -295,17 +295,19 @@ class MPVPlayerViewModel: ObservableObject {
                              self.completeTrackSwitch()
                          } else if self.hasVideoReadyTriggered && self.mpvWrapper.isFileLoaded {
                             if self.isRefiningInitialSeek {
-                                if self.appState?.player.eventStartTime != nil {
+                                if self.appState?.player.eventStartTime != nil && self.isPlaying {
                                     LoggingManager.shared.info(.watchParty, message: "Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...")
                                     // Delay hiding the spinner to ensure the sought frame is rendered
                                     Task { @MainActor in
                                         try? await Task.sleep(nanoseconds: 500_000_000) // 500ms
-                                        LoggingManager.shared.info(.watchParty, message: "Render Stabilization Complete - Releasing UI")
-                                        self.isRefiningInitialSeek = false
-                                        self.isBuffering = false
-                                        withAnimation(.easeOut(duration: 0.5)) {
-                                            self.isLoading = false
-                                            self.showPoster = false
+                                        if self.isPlaying { // Re-check validity
+                                            LoggingManager.shared.info(.watchParty, message: "Render Stabilization Complete - Releasing UI")
+                                            self.isRefiningInitialSeek = false
+                                            self.isBuffering = false
+                                            withAnimation(.easeOut(duration: 0.5)) {
+                                                self.isLoading = false
+                                                self.showPoster = false
+                                            }
                                         }
                                     }
                                 } else if self.isInWatchParty {

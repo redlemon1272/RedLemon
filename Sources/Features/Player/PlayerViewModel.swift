@@ -1326,6 +1326,10 @@ class PlayerViewModel: ObservableObject {
                 finishedEventIds.insert(eventId)
                 currentEventId = nil
             }
+            // CRITICAL FIX: Clear room state to force clean exit and re-join
+            self.currentRoomId = nil
+            self.currentWatchPartyRoom = nil
+            
             if let appState = appState {
                  appState.currentView = .events
                  appState.shouldAutoJoinLobby = true

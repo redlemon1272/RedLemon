@@ -2685,6 +2685,11 @@ extension SupabaseClient {
         let checkPath = "/friendships?or=(and(user_id_1.eq.\(senderId.uuidString.lowercased()),user_id_2.eq.\(receiverId.uuidString.lowercased())),and(user_id_1.eq.\(receiverId.uuidString.lowercased()),user_id_2.eq.\(senderId.uuidString.lowercased())))&select=id,status,user_id_1"
         let existingData = try await makeRequest(path: checkPath, method: "GET")
         
+        // DEBUG: Log the response
+        if let jsonString = String(data: existingData, encoding: .utf8) {
+            print("🔍 FriendRequest Check Response: \(jsonString)")
+        }
+        
         struct ExistingFriendship: Decodable {
             let id: UUID
             let status: String
@@ -2693,6 +2698,7 @@ extension SupabaseClient {
         
         if let existingFriendships = try? jsonDecoder.decode([ExistingFriendship].self, from: existingData),
            let existing = existingFriendships.first {
+            print("🔍 Found existing friendship: id=\(existing.id), status=\(existing.status), user_id_1=\(existing.user_id_1)")
             if existing.status == "accepted" {
                 // Already friends - no action needed
                 print("✅ Already friends with this user")
@@ -2711,6 +2717,7 @@ extension SupabaseClient {
         }
         
         // No existing friendship, create a new pending request
+        print("📤 Creating new friend request: \(senderId) → \(receiverId)")
         let path = "/friendships"
         let body: [String: Any] = [
             "user_id_1": senderId.uuidString,
@@ -2719,6 +2726,7 @@ extension SupabaseClient {
         ]
 
         _ = try await makeRequest(path: path, method: "POST", body: body)
+        print("✅ Friend request created successfully")
     }
 
     func updateFriendshipStatus(id: UUID, status: FriendshipStatus) async throws {

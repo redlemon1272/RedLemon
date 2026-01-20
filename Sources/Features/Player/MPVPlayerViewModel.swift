@@ -116,6 +116,21 @@ class MPVPlayerViewModel: ObservableObject {
                 .compactMap { $0 } // remove nils
                 .sink { [weak self] errorMsg in
                     guard let self = self else { return }
+
+                    // CRITICAL FIX: For events, ignore "Transient EOF Glitch" if we've been playing for a while
+                    // This prevents events from looping when they naturally end with currentTime=0 (spurious EOF)
+                    if errorMsg == "Transient EOF Glitch" {
+                        let isEvent = self.appState?.player.isEventPlayback == true
+                        if isEvent, let start = self.lastPlaybackResumeTime {
+                            let playedDuration = Date().timeIntervalSince(start)
+                            // If we've played more than 80% of the duration, this is a natural end, not an error
+                            if playedDuration > (self.duration * 0.8) {
+                                LoggingManager.shared.info(.videoRendering, message: "Event EOF glitch after playing \(Int(playedDuration))s - Ignoring, allowing natural exit")
+                                return // Don't trigger error retry
+                            }
+                        }
+                    }
+
                     LoggingManager.shared.error(.videoRendering, message: "Critical MPV Error detected: \(errorMsg) - Triggering Failover")
 
                     // Force clear buffering state so UI doesn't hang

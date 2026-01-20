@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 19, 2026 (Part 19: Real-Debrid Server-Side Cache Discovery)
+> **Last Updated:** January 20, 2026 (Part 19: Event Room Guest Visibility)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -78,6 +78,7 @@
 | **Black Screen after Playback Ends** | Missing explicit navigation in exitPlayer | #62 |
 | **Auto-Start Loop (Infinite Playback)** | Stale is_playing flag or missed Ready reset | #63 |
 | **Realtime Auth Error (RLS)** | Missing Authorization header in WebSocket handshake | #64 |
+| **"User Joined" Missing (Guests)** | `LobbyEventRouter` ignores guests | #65 |
 
 ## 🚨 Critical Landmines
 
@@ -288,6 +289,11 @@
     *   **Symptom**: Subscription fails with "unauthorized" even if a valid JWT is sent in the `phx_join` payload.
     *   **Cause**: Some Supabase configurations require the `Authorization` header during the **initial WebSocket HTTP handshake** (the GET request to upgrade to WS).
     *   **Rule**: Custom Realtime clients (`SupabaseRealtimeClient`) MUST inject the `Authorization: Bearer <token>` header into the `URLRequest` used to initialize the connection. Relying on payload-level auth alone is insufficient for high-security (RLS) channels.
+65. **Event Room Guest Visibility (The "Silent Join" Bug)**: *(Added v1.0.125)*
+    *   **Trigger**: Guest joins a System Event (where `isHost` is false for everyone).
+    *   **Symptom**: "User Joined" messages appear in logs but not in the Chat UI for other guests.
+    *   **Cause**: `LobbyEventRouter.handleLobbyJoin` only generated system messages in the `if isHost` block. Guests relied on silent Presence updates.
+    *   **Rule**: Guests MUST process `LOBBY_JOIN` messages to generate UI notifications, guarding against self-echo (`senderId != myId`).
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

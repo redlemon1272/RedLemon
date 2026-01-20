@@ -169,7 +169,15 @@ class LobbyEventRouter: ObservableObject {
          } else {
              // Non-host received guest join notification
              let guestUsername = syncMessage.chatUsername ?? "Guest"
+             let guestId = syncMessage.senderId ?? ""
+
              NSLog("👋 Received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
+             
+             // Fix for Guests in Event Rooms: Add system message to chat
+             // Filter out self-echo to prevent duplicates since sender adds locally (Landmine #61)
+             if guestId.caseInsensitiveCompare(viewModel.participantId) != .orderedSame {
+                 viewModel.chatManager.addSystemMessage(.userJoined, userName: guestUsername)
+             }
          }
     }
 

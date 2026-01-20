@@ -1090,9 +1090,20 @@ class MPVPlayerViewModel: ObservableObject {
             // CRITICAL FIX: Watch Party Ready Gate
             // Video is ready locally, but we are waiting for Host/Sync.
             // Keep the poster visible so we don't show a static frame 0.
-            LoggingManager.shared.info(.watchParty, message: "Video ready (Watch Party) - Keeping poster visible until Sync Message")
-            withAnimation {
-                self.isLoading = false // Hide spinner, but keep poster
+            // EXCEPTION: Events bypass Ready Gate (no host to trigger sync)
+            let isEvent = self.appState?.player.isEventPlayback == true
+            if !isEvent {
+                LoggingManager.shared.info(.watchParty, message: "Video ready (Watch Party) - Keeping poster visible until Sync Message")
+                withAnimation {
+                    self.isLoading = false // Hide spinner, but keep poster
+                }
+            } else {
+                // Events: Hide poster and spinner immediately
+                LoggingManager.shared.info(.watchParty, message: "Video ready (Event) - Hiding poster and spinner")
+                withAnimation {
+                    self.showPoster = false
+                    self.isLoading = false
+                }
             }
         } else {
             // Normal behavior

@@ -434,6 +434,21 @@ if [[ -f "$LOBBY_VM" ]]; then
 fi
 
 # =============================================================================
+# CHECK 22: Guest Join Visibility (Landmine #65)
+# =============================================================================
+# Trigger: LobbyEventRouter missing system message logic for guests.
+print_header "Check 22: Guest Join Visibility (Landmine #65)"
+
+ROUTER="$SOURCES_DIR/Features/Rooms/LobbyEventRouter.swift"
+if [[ -f "$ROUTER" ]]; then
+    # We expect at least 2 occurances of .userJoined (one for Host, one for Guest)
+    COUNT=$(grep -c "addSystemMessage(.userJoined" "$ROUTER" || true)
+    if [[ $COUNT -lt 2 ]]; then
+         report "ERROR" "Landmine #65" "Visibility Risk: LobbyEventRouter MUST handle .userJoined for both Host AND Guests." "$ROUTER" "0" "Found $COUNT occurrences, expected >= 2"
+    fi
+fi
+
+# =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

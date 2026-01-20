@@ -1241,59 +1241,38 @@ class PlayerViewModel: ObservableObject {
 
         // Premature EOF Detection for System Events
         if isEventPlayback, let start = eventStartTime, let metadata = selectedMetadata {
-             // Calculate expected end time based on runtime
-             // Note: eventStartTime is the SCHEDULED start, not when we started watching.
-             // We need to check if we are significantly before the scheduled end.
-
-             // Get total runtime in seconds
-             // runtime is usually string "120 min" or similar. Need to parse or rely on `duration` from MPV if valid?
-             // Actually, `Sessions/Events` have fixed slots.
-
-             // Better approach: Check `TimeService.shared.serverTime`.
-             // Compare current server time with `eventEndTime` (which we need to calculate or store).
-
-             // Let's use the MPV duration vs Expected duration? No, MPV duration is the issue (it's short).
-             // We should check if we are "near" the end of the event slot.
-
-             // If we don't have event slot info readily available here (we have `eventStartTime` but maybe not duration/end),
-             // let's rely on a simpler metric: We know it's an event.
-             // We know we just hit EOF.
-             // If this was a "normal" finish, we should be near the end of the schedule.
-
-             // Let's look at `EventsConfigService` which usually has the current event.
-             // Or rely on `TimeService`.
-
-             // Let's calculate Time Remaining in the Event Slot.
-             // We need to know when the event *should* end.
-             // `PlayerViewModel` has `selectedMediaItem` but not the `EventSlot` directly.
-             // However, `eventStartTime` is set for sync.
-
-             // Let's assume runtime from metadata is truth for the movie content.
-             // If we finish 10 minutes before runtime implies, that's "Credits" maybe.
-             // If we finish 50 minutes before, that's a crash.
-
-             // Parsed "107 min" -> 107.0
+             // START: RELAXED EOF CHECK
+             // Original logic was too strict (300s/5min tolerance) which caused infinite loops 
+             // when metadata runtime (IMDb) didn't match actual file runtime (e.g. different cuts, long credits).
+             
              let cleanedRuntime = (metadata.runtime ?? "0").filter { "0123456789.".contains($0) }
              let runtimeMinutes = Double(cleanedRuntime) ?? 0
              let runtimeSeconds = runtimeMinutes * 60
 
              if runtimeSeconds > 0 {
-                  // Calculate how long we've been "playing" or where we are relative to start.
-                  // `eventStartTime` is the wall-clock time the event started.
                   let now = Date()
                   let timeSinceStart = now.timeIntervalSince(start)
                   let timeRemaining = runtimeSeconds - timeSinceStart
+                  
+                  // Calculate percentage of expected runtime completed
+                  let percentCompleted = (timeSinceStart / runtimeSeconds) * 100
+                  
+                  LoggingManager.shared.debug(.videoRendering, message: "Event EOF Check: Metadata Runtime: \(Int(runtimeMinutes))m, Time Since Start: \(Int(timeSinceStart))s, Remaining: \(Int(timeRemaining))s (\(Int(percentCompleted))%)")
 
-                  // Tolerance: 5 minutes (300s) + Credits allowance
-                  // If we are more than 10% or 10 minutes "early", it's suspicious.
-                  // Let's use 5 minutes for "xXx" case (1h 20m vs 10s file).
-
-                  if timeRemaining > 300 {
-                       LoggingManager.shared.error(.videoRendering, message: "Premature EOF detected! Time remaining: \(Int(timeRemaining))s. Triggering Failover.")
-                       handlePlaybackError("Premature EOF (Target: \(Int(timeRemaining))s left)")
+                  // New Tolerance Logic:
+                  // 1. If we have played > 85% of expected runtime, trust EOF (credits, variable runtimes).
+                  // 2. OR if time remaining is less than 15 minutes (900s) (catch-all for shorter items).
+                  // 3. ONLY trigger failover if we are significantly early (e.g. 50% through).
+                  
+                  if percentCompleted < 85.0 && timeRemaining > 900 {
+                       LoggingManager.shared.error(.videoRendering, message: "⚠️ Premature EOF detected (Too Early)! Played \(Int(percentCompleted))% (<85%) and \(Int(timeRemaining))s (>900s) remaining. Triggering Failover.")
+                       handlePlaybackError("Premature EOF (Played \(Int(percentCompleted))%)")
                        return
+                  } else {
+                       LoggingManager.shared.info(.videoRendering, message: "✅ Event EOF Accepted (Within tolerance). Played \(Int(percentCompleted))%.")
                   }
              }
+             // END: RELAXED EOF CHECK
         }
 
         // Dead room detection: If room was deleted (host left), go to browse instead of lobby

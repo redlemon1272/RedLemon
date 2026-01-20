@@ -119,21 +119,28 @@ class MPVPlayerViewModel: ObservableObject {
 
                     // CRITICAL FIX: For events, ignore "Transient EOF Glitch" if we've been playing for a while
                     // This prevents events from looping when they naturally end with currentTime=0 (spurious EOF)
+                    NSLog("%@", "[ERROR_HANDLER] Error received: \(errorMsg)")
                     if errorMsg == "Transient EOF Glitch" {
                         let isEvent = self.appState?.player.isEventPlayback == true
+                        NSLog("%@", "[ERROR_HANDLER] isEvent: \(isEvent), isEventPlayback: \(self.appState?.player.isEventPlayback ?? false)")
                         if isEvent {
                             // Try lastPlaybackResumeTime first, fallback to eventStartTime
                             let startTime = self.lastPlaybackResumeTime ?? self.appState?.player.eventStartTime
+                            NSLog("%@", "[ERROR_HANDLER] startTime: \(String(describing: startTime))")
                             if let start = startTime {
                                 let playedDuration = Date().timeIntervalSince(start)
+                                NSLog("%@", "[ERROR_HANDLER] playedDuration: \(Int(playedDuration))s, duration: \(Int(self.duration))s, 80%: \(Int(self.duration * 0.8))s")
                                 // If we've played more than 80% of the duration, this is a natural end, not an error
                                 if playedDuration > (self.duration * 0.8) {
+                                    NSLog("%@", "[ERROR_HANDLER] Event EOF after playing \(Int(playedDuration))s - IGNORING, allowing natural exit")
                                     LoggingManager.shared.info(.videoRendering, message: "Event EOF glitch after playing \(Int(playedDuration))s (duration: \(Int(self.duration))s) - Ignoring, allowing natural exit")
                                     return // Don't trigger error retry
                                 } else {
+                                    NSLog("%@", "[ERROR_HANDLER] Event EOF early at \(Int(playedDuration))s - Triggering retry")
                                     LoggingManager.shared.warn(.videoRendering, message: "Event EOF early at \(Int(playedDuration))s/\(Int(self.duration))s - Triggering retry")
                                 }
                             } else {
+                                NSLog("%@", "[ERROR_HANDLER] Event EOF but no start time - Allowing retry")
                                 LoggingManager.shared.warn(.videoRendering, message: "Event EOF but no start time available - Allowing retry")
                             }
                         }

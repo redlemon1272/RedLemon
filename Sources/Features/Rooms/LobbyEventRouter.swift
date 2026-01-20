@@ -14,7 +14,7 @@ class LobbyEventRouter: ObservableObject {
 
     func handle(_ syncMessage: SyncMessage) async {
         guard viewModel != nil else { return }
-        
+
         // Handle TYPED messages first (which might not have chatText)
         if syncMessage.type == .returnToLobby {
              // Host returned to lobby (Typed)
@@ -84,7 +84,7 @@ class LobbyEventRouter: ObservableObject {
             )
 
             viewModel.disconnect()
-            viewModel.appState?.currentView = .browse
+            viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .browse
             viewModel.appState?.restoreWindowFromLobby()
         }
     }
@@ -134,7 +134,7 @@ class LobbyEventRouter: ObservableObject {
         if viewModel.isHost {
              let guestUsername = syncMessage.chatUsername ?? "Guest"
              let guestId = syncMessage.senderId ?? UUID().uuidString
-             
+
              // Check if participant already exists to prevent duplicates
              if let index = viewModel.participants.firstIndex(where: { $0.id.caseInsensitiveCompare(guestId) == .orderedSame }) {
                  NSLog("ℹ️ Guest '%@' re-joined (Already in list at index %d)", guestUsername, index)
@@ -142,7 +142,7 @@ class LobbyEventRouter: ObservableObject {
                  viewModel.participants[index].name = guestUsername
                  return
              }
-             
+
              NSLog("👋 Host received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
              NSLog("   Guest ID: %@, Total participants: %d", guestId, viewModel.participants.count + 1)
 
@@ -172,7 +172,7 @@ class LobbyEventRouter: ObservableObject {
              let guestId = syncMessage.senderId ?? ""
 
              NSLog("👋 Received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
-             
+
              // Fix for Guests in Event Rooms: Add system message to chat
              // Filter out self-echo to prevent duplicates since sender adds locally (Landmine #61)
              if guestId.caseInsensitiveCompare(viewModel.participantId) != .orderedSame {
@@ -294,7 +294,7 @@ class LobbyEventRouter: ObservableObject {
 
                 // Trigger disconnect and return to browse
                 viewModel.disconnect()
-                viewModel.appState?.currentView = .browse
+                viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .browse
                 viewModel.appState?.restoreWindowFromLobby()
             }
         }
@@ -353,7 +353,7 @@ class LobbyEventRouter: ObservableObject {
             if viewModel.appState?.currentView == .player {
                 NSLog("🔄 Guest: Switching from Player to Lobby due to host return")
                 viewModel.appState?.currentView = .watchPartyLobby
-                
+
                 // CRITICAL FIX: Ensure playback state is marked as ended locally
                 // This resets isReady, canAutoJoin, and sets endedAt timestamp for causality checks
                 viewModel.markPlaybackEnded()
@@ -552,7 +552,7 @@ class LobbyEventRouter: ObservableObject {
         }
 
         NSLog("🎬 Guest: Countdown finished. Waiting for Host PLAYBACK_STARTED signal...")
-        
+
         // RACE CONDITION FIX: Do NOT start playback yet.
         // Wait for LOBBY_PLAYBACK_STARTED to ensure Host has successfully entered the player.
         // This prevents the Guest from starting before the Host and being returned to lobby.

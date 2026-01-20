@@ -47,7 +47,7 @@ struct WatchPartyLobbyView: View {
                             .tint(.white)
                         Text(room.type == .userRoom ? "Joining Room..." : "Joining Live Event...")
                             .font(.title3.weight(.medium))
-                            
+
                             .foregroundColor(.white)
                     }
                 }
@@ -182,7 +182,7 @@ struct WatchPartyLobbyView: View {
                                 // Fallback to title if no logo
                                 Text(viewModel.room.mediaItem?.name ?? "Select Media")
                                     .font(.title.weight(.bold))
-                                    
+
                                     .foregroundColor(.white)
 
                                 if let description = viewModel.room.description {
@@ -197,7 +197,7 @@ struct WatchPartyLobbyView: View {
                             if viewModel.room.mediaItem?.type == "series", let season = viewModel.room.season, let episode = viewModel.room.episode {
                                 Text("Season \(season) • Episode \(episode)")
                                     .font(.title3.weight(.medium))
-                                    
+
                                     .foregroundColor(.white.opacity(0.9))
                                     .padding(.horizontal, 14)
                                     .padding(.vertical, 6)
@@ -212,7 +212,7 @@ struct WatchPartyLobbyView: View {
                                 if let year = viewModel.room.mediaItem?.year {
                                     Text(year)
                                         .font(.caption.weight(.medium))
-                                        
+
                                         .padding(.horizontal, 10)
                                         .padding(.vertical, 5)
                                         .background(Color.white.opacity(0.15))
@@ -222,7 +222,7 @@ struct WatchPartyLobbyView: View {
 
                                 Text(viewModel.room.quality.displayName)
                                     .font(.caption.weight(.semibold))
-                                    
+
                                     .padding(.horizontal, 10)
                                     .padding(.vertical, 5)
                                     .background(Color.accentColor.opacity(0.3))
@@ -828,17 +828,17 @@ struct WatchPartyLobbyView: View {
                                 if room.type == .event {
                                     Text("Event starts in \(formatDuration(viewModel.timeUntilStart))")
                                         .font(.title3.weight(.semibold))
-                                        
+
                                         .monospacedDigit()
                                 } else if viewModel.isPlaylistMode {
                                     Text("Next item in \(formatDuration(viewModel.timeUntilStart))")
                                         .font(.title3.weight(.semibold))
-                                        
+
                                         .monospacedDigit()
                                 } else {
                                     Text("Starting in \(formatDuration(viewModel.timeUntilStart))")
                                         .font(.title3.weight(.semibold))
-                                        
+
                                         .monospacedDigit()
                                 }
                             }
@@ -1030,7 +1030,7 @@ struct WatchPartyLobbyView: View {
         viewModel.initiateLeave()
         appState.restoreWindowFromLobby()
         appState.activeLobbyViewModel = nil // Clear persistent session
-        appState.currentView = .browse
+        appState.currentView = room.type == .event ? .events : .browse
     }
 
     // MARK: - Description Editor Popover
@@ -1236,7 +1236,7 @@ struct ConnectionStatusRow: View {
             // Status text
             Text(status.displayText)
                 .font(.caption.weight(.medium))
-                
+
                 .foregroundColor(statusColor)
 
             Spacer()
@@ -1338,7 +1338,7 @@ struct PlaylistItemRow: View {
             // Index number
             Text("\(index + 1)")
                 .font(.caption.weight(.bold))
-                
+
                 .foregroundColor(isCurrent ? .accentColor : .white.opacity(0.5))
                 .frame(width: 24)
 
@@ -1357,7 +1357,7 @@ struct PlaylistItemRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.displayTitle)
                     .font(.subheadline.weight(isCurrent ? .semibold : .regular))
-                    
+
                     .foregroundColor(.white)
                     .lineLimit(1)
 

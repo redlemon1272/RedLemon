@@ -1,0 +1,125 @@
+2026-01-20 15:48:46.945 RedLemon[17917:154714] 🪟 Set initial window to expanded size: (0.0, 148.0, 1366.0, 595.0)
+2026-01-20 15:48:46.945 RedLemon[17917:154714] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-20 15:48:47.157 RedLemon[17917:154714] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-20 15:48:47.163 RedLemon[17917:154714] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-20 15:48:47.216 RedLemon[17917:154714] ✅ Playback state reset complete - starting in browse view
+2026-01-20 15:48:47.216 RedLemon[17917:154714] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-20 15:48:47.216 RedLemon[17917:154714] 🧪 Testing Profile: debug
+2026-01-20 15:48:47.220 RedLemon[17917:154817] 📂 Loaded 5 credential(s) from cache
+2026-01-20 15:48:47.248 RedLemon[17917:154714] ✅ Keychain: Found stored username: ursinho
+2026-01-20 15:48:47.249 RedLemon[17917:154714] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-20 15:48:47.250 RedLemon[17917:154817] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-20 15:48:47.625 RedLemon[17917:154821] 📡 SupabaseClient: User lookup response received (399 bytes)
+2026-01-20 15:48:47.658 RedLemon[17917:154821] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-20 15:48:47.659 RedLemon[17917:154821] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-20 15:48:47.749 RedLemon[17917:154714] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-20 15:48:47.749 RedLemon[17917:154714] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-20 15:48:49.823 RedLemon[17917:154714] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-20 15:48:49.839 RedLemon[17917:154714] 🚀 RedLemon: Starting HTTP server...
+2026-01-20 15:48:49.840 RedLemon[17917:154714] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-20 15:48:49.872 RedLemon[17917:154714] ✅ RedLemon: HTTPServer instance created
+2026-01-20 15:48:49.873 RedLemon[17917:154818] 📡 RedLemon: Server starting on port 47253...
+2026-01-20 15:48:49.873 RedLemon[17917:154714] ✅ RedLemon: Server marked as ready (Optimistic)
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates (interest count: 1)
+✅ [EventsConfig] Subscribed to realtime schedule updates
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+📦 Current build: 124, Latest build: 124
+✅ App is up to date (current: 124, latest: 124)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ [EventsConfig] Fetched movie_events version 1548 with 400 movies
+✅ [EventsConfig] Using cached movie_events config (version 1548, 400 movies)
+✅ [EventsView] Loaded 400 movies from config version 1548
+🗓 AppState: Updated schedule epoch to 2026-01-19 00:59:05 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-20 22:03:05 +0000
+⏰ AppState: Scheduling update in 4457 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt3501632/img (956349 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0114369/img (143272 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1591095/img (651299 bytes)
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence (interest count: 1)
+⏰ AppState: Next schedule update set for Event End: 2026-01-20 22:03:05 +0000
+⏰ AppState: Scheduling update in 4456 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-20 22:03:05 +0000
+⏰ AppState: Scheduling update in 4456 seconds
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to social realtime channels...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages (interest count: 1)
+📡 Joined channel: realtime:friendships (interest count: 1)
+✅ SocialService: Connected to social channels
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-20 15:48:49.933 RedLemon[17917:154714] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-20 15:48:49.934 RedLemon[17917:154714] 🏥 [AppState] Starting global provider health check...
+2026-01-20 15:48:49.934 RedLemon[17917:154714] 🔍 Performing startup checks...
+2026-01-20 15:48:49.934 RedLemon[17917:154714] ✅ Username-based authentication ready
+2026-01-20 15:48:49.950 RedLemon[17917:154818] 🔐 Signed request to /check-payment
+2026-01-20 15:48:50.444 RedLemon[17917:154819] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-20 15:48:50.445 RedLemon[17917:154819] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-20 15:48:51.543 RedLemon[17917:154714] ✅ [AppState] Provider health check complete (found 7 services)
+2026-01-20 15:48:51.605 RedLemon[17917:154714] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+✅ SubDLClient initialized
+👤 LicenseManager: Profile expiry: Optional(2026-02-11 06:00:30 +0000)
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+🎉 License updated! Expires: 2026-02-11 06:00:30 +0000
+📦 Current build: 124, Latest build: 124
+✅ App is up to date (current: 124, latest: 124)
+✅ TimeService: Synced! Offset: 0.173s (RTT: 174ms)
+   Local:  2026-01-20 20:48:51 +0000
+   Server: 2026-01-20 20:48:51 +0000
+⏳ Friend request already sent, waiting for response
+⏰ AppState: Next schedule update set for Event End: 2026-01-20 22:03:05 +0000
+⏰ AppState: Scheduling update in 4446 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-20 22:03:05 +0000
+⏰ AppState: Scheduling update in 4436 seconds

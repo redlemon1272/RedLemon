@@ -2681,6 +2681,36 @@ extension SupabaseClient {
     }
 
     func sendFriendRequest(from senderId: UUID, to receiverId: UUID) async throws {
+        // Check if there's any existing friendship between these two users
+        let checkPath = "/friendships?or=(and(user_id_1.eq.\(senderId.uuidString.lowercased()),user_id_2.eq.\(receiverId.uuidString.lowercased())),and(user_id_1.eq.\(receiverId.uuidString.lowercased()),user_id_2.eq.\(senderId.uuidString.lowercased())))&select=id,status,user_id_1"
+        let existingData = try await makeRequest(path: checkPath, method: "GET")
+        
+        struct ExistingFriendship: Decodable {
+            let id: UUID
+            let status: String
+            let user_id_1: UUID
+        }
+        
+        if let existingFriendships = try? jsonDecoder.decode([ExistingFriendship].self, from: existingData),
+           let existing = existingFriendships.first {
+            if existing.status == "accepted" {
+                // Already friends - no action needed
+                print("✅ Already friends with this user")
+                return
+            } else if existing.status == "pending" {
+                if existing.user_id_1 == receiverId {
+                    // They already sent us a request - accept it! (mutual add = instant friends)
+                    print("🤝 Mutual friend request detected - auto-accepting existing request")
+                    try await updateFriendshipStatus(id: existing.id, status: .accepted)
+                } else {
+                    // We already sent them a request - just wait
+                    print("⏳ Friend request already sent, waiting for response")
+                }
+                return
+            }
+        }
+        
+        // No existing friendship, create a new pending request
         let path = "/friendships"
         let body: [String: Any] = [
             "user_id_1": senderId.uuidString,
@@ -2689,8 +2719,6 @@ extension SupabaseClient {
         ]
 
         _ = try await makeRequest(path: path, method: "POST", body: body)
-
-
     }
 
     func updateFriendshipStatus(id: UUID, status: FriendshipStatus) async throws {

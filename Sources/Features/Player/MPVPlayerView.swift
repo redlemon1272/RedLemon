@@ -460,12 +460,23 @@ struct MPVPlayerView: View {
     private func checkEventMovieFinished() {
         guard appState.player.isEventPlayback else { return }
 
+        // DEBUG: Log auto-exit check
+        NSLog("%@", "[AUTO_EXIT_CHECK] isEventPlayback: true")
+        NSLog("%@", "[AUTO_EXIT_CHECK] isLoading: \(viewModel.isLoading), isResolvingStream: \(appState.player.isResolvingStream)")
+        NSLog("%@", "[AUTO_EXIT_CHECK] playbackFinished: \(viewModel.playbackFinished), isPlaying: \(viewModel.isPlaying)")
+        NSLog("%@", "[AUTO_EXIT_CHECK] Position: \(viewModel.currentTime)s / Duration: \(viewModel.duration)s")
+
         // CRITICAL FIX: Don't trigger auto-exit if we are already resolving a new stream or starting a transition
         // This prevents the Guest from being kicked back to the lobby when the host switches items (previous item EOF)
-        guard !appState.player.isResolvingStream && !viewModel.isLoading else { return }
+        guard !appState.player.isResolvingStream && !viewModel.isLoading else {
+            NSLog("%@", "[AUTO_EXIT_CHECK] BLOCKED: isLoading=\(viewModel.isLoading) or isResolvingStream=\(appState.player.isResolvingStream)")
+            return
+        }
 
         let position = viewModel.currentTime
         let duration = viewModel.duration
+
+        NSLog("%@", "[AUTO_EXIT_CHECK] Checking EOF conditions...")
 
         // Check if MPV reported EOF (most reliable)
         if viewModel.playbackFinished {
@@ -502,6 +513,8 @@ struct MPVPlayerView: View {
                 await appState.player.handleMovieFinished()
             }
         }
+
+        NSLog("%@", "[AUTO_EXIT_CHECK] No exit condition met - continuing to monitor...")
     }
 
     // MARK: - Timer Management

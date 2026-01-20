@@ -615,7 +615,8 @@ struct AddFriendSheet: View {
     @State private var searchInput = ""
     @State private var isSearching = false
     @State private var isSending = false
-    @State private var foundUser: (principal: String, username: String)?
+    @State private var foundUsers: [(principal: String, username: String)] = []
+    @State private var selectedUser: (principal: String, username: String)?
     @State private var errorMessage: String?
 
     var body: some View {
@@ -651,30 +652,54 @@ struct AddFriendSheet: View {
                 }
             }
 
-            // Found user
-            if let user = foundUser {
-                VStack(spacing: 12) {
-                    Circle()
-                        .fill(Color.blue.opacity(0.2))
-                        .frame(width: 60, height: 60)
-                        .overlay(
-                            Text(user.username.prefix(1).uppercased())
-                                .font(.title.weight(.semibold))
-                                
-                                .foregroundColor(.blue)
-                        )
+            // Found users list
+            if !foundUsers.isEmpty {
+                ScrollView {
+                    VStack(spacing: 8) {
+                        ForEach(foundUsers, id: \.principal) { user in
+                            Button(action: {
+                                selectedUser = user
+                            }) {
+                                HStack(spacing: 12) {
+                                    Circle()
+                                        .fill(Color.blue.opacity(0.2))
+                                        .frame(width: 40, height: 40)
+                                        .overlay(
+                                            Text(user.username.prefix(1).uppercased())
+                                                .font(.headline)
+                                                .foregroundColor(.blue)
+                                        )
 
-                    Text(user.username)
-                        .font(.headline)
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(user.username)
+                                            .font(.headline)
+                                            .foregroundColor(.primary)
 
-                    Text(user.principal)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                                        Text(user.principal.prefix(8) + "...")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+
+                                    Spacer()
+
+                                    if selectedUser?.principal == user.principal {
+                                        Image(systemName: "checkmark.circle.fill")
+                                            .foregroundColor(.blue)
+                                    }
+                                }
+                                .padding(12)
+                                .background(
+                                    selectedUser?.principal == user.principal
+                                        ? Color.blue.opacity(0.1)
+                                        : Color(NSColor.controlBackgroundColor)
+                                )
+                                .cornerRadius(10)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
                 }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color(NSColor.controlBackgroundColor))
-                .cornerRadius(12)
+                .frame(maxHeight: 150)
             }
 
             Spacer()
@@ -688,7 +713,7 @@ struct AddFriendSheet: View {
                 .controlSize(.large)
 
                 Button(action: {
-                    if let user = foundUser {
+                    if let user = selectedUser {
                         Task {
                             isSending = true
                             errorMessage = nil
@@ -703,6 +728,13 @@ struct AddFriendSheet: View {
                                 isPresented = false
                             }
                         }
+                    } else if !foundUsers.isEmpty {
+                        // Auto-select the only result if there's just one
+                        if foundUsers.count == 1 {
+                            selectedUser = foundUsers.first
+                        } else {
+                            errorMessage = "Please select a user"
+                        }
                     } else {
                         Task {
                             await searchUser()
@@ -714,7 +746,7 @@ struct AddFriendSheet: View {
                             ProgressView()
                                 .scaleEffect(0.8)
                         }
-                        Text(foundUser != nil ? "Send Friend Request" : "Search")
+                        Text(selectedUser != nil ? "Send Friend Request" : (foundUsers.isEmpty ? "Search" : "Select a User"))
                     }
                     .frame(maxWidth: .infinity)
                 }
@@ -724,23 +756,27 @@ struct AddFriendSheet: View {
             }
         }
         .padding(40)
-        .frame(width: 500, height: 450)
+        .frame(width: 500, height: 500)
     }
 
     private func searchUser() async {
         isSearching = true
         errorMessage = nil
-        foundUser = nil
+        foundUsers = []
+        selectedUser = nil
 
         // Search in Supabase by username
         do {
             let users = try await SupabaseClient.shared.searchUsers(username: searchInput)
 
-            if let user = users.first {
-                // Found user in Supabase
-                foundUser = (principal: user.id.uuidString, username: user.username)
-            } else {
+            if users.isEmpty {
                 errorMessage = "User not found"
+            } else {
+                foundUsers = users.map { (principal: $0.id.uuidString, username: $0.username) }
+                // Auto-select if only one result
+                if foundUsers.count == 1 {
+                    selectedUser = foundUsers.first
+                }
             }
         } catch {
             errorMessage = "Search failed: \(error.localizedDescription)"

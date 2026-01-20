@@ -56,7 +56,8 @@ struct FriendsView: View {
         .background(Color(NSColor.windowBackgroundColor))
         .sheet(isPresented: $showingAddFriend) {
             AddFriendSheet(isPresented: $showingAddFriend, onAdd: { principal, username in
-                await socialService.sendRequest(username: username)
+                // Use the user ID directly instead of re-searching by username
+                await socialService.sendRequest(toUserId: principal)
             })
         }
         .sheet(item: $selectedFriend) { friend in

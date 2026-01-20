@@ -362,8 +362,13 @@ class LobbyPresenceManager: ObservableObject {
         }
         viewModel.playlistVotes[itemId] = votes
 
+        let itemTitle = viewModel.playlist.first(where: { $0.id == itemId })?.displayTitle ?? "a video"
+        
         let action = isVoting ? "voted for" : "unvoted from"
         NSLog("👍 Lobby: %@ %@ playlist item %@", currentUsername, action, String(itemId.prefix(8)))
+
+        // Local Echo (Landmine #61)
+        viewModel.chatManager.addSystemMessage(isVoting ? .userVoted : .userUnvoted, userName: currentUsername, data: ["title": itemTitle])
 
         // Broadcast via Realtime
         Task { [weak self] in

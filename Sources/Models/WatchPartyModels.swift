@@ -208,9 +208,15 @@ struct LobbyMessage: Identifiable {
         case .userNotReady:
             return "\(userName) is not ready"
         case .userVoted:
-             return "\(userName) voted for a video ❤️"
+            if let title = data?["title"] {
+                return "\(userName) voted for \(title) ❤️"
+            }
+            return "\(userName) voted for a video ❤️"
         case .userUnvoted:
-             return "\(userName) removed their vote"
+            if let title = data?["title"] {
+                return "\(userName) removed vote for \(title)"
+            }
+            return "\(userName) removed their vote"
         case .hostStarting:
             return "🎬 Host is starting the movie..."
         case .movieChanged:

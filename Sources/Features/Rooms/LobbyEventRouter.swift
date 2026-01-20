@@ -268,6 +268,9 @@ class LobbyEventRouter: ObservableObject {
         let action = isVoting ? "voted for" : "unvoted from"
         let username = syncMessage.chatUsername ?? "User"
         NSLog("👍 Received: %@ %@ playlist item %@", username, action, String(itemId.prefix(8)))
+
+        let itemTitle = viewModel.playlist.first(where: { $0.id == itemId })?.displayTitle ?? "a video"
+        viewModel.chatManager.addSystemMessage(isVoting ? .userVoted : .userUnvoted, userName: username, data: ["title": itemTitle])
     }
 
     private func handleLobbyKick(_ chatText: String) async {

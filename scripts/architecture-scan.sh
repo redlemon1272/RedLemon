@@ -449,6 +449,33 @@ if [[ -f "$ROUTER" ]]; then
 fi
 
 # =============================================================================
+# CHECK 23: Provider Connectivity Guardrails (Landmine #83)
+# =============================================================================
+# Trigger: URLRequest to providers missing User-Agent or having < 5s timeout.
+print_header "Check 23: Provider Connectivity (Landmine #83)"
+
+SERVICES_DIR="$SOURCES_DIR/Server/Services"
+if [[ -d "$SERVICES_DIR" ]]; then
+    while IFS=: read -r file line code; do
+        if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+        # Heuristic 1: Missing User-Agent (Check files that create URLRequests)
+        if ! grep -q "User-Agent" "$file" && ! grep -q "// OK" "$file"; then
+             report "WARNING" "Landmine #83" "Missing User-Agent: This service creates URLRequests but doesn't seem to set a browser User-Agent. Cloudflare will likely block it." "$file" "1" "Class definition"
+        fi
+
+        # Heuristic 2: Aggressive timeouts
+        # Look for timeoutInterval = [1-4]
+        VIOLATIONS=$(grep -nE "timeoutInterval[[:space:]]*=[[:space:]]*[1-4](\.[0-9]+)?[^0-9]" "$file" | grep -v "// OK" || true)
+        if [[ -n "$VIOLATIONS" ]]; then
+            while IFS=: read -r subline subcode; do
+                report "WARNING" "Landmine #83" "Aggressive Timeout: Timeout is < 5s. Cold APIs or global CDNs often require 10s+." "$file" "$subline" "$subcode"
+            done <<< "$VIOLATIONS"
+        fi
+    done < <(find "$SERVICES_DIR" -name "*.swift" -exec grep -l "URLRequest" {} +)
+fi
+
+# =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

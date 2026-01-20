@@ -67,11 +67,13 @@ final class SubDLClient {
 
         guard let url = components.url else { return false }
         var request = URLRequest(url: url)
-        request.timeoutInterval = 3
+        // Add User-Agent to bypass potential Cloudflare blocks
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
+        request.timeoutInterval = 10 
 
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 3
-        config.timeoutIntervalForResource = 3
+        config.timeoutIntervalForRequest = 10
+        config.timeoutIntervalForResource = 10
         let session = URLSession(configuration: config)
 
         do {

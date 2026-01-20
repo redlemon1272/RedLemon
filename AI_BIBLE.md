@@ -79,6 +79,7 @@
 | **Auto-Start Loop (Infinite Playback)** | Stale is_playing flag or missed Ready reset | #63 |
 | **Realtime Auth Error (RLS)** | Missing Authorization header in WebSocket handshake | #64 |
 | **"User Joined" Missing (Guests)** | `LobbyEventRouter` ignores guests | #65 |
+| **Provider "Offline" (SubDL, RD)** | Missing User-Agent or Aggressive Timeout | #83 |
 
 ## 🚨 Critical Landmines
 
@@ -294,6 +295,13 @@
     *   **Symptom**: "User Joined" messages appear in logs but not in the Chat UI for other guests.
     *   **Cause**: `LobbyEventRouter.handleLobbyJoin` only generated system messages in the `if isHost` block. Guests relied on silent Presence updates.
     *   **Rule**: Guests MUST process `LOBBY_JOIN` messages to generate UI notifications, guarding against self-echo (`senderId != myId`).
+83. **Ghost Offline (Provider Connectivity)**: *(Added v1.0.126)*
+    *   **Trigger**: A provider (SubDL, RD) works on its website but shows "Offline" in the app settings or fails to load media.
+    *   **Cause**: (1) Cloudflare blocking requests without a browser-like `User-Agent`. (2) Aggressive timeouts (e.g., 3s) that fail during global CDN routing or cold API starts.
+    *   **Rule**: EVERY provider search/health check MUST:
+        1. Set a standard Browser User-Agent.
+        2. Use a minimum **10s** timeout.
+        3. For subtitles, use an **8s** timebox in the Resolver to handle slow responses without blocking playback.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)
@@ -1280,6 +1288,23 @@ The `./scripts/release.sh` script handles the heavy lifting, but you must invoke
 
 ### 2. State Snapshots
 When performing async cleanup (WS disconnect, DB updates), always capture property snapshots (e.g. `let wasEvent = isEventPlayback`) at the VERY START of the function. This prevents logic errors if the underlying properties are modified by subsequent `MainActor.run` blocks during the delay.
+
+## Part 22: Connectivity & Provider Protocol
+
+### 1. The "Ghost Offline" Bug (Landmine #83)
+**Symptom**: A third-party provider (SubDL, Real-Debrid) reports "Offline" or fails to load, even though the website works in a browser.
+
+**Root Cause**:
+1. **Cloudflare WAF**: Providers using Cloudflare (like SubDL) often block headless `URLSession` requests that lack a standard `User-Agent`.
+2. **Aggressive Timeouts**: Using very short timeouts (e.g. 3s) for health checks. While "fail fast" is good, cold APIs or global CDN hops often require 5-10s for the first byte.
+
+**Mandatory Solution**:
+1. **Mandatory User-Agent**: EVERY `URLRequest` to a third-party API MUST set a standard browser User-Agent:
+   `request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36...", forHTTPHeaderField: "User-Agent")`
+2. **Realistic Timeouts**: 
+   - Pre-flight/Health checks: **10s** minimum.
+   - Resource Search/Download: **15s** minimum.
+3. **Task Cancellation Safety**: When using `withThrowingTaskGroup` for time-boxed tasks (like attaching subtitles), ensures the `Task.sleep` duration allows for the network request to actually succeed (8-10s).
 
 ## Part 21: Critical Async Patterns
 

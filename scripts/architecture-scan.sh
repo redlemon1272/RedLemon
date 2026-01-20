@@ -393,6 +393,17 @@ done < <(find "$SOURCES_DIR" -name "*.swift")
 
 
 # =============================================================================
+# CHECK 19: Real-Debrid Fake Endpoint (Landmine #44)
+# =============================================================================
+# Trigger: Reference to non-existent '/unrestrict/magnet' endpoint in code or comments.
+print_header "Check 19: Real-Debrid Fake Endpoint (Landmine #44)"
+
+# Note: We do NOT skip comments here because "poison hints" in comments are dangerous too.
+while IFS=: read -r file line code; do
+   report "ERROR" "Landmine #44" "Dead Endpoint: '/unrestrict/magnet' does NOT exist. Remove this reference." "$file" "$line" "$code"
+done < <(grep -rn "/unrestrict/magnet" "$SOURCES_DIR" --include="*.swift")
+
+# =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

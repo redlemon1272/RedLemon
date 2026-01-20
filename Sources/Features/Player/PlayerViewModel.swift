@@ -227,14 +227,14 @@ class PlayerViewModel: ObservableObject {
                 )
 
                 do {
-                    // CRITICAL FIX (Landmine #44): Watch party guests must bypass Real-Debrid's torrent cache
-                    // to get their own IP-specific download URL instead of the host's cached URL.
+                    // CRITICAL UPDATE (Landmine #44): We generally cannot bypass RD's server-side cache.
+                    // The "magnet unrestrict" endpoint does not exist.
                     var unlockedStream = try await streamResolver.unlockStream(
                         stream: syntheticStream,
                         item: item,
                         season: effectiveSeason,
                         episode: effectiveEpisode,
-                        bypassTorrentCache: true // Use /unrestrict/magnet endpoint for guests
+                        bypassTorrentCache: false // Feature disabled (Dead Endpoint)
                     )
                     NSLog("✅ PlayerVM: Direct unlock succeeded! URL: %@", String(unlockedStream.url?.prefix(60) ?? "nil"))
 

@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 16, 2026 (Part 19: Satellite-First Release Protocol)
+> **Last Updated:** January 19, 2026 (Part 19: Real-Debrid Server-Side Cache Discovery)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -56,7 +56,8 @@
 | **Anime: No Streams Found** | Kitsu ID not resolved to IMDB | #40 |
 | **Play-Buffer-Play Flash** | Subtitle track changed during playback | #41 |
 | **Host Stuck Buffering (Audio Plays)** | Recovery logic excludes Watch Party Host | #42 |
-| **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call | #43 |
+| **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call OR Real-Debrid IP-locked URL | #43, #44 |
+| **Watch Party Guest: Instant EOF** | Real-Debrid server-side cache (magnet hash level) | #44 |
 | **Server Fail: Torrent not cached** | Heuristic ignored provider fileIdx (Season Pack) | #45 |
 | **Player Start -> Immediate Fail** | Fake 'Direct' URL (Comet Error Stream) | #46 |
 | **Ghost Participant (Lobby)** | User list doesn't update / 'Left' msg missing | #47 |
@@ -172,17 +173,22 @@
     NSLog("Stream preloaded!") // Only runs if preload actually completed
     ```
     *   **Debug Pattern**: Add logging IMMEDIATELY after async calls to verify they ran: log the input AND output state. If the "success" log prints but the state is wrong, the async call was silently skipped.
-44. **Guest IP-Locked URLs + RD Cache**: *(Added v1.0.80, Fixed v1.0.82)*
+44. **Guest IP-Locked URLs + RD Cache (The Debrid API Limitation)**: *(Added v1.0.80, Updated v1.0.82+)*
     *   **Trigger**: Guest joins watch party, playback starts but hits EOF in 2-5 seconds despite duration being correct.
-    *   **Cause (Layer 1)**: Real-Debrid download URLs are **IP-locked** to the user who unlocked them.
-    *   **Cause (Layer 2)**: `RealDebridClient` has a **60-minute in-memory cache** (`cache[hash:fileIdx:season:episode]`). When the guest calls `unlock()` in `playMedia()`, it returns the **cached host URL** instead of generating a fresh one.
+    *   **Cause (Layer 1 - Client Cache)**: `RealDebridClient` has a **60-minute in-memory cache** (`cache[hash:fileIdx:season:episode]`). When the guest calls `unlock()`, it returns the **cached host URL** instead of generating a fresh one.
+    *   **Cause (Layer 2 - Server Cache, DEEPER)**: Real-Debrid's API caches unrestricted links **at the magnet hash level in their backend**, NOT at the torrent ID level. Even if you delete and re-add a torrent, RD returns the same cached unrestricted URL because it remembers the magnet hash.
+    *   **Cause (Layer 3 - IP Locking)**: Real-Debrid unrestricted download URLs are **IP-locked to the original requester**. When a guest gets the host's cached URL, it doesn't work for their IP.
+    *   **Attempted Workarounds That DON'T Work**:
+        - Deleting and re-adding torrents in RD (returns same cached URL)
+        - Using `/unrestrict/magnet` endpoint (doesn't exist - returns 404 "unknown_method")
+        - Bypassing client-side in-memory cache (still hits server-side cache)
     *   **Symptom**: Guest's log shows `📝 [PLAYER] File Loaded ["duration": "7559.594"]` (correct duration), then `📝 [PLAYER] Playback Finished (EOF)` within seconds. Also: `✅ RD cache hit: <hash>` appearing when guest unlocks.
-    *   **Rule**: In `LobbyEventRouter.handleGuestStartLogic()`:
-        1. Set `targetRoom.unlockedStreamURL = nil` (force fresh unlock)
-        2. Set `viewModel.appState?.player.preResolvedStream = nil` (bypass preloaded URL)
-        3. Call `await RealDebridClient.shared.clearCache(forHash: hash)` (evict cached host URL)
-    *   **Related Code**: `LobbyEventRouter.swift`, `RealDebridClient.swift`
-    *   **Fix Applied**: v1.0.82 added `clearCache(forHash:)` to `RealDebridClient` and calls it from `handleGuestStartLogic()` to evict cached host URLs.
+    *   **Impact**: This is a **Real-Debrid API limitation**, not a bug we can fix. For normal watch party usage (start once, watch together), this works fine. The edge case is when the host starts/stops the same media multiple times - guests get cached URLs that don't work for their IP.
+    *   **Rule**: Accept the limitation. Document that watch parties work best when host doesn't restart the same media multiple times during a session. Workarounds require:
+        1. Using a different Debrid service for guests (if they support it)
+        2. Proxying the video through your server (bandwidth intensive)
+        3. Accepting the limitation (current approach)
+    *   **Related Code**: `RealDebridClient.swift`, `LobbyEventRouter.swift`
 45. **Debrid File Selection (The "Season Pack" Trap)**: *(Added v1.0.82)*
     *   **Trigger**: User gets "Server Fail: Torrent not cached" error for a Season Pack that the provider (Torrentio) claims is cached.
     *   **Cause**: The app ignores the provider's `fileIdx` and attempts to "guess" the correct file via string matching (e.g., matching "S01E05"). The heuristic accidentally targets an uncached file (e.g., "S01E05 Repack.mkv" or a sample) instead of the main file.
@@ -336,6 +342,23 @@ Button(action: {
 Button(action: {
     appState.currentView = .target
 })
+```
+
+### 🛑 Safe Playback Start (Smart Load)
+**Pattern**: Prevent "Play-Buffer-Play" flash (Landmine #41) by loading paused.
+```swift
+// 1. Load PAUSED
+player.setPause(true)
+player.load(url)
+
+// 2. Wait for tracks (Poll in background)
+await waitForTheTracksToLoad()
+
+// 3. Select Tracks (While still paused)
+player.selectSubtitle(trackId)
+
+// 4. Resume ONLY if Autoplay
+if autoplay { player.setPause(false) }
 ```
 
 ---

@@ -144,8 +144,6 @@ struct MPVPlayerView: View {
                                 placeholderBackground
                             }
                         }
-                        .opacity(1)
-                        .animation(.easeOut(duration: 0.5), value: viewModel.showPoster)
                     }
 
                     // MPV video output - IINA-style CAOpenGLLayer

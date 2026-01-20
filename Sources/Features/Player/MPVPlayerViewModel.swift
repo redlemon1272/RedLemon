@@ -1144,9 +1144,12 @@ class MPVPlayerViewModel: ObservableObject {
         }
 
         // Watch Party Ready Gate
-        if isInWatchParty && !hasSentReadySignal {
-            LoggingManager.shared.warn(.watchParty, message: "Watch Party: Video ready (playing), sending READY signal as fallback")
-            sendReadySignal()
+        // REMOVED FALLBACK: Guests must rely on durationPub -> validateStreamIntegrity() -> sendReadySignal()
+        // Calling it here causes a race condition where validation is skipped.
+        if isInWatchParty && !hasSentReadySignal && isWatchPartyHost {
+             // Host can signal ready immediately upon video ready (no validation needed)
+             LoggingManager.shared.info(.watchParty, message: "Watch Party: Video ready (Host), sending READY signal")
+             sendReadySignal()
         }
 
         // Check if we should resume from a specific timestamp

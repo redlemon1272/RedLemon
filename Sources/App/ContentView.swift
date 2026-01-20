@@ -89,7 +89,7 @@ struct ContentView: View {
                             title: "Friends",
                             icon: "person.2.fill",
                             isSelected: appState.currentView == .friends,
-                            badgeCount: socialService.unreadCounts.values.reduce(0, +)
+                            badgeCount: socialService.unreadCounts.values.reduce(0, +) + socialService.friendRequests.count
                         ) {
                             appState.currentView = .friends
                         }

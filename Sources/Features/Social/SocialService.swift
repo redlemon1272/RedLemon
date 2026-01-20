@@ -60,8 +60,8 @@ class SocialService: ObservableObject {
         // 2. Connect to Global Presence Channel
         await setupPresenceChannel(userId: userId, username: username)
 
-        // 4. Connect to DM Channel
-        await setupDMChannel(userId: userId)
+        // 4. Connect to Social Realtime Channels (DMs, Friends)
+        await setupSocialChannels(userId: userId)
 
         // 5. Fetch Unread Counts (Offline messages)
         await fetchUnreadCounts()
@@ -439,16 +439,11 @@ class SocialService: ObservableObject {
              await setupPresenceChannel(userId: userId, username: username)
         }
 
-        // Re-establish DMs
+        // Re-establish Social Channels (DMs, Friendships)
         if let client = dmClient {
-             // Basic check if connected, otherwise try to connect
-             // Currently SupabaseRealtimeClient doesn't expose strict "isJoined" for generic channels easily without tracking topic
-             // But we can try connect() which is idempotent-ish
              try? await client.connect()
-             // We'd need to re-join if the socket completely died.
-             // For now, simpler to just re-run setup if needed, but let's try connect first.
         } else {
-             await setupDMChannel(userId: userId)
+             await setupSocialChannels(userId: userId)
         }
     }
 
@@ -729,10 +724,10 @@ class SocialService: ObservableObject {
         }
     }
 
-    // MARK: - Direct Messages
-
-    private func setupDMChannel(userId: String) async {
-        print("🔌 SocialService: Connecting to DM channel...")
+    // MARK: - Realtime Social Channels (DMs & Friendships)
+    
+    private func setupSocialChannels(userId: String) async {
+        print("🔌 SocialService: Connecting to social realtime channels...")
 
         let client = SupabaseRealtimeClient(
             realtimeURL: Config.supabaseURL,
@@ -743,40 +738,62 @@ class SocialService: ObservableObject {
         // Setup monitoring
         await setupConnectionMonitoring(for: client, isPresence: false)
 
-        // Subscribe to Postgres Changes on direct_messages table
+        // 1. Subscribe to DMs
         await client.onPostgresChange(topic: "direct_messages") { [weak self] payload in
             Task { @MainActor [weak self] in
                 self?.handleIncomingMessage(payload)
             }
         }
 
+        // 2. Subscribe to Friendships (Requests & Updates)
+        await client.onPostgresChange(topic: "friendships") { [weak self] payload in
+            Task { @MainActor [weak self] in
+                self?.handleIncomingFriendship(payload)
+            }
+        }
+
         do {
             try await client.connect()
 
-            // Listen for INSERTs on direct_messages where I am the receiver OR sender
-            // Note: Supabase Realtime filters are limited. We'll listen to all inserts and filter locally if needed,
-            // or try to use a filter string if the custom client supports it (it passes it to config).
-            // The custom client passes 'postgres_changes' config array.
-
-            let changesConfig: [[String: Any]] = [
-                [
-                    "event": "INSERT",
-                    "schema": "public",
-                    "table": "direct_messages",
-                    "filter": "receiver_id=eq.\(userId.lowercased())" // Force lowercase for DB match
-                ],
-                [
-                    "event": "INSERT",
-                    "schema": "public",
-                    "table": "direct_messages",
-                    "filter": "sender_id=eq.\(userId.lowercased())" // Force lowercase for DB match
-                ]
+            // Join DMs Channel
+            let dmConfig: [[String: Any]] = [
+                ["event": "INSERT", "schema": "public", "table": "direct_messages", "filter": "receiver_id=eq.\(userId.lowercased())"],
+                ["event": "INSERT", "schema": "public", "table": "direct_messages", "filter": "sender_id=eq.\(userId.lowercased())"]
             ]
+            try await client.joinChannel("direct_messages", postgresChanges: dmConfig)
 
-            try await client.joinChannel("direct_messages", postgresChanges: changesConfig)
-            print("✅ SocialService: Connected to DM channel")
+            // Join Friendships Channel
+            let friendshipConfig: [[String: Any]] = [
+                ["event": "*", "schema": "public", "table": "friendships", "filter": "user_id_2=eq.\(userId.lowercased())"], // Me as receiver
+                ["event": "UPDATE", "schema": "public", "table": "friendships", "filter": "user_id_1=eq.\(userId.lowercased())"] // Me as sender (status change)
+            ]
+            try await client.joinChannel("friendships", postgresChanges: friendshipConfig)
+
+            print("✅ SocialService: Connected to social channels")
         } catch {
-            print("❌ SocialService: Failed to subscribe to DMs: \(error)")
+            print("❌ SocialService: Failed to subscribe to social channels: \(error)")
+        }
+    }
+
+    private func handleIncomingFriendship(_ payload: [String: Any]) {
+        guard let newRecord = payload["new"] as? [String: Any],
+              let eventType = payload["eventType"] as? String else {
+            return
+        }
+
+        let status = newRecord["status"] as? String ?? ""
+        
+        print("📨 SocialService: Friendship \(eventType) - Status: \(status)")
+
+        // Refresh friend list and requests for any relevant change
+        Task {
+            await loadFriends()
+            
+            // If it's a new pending request for me, show a system notification
+            if eventType == "INSERT" && status == "pending" {
+                 print("🔔 SocialService: New friend request received")
+                 // Automatically refresh unread counts/badge will happen via loadFriends()
+            }
         }
     }
 

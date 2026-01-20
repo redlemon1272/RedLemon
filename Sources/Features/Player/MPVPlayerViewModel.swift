@@ -121,12 +121,20 @@ class MPVPlayerViewModel: ObservableObject {
                     // This prevents events from looping when they naturally end with currentTime=0 (spurious EOF)
                     if errorMsg == "Transient EOF Glitch" {
                         let isEvent = self.appState?.player.isEventPlayback == true
-                        if isEvent, let start = self.lastPlaybackResumeTime {
-                            let playedDuration = Date().timeIntervalSince(start)
-                            // If we've played more than 80% of the duration, this is a natural end, not an error
-                            if playedDuration > (self.duration * 0.8) {
-                                LoggingManager.shared.info(.videoRendering, message: "Event EOF glitch after playing \(Int(playedDuration))s - Ignoring, allowing natural exit")
-                                return // Don't trigger error retry
+                        if isEvent {
+                            // Try lastPlaybackResumeTime first, fallback to eventStartTime
+                            let startTime = self.lastPlaybackResumeTime ?? self.appState?.player.eventStartTime
+                            if let start = startTime {
+                                let playedDuration = Date().timeIntervalSince(start)
+                                // If we've played more than 80% of the duration, this is a natural end, not an error
+                                if playedDuration > (self.duration * 0.8) {
+                                    LoggingManager.shared.info(.videoRendering, message: "Event EOF glitch after playing \(Int(playedDuration))s (duration: \(Int(self.duration))s) - Ignoring, allowing natural exit")
+                                    return // Don't trigger error retry
+                                } else {
+                                    LoggingManager.shared.warn(.videoRendering, message: "Event EOF early at \(Int(playedDuration))s/\(Int(self.duration))s - Triggering retry")
+                                }
+                            } else {
+                                LoggingManager.shared.warn(.videoRendering, message: "Event EOF but no start time available - Allowing retry")
                             }
                         }
                     }

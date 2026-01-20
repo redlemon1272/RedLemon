@@ -125,7 +125,7 @@ class LobbyPresenceManager: ObservableObject {
 
                              // Exit Lobby
                              viewModel.disconnect()
-                             viewModel.appState?.currentView = .browse
+                             viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .browse
                              viewModel.appState?.restoreWindowFromLobby()
                          }
                     } else if type == "UPDATE" {
@@ -218,7 +218,7 @@ class LobbyPresenceManager: ObservableObject {
                     // RESOLVE TRUE USER ID (Same as Join)
                     let metaUserId = metadata?["user_id"] as? String
                     let metaUsername = metadata?["username"] as? String
-                    
+
                     let leavingPhxRef = userId
                     let normalizedID = (metaUserId ?? userId).lowercased()
                     let capturedUsername = metaUsername ?? "User"
@@ -234,16 +234,16 @@ class LobbyPresenceManager: ObservableObject {
                         if let index = strongViewModel.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
                             // Landmine #51: Only consider user Offline when their ref count drops to zero
                             strongViewModel.participants[index].phxRefs.remove(leavingPhxRef)
-                            
+
                             if strongViewModel.participants[index].phxRefs.isEmpty {
                                 let name = strongViewModel.participants[index].name
                                 // 2. Final removal from UI list (via buffer)
                                 strongSelf.pendingLeaves.insert(normalizedID)
-                                
+
                                 // 💬 Log: User Left
                                 strongViewModel.chatManager.addSystemMessage(.userLeft, userName: name)
                                 strongSelf.scheduleFlush()
-                                
+
                                 // 3. Update logical state IMMEDIATELY
                                 strongViewModel.connectedUserIds.remove(normalizedID)
                             } else {
@@ -363,7 +363,7 @@ class LobbyPresenceManager: ObservableObject {
         viewModel.playlistVotes[itemId] = votes
 
         let itemTitle = viewModel.playlist.first(where: { $0.id == itemId })?.displayTitle ?? "a video"
-        
+
         let action = isVoting ? "voted for" : "unvoted from"
         NSLog("👍 Lobby: %@ %@ playlist item %@", currentUsername, action, String(itemId.prefix(8)))
 
@@ -586,13 +586,13 @@ class LobbyPresenceManager: ObservableObject {
                 // However, this caused "Ghost/Zombie" users if Realtime missed a 'leave' event.
                 // We now allow DB Polling to authoritative remove users who are gone > 3s.
                 // The Realtime 'leave' event is still the primary fast-path, but DB is the garbage collector.
-                
+
                 let timeSinceJoin = Date().timeIntervalSince(localP.joinedAt)
-                
+
                 // ISOLATION: Only extend grace period for Events (due to high concurrency/lag)
                 // Regular Watch Parties keep strict 3s cleanup to avoid ghosts.
                 let gracePeriod: TimeInterval = (viewModel.room.type == .event) ? 10.0 : 3.0
-                
+
                 if timeSinceJoin < gracePeriod {
                     // KEEP THEM: They joined less than N seconds ago (Grace Period)
                     // This protects against "blips" where Realtime connects before DB syncs or replication lag
@@ -639,7 +639,7 @@ class LobbyPresenceManager: ObservableObject {
                                    errStr.localizedCaseInsensitiveContains("room_participants_room_id_fkey") {
                                      print("💀 Lobby: Room deleted during Host Self-Heal. Exiting.")
                                      await MainActor.run {
-                                         viewModel.appState?.currentView = .browse
+                                         viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .browse
                                          // Clear invalid room state
                                          viewModel.appState?.player.currentRoomId = nil
                                          viewModel.appState?.player.currentWatchPartyRoom = nil

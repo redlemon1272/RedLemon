@@ -476,6 +476,25 @@ if [[ -d "$SERVICES_DIR" ]]; then
 fi
 
 # =============================================================================
+# CHECK 24: Friend Request ID Usage (Landmine #84)
+# =============================================================================
+# Trigger: AddFriendSheet callback using sendRequest(username:) instead of sendRequest(toUserId:)
+# Risk: Re-searching by username picks the first alphabetical match, not the selected user.
+print_header "Check 24: Friend Request ID (Landmine #84)"
+
+FRIENDS_VIEW="$SOURCES_DIR/Features/Friends/FriendsView.swift"
+if [[ -f "$FRIENDS_VIEW" ]]; then
+    # Look for AddFriendSheet onAdd callback that uses sendRequest(username:
+    VIOLATIONS=$(grep -n "AddFriendSheet.*onAdd" "$FRIENDS_VIEW" -A 3 | grep "sendRequest(username:" | grep -v "// OK" || true)
+    
+    if [[ -n "$VIOLATIONS" ]]; then
+        report "ERROR" "Landmine #84" "AddFriendSheet MUST use sendRequest(toUserId:) not sendRequest(username:). Re-searching by username picks wrong user when names are similar (e.g., 'lemontom' vs 'lemontom1')." "$FRIENDS_VIEW" "58" "sendRequest(username: username)"
+    else
+        echo -e "${GREEN}✅ AddFriendSheet correctly uses user ID (not username).${NC}"
+    fi
+fi
+
+# =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

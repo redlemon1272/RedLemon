@@ -2682,12 +2682,10 @@ extension SupabaseClient {
 
     func sendFriendRequest(from senderId: UUID, to receiverId: UUID) async throws {
         // Check if there's any existing friendship between these two users
-        // URL-encode the complex OR query to prevent parsing issues
+        // Use URLComponents to properly encode the complex OR query (Landmine #84)
         let senderIdStr = senderId.uuidString.lowercased()
         let receiverIdStr = receiverId.uuidString.lowercased()
-        let orFilter = "or=(and(user_id_1.eq.\(senderIdStr),user_id_2.eq.\(receiverIdStr)),and(user_id_1.eq.\(receiverIdStr),user_id_2.eq.\(senderIdStr)))"
         
-        // Use URLComponents to properly encode the query
         var components = URLComponents(string: "\(baseURL)/rest/v1/friendships")!
         components.queryItems = [
             URLQueryItem(name: "or", value: "(and(user_id_1.eq.\(senderIdStr),user_id_2.eq.\(receiverIdStr)),and(user_id_1.eq.\(receiverIdStr),user_id_2.eq.\(senderIdStr)))"),
@@ -2703,14 +2701,7 @@ extension SupabaseClient {
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         
-        print("🔍 FriendRequest Check URL: \(checkURL.absoluteString)")
-        
         let (existingData, _) = try await URLSession.shared.data(for: request)
-        
-        // DEBUG: Log the response
-        if let jsonString = String(data: existingData, encoding: .utf8) {
-            print("🔍 FriendRequest Check Response: \(jsonString)")
-        }
         
         struct ExistingFriendship: Decodable {
             let id: UUID
@@ -2720,26 +2711,20 @@ extension SupabaseClient {
         
         if let existingFriendships = try? jsonDecoder.decode([ExistingFriendship].self, from: existingData),
            let existing = existingFriendships.first {
-            print("🔍 Found existing friendship: id=\(existing.id), status=\(existing.status), user_id_1=\(existing.user_id_1)")
             if existing.status == "accepted" {
                 // Already friends - no action needed
-                print("✅ Already friends with this user")
                 return
             } else if existing.status == "pending" {
                 if existing.user_id_1 == receiverId {
                     // They already sent us a request - accept it! (mutual add = instant friends)
-                    print("🤝 Mutual friend request detected - auto-accepting existing request")
                     try await updateFriendshipStatus(id: existing.id, status: .accepted)
-                } else {
-                    // We already sent them a request - just wait
-                    print("⏳ Friend request already sent, waiting for response")
                 }
+                // Either way (they sent to us, or we sent to them), we're done
                 return
             }
         }
         
         // No existing friendship, create a new pending request
-        print("📤 Creating new friend request: \(senderId) → \(receiverId)")
         let path = "/friendships"
         let body: [String: Any] = [
             "user_id_1": senderId.uuidString,
@@ -2748,7 +2733,6 @@ extension SupabaseClient {
         ]
 
         _ = try await makeRequest(path: path, method: "POST", body: body)
-        print("✅ Friend request created successfully")
     }
 
     func updateFriendshipStatus(id: UUID, status: FriendshipStatus) async throws {

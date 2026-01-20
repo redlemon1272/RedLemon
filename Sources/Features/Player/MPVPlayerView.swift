@@ -125,8 +125,7 @@ struct MPVPlayerView: View {
                     Color.black
 
                     // Poster/Background art (during loading)
-                    // Always show in watch parties/events, conditionally show for solo
-                    if (viewModel.showPoster || viewModel.isInWatchParty), let backgroundURL = viewModel.backgroundURL {
+                    if viewModel.showPoster, let backgroundURL = viewModel.backgroundURL {
                         AsyncImage(url: URL(string: backgroundURL)) { phase in
                             switch phase {
                             case .success(let image):
@@ -144,8 +143,7 @@ struct MPVPlayerView: View {
                                 placeholderBackground
                             }
                         }
-                        // Keep background visible for watch parties/events, fade for solo mode
-                        .opacity((viewModel.showPoster || viewModel.isInWatchParty) ? 1 : 0)
+                        .opacity(viewModel.showPoster ? 1 : 0)
                         .animation(.easeOut(duration: 0.5), value: viewModel.showPoster)
                     }
 

@@ -271,8 +271,14 @@ class MPVPlayerViewModel: ObservableObject {
                              LoggingManager.shared.warn(.watchParty, message: "Watch Party: Room playing but I am HOST - Force sending ready signal (Recovery)")
                              self.sendReadySignal()
                         } else {
-                            // Validate stream before sending ready (Guest only)
-                            if !self.isWatchPartyHost {
+                            // CRITICAL FIX: Events bypass stream validation and Ready Gate
+                            // Events sync to eventStartTime, not to a host. No ready signal needed.
+                            let isEvent = self.appState?.player.isEventPlayback == true
+                            if isEvent {
+                                LoggingManager.shared.info(.watchParty, message: "Event: Duration available, skipping Ready Gate (events have no host)")
+                                self.hasSentReadySignal = true // Prevents future Ready Gate triggers
+                            } else if !self.isWatchPartyHost {
+                                // Validate stream before sending ready (Guest only)
                                 LoggingManager.shared.info(.watchParty, message: "Watch Party: Duration available (\(String(format: "%.1f", dur))s), starting stream validation...")
                                 self.validateStreamIntegrity()
                             } else {

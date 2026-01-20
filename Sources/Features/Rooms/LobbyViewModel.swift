@@ -1538,10 +1538,18 @@ class LobbyViewModel: ObservableObject {
         let now = Date()
         let timeUntilStart = room.createdAt.timeIntervalSince(now)
 
+        // DEBUG: Log timing calculations
+        print("🕐 DEBUG: room.createdAt = \(room.createdAt)")
+        print("🕐 DEBUG: now = \(now)")
+        print("🕐 DEBUG: timeUntilStart = \(Int(timeUntilStart))s")
+        print("🕐 DEBUG: Event start time is \(Int(timeUntilStart))s in the future")
+
         // CRITICAL FIX: Grace Period for Late Joiners
         // If event is already live (timeUntilStart <= 0), ensure we stay in lobby for at least 10s
         let dwellTime = now.timeIntervalSince(joinedAtTimestamp)
         let minDwellTime: TimeInterval = 10.0
+
+        print("🕐 DEBUG: dwellTime = \(Int(dwellTime))s, minDwellTime = \(Int(minDwellTime))s")
 
         // Only enforce dwell time if we haven't been authorized to auto-join yet
         if timeUntilStart <= 0 && dwellTime < minDwellTime && !canAutoJoin {

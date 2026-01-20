@@ -1149,13 +1149,20 @@ class MPVPlayerViewModel: ObservableObject {
 
         // NEW: Event playback - recalculate seek time NOW (when video is actually ready)
         // This compensates for all loading delays and ensures tight sync across devices
-        if let eventStartTime = appState?.player.eventStartTime {
+
+        // DEBUG: Check if we're in event mode and if eventStartTime is set
+        let isEvent = self.appState?.player.isEventPlayback == true
+        let eventStartTime = self.appState?.player.eventStartTime
+        NSLog("%@", "[VIDEO_READY] isEvent: \(isEvent ?? false), eventStartTime: \(eventStartTime?.description ?? "nil")")
+
+        if let eventStartTime = eventStartTime {
             // Optimization: If we already sought during File Loaded, we might not need to do this again
             // causing a double-seek/stutter. However, seeking again aligns us perfectly with "Video Ready" wall clock.
             // Let's check drift. If we are < 2s off, skip it.
             let elapsed = Date().timeIntervalSince(eventStartTime)
             let seekTime = max(0, elapsed)
             let drift = abs(self.currentTime - seekTime)
+            NSLog("%@", "[VIDEO_READY] Event seek check - elapsed: \(Int(elapsed))s, seekTime: \(Int(seekTime))s, drift: \(String(format: "%.2f", drift))s")
 
             if drift < 2.0 {
                 LoggingManager.shared.info(.watchParty, message: "EVENT: Video ready, drift is small (\(String(format: "%.2f", drift))s), skipping redundant seek")

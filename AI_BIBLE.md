@@ -48,7 +48,7 @@
 | **"Ghost" / Zombie Room** | Host quit without strong capture | #21, #32 |
 | **Guests Auto-Join Dead Stream** | Stale DB state (is_playing=true) | #35 |
 | **Ghost Join (Host Left)** | Missing DB Verification on Join | #33 |
-| **Missing "Self" Messages** | Expecting Broadcast Echo | #59 |
+| **Missing "Self" Messages** | Expecting Broadcast Echo | #61 |
 | **Updates Fail** | String comparison used instead of Int | #30 |
 | **Missing Streams** | Hardcoded blocklists active | #4 |
 | **Binge Prompt Flicker** | Global Status Reset used | #34 |
@@ -71,9 +71,13 @@
 | **Wallet doesn't autofill amount** | Missing EIP-681 'value' in URI | #55 |
 | **Screensaver/Sleep during Playback** | Missing `.idleDisplaySleepDisabled` | #56 |
 | **Video Stutter/Drop when Menu Open** | Native `Menu` blocking main thread (Modal Loop) | #57 |
-| **Double Join / Message Echo** | Race Condition in Connection Logic (Debounce Missing) | #59 |
-| **"Realtime not connected" on Transition** | Multi-channel Interest Collision | #60 |
-| **Join Failed (Duplicate Key)** | Race Condition in `room_participants` Join | #61 |
+| **Double Join / Message Echo** | Race Condition in Connection Logic (Debounce Missing) | #58 |
+| **"Realtime not connected" on Transition** | Multi-channel Interest Collision | #59 |
+| **Join Failed (Duplicate Key)** | Race Condition in `room_participants` Join | #60 |
+| **"User Joined" missing for sender** | Broadcasts don't echo to self | #61 |
+| **Black Screen after Playback Ends** | Missing explicit navigation in exitPlayer | #62 |
+| **Auto-Start Loop (Infinite Playback)** | Stale is_playing flag or missed Ready reset | #63 |
+| **Realtime Auth Error (RLS)** | Missing Authorization header in WebSocket handshake | #64 |
 
 ## 🚨 Critical Landmines
 
@@ -198,6 +202,9 @@
     *   **Cause**: `StreamResolver.sort` logic prioritizes Direct URLs (instant playback) over Torrents (need resolving). A "fake" stream appearing to be a Direct URL bypasses all other valid torrents and gets sent to the player, causing immediate failure.
     *   **Symptom**: Player loads quickly, immediately pauses/ends with Error Code 4 ("Failed to recognize file format"). Logs show a URL that looks like an error message path.
     *   **Rule**: All `ProviderServices` MUST validate direct URLs before returning them. Explicitly blacklist known error patterns (e.g., `elfhosted_...`, `reddit.com`) in the Service itself to prevent them from reaching the Resolver.
+
+### 47-51: Realtime & UI
+47. **Realtime Identity Masking (Topic-Scoped Handlers)**:
     *   **Rule**: Presence handlers (`SupabaseRealtimeClient`) MUST pass the Phoenix map key as the primary session ID. UI Managers (`LobbyPresenceManager`, `MPVPlayerViewModel`) MUST use this key to match JOIN and LEAVE events. Never rely on the User UUID alone to resolve a leave event, as stale heartbeats or rotation-reconnects will cause "ghost" entries or ignored leaves.
 48. **Async Scroll Race Condition (The "Empty List" Trap)**:
     *   **Trigger**: Triggering `proxy.scrollTo` inside `onAppear` while content is loading asynchronously (e.g., via `.task`).
@@ -212,9 +219,6 @@
     *   **Rule**: You MUST subclass `NSScrollView` and override `scrollWheel` to forward vertical deltas (`deltaY`) to `nextResponder` manually.
     *   **Note**: On macOS 12-14, the standard `NSScrollView` works fine, and sometimes the custom subclass actually *breaks* it. Use version checks (`if #available(macOS 15, *)`) to apply the fix conditionally.
 50. **The High-Frequency State Trap (60fps Re-renders)**:
-198:     *   **Trigger**: Binding a high-frequency real-time value (like Scroll Offset `CGFloat`) directly to a Global `@Published` property in `AppState`.
-199:     *   **Symptom**: Application becomes extremely sluggish/labored while interacting. CPU usage spikes.
-200:     *   **Cause**: `@Published` triggers `objectWillChange`, forcing **every view in the app observing AppState** to re-evaluate its body 60-120 times per second.
     *   **Trigger**: Binding a high-frequency real-time value (like Scroll Offset `CGFloat`) directly to a Global `@Published` property in `AppState`.
     *   **Symptom**: Application becomes extremely sluggish/labored while interacting. CPU usage spikes.
     *   **Cause**: `@Published` triggers `objectWillChange`, forcing **every view in the app observing AppState** to re-evaluate its body 60-120 times per second.
@@ -224,23 +228,8 @@
     *   **Symptom**: Users erroneously appear to "Leave" and then "Join" instantly (flap) during metadata updates (e.g., status change).
     *   **Cause**: Phoenix Presence updates send a `leave` (old ref) and `join` (new ref) simultaneously. If keyed by `userId`, the `leave` event for the *old* ref deletes the dictionary entry entirely, momentarily removing the user before the `join` (new ref) is processed.
     *   **Rule**: `SupabaseRealtimeClient` MUST iterate over the `metas` array and use `phx_ref` as the unique key for callbacks. Consumers (like `SocialService`) must manage a set of refs per user (`[UserId: [PhxRef: Metadata]]`). User is "Offline" only when their ref count drops to zero.
-59. **Async State Debouncing (The "Double Connect" Trap)**: *(Added v1.0.115)*
-    *   **Trigger**: User joins lobby, "User Joined" message appears twice.
-    *   **Cause**: Connection logic checked `if status == .connected || status == .connecting` and then verified the *underlying* socket state. Since the socket is `false` (not connected *yet*) during `.connecting`, the logic treated it as a "Stale Zombie" and forced a reconnect, launching two parallel connection flows.
-    *   **Rule**: Never validate health during a transitional state (`.connecting`). Explicitly **DEBOUNCE** by returning early: `if status == .connecting { return }`. Only perform stale/zombie checks if the high-level status is stable (`.connected`).
-223: 60. **Realtime Multi-Channel Conflicts**: *(Added v1.0.117)*
-224:     *   **Trigger**: Multiple managers (Lobby, Player, Chat) sharing a single `SupabaseRealtimeClient` instance. One manager calls `cleanup()` or `leaveChannel()` during a transition while another still needs the connection.
-225:     *   **Cause**: Global event handlers or global channel management causing one manager to "kill" another's connection or overwrite its handlers.
-226:     *   **Rule**: `SupabaseRealtimeClient` MUST implement **Reference Counting** for topics and **Topic-Scoped Handlers**.
-227:         1. `joinChannel` increments an interest count; `leaveChannel` decrements and only sends `phx_leave` when count is 1.
-228:         2. All handlers (`onBroadcast`, `onPresence`, `onPostgresChange`) MUST be registered with a `topic` key.
-229:         3. Managers MUST call `leaveChannel(topic:)` with an explicit topic.
-230: 61. **Room Participant Duplicate Key (The "Re-Join" Race)**: *(Added v1.0.117)*
-231:     *   **Trigger**: Host returns to Lobby from Player and immediately attempts to `joinRoom` (to ensure presence) while a previous DELETE or staleness check is pending.
-232:     *   **Symptom**: `Supabase API Error: duplicate key value violates unique constraint "room_participants_pkey"`.
-233:     *   **Rule**: `SupabaseClient.joinRoom` MUST be **Idempotent**. It must catch Postgres error `23505` (Unique Violation) and HTTP `409 Conflict` and treat them as success. Never block connection flow due to "user already in room".
 
-### 52-55: Payments & HD Wallets
+### 52-57: Payments & System
 52. **HD Wallet Derivation Depth (XPRV Trap)**: *(Added v1.0.85)*
     *   **Trigger**: Sweep function fails with "Insufficient funds" or "Key mismatch" when address balance is clearly > 0.
     *   **Cause**: If the `XPRV_EVM` is derived at the "External/Change" level (`m/44'/60'/0'/0`), you **must** use `deriveChild(index)`. Using a path string like `m/0/index` relative to that key will result in the wrong private key.
@@ -267,11 +256,38 @@
     *   **Cause**: Native macOS menus (`NSMenu`) run in a **nested modal event loop** (`waitingForUser`). This hijacking of the main run loop prevents `libmpv` (and high-frequency `Timer` publishers) from dispatching render events on the main thread, starving the video renderer.
     *   **Rule**: **NEVER** use native `Menu` or `ContextMenu` on player views. You MUST implement **Custom SwiftUI Overlays** (ZStack + Overlay) that mimic menu behavior but remain within the standard SwiftUI render loop.
     *   **Fix Applied**: v1.0.112 replaced Chat Overlay's `NSMenu` with a custom `VStack` overlay to fix stutter.
-59. **The Invisible Join Trap (Lack of Local Echo)**: *(Added v1.0.115)*
+58. **Async State Debouncing (The "Double Connect" Trap)**: *(Added v1.0.115)*
+    *   **Trigger**: User joins lobby, "User Joined" message appears twice.
+    *   **Cause**: Connection logic checked `if status == .connected || status == .connecting` and then verified the *underlying* socket state. Since the socket is `false` (not connected *yet*) during `.connecting`, the logic treated it as a "Stale Zombie" and forced a reconnect, launching two parallel connection flows.
+    *   **Rule**: Never validate health during a transitional state (`.connecting`). Explicitly **DEBOUNCE** by returning early: `if status == .connecting { return }`. Only perform stale/zombie checks if the high-level status is stable (`.connected`).
+59. **Realtime Multi-Channel Conflicts**: *(Added v1.0.117)*
+    *   **Trigger**: Multiple managers (Lobby, Player, Chat) sharing a single `SupabaseRealtimeClient` instance. One manager calls `cleanup()` or `leaveChannel()` during a transition while another still needs the connection.
+    *   **Cause**: Global event handlers or global channel management causing one manager to "kill" another's connection or overwrite its handlers.
+    *   **Rule**: `SupabaseRealtimeClient` MUST implement **Reference Counting** for topics and **Topic-Scoped Handlers**.
+60. **Room Participant Duplicate Key (The "Re-Join" Race)**: *(Added v1.0.117)*
+    *   **Trigger**: Host returns to Lobby from Player and immediately attempts to `joinRoom` (to ensure presence) while a previous DELETE or staleness check is pending.
+    *   **Symptom**: `Supabase API Error: duplicate key value violates unique constraint "room_participants_pkey"`.
+    *   **Rule**: `SupabaseClient.joinRoom` MUST be **Idempotent**. It must catch Postgres error `23505` (Unique Violation) and HTTP `409 Conflict` and treat them as success. Never block connection flow due to "user already in room".
+61. **The Invisible Join Trap (Lack of Local Echo)**: *(Added v1.0.115)*
     *   **Trigger**: Relying on Realtime Broadcasts or Presence updates to confirm the sender's own actions.
     *   **Symptom**: "User Joined" or "Message Sent" appears for everyone *else* but not the sender.
     *   **Cause**: Supabase Realtime Broadcasts do NOT echo back to the sender by default. Presence events are also unreliable for self-confirmation due to potential race conditions (see #51).
     *   **Rule**: **Hybrid Strategy**. For any user action (Join/Message), you MUST: (1) **Send** the Broadcast for others, AND (2) **Immediately Update** local state for the sender. Never wait for the network to confirm your own action.
+62. **The "Player Stranding" Bug (Explicit Navigation)**: *(Added v1.0.118)*
+    *   **Trigger**: Exiting player while in Watch Party mode (`keepRoomState = true`).
+    *   **Symptom**: The player disappears but the user is stranded on a black screen or the previous view instead of returning to the Lobby.
+    *   **Cause**: Navigation logic was often guarded by `if !keepRoomState`. When keeping state, the app assumed the view was already "behind" the player, but SwiftUI view stacks often require an explicit `appState.currentView` update to re-render the sidebar and lobby components correctly.
+    *   **Rule**: Every `exitPlayer` path MUST explicitly set the next `currentView`. Do not rely on view hierarchy persistence.
+63. **Auto-Start Loop (Infinite Playback)**: *(Added v1.0.118)*
+    *   **Trigger**: Finishing a movie in a Watch Party.
+    *   **Symptom**: Guest returns to the Lobby, but then immediately bounces back into the Player for the same movie.
+    *   **Cause**: (1) The database `is_playing` flag is eventually consistent. (2) The client's `isReady` flag remained `true`. When the Lobby re-appeared, its `onAppear` or polling saw the "old" playing state and the "ready" guest, and auto-started playback again.
+    *   **Rule**: Clients MUST reset `isReady = false` and `canAutoJoin = false` locally in `markPlaybackEnded()` to break the loop. This force-stops auto-join until the host (or user) takes a new action.
+64. **Realtime Auth Handshake (URLRequest Headers)**: *(Added v1.0.118)*
+    *   **Trigger**: Subscribing to RLS-protected channels (e.g., `reported_streams`) via custom WebSocket clients.
+    *   **Symptom**: Subscription fails with "unauthorized" even if a valid JWT is sent in the `phx_join` payload.
+    *   **Cause**: Some Supabase configurations require the `Authorization` header during the **initial WebSocket HTTP handshake** (the GET request to upgrade to WS).
+    *   **Rule**: Custom Realtime clients (`SupabaseRealtimeClient`) MUST inject the `Authorization: Bearer <token>` header into the `URLRequest` used to initialize the connection. Relying on payload-level auth alone is insufficient for high-security (RLS) channels.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

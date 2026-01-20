@@ -404,6 +404,36 @@ while IFS=: read -r file line code; do
 done < <(grep -rn "/unrestrict/magnet" "$SOURCES_DIR" --include="*.swift")
 
 # =============================================================================
+# CHECK 20: Player Stranding (Explicit Navigation) - Landmine #62
+# =============================================================================
+# Trigger: exitPlayer logic that doesn't set currentView.
+print_header "Check 20: Player Stranding (Landmine #62)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/PlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    # We check if 'currentView' is set inside the exitPlayer function.
+    # Looking for the fix: appState?.currentView = .watchPartyLobby
+     if ! grep -q "appState?\.currentView =" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #62" "Stranding Risk: exitPlayer MUST explicitly set 'currentView' to ensure user returns to Lobby/Source." "$PLAYER_VM" "0" "Missing appState.currentView update"
+    fi
+fi
+
+# =============================================================================
+# CHECK 21: Auto-Start Loop (Ready Reset) - Landmine #63
+# =============================================================================
+# Trigger: markPlaybackEnded logic that misses resetting isReady or canAutoJoin.
+print_header "Check 21: Auto-Start Loop (Landmine #63)"
+
+LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
+if [[ -f "$LOBBY_VM" ]]; then
+    # We check if both isReady and canAutoJoin are reset in markPlaybackEnded.
+    # Heuristic: verify presence of these assignments in the file.
+     if ! grep -q "self\.isReady = false" "$LOBBY_VM" || ! grep -q "self\.canAutoJoin = false" "$LOBBY_VM"; then
+        report "ERROR" "Landmine #63" "Infinite Loop Risk: LobbyViewModel MUST reset both 'isReady' and 'canAutoJoin' to false in markPlaybackEnded()." "$LOBBY_VM" "0" "Missing status resets"
+    fi
+fi
+
+# =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

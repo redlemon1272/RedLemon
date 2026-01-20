@@ -531,13 +531,14 @@ class LobbyViewModel: ObservableObject {
                              self.room.episode = e
                              print("📺 Lobby: Synced season/episode: S\(s)E\(e)")
                         }
-                        
-                        // FIX: Sync createdAt and update timeUntilStart for events
-                        // This ensures the countdown is accurate even if the room instance had stale data
+
+                        // CRITICAL FIX: Do NOT sync createdAt for events
+                        // Events use room.createdAt as the event start time (set by EventsView to event.startTime)
+                        // The database createdAt is the room creation time, which is in the past for reused rooms
+                        // We keep the local room.createdAt which is already correctly set to event.startTime
                         if room.type == .event {
-                             self.room.createdAt = freshRoom.createdAt
-                             self.timeUntilStart = freshRoom.createdAt.timeIntervalSince(Date())
-                             print("⏳ Lobby: Synced event start time. Time until start: \(self.timeUntilStart)")
+                             self.timeUntilStart = self.room.createdAt.timeIntervalSince(Date())
+                             print("⏳ Lobby: Event start time from local room. Time until start: \(self.timeUntilStart)")
                         }
 
                         // CRITICAL FIX: Grace Period Check

@@ -855,6 +855,7 @@ struct WatchPartyLobbyView: View {
                             .background(Color.black.opacity(0.6))
                             .cornerRadius(12)
                             .padding(.bottom, 20)
+                            .id("countdown-\(Int(viewModel.timeUntilStart))") // Force refresh when countdown changes
                         }
                     }
                 }

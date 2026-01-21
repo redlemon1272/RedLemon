@@ -195,6 +195,7 @@ class MockRoomManager: RoomManager, UserManager {
         description: String?,
         playlist: [PlaylistItem]?,
         subtitleUrl: String?,
+        sourceQuality: String?,
         createdAt: Date?
     ) async throws -> SupabaseRoom {
         let room = SupabaseRoom(
@@ -218,7 +219,7 @@ class MockRoomManager: RoomManager, UserManager {
             fileIdx: 0,
 
             quality: "1080p",
-            sourceQuality: nil,
+            sourceQuality: sourceQuality,
             unlockedStreamUrl: nil,
             playlist: playlist,
             currentPlaylistIndex: 0,

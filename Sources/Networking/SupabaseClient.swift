@@ -60,6 +60,7 @@ protocol RoomManager {
         description: String?,
         playlist: [PlaylistItem]?,
         subtitleUrl: String?,
+        sourceQuality: String?,
         createdAt: Date?
     ) async throws -> SupabaseRoom
 
@@ -859,6 +860,7 @@ class SupabaseClient: RoomManager, UserManager {
         description: String? = nil,
         playlist: [PlaylistItem]? = nil,
         subtitleUrl: String? = nil,
+        sourceQuality: String? = nil, // AI_BIBLE #91: Filename fallback for events
         createdAt: Date? = nil
     ) async throws -> SupabaseRoom {
         NSLog("%@", "🎬 SupabaseClient: createRoom called for id: \(id) - ENTRY")
@@ -889,6 +891,7 @@ class SupabaseClient: RoomManager, UserManager {
         if let episode = episode { roomData["episode"] = episode }
         if let unlockedStreamUrl = unlockedStreamUrl { roomData["unlocked_stream_url"] = unlockedStreamUrl }
         if let subtitleUrl = subtitleUrl { roomData["subtitle_url"] = subtitleUrl }
+        if let sourceQuality = sourceQuality { roomData["source_quality"] = sourceQuality }
 
         if let playlist = playlist {
             // Serialize playlist items to dictionaries for JSONB column

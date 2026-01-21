@@ -23,7 +23,9 @@ protocol LobbyDataService {
         isPublic: Bool,
         unlockedStreamUrl: String?,
         description: String?,
-        playlist: [PlaylistItem]?
+        playlist: [PlaylistItem]?,
+        subtitleUrl: String?,
+        sourceQuality: String?
     ) async throws -> SupabaseRoom
 
     func deleteRoom(roomId: String) async throws
@@ -85,7 +87,9 @@ extension LobbyDataService {
         isPublic: Bool = false,
         unlockedStreamUrl: String? = nil,
         description: String? = nil,
-        playlist: [PlaylistItem]? = nil
+        playlist: [PlaylistItem]? = nil,
+        subtitleUrl: String? = nil,
+        sourceQuality: String? = nil
     ) async throws -> SupabaseRoom {
         return try await createRoom(
             id: id,
@@ -101,7 +105,9 @@ extension LobbyDataService {
             isPublic: isPublic,
             unlockedStreamUrl: unlockedStreamUrl,
             description: description,
-            playlist: playlist
+            playlist: playlist,
+            subtitleUrl: subtitleUrl,
+            sourceQuality: sourceQuality
         )
     }
 

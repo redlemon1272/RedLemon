@@ -680,6 +680,15 @@ if [[ -f "$PLAYER_VM" ]]; then
     fi
 fi
 
+# Check 3: EventsView must pass sourceQuality during automated room creation
+EVENTS_VIEW="$SOURCES_DIR/Features/Browse/EventsView.swift"
+if [[ -f "$EVENTS_VIEW" ]]; then
+    if ! grep -q "sourceQuality:" "$EVENTS_VIEW"; then
+        report "ERROR" "Landmine #91" "Missing source_quality in EventsView: Automated event generation MUST pass stream title (sourceQuality) to createRoom to ensure guests can resolve streams with nil hashes." "$EVENTS_VIEW" "1" "Missing sourceQuality in createRoom"
+        ((SYNC_ISSUES++))
+    fi
+fi
+
 if [[ $SYNC_ISSUES -eq 0 ]]; then
     echo -e "${GREEN}✅ Guest/Host stream sync (source_quality fallback) verified.${NC}"
 fi

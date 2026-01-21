@@ -363,9 +363,9 @@
     *   **Symptom**: Guest plays a **different file** than Host.
     *   **Cause**: DebridSearch returns `infoHash = nil`. When Host calls `updateRoomStream(streamHash: nil)`, line 1108 of `SupabaseClient.swift` only adds hash if non-nil, so DB never updates. Guest reads nil and falls through to independent resolution (line 461 of `PlayerViewModel.swift`).
     *   **Rule**: Host MUST persist `source_quality` (stream filename/title) as fallback identifier. Guest resolution MUST use `source_quality` for matching when `stream_hash` is nil.
+    *   **Scope**: This applies to **BOTH** standard Watch Parties (Host) AND Automated Events (System).
+    *   **Event Constraint**: `EventsView` MUST capture and persist `source_quality` (stream title) during automated room creation (`createRoom`), or else guests joining the event for DebridSearch streams will fall back to independent resolution.
     *   **Detection**: Guest log shows: `⚠️ Guest: No stream hash available. Guests cannot use host's URL (IP-locked). Will attempt fresh resolution.`
-    *   **Rule**: After `MPVPlayerViewModel.startWatchPartySync()` registers its observer, call `syncExistingParticipantsToChat()` to iterate `currentWatchPartyRoom.participants` and generate "joined" messages for any participants who joined before the observer was registered.
-    *   **Guard**: Skip for Events (`isEventPlayback == true`) since they already work correctly.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

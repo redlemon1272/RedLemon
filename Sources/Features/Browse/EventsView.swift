@@ -83,7 +83,7 @@ struct EventsView: View {
                                         VStack(alignment: .leading, spacing: 16) {
                                             Text("Upcoming Events")
                                                 .font(.title2.weight(.bold))
-                                                
+
                                                 .foregroundColor(.primary)
                                                 .padding(.horizontal, 4)
 
@@ -373,6 +373,7 @@ struct EventsView: View {
                 var initialStreamHash: String? = nil
                 var initialUnlockedUrl: String? = nil
                 var initialSubtitleUrl: String? = nil
+                var initialStreamTitle: String? = nil
 
                 do {
                     print("⚡️ Resolving stream for system event creation...")
@@ -387,6 +388,7 @@ struct EventsView: View {
                     )
                     initialStreamHash = result.stream.infoHash
                     initialUnlockedUrl = result.stream.url
+                    initialStreamTitle = result.stream.title
 
                     // NEW: Pick the first best subtitle to seed the room
                     if let subs = result.stream.subtitles, !subs.isEmpty {
@@ -428,6 +430,7 @@ struct EventsView: View {
                     isPublic: true,
                     unlockedStreamUrl: initialUnlockedUrl,
                     subtitleUrl: initialSubtitleUrl,
+                    sourceQuality: initialStreamTitle, // AI_BIBLE #91: persist title for fallback
                     createdAt: event.startTime
                 )
                 // Join the room we just created
@@ -1041,7 +1044,7 @@ struct EventLobbyStatusBadge: View {
             if event.startTime.timeIntervalSince(now) > 0 {
                 Text("Starts in \(formatDuration(event.startTime.timeIntervalSince(now)))")
                     .font(.system(size: 11, weight: .semibold))
-                    
+
                     .foregroundColor(.white.opacity(0.9))
                     .monospacedDigit()
             }

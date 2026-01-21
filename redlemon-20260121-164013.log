@@ -1,0 +1,776 @@
+2026-01-21 16:40:14.785 RedLemon[67616:290570] 🪟 Set initial window to expanded size: (0.0, 121.0, 1280.0, 654.0)
+2026-01-21 16:40:14.786 RedLemon[67616:290570] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-21 16:40:14.828 RedLemon[67616:290570] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-21 16:40:14.829 RedLemon[67616:290570] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-21 16:40:14.866 RedLemon[67616:290570] ✅ Playback state reset complete - starting in browse view
+2026-01-21 16:40:14.866 RedLemon[67616:290570] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-21 16:40:14.866 RedLemon[67616:290570] 🧪 Testing Profile: debug
+2026-01-21 16:40:14.869 RedLemon[67616:290601] 📂 Loaded 5 credential(s) from cache
+2026-01-21 16:40:14.892 RedLemon[67616:290570] ✅ Keychain: Found stored username: lemontom
+2026-01-21 16:40:14.892 RedLemon[67616:290570] 🔍 Supabase: Looking up user 'lemontom' in database...
+2026-01-21 16:40:14.892 RedLemon[67616:290625] 🔍 SupabaseClient: Looking up user by username 'lemontom'
+2026-01-21 16:40:15.540 RedLemon[67616:290601] 📡 SupabaseClient: User lookup response received (400 bytes)
+2026-01-21 16:40:15.546 RedLemon[67616:290601] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-21 16:40:15.546 RedLemon[67616:290601] 👤 SupabaseClient: Found user - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-21 16:40:15.589 RedLemon[67616:290570] ✅ AUTH SUCCESS: User authenticated - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-21 16:40:15.589 RedLemon[67616:290570] 🎯 AppState: currentUsername=lemontom, currentUserId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-21 16:40:15.591 RedLemon[67616:290570] 🛡️ AdminRealtimeService: Starting authenticated listeners...
+2026-01-21 16:40:17.155 RedLemon[67616:290570] ✅ AdminRealtimeService: Subscribed to reported_streams, feedback_reports, and broadcast alerts
+2026-01-21 16:40:17.348 RedLemon[67616:290570] 📊 AdminRealtimeService: Initial sync complete. Reports: 0, Feedback: 0
+2026-01-21 16:40:18.804 RedLemon[67616:290570] 🏁 AUTH COMPLETE: Final state - username=lemontom, userId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-21 16:40:18.809 RedLemon[67616:290570] 🚀 RedLemon: Starting HTTP server...
+2026-01-21 16:40:18.809 RedLemon[67616:290570] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/RedLemon-Native
+2026-01-21 16:40:18.825 RedLemon[67616:290570] ✅ RedLemon: HTTPServer instance created
+2026-01-21 16:40:18.825 RedLemon[67616:290570] ✅ RedLemon: Server marked as ready (Optimistic)
+2026-01-21 16:40:18.826 RedLemon[67616:290578] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+📦 Current build: 124, Latest build: 124
+✅ App is up to date (current: 124, latest: 124)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates (interest count: 1)
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Joined channel: realtime:reported_streams (interest count: 1)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ [EventsConfig] Fetched movie_events version 1569 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1569, 405 movies)
+✅ [EventsView] Loaded 405 movies from config version 1569
+🗓 AppState: Updated schedule epoch to 2026-01-21 05:03:55 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4239 seconds
+❌ Realtime System Error (realtime:reported_streams): Unable to subscribe to changes with given parameters. Please check Realtime is enabled for the given connect parameters: [schema: public, table: reported_streams, filters: []]
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0480687/img (901283 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0266915/img (786827 bytes)
+📡 Joined channel: realtime:feedback_reports (interest count: 1)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+❌ Realtime System Error (realtime:feedback_reports): Unable to subscribe to changes with given parameters. Please check Realtime is enabled for the given connect parameters: [schema: public, table: feedback_reports, filters: []]
+📡 Joined channel: realtime:admin:alerts (interest count: 1)
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📊 AppState: Polled participant counts - Active: ["tt0266915": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4238 seconds
+📊 AppState: Polled participant counts - Active: ["tt0266915": 1]
+📡 Joined channel: realtime:global-presence (interest count: 1)
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4238 seconds
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to social realtime channels...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📡 Joined channel: realtime:direct_messages (interest count: 1)
+📡 Joined channel: realtime:friendships (interest count: 1)
+✅ SocialService: Connected to social channels
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-21 16:40:18.863 RedLemon[67616:290570] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-21 16:40:18.863 RedLemon[67616:290570] 🏥 [AppState] Starting global provider health check...
+2026-01-21 16:40:18.864 RedLemon[67616:290570] 🔍 Performing startup checks...
+2026-01-21 16:40:18.864 RedLemon[67616:290570] ✅ Username-based authentication ready
+2026-01-21 16:40:18.866 RedLemon[67616:290578] 🔐 Signed request to /check-payment
+2026-01-21 16:40:19.415 RedLemon[67616:290625] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-21 16:40:19.415 RedLemon[67616:290625] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-21 16:40:21.165 RedLemon[67616:290570] ✅ [AppState] Provider health check complete (found 7 services)
+2026-01-21 16:40:21.247 RedLemon[67616:290570] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+✅ SubDLClient initialized
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+👤 LicenseManager: Profile expiry: Optional(2026-04-18 17:23:32 +0000)
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+🎉 License updated! Expires: 2026-04-18 17:23:32 +0000
+📦 Current build: 124, Latest build: 124
+✅ App is up to date (current: 124, latest: 124)
+✅ TimeService: Synced! Offset: 0.196s (RTT: 256ms)
+   Local:  2026-01-21 21:40:21 +0000
+   Server: 2026-01-21 21:40:21 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📊 AppState: Polled participant counts - Active: ["tt0266915": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4227 seconds
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+📡 Joined channel: realtime:rooms_updates (interest count: 1)
+✅ RoomListView: Connected to rooms realtime updates
+[ INFO ] GET /api/metadata/meta/movie/tt0133093 [request-id: 8965D61C-599B-4686-859B-E02BC2FAFC43]
+[ INFO ] GET /api/metadata/meta/movie/tt0133093 [request-id: DC426ED2-9C3E-4075-8742-3B65A1C4FF7A]
+2026-01-21 16:40:33.691 RedLemon[67616:290581] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-21 16:40:33.695 RedLemon[67616:290601] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-21 16:40:34.314 RedLemon[67616:290570] 🚪 Joining room: 55CL
+2026-01-21 16:40:36.029 RedLemon[67616:290570] 🚪 Room is in lobby
+2026-01-21 16:40:36.029 RedLemon[67616:290570] ✅ PlayerVM: currentWatchPartyRoom set to 55CL
+2026-01-21 16:40:36.135 RedLemon[67616:290570] [LOBBY_VIEW] onAppear: shouldAutoJoinLobby=false, room=55CL, timeUntilStart=0
+💾 Cache SET: Metadata[meta_movie_tt0133093]
+✅ Loaded 1 rooms (total: 1)
+💾 Cache SET: Metadata[meta_movie_tt0133093]
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0133093/img (688767 bytes)
+✅ Loaded 1 rooms (total: 1)
+🚪 Joining room: 55CL
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1569 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1569, 405 movies)
+🎭 Lobby: Connecting to room 55CL...
+🚦 Lobby State: connecting
+✅ Cache HIT: Metadata[meta_movie_tt0133093]
+🔄 Lobby: Fetching fresh room state from Supabase...
+[ INFO ] GET /api/metadata/meta/movie/tt0133093 [request-id: 36F9EFDF-1A94-474E-B10B-17566A54907E]
+2026-01-21 16:40:36.228 RedLemon[67616:290829] 📝 Realtime: Registered observer 'lobby' (Presence: YES, Sync: NO, Status: NO)
+2026-01-21 16:40:36.276 RedLemon[67616:290579] 📝 Realtime: Registered observer 'lobby' (Presence: NO, Sync: YES, Status: NO)
+2026-01-21 16:40:36.471 RedLemon[67616:290570] ✅ Guest joined room 55CL in database
+2026-01-21 16:40:36.598 RedLemon[67616:290570] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-21 16:40:36.599 RedLemon[67616:290570] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-21 16:40:36.694 RedLemon[67616:290601] 📝 Realtime: Registered observer 'lobby' (Presence: YES, Sync: NO, Status: NO)
+2026-01-21 16:40:36.694 RedLemon[67616:290601] 📝 Realtime: Registered observer 'lobby' (Presence: NO, Sync: YES, Status: NO)
+2026-01-21 16:40:36.713 RedLemon[67616:290651] 📤 Realtime: Sending message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-21 16:40:36.713 RedLemon[67616:290651]    Payload keys: chatText, type, timestamp, senderId, position, chatUsername
+2026-01-21 16:40:36.714 RedLemon[67616:290829] ✅ Realtime: Message broadcast complete
+2026-01-21 16:40:36.726 RedLemon[67616:290829] 🔐 SupabaseClient: Signing Identity Payload: '176903163696e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-21 16:40:36.727 RedLemon[67616:290829] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-21 16:40:36.832 RedLemon[67616:290601] 📨 Realtime: Received broadcast message
+2026-01-21 16:40:36.832 RedLemon[67616:290601]    Payload keys: chatUsername, timestamp, position, chatText, type, senderId
+2026-01-21 16:40:36.833 RedLemon[67616:290601] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-21 16:40:36.834 RedLemon[67616:290570] 👋 Received: Guest 'lemontom' joined room 55CL
+2026-01-21 16:40:36.910 RedLemon[67616:290570] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-21 16:40:38.440 RedLemon[67616:290651] 📨 Realtime: Received broadcast message
+2026-01-21 16:40:38.440 RedLemon[67616:290651]    Payload keys: type, chatUsername, senderId, chatText, timestamp, position
+2026-01-21 16:40:38.440 RedLemon[67616:290651] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-21 16:40:38.441 RedLemon[67616:290570] 🎬 Guest: Received RESOLVING signal
+2026-01-21 16:40:49.396 RedLemon[67616:290570] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-21 16:40:49.396 RedLemon[67616:290601] 📨 Realtime: Received broadcast message
+2026-01-21 16:40:49.396 RedLemon[67616:290601]    Payload keys: chatText, position, type, chatUsername, timestamp, senderId
+2026-01-21 16:40:49.397 RedLemon[67616:290601] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-21 16:40:49.397 RedLemon[67616:290570] 🎬 Guest: Received PREPARE signal: LOBBY_PREPARE_PLAYBACK||0
+2026-01-21 16:40:49.397 RedLemon[67616:290570] ✅ Guest: Extracted Hash from Payload: nil
+2026-01-21 16:40:49.730 RedLemon[67616:290570] ⚠️ Guest: No stream hash available. Guests cannot use host's URL (IP-locked). Will attempt fresh resolution.
+2026-01-21 16:40:49.772 RedLemon[67616:290601] ✅ StreamService: Using provided metadata: The Matrix
+2026-01-21 16:40:49.772 RedLemon[67616:290601] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-21 16:40:49.772 RedLemon[67616:290601] ⚡️ StreamResolver: Resolving streams for tt0133093 (S0E0)
+2026-01-21 16:40:49.772 RedLemon[67616:290625] 📝 [APP] 🎬 StreamService: Starting resolution for: The Matrix ["file": "StreamService.swift", "level": "INFO", "line": "105"]
+2026-01-21 16:40:49.773 RedLemon[67616:290625] 📝 [APP] SessionRecorder initialized
+2026-01-21 16:40:49.773 RedLemon[67616:290601] 📝 [APP] New Session Started ["app_version": "1.0.124", "build": "124", "session_id": "207BEFDE-9EC2-4FAC-ABFB-62126B2D6DBE", "trigger_source": "preload", "user_id": "96E01CDB-36C0-4228-A6E4-A29A3C66BC8E"]
+2026-01-21 16:40:49.774 RedLemon[67616:290601] 📝 [APP] Target Content Set ["imdb_id": "tt0133093"]
+2026-01-21 16:40:49.774 RedLemon[67616:290601] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-21 16:40:50.013 RedLemon[67616:290601]    📅 Filtering by year: 1999
+2026-01-21 16:40:50.215 RedLemon[67616:290578] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-21 16:40:50.215 RedLemon[67616:290578] 🔍 ProviderManager: Fetching streams for tt0133093...
+2026-01-21 16:40:50.217 RedLemon[67616:290601] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-21 16:40:50.217 RedLemon[67616:290578] 🔍 Zilean: Searching via IMDB ID: tt0133093
+2026-01-21 16:40:50.217 RedLemon[67616:290601] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-21 16:40:50.217 RedLemon[67616:290579] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-21 16:40:50.217 RedLemon[67616:290601] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0133093.json...
+2026-01-21 16:40:50.217 RedLemon[67616:290579] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22***%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt0133093.json
+2026-01-21 16:40:50.217 RedLemon[67616:290601] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0133093.json
+2026-01-21 16:40:50.217 RedLemon[67616:290579] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt0133093.json
+2026-01-21 16:40:50.327 RedLemon[67616:290830] 📡 Torrentio: HTTP 200, received 84040 bytes
+2026-01-21 16:40:50.357 RedLemon[67616:290830] ✅ Torrentio: Parsed 150 streams from 150 raw
+2026-01-21 16:40:51.661 RedLemon[67616:290625] ✅ Zilean: Got 146 results
+2026-01-21 16:40:56.180 RedLemon[67616:290578] ✅ DebridSearch: Parsed 7 streams
+2026-01-21 16:40:56.181 RedLemon[67616:290625] ✅ ProviderManager: Fetched 303 raw, returning 251 unique streams
+2026-01-21 16:40:56.181 RedLemon[67616:290625] 📦 StreamResolver: Received 251 raw streams, bucketing...
+2026-01-21 16:40:56.182 RedLemon[67616:290625] 📝 [RESOLVER] Providers Fetched ["debridsearch": "7", "torrentio": "148", "zilean": "96"]
+2026-01-21 16:40:58.821 RedLemon[67616:290625] 📝 [RESOLVER] Resolution Complete ["1080p": "1", "2160p": "1", "720p": "1", "selected_provider": "torrentio", "selected_title": "The Matrix Complete 5 Movie Collection - Sci-Fi 1999 - 2021 Eng Rus Multi-Subs 1080p [H264-mp4]
+The Matrix Complete 5 Movie Collection 1999 - 2021/01 The Matrix Remastered - Sci-Fi 1999 Eng Rus Multi-Subs 1080p [H264-mp4].mp4
+👤 1 💾 6.5 GB ⚙️ TorrentGalaxy
+Multi Subs / 🇬🇧 / 🇷🇺 / 🇫🇮"]
+2026-01-21 16:40:58.822 RedLemon[67616:290601] 📝 [APP] 📦 StreamService: Found 32 total streams to try (across all qualities) ["file": "StreamService.swift", "level": "INFO", "line": "304"]
+2026-01-21 16:41:00.354 RedLemon[67616:290601] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-21 16:41:00.354 RedLemon[67616:290601] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-21 16:41:00.354 RedLemon[67616:290601] 🔍 DEBUG: Processing subtitle URL: /subtitle/3486047-8409060.zip
+2026-01-21 16:41:00.354 RedLemon[67616:290579] 🔍 DEBUG: Processing subtitle URL: /subtitle/3265092-3283733.zip
+2026-01-21 16:41:00.354 RedLemon[67616:290625] 🔍 DEBUG: Processing subtitle URL: /subtitle/3486048-8409061.zip
+2026-01-21 16:41:00.354 RedLemon[67616:290831] 🔍 DEBUG: Processing subtitle URL: /subtitle/3145560-3159818.zip
+2026-01-21 16:41:00.354 RedLemon[67616:290601] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-21 16:41:00.354 RedLemon[67616:290579] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-21 16:41:00.355 RedLemon[67616:290831] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-21 16:41:00.354 RedLemon[67616:290625] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-21 16:41:00.355 RedLemon[67616:290831] 🔍 DEBUG: Processing subtitle URL: /subtitle/1138475-2708746.zip
+2026-01-21 16:41:00.355 RedLemon[67616:290831] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-21 16:41:00.357 RedLemon[67616:290570] ✅ Guest: Stream preloaded with URL: https://chi7-4.download.real-debrid.com/d/3Z5UBXKDVM2KG129/The.Matrix.1999.REMAS
+2026-01-21 16:41:00.357 RedLemon[67616:290570] ✅ Guest: Stream preloaded. Sending READY signal.
+2026-01-21 16:41:00.357 RedLemon[67616:290831] 📤 Realtime: Sending message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-21 16:41:00.357 RedLemon[67616:290831]    Payload keys: chatText, timestamp, type, chatUsername, position, senderId
+2026-01-21 16:41:00.358 RedLemon[67616:290601] ✅ Realtime: Message broadcast complete
+2026-01-21 16:41:00.480 RedLemon[67616:290601] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:00.480 RedLemon[67616:290601]    Payload keys: timestamp, position, chatText, chatUsername, senderId, type
+2026-01-21 16:41:00.481 RedLemon[67616:290601] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-21 16:41:01.172 RedLemon[67616:290831] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:01.172 RedLemon[67616:290831]    Payload keys: chatText, position, type, chatUsername, timestamp, senderId
+2026-01-21 16:41:01.172 RedLemon[67616:290831] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-21 16:41:01.172 RedLemon[67616:290570] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2026-01-21 16:41:01.173 RedLemon[67616:290570] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing
+2026-01-21 16:41:01.378 RedLemon[67616:290570] ✅ Guest: Synced stream info from Host (Hash: nil) - URL cleared for fresh unlock
+2026-01-21 16:41:01.379 RedLemon[67616:290570] 🛡️ Guest: preResolvedStream cleared to force fresh RD link
+2026-01-21 16:41:01.411 RedLemon[67616:290570] ⏱️ Step 3: Artificial Delay - Waiting additional 3.01s to ensure Host buffer...
+2026-01-21 16:41:01.508 RedLemon[67616:290570] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-21 16:41:04.508 RedLemon[67616:290570] 🎬 Guest: Fetch took 0.238s, finished countdown loop
+2026-01-21 16:41:04.522 RedLemon[67616:290830] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:04.522 RedLemon[67616:290830]    Payload keys: position, timestamp, senderId, type, chatUsername, chatText
+2026-01-21 16:41:04.522 RedLemon[67616:290830] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-21 16:41:04.522 RedLemon[67616:290570] 🎬 Guest: Launching player for The Matrix (Synced Start)
+2026-01-21 16:41:04.712 RedLemon[67616:290570] 📡 Fetching metadata for tt0133093...
+2026-01-21 16:41:04.712 RedLemon[67616:290570] 🎬 Guest: Countdown finished. Waiting for Host PLAYBACK_STARTED signal...
+2026-01-21 16:41:04.875 RedLemon[67616:290570] 🎬 PlayerVM: Using Playlist Metadata: S0E0
+2026-01-21 16:41:04.875 RedLemon[67616:290570] 🔗 GUEST: Using title fallback for stream matching: The.Matrix.1999.REMASTERED.PROPER.1080p.BluRay.H26
+2026-01-21 16:41:04.876 RedLemon[67616:290830] ✅ StreamService: Using provided metadata: The Matrix
+2026-01-21 16:41:04.877 RedLemon[67616:290830] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-21 16:41:04.877 RedLemon[67616:290830] ⚡️ StreamResolver: Resolving streams for tt0133093 (S0E0)
+2026-01-21 16:41:04.877 RedLemon[67616:290830] 📝 [APP] New Session Started ["app_version": "1.0.124", "build": "124", "session_id": "4267E9B9-7958-4196-88DD-52B43CF2D4AA", "trigger_source": "watch_party_sync_signal", "user_id": "96E01CDB-36C0-4228-A6E4-A29A3C66BC8E"]
+2026-01-21 16:41:04.877 RedLemon[67616:290830] 📝 [APP] Target Content Set ["imdb_id": "tt0133093"]
+2026-01-21 16:41:04.878 RedLemon[67616:290830] 📝 [APP] 🎬 StreamService: Starting resolution for: The Matrix ["file": "StreamService.swift", "level": "INFO", "line": "105"]
+2026-01-21 16:41:04.878 RedLemon[67616:290830] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-21 16:41:05.009 RedLemon[67616:290625]    📅 Filtering by year: 1999
+2026-01-21 16:41:05.136 RedLemon[67616:290831] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-21 16:41:05.136 RedLemon[67616:290831] 🔍 ProviderManager: Fetching streams for tt0133093...
+2026-01-21 16:41:05.136 RedLemon[67616:290831] 🔍 Zilean: Searching via IMDB ID: tt0133093
+2026-01-21 16:41:05.136 RedLemon[67616:291075] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-21 16:41:05.136 RedLemon[67616:291075] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridProvider%22%3A%22RealDebrid%22,%22DebridApiKey%22%3A%22***%22%7D/stream/movie/tt0133093.json
+2026-01-21 16:41:05.136 RedLemon[67616:291075] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridProvider%22%3A%22RealDebrid%22,%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22%7D/stream/movie/tt0133093.json
+2026-01-21 16:41:05.136 RedLemon[67616:290829] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-21 16:41:05.137 RedLemon[67616:290829] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-21 16:41:05.137 RedLemon[67616:290829] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0133093.json...
+2026-01-21 16:41:05.137 RedLemon[67616:290829] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0133093.json
+2026-01-21 16:41:05.139 RedLemon[67616:290625] 📡 Torrentio: HTTP 200, received 84040 bytes
+2026-01-21 16:41:05.191 RedLemon[67616:290625] ✅ Torrentio: Parsed 150 streams from 150 raw
+2026-01-21 16:41:06.551 RedLemon[67616:290625] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:06.551 RedLemon[67616:290625]    Payload keys: isPlaying, senderId, type, position, timestamp
+2026-01-21 16:41:06.551 RedLemon[67616:290625] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:06.551 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:06.689 RedLemon[67616:290579] ✅ Zilean: Got 146 results
+2026-01-21 16:41:07.683 RedLemon[67616:290570] 🛡️ Lobby: User 656daa91-33b4-4688-9135-c982ea52d7c9 remains online (Remaining Refs: 1)
+2026-01-21 16:41:08.032 RedLemon[67616:290829] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:08.032 RedLemon[67616:290829]    Payload keys: type, isPlaying, timestamp, position, senderId
+2026-01-21 16:41:08.032 RedLemon[67616:290829] ✅ Realtime: Decoded message type: ready, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-21 16:41:08.033 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: ready)
+2026-01-21 16:41:08.648 RedLemon[67616:291075] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:08.648 RedLemon[67616:291075]    Payload keys: type, isPlaying, timestamp, position, senderId
+2026-01-21 16:41:08.648 RedLemon[67616:291075] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:08.648 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:09.981 RedLemon[67616:291075] ✅ DebridSearch: Parsed 7 streams
+2026-01-21 16:41:09.982 RedLemon[67616:290579] ✅ ProviderManager: Fetched 303 raw, returning 251 unique streams
+2026-01-21 16:41:09.982 RedLemon[67616:290579] 📦 StreamResolver: Received 251 raw streams, bucketing...
+2026-01-21 16:41:09.983 RedLemon[67616:290579] 📝 [RESOLVER] Providers Fetched ["debridsearch": "7", "torrentio": "148", "zilean": "96"]
+2026-01-21 16:41:10.694 RedLemon[67616:290831] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:10.694 RedLemon[67616:290831]    Payload keys: timestamp, type, position, senderId, isPlaying
+2026-01-21 16:41:10.694 RedLemon[67616:290831] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:10.695 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:12.007 RedLemon[67616:290829] 🔐 SupabaseClient: Signing Identity Payload: '176903167296e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-21 16:41:12.007 RedLemon[67616:290829] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-21 16:41:12.490 RedLemon[67616:290570] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-21 16:41:12.710 RedLemon[67616:290831] 📝 [RESOLVER] Resolution Complete ["1080p": "1", "2160p": "1", "720p": "1", "selected_provider": "torrentio", "selected_title": "The Matrix Complete 5 Movie Collection - Sci-Fi 1999 - 2021 Eng Rus Multi-Subs 1080p [H264-mp4]
+The Matrix Complete 5 Movie Collection 1999 - 2021/01 The Matrix Remastered - Sci-Fi 1999 Eng Rus Multi-Subs 1080p [H264-mp4].mp4
+👤 1 💾 6.5 GB ⚙️ TorrentGalaxy
+Multi Subs / 🇬🇧 / 🇷🇺 / 🇫🇮"]
+📡 SocialService: Updated status - In Lobby: The Matrix: The Matrix
+🔌 Setting up Realtime channel: watch-party:55CL
+   Role: Guest
+   User ID: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+📡 Left channel: realtime:rooms_updates
+📡 Connection state: connected
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:55CL (interest count: 1)
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Loaded metadata for The Matrix
+✅ Lobby: Connected to Realtime
+📨 Unknown event: phx_close on realtime:rooms_updates
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+ℹ️ RealtimeChannelManager: Already setup for room 55CL, filtering duplicate setup call.
+📡 Connection state: connected
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Fetching fresh room state from Supabase...
+📊 AppState: Polled participant counts - Active: ["tt0266915": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4218 seconds
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📊 AppState: Polled participant counts - Active: ["tt0266915": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4208 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Cache HIT: Metadata[meta_movie_tt0133093]
+[2026-01-21T21:40:49Z] [INFO] [StreamService.swift:105] 🎬 StreamService: Starting resolution for: The Matrix
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 7 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0133093.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+⚠️ Comet: Skipping invalid redirect URL: https://comet.elfhosted.com/playback/FGd19KcjlHDpwo6JufTpkEc...
+✅ Comet: Parsed 0 valid streams
+⚠️ MediaFusion: HTTP 418
+📊 StreamResolver: Provider Stats: [zilean:96, debridsearch:7, torrentio:148]
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt0133093.json
+✅ Metadata fetched from Cinemeta for tt0133093: The Matrix (1999)
+🎯 Target title for matching: The Matrix
+   📅 Year filter (1999): 251 → 223 streams
+   🚫 RESOLVER BLOCKING AV1: The Matrix (1999) 2160p UHD HDR AV1 Opus Multi6 [dAV1nci]
+👤 0 💾 8.81 GB ⚙️ 1337x
+   🚫 RESOLVER BLOCKING AV1: The Matrix (1999) 1080p AV1 DDP Atmos [UnAV1Chain]
+👤 1 💾 1.98 GB ⚙️ TorrentGalaxy
+   🚫 RESOLVER BLOCKING AV1: The Matrix 1999 REMASTERED 1080p BluRay AV1 Opus 7 1-onlyfaffs mkv
+   🚫 RESOLVER BLOCKING AV1: The Matrix 1999 1080p Bluray AV1 Opus Multi3-dAV1nci mkv
+   🚫 RESOLVER BLOCKING AV1: The Matrix (1999) [2160p] UHD [BD] DV HDR AV1 TrueHD 7 1+Atmos mkv
+   🚫 RESOLVER FILTERED AV1: 223 → 218 streams
+   🚫 RESOLVER BLOCKING Sample/Trailer: The Matrix 1999 Remastered Bonus BR OPUS VFF ENG 1080p x265 10Bits T0M (Matrix La Matrice Matrix 1)
+Matrix 1 1999 Bonus - Matrix Story VOSTFR T0M.mkv
+👤 8 💾 526.42 MB ⚙️ TorrentGalaxy
+🇬🇧 / 🇫🇷
+   🚫 RESOLVER FILTERED Samples/Trailers: 218 → 217 streams
+   🚫 RESOLVER BLOCKING 3D (Strict): The Matrix (1999) 3D HSBS 1080p BluRay H264 DolbyD 5.1 [nickarad]
+👤 16 💾 4.4 GB ⚙️ TorrentGalaxy
+   🚫 RESOLVER BLOCKING 3D (Strict): 3D Peliculas
+3D Matrix/3D The Matrix 1 1999 (3DHDTV Stereo3D HDTV 2x720p 2560x720 Xvid4200 AC3 Spanish) 3Dcombine Stereoscopic Player unoficial IMAX3D Tridef.avi
+👤 19 💾 4.15 GB ⚙️ Wolfmax4k
+🇪🇸
+   🚫 RESOLVER BLOCKING 3D (Strict): The Matrix 1999 3D Conversion Open Matte 1080p MVC ATMOS doogle v3 iso
+   🚫 RESOLVER BLOCKING 3D (Strict): The Matrix 1999 3D Conv FSBS Multi TrueHD 7 1 Atmos-AETHER mkv
+   🚫 RESOLVER FILTERED 3D: 217 → 213 streams
+   🚫 RESOLVER BLOCKING non-English audio: Matrix - The Matrix (1999-2021) KOLEKCJA.MULTi.2160p.UHD.BluRay.REMUX.DV.HDR.HEVC.TrueHD.7.1-MR ~ Lektor i Napisy PL
+1.Matrix (1999)/The.Matrix.1999.MULTi.2160p.UHD.BluRay.REMUX.DV.HDR.HEVC.TrueHD.7.1-MR.mkv
+👤 0 💾 51.9 GB ⚙️ BestTorrents
+Multi Audio / 🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Матрица / The Matrix [1999 WEB-DL 2160p HDR10 Dolby Vision] [Hybrid] Dub + Original (Eng) + Sub (Rus Eng)
+👤 4 💾 18.45 GB ⚙️ Rutracker
+🇬🇧 / 🇷🇺 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: The Matrix (1999) [V2] [MULTi] [1080p] [BluRay] [x264] [DTS] [AC3] [DENDA] [NAPISY PL i LEKTOR PL]
+👤 2 💾 16.33 GB ⚙️ BestTorrents
+Multi Audio / 🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Матрица / The Matrix [1999 BDRemux 1080p] [Remastered] Dub + 3х MVO + 3х DVO + 8х AVO + VO + Original (Eng) + Sub (Rus Eng)
+👤 1 💾 45.86 GB ⚙️ Rutracker
+🇬🇧 / 🇷🇺 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Keanu Reeves 1986-2021 [10Bit] [1080p.BluRay-WEB-DL.H265.H264-NoNaNo-NitroTeam] [Napisy ENG-PL] [ENG-Lektor PL]
+Matrix - The Matrix 1999 [Rekonstrukcja] [10Bit] [1080p.BluRay.H265.AC3.5.1-NoNaNo-NitroTeam] [Napisy ENG-PL] [ENG-Lektor PL].mkv
+👤 1 💾 3.88 GB ⚙️ BestTorrents
+🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: The.Matrix.1999.REMASTERED.SPANiSH.1080p.BluRay.x264-dem3nt3
+👤 1 💾 16.42 GB ⚙️ TorrentGalaxy
+🇪🇸 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: The Matrix (remastered) 1999 BLURAY REMUX 1080p AVC MULTI VFF TRUEHD 7 1-JACKT mkv (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: The Matrix 1999 Remastered VFF 1080P mHD X264 AC3-ROMKENT mkv (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: The Matrix (1999-2003)  (PROAC)(1080p)(BluRay)(x264)(DTS)(AC3)(LEKTOR NAPISY PL) (Audio)
+   🎵 RESOLVER FILTERED audio language: 213 → 204 streams
+🔍 Searching SubDL: tt0133093 (movie)
+   ℹ️ Fallback Name: The Matrix (1999)
+✅ Found 10 subtitles from SubDL (Primary)
+📊 AppState: Polled participant counts - Active: ["tt0266915": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4198 seconds
+✅ StreamResolver: Processed subtitles for 204 streams (Attached to 204)
+   --- Processing Bucket: 2160p (Input: 77) ---
+   📉 Penalized 1 Ad-Supported Releases (YTS/MX)
+   ✅ Bucket 2160p Final Count: 77
+   --- Processing Bucket: 1080p (Input: 103) ---
+   📉 Penalized 2 Ad-Supported Releases (YTS/MX)
+   ✅ Bucket 1080p Final Count: 103
+   --- Processing Bucket: 720p (Input: 14) ---
+   📉 Penalized 1 Ad-Supported Releases (YTS/MX)
+   ✅ Bucket 720p Final Count: 14
+   --- Processing Bucket: 480p (Input: 10) ---
+   ✅ Bucket 480p Final Count: 10
+📦 2160p Primary: The.Matrix.1999.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT
+👤 10 💾 61.18 GB ⚙️ RARBG
+📦 1080p Primary: The Matrix Complete 5 Movie Collection - Sci-Fi 1999 - 2021 Eng Rus Multi-Subs 1080p [H264-mp4]
+The Matrix Complete 5 Movie Collection 1999 - 2021/01 The Matrix Remastered - Sci-Fi 1999 Eng Rus Multi-Subs 1080p [H264-mp4].mp4
+👤 1 💾 6.5 GB ⚙️ TorrentGalaxy
+Multi Subs / 🇬🇧 / 🇷🇺 / 🇫🇮
+📦 720p Primary: The Matrix Trilogy 1999-2003 BluRay Dual Audio Hindi English AAC 5.1 720p x264 ESub - mkvCinemas [Telly]
+The Matrix 1 - 1999 BluRay Dual Audio [Hindi 5.1 + English 5.1] 720p x264 AAC ESub - mkvCinemas.mkv
+👤 1 💾 1.37 GB ⚙️ 1337x
+Dual Audio / 🇬🇧 / 🇮🇳
+✅ StreamResolver: Quality buckets ready
+   ➕ Added 11 720p streams as backup
+   ➕ Added 10 480p streams as backup
+[2026-01-21T21:40:58Z] [INFO] [StreamService.swift:304] 📦 StreamService: Found 32 total streams to try (across all qualities)
+✅ StreamService: Found 30 H.264 streams (Tier 1)
+✅ StreamService: Found 22 'Clean' English streams. Deprioritizing 6 localized/dual streams.
+⚠️ StreamService: Skipping large file (1080p limit): The Matrix Trilogy (1999-2003) (49.33 GB)
+⚠️ StreamService: Skipping large file (1080p limit): The Matrix (1999) (34.17 GB)
+📦 StreamService: 20 streams remain after size filter
+🔄 StreamService: Trying stream 1/20: The.Matrix.1999.REMASTERED.PROPER.1080p.BluRay.H264.AAC-RARBG.mp4
+💾 2.6 GB
+🔍 StreamService: Resolving redirect URL: https://68d69db7dc40-debrid-search.baby-beamup.club/resolve/RealDebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/ZK5XD5D6XVJC4/https%3A%2F%2Freal-debrid.com%2Fd%2F3S3Y537LPSXLO658
+✅ StreamService: Resolved to: https://chi7-4.download.real-debrid.com/d/3Z5UBXKDVM2KG129/The.Matrix.1999.REMASTERED.PROPER.1080p.BluRay.H264.AAC-RARBG.mp4
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: The.Matrix.1999.REMASTERED.PROPER.1080p.BluRay.H264.AAC-RARBG.mp4
+💾 2.6 GB
+📊 Stream Size: 2.60 GB
+📦 StreamService: Appending 12 fallback streams (alternate codecs)
+📦 StreamService: Returning 31 candidate streams for fallback
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Cache HIT: Metadata[meta_movie_tt0133093]
+[2026-01-21T21:41:04Z] [INFO] [StreamService.swift:105] 🎬 StreamService: Starting resolution for: The Matrix
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 7 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0133093.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+⚠️ Comet: Skipping invalid redirect URL: https://comet.elfhosted.com/playback/wyc1b6o1kDo0aTVve85apIE...
+✅ Comet: Parsed 0 valid streams
+⚠️ MediaFusion: HTTP 418
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4188 seconds
+📊 StreamResolver: Provider Stats: [debridsearch:7, torrentio:148, zilean:96]
+✅ Metadata cache hit for tt0133093: The Matrix
+🎯 Target title for matching: The Matrix
+   📅 Year filter (1999): 251 → 223 streams
+   🚫 RESOLVER BLOCKING AV1: The Matrix (1999) 2160p UHD HDR AV1 Opus Multi6 [dAV1nci]
+👤 0 💾 8.81 GB ⚙️ 1337x
+   🚫 RESOLVER BLOCKING AV1: The Matrix (1999) 1080p AV1 DDP Atmos [UnAV1Chain]
+👤 1 💾 1.98 GB ⚙️ TorrentGalaxy
+   🚫 RESOLVER BLOCKING AV1: The Matrix 1999 REMASTERED 1080p BluRay AV1 Opus 7 1-onlyfaffs mkv
+   🚫 RESOLVER BLOCKING AV1: The Matrix 1999 1080p Bluray AV1 Opus Multi3-dAV1nci mkv
+   🚫 RESOLVER BLOCKING AV1: The Matrix (1999) [2160p] UHD [BD] DV HDR AV1 TrueHD 7 1+Atmos mkv
+   🚫 RESOLVER FILTERED AV1: 223 → 218 streams
+   🚫 RESOLVER BLOCKING Sample/Trailer: The Matrix 1999 Remastered Bonus BR OPUS VFF ENG 1080p x265 10Bits T0M (Matrix La Matrice Matrix 1)
+Matrix 1 1999 Bonus - Matrix Story VOSTFR T0M.mkv
+👤 8 💾 526.42 MB ⚙️ TorrentGalaxy
+🇬🇧 / 🇫🇷
+   🚫 RESOLVER FILTERED Samples/Trailers: 218 → 217 streams
+   🚫 RESOLVER BLOCKING 3D (Strict): The Matrix (1999) 3D HSBS 1080p BluRay H264 DolbyD 5.1 [nickarad]
+👤 16 💾 4.4 GB ⚙️ TorrentGalaxy
+   🚫 RESOLVER BLOCKING 3D (Strict): 3D Peliculas
+3D Matrix/3D The Matrix 1 1999 (3DHDTV Stereo3D HDTV 2x720p 2560x720 Xvid4200 AC3 Spanish) 3Dcombine Stereoscopic Player unoficial IMAX3D Tridef.avi
+👤 19 💾 4.15 GB ⚙️ Wolfmax4k
+🇪🇸
+   🚫 RESOLVER BLOCKING 3D (Strict): The Matrix 1999 3D Conversion Open Matte 1080p MVC ATMOS doogle v3 iso
+   🚫 RESOLVER BLOCKING 3D (Strict): The Matrix 1999 3D Conv FSBS Multi TrueHD 7 1 Atmos-AETHER mkv
+   🚫 RESOLVER FILTERED 3D: 217 → 213 streams
+   🚫 RESOLVER BLOCKING non-English audio: Matrix - The Matrix (1999-2021) KOLEKCJA.MULTi.2160p.UHD.BluRay.REMUX.DV.HDR.HEVC.TrueHD.7.1-MR ~ Lektor i Napisy PL
+1.Matrix (1999)/The.Matrix.1999.MULTi.2160p.UHD.BluRay.REMUX.DV.HDR.HEVC.TrueHD.7.1-MR.mkv
+👤 0 💾 51.9 GB ⚙️ BestTorrents
+Multi Audio / 🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Матрица / The Matrix [1999 WEB-DL 2160p HDR10 Dolby Vision] [Hybrid] Dub + Original (Eng) + Sub (Rus Eng)
+👤 4 💾 18.45 GB ⚙️ Rutracker
+🇬🇧 / 🇷🇺 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: The Matrix (1999) [V2] [MULTi] [1080p] [BluRay] [x264] [DTS] [AC3] [DENDA] [NAPISY PL i LEKTOR PL]
+👤 2 💾 16.33 GB ⚙️ BestTorrents
+Multi Audio / 🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Матрица / The Matrix [1999 BDRemux 1080p] [Remastered] Dub + 3х MVO + 3х DVO + 8х AVO + VO + Original (Eng) + Sub (Rus Eng)
+👤 1 💾 45.86 GB ⚙️ Rutracker
+🇬🇧 / 🇷🇺 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Keanu Reeves 1986-2021 [10Bit] [1080p.BluRay-WEB-DL.H265.H264-NoNaNo-NitroTeam] [Napisy ENG-PL] [ENG-Lektor PL]
+Matrix - The Matrix 1999 [Rekonstrukcja] [10Bit] [1080p.BluRay.H265.AC3.5.1-NoNaNo-NitroTeam] [Napisy ENG-PL] [ENG-Lektor PL].mkv
+👤 1 💾 3.88 GB ⚙️ BestTorrents
+🇬🇧 / 🇵🇱 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: The.Matrix.1999.REMASTERED.SPANiSH.1080p.BluRay.x264-dem3nt3
+👤 1 💾 16.42 GB ⚙️ TorrentGalaxy
+🇪🇸 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: The Matrix (remastered) 1999 BLURAY REMUX 1080p AVC MULTI VFF TRUEHD 7 1-JACKT mkv (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: The Matrix 1999 Remastered VFF 1080P mHD X264 AC3-ROMKENT mkv (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: The Matrix (1999-2003)  (PROAC)(1080p)(BluRay)(x264)(DTS)(AC3)(LEKTOR NAPISY PL) (Audio)
+   🎵 RESOLVER FILTERED audio language: 213 → 204 streams
+🔍 Searching SubDL: tt0133093 (movie)
+   ℹ️ Fallback Name: The Matrix (1999)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 204 streams (Attached to 204)
+   --- Processing Bucket: 2160p (Input: 77) ---
+   📉 Penalized 1 Ad-Supported Releases (YTS/MX)
+   ✅ Bucket 2160p Final Count: 77
+   --- Processing Bucket: 1080p (Input: 103) ---
+🔄 Lobby: Fetching fresh room state from Supabase...
+   📉 Penalized 2 Ad-Supported Releases (YTS/MX)
+   ✅ Bucket 1080p Final Count: 103
+   --- Processing Bucket: 720p (Input: 14) ---
+   📉 Penalized 1 Ad-Supported Releases (YTS/MX)
+   ✅ Bucket 720p Final Count: 14
+   --- Processing Bucket: 480p (Input: 10) ---
+   ✅ Bucket 480p Final Count: 10
+📦 2160p Primary: The.Matrix.1999.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT
+👤 10 💾 61.18 GB ⚙️ RARBG
+📦 1080p Primary: The Matrix Complete 5 Movie Collection - Sci-Fi 1999 - 2021 Eng Rus Multi-Subs 1080p [H264-mp4]
+The Matrix Complete 5 Movie Collection 1999 - 2021/01 The Matrix Remastered - Sci-Fi 1999 Eng Rus Multi-Subs 1080p [H264-mp4].mp4
+👤 1 💾 6.5 GB ⚙️ TorrentGalaxy
+Multi Subs / 🇬🇧 / 🇷🇺 / 🇫🇮
+📦 720p Primary: The Matrix Trilogy 1999-2003 BluRay Dual Audio Hindi English AAC 5.1 720p x264 ESub - mkvCinemas [Telly]
+The Matrix 1 - 1999 BluRay Dual Audio [Hindi 5.1 + English 5.1] 720p x264 AAC ESub - mkvCinemas.mkv
+👤 1 💾 1.37 GB ⚙️ 1337x
+Dual Audio / 🇬🇧 / 🇮🇳
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: No hash available, attempting title-based match: The.Matrix.1999.REMASTERED.PROPER.1080p.BluRay.H26...
+✅ StreamService: Found stream by title match! Lockin2026-01-21 16:41:12.712 RedLemon[67616:290831] 📝 [RESOLVER] Host Stream Title Match ["title": "The.Matrix.1999.REMASTERED.PROPER.1080p.BluRay.H26"]
+2026-01-21 16:41:12.713 RedLemon[67616:291075] 📝 [APP] 📦 StreamService: Found 1 total streams to try (across all qualities) ["file": "StreamService.swift", "level": "INFO", "line": "304"]
+2026-01-21 16:41:12.723 RedLemon[67616:290829] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:12.724 RedLemon[67616:290829]    Payload keys: timestamp, isPlaying, position, senderId, type
+2026-01-21 16:41:12.724 RedLemon[67616:290829] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:12.724 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:13.564 RedLemon[67616:290579] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-21 16:41:13.565 RedLemon[67616:290579] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-21 16:41:13.565 RedLemon[67616:290625] 🔍 DEBUG: Processing subtitle URL: /subtitle/3145560-3159818.zip
+2026-01-21 16:41:13.565 RedLemon[67616:290831] 🔍 DEBUG: Processing subtitle URL: /subtitle/3486048-8409061.zip
+2026-01-21 16:41:13.565 RedLemon[67616:291075] 🔍 DEBUG: Processing subtitle URL: /subtitle/3486047-8409060.zip
+2026-01-21 16:41:13.565 RedLemon[67616:290579] 🔍 DEBUG: Processing subtitle URL: /subtitle/3265092-3283733.zip
+2026-01-21 16:41:13.565 RedLemon[67616:290625] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-21 16:41:13.565 RedLemon[67616:290831] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-21 16:41:13.565 RedLemon[67616:290579] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-21 16:41:13.565 RedLemon[67616:291075] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-21 16:41:13.566 RedLemon[67616:290625] 🔍 DEBUG: Processing subtitle URL: /subtitle/1138475-2708746.zip
+2026-01-21 16:41:13.566 RedLemon[67616:290625] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-21 16:41:13.634 RedLemon[67616:290570] ✅ Stream ready, starting playback...
+2026-01-21 16:41:13.678 RedLemon[67616:290625] 📝 Realtime: Registered observer 'player' (Presence: YES, Sync: NO, Status: NO)
+2026-01-21 16:41:13.684 RedLemon[67616:290829] 📝 Realtime: Registered observer 'player' (Presence: NO, Sync: YES, Status: NO)
+2026-01-21 16:41:13.686 RedLemon[67616:291075] 📝 [PLAYER] Resumed
+2026-01-21 16:41:13.722 RedLemon[67616:290831] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi7-4.download.real-debrid.com/d/3Z5UBXKDVM2KG129/The.Matrix.1999.REMASTERED.PROPER.1080p.BluRay.H264.AAC-RARBG.mp4"]
+g to: The.Matrix.1999.REMASTERED.PROPER.1080p.BluRay.H26
+[2026-01-21T21:41:12Z] [INFO] [StreamService.swift:304] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: The.Matrix.1999.REMASTERED.PROPER.1080p.BluRay.H264.AAC-RARBG.mp4
+💾 2.6 GB
+🔍 StreamService: Resolving redirect URL: https://68d69db7dc40-debrid-search.baby-beamup.club/resolve/RealDebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/ZK5XD5D6XVJC4/https%3A%2F%2Freal-debrid.com%2Fd%2F3S3Y537LPSXLO658
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ StreamService: Resolved to: https://chi7-4.download.real-debrid.com/d/3Z5UBXKDVM2KG129/The.Matrix.1999.REMASTERED.PROPER.1080p.BluRay.H264.AAC-RARBG.mp4
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: The.Matrix.1999.REMASTERED.PROPER.1080p.BluRay.H264.AAC-RARBG.mp4
+💾 2.6 GB
+📊 Stream Size: 2.60 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+!!! MPVWrapper initialized - Build Version: 2026-01-19-GUEST-CACHE-BYPASS-v1 !!!
+🔌 Setting up Realtime channel: watch-party:55CL
+   Role: Guest
+   User ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+📡 Connection state: connected
+📡 Connection state: connecting
+📡 Topic realtime:watch-party:55CL already joined (interest count: 2), skipping phx_join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_movie_tt0133093]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxNDU1NjAtMzE1OTgxOC56aXA= [request-id: 22E14DF4-6BEE-4C80-BE88-A120F1CF08EF]
+2026-01-21 16:41:13.983 RedLemon[67616:290829] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-21 16:41:13.983 RedLemon[67616:290829] 📝 [PLAYER] Buffering Started
+📄 Subtitle request: L3N1YnRpdGxlLzMxNDU1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3145560-3159818.zip
+📡 SocialService: Updated status - online: The Matrix
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4181 seconds
+✅ Download complete: 35387 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): The.Matrix.1999.REMASTERED.1080p.BluRay.H265.AAC-dBE_Track04.srt
+📦 Extracting specific file: The.Matrix.1999.REMASTERED.1080p.BluRay.H265.AAC-dBE_Track04.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMyNjUwOTItMzI4MzczMy56aXA= [request-id: FAD95FCE-DAFA-4F1E-AAD3-D8658A7F63C3]
+📄 Subtitle request: L3N1YnRpdGxlLzMyNjUw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3265092-3283733.zip
+✅ Download complete: 37287 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (5): The Matrix_(1999)_REMASTERED_en.srt
+📦 Extracting specific file: The Matrix_(1999)_REMASTERED_en.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0ODYwNDgtODQwOTA2MS56aXA= [request-id: 882EAC0E-76A1-494F-B35D-DDC746F780A0]
+2026-01-21 16:41:14.580 RedLemon[67616:291075] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:14.580 RedLemon[67616:291076] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:14.580 RedLemon[67616:291076]    Payload keys: position, timestamp, type, isPlaying, senderId
+2026-01-21 16:41:14.580 RedLemon[67616:291075]    Payload keys: position, timestamp, type, isPlaying, senderId
+2026-01-21 16:41:14.580 RedLemon[67616:291075] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:14.580 RedLemon[67616:291076] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:14.581 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:15.003 RedLemon[67616:290570] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-21 16:41:15.003 RedLemon[67616:290570] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-21 16:41:15.815 RedLemon[67616:291130] 📝 [PLAYER] File Loaded ["duration": "8180.639999999999"]
+2026-01-21 16:41:15.827 RedLemon[67616:290570] [VIDEO_READY] isEvent: false, eventStartTime: nil
+2026-01-21 16:41:15.837 RedLemon[67616:291076] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-21 16:41:16.560 RedLemon[67616:290579] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:16.560 RedLemon[67616:290831] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:16.560 RedLemon[67616:290579]    Payload keys: position, isPlaying, senderId, type, timestamp
+2026-01-21 16:41:16.560 RedLemon[67616:290831]    Payload keys: position, isPlaying, senderId, type, timestamp
+2026-01-21 16:41:16.560 RedLemon[67616:290579] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:16.560 RedLemon[67616:290831] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:16.560 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:16.915 RedLemon[67616:290570] 🛡️ Lobby: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e remains online (Remaining Refs: 1)
+2026-01-21 16:41:18.145 RedLemon[67616:291076] 📤 Realtime: Sending message type: ready, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-21 16:41:18.146 RedLemon[67616:291076]    Payload keys: position, type, senderId, timestamp, isPlaying
+2026-01-21 16:41:18.146 RedLemon[67616:290579] ✅ Realtime: Message broadcast complete
+2026-01-21 16:41:18.157 RedLemon[67616:290579] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-21 16:41:18.272 RedLemon[67616:290579] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:18.272 RedLemon[67616:291076] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:18.272 RedLemon[67616:290579]    Payload keys: position, type, senderId, isPlaying, timestamp
+2026-01-21 16:41:18.272 RedLemon[67616:291076]    Payload keys: position, type, senderId, isPlaying, timestamp
+2026-01-21 16:41:18.272 RedLemon[67616:290579] ✅ Realtime: Decoded message type: ready, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-21 16:41:18.272 RedLemon[67616:291076] ✅ Realtime: Decoded message type: ready, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-21 16:41:18.272 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: ready)
+2026-01-21 16:41:18.682 RedLemon[67616:290579] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:18.682 RedLemon[67616:291076] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:18.682 RedLemon[67616:290579]    Payload keys: timestamp, type, isPlaying, position, senderId
+2026-01-21 16:41:18.682 RedLemon[67616:291076]    Payload keys: timestamp, type, isPlaying, position, senderId
+2026-01-21 16:41:18.682 RedLemon[67616:291076] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:18.682 RedLemon[67616:290579] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:18.683 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:19.595 RedLemon[67616:290829] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:19.595 RedLemon[67616:291076] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:19.595 RedLemon[67616:290829]    Payload keys: senderId, position, type, isPlaying, timestamp
+2026-01-21 16:41:19.595 RedLemon[67616:291076]    Payload keys: senderId, position, type, isPlaying, timestamp
+2026-01-21 16:41:19.596 RedLemon[67616:291076] ✅ Realtime: Decoded message type: play, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-21 16:41:19.596 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: play)
+2026-01-21 16:41:19.596 RedLemon[67616:290829] ✅ Realtime: Decoded message type: play, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-21 16:41:19.612 RedLemon[67616:291076] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-21 16:41:20.561 RedLemon[67616:290831] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:20.561 RedLemon[67616:291076] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:20.561 RedLemon[67616:290831]    Payload keys: timestamp, type, senderId, isPlaying, position
+2026-01-21 16:41:20.561 RedLemon[67616:291076]    Payload keys: timestamp, type, senderId, isPlaying, position
+2026-01-21 16:41:20.561 RedLemon[67616:291076] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:20.561 RedLemon[67616:290831] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:20.589 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:22.600 RedLemon[67616:290579] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:22.600 RedLemon[67616:291130] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:22.600 RedLemon[67616:290579]    Payload keys: timestamp, type, senderId, isPlaying, position
+2026-01-21 16:41:22.600 RedLemon[67616:291130]    Payload keys: timestamp, type, senderId, isPlaying, position
+2026-01-21 16:41:22.600 RedLemon[67616:291130] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:22.600 RedLemon[67616:290579] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:22.604 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:23.734 RedLemon[67616:291075] 🔐 SupabaseClient: Signing Identity Payload: '176903168396e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-21 16:41:23.735 RedLemon[67616:291075] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-21 16:41:24.100 RedLemon[67616:290570] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-21 16:41:24.555 RedLemon[67616:291076] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:24.555 RedLemon[67616:290579] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:24.556 RedLemon[67616:290579]    Payload keys: isPlaying, position, type, senderId, timestamp
+2026-01-21 16:41:24.556 RedLemon[67616:291076]    Payload keys: isPlaying, position, type, senderId, timestamp
+2026-01-21 16:41:24.556 RedLemon[67616:291076] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:24.556 RedLemon[67616:290579] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:24.588 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:24.871 RedLemon[67616:290570] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-21 16:41:26.569 RedLemon[67616:291130] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:26.569 RedLemon[67616:290579] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:26.569 RedLemon[67616:290579]    Payload keys: position, type, isPlaying, senderId, timestamp
+2026-01-21 16:41:26.569 RedLemon[67616:291130]    Payload keys: position, type, isPlaying, senderId, timestamp
+2026-01-21 16:41:26.570 RedLemon[67616:290579] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:26.570 RedLemon[67616:291130] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:26.583 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:28.650 RedLemon[67616:291130] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:28.651 RedLemon[67616:291130]    Payload keys: isPlaying, position, type, timestamp, senderId
+2026-01-21 16:41:28.651 RedLemon[67616:290579] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:28.651 RedLemon[67616:290579]    Payload keys: isPlaying, position, type, timestamp, senderId
+2026-01-21 16:41:28.651 RedLemon[67616:291130] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:28.651 RedLemon[67616:290579] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:28.681 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:30.610 RedLemon[67616:291130] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:30.610 RedLemon[67616:291075] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:30.611 RedLemon[67616:291130]    Payload keys: type, isPlaying, senderId, position, timestamp
+2026-01-21 16:41:30.611 RedLemon[67616:291075]    Payload keys: type, isPlaying, senderId, position, timestamp
+2026-01-21 16:41:30.611 RedLemon[67616:291075] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:30.611 RedLemon[67616:291130] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:30.626 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:32.625 RedLemon[67616:291075] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:32.625 RedLemon[67616:291075]    Payload keys: timestamp, type, senderId, isPlaying, position
+2026-01-21 16:41:32.625 RedLemon[67616:290831] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:32.625 RedLemon[67616:290831]    Payload keys: timestamp, type, senderId, isPlaying, position
+2026-01-21 16:41:32.625 RedLemon[67616:291075] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:32.626 RedLemon[67616:290831] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:32.661 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:34.647 RedLemon[67616:291130] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:34.647 RedLemon[67616:291076] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:34.647 RedLemon[67616:291076]    Payload keys: timestamp, senderId, isPlaying, type, position
+2026-01-21 16:41:34.647 RedLemon[67616:291130]    Payload keys: timestamp, senderId, isPlaying, type, position
+2026-01-21 16:41:34.648 RedLemon[67616:291130] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:34.648 RedLemon[67616:291076] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:34.689 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:35.098 RedLemon[67616:290570] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-21 16:41:36.621 RedLemon[67616:291130] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:36.621 RedLemon[67616:291076] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:36.621 RedLemon[67616:291076]    Payload keys: position, type, isPlaying, senderId, timestamp
+2026-01-21 16:41:36.621 RedLemon[67616:291130]    Payload keys: position, type, isPlaying, senderId, timestamp
+2026-01-21 16:41:36.622 RedLemon[67616:291076] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:36.622 RedLemon[67616:291130] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:36.646 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-21 16:41:38.639 RedLemon[67616:291076] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:38.639 RedLemon[67616:291130] 📨 Realtime: Received broadcast message
+2026-01-21 16:41:38.639 RedLemon[67616:291076]    Payload keys: isPlaying, position, timestamp, type, senderId
+2026-01-21 16:41:38.639 RedLemon[67616:291130]    Payload keys: isPlaying, position, timestamp, type, senderId
+2026-01-21 16:41:38.639 RedLemon[67616:291076] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:38.639 RedLemon[67616:291130] ✅ Realtime: Decoded message type: playbackState, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-21 16:41:38.646 RedLemon[67616:290570] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+📄 Subtitle request: L3N1YnRpdGxlLzM0ODYw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3486048-8409061.zip
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ Download complete: 34792 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (20): The.Matrix.1999.REMASTERED.1080p.BluRay.x265-YAWNTiC_eng.srt
+📦 Extracting specific file: The.Matrix.1999.REMASTERED.1080p.BluRay.x265-YAWNTiC_eng.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Fetched movie_events version 1569 with 405 movies
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Using cached movie_events config (version 1569, 405 movies)
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4178 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4168 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+⏰ AppState: Next schedule update set for Event End: 2026-01-21 22:50:55 +0000
+⏰ AppState: Scheduling update in 4158 seconds

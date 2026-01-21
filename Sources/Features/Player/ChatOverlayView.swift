@@ -1114,6 +1114,7 @@ struct ChatOverlayView: View {
             HStack(spacing: 3) {
                 Text(title)
                     .font(.system(size: 12, weight: .medium))
+                    .fixedSize(horizontal: true, vertical: false)
 
                 if badge > 0 {
                     Text("\(badge)")

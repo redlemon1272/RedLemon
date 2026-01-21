@@ -476,11 +476,57 @@ if [[ -d "$SERVICES_DIR" ]]; then
 fi
 
 # =============================================================================
-# CHECK 24: Friend Request ID Usage (Landmine #84)
+# CHECK 24: Event Loop Trap (Three-Fold Event Failure) - Landmine #84
+# =============================================================================
+# Trigger: (1) Events treated as Watch Party guests in stream validation,
+#          (2) Event start time overwritten by database sync,
+#          (3) EOF handler using wrong time reference.
+print_header "Check 24: Event Loop Trap (Landmine #84)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
+LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
+
+# Check 1: Events skip stream validation in durationPub handler
+if [[ -f "$PLAYER_VM" ]]; then
+    # Look for the fix: let isEvent = self.appState?.player.isEventPlayback == true ... if isEvent { hasSentReadySignal = true }
+    if ! grep -q "isEvent.*=.*appState.*player.*isEventPlayback" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #84" "Event Stream Validation Risk: Events MUST skip stream validation. Expected 'let isEvent = self.appState?.player.isEventPlayback == true' followed by 'if isEvent { hasSentReadySignal = true }' in durationPub handler." "$PLAYER_VM" "0" "Missing event stream validation skip"
+    fi
+fi
+
+# Check 2: LobbyViewModel preserves event start time (doesn't sync from DB)
+if [[ -f "$LOBBY_VM" ]]; then
+    # Look for the anti-pattern: self.room.createdAt = freshRoom.createdAt (for events)
+    # The fix should have a comment about NOT syncing createdAt for events
+    DANGER_LINE=$(grep -n "self\.room\.createdAt = freshRoom\.createdAt" "$LOBBY_VM" || true)
+    if [[ -n "$DANGER_LINE" ]]; then
+        # Check if it's properly guarded with a comment about events
+        CONTEXT_LINE=$(echo "$DANGER_LINE" | cut -d: -f1)
+        FILE_SNIP=$(sed -n "$((CONTEXT_LINE-2)),$((CONTEXT_LINE+2))p" "$LOBBY_VM")
+        if ! echo "$FILE_SNIP" | grep -qi "event"; then
+            report "ERROR" "Landmine #84" "Event Start Time Overwrite Risk: LobbyViewModel syncs 'createdAt' from database without checking if it's an event. This overwrites the event start time with room creation time. Must preserve local room.createdAt for events." "$LOBBY_VM" "$CONTEXT_LINE" "Unconditional createdAt sync"
+        fi
+    fi
+fi
+
+# Check 3: EOF handler uses eventStartTime not lastPlaybackResumeTime
+if [[ -f "$PLAYER_VM" ]]; then
+    # Look for the anti-pattern: let startTime = self.lastPlaybackResumeTime ?? self.appState?.player.eventStartTime
+    # The fix should be: let startTime = self.appState?.player.eventStartTime (for events)
+    if grep -q "lastPlaybackResumeTime.*??.*eventStartTime" "$PLAYER_VM"; then
+        # Check if there's an event-specific branch that bypasses this
+        if ! grep -B5 "lastPlaybackResumeTime.*??.*eventStartTime" "$PLAYER_VM" | grep -q "isEventPlayback"; then
+            report "ERROR" "Landmine #84" "Event EOF Handler Time Reference Risk: EOF handler falls back to lastPlaybackResumeTime for events. This causes late joiners to fail the 80% duration check. Must use eventStartTime for events (all viewers sync to wall clock, not join time)." "$PLAYER_VM" "0" "Using wrong time reference for EOF detection"
+        fi
+    fi
+fi
+
+# =============================================================================
+# CHECK 25: Friend Request ID Usage (Landmine #84)
 # =============================================================================
 # Trigger: AddFriendSheet callback using sendRequest(username:) instead of sendRequest(toUserId:)
 # Risk: Re-searching by username picks the first alphabetical match, not the selected user.
-print_header "Check 24: Friend Request ID (Landmine #84)"
+print_header "Check 25: Friend Request ID (Landmine #84)"
 
 FRIENDS_VIEW="$SOURCES_DIR/Features/Friends/FriendsView.swift"
 if [[ -f "$FRIENDS_VIEW" ]]; then

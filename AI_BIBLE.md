@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 20, 2026 (Part 19: Event Room Guest Visibility)
+> **Last Updated:** January 20, 2026 (Part 19: Event Loop Trap - Landmine #84)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -80,6 +80,9 @@
 | **Realtime Auth Error (RLS)** | Missing Authorization header in WebSocket handshake | #64 |
 | **"User Joined" Missing (Guests)** | `LobbyEventRouter` ignores guests | #65 |
 | **Provider "Offline" (SubDL, RD)** | Missing User-Agent or Aggressive Timeout | #83 |
+| **Event: Stuck at 0:00 / Black Screen** | Stream validation seeking to 0 (Watch Party logic on Events) | #84 |
+| **Event: Auto-Starts Early (Countdown Bypass)** | Database createdAt (room creation) vs eventStartTime mismatch | #84 |
+| **Event: Infinite Loop (No Auto-Exit)** | EOF handler using wrong time reference (user join vs event start) | #84 |
 
 ## 🚨 Critical Landmines
 
@@ -302,6 +305,14 @@
         1. Set a standard Browser User-Agent.
         2. Use a minimum **10s** timeout.
         3. For subtitles, use an **8s** timebox in the Resolver to handle slow responses without blocking playback.
+84. **Event Loop Trap (Three-Fold Event Failure)**: *(Added v1.0.124)*
+    *   **Trigger**: (1) Events stuck at 0:00 with black screen, (2) Events auto-starting 18+ minutes early (countdown bypass), (3) Events looping forever instead of auto-exiting to next event.
+    *   **Cause**: (1) Events inherit `isInWatchParty=true` but have no host, triggering stream validation that seeks to 0 after 2 seconds. (2) LobbyViewModel syncs `room.createdAt` from database (room creation time) instead of using EventsView's `event.startTime`. (3) EOF handler used `lastPlaybackResumeTime` (when user joined) instead of `eventStartTime` (when event started), causing late joiners to fail the 80% duration check.
+    *   **Rule**: Events are NOT watch parties. They have special handling:
+        1. **Skip Ready Gate**: In `durationPub` handler, check `isEventPlayback` and skip stream validation. Set `hasSentReadySignal = true` to prevent future triggers.
+        2. **Preserve Event Start Time**: In `LobbyViewModel`, never sync `createdAt` for events from database. Use local `room.createdAt` (already set to `event.startTime` by EventsView).
+        3. **Use Wall Clock Time**: In EOF handler, ALWAYS use `eventStartTime` not `lastPlaybackResumeTime`. All viewers sync to event start time regardless of join time.
+    *   **Detection**: Video reaches position >0 but then resets to 0, or countdown shows negative values, or `[ERROR_HANDLER] playedDuration` is much shorter than expected.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

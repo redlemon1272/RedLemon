@@ -229,10 +229,18 @@ struct WatchModeSelectionView: View {
         if mode == .watchParty {
             await MainActor.run {
                 appState.player.currentWatchMode = .watchParty
-                appState.currentView = .qualitySelection
                 isCreatingRoom = false
             }
+            
+            // CRITICAL: Dismiss sheet BEFORE changing root view to prevent SwiftUI hang/freeze
             dismiss()
+            
+            // Small delay to allow sheet dismissal to begin/process before unmounting parent
+            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
+            
+            await MainActor.run {
+                appState.currentView = .qualitySelection
+            }
         } else {
             dismiss()
             await appState.player.playMedia(
@@ -250,8 +258,13 @@ struct WatchModeSelectionView: View {
                 appState.selectedSeason = season
                 appState.selectedEpisode = episode
             }
-            appState.currentView = .mediaDetail
+            
+            // CRITICAL: Dismiss sheet BEFORE changing root view
             dismiss()
+            
+            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
+            
+            appState.currentView = .mediaDetail
         }
     }
 

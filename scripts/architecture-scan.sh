@@ -582,6 +582,30 @@ if [[ $PERF_ISSUES -eq 0 ]]; then
 fi
 
 # =============================================================================
+# CHECK 28: Sheet Dismissal Safety (Landmine #87)
+# =============================================================================
+# Trigger: View transition while a sheet is still active.
+# Fix: dismiss() before appState.currentView update.
+print_header "Check 28: Sheet Dismissal Safety (Landmine #87)"
+
+TRANSITION_ISSUES=0
+
+if [[ -f "$BROWSE_COMPONENTS" ]]; then
+    # Look for the safe pattern using awk to handle multi-line sequence
+    # Pattern: dismiss() -> Task.sleep -> currentView
+    if ! awk '/dismiss\(\)/ { found_dismiss=1; next } 
+             found_dismiss && /Task.sleep/ { found_sleep=1; next }
+             found_sleep && /currentView/ { found_all=1; exit }
+             /}/ { found_dismiss=0; found_sleep=0 } 
+             END { if (!found_all) exit 1 }' "$BROWSE_COMPONENTS"; then
+        report "ERROR" "Landmine #87" "Dangerous View Transition: Root view changed before sheet dismissal. This causes hard freezes on macOS. MUST call dismiss() -> sleep(0.1s) -> currentView = .target" "$BROWSE_COMPONENTS" "0" "Missing safe dismissal pattern"
+        ((TRANSITION_ISSUES++))
+    else
+        echo -e "${GREEN}✅ Sheet dismissal safety pattern verified in BrowseComponents.${NC}"
+    fi
+fi
+
+# =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

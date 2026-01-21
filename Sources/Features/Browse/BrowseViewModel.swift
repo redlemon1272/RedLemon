@@ -22,10 +22,8 @@ class BrowseViewModel: ObservableObject {
     private var memoryCleanupTimer: Timer?
     
     // PERF: Track visible rows to prioritize loading
-    @Published var visibleRowKeys: Set<String> = []
-    
-    // PERF: Concurrency limiter for catalog loading (max 2 simultaneous)
-    private let catalogLoadSemaphore = AsyncSemaphore(limit: 2)
+    // Optimization: Removed @Published to prevent whole-page re-renders on row visibility changes
+    var visibleRowKeys: Set<String> = []
     
     init(appState: AppState) {
         self.appState = appState
@@ -80,10 +78,9 @@ class BrowseViewModel: ObservableObject {
         memoryCleanupTimer?.invalidate()
         tabSwitchTask?.cancel()
         
-        // Cancel all ongoing catalog loading tasks
-        for key in appState.browseIsLoadingCatalogs {
-            appState.browseIsLoadingCatalogs.remove(key)
-        }
+        // Cancel all ongoing catalog loading tasks in one batch to avoid flurry of UI updates
+        appState.browseIsLoadingCatalogs.removeAll()
+        visibleRowKeys.removeAll()
     }
     
     func handleTabChange(to newValue: MediaType) {

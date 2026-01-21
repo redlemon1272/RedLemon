@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 20, 2026 (Part 20: Browse Performance Optimizations - Landmine #86)
+> **Last Updated:** January 20, 2026 (Part 21: Watch Party Freeze - Landmine #87)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -85,6 +85,7 @@
 | **Event: Infinite Loop (No Auto-Exit)** | EOF handler using wrong time reference (user join vs event start) | #84 |
 | **"No Valid Streams" (All .iso files)** | Fake torrents block legitimate localized streams | #85 |
 | **Browse Page Slow/Laggy** | All catalogs + images loading simultaneously | #86 |
+| **App Freeze on Watch Party (Browse)** | Sheet dismissal race condition / root unmount | #87 |
 
 ## 🚨 Critical Landmines
 
@@ -127,6 +128,13 @@
         4. **Removed Scroll Offset Thrashing**: Changed `scrollOffset` bindings to `nil` to prevent AppState updates during scroll.
     *   **Files**: `BrowseViewModel.swift`, `BrowseComponents.swift`, `BrowseView.swift`
     *   **Key Rule**: NEVER load all catalogs at once. Always stagger and prioritize visible content.
+
+87. **Watch Party Freeze (Browse Sheet Race)**: *(Added v1.0.127)*
+    *   **Trigger**: Starting a Watch Party from the "Continue Watching" sheet on the Browse page.
+    *   **Cause**: Swapping `appState.currentView` (unmounting the parent) before the sheet is dismissed.
+    *   **Rule**: Always call `dismiss()` the sheet and use a small delay (0.1s) BEFORE changing the root `currentView`.
+    *   **Files**: `BrowseComponents.swift` (WatchModeSelectionView)
+    *   **Pattern**: `dismiss() -> Task.sleep(0.1s) -> appState.currentView = .target`
 
 ### 21-25: Concurrency & Sync
 21. **Zombie Rooms**: Host quits abruptly.

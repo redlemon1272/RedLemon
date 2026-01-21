@@ -802,14 +802,13 @@ struct SettingsView: View {
                     Image(systemName: "key.viewfinder")
                         .font(.title2)
                         .foregroundColor(.purple)
-                        .foregroundColor(.purple)
                     Text("Account Recovery")
                         .font(.title3.weight(.semibold))
 
                     Spacer()
                 }
 
-                Text("Your account is automatically synced to iCloud. You can also create a manual backup file.")
+                Text("Protect your identity by creating a manual backup file. This file is required to restore your account on another device.")
                     .font(.body)
                     .foregroundColor(.secondary)
 

@@ -13,11 +13,6 @@ struct WatchPartyLobbyView: View {
     @State private var showMediaPicker = false
     @State private var showDescriptionEditor = false
     @State private var editingDescription: String = ""
-    // CRITICAL FIX: Mirror timeUntilStart locally to force SwiftUI View updates
-    // This ensures the countdown becomes visible when timeUntilStart changes
-    @State private var localTimeUntilStart: TimeInterval = 0
-    // CRITICAL FIX: Force View recreation when countdown is set during auto-join
-    @State private var refreshTrigger: Int = 0
     @StateObject private var licenseManager = LicenseManager.shared
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
@@ -57,11 +52,6 @@ struct WatchPartyLobbyView: View {
                     }
                 }
             }
-            .id("lobby-\(refreshTrigger)")  // Force View recreation when refreshTrigger changes
-        }
-        .onChange(of: viewModel.timeUntilStart) { newValue in
-            localTimeUntilStart = newValue
-            NSLog("%@", "[LOBBY_VIEW] timeUntilStart changed to \(Int(newValue))s")
         }
         .onAppear {
             viewModel.appState = appState  // Set weak reference
@@ -84,33 +74,19 @@ struct WatchPartyLobbyView: View {
                 // CRITICAL FIX: Late Joiners should skip the 8s safety delay
                 viewModel.enableInstantJoin()
 
-                // CRITICAL FIX: Only show overlay if countdown hasn't been set yet
-                // If countdown is already > 0, the lobby has already initialized and we don't need the overlay
-                if localTimeUntilStart <= 0 {
-                    NSLog("%@", "[LOBBY_VIEW] Showing overlay (timeUntilStart=\(Int(localTimeUntilStart)))")
-                    isAutoJoining = true
-                    // Auto-ready after a brief delay to allow connection
-                    Task { @MainActor in
-                        try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s
-                        if !viewModel.isReady {
-                            viewModel.toggleReady()
-                        }
-                        // Keep overlay for a bit longer, then hide if not switched
-                        // If room is playing, LobbyViewModel will switch view automatically
-                        try? await Task.sleep(nanoseconds: 3_500_000_000) // 5.0s (3.5s additional)
-
-                        // CRITICAL FIX: Sync localTimeUntilStart BEFORE hiding overlay
-                        // This ensures the countdown becomes visible if it was set during the overlay period
-                        localTimeUntilStart = viewModel.timeUntilStart
-                        refreshTrigger += 1  // Force View recreation to show countdown
-                        NSLog("%@", "[LOBBY_VIEW] Overlay hidden, syncing localTimeUntilStart=\(Int(localTimeUntilStart)), refreshTrigger=\(refreshTrigger)")
-
-                        withAnimation {
-                            isAutoJoining = false
-                        }
+                isAutoJoining = true
+                // Auto-ready after a brief delay to allow connection
+                Task { @MainActor in
+                    try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s
+                    if !viewModel.isReady {
+                        viewModel.toggleReady()
                     }
-                } else {
-                    NSLog("%@", "[LOBBY_VIEW] SKIPPING overlay (countdown already set to \(Int(localTimeUntilStart))s)")
+                    // Keep overlay for a bit longer, then hide if not switched
+                    // If room is playing, LobbyViewModel will switch view automatically
+                    try? await Task.sleep(nanoseconds: 3_500_000_000) // 5.0s (3.5s additional)
+                    withAnimation {
+                        isAutoJoining = false
+                    }
                 }
                 // Reset flag
                 appState.shouldAutoJoinLobby = false
@@ -819,65 +795,58 @@ struct WatchPartyLobbyView: View {
                         }
                     } else {
                         // Guest controls - hide ready button for events (no host coordination needed)
-                        Group {
-                            if room.type == .userRoom {
-                                Button(action: toggleReady) {
-                                    HStack {
-                                        Image(systemName: viewModel.isReady ? "checkmark.circle.fill" : "circle")
-                                        Text(viewModel.isReady ? "Ready!" : "Mark as Ready")
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(viewModel.isReady ? Color.green : Color.white.opacity(0.1))
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
-                                }
-                                .buttonStyle(.plain)
-                            }
-
-                            if viewModel.isStarting {
+                        if room.type == .userRoom {
+                            Button(action: toggleReady) {
                                 HStack {
-                                    ProgressView()
-                                        .scaleEffect(0.8)
-                                    Text("Host is starting in \(viewModel.countdown)...")
-                                        .foregroundColor(.white)
+                                    Image(systemName: viewModel.isReady ? "checkmark.circle.fill" : "circle")
+                                    Text(viewModel.isReady ? "Ready!" : "Mark as Ready")
                                 }
+                                .frame(maxWidth: .infinity)
                                 .padding()
-                            }
-
-                            // CRITICAL FIX: Use localTimeUntilStart to force SwiftUI View updates
-                            // When localTimeUntilStart changes, SwiftUI re-evaluates this View
-                            // Fall back to viewModel.timeUntilStart for manual join (onChange works)
-                            let effectiveTime = max(localTimeUntilStart, viewModel.timeUntilStart)
-
-                            if effectiveTime > 0 {
-                                HStack {
-                                    Image(systemName: "timer")
-                                        .font(.title2)
-                                    // Show different text for events vs playlists
-                                    if room.type == .event {
-                                        Text("Event starts in \(formatDuration(effectiveTime))")
-                                            .font(.title3.weight(.semibold))
-
-                                            .monospacedDigit()
-                                    } else if viewModel.isPlaylistMode {
-                                        Text("Next item in \(formatDuration(effectiveTime))")
-                                            .font(.title3.weight(.semibold))
-
-                                            .monospacedDigit()
-                                    } else {
-                                        Text("Starting in \(formatDuration(effectiveTime))")
-                                            .font(.title3.weight(.semibold))
-
-                                            .monospacedDigit()
-                                    }
-                                }
+                                .background(viewModel.isReady ? Color.green : Color.white.opacity(0.1))
                                 .foregroundColor(.white)
-                                .padding()
-                                .background(Color.black.opacity(0.6))
-                                .cornerRadius(12)
-                                .padding(.bottom, 20)
+                                .cornerRadius(10)
                             }
+                            .buttonStyle(.plain)
+                        }
+
+                        if viewModel.isStarting {
+                            HStack {
+                                ProgressView()
+                                    .scaleEffect(0.8)
+                                Text("Host is starting in \(viewModel.countdown)...")
+                                    .foregroundColor(.white)
+                            }
+                            .padding()
+                        }
+
+                        if viewModel.timeUntilStart > 0 {
+                            HStack {
+                                Image(systemName: "timer")
+                                    .font(.title2)
+                                // Show different text for events vs playlists
+                                if room.type == .event {
+                                    Text("Event starts in \(formatDuration(viewModel.timeUntilStart))")
+                                        .font(.title3.weight(.semibold))
+
+                                        .monospacedDigit()
+                                } else if viewModel.isPlaylistMode {
+                                    Text("Next item in \(formatDuration(viewModel.timeUntilStart))")
+                                        .font(.title3.weight(.semibold))
+
+                                        .monospacedDigit()
+                                } else {
+                                    Text("Starting in \(formatDuration(viewModel.timeUntilStart))")
+                                        .font(.title3.weight(.semibold))
+
+                                        .monospacedDigit()
+                                }
+                            }
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.black.opacity(0.6))
+                            .cornerRadius(12)
+                            .padding(.bottom, 20)
                         }
                     }
                 }

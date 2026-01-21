@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 20, 2026 (Part 19: Event Loop Trap - Landmine #84)
+> **Last Updated:** January 20, 2026 (Part 19: Fake Torrent Fallback - Landmine #85)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -83,6 +83,7 @@
 | **Event: Stuck at 0:00 / Black Screen** | Stream validation seeking to 0 (Watch Party logic on Events) | #84 |
 | **Event: Auto-Starts Early (Countdown Bypass)** | Database createdAt (room creation) vs eventStartTime mismatch | #84 |
 | **Event: Infinite Loop (No Auto-Exit)** | EOF handler using wrong time reference (user join vs event start) | #84 |
+| **"No Valid Streams" (All .iso files)** | Fake torrents block legitimate localized streams | #85 |
 
 ## 🚨 Critical Landmines
 
@@ -313,6 +314,13 @@
         2. **Preserve Event Start Time**: In `LobbyViewModel`, never sync `createdAt` for events from database. Use local `room.createdAt` (already set to `event.startTime` by EventsView).
         3. **Use Wall Clock Time**: In EOF handler, ALWAYS use `eventStartTime` not `lastPlaybackResumeTime`. All viewers sync to event start time regardless of join time.
     *   **Detection**: Video reaches position >0 but then resets to 0, or countdown shows negative values, or `[ERROR_HANDLER] playedDuration` is much shorter than expected.
+85. **Fake Torrent Fallback Trap (The ".iso Masquerade")**: *(Added v1.0.125)*
+    *   **Trigger**: User tries to play new/popular content, gets "No Valid Streams" despite providers showing many results.
+    *   **Cause**: Fake torrents masquerade as legitimate releases (e.g., "The Housemaid (2026) [1080p] [WEBRip]") but contain `.iso` disc images instead of video files. These pass the "clean English" filter, blocking actual working streams (often localized/dubbed CAM releases) from being tried.
+    *   **Symptom**: Logs show all streams being "Blocked restricted extension: .iso" after unlock. Meanwhile, legitimate localized streams (e.g., `*.Dublado.mkv`) exist but were deprioritized and never tried.
+    *   **Rule**: After ALL "clean" streams fail to unlock, StreamService MUST attempt `deprioritizedStreams` (localized/dual audio) as a "last resort" fallback. Better to play a dubbed CAM than show "No Streams Found."
+    *   **Fix Location**: `StreamService.swift` - Added localized fallback loop after main unlock loop.
+    *   **Detection**: Log shows repeated `Blocked Extension ["ext": ".iso"]` for every attempted stream.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

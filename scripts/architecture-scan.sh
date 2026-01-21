@@ -541,6 +541,24 @@ if [[ -f "$FRIENDS_VIEW" ]]; then
 fi
 
 # =============================================================================
+# CHECK 26: Localized Fallback (Landmine #85)
+# =============================================================================
+# Trigger: All "clean" English streams are fake (.iso files), but legitimate
+#          localized streams exist and weren't tried.
+# Fix: StreamService MUST attempt deprioritizedStreams as last resort.
+print_header "Check 26: Localized Fallback (Landmine #85)"
+
+STREAM_SERVICE="$SOURCES_DIR/App/Services/StreamService.swift"
+if [[ -f "$STREAM_SERVICE" ]]; then
+    # Look for the fallback pattern: deprioritizedStreams.isEmpty check followed by retry loop
+    if ! grep -q "deprioritizedStreams.isEmpty" "$STREAM_SERVICE" || ! grep -q "Localized Fallback" "$STREAM_SERVICE"; then
+        report "ERROR" "Landmine #85" "Missing Localized Fallback: StreamService MUST attempt 'deprioritizedStreams' when all 'clean' streams fail. This handles fake torrents (.iso files) that masquerade as English releases." "$STREAM_SERVICE" "0" "Missing fallback loop for localized streams"
+    else
+        echo -e "${GREEN}✅ StreamService has localized fallback logic.${NC}"
+    fi
+fi
+
+# =============================================================================
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

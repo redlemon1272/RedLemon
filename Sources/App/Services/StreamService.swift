@@ -626,6 +626,38 @@ actor StreamService: StreamResolving {
             }
         }
 
+        // FALLBACK: If ALL "clean" streams failed, try deprioritized (localized/dual) streams
+        // This handles cases where fake torrents (.iso files) masquerade as clean English releases
+        // while legitimate localized streams (e.g., Portuguese CAM) exist and would actually work.
+        if !deprioritizedStreams.isEmpty {
+            let deprioritizedNotTried = deprioritizedStreams.filter { deprioritized in
+                !finalStreams.contains { $0.id == deprioritized.id }
+            }
+            
+            if !deprioritizedNotTried.isEmpty {
+                print("🔄 StreamService: All 'clean' streams failed. Attempting \(deprioritizedNotTried.count) localized/dual streams as last resort...")
+                
+                for (index, stream) in deprioritizedNotTried.enumerated() {
+                    print("🔄 StreamService: [Localized Fallback] Trying stream \(index + 1)/\(deprioritizedNotTried.count): \(stream.title)")
+                    
+                    do {
+                        let unlockedStream = try await unlockStream(stream: stream, item: item, season: finalSeason, episode: finalEpisode, bypassTorrentCache: nil)
+                        print("✅ StreamService: [Localized Fallback] SUCCESS: \(stream.title)")
+                        
+                        // Build remaining candidates
+                        let candidateStreams = Array(deprioritizedNotTried.dropFirst(index + 1))
+                        print("📦 StreamService: Returning \(candidateStreams.count) localized candidate streams for fallback")
+                        
+                        return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata, candidateStreams: candidateStreams)
+                    } catch {
+                        LogManager.shared.warning("❌ StreamService: [Localized Fallback \(index + 1)/\(deprioritizedNotTried.count)] Unlock failed for \(stream.title): \(error.localizedDescription)")
+                        lastError = error
+                        continue
+                    }
+                }
+            }
+        }
+        
         throw lastError ?? APIError.noStreamsFound
     }
 

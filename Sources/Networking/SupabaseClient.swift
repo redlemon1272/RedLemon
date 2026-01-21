@@ -266,7 +266,31 @@ class SupabaseClient: RoomManager, UserManager {
 
                     // 🛡️ SECURITY: Identity Proof (Timestamp + UserID + Path)
                     // This prevents replay attacks across users
-                    if let userId = auth.currentUser?.id {
+                    // 
+                    // LANDMINE #88: New users created during onboarding may have auth.currentUser
+                    // still nil when heartbeat fires. This fallback reconstructs it from Keychain.
+                    var effectiveUserId = auth.currentUser?.id
+                    
+                    // Fallback: Reconstruct from Keychain if auth context is stale
+                    if effectiveUserId == nil {
+                        if let storedId = await KeychainManager.shared.get(service: "user_id"),
+                           let uuid = UUID(uuidString: storedId) {
+                            effectiveUserId = uuid
+                            NSLog("%@", "⚠️ SupabaseClient: auth.currentUser was nil, reconstructed from Keychain: \(uuid.uuidString)")
+                            
+                            // Repair the auth context to prevent future misses
+                            if let username = await KeychainManager.shared.getUsername() {
+                                auth.currentUser = AuthUser(
+                                    id: uuid,
+                                    username: username,
+                                    isAdmin: false,  // Will be refreshed on next full auth
+                                    isPremium: false
+                                )
+                            }
+                        }
+                    }
+                    
+                    if let userId = effectiveUserId {
                         // NOTE: This MUST match the server's verify_user_signature function exactly.
                         let identityPayload = "\(timestamp)\(userId.uuidString.lowercased())\(path)"
 
@@ -278,6 +302,9 @@ class SupabaseClient: RoomManager, UserManager {
                         let identitySignature = try CryptoManager.shared.sign(message: identityPayload, privateKeyBase64: privateKey)
                         request.setValue(identitySignature, forHTTPHeaderField: "x-identity-signature")
                         request.setValue(userId.uuidString, forHTTPHeaderField: "x-identity-id")
+                    } else {
+                        // CRITICAL: Identity signature will be missing - server will reject!
+                        NSLog("%@", "⚠️ SupabaseClient: NO USER ID available for identity signature on \(path). Heartbeat WILL FAIL!")
                     }
 
                     NSLog("%@", "🔐 Signed request to \(path)")

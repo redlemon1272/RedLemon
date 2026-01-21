@@ -606,6 +606,25 @@ if [[ -f "$BROWSE_COMPONENTS" ]]; then
 fi
 
 # =============================================================================
+# CHECK 29: Auth Context Fallback (Landmine #88)
+# =============================================================================
+# New users may have auth.currentUser nil during signing. The fallback
+# reconstructs from Keychain to prevent heartbeat failures.
+print_header "Check 29: Auth Context Fallback (Landmine #88)"
+
+SUPABASE_CLIENT="$SOURCES_DIR/Networking/SupabaseClient.swift"
+if [[ -f "$SUPABASE_CLIENT" ]]; then
+    # Verify the fallback pattern exists
+    if grep -q "auth.currentUser was nil, reconstructed from Keychain" "$SUPABASE_CLIENT" && \
+       grep -q "effectiveUserId" "$SUPABASE_CLIENT"; then
+        echo -e "${GREEN}✅ Auth context fallback pattern verified in SupabaseClient.${NC}"
+    else
+        report "ERROR" "Landmine #88" "Missing auth context fallback in signing logic. New users' heartbeats will fail, causing guests to be kicked from watch parties." "$SUPABASE_CLIENT" "0" "Missing effectiveUserId fallback pattern"
+    fi
+fi
+
+# =============================================================================
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

@@ -129,6 +129,18 @@ class AccountExportManager {
             LibraryManager.shared.restoreFromBackup(items: library)
         }
 
+        // Landmine #88: Proactively set auth context to prevent heartbeat failures
+        // The Keychain fallback in makeRequest() will catch this too, but it's better to set it here.
+        if let userId = UUID(uuidString: exportData.userId) {
+            SupabaseClient.shared.auth.currentUser = AuthUser(
+                id: userId,
+                username: exportData.username,
+                isAdmin: false,  // Will be refreshed on next DB lookup
+                isPremium: false
+            )
+            NSLog("✅ AccountImport: Set auth.currentUser for '%@'", exportData.username)
+        }
+
         return exportData
     }
 }

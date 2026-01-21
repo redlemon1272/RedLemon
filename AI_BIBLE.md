@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 20, 2026 (Part 21: Watch Party Freeze - Landmine #87)
+> **Last Updated:** January 21, 2026 (Part 22: Stale Auth Context - Landmine #88)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -86,6 +86,7 @@
 | **"No Valid Streams" (All .iso files)** | Fake torrents block legitimate localized streams | #85 |
 | **Browse Page Slow/Laggy** | All catalogs + images loading simultaneously | #86 |
 | **App Freeze on Watch Party (Browse)** | Sheet dismissal race condition / root unmount | #87 |
+| **Guest Kicked ("Room Closed") - Host OK** | Heartbeat fails due to stale auth.currentUser | #88 |
 
 ## 🚨 Critical Landmines
 
@@ -135,6 +136,14 @@
     *   **Rule**: Always call `dismiss()` the sheet and use a small delay (0.1s) BEFORE changing the root `currentView`.
     *   **Files**: `BrowseComponents.swift` (WatchModeSelectionView)
     *   **Pattern**: `dismiss() -> Task.sleep(0.1s) -> appState.currentView = .target`
+
+88. **Stale Auth Context (Heartbeat Failure)**: *(Added v1.0.128)*
+    *   **Symptom**: Guest gets kicked from Watch Party with "Room Closed" message, but Host continues playing.
+    *   **Trigger**: New user creates account during onboarding, then hosts a Watch Party in the same session.
+    *   **Cause**: `SupabaseClient.auth.currentUser` is set during registration, but the signing logic runs on background threads before it propagates. Without `currentUser.id`, the identity signature (`x-identity-signature`) is missing, causing server to reject heartbeat. After 2 minutes of failed heartbeats, the `cleanup_inactive_rooms_v2()` cron deletes the participant row, triggering room orphan detection.
+    *   **Fix**: `makeRequest()` now has a fallback that reconstructs `auth.currentUser` from Keychain (`user_id`) if it's nil during signing.
+    *   **Files**: `SupabaseClient.swift` (lines 269-293)
+    *   **Rule**: NEVER assume `auth.currentUser` is populated. Always have a Keychain fallback for identity operations.
 
 ### 21-25: Concurrency & Sync
 21. **Zombie Rooms**: Host quits abruptly.

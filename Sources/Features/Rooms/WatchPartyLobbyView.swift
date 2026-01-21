@@ -73,19 +73,22 @@ struct WatchPartyLobbyView: View {
                 // CRITICAL FIX: Late Joiners should skip the 8s safety delay
                 viewModel.enableInstantJoin()
 
-                isAutoJoining = true
-                // Auto-ready after a brief delay to allow connection
-                // Auto-ready after a brief delay to allow connection
-                Task { @MainActor in
-                    try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s
-                    if !viewModel.isReady {
-                        viewModel.toggleReady()
-                    }
-                    // Keep overlay for a bit longer, then hide if not switched
-                    // If room is playing, LobbyViewModel will switch view automatically
-                    try? await Task.sleep(nanoseconds: 3_500_000_000) // 5.0s (3.5s additional)
-                    withAnimation {
-                        isAutoJoining = false
+                // CRITICAL FIX: Only show overlay if countdown hasn't been set yet
+                // If countdown is already > 0, the lobby has already initialized and we don't need the overlay
+                if viewModel.timeUntilStart <= 0 {
+                    isAutoJoining = true
+                    // Auto-ready after a brief delay to allow connection
+                    Task { @MainActor in
+                        try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s
+                        if !viewModel.isReady {
+                            viewModel.toggleReady()
+                        }
+                        // Keep overlay for a bit longer, then hide if not switched
+                        // If room is playing, LobbyViewModel will switch view automatically
+                        try? await Task.sleep(nanoseconds: 3_500_000_000) // 5.0s (3.5s additional)
+                        withAnimation {
+                            isAutoJoining = false
+                        }
                     }
                 }
                 // Reset flag

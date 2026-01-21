@@ -102,24 +102,12 @@ struct FriendProfileView: View {
     private var headerView: some View {
         HStack(spacing: 16) {
             // Avatar
-            ZStack {
-                Circle()
-                    .fill(Color.blue.opacity(0.2))
-                    .frame(width: 40, height: 40)
-
-                Text(friend.username.prefix(1).uppercased())
-                    .font(.title3.weight(.bold))
-                    
-                    .foregroundColor(.blue)
-
-                // Online indicator
-                if isOnline {
-                     Circle()
-                         .fill(Color.green)
-                         .frame(width: 10, height: 10)
-                         .offset(x: 14, y: 14)
-                 }
-            }
+            UserAvatar(
+                username: friend.username,
+                size: 40,
+                isOnline: isOnline,
+                showOnlineIndicator: true
+            )
 
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 4) {

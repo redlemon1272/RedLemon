@@ -290,7 +290,7 @@ struct FriendsView: View {
 
                 Text("No friends online")
                     .font(.title2.weight(.semibold))
-                    
+
 
                 Text("None of your friends are currently online.")
                     .font(.body)
@@ -304,7 +304,7 @@ struct FriendsView: View {
 
                  Text("Find a Friend")
                      .font(.title2.weight(.semibold))
-                     
+
 
                  Text("You have many friends! Use the search bar to find someone specific.")
                      .font(.body)
@@ -318,7 +318,7 @@ struct FriendsView: View {
 
                 Text("No friends yet")
                     .font(.title2.weight(.semibold))
-                    
+
 
                 Text("Add friends to watch together and see what they're watching")
                     .font(.body)
@@ -416,31 +416,23 @@ struct FriendRow: View {
     var body: some View {
         HStack(spacing: 12) {
             // Avatar
-            ZStack {
-                Circle()
-                    .fill(friend.isFavorite ? Color.yellow.opacity(0.2) : Color.blue.opacity(0.2))
-                    .frame(width: 50, height: 50)
-
-                Text(friend.username.prefix(1).uppercased())
-                    .font(.title2.weight(.semibold))
-                    
-                    .foregroundColor(friend.isFavorite ? .yellow : .blue)
-
-                // Online indicator
-                if activity != nil || activity?.currentlyWatching != nil { // Check if online or watching
-                     // We need to know if they are just online (no activity object might mean offline if we use map)
-                     // But activity object is created for online users.
-                     // So if activity exists, they are online.
-                    Circle()
-                        .fill(Color.green)
-                        .frame(width: 12, height: 12)
-                        .overlay(
-                            Circle()
-                                .stroke(Color(NSColor.windowBackgroundColor), lineWidth: 2)
-                        )
-                        .offset(x: 18, y: 18)
+            UserAvatar(
+                username: friend.username,
+                size: 50,
+                isOnline: activity != nil,
+                showOnlineIndicator: true
+            )
+            .overlay(
+                // Favorite star indicator
+                Group {
+                    if friend.isFavorite {
+                        Image(systemName: "star.fill")
+                            .font(.system(size: 10))
+                            .foregroundColor(.yellow)
+                            .offset(x: -18, y: -18)
+                    }
                 }
-            }
+            )
 
             // Info
             VStack(alignment: .leading, spacing: 4) {
@@ -497,7 +489,7 @@ struct FriendRow: View {
             if unreadCount > 0 {
                 Text("\(unreadCount)")
                     .font(.caption.weight(.bold))
-                    
+
                     .foregroundColor(.white)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
@@ -564,15 +556,12 @@ struct FriendRequestRow: View {
     var body: some View {
         HStack(spacing: 12) {
             // Avatar
-            Circle()
-                .fill(Color.purple.opacity(0.2))
-                .frame(width: 50, height: 50)
-                .overlay(
-                    Text(request.fromUsername.prefix(1).uppercased())
-                        .font(.title2.weight(.semibold))
-                        
-                        .foregroundColor(.purple)
-                )
+            UserAvatar(
+                username: request.fromUsername,
+                size: 50,
+                isOnline: false,
+                showOnlineIndicator: false
+            )
 
             // Info
             VStack(alignment: .leading, spacing: 4) {
@@ -662,14 +651,12 @@ struct AddFriendSheet: View {
                                 selectedUser = user
                             }) {
                                 HStack(spacing: 12) {
-                                    Circle()
-                                        .fill(Color.blue.opacity(0.2))
-                                        .frame(width: 40, height: 40)
-                                        .overlay(
-                                            Text(user.username.prefix(1).uppercased())
-                                                .font(.headline)
-                                                .foregroundColor(.blue)
-                                        )
+                                    UserAvatar(
+                                        username: user.username,
+                                        size: 40,
+                                        isOnline: false,
+                                        showOnlineIndicator: false
+                                    )
 
                                     VStack(alignment: .leading, spacing: 2) {
                                         Text(user.username)

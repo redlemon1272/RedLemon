@@ -540,14 +540,12 @@ struct WatchPartyLobbyView: View {
                                                 HStack {
                                                     // Avatar (Existing)
                                                     ZStack(alignment: .topTrailing) {
-                                                        Circle()
-                                                            .fill(Constants.avatarColor(for: friend.username))
-                                                            .frame(width: 32, height: 32)
-                                                            .overlay(
-                                                                Text(friend.username.prefix(1).uppercased())
-                                                                    .font(.caption.bold())
-                                                                    .foregroundColor(.white)
-                                                            )
+                                                        UserAvatar(
+                                                            username: friend.username,
+                                                            size: 32,
+                                                            isOnline: true,
+                                                            showOnlineIndicator: false
+                                                        )
 
                                                         if let count = socialService.unreadCounts[friend.id], count > 0 {
                                                             Circle()
@@ -894,7 +892,7 @@ struct WatchPartyLobbyView: View {
                     // Username / Menu
                     HStack(spacing: 4) {
                         let isSenderHost = chatMsg.senderId.map { $0.caseInsensitiveCompare(viewModel.room.hostId) == .orderedSame } ?? false
-                        let nameColor: Color = isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: chatMsg.username)
+                        let nameColor: Color = isSenderHost ? DesignSystem.Colors.accent : UserAvatar.primaryColor(for: chatMsg.username)
 
                         Text(chatMsg.username)
                             .font(.caption.weight(.semibold))
@@ -1116,14 +1114,13 @@ struct ParticipantRow: View {
 
     var body: some View {
         HStack {
-            Circle()
-                .fill(participant.isHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: participant.name))
-                .frame(width: 32, height: 32)
-                .overlay(
-                    Text(String(participant.name.prefix(1)))
-                        .foregroundColor(.white)
-                        .font(.caption.bold())
-                )
+            UserAvatar(
+                username: participant.name,
+                size: 32,
+                isOnline: true,
+                isHost: participant.isHost,
+                showOnlineIndicator: false
+            )
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(participant.name)

@@ -304,7 +304,7 @@ struct ChatOverlayView: View {
     // MARK: - List Views
 
     private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool, isPremium: Bool, isSenderHost: Bool, timestamp: String? = nil) -> some View {
-        let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: username))
+        let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : UserAvatar.primaryColor(for: username))
 
         if isSystem {
             return AnyView(
@@ -881,7 +881,7 @@ struct ChatOverlayView: View {
         }
 
         var body: some View {
-            let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : Constants.avatarColor(for: username))
+            let nameColor: Color = isSystem ? .gray : (isSenderHost ? DesignSystem.Colors.accent : UserAvatar.primaryColor(for: username))
 
             if isSystem {
                  Text(username)
@@ -1337,10 +1337,12 @@ struct FriendRowButton: View {
                 HStack {
                     // Avatar
                     ZStack(alignment: .topTrailing) {
-                        Circle()
-                            .fill(Constants.avatarColor(for: friend.username))
-                            .frame(width: 32, height: 32)
-                            .overlay(Text(friend.username.prefix(1).uppercased()).foregroundColor(.white))
+                        UserAvatar(
+                            username: friend.username,
+                            size: 32,
+                            isOnline: isOnline,
+                            showOnlineIndicator: false
+                        )
 
                         if unreadCount > 0 {
                             Circle()

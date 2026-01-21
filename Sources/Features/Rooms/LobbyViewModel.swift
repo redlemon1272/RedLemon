@@ -154,6 +154,18 @@ class LobbyViewModel: ObservableObject {
         self.isHost = isHost
         self.realtimeManager = realtimeManager
         self.dataService = dataService
+
+        // CRITICAL FIX: Initialize timeUntilStart immediately for events
+        // This ensures the UI shows the countdown even if connection is delayed/blocked
+        // (e.g. Double onAppear causing duplicate VMs)
+        if room.type == .event {
+             let now = Date()
+             let remaining = room.createdAt.timeIntervalSince(now)
+             if remaining > 0 {
+                 self.timeUntilStart = remaining
+             }
+        }
+
         // NORMALIZE: Ensure all initial participants have lowercase IDs for consistency
         self.participants = room.participants.map { p in
             return Participant(
@@ -327,7 +339,7 @@ class LobbyViewModel: ObservableObject {
                     username: appState?.currentUsername ?? "User",
                     postgresChanges: roomUpdatesConfig
                 )
-                
+
                 await manager.registerObserver(
                     id: "lobby",
                     onPresence: nil,
@@ -417,6 +429,14 @@ class LobbyViewModel: ObservableObject {
                         self.connect() // Recursive call with corrected status
                     } else {
                         print("⚠️ Lobby: Already connected - skipping duplicate connect call")
+
+                        // CRITICAL FIX: Even if already connected, we MUST start the local ticker for events
+                        // The View might be a new instance (VM2) observing a new ViewModel, even if the socket (Singleton/Manager) matches.
+                        // If we skip this, VM2's timeUntilStart remains 0 and the countdown is hidden.
+                        if self.room.type == .event && self.timeUntilStart > 0 {
+                             print("⏱️ Lobby: Connection active, starting local event ticker")
+                             self.startEventCountdownTicker()
+                        }
                     }
                 }
             }
@@ -539,6 +559,10 @@ class LobbyViewModel: ObservableObject {
                         if room.type == .event {
                              self.timeUntilStart = self.room.createdAt.timeIntervalSince(Date())
                              print("⏳ Lobby: Event start time from local room. Time until start: \(self.timeUntilStart)")
+
+                             if self.timeUntilStart > 0 {
+                                 self.startEventCountdownTicker()
+                             }
                         }
 
                         // CRITICAL FIX: Grace Period Check
@@ -550,7 +574,7 @@ class LobbyViewModel: ObservableObject {
                              print("🛑 Lobby: Ignoring auto-start on connect - Grace Period active")
                              isGracePeriodActive = true
                         }
-                        
+
                         // Auto-start for event rooms (always) or regular rooms that are already playing
                         // BUT respect grace period
                         if !isGracePeriodActive {
@@ -639,7 +663,7 @@ class LobbyViewModel: ObservableObject {
                    msg.contains("unique constraint") ||
                    msg.contains("23505") {
                     print("ℹ️ Lobby: User already in room (Duplicate Key) - Proceeding to setup Realtime.")
-                    
+
                     // Proceed to Realtime setup even in catch block if it's just a duplicate key error
                     await self.setupRealtimeSubscription()
 
@@ -833,11 +857,11 @@ class LobbyViewModel: ObservableObject {
         self.playbackEndedTimestamp = Date()
         self.isStarting = false
         self.transitionState.isStarting = false
-        
-        // CRITICAL FIX: Mark client as NOT READY after playback finishes. 
+
+        // CRITICAL FIX: Mark client as NOT READY after playback finishes.
         // This ensures they stay in the lobby until they (or the host) decide to start again.
         // It also prevents the "Auto-start Loop" if the host stays in 'Playing' state.
-        // AI_BIBLE: System events are wall-clock synced and ignore these flags; 
+        // AI_BIBLE: System events are wall-clock synced and ignore these flags;
         // resetting them here can cause a 10s 'dwell time' loop on the next event.
         if room.type != .event {
             self.isReady = false
@@ -1512,6 +1536,49 @@ class LobbyViewModel: ObservableObject {
     // MARK: - Helper Functions
 
 
+    // MARK: - Event Logic
+
+    // CRITICAL FIX: Dedicated ticker that runs regardless of connection state
+    func startEventCountdownTicker() {
+        // Prevent duplicate tickers
+        // We check if the task is already running (non-nil)
+        if countdownTask != nil {
+            return
+        }
+
+        print("⏱️ Lobby: Starting Event Countdown Ticker")
+
+        countdownTask = Task { [weak self] in
+             while !Task.isCancelled {
+                 guard let self = self else { return }
+
+                 let now = Date()
+                 let remaining = self.room.createdAt.timeIntervalSince(now)
+
+                 await MainActor.run {
+                     if remaining <= 0 {
+                         self.timeUntilStart = 0
+                         // Only trigger auto-start if we are not already starting
+                         if !self.isStarting {
+                             self.autoStartSystemEvent()
+                         }
+                         // Cancel task after triggering
+                         self.countdownTask?.cancel()
+                         self.countdownTask = nil
+                     } else {
+                         self.timeUntilStart = remaining
+                         // Debug: Log every 10 seconds to reduce spam
+                         if Int(remaining) % 10 == 0 {
+                             NSLog("%@", "[COUNTDOWN] Updated to \(Int(remaining))s")
+                         }
+                     }
+                 }
+
+                 try? await Task.sleep(nanoseconds: 1_000_000_000)
+             }
+        }
+    }
+
     func autoStartSystemEvent(sessionId: String? = nil) {
         if isHost {
             if isStarting || stateMachine.isCountingDown {
@@ -1571,27 +1638,9 @@ class LobbyViewModel: ObservableObject {
         if timeUntilStart > 0 {
             print("⏳ Lobby: Event starts in \(Int(timeUntilStart))s. Waiting...")
             self.timeUntilStart = timeUntilStart
-            NSLog("%@", "[COUNTDOWN] timeUntilStart set to \(Int(timeUntilStart))s - UI should show countdown")
 
-            countdownTask?.cancel()
-            countdownTask = Task { [weak self] in
-                while !Task.isCancelled {
-                    guard let self = self else { return }
-                    let remaining = self.room.createdAt.timeIntervalSince(Date())
-                    if remaining <= 0 {
-                        self.timeUntilStart = 0
-                        self.autoStartSystemEvent(sessionId: sessionId)
-                        return
-                    } else {
-                        self.timeUntilStart = remaining
-                        // Debug: Log every 10 seconds to reduce spam
-                        if Int(remaining) % 10 == 0 {
-                            NSLog("%@", "[COUNTDOWN] Updated to \(Int(remaining))s")
-                        }
-                    }
-                    try? await Task.sleep(nanoseconds: 1_000_000_000)
-                }
-            }
+            // start ticker
+            startEventCountdownTicker()
             return
         }
 

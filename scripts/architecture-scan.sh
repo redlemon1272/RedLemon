@@ -624,6 +624,36 @@ if [[ -f "$SUPABASE_CLIENT" ]]; then
 fi
 
 # =============================================================================
+# CHECK 30: False EOF Loop (Landmine #89)
+# =============================================================================
+# Trigger: Missing lastKnownGoodPosition tracking or usage in EOF detection.
+print_header "Check 30: False EOF Loop (Landmine #89)"
+
+MPV_WRAPPER="$SOURCES_DIR/Features/Player/MPVWrapper.swift"
+if [[ -f "$MPV_WRAPPER" ]]; then
+    ISSUES=0
+    # Verify property exists
+    if ! grep -q "lastKnownGoodPosition" "$MPV_WRAPPER"; then
+        report "ERROR" "Landmine #89" "Missing lastKnownGoodPosition: MPVWrapper MUST track the highest playback position to prevent false EOF detection during edge-case seeks." "$MPV_WRAPPER" "1" "Missing lastKnownGoodPosition property"
+        ((ISSUES++))
+    fi
+    # Verify it is used in progress calculation
+    if ! grep -q "effectivePosition = max(currentTime, lastKnownGoodPosition)" "$MPV_WRAPPER"; then
+         report "ERROR" "Landmine #89" "Missing effectivePosition calculation: MPVWrapper MUST use max(currentTime, lastKnownGoodPosition) for progress calculations at EOF." "$MPV_WRAPPER" "1" "Missing effectivePosition logic"
+         ((ISSUES++))
+    fi
+    # Verify it is reset
+    if ! grep -q "lastKnownGoodPosition = 0" "$MPV_WRAPPER"; then
+          report "ERROR" "Landmine #89" "Missing lastKnownGoodPosition reset: MPVWrapper MUST reset position tracking when a new file starts." "$MPV_WRAPPER" "1" "Missing reset logic"
+          ((ISSUES++))
+    fi
+
+    if [[ $ISSUES -eq 0 ]]; then
+        echo -e "${GREEN}✅ False EOF protection (Landmine #89) verified in MPVWrapper.${NC}"
+    fi
+fi
+
+# =============================================================================
 
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"

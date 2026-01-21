@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 21, 2026 (Part 22: Stale Auth Context - Landmine #88)
+> **Last Updated:** January 21, 2026 (Part 22: False EOF Loop - Landmine #89)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -1354,6 +1354,16 @@ When performing async cleanup (WS disconnect, DB updates), always capture proper
    - Pre-flight/Health checks: **10s** minimum.
    - Resource Search/Download: **15s** minimum.
 3. **Task Cancellation Safety**: When using `withThrowingTaskGroup` for time-boxed tasks (like attaching subtitles), ensures the `Task.sleep` duration allows for the network request to actually succeed (8-10s).
+
+### 2. The "False EOF" Loop (Landmine #89)
+**Symptom**: In Watch Parties, when the Host skips to the end, the player attempts to retry/restart the movie instead of returning to the lobby. Guests correctly return to the lobby.
+
+**Root Cause**: MPV Quirk. When seeking to the very end, MPV's `currentTime` can reset to `0.0` milliseconds before the `END_FILE` event fires. The existing "Suspicious EOF" logic (which checks if progress < 95%) sees `0%` progress and flags it as a `Transient EOF Glitch` (error), triggering the `PlayerViewModel` retry logic.
+
+**Mandatory Solution**:
+1. **Track Last Good Position**: `MPVWrapper` MUST maintain a `lastKnownGoodPosition` property that updates whenever `currentTime` advances.
+2. **Effective Position Calculation**: During `END_FILE` handling, use `max(currentTime, lastKnownGoodPosition)` as the effective position for progress calculations.
+3. **Reset**: Always reset `lastKnownGoodPosition = 0` when starting a new file.
 
 ## Part 21: Critical Async Patterns
 

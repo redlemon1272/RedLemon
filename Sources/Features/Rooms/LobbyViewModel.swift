@@ -1571,6 +1571,7 @@ class LobbyViewModel: ObservableObject {
         if timeUntilStart > 0 {
             print("⏳ Lobby: Event starts in \(Int(timeUntilStart))s. Waiting...")
             self.timeUntilStart = timeUntilStart
+            NSLog("%@", "[COUNTDOWN] timeUntilStart set to \(Int(timeUntilStart))s - UI should show countdown")
 
             countdownTask?.cancel()
             countdownTask = Task { [weak self] in
@@ -1583,6 +1584,10 @@ class LobbyViewModel: ObservableObject {
                         return
                     } else {
                         self.timeUntilStart = remaining
+                        // Debug: Log every 10 seconds to reduce spam
+                        if Int(remaining) % 10 == 0 {
+                            NSLog("%@", "[COUNTDOWN] Updated to \(Int(remaining))s")
+                        }
                     }
                     try? await Task.sleep(nanoseconds: 1_000_000_000)
                 }

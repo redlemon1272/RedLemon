@@ -52,6 +52,7 @@ struct WatchPartyLobbyView: View {
                     }
                 }
             }
+            .id("lobby-view-\(Int(viewModel.timeUntilStart))") // Force refresh when countdown changes
         }
         .onAppear {
             viewModel.appState = appState  // Set weak reference
@@ -858,7 +859,6 @@ struct WatchPartyLobbyView: View {
                                 .padding(.bottom, 20)
                             }
                         }
-                        .id("guest-controls-\(Int(viewModel.timeUntilStart))") // Force refresh when countdown changes
                     }
                 }
                 .padding(.horizontal)

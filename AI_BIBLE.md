@@ -121,12 +121,11 @@
     *   **Trigger**: Browse page feels sluggish compared to Events/Discover.
     *   **Cause**: Loading 10+ streaming service catalogs + 100+ poster images simultaneously overwhelms CPU/memory.
     *   **Optimizations Applied**:
-        1. **Progressive Row Loading**: Only render first 3 service rows initially, reveal more as user scrolls.
-        2. **Staggered Catalog Loading**: 150ms delay between catalog fetches, visible rows prioritized.
-        3. **NSCache Fast-Path**: `PosterImageCache` provides synchronous image retrieval (no async overhead).
-        4. **Visibility Tracking**: `visibleRowKeys` prioritizes loading for rows currently on screen.
-        5. **Removed Scroll Offset Thrashing**: Changed `scrollOffset` bindings to `nil` to prevent AppState updates during scroll.
-    *   **Files**: `BrowseViewModel.swift`, `BrowseComponents.swift`, `BrowseView.swift`, `AsyncSemaphore.swift`
+        1. **Staggered Catalog Loading**: 150ms delay between catalog fetches, visible rows prioritized first.
+        2. **NSCache Fast-Path**: `PosterImageCache` provides synchronous image retrieval (no async overhead).
+        3. **Visibility Tracking**: `visibleRowKeys` prioritizes loading for rows currently on screen.
+        4. **Removed Scroll Offset Thrashing**: Changed `scrollOffset` bindings to `nil` to prevent AppState updates during scroll.
+    *   **Files**: `BrowseViewModel.swift`, `BrowseComponents.swift`, `BrowseView.swift`
     *   **Key Rule**: NEVER load all catalogs at once. Always stagger and prioritize visible content.
 
 ### 21-25: Concurrency & Sync

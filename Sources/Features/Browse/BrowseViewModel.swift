@@ -24,9 +24,6 @@ class BrowseViewModel: ObservableObject {
     // PERF: Track visible rows to prioritize loading
     @Published var visibleRowKeys: Set<String> = []
     
-    // PERF: Progressive row loading - start with 3, expand as user scrolls
-    @Published var progressiveRowCount: Int = 3
-    
     // PERF: Concurrency limiter for catalog loading (max 2 simultaneous)
     private let catalogLoadSemaphore = AsyncSemaphore(limit: 2)
     
@@ -93,8 +90,7 @@ class BrowseViewModel: ObservableObject {
         // Persist tab selection to AppState
         appState.browseSelectedTab = newValue.index
         
-        // PERF: Reset progressive loading on tab switch
-        progressiveRowCount = 3
+        // PERF: Reset visibility tracking on tab switch
         visibleRowKeys.removeAll()
         
         // Skip reload if this is a navigation restore
@@ -185,17 +181,6 @@ class BrowseViewModel: ObservableObject {
     
     func showWatchModeSelection(for historyItem: WatchHistoryItem) {
         selectedHistoryItem = historyItem
-    }
-    
-    // PERF: Reveal more rows as user scrolls (progressive loading)
-    func revealMoreRows(count: Int = 3) {
-        let maxRows = getStreamingServiceKeys().count
-        let newCount = min(progressiveRowCount + count, maxRows)
-        if newCount > progressiveRowCount {
-            withAnimation(.easeOut(duration: 0.2)) {
-                progressiveRowCount = newCount
-            }
-        }
     }
     
     // MARK: - Catalog Loading Logic

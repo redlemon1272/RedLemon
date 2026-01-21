@@ -102,12 +102,9 @@ struct BrowseViewContent: View {
                                     )
                                     .id("trending")
 
-                                    // Streaming service catalogs - PERF: Progressive loading
-                                    // Only render first 3 immediately, rest appear as user scrolls
-                                    let allKeys = viewModel.getStreamingServiceKeys()
-                                    let visibleCount = viewModel.progressiveRowCount
-                                    
-                                    ForEach(Array(allKeys.prefix(visibleCount)), id: \.self) { serviceKey in
+                                    // Streaming service catalogs
+                                    // PERF: Rows are all rendered, but catalogs load with staggered delays
+                                    ForEach(viewModel.getStreamingServiceKeys(), id: \.self) { serviceKey in
                                         LazyStreamingServiceRow(
                                             title: viewModel.getServiceDisplayName(serviceKey),
                                             catalogKey: serviceKey,
@@ -125,16 +122,6 @@ struct BrowseViewContent: View {
                                             }
                                         )
                                         .id(serviceKey)
-                                    }
-                                    
-                                    // PERF: "Load More" trigger at bottom - reveals more rows as user scrolls
-                                    if visibleCount < allKeys.count {
-                                        Color.clear
-                                            .frame(height: 1)
-                                            .onAppear {
-                                                // Reveal 3 more rows when user scrolls near bottom
-                                                viewModel.revealMoreRows(count: 3)
-                                            }
                                     }
                                 }
                                 .padding(.bottom)

@@ -562,23 +562,14 @@ fi
 # CHECK 27: Browse Performance Optimizations (Landmine #86)
 # =============================================================================
 # Trigger: Browse page loading 10+ catalogs + 100+ images simultaneously.
-# Fix: Progressive row loading, staggered fetches, NSCache fast-path.
+# Fix: Staggered fetches, NSCache fast-path.
 print_header "Check 27: Browse Performance (Landmine #86)"
 
-BROWSE_VM="$SOURCES_DIR/Features/Browse/BrowseViewModel.swift"
 BROWSE_COMPONENTS="$SOURCES_DIR/Features/Browse/BrowseComponents.swift"
 
 PERF_ISSUES=0
 
-# Check 1: Progressive row loading exists
-if [[ -f "$BROWSE_VM" ]]; then
-    if ! grep -q "progressiveRowCount" "$BROWSE_VM"; then
-        report "WARNING" "Landmine #86" "Missing Progressive Row Loading: BrowseViewModel should have 'progressiveRowCount' to limit initial row rendering." "$BROWSE_VM" "0" "Missing progressiveRowCount"
-        ((PERF_ISSUES++))
-    fi
-fi
-
-# Check 2: PosterImageCache (NSCache fast-path) exists
+# Check: PosterImageCache (NSCache fast-path) exists
 if [[ -f "$BROWSE_COMPONENTS" ]]; then
     if ! grep -q "PosterImageCache" "$BROWSE_COMPONENTS"; then
         report "WARNING" "Landmine #86" "Missing PosterImageCache: BrowseComponents should have 'PosterImageCache' (NSCache) for synchronous image retrieval." "$BROWSE_COMPONENTS" "0" "Missing PosterImageCache"

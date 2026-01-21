@@ -16,6 +16,8 @@ struct WatchPartyLobbyView: View {
     // CRITICAL FIX: Mirror timeUntilStart locally to force SwiftUI View updates
     // This ensures the countdown becomes visible when timeUntilStart changes
     @State private var localTimeUntilStart: TimeInterval = 0
+    // CRITICAL FIX: Force View recreation when countdown is set during auto-join
+    @State private var refreshTrigger: Int = 0
     @StateObject private var licenseManager = LicenseManager.shared
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
@@ -55,6 +57,7 @@ struct WatchPartyLobbyView: View {
                     }
                 }
             }
+            .id("lobby-\(refreshTrigger)")  // Force View recreation when refreshTrigger changes
         }
         .onChange(of: viewModel.timeUntilStart) { newValue in
             localTimeUntilStart = newValue
@@ -99,7 +102,8 @@ struct WatchPartyLobbyView: View {
                         // CRITICAL FIX: Sync localTimeUntilStart BEFORE hiding overlay
                         // This ensures the countdown becomes visible if it was set during the overlay period
                         localTimeUntilStart = viewModel.timeUntilStart
-                        NSLog("%@", "[LOBBY_VIEW] Overlay hidden, syncing localTimeUntilStart=\(Int(localTimeUntilStart))")
+                        refreshTrigger += 1  // Force View recreation to show countdown
+                        NSLog("%@", "[LOBBY_VIEW] Overlay hidden, syncing localTimeUntilStart=\(Int(localTimeUntilStart)), refreshTrigger=\(refreshTrigger)")
 
                         withAnimation {
                             isAutoJoining = false

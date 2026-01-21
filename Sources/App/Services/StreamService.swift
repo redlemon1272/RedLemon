@@ -11,7 +11,7 @@ struct StreamResolutionResult {
 
 /// Protocol for resolving and unlocking streams
 protocol StreamResolving {
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, filterExtended: Bool, triggerSource: String) async throws -> StreamResolutionResult
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, preferredTitle: String?, filterExtended: Bool, triggerSource: String) async throws -> StreamResolutionResult
     func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?, bypassTorrentCache: Bool?) async throws -> Stream
 }
 
@@ -98,6 +98,7 @@ actor StreamService: StreamResolving {
         episode: Int? = nil,
         metadata: MediaMetadata? = nil,
         preferredInfoHash: String? = nil,
+        preferredTitle: String? = nil, // AI_BIBLE #91: Fallback for title matching when hash is nil
         filterExtended: Bool = false,
         triggerSource: String = "manual"
     ) async throws -> StreamResolutionResult {
@@ -238,6 +239,30 @@ actor StreamService: StreamResolving {
             }
         }
 
+        // AI_BIBLE #91: Title-based fallback matching when hash is nil (DebridSearch streams)
+        // This allows Guests to play the same file as Host when the provider doesn't supply hashes
+        if forcedStream == nil, let targetTitle = preferredTitle, !targetTitle.isEmpty {
+            print("🔗 StreamService: No hash available, attempting title-based match: \(targetTitle.prefix(50))...")
+            let allBuckets = [buckets.uhd4k, buckets.fullHD, buckets.hd, buckets.sd]
+            let normalizedTarget = targetTitle.lowercased()
+
+            for bucket in allBuckets {
+                let streams = extractStreams(from: bucket)
+                // Match by title (case-insensitive, contains check for flexibility)
+                if let match = streams.first(where: { $0.title.lowercased().contains(normalizedTarget) || normalizedTarget.contains($0.title.lowercased()) }) {
+                    print("✅ StreamService: Found stream by title match! Locking to: \(match.title.prefix(50))")
+                    await SessionRecorder.shared.log(category: .resolver, message: "Host Stream Title Match", metadata: ["title": targetTitle.prefix(50).description])
+                    forcedStream = match
+                    break
+                }
+            }
+
+            if forcedStream == nil {
+                print("⚠️ StreamService: Title match failed. Guest will resolve independently (may get different file).")
+                await SessionRecorder.shared.log(category: .resolver, message: "Host Stream Title Not Found", metadata: ["title": targetTitle.prefix(50).description])
+            }
+        }
+
         // If forced stream is found, we skip standard selection logic
         if let match = forcedStream {
             streamsToTry = [match]
@@ -335,14 +360,14 @@ actor StreamService: StreamResolving {
         // Step 3.5: Apply Keyword Safety Filter (Remux, etc) AND Extended Cut Filter
         // User reported performance issues (spinning beach ball) with Remux files
         // Also blocking low-quality cam rips to ensure premium experience
-        
+
         // Keywords that are ALWAYS blocked (Performance/Critical issues)
         let alwaysBlocked = ["remux"]
-        
+
         // Keywords blocked for QUALITY (Telesync/Cam/HDRip)
         // These are unacceptable for Events, but acceptable for Solo if nothing else exists
         let qualityBlocked = ["telesync", "cam", "hdts", "hd-ts", "hc", "hdtc", "hdrip"]
-        
+
         // Keywords blocked for RUNTIME/EDITION (Events only)
         let extendedBlocked = ["extended", "director", "uncut", "unrated", "special edition"]
 
@@ -372,7 +397,7 @@ actor StreamService: StreamResolving {
             }
             return stream
         }
-        
+
         // FALLBACK LOGIC (Solo Mode Only)
         // If we filtered everything out in Solo mode (likely because only Cams/HDRips exist),
         // we relax the filter to allow them.
@@ -385,7 +410,7 @@ actor StreamService: StreamResolving {
                 // Solo Mode: Relax quality filter
                 print("⚠️ StreamService: No streams passed Quality Filter. Relaxing to allow Cam/HDRip for Solo playback.")
                 activeBlockedKeywords = alwaysBlocked // Reset to only block Remux
-                
+
                 keywordFiltered = filteredStreams.compactMap { stream -> Stream? in
                     let titleLower = stream.title.lowercased()
                     if activeBlockedKeywords.contains(where: { titleLower.contains($0) }) {
@@ -633,21 +658,21 @@ actor StreamService: StreamResolving {
             let deprioritizedNotTried = deprioritizedStreams.filter { deprioritized in
                 !finalStreams.contains { $0.id == deprioritized.id }
             }
-            
+
             if !deprioritizedNotTried.isEmpty {
                 print("🔄 StreamService: All 'clean' streams failed. Attempting \(deprioritizedNotTried.count) localized/dual streams as last resort...")
-                
+
                 for (index, stream) in deprioritizedNotTried.enumerated() {
                     print("🔄 StreamService: [Localized Fallback] Trying stream \(index + 1)/\(deprioritizedNotTried.count): \(stream.title)")
-                    
+
                     do {
                         let unlockedStream = try await unlockStream(stream: stream, item: item, season: finalSeason, episode: finalEpisode, bypassTorrentCache: nil)
                         print("✅ StreamService: [Localized Fallback] SUCCESS: \(stream.title)")
-                        
+
                         // Build remaining candidates
                         let candidateStreams = Array(deprioritizedNotTried.dropFirst(index + 1))
                         print("📦 StreamService: Returning \(candidateStreams.count) localized candidate streams for fallback")
-                        
+
                         return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata, candidateStreams: candidateStreams)
                     } catch {
                         LogManager.shared.warning("❌ StreamService: [Localized Fallback \(index + 1)/\(deprioritizedNotTried.count)] Unlock failed for \(stream.title): \(error.localizedDescription)")
@@ -657,7 +682,7 @@ actor StreamService: StreamResolving {
                 }
             }
         }
-        
+
         throw lastError ?? APIError.noStreamsFound
     }
 

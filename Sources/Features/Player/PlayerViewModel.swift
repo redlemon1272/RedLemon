@@ -83,6 +83,7 @@ class PlayerViewModel: ObservableObject {
             episode: episode,
             metadata: metadata,
             preferredInfoHash: streamHash,
+            preferredTitle: nil,
             filterExtended: false,
             triggerSource: "preload"
         )
@@ -452,12 +453,39 @@ class PlayerViewModel: ObservableObject {
                      episode: effectiveEpisode, // Use effective variables
                      metadata: metadata,
                      preferredInfoHash: hostStreamHash,
+                     preferredTitle: nil, // Have hash, don't need title fallback
                      filterExtended: false,
                      triggerSource: triggerSource
                  )
                  resolvedStream = result.stream
                  resolvedMetadata = result.metadata
                  Task { @MainActor in self.streamQueue = result.candidateStreams }
+
+            // AI_BIBLE #91: Title-based fallback when hash is nil (DebridSearch streams)
+            } else if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
+                      (roomId == nil || watchPartyRoom.id.caseInsensitiveCompare(roomId ?? "") == .orderedSame), // OK
+                      watchPartyRoom.selectedStreamHash == nil,
+                      let hostStreamTitle = watchPartyRoom.selectedStreamTitle, !hostStreamTitle.isEmpty {
+
+                 // TITLE-BASED LOCK (For DebridSearch / no-hash providers)
+                 LoggingManager.shared.info(.watchParty, message: "[SYNC VERIFICATION] LOCKING TO SHARED STREAM (TITLE FALLBACK) 🔒")
+                 NSLog("🔗 GUEST: Using title fallback for stream matching: %@", hostStreamTitle.prefix(50).description)
+
+                 let result = try await streamResolver.resolveStream(
+                     item: item,
+                     quality: quality,
+                     season: effectiveSeason,
+                     episode: effectiveEpisode,
+                     metadata: metadata,
+                     preferredInfoHash: nil, // No hash available
+                     preferredTitle: hostStreamTitle, // Use title for matching
+                     filterExtended: false,
+                     triggerSource: triggerSource
+                 )
+                 resolvedStream = result.stream
+                 resolvedMetadata = result.metadata
+                 Task { @MainActor in self.streamQueue = result.candidateStreams }
+
             } else {
                 // Standard resolution with Auto-Retry
                 let maxRetries = 3
@@ -481,6 +509,7 @@ class PlayerViewModel: ObservableObject {
                             episode: effectiveEpisode, // Use effective variables
                             metadata: metadata,
                             preferredInfoHash: nil,
+                            preferredTitle: nil,
                             filterExtended: false,
                             triggerSource: triggerSource
                         )
@@ -643,6 +672,7 @@ class PlayerViewModel: ObservableObject {
                     episode: episode,
                     metadata: metadata,
                     preferredInfoHash: nil,
+                    preferredTitle: nil,
                     filterExtended: false,
                     triggerSource: "preload"
                 )
@@ -728,6 +758,7 @@ class PlayerViewModel: ObservableObject {
                     episode: targetEpisode,
                     metadata: metadata,
                     preferredInfoHash: nil,
+                    preferredTitle: nil,
                     filterExtended: false,
                     triggerSource: "watch_party_resolve"
                 )
@@ -805,6 +836,7 @@ class PlayerViewModel: ObservableObject {
                 room.selectedStreamHash = finalStream.infoHash
                 room.selectedFileIdx = finalStream.fileIdx
                 room.selectedQuality = finalStream.quality
+                room.selectedStreamTitle = finalStream.title // AI_BIBLE #91: Fallback for title matching
                 room.unlockedStreamURL = finalStream.url
                 self.currentWatchPartyRoom = room
             }
@@ -816,10 +848,11 @@ class PlayerViewModel: ObservableObject {
             fileIdx: finalStream.fileIdx,
             quality: finalStream.quality,
             unlockedUrl: finalStream.url,
+            sourceQuality: finalStream.title, // AI_BIBLE #91: Fallback for Guest matching when hash is nil
             resetPlayback: true // RESET STATE: Ensure room is paused/lobby for new media
         )
 
-        LoggingManager.shared.info(.watchParty, message: "Stream persisted! Hash: \(finalStream.infoHash ?? "nil")")
+        LoggingManager.shared.info(.watchParty, message: "Stream persisted! Hash: \(finalStream.infoHash ?? "nil"), Title: \(finalStream.title)")
         return finalStream
     }
 
@@ -901,6 +934,7 @@ class PlayerViewModel: ObservableObject {
                             fileIdx: unlockedStream.fileIdx,
                             quality: unlockedStream.quality,
                             unlockedUrl: unlockedStream.url,
+                            sourceQuality: unlockedStream.title, // AI_BIBLE #91
                             resetPlayback: true // RESET STATE: Manual stream change implies new session start
                         )
                     } catch {
@@ -946,7 +980,7 @@ class PlayerViewModel: ObservableObject {
         // CRITICAL FIX (Landmine #44): Premature EOF Logic (Purge Retry)
         if error == "PREMATURE_EOF" {
             LoggingManager.shared.error(.videoRendering, message: "PlayerVM: Handling PREMATURE_EOF - Triggering PURGE retry.")
-            
+
             // If we have a stream selected, try to replay it with FORCE FRESH (Purge) mode
             if let stream = self.selectedStream {
                 Task { @MainActor in
@@ -991,6 +1025,7 @@ class PlayerViewModel: ObservableObject {
                            episode: episode,
                            metadata: self.selectedMetadata ?? nil,
                            preferredInfoHash: nil, // Don't force the failed hash
+                           preferredTitle: nil,
                            filterExtended: false,
                            triggerSource: "emergency_resolve"
                        )
@@ -1077,6 +1112,7 @@ class PlayerViewModel: ObservableObject {
                                     fileIdx: unlockedStream.fileIdx,
                                     quality: unlockedStream.quality,
                                     unlockedUrl: unlockedStream.url,
+                                    sourceQuality: unlockedStream.title, // AI_BIBLE #91
                                     resetPlayback: true // RESET STATE: Failover needs to sync guests to new file
                                 )
                                 LoggingManager.shared.info(.watchParty, message: "Watch Party Failover: Room updated successfully")
@@ -1242,9 +1278,9 @@ class PlayerViewModel: ObservableObject {
         // Premature EOF Detection for System Events
         if isEventPlayback, let start = eventStartTime, let metadata = selectedMetadata {
              // START: RELAXED EOF CHECK
-             // Original logic was too strict (300s/5min tolerance) which caused infinite loops 
+             // Original logic was too strict (300s/5min tolerance) which caused infinite loops
              // when metadata runtime (IMDb) didn't match actual file runtime (e.g. different cuts, long credits).
-             
+
              let cleanedRuntime = (metadata.runtime ?? "0").filter { "0123456789.".contains($0) }
              let runtimeMinutes = Double(cleanedRuntime) ?? 0
              let runtimeSeconds = runtimeMinutes * 60
@@ -1253,17 +1289,17 @@ class PlayerViewModel: ObservableObject {
                   let now = Date()
                   let timeSinceStart = now.timeIntervalSince(start)
                   let timeRemaining = runtimeSeconds - timeSinceStart
-                  
+
                   // Calculate percentage of expected runtime completed
                   let percentCompleted = (timeSinceStart / runtimeSeconds) * 100
-                  
+
                   LoggingManager.shared.debug(.videoRendering, message: "Event EOF Check: Metadata Runtime: \(Int(runtimeMinutes))m, Time Since Start: \(Int(timeSinceStart))s, Remaining: \(Int(timeRemaining))s (\(Int(percentCompleted))%)")
 
                   // New Tolerance Logic:
                   // 1. If we have played > 85% of expected runtime, trust EOF (credits, variable runtimes).
                   // 2. OR if time remaining is less than 15 minutes (900s) (catch-all for shorter items).
                   // 3. ONLY trigger failover if we are significantly early (e.g. 50% through).
-                  
+
                   if percentCompleted < 85.0 && timeRemaining > 900 {
                        LoggingManager.shared.error(.videoRendering, message: "⚠️ Premature EOF detected (Too Early)! Played \(Int(percentCompleted))% (<85%) and \(Int(timeRemaining))s (>900s) remaining. Triggering Failover.")
                        handlePlaybackError("Premature EOF (Played \(Int(percentCompleted))%)")
@@ -1308,11 +1344,11 @@ class PlayerViewModel: ObservableObject {
             // CRITICAL FIX: Clear room state to force clean exit and re-join
             self.currentRoomId = nil
             self.currentWatchPartyRoom = nil
-            
+
             if let appState = appState {
                  appState.currentView = .events
                  appState.shouldAutoJoinLobby = true
-                 
+
                  // CRITICAL FIX: Reset idempotency lock for events
                  // This ensures the NEXT event can start even if it uses the same stream/media
                  lastAutoStartedSessionId = nil

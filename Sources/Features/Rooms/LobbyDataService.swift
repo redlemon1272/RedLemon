@@ -50,6 +50,7 @@ protocol LobbyDataService {
         fileIdx: Int?,
         quality: String?,
         unlockedUrl: String?,
+        sourceQuality: String?,
         resetPlayback: Bool
     ) async throws
 

@@ -162,7 +162,7 @@ class LobbyDatabaseManager: ObservableObject {
 
         // 1. Check if we just finished playback (grace period)
         // AI_BIBLE: Bypass for events to ensure seamless progression
-        if viewModel.room.type != .event, 
+        if viewModel.room.type != .event,
            let endedAt = viewModel.playbackEndedTimestamp,
            Date().timeIntervalSince(endedAt) < 5 {
             NSLog("%@", "🛑 Guest: Ignoring playback signal - just finished playback (Grace Period)")
@@ -282,10 +282,11 @@ class LobbyDatabaseManager: ObservableObject {
                 currentRoom.selectedStreamHash = roomState.streamHash
                 currentRoom.selectedFileIdx = roomState.fileIdx
                 currentRoom.selectedQuality = roomState.quality
+                currentRoom.selectedStreamTitle = roomState.sourceQuality // AI_BIBLE #91: Title fallback
                 currentRoom.unlockedStreamURL = roomState.unlockedStreamUrl
 
                 appState.player.currentWatchPartyRoom = currentRoom
-                NSLog("✅ Guest: Synced stream details from DB fallback (Hash: %@)", String(roomState.streamHash?.prefix(8) ?? "nil"))
+                NSLog("✅ Guest: Synced stream details from DB fallback (Hash: %@, Title: %@)", String(roomState.streamHash?.prefix(8) ?? "nil"), String(roomState.sourceQuality?.prefix(20) ?? "nil"))
             }
 
             // CRITICAL: Set season/episode from room BEFORE playMedia()

@@ -300,22 +300,22 @@ REALTIME_CLIENT="$SOURCES_DIR/Networking/SupabaseRealtimeClient.swift"
 if [[ -f "$REALTIME_CLIENT" ]]; then
     # Look for generic onBroadcast/onPresence calls that might be missing topic scoping
     # This is a bit tricky to verify globally, so we check usage in Managers.
-    
+
     # Actually, let's check RealtimeChannelManager for correct usage.
     # It must call calls with 'topic: channelName'
-    
+
     # We grep for calls that do NOT have the topic label.
     # Pattern: .onBroadcast(params... without topic:)
     # Swift arg labels are mandatory if defined, so we check for missing label.
-    
+
     VIOLATIONS=$(grep -rn "onBroadcast(" "$SOURCES_DIR" --include="*.swift" | grep -v "topic:" | grep -v "func onBroadcast" | grep -v "//" || true)
-    
+
     if [[ -n "$VIOLATIONS" ]]; then
         while IFS=: read -r file line code; do
              report "ERROR" "Landmine #60" "Global Handler Risk: onBroadcast MUST specify 'topic:' parameter." "$file" "$line" "$code"
         done <<< "$VIOLATIONS"
     fi
-    
+
     VIOLATIONS_PRESENCE=$(grep -rn "onPresence(" "$SOURCES_DIR" --include="*.swift" | grep -v "topic:" | grep -v "func onPresence" | grep -v "//" || true)
      if [[ -n "$VIOLATIONS_PRESENCE" ]]; then
         while IFS=: read -r file line code; do
@@ -532,7 +532,7 @@ FRIENDS_VIEW="$SOURCES_DIR/Features/Friends/FriendsView.swift"
 if [[ -f "$FRIENDS_VIEW" ]]; then
     # Look for AddFriendSheet onAdd callback that uses sendRequest(username:
     VIOLATIONS=$(grep -n "AddFriendSheet.*onAdd" "$FRIENDS_VIEW" -A 3 | grep "sendRequest(username:" | grep -v "// OK" || true)
-    
+
     if [[ -n "$VIOLATIONS" ]]; then
         report "ERROR" "Landmine #84" "AddFriendSheet MUST use sendRequest(toUserId:) not sendRequest(username:). Re-searching by username picks wrong user when names are similar (e.g., 'lemontom' vs 'lemontom1')." "$FRIENDS_VIEW" "58" "sendRequest(username: username)"
     else
@@ -593,10 +593,10 @@ TRANSITION_ISSUES=0
 if [[ -f "$BROWSE_COMPONENTS" ]]; then
     # Look for the safe pattern using awk to handle multi-line sequence
     # Pattern: dismiss() -> Task.sleep -> currentView
-    if ! awk '/dismiss\(\)/ { found_dismiss=1; next } 
+    if ! awk '/dismiss\(\)/ { found_dismiss=1; next }
              found_dismiss && /Task.sleep/ { found_sleep=1; next }
              found_sleep && /currentView/ { found_all=1; exit }
-             /}/ { found_dismiss=0; found_sleep=0 } 
+             /}/ { found_dismiss=0; found_sleep=0 }
              END { if (!found_all) exit 1 }' "$BROWSE_COMPONENTS"; then
         report "ERROR" "Landmine #87" "Dangerous View Transition: Root view changed before sheet dismissal. This causes hard freezes on macOS. MUST call dismiss() -> sleep(0.1s) -> currentView = .target" "$BROWSE_COMPONENTS" "0" "Missing safe dismissal pattern"
         ((TRANSITION_ISSUES++))
@@ -651,6 +651,37 @@ if [[ -f "$MPV_WRAPPER" ]]; then
     if [[ $ISSUES -eq 0 ]]; then
         echo -e "${GREEN}✅ False EOF protection (Landmine #89) verified in MPVWrapper.${NC}"
     fi
+fi
+
+# =============================================================================
+# CHECK 31: Guest/Host Stream Sync (Landmine #91)
+# =============================================================================
+# Trigger: DebridSearch returns nil infoHash, Guest falls to independent resolution.
+# Fix: updateRoomStream MUST persist source_quality (filename) as fallback.
+print_header "Check 31: Guest/Host Stream Sync (Landmine #91)"
+
+SUPABASE_CLIENT="$SOURCES_DIR/Networking/SupabaseClient.swift"
+PLAYER_VM="$SOURCES_DIR/Features/Player/PlayerViewModel.swift"
+SYNC_ISSUES=0
+
+# Check 1: updateRoomStream must persist source_quality
+if [[ -f "$SUPABASE_CLIENT" ]]; then
+    if ! grep -q "source_quality" "$SUPABASE_CLIENT"; then
+        report "ERROR" "Landmine #91" "Missing source_quality persistence: updateRoomStream MUST persist 'source_quality' (stream filename) as fallback when infoHash is nil." "$SUPABASE_CLIENT" "1090" "Missing source_quality parameter"
+        ((SYNC_ISSUES++))
+    fi
+fi
+
+# Check 2: resolveAndPersistForWatchParty must pass title to updateRoomStream
+if [[ -f "$PLAYER_VM" ]]; then
+    if ! grep -q "sourceQuality:" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #91" "Missing source_quality in resolveAndPersistForWatchParty: Must pass stream title to updateRoomStream for Guest matching when hash is nil." "$PLAYER_VM" "813" "Missing sourceQuality parameter in updateRoomStream call"
+        ((SYNC_ISSUES++))
+    fi
+fi
+
+if [[ $SYNC_ISSUES -eq 0 ]]; then
+    echo -e "${GREEN}✅ Guest/Host stream sync (source_quality fallback) verified.${NC}"
 fi
 
 # =============================================================================

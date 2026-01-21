@@ -83,6 +83,7 @@
 | **Event: Stuck at 0:00 / Black Screen** | Stream validation seeking to 0 (Watch Party logic on Events) | #84 |
 | **Event: Auto-Starts Early (Countdown Bypass)** | Database createdAt (room creation) vs eventStartTime mismatch | #84 |
 | **Event: Infinite Loop (No Auto-Exit)** | EOF handler using wrong time reference (user join vs event start) | #84 |
+| **Guest plays different file than Host** | DebridSearch has nil infoHash; Guest falls to independent resolution | #91 |
 | **"No Valid Streams" (All .iso files)** | Fake torrents block legitimate localized streams | #85 |
 | **Browse Page Slow/Laggy** | All catalogs + images loading simultaneously | #86 |
 | **App Freeze on Watch Party (Browse)** | Sheet dismissal race condition / root unmount | #87 |
@@ -351,6 +352,20 @@
     *   **Rule**: After ALL "clean" streams fail to unlock, StreamService MUST attempt `deprioritizedStreams` (localized/dual audio) as a "last resort" fallback. Better to play a dubbed CAM than show "No Streams Found."
     *   **Fix Location**: `StreamService.swift` - Added localized fallback loop after main unlock loop.
     *   **Detection**: Log shows repeated `Blocked Extension ["ext": ".iso"]` for every attempted stream.
+90. **Room Presence Message Timing (The "Silent Join" Bug v2)**: *(Added v1.0.126)*
+    *   **Trigger**: Guest joins a User Room (not Event) while Host is in Lobby.
+    *   **Symptom**: "User Joined" message appears for Events but NOT for Rooms in the player chat overlay.
+    *   **Cause**: For Rooms, guests join during the Lobby phase, but the Player registers its presence observer **later** (when Host starts playback). By the time the Player's observer is active, the join event already happened. Events work because users go directly to the Player (no Lobby phase).
+    *   **Rule**: After `MPVPlayerViewModel.startWatchPartySync()` registers its observer, call `syncExistingParticipantsToChat()` to iterate `currentWatchPartyRoom.participants` and generate "joined" messages for any participants who joined before the observer was registered.
+    *   **Guard**: Skip for Events (`isEventPlayback == true`) since they already work correctly.
+91. **Guest/Host Stream Mismatch (The "DebridSearch Nil Hash" Trap)**: *(Added v1.0.126)*
+    *   **Trigger**: Host resolves stream from DebridSearch provider (direct redirect URLs, no torrent hashes).
+    *   **Symptom**: Guest plays a **different file** than Host.
+    *   **Cause**: DebridSearch returns `infoHash = nil`. When Host calls `updateRoomStream(streamHash: nil)`, line 1108 of `SupabaseClient.swift` only adds hash if non-nil, so DB never updates. Guest reads nil and falls through to independent resolution (line 461 of `PlayerViewModel.swift`).
+    *   **Rule**: Host MUST persist `source_quality` (stream filename/title) as fallback identifier. Guest resolution MUST use `source_quality` for matching when `stream_hash` is nil.
+    *   **Detection**: Guest log shows: `⚠️ Guest: No stream hash available. Guests cannot use host's URL (IP-locked). Will attempt fresh resolution.`
+    *   **Rule**: After `MPVPlayerViewModel.startWatchPartySync()` registers its observer, call `syncExistingParticipantsToChat()` to iterate `currentWatchPartyRoom.participants` and generate "joined" messages for any participants who joined before the observer was registered.
+    *   **Guard**: Skip for Events (`isEventPlayback == true`) since they already work correctly.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)
@@ -1350,7 +1365,7 @@ When performing async cleanup (WS disconnect, DB updates), always capture proper
 **Mandatory Solution**:
 1. **Mandatory User-Agent**: EVERY `URLRequest` to a third-party API MUST set a standard browser User-Agent:
    `request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36...", forHTTPHeaderField: "User-Agent")`
-2. **Realistic Timeouts**: 
+2. **Realistic Timeouts**:
    - Pre-flight/Health checks: **10s** minimum.
    - Resource Search/Download: **15s** minimum.
 3. **Task Cancellation Safety**: When using `withThrowingTaskGroup` for time-boxed tasks (like attaching subtitles), ensures the `Task.sleep` duration allows for the network request to actually succeed (8-10s).

@@ -434,6 +434,7 @@ class LobbyEventRouter: ObservableObject {
         targetRoom.selectedStreamHash = roomState.streamHash
         targetRoom.selectedFileIdx = roomState.fileIdx
         targetRoom.selectedQuality = roomState.quality
+        targetRoom.selectedStreamTitle = roomState.sourceQuality // AI_BIBLE #91: Title fallback
 
         // FIX (v1.0.80): Do NOT copy host's unlockedStreamURL!
         // Real-Debrid URLs are IP-locked to the user who unlocked them.

@@ -64,7 +64,7 @@ protocol RoomManager {
     ) async throws -> SupabaseRoom
 
     func joinRoom(roomId: String, userId: UUID, isHost: Bool) async throws
-    func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?, resetPlayback: Bool) async throws
+    func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?, sourceQuality: String?, resetPlayback: Bool) async throws
     func getRoomState(roomId: String) async throws -> SupabaseRoom?
     func getRoomParticipants(roomId: String) async throws -> [RoomParticipant]
 }
@@ -266,18 +266,18 @@ class SupabaseClient: RoomManager, UserManager {
 
                     // 🛡️ SECURITY: Identity Proof (Timestamp + UserID + Path)
                     // This prevents replay attacks across users
-                    // 
+                    //
                     // LANDMINE #88: New users created during onboarding may have auth.currentUser
                     // still nil when heartbeat fires. This fallback reconstructs it from Keychain.
                     var effectiveUserId = auth.currentUser?.id
-                    
+
                     // Fallback: Reconstruct from Keychain if auth context is stale
                     if effectiveUserId == nil {
                         if let storedId = await KeychainManager.shared.get(service: "user_id"),
                            let uuid = UUID(uuidString: storedId) {
                             effectiveUserId = uuid
                             NSLog("%@", "⚠️ SupabaseClient: auth.currentUser was nil, reconstructed from Keychain: \(uuid.uuidString)")
-                            
+
                             // Repair the auth context to prevent future misses
                             if let username = await KeychainManager.shared.getUsername() {
                                 auth.currentUser = AuthUser(
@@ -289,7 +289,7 @@ class SupabaseClient: RoomManager, UserManager {
                             }
                         }
                     }
-                    
+
                     if let userId = effectiveUserId {
                         // NOTE: This MUST match the server's verify_user_signature function exactly.
                         let identityPayload = "\(timestamp)\(userId.uuidString.lowercased())\(path)"
@@ -1087,12 +1087,14 @@ class SupabaseClient: RoomManager, UserManager {
     }
 
     /// Update room stream selection (Host only)
+    /// AI_BIBLE #91: sourceQuality is critical for Guest matching when infoHash is nil (DebridSearch)
     func updateRoomStream(
         roomId: String,
         streamHash: String?,
         fileIdx: Int?,
         quality: String?,
         unlockedUrl: String?,
+        sourceQuality: String? = nil, // AI_BIBLE #91: Filename fallback when hash is nil
         resetPlayback: Bool = false
     ) async throws {
         var body: [String: Any] = [
@@ -1109,6 +1111,8 @@ class SupabaseClient: RoomManager, UserManager {
         if let fileIdx = fileIdx { body["selected_file_idx"] = fileIdx }
         if let quality = quality { body["selected_quality"] = quality }
         if let unlockedUrl = unlockedUrl { body["unlocked_stream_url"] = unlockedUrl }
+        // AI_BIBLE #91: Always persist source_quality for Guest fallback matching
+        if let sourceQuality = sourceQuality { body["source_quality"] = sourceQuality }
 
         _ = try await makeRequest(
             path: "/rooms",
@@ -1616,7 +1620,7 @@ struct ReportedStream: Identifiable, Codable {
                 method: "POST",
                 body: body
             )
-            
+
             // Broadcast alert for real-time admin notification
             Task {
                 try? await realtimeClient.connect()
@@ -1971,7 +1975,7 @@ struct ReportedStream: Identifiable, Codable {
                 method: "POST",
                 body: body
             )
-            
+
             // Broadcast alert for real-time admin notification
             Task {
                 try? await realtimeClient.connect()
@@ -2372,6 +2376,7 @@ struct SupabaseRoom: Codable {
     let episode: Int?  // Episode number for TV shows
     let fileIdx: Int? // Selected file index
     let quality: String? // Selected quality
+    let sourceQuality: String? // AI_BIBLE #91: Stream title for fallback matching when hash is nil
     let unlockedStreamUrl: String? // Unlocked stream URL
     let playlist: [PlaylistItem]? // List of items to play
     let currentPlaylistIndex: Int? // Current index in playlist
@@ -2397,6 +2402,7 @@ struct SupabaseRoom: Codable {
         case episode
         case fileIdx = "selected_file_idx"
         case quality = "selected_quality"
+        case sourceQuality = "source_quality" // AI_BIBLE #91
         case unlockedStreamUrl = "unlocked_stream_url"
         case playlist
         case currentPlaylistIndex = "current_playlist_index"
@@ -2712,30 +2718,30 @@ extension SupabaseClient {
         // Use URLComponents to properly encode the complex OR query (Landmine #84)
         let senderIdStr = senderId.uuidString.lowercased()
         let receiverIdStr = receiverId.uuidString.lowercased()
-        
+
         var components = URLComponents(string: "\(baseURL)/rest/v1/friendships")!
         components.queryItems = [
             URLQueryItem(name: "or", value: "(and(user_id_1.eq.\(senderIdStr),user_id_2.eq.\(receiverIdStr)),and(user_id_1.eq.\(receiverIdStr),user_id_2.eq.\(senderIdStr)))"),
             URLQueryItem(name: "select", value: "id,status,user_id_1")
         ]
-        
+
         guard let checkURL = components.url else {
             throw SupabaseError.invalidURL
         }
-        
+
         var request = URLRequest(url: checkURL)
         request.httpMethod = "GET"
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        
+
         let (existingData, _) = try await URLSession.shared.data(for: request)
-        
+
         struct ExistingFriendship: Decodable {
             let id: UUID
             let status: String
             let user_id_1: UUID
         }
-        
+
         if let existingFriendships = try? jsonDecoder.decode([ExistingFriendship].self, from: existingData),
            let existing = existingFriendships.first {
             if existing.status == "accepted" {
@@ -2750,7 +2756,7 @@ extension SupabaseClient {
                 return
             }
         }
-        
+
         // No existing friendship, create a new pending request
         let path = "/friendships"
         let body: [String: Any] = [

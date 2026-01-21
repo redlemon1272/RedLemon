@@ -146,7 +146,7 @@ class MockStreamResolver: StreamResolving {
     var resolvedStream: RedLemon.Stream?
     var unlockedStream: RedLemon.Stream?
 
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, filterExtended: Bool, triggerSource: String = "test") async throws -> StreamResolutionResult {
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, preferredTitle: String?, filterExtended: Bool, triggerSource: String = "test") async throws -> StreamResolutionResult {
         let stream = resolvedStream ?? RedLemon.Stream(
             url: "https://example.com/stream",
             title: "Mock Stream",
@@ -216,7 +216,9 @@ class MockRoomManager: RoomManager, UserManager {
             season: season,
             episode: episode,
             fileIdx: 0,
+
             quality: "1080p",
+            sourceQuality: nil,
             unlockedStreamUrl: nil,
             playlist: playlist,
             currentPlaylistIndex: 0,
@@ -231,7 +233,7 @@ class MockRoomManager: RoomManager, UserManager {
         joinRoomCalled = true
     }
 
-    func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?, resetPlayback: Bool) async throws {
+    func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?, sourceQuality: String?, resetPlayback: Bool) async throws {
         updateStreamCalled = true
     }
 

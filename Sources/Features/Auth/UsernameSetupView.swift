@@ -264,7 +264,7 @@ struct ApiKeysStepView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Image(systemName: "key.fill").foregroundColor(.orange)
-                        Text("Real-Debrid API Token").font(.headline)
+                        Text("Real-Debrid API Private Token").font(.headline)
                         Spacer()
                         Link("Get Token", destination: URL(string: "https://real-debrid.com/apitoken")!)
                             .font(.caption)

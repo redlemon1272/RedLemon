@@ -580,7 +580,7 @@ struct StreamErrorView: View {
             return (
                 title: "Real-Debrid Not Configured",
                 message: "RedLemon requires a Real-Debrid account to stream content.",
-                solution: "Go to Settings and add your Real-Debrid API key.",
+                solution: "Go to Settings and add your Real-Debrid API Private Token.",
                 icon: "key.fill",
                 showSettings: true
             )
@@ -591,7 +591,7 @@ struct StreamErrorView: View {
             return (
                 title: "Invalid API Key",
                 message: "Your Real-Debrid API key appears to be invalid or revoked.",
-                solution: "Go to Settings and add a fresh API key from real-debrid.com.",
+                solution: "Go to Settings and add a fresh API Private Token from real-debrid.com.",
                 icon: "key.fill",
                 showSettings: true
             )

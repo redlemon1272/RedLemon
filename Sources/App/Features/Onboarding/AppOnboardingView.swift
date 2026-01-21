@@ -297,7 +297,7 @@ struct AppOnboardingView: View {
                     HStack {
                         Image(systemName: "bolt.fill")
                             .foregroundColor(.yellow)
-                        Text("Real-Debrid API Key")
+                        Text("Real-Debrid API Private Token")
                             .foregroundColor(.white)
                             .font(.headline)
                         

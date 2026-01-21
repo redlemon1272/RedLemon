@@ -179,7 +179,7 @@ struct SettingsView: View {
                     Image(systemName: "key.fill")
                         .font(.title2)
                         .foregroundColor(.orange)
-                    Text("Real-Debrid API Token")
+                    Text("Real-Debrid API Private Token")
                         .font(.title3.weight(.semibold))
 
                     Spacer()

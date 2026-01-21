@@ -32,6 +32,10 @@ class MPVWrapper: ObservableObject {
     
     // Race Condition Fix: Track expected external subtitles to prevent premature resumption
     private var expectedExternalSubtitles: Int = 0
+    
+    // Landmine #89 Fix: Track highest position seen during playback.
+    // Used for accurate EOF detection when currentTime resets to 0 during edge-case seeks.
+    private var lastKnownGoodPosition: Double = 0
 
     internal var mpvHandle: OpaquePointer?
     internal var renderContext: OpaquePointer?  // MPV render context (thread-safe per MPV docs)
@@ -380,6 +384,7 @@ class MPVWrapper: ObservableObject {
             // Natural cleanup point - video starting
             // Reset finished state on new file start
             playbackFinished = false
+            lastKnownGoodPosition = 0 // Reset position tracker for new file
             mpvError = nil // Reset error state
         case MPV_EVENT_FILE_LOADED:
             updateDuration()
@@ -430,16 +435,22 @@ class MPVWrapper: ObservableObject {
                     // If we receive EOF but are nowhere near the end (e.g. < 95% watched and > 1 min remaining),
                     // this is likely a network drop that MPV misinterpreted as end of stream.
                     // We should treat this as an ERROR to trigger retry/failover, or at minimum NOT exit.
-                    let timeRemaining = duration - currentTime
-                    let progress = (duration > 0) ? (currentTime / duration) : 0
+                    
+                    // Landmine #89 Fix: Use lastKnownGoodPosition instead of currentTime for EOF check.
+                    // When the user seeks to the very end, MPV's currentTime can reset to 0 before the 
+                    // END_FILE event fires. This caused legitimate EOFs to be classified as suspicious.
+                    // lastKnownGoodPosition tracks the highest position seen during playback.
+                    let effectivePosition = max(currentTime, lastKnownGoodPosition)
+                    let timeRemaining = duration - effectivePosition
+                    let progress = (duration > 0) ? (effectivePosition / duration) : 0
                     
                     // FORENSIC LOGGING
-                    print("!!! MPV EOF DETECTED !!! Duration: \(duration), CurrentTime: \(currentTime), TimeRemaining: \(timeRemaining), Progress: \(progress)")
-                    LoggingManager.shared.warn(.videoRendering, message: "Forensic EOF Check: Dur=\(duration), Cur=\(currentTime), Rem=\(timeRemaining), Prog=\(progress)")
+                    print("!!! MPV EOF DETECTED !!! Duration: \(duration), CurrentTime: \(currentTime), LastKnownGood: \(lastKnownGoodPosition), EffectivePos: \(effectivePosition), TimeRemaining: \(timeRemaining), Progress: \(progress)")
+                    LoggingManager.shared.warn(.videoRendering, message: "Forensic EOF Check: Dur=\(duration), Cur=\(currentTime), LastGood=\(lastKnownGoodPosition), Eff=\(effectivePosition), Rem=\(timeRemaining), Prog=\(progress)")
 
                     if (duration > 30 && progress < 0.1) || (duration > 300 && timeRemaining > 60 && progress < 0.95) {
-                        LoggingManager.shared.warn(.videoRendering, message: "MPV: SUSPICIOUS EOF detected! Pos: \(Int(currentTime))s / Dur: \(Int(duration))s. Ignoring as False EOF.")
-                         Task { await SessionRecorder.shared.log(category: .error, message: "Suspicious EOF (False Positive)", metadata: ["pos": "\(currentTime)", "dur": "\(duration)"]) }
+                        LoggingManager.shared.warn(.videoRendering, message: "MPV: SUSPICIOUS EOF detected! Pos: \(Int(effectivePosition))s / Dur: \(Int(duration))s. Ignoring as False EOF.")
+                         Task { await SessionRecorder.shared.log(category: .error, message: "Suspicious EOF (False Positive)", metadata: ["pos": "\(effectivePosition)", "dur": "\(duration)"]) }
                         
                         // Treat as error to prevent exit, but don't set mpvError if it's just a skip-able glitch
                         // Set a specific error string that ViewModel can ignore or handle as 'auto-resume'
@@ -572,6 +583,11 @@ class MPVWrapper: ObservableObject {
         // ✅ Only update if significant change
         guard abs(currentTime - time) >= minTimeChangeThreshold else { return }
         currentTime = time
+        
+        // Landmine #89 Fix: Track highest position seen (for accurate EOF detection)
+        if time > lastKnownGoodPosition {
+            lastKnownGoodPosition = time
+        }
     }
 
     private func updateDuration() {

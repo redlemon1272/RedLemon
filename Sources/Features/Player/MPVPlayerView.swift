@@ -77,6 +77,10 @@ struct MPVPlayerView: View {
     @State private var cursorHideTimer: Timer?
     @State private var eventAutoExitTimer: Timer?
 
+    // Track consecutive detections of MPV stopped state (position=0, duration=0, paused)
+    // This prevents false positives at app startup while detecting EOF after ERROR_HANDLER ignores it
+    @State private var stoppedStateDetectionCount: Int? = nil
+
     // Track selection menus
     @State private var showAudioMenu = false
     @State private var showSubtitleMenu = false
@@ -496,7 +500,7 @@ struct MPVPlayerView: View {
             return
         }
 
-        // Fallback: Check if near end and paused (in case EOF wasn't detected)
+        // Fallback 1: Check if near end and paused (in case EOF wasn't detected)
         let isPaused = !viewModel.isPlaying
         if duration > 0 && position >= duration - 5 && isPaused {
             LoggingManager.shared.info(.videoRendering, message: "Event movie finished detected (time-based fallback)!")
@@ -512,6 +516,42 @@ struct MPVPlayerView: View {
                 viewModel.isExitingSession = true
                 await appState.player.handleMovieFinished()
             }
+            return
+        }
+
+        // CRITICAL FIX: Fallback 2 - Handle MPV stopped state after EOF
+        // When MPV hits EOF and ERROR_HANDLER ignores it, MPV enters a "stopped" state where:
+        // - currentTime = 0.0, duration = 0.0, playbackFinished = false, isPlaying = false
+        // This is a terminal state that indicates the event has ended naturally
+        // To prevent false positives at startup, we require duration to have been > 0 previously
+        if position == 0.0 && duration == 0.0 && isPaused && !viewModel.playbackFinished {
+            // Track consecutive detections of this state (prevents false positives)
+            if stoppedStateDetectionCount == nil {
+                stoppedStateDetectionCount = 0
+            }
+            stoppedStateDetectionCount! += 1
+
+            // Require 3 consecutive detections (3 seconds) to confirm this is real EOF, not startup
+            if stoppedStateDetectionCount! >= 3 {
+                LoggingManager.shared.info(.videoRendering, message: "Event movie finished detected (MPV stopped state)!")
+                LoggingManager.shared.debug(.videoRendering, message: "   Position: 0.0s, Duration: 0.0s, isPaused: \(isPaused)")
+                LoggingManager.shared.debug(.videoRendering, message: "   Consecutive detections: \(stoppedStateDetectionCount!) - confirms event was playing")
+                LoggingManager.shared.info(.videoRendering, message: "   Auto-exiting player and returning to Events page...")
+
+                // Stop the timer
+                eventAutoExitTimer?.invalidate()
+                eventAutoExitTimer = nil
+
+                // Exit player and return to events
+                Task {
+                    viewModel.isExitingSession = true
+                    await appState.player.handleMovieFinished()
+                }
+                return
+            }
+        } else {
+            // Reset counter if state changes
+            stoppedStateDetectionCount = nil
         }
 
         NSLog("%@", "[AUTO_EXIT_CHECK] No exit condition met - continuing to monitor...")

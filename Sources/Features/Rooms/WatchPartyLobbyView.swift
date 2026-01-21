@@ -841,23 +841,28 @@ struct WatchPartyLobbyView: View {
                                 .padding()
                             }
 
-                            if viewModel.timeUntilStart > 0 {
+                            // CRITICAL FIX: Use localTimeUntilStart to force SwiftUI View updates
+                            // When localTimeUntilStart changes, SwiftUI re-evaluates this View
+                            // Fall back to viewModel.timeUntilStart for manual join (onChange works)
+                            let effectiveTime = max(localTimeUntilStart, viewModel.timeUntilStart)
+
+                            if effectiveTime > 0 {
                                 HStack {
                                     Image(systemName: "timer")
                                         .font(.title2)
                                     // Show different text for events vs playlists
                                     if room.type == .event {
-                                        Text("Event starts in \(formatDuration(viewModel.timeUntilStart))")
+                                        Text("Event starts in \(formatDuration(effectiveTime))")
                                             .font(.title3.weight(.semibold))
 
                                             .monospacedDigit()
                                     } else if viewModel.isPlaylistMode {
-                                        Text("Next item in \(formatDuration(viewModel.timeUntilStart))")
+                                        Text("Next item in \(formatDuration(effectiveTime))")
                                             .font(.title3.weight(.semibold))
 
                                             .monospacedDigit()
                                     } else {
-                                        Text("Starting in \(formatDuration(viewModel.timeUntilStart))")
+                                        Text("Starting in \(formatDuration(effectiveTime))")
                                             .font(.title3.weight(.semibold))
 
                                             .monospacedDigit()

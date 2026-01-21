@@ -166,12 +166,12 @@ class MPVPlayerViewModel: ObservableObject {
                 .sink { [weak self] isPlaying in
                     guard let self = self else { return }
                     self.isPlaying = isPlaying
-                    
+
                     // Landmine #44: Track resume time
                     if isPlaying {
                         self.lastPlaybackResumeTime = Date()
                     }
-                    
+
                     if isPlaying && self.isLoading {
                         // Video started playing - hide poster
                         self.onVideoReady()
@@ -189,30 +189,30 @@ class MPVPlayerViewModel: ObservableObject {
                         // CRITICAL FIX (Landmine #44): Detect Premature EOF (IP Lock / Cache Issue)
                         if let start = self.lastPlaybackResumeTime {
                             let playedDuration = Date().timeIntervalSince(start)
-                            
+
                             // Check: Early exit (<5s) on long content (>5m) for Watch Party Guest
                             if playedDuration < 5.0 && self.duration > 300 && self.isInWatchParty && !self.isWatchPartyHost {
                                 LoggingManager.shared.error(.videoRendering, message: "🛑 PREMATURE EOF DETECTED! (Played: \(String(format: "%.2f", playedDuration))s). Triggering Retry.")
-                                
+
                                 // Show loading state immediately to prevent flicker
                                 self.isLoading = true
                                 self.showPoster = true
                                 // self.statusMessage = "Connection lost. Retrying..."
-                                
+
                                 // Trigger Retry Logic via Error Channel
                                 self.playbackErrorTrigger.send("PREMATURE_EOF")
-                                
+
                                 // Validation Cleanup: If we were validating, cancel the success task
                                 if self.isValidatingStream {
                                     LoggingManager.shared.warn(.watchParty, message: "Validation Failed (EOF). Retrying...")
                                     self.validationTask?.cancel()
                                     self.isValidatingStream = false
                                 }
-                                
+
                                 return // ABORT: Do not set playbackFinished = true
                             }
                         }
-                        
+
                         LoggingManager.shared.info(.videoRendering, message: "⚠️ FORENSIC: playbackFinishedPub fired! CurrentTime: \(self.currentTime), Duration: \(self.duration)")
                     }
                     self.playbackFinished = finished
@@ -679,7 +679,7 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var readyGuestIds: Set<String> = []
     private var pendingLeaveTasks: [String: Task<Void, Never>] = [:] // Debounce map for leaving guests
     private var hasSentReadySignal: Bool = false
-    
+
     // Stream Integrity Validation (Landmine #44 Fix)
     private var isValidatingStream: Bool = false
     private var validationTask: Task<Void, Never>?
@@ -1821,7 +1821,7 @@ class MPVPlayerViewModel: ObservableObject {
         let userId = appState?.currentUserId ?? UUID()
 
 
-        
+
         let message = ChatMessage(
             id: UUID().uuidString,
             username: username,
@@ -2131,7 +2131,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     deinit {
         LoggingManager.shared.info(.general, message: "MPVPlayerViewModel deinit")
-        
+
         // Safety Net: If cleanup wasn't called (e.g. implicit back navigation),
         // ensure Realtime is disconnected so presence updates happen.
         // We use a DETACHED task to effectively "fire and forget" the network call from a dying object.
@@ -2222,7 +2222,7 @@ extension MPVPlayerViewModel {
         await realtimeManager?.registerObserver(id: "player", onPresence: { [weak self] (action: PresenceAction, userId: String, metadata: [String: Any]?) in
             _ = Task { @MainActor in
                 guard let self = self else { return }
-                
+
                 // PERFORMANCE DIAGNOSTIC: Track how long participant updates take
                 let startTime = CACurrentMediaTime()
 
@@ -2394,7 +2394,7 @@ extension MPVPlayerViewModel {
                         // NOTE: SwiftUI automatically detects this change - no need for objectWillChange.send()
                         // Forcing objectWillChange causes full view hierarchy re-render (lag on macOS 26)
                         self.appState?.player.currentWatchPartyRoom?.participants = updatedParticipants
-                        
+
                         // PERFORMANCE DIAGNOSTIC: Log how long the join processing took
                         let joinDurationMs = (CACurrentMediaTime() - startTime) * 1000
                         LoggingManager.shared.performance("Participant JOIN processing", durationMs: joinDurationMs)
@@ -2424,7 +2424,7 @@ extension MPVPlayerViewModel {
                             if var refs = self.activeConnectionRefs[actualUserId] {
                                 refs.remove(leavingPhxRef)
                                 self.activeConnectionRefs[actualUserId] = refs
-                                
+
                                 // 2. Bible Landmine #51: Only consider Offline when count hits Zero
                                 if !refs.isEmpty {
                                     LoggingManager.shared.info(.watchParty, message: "🛡️ Ignoring leave for \(actualUserId) - User still has \(refs.count) active connections")
@@ -2432,7 +2432,7 @@ extension MPVPlayerViewModel {
                                     return
                                 }
                             }
-                            
+
                             // User is truly gone
                             self.activeConnectionRefs.removeValue(forKey: actualUserId)
 
@@ -2445,7 +2445,7 @@ extension MPVPlayerViewModel {
                                     let name = currentParticipants[index].name
                                     currentParticipants.remove(at: index)
                                     self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
-                                    
+
                                     // 💬 System Message: Leave (Only for others)
                                     if actualUserId != self.currentUserId {
                                         self.addSystemMessage("\(name) left")
@@ -2458,14 +2458,14 @@ extension MPVPlayerViewModel {
                             if actualUserId != self.currentUserId {
                                 self.connectedGuestIds.remove(actualUserId)
                                 self.readyGuestIds.remove(actualUserId)
-                                
+
                                 // self.addSystemMessage("\(username) left") // Already handled above
-                                
+
                                 if self.isWatchPartyHost {
                                     self.checkIfAllGuestsReady()
                                 }
                             }
-                            
+
                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                             LoggingManager.shared.info(.watchParty, message: "Participant left (confirmed): \(actualUserId)")
                         }
@@ -2503,7 +2503,7 @@ extension MPVPlayerViewModel {
                 }
             }
         }, onSync: nil, onConnectionState: nil)
-        
+
 
         // Now setup the channel with callbacks already in place
         // Don't auto-open chat - let user toggle it with spacebar or chat button
@@ -2527,7 +2527,7 @@ extension MPVPlayerViewModel {
                 userId: userId,
                 username: username
             )
-            
+
             // Register as player observer (Presence is already registered above, but we update it with Sync here)
             await realtimeManager.registerObserver(
                 id: "player",
@@ -2554,6 +2554,11 @@ extension MPVPlayerViewModel {
 
         LoggingManager.shared.info(.watchParty, message: "Watch party sync initialized with Realtime")
 
+        // FIX: Sync "User Joined" messages for participants who joined BEFORE the player observer was registered.
+        // This handles the timing issue where guests join in the Lobby but the Player's observer
+        // isn't registered until after the Host starts playback. (AI_BIBLE #65, #84)
+        syncExistingParticipantsToChat()
+
         // Post-Setup Check: If video already loaded, send ready signal (Host) or validate (Guest)
         // This handles the race condition where duration loaded before Realtime was ready
         if duration > 0 && !hasSentReadySignal {
@@ -2567,6 +2572,30 @@ extension MPVPlayerViewModel {
                      validateStreamIntegrity()
                  }
              }
+        }
+    }
+
+    /// Syncs "User Joined" messages for participants who joined BEFORE the player observer was registered.
+    /// AI_BIBLE #84: ONLY for User Rooms - Events already work correctly and must NOT be modified.
+    private func syncExistingParticipantsToChat() {
+        // CRITICAL GUARD: Only apply to User Rooms (AI_BIBLE #84)
+        // Events already receive presence events correctly - touching this would cause regression
+        if appState?.player.isEventPlayback == true {
+            LoggingManager.shared.debug(.watchParty, message: "Skipping participant sync - Event playback (already works)")
+            return
+        }
+
+        guard let participants = appState?.player.currentWatchPartyRoom?.participants else { return }
+
+        for participant in participants {
+            // Skip self (AI_BIBLE #61: Hybrid Strategy - sender adds locally)
+            if participant.id.caseInsensitiveCompare(currentUserId ?? "") == .orderedSame { continue }
+            // Skip host (always present from room creation)
+            if participant.isHost { continue }
+
+            // Add join message for existing participant
+            addSystemMessage("\(participant.name) joined")
+            LoggingManager.shared.info(.watchParty, message: "Synced existing participant to chat: \(participant.name)")
         }
     }
 
@@ -2863,7 +2892,7 @@ extension MPVPlayerViewModel {
             if let last = newMessages.first {
                  lastChatMessageId = last.id.uuidString
             }
-            
+
             for msg in newMessages {
                  LoggingManager.shared.debug(.social, message: "New chat message from \(msg.username): \(msg.message)")
             }
@@ -3305,7 +3334,7 @@ extension MPVPlayerViewModel {
             LoggingManager.shared.info(.watchParty, message: "Received Room Closed signal in Player")
             Task { @MainActor [weak self] in
                 guard let self = self else { return }
-                
+
                 // 1. Stabilization & Cleanup
                 self.isExitingSession = true
                 try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s stabilization
@@ -3318,7 +3347,7 @@ extension MPVPlayerViewModel {
                 // Force full exit to browse
                 // Force full exit to browse
                 await self.appState?.player.exitPlayer(keepRoomState: false)
-                
+
                 await MainActor.run {
                     self.appState?.currentView = .browse
                 }
@@ -3526,35 +3555,35 @@ extension MPVPlayerViewModel {
     private func validateStreamIntegrity() {
         guard !isValidatingStream else { return }
         isValidatingStream = true
-        
+
         LoggingManager.shared.info(.watchParty, message: "🔍 Validating stream integrity (Silent Play)...")
-        
+
         // Mute and Play
         let previousVolume = self.volume
         mpvWrapper.setVolume(0)
-        
+
         Task { @MainActor [weak self] in
             guard let self = self else { return }
             await self.playbackService.play()
-            
+
             // Monitor for stability (2 seconds)
             // If EOF happens, the checking logic in playbackFinishedPub will catch it and trigger retry
             self.validationTask = Task {
                 try? await Task.sleep(nanoseconds: 2_000_000_000)
                 guard !Task.isCancelled else { return }
-                
+
                 // If we are here, we survived 2 seconds without EOF!
                 await MainActor.run { [weak self] in
                     guard let self = self else { return }
                     if self.isValidatingStream {
                         LoggingManager.shared.info(.watchParty, message: "✅ Stream Validation Passed! Proceeding to READY.")
-                        
+
                         // Reset
                         self.mpvWrapper.pause()
                         self.mpvWrapper.seek(to: 0)
                         self.mpvWrapper.setVolume(Int(previousVolume))
                         self.isValidatingStream = false
-                        
+
                         // Proceed
                         self.sendReadySignal()
                     }
@@ -3586,7 +3615,7 @@ extension MPVPlayerViewModel {
 
         // CRITICAL FIX: Ensure we have at least one guest before starting
         // Without this, fast hosts would start immediately if guests haven't joined presence yet
-        
+
         // RECOVERY: If connectedGuestIds is empty, check participants list
         if connectedGuestIds.isEmpty, let participants = appState?.player.currentWatchPartyRoom?.participants {
              let userId = self.currentUserId ?? ""

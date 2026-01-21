@@ -13,6 +13,9 @@ struct WatchPartyLobbyView: View {
     @State private var showMediaPicker = false
     @State private var showDescriptionEditor = false
     @State private var editingDescription: String = ""
+    // CRITICAL FIX: Mirror timeUntilStart locally to force SwiftUI View updates
+    // This ensures the countdown becomes visible when timeUntilStart changes
+    @State private var localTimeUntilStart: TimeInterval = 0
     @StateObject private var licenseManager = LicenseManager.shared
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
@@ -52,7 +55,10 @@ struct WatchPartyLobbyView: View {
                     }
                 }
             }
-            .id("lobby-view-\(Int(viewModel.timeUntilStart))") // Force refresh when countdown changes
+        }
+        .onChange(of: viewModel.timeUntilStart) { newValue in
+            localTimeUntilStart = newValue
+            NSLog("%@", "[LOBBY_VIEW] timeUntilStart changed to \(Int(newValue))s")
         }
         .onAppear {
             viewModel.appState = appState  // Set weak reference
@@ -77,8 +83,8 @@ struct WatchPartyLobbyView: View {
 
                 // CRITICAL FIX: Only show overlay if countdown hasn't been set yet
                 // If countdown is already > 0, the lobby has already initialized and we don't need the overlay
-                if viewModel.timeUntilStart <= 0 {
-                    NSLog("%@", "[LOBBY_VIEW] Showing overlay (timeUntilStart=\(Int(viewModel.timeUntilStart)))")
+                if localTimeUntilStart <= 0 {
+                    NSLog("%@", "[LOBBY_VIEW] Showing overlay (timeUntilStart=\(Int(localTimeUntilStart)))")
                     isAutoJoining = true
                     // Auto-ready after a brief delay to allow connection
                     Task { @MainActor in
@@ -92,10 +98,10 @@ struct WatchPartyLobbyView: View {
                         withAnimation {
                             isAutoJoining = false
                         }
-                        NSLog("%@", "[LOBBY_VIEW] Overlay hidden, timeUntilStart=\(Int(viewModel.timeUntilStart))")
+                        NSLog("%@", "[LOBBY_VIEW] Overlay hidden, timeUntilStart=\(Int(localTimeUntilStart))")
                     }
                 } else {
-                    NSLog("%@", "[LOBBY_VIEW] SKIPPING overlay (countdown already set to \(Int(viewModel.timeUntilStart))s)")
+                    NSLog("%@", "[LOBBY_VIEW] SKIPPING overlay (countdown already set to \(Int(localTimeUntilStart))s)")
                 }
                 // Reset flag
                 appState.shouldAutoJoinLobby = false

@@ -803,60 +803,62 @@ struct WatchPartyLobbyView: View {
                         }
                     } else {
                         // Guest controls - hide ready button for events (no host coordination needed)
-                        if room.type == .userRoom {
-                            Button(action: toggleReady) {
-                                HStack {
-                                    Image(systemName: viewModel.isReady ? "checkmark.circle.fill" : "circle")
-                                    Text(viewModel.isReady ? "Ready!" : "Mark as Ready")
-                                }
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(viewModel.isReady ? Color.green : Color.white.opacity(0.1))
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                            }
-                            .buttonStyle(.plain)
-                        }
-
-                        if viewModel.isStarting {
-                            HStack {
-                                ProgressView()
-                                    .scaleEffect(0.8)
-                                Text("Host is starting in \(viewModel.countdown)...")
+                        Group {
+                            if room.type == .userRoom {
+                                Button(action: toggleReady) {
+                                    HStack {
+                                        Image(systemName: viewModel.isReady ? "checkmark.circle.fill" : "circle")
+                                        Text(viewModel.isReady ? "Ready!" : "Mark as Ready")
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background(viewModel.isReady ? Color.green : Color.white.opacity(0.1))
                                     .foregroundColor(.white)
-                            }
-                            .padding()
-                        }
-
-                        if viewModel.timeUntilStart > 0 {
-                            HStack {
-                                Image(systemName: "timer")
-                                    .font(.title2)
-                                // Show different text for events vs playlists
-                                if room.type == .event {
-                                    Text("Event starts in \(formatDuration(viewModel.timeUntilStart))")
-                                        .font(.title3.weight(.semibold))
-
-                                        .monospacedDigit()
-                                } else if viewModel.isPlaylistMode {
-                                    Text("Next item in \(formatDuration(viewModel.timeUntilStart))")
-                                        .font(.title3.weight(.semibold))
-
-                                        .monospacedDigit()
-                                } else {
-                                    Text("Starting in \(formatDuration(viewModel.timeUntilStart))")
-                                        .font(.title3.weight(.semibold))
-
-                                        .monospacedDigit()
+                                    .cornerRadius(10)
                                 }
+                                .buttonStyle(.plain)
                             }
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.black.opacity(0.6))
-                            .cornerRadius(12)
-                            .padding(.bottom, 20)
-                            .id("countdown-\(Int(viewModel.timeUntilStart))") // Force refresh when countdown changes
+
+                            if viewModel.isStarting {
+                                HStack {
+                                    ProgressView()
+                                        .scaleEffect(0.8)
+                                    Text("Host is starting in \(viewModel.countdown)...")
+                                        .foregroundColor(.white)
+                                }
+                                .padding()
+                            }
+
+                            if viewModel.timeUntilStart > 0 {
+                                HStack {
+                                    Image(systemName: "timer")
+                                        .font(.title2)
+                                    // Show different text for events vs playlists
+                                    if room.type == .event {
+                                        Text("Event starts in \(formatDuration(viewModel.timeUntilStart))")
+                                            .font(.title3.weight(.semibold))
+
+                                            .monospacedDigit()
+                                    } else if viewModel.isPlaylistMode {
+                                        Text("Next item in \(formatDuration(viewModel.timeUntilStart))")
+                                            .font(.title3.weight(.semibold))
+
+                                            .monospacedDigit()
+                                    } else {
+                                        Text("Starting in \(formatDuration(viewModel.timeUntilStart))")
+                                            .font(.title3.weight(.semibold))
+
+                                            .monospacedDigit()
+                                    }
+                                }
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.black.opacity(0.6))
+                                .cornerRadius(12)
+                                .padding(.bottom, 20)
+                            }
                         }
+                        .id("guest-controls-\(Int(viewModel.timeUntilStart))") // Force refresh when countdown changes
                     }
                 }
                 .padding(.horizontal)

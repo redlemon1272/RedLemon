@@ -70,12 +70,14 @@ struct WatchPartyLobbyView: View {
             }
 
             if appState.shouldAutoJoinLobby {
+                NSLog("%@", "[LOBBY_VIEW] onAppear: shouldAutoJoinLobby=true, room=\(room.id), timeUntilStart=\(Int(viewModel.timeUntilStart))")
                 // CRITICAL FIX: Late Joiners should skip the 8s safety delay
                 viewModel.enableInstantJoin()
 
                 // CRITICAL FIX: Only show overlay if countdown hasn't been set yet
                 // If countdown is already > 0, the lobby has already initialized and we don't need the overlay
                 if viewModel.timeUntilStart <= 0 {
+                    NSLog("%@", "[LOBBY_VIEW] Showing overlay (timeUntilStart=\(Int(viewModel.timeUntilStart)))")
                     isAutoJoining = true
                     // Auto-ready after a brief delay to allow connection
                     Task { @MainActor in
@@ -89,10 +91,15 @@ struct WatchPartyLobbyView: View {
                         withAnimation {
                             isAutoJoining = false
                         }
+                        NSLog("%@", "[LOBBY_VIEW] Overlay hidden, timeUntilStart=\(Int(viewModel.timeUntilStart))")
                     }
+                } else {
+                    NSLog("%@", "[LOBBY_VIEW] SKIPPING overlay (countdown already set to \(Int(viewModel.timeUntilStart))s)")
                 }
                 // Reset flag
                 appState.shouldAutoJoinLobby = false
+            } else {
+                NSLog("%@", "[LOBBY_VIEW] onAppear: shouldAutoJoinLobby=false, room=\(room.id), timeUntilStart=\(Int(viewModel.timeUntilStart))")
             }
         }
     }

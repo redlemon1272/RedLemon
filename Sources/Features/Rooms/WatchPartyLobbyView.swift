@@ -98,7 +98,10 @@ struct WatchPartyLobbyView: View {
                         withAnimation {
                             isAutoJoining = false
                         }
-                        NSLog("%@", "[LOBBY_VIEW] Overlay hidden, timeUntilStart=\(Int(localTimeUntilStart))")
+                        // CRITICAL FIX: Sync localTimeUntilStart when overlay ends
+                        // This ensures the countdown becomes visible if it was set during the overlay period
+                        localTimeUntilStart = viewModel.timeUntilStart
+                        NSLog("%@", "[LOBBY_VIEW] Overlay hidden, syncing localTimeUntilStart=\(Int(localTimeUntilStart))")
                     }
                 } else {
                     NSLog("%@", "[LOBBY_VIEW] SKIPPING overlay (countdown already set to \(Int(localTimeUntilStart))s)")

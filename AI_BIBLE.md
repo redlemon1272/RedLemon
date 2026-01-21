@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 20, 2026 (Part 19: Fake Torrent Fallback - Landmine #85)
+> **Last Updated:** January 20, 2026 (Part 20: Browse Performance Optimizations - Landmine #86)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -84,6 +84,7 @@
 | **Event: Auto-Starts Early (Countdown Bypass)** | Database createdAt (room creation) vs eventStartTime mismatch | #84 |
 | **Event: Infinite Loop (No Auto-Exit)** | EOF handler using wrong time reference (user join vs event start) | #84 |
 | **"No Valid Streams" (All .iso files)** | Fake torrents block legitimate localized streams | #85 |
+| **Browse Page Slow/Laggy** | All catalogs + images loading simultaneously | #86 |
 
 ## 🚨 Critical Landmines
 
@@ -114,6 +115,19 @@
 18. **Event Truth**: **Rule**: If ID starts with `event_`, it IS an event. Bypass Host Checks.
 19. **Zilean Integrity**: Logs lie. **Rule**: Check Admin Dashboard "Zilean Torrents" count. Static count = Broken Pipeline.
 20. **Timer Bursts**: Synchronized timers cause jitter. **Rule**: Stagger tasks (`Task.sleep` with offsets).
+
+### Performance Optimizations
+86. **Browse Page Performance (The "10 Rows of Death")**: *(Added v1.0.126)*
+    *   **Trigger**: Browse page feels sluggish compared to Events/Discover.
+    *   **Cause**: Loading 10+ streaming service catalogs + 100+ poster images simultaneously overwhelms CPU/memory.
+    *   **Optimizations Applied**:
+        1. **Progressive Row Loading**: Only render first 3 service rows initially, reveal more as user scrolls.
+        2. **Staggered Catalog Loading**: 150ms delay between catalog fetches, visible rows prioritized.
+        3. **NSCache Fast-Path**: `PosterImageCache` provides synchronous image retrieval (no async overhead).
+        4. **Visibility Tracking**: `visibleRowKeys` prioritizes loading for rows currently on screen.
+        5. **Removed Scroll Offset Thrashing**: Changed `scrollOffset` bindings to `nil` to prevent AppState updates during scroll.
+    *   **Files**: `BrowseViewModel.swift`, `BrowseComponents.swift`, `BrowseView.swift`, `AsyncSemaphore.swift`
+    *   **Key Rule**: NEVER load all catalogs at once. Always stagger and prioritize visible content.
 
 ### 21-25: Concurrency & Sync
 21. **Zombie Rooms**: Host quits abruptly.

@@ -21,6 +21,15 @@ class BrowseViewModel: ObservableObject {
     private var tabSwitchTask: Task<Void, Never>?
     private var memoryCleanupTimer: Timer?
     
+    // PERF: Track visible rows to prioritize loading
+    @Published var visibleRowKeys: Set<String> = []
+    
+    // PERF: Progressive row loading - start with 3, expand as user scrolls
+    @Published var progressiveRowCount: Int = 3
+    
+    // PERF: Concurrency limiter for catalog loading (max 2 simultaneous)
+    private let catalogLoadSemaphore = AsyncSemaphore(limit: 2)
+    
     init(appState: AppState) {
         self.appState = appState
         // Restore tab selection from AppState
@@ -83,6 +92,10 @@ class BrowseViewModel: ObservableObject {
     func handleTabChange(to newValue: MediaType) {
         // Persist tab selection to AppState
         appState.browseSelectedTab = newValue.index
+        
+        // PERF: Reset progressive loading on tab switch
+        progressiveRowCount = 3
+        visibleRowKeys.removeAll()
         
         // Skip reload if this is a navigation restore
         if appState.browseScrollPosition != nil {
@@ -172,6 +185,17 @@ class BrowseViewModel: ObservableObject {
     
     func showWatchModeSelection(for historyItem: WatchHistoryItem) {
         selectedHistoryItem = historyItem
+    }
+    
+    // PERF: Reveal more rows as user scrolls (progressive loading)
+    func revealMoreRows(count: Int = 3) {
+        let maxRows = getStreamingServiceKeys().count
+        let newCount = min(progressiveRowCount + count, maxRows)
+        if newCount > progressiveRowCount {
+            withAnimation(.easeOut(duration: 0.2)) {
+                progressiveRowCount = newCount
+            }
+        }
     }
     
     // MARK: - Catalog Loading Logic
@@ -387,15 +411,29 @@ class BrowseViewModel: ObservableObject {
         }
         
         guard !servicesNeedingReload.isEmpty else { return }
-        try? await Task.sleep(nanoseconds: 300_000_000)
+        
+        // PERF: Prioritize visible rows first
+        let visibleFirst = servicesNeedingReload.sorted { key1, key2 in
+            let vis1 = visibleRowKeys.contains(key1)
+            let vis2 = visibleRowKeys.contains(key2)
+            if vis1 && !vis2 { return true }
+            if vis2 && !vis1 { return false }
+            return false
+        }
+        
+        try? await Task.sleep(nanoseconds: 200_000_000) // 0.2s initial delay
         
         let trendingCatalog = appState.browseCatalogs[getStorageKey("trending")]
         if trendingCatalog == nil || trendingCatalog?.isEmpty == true {
             await loadCatalogIfNeeded(key: "trending", isTrending: true)
         }
         
-        for (index, serviceKey) in servicesNeedingReload.enumerated() {
-            if index > 0 { try? await Task.sleep(nanoseconds: 50_000_000) }
+        // PERF: Load with staggered delays and concurrency limit
+        for (index, serviceKey) in visibleFirst.enumerated() {
+            // Stagger: 150ms between each, increases for non-visible rows
+            let isVisible = visibleRowKeys.contains(serviceKey)
+            let delay: UInt64 = isVisible ? 100_000_000 : UInt64(150_000_000 + (index * 50_000_000))
+            if index > 0 { try? await Task.sleep(nanoseconds: delay) }
             await loadCatalogIfNeeded(key: serviceKey)
         }
     }

@@ -1,4 +1,19 @@
 import SwiftUI
+import AppKit
+
+// MARK: - Performance: In-Memory Image Cache
+// Provides synchronous access to images without async overhead
+class PosterImageCache {
+    static let shared = NSCache<NSString, NSImage>()
+    
+    static func get(_ key: String) -> NSImage? {
+        return shared.object(forKey: key as NSString)
+    }
+    
+    static func set(_ key: String, image: NSImage) {
+        shared.setObject(image, forKey: key as NSString)
+    }
+}
 
 // MARK: - Components for BrowseView
 
@@ -434,18 +449,18 @@ struct MediaCard: View {
     }
 }
 
-/// Optimized MediaCard with memory management
+/// Optimized MediaCard with memory management and NSCache fast-path
 struct OptimizedMediaCard: View {
     let item: MediaItem
-    @State private var imageData: Data?
+    @State private var cachedImage: NSImage?
     @State private var imageLoadTask: Task<Void, Never>?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             // Poster image with memory optimization
             ZStack {
-                if let imageData = imageData, let nsImage = NSImage(data: imageData) {
-                    Image(nsImage: nsImage)
+                if let image = cachedImage {
+                    Image(nsImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(height: 220)
@@ -497,20 +512,30 @@ struct OptimizedMediaCard: View {
         .onDisappear {
             // Cancel image loading when view disappears
             imageLoadTask?.cancel()
-            imageData = nil // Memory optimization: release image data when not visible
+            // PERF: Don't nil out cachedImage - keep in NSCache for fast reappear
         }
     }
 
     private func loadImage() {
         guard let posterURL = item.posterURL else { return }
         let cacheKey = posterURL.absoluteString
+        
+        // PERF: Fast-path - check NSCache synchronously first (no async overhead)
+        if let fastCached = PosterImageCache.get(cacheKey) {
+            self.cachedImage = fastCached
+            return
+        }
 
         imageLoadTask?.cancel()
         imageLoadTask = Task {
-            // Check cache first
+            // Check disk cache
             if let cachedData = await CacheManager.shared.getImageData(key: cacheKey) {
-                if !Task.isCancelled {
-                    self.imageData = cachedData
+                if !Task.isCancelled, let img = NSImage(data: cachedData) {
+                    // Populate fast cache
+                    PosterImageCache.set(cacheKey, image: img)
+                    await MainActor.run {
+                        self.cachedImage = img
+                    }
                 }
                 return
             }
@@ -518,15 +543,17 @@ struct OptimizedMediaCard: View {
             // Download
             do {
                 let (data, _) = try await URLSession.shared.data(from: posterURL)
-                if !Task.isCancelled {
-                    // Cache
+                if !Task.isCancelled, let img = NSImage(data: data) {
+                    // Cache to disk
                     await CacheManager.shared.setImageData(key: cacheKey, value: data)
-                    self.imageData = data
+                    // Populate fast cache
+                    PosterImageCache.set(cacheKey, image: img)
+                    await MainActor.run {
+                        self.cachedImage = img
+                    }
                 }
             } catch {
-                if !Task.isCancelled {
-                    print("Failed to load optimized poster: \(error)")
-                }
+                // Silently fail - placeholder shown
             }
         }
     }
@@ -565,7 +592,7 @@ struct StreamingServiceRow: View {
     }
 }
 
-/// Lazy loading streaming service row
+/// Lazy loading streaming service row with visibility tracking
 struct LazyStreamingServiceRow: View {
     let title: String
     let catalogKey: String
@@ -574,6 +601,7 @@ struct LazyStreamingServiceRow: View {
     let scrollOffset: Binding<CGFloat>?
     let onTap: (MediaItem) -> Void
     let onAppear: () async -> Void
+    var onVisibilityChange: ((String, Bool) -> Void)? = nil  // PERF: Track visibility
 
     @State private var hasAppeared = false
     @State private var lastKnownItemCount = 0
@@ -612,6 +640,7 @@ struct LazyStreamingServiceRow: View {
             }
         }
         .onAppear {
+            onVisibilityChange?(catalogKey, true)
             let shouldLoad = !hasAppeared || items.isEmpty || lastKnownItemCount == 0
             if shouldLoad {
                 hasAppeared = true
@@ -620,6 +649,9 @@ struct LazyStreamingServiceRow: View {
                 }
             }
             lastKnownItemCount = items.count
+        }
+        .onDisappear {
+            onVisibilityChange?(catalogKey, false)
         }
         .onChange(of: items.count) { newCount in
             if newCount == 0 && lastKnownItemCount > 0 {

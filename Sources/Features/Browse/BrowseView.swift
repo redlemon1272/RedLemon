@@ -78,10 +78,7 @@ struct BrowseViewContent: View {
                                     StreamingServiceRow(
                                         title: viewModel.selectedTab == .movies ? "Popular Movies" : "Popular TV Shows",
                                         items: viewModel.selectedTab == .movies ? appState.popularMovies : appState.popularShows,
-                                        scrollOffset: Binding(
-                                            get: { appState.browseRowScrollPositions["popular"] ?? 0 },
-                                            set: { appState.browseRowScrollPositions["popular"] = $0 }
-                                        ),
+                                        scrollOffset: nil, // PERF: Don't track scroll during scrolling
                                         onTap: { item in viewModel.selectMedia(item, fromRow: "popular") }
                                     )
                                     .id("popular")
@@ -92,30 +89,52 @@ struct BrowseViewContent: View {
                                         catalogKey: "trending",
                                         items: appState.browseCatalogs[viewModel.getStorageKey("trending")] ?? [],
                                         isLoading: appState.browseIsLoadingCatalogs.contains(viewModel.getStorageKey("trending")),
-                                        scrollOffset: Binding(
-                                            get: { appState.browseRowScrollPositions[viewModel.getStorageKey("trending")] ?? 0 },
-                                            set: { appState.browseRowScrollPositions[viewModel.getStorageKey("trending")] = $0 }
-                                        ),
+                                        scrollOffset: nil, // PERF: Don't track scroll during scrolling
                                         onTap: { item in viewModel.selectMedia(item, fromRow: "trending") },
-                                        onAppear: { await viewModel.loadCatalogIfNeeded(key: "trending", isTrending: true) }
+                                        onAppear: { await viewModel.loadCatalogIfNeeded(key: "trending", isTrending: true) },
+                                        onVisibilityChange: { key, visible in
+                                            if visible {
+                                                viewModel.visibleRowKeys.insert(key)
+                                            } else {
+                                                viewModel.visibleRowKeys.remove(key)
+                                            }
+                                        }
                                     )
                                     .id("trending")
 
-                                    // Streaming service catalogs
-                                    ForEach(viewModel.getStreamingServiceKeys(), id: \.self) { serviceKey in
+                                    // Streaming service catalogs - PERF: Progressive loading
+                                    // Only render first 3 immediately, rest appear as user scrolls
+                                    let allKeys = viewModel.getStreamingServiceKeys()
+                                    let visibleCount = viewModel.progressiveRowCount
+                                    
+                                    ForEach(Array(allKeys.prefix(visibleCount)), id: \.self) { serviceKey in
                                         LazyStreamingServiceRow(
                                             title: viewModel.getServiceDisplayName(serviceKey),
                                             catalogKey: serviceKey,
                                             items: appState.browseCatalogs[viewModel.getStorageKey(serviceKey)] ?? [],
                                             isLoading: appState.browseIsLoadingCatalogs.contains(viewModel.getStorageKey(serviceKey)),
-                                            scrollOffset: Binding(
-                                                get: { appState.browseRowScrollPositions[viewModel.getStorageKey(serviceKey)] ?? 0 },
-                                                set: { appState.browseRowScrollPositions[viewModel.getStorageKey(serviceKey)] = $0 }
-                                            ),
+                                            scrollOffset: nil, // PERF: Don't track scroll during scrolling
                                             onTap: { item in viewModel.selectMedia(item, fromRow: serviceKey) },
-                                            onAppear: { await viewModel.loadCatalogIfNeeded(key: serviceKey) }
+                                            onAppear: { await viewModel.loadCatalogIfNeeded(key: serviceKey) },
+                                            onVisibilityChange: { key, visible in
+                                                if visible {
+                                                    viewModel.visibleRowKeys.insert(key)
+                                                } else {
+                                                    viewModel.visibleRowKeys.remove(key)
+                                                }
+                                            }
                                         )
                                         .id(serviceKey)
+                                    }
+                                    
+                                    // PERF: "Load More" trigger at bottom - reveals more rows as user scrolls
+                                    if visibleCount < allKeys.count {
+                                        Color.clear
+                                            .frame(height: 1)
+                                            .onAppear {
+                                                // Reveal 3 more rows when user scrolls near bottom
+                                                viewModel.revealMoreRows(count: 3)
+                                            }
                                     }
                                 }
                                 .padding(.bottom)

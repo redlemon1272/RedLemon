@@ -588,7 +588,12 @@ struct MPVPlayerView: View {
             NextEpisodeOverlay(
                 info: info,
                 thumbnail: viewModel.nextEpisodeThumbnail,
-                onCancel: { viewModel.cancelNextEpisodeAutoPlay() },
+                onExit: {
+                    viewModel.cancelNextEpisodeAutoPlay()
+                    Task {
+                        await appState.player.exitPlayer(keepRoomState: false)
+                    }
+                },
                 onPlay: {
                     viewModel.startNextEpisodeNow() // Sync hide and mark handled
                     Task {
@@ -637,10 +642,10 @@ struct MPVPlayerView: View {
                     .font(.system(size: 14))
 
                 Spacer()
-                
+
                 let subdlStatus = appState.providerHealth["subdl"] ?? "Unknown"
                 let isChecking = appState.isCheckingProviders
-                
+
                 if isChecking {
                     ProgressView()
                         .controlSize(.small)
@@ -650,7 +655,7 @@ struct MPVPlayerView: View {
                         Circle()
                             .fill(subdlStatus == "Online" ? Color.green : Color.red)
                             .frame(width: 8, height: 8)
-                        
+
                         Text(subdlStatus)
                             .foregroundColor(subdlStatus == "Online" ? .green : .red)
                             .font(.system(size: 12, weight: .semibold))
@@ -659,7 +664,7 @@ struct MPVPlayerView: View {
                     .padding(.vertical, 4)
                     .background(Color.black.opacity(0.2))
                     .cornerRadius(4)
-                    
+
                     // Refresh button
                     Button(action: {
                         appState.checkProviderHealth()
@@ -1353,7 +1358,7 @@ struct MPVPlayerView_Previews: PreviewProvider {
 struct NextEpisodeOverlay: View {
     let info: String
     let thumbnail: String?
-    let onCancel: () -> Void
+    let onExit: () -> Void
     let onPlay: () -> Void
 
     @State private var remainingSeconds = 10
@@ -1374,12 +1379,13 @@ struct NextEpisodeOverlay: View {
 
                         Spacer()
 
-                        Button(action: onCancel) {
+                        Button(action: onExit) {
                             Image(systemName: "xmark.circle.fill")
                                 .font(.title2)
                                 .foregroundColor(.white.opacity(0.8))
                         }
                         .buttonStyle(.plain)
+                        .help("Exit Player")
                     }
 
                     HStack(spacing: 16) {

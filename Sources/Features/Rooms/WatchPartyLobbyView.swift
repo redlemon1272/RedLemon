@@ -95,13 +95,15 @@ struct WatchPartyLobbyView: View {
                         // Keep overlay for a bit longer, then hide if not switched
                         // If room is playing, LobbyViewModel will switch view automatically
                         try? await Task.sleep(nanoseconds: 3_500_000_000) // 5.0s (3.5s additional)
-                        withAnimation {
-                            isAutoJoining = false
-                        }
-                        // CRITICAL FIX: Sync localTimeUntilStart when overlay ends
+
+                        // CRITICAL FIX: Sync localTimeUntilStart BEFORE hiding overlay
                         // This ensures the countdown becomes visible if it was set during the overlay period
                         localTimeUntilStart = viewModel.timeUntilStart
                         NSLog("%@", "[LOBBY_VIEW] Overlay hidden, syncing localTimeUntilStart=\(Int(localTimeUntilStart))")
+
+                        withAnimation {
+                            isAutoJoining = false
+                        }
                     }
                 } else {
                     NSLog("%@", "[LOBBY_VIEW] SKIPPING overlay (countdown already set to \(Int(localTimeUntilStart))s)")

@@ -760,29 +760,6 @@ if [[ -f "$RD_CLIENT" ]]; then
     fi
 fi
 
-# =============================================================================
-
-echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
-echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
-echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"
-
-# Report Errors
-if [[ $ERROR_COUNT -gt 0 ]]; then
-    echo -e "${RED}❌ ERRORS: $ERROR_COUNT${NC}"
-else
-    echo -e "${GREEN}✅ ERRORS: 0${NC}"
-fi
-
-# Report Warnings
-if [[ $WARNING_COUNT -gt 0 ]]; then
-    echo -e "${YELLOW}⚠️  WARNINGS: $WARNING_COUNT${NC}"
-else
-    echo -e "${GREEN}✅ WARNINGS: 0${NC}"
-fi
-
-echo ""
-echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
-
 # Exit Code Logic
 
 
@@ -822,6 +799,87 @@ if [[ -f "$PLAYER_VM" ]]; then
         fi
     fi
 fi
+
+# =============================================================================
+# CHECK 37: Restricted Edge Function Subprocesses (Landmine #97)
+# =============================================================================
+# Trigger: Using Deno.Command, which is blocked by Supabase Edge Runtime.
+# Rule: Use host-side scripts and absolute paths for system stats.
+print_header "Check 37: Edge Function Subprocesses (Landmine #97)"
+
+FUNCTIONS_DIR="supabase/functions"
+if [[ -d "$FUNCTIONS_DIR" ]]; then
+    while IFS=: read -r file line code; do
+        if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+        # Check for Deno.Command usage
+        if [[ "$code" =~ Deno\.Command ]]; then
+             report "ERROR" "Landmine #97" "Subprocess Error: 'Deno.Command' is forbidden in Supabase Edge Runtime. Use host-side scripts + stats files." "$file" "$line" "$code"
+        fi
+    done < <(grep -rn "Deno\.Command" "$FUNCTIONS_DIR" --include="*.ts" | grep -v "// OK")
+fi
+
+# =============================================================================
+# CHECK 38: Heartbeat Global Tracking (Landmine #98)
+# =============================================================================
+# Trigger: 'heartbeat' function in SQL without updating public.users.last_seen.
+# Rule: All heartbeats must update global last_seen to avoid stale dashboard data.
+print_header "Check 38: Heartbeat Global Tracking (Landmine #98)"
+
+MIGRATIONS_DIR="supabase/migrations"
+if [[ -d "$MIGRATIONS_DIR" ]]; then
+    # Look for files that define a heartbeat function
+    # We only care about the actual definition block.
+    # LANDMINE #98 Defense: Every heartbeat must ping the users table.
+    while IFS= read -r file; do
+        # Support suppression for legacy migrations
+        if grep -qE -- "-- (OK|legacy)" "$file"; then continue; fi
+
+        # Extract the content of the function (rough check)
+        # If it defines a heartbeat but doesn't mention public.users, it's a risk.
+        if ! grep -q "UPDATE.*public.users" "$file" && ! grep -q "INSERT.*public.users" "$file"; then
+             report "ERROR" "Landmine #98" "Stale Global State: heartbeat function does not update 'public.users.last_seen'. Dashboard will show user as offline." "$file" "0" "Missing UPDATE public.users"
+        fi
+    done < <(grep -lE "CREATE OR REPLACE FUNCTION.*heartbeat" "$MIGRATIONS_DIR"/*.sql | grep -v "revert")
+fi
+
+# =============================================================================
+# CHECK 39: Void RPC Trap (Landmine #99)
+# =============================================================================
+# Trigger: Using Void/() with generic rpc<T>.
+# Rule: Swift's Void cannot conform to Decodable. Use dedicated helpers.
+print_header "Check 39: Void RPC Trap (Landmine #99)"
+# Detect pattern where developer tries to use Void with generic rpc<T>
+grep -rnE "let _: (Void|\(\)) = try await .*rpc\(" "Sources" | while read -r line; do
+    file=$(echo "$line" | cut -d: -f1)
+    ln=$(echo "$line" | cut -d: -f2)
+    content=$(echo "$line" | cut -d: -f3-)
+
+    if [[ "$content" == *"// OK"* || "$content" == *"// legacy"* ]]; then continue; fi
+
+    report "ERROR" "Landmine #99" "Void RPC Trap: 'Void' cannot conform to 'Decodable'. Use a dedicated helper or makeRequest directly for RPCs with no return data." "$file" "$ln" "$content"
+done
+
+echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
+echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
+echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"
+
+# Report Errors
+if [[ $ERROR_COUNT -gt 0 ]]; then
+    echo -e "${RED}❌ ERRORS: $ERROR_COUNT${NC}"
+else
+    echo -e "${GREEN}✅ ERRORS: 0${NC}"
+fi
+
+# Report Warnings
+if [[ $WARNING_COUNT -gt 0 ]]; then
+    echo -e "${YELLOW}⚠️  WARNINGS: $WARNING_COUNT${NC}"
+else
+    echo -e "${GREEN}✅ WARNINGS: 0${NC}"
+fi
+
+echo ""
+echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
 
 # Exit Code Logic
 if [[ $ERROR_COUNT -gt 0 ]]; then

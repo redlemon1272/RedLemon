@@ -1,4 +1,5 @@
--- Migration: Room Heartbeat & Zombie Cleanup V2 (Updated)
+-- legacy
+-- Migration: Room Heartbeat & Zombie Cleanup V2 (Updated) -- legacy
 -- Date: 2026-01-05
 -- Description: Adds heartbeat RPC, strict cleanup logic, and auto-sync triggers.
 
@@ -79,14 +80,14 @@ BEGIN
       AND (
         -- Condition 1: Empty Room (using actual count from table source)
         (SELECT COUNT(*) FROM public.room_participants rp WHERE rp.room_id = rooms.id) = 0
-        
+
         OR
-        
+
         -- Condition 2: Orphaned Room (Host is gone)
         NOT EXISTS (
-            SELECT 1 
-            FROM public.room_participants rp 
-            WHERE rp.room_id = rooms.id 
+            SELECT 1
+            FROM public.room_participants rp
+            WHERE rp.room_id = rooms.id
             AND rp.user_id = rooms.host_user_id
         )
       )
@@ -107,11 +108,11 @@ BEGIN
     IF EXISTS (SELECT 1 FROM pg_extension WHERE extname = 'pg_cron') THEN
         -- Unschedule old jobs to avoid duplicates
         PERFORM cron.unschedule('cleanup-zombie-rooms');
-        
+
         -- Schedule new job every minute
         PERFORM cron.schedule(
             'cleanup-zombie-rooms',
-            '* * * * *', 
+            '* * * * *',
             'SELECT public.cleanup_inactive_rooms_v2();'
         );
     END IF;

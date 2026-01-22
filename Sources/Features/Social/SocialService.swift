@@ -457,10 +457,16 @@ class SocialService: ObservableObject {
         currentMetadata = metadata
 
         do {
-            // print("💓 SocialService: Sending heartbeat...") (Silent unless debug)
+            // 1. Realtime Presence Tracking
             try await client.track(topic: "global-presence", userId: userId, metadata: metadata)
+
+            // 2. Database Last Seen Update (Global Heartbeat)
+            // This ensures the Admin Dashboard shows the user as 'Online' even if not in a room.
+            if let uuid = UUID(uuidString: userId) {
+                try await SupabaseClient.shared.sendUserHeartbeat(userId: uuid)
+            }
         } catch {
-            print("❌ SocialService: Heartbeat failed: \(error)")
+            print("❌ SocialService: Heartbeat/LastSeen update failed: \(error)")
         }
     }
 
@@ -725,7 +731,7 @@ class SocialService: ObservableObject {
     }
 
     // MARK: - Realtime Social Channels (DMs & Friendships)
-    
+
     private func setupSocialChannels(userId: String) async {
         print("🔌 SocialService: Connecting to social realtime channels...")
 
@@ -782,13 +788,13 @@ class SocialService: ObservableObject {
         }
 
         let status = newRecord["status"] as? String ?? ""
-        
+
         print("📨 SocialService: Friendship \(eventType) - Status: \(status)")
 
         // Refresh friend list and requests for any relevant change
         Task {
             await loadFriends()
-            
+
             // If it's a new pending request for me, show a system notification
             if eventType == "INSERT" && status == "pending" {
                  print("🔔 SocialService: New friend request received")

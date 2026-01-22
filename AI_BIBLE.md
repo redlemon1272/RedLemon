@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 22, 2026 (Part 96: The Re-Join Echo Trap - Landmine #96)
+> **Last Updated:** January 22, 2026 (Part 99: Void RPC Trap - Landmine #99)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -93,6 +93,9 @@
 | **Wrong Episode Plays (Multi-Season Pack)** | Episode-only pattern matches wrong season file | #94 |
 | **"Host has left the room" (Self-Alert)** | Host processes their own "Room Closed" broadcast | #95 |
 | **User Re-Joins Silently** | Deduplication state not cleared on leave | #96 |
+| **Zero KB Disk Usage** | Edge Function `df` failure / Relative path error | #97 |
+| **Stale User Last Seen** | "12 days ago" for active user | #98 |
+| **Void RPC Build Failure** | type 'Void' cannot conform to 'Decodable' | #99 |
 
 ## 🚨 Critical Landmines
 
@@ -310,6 +313,23 @@
     *   **Trigger**: Host returns to Lobby from Player and immediately attempts to `joinRoom` (to ensure presence) while a previous DELETE or staleness check is pending.
     *   **Symptom**: `Supabase API Error: duplicate key value violates unique constraint "room_participants_pkey"`.
     *   **Rule**: `SupabaseClient.joinRoom` MUST be **Idempotent**. It must catch Postgres error `23505` (Unique Violation) and HTTP `409 Conflict` and treat them as success. Never block connection flow due to "user already in room".
+**Landmine #97: Zero KB Disk Usage in Edge Functions**
+- **Symptom**: Admin Dashboard shows "Disk Usage: 0 bytes (0%)" even when server is active.
+- **Trigger**: Edge function calls `Deno.Command("df", ...)`.
+- **Cause**: Security restrictions in Deno Edge Functions block direct shell command execution.
+- **Rule**: Never use `Deno.Command` in edge functions. Use pre-calculated JSON files or authorized internal APIs.
+
+**Landmine #98: Stale User Last Seen Timestamps**
+- **Symptom**: Admin Dashboard shows users last seen days/weeks ago despite current activity.
+- **Trigger**: Database heartbeat functions (e.g. `room_heartbeat`) only update `room_participants` table.
+- **Cause**: The `users` table `last_seen` column is not updated during session heartbeats, only on registration.
+- **Rule**: Every heartbeat RPC (`room_heartbeat`, `user_heartbeat`) MUST explicitly update `public.users.last_seen`.
+
+**Landmine #99: The Void RPC Decodable Trap**
+- **Symptom**: Build failure: `type 'Void' cannot conform to 'Decodable'`.
+- **Trigger**: Calling `SupabaseClient.shared.rpc(fn: "...", ...)` and expecting a `Void` or `()` return.
+- **Cause**: The generic `rpc<T>` function requires `T: Decodable`. Swift's `Void` does not conform to `Decodable`.
+- **Rule**: For RPCs that return no data, do NOT use the generic `rpc` method. Use `makeRequest` directly or a dedicated helper (e.g., `sendUserHeartbeat`, `sendHeartbeat`).
 61. **The Invisible Join Trap (Lack of Local Echo)**: *(Added v1.0.115)*
     *   **Trigger**: Relying on Realtime Broadcasts or Presence updates to confirm the sender's own actions.
     *   **Symptom**: "User Joined" or "Message Sent" appears for everyone *else* but not the sender.

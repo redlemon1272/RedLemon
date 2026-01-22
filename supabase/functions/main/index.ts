@@ -30,7 +30,7 @@ serve(async (req: Request) => {
     if (path.includes("update-prices")) return updatePrices(req);
 
     // System Status (Added for Admin Dashboard)
-    if (path === '/system/status') {
+    if (path.includes('/system/status')) {
         return new Response(JSON.stringify({
             status: 'online',
             timestamp: new Date().toISOString(),
@@ -40,44 +40,49 @@ serve(async (req: Request) => {
     }
 
     // Disk Usage (Added for Admin Dashboard)
-    if (path === '/system/disk') {
+    if (path.includes('/system/disk')) {
         try {
-            // Execute df command to get disk usage for root filesystem
-            const cmd = new Deno.Command("df", {
-                args: ["-B1", "/"],  // -B1 for bytes, / for root filesystem
-                stdout: "piped",
-                stderr: "piped",
-            });
-            const { stdout } = await cmd.output();
-            const output = new TextDecoder().decode(stdout);
+            // Priority 1: Read from pre-calculated disk_stats.json (written by host script)
+            try {
+                const statsJson = await Deno.readTextFile("/home/deno/functions/disk_stats.json");
+                const stats = JSON.parse(statsJson);
 
-            // Parse df output: Filesystem 1B-blocks Used Available Use% Mounted
-            const lines = output.trim().split('\n');
-            if (lines.length >= 2) {
-                const parts = lines[1].split(/\s+/);
-                // parts: [filesystem, total, used, available, use%, mount]
-                const totalBytes = parseInt(parts[1]) || 0;
-                const usedBytes = parseInt(parts[2]) || 0;
-                const freeBytes = parseInt(parts[3]) || 0;
-                const usagePercent = totalBytes > 0 ? (usedBytes / totalBytes) * 100 : 0;
+                if (stats.total_bytes && stats.free_bytes !== undefined) {
+                    const totalBytes = stats.total_bytes;
+                    const usedBytes = stats.used_bytes ?? (totalBytes - stats.free_bytes);
+                    const freeBytes = stats.free_bytes;
+                    const usagePercent = totalBytes > 0 ? (usedBytes / totalBytes) * 100 : 0;
 
-                return new Response(JSON.stringify({
-                    total_bytes: totalBytes,
-                    used_bytes: usedBytes,
-                    free_bytes: freeBytes,
-                    usage_percent: Math.round(usagePercent * 10) / 10
-                }), { headers: { 'Content-Type': 'application/json' } });
+                    return new Response(JSON.stringify({
+                        total_bytes: totalBytes,
+                        used_bytes: usedBytes,
+                        free_bytes: freeBytes,
+                        usage_percent: Math.round(usagePercent * 10) / 10,
+                        source: "cache"
+                    }), { headers: { 'Content-Type': 'application/json' } });
+                }
+            } catch (e) {
+                console.error("Disk usage stats file error:", e.message);
             }
-            throw new Error("Failed to parse df output");
-        } catch (error) {
-            console.error("Disk usage error:", error);
-            // Fallback for environment where df is not available or perm denied
+
+            // Fallback for environment where disk_stats.json is missing or invalid
             return new Response(JSON.stringify({
                 total_bytes: 100000000000,
                 used_bytes: 0,
                 free_bytes: 100000000000,
                 usage_percent: 0,
-                error: "Failed to get real disk usage"
+                error: "Failed to read disk_stats.json",
+                source: "fallback"
+            }), { headers: { 'Content-Type': 'application/json' } });
+        } catch (error) {
+            console.error("System disk error:", error);
+            return new Response(JSON.stringify({
+                total_bytes: 100000000000,
+                used_bytes: 0,
+                free_bytes: 100000000000,
+                usage_percent: 0,
+                error: "Internal server error",
+                source: "critical_fallback"
             }), { headers: { 'Content-Type': 'application/json' } });
         }
     }

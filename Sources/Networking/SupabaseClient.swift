@@ -376,7 +376,7 @@ class SupabaseClient: RoomManager, UserManager {
     /// Remote Procedure Call (RPC)
     func rpc<T: Decodable>(fn: String, params: [String: Any]? = nil) async throws -> T {
         // CRITICAL SECURITY: Auto-sign sensitive RPCs defined in AI Bible
-        let sensitiveRPCs = ["room_heartbeat", "cleanup_stale_participants", "get_admin_logs"]
+        let sensitiveRPCs = ["room_heartbeat", "user_heartbeat", "cleanup_stale_participants", "get_admin_logs"]
         let shouldSign = sensitiveRPCs.contains(fn)
 
         let data = try await makeRequest(
@@ -1016,6 +1016,19 @@ class SupabaseClient: RoomManager, UserManager {
             method: "POST",
             body: [
                 "p_room_id": roomId,
+                "p_user_id": userId.uuidString.lowercased()
+            ],
+            // 🔐 SECURE: Sign request to prevent IDOR/Spoofing
+            sign: true
+        )
+    }
+
+    /// Send global user heartbeat (Last Seen update)
+    func sendUserHeartbeat(userId: UUID) async throws {
+        _ = try await makeRequest(
+            path: "/rpc/user_heartbeat",
+            method: "POST",
+            body: [
                 "p_user_id": userId.uuidString.lowercased()
             ],
             // 🔐 SECURE: Sign request to prevent IDOR/Spoofing

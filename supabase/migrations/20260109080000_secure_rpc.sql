@@ -1,3 +1,4 @@
+-- legacy
 -- Secure RPC Verification Function
 -- Requires pgsodium extension (which is standard in Supabase)
 

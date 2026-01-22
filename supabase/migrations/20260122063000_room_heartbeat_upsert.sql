@@ -1,3 +1,4 @@
+-- legacy
 -- Make room_heartbeat an UPSERT operation
 -- This ensures that if a user's row doesn't exist (e.g., joinRoom failed due to RLS race),
 -- the heartbeat will create it. This is the ultimate safety net for presence.

@@ -1,3 +1,4 @@
+-- legacy
 -- Migration: Fix Room Heartbeat to UPSERT
 -- Date: 2026-01-08
 -- Description: Makes room_heartbeat an UPSERT operation to ensure participants

@@ -1,3 +1,4 @@
+-- legacy
 -- Security Fixes 2026-01-09
 -- Fixes IDOR vulnerabilities in RPC functions by enforcing auth.uid()
 

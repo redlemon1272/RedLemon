@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 21, 2026 (Part 95: Broadcast Self-Echo Trap - Landmine #95)
+> **Last Updated:** January 22, 2026 (Part 96: The Re-Join Echo Trap - Landmine #96)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -92,6 +92,7 @@
 | **Event Countdown Hidden (Auto-Join Only)** | VM Recreation Trap (New VM blocked from init by shared state) | #93 |
 | **Wrong Episode Plays (Multi-Season Pack)** | Episode-only pattern matches wrong season file | #94 |
 | **"Host has left the room" (Self-Alert)** | Host processes their own "Room Closed" broadcast | #95 |
+| **User Re-Joins Silently** | Deduplication state not cleared on leave | #96 |
 
 ## 🚨 Critical Landmines
 
@@ -398,6 +399,14 @@
     *   **Cause**: Realtime broadcasts generally do NOT echo, but some configurations or race conditions can cause loopback.
     *   **Rule**: **Always Filter Self**. In any broadcast handler (`onSync`, `onBroadcast`), explicitly check `if senderId == currentUserId { return }` before processing destructive actions. Never assume the network will filter it for you.
     *   **Impact**: Prevents false positive alerts where the sender scares themselves.
+
+96. **The Re-Join Echo Trap (State Clearing)**: *(Added v1.0.131)*
+    *   **Trigger**: A deduplication mechanism (e.g. `announcedParticipantIds`) prevents "Double Join" messages correctly, but also silences "User Joined" messages when a user leaves (gracefully) and immediately re-joins.
+    *   **Symptom**: User leaves watch party, returns, and no "User Joined" message appears.
+    *   **Cause**: The deduplication logic remembered the user session forever. It didn't account for the "Leave" event resetting the state.
+    *   **Rule**: **Reset on Exit**. Any deduplication state used for "Once-per-session" events MUST be cleared in the `.leave` or disconnect handler.
+    *   **Fix**: `announcedParticipantIds.remove(id)` added to `.leave` handler in `MPVPlayerViewModel`.
+    *   **Related**: Landmine #58 (Async State Debouncing) -> This is the inverse problem (Over-debouncing).
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

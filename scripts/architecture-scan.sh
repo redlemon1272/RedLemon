@@ -804,6 +804,25 @@ if [[ -f "$LOBBY_ROUTER" ]]; then
     fi
 fi
 
+# =============================================================================
+# CHECK 36: Re-Join State Clearing (Landmine #96)
+# =============================================================================
+# Trigger: Deduplication state (announcedParticipantIds) never cleared on leave.
+# Fix: stated.remove(id) in leave handler.
+print_header "Check 36: Re-Join State Clearing (Landmine #96)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    # If the set exists, we must see a removal call
+    if grep -q "var announcedParticipantIds" "$PLAYER_VM"; then
+        if ! grep -q "announcedParticipantIds.remove" "$PLAYER_VM"; then
+            report "ERROR" "Landmine #96" "State Clearing Risk: 'announcedParticipantIds' is defined but never cleared (removed). This silences re-joins (Zombie Deduplication). Must call .remove(id) in leave handler." "$PLAYER_VM" "0" "Missing cleanup call"
+        else
+            echo -e "${GREEN}✅ MPVPlayerViewModel correctly cleans up announcedParticipantIds.${NC}"
+        fi
+    fi
+fi
+
 # Exit Code Logic
 if [[ $ERROR_COUNT -gt 0 ]]; then
     exit 1 # Block items

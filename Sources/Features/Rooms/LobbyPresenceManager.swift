@@ -247,6 +247,17 @@ class LobbyPresenceManager: ObservableObject {
 
                             if strongViewModel.participants[index].phxRefs.isEmpty {
                                 let name = strongViewModel.participants[index].name
+                                let joinedAt = strongViewModel.participants[index].joinedAt
+
+                                // CRITICAL FIX: Suppress false 'User Left' for users who JUST joined
+                                // When user auto-joins a new event lobby, their old Realtime connection disconnects.
+                                // This sends a stale 'leave' event which we must ignore if they joined recently.
+                                let timeSinceJoin = Date().timeIntervalSince(joinedAt)
+                                if timeSinceJoin < 5.0 {
+                                    NSLog("🛡️ Lobby: Suppressing false 'User Left' for %@ - joined %.1fs ago (stale presence leave)", name, timeSinceJoin)
+                                    return
+                                }
+
                                 // 2. Final removal from UI list (via buffer)
                                 strongSelf.pendingLeaves.insert(normalizedID)
 

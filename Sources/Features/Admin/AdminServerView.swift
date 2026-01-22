@@ -8,6 +8,7 @@ struct AdminServerView: View {
     @State private var lastJanitor: SystemJobLog?
     @State private var lastSweep: SystemJobLog?
     @State private var diskUsage: DiskUsage?
+    @State private var realtimeStats: RealtimeStats?
     @State private var isLoading = false
     @State private var lastRefreshed: Date?
     
@@ -254,8 +255,225 @@ struct AdminServerView: View {
                 .padding()
                 .background(Color(NSColor.controlBackgroundColor))
                 .cornerRadius(12)
-                
-                // 4. Environment Info
+
+                // 4. Live Event Monitoring (Realtime Stats)
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        Label("Live Event Monitoring", systemImage: "antenna.radiowaves.left.and.right")
+                            .font(.headline)
+                        Spacer()
+                        if let stats = realtimeStats {
+                            Circle()
+                                .fill(stats.capacityStatus == "healthy" ? Color.green :
+                                      stats.capacityStatus == "warning" ? Color.orange :
+                                      Color.red)
+                                .frame(width: 8, height: 8)
+                            Text(stats.capacityStatus.uppercased())
+                                .font(.system(size: 11, weight: .bold))
+                                .foregroundColor(stats.capacityStatus == "healthy" ? .green :
+                                                   stats.capacityStatus == "warning" ? .orange :
+                                                   .red)
+                        }
+                    }
+
+                    if let stats = realtimeStats {
+                        // Main metrics row
+                        HStack(spacing: 16) {
+                            StatusCard(
+                                title: "Total Viewers",
+                                value: "\(stats.totalParticipants)",
+                                icon: "person.2.fill",
+                                color: stats.capacityStatus == "healthy" ? .green :
+                                       stats.capacityStatus == "warning" ? .orange :
+                                       .red,
+                                subtitle: "\(stats.activeEvents) active event\(stats.activeEvents == 1 ? "" : "s")"
+                            )
+
+                            StatusCard(
+                                title: "Capacity Used",
+                                value: String(format: "%.1f%%", stats.usagePercent),
+                                icon: "chart.pie.fill",
+                                color: stats.capacityStatus == "healthy" ? .green :
+                                       stats.capacityStatus == "warning" ? .orange :
+                                       .red,
+                                subtitle: "\(stats.maxConnections) max connections"
+                            )
+                        }
+
+                        // Current event
+                        if let largest = stats.largestEvent, largest.participantsCount > 0 {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Current Event")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(largest.roomName)
+                                            .font(.system(size: 13, weight: .medium))
+                                        Text(largest.roomId)
+                                            .font(.system(.caption2, design: .monospaced))
+                                            .foregroundColor(.secondary)
+                                    }
+                                    Spacer()
+                                    Text("\(largest.participantsCount) viewers")
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(.blue)
+                                }
+                                .padding()
+                                .background(Color(NSColor.windowBackgroundColor))
+                                .cornerRadius(8)
+                            }
+                        }
+
+                        // Capacity bar
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Connection Capacity")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+
+                            GeometryReader { geometry in
+                                ZStack(alignment: .leading) {
+                                    RoundedRectangle(cornerRadius: 6)
+                                        .fill(Color.gray.opacity(0.2))
+                                        .frame(height: 12)
+
+                                    RoundedRectangle(cornerRadius: 6)
+                                        .fill(stats.capacityStatus == "critical" ? Color.red :
+                                               stats.capacityStatus == "warning" ? Color.orange :
+                                               Color.green)
+                                        .frame(width: geometry.size.width * min(stats.usagePercent / 100, 1), height: 12)
+                                }
+                            }
+                            .frame(height: 12)
+
+                            HStack {
+                                Text("\(stats.totalParticipants) / \(stats.maxConnections) connections")
+                                    .font(.caption2)
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                                Text("RLIMIT_NOFILE=10000")
+                                    .font(.caption2)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .padding()
+                        .background(Color(NSColor.windowBackgroundColor))
+                        .cornerRadius(8)
+                    } else {
+                        Text("Loading realtime stats...")
+                            .foregroundColor(.secondary)
+                            .italic()
+                    }
+                }
+                .padding()
+                .background(Color(NSColor.controlBackgroundColor))
+                .cornerRadius(12)
+
+                // 5. Watch Party Rooms (User-Hosted)
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        Label("Watch Party Rooms", systemImage: "person.3.fill")
+                            .font(.headline)
+                        Spacer()
+                        if let stats = realtimeStats {
+                            Text("\(stats.activeRooms) active")
+                                .font(.system(size: 11, weight: .medium))
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
+                    if let stats = realtimeStats {
+                        // Main metrics row
+                        HStack(spacing: 16) {
+                            StatusCard(
+                                title: "Active Rooms",
+                                value: "\(stats.activeRooms)",
+                                icon: "door.left.garden.open.fill",
+                                color: .blue,
+                                subtitle: "user-hosted rooms"
+                            )
+
+                            StatusCard(
+                                title: "Total Viewers",
+                                value: "\(stats.totalRoomParticipants)",
+                                icon: "person.2.fill",
+                                color: .green,
+                                subtitle: "across all rooms"
+                            )
+                        }
+
+                        // Largest room
+                        if let largest = stats.largestRoom, largest.participantsCount > 0 {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Most Popular Room")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(largest.roomName)
+                                            .font(.system(size: 13, weight: .medium))
+                                        Text(largest.roomId)
+                                            .font(.system(.caption2, design: .monospaced))
+                                            .foregroundColor(.secondary)
+                                    }
+                                    Spacer()
+                                    Text("\(largest.participantsCount) viewers")
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(.blue)
+                                }
+                                .padding()
+                                .background(Color(NSColor.windowBackgroundColor))
+                                .cornerRadius(8)
+                            }
+                        }
+
+                        // Active rooms list (if any)
+                        if !stats.rooms.isEmpty {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Active Rooms")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+
+                                ForEach(stats.rooms.prefix(5), id: \.id) { room in
+                                    HStack {
+                                        VStack(alignment: .leading, spacing: 2) {
+                                            Text(room.name)
+                                                .font(.system(size: 12, weight: .medium))
+                                                .lineLimit(1)
+                                            Text(room.id)
+                                                .font(.system(.caption2, design: .monospaced))
+                                                .foregroundColor(.secondary)
+                                        }
+                                        Spacer()
+                                        if let count = room.participantsCount, count > 0 {
+                                            Text("\(count)")
+                                                .font(.system(size: 12, weight: .semibold))
+                                                .foregroundColor(.secondary)
+                                        }
+                                        if let isPlaying = room.isPlaying {
+                                            Image(systemName: isPlaying ? "play.fill" : "pause.fill")
+                                                .font(.caption2)
+                                                .foregroundColor(isPlaying ? .green : .secondary)
+                                        }
+                                    }
+                                    .padding(.vertical, 4)
+                                    .padding(.horizontal, 8)
+                                    .background(Color(NSColor.windowBackgroundColor))
+                                    .cornerRadius(6)
+                                }
+                            }
+                        }
+                    } else {
+                        Text("Loading room stats...")
+                            .foregroundColor(.secondary)
+                            .italic()
+                    }
+                }
+                .padding()
+                .background(Color(NSColor.controlBackgroundColor))
+                .cornerRadius(12)
+
+                // 6. Environment Info
                 VStack(alignment: .leading, spacing: 16) {
                     Label("Environment", systemImage: "server.rack")
                         .font(.headline)
@@ -337,6 +555,15 @@ struct AdminServerView: View {
                 // Fallback with mock data if endpoint not available
                 diskUsage = nil
             }
+
+            // 6. Get Realtime Stats (Live Event Monitoring)
+            do {
+                let stats: RealtimeStats = try await SupabaseClient.shared.invokeFunction(name: "system/realtime-stats")
+                realtimeStats = stats
+            } catch {
+                print("Realtime Stats Error: %@", "\(error)")
+                // Don't set nil - keep previous data if available
+            }
             
             lastRefreshed = Date()
             isLoading = false
@@ -381,12 +608,82 @@ struct DiskUsage: Codable {
     let usedBytes: Int64
     let freeBytes: Int64
     let usagePercent: Double
-    
+
     enum CodingKeys: String, CodingKey {
         case totalBytes = "total_bytes"
         case usedBytes = "used_bytes"
         case freeBytes = "free_bytes"
         case usagePercent = "usage_percent"
+    }
+}
+
+struct RealtimeStats: Codable {
+    let totalParticipants: Int
+    let activeEvents: Int
+    let largestEvent: LargestEvent?
+    let activeRooms: Int
+    let totalRoomParticipants: Int
+    let largestRoom: LargestRoom?
+    let maxConnections: Int
+    let usagePercent: Double
+    let capacityStatus: String
+    let events: [EventRoomInfo]
+    let rooms: [EventRoomInfo]
+
+    enum CodingKeys: String, CodingKey {
+        case totalParticipants = "total_participants"
+        case activeEvents = "active_events"
+        case largestEvent = "largest_event"
+        case activeRooms = "active_rooms"
+        case totalRoomParticipants = "total_room_participants"
+        case largestRoom = "largest_room"
+        case maxConnections = "max_connections"
+        case usagePercent = "usage_percent"
+        case capacityStatus = "capacity_status"
+        case events
+        case rooms
+    }
+}
+
+struct LargestEvent: Codable {
+    let roomId: String
+    let roomName: String
+    let participantsCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case roomId = "room_id"
+        case roomName = "room_name"
+        case participantsCount = "participants_count"
+    }
+}
+
+struct LargestRoom: Codable {
+    let roomId: String
+    let roomName: String
+    let participantsCount: Int
+
+    enum CodingKeys: String, CodingKey {
+        case roomId = "room_id"
+        case roomName = "room_name"
+        case participantsCount = "participants_count"
+    }
+}
+
+struct EventRoomInfo: Codable {
+    let id: String
+    let name: String
+    let participantsCount: Int?
+    let isPlaying: Bool?
+    let maxParticipants: Int?
+    let createdAt: Date?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case participantsCount = "participants_count"
+        case isPlaying = "is_playing"
+        case maxParticipants = "max_participants"
+        case createdAt = "created_at"
     }
 }
 

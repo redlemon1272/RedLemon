@@ -1,5 +1,6 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
 import { handler as assignAddress } from "../assign-address/index.ts"
 import { handler as checkPayment } from "../check-payment/index.ts"
 import { handler as cleanupRooms } from "../cleanup-rooms/index.ts"
@@ -84,6 +85,126 @@ serve(async (req: Request) => {
                 error: "Internal server error",
                 source: "critical_fallback"
             }), { headers: { 'Content-Type': 'application/json' } });
+        }
+    }
+
+    // Realtime Stats (Added for Admin Dashboard - Live Event & Room Monitoring)
+    if (path.includes('/system/realtime-stats')) {
+        try {
+            // Create Supabase admin client
+            const supabaseAdmin = createClient(
+                Deno.env.get('SUPABASE_URL') ?? '',
+                Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+            );
+
+            // Query active event rooms (system-hosted)
+            // Events are identified by room_id starting with 'event_'
+            const { data: events, error: eventsError } = await supabaseAdmin
+                .from('rooms')
+                .select('id, name, participants_count, is_playing, max_participants, created_at')
+                .ilike('id', 'event_%')
+                .order('participants_count', { ascending: false, nullsFirst: false })
+                .limit(10);
+
+            if (eventsError) {
+                throw new Error(`Database query failed for events: ${eventsError.message}`);
+            }
+
+            // Query active user-hosted watch party rooms (NOT starting with 'event_')
+            const { data: rooms, error: roomsError } = await supabaseAdmin
+                .from('rooms')
+                .select('id, name, participants_count, is_playing, max_participants, created_at')
+                .not('id', 'ilike', 'event_%')
+                .order('participants_count', { ascending: false, nullsFirst: false })
+                .limit(10);
+
+            if (roomsError) {
+                throw new Error(`Database query failed for rooms: ${roomsError.message}`);
+            }
+
+            // Calculate event stats
+            let totalEventParticipants = 0;
+            let largestEvent = null;
+            let activeEvents = 0;
+
+            if (events && Array.isArray(events)) {
+                for (const event of events) {
+                    const count = event.participants_count || 0;
+                    totalEventParticipants += count;
+                    if (count > 0) {
+                        activeEvents++;
+                    }
+                    if (!largestEvent || count > (largestEvent.participants_count || 0)) {
+                        largestEvent = event;
+                    }
+                }
+            }
+
+            // Calculate room stats
+            let totalRoomParticipants = 0;
+            let largestRoom = null;
+            let activeRooms = 0;
+
+            if (rooms && Array.isArray(rooms)) {
+                for (const room of rooms) {
+                    const count = room.participants_count || 0;
+                    totalRoomParticipants += count;
+                    if (count > 0) {
+                        activeRooms++;
+                    }
+                    if (!largestRoom || count > (largestRoom.participants_count || 0)) {
+                        largestRoom = room;
+                    }
+                }
+            }
+
+            // Realtime capacity limits (from docker-compose RLIMIT_NOFILE=10000)
+            // Each WebSocket uses ~2 file descriptors, so effective limit is ~5000 connections
+            const MAX_WEBSOCKET_CONNECTIONS = 5000;
+            const totalParticipants = totalEventParticipants + totalRoomParticipants;
+            const usagePercent = totalParticipants > 0
+                ? (totalParticipants / MAX_WEBSOCKET_CONNECTIONS) * 100
+                : 0;
+
+            return new Response(JSON.stringify({
+                // Events section
+                total_participants: totalParticipants,
+                active_events: activeEvents,
+                largest_event: largestEvent ? {
+                    room_id: largestEvent.id,
+                    room_name: largestEvent.name,
+                    participants_count: largestEvent.participants_count
+                } : null,
+                // Rooms section (NEW)
+                active_rooms: activeRooms,
+                total_room_participants: totalRoomParticipants,
+                largest_room: largestRoom ? {
+                    room_id: largestRoom.id,
+                    room_name: largestRoom.name,
+                    participants_count: largestRoom.participants_count
+                } : null,
+                // Capacity section
+                max_connections: MAX_WEBSOCKET_CONNECTIONS,
+                usage_percent: Math.round(usagePercent * 10) / 10,
+                capacity_status: usagePercent >= 80 ? 'critical' : usagePercent >= 50 ? 'warning' : 'healthy',
+                // Full lists
+                events: events || [],
+                rooms: rooms || []
+            }), { headers: { 'Content-Type': 'application/json' } });
+        } catch (error) {
+            console.error("Realtime stats error:", error);
+            return new Response(JSON.stringify({
+                total_participants: 0,
+                active_events: 0,
+                largest_event: null,
+                active_rooms: 0,
+                total_room_participants: 0,
+                largest_room: null,
+                max_connections: 5000,
+                usage_percent: 0,
+                capacity_status: 'unknown',
+                error: error instanceof Error ? error.message : String(error)
+            }), { status: 500, headers: { 'Content-Type': 'application/json' } });
         }
     }
 

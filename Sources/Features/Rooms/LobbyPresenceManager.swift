@@ -707,8 +707,6 @@ class LobbyPresenceManager: ObservableObject {
                     finalParticipants.append(updatedParticipant)
                     NSLog("🛡️ Lobby: Preserving transitioning user '%@' (missing from DB but returning to lobby, reset joinedAt)", localP.name)
                 } else {
-                    // DEBUG: Log why we're hitting the remove path
-                    NSLog("⚠️ Lobby: Removing %@ - NOT transitioning. transitioningUsers count: %d, checking ID: %@", localP.name, transitioningUsers.count, localP.id)
                     // REMOVE THEM: They've been gone from DB for too long
                     // This is a legitimate "User Left" event
                     viewModel.chatManager.addSystemMessage(.userLeft, userName: localP.name, data: [:])

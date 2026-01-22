@@ -397,6 +397,15 @@ class LobbyViewModel: ObservableObject {
     }
 
     func connect() {
+        // CRITICAL FIX: Update participantId to actual user ID BEFORE Realtime setup
+        // The init() sets a random UUID as a temporary value, but Realtime needs the real user ID
+        if !isHost {
+            if let userId = appState?.currentUserId {
+                self.participantId = userId.uuidString.lowercased()
+                NSLog("🔑 Lobby: Updated participantId to actual user ID: %@", self.participantId)
+            }
+        }
+
         // Check for pending messages from Player (e.g. "Host returned to lobby")
         if let msg = appState?.pendingLobbyMessage {
             print("🔔 Lobby: Displaying pending message: \(msg)")

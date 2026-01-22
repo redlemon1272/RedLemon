@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 21, 2026 (Part 92: State Handoff Trap - Landmine #92)
+> **Last Updated:** January 21, 2026 (Part 93: VM Recreation Trap - Landmine #93)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -89,6 +89,7 @@
 | **App Freeze on Watch Party (Browse)** | Sheet dismissal race condition / root unmount | #87 |
 | **Guest Kicked ("Room Closed") - Host OK** | Heartbeat fails due to stale auth.currentUser | #88 |
 | **"User Joined" Missing / Stale Player State** | State Handoff Failure (Source VM didn't sync to AppState) | #92 |
+| **Event Countdown Hidden (Auto-Join Only)** | VM Recreation Trap (New VM blocked from init by shared state) | #93 |
 
 ## 🚨 Critical Landmines
 
@@ -374,6 +375,13 @@
     *   **Cause**: `AppState` is a shared container, but it doesn't auto-fetch. If the Source VM modifies its *local* copy of data (e.g. `self.participants`) but doesn't explicitly sync it back to `AppState.currentWatchPartyRoom` immediately before navigation, the Destination VM initializes with stale `AppState`.
     *   **Rule**: **Explicit Sync Before Navigation**. The Source VM MUST copy all relevant local state (participants, playlist, stream details) to the `AppState` object *synchronously* in the same Task/Block as the navigation call.
     *   **Code**: `appState.player.currentWatchPartyRoom = self.room` -> `appState.currentView = .player`
+
+93. **VM Recreation + Shared State Trap (The "Double onAppear" Bug)**: *(Added v1.0.129)*
+    *   **Trigger**: View lifecycle events (e.g., `onAppear`) cause SwiftUI to recreate the View and its ViewModel (VM2), while a shared Singleton (like `RealtimeChannelManager`) already holds state from VM1.
+    *   **Symptom**: New ViewModel (VM2) is blocked from running initialization code because the shared manager reports "Already Connected". Critical local state (e.g., `timeUntilStart`) is never set, causing UI elements to be hidden or malfunction.
+    *   **Cause**: `shouldAutoJoinLobby = false` toggle triggers parent View re-render -> `WatchPartyLobbyView.init` called again -> new `LobbyViewModel(VM2)` created. VM2 calls `connect()`, but shared `RealtimeChannelManager` says "Already setup". `connect()` returns early. VM2 never runs `autoStartSystemEvent()` where the timer ticker is started.
+    *   **Rule**: ViewModels MUST NOT rely solely on connection flow to initialize critical UI state. Idempotent initialization (in `init`) is essential. Additionally, even when "Already Connected", local state setup (like tickers/timers) MUST still execute.
+    *   **Detection**: Log shows "Already setup for room X" or "Already connected - skipping" followed by missing expected periodic logs (e.g., `[COUNTDOWN]`).
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

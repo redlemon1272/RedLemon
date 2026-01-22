@@ -719,6 +719,31 @@ fi
 
 # =============================================================================
 
+# =============================================================================
+# CHECK 33: VM Recreation Guard (Landmine #93)
+# =============================================================================
+# Trigger: LobbyViewModel relies only on connect() for timer init, which fails on VM recreation.
+print_header "Check 33: VM Recreation Guard (Landmine #93)"
+
+LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
+if [[ -f "$LOBBY_VM" ]]; then
+    # Check 1: Init must calculate timeUntilStart for events
+    if ! grep -q 'if room.type == .event' "$LOBBY_VM" || ! grep -q 'self.timeUntilStart = remaining' "$LOBBY_VM"; then
+        report "ERROR" "Landmine #93" "VM Recreation Risk: LobbyViewModel init MUST calculate timeUntilStart for events." "$LOBBY_VM" "0" "Missing init time calculation"
+    else
+        echo -e "${GREEN}✅ LobbyViewModel init calculates timeUntilStart for events.${NC}"
+    fi
+
+    # Check 2: Already Connected block must start ticker for events
+    if ! grep -q 'startEventCountdownTicker' "$LOBBY_VM"; then
+        report "ERROR" "Landmine #93" "VM Recreation Risk: LobbyViewModel MUST have startEventCountdownTicker method." "$LOBBY_VM" "0" "Missing ticker method"
+    else
+        echo -e "${GREEN}✅ LobbyViewModel has startEventCountdownTicker method.${NC}"
+    fi
+fi
+
+# =============================================================================
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

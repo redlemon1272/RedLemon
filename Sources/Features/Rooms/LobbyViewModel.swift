@@ -201,10 +201,9 @@ class LobbyViewModel: ObservableObject {
         // Load metadata for poster/backdrop
         loadMetadata()
 
-        // Setup Realtime subscription for room updates
-        Task {
-            await setupRealtimeSubscription()
-        }
+        // CRITICAL FIX: Don't setup Realtime from init() - it will use the wrong participantId (random UUID)
+        // Realtime setup must happen in connect() AFTER participantId is updated to actual user ID
+        // This prevents duplicate Realtime connections with different user IDs
 
         // Add initial join message
         // Add initial join message and track connection

@@ -939,21 +939,27 @@ class SupabaseClient: RoomManager, UserManager {
                     "room_id": roomId,
                     "user_id": userId.uuidString,
                     "is_host": isHost
-                ]
+                ],
+                headers: ["Prefer": "resolution=merge-duplicates"]
             )
         } catch let error as SupabaseError {
             // Check for specific Postgres error code 23505 (Unique Violation) or duplicate key message
+            // Duplicate key errors are now handled by UPSERT (merge-duplicates)
+            // But we keep the catch block for other userMessage types just in case
             switch error {
             case .serverError(let msg), .userMessage(let msg):
-                if msg.contains("23505") || msg.contains("duplicate key") {
-                    NSLog("%@", "⚠️ SupabaseClient: User already in room (Caught: \(msg)), proceeding...")
-                    return
-                }
-            case .httpError(let code, _) where code == 409:
-                NSLog("%@", "⚠️ SupabaseClient: User already in room (409), proceeding...")
-                return
+                 // Log but rethrow distinct errors
+                 LoggingManager.shared.warn(.network, message: "Supabase Join Error: \(msg)")
+                 throw error
+            case .httpError(let code, _):
+                 if code == 409 {
+                     // Should not happen with upsert, but just in case
+                     NSLog("%@", "⚠️ SupabaseClient: Conflict (409) despite upsert - proceeding...")
+                     return
+                 }
+                 throw error
             default:
-                break
+                throw error
             }
             throw error
         } catch {

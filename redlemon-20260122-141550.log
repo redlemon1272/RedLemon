@@ -5545,3 +5545,832 @@ DEBUG: MPVPlayerViewModel.cleanup called - forcing cleanup. Reason: VIEW_DISAPPE
 2026-01-22 14:31:07.520 RedLemon[61720:258261] 🔐 Signed request to /rpc/room_heartbeat
 2026-01-22 14:31:08.038 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
 2026-01-22 14:31:08.038 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:31:12.185 RedLemon[61720:251701] [COUNTDOWN] Updated to 360s
+2026-01-22 14:31:12.186 RedLemon[61720:251701] [COUNTDOWN] Updated to 360s
+2026-01-22 14:31:22.623 RedLemon[61720:251701] [COUNTDOWN] Updated to 350s
+2026-01-22 14:31:22.623 RedLemon[61720:251701] [COUNTDOWN] Updated to 350s
+2026-01-22 14:31:26.877 RedLemon[61720:258634] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-22 14:31:32.146 RedLemon[61720:251701] [COUNTDOWN] Updated to 340s
+2026-01-22 14:31:32.146 RedLemon[61720:251701] [COUNTDOWN] Updated to 340s
+2026-01-22 14:31:39.725 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:31:39.725 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:31:42.694 RedLemon[61720:251701] [COUNTDOWN] Updated to 330s
+2026-01-22 14:31:42.694 RedLemon[61720:251701] [COUNTDOWN] Updated to 330s
+2026-01-22 14:31:43.436 RedLemon[61720:256748] 🔐 SupabaseClient: Signing Identity Payload: '176911030396e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-22 14:31:43.436 RedLemon[61720:256748] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-22 14:31:43.846 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:31:43.846 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:31:52.229 RedLemon[61720:251701] [COUNTDOWN] Updated to 320s
+2026-01-22 14:31:52.229 RedLemon[61720:251701] [COUNTDOWN] Updated to 320s
+2026-01-22 14:31:52.237 RedLemon[61720:257708] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-22 14:32:02.662 RedLemon[61720:251701] [COUNTDOWN] Updated to 310s
+2026-01-22 14:32:02.662 RedLemon[61720:251701] [COUNTDOWN] Updated to 310s
+2026-01-22 14:32:12.283 RedLemon[61720:251701] [COUNTDOWN] Updated to 300s
+2026-01-22 14:32:12.283 RedLemon[61720:251701] [COUNTDOWN] Updated to 300s
+2026-01-22 14:32:15.201 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:32:15.201 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:32:18.473 RedLemon[61720:260484] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-22 14:32:18.944 RedLemon[61720:260469] 🔐 SupabaseClient: Signing Identity Payload: '176911033896e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-22 14:32:18.945 RedLemon[61720:260469] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-22 14:32:19.355 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:32:19.355 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:32:32.597 RedLemon[61720:251701] [COUNTDOWN] Updated to 280s
+2026-01-22 14:32:32.597 RedLemon[61720:251701] [COUNTDOWN] Updated to 280s
+2026-01-22 14:32:42.069 RedLemon[61720:251701] [COUNTDOWN] Updated to 270s
+2026-01-22 14:32:42.069 RedLemon[61720:251701] [COUNTDOWN] Updated to 270s
+2026-01-22 14:32:44.135 RedLemon[61720:260849] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-22 14:32:50.587 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:32:50.587 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:32:52.634 RedLemon[61720:251701] [COUNTDOWN] Updated to 260s
+2026-01-22 14:32:52.634 RedLemon[61720:251701] [COUNTDOWN] Updated to 260s
+2026-01-22 14:32:55.538 RedLemon[61720:261074] 🔐 SupabaseClient: Signing Identity Payload: '176911037596e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-22 14:32:55.539 RedLemon[61720:261074] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-22 14:32:55.951 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:32:55.952 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:33:02.072 RedLemon[61720:251701] [COUNTDOWN] Updated to 250s
+2026-01-22 14:33:02.072 RedLemon[61720:251701] [COUNTDOWN] Updated to 250s
+2026-01-22 14:33:09.736 RedLemon[61720:260484] 🔐 Signed request to /rpc/user_heartbeat
+abase...
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 440 seconds
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 427 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 420 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 410 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 399 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 389 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 380 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 370 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 360 seconds
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 350 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 340 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 329 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 319 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 309 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 298 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 290 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 279 seconds
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 270 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 260 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 249 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Fetched movie_2026-01-22 14:33:12.546 RedLemon[61720:251701] [COUNTDOWN] Updated to 240s
+2026-01-22 14:33:12.547 RedLemon[61720:251701] [COUNTDOWN] Updated to 240s
+2026-01-22 14:33:22.024 RedLemon[61720:251701] [COUNTDOWN] Updated to 230s
+2026-01-22 14:33:22.030 RedLemon[61720:251701] [COUNTDOWN] Updated to 230s
+2026-01-22 14:33:26.836 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:33:26.836 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:33:31.035 RedLemon[61720:261488] 🔐 SupabaseClient: Signing Identity Payload: '176911041196e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-22 14:33:31.036 RedLemon[61720:261488] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-22 14:33:31.450 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:33:31.450 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:33:32.481 RedLemon[61720:251701] [COUNTDOWN] Updated to 220s
+2026-01-22 14:33:32.481 RedLemon[61720:251701] [COUNTDOWN] Updated to 220s
+2026-01-22 14:33:35.282 RedLemon[61720:261487] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-22 14:33:42.946 RedLemon[61720:251701] [COUNTDOWN] Updated to 210s
+2026-01-22 14:33:42.946 RedLemon[61720:251701] [COUNTDOWN] Updated to 210s
+2026-01-22 14:33:44.922 RedLemon[61720:251701] 🎭 Lobby: Disconnected from room event_tt0480687
+2026-01-22 14:33:44.922 RedLemon[61720:251701] 🪟 restoreWindowFromLobby() called - no action needed (window stays expanded)
+2026-01-22 14:33:45.223 RedLemon[61720:251701] ✅ Left room event_tt0480687 (User: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-22 14:33:45.347 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:33:45.347 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:33:52.251 RedLemon[61720:251701] [COUNTDOWN] Updated to 200s
+2026-01-22 14:33:54.019 RedLemon[61720:261751] 🗓 Schedule Calc: Thor: Ragnarok | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2026-01-22 14:33:54.019 RedLemon[61720:261751] 🗓 Schedule Calc: Roofman | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-22 14:33:54.019 RedLemon[61720:261751] 🗓 Schedule Calc: Talladega Nights: The Ballad of Ricky Bobby | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: The Exorcist: Believer | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: Rush Hour | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: Five Nights at Freddy's 2 | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: Now You See Me: Now You Don't | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: Final Destination | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: Rush Hour 2 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: Black Phone 2 | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: Deadpool 2 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: The Final Destination | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: Split | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+2026-01-22 14:33:54.020 RedLemon[61720:261751] 🗓 Schedule Calc: Pirates of the Caribbean: The Curse of the Black Pearl | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: The Expendables 4 | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: Final Destination 2 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: Avengers: Age of Ultron | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: Se7en | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: xXx: Return of Xander Cage | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: The Expendables 3 | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: Final Destination 5 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: The Simpsons Movie | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: Tron: Legacy | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: The Mummy Returns | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-22 14:33:54.021 RedLemon[61720:261751] 🗓 Schedule Calc: Cast Away | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: The Sixth Sense | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Lucy | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: The Hunger Games: The Ballad of Songbirds & Snakes | RuntimeStr: 157 min -> 157m | Duration: 10020.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Jurassic World: Fallen Kingdom | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Death Race | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Silent Hill | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Monsters, Inc. | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Bad Boys II | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: The Conjuring 2 | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Nope | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Thor | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: 28 Years Later | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Despicable Me | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Black Swan | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-22 14:33:54.022 RedLemon[61720:261751] 🗓 Schedule Calc: Iron Man 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: Bullet Train | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: The Pacifier | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: Avengers: Endgame | RuntimeStr: 181 min -> 181m | Duration: 11460.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: 300: Rise of an Empire | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: V for Vendetta | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: The Mummy: Tomb of the Dragon Emperor | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: Hereditary | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: The Amazing Spider-Man 2 | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: Apocalypto | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: Face/Off | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: Jurassic World: Rebirth | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+2026-01-22 14:33:54.023 RedLemon[61720:261751] 🗓 Schedule Calc: Top Gun | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-22 14:33:54.024 RedLemon[61720:261751] 🗓 Schedule Calc: The Menu | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-22 14:33:54.024 RedLemon[61720:261751] 🗓 Schedule Calc: Terminator Salvation | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-22 14:33:54.024 RedLemon[61720:261751] 🗓 Schedule Calc: Scouts Guide to the Zombie Apocalypse | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-22 14:33:54.024 RedLemon[61720:261751] 🗓 Schedule Calc: Civil War | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-22 14:33:54.024 RedLemon[61720:261751] 🗓 Schedule Calc: We're the Millers | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-22 14:33:54.024 RedLemon[61720:261751] 🗓 Schedule Calc: Renfield | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-22 14:33:54.030 RedLemon[61720:261751] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-22 14:33:54.030 RedLemon[61720:261751] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Kung Fu Hustle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Colombiana | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Night at the Museum | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: MaXXXine | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Dune: Part Two | RuntimeStr: 167 min -> 167m | Duration: 10620.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Spider-Man 3 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Terminator Genisys | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: John Wick: Chapter 2 | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Final Destination: Bloodlines | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Pirates of the Caribbean: Dead Men Tell No Tales | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Prey | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Shrek | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Now You See Me | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Jurassic World | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: Drive | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-22 14:33:54.031 RedLemon[61720:261751] 🗓 Schedule Calc: The Emperor's New Groove | RuntimeStr: 78 min -> 78m | Duration: 5280.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Venom | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Transformers: Age of Extinction | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Shaft | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: A Quiet Place: Day One | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 1 | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Black Hawk Down | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: The Strangers: Chapter 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Fury | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Rush Hour 3 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Avatar | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Jumanji: The Next Level | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: The Matrix Reloaded | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Hostel | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Gladiator II | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: The Nun II | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: The Conjuring: Last Rites | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Blade Runner 2049 | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: Deadpool | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: The Lord of the Rings: The Return of the King | RuntimeStr: 201 min -> 201m | Duration: 12660.0s
+2026-01-22 14:33:54.032 RedLemon[61720:261751] 🗓 Schedule Calc: RED | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-22 14:33:54.034 RedLemon[61720:261751] 🗓 Schedule Calc: Elf | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2026-01-22 14:33:54.035 RedLemon[61720:261751] 🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-22 14:33:54.035 RedLemon[61720:261751] 🗓 Schedule Calc: X | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2026-01-22 14:33:54.035 RedLemon[61720:261751] 🗓 Schedule Calc: The Martian | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-22 14:33:54.035 RedLemon[61720:261751] 🗓 Schedule Calc: Ready Player One | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Blue Streak | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: The Lord of the Rings: The Fellowship of the Ring | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Rush Hour 3 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Troy | RuntimeStr: 163 min -> 163m | Duration: 10380.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Fargo | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Final Destination 3 | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Now You See Me 2 | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Ninja Assassin | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Scarface | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-22 14:33:54.036 RedLemon[61720:261751] 🗓 Schedule Calc: Die Hard 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: Real Steel | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: Captain America: Civil War | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: The Terminator | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: Black Phone 2 | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: Baghead | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: Carry-On | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: The Suicide Squad | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: Shutter Island | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: Iron Man | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: Pirates of the Caribbean: At World's End | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-22 14:33:54.037 RedLemon[61720:261751] 🗓 Schedule Calc: District 9 | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: Kingdom of the Planet of the Apes | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: Joe Dirt | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: Nobody | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: Edge of Tomorrow | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: Karate Kid: Legends | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: The Fall Guy | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: Venom: The Last Dance | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: Transformers One | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: The Mummy | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: Paranormal Activity | RuntimeStr: 86 min -> 86m | Duration: 5760.0s
+2026-01-22 14:33:54.038 RedLemon[61720:261751] 🗓 Schedule Calc: F1: The Movie | RuntimeStr: 156 min -> 156m | Duration: 9960.0s
+2026-01-22 14:33:54.039 RedLemon[61720:261751] 🗓 Schedule Calc: John Wick: Chapter 4 | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+2026-01-22 14:33:54.039 RedLemon[61720:261751] 🗓 Schedule Calc: Mickey 17 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-22 14:33:54.039 RedLemon[61720:261751] 🗓 Schedule Calc: Despicable Me 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-22 14:33:54.039 RedLemon[61720:261751] 🗓 Schedule Calc: Madagascar: Escape 2 Africa | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2026-01-22 14:33:54.039 RedLemon[61720:261751] 🗓 Schedule Calc: Frankenstein | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+2026-01-22 14:33:54.039 RedLemon[61720:261751] 🗓 Schedule Calc: Gattaca | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-22 14:33:54.039 RedLemon[61720:261751] 🗓 Schedule Calc: The Amazing Spider-Man | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2026-01-22 14:33:54.040 RedLemon[61720:261751] 🗓 Schedule Calc: Furiosa: A Mad Max Saga | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2026-01-22 14:33:54.040 RedLemon[61720:261751] 🗓 Schedule Calc: Nobody 2 | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2026-01-22 14:33:54.040 RedLemon[61720:261751] 🗓 Schedule Calc: Everything Everywhere All at Once | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2026-01-22 14:33:54.040 RedLemon[61720:261751] 🗓 Schedule Calc: The Shining | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+2026-01-22 14:33:54.040 RedLemon[61720:261751] 🗓 Schedule Calc: The Hobbit: An Unexpected Journey | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2026-01-22 14:33:54.040 RedLemon[61720:261751] 🗓 Schedule Calc: Inside Man | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-22 14:33:54.040 RedLemon[61720:261751] 🗓 Schedule Calc: The Batman | RuntimeStr: 177 min -> 177m | Duration: 11220.0s
+2026-01-22 14:33:54.040 RedLemon[61720:261751] 🗓 Schedule Calc: Eyes Wide Shut | RuntimeStr: 159 min -> 159m | Duration: 10140.0s
+2026-01-22 14:33:54.040 RedLemon[61720:261751] 🗓 Schedule Calc: Sinners | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2026-01-22 14:33:54.041 RedLemon[61720:261751] 🗓 Schedule Calc: Mystery Men | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-22 14:33:54.042 RedLemon[61720:261751] 🗓 Schedule Calc: Kung Fu Panda 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-22 14:33:54.042 RedLemon[61720:261751] 🗓 Schedule Calc: Mission: Impossible - Fallout | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2026-01-22 14:33:54.042 RedLemon[61720:261751] 🗓 Schedule Calc: Incredibles 2 | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+2026-01-22 14:33:54.043 RedLemon[61720:261751] 🗓 Schedule Calc: The Equalizer 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-22 14:33:54.043 RedLemon[61720:261751] 🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-22 14:33:54.043 RedLemon[61720:261751] 🗓 Schedule Calc: Tron: Ares | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-22 14:33:54.043 RedLemon[61720:261751] 🗓 Schedule Calc: Jurassic World: Dominion | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2026-01-22 14:33:54.043 RedLemon[61720:261751] 🗓 Schedule Calc: Gladiator | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+2026-01-22 14:33:54.043 RedLemon[61720:261751] 🗓 Schedule Calc: Training Day | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-22 14:33:54.043 RedLemon[61720:261751] 🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-22 14:33:54.043 RedLemon[61720:261751] 🗓 Schedule Calc: Constantine | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-22 14:33:54.044 RedLemon[61720:261751] 🗓 Schedule Calc: Annabelle Comes Home | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2026-01-22 14:33:54.044 RedLemon[61720:261751] 🗓 Schedule Calc: Kill Bill: The Whole Bloody Affair | RuntimeStr: 247 min -> 247m | Duration: 15420.0s
+2026-01-22 14:33:54.044 RedLemon[61720:261751] 🗓 Schedule Calc: The Usual Suspects | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2026-01-22 14:33:54.044 RedLemon[61720:261751] 🗓 Schedule Calc: Mission: Impossible - Dead Reckoning Part One | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+2026-01-22 14:33:54.044 RedLemon[61720:261751] 🗓 Schedule Calc: Candyman | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-22 14:33:54.044 RedLemon[61720:261751] 🗓 Schedule Calc: Thor: Love and Thunder | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-22 14:33:54.044 RedLemon[61720:261751] 🗓 Schedule Calc: Night at the Museum: Secret of the Tomb | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-22 14:33:54.044 RedLemon[61720:261751] 🗓 Schedule Calc: Dawn of the Planet of the Apes | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-22 14:33:54.044 RedLemon[61720:261751] 🗓 Schedule Calc: The Dictator | RuntimeStr: 83 min -> 83m | Duration: 5580.0s
+2026-01-22 14:33:54.044 RedLemon[61720:261751] 🗓 Schedule Calc: Johnny English | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+2026-01-22 14:33:54.045 RedLemon[61720:261751] 🗓 Schedule Calc: Scream | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-22 14:33:54.046 RedLemon[61720:261751] 🗓 Schedule Calc: Little Man | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-22 14:33:54.046 RedLemon[61720:261751] 🗓 Schedule Calc: Furious 7 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2026-01-22 14:33:54.046 RedLemon[61720:261751] 🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-22 14:33:54.047 RedLemon[61720:261751] 🗓 Schedule Calc: Dune: Part One | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+2026-01-22 14:33:54.047 RedLemon[61720:261751] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-22 14:33:54.047 RedLemon[61720:261751] 🗓 Schedule Calc: The Incredible Hulk | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2026-01-22 14:33:54.047 RedLemon[61720:261751] 🗓 Schedule Calc: Batman Begins | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2026-01-22 14:33:54.047 RedLemon[61720:261751] 🗓 Schedule Calc: Man of Steel | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2026-01-22 14:33:54.047 RedLemon[61720:261751] 🗓 Schedule Calc: The Conjuring | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2026-01-22 14:33:54.047 RedLemon[61720:261751] 🗓 Schedule Calc: Five Nights at Freddy's | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-22 14:33:54.047 RedLemon[61720:261751] 🗓 Schedule Calc: M3GAN 2.0 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2026-01-22 14:33:54.048 RedLemon[61720:261751] 🗓 Schedule Calc: Underworld | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-22 14:33:54.048 RedLemon[61720:261751] 🗓 Schedule Calc: Pirates of the Caribbean: Dead Man's Chest | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+2026-01-22 14:33:54.048 RedLemon[61720:261751] 🗓 Schedule Calc: Iron Man 3 | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-22 14:33:54.048 RedLemon[61720:261751] 🗓 Schedule Calc: The Departed | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+2026-01-22 14:33:54.048 RedLemon[61720:261751] 🗓 Schedule Calc: Mission: Impossible - The Final Reckoning | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+2026-01-22 14:33:54.048 RedLemon[61720:261751] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-22 14:33:54.053 RedLemon[61720:261751] 🗓 Schedule Calc: Annabelle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-22 14:33:54.055 RedLemon[61720:261751] 🗓 Schedule Calc: Him | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+2026-01-22 14:33:54.055 RedLemon[61720:261751] 🗓 Schedule Calc: Van Helsing | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-22 14:33:54.056 RedLemon[61720:261751] 🗓 Schedule Calc: The Conjuring: The Devil Made Me Do It | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-22 14:33:54.057 RedLemon[61720:261751] 🗓 Schedule Calc: The Fan | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2026-01-22 14:33:54.057 RedLemon[61720:261751] 🗓 Schedule Calc: Napoleon | RuntimeStr: 158 min -> 158m | Duration: 10080.0s
+2026-01-22 14:33:54.057 RedLemon[61720:261751] 🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-22 14:33:54.058 RedLemon[61720:261751] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-22 14:33:54.058 RedLemon[61720:261751] 🗓 Schedule Calc: The Skeleton Key | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-22 14:33:54.058 RedLemon[61720:261751] 🗓 Schedule Calc: It: Chapter Two | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2026-01-22 14:33:54.058 RedLemon[61720:261751] 🗓 Schedule Calc: 1917 | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-22 14:33:54.058 RedLemon[61720:261751] 🗓 Schedule Calc: I Am Legend | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-22 14:33:54.059 RedLemon[61720:261751] 🗓 Schedule Calc: Arrival | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2026-01-22 14:33:54.059 RedLemon[61720:261751] 🗓 Schedule Calc: Joker: Folie à Deux | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2026-01-22 14:33:54.059 RedLemon[61720:261751] 🗓 Schedule Calc: Back to the Future Part II | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-22 14:33:54.059 RedLemon[61720:261751] 🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-22 14:33:54.059 RedLemon[61720:261751] 🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-22 14:33:54.059 RedLemon[61720:261751] 🗓 Schedule Calc: Old | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-22 14:33:54.059 RedLemon[61720:261751] 🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-22 14:33:54.060 RedLemon[61720:261751] 🗓 Schedule Calc: The Wolf of Wall Street | RuntimeStr: 180 min -> 180m | Duration: 11400.0s
+2026-01-22 14:33:54.060 RedLemon[61720:261751] 🗓 Schedule Calc: Surrogates | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2026-01-22 14:33:54.062 RedLemon[61720:261751] 🗓 Schedule Calc: The Fifth Element | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-22 14:33:54.062 RedLemon[61720:261751] 🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2026-01-22 14:33:54.062 RedLemon[61720:261751] 🗓 Schedule Calc: World War Z | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2026-01-22 14:33:54.062 RedLemon[61720:261751] 🗓 Schedule Calc: Heretic | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-22 14:33:54.062 RedLemon[61720:261751] 🗓 Schedule Calc: Inglourious Basterds | RuntimeStr: 153 min -> 153m | Duration: 9780.0s
+2026-01-22 14:33:54.062 RedLemon[61720:261751] 🗓 Schedule Calc: Logan | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-22 14:33:54.062 RedLemon[61720:261751] 🗓 Schedule Calc: Man on Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2026-01-22 14:33:54.062 RedLemon[61720:261751] 🗓 Schedule Calc: Evil Dead Rise | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+2026-01-22 14:33:54.062 RedLemon[61720:261751] 🗓 Schedule Calc: Predator 2 | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-22 14:33:54.062 RedLemon[61720:261751] 🗓 Schedule Calc: Saw | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-22 14:33:54.062 RedLemon[61720:261751] 🗓 Schedule Calc: Abigail | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: Interstellar | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: Taken | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: The Drop | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: Aquaman | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: The Faculty | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: Home Alone 2: Lost in New York | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: Cloud Atlas | RuntimeStr: 172 min -> 172m | Duration: 10920.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: Avengers: Infinity War | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: Scary Movie 2 | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: Chronicle | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+2026-01-22 14:33:54.063 RedLemon[61720:261751] 🗓 Schedule Calc: Back to the Future | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2026-01-22 14:33:54.064 RedLemon[61720:261751] 🗓 Schedule Calc: The Black Phone | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-22 14:33:54.064 RedLemon[61720:261751] 🗓 Schedule Calc: The Mask | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-22 14:33:54.064 RedLemon[61720:261751] 🗓 Schedule Calc: Meet the Robinsons | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2026-01-22 14:33:54.064 RedLemon[61720:261751] 🗓 Schedule Calc: Orphan | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-22 14:33:54.064 RedLemon[61720:261751] 🗓 Schedule Calc: Terminator 2: Judgment Day | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-22 14:33:54.064 RedLemon[61720:261751] 🗓 Schedule Calc: Bad Boys | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-22 14:33:54.064 RedLemon[61720:261751] 🗓 Schedule Calc: Fast X | RuntimeStr: 142 min -> 142m | Duration: 9120.0s
+2026-01-22 14:33:54.064 RedLemon[61720:261751] 🗓 Schedule Calc: The Matrix | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2026-01-22 14:33:54.064 RedLemon[61720:261751] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-22 14:33:54.065 RedLemon[61720:261751] 🗓 Schedule Calc: Nosferatu | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2026-01-22 14:33:54.065 RedLemon[61720:261751] 🗓 Schedule Calc: Transformers: Rise of the Beasts | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-22 14:33:54.068 RedLemon[61720:261751] 🗓 Schedule Calc: It Follows | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-22 14:33:54.070 RedLemon[61720:261751] 🗓 Schedule Calc: Fight Club | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2026-01-22 14:33:54.070 RedLemon[61720:261751] 🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-22 14:33:54.070 RedLemon[61720:261751] 🗓 Schedule Calc: Jingle All the Way | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2026-01-22 14:33:54.070 RedLemon[61720:261751] 🗓 Schedule Calc: The Super Mario Bros. Movie | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-22 14:33:54.070 RedLemon[61720:261751] 🗓 Schedule Calc: Candyman | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-22 14:33:54.070 RedLemon[61720:261751] 🗓 Schedule Calc: A Minecraft Movie | RuntimeStr: nil -> 120m | Duration: 7800.0s
+2026-01-22 14:33:54.070 RedLemon[61720:261751] 🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-22 14:33:54.071 RedLemon[61720:261751] 🗓 Schedule Calc: The Substance | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-22 14:33:54.071 RedLemon[61720:261751] 🗓 Schedule Calc: War of the Worlds | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-22 14:33:54.071 RedLemon[61720:261751] 🗓 Schedule Calc: Companion | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2026-01-22 14:33:54.072 RedLemon[61720:261751] 🗓 Schedule Calc: Spider-Man | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-22 14:33:54.073 RedLemon[61720:261751] 🗓 Schedule Calc: Taken 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2026-01-22 14:33:54.073 RedLemon[61720:261751] 🗓 Schedule Calc: Mr. & Mrs. Smith | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2026-01-22 14:33:54.073 RedLemon[61720:261751] 🗓 Schedule Calc: The Maze Runner | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+2026-01-22 14:33:54.073 RedLemon[61720:261751] 🗓 Schedule Calc: Ballerina | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+2026-01-22 14:33:54.074 RedLemon[61720:261751] 🗓 Schedule Calc: Hot Fuzz | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-22 14:33:54.074 RedLemon[61720:261751] 🗓 Schedule Calc: The Nun | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+2026-01-22 14:33:54.074 RedLemon[61720:261751] 🗓 Schedule Calc: Cobweb | RuntimeStr: 88 min -> 88m | Duration: 5880.0s
+2026-01-22 14:33:54.074 RedLemon[61720:261751] 🗓 Schedule Calc: The Matrix Resurrections | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2026-01-22 14:33:54.074 RedLemon[61720:261751] 🗓 Schedule Calc: Riddick | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-22 14:33:54.074 RedLemon[61720:261751] 🗓 Schedule Calc: War 2 | RuntimeStr: 173 min -> 173m | Duration: 10980.0s
+2026-01-22 14:33:54.074 RedLemon[61720:261751] 🗓 Schedule Calc: The Big Lebowski | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+2026-01-22 14:33:54.074 RedLemon[61720:261751] 🗓 Schedule Calc: The Lord of the Rings: The Two Towers | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+2026-01-22 14:33:54.075 RedLemon[61720:261751] 🗓 Schedule Calc: Brüno | RuntimeStr: 83 min -> 83m | Duration: 5580.0s
+2026-01-22 14:33:54.075 RedLemon[61720:261751] 🗓 Schedule Calc: Resident Evil: Red Falls | RuntimeStr: 53 min -> 53m | Duration: 3780.0s
+2026-01-22 14:33:54.075 RedLemon[61720:261751] 🗓 Schedule Calc: Signs | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2026-01-22 14:33:54.075 RedLemon[61720:261751] 🗓 Schedule Calc: The Karate Kid | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2026-01-22 14:33:54.075 RedLemon[61720:261751] 🗓 Schedule Calc: Inception | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+2026-01-22 14:33:54.076 RedLemon[61720:261751] 🗓 Schedule Calc: Avatar: The Way of Water | RuntimeStr: 192 min -> 192m | Duration: 12120.0s
+2026-01-22 14:33:54.076 RedLemon[61720:261751] 🗓 Schedule Calc: Code 3 | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2026-01-22 14:33:54.077 RedLemon[61720:261751] 🗓 Schedule Calc: The Hobbit: The Battle of the Five Armies | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+2026-01-22 14:33:54.078 RedLemon[61720:261751] 🗓 Schedule Calc: Captain America: Brave New World | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-22 14:33:54.078 RedLemon[61720:261751] 🗓 Schedule Calc: Exit Wounds | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-22 14:33:54.078 RedLemon[61720:261751] 🗓 Schedule Calc: Snatch | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-22 14:33:54.078 RedLemon[61720:261751] 🗓 Schedule Calc: Triangle | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-22 14:33:54.078 RedLemon[61720:261751] 🗓 Schedule Calc: Creed | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: The Black Phone | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: The Godfather Part II | RuntimeStr: 202 min -> 202m | Duration: 12720.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: The Last Samurai | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: The Dark Knight | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: Guardians of the Galaxy Vol. 3 | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: The Equalizer | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: The Godfather Part III | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: The Imitation Game | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: Joe Dirt | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: X-Men: Days of Future Past | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: Rush Hour | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: Guardians of the Galaxy Vol. 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-22 14:33:54.079 RedLemon[61720:261751] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: The Hunger Games: Catching Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: The Accountant 2 | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: xXx | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: A Haunted House 2 | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: Blade Runner | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: 2001: A Space Odyssey | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: Léon: The Professional | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: The Long Walk | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: Stuber | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: Sinister | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: Rush Hour 2 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: A.I. Artificial Intelligence | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2026-01-22 14:33:54.080 RedLemon[61720:261751] 🗓 Schedule Calc: Alien: Romulus | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: The Woman in Cabin 10 | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: Wanted | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: Ocean's Eight | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: Joker | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: Catch Me If You Can | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: Cargo | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: Barbie | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: Mad Max: Fury Road | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: Batman Returns | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: The Naked Gun | RuntimeStr: 85 min -> 85m | Duration: 5700.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: Cool Runnings | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: Fractured | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-22 14:33:54.081 RedLemon[61720:261751] 🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2026-01-22 14:33:54.082 RedLemon[61720:261751] 🗓 Schedule Calc: Shooter | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-22 14:33:54.082 RedLemon[61720:261751] 🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2026-01-22 14:33:54.082 RedLemon[61720:261751] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-22 14:33:54.082 RedLemon[61720:261751] 🗓 Schedule Calc: Road House | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-22 14:33:54.082 RedLemon[61720:261751] 🗓 Schedule Calc: Deja Vu | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-22 14:33:54.082 RedLemon[61720:261751] 🗓 Schedule Calc: Southpaw | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-22 14:33:54.082 RedLemon[61720:261751] 🗓 Schedule Calc: Silent Night | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-22 14:33:54.083 RedLemon[61720:261751] 🗓 Schedule Calc: Casino Royale | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+2026-01-22 14:33:54.084 RedLemon[61720:261751] 🗓 Schedule Calc: The Running Man | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2026-01-22 14:33:54.084 RedLemon[61720:261751] 🗓 Schedule Calc: The Covenant | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-22 14:33:54.084 RedLemon[61720:261751] 🗓 Schedule Calc: Bad Boys for Life | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: Rush Hour 2 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: Rush Hour | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: Blade: Trinity | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: Freaky Tales | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: The Fantastic Four: First Steps | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: Fast & Furious Presents: Hobbs & Shaw | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: No Country for Old Men | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: Top Gun: Maverick | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: No Escape | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: The Exorcist | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: Die Hard | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: The Smashing Machine | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: Fruitvale Station | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+2026-01-22 14:33:54.085 RedLemon[61720:261751] 🗓 Schedule Calc: Playdate | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2026-01-22 14:33:54.086 RedLemon[61720:261751] 🗓 Schedule Calc: Presence | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+2026-01-22 14:33:54.086 RedLemon[61720:261751] 🗓 Schedule Calc: Fracture | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+2026-01-22 14:33:54.086 RedLemon[61720:261751] 🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2026-01-22 14:33:54.087 RedLemon[61720:261751] 🗓 Schedule Calc: Plane | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-22 14:33:54.088 RedLemon[61720:261751] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2026-01-22 14:33:54.088 RedLemon[61720:261751] 🗓 Schedule Calc: Venom: Let There Be Carnage | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2026-01-22 14:33:54.088 RedLemon[61720:261751] 🗓 Schedule Calc: Pulp Fiction | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+2026-01-22 14:33:54.088 RedLemon[61720:261751] 🗓 Schedule Calc: Men in Black | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2026-01-22 14:33:54.088 RedLemon[61720:261751] 🗓 Schedule Calc: Rush Hour 3 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2026-01-22 14:33:54.088 RedLemon[61720:261751] 🗓 Schedule Calc: Batman v Superman: Dawn of Justice | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+2026-01-22 14:33:54.088 RedLemon[61720:261751] 🗓 Schedule Calc: Thir13en Ghosts | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2026-01-22 14:33:54.088 RedLemon[61720:261751] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-22 14:33:54.088 RedLemon[61720:261751] 🗓 Schedule Calc: Doctor Strange in the Multiverse of Madness | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-22 14:33:54.088 RedLemon[61720:261751] 🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2026-01-22 14:33:54.088 RedLemon[61720:261751] 🗓 Schedule Calc: Ma | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-22 14:33:54.089 RedLemon[61720:261751] 🗓 Schedule Calc: The Prestige | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2026-01-22 14:33:54.089 RedLemon[61720:261751] 🗓 Schedule Calc: Bring Her Back | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-22 14:33:54.091 RedLemon[61720:261751] 🗓 Schedule Calc: Tower Heist | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2026-01-22 14:33:54.092 RedLemon[61720:261751] 🗓 Schedule Calc: Pirates of the Caribbean: On Stranger Tides | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2026-01-22 14:33:54.092 RedLemon[61720:261751] 🗓 Schedule Calc: The Dark Knight Rises | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+2026-01-22 14:33:54.092 RedLemon[61720:261751] 🗓 Schedule Calc: Escape Room | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2026-01-22 14:33:54.092 RedLemon[61720:261751] 🗓 Schedule Calc: A Bronx Tale | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2026-01-22 14:33:54.092 RedLemon[61720:261751] 🗓 Schedule Calc: It: Chapter Two | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2026-01-22 14:33:54.092 RedLemon[61720:261751] 🗓 Schedule Calc: Kill Bill: Vol. 1 | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2026-01-22 14:33:54.092 RedLemon[61720:261751] 🗓 Schedule Calc: Wonder Woman | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2026-01-22 14:33:54.092 RedLemon[61720:261751] 🗓 Schedule Calc: Her | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2026-01-22 14:33:54.093 RedLemon[61720:261751] 🗓 Schedule Calc: Deadpool & Wolverine | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+2026-01-22 14:33:54.093 RedLemon[61720:261751] 🗓 Schedule Calc: Central Intelligence | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2026-01-22 14:33:54.093 RedLemon[61720:261751] 🗓 Schedule Calc: War of the Worlds | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+2026-01-22 14:33:54.093 RedLemon[61720:261751] 🗓 Schedule Calc: The Avengers | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2026-01-22 14:33:54.093 RedLemon[61720:261751] 🗓 Schedule Calc: Borderlands | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2026-01-22 14:33:54.093 RedLemon[61720:261751] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2026-01-22 14:33:54.093 RedLemon[61720:261751] 🗓 Schedule Calc: The Jacket | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2026-01-22 14:33:54.093 RedLemon[61720:261751] 🗓 Schedule Calc: John Wick: Chapter 3 - Parabellum | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2026-01-22 14:33:54.093 RedLemon[61720:261751] 🗓 Schedule Calc: Gone Girl | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2026-01-22 14:33:54.093 RedLemon[61720:261751] 🗓 Schedule Calc: Taken 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+=== AttributeGraph: cycle detected through attribute 616568 ===
+2026-01-22 14:33:56.492 RedLemon[61720:251701] ✅ [ScheduleManagement] Refreshed data. Loaded 405 movies. Version: 1578
+2026-01-22 14:34:01.333 RedLemon[61720:261487] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-22 14:34:02.736 RedLemon[61720:251701] [COUNTDOWN] Updated to 190s
+2026-01-22 14:34:02.781 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:34:05.822 RedLemon[61720:251701] 🔔 [AppState] Schedule update received. Showing notification immediately.
+2026-01-22 14:34:06.901 RedLemon[61720:261917] 🔐 SupabaseClient: Signing Identity Payload: '176911044696e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-22 14:34:06.902 RedLemon[61720:261917] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-22 14:34:07.495 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:34:07.496 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:34:07.496 RedLemon[61720:251701] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:34:07.533 RedLemon[61720:251701] 🔄 [AppState] User requested restart due to schedule update
+events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 240 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 229 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 220 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+✅ SocialService: Event event_tt0480687 is JOINABLE (Live or Next Up) - allowing join
+🛑 LobbyPresence: Polling stopped
+🛑 LobbyDatabase: Polling stopped
+🛑 Lobby: Polling stopped (chat via Realtime only)
+🚦 Lobby State: closed
+📅 EventsView appeared
+🧹 Cleaning up Realtime channel for room: event_tt0480687
+🔄 Untracking presence on realtime:watch-party:event_tt0480687...
+📡 Topic realtime:watch-party:event_tt0480687 presence still tracked by other managers (count: 1), skipping phx_leave for presence
+✅ Presence untracked
+🔄 Leaving channel realtime:watch-party:event_tt0480687...
+📡 Topic realtime:watch-party:event_tt0480687 still in use by other managers (interest count: 1), skipping phx_leave
+✅ Channel left
+📡 SocialService: Updated status - Browsing Events: 
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 208 seconds
+☠️ LobbyViewModel deinit
+🧹 LobbyViewModel: Triggering detached cleanup task...
+⚠️ Cleanup already in progress, skipping
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+📡 Connection state: disconnected
+✅ Realtime channel cleanup complete
+♻️ RealtimeChannelManager deinitialized
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🎉 License updated! Expires: 2026-04-18 17:23:32 +0000
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+📊 AppState: Polled participant counts - Active: ["tt0480687": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 200 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1578, 405 movies)
+🗓 Schedule Calc: Total Cycle Duration: 3169980.0s
+🗓 Schedule Calc: Time Since Epoch: 63821.2238945961s | Cycle Pos: 63821.2238945961s
+🗓 Schedule Calc: FOUND -> Rush Hour 2 (tt0266915) starting at 2026-01-22 17:57:13 +0000
+🔄 [EventsConfig] Force refreshing movie_events config...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+🆕 [EventsConfig] Server has newer version 1578 (cached: 0)
+💾 [EventsConfig] Cached new version 1578
+▶️ [Admin] Play Now for 'Rush Hour 2' (Index: 8)
+   accumulatedOffset: 58020.0s
+   newEpoch: 1769052419
+📤 [Admin] Immediate upload with 405 movies...
+🔄 [EventsConfig] Force refreshing movie_events config...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+🆕 [EventsConfig] Server has newer version 1578 (cached: 0)
+💾 [EventsConfig] Cached new version 1578
+📤 [EventsConfig] Uploading new movie_events config with 405 movies...
+✅ [EventsConfig] Fetched movie_events version 1578 with 405 movies
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Successfully uploaded version 1579
+✅ [Admin] Immediate sync successful!
+🔔 [EventsConfig] Realtime notification: New schedule version 1579 available (current: 1578)
+📊 AppState: Polled participant counts - Active: ["tt0480687": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-22 19:37:13 +0000
+⏰ AppState: Scheduling update in 187 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📡 [EventsConfig] Checking server for movie_events config version...

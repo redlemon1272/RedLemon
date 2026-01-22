@@ -700,8 +700,12 @@ class LobbyPresenceManager: ObservableObject {
                     // CRITICAL FIX: Suppress false 'User Left' during return-to-lobby transition
                     // Guest DB presence may fail due to RLS, but they're still present via Realtime.
                     // Keep them in the list until the transition window expires.
-                    NSLog("🛡️ Lobby: Preserving transitioning user '%@' (missing from DB but returning to lobby)", localP.name)
-                    finalParticipants.append(localP)
+                    // Also update their joinedAt to reset the grace period clock for future polling cycles.
+                    // Participant is a struct, so create a modified copy.
+                    var updatedParticipant = localP
+                    updatedParticipant.joinedAt = Date()
+                    finalParticipants.append(updatedParticipant)
+                    NSLog("🛡️ Lobby: Preserving transitioning user '%@' (missing from DB but returning to lobby, reset joinedAt)", localP.name)
                 } else {
                     // REMOVE THEM: They've been gone from DB for too long
                     // This is a legitimate "User Left" event

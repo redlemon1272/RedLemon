@@ -860,6 +860,32 @@ grep -rnE "let _: (Void|\(\)) = try await .*rpc\(" "Sources" | while read -r lin
     report "ERROR" "Landmine #99" "Void RPC Trap: 'Void' cannot conform to 'Decodable'. Use a dedicated helper or makeRequest directly for RPCs with no return data." "$file" "$ln" "$content"
 done
 
+
+# =============================================================================
+# CHECK 40: Event Heartbeat Latency Grace Period (Landmine #100)
+# =============================================================================
+# Trigger: Using a grace period < 90s for events, causing eviction during RLS latency spikes.
+# Rule: Must use at least 90.0 seconds for .event type rooms.
+print_header "Check 40: Event Heartbeat Latency (Landmine #100)"
+
+LOBBY_PM="$SOURCES_DIR/Features/Rooms/LobbyPresenceManager.swift"
+if [[ -f "$LOBBY_PM" ]]; then
+    # We look for the line defining baseGracePeriod for events.
+    # It must contain '90.0' or greater.
+    # Regex: let baseGracePeriod.*=.*\(.*\.event\).*?90\.0
+
+    # We grep for the line first
+    GRACE_LINE=$(grep "let baseGracePeriod: TimeInterval =" "$LOBBY_PM" || true)
+
+    if [[ -z "$GRACE_LINE" ]]; then
+        report "ERROR" "Landmine #100" "Missing Grace Period Def: LobbyPresenceManager must define 'baseGracePeriod'." "$LOBBY_PM" "0" "Missing definition"
+    elif [[ ! "$GRACE_LINE" =~ 90\.0 ]]; then
+         # Check if it's even larger? Hard to do simple regex for >90.
+         # For now, strict check for 90.0 is safest to prevent regression.
+         report "ERROR" "Landmine #100" "Grace Period Regression: Event grace period MUST be at least 90.0 seconds to cover RLS latency (Landmine #100). Found: $GRACE_LINE" "$LOBBY_PM" "0" "$GRACE_LINE"
+    fi
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

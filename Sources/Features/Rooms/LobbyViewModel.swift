@@ -859,6 +859,9 @@ class LobbyViewModel: ObservableObject {
             LoggingManager.shared.info(.watchParty, message: "📣 Host returning to lobby, notifying guests...")
             LoggingManager.shared.info(.watchParty, message: "⚠️ FORENSIC: announceReturnToLobby called. isHost: \(isHost), ParticipantId: \(participantId)")
 
+            // CRITICAL FIX: Mark all users as transitioning to prevent false "user left" messages
+            // during the Realtime connection reset that occurs when returning to lobby.
+            self.presenceManager.markAllUsersAsTransitioning()
 
             // 1. Update Database (Prevent Guest auto-start loop)
             // ⚠️ AI_BIBLE #35: Ghost Streams - MUST nil stream_hash on lobby return to prevent Zombie Playback

@@ -12,8 +12,38 @@ class LobbyPresenceManager: ObservableObject {
     private var heartbeatTask: Task<Void, Never>? // Replaces 'startHeartbeatLoop' inline task
     private var isPresenceSetup = false // Guard against duplicate observer registration
 
+    // Return-to-Lobby Transition Tracking
+    // When host returns group to lobby, Realtime connections reset. This causes false presence_leave events.
+    // We track users who are transitioning to suppress false "user left" messages during this window.
+    private var transitioningUsers: Set<String> = []
+    private var transitionExpiryTask: Task<Void, Never>?
+
     init(viewModel: LobbyViewModel) {
         self.viewModel = viewModel
+    }
+
+    // MARK: - Return-to-Lobby Transition Tracking
+
+    /// Call this when returning to lobby to prevent false "user left" messages
+    /// during the Realtime connection reset.
+    func markAllUsersAsTransitioning() {
+        guard let viewModel = viewModel else { return }
+        // Mark all current participants as transitioning
+        transitioningUsers = Set(viewModel.participants.map { $0.id.lowercased() })
+        NSLog("🔄 Lobby: Marked %d users as transitioning (return-to-lobby)", transitioningUsers.count)
+
+        // Clear the transition state after 60 seconds (safe window for reconnection)
+        transitionExpiryTask?.cancel()
+        transitionExpiryTask = Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 60_000_000_000) // 60s
+            self?.transitioningUsers.removeAll()
+            NSLog("✅ Lobby: Transition window expired, cleared %d transitioning users", self?.transitioningUsers.count ?? 0)
+        }
+    }
+
+    /// Check if a user is currently transitioning (returning to lobby)
+    private func isUserTransitioning(_ userId: String) -> Bool {
+        return transitioningUsers.contains(userId.lowercased())
     }
 
     // MARK: - Update Buffering (Landmine #50 Defense)
@@ -272,6 +302,16 @@ class LobbyPresenceManager: ObservableObject {
                                     return
                                 }
 
+                                // CRITICAL FIX: Suppress false 'User Left' during return-to-lobby transition
+                                // When host returns group to lobby, Realtime connections reset. This causes temporary
+                                // presence_leave events for users who are still present but reconnecting.
+                                if strongSelf.isUserTransitioning(normalizedID) {
+                                    NSLog("🛡️ Lobby: Suppressing false 'User Left' for %@ - user is transitioning (return-to-lobby)", name)
+                                    // Don't remove them from the list - they'll reconnect shortly
+                                    // If they truly left, DB polling will catch them after the transition window
+                                    return
+                                }
+
                                 // 2. Final removal from UI list (via buffer)
                                 strongSelf.pendingLeaves.insert(normalizedID)
 
@@ -288,6 +328,11 @@ class LobbyPresenceManager: ObservableObject {
                             // User already missing from participants list (e.g. removed by DB poll)
                             // We still need to announce it if they were tracked in Realtime
                             if strongViewModel.connectedUserIds.contains(normalizedID) {
+                                // CRITICAL FIX: Suppress false 'User Left' during return-to-lobby transition
+                                if strongSelf.isUserTransitioning(normalizedID) {
+                                    NSLog("🛡️ Lobby: Suppressing false 'User Left' for %@ - user is transitioning (return-to-lobby, missing from list)", capturedUsername)
+                                    return
+                                }
                                 strongViewModel.chatManager.addSystemMessage(.userLeft, userName: capturedUsername)
                                 NSLog("📉 User %@ left (removed from tracking, was missing from list)", normalizedID)
                             }
@@ -644,6 +689,12 @@ class LobbyPresenceManager: ObservableObject {
                     // KEEP THEM: They joined less than N seconds ago (Grace Period)
                     // This protects against "blips" where Realtime connects before DB syncs or replication lag
                    //  NSLog("🛡️ Preserving recent joiner '\(localP.name)' (joined \(String(format: "%.1f", timeSinceJoin))s ago)")
+                    finalParticipants.append(localP)
+                } else if isUserTransitioning(localP.id) {
+                    // CRITICAL FIX: Suppress false 'User Left' during return-to-lobby transition
+                    // Guest DB presence may fail due to RLS, but they're still present via Realtime.
+                    // Keep them in the list until the transition window expires.
+                    NSLog("🛡️ Lobby: Preserving transitioning user '%@' (missing from DB but returning to lobby)", localP.name)
                     finalParticipants.append(localP)
                 } else {
                     // REMOVE THEM: They've been gone from DB for too long

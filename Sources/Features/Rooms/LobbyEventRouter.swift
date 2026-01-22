@@ -359,6 +359,10 @@ class LobbyEventRouter: ObservableObject {
 
         NSLog("🎬 Guest: Received LOBBY_RETURN signal from Host")
 
+        // CRITICAL FIX: Mark all users as transitioning to prevent false "user left" messages
+        // during the Realtime connection reset that occurs when returning to lobby.
+        viewModel.presenceManager.markAllUsersAsTransitioning()
+
         // Add a system message
         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host returned to lobby"])
 

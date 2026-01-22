@@ -412,6 +412,15 @@ class LobbyViewModel: ObservableObject {
         // will naturally be false during handshake, causing a recursive restart loop (Double Connect).
         if realtimeConnectionStatus == .connecting {
             print("⚠️ Lobby: Connection already in progress - skipping duplicate connect call")
+
+            // CRITICAL FIX (Landmine #93): Even though we skip the connection attempt,
+            // this ViewModel instance MUST start its own local countdown ticker.
+            // The ticker updates `timeUntilStart` which is instance-local state.
+            // Without this, VM2 created during Double onAppear will show a frozen countdown.
+            if room.type == .event && timeUntilStart > 0 {
+                print("⏱️ Lobby: Connection in progress, but starting local event ticker for THIS ViewModel")
+                startEventCountdownTicker()
+            }
             return
         }
 

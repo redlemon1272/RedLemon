@@ -1,0 +1,783 @@
+2026-01-22 14:34:48.176 RedLemon[26064:190585] 🪟 Set initial window to expanded size: (0.0, 148.0, 1366.0, 595.0)
+2026-01-22 14:34:48.176 RedLemon[26064:190585] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-22 14:34:48.263 RedLemon[26064:190585] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-22 14:34:48.267 RedLemon[26064:190585] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-22 14:34:48.312 RedLemon[26064:190585] ✅ Playback state reset complete - starting in browse view
+2026-01-22 14:34:48.312 RedLemon[26064:190585] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-22 14:34:48.312 RedLemon[26064:190585] 🧪 Testing Profile: debug
+2026-01-22 14:34:48.321 RedLemon[26064:190651] 📂 Loaded 5 credential(s) from cache
+2026-01-22 14:34:48.358 RedLemon[26064:190585] ✅ Keychain: Found stored username: ursinho
+2026-01-22 14:34:48.358 RedLemon[26064:190585] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-22 14:34:48.359 RedLemon[26064:190651] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-22 14:34:48.997 RedLemon[26064:190654] 📡 SupabaseClient: User lookup response received (400 bytes)
+2026-01-22 14:34:49.011 RedLemon[26064:190654] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-22 14:34:49.012 RedLemon[26064:190654] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-22 14:34:49.068 RedLemon[26064:190585] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-22 14:34:49.068 RedLemon[26064:190585] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-22 14:34:51.268 RedLemon[26064:190585] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-22 14:34:51.275 RedLemon[26064:190585] 🚀 RedLemon: Starting HTTP server...
+2026-01-22 14:34:51.276 RedLemon[26064:190585] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-22 14:34:51.303 RedLemon[26064:190585] ✅ RedLemon: HTTPServer instance created
+2026-01-22 14:34:51.303 RedLemon[26064:190585] ✅ RedLemon: Server marked as ready (Optimistic)
+2026-01-22 14:34:51.304 RedLemon[26064:190678] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+📦 Current build: 125, Latest build: 125
+✅ App is up to date (current: 125, latest: 125)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates (interest count: 1)
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ [EventsConfig] Fetched movie_events version 1579 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1579, 405 movies)
+✅ [EventsView] Loaded 405 movies from config version 1579
+🗓 AppState: Updated schedule epoch to 2026-01-22 03:26:59 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5950 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0480687/img (901283 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt29644189/img (793673 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0266915/img (786827 bytes)
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5949 seconds
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5949 seconds
+📡 Joined channel: realtime:global-presence (interest count: 1)
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to social realtime channels...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages (interest count: 1)
+📡 Joined channel: realtime:friendships (interest count: 1)
+✅ SocialService: Connected to social channels
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-22 14:34:51.360 RedLemon[26064:190585] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-22 14:34:51.360 RedLemon[26064:190585] 🏥 [AppState] Starting global provider health check...
+2026-01-22 14:34:51.361 RedLemon[26064:190585] 🔍 Performing startup checks...
+2026-01-22 14:34:51.361 RedLemon[26064:190585] ✅ Username-based authentication ready
+2026-01-22 14:34:51.364 RedLemon[26064:190654] 🔐 Signed request to /check-payment
+2026-01-22 14:34:51.869 RedLemon[26064:190654] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-22 14:34:51.869 RedLemon[26064:190654] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-22 14:34:52.799 RedLemon[26064:190585] 🔄 Checking for app updates...
+2026-01-22 14:34:53.238 RedLemon[26064:190585] ✅ [AppState] Provider health check complete (found 7 services)
+2026-01-22 14:34:55.769 RedLemon[26064:190653] 🔐 Signed request to /rpc/user_heartbeat
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+✅ SubDLClient initialized
+👤 LicenseManager: Profile expiry: Optional(2026-02-11 06:00:30 +0000)
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+🎉 License updated! Expires: 2026-02-11 06:00:30 +0000
+📦 Current build: 125, Latest build: 125
+✅ App is up to date (current: 125, latest: 125)
+✅ TimeService: Synced! Offset: 0.085s (RTT: 127ms)
+   Local:  2026-01-22 19:34:52 +0000
+   Server: 2026-01-22 19:34:53 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5939 seconds
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5929 seconds
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+📡 Joined channel: realtime:rooms_updates (interest count: 1)
+✅ RoomListView: Connected to rooms realtime updates
+[ INFO ] GET /api/metadata/meta/movie/tt6604188 [request-id: 321FC606-2D17-43AF-9290-403B361469D3]
+[ INFO ] GET /api/metadata/meta/movie/tt6604188 [request-id: 6AA982E6-B8D9-4B73-BF6F-F0E928E62C57]
+2026-01-22 14:35:17.514 RedLemon[26064:190677] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-22 14:35:17.514 RedLemon[26064:190650] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-22 14:35:18.110 RedLemon[26064:190585] 🚪 Joining room: RLWK
+2026-01-22 14:35:19.095 RedLemon[26064:190585] 🚪 Room is in lobby
+2026-01-22 14:35:19.095 RedLemon[26064:190585] ✅ PlayerVM: currentWatchPartyRoom set to RLWK
+2026-01-22 14:35:19.218 RedLemon[26064:190585] [LOBBY_VIEW] onAppear: shouldAutoJoinLobby=false, room=RLWK, timeUntilStart=0
+💾 Cache SET: Metadata[meta_movie_tt6604188]
+💾 Cache SET: Metadata[meta_movie_tt6604188]
+✅ Loaded 1 rooms (total: 1)
+✅ Loaded 1 rooms (total: 1)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt6604188/img (505639 bytes)
+🚪 Joining room: RLWK
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1579 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1579, 405 movies)
+🎭 Lobby: Connecting to room RLWK...
+🚦 Lobby State: connecting
+✅ Cache HIT: Metadata[meta_movie_tt6604188]
+🔄 Lobby: Fetching fresh room state from Supabase...
+[ INFO ] GET /api/metadata/meta/movie/tt6604188 [request-id: 75D05CDB-BC4B-40DC-A56A-6D0847A7DE90]
+2026-01-22 14:35:19.372 RedLemon[26064:191001] 📝 Realtime: Registered observer 'lobby' (Presence: YES, Sync: NO, Status: NO)
+2026-01-22 14:35:19.436 RedLemon[26064:191001] 📝 Realtime: Registered observer 'lobby' (Presence: NO, Sync: YES, Status: NO)
+2026-01-22 14:35:19.728 RedLemon[26064:190585] ✅ Guest joined room RLWK in database
+2026-01-22 14:35:19.750 RedLemon[26064:190585] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:35:19.750 RedLemon[26064:190585] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:35:20.276 RedLemon[26064:190585] ℹ️ RealtimeChannelManager: Already setup for room RLWK, filtering duplicate setup call.
+2026-01-22 14:35:20.297 RedLemon[26064:190678] 📝 Realtime: Registered observer 'lobby' (Presence: NO, Sync: YES, Status: NO)
+2026-01-22 14:35:20.310 RedLemon[26064:191000] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-22 14:35:20.311 RedLemon[26064:191000]    Payload keys: position, type, chatUsername, senderId, chatText, timestamp
+2026-01-22 14:35:20.322 RedLemon[26064:191001] ✅ Realtime: Message broadcast complete
+2026-01-22 14:35:20.368 RedLemon[26064:191001] 🔐 SupabaseClient: Signing Identity Payload: '1769110520656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-22 14:35:20.369 RedLemon[26064:191001] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-22 14:35:20.431 RedLemon[26064:191001] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:20.431 RedLemon[26064:191001]    Payload keys: position, chatUsername, timestamp, senderId, chatText, type
+2026-01-22 14:35:20.433 RedLemon[26064:191001] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-22 14:35:20.434 RedLemon[26064:190585] 👋 Received: Guest 'ursinho' joined room RLWK
+2026-01-22 14:35:20.788 RedLemon[26064:190585] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:35:21.019 RedLemon[26064:190651] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-22 14:35:22.445 RedLemon[26064:190651] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:22.445 RedLemon[26064:190651]    Payload keys: timestamp, chatText, chatUsername, senderId, position, type
+2026-01-22 14:35:22.445 RedLemon[26064:190651] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:22.446 RedLemon[26064:190585] 🎬 Guest: Received RESOLVING signal
+2026-01-22 14:35:25.803 RedLemon[26064:190585] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:35:25.803 RedLemon[26064:190678] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:25.803 RedLemon[26064:190678]    Payload keys: senderId, type, chatText, position, chatUsername, timestamp
+2026-01-22 14:35:25.803 RedLemon[26064:190678] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:25.804 RedLemon[26064:190585] 🎬 Guest: Received PREPARE signal: LOBBY_PREPARE_PLAYBACK|11be8a8a7041d6f01a87e23ac16761d2d5fb4ab2|0
+2026-01-22 14:35:25.804 RedLemon[26064:190585] ✅ Guest: Extracted Hash from Payload: 11be8a8a7041d6f01a87e23ac16761d2d5fb4ab2
+2026-01-22 14:35:26.115 RedLemon[26064:190650] ✅ StreamService: Using provided metadata: Tron: Ares
+2026-01-22 14:35:26.115 RedLemon[26064:190650] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-22 14:35:26.115 RedLemon[26064:190651] 📝 [APP] 🎬 StreamService: Starting resolution for: Tron: Ares ["file": "StreamService.swift", "level": "INFO", "line": "105"]
+2026-01-22 14:35:26.115 RedLemon[26064:190650] ⚡️ StreamResolver: Resolving streams for tt6604188 (S0E0)
+2026-01-22 14:35:26.115 RedLemon[26064:190651] 📝 [APP] SessionRecorder initialized
+2026-01-22 14:35:26.116 RedLemon[26064:190650] 📝 [APP] New Session Started ["app_version": "1.0.125", "build": "125", "session_id": "C8AA7E80-F485-46B0-81D9-126C5C25175B", "trigger_source": "preload", "user_id": "656DAA91-33B4-4688-9135-C982EA52D7C9"]
+2026-01-22 14:35:26.116 RedLemon[26064:190650] 📝 [APP] Target Content Set ["imdb_id": "tt6604188"]
+2026-01-22 14:35:26.116 RedLemon[26064:190650] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-22 14:35:26.319 RedLemon[26064:190650]    📅 Filtering by year: 2025
+2026-01-22 14:35:26.646 RedLemon[26064:190650] 📝 [RESOLVER] Found Verified Stream ["hash": "11be8a8a7041d6f01a87e23ac16761d2d5fb4ab2", "vote_count": "1"]
+📡 SocialService: Updated status - In Lobby: Tron: Ares: Tron: Ares
+🔌 Setting up Realtime channel: watch-party:RLWK
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connected
+📡 Connection state: connecting
+📡 Left channel: realtime:rooms_updates
+📡 Joined channel: realtime:watch-party:RLWK (interest count: 1)
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+✅ Lobby: Loaded metadata for Tron: Ares
+📨 Unknown event: phx_close on realtime:rooms_updates
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+ℹ️ RealtimeChannelManager: Already setup for room RLWK, filtering duplicate setup call.
+📡 Connection state: connected
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5918 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Cache HIT: Metadata[meta_movie_tt6604188]
+[2026-01-22T19:35:26Z] [INFO] [StreamService.swift:105] 🎬 StreamService: Starting resolution for: Tron: Ares
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 7 blocked streams from blacklist
+⚡️ StreamResolver: Found Community Verified stream with 1 votes!
+   ℹ️ Hash: 11be8a8a7041d6f01a87e23ac16761d2d5fb4ab2
+   ℹ️ Last Verified: 2026-01-14 23:18:03 +0000
+🔍 Searching SubDL: tt6604188 (movie)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.
+⚡️ StreamService: Testing verified stream viability...
+🔓 StreamService: Unlocking with infoHash: 11be8a8a7041...
+[ INFO ] POST /api/streams/unlock [request-id: E0C5C937-5678-4A81-86F5-FA6A88C6DBDB]
+2026-01-22 14:35:26.875 RedLemon[26064:190650] 🔓 Unlock request: infoHash=11be8a8a7041..., fileIdx=0
+2026-01-22 14:35:26.875 RedLemon[26064:190650] ✅ Token found, attempting unlock...
+2026-01-22 14:35:28.591 RedLemon[26064:190651] ✅ Unlocked successfully: Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264-KyoGo.mkv
+2026-01-22 14:35:28.596 RedLemon[26064:191000] 📝 [RESOLVER] Stream Unlocked ["filename": "Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264-KyoGo.mkv", "is_generic": "false", "original_title": "Community Verified Stream (1080p)", "url_host": "chi9-4.download.real-debrid.com"]
+2026-01-22 14:35:28.596 RedLemon[26064:191000] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles...
+2026-01-22 14:35:28.596 RedLemon[26064:191000] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-22 14:35:28.597 RedLemon[26064:190678] 🔍 DEBUG: Processing subtitle URL: /subtitle/3531425-8453249.zip
+2026-01-22 14:35:28.597 RedLemon[26064:190650] 🔍 DEBUG: Processing subtitle URL: /subtitle/3527528-8449313.zip
+2026-01-22 14:35:28.597 RedLemon[26064:191000] 🔍 DEBUG: Processing subtitle URL: /subtitle/3533496-8455378.zip
+2026-01-22 14:35:28.597 RedLemon[26064:190651] 🔍 DEBUG: Processing subtitle URL: /subtitle/3531424-8453248.zip
+2026-01-22 14:35:28.597 RedLemon[26064:190650] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-22 14:35:28.597 RedLemon[26064:190678] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-22 14:35:28.597 RedLemon[26064:190651] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-22 14:35:28.597 RedLemon[26064:191000] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-22 14:35:28.598 RedLemon[26064:190678] 🔍 DEBUG: Processing subtitle URL: /subtitle/3533512-8455394.zip
+2026-01-22 14:35:28.598 RedLemon[26064:190678] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-22 14:35:28.599 RedLemon[26064:190585] ✅ Guest: Stream preloaded with URL: https://chi9-4.download.real-debrid.com/d/LYMLGGAR2NAIE116/Tron.Ares.2025.1080p.
+2026-01-22 14:35:28.599 RedLemon[26064:190585] ✅ Guest: Stream preloaded. Sending READY signal.
+2026-01-22 14:35:28.599 RedLemon[26064:190651] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-22 14:35:28.600 RedLemon[26064:190651]    Payload keys: timestamp, chatText, type, position, chatUsername, senderId
+2026-01-22 14:35:28.600 RedLemon[26064:190678] ✅ Realtime: Message broadcast complete
+2026-01-22 14:35:28.720 RedLemon[26064:190678] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:28.720 RedLemon[26064:190678]    Payload keys: type, timestamp, chatText, position, chatUsername, senderId
+2026-01-22 14:35:28.720 RedLemon[26064:190678] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-22 14:35:29.101 RedLemon[26064:190678] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:29.101 RedLemon[26064:190678]    Payload keys: type, timestamp, chatText, position, chatUsername, senderId
+2026-01-22 14:35:29.102 RedLemon[26064:190678] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:29.102 RedLemon[26064:190585] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2026-01-22 14:35:29.102 RedLemon[26064:190585] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing
+2026-01-22 14:35:29.229 RedLemon[26064:190585] ✅ Guest: Synced stream info from Host (Hash: 11be8a8a) - URL cleared for fresh unlock
+2026-01-22 14:35:29.229 RedLemon[26064:190585] 🛡️ Guest: preResolvedStream cleared to force fresh RD link
+2026-01-22 14:35:29.308 RedLemon[26064:190585] ⏱️ Step 3: Artificial Delay - Waiting additional 3.04s to ensure Host buffer...
+2026-01-22 14:35:29.308 RedLemon[26064:190585] 🗑️ Guest: RD cache cleared for hash: 11be8a8a...
+2026-01-22 14:35:29.328 RedLemon[26064:190585] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:35:32.316 RedLemon[26064:191000] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:32.316 RedLemon[26064:191000]    Payload keys: position, chatText, chatUsername, timestamp, type, senderId
+2026-01-22 14:35:32.317 RedLemon[26064:191000] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:32.318 RedLemon[26064:190585] 🎬 Guest: Launching player for Tron: Ares (Synced Start)
+2026-01-22 14:35:32.564 RedLemon[26064:190585] 🎬 Guest: Fetch took 0.206s, finished countdown loop
+2026-01-22 14:35:32.566 RedLemon[26064:190585] 📡 Fetching metadata for tt6604188...
+2026-01-22 14:35:32.697 RedLemon[26064:190585] 🎬 PlayerVM: Using Playlist Metadata: S0E0
+2026-01-22 14:35:32.697 RedLemon[26064:190585] 🚀 PlayerVM: Using DIRECT UNLOCK path (Guest Optimization)
+2026-01-22 14:35:32.697 RedLemon[26064:190585]    Hash: 11be8a8a7041...
+2026-01-22 14:35:32.698 RedLemon[26064:190585] 🗑️ PlayerVM: RD cache cleared for direct unlock
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+✅ RD addMagnet: SYZZJSRBEQMJC
+🎬 Movie: Found matching file for title 'Tron: Ares': /Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264-KyoGo.mkv
+📝 RD: Selecting file ID 1 for torrent SYZZJSRBEQMJC
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/I5SWKGXHXTGSY6EC
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Verified stream is VIABLE. Returning immediately.
+📝 Guest: Marked session as started (Idempotency Lock): 11be8a8a
+🗑️ RD cache cleared for hash: 11be8a8a7041... (1 entries)
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5909 seconds
+✅ Cache HIT: Metadata[meta_movie_tt6604188]
+🔓 StreamService: Unlocking with infoHash: 11be8a8a7041...
+[ INFO ] POST /api/streams/unlock [request-id: 5CBA02EB-84F6-4474-B8FB-7BAEC3907FF1]
+2026-01-22 14:35:32.736 RedLemon[26064:190678] 🔓 Unlock request: infoHash=11be8a8a7041..., fileIdx=0
+2026-01-22 14:35:32.736 RedLemon[26064:190678] ✅ Token found, attempting unlock...
+2026-01-22 14:35:32.775 RedLemon[26064:190585] 🎬 Guest: Countdown finished. Waiting for Host PLAYBACK_STARTED signal...
+2026-01-22 14:35:34.103 RedLemon[26064:190677] ✅ Unlocked successfully: Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264-KyoGo.mkv
+2026-01-22 14:35:34.106 RedLemon[26064:191002] 📝 [RESOLVER] Stream Unlocked ["filename": "Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264-KyoGo.mkv", "is_generic": "false", "original_title": "Shared Stream (Direct)", "url_host": "chi9-4.download.real-debrid.com"]
+2026-01-22 14:35:34.106 RedLemon[26064:190585] ✅ PlayerVM: Direct unlock succeeded! URL: https://chi9-4.download.real-debrid.com/d/LYMLGGAR2NAIE116/T
+✅ RD addMagnet: 73BEVUUJSV2N2
+🎬 Movie: Found matching file for title 'Tron: Ares': /Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264-KyoGo.mkv
+📝 RD: Selecting file ID 1 for torrent 73BEVUUJSV2N2
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/I5SWKGXHXTGSY6EC
+✅ StreamService: Stream unlocked successfully!
+[ INFO ] GET /subtitles/search [request-id: 15639DA1-9EA7-44D1-A5A6-03DF10631ED2]
+2026-01-22 14:35:34.341 RedLemon[26064:190585] ✅ Direct Unlock: Found 10 SubDL subtitles
+2026-01-22 14:35:34.342 RedLemon[26064:190585] ✅ Direct Unlock: Attached 10 SubDL subtitles to stream
+2026-01-22 14:35:34.407 RedLemon[26064:190651] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:34.407 RedLemon[26064:190651]    Payload keys: isPlaying, timestamp, type, senderId, position
+2026-01-22 14:35:34.408 RedLemon[26064:190651] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:34.428 RedLemon[26064:190585] ✅ Stream ready, starting playback...
+2026-01-22 14:35:34.525 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-22 14:35:34.525 RedLemon[26064:190651] 📝 Realtime: Registered observer 'player' (Presence: YES, Sync: NO, Status: NO)
+2026-01-22 14:35:34.531 RedLemon[26064:190651] 📝 Realtime: Registered observer 'player' (Presence: NO, Sync: YES, Status: NO)
+2026-01-22 14:35:34.532 RedLemon[26064:190650] 📝 [PLAYER] Resumed
+2026-01-22 14:35:34.571 RedLemon[26064:191002] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi9-4.download.real-debrid.com/d/LYMLGGAR2NAIE116/Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264-KyoGo.mkv"]
+🔍 Searching SubDL: tt6604188 (movie)
+   ℹ️ Fallback Name: Tron: Ares (2025)
+✅ Found 10 subtitles from SubDL (Primary)
+!!! MPVWrapper initialized - Build Version: 2026-01-19-GUEST-CACHE-BYPASS-v1 !!!
+🔌 Setting up Realtime channel: watch-party:RLWK
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connected
+📡 Connection state: connecting
+📡 Topic realtime:watch-party:RLWK already joined (interest count: 2), skipping phx_join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_movie_tt6604188]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1NDEwOTgtODQ2MzE0MS56aXA= [request-id: D20A6D82-ADC7-4B33-B45F-EF760D14ACCC]
+2026-01-22 14:35:34.906 RedLemon[26064:190678] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-22 14:35:34.906 RedLemon[26064:190678] 📝 [PLAYER] Buffering Started
+📄 Subtitle request: L3N1YnRpdGxlLzM1NDEw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3541098-8463141.zip
+📡 SocialService: Updated status - online: Tron: Ares
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5905 seconds
+✅ Download complete: 69274 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 2 files...
+✅ Selected best match by compatibility score (5): [CoffeePrison] Tron Ares 2025 DSN+ WEB ENG.srt
+📦 Extracting specific file: \[CoffeePrison\] Tron Ares 2025 DSN+ WEB ENG.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MzUyNDgtODQ1NzE0Ny56aXA= [request-id: 1F45B366-55FC-41EB-BC9F-1028ADD7E594]
+📄 Subtitle request: L3N1YnRpdGxlLzM1MzUy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3535248-8457147.zip
+✅ Download complete: 38988 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (5): Tron.Ares.2025.WEB.x264.AAC.srt
+📦 Extracting specific file: Tron.Ares.2025.WEB.x264.AAC.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MzE3NDItODQ1MzU4NS56aXA= [request-id: FA167A09-D26B-41F4-B0F9-17F3F7696B86]
+2026-01-22 14:35:35.911 RedLemon[26064:191107] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:35.911 RedLemon[26064:190650] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:35.911 RedLemon[26064:191107]    Payload keys: position, timestamp, type, senderId, isPlaying
+2026-01-22 14:35:35.912 RedLemon[26064:190650]    Payload keys: position, timestamp, type, senderId, isPlaying
+2026-01-22 14:35:35.912 RedLemon[26064:190650] ✅ Realtime: Decoded message type: ready, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:35.912 RedLemon[26064:191107] ✅ Realtime: Decoded message type: ready, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:35.913 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: ready)
+2026-01-22 14:35:36.390 RedLemon[26064:190650] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:36.390 RedLemon[26064:190651] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:36.390 RedLemon[26064:190650]    Payload keys: isPlaying, position, senderId, type, timestamp
+2026-01-22 14:35:36.390 RedLemon[26064:190651]    Payload keys: isPlaying, position, senderId, type, timestamp
+2026-01-22 14:35:36.391 RedLemon[26064:190650] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:36.391 RedLemon[26064:190651] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:36.392 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-22 14:35:37.389 RedLemon[26064:190650] 📝 [PLAYER] File Loaded ["duration": "7198.464"]
+2026-01-22 14:35:37.702 RedLemon[26064:190585] [VIDEO_READY] isEvent: false, eventStartTime: nil
+2026-01-22 14:35:37.722 RedLemon[26064:191002] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-22 14:35:37.742 RedLemon[26064:190651] 📝 [PLAYER] Buffering State ["buffering": "true"]
+2026-01-22 14:35:37.758 RedLemon[26064:190651] 📝 [PLAYER] Buffering Started
+2026-01-22 14:35:37.758 RedLemon[26064:190585] 🛡️ Lobby: User 656daa91-33b4-4688-9135-c982ea52d7c9 remains online (Remaining Refs: 1)
+2026-01-22 14:35:37.909 RedLemon[26064:190678] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:37.909 RedLemon[26064:191002] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:37.909 RedLemon[26064:191002]    Payload keys: isPlaying, type, timestamp, senderId, position
+2026-01-22 14:35:37.910 RedLemon[26064:190678]    Payload keys: isPlaying, type, timestamp, senderId, position
+2026-01-22 14:35:37.910 RedLemon[26064:191002] ✅ Realtime: Decoded message type: ready, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:37.910 RedLemon[26064:190678] ✅ Realtime: Decoded message type: ready, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:37.910 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: ready)
+2026-01-22 14:35:38.209 RedLemon[26064:190585] 👋 lemontom synced from database
+2026-01-22 14:35:38.387 RedLemon[26064:190678] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:38.387 RedLemon[26064:191002] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:38.387 RedLemon[26064:190678]    Payload keys: senderId, type, timestamp, isPlaying, position
+2026-01-22 14:35:38.387 RedLemon[26064:191002]    Payload keys: senderId, type, timestamp, isPlaying, position
+2026-01-22 14:35:38.388 RedLemon[26064:190678] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:38.388 RedLemon[26064:191002] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:38.388 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-22 14:35:39.188 RedLemon[26064:190678] 📝 [PLAYER] Buffering State ["buffering": "false"]
+2026-01-22 14:35:39.747 RedLemon[26064:190678] 📤 Realtime: Sending message type: ready, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-22 14:35:39.747 RedLemon[26064:190678]    Payload keys: senderId, position, isPlaying, timestamp, type
+2026-01-22 14:35:39.747 RedLemon[26064:190650] ✅ Realtime: Message broadcast complete
+2026-01-22 14:35:39.777 RedLemon[26064:190650] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-22 14:35:39.912 RedLemon[26064:190650] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:39.912 RedLemon[26064:190650]    Payload keys: type, isPlaying, position, senderId, timestamp
+2026-01-22 14:35:39.912 RedLemon[26064:191002] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:39.913 RedLemon[26064:191002]    Payload keys: type, isPlaying, position, senderId, timestamp
+2026-01-22 14:35:39.914 RedLemon[26064:190650] ✅ Realtime: Decoded message type: ready, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:39.914 RedLemon[26064:191002] ✅ Realtime: Decoded message type: ready, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:39.914 RedLemon[26064:191002] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:39.914 RedLemon[26064:190650] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:39.915 RedLemon[26064:190650]    Payload keys: type, isPlaying, position, timestamp, senderId
+2026-01-22 14:35:39.915 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: ready)
+2026-01-22 14:35:39.915 RedLemon[26064:191002]    Payload keys: type, isPlaying, position, timestamp, senderId
+2026-01-22 14:35:39.916 RedLemon[26064:191002] ✅ Realtime: Decoded message type: ready, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-22 14:35:39.916 RedLemon[26064:190650] ✅ Realtime: Decoded message type: ready, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-22 14:35:39.925 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: ready)
+2026-01-22 14:35:40.388 RedLemon[26064:191107] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:40.388 RedLemon[26064:190650] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:40.388 RedLemon[26064:190650]    Payload keys: type, isPlaying, senderId, timestamp, position
+2026-01-22 14:35:40.388 RedLemon[26064:191107]    Payload keys: type, isPlaying, senderId, timestamp, position
+2026-01-22 14:35:40.388 RedLemon[26064:190650] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:40.388 RedLemon[26064:191107] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:40.389 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-22 14:35:41.156 RedLemon[26064:191002] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:41.156 RedLemon[26064:190678] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:41.156 RedLemon[26064:191002]    Payload keys: isPlaying, senderId, type, timestamp, position
+2026-01-22 14:35:41.156 RedLemon[26064:190678]    Payload keys: isPlaying, senderId, type, timestamp, position
+2026-01-22 14:35:41.156 RedLemon[26064:191002] ✅ Realtime: Decoded message type: play, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:41.156 RedLemon[26064:190678] ✅ Realtime: Decoded message type: play, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:35:41.157 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: play)
+2026-01-22 14:35:41.177 RedLemon[26064:191002] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-22 14:35:42.467 RedLemon[26064:191002] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:42.467 RedLemon[26064:190651] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:42.467 RedLemon[26064:190651]    Payload keys: type, isPlaying, position, senderId, timestamp
+2026-01-22 14:35:42.467 RedLemon[26064:191002]    Payload keys: type, isPlaying, position, senderId, timestamp
+2026-01-22 14:35:42.467 RedLemon[26064:190651] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:42.467 RedLemon[26064:191002] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:42.484 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-22 14:35:42.855 RedLemon[26064:190585] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:35:42.939 RedLemon[26064:190585] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:35:44.469 RedLemon[26064:190678] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:44.469 RedLemon[26064:191002] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:44.469 RedLemon[26064:190678]    Payload keys: isPlaying, type, position, timestamp, senderId
+2026-01-22 14:35:44.469 RedLemon[26064:191002]    Payload keys: isPlaying, type, position, timestamp, senderId
+2026-01-22 14:35:44.470 RedLemon[26064:190678] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:44.470 RedLemon[26064:191002] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:44.504 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-22 14:35:44.578 RedLemon[26064:190678] 🔐 SupabaseClient: Signing Identity Payload: '1769110544656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-22 14:35:44.579 RedLemon[26064:190678] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-22 14:35:45.033 RedLemon[26064:190585] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:35:45.470 RedLemon[26064:191002] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-22 14:35:45.710 RedLemon[26064:190585] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-22 14:35:46.399 RedLemon[26064:191107] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-22 14:35:46.469 RedLemon[26064:190678] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:46.469 RedLemon[26064:191000] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:46.469 RedLemon[26064:190678]    Payload keys: isPlaying, timestamp, type, senderId, position
+2026-01-22 14:35:46.469 RedLemon[26064:191000]    Payload keys: isPlaying, timestamp, type, senderId, position
+2026-01-22 14:35:46.470 RedLemon[26064:191000] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:46.470 RedLemon[26064:190678] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:46.470 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-22 14:35:46.471 RedLemon[26064:190678] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-22 14:35:46.749 RedLemon[26064:190585] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:35:46.750 RedLemon[26064:190585] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:35:46.807 RedLemon[26064:191002] 📝 Realtime: Unregistered observer 'player'
+2026-01-22 14:35:46.809 RedLemon[26064:190678] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-22 14:35:48.474 RedLemon[26064:190678] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:48.474 RedLemon[26064:190678]    Payload keys: position, type, senderId, isPlaying, timestamp
+2026-01-22 14:35:48.475 RedLemon[26064:190678] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:48.475 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-22 14:35:50.502 RedLemon[26064:191002] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:50.503 RedLemon[26064:191002]    Payload keys: type, isPlaying, senderId, position, timestamp
+2026-01-22 14:35:50.503 RedLemon[26064:191002] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:50.503 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-22 14:35:52.550 RedLemon[26064:191002] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:52.550 RedLemon[26064:191002]    Payload keys: type, isPlaying, timestamp, position, senderId
+2026-01-22 14:35:52.551 RedLemon[26064:191002] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:52.551 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-22 14:35:52.957 RedLemon[26064:190585] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-22 14:35:54.427 RedLemon[26064:191000] 📨 Realtime: Received broadcast message
+2026-01-22 14:35:54.428 RedLemon[26064:191000]    Payload keys: isPlaying, position, type, timestamp, senderId
+2026-01-22 14:35:54.428 RedLemon[26064:191000] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:35:54.429 RedLemon[26064:190585] ⚠️ Received Realtime message with no chat text (Type: playbackState)
+2026-01-22 14:36:01.511 RedLemon[26064:190585] 🚪 Joining room: RLWK
+2026-01-22 14:36:03.212 RedLemon[26064:190585] 🎬 Room is playing (or Live Event) - joining playback
+2026-01-22 14:36:03.212 RedLemon[26064:190585] ✅ PlayerVM: currentWatchPartyRoom set to RLWK
+2026-01-22 14:36:03.503 RedLemon[26064:190585] 📡 Fetching metadata for tt6604188...
+2026-01-22 14:36:03.719 RedLemon[26064:190585] 🎬 PlayerVM: Using Playlist Metadata: S0E0
+2026-01-22 14:36:03.722 RedLemon[26064:190678] ✅ StreamService: Using provided metadata: Tron: Ares
+2026-01-22 14:36:03.722 RedLemon[26064:191108] 📝 [APP] 🎬 StreamService: Starting resolution for: Tron: Ares ["file": "StreamService.swift", "level": "INFO", "line": "105"]
+2026-01-22 14:36:03.722 RedLemon[26064:190678] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-22 14:36:03.722 RedLemon[26064:190678] ⚡️ StreamResolver: Resolving streams for tt6604188 (S0E0)
+2026-01-22 14:36:03.723 RedLemon[26064:190678] 📝 [APP] New Session Started ["app_version": "1.0.125", "build": "125", "session_id": "77A7DF25-51BF-40FB-8504-6AA177AF8A34", "trigger_source": "manual", "user_id": "656DAA91-33B4-4688-9135-C982EA52D7C9"]
+2026-01-22 14:36:03.723 RedLemon[26064:190678] 📝 [APP] Target Content Set ["imdb_id": "tt6604188"]
+2026-01-22 14:36:03.724 RedLemon[26064:190678] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-22 14:36:04.046 RedLemon[26064:190678]    📅 Filtering by year: 2025
+2026-01-22 14:36:04.176 RedLemon[26064:190678] 📝 [RESOLVER] Found Verified Stream ["hash": "11be8a8a7041d6f01a87e23ac16761d2d5fb4ab2", "vote_count": "1"]
+📄 Subtitle request: L3N1YnRpdGxlLzM1MzE3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3531742-8453585.zip
+✅ Download complete: 31731 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (5): Tron Ares (2025) eng.srt
+📦 Extracting specific file: Tron Ares (2025) eng.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5899 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+📡 Joined channel: realtime:rooms_updates (interest count: 1)
+✅ RoomListView: Connected to rooms realtime updates
+DEBUG: MPVPlayerViewModel.cleanup called - forcing cleanup. Reason: VIEW_DISAPPEAR
+📡 SocialService: Updated status - Browsing: 
+🧹 Cleaning up Realtime channel for room: RLWK
+🔄 Untracking presence on realtime:watch-party:RLWK...
+📡 Topic realtime:watch-party:RLWK presence still tracked by other managers (count: 1), skipping phx_leave for presence
+✅ Presence untracked
+🔄 Leaving channel realtime:watch-party:RLWK...
+📡 Topic realtime:watch-party:RLWK still in use by other managers (interest count: 1), skipping phx_leave
+✅ Channel left
+🔄 Lobby: Fetching fresh room state from Supabase...
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+📡 Connection state: disconnected
+✅ Realtime channel cleanup complete
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Cache HIT: Metadata[meta_movie_tt6604188]
+✅ Cache HIT: Metadata[meta_movie_tt6604188]
+✅ Loaded 1 rooms (total: 1)
+✅ Loaded 1 rooms (total: 1)
+📡 [EventsConfig] Checking server for movie_events config version...
+♻️ RealtimeChannelManager deinitialized
+✅ [EventsConfig] Fetched movie_events version 1579 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1579, 405 movies)
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5889 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+☠️ LobbyViewModel deinit
+🧹 LobbyViewModel: Triggering detached cleanup task...
+🧹 Cleaning up Realtime channel for room: RLWK
+🔄 Untracking presence on realtime:watch-party:RLWK...
+✅ Presence untracked
+🔄 Leaving channel realtime:watch-party:RLWK...
+📡 Left channel: realtime:watch-party:RLWK
+✅ Channel left
+📨 Unknown event: phx_close on realtime:watch-party:RLWK
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+📡 Connection state: disconnected
+✅ Realtime channel cleanup complete
+♻️ RealtimeChannelManager deinitialized
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5879 seconds
+🚪 Joining room: RLWK
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1579 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1579, 405 movies)
+✅ Cache HIT: Metadata[meta_movie_tt6604188]
+✅ Cache HIT: Metadata[meta_movie_tt6604188]
+📡 Left channel: realtime:rooms_updates
+[2026-01-22T19:36:03Z] [INFO] [StreamService.swift:105] 🎬 StreamService: Starting resolution for: Tron: Ares
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+📨 Unknown event: phx_close on realtime:rooms_updates
+🛡️ StreamResolver: Loaded 7 blocked streams from blacklist
+⚡️ StreamResolver: Found Community Verified stream with 1 votes!
+   ℹ️ Hash: 11be8a8a7041d6f01a87e23ac16761d2d5fb4ab2
+   ℹ️ Last Verified: 2026-01-14 23:18:03 +0000
+🔍 Searching SubDL: tt6604188 (movie)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.
+⚡️ StreamService: Testing verified stream viability...
+🔓 StreamService: Unlocking with infoHash: 11be8a8a7041...
+[ INFO ] POST /api/streams/unlock [request-id: 82ECA346-52BD-4A90-87CE-DA1F0F8556CB]
+2026-01-22 14:36:04.400 RedLemon[26064:191108] 🔓 Unlock request: infoHash=11be8a8a7041..., fileIdx=0
+2026-01-22 14:36:04.401 RedLemon[26064:191108] ✅ Token found, attempting unlock...
+2026-01-22 14:36:04.401 RedLemon[26064:191108] ✅ Unlocked successfully: Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264-KyoGo.mkv
+2026-01-22 14:36:04.403 RedLemon[26064:190651] 📝 [RESOLVER] Stream Unlocked ["filename": "Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264-KyoGo.mkv", "is_generic": "false", "original_title": "Community Verified Stream (1080p)", "url_host": "chi9-4.download.real-debrid.com"]
+2026-01-22 14:36:04.403 RedLemon[26064:190651] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles...
+2026-01-22 14:36:04.403 RedLemon[26064:190651] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-22 14:36:04.403 RedLemon[26064:190651] 🔍 DEBUG: Processing subtitle URL: /subtitle/3531424-8453248.zip
+2026-01-22 14:36:04.403 RedLemon[26064:191108] 🔍 DEBUG: Processing subtitle URL: /subtitle/3531425-8453249.zip
+2026-01-22 14:36:04.403 RedLemon[26064:190651] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-22 14:36:04.403 RedLemon[26064:191107] 🔍 DEBUG: Processing subtitle URL: /subtitle/3533496-8455378.zip
+2026-01-22 14:36:04.403 RedLemon[26064:190678] 🔍 DEBUG: Processing subtitle URL: /subtitle/3527528-8449313.zip
+2026-01-22 14:36:04.403 RedLemon[26064:191108] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-22 14:36:04.403 RedLemon[26064:191107] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-22 14:36:04.403 RedLemon[26064:190678] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-22 14:36:04.403 RedLemon[26064:190651] 🔍 DEBUG: Processing subtitle URL: /subtitle/3533512-8455394.zip
+2026-01-22 14:36:04.403 RedLemon[26064:190651] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-22 14:36:04.451 RedLemon[26064:190585] ✅ Stream ready, starting playback...
+2026-01-22 14:36:04.465 RedLemon[26064:191107] 📝 Realtime: Registered observer 'player' (Presence: YES, Sync: NO, Status: NO)
+2026-01-22 14:36:04.472 RedLemon[26064:190651] 📝 [PLAYER] Resumed
+2026-01-22 14:36:04.472 RedLemon[26064:191107] 📝 Realtime: Registered observer 'player' (Presence: NO, Sync: YES, Status: NO)
+2026-01-22 14:36:04.511 RedLemon[26064:191492] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi9-4.download.real-debrid.com/d/LYMLGGAR2NAIE116/Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.H.264-KyoGo.mkv"]
+✅ RD cache hit: 11be8a8a7041
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Verified stream is VIABLE. Returning immediately.
+!!! MPVWrapper initialized - Build Version: 2026-01-19-GUEST-CACHE-BYPASS-v1 !!!
+🔌 Setting up Realtime channel: watch-party:RLWK
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connected
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:RLWK (interest count: 1)
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_movie_tt6604188]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MzE0MjQtODQ1MzI0OC56aXA= [request-id: F80BCD98-F8C2-48F3-AD96-6058F6E6A142]
+2026-01-22 14:36:04.699 RedLemon[26064:191108] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-22 14:36:04.699 RedLemon[26064:191108] 📝 [PLAYER] Buffering Started
+📄 Subtitle request: L3N1YnRpdGxlLzM1MzE0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3531424-8453248.zip
+📡 SocialService: Updated status - online: Tron: Ares
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5875 seconds
+✅ Download complete: 37382 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (620): Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-BYNDR_track4_[eng].SDH.srt
+📦 Extracting specific file: Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-BYNDR_track4_\[eng\].SDH.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MzE0MjUtODQ1MzI0OS56aXA= [request-id: D0880A90-6CC1-4CE6-B274-AE413DFECFE4]
+📄 Subtitle request: L3N1YnRpdGxlLzM1MzE0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3531425-8453249.zip
+✅ Download complete: 37382 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (620): Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-BYNDR_track4_[eng].SDH.srt
+📦 Extracting specific file: Tron.Ares.2025.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-BYNDR_track4_\[eng\].SDH.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MzM0OTYtODQ1NTM3OC56aXA= [request-id: 2B4C7071-64F5-4DA4-88D8-9AC0BA2249D0]
+2026-01-22 14:36:06.531 RedLemon[26064:191107] 📨 Realtime: Received broadcast message
+2026-01-22 14:36:06.532 RedLemon[26064:191107]    Payload keys: position, isPlaying, type, timestamp, senderId
+2026-01-22 14:36:06.532 RedLemon[26064:191107] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:36:07.143 RedLemon[26064:191108] 📝 [PLAYER] File Loaded ["duration": "7198.464"]
+2026-01-22 14:36:07.511 RedLemon[26064:190585] [VIDEO_READY] isEvent: false, eventStartTime: nil
+2026-01-22 14:36:07.542 RedLemon[26064:191492] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-22 14:36:07.587 RedLemon[26064:191492] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-22 14:36:08.432 RedLemon[26064:191107] 📨 Realtime: Received broadcast message
+2026-01-22 14:36:08.432 RedLemon[26064:191107]    Payload keys: senderId, position, isPlaying, type, timestamp
+2026-01-22 14:36:08.433 RedLemon[26064:191107] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:36:08.518 RedLemon[26064:191107] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-22 14:36:09.470 RedLemon[26064:191492] 📤 Realtime: Sending message type: ready, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-22 14:36:09.470 RedLemon[26064:191492]    Payload keys: type, senderId, isPlaying, position, timestamp
+2026-01-22 14:36:09.471 RedLemon[26064:191492] ✅ Realtime: Message broadcast complete
+2026-01-22 14:36:09.481 RedLemon[26064:191108] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-22 14:36:09.601 RedLemon[26064:191108] 📨 Realtime: Received broadcast message
+2026-01-22 14:36:09.601 RedLemon[26064:191108]    Payload keys: position, timestamp, type, senderId, isPlaying
+2026-01-22 14:36:09.602 RedLemon[26064:191108] ✅ Realtime: Decoded message type: ready, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-22 14:36:10.559 RedLemon[26064:191108] 📨 Realtime: Received broadcast message
+2026-01-22 14:36:10.560 RedLemon[26064:191108]    Payload keys: type, isPlaying, senderId, position, timestamp
+2026-01-22 14:36:10.560 RedLemon[26064:191108] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:36:10.855 RedLemon[26064:191107] 📨 Realtime: Received broadcast message
+2026-01-22 14:36:10.855 RedLemon[26064:191107]    Payload keys: position, senderId, type, timestamp, isPlaying
+2026-01-22 14:36:10.856 RedLemon[26064:191107] ✅ Realtime: Decoded message type: play, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:36:10.915 RedLemon[26064:190651] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-22 14:36:11.848 RedLemon[26064:190651] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-22 14:36:12.481 RedLemon[26064:191108] 📨 Realtime: Received broadcast message
+2026-01-22 14:36:12.481 RedLemon[26064:191108]    Payload keys: isPlaying, position, timestamp, senderId, type
+2026-01-22 14:36:12.482 RedLemon[26064:191108] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:36:14.501 RedLemon[26064:191108] 📨 Realtime: Received broadcast message
+2026-01-22 14:36:14.501 RedLemon[26064:191108]    Payload keys: senderId, isPlaying, type, position, timestamp
+2026-01-22 14:36:14.501 RedLemon[26064:191108] ✅ Realtime: Decoded message type: playbackState, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-22 14:36:14.546 RedLemon[26064:190651] 🔐 SupabaseClient: Signing Identity Payload: '1769110574656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-22 14:36:14.547 RedLemon[26064:190651] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-22 14:36:15.898 RedLemon[26064:190651] 📨 Realtime: Received broadcast message
+2026-01-22 14:36:15.898 RedLemon[26064:190651]    Payload keys: type, isPlaying, position, senderId, timestamp
+2026-01-22 14:36:15.899 RedLemon[26064:190651] ✅ Realtime: Decoded message type: returnToLobby, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:36:15.976 RedLemon[26064:191492] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-22 14:36:16.841 RedLemon[26064:191492] 📨 Realtime: Received broadcast message
+2026-01-22 14:36:16.841 RedLemon[26064:191492]    Payload keys: timestamp, chatText, chatUsername, isPlaying, position, type, senderId
+2026-01-22 14:36:16.841 RedLemon[26064:191492] ✅ Realtime: Decoded message type: returnToLobby, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-22 14:36:17.066 RedLemon[26064:191492] 📝 Realtime: Unregistered observer 'player'
+2026-01-22 14:36:17.312 RedLemon[26064:190585] [LOBBY_VIEW] onAppear: shouldAutoJoinLobby=false, room=RLWK, timeUntilStart=0
+📄 Subtitle request: L3N1YnRpdGxlLzM1MzM0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3533496-8455378.zip
+✅ Download complete: 73140 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 2 files...
+⚠️ No strong compatibility match (Best: 0 for Tron.Ares.2025.1080p.WEBRip.x264.AAC5.1-[YTS.LT].ass)
+⚠️ No specific match found, using first file: Tron.Ares.2025.1080p.WEBRip.x264.AAC5.1-[YTS.LT].ass
+📦 Extracting specific file: Tron.Ares.2025.1080p.WEBRip.x264.AAC5.1-\[YTS.LT\].ass
+✅ Extraction successful
+✅ Detected ASS subtitle format - returning raw content
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5869 seconds
+DEBUG: MPVPlayerViewModel.cleanup called - forcing cleanup. Reason: RETURN_TO_LOBBY_SIGNAL
+🔔 Lobby: Displaying pending message: Host returned the group to the lobby.
+🔄 Lobby: Returning from playback - resetting connection status
+🎭 Lobby: Connecting to room RLWK...
+🚦 Lobby State: connecting
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+[ INFO ] GET /api/metadata/meta/movie/tt6604188 [request-id: AB79B2A9-9F94-4526-AECA-ECA2713D36A0]
+[ INFO ] GET /api/metadata/meta/movie/tt6604188 [request-id: 0AFF8E16-EBE3-4BB3-809E-487B01208C24]
+2026-01-22 14:36:17.547 RedLemon[26064:190585] [LOBBY_VIEW] onAppear: shouldAutoJoinLobby=false, room=RLWK, timeUntilStart=0
+2026-01-22 14:36:17.683 RedLemon[26064:191493] 📝 Realtime: Registered observer 'lobby' (Presence: YES, Sync: NO, Status: NO)
+2026-01-22 14:36:17.683 RedLemon[26064:190678] 📝 Realtime: Registered observer 'lobby' (Presence: YES, Sync: NO, Status: NO)
+2026-01-22 14:36:17.961 RedLemon[26064:191492] 📝 Realtime: Registered observer 'lobby' (Presence: NO, Sync: YES, Status: NO)
+2026-01-22 14:36:17.961 RedLemon[26064:190651] 📝 Realtime: Registered observer 'lobby' (Presence: NO, Sync: YES, Status: NO)
+2026-01-22 14:36:18.099 RedLemon[26064:191493] ❌ [14:36:18.099] [NETWORK] [SupabaseClient.swift:364] Supabase API Error: new row violates row-level security policy (USING expression) for table "room_participants"
+2026-01-22 14:36:18.102 RedLemon[26064:190585] ❌ Lobby: Failed to connect - userMessage("new row violates row-level security policy (USING expression) for table \"room_participants\"")
+2026-01-22 14:36:18.103 RedLemon[26064:190585]    Guest could not join room in database
+2026-01-22 14:36:21.271 RedLemon[26064:190585] 🛡️ Lobby: User 656daa91-33b4-4688-9135-c982ea52d7c9 remains online (Remaining Refs: 1)
+2026-01-22 14:36:39.521 RedLemon[26064:190651] 🔐 Signed request to /rpc/user_heartbeat
+⚠️ Lobby: Connection already in progress - skipping duplicate connect call
+📡 SocialService: Updated status - In Lobby: Tron: Ares: Tron: Ares
+♻️ Lobby: Room stopped playing. Resetting auto-start session ID.
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📡 SocialService: Updated status - In Lobby: Tron: Ares: Tron: Ares
+✅ Lobby: Loaded metadata for Tron: Ares
+✅ Lobby: Loaded metadata for Tron: Ares
+🔌 Setting up Realtime channel: watch-party:RLWK
+   Role: Guest
+🔌 Setting up Realtime channel: watch-party:RLWK
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connected
+📡 Connection state: connecting
+📡 Topic realtime:watch-party:RLWK already joined (interest count: 2), skipping phx_join
+   Role: Guest
+   User ID: 80c4bd33-3b2e-4da7-8cea-30602fe89d22
+📡 Connection state: connected
+📡 Connection state: connecting
+📡 Topic realtime:watch-party:RLWK already joined (interest count: 3), skipping phx_join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: error("new row violates row-level security policy (USING expression) for table \"room_participants\"")
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+☠️ LobbyViewModel deinit
+🧹 LobbyViewModel: Triggering detached cleanup task...
+🧹 Cleaning up Realtime channel for room: RLWK
+🔄 Untracking presence on realtime:watch-party:RLWK...
+📡 Topic realtime:watch-party:RLWK presence still tracked by other managers (count: 2), skipping phx_leave for presence
+✅ Presence untracked
+🔄 Leaving channel realtime:watch-party:RLWK...
+📡 Topic realtime:watch-party:RLWK still in use by other managers (interest count: 2), skipping phx_leave
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+📡 Connection state: disconnected
+✅ Realtime channel cleanup complete
+♻️ RealtimeChannelManager deinitialized
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5859 seconds
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5848 seconds
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5839 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1579 with 405 movies
+✅ [EventsConfig] Using cached movie_events config (version 1579, 405 movies)
+📊 AppState: Polled participant counts - Active: ["tt0480687": 2]
+⏰ AppState: Next schedule update set for Event End: 2026-01-22 21:13:59 +0000
+⏰ AppState: Scheduling update in 5829 seconds

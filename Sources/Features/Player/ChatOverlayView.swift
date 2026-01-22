@@ -216,21 +216,23 @@ struct ChatOverlayView: View {
                             }
                         }
 
-                        // Reaction Toggle
-                        Button(action: {
-                            withAnimation {
-                                viewModel.areReactionsEnabled.toggle()
+                        if appState.isEventPlayback || viewModel.isInWatchParty {
+                            // Reaction Toggle
+                            Button(action: {
+                                withAnimation {
+                                    viewModel.areReactionsEnabled.toggle()
+                                }
+                            }) {
+                                Image(systemName: viewModel.areReactionsEnabled ? "eye.fill" : "eye.slash.fill")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(viewModel.areReactionsEnabled ? .white.opacity(0.8) : .white.opacity(0.4))
+                                    .frame(width: 28, height: 28)
+                                    .background(Color.white.opacity(0.1))
+                                    .clipShape(Circle())
                             }
-                        }) {
-                            Image(systemName: viewModel.areReactionsEnabled ? "eye.fill" : "eye.slash.fill")
-                                .font(.system(size: 14))
-                                .foregroundColor(viewModel.areReactionsEnabled ? .white.opacity(0.8) : .white.opacity(0.4))
-                                .frame(width: 28, height: 28)
-                                .background(Color.white.opacity(0.1))
-                                .clipShape(Circle())
+                            .buttonStyle(.plain)
+                            .help(viewModel.areReactionsEnabled ? "Hide Reactions" : "Show Reactions")
                         }
-                        .buttonStyle(.plain)
-                        .help(viewModel.areReactionsEnabled ? "Hide Reactions" : "Show Reactions")
 
                         // Close Button
                         Button(action: { viewModel.toggleChat() }) {

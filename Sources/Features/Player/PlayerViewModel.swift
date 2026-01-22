@@ -1154,6 +1154,7 @@ class PlayerViewModel: ObservableObject {
         // Capture state before ANY property resets
         let wasFullscreen = NSApplication.shared.windows.first(where: { $0.isVisible && $0.styleMask.contains(.fullScreen) }) != nil
         let wasEvent = isEventPlayback
+        let wasWatchParty = currentWatchMode == .watchParty
 
         // 2. Start window transition IMMEDIATELY
         exitFullscreen()
@@ -1208,6 +1209,8 @@ class PlayerViewModel: ObservableObject {
                 if !keepRoomState {
                     if wasEvent {
                        appState?.currentView = .events
+                    } else if wasWatchParty {
+                       appState?.currentView = .rooms
                     } else {
                        // Optimization: Signal BrowseView to defer heavy rendering
                        appState?.isReturningFromPlayer = true
@@ -1316,11 +1319,8 @@ class PlayerViewModel: ObservableObject {
         if let roomId = currentRoomId {
             let roomExists = try? await roomManager.getRoomState(roomId: roomId)
             if roomExists == nil {
-                LoggingManager.shared.warn(.watchParty, message: "PlayerVM: Room \(roomId) no longer exists - returning to browse")
+                LoggingManager.shared.warn(.watchParty, message: "PlayerVM: Room \(roomId) no longer exists - returning to rooms")
                 await exitPlayer(keepRoomState: false)
-                if let appState = appState {
-                    appState.currentView = .browse
-                }
                 return
             } else {
                 LoggingManager.shared.info(.watchParty, message: "PlayerVM: Room \(roomId) still exists, proceeding with session persistence")

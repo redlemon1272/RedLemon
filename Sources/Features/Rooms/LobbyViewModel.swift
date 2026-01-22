@@ -633,7 +633,7 @@ class LobbyViewModel: ObservableObject {
                                     message: "This watch party is no longer active."
                                 )
                                 self.disconnect()
-                                self.appState?.currentView = .browse
+                                self.appState?.currentView = .rooms
                                 self.appState?.restoreWindowFromLobby()
                             }
                             return
@@ -708,7 +708,7 @@ class LobbyViewModel: ObservableObject {
                           errStr.localizedCaseInsensitiveContains("room_participants_room_id_fkey") {
                     print("💀 Lobby: Room definitely deleted (Foreign Key Error). Exiting to Browse...")
                     await MainActor.run {
-                        self.appState?.currentView = .browse
+                        self.appState?.currentView = .rooms
                         self.appState?.player.currentRoomId = nil
                         self.appState?.player.currentWatchPartyRoom = nil
                     }

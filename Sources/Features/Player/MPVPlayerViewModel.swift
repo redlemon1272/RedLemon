@@ -3227,7 +3227,8 @@ extension MPVPlayerViewModel {
                             await self.appState?.player.exitPlayer(keepRoomState: false)
 
                             // 2. Switch View AND Show Alert on the destination screen
-                            self.appState?.currentView = .browse
+                            // Note: exitPlayer already sets .rooms for watch parties
+                            self.appState?.currentView = .rooms
 
                             // Show GLOBAL alert (Now appears on Browse screen)
                             self.appState?.activeAlert = AppState.AppAlert(
@@ -3359,7 +3360,7 @@ extension MPVPlayerViewModel {
                 await self.appState?.player.exitPlayer(keepRoomState: false)
 
                 await MainActor.run {
-                    self.appState?.currentView = .browse
+                    self.appState?.currentView = .rooms
                 }
             }
 
@@ -3555,7 +3556,7 @@ extension MPVPlayerViewModel {
             await self.cleanup(returningToLobby: true, reason: "HOST_ABSENT_TIMEOUT")
             await self.appState?.player.exitPlayer(keepRoomState: false)
             await MainActor.run {
-                self.appState?.currentView = .browse
+                self.appState?.currentView = .rooms
             }
         }
     }

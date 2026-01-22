@@ -1030,7 +1030,7 @@ struct WatchPartyLobbyView: View {
         viewModel.initiateLeave()
         appState.restoreWindowFromLobby()
         appState.activeLobbyViewModel = nil // Clear persistent session
-        appState.currentView = room.type == .event ? .events : .browse
+        appState.currentView = room.type == .event ? .events : .rooms
     }
 
     // MARK: - Description Editor Popover

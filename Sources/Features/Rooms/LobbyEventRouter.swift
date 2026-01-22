@@ -94,7 +94,7 @@ class LobbyEventRouter: ObservableObject {
             )
 
             viewModel.disconnect()
-            viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .browse
+            viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .rooms
             viewModel.appState?.restoreWindowFromLobby()
         }
     }
@@ -310,9 +310,9 @@ class LobbyEventRouter: ObservableObject {
                     message: "You have been kicked from the room."
                 )
 
-                // Trigger disconnect and return to browse
+                // Trigger disconnect and return to rooms
                 viewModel.disconnect()
-                viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .browse
+                viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .rooms
                 viewModel.appState?.restoreWindowFromLobby()
             }
         }

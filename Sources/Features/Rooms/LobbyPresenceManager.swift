@@ -125,7 +125,7 @@ class LobbyPresenceManager: ObservableObject {
 
                              // Exit Lobby
                              viewModel.disconnect()
-                             viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .browse
+                             viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .rooms
                              viewModel.appState?.restoreWindowFromLobby()
                          }
                     } else if type == "UPDATE" {
@@ -658,7 +658,7 @@ class LobbyPresenceManager: ObservableObject {
                                    errStr.localizedCaseInsensitiveContains("room_participants_room_id_fkey") {
                                      print("💀 Lobby: Room deleted during Host Self-Heal. Exiting.")
                                      await MainActor.run {
-                                         viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .browse
+                                         viewModel.appState?.currentView = viewModel.room.type == .event ? .events : .rooms
                                          // Clear invalid room state
                                          viewModel.appState?.player.currentRoomId = nil
                                          viewModel.appState?.player.currentWatchPartyRoom = nil

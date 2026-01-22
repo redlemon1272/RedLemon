@@ -58,6 +58,13 @@ class MPVPlayerViewModel: ObservableObject {
     // Landmine #44: Track playback start time to detect "Instant EOF"
     private var lastPlaybackResumeTime: Date?
 
+    // Failsafe: Track announced participants to prevent "Double Join" messages (History + Realtime race)
+    private var announcedParticipantIds: Set<String> = []
+
+    // Failsafe: Track "Ghost Candidates" (Users who are Online in Realtime but missing from DB for >30s)
+    // This fixes the "Missing Leave" bug where a user leaves via API but the socket disconnect is missed.
+    private var ghostCandidateStartTimes: [String: Date] = [:]
+
 
     init(mpvWrapper: MPVWrapper = MPVWrapper(),
          subtitleService: SubtitleService? = nil,
@@ -2210,7 +2217,12 @@ extension MPVPlayerViewModel {
         self.hasSentReadySignal = false
         self.connectedGuestIds.removeAll()
         self.readyGuestIds.removeAll()
+        self.connectedGuestIds.removeAll()
+        self.readyGuestIds.removeAll()
         self.readySignalsSentCount = 0
+        // FIX: Reset tracking
+        self.announcedParticipantIds.removeAll()
+        self.ghostCandidateStartTimes.removeAll()
 
         self.currentUserId = userId.lowercased()
 
@@ -2331,7 +2343,10 @@ extension MPVPlayerViewModel {
 
                             // If upgrading from DB-only (Offline) to Realtime (Online), announce it
                             if wasOffline && actualUserId != self.currentUserId {
-                                self.addSystemMessage("\(updatedParticipants[index].name) joined")
+                                if !self.announcedParticipantIds.contains(actualUserId) {
+                                    self.addSystemMessage("\(updatedParticipants[index].name) joined")
+                                    self.announcedParticipantIds.insert(actualUserId)
+                                }
                             }
 
                             if let name = metaUsername {
@@ -2358,7 +2373,10 @@ extension MPVPlayerViewModel {
 
                             // 💬 System Message: Join
                             if actualUserId != self.currentUserId {
-                                self.addSystemMessage("\(username) joined")
+                                if !self.announcedParticipantIds.contains(actualUserId) {
+                                    self.addSystemMessage("\(username) joined")
+                                    self.announcedParticipantIds.insert(actualUserId)
+                                }
                             }
                         }
 
@@ -2604,8 +2622,11 @@ extension MPVPlayerViewModel {
             if participant.isHost { continue }
 
             // Add join message for existing participant
-            addSystemMessage("\(participant.name) joined")
-            LoggingManager.shared.info(.watchParty, message: "Synced existing participant to chat: \(participant.name)")
+            if !announcedParticipantIds.contains(participant.id.lowercased()) {
+                addSystemMessage("\(participant.name) joined")
+                announcedParticipantIds.insert(participant.id.lowercased())
+                LoggingManager.shared.info(.watchParty, message: "Synced existing participant to chat: \(participant.name)")
+            }
         }
     }
 
@@ -2842,7 +2863,28 @@ extension MPVPlayerViewModel {
                 let isInDB = dbUserIds.contains(id)
 
                 // If Online: Keep (Source of Truth is Realtime)
-                if isOnline { return false }
+                if isOnline {
+                    // GHOST CHECK: If Online but NOT in DB for too long, kill it.
+                    if !isInDB {
+                        if let start = self.ghostCandidateStartTimes[id] {
+                            if Date().timeIntervalSince(start) > 30.0 { // 30s tolerance
+                                LoggingManager.shared.warn(.watchParty, message: "👻 Ghost Detection: \(id) has been Online but missing from DB for >30s. Force removing.")
+                                self.ghostCandidateStartTimes.removeValue(forKey: id)
+                                return true // Force Remove
+                            }
+                        } else {
+                            // Start tracking ghost candidacy
+                            self.ghostCandidateStartTimes[id] = Date()
+                        }
+                    } else {
+                        // Found in DB, clear suspicion
+                        self.ghostCandidateStartTimes.removeValue(forKey: id)
+                    }
+                    return false
+                }
+
+                // If Offline, clear ghost data
+                self.ghostCandidateStartTimes.removeValue(forKey: id)
 
                 // If Offline and Not in DB: Remove (Stale)
                 if !isInDB { return true }
@@ -2852,6 +2894,14 @@ extension MPVPlayerViewModel {
 
             if !idsToRemove.isEmpty {
                 for id in idsToRemove {
+                    // If we remove a user (Zombie/Ghost) who hasn't officially left, announce it
+                    // Find the name first
+                    let name = currentMap[id]?.name ?? "Someone"
+                    // Check if they were "Joined" (Announced) before removing
+                    if self.announcedParticipantIds.contains(id) {
+                         self.addSystemMessage("\(name) left") // Fallback leave message
+                         self.announcedParticipantIds.remove(id)
+                    }
                     currentMap.removeValue(forKey: id)
                 }
                 hasChanges = true

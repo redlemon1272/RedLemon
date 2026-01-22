@@ -784,6 +784,27 @@ echo ""
 echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
 
 # Exit Code Logic
+
+
+# =============================================================================
+# CHECK 35: Broadcast Self-Echo Guard (Landmine #95)
+# =============================================================================
+# Trigger: Host processes their own "Room Closed" or "Link Update" broadcast.
+# Rule: Broadcast handlers MUST check `if senderId != currentUserId`.
+print_header "Check 35: Broadcast Self-Echo Guard (Landmine #95)"
+
+LOBBY_ROUTER="$SOURCES_DIR/Features/Rooms/LobbyEventRouter.swift"
+if [[ -f "$LOBBY_ROUTER" ]]; then
+    # We look for handleRoomClosed or logic that processes destructive actions.
+    # The fix is filtering by senderId.
+    if ! grep -q "senderId.*caseInsensitiveCompare.*participantId" "$LOBBY_ROUTER" && ! grep -q "senderId.*!=.*currentUserId" "$LOBBY_ROUTER"; then
+        report "WARNING" "Landmine #95" "Self-Echo Risk: LobbyEventRouter MUST filter out broadcasts from self (senderId == currentUserId) to prevent self-kicking or double-processing." "$LOBBY_ROUTER" "0" "Missing senderId check"
+    else
+        echo -e "${GREEN}✅ LobbyEventRouter has self-echo guards.${NC}"
+    fi
+fi
+
+# Exit Code Logic
 if [[ $ERROR_COUNT -gt 0 ]]; then
     exit 1 # Block items
 else

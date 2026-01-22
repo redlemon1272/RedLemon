@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 21, 2026 (Part 94: Multi-Season Pack Mismatch - Landmine #94)
+> **Last Updated:** January 21, 2026 (Part 95: Broadcast Self-Echo Trap - Landmine #95)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -91,6 +91,7 @@
 | **"User Joined" Missing / Stale Player State** | State Handoff Failure (Source VM didn't sync to AppState) | #92 |
 | **Event Countdown Hidden (Auto-Join Only)** | VM Recreation Trap (New VM blocked from init by shared state) | #93 |
 | **Wrong Episode Plays (Multi-Season Pack)** | Episode-only pattern matches wrong season file | #94 |
+| **"Host has left the room" (Self-Alert)** | Host processes their own "Room Closed" broadcast | #95 |
 
 ## 🚨 Critical Landmines
 
@@ -390,6 +391,13 @@
     *   **Cause**: `RealDebridClient.selectEpisodeFile()` used an episode-only pattern (`e01`) that matched the first file containing "E01" without verifying the season number.
     *   **Rule**: Episode-only patterns (`Exx`) MUST NOT be trusted without additional season context validation (directory path like `/Season 1/` or inline `S01`).
     *   **Code**: `RealDebridClient.swift` - `selectEpisodeFile()` now separates "full patterns" (SxxExx) from "episode-only patterns" and validates season context for the latter.
+
+95. **Broadcast Self-Echo Trap (The "Host Kick" Bug)**: *(Added v1.0.130)*
+    *   **Trigger**: Host broadcasts a destructive signal (Room Closed / Kick) via Realtime.
+    *   **Symptom**: Host receives their own broadcast and processes it as an incoming alert, effectively "kicking themselves" with a "Host has left the room" message.
+    *   **Cause**: Realtime broadcasts generally do NOT echo, but some configurations or race conditions can cause loopback.
+    *   **Rule**: **Always Filter Self**. In any broadcast handler (`onSync`, `onBroadcast`), explicitly check `if senderId == currentUserId { return }` before processing destructive actions. Never assume the network will filter it for you.
+    *   **Impact**: Prevents false positive alerts where the sender scares themselves.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

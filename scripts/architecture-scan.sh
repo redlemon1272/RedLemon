@@ -694,6 +694,30 @@ if [[ $SYNC_ISSUES -eq 0 ]]; then
 fi
 
 # =============================================================================
+# CHECK 32: State Handoff Guard (Landmine #92)
+# =============================================================================
+# Trigger: LobbyViewModel or LobbyEventRouter fails to sync participants to AppState/TargetRoom.
+print_header "Check 32: State Handoff Guard (Landmine #92)"
+
+LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
+if [[ -f "$LOBBY_VM" ]]; then
+    if ! grep -q "roomToSync.participants = self.participants" "$LOBBY_VM"; then
+        report "ERROR" "Landmine #92" "State Handoff Risk: LobbyViewModel MUST explicitly sync 'participants' to 'roomToSync' before assigning to AppState." "$LOBBY_VM" "0" "Missing participant sync"
+    else
+        echo -e "${GREEN}✅ LobbyViewModel correctly syncs participants before handoff.${NC}"
+    fi
+fi
+
+LOBBY_ROUTER="$SOURCES_DIR/Features/Rooms/LobbyEventRouter.swift"
+if [[ -f "$LOBBY_ROUTER" ]]; then
+    if ! grep -q "targetRoom.participants = viewModel.participants" "$LOBBY_ROUTER"; then
+        report "ERROR" "Landmine #92" "State Handoff Risk: LobbyEventRouter MUST explicitly sync 'participants' to 'targetRoom' for Guests." "$LOBBY_ROUTER" "0" "Missing participant sync"
+    else
+         echo -e "${GREEN}✅ LobbyEventRouter correctly syncs participants before handoff.${NC}"
+    fi
+fi
+
+# =============================================================================
 
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"

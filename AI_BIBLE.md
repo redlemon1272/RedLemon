@@ -88,6 +88,7 @@
 | **Browse Page Slow/Laggy** | All catalogs + images loading simultaneously | #86 |
 | **App Freeze on Watch Party (Browse)** | Sheet dismissal race condition / root unmount | #87 |
 | **Guest Kicked ("Room Closed") - Host OK** | Heartbeat fails due to stale auth.currentUser | #88 |
+| **"User Joined" Missing / Stale Player State** | State Handoff Failure (Source VM didn't sync to AppState) | #92 |
 
 ## 🚨 Critical Landmines
 

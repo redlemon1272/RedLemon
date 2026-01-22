@@ -886,6 +886,26 @@ if [[ -f "$LOBBY_PM" ]]; then
     fi
 fi
 
+# =============================================================================
+# CHECK 41: Realtime Decoupling (Landmine #101)
+# =============================================================================
+# Trigger: DB join failure causes Realtime to NOT be set up, leaving guests "not connected".
+# Rule: setupRealtimeSubscription MUST be called even when DB operations fail.
+print_header "Check 41: Realtime Decoupling (Landmine #101)"
+
+LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
+if [[ -f "$LOBBY_VM" ]]; then
+    # Count how many times setupRealtimeSubscription is called in connect() context
+    # Should be at least 2: once in success path, once in error handling
+    COUNT=$(grep -c "setupRealtimeSubscription()" "$LOBBY_VM" || true)
+
+    if [[ $COUNT -lt 2 ]]; then
+        report "ERROR" "Landmine #101" "Realtime Decoupling Risk: setupRealtimeSubscription MUST be called in BOTH success path AND error handler. Realtime and DB are independent channels - guests need connectivity even when DB writes fail (RLS, permissions, etc.)." "$LOBBY_VM" "0" "Found $COUNT call(s), expected >= 2"
+    else
+        echo -e "${GREEN}✅ LobbyViewModel has Realtime decoupling (setupRealtimeSubscription in error handler).${NC}"
+    fi
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

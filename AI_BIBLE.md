@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 22, 2026 (Part 100: Event Heartbeat Latency - Landmine #100)
+> **Last Updated:** January 22, 2026 (Part 101: Realtime Decoupling - Landmine #101)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -96,6 +96,7 @@
 | **Zero KB Disk Usage** | Edge Function `df` failure / Relative path error | #97 |
 | **Stale User Last Seen** | "12 days ago" for active user | #98 |
 | **Void RPC Build Failure** | type 'Void' cannot conform to 'Decodable' | #99 |
+| **Guest shows "not connected"** | Realtime setup skipped after DB join fails (RLS, permissions) | #101 |
 
 ## 🚨 Critical Landmines
 
@@ -436,6 +437,14 @@
     *   **Rule**: **Generous Padding**. The grace period for DB eviction MUST be at least **2.5x** the heartbeat interval (e.g., 90s for a 35s heartbeat) to safely absorb transition spikes.
     *   **Corollary**: Participant merging logic MUST be robust. Use **whitespace-trimmed Case-Insensitive Matching** for usernames to prevent duplicate "Self" entries (one random UUID, one DB UUID) during these transition windows.
     *   **Fix**: `LobbyPresenceManager.swift` - Extended event grace period to 90s and added `.trimmingCharacters(in: .whitespacesAndNewlines)` to matching.
+
+101. **The "All-or-Nothing" Connection Trap (Realtime Decoupling)**: *(Added v1.0.134)*
+    *   **Trigger**: Guest returns to lobby or joins a room where database write fails (RLS policies, permissions, or transient errors).
+    *   **Symptom**: Guest shows "not connected" status even though Realtime WebSocket could work fine. Chat, presence, and sync messages fail entirely.
+    *   **Cause**: Connection flow treats Realtime setup as dependent on database join success. When `joinRoom()` throws an error, the entire connection fails without establishing Realtime connectivity. Realtime and Database are **independent communication channels** - Realtime (WebSockets) for real-time sync/presence, Database for persistence/polling fallback.
+    *   **Rule**: **Decouple Connection Layers**. Realtime MUST be established even when database operations fail for non-fatal errors. Only treat **structural errors** as fatal (e.g., Foreign Key = room deleted). Gracefully degrade to "Realtime-only" mode with a user-facing message explaining limited features.
+    *   **Detection**: Log shows "Guest could not join room in database" followed by absence of "Setting up Realtime channel" message.
+    *   **Fix**: `LobbyViewModel.swift` - Moved `setupRealtimeSubscription()` into the error handler for non-fatal errors (lines 725-748).
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

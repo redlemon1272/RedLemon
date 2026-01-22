@@ -591,6 +591,15 @@ class LobbyPresenceManager: ObservableObject {
                     continue
                 }
 
+                // CRITICAL FIX: Self Protection
+                // If the local user is missing from DB results (e.g. due to RLS race or latency),
+                // we MUST NOT evict ourselves. We are obviously present.
+                if localP.id.caseInsensitiveCompare(viewModel.participantId) == .orderedSame {
+                    // NSLog("🛡️ Preserving Self '\(localP.name)' despite missing from DB poll")
+                    finalParticipants.append(localP)
+                    continue
+                }
+
                 // REALTIME PROTECTION REMOVED:
                 // We previously trusted Realtime to keep users in the list even if DB missed them.
                 // However, this caused "Ghost/Zombie" users if Realtime missed a 'leave' event.

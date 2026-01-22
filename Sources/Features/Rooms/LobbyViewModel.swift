@@ -945,6 +945,9 @@ class LobbyViewModel: ObservableObject {
     // func trimLobbyMessages() { ... }
 
     func toggleReady() {
+        // CRITICAL FIX: Event rooms do not use "Ready" state.
+        // Events run on a fixed schedule. "Ready" status messages are confusing in this context.
+        if room.type == .event { return }
         presenceManager.toggleReady()
     }
 

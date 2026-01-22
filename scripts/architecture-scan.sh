@@ -744,6 +744,24 @@ fi
 
 # =============================================================================
 
+# =============================================================================
+# CHECK 34: Multi-Season Pack Guard (Landmine #94)
+# =============================================================================
+# Trigger: Episode-only pattern "e\(episodeStr)" matches wrong season in multi-season packs.
+print_header "Check 34: Multi-Season Pack Guard (Landmine #94)"
+
+RD_CLIENT="$SOURCES_DIR/Server/Debrid/RealDebridClient.swift"
+if [[ -f "$RD_CLIENT" ]]; then
+    # Check: selectEpisodeFile must have season context validation for Exx patterns
+    if ! grep -q 'seasonContextPatterns' "$RD_CLIENT"; then
+        report "ERROR" "Landmine #94" "Multi-Season Pack Risk: selectEpisodeFile MUST validate season context for episode-only patterns." "$RD_CLIENT" "0" "Missing season context validation"
+    else
+        echo -e "${GREEN}✅ RealDebridClient validates season context for episode-only patterns.${NC}"
+    fi
+fi
+
+# =============================================================================
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

@@ -2467,6 +2467,7 @@ extension MPVPlayerViewModel {
                                     // 💬 System Message: Leave (Only for others)
                                     if actualUserId != self.currentUserId {
                                         self.addSystemMessage("\(name) left")
+                                        self.announcedParticipantIds.remove(actualUserId) // FIX: Allow re-announce on return
                                     }
                                     LoggingManager.shared.info(.watchParty, message: "Participant \(name) (\(actualUserId)) officially removed from UI")
                                 }

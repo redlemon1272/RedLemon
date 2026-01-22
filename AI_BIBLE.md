@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 22, 2026 (Part 99: Void RPC Trap - Landmine #99)
+> **Last Updated:** January 22, 2026 (Part 100: Event Heartbeat Latency - Landmine #100)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -427,6 +427,15 @@
     *   **Rule**: **Reset on Exit**. Any deduplication state used for "Once-per-session" events MUST be cleared in the `.leave` or disconnect handler.
     *   **Fix**: `announcedParticipantIds.remove(id)` added to `.leave` handler in `MPVPlayerViewModel`.
     *   **Related**: Landmine #58 (Async State Debouncing) -> This is the inverse problem (Over-debouncing).
+
+
+100. **Event Heartbeat Latency Trap (The 60-Second Eviction)**: *(Added v1.0.133)*
+    *   **Trigger**: Auto-joining a new event lobby immediately after the previous event ends.
+    *   **Symptom**: "User Left" message appears for a user who is clearly still there (confirmed by "User Joined" shortly after).
+    *   **Cause**: The first DB Heartbeat (UPSERT) can be delayed by RLS overhead, cold starts, or network race conditions during the transition. If the "Zombie Cleanup" grace period (e.g., 60s) is strictly equal to `heartbeat_interval` + `latency`, it fails. Observed latency was 61.5s.
+    *   **Rule**: **Generous Padding**. The grace period for DB eviction MUST be at least **2.5x** the heartbeat interval (e.g., 90s for a 35s heartbeat) to safely absorb transition spikes.
+    *   **Corollary**: Participant merging logic MUST be robust. Use **whitespace-trimmed Case-Insensitive Matching** for usernames to prevent duplicate "Self" entries (one random UUID, one DB UUID) during these transition windows.
+    *   **Fix**: `LobbyPresenceManager.swift` - Extended event grace period to 90s and added `.trimmingCharacters(in: .whitespacesAndNewlines)` to matching.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

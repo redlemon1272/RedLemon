@@ -22,7 +22,7 @@ class LobbyEventRouter: ObservableObject {
              return
         } else if syncMessage.type == .roomClosed {
              // Host closed the room (Typed)
-             await handleRoomClosed()
+             await handleRoomClosed(syncMessage)
              return
         }
 
@@ -63,7 +63,17 @@ class LobbyEventRouter: ObservableObject {
     }
 
     private func handleRoomClosed() async {
+        // Redundant empty signature - logic moved to typed handler
+    }
+
+    private func handleRoomClosed(_ syncMessage: SyncMessage? = nil) async {
         guard let viewModel = viewModel else { return }
+
+        // FIX: Ignore Self-Echo (Host shouldn't see their own "Host Left" message)
+        if let senderId = syncMessage?.senderId, senderId.caseInsensitiveCompare(viewModel.participantId) == .orderedSame {
+             NSLog("🛡️ Ignoring Room Closed signal from self (Self-Echo)")
+             return
+        }
 
         NSLog("🔒 Received Room Closed signal from Host")
 
@@ -166,6 +176,14 @@ class LobbyEventRouter: ObservableObject {
              // VOTE SYNC: Re-broadcast host's current vote so late joiners see it
              // (AI Bible Landmine #13: ephemeral state must be re-synced on join)
              await broadcastCurrentVotes()
+
+             // CRITICAL FIX (Landmine #90): Sync participants to AppState immediately
+             // This ensures that if the host transitions to Player, the AppState has the guest list.
+             // Without this, MPVPlayerViewModel initializes with EMPTY participants (Silent Join).
+             await MainActor.run {
+                 viewModel.appState?.player.currentWatchPartyRoom?.participants = viewModel.participants
+                 NSLog("✅ Lobby: Synced participants to AppState (Count: %d)", viewModel.participants.count)
+             }
          } else {
              // Non-host received guest join notification
              let guestUsername = syncMessage.chatUsername ?? "Guest"

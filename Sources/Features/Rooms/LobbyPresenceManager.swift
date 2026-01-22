@@ -10,6 +10,7 @@ class LobbyPresenceManager: ObservableObject {
     // Tasks
     private var participantsPollingTask: Task<Void, Never>?
     private var heartbeatTask: Task<Void, Never>? // Replaces 'startHeartbeatLoop' inline task
+    private var isPresenceSetup = false // Guard against duplicate observer registration
 
     init(viewModel: LobbyViewModel) {
         self.viewModel = viewModel
@@ -92,6 +93,15 @@ class LobbyPresenceManager: ObservableObject {
     // MARK: - Realtime Presence
 
     func setupPresence(realtimeManager: any RealtimeService) async {
+        // CRITICAL FIX: Prevent duplicate observer registration
+        // Multiple calls to setupPresence() (e.g., from double onAppear, returnToLobby transition)
+        // can cause duplicate presence tracking entries and "Suppressing false User Left" messages
+        guard !isPresenceSetup else {
+            let roomId = viewModel?.room.id ?? "unknown"
+            NSLog("ℹ️ RealtimeChannelManager: Already setup for room %@, filtering duplicate setup call.", roomId)
+            return
+        }
+        isPresenceSetup = true
 
         // Handle Postgres Changes (Room Deletion)
         await realtimeManager.setPostgresCallback { [weak self] payload in
@@ -620,7 +630,11 @@ class LobbyPresenceManager: ObservableObject {
 
                 // CRITICAL FIX: Extended to 60s for events to cover the full 35s heartbeat cycle.
                 // Log analysis showed eviction at 46s (just missing 45s), so 60s provides safe buffer.
-                let gracePeriod: TimeInterval = (viewModel.room.type == .event) ? 60.0 : 3.0
+                // ALSO: Extend grace period during return-to-lobby transition to prevent false "User Left" messages
+                // when guest DB join fails due to RLS or replication lag.
+                let baseGracePeriod: TimeInterval = (viewModel.room.type == .event) ? 60.0 : 3.0
+                let returnToLobbyBonus: TimeInterval = viewModel.shouldDelayConnectAfterLobbyReturn ? 10.0 : 0.0
+                let gracePeriod: TimeInterval = baseGracePeriod + returnToLobbyBonus
 
                 if timeSinceJoin < gracePeriod {
                     // KEEP THEM: They joined less than N seconds ago (Grace Period)

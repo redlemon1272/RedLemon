@@ -85,6 +85,17 @@ class LobbyViewModel: ObservableObject {
     var isLeavingExplicitly: Bool = false // Flag to track if host is explicitly leaving (vs deinit/background)
     var canAutoJoin: Bool = false // Safety flag: Made var for LobbyDatabaseManager access
     var joinedAtTimestamp: Date = Date() // Track when user actually entered this lobby instance
+    // CRITICAL FIX (Landmine #93): Track when we last broadcast LOBBY_JOIN to prevent duplicates
+    // During Double onAppear, VM1 and VM2 both try to send LOBBY_JOIN causing "joined, left, joined" chaos
+    // Delegated to AppState.player to persist across View/ViewModel recreations
+    var lastLobbyJoinBroadcast: Date? {
+        get { appState?.player.lastLobbyJoinBroadcast }
+        set {
+            if let appState = appState {
+                appState.player.lastLobbyJoinBroadcast = newValue
+            }
+        }
+    }
     @Published var shouldDelayConnectAfterLobbyReturn: Bool = false // Safety flag for race condition on return
     // Track unique session (StreamHash + StartTime) to prevent loops
     // Delegated to AppState.player to persist across View recreations (Guest Loop Fix)
@@ -639,20 +650,32 @@ class LobbyViewModel: ObservableObject {
 
                 if !isHost {
                      let guestName = self.appState?.currentUsername ?? "Guest"
-                     let joinMsg = SyncMessage(
-                         type: .chat,
-                         timestamp: 0,
-                         isPlaying: nil,
-                         senderId: self.participantId,
-                         chatText: "LOBBY_JOIN",
-                         chatUsername: guestName
-                     )
-                     if let manager = realtimeManager {
-                         try? await manager.sendSyncMessage(joinMsg)
 
-                         // Echo join message locally for the sender (since we don't receive our own broadcast)
-                         await MainActor.run {
-                             self.addMessage(.userJoined, userName: guestName)
+                     // CRITICAL FIX (Landmine #93): Dedupe LOBBY_JOIN broadcasts during VM recreation
+                     // Double onAppear causes VM1 and VM2 to both call connect(), leading to duplicate join messages.
+                     // Skip if we already broadcast within the last 5 seconds.
+                     let now = Date()
+                     if let lastBroadcast = self.lastLobbyJoinBroadcast,
+                        now.timeIntervalSince(lastBroadcast) < 5.0 {
+                         NSLog("%@", "⚠️ Lobby: Skipping duplicate LOBBY_JOIN broadcast (last: \(now.timeIntervalSince(lastBroadcast))s ago)")
+                     } else {
+                         self.lastLobbyJoinBroadcast = now
+
+                         let joinMsg = SyncMessage(
+                             type: .chat,
+                             timestamp: 0,
+                             isPlaying: nil,
+                             senderId: self.participantId,
+                             chatText: "LOBBY_JOIN",
+                             chatUsername: guestName
+                         )
+                         if let manager = realtimeManager {
+                             try? await manager.sendSyncMessage(joinMsg)
+
+                             // Echo join message locally for the sender (since we don't receive our own broadcast)
+                             await MainActor.run {
+                                 self.addMessage(.userJoined, userName: guestName)
+                             }
                          }
                      }
                 }

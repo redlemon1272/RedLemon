@@ -230,6 +230,16 @@ class LobbyPresenceManager: ObservableObject {
                         guard let strongSelf = self else { return }
                         guard let strongViewModel = strongSelf.viewModel else { return }
 
+                        // CRITICAL FIX (Landmine #93): Suppress false 'User Left' from VM recreation
+                        // During Double onAppear, VM1 deinits and triggers a presence leave.
+                        // 3 seconds later, this code runs - but by then, VM2 is connected and the user never actually left.
+                        // Check if they recently broadcast LOBBY_JOIN (within 5s). If so, this leave is a false positive.
+                        if let lastJoin = strongViewModel.lastLobbyJoinBroadcast,
+                           Date().timeIntervalSince(lastJoin) < 5.0 {
+                            NSLog("🛡️ Lobby: Suppressing false 'User Left' - user %@ just joined %.1fs ago (VM recreation)", normalizedID, Date().timeIntervalSince(lastJoin))
+                            return
+                        }
+
                         // 1. Check against active participants list
                         if let index = strongViewModel.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
                             // Landmine #51: Only consider user Offline when their ref count drops to zero

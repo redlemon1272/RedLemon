@@ -56,6 +56,7 @@ class PlayerViewModel: ObservableObject {
     @Published var userCancelledAutoPlay: Bool = false
     @Published var lastAutoStartedSessionId: String? = nil // Persist auto-start session ID (Guest Loop Fix)
     @Published var playbackEndedTimestamp: Date? = nil // Persist end time to prevent grace period loops
+    @Published var lastLobbyJoinBroadcast: Date? = nil // CRITICAL FIX (Landmine #93): Dedupe join broadcasts during VM recreation
 
     // Pre-resolved stream for Watch Party Optimization
     var preResolvedStream: Stream?

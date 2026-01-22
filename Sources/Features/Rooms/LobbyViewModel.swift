@@ -1207,13 +1207,16 @@ class LobbyViewModel: ObservableObject {
                 print("✅ Host: Updated AppState selection to S\(room.season ?? 0)E\(room.episode ?? 0)")
             }
 
-            // Sync Playlist State to AppState
-            if var currentRoom = appState.player.currentWatchPartyRoom {
-                currentRoom.playlist = self.playlist
-                currentRoom.currentPlaylistIndex = self.currentPlaylistIndex
-                appState.player.currentWatchPartyRoom = currentRoom
-                print("✅ Host: Synced playlist state to AppState (Index: \(self.currentPlaylistIndex))")
-            }
+            // Sync Lobby State (Playlist & Participants) to AppState
+            // CRITICAL FIX: Ensure AppState has the latest participant list for "Silent Join" fix (Landmine #90)
+            // We must force-update this because MPVPlayerViewModel reads it upon initialization.
+            var roomToSync = self.room
+            roomToSync.playlist = self.playlist
+            roomToSync.currentPlaylistIndex = self.currentPlaylistIndex
+            roomToSync.participants = self.participants
+
+            appState.player.currentWatchPartyRoom = roomToSync
+            print("✅ Host: Synced FULL Lobby state to AppState (Participants: \(self.participants.count), Playlist Idx: \(self.currentPlaylistIndex))")
 
             appState.player.navigateToPlayer(stream: finalStream)
 

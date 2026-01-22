@@ -436,6 +436,10 @@ class LobbyEventRouter: ObservableObject {
         targetRoom.selectedQuality = roomState.quality
         targetRoom.selectedStreamTitle = roomState.sourceQuality // AI_BIBLE #91: Title fallback
 
+        // CRITICAL FIX: Sync latest participants for "Silent Join" Fix (Landmine #90)
+        // Ensure the Guest's player has the full list of participants so syncExistingParticipantsToChat() works.
+        targetRoom.participants = viewModel.participants
+
         // FIX (v1.0.80): Do NOT copy host's unlockedStreamURL!
         // Real-Debrid URLs are IP-locked to the user who unlocked them.
         // If we copy the host's URL, the guest's playback will hit EOF immediately

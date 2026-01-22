@@ -2557,6 +2557,16 @@ extension MPVPlayerViewModel {
         // FIX: Sync "User Joined" messages for participants who joined BEFORE the player observer was registered.
         // This handles the timing issue where guests join in the Lobby but the Player's observer
         // isn't registered until after the Host starts playback. (AI_BIBLE #65, #84)
+
+        if let room = appState?.player.currentWatchPartyRoom {
+             LoggingManager.shared.info(.watchParty, message: "Participant Sync Pre-Check: Room ID \(room.id), Participants: \(room.participants.count)")
+             room.participants.forEach { p in
+                 LoggingManager.shared.info(.watchParty, message: "   - \(p.name) (Host: \(p.isHost), ID: \(p.id))")
+             }
+        } else {
+             LoggingManager.shared.warn(.watchParty, message: "Participant Sync Pre-Check: currentWatchPartyRoom is NIL!")
+        }
+
         syncExistingParticipantsToChat()
 
         // Post-Setup Check: If video already loaded, send ready signal (Host) or validate (Guest)

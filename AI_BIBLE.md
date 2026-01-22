@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 21, 2026 (Part 22: False EOF Loop - Landmine #89)
+> **Last Updated:** January 21, 2026 (Part 92: State Handoff Trap - Landmine #92)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -366,6 +366,13 @@
     *   **Scope**: This applies to **BOTH** standard Watch Parties (Host) AND Automated Events (System).
     *   **Event Constraint**: `EventsView` MUST capture and persist `source_quality` (stream title) during automated room creation (`createRoom`), or else guests joining the event for DebridSearch streams will fall back to independent resolution.
     *   **Detection**: Guest log shows: `⚠️ Guest: No stream hash available. Guests cannot use host's URL (IP-locked). Will attempt fresh resolution.`
+
+92. **State Handoff Trap (The "Empty Handed" Transition)**: *(Added v1.0.129)*
+    *   **Trigger**: Transitioning between complex ViewModels (e.g., Lobby to Player) via `AppState`.
+    *   **Symptom**: Destination ViewModel sees stale or empty data (e.g., `participants` list is empty), even though the Source ViewModel had it.
+    *   **Cause**: `AppState` is a shared container, but it doesn't auto-fetch. If the Source VM modifies its *local* copy of data (e.g. `self.participants`) but doesn't explicitly sync it back to `AppState.currentWatchPartyRoom` immediately before navigation, the Destination VM initializes with stale `AppState`.
+    *   **Rule**: **Explicit Sync Before Navigation**. The Source VM MUST copy all relevant local state (participants, playlist, stream details) to the `AppState` object *synchronously* in the same Task/Block as the navigation call.
+    *   **Code**: `appState.player.currentWatchPartyRoom = self.room` -> `appState.currentView = .player`
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

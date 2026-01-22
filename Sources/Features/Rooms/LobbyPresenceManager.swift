@@ -538,13 +538,12 @@ class LobbyPresenceManager: ObservableObject {
                     $0.id.caseInsensitiveCompare(participant.userId.uuidString) == .orderedSame
                 })
 
-                // 2. Secondary Match: Name + Ephemeral ID Fallback (Fix for Ghost Duplicates)
-                if existingLocal == nil {
-                     existingLocal = currentParticipants.first(where: {
-                         $0.name.caseInsensitiveCompare(username) == .orderedSame &&
-                         $0.id.count != 36
-                     })
-                }
+                 // 2. Secondary Match: Name Fallback (Fix for random-ID local user)
+                 if existingLocal == nil {
+                      existingLocal = currentParticipants.first(where: {
+                          $0.name.caseInsensitiveCompare(username) == .orderedSame
+                      })
+                 }
 
                 if let found = existingLocal {
                     consumedLocalIds.insert(found.id)

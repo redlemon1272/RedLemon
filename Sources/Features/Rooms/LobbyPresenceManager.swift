@@ -175,7 +175,11 @@ class LobbyPresenceManager: ObservableObject {
 
                     // Check if already exists (CASE INSENSITIVE)
                     if let index = strongViewModel.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
-                        strongViewModel.participants[index].joinedAt = Date()
+                        // CRITICAL FIX: Preserve original joinedAt timestamp
+                        // Do NOT update joinedAt when reconnecting via Realtime
+                        // This prevents the "stale presence leave" bug where users appear to have just joined
+                        // when they've actually been in the room the whole time (their connection just reset).
+                        // joinedAt is only set once: when the user first joins the room.
                         strongViewModel.participants[index].phxRefs.insert(userId) // Add connection ID (Map Key)
 
                         // Parse metadata

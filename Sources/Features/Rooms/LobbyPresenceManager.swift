@@ -619,9 +619,10 @@ class LobbyPresenceManager: ObservableObject {
 
                 let timeSinceJoin = Date().timeIntervalSince(localP.joinedAt)
 
-                // ISOLATION: Only extend grace period for Events (due to high concurrency/lag)
-                // Regular Watch Parties keep strict 3s cleanup to avoid ghosts.
-                let gracePeriod: TimeInterval = (viewModel.room.type == .event) ? 10.0 : 3.0
+                // CRITICAL FIX: Extended to 45s for events to cover the full 35s heartbeat cycle.
+                // If the first heartbeat (T=0) fails/misses due to race conditions, we must
+                // survive until the second heartbeat (T=35) to prevent false 'left' messages.
+                let gracePeriod: TimeInterval = (viewModel.room.type == .event) ? 45.0 : 3.0
 
                 if timeSinceJoin < gracePeriod {
                     // KEEP THEM: They joined less than N seconds ago (Grace Period)

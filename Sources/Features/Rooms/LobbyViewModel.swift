@@ -723,25 +723,28 @@ class LobbyViewModel: ObservableObject {
                     return
                 }
                 else {
+                    // CRITICAL FIX: Setup Realtime even if DB join fails (for non-fatal errors)
+                    // Realtime and DB operations should be independent - guests can participate
+                    // via Realtime even if they can't write to the database (e.g., RLS policies)
+                    print("⚠️ Lobby: DB join failed, but setting up Realtime for connectivity...")
+                    await self.setupRealtimeSubscription()
+
+                    await MainActor.run {
+                        self.stateMachine.transition(to: .connected)
+                    }
+
                     if !isHost {
-                        NSLog("   Guest could not join room in database")
-                        addMessage(.systemError, userName: "System", data: [
-                            "message": "Failed to join room. Please check your connection and try again.",
-                            "error": "\(error.localizedDescription)"
+                        NSLog("   Guest could not join room in database, but has Realtime connectivity")
+                        addMessage(.systemInfo, userName: "System", data: [
+                            "message": "Connected via Realtime. Some features may be limited."
                         ])
                     } else {
-                        NSLog("   Will rely on database polling instead")
+                        NSLog("   Host will rely on database polling for synchronization")
                         addMessage(.systemInfo, userName: "System", data: [
                             "message": "Connection setup failed. Using database polling for synchronization.",
                             "error": "\(error.localizedDescription)"
                         ])
                     }
-
-                    await MainActor.run {
-                        // Don't transition to error if it was a dupe key (already handled above), but here we are in 'else'
-                        self.stateMachine.transition(to: .error(error.localizedDescription))
-                    }
-                    realtimeConnectionStatus = .disconnected
                 }
             }
 

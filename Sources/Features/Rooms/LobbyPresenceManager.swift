@@ -600,7 +600,9 @@ class LobbyPresenceManager: ObservableObject {
                  // 2. Secondary Match: Name Fallback (Fix for random-ID local user)
                  if existingLocal == nil {
                       existingLocal = currentParticipants.first(where: {
-                          $0.name.caseInsensitiveCompare(username) == .orderedSame
+                          let cleanName = $0.name.trimmingCharacters(in: .whitespacesAndNewlines)
+                          let cleanTarget = username.trimmingCharacters(in: .whitespacesAndNewlines)
+                          return cleanName.caseInsensitiveCompare(cleanTarget) == .orderedSame
                       })
                  }
 
@@ -677,11 +679,11 @@ class LobbyPresenceManager: ObservableObject {
 
                 let timeSinceJoin = Date().timeIntervalSince(localP.joinedAt)
 
-                // CRITICAL FIX: Extended to 60s for events to cover the full 35s heartbeat cycle.
-                // Log analysis showed eviction at 46s (just missing 45s), so 60s provides safe buffer.
+                // CRITICAL FIX: Extended to 90s for events to cover observed 61.5s polling/latency.
+                // 60s was just barely insufficient. 90s provides a robust buffer for 2h events.
                 // ALSO: Extend grace period during return-to-lobby transition to prevent false "User Left" messages
                 // when guest DB join fails due to RLS or replication lag.
-                let baseGracePeriod: TimeInterval = (viewModel.room.type == .event) ? 60.0 : 3.0
+                let baseGracePeriod: TimeInterval = (viewModel.room.type == .event) ? 90.0 : 3.0
                 let returnToLobbyBonus: TimeInterval = viewModel.shouldDelayConnectAfterLobbyReturn ? 10.0 : 0.0
                 let gracePeriod: TimeInterval = baseGracePeriod + returnToLobbyBonus
 

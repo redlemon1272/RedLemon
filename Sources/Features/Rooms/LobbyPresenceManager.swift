@@ -16,7 +16,7 @@ class LobbyPresenceManager: ObservableObject {
     // When host returns group to lobby, Realtime connections reset. This causes false presence_leave events.
     // We track users who are transitioning to suppress false "user left" messages during this window.
     private var transitioningUsers: Set<String> = []
-    private var transitionExpiryTask: Task<Void, Never>?
+    private var transitionExpiryDate: Date?
 
     init(viewModel: LobbyViewModel) {
         self.viewModel = viewModel
@@ -30,19 +30,23 @@ class LobbyPresenceManager: ObservableObject {
         guard let viewModel = viewModel else { return }
         // Mark all current participants as transitioning
         transitioningUsers = Set(viewModel.participants.map { $0.id.lowercased() })
+        // Set expiry date 60 seconds from now
+        transitionExpiryDate = Date().addingTimeInterval(60)
         NSLog("🔄 Lobby: Marked %d users as transitioning (return-to-lobby)", transitioningUsers.count)
-
-        // Clear the transition state after 60 seconds (safe window for reconnection)
-        transitionExpiryTask?.cancel()
-        transitionExpiryTask = Task { @MainActor [weak self] in
-            try? await Task.sleep(nanoseconds: 60_000_000_000) // 60s
-            self?.transitioningUsers.removeAll()
-            NSLog("✅ Lobby: Transition window expired, cleared %d transitioning users", self?.transitioningUsers.count ?? 0)
-        }
     }
 
     /// Check if a user is currently transitioning (returning to lobby)
+    /// Also clears expired transitions
     private func isUserTransitioning(_ userId: String) -> Bool {
+        // Check if transition window has expired
+        if let expiry = transitionExpiryDate, Date() > expiry {
+            if !transitioningUsers.isEmpty {
+                NSLog("✅ Lobby: Transition window expired, clearing %d transitioning users", transitioningUsers.count)
+                transitioningUsers.removeAll()
+                transitionExpiryDate = nil
+            }
+            return false
+        }
         return transitioningUsers.contains(userId.lowercased())
     }
 

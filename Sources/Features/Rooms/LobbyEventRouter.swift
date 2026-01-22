@@ -140,24 +140,24 @@ class LobbyEventRouter: ObservableObject {
                  NSLog("ℹ️ Guest '%@' re-joined (Already in list at index %d)", guestUsername, index)
                  // Update any stale data if needed
                  viewModel.participants[index].name = guestUsername
-                 return
-             }
+             } else {
+                 NSLog("👋 Host received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
+                 NSLog("   Guest ID: %@, Total participants: %d", guestId, viewModel.participants.count + 1)
 
-             NSLog("👋 Host received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
-             NSLog("   Guest ID: %@, Total participants: %d", guestId, viewModel.participants.count + 1)
+                 let guest = Participant(
+                     id: guestId,
+                     name: guestUsername,
+                     isHost: false,
+                     isReady: false,
+                     joinedAt: Date(),
+                     phxRefs: []
+                 )
+                 viewModel.participants.append(guest)
+             }
 
              // Presence callback handles this already, BUT it may suppress the message if the user is reconnecting (flapping).
              // We explicitly add the message here on LOBBY_JOIN to ensure the intent is logged in chat.
              viewModel.chatManager.addSystemMessage(.userJoined, userName: guestUsername)
-             let guest = Participant(
-                 id: guestId,
-                 name: guestUsername,
-                 isHost: false,
-                 isReady: false,
-                 joinedAt: Date(),
-                 phxRefs: []
-             )
-             viewModel.participants.append(guest)
 
              // Log updated room status
              let readyCount = viewModel.participants.filter { $0.isReady }.count

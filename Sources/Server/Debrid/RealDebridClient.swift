@@ -251,9 +251,9 @@ actor RealDebridClient {
         let actualFileIdx: Int
         // Determine which file to select
         // Fix: logic flow to prioritize provider 'fileIdx' > TV heuristic > Movie heuristic
-        
+
         var selectedFileId: Int?
-        
+
         // Priority 0: Explicit File Index from Provider (e.g. Torrentio)
         if let idx = fileIdx, let files = initialInfo.files {
             if idx >= 0 && idx < files.count {
@@ -290,17 +290,17 @@ actor RealDebridClient {
                 let matchesRequested = patterns.contains { pattern in
                     pathLower.contains(pattern)
                 }
-                
+
                 // Allow "Multi-Episode" matches (heuristic check inside selectEpisodeFile checked this, but double check pattern?)
                 // Actually selectEpisodeFile already does heavy validation.
                 // The check below is a safety guardrail.
                 // BUT: If selectEpisodeFile found it via "Fallback" (largest file), matchesRequested might be false.
                 // We should trust selectEpisodeFile's return if it found something.
-                
+
                 // Only strict check if it wasn't a fallback?
                 // Let's keep existing warning logging but NOT throw?
                 // Previous code threw 'notCached' if mismatched.
-                
+
                  if !matchesRequested {
                      // Check common aliases or multi-ep passed by selectEpisodeFile?
                      // If selectEpisodeFile returned it, it's our best guess.
@@ -503,15 +503,54 @@ actor RealDebridClient {
             let fileId = file.id ?? (index + 1)
             let sizeStr = formatFileSize(file.bytes ?? 0)
 
-            // Check standard patterns
-            let matchesPattern = patterns.contains { pattern in
+            // CRITICAL FIX (Landmine #94): Check patterns in priority order.
+            // Full SxxExx patterns are trusted. Episode-only patterns require
+            // additional season path validation to prevent multi-season pack mismatches.
+
+            // Priority 1: Full SxxExx patterns (most reliable)
+            let fullPatterns = [
+                "s\(seasonStr)e\(episodeStr)",
+                "s\(season)e\(episode)",
+                "s\(seasonStr).e\(episodeStr)",
+                "s\(seasonStr) e\(episodeStr)",
+                "s\(season) e\(episode)",
+                "\(season)x\(episodeStr)" // 9x24 style
+            ]
+
+            let matchesFullPattern = fullPatterns.contains { pattern in
                 pathLower.contains(pattern.lowercased())
+            }
+
+            // Priority 2: Episode-only pattern WITH season path validation (Landmine #94 fix)
+            // Only trust "E01" if the path also contains "/Season 1/" or "/Season1/" or "S01" somewhere
+            var matchesEpisodeOnlyWithSeasonContext = false
+            if pathLower.contains("e\(episodeStr)") && !matchesFullPattern {
+                // Check for season context in path (directory structure or inline season marker)
+                let seasonContextPatterns = [
+                    "/season \(season)/",
+                    "/season\(season)/",
+                    "season \(season)/",
+                    "season\(season)/",
+                    "s\(seasonStr)/",  // e.g. "S01/"
+                    "s\(seasonStr).",  // e.g. "S01."
+                    "s\(seasonStr) ",  // e.g. "S01 "
+                    "/s\(season)/",
+                    " s\(seasonStr)e", // Look for SxxE pattern even if not matching exact episode
+                ]
+                matchesEpisodeOnlyWithSeasonContext = seasonContextPatterns.contains { pattern in
+                    pathLower.contains(pattern.lowercased())
+                }
+
+                if !matchesEpisodeOnlyWithSeasonContext {
+                    // NSLog("⚠️ SKIP (Landmine #94): '%@' matches E%02d but lacks Season %d context", path, episode, season)
+                    // Skip this file - it's likely from a different season
+                }
             }
 
             // Check Multi-Episode Ranges (e.g. "S09E23-E24" or "E23-24")
             let matchesMulti = checkMultiEpisode(path: pathLower, season: season, targetEpisode: episode)
 
-            if matchesPattern || matchesMulti {
+            if matchesFullPattern || matchesEpisodeOnlyWithSeasonContext || matchesMulti {
                 // Additional validation: check if file size is reasonable for a TV episode
                 if isValidEpisodeSize(file.bytes ?? 0, quality: extractQualityFromPath(path)) {
                     NSLog("✅ MATCH FOUND: %@ → file ID: %d (%@)", path, fileId, sizeStr)
@@ -672,11 +711,11 @@ actor RealDebridClient {
     private func purgeTorrents(hash: String, token: String) async throws {
         // 1. Get recent torrents (limit 50 should be enough for recent activity)
         let torrents = try await getTorrents(limit: 50, token: token)
-        
+
         // 2. Filter by hash
         let targetHash = hash.lowercased()
         let matches = torrents.filter { ($0.hash ?? "").lowercased() == targetHash }
-        
+
         // 3. Delete matches
         if !matches.isEmpty {
             print("🗑️ RD: Found \(matches.count) existing torrents for hash \(targetHash.prefix(8)). Deleting...")
@@ -693,15 +732,15 @@ actor RealDebridClient {
         let url = URL(string: "\(baseURL)/torrents?limit=\(limit)")!
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        
+
         let (data, response) = try await URLSession.shared.data(for: request)
-        
+
         guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
             // Non-critical, return empty list if failed
             print("⚠️ RD: Failed to list torrents (HTTP \((response as? HTTPURLResponse)?.statusCode ?? 0))")
             return []
         }
-        
+
         // Response is array of TorrentInfo-like objects (minimal fields)
         return try JSONDecoder().decode([TorrentInfo].self, from: data)
     }
@@ -711,9 +750,9 @@ actor RealDebridClient {
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        
+
         let (_, response) = try await URLSession.shared.data(for: request)
-        
+
         if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
             print("⚠️ RD: Failed to delete torrent \(id) (HTTP \(httpResponse.statusCode))")
         } else {

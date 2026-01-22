@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 21, 2026 (Part 93: VM Recreation Trap - Landmine #93)
+> **Last Updated:** January 21, 2026 (Part 94: Multi-Season Pack Mismatch - Landmine #94)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -90,6 +90,7 @@
 | **Guest Kicked ("Room Closed") - Host OK** | Heartbeat fails due to stale auth.currentUser | #88 |
 | **"User Joined" Missing / Stale Player State** | State Handoff Failure (Source VM didn't sync to AppState) | #92 |
 | **Event Countdown Hidden (Auto-Join Only)** | VM Recreation Trap (New VM blocked from init by shared state) | #93 |
+| **Wrong Episode Plays (Multi-Season Pack)** | Episode-only pattern matches wrong season file | #94 |
 
 ## 🚨 Critical Landmines
 
@@ -382,6 +383,13 @@
     *   **Cause**: `shouldAutoJoinLobby = false` toggle triggers parent View re-render -> `WatchPartyLobbyView.init` called again -> new `LobbyViewModel(VM2)` created. VM2 calls `connect()`, but shared `RealtimeChannelManager` says "Already setup". `connect()` returns early. VM2 never runs `autoStartSystemEvent()` where the timer ticker is started.
     *   **Rule**: ViewModels MUST NOT rely solely on connection flow to initialize critical UI state. Idempotent initialization (in `init`) is essential. Additionally, even when "Already Connected", local state setup (like tickers/timers) MUST still execute.
     *   **Detection**: Log shows "Already setup for room X" or "Already connected - skipping" followed by missing expected periodic logs (e.g., `[COUNTDOWN]`).
+
+94. **Multi-Season Pack Episode Mismatch (The "Wrong Season" Bug)**: *(Added v1.0.129)*
+    *   **Trigger**: User requests S01E01 from a torrent containing Seasons 1-3. S02E01 file appears before S01E01 in the torrent's file index.
+    *   **Symptom**: App plays **S02E01** instead of **S01E01**. Logs show `✅ MATCH FOUND: /Season 2/...S02E01.mkv`.
+    *   **Cause**: `RealDebridClient.selectEpisodeFile()` used an episode-only pattern (`e01`) that matched the first file containing "E01" without verifying the season number.
+    *   **Rule**: Episode-only patterns (`Exx`) MUST NOT be trusted without additional season context validation (directory path like `/Season 1/` or inline `S01`).
+    *   **Code**: `RealDebridClient.swift` - `selectEpisodeFile()` now separates "full patterns" (SxxExx) from "episode-only patterns" and validates season context for the latter.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

@@ -88,6 +88,24 @@ class SupabaseClient: RoomManager, UserManager {
     private static let decodingFormatters: [DateFormatter] = [
         {
             let f = DateFormatter()
+            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSX" // 6 digits + Z or +00:00
+            f.locale = Locale(identifier: "en_US_POSIX")
+            return f
+        }(),
+        {
+            let f = DateFormatter()
+            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX" // 3 digits + Z or +00:00
+            f.locale = Locale(identifier: "en_US_POSIX")
+            return f
+        }(),
+        {
+            let f = DateFormatter()
+            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssX" // 0 digits + Z or +00:00
+            f.locale = Locale(identifier: "en_US_POSIX")
+            return f
+        }(),
+        {
+            let f = DateFormatter()
             f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
             f.locale = Locale(identifier: "en_US_POSIX")
             f.timeZone = TimeZone(secondsFromGMT: 0)
@@ -98,18 +116,6 @@ class SupabaseClient: RoomManager, UserManager {
             f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
             f.locale = Locale(identifier: "en_US_POSIX")
             f.timeZone = TimeZone(secondsFromGMT: 0)
-            return f
-        }(),
-        {
-            let f = DateFormatter()
-            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-            f.locale = Locale(identifier: "en_US_POSIX")
-            return f
-        }(),
-        {
-            let f = DateFormatter()
-            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-            f.locale = Locale(identifier: "en_US_POSIX")
             return f
         }()
     ]

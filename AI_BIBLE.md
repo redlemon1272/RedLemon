@@ -97,6 +97,7 @@
 | **Stale User Last Seen** | "12 days ago" for active user | #98 |
 | **Void RPC Build Failure** | type 'Void' cannot conform to 'Decodable' | #99 |
 | **Guest shows "not connected"** | Realtime setup skipped after DB join fails (RLS, permissions) | #101 |
+| **"403 Forbidden" / RLS Error** | Missing cryptographic signature on DB write | #103 |
 
 ## 🚨 Critical Landmines
 
@@ -1484,4 +1485,27 @@ deinit {
         }
     }
 }
+
+---
+
+## Part 23: Security & RLS Protocol
+
+### 1. The "Anonymous Writer" Trap (Landmine #103)
+**Symptom**: Guests (and sometimes hosts) report being "connected" to chat but invisible to the room, or they see "403 Forbidden" or "RLS violation" in the console when joining/syncing.
+
+**Root Cause**: Postgres Row Level Security (RLS) policies on tables like `room_participants` and `rooms` require cryptographic proof of identity. If `SupabaseClient` makes a standard `POST`, `PATCH`, or `DELETE` request WITHOUT a signature, the database rejects the row insertion/update even if the JWT is valid.
+
+**Mandatory Solution**:
+1. **Always Sign Writes**: Every database mutation (`POST`, `PATCH`, `DELETE`) in `SupabaseClient.swift` MUST include `sign: true` in the `makeRequest` call.
+2. **Identity Header**: This ensures the `x-identity-signature` and `x-identity-id` headers are injected, proving to the database that the sender owns the UUID they are claiming to be.
+3. **Graceful Fallback**: The `makeRequest` signature logic MUST handle cases where `auth.currentUser` is temporarily nil by reconstructing from the Keychain (Landmine #88).
+
+```swift
+// ✅ CORRECT: Signed mutation for RLS compliance
+_ = try await makeRequest(
+    path: "/room_participants",
+    method: "POST",
+    body: body,
+    sign: true // 🔐 SECURE: Identity verification
+)
 ```

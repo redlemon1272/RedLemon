@@ -375,15 +375,12 @@ class SupabaseClient: RoomManager, UserManager {
 
     /// Remote Procedure Call (RPC)
     func rpc<T: Decodable>(fn: String, params: [String: Any]? = nil) async throws -> T {
-        // CRITICAL SECURITY: Auto-sign sensitive RPCs defined in AI Bible
-        let sensitiveRPCs = ["room_heartbeat", "user_heartbeat", "cleanup_stale_participants", "get_admin_logs"]
-        let shouldSign = sensitiveRPCs.contains(fn)
 
         let data = try await makeRequest(
             path: "/rpc/\(fn)",
             method: "POST",
             body: params,
-            sign: shouldSign
+            sign: true // 🔐 SECURE: Always sign RPC calls for identity proof
         )
         return try jsonDecoder.decode(T.self, from: data)
     }
@@ -407,7 +404,8 @@ class SupabaseClient: RoomManager, UserManager {
     func getServerTime() async throws -> Date {
         let data = try await makeRequest(
             path: "/rpc/get_server_time",
-            method: "POST"
+            method: "POST",
+            sign: true // 🔐 SECURE: Proven request context
         )
 
         // RPC returns a string like "2023-10-27T10:00:00.123456+00:00"
@@ -482,7 +480,8 @@ class SupabaseClient: RoomManager, UserManager {
         let data = try await makeRequest(
             path: "/rpc/register_user_secure",
             method: "POST",
-            body: params
+            body: params,
+            sign: true // 🔐 SECURE: Proof of key ownership
         )
 
         struct MinimalResponse: Decodable {
@@ -541,7 +540,8 @@ class SupabaseClient: RoomManager, UserManager {
         let data = try await makeRequest(
             path: "/rpc/login_by_username",
             method: "POST",
-            body: ["p_username": username]
+            body: ["p_username": username],
+            sign: true // 🔐 SECURE: Identity proof
         )
 
         let users = try jsonDecoder.decode([SupabaseUser].self, from: data)
@@ -645,55 +645,25 @@ class SupabaseClient: RoomManager, UserManager {
 
     /// Grant Premium Status (Admin Only)
     func grantPremium(callerUserId: UUID, username: String, days: Int) async throws -> String {
-        struct GrantParams: Encodable {
-            let caller_user_id: String  // UUID as string for JSON
-            let target_username: String
-            let days_to_add: Int
-        }
+        let params: [String: Any] = [
+            "caller_user_id": callerUserId.uuidString.lowercased(),
+            "target_username": username,
+            "days_to_add": days
+        ]
+
+        let data = try await makeRequest(
+            path: "/rpc/admin_grant_premium",
+            method: "POST",
+            body: params,
+            sign: true
+        )
 
         struct GrantResponse: Decodable {
             let success: Bool
             let message: String
         }
 
-        let params = GrantParams(
-            caller_user_id: callerUserId.uuidString,
-            target_username: username,
-            days_to_add: days
-        )
-
-        // Call the PostgreSQL function via RPC endpoint
-        guard let url = URL(string: "\(baseURL)/rest/v1/rpc/admin_grant_premium") else {
-            throw SupabaseError.invalidURL
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(apiKey, forHTTPHeaderField: "apikey")
-        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        request.httpBody = try encoder.encode(params)
-
-        let (data, httpResponse) = try await session.data(for: request)
-
-        guard let response = httpResponse as? HTTPURLResponse else {
-            throw SupabaseError.invalidResponse
-        }
-
-        if response.statusCode >= 400 {
-            if let errorMessage = String(data: data, encoding: .utf8) {
-                throw SupabaseError.httpError(response.statusCode, errorMessage)
-            } else {
-                throw SupabaseError.httpError(response.statusCode, "Unknown error")
-            }
-        }
-
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let result = try decoder.decode(GrantResponse.self, from: data)
+        let result = try jsonDecoder.decode(GrantResponse.self, from: data)
 
         if result.success {
             return result.message
@@ -704,52 +674,24 @@ class SupabaseClient: RoomManager, UserManager {
 
     /// Revoke Premium Status (Admin Only)
     func revokePremium(callerUserId: UUID, username: String) async throws -> String {
-        struct RevokeParams: Encodable {
-            let caller_user_id: String
-            let target_username: String
-        }
+        let params: [String: Any] = [
+            "caller_user_id": callerUserId.uuidString.lowercased(),
+            "target_username": username
+        ]
+
+        let data = try await makeRequest(
+            path: "/rpc/admin_revoke_premium",
+            method: "POST",
+            body: params,
+            sign: true
+        )
 
         struct RevokeResponse: Decodable {
             let success: Bool
             let message: String
         }
 
-        let params = RevokeParams(
-            caller_user_id: callerUserId.uuidString,
-            target_username: username
-        )
-
-        guard let url = URL(string: "\(baseURL)/rest/v1/rpc/admin_revoke_premium") else {
-            throw SupabaseError.invalidURL
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(apiKey, forHTTPHeaderField: "apikey")
-        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        request.httpBody = try encoder.encode(params)
-
-        let (data, httpResponse) = try await session.data(for: request)
-
-        guard let response = httpResponse as? HTTPURLResponse else {
-            throw SupabaseError.invalidResponse
-        }
-
-        if response.statusCode >= 400 {
-            if let errorMessage = String(data: data, encoding: .utf8) {
-                throw SupabaseError.httpError(response.statusCode, errorMessage)
-            } else {
-                throw SupabaseError.httpError(response.statusCode, "Unknown error")
-            }
-        }
-
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let result = try decoder.decode(RevokeResponse.self, from: data)
+        let result = try jsonDecoder.decode(RevokeResponse.self, from: data)
 
         if result.success {
             return result.message
@@ -1295,7 +1237,8 @@ class SupabaseClient: RoomManager, UserManager {
                 "is_public": isPublic,
                 "last_activity": ISO8601DateFormatter().string(from: Date())
             ],
-            query: ["id": "eq.\(roomId)"]
+            query: ["id": "eq.\(roomId)"],
+            sign: true // 🔐 SECURE: Identity proof required
         )
     }
 
@@ -1390,7 +1333,8 @@ class SupabaseClient: RoomManager, UserManager {
             _ = try await makeRequest(
                 path: "/app_logs",
                 method: "POST",
-                body: body
+                body: body,
+                sign: true // 🔐 SECURE: Authenticate log source
             )
         } catch {
             NSLog("❌ Failed to upload log: %@", String(describing: error))
@@ -1462,7 +1406,8 @@ class SupabaseClient: RoomManager, UserManager {
     func getAppVersionStats() async throws -> [AppVersionStat] {
         let data = try await makeRequest(
             path: "/rpc/get_app_version_stats",
-            method: "POST"
+            method: "POST",
+            sign: true // 🔐 Admin access
         )
         return try jsonDecoder.decode([AppVersionStat].self, from: data)
     }
@@ -1470,7 +1415,8 @@ class SupabaseClient: RoomManager, UserManager {
     func getContentPopularity() async throws -> [ContentPopularityStat] {
         let data = try await makeRequest(
             path: "/rpc/get_content_popularity",
-            method: "POST"
+            method: "POST",
+            sign: true // 🔐 Admin access
         )
         return try jsonDecoder.decode([ContentPopularityStat].self, from: data)
     }
@@ -1629,7 +1575,8 @@ struct ReportedStream: Identifiable, Codable {
                 body: ["movie_title": title],
                 query: [
                     "id": "eq.\(id.uuidString)"
-                ]
+                ],
+                sign: true // 🔐 SECURE: Admin mutation
             )
             LoggingManager.shared.info(.general, message: "Title updated for report \(id.uuidString)")
         } catch {
@@ -1789,7 +1736,8 @@ struct ReportedStream: Identifiable, Codable {
                 body: ["movie_title": title],
                 query: [
                     "imdb_id": "eq.\(imdbId)"
-                ]
+                ],
+                sign: true // 🔐 SECURE: Admin mutation
             )
             LoggingManager.shared.info(.general, message: "Title updated for \(imdbId)")
         } catch {
@@ -1848,7 +1796,8 @@ struct ReportedStream: Identifiable, Codable {
                 path: "/verified_streams",
                 method: "POST", // POST with Prefer: resolution=merge-duplicates is UPSERT
                 body: body,
-                headers: ["Prefer": "resolution=merge-duplicates"]
+                headers: ["Prefer": "resolution=merge-duplicates"],
+                sign: true // 🔐 SECURE: Identity proof for voting
             )
             LoggingManager.shared.info(.network, message: "Verified Stream: Voted for \(imdbId) S\(season)E\(episode) (\(quality)) [Hash: \(streamHash.prefix(8))...]")
 
@@ -1927,7 +1876,8 @@ struct ReportedStream: Identifiable, Codable {
         let data = try await makeRequest(
             path: "/rpc/get_user_payment_history",
             method: "POST",
-            body: params
+            body: params,
+            sign: true // 🔐 SECURE: Identity proof for history
         )
         return try jsonDecoder.decode([PaymentTransaction].self, from: data)
     }
@@ -1966,7 +1916,8 @@ struct ReportedStream: Identifiable, Codable {
         let data = try await makeRequest(
             path: "/rpc/get_all_payment_transactions",
             method: "POST",
-            body: params
+            body: params,
+            sign: true // 🔐 Admin access
         )
         let rpcTransactions = try jsonDecoder.decode([RPCTransaction].self, from: data)
 
@@ -1994,7 +1945,8 @@ struct ReportedStream: Identifiable, Codable {
         // Use manual RPC call via PostgREST
         let data = try await makeRequest(
             path: "/rpc/get_payment_stats",
-            method: "POST"
+            method: "POST",
+            sign: true // 🔐 Admin access
         )
 
         let statsArray = try jsonDecoder.decode([PaymentStats].self, from: data)
@@ -2027,7 +1979,8 @@ struct ReportedStream: Identifiable, Codable {
             _ = try await makeRequest(
                 path: "/feedback_reports",
                 method: "POST",
-                body: body
+                body: body,
+                sign: true // 🔐 SECURE: Identity required for feedback
             )
 
             // Broadcast alert for real-time admin notification
@@ -2064,7 +2017,8 @@ struct ReportedStream: Identifiable, Codable {
         _ = try await makeRequest(
             path: "/session_logs",
             method: "POST",
-            body: body
+            body: body,
+            sign: true // 🔐 SECURE: Identity required for logs
         )
         LoggingManager.shared.info(.network, message: "Session Log uploaded successfully: \(log.sessionId)")
     }
@@ -2088,7 +2042,8 @@ struct ReportedStream: Identifiable, Codable {
             _ = try await makeRequest(
                 path: "/feedback_reports",
                 method: "DELETE",
-                query: ["id": "eq.\(id.uuidString)"]
+                query: ["id": "eq.\(id.uuidString)"],
+                sign: true // 🔐 SECURE: Admin mutation
             )
             LoggingManager.shared.info(.social, message: "Deleted feedback: \(id)")
         } catch {
@@ -2116,7 +2071,8 @@ struct ReportedStream: Identifiable, Codable {
          _ = try await makeRequest(
             path: "/system_job_logs",
             method: "DELETE",
-            query: ["id": "neq.00000000-0000-0000-0000-000000000000"]
+            query: ["id": "neq.00000000-0000-0000-0000-000000000000"],
+            sign: true // 🔐 SECURE: Admin mutation
         )
         LoggingManager.shared.info(.network, message: "Deleted all system logs.")
     }
@@ -2127,7 +2083,8 @@ struct ReportedStream: Identifiable, Codable {
             _ = try await makeRequest(
                 path: "/session_logs",
                 method: "DELETE",
-                query: ["id": "eq.\(id.uuidString)"]
+                query: ["id": "eq.\(id.uuidString)"],
+                sign: true // 🔐 SECURE: Admin mutation
             )
             LoggingManager.shared.info(.network, message: "Deleted session log: \(id)")
         } catch {
@@ -2141,7 +2098,8 @@ struct ReportedStream: Identifiable, Codable {
         _ = try await makeRequest(
             path: "/session_logs",
             method: "DELETE",
-            query: ["id": "neq.00000000-0000-0000-0000-000000000000"]
+            query: ["id": "neq.00000000-0000-0000-0000-000000000000"],
+            sign: true // 🔐 SECURE: Admin mutation
         )
         LoggingManager.shared.info(.network, message: "Deleted all session logs.")
     }
@@ -2217,7 +2175,8 @@ struct ReportedStream: Identifiable, Codable {
             method: "POST",
             body: payload,
             query: ["on_conflict": "user_id,media_id,season,episode"],
-            headers: ["Prefer": "resolution=merge-duplicates, return=representation"]
+            headers: ["Prefer": "resolution=merge-duplicates, return=representation"],
+            sign: true // 🔐 SECURE: Proven history ownership
         )
     }
 
@@ -2697,7 +2656,7 @@ extension SupabaseClient {
     func declineFriendRequest(requestId: UUID) async throws {
         // Delete the row
         let path = "/friendships?id=eq.\(requestId)"
-        _ = try await makeRequest(path: path, method: "DELETE")
+        _ = try await makeRequest(path: path, method: "DELETE", sign: true)
     }
 
     func deleteFriend(userId: UUID, friendId: UUID) async throws {
@@ -2706,7 +2665,8 @@ extension SupabaseClient {
             method: "DELETE",
             query: [
                 "or": "(and(user_id_1.eq.\(userId.uuidString),user_id_2.eq.\(friendId.uuidString)),and(user_id_1.eq.\(friendId.uuidString),user_id_2.eq.\(userId.uuidString)))"
-            ]
+            ],
+            sign: true // 🔐 SECURE: Only participants can delete
         )
     }
 
@@ -2819,13 +2779,13 @@ extension SupabaseClient {
             "status": "pending"
         ]
 
-        _ = try await makeRequest(path: path, method: "POST", body: body)
+        _ = try await makeRequest(path: path, method: "POST", body: body, sign: true)
     }
 
     func updateFriendshipStatus(id: UUID, status: FriendshipStatus) async throws {
         let path = "/friendships?id=eq.\(id)"
         let body = ["status": status.rawValue]
-        _ = try await makeRequest(path: path, method: "PATCH", body: body)
+        _ = try await makeRequest(path: path, method: "PATCH", body: body, sign: true)
 
 
     }
@@ -2843,7 +2803,8 @@ extension SupabaseClient {
                 "user_id_1": userId1.uuidString,
                 "user_id_2": userId2.uuidString,
                 "status": "accepted"
-            ]
+            ],
+            sign: true
         )
 
         _ = try await makeRequest(
@@ -2853,7 +2814,8 @@ extension SupabaseClient {
                 "user_id_1": userId2.uuidString,
                 "user_id_2": userId1.uuidString,
                 "status": "accepted"
-            ]
+            ],
+            sign: true
         )
     }
 
@@ -2872,7 +2834,7 @@ extension SupabaseClient {
             "content": content
         ]
 
-        _ = try await makeRequest(path: path, method: "POST", body: body)
+        _ = try await makeRequest(path: path, method: "POST", body: body, sign: true)
     }
 
     /// Delete all direct messages between two users
@@ -2885,7 +2847,8 @@ extension SupabaseClient {
             method: "DELETE",
             query: [
                 "or": "(and(sender_id.eq.\(userId.uuidString),receiver_id.eq.\(friendId.uuidString)),and(sender_id.eq.\(friendId.uuidString),receiver_id.eq.\(userId.uuidString)))"
-            ]
+            ],
+            sign: true // 🔐 SECURE: Only sender/receiver can delete
         )
     }
 }
@@ -3034,7 +2997,8 @@ class QueryBuilder {
                 path: "/\(table)",
                 method: "PATCH",
                 body: updateData,
-                query: query
+                query: query,
+                sign: true // 🔐 SECURE: Mutations via QueryBuilder must be signed
             )
             return QueryResult(data: data)
         } else {

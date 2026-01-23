@@ -906,6 +906,48 @@ if [[ -f "$LOBBY_VM" ]]; then
     fi
 fi
 
+# =============================================================================
+# CHECK 42: Signed Database Writes (Landmine #103)
+# =============================================================================
+# Trigger: Write operations (POST, PATCH, DELETE) without sign: true.
+# Rule: RLS policies require cryptographic identity proof for all mutations.
+print_header "Check 42: Signed Database Writes (Landmine #103)"
+
+SUPABASE_CLIENT="$SOURCES_DIR/Networking/SupabaseClient.swift"
+if [[ -f "$SUPABASE_CLIENT" ]]; then
+    # We use a Perl script to find multi-line makeRequest blocks that lack 'sign: true'
+    # but specify a write method.
+    UNSIGNED_WRITES=$(perl -0777 -ne '
+        while (/makeRequest\s*\(/g) {
+            $start = $-[0];
+            $line = (substr($_, 0, $start) =~ tr/\n//) + 1;
+            $pos = pos($_);
+            $depth = 1;
+            while ($depth > 0 && $pos < length($_)) {
+                $char = substr($_, $pos, 1);
+                if ($char eq "(") { $depth++; }
+                elsif ($char eq ")") { $depth--; }
+                $pos++;
+            }
+            $block = substr($_, $start, $pos - $start);
+            if ($block =~ /method\s*:\s*"(POST|PATCH|DELETE)"/ && $block !~ /sign\s*:\s*true/ && $block !~ /isFunction\s*:\s*true/) {
+                $path = ($block =~ /path:\s*"([^"]+)"/) ? $1 : "Unknown Path";
+                $snippet = (split(/\n/, $block))[0]; # First line for snippet
+                print "$line:$path:$snippet\n";
+            }
+            pos($_) = $pos;
+        }
+    ' "$SUPABASE_CLIENT" || true)
+
+    if [[ -n "$UNSIGNED_WRITES" ]]; then
+        while IFS=: read -r line path code; do
+            report "ERROR" "Landmine #103" "Anonymous Write Risk: mutations MUST include 'sign: true' for RLS. Missing for $path." "$SUPABASE_CLIENT" "$line" "$code"
+        done <<< "$UNSIGNED_WRITES"
+    else
+        echo -e "${GREEN}✅ SupabaseClient write operations are signed.${NC}"
+    fi
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

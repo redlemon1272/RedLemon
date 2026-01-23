@@ -346,9 +346,9 @@ struct SettingsView: View {
 
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Image(systemName: "bitcoinsign.circle.fill")
-                        .font(.title2)
-                        .foregroundColor(.orange)
+                    EthereumLogo()
+                        .fill(Color.blue)
+                        .frame(width: 24, height: 38)
                     Text("Host License")
                         .font(.title3.weight(.semibold))
 
@@ -573,7 +573,7 @@ struct SettingsView: View {
                     // Chain badge
                     Text(tx.chain.uppercased())
                         .font(.caption2.weight(.bold))
-                        
+
                         .foregroundColor(.white)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
@@ -583,7 +583,7 @@ struct SettingsView: View {
                     // Status Badge
                     Text("COMPLETED")
                         .font(.caption2.weight(.bold))
-                        
+
                         .foregroundColor(.green)
                         .padding(.horizontal, 4)
                         .padding(.vertical, 2)
@@ -596,7 +596,7 @@ struct SettingsView: View {
                     if let days = tx.durationDays {
                         Text("\(days) DAYS")
                             .font(.caption2.weight(.bold))
-                            
+
                             .foregroundColor(.cyan)
                             .padding(.horizontal, 4)
                             .padding(.vertical, 2)
@@ -1033,7 +1033,7 @@ struct SettingsView: View {
     private func uploadSessionLog() async {
         isLoading = true
         let log = await SessionRecorder.shared.getSanitizedLog()
-        
+
         do {
             try await SupabaseClient.shared.uploadSessionLog(log: log)
 
@@ -1445,5 +1445,31 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(updateManager: UpdateManager.shared)
             .frame(width: 800, height: 600)
+    }
+}
+
+/// Official Ethereum Geometry Shape
+struct EthereumLogo: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let width = rect.width
+        let height = rect.height
+
+        // Standard ETH logo silhouette
+        // Top Pyramid
+        path.move(to: CGPoint(x: width * 0.5, y: 0))
+        path.addLine(to: CGPoint(x: width, y: height * 0.61)) // Right
+        path.addLine(to: CGPoint(x: width * 0.5, y: height * 0.72)) // Center Bottom of Top
+        path.addLine(to: CGPoint(x: 0, y: height * 0.61)) // Left
+        path.closeSubpath()
+
+        // Bottom Pyramid
+        path.move(to: CGPoint(x: width * 0.5, y: height * 0.8)) // Start gap down
+        path.addLine(to: CGPoint(x: width, y: height * 0.61)) // Connect to Right Wing
+        path.addLine(to: CGPoint(x: width * 0.5, y: height)) // Bottom Tip
+        path.addLine(to: CGPoint(x: 0, y: height * 0.61)) // Connect to Left Wing
+        path.closeSubpath()
+
+        return path
     }
 }

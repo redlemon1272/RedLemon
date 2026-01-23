@@ -1,0 +1,251 @@
+2026-01-23 17:59:19.912 RedLemon[68064:312715] 🪟 Set initial window to expanded size: (0.0, 138.0, 1366.0, 605.0)
+2026-01-23 17:59:19.912 RedLemon[68064:312715] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-23 17:59:20.049 RedLemon[68064:312715] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-23 17:59:20.053 RedLemon[68064:312715] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-23 17:59:20.090 RedLemon[68064:312715] ✅ Playback state reset complete - starting in browse view
+2026-01-23 17:59:20.090 RedLemon[68064:312715] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-23 17:59:20.090 RedLemon[68064:312715] 🧪 Testing Profile: debug
+2026-01-23 17:59:20.118 RedLemon[68064:312769] 📂 Loaded 4 credential(s) from cache
+2026-01-23 17:59:20.129 RedLemon[68064:312715] ✅ Keychain: Found stored username: hihihihi
+2026-01-23 17:59:20.130 RedLemon[68064:312715] 🔍 Supabase: Looking up user 'hihihihi' in database...
+2026-01-23 17:59:20.130 RedLemon[68064:312769] 🔍 SupabaseClient: Looking up user by username 'hihihihi'
+2026-01-23 17:59:21.404 RedLemon[68064:312769] 📡 SupabaseClient: User lookup response received (373 bytes)
+2026-01-23 17:59:21.426 RedLemon[68064:312769] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-23 17:59:21.427 RedLemon[68064:312769] 👤 SupabaseClient: Found user - hihihihi (ID: 5F763752-D145-46C6-80DD-EB9C3134CF1E)
+2026-01-23 17:59:21.557 RedLemon[68064:312715] ✅ AUTH SUCCESS: User authenticated - hihihihi (ID: 5F763752-D145-46C6-80DD-EB9C3134CF1E)
+2026-01-23 17:59:21.557 RedLemon[68064:312715] 🎯 AppState: currentUsername=hihihihi, currentUserId=5F763752-D145-46C6-80DD-EB9C3134CF1E
+2026-01-23 17:59:24.010 RedLemon[68064:312769] 🔐 Signed request to /rpc/get_free_tier_status
+2026-01-23 17:59:24.678 RedLemon[68064:312715] 🏁 AUTH COMPLETE: Final state - username=hihihihi, userId=5F763752-D145-46C6-80DD-EB9C3134CF1E
+2026-01-23 17:59:24.684 RedLemon[68064:312715] 🚀 RedLemon: Starting HTTP server...
+2026-01-23 17:59:24.684 RedLemon[68064:312715] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-23 17:59:24.715 RedLemon[68064:312715] ✅ RedLemon: HTTPServer instance created
+2026-01-23 17:59:24.716 RedLemon[68064:312764] 📡 RedLemon: Server starting on port 47253...
+2026-01-23 17:59:24.716 RedLemon[68064:312715] ✅ RedLemon: Server marked as ready (Optimistic)
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+✅ Connected to Supabase Realtime
+📅 EventsView appeared
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+📦 Current build: 135, Latest build: 135
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ App is up to date (current: 135, latest: 135)
+📡 Joined channel: realtime:events_config_updates (interest count: 1)
+✅ [EventsConfig] Subscribed to realtime schedule updates
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsView] Loaded 399 movies from config version 1585
+🗓 AppState: Updated schedule epoch to 2026-01-23 22:49:34 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7873 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt4627382/img (607400 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0415306/img (451442 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt3501632/img (956349 bytes)
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7871 seconds
+📡 Joined channel: realtime:global-presence (interest count: 1)
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7870 seconds
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to social realtime channels...
+📈 SocialService: User 5f763752-d145-46c6-80dd-eb9c3134cf1e came online
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+🚫 License revoked or inactive.
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📡 Joined channel: realtime:direct_messages (interest count: 1)
+📡 Joined channel: realtime:friendships (interest count: 1)
+✅ SocialService: Connected to social channels
+📬 SocialService: Fetched 0 unread messages
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-23 17:59:24.894 RedLemon[68064:312715] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-23 17:59:24.894 RedLemon[68064:312715] 🏥 [AppState] Starting global provider health check...
+2026-01-23 17:59:24.895 RedLemon[68064:312715] 🔍 Performing startup checks...
+2026-01-23 17:59:24.895 RedLemon[68064:312715] ✅ Username-based authentication ready
+2026-01-23 17:59:24.896 RedLemon[68064:312768] 🔐 Signed request to /check-payment
+2026-01-23 17:59:25.518 RedLemon[68064:312769] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-23 17:59:25.518 RedLemon[68064:312769] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-23 17:59:25.548 RedLemon[68064:312715] 🔄 Checking for app updates...
+2026-01-23 17:59:25.549 RedLemon[68064:312761] 🔐 Signed request to /rpc/get_server_time
+2026-01-23 17:59:26.749 RedLemon[68064:312715] ✅ [AppState] Provider health check complete (found 7 services)
+2026-01-23 17:59:29.370 RedLemon[68064:312884] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-23 17:59:32.238 RedLemon[68064:312768] 🔄 UserResetManager: Starting complete user data reset
+2026-01-23 17:59:32.239 RedLemon[68064:312768] 🗑️ UserResetManager: Clearing local user data
+2026-01-23 17:59:32.239 RedLemon[68064:312768]    - Removed username from UserDefaults
+2026-01-23 17:59:32.239 RedLemon[68064:312768]    - Removed watch history from UserDefaults
+2026-01-23 17:59:32.241 RedLemon[68064:312768]    - Removed persistent domain for com.redlemon.app
+2026-01-23 17:59:32.241 RedLemon[68064:312768]    - Cleared all user-related UserDefaults
+2026-01-23 17:59:32.241 RedLemon[68064:312768] 🗑️ KeychainManager: Deleting username from UserDefaults
+2026-01-23 17:59:32.243 RedLemon[68064:312768] ✅ KeychainManager: Username deleted successfully
+2026-01-23 17:59:32.243 RedLemon[68064:312768]    - Removed username from KeychainManager
+2026-01-23 17:59:32.309 RedLemon[68064:312768]    - Removed keychain service: public_key
+2026-01-23 17:59:32.352 RedLemon[68064:312768]    - Removed keychain service: realdebrid
+2026-01-23 17:59:32.391 RedLemon[68064:312768]    - Removed keychain service: user_id
+2026-01-23 17:59:32.431 RedLemon[68064:312768]    - Removed keychain service: private_key
+2026-01-23 17:59:32.431 RedLemon[68064:312768] ✅ UserResetManager: Local user data cleared
+2026-01-23 17:59:32.431 RedLemon[68064:312768] ✅ UserResetManager: User data reset completed
+2026-01-23 17:59:32.567 RedLemon[68064:312768] 🔄 UserResetManager: Forcing username setup on next launch
+2026-01-23 17:59:32.567 RedLemon[68064:312768] ✅ UserResetManager: Username setup will be forced on next launch
+2026-01-23 17:59:50.629 RedLemon[68064:312981] 💾 KeychainManager: Saving username 'ursinho' to UserDefaults
+2026-01-23 17:59:50.645 RedLemon[68064:312981] ✅ KeychainManager: Username saved successfully
+2026-01-23 17:59:50.775 RedLemon[68064:312981] 🔐 KeychainManager: Key pair saved securely
+2026-01-23 17:59:50.918 RedLemon[68064:312981] ✅ AccountImport: Set auth.currentUser for 'ursinho'
+2026-01-23 17:59:53.526 RedLemon[68064:312980] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:53.831 RedLemon[68064:312981] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:54.129 RedLemon[68064:312920] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:54.426 RedLemon[68064:312981] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:54.720 RedLemon[68064:312981] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:55.012 RedLemon[68064:312981] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:55.306 RedLemon[68064:313169] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:55.598 RedLemon[68064:313169] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:55.892 RedLemon[68064:312981] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:56.182 RedLemon[68064:312981] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:56.475 RedLemon[68064:312920] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:56.767 RedLemon[68064:312920] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:57.066 RedLemon[68064:312981] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:57.366 RedLemon[68064:312920] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:57.660 RedLemon[68064:313158] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:57.953 RedLemon[68064:312920] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:58.239 RedLemon[68064:313158] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-23 17:59:58.252 RedLemon[68064:312920] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:58.535 RedLemon[68064:312981] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:59.212 RedLemon[68064:312981] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:59.512 RedLemon[68064:313169] 🔐 Signed request to /user_watch_history
+2026-01-23 17:59:59.766 RedLemon[68064:312980] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:00.461 RedLemon[68064:313169] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:00.767 RedLemon[68064:313169] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:01.068 RedLemon[68064:313169] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:01.372 RedLemon[68064:312981] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:01.669 RedLemon[68064:312981] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:02.638 RedLemon[68064:312920] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:02.884 RedLemon[68064:313169] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:03.201 RedLemon[68064:313124] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:03.516 RedLemon[68064:312980] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:04.274 RedLemon[68064:313124] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:04.573 RedLemon[68064:312920] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:04.871 RedLemon[68064:313124] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:05.169 RedLemon[68064:312920] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:05.466 RedLemon[68064:313169] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:05.988 RedLemon[68064:312920] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:06.284 RedLemon[68064:313169] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:06.581 RedLemon[68064:312920] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:07.718 RedLemon[68064:312980] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:08.021 RedLemon[68064:313169] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:08.317 RedLemon[68064:313124] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:09.323 RedLemon[68064:313124] 🔐 Signed request to /user_watch_history
+2026-01-23 18:00:20.693 RedLemon[68064:312715] 🔔 [AppState] Schedule update received. Showing notification immediately.
+2026-01-23 18:00:25.769 RedLemon[68064:313158] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-23 18:00:51.945 RedLemon[68064:313472] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-23 18:00:59.975 RedLemon[68064:312715] 🔄 [AppState] Triggering mandatory app relaunch...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+👤 LicenseManager: Profile expiry: nil
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+🚫 License revoked or inactive.
+📦 Current build: 135, Latest build: 135
+✅ App is up to date (current: 135, latest: 135)
+✅ TimeService: Synced! Offset: 0.139s (RTT: 125ms)
+   Local:  2026-01-23 22:59:25 +0000
+   Server: 2026-01-23 22:59:25 +0000
+🗑️ Broadly deleted public_key from Keychain
+🗑️ Removed public_key from cache and keychain
+🗑️ Broadly deleted realdebrid from Keychain
+🗑️ Removed realdebrid from cache and keychain
+🗑️ Broadly deleted user_id from Keychain
+🗑️ Removed user_id from cache and keychain
+🗑️ Broadly deleted private_key from Keychain
+🗑️ Removed private_key from cache and keychain
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7861 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7852 seconds
+🗑️ Broadly deleted user_id from Keychain
+🔐 Saved user_id credential to local Keychain
+✅ Saved user_id credential to cache
+🗑️ Broadly deleted private_key from Keychain
+🔐 Saved private_key credential to local Keychain
+✅ Saved private_key credential to cache
+🗑️ Broadly deleted public_key from Keychain
+🔐 Saved public_key credential to local Keychain
+✅ Saved public_key credential to cache
+🗑️ Broadly deleted realdebrid from Keychain
+🔐 Saved realdebrid credential to local Keychain
+✅ Saved realdebrid credential to cache
+🗑️ Broadly deleted subdl from Keychain
+🔐 Saved subdl credential to local Keychain
+✅ Saved subdl credential to cache
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence (interest count: 1)
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7841 seconds
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to social realtime channels...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages (interest count: 1)
+📡 Joined channel: realtime:friendships (interest count: 1)
+✅ SocialService: Connected to social channels
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 42 items to cloud...
+🔄 SocialService: Syncing 42 items to cloud (serial)...
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7831 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7822 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+🆕 [EventsConfig] Server has newer version 1585 (cached: 0)
+💾 [EventsConfig] Cached new version 1585
+🔔 [EventsConfig] Polling found new version 1585 (current: 0)
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7811 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7802 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7792 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-24 01:10:34 +0000
+⏰ AppState: Scheduling update in 7781 seconds

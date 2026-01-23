@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.131 -->
+        <item>
+            <title>Version 1.0.131</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Improved Browse Layout (2-line titles + Year)</li><li>New Vector Ethereum Icon in Settings</li><li>UI Polish & Spacing Fixes</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 01:36:30 -0500</pubDate>
+            <sparkle:version>131</sparkle:version>
+            <sparkle:shortVersionString>1.0.131</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.131.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="9Pd9TSnGX9e3gQ95ysy0d2U5CRYWLyV5jIiALKEFn2UAYpJn9AKl9MABHoPR2x+fIHRvMp5i2f0JlW2Lb2UvCg==" length="73385365"
+            />
+        </item>
         <!-- v1.0.130 -->
         <item>
             <title>Version 1.0.130</title>

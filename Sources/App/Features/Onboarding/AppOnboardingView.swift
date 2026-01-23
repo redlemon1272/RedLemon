@@ -635,8 +635,15 @@ struct AppOnboardingView: View {
         // Mark onboarding as complete in UserDefaults
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding_v1")
         
-        withAnimation {
-            isPresented = false
+        // Conditional Relaunch: If any API keys were entered during onboarding, force a relaunch
+        // to ensure the Vapor server and all resolvers pick up the new credentials immediately.
+        if !realDebridKey.isEmpty || !subdlKey.isEmpty {
+            NSLog("🔄 [Onboarding] Keys were entered. Induced mandatory relaunch.")
+            appState.relaunchApp()
+        } else {
+            withAnimation {
+                isPresented = false
+            }
         }
     }
 }

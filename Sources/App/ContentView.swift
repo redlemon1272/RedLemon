@@ -311,7 +311,7 @@ struct ContentView: View {
                 }
 
                 Button(action: {
-                    appState.restartApplication()
+                    appState.relaunchApp()
                 }) {
                     Text("Restart Now")
                         .font(.headline.weight(.semibold))

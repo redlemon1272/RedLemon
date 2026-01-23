@@ -1278,16 +1278,15 @@ struct SettingsView: View {
 
                 await MainActor.run {
                     messageType = .success
-                    saveMessage = "✅ Credentials saved successfully!"
+                    saveMessage = "✅ Credentials saved! Restarting app to apply changes..."
                     isLoading = false
                 }
 
-                // Clear message after 3 seconds
-                try? await Task.sleep(nanoseconds: 3_000_000_000)
+                // Brief delay so user sees the message
+                try? await Task.sleep(nanoseconds: 1_200_000_000)
+                
                 await MainActor.run {
-                    withAnimation {
-                        saveMessage = nil
-                    }
+                    appState.relaunchApp()
                 }
 
             } catch {

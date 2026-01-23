@@ -88,13 +88,23 @@ class AppState: ObservableObject {
         }
     }
 
-    func restartApplication() {
-        NSLog("%@", "🔄 [AppState] User requested restart due to schedule update")
-        // Relaunching is complex, but standardized behavior for "Restart to apply updates" on macOS
-        // often involves just terminating, or using a helper.
-        // For simplicity and safety, we will just terminate, and the user can re-open.
-        // We could also try to relaunch via Process, but sandbox might block it.
-        NSApplication.shared.terminate(nil)
+    /// Relaunches the application to ensure all service changes and environment variables are fresh.
+    func relaunchApp() {
+        NSLog("🔄 [AppState] Triggering mandatory app relaunch...")
+        let bundleURL = Bundle.main.bundleURL
+        let configuration = NSWorkspace.OpenConfiguration()
+        
+        // This opens a new instance of the app
+        NSWorkspace.shared.openApplication(at: bundleURL, configuration: configuration) { _, error in
+            if let error = error {
+                NSLog("%@", "❌ [AppState] Failed to relaunch app: \(error.localizedDescription)")
+            }
+            
+            // Terminate the current instance
+            Task { @MainActor in
+                NSApplication.shared.terminate(nil)
+            }
+        }
     }
 
     // MARK: - Context-Aware Schedule Notifications

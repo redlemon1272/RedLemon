@@ -647,7 +647,8 @@ struct AppOnboardingView: View {
                   (!realDebridKey.isEmpty || !subdlKey.isEmpty) ? "YES" : "NO",
                   isRestored ? "YES" : "NO")
             // Give a tiny moment for dismissal animation to start
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
                 appState.relaunchApp()
             }
         }

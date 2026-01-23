@@ -519,6 +519,13 @@ struct AppOnboardingView: View {
                 .foregroundColor(.white.opacity(0.8))
                 .buttonStyle(.plain)
                 .padding(.top, 4)
+                
+                if !realDebridKey.isEmpty || !subdlKey.isEmpty || isRestored {
+                    Text("The app will restart to apply your credentials.")
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundColor(.green.opacity(0.7))
+                        .padding(.top, -8)
+                }
             }
             .padding(.top, 20)
         }

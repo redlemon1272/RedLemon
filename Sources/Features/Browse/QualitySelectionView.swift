@@ -44,7 +44,7 @@ struct QualitySelectionView: View {
                 VStack(spacing: 8) {
                     Text(mediaItem.name)
                         .font(.title2.weight(.bold))
-                        
+
 
                     if let year = mediaItem.year {
                         Text(year)
@@ -94,37 +94,74 @@ struct QualitySelectionView: View {
 
                         // Free user warning when Watch Party is selected
                         if watchMode == .watchParty && !licenseManager.isPremium {
-                            HStack(spacing: 8) {
-                                Image(systemName: "exclamationmark.triangle.fill")
-                                    .foregroundColor(.orange)
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text("Starting will use your free watch party")
-                                        .font(.subheadline.weight(.medium))
-                                        
-                                    Text("Free users can host 1 room every 72 hours")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
+                            if licenseManager.timeUntilNextFreeRoom > 0 {
+                                // CASE 1: BLOCKED (Cooldown Active)
+                                HStack(spacing: 8) {
+                                    Image(systemName: "clock.badge.exclamationmark.fill")
+                                        .foregroundColor(.red)
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text("Limit Reached")
+                                            .font(.subheadline.weight(.bold))
+                                            .foregroundColor(.red)
+
+                                        Text("Next free party in: \(licenseManager.formattedCooldownTime)")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    Spacer()
+                                    Button("Upgrade") {
+                                        showPremiumSheet = true
+                                    }
+                                    .font(.system(size: 12, weight: .semibold))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(Color.accentColor)
+                                    .cornerRadius(6)
                                 }
-                                Spacer()
-                                Button("Upgrade") {
-                                    showPremiumSheet = true
+                                .padding(12)
+                                .background(Color.red.opacity(0.1))
+                                .cornerRadius(10)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.red.opacity(0.3), lineWidth: 1)
+                                )
+                                .frame(maxWidth: 400)
+                                .padding(.top, 8)
+                            } else {
+                                // CASE 2: ALLOWED (Warning about consumption)
+                                HStack(spacing: 8) {
+                                    Image(systemName: "exclamationmark.triangle.fill")
+                                        .foregroundColor(.orange)
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text("Starting will use your weekly free party")
+                                            .font(.subheadline.weight(.medium))
+
+                                        Text("Free users can host 1 room every 168 hours (7 days)")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    Spacer()
+                                    Button("Upgrade") {
+                                        showPremiumSheet = true
+                                    }
+                                    .font(.system(size: 12, weight: .semibold))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(Color.accentColor)
+                                    .cornerRadius(6)
                                 }
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 6)
-                                .background(Color.accentColor)
-                                .cornerRadius(6)
+                                .padding(12)
+                                .background(Color.orange.opacity(0.1))
+                                .cornerRadius(10)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+                                )
+                                .frame(maxWidth: 400)
+                                .padding(.top, 8)
                             }
-                            .padding(12)
-                            .background(Color.orange.opacity(0.1))
-                            .cornerRadius(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.orange.opacity(0.3), lineWidth: 1)
-                            )
-                            .frame(maxWidth: 400)
-                            .padding(.top, 8)
                         }
 
                         // NEW: Room Settings (Only for Watch Party)
@@ -216,6 +253,11 @@ struct QualitySelectionView: View {
             }
         }
         .onAppear {
+            // Check status immediately
+            Task {
+                await licenseManager.checkHostingLimit()
+            }
+
             // Sync with global state (e.g. if coming from "Resume Watch Party")
             if appState.player.currentWatchMode == .watchParty {
                 self.watchMode = .watchParty

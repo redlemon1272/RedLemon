@@ -8,6 +8,7 @@ MIGRATIONS=(
     "supabase/migrations/20260123000000_sync_premium_columns.sql"
     "supabase/migrations/20260123000500_process_payment_batch.sql"
     "supabase/migrations/20260123010000_room_creation_refund.sql"
+    "supabase/migrations/20260123020000_increase_cooldown.sql"
 )
 
 for MIGRATION in "${MIGRATIONS[@]}"; do

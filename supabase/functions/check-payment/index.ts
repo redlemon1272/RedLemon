@@ -203,40 +203,28 @@ export const handler = async (req: Request) => {
             }
         }
 
-        // 6. Apply logic
+        // 6. Apply logic Atomic
         if (totalNewUsdValue > 0) {
-            // Log them
-            if (newTransactionsToLog.length > 0) {
-                await supabaseAdmin.from('payment_transactions').insert(newTransactionsToLog)
-            }
-
             // Calculate Tiers
-            let daysToAdd = 0
-            if (totalNewUsdValue >= 9.80) daysToAdd = 90
-            else if (totalNewUsdValue >= 6.80) daysToAdd = 60
-            else if (totalNewUsdValue >= 3.80) daysToAdd = 30
+            let totalDays = 0
+            if (totalNewUsdValue >= 9.80) totalDays = 90
+            else if (totalNewUsdValue >= 6.80) totalDays = 60
+            else if (totalNewUsdValue >= 3.80) totalDays = 30
 
-            if (daysToAdd > 0) {
-                const { data: userData } = await supabaseAdmin
-                    .from('users')
-                    .select('subscription_expires_at')
-                    .eq('id', userId)
-                    .single()
+            if (totalDays > 0) {
+                // Call ATOMIC RPC for processing
+                const { data: batchResult, error: batchError } = await supabaseAdmin.rpc('process_payment_batch_secure', {
+                    p_user_id: userId,
+                    p_transactions: newTransactionsToLog,
+                    p_days_to_add: totalDays
+                })
 
-                let currentExpiry = userData?.subscription_expires_at ? new Date(userData.subscription_expires_at) : new Date()
-                if (currentExpiry < new Date()) currentExpiry = new Date()
+                if (batchError || !batchResult?.success) {
+                    console.error('❌ Payment Batch Error:', batchError || batchResult?.message)
+                    throw new Error(batchError?.message || batchResult?.message || 'Failed to process payment batch')
+                }
 
-                const newExpiry = new Date(currentExpiry.getTime() + (daysToAdd * 24 * 60 * 60 * 1000))
-
-                await supabaseAdmin
-                    .from('users')
-                    .update({
-                        subscription_expires_at: newExpiry.toISOString(),
-                        is_premium: true
-                    })
-                    .eq('id', userId)
-
-                // Archive used pools used to force rotation
+                // 7. Archive used pools used to force rotation (Non-critical, can happen after)
                 if (paymentDetectedPools.size > 0) {
                     await supabaseAdmin
                         .from('payment_pools')
@@ -247,10 +235,10 @@ export const handler = async (req: Request) => {
 
                 return new Response(JSON.stringify({
                     success: true,
-                    new_payment: true, // Distinct flag for new detection
+                    new_payment: true,
                     premium: true,
-                    added_days: daysToAdd,
-                    new_expiry: newExpiry
+                    added_days: totalDays,
+                    new_expiry: batchResult.new_expiry
                 }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
             } else {
                 return new Response(JSON.stringify({

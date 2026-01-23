@@ -135,7 +135,16 @@ struct SettingsView: View {
             Text("This will erase your username '@\(currentUsername)' and all local data from this device. Make sure you have saved your recovery phrase if you want to restore your account later.")
         }
         .sheet(isPresented: $showRestoreAccount) {
-            RestoreAccountView()
+            RestoreAccountView(onDismiss: {
+                // If the username changed from empty to something, or if we want to be safe,
+                // we relaunch because credentials/keys have changed.
+                Task { @MainActor in
+                    // Brief delay to allow the sheet dismissal to animate
+                    try? await Task.sleep(nanoseconds: 500_000_000)
+                    appState.relaunchApp()
+                }
+            })
+            .environmentObject(appState)
         }
         .sheet(isPresented: $showPaymentGate, onDismiss: {
             // Fire-and-forget sync after payment modal closes

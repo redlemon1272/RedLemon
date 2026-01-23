@@ -86,7 +86,8 @@ class EventsConfigService {
         let currentVersion = UserDefaults.standard.integer(forKey: "\(versionKey)_movie_events")
         do {
             let serverConfig = try await fetchConfig(type: "movie_events")
-            if serverConfig.version > currentVersion {
+            // Only notify if we actually had a previous version (prevents first-run/reset popups)
+            if currentVersion > 0 && serverConfig.version > currentVersion {
                 print("🔔 [EventsConfig] Polling found new version \(serverConfig.version) (current: \(currentVersion))")
                 Task { @MainActor in
                     NotificationCenter.default.post(name: Notification.Name("ScheduleDidUpdate"), object: nil)
@@ -109,7 +110,8 @@ class EventsConfigService {
         // Check against current cached version
         let currentVersion = UserDefaults.standard.integer(forKey: "\(versionKey)_movie_events")
         
-        if newVersion > currentVersion {
+        // Only notify if we actually had a previous version (prevents first-run/reset popups)
+        if currentVersion > 0 && newVersion > currentVersion {
             print("🔔 [EventsConfig] Realtime notification: New schedule version \(newVersion) available (current: \(currentVersion))")
             
             // Post notification on main thread

@@ -940,7 +940,8 @@ class SupabaseClient: RoomManager, UserManager {
                     "user_id": userId.uuidString,
                     "is_host": isHost
                 ],
-                headers: ["Prefer": "resolution=merge-duplicates"]
+                headers: ["Prefer": "resolution=merge-duplicates"],
+                sign: true // 🔐 SECURE: Prove identity to join
             )
         } catch let error as SupabaseError {
             // Check for specific Postgres error code 23505 (Unique Violation) or duplicate key message
@@ -982,7 +983,8 @@ class SupabaseClient: RoomManager, UserManager {
             query: [
                 "room_id": "eq.\(roomId)",
                 "user_id": "eq.\(userId.uuidString)"
-            ]
+            ],
+            sign: true // 🔐 SECURE: Prove identity to leave
         )
     }
 
@@ -991,7 +993,8 @@ class SupabaseClient: RoomManager, UserManager {
         _ = try await makeRequest(
             path: "/rooms",
             method: "DELETE",
-            query: ["id": "eq.\(roomId)"]
+            query: ["id": "eq.\(roomId)"],
+            sign: true // 🔐 SECURE: Only host or admin can delete
         )
     }
 
@@ -1055,7 +1058,8 @@ class SupabaseClient: RoomManager, UserManager {
             path: "/rooms",
             method: "PATCH",
             body: body,
-            query: ["id": "eq.\(roomId)"]
+            query: ["id": "eq.\(roomId)"],
+            sign: true // 🔐 SECURE: Only host can control playback
         )
         if position % 10 == 0 { // Don't log every second
              NSLog("%@", "✅ SupabaseClient: Updated room playback (Playing: \(isPlaying), Pos: \(position)s, ClearedStream: \(shouldClearStream))")
@@ -1072,7 +1076,8 @@ class SupabaseClient: RoomManager, UserManager {
                 "playback_position": 0,
                 "last_activity": ISO8601DateFormatter().string(from: Date())
             ],
-            query: ["id": "eq.\(roomId)"]
+            query: ["id": "eq.\(roomId)"],
+            sign: true // 🔐 SECURE: Identity check
         )
     }
 
@@ -1140,7 +1145,8 @@ class SupabaseClient: RoomManager, UserManager {
             path: "/rooms",
             method: "PATCH",
             body: body,
-            query: ["id": "eq.\(roomId)"]
+            query: ["id": "eq.\(roomId)"],
+            sign: true // 🔐 SECURE: Only host can set stream
         )
 
         NSLog("%@", "✅ Persisted stream selection to room \(roomId)")
@@ -1162,7 +1168,8 @@ class SupabaseClient: RoomManager, UserManager {
             path: "/rooms",
             method: "PATCH",
             body: body,
-            query: ["id": "eq.\(roomId)"]
+            query: ["id": "eq.\(roomId)"],
+            sign: true // 🔐 SECURE: Host check
         )
 
         NSLog("✅ Reset/Cleared stream selection for room %@", roomId)
@@ -1177,7 +1184,8 @@ class SupabaseClient: RoomManager, UserManager {
             path: "/rooms",
             method: "PATCH",
             body: body,
-            query: ["id": "eq.\(roomId)"]
+            query: ["id": "eq.\(roomId)"],
+            sign: true // 🔐 SECURE: Host check
         )
     }
 
@@ -1206,7 +1214,8 @@ class SupabaseClient: RoomManager, UserManager {
                     "playlist": playlistData,
                     "current_playlist_index": currentIndex
                 ],
-                query: ["id": "eq.\(roomId)"]
+                query: ["id": "eq.\(roomId)"],
+                sign: true // 🔐 SECURE: Host check
             )
             NSLog("✅ SupabaseClient: Playlist updated successfully")
         } catch SupabaseError.httpError(let code, let message) where code == 400 && message.contains("current_playlist_index") {
@@ -1226,7 +1235,8 @@ class SupabaseClient: RoomManager, UserManager {
                 path: "/rooms",
                 method: "PATCH",
                 body: ["playlist": playlistData],
-                query: ["id": "eq.\(roomId)"]
+                query: ["id": "eq.\(roomId)"],
+                sign: true // 🔐 SECURE: Host check
             )
             NSLog("✅ SupabaseClient: Playlist updated (Fallback mode: No Index persisted)")
 
@@ -1271,7 +1281,8 @@ class SupabaseClient: RoomManager, UserManager {
             path: "/rooms",
             method: "PATCH",
             body: body,
-            query: ["id": "eq.\(roomId)"]
+            query: ["id": "eq.\(roomId)"],
+            sign: true // 🔐 SECURE: Host check
         )
     }
 
@@ -1305,7 +1316,8 @@ class SupabaseClient: RoomManager, UserManager {
             path: "/rooms",
             method: "PATCH",
             body: body,
-            query: ["id": "eq.\(roomId)"]
+            query: ["id": "eq.\(roomId)"],
+            sign: true // 🔐 SECURE: Host check
         )
         NSLog("%@", "✅ Updated room description for \(roomId)")
     }
@@ -1330,7 +1342,8 @@ class SupabaseClient: RoomManager, UserManager {
                 "user_id": userId.uuidString,
                 "username": username,
                 "message": message
-            ]
+            ],
+            sign: true // 🔐 SECURE: No impersonation
         )
     }
 
@@ -1653,7 +1666,8 @@ struct ReportedStream: Identifiable, Codable {
             _ = try await makeRequest(
                 path: "/reported_streams",
                 method: "POST",
-                body: body
+                body: body,
+                sign: true // 🔐 SECURE: Authenticate user report
             )
 
             // Broadcast alert for real-time admin notification
@@ -1674,7 +1688,8 @@ struct ReportedStream: Identifiable, Codable {
             _ = try await makeRequest(
                 path: "/reported_streams",
                 method: "DELETE",
-                query: ["id": "eq.\(id.uuidString)"]
+                query: ["id": "eq.\(id.uuidString)"],
+                sign: true // 🔐 Admin check
             )
             LoggingManager.shared.info(.social, message: "Report dismissed: \(id)")
         } catch {
@@ -1702,7 +1717,8 @@ struct ReportedStream: Identifiable, Codable {
             method: "DELETE",
             query: [
                 "id": "eq.\(id)"
-            ]
+            ],
+            sign: true // 🔐 Admin check
         )
         LoggingManager.shared.info(.social, message: "Deleted reported stream entry: \(id)")
     }
@@ -1714,7 +1730,8 @@ struct ReportedStream: Identifiable, Codable {
             method: "DELETE",
             query: [
                 "stream_hash": "eq.\(streamHash)"
-            ]
+            ],
+            sign: true // 🔐 Admin check
         )
         LoggingManager.shared.info(.general, message: "Deleted verified stream with hash: \(streamHash)")
     }
@@ -1746,7 +1763,8 @@ struct ReportedStream: Identifiable, Codable {
         _ = try await makeRequest(
             path: "/blocked_streams",
             method: "POST",
-            body: body
+            body: body,
+            sign: true // 🔐 Admin check
         )
         LoggingManager.shared.warn(.general, message: "Blocked stream: \(hash)")
     }
@@ -1756,7 +1774,8 @@ struct ReportedStream: Identifiable, Codable {
         _ = try await makeRequest(
             path: "/blocked_streams",
             method: "DELETE",
-            query: ["stream_hash": "eq.\(hash)"]
+            query: ["stream_hash": "eq.\(hash)"],
+            sign: true // 🔐 Admin check
         )
         LoggingManager.shared.info(.general, message: "Unblocked stream: \(hash)")
     }

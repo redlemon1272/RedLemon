@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.136 -->
+        <item>
+            <title>Version 1.0.136</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implemented mandatory app relaunch protocol for API keys and account restoration.</li><li>Added user-facing notices for app restarts triggered by onboarding or settings changes.</li><li>Fixed spurious 'Schedule Updated' notifications on first launch or data reset.</li><li>Improved onboarding flow with immediate modal dismissal and conditional relaunch.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 18:21:01 -0500</pubDate>
+            <sparkle:version>136</sparkle:version>
+            <sparkle:shortVersionString>1.0.136</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.136.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="sicmmBWH1UzUzmfTgGiptfTTdKh7pxr6WD8G2KTl59D9YQHPiIdEyUzkTV6oEkm4kqGiNNtNodPWeBCIR0SdCg==" length="73506731"
+            />
+        </item>
         <!-- v1.0.135 -->
         <item>
             <title>Version 1.0.135</title>

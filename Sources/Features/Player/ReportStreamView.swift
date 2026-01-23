@@ -20,11 +20,13 @@ struct ReportStreamView: View {
 
     // Optional: For "Try Another Stream" feature (solo playback only)
     var hasAlternativeStreams: Bool = false
+    var isWatchParty: Bool = false // New: Enable specific UX for Watch Party hosts
     var onTryAnother: (() -> Void)? = nil
 
     @State private var selectedReason: String?
     @State private var isSubmitting = false
     @State private var showSuccess = false
+    @State private var showTryAnotherConfirmation = false // New: Safety for global blocks
 
     let reasons = [
         "Different Movie/Show",
@@ -117,11 +119,15 @@ struct ReportStreamView: View {
                 }
                 .padding(.top, 10)
 
-                // Try Another Stream button (solo playback only)
+                // Try Another Stream button
                 if hasAlternativeStreams {
                     Button(action: {
-                        onTryAnother?()
-                        onDismiss()
+                        if isWatchParty {
+                            showTryAnotherConfirmation = true
+                        } else {
+                            onTryAnother?()
+                            onDismiss()
+                        }
                     }) {
                         HStack(spacing: 6) {
                             Image(systemName: "arrow.triangle.2.circlepath")
@@ -138,6 +144,19 @@ struct ReportStreamView: View {
                     .padding(.top, 8)
                 }
             }
+        }
+        .confirmationDialog(
+            "Try Another Stream?",
+            isPresented: $showTryAnotherConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Try Another Stream", role: .destructive) {
+                onTryAnother?()
+                onDismiss()
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This will block this stream for this session and return everyone to the lobby. Use this only if the stream is incorrect or broken.")
         }
         .padding(30)
         .background(VisualEffectView(material: .hudWindow, blendingMode: .behindWindow))

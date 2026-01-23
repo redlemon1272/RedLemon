@@ -309,6 +309,11 @@ struct SyncMessage: Codable {
         self.isPremium = isPremium
 
     }
+
+    var dictionary: [String: Any]? {
+        guard let data = try? JSONEncoder().encode(self) else { return nil }
+        return try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+    }
 }
 
 // MARK: - Sync Action (Syncplay + WatchParty inspired)

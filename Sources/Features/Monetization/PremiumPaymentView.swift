@@ -58,7 +58,7 @@ struct PremiumPaymentView: View {
 
 
 
-                        Text("Unlock premium to host unlimited watch parties. Choose a plan that suits you.")
+                        Text("Unlock premium to host unlimited watch parties.")
                             .font(.body)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)

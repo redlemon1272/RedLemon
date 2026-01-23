@@ -1002,6 +1002,65 @@ class PlayerViewModel: ObservableObject {
         tryNextStream()
     }
 
+    // MARK: - Watch Party Failover (Host)
+
+    /// Blocks the current stream and returns all participants to the lobby.
+    /// Used by Watch Party hosts when a bad file is encountered.
+    func tryAnotherStreamForWatchParty(hash: String, filename: String?, provider: String?) {
+        guard isWatchPartyHost else { return }
+
+        LoggingManager.shared.warn(.watchParty, message: "Host is reporting/excluding stream and returning to lobby: \(hash)")
+
+        Task {
+            // 1. Report the stream globally (non-destructive flagging for admins)
+            await SupabaseClient.shared.reportStream(
+                imdbId: selectedMediaItem?.id ?? "unknown",
+                season: selectedSeason ?? -1,
+                episode: selectedEpisode ?? -1,
+                quality: selectedQuality.rawValue,
+                streamHash: hash,
+                reason: "Inaccurate/Broken file (Host reported via Watch Party)",
+                movieTitle: selectedMetadata?.title,
+                filename: filename,
+                provider: provider
+            )
+
+            // 2. Mark hash as attempted locally (session-level exclusion)
+            // This ensures the next resolution for this title avoids this hash.
+            if let imdbId = selectedMediaItem?.id {
+                await StreamService.shared.markStreamAsAttempted(imdbId: imdbId, hash: hash)
+            }
+
+            // 3. Clear room playback state in DB so "Start" button is visible for everyone
+            if let roomId = currentRoomId {
+                try? await SupabaseClient.shared.updateRoomPlayback(roomId: roomId, position: 0, isPlaying: false)
+            }
+
+            // 4. Broadcast LOBBY_RETURN to all participants
+            // This ensures everyone sees the "Returning to Lobby..." overlay and transitions together.
+            if let roomId = currentRoomId {
+                let msg = SyncMessage(
+                    type: .returnToLobby, // Typed message for stability
+                    timestamp: Date().timeIntervalSince1970,
+                    isPlaying: false,
+                    senderId: SupabaseClient.shared.auth.currentUser?.id.uuidString ?? "host",
+                    chatText: "LOBBY_RETURN", // Legacy fallback
+                    chatUsername: "Host"
+                )
+
+                // Broadcast to the watch-party topic (matching RealtimeChannelManager standard)
+                try? await SupabaseClient.shared.realtimeClient.broadcast(
+                    topic: "watch-party:\(roomId)",
+                    event: "sync",
+                    payload: msg.dictionary ?? [:]
+                )
+            }
+
+            // 3. Exit player and return to lobby locally
+            await exitPlayer(keepRoomState: true)
+        }
+    }
+
     func tryNextStream() {
         if streamQueue.isEmpty {
             // CRITICAL: Failover for Guests (or initial failure)

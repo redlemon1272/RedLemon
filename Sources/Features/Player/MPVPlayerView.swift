@@ -1206,10 +1206,21 @@ struct MPVPlayerView: View {
                                  showReportSheet = false
                              }
                          },
-                         // Solo playback only: show "Try Another Stream" if alternatives exist
-                         hasAlternativeStreams: !viewModel.isInWatchParty && !appState.isEventPlayback && appState.player.streamQueue.count > 0,
+                         // Enable "Try Another Stream" for solo playback with queue, and for Watch Party Hosts
+                         hasAlternativeStreams: (!viewModel.isInWatchParty && !appState.isEventPlayback && appState.player.streamQueue.count > 0) || viewModel.isWatchPartyHost,
+                         isWatchParty: viewModel.isInWatchParty,
                          onTryAnother: {
-                             appState.player.tryNextStream()
+                             if viewModel.isWatchPartyHost {
+                                 // Watch Party Host Path: Block hash and return all to lobby
+                                 appState.player.tryAnotherStreamForWatchParty(
+                                     hash: viewModel.currentStreamHash ?? streamHash ?? "",
+                                     filename: URL(string: viewModel.videoURL)?.lastPathComponent,
+                                     provider: viewModel.streamTitle
+                                 )
+                             } else {
+                                 // Solo Playback Path: Simply try next in queue
+                                 appState.player.tryNextStream()
+                             }
                          }
                      )
                      Spacer()

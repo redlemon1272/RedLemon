@@ -58,6 +58,8 @@ protocol LobbyDataService {
 
     func resetRoomStream(roomId: String) async throws
 
+    func updateRoomPrivacy(roomId: String, isPublic: Bool) async throws
+
     // Participants & Presence
     func getRoomParticipants(roomId: String) async throws -> [RoomParticipant]
     func sendHeartbeat(roomId: String, userId: UUID) async throws

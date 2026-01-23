@@ -73,7 +73,7 @@ struct RoomListView: View {
                             .foregroundColor(.secondary)
                         Text("No rooms found")
                             .font(.title2.weight(.bold))
-                            
+
                         Text("Try a different search term")
                             .foregroundColor(.secondary)
                     } else {
@@ -82,7 +82,7 @@ struct RoomListView: View {
                             .foregroundColor(.secondary)
                         Text("No Active Rooms")
                             .font(.title2.weight(.bold))
-                            
+
                         Text("Be the first to start a watch party!")
                             .foregroundColor(.secondary)
                         Button("Refresh") {
@@ -381,6 +381,7 @@ struct RoomListView: View {
             lastActivity: room.lastActivity,
             playlist: room.playlist,
             currentPlaylistIndex: room.currentPlaylistIndex ?? 0,
+            isPublic: room.isPublic,
             lobbyDuration: 300,
             shouldLoop: false,
             isPersistent: true,
@@ -574,7 +575,7 @@ struct RoomListView: View {
 
     private func disconnectRealtime() async {
         let client = SupabaseClient.shared.realtimeClient
-        
+
         // Remove handler to prevent leaks
         if let id = postgresHandlerId {
             await client.removePostgresChange(id: id)
@@ -582,7 +583,7 @@ struct RoomListView: View {
                 self.postgresHandlerId = nil
             }
         }
-        
+
         // Leave the channel, but DO NOT disconnect the socket (connection is shared)
         try? await client.leaveChannel(topic: "realtime:rooms_updates")
     }
@@ -852,7 +853,7 @@ struct JoinRoomDialog: View {
         VStack(spacing: 20) {
             Text("Join Watch Party")
                 .font(.title.weight(.bold))
-                
+
 
             Text("Enter the room code shared by the host")
                 .foregroundColor(.secondary)

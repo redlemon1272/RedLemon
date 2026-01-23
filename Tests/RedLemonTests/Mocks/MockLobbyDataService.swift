@@ -106,7 +106,10 @@ class MockLobbyDataService: LobbyDataService {
         updateRoomPlaybackCallCount += 1
     }
 
-    func resetRoomStream(roomId: String) async throws {
+        // Mock Implementation
+    }
+
+    func updateRoomPrivacy(roomId: String, isPublic: Bool) async throws {
         // Mock Implementation
     }
 

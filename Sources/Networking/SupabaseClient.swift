@@ -1168,6 +1168,19 @@ class SupabaseClient: RoomManager, UserManager {
         NSLog("✅ Reset/Cleared stream selection for room %@", roomId)
     }
 
+    func updateRoomPrivacy(roomId: String, isPublic: Bool) async throws {
+        let body: [String: Any] = [
+            "is_public": isPublic
+        ]
+
+        _ = try await makeRequest(
+            path: "/rooms",
+            method: "PATCH",
+            body: body,
+            query: ["id": "eq.\(roomId)"]
+        )
+    }
+
     /// Update room playlist (Host only)
     func updateRoomPlaylist(
         roomId: String,

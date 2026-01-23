@@ -248,6 +248,20 @@ struct WatchPartyLobbyView: View {
                                             .font(.caption)
                                     }
                                     .buttonStyle(PlainButtonStyle())
+
+                                    if isHost {
+                                        // Privacy Toggle
+                                        Button(action: {
+                                            viewModel.togglePrivacy()
+                                        }) {
+                                            Image(systemName: room.isPublic ? "lock.open.fill" : "lock.fill")
+                                                .font(.caption)
+                                                .foregroundColor(room.isPublic ? .white.opacity(0.6) : .red)
+                                        }
+                                        .buttonStyle(PlainButtonStyle())
+                                        .help(room.isPublic ? "Make Room Private" : "Make Room Public")
+                                    }
+
                                 }
                             }
 

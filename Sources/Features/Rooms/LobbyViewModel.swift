@@ -1015,6 +1015,28 @@ class LobbyViewModel: ObservableObject {
         }
     }
 
+    func togglePrivacy() {
+        guard isHost else { return }
+        let newPrivacy = !room.isPublic
+        room.isPublic = newPrivacy // Optimistic update
+
+        Task {
+            do {
+                try await dataService.updateRoomPrivacy(roomId: room.id, isPublic: newPrivacy)
+                LoggingManager.shared.info(.watchParty, message: "Host toggled privacy to \(newPrivacy)")
+
+                // Add system message
+                let privacyText = newPrivacy ? "Public" : "Private"
+                addMessage(.systemInfo, userName: "System", data: ["message": "Room is now \(privacyText)"])
+            } catch {
+                LoggingManager.shared.error(.watchParty, message: "Failed to toggle privacy: \(error)")
+                await MainActor.run {
+                    self.room.isPublic = !newPrivacy // Revert on failure
+                }
+            }
+        }
+    }
+
     func addFriend(participantId: String) {
         Task {
             _ = await SocialService.shared.sendRequest(toUserId: participantId)
@@ -1447,6 +1469,7 @@ class LobbyViewModel: ObservableObject {
                 self.room.unlockedStreamURL = freshRoom.unlockedStreamUrl
                 self.room.unlockedStreamURL = freshRoom.unlockedStreamUrl
                 self.room.subtitleUrl = freshRoom.subtitleUrl
+                self.room.isPublic = freshRoom.isPublic
 
                 // Reset session ID if room stops playing
                 if !freshRoom.isPlaying {

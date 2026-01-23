@@ -153,4 +153,50 @@ final class LobbyViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.playlistVotes[item2Id]?.contains(viewModel.participantId) ?? false, "Item2 should have user's vote")
         XCTAssertFalse(viewModel.playlistVotes[item1Id]?.contains(viewModel.participantId) ?? true, "Item1 should NOT have user's vote (single vote enforcement)")
     }
+
+    func testTogglePrivacy() async throws {
+        // Given: Room is initialized (using mockRoom which defaults to Public=true in our mock setup)
+        // Wait, mockRoom in setUp is initialized. Let's verify defaults.
+        // We'll set up a fresh one to be sure.
+        let host = Participant.host()
+        let privacyRoom = WatchPartyRoom(
+            id: "privacy_test_room",
+            hostId: host.id,
+            hostName: "TestHost",
+            mediaItem: nil,
+            quality: .fullHD,
+            participants: [host],
+            participantCount: 1,
+            state: .lobby,
+            createdAt: Date(),
+            lastActivity: Date(),
+            currentPlaylistIndex: 0,
+            isPublic: true,
+            lobbyDuration: 300,
+            shouldLoop: false,
+            isPersistent: false
+        )
+
+        let mockService = MockLobbyDataService() // Use local mock service to spy
+        // We need to inject this mock service into the view model
+        // CURRENTLY setUp uses `mockRoom` and defaults.
+        // We will instantiate VM manually.
+
+        viewModel = LobbyViewModel(
+            room: privacyRoom,
+            isHost: true,
+            realtimeManager: mockRealtimeManager,
+            dataService: mockService
+        )
+
+        // When: Host toggles privacy
+        viewModel.togglePrivacy()
+
+        // Then:
+        // 1. Optimistic update
+        XCTAssertFalse(viewModel.room.isPublic, "Room should be private after toggle")
+
+        // Wait for async task to hit mock
+        try? await Task.sleep(nanoseconds: 100_000_000)
+    }
 }

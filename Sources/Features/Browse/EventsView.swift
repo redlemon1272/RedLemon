@@ -602,6 +602,7 @@ struct EventsView: View {
             lastActivity: event.startTime,
             playlist: nil,  // Events don't use playlists
             currentPlaylistIndex: 0,
+            isPublic: true,
             lobbyDuration: event.isLive ? 0 : 600,  // No lobby for live events, 10 min for upcoming
             shouldLoop: false,
             isPersistent: true,  // Events are persistent

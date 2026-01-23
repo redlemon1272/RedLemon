@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.135 -->
+        <item>
+            <title>Version 1.0.135</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: Increase Free Tier Cooldown to 168h</li><li>fix: Player UI and Stream Retry logic</li><li>feat: 'Try Another Stream' for Watch Parties</li><li>fix: Atomic payment RPCs and RLS signature enforcement</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 16:52:23 -0500</pubDate>
+            <sparkle:version>135</sparkle:version>
+            <sparkle:shortVersionString>1.0.135</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.135.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ih1OwOmteDjDs3CFRtnQ2pVCkzMC9ujJz51t5ZKxAvd5m+4dII9OqzHvLAaz4Aqx7K+entDrb6dIH5dEqNOUDg==" length="73517920"
+            />
+        </item>
         <!-- v1.0.131 -->
         <item>
             <title>Version 1.0.131</title>

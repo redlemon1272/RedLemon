@@ -137,19 +137,20 @@ RedLemon-Native/
 
 ---
 
-## 🔄 Recent Changes (December 2025)
+## 🔄 Recent Changes (January 2026)
 
-### **Removed**
-- ❌ uWebSockets implementation (Supabase Realtime is used)
-- ❌ ICP integration
-- ❌ SwiftNIO dependency
+### **Added/Improved**
+- ✅ **Atomic Payment Processing**: Robust crypto payment gateway using server-side RPCs for atomic transaction logging and premium status updates.
+- ✅ **Subscription Persistence**: Fixed date decoding and added database triggers to ensure `premium_until` and `subscription_expires_at` remain synced across app restarts.
+- ✅ **Security Hardening**: Enforced cryptographic signatures for all database write operations to comply with strict RLS policies.
+- ✅ **Lobby Stability**: Decoupled Realtime and Database connection layers to prevent "all-or-nothing" failures in the Lobby.
+- ✅ **Event Improvements**: Fixed event countdowns, auto-start loops, and event-specific heartbeat grace periods (90s).
 
 ### **Current Focus**
-- ✅ Technical Debt Reduction
-- ✅ Friends System
-- ✅ Watch Party Enhancements
-- ✅ Language/Localization
-- ✅ Server Migration (Future)
+- ✅ Payment System Reliability
+- ✅ Watch Party Consistency
+- ✅ Advanced Subtitle Extraction (Smart Fallbacks)
+- ✅ Production Monitoring & Logging
 
 ---
 
@@ -158,8 +159,9 @@ RedLemon-Native/
 - **Watch Party**: Look at `RealtimeChannelManager.swift`. It uses `SupabaseRealtimeClient` to sync via Supabase channels.
 - **Friends**: `FriendsView.swift` and `SupabaseClient.swift`.
 - **Playback**: `MPVPlayerViewModel.swift`.
+- **Payments**: `check-payment` edge function and `process_payment_batch_secure` RPC.
 
 ---
 
-**Last Updated:** December 4, 2025
-**Status:** Active Development (Refactoring Phase)
+**Last Updated:** January 23, 2026
+**Status:** Hardening Phase (Production Ready)

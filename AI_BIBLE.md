@@ -98,6 +98,7 @@
 | **Void RPC Build Failure** | type 'Void' cannot conform to 'Decodable' | #99 |
 | **Guest shows "not connected"** | Realtime setup skipped after DB join fails (RLS, permissions) | #101 |
 | **"403 Forbidden" / RLS Error** | Missing cryptographic signature on DB write | #103 |
+| **Partial Payment Success** | Non-atomic write (Log success, Credit fail) | #104 |
 
 ## 🚨 Critical Landmines
 
@@ -352,6 +353,12 @@
     *   **Symptom**: Subscription fails with "unauthorized" even if a valid JWT is sent in the `phx_join` payload.
     *   **Cause**: Some Supabase configurations require the `Authorization` header during the **initial WebSocket HTTP handshake** (the GET request to upgrade to WS).
     *   **Rule**: Custom Realtime clients (`SupabaseRealtimeClient`) MUST inject the `Authorization: Bearer <token>` header into the `URLRequest` used to initialize the connection. Relying on payload-level auth alone is insufficient for high-security (RLS) channels.
+
+**Landmine #104: Partial Payment Success (The Atomic Write Trap)**: *(Added v1.0.135)*
+*   **Symptom**: User payed, transaction is logged in `payment_transactions`, but `is_premium` is NOT updated and expiry remains old.
+*   **Cause**: The edge function performed three separate database writes (Write Log -> Update User -> Update Pool). If the function timed out or the database connection flickered after the first write, the user wouldn't get credit despite funds being taken.
+*   **Rule**: **Use Atomic RPCs**. All payment processing MUST happen inside a single PostgreSQL function (`process_payment_batch_secure`) wrapped in a transaction. The edge function must call this RPC once.
+*   **Verification**: Check `check-payment/index.ts` to ensure it uses the `process_payment_batch_secure` RPC.
 65. **Event Room Guest Visibility (The "Silent Join" Bug)**: *(Added v1.0.125)*
     *   **Trigger**: Guest joins a System Event (where `isHost` is false for everyone).
     *   **Symptom**: "User Joined" messages appear in logs but not in the Chat UI for other guests.

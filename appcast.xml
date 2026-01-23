@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.127 -->
+        <item>
+            <title>Version 1.0.127</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implement Watch Party Room Privacy Toggle (Host-only)</li><li>Added Privacy Lock/Unlock button in Lobby</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 22 Jan 2026 21:40:13 -0500</pubDate>
+            <sparkle:version>127</sparkle:version>
+            <sparkle:shortVersionString>1.0.127</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.127.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="zBbINIWwEqm9SGoPiWxZTO1gTGYpkUze3JtDa4zV4CD+LcYaCkprORXDtiLp52OlKu9piBiJBfp7peh8KV6sBg==" length="73519932"
+            />
+        </item>
         <!-- v1.0.126 -->
         <item>
             <title>Version 1.0.126</title>

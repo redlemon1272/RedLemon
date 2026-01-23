@@ -1076,6 +1076,11 @@ graph TD
 - **Action**: It autonomously resolves fresh streams for the content and effectively "forks" playback to a working stream.
 - **Note**: This prevents "No Streams Found" errors but may lead to minor runtime deltas if the Guest picks a different release group.
 
+### Host Failover (Stream Exclusion / "Try Another")
+- **Problem**: The resolved stream is broken, wrong language, or hardcoded subs.
+- **Mechanism**: The Host puts the current stream hash into an ephemeral blocklist (`StreamResolver.attemptedHashes`) valid for the app session.
+- **Action**: The "Try Another Stream" button forces a re-resolution which explicitly excludes all hashes in this blocklist, guaranteeing a *different* file is selected.
+
 ---
 
 # Part 9: Secrets & Credentials Management
@@ -1263,7 +1268,8 @@ Logs must be "Forensically Complete" - a silent narrative that explains "Who, Wh
 Tracks when users create watch party rooms to enforce limits.
 
 ### Limit Rules
-- **Free Users**: 1 room per 72 hours
+- **Free Users**: 1 room per 168 hours (7 days)
+    - *Refund Grace Period*: If a room is closed within 10 minutes, the credit is automatically refunded (to handle setup/technical issues).
 - **Premium Users**: Unlimited
 
 ### Implementation

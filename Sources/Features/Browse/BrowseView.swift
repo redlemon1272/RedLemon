@@ -2,7 +2,7 @@ import SwiftUI
 
 struct BrowseView: View {
     @EnvironmentObject var appState: AppState
-    
+
     var body: some View {
         BrowseViewContainer(appState: appState)
     }
@@ -10,11 +10,11 @@ struct BrowseView: View {
 
 private struct BrowseViewContainer: View {
     @StateObject var viewModel: BrowseViewModel
-    
+
     init(appState: AppState) {
         _viewModel = StateObject(wrappedValue: BrowseViewModel(appState: appState))
     }
-    
+
     var body: some View {
         BrowseViewContent(viewModel: viewModel)
     }
@@ -23,7 +23,7 @@ private struct BrowseViewContainer: View {
 struct BrowseViewContent: View {
     @ObservedObject var viewModel: BrowseViewModel
     @EnvironmentObject var appState: AppState
-    
+
     var body: some View {
         ZStack {
             if viewModel.isStabilizing {
@@ -151,7 +151,7 @@ struct BrowseViewContent: View {
                (viewModel.selectedTab == .shows && appState.popularShows.isEmpty) {
                 await viewModel.loadContent()
             }
-            
+
             viewModel.loadRecentlyWatched()
         }
         .onAppear {
@@ -166,7 +166,7 @@ struct BrowseViewContent: View {
             Text(viewModel.alertMessage)
         }
     }
-    
+
     @ViewBuilder
     private var continueWatchingSection: some View {
         let history = viewModel.filteredHistoryItems
@@ -177,7 +177,7 @@ struct BrowseViewContent: View {
                     .padding(.horizontal)
 
                 VersionAwareHorizontalScrollView {
-                    HStack(spacing: 16) {
+                    HStack(alignment: .top, spacing: 16) {
                         ForEach(history) { historyItem in
                             Button(action: {
                                 guard !viewModel.isNavigating else { return }
@@ -195,15 +195,15 @@ struct BrowseViewContent: View {
                     }
                     .padding(.horizontal)
                 }
-                .frame(height: 280)
+                .frame(height: 300)
             }
             .padding(.top)
         }
     }
-    
+
     private func restoreScrollPosition(using proxy: ScrollViewProxy) {
         guard let scrollTo = appState.browseScrollPosition else { return }
-        
+
         // Ensure main content is loaded
         let isContentReady = viewModel.selectedTab == .movies ? !appState.popularMovies.isEmpty : !appState.popularShows.isEmpty
         guard isContentReady else { return }

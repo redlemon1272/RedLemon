@@ -5,11 +5,11 @@ import AppKit
 // Provides synchronous access to images without async overhead
 class PosterImageCache {
     static let shared = NSCache<NSString, NSImage>()
-    
+
     static func get(_ key: String) -> NSImage? {
         return shared.object(forKey: key as NSString)
     }
-    
+
     static func set(_ key: String, image: NSImage) {
         shared.setObject(image, forKey: key as NSString)
     }
@@ -231,13 +231,13 @@ struct WatchModeSelectionView: View {
                 appState.player.currentWatchMode = .watchParty
                 isCreatingRoom = false
             }
-            
+
             // CRITICAL: Dismiss sheet BEFORE changing root view to prevent SwiftUI hang/freeze
             dismiss()
-            
+
             // Small delay to allow sheet dismissal to begin/process before unmounting parent
             try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
-            
+
             await MainActor.run {
                 appState.currentView = .qualitySelection
             }
@@ -258,12 +258,12 @@ struct WatchModeSelectionView: View {
                 appState.selectedSeason = season
                 appState.selectedEpisode = episode
             }
-            
+
             // CRITICAL: Dismiss sheet BEFORE changing root view
             dismiss()
-            
+
             try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
-            
+
             appState.currentView = .mediaDetail
         }
     }
@@ -410,17 +410,24 @@ struct MediaCard: View {
                 }
             }
 
-            // Title
-            Text(item.name)
-                .font(.subheadline.weight(.medium))
-                .lineLimit(2)
+            VStack(alignment: .leading, spacing: 2) {
+                // Title
+                Text(item.name)
+                    .font(.subheadline.weight(.medium))
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
-            // Year
-            if let year = item.year {
-                Text(year)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                // Year
+                if let year = item.year {
+                    Text(year)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
             }
+
+
         }
         .frame(width: 150)
         .task {
@@ -506,16 +513,21 @@ struct OptimizedMediaCard: View {
                 }
             }
 
-            // Title
-            Text(item.name)
-                .font(.subheadline.weight(.medium))
-                .lineLimit(2)
+            VStack(alignment: .leading, spacing: 2) {
+                // Title
+                Text(item.name)
+                    .font(.subheadline.weight(.medium))
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
-            // Year
-            if let year = item.year {
-                Text(year)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                // Year
+                if let year = item.year {
+                    Text(year)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
             }
         }
         .frame(width: 150)
@@ -532,7 +544,7 @@ struct OptimizedMediaCard: View {
     private func loadImage() {
         guard let posterURL = item.posterURL else { return }
         let cacheKey = posterURL.absoluteString
-        
+
         // PERF: Fast-path - check NSCache synchronously first (no async overhead)
         if let fastCached = PosterImageCache.get(cacheKey) {
             self.cachedImage = fastCached
@@ -587,7 +599,7 @@ struct StreamingServiceRow: View {
                     .padding(.horizontal)
 
                 VersionAwareHorizontalScrollView(scrollOffset: scrollOffset) {
-                    LazyHStack(spacing: 16) {
+                    LazyHStack(alignment: .top, spacing: 16) {
                         ForEach(items) { item in
                             Button(action: {
                                 onTap(item)
@@ -599,7 +611,7 @@ struct StreamingServiceRow: View {
                     }
                     .padding(.horizontal)
                 }
-                .frame(height: 280)
+                .frame(height: 300)
             }
         }
     }
@@ -637,7 +649,7 @@ struct LazyStreamingServiceRow: View {
                 .frame(height: 240)
             } else if !items.isEmpty {
                 VersionAwareHorizontalScrollView(scrollOffset: scrollOffset) {
-                    LazyHStack(spacing: 16) {
+                    LazyHStack(alignment: .top, spacing: 16) {
                         ForEach(items) { item in
                             Button(action: {
                                 onTap(item)
@@ -649,7 +661,7 @@ struct LazyStreamingServiceRow: View {
                     }
                     .padding(.horizontal)
                 }
-                .frame(height: 280)
+                .frame(height: 300)
             }
         }
         .onAppear {

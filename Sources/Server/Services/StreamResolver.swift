@@ -209,9 +209,15 @@ actor StreamResolver {
             let beforeBlockFilter = filteredStreams.count
             filteredStreams = filteredStreams.filter { stream in
                 // First check by hash (most accurate)
-                if let hash = stream.infoHash?.lowercased(), blockedHashes.contains(hash) {
-                    print("   🛡️ RESOLVER BLOCKING blacklisted stream: \(stream.title) (Hash: \(hash))")
-                    return false
+                if let hash = stream.infoHash?.lowercased() {
+                    if blockedHashes.contains(hash) {
+                         print("   🛡️ RESOLVER BLOCKING blacklisted stream: \(stream.title) (Hash: \(hash))")
+                         return false
+                    }
+                    if excludedHashes.contains(hash) {
+                        print("   🧠 RESOLVER SKIP - Excluded by Session: \(stream.title) (Hash: \(hash))")
+                        return false
+                    }
                 }
 
                 // Fallback: Check by filename for hashless streams (DebridSearch)

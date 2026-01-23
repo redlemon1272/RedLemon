@@ -1061,6 +1061,30 @@ class PlayerViewModel: ObservableObject {
         }
     }
 
+    /// Explicitly rejects the current stream (Solo Mode) and tries the next one.
+    /// This ensures the rejected hash is recorded in StreamService so it isn't picked up again by emergency resolution.
+    func tryAnotherStream() {
+        guard let stream = selectedStream, let hash = stream.infoHash, let imdbId = selectedMediaItem?.id else {
+            tryNextStream()
+            return
+        }
+
+        LoggingManager.shared.info(.videoRendering, message: "PlayerVM: User requested another stream. Excluding current hash: \(hash)")
+
+        Task {
+            // 1. Mark hash as attempted globally for this session
+            await StreamService.shared.markStreamAsAttempted(imdbId: imdbId, hash: hash)
+
+            await MainActor.run {
+                // 2. Filter out the blocked hash from the existing queue to avoid retrying it immediately
+                self.streamQueue.removeAll { $0.infoHash == hash }
+
+                // 3. Try next
+                self.tryNextStream()
+            }
+        }
+    }
+
     func tryNextStream() {
         if streamQueue.isEmpty {
             // CRITICAL: Failover for Guests (or initial failure)

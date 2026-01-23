@@ -84,8 +84,9 @@ class MPVViewLayer: CAOpenGLLayer {
         // This resolves stutter/blips on older Retina Macs (e.g. 2015 MBP)
         // Video content is naturally soft, so hardware upscaling by the OS is virtually indistinguishable
         // but saves ~75% of GPU fill rate.
-        self.contentsScale = 1.0
-        
+        // Use reliable native scale to prevent "Zoomed In"/Pixelated look on Retina
+        self.contentsScale = NSScreen.main?.backingScaleFactor ?? 2.0
+
         LoggingManager.shared.debug(.videoRendering, message: "MPVViewLayer initialized with async rendering")
     }
 
@@ -220,13 +221,13 @@ class MPVViewLayer: CAOpenGLLayer {
         let scale = self.contentsScale
         let w = Int32(self.bounds.width * scale)
         let h = Int32(self.bounds.height * scale)
-        
+
         guard w > 0 && h > 0 else { return }
 
         // Render MPV frame directly (thread-safe per MPV docs)
         renderLock.lock()
         defer { renderLock.unlock() }
-        
+
         guard let renderContext = wrapper.renderContext else { return }
 
         var flip: CInt = 1
@@ -301,7 +302,7 @@ class MPVViewLayer: CAOpenGLLayer {
 
             // CRITICAL: Tell Core Animation we need to redraw
             setNeedsDisplay()
-            
+
             // Force main thread update to wake up run loop and ensure window compositor picks up the frame
             // This fixes the "black screen until mouse move" issue
             // Coalesce updates to prevent flooding the main thread during animations
@@ -324,7 +325,7 @@ class MPVViewLayer: CAOpenGLLayer {
     func uninit() {
         renderLock.lock()
         defer { renderLock.unlock() }
-        
+
         guard !isUninited else { return }
         isUninited = true
         LoggingManager.shared.debug(.videoRendering, message: "MPVViewLayer uniniting...")

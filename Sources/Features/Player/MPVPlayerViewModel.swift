@@ -637,6 +637,7 @@ class MPVPlayerViewModel: ObservableObject {
     // Chat state
     @Published var showChat: Bool = false
     @Published var showParticipantList: Bool = false
+    @Published var activeChatMenuTarget: MenuTarget? = nil
 
     @Published var mutedUserIds: Set<String> = []
     private let mutedUsersKey = "redlemon_muted_users"

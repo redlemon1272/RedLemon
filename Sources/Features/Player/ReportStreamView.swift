@@ -54,110 +54,145 @@ struct ReportStreamView: View {
                         onDismiss()
                     }
                 }
-            } else {
-                Text("Report Stream")
-                    .font(.title2.bold())
+            } else if showTryAnotherConfirmation {
+                    // Custom Internal Confirmation UX (Avoids native cursor issues)
+                    VStack(spacing: 16) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 32))
+                            .foregroundColor(.orange)
 
-                Text("What's wrong with this stream?")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+                        Text("Try Another Stream?")
+                            .font(.headline)
 
-                VStack(spacing: 12) {
-                    ForEach(reasons, id: \.self) { reason in
-                        Button(action: {
-                            selectedReason = reason
-                        }) {
-                            HStack {
-                                Text(reason)
-                                Spacer()
-                                if selectedReason == reason {
-                                    Image(systemName: "checkmark")
-                                }
+                        Text("This will block this stream for this session and return everyone to the lobby. Use this only if the stream is incorrect or broken.")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+
+                        HStack(spacing: 12) {
+                            Button(action: {
+                                showTryAnotherConfirmation = false
+                            }) {
+                                Text("Cancel")
+                                    .font(.system(size: 13, weight: .medium))
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
+                                    .background(Color.white.opacity(0.1))
+                                    .cornerRadius(8)
                             }
-                            .padding()
-                            .background(Color.white.opacity(selectedReason == reason ? 0.2 : 0.05))
-                            .cornerRadius(12)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(selectedReason == reason ? Color.accentColor : Color.gray.opacity(0.3), lineWidth: 1)
-                            )
+                            .buttonStyle(PlainButtonStyle())
+
+                            Button(action: {
+                                onTryAnother?()
+                                onDismiss()
+                            }) {
+                                Text("Confirm & Block")
+                                    .font(.system(size: 13, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
+                                    .background(Color.red.opacity(0.8))
+                                    .cornerRadius(8)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                    .padding()
+                    .background(Color.black.opacity(0.3))
+                    .cornerRadius(16)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                } else {
+                    Text("Report Stream")
+                        .font(.title2.bold())
+
+                    Text("What's wrong with this stream?")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+
+                    VStack(spacing: 12) {
+                        ForEach(reasons, id: \.self) { reason in
+                            Button(action: {
+                                selectedReason = reason
+                            }) {
+                                HStack {
+                                    Text(reason)
+                                    Spacer()
+                                    if selectedReason == reason {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                                .padding()
+                                .background(Color.white.opacity(selectedReason == reason ? 0.2 : 0.05))
+                                .cornerRadius(12)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(selectedReason == reason ? Color.accentColor : Color.gray.opacity(0.3), lineWidth: 1)
+                                )
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+
+                    HStack(spacing: 16) {
+                        Button(action: {
+                            onDismiss()
+                        }) {
+                            Text("Cancel")
+                                .foregroundColor(.white.opacity(0.7))
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
+                                .background(Color.white.opacity(0.1))
+                                .cornerRadius(8)
                         }
                         .buttonStyle(PlainButtonStyle())
+                        .keyboardShortcut(.cancelAction)
+
+                        Button(action: {
+                            submitReport()
+                        }) {
+                            Text(isSubmitting ? "Submitting..." : "Submit Report")
+                                .font(.body.weight(.semibold))
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
+                                .background(Color.accentColor)
+                                .cornerRadius(8)
+                                .opacity((selectedReason == nil || isSubmitting) ? 0.5 : 1.0)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .disabled(selectedReason == nil || isSubmitting)
                     }
-                }
+                    .padding(.top, 10)
 
-
-
-                HStack(spacing: 16) {
-                    Button(action: {
-                        onDismiss()
-                    }) {
-                        Text("Cancel")
-                            .foregroundColor(.white.opacity(0.7))
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(Color.white.opacity(0.1))
-                            .cornerRadius(8)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .keyboardShortcut(.cancelAction)
-
-                    Button(action: {
-                        submitReport()
-                    }) {
-                        Text(isSubmitting ? "Submitting..." : "Submit Report")
-                            .font(.body.weight(.semibold))
+                    // Try Another Stream button
+                    if hasAlternativeStreams {
+                        Button(action: {
+                            withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                                if isWatchParty {
+                                    showTryAnotherConfirmation = true
+                                } else {
+                                    onTryAnother?()
+                                    onDismiss()
+                                }
+                            }
+                        }) {
+                            HStack(spacing: 6) {
+                                Image(systemName: "arrow.triangle.2.circlepath")
+                                Text("Try Another Stream")
+                            }
+                            .font(.body.weight(.medium))
                             .foregroundColor(.white)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(Color.accentColor)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
+                            .background(Color.blue.opacity(0.8))
                             .cornerRadius(8)
-                            .opacity((selectedReason == nil || isSubmitting) ? 0.5 : 1.0)
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .disabled(selectedReason == nil || isSubmitting)
-                }
-                .padding(.top, 10)
-
-                // Try Another Stream button
-                if hasAlternativeStreams {
-                    Button(action: {
-                        if isWatchParty {
-                            showTryAnotherConfirmation = true
-                        } else {
-                            onTryAnother?()
-                            onDismiss()
                         }
-                    }) {
-                        HStack(spacing: 6) {
-                            Image(systemName: "arrow.triangle.2.circlepath")
-                            Text("Try Another Stream")
-                        }
-                        .font(.body.weight(.medium))
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(Color.blue.opacity(0.8))
-                        .cornerRadius(8)
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.top, 8)
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding(.top, 8)
                 }
             }
-        }
-        .confirmationDialog(
-            "Try Another Stream?",
-            isPresented: $showTryAnotherConfirmation,
-            titleVisibility: .visible
-        ) {
-            Button("Try Another Stream", role: .destructive) {
-                onTryAnother?()
-                onDismiss()
-            }
-            Button("Cancel", role: .cancel) {}
-        } message: {
-            Text("This will block this stream for this session and return everyone to the lobby. Use this only if the stream is incorrect or broken.")
-        }
         .padding(30)
         .background(VisualEffectView(material: .hudWindow, blendingMode: .behindWindow))
         .cornerRadius(20)

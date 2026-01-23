@@ -387,7 +387,7 @@ struct ChatOverlayView: View {
                 // Custom Menu Trigger (Non-Blocking)
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.2)) {
-                        self.activeMenuTarget = MenuTarget(id: uid, username: username, isFriend: isFriend, isHost: isHost)
+                        viewModel.activeChatMenuTarget = MenuTarget(id: uid, username: username, isFriend: isFriend, isHost: isHost)
                     }
                 }) {
                     Image(systemName: "chevron.down")
@@ -422,7 +422,7 @@ struct ChatOverlayView: View {
                                 friends: socialService.friends,
                                 onMenuTrigger: { target in
                                     withAnimation(.easeInOut(duration: 0.2)) {
-                                        self.activeMenuTarget = target
+                                        viewModel.activeChatMenuTarget = target
                                     }
                                 }
                             )
@@ -495,7 +495,7 @@ struct ChatOverlayView: View {
                 friends: socialService.friends,
                 onMenuTrigger: { target in
                     withAnimation(.easeInOut(duration: 0.2)) {
-                        self.activeMenuTarget = target
+                        viewModel.activeChatMenuTarget = target
                     }
                 }
             )
@@ -843,15 +843,6 @@ struct ChatOverlayView: View {
 
     // MARK: - Custom User Menu (Non-Blocking)
 
-    // Identify target user for menu
-    struct MenuTarget: Equatable, Identifiable {
-        let id: String // userId
-        let username: String
-        let isFriend: Bool
-        let isHost: Bool // Is the user a host?
-    }
-
-    @State private var activeMenuTarget: MenuTarget? = nil
 
 
     // OPTIMIZATION: Extracted to Struct to enable View caching
@@ -946,12 +937,12 @@ struct ChatOverlayView: View {
     // Custom Overlay View
     private var customUserMenuOverlay: some View {
         ZStack {
-            if let target = activeMenuTarget {
+            if let target = viewModel.activeChatMenuTarget {
                 // Dimmed Background - Click to dismiss
                 Color.black.opacity(0.4)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
-                        withAnimation { activeMenuTarget = nil }
+                        withAnimation { viewModel.activeChatMenuTarget = nil }
                     }
 
                 // Menu Content
@@ -972,7 +963,7 @@ struct ChatOverlayView: View {
                         } else {
                             Task { _ = await socialService.sendRequest(toUserId: target.id) }
                         }
-                        withAnimation { activeMenuTarget = nil }
+                        withAnimation { viewModel.activeChatMenuTarget = nil }
                     }) {
                         HStack {
                             Image(systemName: target.isFriend ? "person.badge.minus" : "person.badge.plus")
@@ -990,7 +981,7 @@ struct ChatOverlayView: View {
                     let isMuted = viewModel.mutedUserIds.contains(target.id)
                     Button(action: {
                         viewModel.toggleMute(userId: target.id)
-                        withAnimation { activeMenuTarget = nil } // Optional: Keep open? Better to close.
+                        withAnimation { viewModel.activeChatMenuTarget = nil } // Optional: Keep open? Better to close.
                     }) {
                         HStack {
                             Image(systemName: isMuted ? "speaker.wave.2" : "speaker.slash")
@@ -1007,7 +998,7 @@ struct ChatOverlayView: View {
                     // Block
                     Button(action: {
                         viewModel.blockUser(target.id, username: target.username)
-                        withAnimation { activeMenuTarget = nil }
+                        withAnimation { viewModel.activeChatMenuTarget = nil }
                     }) {
                         HStack {
                             Image(systemName: "slash.circle")
@@ -1024,7 +1015,7 @@ struct ChatOverlayView: View {
                         Divider().background(Color.white.opacity(0.1))
                         Button(action: {
                             viewModel.kickUser(target.id)
-                            withAnimation { activeMenuTarget = nil }
+                            withAnimation { viewModel.activeChatMenuTarget = nil }
                         }) {
                              HStack {
                                 Image(systemName: "xmark.circle")
@@ -1040,7 +1031,7 @@ struct ChatOverlayView: View {
                     // Cancel/Close
                     Divider().background(Color.white.opacity(0.1))
                     Button(action: {
-                        withAnimation { activeMenuTarget = nil }
+                        withAnimation { viewModel.activeChatMenuTarget = nil }
                     }) {
                         Text("Close")
                             .font(.caption)

@@ -340,3 +340,12 @@ enum PresenceAction {
     case leave
 }
 
+
+// MARK: - Menu Target (for Social/Chat)
+
+struct MenuTarget: Equatable, Identifiable {
+    let id: String // userId
+    let username: String
+    let isFriend: Bool
+    let isHost: Bool // Is the user a host?
+}

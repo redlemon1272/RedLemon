@@ -226,8 +226,67 @@ struct MPVPlayerView: View {
 
                 ChatOverlayView(viewModel: viewModel, initialChatMode: initialMode)
                     .frame(width: geometry.size.width * 0.2)
-                    // .transition(.identity) // Explicitly no transition
                     .zIndex(100)
+            }
+        }
+        .onChange(of: showReportSheet) { isOpen in
+            if isOpen {
+                NSCursor.unhide()
+                cursorHideTimer?.invalidate()
+            }
+        }
+        .onChange(of: showPlaylistMenu) { isOpen in
+            if isOpen {
+                NSCursor.unhide()
+                cursorHideTimer?.invalidate()
+            }
+        }
+        .onChange(of: showAudioMenu) { isOpen in
+            if isOpen {
+                NSCursor.unhide()
+                cursorHideTimer?.invalidate()
+            }
+        }
+        .onChange(of: showSubtitleMenu) { isOpen in
+            if isOpen {
+                NSCursor.unhide()
+                cursorHideTimer?.invalidate()
+            }
+        }
+        .onChange(of: viewModel.showChat) { isOpen in
+            if isOpen {
+                NSCursor.unhide()
+                cursorHideTimer?.invalidate()
+            }
+        }
+        .onChange(of: viewModel.activeChatMenuTarget) { target in
+            if target != nil {
+                NSCursor.unhide()
+                cursorHideTimer?.invalidate()
+            }
+        }
+        .onChange(of: viewModel.showNextEpisodePrompt) { show in
+            if show {
+                NSCursor.unhide()
+                cursorHideTimer?.invalidate()
+            }
+        }
+        .onChange(of: viewModel.showWaitingForGuests) { show in
+            if show {
+                NSCursor.unhide()
+                cursorHideTimer?.invalidate()
+            }
+        }
+        .onChange(of: viewModel.showParticipantList) { show in
+            if show {
+                NSCursor.unhide()
+                cursorHideTimer?.invalidate()
+            }
+        }
+        .onChange(of: viewModel.showSettings) { show in
+            if show {
+                NSCursor.unhide()
+                cursorHideTimer?.invalidate()
             }
         }
         .onChange(of: geometry.size) { newSize in
@@ -244,8 +303,21 @@ struct MPVPlayerView: View {
 
                 // Reset cursor hide timer
                 cursorHideTimer?.invalidate()
-                cursorHideTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
-                    NSCursor.hide()
+                cursorHideTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { [mouseLocation] _ in
+                    // Don't hide cursor if any modal/overlay is open or if mouse is in chat area
+                    let windowWidth = NSApplication.shared.keyWindow?.frame.width ?? 1
+                    let chatThreshold = windowWidth * 0.8
+                    let isMouseInChat = viewModel.showChat && mouseLocation.x > chatThreshold
+
+                    let isAnyMenuOpen = showReportSheet || showPlaylistMenu || showAudioMenu || showSubtitleMenu ||
+                                       showStreamInfoSheet || showEventListMenu ||
+                                       viewModel.activeChatMenuTarget != nil ||
+                                       viewModel.showNextEpisodePrompt || viewModel.showWaitingForGuests || viewModel.showSubtitleSyncPanel ||
+                                       viewModel.showParticipantList || viewModel.showSettings
+
+                    if !isAnyMenuOpen && !isMouseInChat {
+                        NSCursor.hide()
+                    }
                 }
 
                 if let window = NSApplication.shared.keyWindow {
@@ -1206,8 +1278,9 @@ struct MPVPlayerView: View {
                                  showReportSheet = false
                              }
                          },
-                         // Enable "Try Another Stream" for solo playback with queue, and for Watch Party Hosts
-                         hasAlternativeStreams: (!viewModel.isInWatchParty && !appState.isEventPlayback && appState.player.streamQueue.count > 0) || viewModel.isWatchPartyHost,
+                         // Enable "Try Another Stream" only if queue has items (Matches Solo Behavior)
+                         // For Watch Party, strict limitation to Host only.
+                         hasAlternativeStreams: (!appState.isEventPlayback && appState.player.streamQueue.count > 0) && (!viewModel.isInWatchParty || viewModel.isWatchPartyHost),
                          isWatchParty: viewModel.isInWatchParty,
                          onTryAnother: {
                              if viewModel.isWatchPartyHost {
@@ -1218,8 +1291,8 @@ struct MPVPlayerView: View {
                                      provider: viewModel.streamTitle
                                  )
                              } else {
-                                 // Solo Playback Path: Simply try next in queue
-                                 appState.player.tryNextStream()
+                                 // Solo Playback Path: Explicitly reject current stream and try next
+                                 appState.player.tryAnotherStream()
                              }
                          }
                      )

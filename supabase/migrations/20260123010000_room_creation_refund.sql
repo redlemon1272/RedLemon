@@ -12,10 +12,10 @@ BEGIN
         RETURN OLD;
     END IF;
 
-    -- GRACE PERIOD: 30 minutes
-    -- Logic: If the room is deleted within 30 minutes of its creation,
+    -- GRACE PERIOD: 10 minutes
+    -- Logic: If the room is deleted within 10 minutes of its creation,
     -- we assume a technical failure or setup issue occurred and refund the credit.
-    IF (NOW() - OLD.created_at) < INTERVAL '30 minutes' THEN
+    IF (NOW() - OLD.created_at) < INTERVAL '10 minutes' THEN
         -- Delete the corresponding history record to restore the user's credit
         DELETE FROM public.room_creation_history
         WHERE user_id = OLD.host_user_id
@@ -40,5 +40,5 @@ EXECUTE FUNCTION public.maybe_refund_room_creation();
 
 -- 3. Documentation
 COMMENT ON FUNCTION public.maybe_refund_room_creation() IS
-    'Automatically restores a free user''s hosting credit if their room is closed within 30 minutes.
+    'Automatically restores a free user''s hosting credit if their room is closed within 10 minutes.
      This ensures connectivity issues or playback errors don''t waste their once-per-30-day/72-hour attempt.';

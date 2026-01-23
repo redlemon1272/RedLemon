@@ -73,6 +73,11 @@ struct RestoreAccountView: View {
                         Text(success)
                             .foregroundColor(.white)
                             .font(.headline)
+                        
+                        Text("RedLemon will restart to apply your backup.")
+                            .font(.subheadline)
+                            .foregroundColor(.green.opacity(0.8))
+                            .padding(.top, -4)
                     }
                     .transition(.scale.combined(with: .opacity))
                 }

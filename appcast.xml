@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.128 -->
+        <item>
+            <title>Version 1.0.128</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed RLS violation for room participants (Landmine #103)</li><li>Enforced cryptographic signing for guest connections</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 22 Jan 2026 22:18:23 -0500</pubDate>
+            <sparkle:version>128</sparkle:version>
+            <sparkle:shortVersionString>1.0.128</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.128.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="3l8U835Pa+avOIERA+VxyLY2+OlcBgekxuRIT56tCEeLV3c7e7B++Mz+XB5E8vQQKvonIMbbMCLTuWUNS1UMCA==" length="73598677"
+            />
+        </item>
         <!-- v1.0.127 -->
         <item>
             <title>Version 1.0.127</title>

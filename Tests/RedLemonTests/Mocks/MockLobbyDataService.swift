@@ -43,7 +43,7 @@ class MockLobbyDataService: LobbyDataService {
     func createRoom(
         id: String,
         name: String,
-        hostUserId: UUID,
+        hostUserId: UUID?,
         hostUsername: String,
         streamHash: String?,
         imdbId: String?,
@@ -55,7 +55,8 @@ class MockLobbyDataService: LobbyDataService {
         unlockedStreamUrl: String?,
         description: String?,
         playlist: [PlaylistItem]?,
-        subtitleUrl: String?
+        subtitleUrl: String?,
+        sourceQuality: String?
     ) async throws -> SupabaseRoom {
         createRoomCallCount += 1
         return SupabaseRoom(
@@ -77,9 +78,8 @@ class MockLobbyDataService: LobbyDataService {
             season: season,
             episode: episode,
             fileIdx: 0,
-
             quality: "1080p",
-            sourceQuality: nil,
+            sourceQuality: sourceQuality,
             unlockedStreamUrl: unlockedStreamUrl,
             playlist: playlist,
             currentPlaylistIndex: 0,
@@ -104,9 +104,6 @@ class MockLobbyDataService: LobbyDataService {
 
     func updateRoomPlayback(roomId: String, position: Int, isPlaying: Bool, shouldClearStream: Bool) async throws {
         updateRoomPlaybackCallCount += 1
-    }
-
-        // Mock Implementation
     }
 
     func updateRoomPrivacy(roomId: String, isPublic: Bool) async throws {
@@ -139,6 +136,10 @@ class MockLobbyDataService: LobbyDataService {
         resetPlayback: Bool
     ) async throws {
         updateRoomStreamCallCount += 1
+    }
+
+    func resetRoomStream(roomId: String) async throws {
+        // Mock Implementation
     }
 
     // MARK: - Participants & Presence

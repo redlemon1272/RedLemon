@@ -1625,3 +1625,32 @@ request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ...", forHTTPH
 request.timeoutInterval = 30
 ```
 
+---
+
+## Part 27: Performance & Parallelism Protocol
+
+### 1. Horizontal Scroll Overdraw (Landmine #111)
+**Symptom**: The Browse page feels "heavy", navigation jitters, and the Swift compiler takes a long time (or fails) on the View body.
+**Root Cause**: **"The Rows of Death"**. Rendering multiple (10+) nested horizontal `NSScrollView` or `ScrollView` instances inside a vertical list forces the system to maintain many off-screen layout contexts. On macOS, this leads to event contention and frame drops.
+**Mandatory Solution**: 
+1. **The Grid Pivot**: If a page requires more than 3-4 horizontal segments, pivot to a **Single Grid Layout with a Service Selector**.
+2. **Lazy Rendering**: Use `LazyVGrid` with `adaptive` columns for the main content. This limits the active view hierarchy to only what is visible.
+
+### 2. The Parallel Dispatch Mutation Trap (Landmine #112)
+**Symptom**: Build Error: `main actor-isolated property 'X' can not be mutated from a non-isolated context` when using `async let`.
+**Root Cause**: `async let` closures (e.g. `async let task: Void = { ... }()`) execute in a non-isolated detached context. Even if the parent `init` or method is `@MainActor`, the closure itself is not. Direct mutations of `@Published` properties within these closures will fail.
+**Mandatory Solution**: 
+1. **Capture Weakly**: Always use `[weak self]` in the closure to prevent retain cycles.
+2. **Local Variables**: Perform fetching/processing into local variables.
+3. **MainActor Commitment**: Use `await MainActor.run { self?.property = localResult }` to commit changes back to the UI state.
+
+```swift
+// ✅ CORRECT: Parallel loading with MainActor commitment
+async let loadHero: Void = { [weak self] in
+    let results = try await fetch()
+    await MainActor.run { [weak self] in
+        self?.data = results 
+    }
+}()
+```
+

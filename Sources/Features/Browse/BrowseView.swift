@@ -82,47 +82,80 @@ struct BrowseViewContent: View {
                                         onTap: { item in viewModel.selectMedia(item, fromRow: "popular") }
                                     )
                                     .id("popular")
-
-                                    // Trending section
+                                    
+                                    // Trending section (Hero)
                                     LazyStreamingServiceRow(
                                         title: viewModel.selectedTab == .movies ? "Trending Movies" : "Trending TV Shows",
                                         catalogKey: "trending",
                                         items: appState.browseCatalogs[viewModel.getStorageKey("trending")] ?? [],
                                         isLoading: appState.browseIsLoadingCatalogs.contains(viewModel.getStorageKey("trending")),
-                                        scrollOffset: nil, // PERF: Don't track scroll during scrolling
+                                        scrollOffset: nil,
                                         onTap: { item in viewModel.selectMedia(item, fromRow: "trending") },
-                                        onAppear: { await viewModel.loadCatalogIfNeeded(key: "trending", isTrending: true) },
-                                        onVisibilityChange: { key, visible in
-                                            if visible {
-                                                viewModel.visibleRowKeys.insert(key)
-                                            } else {
-                                                viewModel.visibleRowKeys.remove(key)
-                                            }
-                                        }
+                                        onAppear: { await viewModel.loadCatalogIfNeeded(key: "trending", isTrending: true) }
                                     )
                                     .id("trending")
 
-                                    // Streaming service catalogs
-                                    // PERF: Rows are all rendered, but catalogs load with staggered delays
-                                    ForEach(viewModel.getStreamingServiceKeys(), id: \.self) { serviceKey in
-                                        LazyStreamingServiceRow(
-                                            title: viewModel.getServiceDisplayName(serviceKey),
-                                            catalogKey: serviceKey,
-                                            items: appState.browseCatalogs[viewModel.getStorageKey(serviceKey)] ?? [],
-                                            isLoading: appState.browseIsLoadingCatalogs.contains(viewModel.getStorageKey(serviceKey)),
-                                            scrollOffset: nil, // PERF: Don't track scroll during scrolling
-                                            onTap: { item in viewModel.selectMedia(item, fromRow: serviceKey) },
-                                            onAppear: { await viewModel.loadCatalogIfNeeded(key: serviceKey) },
-                                            onVisibilityChange: { key, visible in
-                                                if visible {
-                                                    viewModel.visibleRowKeys.insert(key)
-                                                } else {
-                                                    viewModel.visibleRowKeys.remove(key)
+                                    Divider()
+                                        .padding(.horizontal)
+
+                                    // NEW: "Blazing Fast" Service Browse Grid
+                                    VStack(alignment: .leading, spacing: 16) {
+                                        HStack {
+                                            Text("Browse Services")
+                                                .font(.title2.weight(.bold))
+                                            
+                                            Spacer()
+                                            
+                                            Picker("Service", selection: $viewModel.selectedService) {
+                                                ForEach(viewModel.getStreamingServiceKeys(), id: \.self) { key in
+                                                    Text(viewModel.getServiceDisplayName(key)).tag(key)
                                                 }
                                             }
-                                        )
-                                        .id(serviceKey)
+                                            .pickerStyle(.menu)
+                                            .onChange(of: viewModel.selectedService) { newValue in
+                                                viewModel.handleServiceChange(to: newValue)
+                                            }
+                                        }
+                                        .padding(.horizontal)
+
+                                        if viewModel.isServiceLoading && (appState.browseCatalogs[viewModel.getStorageKey(viewModel.selectedService)] ?? []).isEmpty {
+                                            HStack {
+                                                Spacer()
+                                                ProgressView()
+                                                    .padding()
+                                                Spacer()
+                                            }
+                                            .frame(height: 400)
+                                        } else {
+                                            let items = appState.browseCatalogs[viewModel.getStorageKey(viewModel.selectedService)] ?? []
+                                            
+                                            if items.isEmpty {
+                                                VStack(spacing: 12) {
+                                                    Image(systemName: "film")
+                                                        .font(.system(size: 48))
+                                                        .foregroundColor(.secondary)
+                                                    Text("Loading service content...")
+                                                        .foregroundColor(.secondary)
+                                                }
+                                                .frame(maxWidth: .infinity)
+                                                .frame(height: 400)
+                                            } else {
+                                                // Grid layout matching Discover page's speed
+                                                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 20)], spacing: 20) {
+                                                    ForEach(items) { item in
+                                                        Button(action: {
+                                                            viewModel.selectMedia(item, fromRow: viewModel.selectedService)
+                                                        }) {
+                                                            OptimizedMediaCard(item: item)
+                                                        }
+                                                        .buttonStyle(.scalableMedia)
+                                                    }
+                                                }
+                                                .padding(.horizontal)
+                                            }
+                                        }
                                     }
+                                    .id("service-grid")
                                 }
                                 .padding(.bottom)
                             }
@@ -146,11 +179,8 @@ struct BrowseViewContent: View {
                 try? await Task.sleep(nanoseconds: 100_000_000) //100ms
             }
 
-            // Only load if content is missing
-            if (viewModel.selectedTab == .movies && appState.popularMovies.isEmpty) ||
-               (viewModel.selectedTab == .shows && appState.popularShows.isEmpty) {
-                await viewModel.loadContent()
-            }
+            // Load all content (Hero + Grid)
+            await viewModel.loadContent()
 
             viewModel.loadRecentlyWatched()
         }

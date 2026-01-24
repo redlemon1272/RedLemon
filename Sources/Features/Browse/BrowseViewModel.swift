@@ -12,6 +12,10 @@ class BrowseViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var selectedHistoryItem: WatchHistoryItem?
     
+    // Grid optimization: Track selected service for the main grid
+    @Published var selectedService: String = "netflix" 
+    @Published var isServiceLoading = false
+    
     // Performance optimization states
     @Published var isStabilizing = false
     @Published var isNavigating = false
@@ -101,8 +105,23 @@ class BrowseViewModel: ObservableObject {
             guard !Task.isCancelled else { return }
             
             await loadContent()
+            await loadSelectedService() // Immediately load the selected service for the grid
             await smartReloadStreamingServices()
         }
+    }
+    
+    func handleServiceChange(to serviceKey: String) {
+        selectedService = serviceKey
+        Task {
+            await loadSelectedService()
+        }
+    }
+    
+    func loadSelectedService() async {
+        isServiceLoading = true
+        let isTrending = selectedService == "trending"
+        await loadCatalogIfNeeded(key: selectedService, isTrending: isTrending)
+        isServiceLoading = false
     }
     
     func loadContent() async {
@@ -114,19 +133,40 @@ class BrowseViewModel: ObservableObject {
         }
         errorMessage = nil
         
-        do {
-            if selectedTab == .movies {
-                if appState.popularMovies.isEmpty {
-                    appState.popularMovies = try await apiClient.fetchPopularMovies()
+        // Start loading both sections in parallel for "blazing fast" experience
+        async let loadHero: Void = { [weak self] in
+            guard let self = self else { return }
+            do {
+                if await selectedTab == .movies {
+                    if await appState.popularMovies.isEmpty {
+                        let movies = try await apiClient.fetchPopularMovies()
+                        await MainActor.run { [weak self] in
+                            self?.appState.popularMovies = movies
+                        }
+                    }
+                } else if await selectedTab == .shows {
+                    if await appState.popularShows.isEmpty {
+                        let shows = try await apiClient.fetchPopularShows()
+                        await MainActor.run { [weak self] in
+                            self?.appState.popularShows = shows
+                        }
+                    }
                 }
-            } else if selectedTab == .shows {
-                if appState.popularShows.isEmpty {
-                    appState.popularShows = try await apiClient.fetchPopularShows()
+                
+                // ALSO load Trending for the hero section
+                await loadCatalogIfNeeded(key: "trending", isTrending: true)
+            } catch {
+                let desc = error.localizedDescription
+                await MainActor.run { [weak self] in
+                    self?.errorMessage = desc
                 }
             }
-        } catch {
-            errorMessage = error.localizedDescription
-        }
+        }()
+        
+        async let loadGrid = loadSelectedService()
+        
+        // Wait for both to complete
+        _ = await (loadHero, loadGrid)
         
         isLoading = false
     }
@@ -183,15 +223,16 @@ class BrowseViewModel: ObservableObject {
     // MARK: - Catalog Loading Logic
     
     func getStreamingServiceKeys() -> [String] {
-        if selectedTab == .movies {
-            return ["netflix", "prime", "disney", "hbo", "appleTv", "paramount", "hulu", "peacock", "starz", "showtime"]
-        } else {
-            return ["netflix", "prime", "disney", "hbo", "appleTv", "paramount", "hulu", "peacock", "starz", "showtime", "discovery"]
+        var baseKeys = ["netflix", "prime", "disney", "hbo", "appleTv", "paramount", "hulu", "peacock", "starz", "showtime"]
+        if selectedTab == .shows {
+            baseKeys.append("discovery")
         }
+        return baseKeys
     }
     
     func getServiceDisplayName(_ key: String) -> String {
         switch key {
+        case "trending": return "Trending Now"
         case "netflix": return "Netflix"
         case "prime": return "Prime Video"
         case "disney": return "Disney+"

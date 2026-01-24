@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 23, 2026 (Part 106: Visual Continuity - Landmine #106)
+> **Last Updated:** January 24, 2026 (Part 108: SwiftUI Partial Body Traps - Landmine #108)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -101,6 +101,8 @@
 | **Partial Payment Success** | Non-atomic write (Log success, Credit fail) | #104 |
 | **Stream Re-selection Loop** | Hashless streams bypass exclusion list | #105 |
 | **Flaky Background Art / Flicker** | Redundant state reset in loadStream | #106 |
+| **Missing Logos/Art (Text only)** | Lite MediaItem used without hydration | #107 |
+| **Compiler: Extraneous '}' / Redeclaration** | Partial SwiftUI Body Replacement Error | #108 |
 
 ## 🚨 Critical Landmines
 
@@ -461,6 +463,18 @@
     *   **Cause**: The Player ViewModel resets visual properties (`backgroundURL`, `posterURL`) to `nil` at the start of `loadStream` before refetching them. This breaks the "visual chain" from the Browse page.
     *   **Rule**: **Inherit UI State Sync**. ViewModels MUST copy visual state (backgrounds/logos) from the `AppState` metadata cache *synchronously* during initialization. 
     *   **Fix**: `MPVPlayerViewModel.swift` - Check `appState.player.selectedMetadata` and populate URLs immediately if the IMDB ID matches.
+
+107. **Metadata Hydration Trap (Detail Views)**: *(Added v1.0.139)*
+    *   **Trigger**: Navigating from a search/browse list to a detail-oriented view (like `QualitySelectionView`) relying solely on the passed `MediaItem`.
+    *   **Symptom**: High-fidelity assets (Logos, Backgrounds) are missing or low-res. Text title shows instead of Logo.
+    *   **Cause**: List widgets (Cinemeta/Trakt) often provide "Lite" models optimized for grid scrolling. They lack deep links or high-res art found in the full metadata.
+    *   **Rule**: **Always Hydrate**. Views that require high-fidelity assets MUST explicitly fetch full metadata (`fetchMetadata`) on appear or init. Never assume a `MediaItem` from a list is complete.
+
+108. **SwiftUI Partial Body Replacement Trap (The "Extraneous Brace")**: *(Added v1.0.139)*
+    *   **Trigger**: Using AI tools to surgically replace *parts* of a SwiftUI `body` property.
+    *   **Symptom**: Compiler errors: `extraneous '}' at top level` or `invalid redeclaration of 'body'`.
+    *   **Cause**: SwiftUI's deeply nested closure syntax (stacks inside stacks) makes it incredibly clumsy for regex/line-based partial replacements. A single missed brace corrupts the entire file structure.
+    *   **Rule**: **Atomic Replacement**. When modifying a complex SwiftUI `body`, the AI MUST replace the **ENTIRE** `body` property (or the whole `struct`), never just a sub-section. It is safer to re-print 50 lines than to spend 3 cycles fixing brace mismatches.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

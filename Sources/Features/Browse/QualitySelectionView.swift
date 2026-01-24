@@ -11,227 +11,309 @@ struct QualitySelectionView: View {
     @State private var isPublicRoom: Bool = true
     @State private var showPremiumSheet: Bool = false
     @StateObject private var licenseManager = LicenseManager.shared
+    
+    @State private var metadata: MediaMetadata?
+    @State private var isLoading = true
 
     var body: some View {
-        VStack(spacing: 0) {
-            // Back button toolbar
-            HStack {
-                Button(action: {
-                    appState.currentView = .mediaDetail
-                }) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 14, weight: .semibold))
-                        Text("Back")
-                            .font(.system(size: 15, weight: .semibold))
-                    }
-                    .foregroundColor(.primary)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(Color.primary.opacity(0.1))
-                    .cornerRadius(8)
-                }
-                .buttonStyle(PlainButtonStyle())
-                .padding()
-
-                Spacer()
-            }
-            .background(Color(NSColor.windowBackgroundColor))
-
-            // Content - No ScrollView, everything fits
-            VStack(spacing: 0) {
-                // Header
-                VStack(spacing: 8) {
-                    Text(mediaItem.name)
-                        .font(.title2.weight(.bold))
-
-
-                    if let year = mediaItem.year {
-                        Text(year)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-                }
-                .padding(.top, 20)
-
-                Spacer()
-
-                // Main content - Centered Watch Mode
-                VStack(alignment: .center, spacing: 24) {
-                    // Watch Mode Selection
-                    VStack(alignment: .center, spacing: 16) {
-                        Text("Watch Mode")
-                            .font(.headline)
-                            .foregroundColor(.primary)
-
-                        HStack(spacing: 24) {
-                            Button(action: {
-                                watchMode = .solo
-                            }) {
-                                WatchModeButton(
-                                    title: "Watch Solo",
-                                    icon: "person.fill",
-                                    description: "Private room",
-                                    isSelected: watchMode == .solo
-                                )
-                            }
-                            .buttonStyle(.plain)
-                            .frame(width: 180, height: 120)
-
-                            Button(action: {
-                                watchMode = .watchParty
-                            }) {
-                                WatchModeButton(
-                                    title: "Watch Party",
-                                    icon: "person.3.fill",
-                                    description: "Invite friends",
-                                    isSelected: watchMode == .watchParty
-                                )
-                            }
-                            .buttonStyle(.plain)
-                            .frame(width: 180, height: 120)
+        GeometryReader { geometry in
+            ZStack(alignment: .topLeading) {
+                // Blurred background art
+                if let metadata = metadata, let background = metadata.backgroundURL ?? mediaItem.background, let url = URL(string: background) {
+                    AsyncImage(url: url) { phase in
+                        switch phase {
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geometry.size.width, height: geometry.size.height)
+                                .blur(radius: 40)
+                                .overlay(Color.black.opacity(0.7))
+                                .clipped()
+                        case .failure(_), .empty:
+                            Color(NSColor.windowBackgroundColor)
+                                .frame(width: geometry.size.width, height: geometry.size.height)
+                        @unknown default:
+                            Color(NSColor.windowBackgroundColor)
+                                .frame(width: geometry.size.width, height: geometry.size.height)
                         }
+                    }
+                } else if let background = mediaItem.background, let url = URL(string: background) {
+                    // Fallback to mediaItem background if metadata not yet loaded
+                     AsyncImage(url: url) { phase in
+                         if case .success(let image) = phase {
+                             image
+                                 .resizable()
+                                 .aspectRatio(contentMode: .fill)
+                                 .frame(width: geometry.size.width, height: geometry.size.height)
+                                 .blur(radius: 40)
+                                 .overlay(Color.black.opacity(0.7))
+                                 .clipped()
+                         } else {
+                             Color(NSColor.windowBackgroundColor)
+                         }
+                     }
+                } else {
+                    Color(NSColor.windowBackgroundColor)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                }
 
-                        // Free user warning when Watch Party is selected
-                        if watchMode == .watchParty && !licenseManager.isPremium {
-                            if licenseManager.timeUntilNextFreeRoom > 0 {
-                                // CASE 1: BLOCKED (Cooldown Active)
-                                HStack(spacing: 8) {
-                                    Image(systemName: "clock.badge.exclamationmark.fill")
-                                        .foregroundColor(.red)
-                                    VStack(alignment: .leading, spacing: 2) {
-                                        Text("Limit Reached")
-                                            .font(.subheadline.weight(.bold))
-                                            .foregroundColor(.red)
+                VStack(spacing: 0) {
+                    // Back button toolbar
+                    HStack {
+                        Button(action: {
+                            appState.currentView = .mediaDetail
+                        }) {
+                            HStack(spacing: 6) {
+                                Image(systemName: "chevron.left")
+                                .font(.system(size: 14, weight: .semibold))
+                                Text("Back")
+                                .font(.system(size: 15, weight: .semibold))
+                            }
+                            .foregroundColor(.white) // Use white for better contrast
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Color.white.opacity(0.1)) // More subtle background
+                            .cornerRadius(8)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding()
 
-                                        Text("Next free party in: \(licenseManager.formattedCooldownTime)")
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                    .background(Color.clear) // Transparent background for toolbar
+
+                    // Content - No ScrollView, everything fits
+                    VStack(spacing: 0) {
+                        // Header
+                        VStack(spacing: 8) {
+                            // Try to use fetched metadata logo first, then fall back to passed mediaItem logo, then text
+                            if let logoString = metadata?.logoURL ?? mediaItem.logo, 
+                               let url = URL(string: logoString) {
+                                // Logo Art
+                                AsyncImage(url: url) { phase in
+                                    switch phase {
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(maxHeight: 120) 
+                                            .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
+                                    case .failure(_):
+                                        Text(mediaItem.name)
+                                            .font(.title2.weight(.bold))
+                                            .multilineTextAlignment(.center)
+                                            .foregroundColor(.white)
+                                    case .empty:
+                                        // While loading the image, show text softly or just space
+                                        Text(mediaItem.name)
+                                            .font(.title2.weight(.bold))
+                                            .multilineTextAlignment(.center)
+                                            .opacity(0.3)
+                                            .foregroundColor(.white)
+                                    @unknown default:
+                                        EmptyView()
                                     }
-                                    Spacer()
-                                    Button("Upgrade") {
-                                        showPremiumSheet = true
-                                    }
-                                    .font(.system(size: 12, weight: .semibold))
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 6)
-                                    .background(Color.accentColor)
-                                    .cornerRadius(6)
                                 }
-                                .padding(12)
-                                .background(Color.red.opacity(0.1))
-                                .cornerRadius(10)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.red.opacity(0.3), lineWidth: 1)
-                                )
-                                .frame(maxWidth: 400)
-                                .padding(.top, 8)
                             } else {
-                                // CASE 2: ALLOWED (Warning about consumption)
-                                HStack(spacing: 8) {
-                                    Image(systemName: "exclamationmark.triangle.fill")
-                                        .foregroundColor(.orange)
-                                    VStack(alignment: .leading, spacing: 2) {
-                                        Text("Starting will use your weekly free party")
-                                            .font(.subheadline.weight(.medium))
-
-                                        Text("Free users can host 1 room every 168 hours (7 days)")
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-                                    }
-                                    Spacer()
-                                    Button("Upgrade") {
-                                        showPremiumSheet = true
-                                    }
-                                    .font(.system(size: 12, weight: .semibold))
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 6)
-                                    .background(Color.accentColor)
-                                    .cornerRadius(6)
+                                // Plain Text Fallback (or loading state)
+                                if isLoading {
+                                     ProgressView()
+                                        .scaleEffect(0.5)
+                                        .colorScheme(.dark)
+                                } else {
+                                    Text(mediaItem.name)
+                                        .font(.title2.weight(.bold))
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(.white)
                                 }
-                                .padding(12)
-                                .background(Color.orange.opacity(0.1))
-                                .cornerRadius(10)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.orange.opacity(0.3), lineWidth: 1)
-                                )
-                                .frame(maxWidth: 400)
-                                .padding(.top, 8)
+                            }
+
+                            if let year = mediaItem.year {
+                                Text(year)
+                                    .font(.subheadline)
+                                    .foregroundColor(.white.opacity(0.7))
                             }
                         }
+                        .padding(.top, 20)
 
-                        // NEW: Room Settings (Only for Watch Party)
-                        if watchMode == .watchParty {
-                            VStack(alignment: .center, spacing: 12) {
-                                Text("Room Settings")
+                        Spacer()
+
+                        // Main content - Centered Watch Mode
+                        VStack(alignment: .center, spacing: 24) {
+                            // Watch Mode Selection
+                            VStack(alignment: .center, spacing: 16) {
+                                Text("Watch Mode")
                                     .font(.headline)
-                                    .foregroundColor(.primary)
-                                    .padding(.top, 4)
+                                    .foregroundColor(.white)
 
-                                TextField("Room Description (optional)", text: $roomDescription)
-                                    .textFieldStyle(PlainTextFieldStyle())
-                                    .multilineTextAlignment(.center)
-                                    .padding(8)
-                                    .background(Color.secondary.opacity(0.1))
-                                    .cornerRadius(8)
-                                    .frame(width: 300)
+                                HStack(spacing: 24) {
+                                    Button(action: {
+                                        watchMode = .solo
+                                    }) {
+                                        WatchModeButton(
+                                            title: "Watch Solo",
+                                            icon: "person.fill",
+                                            description: "Private room",
+                                            isSelected: watchMode == .solo
+                                        )
+                                    }
+                                    .buttonStyle(.plain)
+                                    .frame(width: 180, height: 120)
 
-                                Toggle("Public Room (Visible in Browse)", isOn: $isPublicRoom)
-                                    .toggleStyle(SwitchToggleStyle(tint: .accentColor))
+                                    Button(action: {
+                                        watchMode = .watchParty
+                                    }) {
+                                        WatchModeButton(
+                                            title: "Watch Party",
+                                            icon: "person.3.fill",
+                                            description: "Invite friends",
+                                            isSelected: watchMode == .watchParty
+                                        )
+                                    }
+                                    .buttonStyle(.plain)
+                                    .frame(width: 180, height: 120)
+                                }
+
+                                // Free user warning when Watch Party is selected
+                                if watchMode == .watchParty && !licenseManager.isPremium {
+                                    if licenseManager.timeUntilNextFreeRoom > 0 {
+                                        // CASE 1: BLOCKED (Cooldown Active)
+                                        HStack(spacing: 8) {
+                                            Image(systemName: "clock.badge.exclamationmark.fill")
+                                                .foregroundColor(.red)
+                                            VStack(alignment: .leading, spacing: 2) {
+                                                Text("Limit Reached")
+                                                    .font(.subheadline.weight(.bold))
+                                                    .foregroundColor(.red)
+
+                                                Text("Next free party in: \(licenseManager.formattedCooldownTime)")
+                                                    .font(.caption)
+                                                    .foregroundColor(.white.opacity(0.7))
+                                            }
+                                            Spacer()
+                                            Button("Upgrade") {
+                                                showPremiumSheet = true
+                                            }
+                                            .font(.system(size: 12, weight: .semibold))
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 12)
+                                            .padding(.vertical, 6)
+                                            .background(Color.accentColor)
+                                            .cornerRadius(6)
+                                        }
+                                        .padding(12)
+                                        .background(Color.red.opacity(0.1))
+                                        .cornerRadius(10)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(Color.red.opacity(0.3), lineWidth: 1)
+                                        )
+                                        .frame(maxWidth: 400)
+                                        .padding(.top, 8)
+                                    } else {
+                                        // CASE 2: ALLOWED (Warning about consumption)
+                                        HStack(spacing: 8) {
+                                            Image(systemName: "exclamationmark.triangle.fill")
+                                                .foregroundColor(.orange)
+                                            VStack(alignment: .leading, spacing: 2) {
+                                                Text("Free users can host 1 room every 168 hours (7 days)")
+                                                    .font(.caption)
+                                                    .foregroundColor(.white.opacity(0.7))
+                                                    .fixedSize(horizontal: false, vertical: true)
+                                            }
+                                            Spacer()
+                                            Button("Upgrade") {
+                                                showPremiumSheet = true
+                                            }
+                                            .font(.system(size: 12, weight: .semibold))
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 12)
+                                            .padding(.vertical, 6)
+                                            .background(Color.accentColor)
+                                            .cornerRadius(6)
+                                        }
+                                        .padding(12)
+                                        .background(Color.orange.opacity(0.1))
+                                        .cornerRadius(10)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+                                        )
+                                        .frame(maxWidth: 400)
+                                        .padding(.top, 8)
+                                    }
+                                }
+
+                                // NEW: Room Settings (Only for Watch Party)
+                                if watchMode == .watchParty {
+                                    VStack(alignment: .center, spacing: 12) {
+                                        Text("Room Settings")
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                            .padding(.top, 4)
+
+                                        TextField("Room Description (optional)", text: $roomDescription)
+                                            .textFieldStyle(PlainTextFieldStyle())
+                                            .multilineTextAlignment(.center)
+                                            .padding(8)
+                                            .background(Color.white.opacity(0.1))
+                                            .foregroundColor(.white)
+                                            .cornerRadius(8)
+                                            .frame(width: 300)
+
+                                        Toggle("Public Room (Visible in Browse)", isOn: $isPublicRoom)
+                                            .toggleStyle(SwitchToggleStyle(tint: .accentColor))
+                                            .foregroundColor(.white)
+                                    }
+                                    .transition(.opacity)
+                                    .padding(.top, 8)
+                                }
                             }
-                            .transition(.opacity)
-                            .padding(.top, 8)
                         }
+                        .padding(.horizontal, 40)
+
+                        Spacer()
+
+                        // Action Buttons - Use white text and transparent backgrounds for harmony
+                        VStack(spacing: 12) {
+                            if appState.player.isResolvingStream || appState.isLoadingRoom {
+                                ProgressView(appState.isLoadingRoom ? "Creating room..." : "Finding best stream...")
+                                    .frame(maxWidth: .infinity, minHeight: 50)
+                                    .padding()
+                                    .colorScheme(.dark)
+                                    .id("loading-progress")
+                            } else {
+                                Button(action: startPlayback) {
+                                    HStack {
+                                        Image(systemName: watchMode == .watchParty ? "person.3.fill" : "play.fill")
+                                        Text(watchMode == .watchParty ? "Create Room" : "Start Watching")
+                                            .font(.body.weight(.semibold))
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 14)
+                                    .background(Color.accentColor)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                                }
+                                .buttonStyle(.plain)
+
+                                if let error = appState.player.streamError {
+                                    Text(error)
+                                        .font(.caption)
+                                        .foregroundColor(.red)
+                                        .multilineTextAlignment(.center)
+                                        .padding(.horizontal)
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 40)
+                        .padding(.bottom, 30)
+                        
                     }
                 }
-                .padding(.horizontal, 40)
-
-                Spacer()
-
-                // Action Buttons
-                VStack(spacing: 12) {
-                    if appState.player.isResolvingStream || appState.isLoadingRoom {
-                        ProgressView(appState.isLoadingRoom ? "Creating room..." : "Finding best stream...")
-                            .frame(maxWidth: .infinity, minHeight: 50)
-                            .padding()
-                            .id("loading-progress") // Force stable identity
-                    } else {
-                        Button(action: startPlayback) {
-                            HStack {
-                                Image(systemName: "play.fill")
-                                Text("Start Watching")
-                                    .font(.body.weight(.semibold))
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Color.accentColor)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                        }
-                        .buttonStyle(.plain)
-
-                        if let error = appState.player.streamError {
-                            Text(error)
-                                .font(.caption)
-                                .foregroundColor(.red)
-                                .multilineTextAlignment(.center)
-                                .padding(.horizontal)
-                        }
-                    }
-
-                    Button("Cancel") {
-                        appState.currentView = .mediaDetail
-                    }
-                    .foregroundColor(.secondary)
-                }
-                .padding(.horizontal, 40)
-                .padding(.bottom, 30)
             }
-
+        }
         .sheet(isPresented: $showPremiumSheet) {
             PremiumPaymentView()
         }
@@ -257,6 +339,11 @@ struct QualitySelectionView: View {
             Task {
                 await licenseManager.checkHostingLimit()
             }
+            
+            // Load metadata to ensure we have the logo
+            Task {
+                await loadMetadata()
+            }
 
             // Sync with global state (e.g. if coming from "Resume Watch Party")
             if appState.player.currentWatchMode == .watchParty {
@@ -264,6 +351,24 @@ struct QualitySelectionView: View {
             }
         }
     }
+
+    private func loadMetadata() async {
+        isLoading = true
+        defer { isLoading = false }
+        
+        // If we already have a logo in mediaItem, we might not strictly NEED this, 
+        // but often the list item doesn't have it.
+        if mediaItem.logo != nil { 
+            // We have a logo already? Let's assume passed item is good for now, 
+            // but the user says it's failing. So likely mediaItem.logo is nil.
+        }
+
+        do {
+            let client = LocalAPIClient()
+            self.metadata = try await client.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
+        } catch {
+            print("Failed to load metadata in QualitySelection: \(error)")
+        }
     }
 
     private func startPlayback() {
@@ -318,5 +423,6 @@ struct WatchModeButton: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(isSelected ? Color.accentColor : Color.secondary.opacity(0.3), lineWidth: 2)
         )
+        .contentShape(Rectangle()) // Hit testing for entire area
     }
 }

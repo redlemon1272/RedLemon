@@ -146,10 +146,15 @@ echo -e "${BLUE}   Uploading RedLemon-v${VERSION}.dmg...${NC}"
 echo -e "${BLUE}   Uploading appcast.xml...${NC}"
 ./remote_scp.sh "$APPCAST_FILE" "/root/updates/appcast.xml"
 
+# Update Latest Symlink
+echo -e "${YELLOW}🔗 Updating 'latest' symlink on server...${NC}"
+./remote_exec.sh "cd /root/updates && ln -sf RedLemon-v${VERSION}.dmg RedLemon-latest.dmg"
+
 echo ""
 echo -e "${GREEN}✅ Release v${VERSION} (${BUILD_NUMBER}) Deployed Successfully!${NC}"
 echo "---------------------------------------------------"
 echo "Public Update URL: https://151.243.109.243.nip.io/updates/appcast.xml"
+echo "Latest Download URL: https://151.243.109.243.nip.io/updates/RedLemon-latest.dmg"
 echo "---------------------------------------------------"
 echo "Next steps:"
 echo "1. Commit and push appcast.xml to GitHub (for backup)"

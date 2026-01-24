@@ -695,7 +695,25 @@ struct MPVPlayerView: View {
         } else if viewModel.isExitingSession {
             LoadingOverlay(streamTitle: "", message: "Closing...")
         } else if viewModel.isLoading {
-            let message = (viewModel.isBuffering && viewModel.mpvWrapper.isFileLoaded) ? "Buffering..." : "Loading stream..."
+            let message: String = {
+                // Default message
+                var msg = (viewModel.isBuffering && viewModel.mpvWrapper.isFileLoaded) ? "Buffering..." : "Loading stream..."
+                
+                // Watch Party Ready Gate Heuristic:
+                // If we are in a watch party, file is loaded, NOT playing, and at the very beginning (time < 2s),
+                // we are likely at the "Ready Gate" waiting for sync.
+                let isAtReadyGate = viewModel.isInWatchParty && 
+                                    viewModel.mpvWrapper.isFileLoaded && 
+                                    !viewModel.isPlaying && 
+                                    viewModel.currentTime < 2.0
+                
+                if isAtReadyGate {
+                    msg = viewModel.isWatchPartyHost ? "Waiting for guests..." : "Waiting for host..."
+                }
+                
+                return msg
+            }()
+            
             LoadingOverlay(streamTitle: viewModel.streamTitle, message: message)
         }
 

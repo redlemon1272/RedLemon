@@ -1689,3 +1689,18 @@ if isPlaying && hasCompletedInitialTrackSelection && getCurrentSubtitleTrack() !
     return // Only block if we already have a track (preventing flash)
 }
 ```
+
+### 5. The Playlist Sync Race (Landmine #115)
+**Symptom**: Host switches a playlist item and then immediately clicks "Start". Guests play the *previous* item.
+**Root Cause**: **Causal Inconsistency**. When the host switches items and then starts playback rapidly, guests may receive the "Start" signal and fetch the room state before the previous playlist update has finished propagating across database clusters.
+**Mandatory Solution**: 
+1. **Host Interlock**: Implement an `isPlaylistSyncing` flag in `LobbyViewModel`.
+2. **Artificial Delay**: Set the flag to `true` when switching items and wait at least **800ms** after the DB update completes before setting it back to `false`.
+3. **UI Blocking**: Disable the "Start Playback" button while `isPlaylistSyncing` is active.
+
+```swift
+// ✅ CORRECT: Delaying start for propagation
+try await self.dataService.updateRoomPlaylist(...)
+try? await Task.sleep(nanoseconds: 800_000_000) // 800ms grace period
+self.isPlaylistSyncing = false
+```

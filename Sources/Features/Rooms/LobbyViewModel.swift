@@ -19,6 +19,7 @@ class LobbyViewModel: ObservableObject {
 
     @Published var isReady: Bool = false
     @Published var isStarting: Bool = false
+    @Published var isPlaylistSyncing: Bool = false // Host Interlock: prevents race condition on item switch
     @Published var isAwaitingGuests: Bool = false // FIX (v1.0.77): Track guest sync phase for better UX
 
     @Published var countdown: Int = 3
@@ -1996,6 +1997,9 @@ class LobbyViewModel: ObservableObject {
         // CRITICAL: Reset ready state
         self.isReady = false
 
+        // NEW: Enable sync lock
+        self.isPlaylistSyncing = true
+
         Task { [weak self] in
             guard let self = self else { return }
             // Prepare metadata to send
@@ -2051,8 +2055,19 @@ class LobbyViewModel: ObservableObject {
                     currentIndex: index
                 )
                 print("✅ Supabase: Room metadata & playlist updated")
+                
+                // CRITICAL FIX: Add a small grace period for DB propagation
+                // before releasing the "Start Playback" button for the host.
+                try? await Task.sleep(nanoseconds: 800_000_000) // 800ms
+                
+                await MainActor.run {
+                    self.isPlaylistSyncing = false
+                }
             } catch {
                 print("❌ Supabase: Failed to update room: \(error)")
+                await MainActor.run {
+                    self.isPlaylistSyncing = false
+                }
             }
         }
     }

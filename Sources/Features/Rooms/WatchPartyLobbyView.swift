@@ -769,17 +769,22 @@ struct WatchPartyLobbyView: View {
                             startMovie()
                         }) {
                             HStack {
-                                Image(systemName: "play.fill")
-                                Text("Start Playback")
+                                if viewModel.isPlaylistSyncing {
+                                    ProgressView().scaleEffect(0.6).padding(.trailing, 4)
+                                    Text("Syncing Selection...")
+                                } else {
+                                    Image(systemName: "play.fill")
+                                    Text("Start Playback")
+                                }
                             }
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.accentColor)
+                            .background(viewModel.isPlaylistSyncing ? Color.gray : Color.accentColor)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                         }
                         .buttonStyle(.plain)
-                        .disabled(viewModel.isStarting)
+                        .disabled(viewModel.isStarting || viewModel.isPlaylistSyncing)
 
                         if viewModel.isResolvingStream {
                             HStack {

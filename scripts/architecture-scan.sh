@@ -1084,6 +1084,22 @@ if [[ -f "$SUB_SERVICE" ]]; then
     echo -e "${GREEN}✅ Subtitle availability and decoding verified.${NC}"
 fi
 
+# =============================================================================
+# CHECK 49: Playlist Sync Interlock (Landmine #115)
+# =============================================================================
+print_header "Check 49: Playlist Sync Interlock (Landmine #115)"
+LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
+if [[ -f "$LOBBY_VM" ]]; then
+    # Rule: playItem(at:) must use isPlaylistSyncing and Task.sleep(800ms+)
+    if ! grep -q "isPlaylistSyncing = true" "$LOBBY_VM"; then
+        report "ERROR" "Landmine #115" "Sync Risk: LobbyViewModel MUST use isPlaylistSyncing to interlock the Start button during item switches." "$LOBBY_VM" "0" "Missing isPlaylistSyncing lock"
+    fi
+    if ! grep -q "Task.sleep(nanoseconds: 800_000_000)" "$LOBBY_VM"; then
+        report "WARNING" "Landmine #115" "UX Warning: LobbyViewModel should use at least an 800ms grace period for DB propagation." "$LOBBY_VM" "0" "Missing Task.sleep(800ms) in playlist sync"
+    fi
+     echo -e "${GREEN}✅ Playlist sync interlock verified.${NC}"
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.140 -->
+        <item>
+            <title>Version 1.0.140</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>GUI: Watch Party 'Ready Gate' now explicitly shows 'Waiting for guests...' or 'Waiting for host...' instead of 'Buffering...' to provide better clarity during synchronization.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 12:33:42 -0500</pubDate>
+            <sparkle:version>140</sparkle:version>
+            <sparkle:shortVersionString>1.0.140</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.140.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ouUN1PAN8ZDA8/sufXlCauMLK2bmauU7hgX4JxY+E5lQgk+ZI3U/4UpCslAh4Y5ZgDV7mgHaR7XTrNTSOyIMCA==" length="73419559"
+            />
+        </item>
         <!-- vv1.0.139 -->
         <item>
             <title>Version v1.0.139</title>

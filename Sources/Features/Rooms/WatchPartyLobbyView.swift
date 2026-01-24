@@ -14,6 +14,7 @@ struct WatchPartyLobbyView: View {
     @State private var showDescriptionEditor = false
     @State private var editingDescription: String = ""
     @StateObject private var licenseManager = LicenseManager.shared
+    @FocusState private var isChatInputFocused: Bool
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
     init(viewModel: LobbyViewModel) {
@@ -56,6 +57,12 @@ struct WatchPartyLobbyView: View {
         .onAppear {
             viewModel.appState = appState  // Set weak reference
             viewModel.connect()
+
+            // Auto-focus chat input for immediate engagement
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s delay to allow view to settle
+                isChatInputFocused = true
+            }
 
             // Broadcast "In Lobby" status
             Task {
@@ -464,14 +471,17 @@ struct WatchPartyLobbyView: View {
                             }
                         } else {
                             // Main Tabs
-                            Button(action: { sidebarTab = .chat }) {
+                            Button(action: { 
+                                sidebarTab = .chat 
+                                isChatInputFocused = true
+                            }) {
                                 VStack(spacing: 4) {
                                     HStack {
                                         Image(systemName: "bubble.left.and.bubble.right.fill")
                                         Text("Chat")
                                     }
                                     .foregroundColor(sidebarTab == .chat ? .white : .white.opacity(0.6))
-
+ 
                                     // Active Indicator
                                     Rectangle()
                                         .fill(sidebarTab == .chat ? Color.accentColor : Color.clear)
@@ -739,6 +749,7 @@ struct WatchPartyLobbyView: View {
 
                                             TextField("Send a message...", text: $viewModel.chatInput)
                                                 .textFieldStyle(PlainTextFieldStyle())
+                                                .focused($isChatInputFocused)
                                                 .padding(8)
                                                 .background(Color.white.opacity(0.1))
                                                 .cornerRadius(8)

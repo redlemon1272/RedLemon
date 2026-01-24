@@ -2691,7 +2691,7 @@ extension MPVPlayerViewModel {
                 Task { [weak self] in
                     guard let self = self else { return }
                     await self.cleanup(returningToLobby: true)
-                    await self.appState?.player.exitPlayer(keepRoomState: true)
+                    await self.appState?.player.exitPlayer(keepRoomState: true, notifyGuests: false)
                     await MainActor.run {
                         self.appState?.currentView = .watchPartyLobby
                     }

@@ -1061,7 +1061,7 @@ class PlayerViewModel: ObservableObject {
             try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s
 
             // 3. Exit player and return to lobby locally
-            await exitPlayer(keepRoomState: true)
+            await exitPlayer(keepRoomState: true, notifyGuests: false)
         }
     }
 
@@ -1228,7 +1228,7 @@ class PlayerViewModel: ObservableObject {
         enterFullscreen()
     }
 
-    func exitPlayer(keepRoomState: Bool = false) async {
+    func exitPlayer(keepRoomState: Bool = false, notifyGuests: Bool = true) async {
         // 1. Idempotency Check - prevent multiple simultaneous exit calls
         // This stops the dual-trigger from MPVPlayerView (onDisappear + manual click)
         guard showPlayer else {
@@ -1236,7 +1236,7 @@ class PlayerViewModel: ObservableObject {
             return
         }
 
-        LoggingManager.shared.info(.videoRendering, message: "PlayerVM: exitPlayer called (keepRoomState: \(keepRoomState))")
+        LoggingManager.shared.info(.videoRendering, message: "PlayerVM: exitPlayer called (keepRoomState: \(keepRoomState), notifyGuests: \(notifyGuests))")
 
         // Capture state before ANY property resets
         let wasFullscreen = NSApplication.shared.windows.first(where: { $0.isVisible && $0.styleMask.contains(.fullScreen) }) != nil
@@ -1259,10 +1259,11 @@ class PlayerViewModel: ObservableObject {
         // CRITICAL: Lobby State Sync (Keep this before clearing showPlayer)
         if keepRoomState {
              appState?.activeLobbyViewModel?.markPlaybackEnded()
-             if isWatchPartyHost {
+             if isWatchPartyHost && notifyGuests {
                   appState?.activeLobbyViewModel?.announceReturnToLobby()
              }
-        } else {
+        }
+ else {
              if let roomId = currentRoomId {
                  LoggingManager.shared.info(.watchParty, message: "Leaving room: \(roomId)")
              }

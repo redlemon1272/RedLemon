@@ -359,6 +359,12 @@ class LobbyEventRouter: ObservableObject {
 
         NSLog("🎬 Guest: Received LOBBY_RETURN signal from Host")
 
+        // FIX: Ignore Self-Echo (Landmine #95) - Don't process return signal from self
+        if let senderId = syncMessage.senderId, senderId.caseInsensitiveCompare(viewModel.participantId) == .orderedSame {
+             NSLog("🛡️ Ignoring LOBBY_RETURN from self (Self-Echo)")
+             return
+        }
+
         // CRITICAL FIX: Mark all users as transitioning to prevent false "user left" messages
         // during the Realtime connection reset that occurs when returning to lobby.
         viewModel.presenceManager.markAllUsersAsTransitioning()

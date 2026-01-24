@@ -57,8 +57,9 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
         // Update the timestamp immediately to show user something happened
         self.lastCheckedDate = Date()
         
-        // Primary method via controller
-        updaterController?.checkForUpdates(nil)
+        // Primary method via controller - Pass 'self' as sender (NSObject)
+        // macOS 13+ stricter responder chain often ignores nil senders for IBActions
+        updaterController?.checkForUpdates(self)
         
         // Fallback: Directly trigger updater if controller is stubborn
         if let updater = updaterController?.updater {

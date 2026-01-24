@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.143 -->
+        <item>
+            <title>Version 1.0.143</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implemented Host Interlock (Landmine #115) to prevent playlist sync race conditions</li><li>Codified Landmines #113 and #114 into Architecture Scanner</li><li>Fixed emoji spacing issues in chat input (Landmine #113)</li><li>Optimized subtitle delivery and robust decoding (Landmine #114)</li><li>Auto-focus chat input field when joining lobby for immediate engagement</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 18:13:19 -0500</pubDate>
+            <sparkle:version>143</sparkle:version>
+            <sparkle:shortVersionString>1.0.143</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.143.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="K2xbILKL/9uE2dwQ0VX/Rh1uTlKptuUJMOuA+QahvEftLlXY8MClofMr+Ibc6I/mjunC38UIr0gK6UTvBe0jAg==" length="74009019"
+            />
+        </item>
         <!-- v1.0.142 -->
         <item>
             <title>Version 1.0.142</title>

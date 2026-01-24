@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- vv1.0.139 -->
+        <item>
+            <title>Version v1.0.139</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed flaky background art by implementing metadata inheritance (handoff logic).</li><li>Expanded background artwork visibility to persist during mid-playback buffering states.</li><li>Updated AI Bible and Architecture Scanner with Landmine #106 (Visual Continuity Trap).</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 23:24:24 -0500</pubDate>
+            <sparkle:version>139</sparkle:version>
+            <sparkle:shortVersionString>v1.0.139</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.139.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="iaVkhG9ED+tlZ7+uGB+U/hDhK1ZkeviEyfMez0QZD3jdZd6SYgHvJWP+akviSak1/eQslBOa75KT6SlM/2YSDw==" length="73557542"
+            />
+        </item>
         <!-- vv1.0.138 -->
         <item>
             <title>Version v1.0.138</title>

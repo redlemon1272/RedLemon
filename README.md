@@ -2,7 +2,7 @@
 
 A native macOS media streaming app with watch party features.
 
-**Current Version:** vv1.0.138 (build 138)
+**Current Version:** vv1.0.139 (build 139)
 **Status:** ✅ Production Ready
 
 ## 🚀 For AI Assistants & Developers

@@ -255,9 +255,16 @@ struct MPVPlayerView: View {
             }
         }
         .onChange(of: viewModel.showChat) { isOpen in
-            if isOpen {
+            // Only unhide cursor if not toggled via keyboard (Command key)
+            // This prevents the cursor from flashing when using the shortcut
+            let isCommandPressed = NSEvent.modifierFlags.contains(.command)
+            
+            if isOpen && !isCommandPressed {
                 NSCursor.unhide()
                 cursorHideTimer?.invalidate()
+            } else if isOpen && isCommandPressed {
+                 // Even if command pressed, verify if mouse is actually still (avoid hiding if user moved mouse)
+                 // But default behavior is to keep it hidden or let existing timer handle it
             }
         }
         .onChange(of: viewModel.activeChatMenuTarget) { target in

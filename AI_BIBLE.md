@@ -1654,3 +1654,21 @@ async let loadHero: Void = { [weak self] in
 }()
 ```
 
+### 3. The Emoji Spacing Bug (Landmine #113)
+**Symptom**: After inserting an emoji into a chat input, subsequent normal text has "huge spaces" between words (e.g., "I    want    to    go").
+**Root Cause**: **Attribute Leakage**. `NSTextView` (and SwiftUI `TextField` on macOS) can "poison" its `typingAttributes` using metrics from the emoji fallback font (Apple Color Emoji). This often includes wide kerning or tracking values that persist even when typing normal characters.
+**Mandatory Solution**: 
+1. **Disable Rich Text**: Set `textView.isRichText = false` and `textView.importsGraphics = false`.
+2. **Hard Reset Attributes**: Explicitly reset `typingAttributes` and `textStorage` attributes to include `.kern: 0.0`.
+3. **Avoid SwiftUI `TextField(axis: .vertical)`**: On macOS 13+, the vertical auto-growing TextField is prone to this and lacks low-level control. Use a custom `NSTextView` wrapper instead.
+
+```swift
+// ✅ CORRECT: Sanitizing NSTextView attributes
+let attributes: [NSAttributedString.Key: Any] = [
+    .font: NSFont.systemFont(ofSize: 13),
+    .foregroundColor: NSColor.white,
+    .kern: 0.0 // Key fix for emoji spacing
+]
+textView.typingAttributes = attributes
+```
+

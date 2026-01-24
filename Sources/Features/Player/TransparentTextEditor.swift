@@ -31,10 +31,14 @@ struct TransparentTextEditor: NSViewRepresentable {
             // Use AttributedString to ensure font/color/emoji support is robust
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: NSFont.systemFont(ofSize: 13),
-                .foregroundColor: NSColor.white
+                .foregroundColor: NSColor.white,
+                .kern: 0.0 // Ensure no tracking/kerning leaks from emoji fonts
             ]
             let attributedString = NSAttributedString(string: text, attributes: attributes)
             context.coordinator.textView.textStorage?.setAttributedString(attributedString)
+            
+            // Re-apply typing attributes to ensure next characters are sane
+            context.coordinator.textView.typingAttributes = attributes
             context.coordinator.textView.needsDisplay = true
         }
         
@@ -53,12 +57,20 @@ struct TransparentTextEditor: NSViewRepresentable {
         lazy var textView: NSTextView = {
             let tv = NSTextView()
             tv.drawsBackground = false
-            tv.isRichText = true // Allow emojis/rich content
-            tv.importsGraphics = true
+            tv.isRichText = false // Fix: Rich text causes attribute leakage with emojis
+            tv.importsGraphics = false // No need for inline attachments in chat
             tv.isEditable = true
             tv.isSelectable = true
             tv.font = .systemFont(ofSize: 13) // Match existing style
             tv.textColor = .white
+            
+            // Explicitly set default attributes to prevent spacing "poisoning"
+            tv.typingAttributes = [
+                .font: NSFont.systemFont(ofSize: 13),
+                .foregroundColor: NSColor.white,
+                .kern: 0.0
+            ]
+            
             tv.delegate = self
             
             // Allow growing

@@ -692,39 +692,34 @@ struct ChatOverlayView: View {
                         .padding(.bottom, 5)
                 }
 
-                // Input Field
+                // Unified Input Field (Using optimized TransparentTextEditor to fix Landmine #113)
                 Group {
-                    if #available(macOS 13.0, *) {
-                        TextField(inputPlaceholder, text: (chatMode == .friends) ? $friendsVM.searchText : $inputText, axis: .vertical)
+                    if chatMode == .friends {
+                        TextField("", text: $friendsVM.searchText)
                             .textFieldStyle(.plain)
                             .foregroundColor(.white)
                             .focused($isInputFocused)
-                            .lineLimit(1...5)
-                            .onSubmit {
-                                if chatMode != .friends { sendMessage() }
-                            }
                     } else {
-                        // Fallback for macOS 12
-                        ZStack(alignment: .topLeading) {
-                            if (chatMode == .friends ? friendsVM.searchText : inputText).isEmpty {
-                                Text(inputPlaceholder)
-                                    .foregroundColor(.white.opacity(0.5))
-                                    .padding(.leading, 4) // Align with text cursor
-                                    .padding(.top, 0)
-                                    .allowsHitTesting(false)
-                            }
-
-                            if chatMode == .friends {
-                                TextField("", text: $friendsVM.searchText)
-                                    .textFieldStyle(.plain)
-                                    .foregroundColor(.white)
-                            } else {
-                                TransparentTextEditor(text: $inputText, onCommit: sendMessage, isFocused: manualFocus)
-                                    .frame(minHeight: 20, maxHeight: 60)
-                            }
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.vertical, 4)
+                        // Use TransparentTextEditor for all versions to prevent "The Emoji Spacing Bug"
+                        // axis: .vertical in SwiftUI TextField has a known issue with emoji attribute leakage.
+                        TransparentTextEditor(
+                            text: $inputText, 
+                            onCommit: sendMessage, 
+                            isFocused: manualFocus
+                        )
+                        .frame(minHeight: 20, maxHeight: 120) // Allow growth up to 120px
+                        .background(
+                            Group {
+                                if inputText.isEmpty {
+                                    Text(inputPlaceholder)
+                                        .foregroundColor(.white.opacity(0.5))
+                                        .padding(.leading, 4)
+                                        .padding(.top, 0)
+                                        .allowsHitTesting(false)
+                                }
+                            },
+                            alignment: .topLeading
+                        )
                     }
                 }
 

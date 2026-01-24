@@ -1040,6 +1040,50 @@ if [[ -f "$SUBDL_CLIENT" ]]; then
     echo -e "${GREEN}✅ SubDL CDN headers and timeout verified.${NC}"
 fi
 
+# =============================================================================
+# CHECK 47: Emoji Spacing Guard (Landmine #113)
+# =============================================================================
+print_header "Check 47: Emoji Spacing Guard (Landmine #113)"
+CHAT_VIEW="$SOURCES_DIR/Features/Player/ChatOverlayView.swift"
+if [[ -f "$CHAT_VIEW" ]]; then
+    # Rule: Chat input MUST NOT use SwiftUI axis: .vertical on macOS (causes emoji spacing poisoning)
+    # Refined grep: skip comments and look for the actual parameter usage
+    if grep "axis: .vertical" "$CHAT_VIEW" | grep -v "//" | grep -q "axis:"; then
+        report "ERROR" "Landmine #113" "Emoji Spacing Risk: ChatOverlayView MUST NOT use SwiftUI axis: .vertical. Use TransparentTextEditor (NSTextView) instead." "$CHAT_VIEW" "0" "Found axis: .vertical in chat input"
+    fi
+    # Ensure TransparentTextEditor is used for chat
+    if ! grep -q "TransparentTextEditor" "$CHAT_VIEW"; then
+        report "WARNING" "Landmine #113" "UX Warning: ChatOverlayView should use TransparentTextEditor for robust emoji support." "$CHAT_VIEW" "0" "Missing TransparentTextEditor"
+    fi
+    echo -e "${GREEN}✅ Emoji spacing protection verified.${NC}"
+fi
+
+# =============================================================================
+# CHECK 48: Subtitle Decoding & Selection Guard (Landmine #114)
+# =============================================================================
+print_header "Check 48: Subtitle Decoding & Selection Guard (Landmine #114)"
+MPV_WRAPPER="$SOURCES_DIR/Features/Player/MPVWrapper.swift"
+SUB_SERVICE="$SOURCES_DIR/Features/Player/Services/SubtitleService.swift"
+
+if [[ -f "$MPV_WRAPPER" ]]; then
+    # Rule: refreshSubtitleSelection must allow updates if no track is active (sid == 0)
+    if grep -q "if isPlaying && hasCompletedInitialTrackSelection {" "$MPV_WRAPPER" && ! grep -q "getCurrentSubtitleTrack() != 0" "$MPV_WRAPPER"; then
+        report "ERROR" "Landmine #114" "Availability Risk: MPVWrapper selection guard is too strict. Must allow auto-engagement if getCurrentSubtitleTrack() == 0." "$MPV_WRAPPER" "0" "Selection guard blocking late-arrivals"
+    fi
+     # Rule: SMART-LOAD must have at least 15s timeout for external subs
+    if ! grep -q "timeoutDuration: TimeInterval = self.expectedExternalSubtitles > 0 ? 15.0" "$MPV_WRAPPER"; then
+         report "WARNING" "Landmine #114" "Latency Risk: SMART-LOAD timeout should be 15s when external subtitles are expected." "$MPV_WRAPPER" "0" "Timeout too short for slow CDNs"
+    fi
+fi
+
+if [[ -f "$SUB_SERVICE" ]]; then
+    # Rule: SubtitleService MUST use robust decoding to handle SubDL encodings
+    if ! grep -q "decodeRobustly" "$SUB_SERVICE"; then
+        report "ERROR" "Landmine #114" "Decoding Risk: SubtitleService MUST use decodeRobustly (UTF8/CP1252/Latin1) for SubDL compatibility." "$SUB_SERVICE" "0" "Missing robust decoding"
+    fi
+    echo -e "${GREEN}✅ Subtitle availability and decoding verified.${NC}"
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

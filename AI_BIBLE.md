@@ -1671,3 +1671,21 @@ let attributes: [NSAttributedString.Key: Any] = [
 ]
 textView.typingAttributes = attributes
 ```
+
+### 4. The Subtitle Availability Gap (Landmine #114)
+**Symptom**: Subtitles don't appear in the menu on first load, or they appear in the menu but can't be selected/don't display.
+**Root Cause**: 
+1. **Concurrency Race**: `Smart Load` timeout (previously 8s) is shorter than proxy download/unzip/VTT conversion time (can be 20s+).
+2. **Encoding Mismatch**: SubDL files are often `Windows-1252` or `Latin-1`. Standard UTF-8 decoding results in empty tracks.
+3. **Selection Guard**: `refreshSubtitleSelection` blocking updates during playback to prevent "flicker" stops late-arriving subs from auto-enabling.
+**Mandatory Solution**: 
+1. **Extended Timeout**: Use at least 15s in `pollForTracksAndResume` when external subs are expected.
+2. **Robust Decoding**: Attempt multiple encodings in `SubtitleService` (UTF8 -> CP1252 -> Latin1).
+3. **Dynamic Engagement**: Allow `refreshSubtitleSelection` during playback IF no track is currently active (`sid == 0`).
+
+```swift
+// ✅ CORRECT: Allowing late-arrival engagement
+if isPlaying && hasCompletedInitialTrackSelection && getCurrentSubtitleTrack() != 0 {
+    return // Only block if we already have a track (preventing flash)
+}
+```

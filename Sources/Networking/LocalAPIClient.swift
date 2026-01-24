@@ -55,7 +55,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
             let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
 
             // Apply fixed catalog size (conservative for all devices)
-            let fixedSize = 15
+            let fixedSize = 18
             let items = response.metas.prefix(fixedSize).map { MediaItem(from: $0) }
 
             // Update cache and return
@@ -86,7 +86,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
             let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
 
             // Apply fixed catalog size (conservative for all devices)
-            let fixedSize = 15
+            let fixedSize = 18
             let items = response.metas.prefix(fixedSize).map { MediaItem(from: $0) }
 
             // Update cache and return

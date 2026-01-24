@@ -339,7 +339,7 @@ class BrowseViewModel: ObservableObject {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let response = try JSONDecoder().decode(StremioMetaResponse.self, from: data)
-            let items = response.metas.prefix(15).compactMap { meta in
+            let items = response.metas.prefix(18).compactMap { meta in
                 MediaItem(
                     id: meta.id,
                     type: meta.type,

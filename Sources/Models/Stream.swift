@@ -79,6 +79,41 @@ struct Stream: Codable, Identifiable {
         return "Unknown"
     }
 
+    // MARK: - Normalization
+    
+    /// Normalizes a title for robust comparison (lowercase, remove extensions, replace delimiters with spaces)
+    static func normalizeTitle(_ title: String) -> String {
+        var normalized = title.lowercased()
+        
+        // Remove common video extensions
+        for ext in [".mkv", ".mp4", ".avi", ".mov", ".ts", ".webm"] {
+            if normalized.hasSuffix(ext) {
+                normalized = String(normalized.dropLast(ext.count))
+            }
+        }
+        
+        // Pre-processing: Standardize 5.1/7.1/2.0 patterns to "d p d" (e.g. "5.1" -> "5 1")
+        // This ensures "DDP5.1" and "DDP5 1" normalize to the same string
+        normalized = normalized.replacingOccurrences(of: "5.1", with: "5 1")
+        normalized = normalized.replacingOccurrences(of: "7.1", with: "7 1")
+        normalized = normalized.replacingOccurrences(of: "2.0", with: "2 0")
+
+        // Replace all non-alphanumeric characters with spaces to handle different delimiter styles
+        // (dots, dashes, underscores, etc.)
+        normalized = normalized.map { char in
+            if char.isLetter || char.isNumber {
+                return String(char)
+            } else {
+                return " "
+            }
+        }.joined()
+        
+        // Condense multiple spaces and trim
+        return normalized.components(separatedBy: .whitespaces)
+            .filter { !$0.isEmpty }
+            .joined(separator: " ")
+    }
+
     // MARK: - Source Quality Detection
 
     /// Extract the source quality from title (CAM, WEB-DL, BluRay, etc.)

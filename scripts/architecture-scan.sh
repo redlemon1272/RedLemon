@@ -948,6 +948,34 @@ if [[ -f "$SUPABASE_CLIENT" ]]; then
     fi
 fi
 
+# =============================================================================
+# CHECK 43: Title/Group Stream Exclusion (Landmine #105)
+# =============================================================================
+# Trigger: StreamResolver missing excludedTitles/excludedGroups parameters or checks.
+# Rule: Must support title/group-based exclusion to prevent duplicate bad releases (Hydra).
+print_header "Check 43: Hydra Prevention Protocol (Landmine #105)"
+
+RESOLVER="$SOURCES_DIR/Server/Services/StreamResolver.swift"
+if [[ -f "$RESOLVER" ]]; then
+    # Verify excludedTitles exists in processBucket
+    if ! grep -q "excludedTitles: Set<String>" "$RESOLVER"; then
+        report "ERROR" "Landmine #105" "Hydra Risk: StreamResolver.processBucket MUST accept 'excludedTitles' to filter hashless streams." "$RESOLVER" "0" "Missing excludedTitles parameter"
+    elif ! grep -q "excludedTitles.contains" "$RESOLVER" && ! grep -q "excludedGroups.contains" "$RESOLVER"; then
+        report "ERROR" "Landmine #105" "Hydra Risk: StreamResolver MUST check excludedTitles or excludedGroups during filtering." "$RESOLVER" "0" "Missing multi-criteria exclusion check"
+    else
+        echo -e "${GREEN}✅ StreamResolver has Hydra prevention logic (Title/Group blocking).${NC}"
+    fi
+fi
+
+SERVICE="$SOURCES_DIR/App/Services/StreamService.swift"
+if [[ -f "$SERVICE" ]]; then
+    if ! grep -q "attemptedGroups" "$SERVICE"; then
+         report "ERROR" "Landmine #105" "Hydra Risk: StreamService MUST track 'attemptedGroups' to handle release group banning." "$SERVICE" "0" "Missing attemptedGroups dictionary"
+    else
+         echo -e "${GREEN}✅ StreamService tracks attempted release groups.${NC}"
+    fi
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

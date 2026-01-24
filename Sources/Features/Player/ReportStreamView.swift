@@ -98,9 +98,7 @@ struct ReportStreamView: View {
                             .buttonStyle(PlainButtonStyle())
                         }
                     }
-                    .padding()
-                    .background(Color.black.opacity(0.3))
-                    .cornerRadius(16)
+                    .padding(.vertical, 10)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                 } else {
                     Text("Report Stream")

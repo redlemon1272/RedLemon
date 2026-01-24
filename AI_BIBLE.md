@@ -99,6 +99,7 @@
 | **Guest shows "not connected"** | Realtime setup skipped after DB join fails (RLS, permissions) | #101 |
 | **"403 Forbidden" / RLS Error** | Missing cryptographic signature on DB write | #103 |
 | **Partial Payment Success** | Non-atomic write (Log success, Credit fail) | #104 |
+| **Stream Re-selection Loop** | Hashless streams bypass exclusion list | #105 |
 
 ## 🚨 Critical Landmines
 
@@ -1521,4 +1522,36 @@ _ = try await makeRequest(
     body: body,
     sign: true // 🔐 SECURE: Identity verification
 )
+```
+
+---
+
+## Part 24: Intelligent Stream Exclusion (The "Hydra" Protocol)
+
+### 1. The Hydra Duplicate Loop (Landmine #105)
+**Symptom**: Clicking "Try Another Stream" re-selects the same problematic file or a file from the same release group (e.g. seeing "FLUX" again and again). This is common for movies where one bad release is mirrored across many torrent sites.
+
+**Root Cause**: 
+1. **Hash Transparency**: Streams from `DebridSearch` often lack an `infoHash` until resolved. If `PlayerViewModel` only blocks hashes, hashless streams bypass the filter completely.
+2. **The "Hydra" Effect**: One release group (e.g. FLUX) might have 50 different torrents for the same movie. Blocking one by hash or exact title just selects the next one with a slightly different name.
+3. **Dirty Input**: Titles passed from the UI often contain newlines, emojis, or size metadata (e.g. `Movie.FLUX.mkv\n💾 8GB`) which causes simple string matches to fail.
+
+**Mandatory Solution**:
+1. **Never Return Early on Nil Hash**: `PlayerViewModel.tryAnotherStream` MUST call `markStreamAsAttempted` even if the hash is nil.
+2. **Four-Layer Defense**:
+    - **Hash Block**: Prevent exact torrent duplication.
+    - **Fuzzy Title Block**: `Stream.normalizeTitle` (remove extensions, punctuation) to block identical filenames.
+    - **Release Group Block**: Extract the donor group (e.g. `-FLUX`) and ban the entire group for the session.
+    - **Size Block**: Block files with identical size strings (e.g. `8.04 GB`) as they are likely mirrors.
+3. **Sanitize First**: Always split titles by `.newlines` and take the first component before extraction.
+
+```swift
+// ✅ CORRECT: Multi-layered exclusion check in StreamResolver
+var filtered = streams.filter { stream in
+    if let hash = stream.infoHash, excludedHashes.contains(hash) { return false }
+    if excludedTitles.contains(Stream.normalizeTitle(stream.title)) { return false }
+    if let group = extractGroup(stream.title), excludedGroups.contains(group) { return false }
+    if let size = stream.size, excludedSizes.contains(size) { return false }
+    return true
+}
 ```

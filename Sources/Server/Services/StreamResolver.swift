@@ -24,6 +24,9 @@ actor StreamResolver {
         name: String? = nil,
         year: String? = nil,
         excludedHashes: Set<String> = [],
+        excludedTitles: Set<String> = [],
+        excludedGroups: Set<String> = [],
+        excludedSizes: Set<String> = [],
         ignoreVerified: Bool = false,
         preferredHash: String? = nil,
         triggerSource: String? = nil
@@ -614,10 +617,10 @@ actor StreamResolver {
         let preferPackPrimary = (type == "series")
         let preferMultiSubMovies = (type == "movie")
 
-        let uhd4kBucket = processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes)
-        let fullHDBucket = processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes)
-        let hdBucket = processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes)
-        let sdBucket = processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes)
+        let uhd4kBucket = processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes, excludedTitles: excludedTitles, excludedGroups: excludedGroups, excludedSizes: excludedSizes)
+        let fullHDBucket = processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes, excludedTitles: excludedTitles, excludedGroups: excludedGroups, excludedSizes: excludedSizes)
+        let hdBucket = processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes, excludedTitles: excludedTitles, excludedGroups: excludedGroups, excludedSizes: excludedSizes)
+        let sdBucket = processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes, excludedTitles: excludedTitles, excludedGroups: excludedGroups, excludedSizes: excludedSizes)
 
         // Log final primary selections
         if let primary = uhd4kBucket.primary { print("📦 2160p Primary: \(primary.title)") }
@@ -791,7 +794,10 @@ actor StreamResolver {
         targetTitle: String?,
         preferMultiSubPacksFirst: Bool,
         preferMultiSubMovies: Bool,
-        excludedHashes: Set<String>
+        excludedHashes: Set<String>,
+        excludedTitles: Set<String>,
+        excludedGroups: Set<String>,
+        excludedSizes: Set<String>
     ) -> QualityBucket {
 
         print("   --- Processing Bucket: \(quality) (Input: \(streams.count)) ---")
@@ -806,7 +812,30 @@ actor StreamResolver {
         var filtered = streams.filter { stream in
              // Check EXCLUDED hashes (Smart Retry)
              if let hash = stream.infoHash, excludedHashes.contains(hash) {
-                 print("   🧠 RESOLVER DROP (\(quality)): Previously Attempted: \(stream.title)")
+                 print("   🧠 RESOLVER DROP (\(quality)): Previously Attempted (Hash): \(stream.title)")
+                 return false
+             }
+
+             // Check EXCLUDED titles (Smart Retry fallback)
+             let normalizedTitle = Stream.normalizeTitle(stream.title)
+             if excludedTitles.contains(normalizedTitle) {
+                 print("   🧠 RESOLVER DROP (\(quality)): Previously Attempted (Title): \(stream.title)")
+                 return false
+             }
+
+             // Check EXCLUDED groups (Hydra Prevention)
+             // Extract group from LAST dash component
+             if let lastComponent = stream.title.components(separatedBy: "-").last?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                 let groupToCheck = lastComponent.replacingOccurrences(of: ".mkv", with: "").replacingOccurrences(of: ".mp4", with: "").lowercased()
+                 if excludedGroups.contains(groupToCheck) {
+                     print("   🧠 RESOLVER DROP (\(quality)): Previously Attempted (Group): \(groupToCheck)")
+                     return false
+                 }
+             }
+             
+             // Check EXCLUDED sizes (Identical File Prevention)
+             if let size = stream.size, !size.isEmpty, excludedSizes.contains(size) {
+                 print("   🧠 RESOLVER DROP (\(quality)): Previously Attempted (Size Match): \(stream.title) (\(size))")
                  return false
              }
 

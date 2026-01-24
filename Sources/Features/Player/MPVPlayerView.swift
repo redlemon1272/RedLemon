@@ -80,6 +80,7 @@ struct MPVPlayerView: View {
     // Track consecutive detections of MPV stopped state (position=0, duration=0, paused)
     // This prevents false positives at app startup while detecting EOF after ERROR_HANDLER ignores it
     @State private var stoppedStateDetectionCount: Int? = nil
+    @State private var lastSignificantMouseLocation: CGPoint = .zero // NEW: Filter jitter
 
     // Track selection menus
     @State private var showAudioMenu = false
@@ -298,8 +299,12 @@ struct MPVPlayerView: View {
         .background(MouseTrackingView { location in
                 mouseLocation = location
 
-                // Show cursor when mouse moves
-                NSCursor.unhide()
+                // Show cursor when significant mouse movement is detected
+                let distance = sqrt(pow(location.x - lastSignificantMouseLocation.x, 2) + pow(location.y - lastSignificantMouseLocation.y, 2))
+                if distance > 2 {
+                    NSCursor.unhide()
+                    lastSignificantMouseLocation = location
+                }
 
                 // Reset cursor hide timer
                 cursorHideTimer?.invalidate()
@@ -383,8 +388,13 @@ struct MPVPlayerView: View {
             // Set appState reference for watch history tracking
             viewModel.appState = appState
 
-            // Hide cursor initially
-            cursorHideTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { _ in
+            // Hide cursor immediately and again after layout settles
+            NSCursor.hide()
+            cursorHideTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+                NSCursor.hide()
+            }
+            // Third attempt for robustness
+            Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { _ in
                 NSCursor.hide()
             }
 

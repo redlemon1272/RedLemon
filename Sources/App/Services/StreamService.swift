@@ -25,19 +25,86 @@ actor StreamService: StreamResolving {
     /// Tracks attempted infoHashes per IMDB ID for the current session
     /// [IMDB_ID: Set<InfoHash>]
     private var attemptedHashes: [String: Set<String>] = [:]
+    private var attemptedTitles: [String: Set<String>] = [:]
+    private var attemptedGroups: [String: Set<String>] = [:]
+    private var attemptedSizes: [String: Set<String>] = [:] // New: Track file sizes to block identical files
 
-    /// Mark a stream hash as attempted for a specific item
-    func markStreamAsAttempted(imdbId: String, hash: String) {
-        if attemptedHashes[imdbId] == nil {
-            attemptedHashes[imdbId] = []
-        }
+    /// Mark a stream as attempted with full context for robust exclusion
+    func markStreamAsAttempted(imdbId: String, hash: String, title: String? = nil, size: String? = nil, provider: String? = nil) {
+        // 1. Hash Block
+        if attemptedHashes[imdbId] == nil { attemptedHashes[imdbId] = [] }
         attemptedHashes[imdbId]?.insert(hash)
+        
+        // 2. Title Normalization Block
+        if let title = title {
+            if attemptedTitles[imdbId] == nil { attemptedTitles[imdbId] = [] }
+            let normalized = Stream.normalizeTitle(title)
+            attemptedTitles[imdbId]?.insert(normalized)
+            
+            // 3. Release Group Block (Hydra Prevention)
+            if let group = extractReleaseGroup(from: title) {
+                if attemptedGroups[imdbId] == nil { attemptedGroups[imdbId] = [] }
+                attemptedGroups[imdbId]?.insert(group)
+                print("🧠 StreamService: Marked group '\(group)' as attempted for \(imdbId)")
+            }
+        }
+        
+        // 4. Size Block (Identical File Prevention)
+        if let size = size, !size.isEmpty && size != "0 GB" {
+            if attemptedSizes[imdbId] == nil { attemptedSizes[imdbId] = [] }
+            attemptedSizes[imdbId]?.insert(size)
+            print("🧠 StreamService: Marked size '\(size)' as blocked for \(imdbId)")
+        }
+        
         print("🧠 StreamService: Marked hash \(hash.prefix(8)) as attempted for \(imdbId)")
     }
+    
+    private func extractReleaseGroup(from title: String) -> String? {
+        // Sanitize: Take only the first line to strip any appended metadata (newlines, size info, emojis)
+        let cleanTitle = title.components(separatedBy: .newlines).first?.trimmingCharacters(in: .whitespacesAndNewlines) ?? title
 
-    /// Get list of hashes to exclude for a specific item
-    func getAttemptedHashes(for imdbId: String) -> Set<String> {
-        return attemptedHashes[imdbId] ?? []
+        // Normalize dashes
+        let normalized = cleanTitle.replacingOccurrences(of: "–", with: "-")
+                                   .replacingOccurrences(of: "—", with: "-")
+        
+        guard let lastComponent = normalized.components(separatedBy: "-").last?.trimmingCharacters(in: .whitespacesAndNewlines) else { return nil }
+        
+        var cleanGroup = lastComponent
+        for ext in [".mkv", ".mp4", ".avi", ".iso"] {
+            if cleanGroup.hasSuffix(ext) {
+                cleanGroup = String(cleanGroup.dropLast(ext.count))
+            }
+        }
+        
+        cleanGroup = cleanGroup.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        let blacklist = ["h264", "x264", "h265", "x265", "hevc", "avc", "aac", "ac3", "dts", "10bit", "hdr", "sdr", "web-dl", "bluray"]
+        if blacklist.contains(cleanGroup.lowercased()) { return nil }
+        
+        if cleanGroup.count >= 2 && cleanGroup.count <= 20 {
+             if cleanGroup.range(of: "^[a-zA-Z0-9._]+$", options: .regularExpression) != nil {
+                 return cleanGroup.lowercased()
+             }
+        }
+        return nil
+    }
+
+    /// Tracks all exclusion criteria
+    struct AttemptedStreams {
+        let hashes: Set<String>
+        let titles: Set<String>
+        let groups: Set<String>
+        let sizes: Set<String>
+    }
+
+    /// Get list of exclusions for a specific item
+    func getAttemptedStreams(for imdbId: String) -> AttemptedStreams {
+        return AttemptedStreams(
+            hashes: attemptedHashes[imdbId] ?? [],
+            titles: attemptedTitles[imdbId] ?? [],
+            groups: attemptedGroups[imdbId] ?? [],
+            sizes: attemptedSizes[imdbId] ?? []
+        )
     }
 
     // MARK: - File Extension Validation
@@ -137,10 +204,15 @@ actor StreamService: StreamResolving {
         // Step 3: Get Stream Bucket (Direct Resolver Call)
         NSLog("⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...")
 
-        // Get exclusion list for this item (Smart Retry)
-        let excludedHashes = getAttemptedHashes(for: item.id)
-        if !excludedHashes.isEmpty {
-            print("🧠 StreamService: Exclusion list has \(excludedHashes.count) previous attempts for \(item.id)")
+        // Get exclusion lists for this item (Smart Retry)
+        let attempted = getAttemptedStreams(for: item.id)
+        let excludedHashes = attempted.hashes
+        let excludedTitles = attempted.titles
+        let excludedGroups = attempted.groups
+        let excludedSizes = attempted.sizes
+
+        if !excludedHashes.isEmpty || !excludedTitles.isEmpty || !excludedGroups.isEmpty {
+            print("🧠 StreamService: Exclusion list has \(excludedHashes.count) hashes, \(excludedTitles.count) titles, \(excludedGroups.count) groups for \(item.id)")
         }
 
         var bucketsResponse = try await StreamResolver.shared.resolveStreamsByQuality(
@@ -151,6 +223,9 @@ actor StreamService: StreamResolving {
             name: item.name,
             year: finalMetadata.year,
             excludedHashes: excludedHashes,
+            excludedTitles: excludedTitles,
+            excludedGroups: excludedGroups,
+            excludedSizes: excludedSizes,
             ignoreVerified: false,
             preferredHash: preferredInfoHash,
             triggerSource: triggerSource

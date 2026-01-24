@@ -842,9 +842,28 @@ class MPVPlayerViewModel: ObservableObject {
         self.showPoster = true
 
         // Fix: Reset background/poster URLs to prevent flashing previous image if ViewModel is reused
-        self.backgroundURL = nil
-        self.posterURL = nil
-        self.logoURL = nil
+        // CRITICAL FIX: Pre-populate background art from AppState cached metadata to prevent flash
+        if let cachedMeta = appState?.player.selectedMetadata, cachedMeta.id == imdbId {
+            if let background = cachedMeta.backgroundURL {
+                 self.backgroundURL = upgradeToHD(background)
+            } else if let poster = cachedMeta.posterURL {
+                 self.backgroundURL = upgradeToHD(poster)
+            }
+
+            if let poster = cachedMeta.posterURL {
+                self.posterURL = upgradeToHD(poster)
+            }
+
+            if let logo = cachedMeta.logoURL {
+                self.logoURL = upgradeToHD(logo)
+            }
+            LoggingManager.shared.debug(.videoRendering, message: "✨ Pre-populated player metadata from AppState cache")
+        } else {
+            // Fallback: Clear if no cache available
+            self.backgroundURL = nil
+            self.posterURL = nil
+            self.logoURL = nil
+        }
         self.isExitingSession = false
         self.isExitingToLobby = false
 

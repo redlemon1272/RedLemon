@@ -129,8 +129,8 @@ struct MPVPlayerView: View {
                     // Background layer (always black)
                     Color.black
 
-                    // Poster/Background art (during loading)
-                    if viewModel.showPoster, let backgroundURL = viewModel.backgroundURL {
+                    // Poster/Background art (during loading or buffering)
+                    if (viewModel.showPoster || viewModel.isLoading), let backgroundURL = viewModel.backgroundURL {
                         AsyncImage(url: URL(string: backgroundURL)) { phase in
                             switch phase {
                             case .success(let image):

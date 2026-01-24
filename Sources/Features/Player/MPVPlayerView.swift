@@ -1294,7 +1294,10 @@ struct MPVPlayerView: View {
                          isWatchParty: viewModel.isInWatchParty,
                          onTryAnother: {
                              if viewModel.isWatchPartyHost {
-                                 // Watch Party Host Path: Block hash and return all to lobby
+                                 // Watch Party Host Path: Show stable transition state
+                                 viewModel.isExitingToLobby = true
+                                 
+                                 // Block hash and return all to lobby
                                  appState.player.tryAnotherStreamForWatchParty(
                                      hash: viewModel.currentStreamHash ?? streamHash ?? "",
                                      filename: URL(string: viewModel.videoURL)?.lastPathComponent,

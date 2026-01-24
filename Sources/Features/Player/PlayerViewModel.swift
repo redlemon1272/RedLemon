@@ -1056,6 +1056,10 @@ class PlayerViewModel: ObservableObject {
                 )
             }
 
+            // 5. Small delay to ensure message propagates through Realtime
+            // This mirrors triggerReturnToLobby for a smooth transition logic.
+            try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s
+
             // 3. Exit player and return to lobby locally
             await exitPlayer(keepRoomState: true)
         }

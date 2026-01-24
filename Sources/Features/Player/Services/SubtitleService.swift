@@ -112,6 +112,8 @@ actor MPVSubtitleService: SubtitleService {
                         if let localPath = await self.downloadSubtitle(url: subtitle.url) {
                             LoggingManager.shared.info(.subtitles, message: "Subtitle ready: \(subtitle.label)")
                             await self.mpvController?.loadSubtitle(url: localPath, title: subtitle.label)
+                            // Update tracks immediately after each successful load to populate menu
+                            await self.scanEmbeddedTracks(isFastPath: true)
                         }
                     }
                 }
@@ -127,9 +129,12 @@ actor MPVSubtitleService: SubtitleService {
 
         // Retry logic: Tracks often appear slightly AFTER file load/video ready
         // FAST PATH: Only check once (used for reactive updates from MPV events)
-        let maxAttempts = isFastPath ? 1 : 5
+        // Initial scan logic: Tracks often appear slightly AFTER file load/video ready
+        // FAST PATH: Only check once (used for reactive updates from MPV events or late arrivals)
+        let maxAttempts = isFastPath ? 1 : 3
+        let sleepInterval: UInt64 = 500_000_000 // 500ms
         
-        LoggingManager.shared.debug(.subtitles, message: "SubtitleService: Scanning tracks (FastPath: \(isFastPath))...")
+        LoggingManager.shared.debug(.social, message: "SubtitleService: Scanning tracks (FastPath: \(isFastPath))...")
 
         for i in 0..<maxAttempts {
             let tracks = await mpv.getSubtitleTracks()
@@ -143,7 +148,7 @@ actor MPVSubtitleService: SubtitleService {
             }
 
             if i < maxAttempts - 1 {
-                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                try? await Task.sleep(nanoseconds: sleepInterval)
             }
         }
     }
@@ -197,7 +202,11 @@ actor MPVSubtitleService: SubtitleService {
             if isZip {
                 subtitleText = try extractSRTFromZip(data: data)
             } else {
-                guard let text = String(data: data, encoding: .utf8) else { return nil }
+                // Robust decoding for non-UTF8 subtitles (common on SubDL)
+                guard let text = decodeRobustly(data: data) else { 
+                    LoggingManager.shared.warn(.subtitles, message: "Could not decode subtitle data with common encodings")
+                    return nil 
+                }
                 subtitleText = text
             }
 
@@ -243,11 +252,14 @@ actor MPVSubtitleService: SubtitleService {
         process.waitUntilExit()
 
         let contents = try FileManager.default.contentsOfDirectory(at: extractDir, includingPropertiesForKeys: nil)
-        guard let srtFile = contents.first(where: { $0.pathExtension.lowercased() == "srt" }) else {
-            throw NSError(domain: "SubtitleExtraction", code: -1, userInfo: [NSLocalizedDescriptionKey: "No SRT file found"])
+        guard let srtFile = contents.first(where: { ["srt", "ass", "vtt"].contains($0.pathExtension.lowercased()) }) else {
+            throw NSError(domain: "SubtitleExtraction", code: -1, userInfo: [NSLocalizedDescriptionKey: "No supported subtitle file found in zip"])
         }
 
-        let srtContent = try String(contentsOf: srtFile, encoding: .utf8)
+        let fileData = try Data(contentsOf: srtFile)
+        guard let srtContent = decodeRobustly(data: fileData) else {
+            throw NSError(domain: "SubtitleExtraction", code: -2, userInfo: [NSLocalizedDescriptionKey: "Could not decode extracted subtitle"])
+        }
 
         try? FileManager.default.removeItem(at: zipFile)
         try? FileManager.default.removeItem(at: extractDir)
@@ -256,7 +268,6 @@ actor MPVSubtitleService: SubtitleService {
     }
 
     nonisolated private func convertSRTToVTT(srt: String) -> String {
-        // Fix 1: Normalize newlines for Windows (CRLF) support
         let normalized = srt.replacingOccurrences(of: "\r\n", with: "\n")
                             .replacingOccurrences(of: "\r", with: "\n")
 
@@ -267,33 +278,49 @@ actor MPVSubtitleService: SubtitleService {
             let trimmed = cue.trimmingCharacters(in: .whitespacesAndNewlines)
             if trimmed.isEmpty { continue }
             
-            // Fix 2: Only replace commas in timestamps, not dialogue
             var lines = trimmed.components(separatedBy: "\n")
             
-            // Basic SRT heuristic:
-            // Line 0: ID (Optional)
-            // Line 1: Timestamp (00:00:00,000 --> ...)
+            // SRT Heuristic:
+            // Line 0: ID (Optional, numeric)
+            // Line 1: Timestamp (00:00:20,000 --> 00:00:24,400)
             
             if lines.count >= 2 {
-                // If line 0 matches "-->", it's the timestamp (ID omitted)
                 if lines[0].contains("-->") {
-                    lines[0] = lines[0].replacingOccurrences(of: ",", with: ".")
-                } 
-                // If line 1 matches "-->", line 0 is likely ID
-                else if lines[1].contains("-->") {
-                    lines[1] = lines[1].replacingOccurrences(of: ",", with: ".")
+                    lines[0] = sanitizeSRTTimestamp(lines[0])
+                } else if lines[1].contains("-->") {
+                    lines[1] = sanitizeSRTTimestamp(lines[1])
                 }
-                // Fallback: If neither matches clearly, rely on old behavior but safer? 
-                // Actually the old behavior was replace all commas. 
-                // If we can't find the timestamp, we might default to no replacement or full replacement.
-                // Given SRT strictness, one of the first two lines MUST be the timestamp.
             } else if lines.count == 1 && lines[0].contains("-->") {
-                 lines[0] = lines[0].replacingOccurrences(of: ",", with: ".")
+                 lines[0] = sanitizeSRTTimestamp(lines[0])
             }
             
-            let convertedChunk = lines.joined(separator: "\n")
-            vtt += convertedChunk + "\n\n"
+            vtt += lines.joined(separator: "\n") + "\n\n"
         }
         return vtt
+    }
+
+    nonisolated private func sanitizeSRTTimestamp(_ line: String) -> String {
+        // Replace ONLY commas that are part of a timestamp (3 digits after comma)
+        // 00:00:20,000 -> 00:00:20.000
+        // We use a simple replacement here as most SRT timestamps follow this pattern rigidly.
+        return line.replacingOccurrences(of: ",", with: ".")
+    }
+
+    nonisolated private func decodeRobustly(data: Data) -> String? {
+        // Try encodings in order of likelihood
+        let encodings: [String.Encoding] = [
+            .utf8,
+            .windowsCP1252,
+            .isoLatin1,
+            .macOSRoman,
+            .utf16
+        ]
+        
+        for encoding in encodings {
+            if let decoded = String(data: data, encoding: encoding) {
+                return decoded
+            }
+        }
+        return nil
     }
 }

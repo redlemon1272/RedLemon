@@ -1671,4 +1671,3 @@ let attributes: [NSAttributedString.Key: Any] = [
 ]
 textView.typingAttributes = attributes
 ```
-

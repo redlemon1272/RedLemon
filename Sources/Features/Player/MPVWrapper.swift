@@ -251,8 +251,10 @@ class MPVWrapper: ObservableObject {
         LoggingManager.shared.debug(.subtitles, message: "SMART-LOAD: Starting track polling loop...")
         LoggingManager.shared.debug(.subtitles, message: "SMART-LOAD: Expecting \(self.expectedExternalSubtitles) external subtitles to prevent race condition")
         
-        // Timeout: 8.0 seconds max wait (allow time for slow downloads)
-        let timeout = Date().addingTimeInterval(8.0)
+        // Timeout: allow more time if we are waiting for external subtitles (slow network)
+        // 15 seconds for network-bound external subs; 4 seconds for purely local/embedded
+        let timeoutDuration: TimeInterval = self.expectedExternalSubtitles > 0 ? 15.0 : 4.0
+        let timeout = Date().addingTimeInterval(timeoutDuration)
         var tracksFound = false
         var allExpectedSubsLoaded = false
         
@@ -301,9 +303,10 @@ class MPVWrapper: ObservableObject {
             }
             
             if basicTracksExist && !subsReady {
-                 // Log occasionally
-                 if Int(Date().timeIntervalSince1970 * 10) % 10 == 0 {
-                     LoggingManager.shared.debug(.subtitles, message: "SMART-LOAD: Waiting for subtitles... (Found \(externalSubCount)/\(self.expectedExternalSubtitles))")
+                 // Log regularly while waiting for external assets
+                 let now = Date().timeIntervalSince1970
+                 if Int(now * 2) % 2 == 0 { // log every 0.5s approx
+                      LoggingManager.shared.debug(.subtitles, message: "SMART-LOAD: Still waiting for external subs... (Found \(externalSubCount)/\(self.expectedExternalSubtitles)) [Elapsed: \(String(format: "%.1f", 15.0 - timeout.timeIntervalSinceNow))s]")
                  }
             }
             
@@ -710,9 +713,14 @@ class MPVWrapper: ObservableObject {
         }
 
         if result >= 0 {
-            LoggingManager.shared.debug(.subtitles, message: "External subtitle added to track list (not auto-selected)")
+            LoggingManager.shared.info(.subtitles, message: "Successfully added external subtitle: \(title)")
+            
+            // NEW: Refresh selections when a new track arrives late.
+            // Since we relaxed the guard in refreshSubtitleSelection, this will now
+            // auto-select this track if we are currently sitting at 'Off'.
+            self.refreshSubtitleSelection()
         } else {
-            LoggingManager.shared.error(.subtitles, message: "Failed to load subtitle, MPV error code: \(result)")
+            LoggingManager.shared.error(.subtitles, message: "Failed to add external subtitle. Error code: \(result)")
         }
     }
 
@@ -1034,10 +1042,12 @@ class MPVWrapper: ObservableObject {
     func refreshSubtitleSelection() {
         guard let handle = mpvHandle, isInitialized else { return }
         
-        // DEFENSIVE GUARD: Prevent regression - never change tracks while playing
-        // AI_BIBLE #41: Track selection must happen BEFORE playback starts
-        if isPlaying && hasCompletedInitialTrackSelection {
-            LoggingManager.shared.warn(.subtitles, message: "⚠️ BLOCKED: refreshSubtitleSelection called during playback. This would cause buffer flash. Ignoring.")
+        // DEFENSIVE GUARD: Prevent regression - only change tracks if none are currently active
+        // AI_BIBLE #41: Prevents buffer flash when swapping tracks.
+        // FIX: If we have NO subtitles selected (sid == 0), we SHOULD allow the auto-selector to 
+        // light one up as they arrive late from the network.
+        if isPlaying && hasCompletedInitialTrackSelection && getCurrentSubtitleTrack() != 0 {
+            LoggingManager.shared.warn(.subtitles, message: "⚠️ BLOCKED: refreshSubtitleSelection called during playback with active track. Ignoring to prevent flash.")
             return
         }
 

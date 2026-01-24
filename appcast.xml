@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- vv1.0.137 -->
+        <item>
+            <title>Version v1.0.137</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implemented Hydra Protocol (Landmine #105) for multi-layered stream exclusion.</li><li>Improved player UI: Fixed cursor visibility and synchronized lobby return transitions.</li><li>Resolved duplicate 'Host returned to lobby' chat notifications (Landmine #95).</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 22:42:45 -0500</pubDate>
+            <sparkle:version>137</sparkle:version>
+            <sparkle:shortVersionString>v1.0.137</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.137.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="8emjyPetLg+vp1sQUrw/jPxm913g4UjACBobK/CqauwZiQNiwvBUH5PbE1vAHgDWkCZH5625Iwk33iflE3QCAA==" length="73462789"
+            />
+        </item>
         <!-- v1.0.136 -->
         <item>
             <title>Version 1.0.136</title>

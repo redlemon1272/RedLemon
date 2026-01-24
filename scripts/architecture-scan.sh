@@ -976,6 +976,22 @@ if [[ -f "$SERVICE" ]]; then
     fi
 fi
 
+# =============================================================================
+# CHECK 44: Visual Continuity (Landmine #106)
+# =============================================================================
+# Trigger: Redundant state reset in loadStream causes black flicker.
+# Fix: Inherit background art from AppState.
+print_header "Check 44: Visual Continuity (Landmine #106)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    if ! grep -q "Pre-populated player metadata from AppState cache" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #106" "Visual Handoff Risk: MPVPlayerViewModel MUST inherit background/poster art from AppState synchronously in loadStream to prevent black flicker." "$PLAYER_VM" "0" "Missing metadata inheritance"
+    else
+        echo -e "${GREEN}✅ MPVPlayerViewModel correctly inherits metadata for visual continuity.${NC}"
+    fi
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

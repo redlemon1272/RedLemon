@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 22, 2026 (Part 101: Realtime Decoupling - Landmine #101)
+> **Last Updated:** January 23, 2026 (Part 106: Visual Continuity - Landmine #106)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -100,6 +100,7 @@
 | **"403 Forbidden" / RLS Error** | Missing cryptographic signature on DB write | #103 |
 | **Partial Payment Success** | Non-atomic write (Log success, Credit fail) | #104 |
 | **Stream Re-selection Loop** | Hashless streams bypass exclusion list | #105 |
+| **Flaky Background Art / Flicker** | Redundant state reset in loadStream | #106 |
 
 ## 🚨 Critical Landmines
 
@@ -454,6 +455,12 @@
     *   **Rule**: **Decouple Connection Layers**. Realtime MUST be established even when database operations fail for non-fatal errors. Only treat **structural errors** as fatal (e.g., Foreign Key = room deleted). Gracefully degrade to "Realtime-only" mode with a user-facing message explaining limited features.
     *   **Detection**: Log shows "Guest could not join room in database" followed by absence of "Setting up Realtime channel" message.
     *   **Fix**: `LobbyViewModel.swift` - Moved `setupRealtimeSubscription()` into the error handler for non-fatal errors (lines 725-748).
+
+106. **Visual Continuity Trap (The "Loading Flicker")**: *(Added v1.0.138)*
+    *   **Symptom**: Background art flashes black or appears "flaky" behind the loading/buffering overlay.
+    *   **Cause**: The Player ViewModel resets visual properties (`backgroundURL`, `posterURL`) to `nil` at the start of `loadStream` before refetching them. This breaks the "visual chain" from the Browse page.
+    *   **Rule**: **Inherit UI State Sync**. ViewModels MUST copy visual state (backgrounds/logos) from the `AppState` metadata cache *synchronously* during initialization. 
+    *   **Fix**: `MPVPlayerViewModel.swift` - Check `appState.player.selectedMetadata` and populate URLs immediately if the IMDB ID matches.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

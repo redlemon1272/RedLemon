@@ -443,13 +443,13 @@ final class SubDLClient {
         print("📥 Downloading subtitle from SubDL CDN: \(downloadPath)")
 
         var request = URLRequest(url: url)
-        request.timeoutInterval = 15 // Explicitly set request timeout
-
-        // request.timeoutInterval is sometimes ignored by shared session, so we use a custom config
+        // Add User-Agent to bypass SubDL CDN blocking
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
+        request.timeoutInterval = 30 // Increased for slower CDN downloads
 
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 15 // 15s timeout for download (fail fast)
-        config.timeoutIntervalForResource = 15
+        config.timeoutIntervalForRequest = 30
+        config.timeoutIntervalForResource = 30
         let session = URLSession(configuration: config)
 
         let (data, response) = try await session.data(for: request)

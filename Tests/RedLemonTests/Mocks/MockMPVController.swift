@@ -12,12 +12,16 @@ class MockMPVController: MPVController {
     @Published var isBuffering = false
     @Published var isFileLoaded = false
     
+    // Track update notification
+    let tracksChanged = PassthroughSubject<Void, Never>()
+    
     var isPlayingPublisher: AnyPublisher<Bool, Never> { $isPlaying.eraseToAnyPublisher() }
     var playbackFinishedPublisher: AnyPublisher<Bool, Never> { $playbackFinished.eraseToAnyPublisher() }
     var currentTimePublisher: AnyPublisher<Double, Never> { $currentTime.eraseToAnyPublisher() }
     var durationPublisher: AnyPublisher<Double, Never> { $duration.eraseToAnyPublisher() }
     var isBufferingPublisher: AnyPublisher<Bool, Never> { $isBuffering.eraseToAnyPublisher() }
     var isFileLoadedPublisher: AnyPublisher<Bool, Never> { $isFileLoaded.eraseToAnyPublisher() }
+    var tracksChangedPublisher: AnyPublisher<Void, Never> { tracksChanged.eraseToAnyPublisher() }
     
     // MARK: - Spies
     // MARK: - Spies

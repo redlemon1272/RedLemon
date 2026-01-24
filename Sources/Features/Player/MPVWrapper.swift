@@ -22,6 +22,9 @@ class MPVWrapper: ObservableObject {
     @Published var playbackFinished = false
     @Published var isFileLoaded = false
     @Published var mpvError: String? = nil // Expose critical errors to ViewModel
+    
+    // Track update notification
+    let tracksChanged = PassthroughSubject<Void, Never>()
     @Published var hasCompletedInitialTrackSelection = false // Prevents duplicate re-scans
     
     // Track the current video filename for subtitle matching
@@ -168,6 +171,10 @@ class MPVWrapper: ObservableObject {
 
         // Observe pause property to correctly track playback state
         mpv_observe_property(handle, 0, "pause", MPV_FORMAT_FLAG)
+
+        // Observe track list changes to update subtitle/audio menus reactively
+        mpv_observe_property(handle, 0, "track-list", MPV_FORMAT_NONE)
+        mpv_observe_property(handle, 0, "track-list/count", MPV_FORMAT_INT64)
 
         // Observe buffering state (detects network stalls)
         mpv_observe_property(handle, 0, "paused-for-cache", MPV_FORMAT_FLAG)
@@ -513,6 +520,10 @@ class MPVWrapper: ObservableObject {
                          Task { await SessionRecorder.shared.log(category: .player, message: "Buffering State", metadata: ["buffering": "\(isBufferingNow)"]) }
                      }
                  }
+            } else if nameStr == "track-list" || nameStr == "track-list/count" {
+                 // Notify that tracks have changed
+                 LoggingManager.shared.debug(.subtitles, message: "MPV: Track list change detected (\(nameStr))")
+                 self.tracksChanged.send()
             }
         case MPV_EVENT_LOG_MESSAGE:
             guard let data = eventPtr.pointee.data else { break }
@@ -602,10 +613,14 @@ class MPVWrapper: ObservableObject {
     func loadVideo(url: String, autoplay: Bool = true, expectedSubtitleCount: Int = 0, startTime: Double = 0) {
         // Extract filename for subtitle matching (e.g. "Movie.2023.1080p.WEBRip.mp4")
         if let urlObj = URL(string: url) {
-        LoggingManager.shared.debug(.videoRendering, message: "MPV: Current video filename set to: \(self.currentVideoFilename)")
+            self.currentVideoFilename = urlObj.lastPathComponent
+            LoggingManager.shared.debug(.videoRendering, message: "MPV: Current video filename set to: \(self.currentVideoFilename)")
         } else {
             self.currentVideoFilename = url
         }
+        
+        self.expectedExternalSubtitles = expectedSubtitleCount
+        LoggingManager.shared.info(.subtitles, message: "MPV: Expected external subtitles set to: \(expectedSubtitleCount)")
 
         // Execute load immediately (Array-based command handles spaces/quotes safely)
         executeLoadVideo(url: url, autoplay: autoplay, startTime: startTime)
@@ -1545,6 +1560,7 @@ extension MPVWrapper: MPVController {
     var durationPublisher: AnyPublisher<Double, Never> { $duration.eraseToAnyPublisher() }
     var isBufferingPublisher: AnyPublisher<Bool, Never> { $isBuffering.eraseToAnyPublisher() }
     var isFileLoadedPublisher: AnyPublisher<Bool, Never> { $isFileLoaded.eraseToAnyPublisher() }
+    var tracksChangedPublisher: AnyPublisher<Void, Never> { tracksChanged.eraseToAnyPublisher() }
 
     // Explicit witness for protocol to handle default argument mismatch?
     func setSubtitleTrack(_ id: Int) {

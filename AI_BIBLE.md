@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 24, 2026 (Part 108: SwiftUI Partial Body Traps - Landmine #108)
+> **Last Updated:** January 24, 2026 (Part 109: Subtitle Delivery Races & CDN User-Agents)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -103,6 +103,8 @@
 | **Flaky Background Art / Flicker** | Redundant state reset in loadStream | #106 |
 | **Missing Logos/Art (Text only)** | Lite MediaItem used without hydration | #107 |
 | **Compiler: Extraneous '}' / Redeclaration** | Partial SwiftUI Body Replacement Error | #108 |
+| **Subtitles Appear Delayed (10s+)** | Sequential loading loop + 5s polling delay | #109 |
+| **Subtitle Download Failed (403/503)** | Missing Browser User-Agent (SubDL CDN) | #110 |
 
 ## 🚨 Critical Landmines
 
@@ -1576,3 +1578,50 @@ var filtered = streams.filter { stream in
     return true
 }
 ```
+
+---
+
+## Part 25: Parallel Delivery & Subtitle Latency
+
+### 1. Subtitle Delivery Race (Landmine #109)
+**Symptom**: Subtitles are found quickly by the server, but take 15-20 seconds to appear in the player's menu after the video starts.
+
+**Root Cause**: 
+1. **Sequential Loading**: The `SubtitleService` originally downloaded external subtitles one-by-one in a `for` loop. If 5 subtitles were found and each took 2s, that's a 10s base delay.
+2. **Polling Latency**: The `scanEmbeddedTracks()` function relied on a fixed 5-second polling loop to detect when MPV finished loading external files. This added another 5s of dead air.
+
+**Mandatory Solution**:
+1. **Parallel Downloads**: Use `withTaskGroup` to download all external subtitles simultaneously.
+2. **Reactive Menu Updates**: Do NOT rely on polling. Observe the MPV `track-list` property and trigger an immediate scan when it changes. 
+3. **Internal Observer**: `SubtitleService` must subscribe to `mpv.tracksChangedPublisher` to refresh its `availableTracks` list instantly.
+
+```swift
+// ✅ CORRECT: Reactive track observation in SubtitleService
+observers.append(Task { [weak self] in
+    for await _ in mpv.tracksChangedPublisher.values {
+        // Immediate update when MPV registers a new track
+        await self?.scanEmbeddedTracks(isFastPath: true)
+    }
+})
+```
+
+---
+
+## Part 26: CDN & Header Enforcement
+
+### 1. CDN User-Agent Enforcement (Landmine #110)
+**Symptom**: Subtitle downloads from providers like SubDL fail with 403 Forbidden or 503 Service Unavailable, even though the URL is valid.
+
+**Root Cause**: SubDL's CDN (and many others) explicitly block requests that do not specify a common Browser User-Agent. Default `URLSession` headers are flagged as "Bot" or "Scraper".
+
+**Mandatory Solution**:
+1. **Standard Headers**: Every subtitle download request MUST specify a modern browser User-Agent (e.g., Chrome/MacOS).
+2. **Longer Timeouts**: CDN propagation and ZIP extraction can be slow. Use a minimum **30s timeout** for subtitle CDN requests.
+
+```swift
+// ✅ CORRECT: SubDL Request Headers
+var request = URLRequest(url: url)
+request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ...", forHTTPHeaderField: "User-Agent")
+request.timeoutInterval = 30
+```
+

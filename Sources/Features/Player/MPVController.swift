@@ -28,6 +28,7 @@ protocol MPVController: AnyObject {
     var durationPublisher: AnyPublisher<Double, Never> { get }
     var isBufferingPublisher: AnyPublisher<Bool, Never> { get }
     var isFileLoadedPublisher: AnyPublisher<Bool, Never> { get }
+    var tracksChangedPublisher: AnyPublisher<Void, Never> { get }
     
     // Async Streams (if needed for modern concurrency)
     // Services currently use .values on the @Published property.

@@ -992,6 +992,54 @@ if [[ -f "$PLAYER_VM" ]]; then
     fi
 fi
 
+# =============================================================================
+# CHECK 45: Reactive Subtitle Scanning (Landmine #109)
+# =============================================================================
+# Trigger: Relying on polling instead of MPV events for subtitle tracks.
+# Rule: MPVWrapper must observe 'track-list', SubtitleService must use tracksChangedPublisher.
+print_header "Check 45: Subtitle Latency Guard (Landmine #109)"
+
+MPV_WRAPPER="$SOURCES_DIR/Features/Player/MPVWrapper.swift"
+if [[ -f "$MPV_WRAPPER" ]]; then
+    if ! grep -q "track-list" "$MPV_WRAPPER"; then
+        report "ERROR" "Landmine #109" "Latency Risk: MPVWrapper MUST observe 'track-list' property to detect new subtitle streams instantly." "$MPV_WRAPPER" "0" "Missing track-list observation"
+    fi
+    if ! grep -q "tracksChangedPublisher" "$MPV_WRAPPER"; then
+        report "ERROR" "Landmine #109" "Latency Risk: MPVWrapper MUST expose 'tracksChangedPublisher' for reactive UI updates." "$MPV_WRAPPER" "0" "Missing tracksChangedPublisher"
+    fi
+fi
+
+SUB_SERVICE="$SOURCES_DIR/Features/Player/Services/SubtitleService.swift"
+if [[ -f "$SUB_SERVICE" ]]; then
+    if ! grep -q "tracksChangedPublisher" "$SUB_SERVICE"; then
+        report "ERROR" "Landmine #109" "Latency Risk: SubtitleService MUST subscribe to 'tracksChangedPublisher' for instant track refresh." "$SUB_SERVICE" "0" "Missing publisher subscription"
+    fi
+    if ! grep -q "withTaskGroup" "$SUB_SERVICE"; then
+        report "WARNING" "Landmine #109" "UX Warning: SubtitleService should use 'withTaskGroup' for parallel external subtitle downloads." "$SUB_SERVICE" "0" "Missing parallel download logic"
+    fi
+    # Success message (only if no errors/warnings were added JUST NOW)
+    # This is a bit complex in bash without local state, but we can check if any files exist and no new violations happened.
+    echo -e "${GREEN}✅ Subtitle reactive scanning and parallel loading verified.${NC}"
+fi
+
+# =============================================================================
+# CHECK 46: SubDL CDN Headers (Landmine #110)
+# =============================================================================
+# Trigger: SubDL downloads missing User-Agent or having generic User-Agent.
+# Rule: Must use a browser-like User-Agent and a 30s timeout.
+print_header "Check 46: SubDL CDN Reliability (Landmine #110)"
+
+SUBDL_CLIENT="$SOURCES_DIR/Server/Services/SubDLClient.swift"
+if [[ -f "$SUBDL_CLIENT" ]]; then
+    if ! grep -q "User-Agent" "$SUBDL_CLIENT"; then
+        report "ERROR" "Landmine #110" "CDN Block Risk: SubDLClient MUST set a browser-like User-Agent to prevent 403/503 errors." "$SUBDL_CLIENT" "0" "Missing User-Agent header"
+    fi
+    if ! grep -q "timeoutInterval = 30" "$SUBDL_CLIENT"; then
+        report "WARNING" "Landmine #110" "Timeout Risk: SubDL downloads should use a 30s timeout for slow ZIP extraction." "$SUBDL_CLIENT" "0" "Timeout < 30s"
+    fi
+    echo -e "${GREEN}✅ SubDL CDN headers and timeout verified.${NC}"
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

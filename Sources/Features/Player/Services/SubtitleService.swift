@@ -12,7 +12,7 @@ protocol SubtitleService: Actor {
     func loadExternalSubtitles(_ items: [(url: String, label: String)]) async
 
     /// Scan for embedded tracks in the current file
-    func scanEmbeddedTracks() async
+    func scanEmbeddedTracks(isFastPath: Bool) async
 
     /// Select a specific track by ID
     func selectTrack(_ id: Int) async
@@ -28,6 +28,12 @@ protocol SubtitleService: Actor {
 
     /// Stream of offset for UI binding
     var offsetPublisher: AnyPublisher<Double, Never> { get }
+}
+
+extension SubtitleService {
+    func scanEmbeddedTracks() async {
+        await scanEmbeddedTracks(isFastPath: false)
+    }
 }
 
 /// Actor-based implementation of SubtitleService
@@ -55,10 +61,28 @@ actor MPVSubtitleService: SubtitleService {
 
     // MARK: - Dependencies
     private weak var mpvController: (any MPVController)?
+    private var observers: [Task<Void, Never>] = []
 
     // MARK: - Initialization
     init(mpvController: any MPVController) {
         self.mpvController = mpvController
+        Task { await setupObservers() }
+    }
+    
+    deinit {
+        for observer in observers {
+            observer.cancel()
+        }
+    }
+
+    private func setupObservers() async {
+        guard let mpv = mpvController else { return }
+        
+        observers.append(Task { [weak self] in
+            for await _ in mpv.tracksChangedPublisher.values {
+                await self?.scanEmbeddedTracks(isFastPath: true)
+            }
+        })
     }
 
     // MARK: - Protocol Implementation
@@ -78,58 +102,37 @@ actor MPVSubtitleService: SubtitleService {
             }
             // Update tracks after loading
             await scanEmbeddedTracks()
-        } else if !items.isEmpty {
-            // Check for SubDL URLs which need proxy handling
-             let hasSubDLSubtitles = items.contains { $0.url.contains("/subtitles/subdl/") }
-
-            if hasSubDLSubtitles {
-                LoggingManager.shared.info(.subtitles, message: "SubDL subtitles detected - downloading to local files in background...")
-
-                // Download sequentially to avoid overwhelming server or logic
-                for (index, subtitle) in items.enumerated() {
-                    // Start download
-                    if let localPath = await downloadSubtitle(url: subtitle.url) {
-                        LoggingManager.shared.info(.subtitles, message: "Subtitle \(index + 1) downloaded to: \(localPath)")
-                        mpv.loadSubtitle(url: localPath, title: subtitle.label)
-                    } else {
-                         LoggingManager.shared.error(.subtitles, message: "Failed to download subtitle \(index + 1)")
+        }
+        if !items.isEmpty {
+            LoggingManager.shared.info(.subtitles, message: "Parallel loading \(items.count) external subtitles...")
+            
+            await withTaskGroup(of: Void.self) { group in
+                for subtitle in items {
+                    group.addTask {
+                        if let localPath = await self.downloadSubtitle(url: subtitle.url) {
+                            LoggingManager.shared.info(.subtitles, message: "Subtitle ready: \(subtitle.label)")
+                            await self.mpvController?.loadSubtitle(url: localPath, title: subtitle.label)
+                        }
                     }
                 }
-
-                // Update tracks after loading all
-                await scanEmbeddedTracks()
-                // NOTE: Do NOT call refreshSubtitleSelection() here!
-                // The initial selection is done by MPVWrapper.pollForTracksAndResume() BEFORE playback starts.
-                // Calling it again here would change the track DURING playback, causing a buffer flash.
-            } else {
-                 // Standard URL loading (MPV can handle many http urls directly, but safer to download)
-                 // For now, assuming direct load for non-SubDL or falling back to download logic
-                 // Implementing simple direct load for non-proxy URLs if MPV supports it,
-                 // BUT previous logic suggested downloading everything. Let's stick to downloading.
-                for (index, subtitle) in items.enumerated() {
-                    if let localPath = await downloadSubtitle(url: subtitle.url) {
-                         mpv.loadSubtitle(url: localPath, title: subtitle.label)
-                    }
-                }
-                await scanEmbeddedTracks()
-                // NOTE: Do NOT call refreshSubtitleSelection() here!
-                // The initial selection is done by MPVWrapper.pollForTracksAndResume() BEFORE playback starts.
-                // Calling it again here would change the track DURING playback, causing a buffer flash.
             }
+            
+            // Initial scan after starting all downloads
+            await scanEmbeddedTracks()
         }
     }
 
-    func scanEmbeddedTracks() async {
+    func scanEmbeddedTracks(isFastPath: Bool = false) async {
         guard let mpv = mpvController else { return }
 
         // Retry logic: Tracks often appear slightly AFTER file load/video ready
-        // We poll for 5 seconds to ensure we catch all embedded streams
-        LoggingManager.shared.debug(.subtitles, message: "SubtitleService: Starting embedded track scan (polling 5s)...")
+        // FAST PATH: Only check once (used for reactive updates from MPV events)
+        let maxAttempts = isFastPath ? 1 : 5
+        
+        LoggingManager.shared.debug(.subtitles, message: "SubtitleService: Scanning tracks (FastPath: \(isFastPath))...")
 
-        for i in 0..<5 {
+        for i in 0..<maxAttempts {
             let tracks = await mpv.getSubtitleTracks()
-
-            // Always update to ensure we catch all state changes (optimization was causing missed updates)
             self.availableTracks = tracks
 
             let currentid = await mpv.getCurrentSubtitleTrack()
@@ -139,13 +142,7 @@ actor MPVSubtitleService: SubtitleService {
                 self.currentTrack = nil
             }
 
-            LoggingManager.shared.debug(.subtitles, message: "SubtitleService: Scanned \(tracks.count) tracks (Attempt \(i+1)/5)")
-            for t in tracks {
-                LoggingManager.shared.debug(.subtitles, message: "   Track: ID=\(t.id), Title=\(t.displayName), External=\(t.isExternal)")
-            }
-
-            // Wait 1 second before next poll
-            if i < 4 {
+            if i < maxAttempts - 1 {
                 try? await Task.sleep(nanoseconds: 1_000_000_000)
             }
         }

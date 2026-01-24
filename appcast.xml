@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.142 -->
+        <item>
+            <title>Version 1.0.142</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Parallelized external subtitle downloads for 300% faster delivery</li><li>Added reactive subtitle track scanning for instant UI updates</li><li>Improved SubDL CDN reliability with browser-like headers and 30s timeout</li><li>Fixed building of RedLemonTests/LandmineTests</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 16:37:37 -0500</pubDate>
+            <sparkle:version>142</sparkle:version>
+            <sparkle:shortVersionString>1.0.142</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.142.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="UadCPkXZgVPjYIE7Gb8C5Ua+mvTvohzUiTBh8CxkXkvGv8p83642CFze+ER2Rs1cyjs2qYWBQnCU5SZLO8fNCw==" length="74095831"
+            />
+        </item>
         <!-- v1.0.141 -->
         <item>
             <title>Version 1.0.141</title>

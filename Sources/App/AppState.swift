@@ -92,17 +92,33 @@ class AppState: ObservableObject {
     func relaunchApp() {
         NSLog("🔄 [AppState] Triggering mandatory app relaunch...")
         let bundleURL = Bundle.main.bundleURL
-        let configuration = NSWorkspace.OpenConfiguration()
         
-        // This opens a new instance of the app
-        NSWorkspace.shared.openApplication(at: bundleURL, configuration: configuration) { _, error in
-            if let error = error {
-                NSLog("%@", "❌ [AppState] Failed to relaunch app: \(error.localizedDescription)")
-            }
+        // 🚀 CRITICAL: Use /usr/bin/open -n to ensure a fresh, separate instance is spawned.
+        // This is the most reliable way to "relaunch" an app on macOS.
+        let process = Process() // OK
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/open")
+        process.arguments = ["-n", bundleURL.path]
+        
+        do {
+            try process.run()
             
-            // Terminate the current instance
+            // Give the OS a moment to start the new process before we terminate
             Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 200_000_000) // 200ms
                 NSApplication.shared.terminate(nil)
+            }
+        } catch {
+            NSLog("❌ [AppState] Failed to relaunch via 'open' command: %@", error.localizedDescription)
+            
+            // Fallback to NSWorkspace if Process fails
+            let configuration = NSWorkspace.OpenConfiguration()
+            NSWorkspace.shared.openApplication(at: bundleURL, configuration: configuration) { _, error in
+                if let error = error {
+                    NSLog("❌ [AppState] NSWorkspace also failed: %@", error.localizedDescription)
+                }
+                Task { @MainActor in
+                    NSApplication.shared.terminate(nil)
+                }
             }
         }
     }

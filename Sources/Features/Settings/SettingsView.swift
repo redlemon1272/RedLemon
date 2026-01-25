@@ -1359,24 +1359,17 @@ struct SettingsView: View {
             await UserResetManager.shared.forceUsernameSetup()
 
             await MainActor.run {
-                resetMessage = "✅ User data erased! The app will now show the username setup screen."
+                resetMessage = "✅ User data erased! Restarting app to show setup screen..."
                 currentUsername = ""
                 appState.currentUsername = ""
                 appState.currentUserId = nil
             }
 
-            // Clear message after 3 seconds (Bible Landmine #25: no DispatchQueue.main)
-            Task { @MainActor in
-                try? await Task.sleep(nanoseconds: 3_000_000_000)
-                withAnimation {
-                    resetMessage = nil
-                }
-            }
-
-            // Stop resetting after a delay
-            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            // Brief delay so user sees the message (Bible Landmine #52: no sleep on MainActor)
+            try? await Task.sleep(nanoseconds: 1_500_000_000)
+            
             await MainActor.run {
-                isResetting = false
+                appState.relaunchApp()
             }
 
         } catch {

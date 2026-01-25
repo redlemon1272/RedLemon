@@ -11,7 +11,7 @@ actor MockRealtimeManager: RealtimeService {
     // Test verification properties
     var sentMessages: [SyncMessage] = []
 
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]? = nil) async throws {
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, isPremium: Bool, postgresChanges: [[String: Any]]? = nil) async throws {
         self.isConnected = true
         connectionStateCallback?(.connected)
     }

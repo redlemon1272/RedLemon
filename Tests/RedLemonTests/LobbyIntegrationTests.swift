@@ -148,7 +148,7 @@ class LobbyIntegrationTests: XCTestCase {
         // Given
         viewModel.stateMachine.transition(to: .connected)
         let guestIdx = "guest-id-123"
-        let guest = Participant(id: guestIdx, name: "Bad Guest", isHost: false, isReady: true, joinedAt: Date(), phxRefs: [])
+        let guest = Participant(id: guestIdx, name: "Bad Guest", isHost: false, isReady: true, isPremium: false, joinedAt: Date(), phxRefs: [])
         viewModel.participants.append(guest)
 
         // When
@@ -199,6 +199,7 @@ class LobbyIntegrationTests: XCTestCase {
             name: "Leaver",
             isHost: false,
             isReady: true,
+            isPremium: false,
             joinedAt: Date().addingTimeInterval(-10), // Joined 10s ago (Not in grace period)
             phxRefs: []
         )

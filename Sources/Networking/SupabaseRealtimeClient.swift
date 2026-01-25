@@ -372,34 +372,35 @@ actor SupabaseRealtimeClient {
     }
 
     private func startReceivingMessages() {
-        receiveTask = Task {
-            while isConnected {
+        receiveTask = Task.detached { [weak self] in
+            guard let self = self else { return }
+            while await self.isConnected {
                 do {
-                    guard let task = webSocketTask else { break }
+                    guard let task = await self.webSocketTask else { break }
 
                     let message = try await task.receive()
 
                     // Check again after await - we might have disconnected
-                    guard isConnected else { break }
+                    guard await self.isConnected else { break }
 
                     switch message {
                     case .string(let text):
                         // print("📨 Received: \(text)")
-                        handleIncomingMessage(text)
+                        await self.handleIncomingMessage(text)
                     case .data(let data):
                         if let text = String(data: data, encoding: .utf8) {
                             // print("📨 Received (binary): \(text)")
-                            handleIncomingMessage(text)
+                            await self.handleIncomingMessage(text)
                         }
                     @unknown default:
                         break
                     }
                 } catch {
                     // Only log error if we're still supposed to be connected
-                    if isConnected {
+                    if await self.isConnected {
                         print("❌ Error receiving message: \(error)")
                         // Connection lost, notify handlers
-                        await disconnect()
+                        await self.disconnect()
                     }
                     break
                 }
@@ -565,24 +566,26 @@ actor SupabaseRealtimeClient {
         // Cancel any existing heartbeat task to prevent duplicates
         heartbeatTask?.cancel()
 
-        heartbeatTask = Task {
+        heartbeatTask = Task.detached { [weak self] in
+            guard let self = self else { return }
             while !Task.isCancelled {
                 do {
                     try await Task.sleep(nanoseconds: 30_000_000_000) // 30 seconds
 
+                    let ref = await self.nextRef()
                     let message: [String: Any] = [
                         "topic": "phoenix",
                         "event": "heartbeat",
                         "payload": [:],
-                        "ref": nextRef()
+                        "ref": ref
                     ]
 
-                    try await sendMessage(message)
+                    try await self.sendMessage(message)
                     // print("💓 Heartbeat sent")
                 } catch {
                     print("❌ Heartbeat failed: \(error)")
-                    if isConnected {
-                        await disconnect()
+                    if await self.isConnected {
+                        await self.disconnect()
                     }
                     break
                 }

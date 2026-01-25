@@ -147,21 +147,21 @@ actor RealtimeChannelManager: RealtimeService {
 
         // Handle broadcast messages
         self.broadcastHandlerId = await realtimeClient.onBroadcast(topic: channelName, event: eventName) { _, payload in
-            Task { [weak self] in
+            Task.detached { [weak self] in
                 await self?.handleBroadcastMessage(payload)
             }
         }
 
         // Handle presence changes
         self.presenceHandlerId = await realtimeClient.onPresence(topic: channelName) { action, userId, metadata in
-            Task { @MainActor in
-                await self.handlePresenceUpdate(action: action, userId: userId, metadata: metadata)
+            Task.detached { [weak self] in
+                await self?.handlePresenceUpdate(action: action, userId: userId, metadata: metadata)
             }
         }
 
         // Handle connection changes
         self.connectionHandlerId = await realtimeClient.onConnectionChange { connected in
-            Task { [weak self] in
+            Task.detached { [weak self] in
                 await self?.handleConnectionChange(connected)
             }
         }
@@ -174,7 +174,7 @@ actor RealtimeChannelManager: RealtimeService {
 
         // Handle postgres changes (topic-scoped)
         self.postgresHandlerId = await realtimeClient.onPostgresChange(topic: channelName) { payload in
-            Task { [weak self] in
+            Task.detached { [weak self] in
                await self?.handlePostgresChange(payload)
             }
         }
@@ -191,13 +191,14 @@ actor RealtimeChannelManager: RealtimeService {
     // MARK: - Telemetry
 
     private func logError(_ message: String) {
-        Task {
+        Task.detached { [weak self] in
+            let rId = await self?.roomId ?? "unknown"
+            let uId = await self?.userId ?? "unknown"
             // Bridge to SupabaseClient for server-side logging
-            // We use 'error' level for these runtime failures
             try? await SupabaseClient.shared.insertLog(
                 level: "error",
                 message: "[Realtime] \(message)",
-                metadata: ["room_id": roomId ?? "unknown", "user_id": userId ?? "unknown"]
+                metadata: ["room_id": rId, "user_id": uId]
             )
         }
     }
@@ -247,7 +248,7 @@ actor RealtimeChannelManager: RealtimeService {
         // Auto-Reconnect Logic
         if !connected && !isDisconnecting {
             print("⚠️ Realtime: Connection lost. Attempting auto-reconnect in 2s...")
-            Task { [weak self] in
+            Task.detached { [weak self] in
                 guard let self = self else { return }
 
                 try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s

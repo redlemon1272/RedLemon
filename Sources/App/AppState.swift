@@ -540,14 +540,25 @@ class AppState: ObservableObject {
         let currentIds = eventsSchedule.map { $0.id }
 
         let newCounts = await Task.detached {
-            var counts: [String: Int] = [:]
-            for id in currentIds {
-                let roomId = "event_\(id)"
-                if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
-                    counts[id] = roomState.participantsCount
+            await withTaskGroup(of: (String, Int)?.self) { group in
+                for id in currentIds {
+                    group.addTask {
+                        let roomId = "event_\(id)"
+                        if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                            return (id, roomState.participantsCount)
+                        }
+                        return nil
+                    }
                 }
+                
+                var counts: [String: Int] = [:]
+                for await result in group {
+                    if let (id, count) = result {
+                        counts[id] = count
+                    }
+                }
+                return counts
             }
-            return counts
         }.value
 
         // Only log if there are non-zero counts (avoid spam)

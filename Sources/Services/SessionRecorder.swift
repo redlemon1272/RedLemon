@@ -67,8 +67,8 @@ actor SessionRecorder {
     private let sensitiveKeys = ["api_key", "token", "password", "auth", "secret"]
     
     private init() {
-        Task {
-            await log(category: .app, message: "SessionRecorder initialized")
+        Task.detached { [weak self] in
+            await self?.log(category: .app, message: "SessionRecorder initialized")
         }
     }
     

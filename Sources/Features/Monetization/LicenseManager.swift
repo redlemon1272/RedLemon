@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 
 
+@MainActor
 class LicenseManager: ObservableObject {
     static let shared = LicenseManager()
 
@@ -29,35 +30,31 @@ class LicenseManager: ObservableObject {
 
     /// Refresh license status from server
     func refreshLicense(premium: Bool, expiresAt: Date?) {
-        Task { @MainActor in
-            self.objectWillChange.send() // Force UI update
+        self.objectWillChange.send() // Force UI update
 
-            if let date = expiresAt {
-                self.subscriptionExpiresAt = date.timeIntervalSince1970
-                print("🎉 License updated! Expires: \(date)")
-            } else if premium {
-                 // Fallback if no date returned but premium is true (Legacy/Safety)
-                 // Give 30 days if undefined? Or just set far future?
-                 // Let's set 30 days to be safe/generous for now
-                 // Only update if current expiry is in the past, to avoid overwriting a longer valid sub
-                 if self.subscriptionExpiresAt < Date().timeIntervalSince1970 {
-                     self.subscriptionExpiresAt = Date().addingTimeInterval(30 * 24 * 3600).timeIntervalSince1970
-                 }
-            } else {
-                // Premium is FALSE and no date provided -> Revoke/Expire
-                // Set expiry to 0 (1970) to ensure isPremium returns false
-                self.subscriptionExpiresAt = 0
-                print("🚫 License revoked or inactive.")
-            }
+        if let date = expiresAt {
+            self.subscriptionExpiresAt = date.timeIntervalSince1970
+            print("🎉 License updated! Expires: \(date)")
+        } else if premium {
+             // Fallback if no date returned but premium is true (Legacy/Safety)
+             // Give 30 days if undefined? Or just set far future?
+             // Let's set 30 days to be safe/generous for now
+             // Only update if current expiry is in the past, to avoid overwriting a longer valid sub
+             if self.subscriptionExpiresAt < Date().timeIntervalSince1970 {
+                 self.subscriptionExpiresAt = Date().addingTimeInterval(30 * 24 * 3600).timeIntervalSince1970
+             }
+        } else {
+            // Premium is FALSE and no date provided -> Revoke/Expire
+            // Set expiry to 0 (1970) to ensure isPremium returns false
+            self.subscriptionExpiresAt = 0
+            print("🚫 License revoked or inactive.")
         }
     }
 
     /// Activate the license (Legacy support / Quick unlock)
     func activateLicense() {
-        Task { @MainActor in
-            // Default to 30 days if activated blindly
-             self.subscriptionExpiresAt = Date().addingTimeInterval(30 * 24 * 3600).timeIntervalSince1970
-        }
+        // Default to 30 days if activated blindly
+         self.subscriptionExpiresAt = Date().addingTimeInterval(30 * 24 * 3600).timeIntervalSince1970
     }
 
     func refreshSubscription() async {
@@ -83,14 +80,12 @@ class LicenseManager: ObservableObject {
                 print("👤 LicenseManager: Profile expiry: \(String(describing: profileExpiry))")
 
                 // Refresh Auth Context to update Hosting Streak in UI immediately
-                await MainActor.run {
-                    SupabaseClient.shared.auth.currentUser = AuthUser(
-                        id: user.id,
-                        username: user.username,
-                        isAdmin: user.isAdmin ?? false,
-                        isPremium: user.isPremium ?? false
-                    )
-                }
+                SupabaseClient.shared.auth.currentUser = AuthUser(
+                    id: user.id,
+                    username: user.username,
+                    isAdmin: user.isAdmin ?? false,
+                    isPremium: user.isPremium ?? false
+                )
             }
         } catch {
             print("⚠️ LicenseManager: Profile check failed (non-fatal): \(error)")
@@ -129,13 +124,11 @@ class LicenseManager: ObservableObject {
 
         let data = try JSONDecoder().decode(RecoveryResponse.self, from: response)
 
-        await MainActor.run {
-            if let expiryString = data.subscription_expires_at,
-               let date = SupabaseClient.isoFormatter.date(from: expiryString) {
-                self.subscriptionExpiresAt = date.timeIntervalSince1970
-            } else if data.is_host {
-                self.activateLicense()
-            }
+        if let expiryString = data.subscription_expires_at,
+           let date = SupabaseClient.isoFormatter.date(from: expiryString) {
+            self.subscriptionExpiresAt = date.timeIntervalSince1970
+        } else if data.is_host {
+            self.activateLicense()
         }
 
         return true
@@ -158,20 +151,35 @@ class LicenseManager: ObservableObject {
     // MARK: - Hosting Limit
     @Published var timeUntilNextFreeRoom: TimeInterval = 0
 
+    private var lastLimitCheck: Date = .distantPast
+    private var isCheckingLimit: Bool = false
+
     func checkHostingLimit() async {
+        // Prevent concurrent or too-frequent checks
+        if isCheckingLimit { return }
+        
+        let now = Date()
+        let timeSinceLastCheck = now.timeIntervalSince(lastLimitCheck)
+        
+        // Debounce: don't check more than once per minute unless we think we're ready
+        if timeSinceLastCheck < 60 && timeUntilNextFreeRoom > 0 {
+            return
+        }
+        
+        isCheckingLimit = true
+        lastLimitCheck = now
+        defer { isCheckingLimit = false }
+
         // Premium users have no limit
         if isPremium {
-            await MainActor.run { self.timeUntilNextFreeRoom = 0 }
+            self.timeUntilNextFreeRoom = 0
             return
         }
 
         do {
             // Use unified check from SupabaseClient (queries room_creation_history)
             let remaining = try await SupabaseClient.shared.checkFreeTierLimit()
-
-            await MainActor.run {
-                self.timeUntilNextFreeRoom = remaining
-            }
+            self.timeUntilNextFreeRoom = remaining
         } catch {
             print("Error checking hosting limit: \(error)")
         }

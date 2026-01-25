@@ -26,9 +26,8 @@ class SocialService: ObservableObject {
 
     // MARK: - Internal
     private let client = SupabaseClient.shared
-    private var presenceClient: SupabaseRealtimeClient?
+    private var realtimeClient: SupabaseRealtimeClient { SupabaseClient.shared.realtimeClient }
     private var userPresenceRefs: [String: [String: [String: Any]]] = [:] // Key: UserID -> [Ref: Metadata]
-    private var dmClient: SupabaseRealtimeClient?
     private var currentUserId: String?
     private var currentUsername: String?
     private var currentMetadata: [String: Any] = [:]
@@ -72,14 +71,7 @@ class SocialService: ObservableObject {
 
     func disconnect() async {
         stopHeartbeat()
-        if let client = presenceClient {
-            await client.disconnect()
-            presenceClient = nil
-        }
-        if let client = dmClient {
-            await client.disconnect()
-            dmClient = nil
-        }
+        // No longer disconnecting the shared client here
         isConnected = false
         onlineUserIds.removeAll()
         friendActivity.removeAll()
@@ -88,20 +80,13 @@ class SocialService: ObservableObject {
     // MARK: - Presence
 
     private func setupPresenceChannel(userId: String, username: String) async {
-        print("🔌 SocialService: Connecting to global presence...")
-
-        // Create a dedicated client for presence
-        let client = SupabaseRealtimeClient(
-            realtimeURL: Config.supabaseURL,
-            apiKey: Config.supabaseAnonKey
-        )
-        self.presenceClient = client
+        print("🔌 SocialService: Connecting to global presence via shared client...")
 
         // Setup connection monitoring
-        await setupConnectionMonitoring(for: client, isPresence: true)
+        await setupConnectionMonitoring(for: realtimeClient, isPresence: true)
 
         // Subscribe to presence events
-        await client.onPresence(topic: "global-presence") { [weak self] action, presenceKey, metadata in
+        await realtimeClient.onPresence(topic: "global-presence") { [weak self] action, presenceKey, metadata in
             Task { @MainActor [weak self] in
                 if action == .join {
                     self?.handlePresenceJoin(mapKey: presenceKey, metadata: metadata)
@@ -112,8 +97,8 @@ class SocialService: ObservableObject {
         }
 
         do {
-            try await client.connect()
-            try await client.joinChannel("global-presence")
+            try await realtimeClient.connect()
+            try await realtimeClient.joinChannel("global-presence")
 
             // Track my initial status
             let initialMeta: [String: Any] = [
@@ -123,7 +108,7 @@ class SocialService: ObservableObject {
                 "is_premium": LicenseManager.shared.isPremium
             ]
             self.currentMetadata = initialMeta
-            try await client.track(topic: "global-presence", userId: userId, metadata: initialMeta)
+            try await realtimeClient.track(topic: "global-presence", userId: userId, metadata: initialMeta)
 
             isConnected = true
             startHeartbeat()
@@ -135,7 +120,7 @@ class SocialService: ObservableObject {
     }
 
     func updateWatchingStatus(mediaTitle: String?, mediaType: String?, imdbId: String?, roomId: String?, status: String? = nil) async {
-        guard let client = presenceClient, let userId = currentUserId, let username = currentUsername else { return }
+        guard let userId = currentUserId, let username = currentUsername else { return }
 
         var metadata: [String: Any] = [
             "username": username,
@@ -157,7 +142,7 @@ class SocialService: ObservableObject {
 
         do {
             self.currentMetadata = metadata
-            try await client.track(topic: "global-presence", userId: userId, metadata: metadata)
+            try await realtimeClient.track(topic: "global-presence", userId: userId, metadata: metadata)
             print("📡 SocialService: Updated status - \(metadata["status"] as? String ?? "Unknown"): \(mediaTitle ?? "")")
         } catch {
             print("❌ SocialService: Failed to update status: \(error)")
@@ -423,32 +408,27 @@ class SocialService: ObservableObject {
         print("🔄 SocialService: Attempting to reconnect...")
 
         // Re-establish Presence
-        if let client = presenceClient {
-            let isJoined = await client.isJoined(to: "global-presence")
-            if !isJoined {
-                  do {
-                     try await client.connect()
-                     try await client.joinChannel("global-presence")
-                     try await client.track(topic: "global-presence", userId: userId, metadata: currentMetadata)
-                     print("✅ SocialService: Reconnected to presence")
-                 } catch {
-                     print("❌ SocialService: Presence reconnection failed: \(error)")
-                 }
-            }
+        let isJoinedGlobal = await realtimeClient.isJoined(to: "global-presence")
+        if !isJoinedGlobal {
+              do {
+                 try await realtimeClient.connect()
+                 try await realtimeClient.joinChannel("global-presence")
+                 try await realtimeClient.track(topic: "global-presence", userId: userId, metadata: currentMetadata)
+                 print("✅ SocialService: Reconnected to presence")
+             } catch {
+                 print("❌ SocialService: Presence reconnection failed: \(error)")
+             }
         } else {
-             await setupPresenceChannel(userId: userId, username: username)
+             // If already joined, just ensure we are tracking
+             try? await realtimeClient.track(topic: "global-presence", userId: userId, metadata: currentMetadata)
         }
 
         // Re-establish Social Channels (DMs, Friendships)
-        if let client = dmClient {
-             try? await client.connect()
-        } else {
-             await setupSocialChannels(userId: userId)
-        }
+        try? await realtimeClient.connect()
     }
 
     private func sendHeartbeat() async {
-        guard isConnected, let client = presenceClient, let userId = currentUserId else { return }
+        guard isConnected, let userId = currentUserId else { return }
 
         // Refresh timestamp and premium status
         var metadata = currentMetadata
@@ -458,7 +438,7 @@ class SocialService: ObservableObject {
 
         do {
             // 1. Realtime Presence Tracking
-            try await client.track(topic: "global-presence", userId: userId, metadata: metadata)
+            try await realtimeClient.track(topic: "global-presence", userId: userId, metadata: metadata)
 
             // 2. Database Last Seen Update (Global Heartbeat)
             // This ensures the Admin Dashboard shows the user as 'Online' even if not in a room.
@@ -733,47 +713,41 @@ class SocialService: ObservableObject {
     // MARK: - Realtime Social Channels (DMs & Friendships)
 
     private func setupSocialChannels(userId: String) async {
-        print("🔌 SocialService: Connecting to social realtime channels...")
-
-        let client = SupabaseRealtimeClient(
-            realtimeURL: Config.supabaseURL,
-            apiKey: Config.supabaseAnonKey
-        )
-        self.dmClient = client
+        print("🔌 SocialService: Connecting to social realtime channels via shared client...")
 
         // Setup monitoring
-        await setupConnectionMonitoring(for: client, isPresence: false)
+        await setupConnectionMonitoring(for: realtimeClient, isPresence: false)
 
         // 1. Subscribe to DMs
-        await client.onPostgresChange(topic: "direct_messages") { [weak self] payload in
+        await realtimeClient.onPostgresChange(topic: "direct_messages") { [weak self] payload in
             Task { @MainActor [weak self] in
                 self?.handleIncomingMessage(payload)
             }
         }
 
         // 2. Subscribe to Friendships (Requests & Updates)
-        await client.onPostgresChange(topic: "friendships") { [weak self] payload in
+        await realtimeClient.onPostgresChange(topic: "friendships") { [weak self] payload in
             Task { @MainActor [weak self] in
                 self?.handleIncomingFriendship(payload)
             }
         }
 
         do {
-            try await client.connect()
+            try await realtimeClient.connect()
 
             // Join DMs Channel
             let dmConfig: [[String: Any]] = [
                 ["event": "INSERT", "schema": "public", "table": "direct_messages", "filter": "receiver_id=eq.\(userId.lowercased())"],
                 ["event": "INSERT", "schema": "public", "table": "direct_messages", "filter": "sender_id=eq.\(userId.lowercased())"]
             ]
-            try await client.joinChannel("direct_messages", postgresChanges: dmConfig)
+            try await realtimeClient.joinChannel("direct_messages", postgresChanges: dmConfig)
 
             // Join Friendships Channel
             let friendshipConfig: [[String: Any]] = [
                 ["event": "*", "schema": "public", "table": "friendships", "filter": "user_id_2=eq.\(userId.lowercased())"], // Me as receiver
                 ["event": "UPDATE", "schema": "public", "table": "friendships", "filter": "user_id_1=eq.\(userId.lowercased())"] // Me as sender (status change)
             ]
-            try await client.joinChannel("friendships", postgresChanges: friendshipConfig)
+            try await realtimeClient.joinChannel("friendships", postgresChanges: friendshipConfig)
 
             print("✅ SocialService: Connected to social channels")
         } catch {

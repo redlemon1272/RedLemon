@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 24, 2026 (Part 109: Subtitle Delivery Races & CDN User-Agents)
+> **Last Updated:** January 25, 2026 (Part 122: Realtime Consolidation & Optimistic UI)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -109,6 +109,10 @@
 | **Subtitle Availability Gap** | Concurrency race or slow provider response | #114 |
 | **Guest/Host Subtitle Mismatch** | Sync inconsistency or weak scoring (TELESYNC Trap) | #117 |
 | **Missing Subtitles on Start** | Initial API timeout; Service was down during "Smart Load" | #118 |
+| **App Hang/Freezes (Startup)** | Actor Initialization Task Loop | #119 |
+| **App Lag/Resource Exhaustion** | New LocalAPIClient() per view | #120 |
+| **UI Flash/Spinners** | Missing Optimistic Rendering | #121 |
+| **Supabase Error: Ext Limit** | Multiple Realtime WebSockets | #122 |
 
 ## 🚨 Critical Landmines
 

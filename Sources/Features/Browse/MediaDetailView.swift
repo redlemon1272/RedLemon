@@ -14,9 +14,10 @@ struct MediaDetailView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {
-                // Blurred background art (only show after metadata loads)
-                if !isLoading, let metadata = metadata, let backgroundURL = metadata.backgroundURL {
-                    AsyncImage(url: URL(string: backgroundURL)) { phase in
+                // Blurred background art (Optimistic rendering: use mediaItem background as fallback)
+                let backgroundURL = metadata?.backgroundURL ?? mediaItem.background
+                if let urlString = backgroundURL, let url = URL(string: urlString) {
+                    AsyncImage(url: url) { phase in
                         switch phase {
                         case .success(let image):
                             image
@@ -26,10 +27,7 @@ struct MediaDetailView: View {
                                 .blur(radius: 40)
                                 .overlay(Color.black.opacity(0.7))
                                 .clipped()
-                        case .failure(_), .empty:
-                            Color(NSColor.windowBackgroundColor)
-                                .frame(width: geometry.size.width, height: geometry.size.height)
-                        @unknown default:
+                        default:
                             Color(NSColor.windowBackgroundColor)
                                 .frame(width: geometry.size.width, height: geometry.size.height)
                         }
@@ -64,93 +62,86 @@ struct MediaDetailView: View {
                     Spacer()
                 }
                 .frame(maxWidth: .infinity)
-                // Removed ultraThinMaterial background to match Lobby style (transparent/overlay)
 
                 // Content
                 ScrollView {
-                    if isLoading {
+                    VStack(alignment: .center, spacing: 0) {
+                        // Logo or Title
                         VStack {
-                            Spacer()
-                            ProgressView("Loading details...")
-                                .padding()
-                            Spacer()
-                        }
-                        .frame(maxWidth: .infinity, minHeight: 400)
-                    } else {
-                        VStack(alignment: .center, spacing: 0) {
-                                                        // Logo or Title
-                            VStack {
-                                if let logoURL = metadata?.logoURL {
-                                    AsyncImage(url: URL(string: logoURL)) { image in
+                            let logoURL = metadata?.logoURL ?? mediaItem.logo
+                            if let urlString = logoURL, let url = URL(string: urlString) {
+                                AsyncImage(url: url) { phase in
+                                    switch phase {
+                                    case .success(let image):
                                         image
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(maxWidth: min(geometry.size.width * 0.7, 700), maxHeight: 150)
                                             .shadow(color: .black.opacity(0.8), radius: 20, x: 0, y: 10)
-                                    } placeholder: {
+                                    default:
                                         Text(mediaItem.name)
                                             .font(.system(size: 56, weight: .bold))
                                             .foregroundColor(.white)
                                             .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 5)
                                     }
-                                } else {
-                                    Text(mediaItem.name)
-                                        .font(.system(size: 56, weight: .bold))
-                                        .foregroundColor(.white)
-                                        .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 5)
-                                        .multilineTextAlignment(.center)
                                 }
+                            } else {
+                                Text(mediaItem.name)
+                                    .font(.system(size: 56, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .shadow(color: .black.opacity(0.8), radius: 10, x: 0, y: 5)
+                                    .multilineTextAlignment(.center)
                             }
-                            .padding(.top, 50)
-                            .padding(.horizontal, max(30, geometry.size.width * 0.05))
+                        }
+                        .padding(.top, 50)
+                        .padding(.horizontal, max(30, geometry.size.width * 0.05))
 
-                            // Metadata row (Year, Rating, Genres)
-                            HStack(spacing: 20) {
-                                if let year = metadata?.year {
-                                    Text(year)
+                        // Metadata row (Year, Rating, Genres)
+                        HStack(spacing: 20) {
+                            Text(metadata?.year ?? mediaItem.year ?? "")
+                                .font(.title2.weight(.medium))
+                                .foregroundColor(.white.opacity(0.9))
+
+                            if let imdbRating = metadata?.imdbRating {
+                                HStack(spacing: 4) {
+                                    Image(systemName: "star.fill")
+                                        .foregroundColor(.yellow)
+                                    Text(String(format: "%.1f", imdbRating))
                                         .font(.title2.weight(.medium))
-                                        
                                         .foregroundColor(.white.opacity(0.9))
                                 }
-
-                                if let imdbRating = metadata?.imdbRating {
-                                    HStack(spacing: 4) {
-                                        Image(systemName: "star.fill")
-                                            .foregroundColor(.yellow)
-                                        Text(String(format: "%.1f", imdbRating))
-                                            .font(.title2.weight(.medium))
-                                            
-                                            .foregroundColor(.white.opacity(0.9))
-                                    }
-                                }
-
-                                if let genres = metadata?.genres, !genres.isEmpty {
-                                    Text(genres.prefix(2).joined(separator: " • "))
-                                        .font(.title2)
-                                        .foregroundColor(.white.opacity(0.7))
-                                }
-                            }
-                            .padding(.top, 20)
-
-                            // Synopsis
-                            if let description = metadata?.description {
-                                Text(description)
-                                    .font(.title3)
-                                    .foregroundColor(.white.opacity(0.85))
-                                    .multilineTextAlignment(.center)
-                                    .lineLimit(6)
-                                    .frame(maxWidth: min(geometry.size.width * 0.8, 900))
-                                    .padding(.horizontal, max(30, geometry.size.width * 0.05))
-                                    .padding(.top, 24)
                             }
 
-                            // Cast and Director
+                            if let genres = metadata?.genres, !genres.isEmpty {
+                                Text(genres.prefix(2).joined(separator: " • "))
+                                    .font(.title2)
+                                    .foregroundColor(.white.opacity(0.7))
+                            }
+                        }
+                        .padding(.top, 20)
+
+                        // Synopsis
+                        if let description = metadata?.description {
+                            Text(description)
+                                .font(.title3)
+                                .foregroundColor(.white.opacity(0.85))
+                                .multilineTextAlignment(.center)
+                                .lineLimit(6)
+                                .frame(maxWidth: min(geometry.size.width * 0.8, 900))
+                                .padding(.horizontal, max(30, geometry.size.width * 0.05))
+                                .padding(.top, 24)
+                        } else if isLoading {
+                             // Minimal placeholder to maintain layout
+                             Color.clear.frame(height: 100)
+                        }
+
+                        // Cast and Director
+                        if let metadata = metadata {
                             HStack(spacing: 40) {
-                                if let director = metadata?.director {
+                                if let director = metadata.director {
                                     VStack(spacing: 4) {
                                         Text("DIRECTOR")
                                             .font(.subheadline.weight(.semibold))
-                                            
                                             .foregroundColor(.white.opacity(0.5))
                                         Text(director)
                                             .font(.body)
@@ -158,11 +149,10 @@ struct MediaDetailView: View {
                                     }
                                 }
 
-                                if let cast = metadata?.cast, !cast.isEmpty {
+                                if let cast = metadata.cast, !cast.isEmpty {
                                     VStack(spacing: 4) {
                                         Text("STARRING")
                                             .font(.subheadline.weight(.semibold))
-                                            
                                             .foregroundColor(.white.opacity(0.5))
                                         Text(cast.prefix(3).joined(separator: ", "))
                                             .font(.body)
@@ -174,15 +164,16 @@ struct MediaDetailView: View {
                                 }
                             }
                             .padding(.top, 30)
+                        }
 
-                            // Season and Episode Pickers (for TV shows)
-                            if mediaItem.type == "series" && !availableSeasons.isEmpty {
+                        // Season and Episode Pickers (for TV shows)
+                        if mediaItem.type == "series" {
+                            if !availableSeasons.isEmpty {
                                 HStack(spacing: 16) {
                                     // Season Picker
                                     VStack(alignment: .leading, spacing: 8) {
                                         Text("SEASON")
                                             .font(.subheadline.weight(.semibold))
-                                            
                                             .foregroundColor(.white.opacity(0.7))
 
                                         Picker("Season", selection: $selectedSeason) {
@@ -205,7 +196,6 @@ struct MediaDetailView: View {
                                         VStack(alignment: .leading, spacing: 8) {
                                             Text("EPISODE")
                                                 .font(.subheadline.weight(.semibold))
-                                                
                                                 .foregroundColor(.white.opacity(0.7))
 
                                             Picker("Episode", selection: $selectedEpisode) {
@@ -223,122 +213,122 @@ struct MediaDetailView: View {
                                 }
                                 .padding(.top, 30)
 
-                                    // Episode Synopsis
-                                    if let currentEpisode = episodesInSeason.first(where: { $0.episode == selectedEpisode }) {
+                                // Episode Synopsis
+                                if let currentEpisode = episodesInSeason.first(where: { $0.episode == selectedEpisode }) {
+                                    // Release Date
+                                    if let released = currentEpisode.released {
+                                        let isFuture = isDateInFuture(released)
+                                        HStack(spacing: 6) {
+                                            Image(systemName: "calendar")
+                                                .font(.subheadline)
+                                                .foregroundColor(.white.opacity(0.6))
+                                            Text(formatDate(released))
+                                                .font(.subheadline.weight(isFuture ? .bold : .medium))
+                                                .foregroundColor(isFuture ? .orange : .white.opacity(0.8))
 
-                                        // Release Date
-                                        if let released = currentEpisode.released {
-                                            let isFuture = isDateInFuture(released)
-                                            HStack(spacing: 6) {
-                                                Image(systemName: "calendar")
-                                                    .font(.subheadline)
-                                                    .foregroundColor(.white.opacity(0.6))
-                                                Text(formatDate(released))
-                                                    .font(.subheadline.weight(isFuture ? .bold : .medium))
-                                                    
-                                                    .foregroundColor(isFuture ? .orange : .white.opacity(0.8))
-
-                                                if isFuture {
-                                                    Text("(Unreleased)")
-                                                        .font(.subheadline.weight(.bold))
-                                                        
-                                                        .foregroundColor(.orange)
-                                                }
+                                            if isFuture {
+                                                Text("(Unreleased)")
+                                                    .font(.subheadline.weight(.bold))
+                                                    .foregroundColor(.orange)
                                             }
-                                            .padding(.top, 8)
                                         }
-
-                                        if let overview = currentEpisode.overview, !overview.isEmpty {
-                                            Text(overview)
-                                                .font(.body)
-                                                .foregroundColor(.white.opacity(0.7))
-                                                .multilineTextAlignment(.center)
-                                                .lineLimit(3)
-                                                .frame(maxWidth: min(geometry.size.width * 0.75, 800))
-                                                .padding(.horizontal, max(30, geometry.size.width * 0.05))
-                                                .padding(.top, 16)
-                                        }
+                                        .padding(.top, 8)
                                     }
-                            }
 
-
-                            // Action Buttons
-                            VStack(spacing: 16) {
-                                // Watch Now Button
-                                Button(action: {
-                                    appState.player.selectedMediaItem = mediaItem
-                                    if mediaItem.type == "series" {
-                                        appState.selectedSeason = selectedSeason
-                                        appState.selectedEpisode = selectedEpisode
+                                    if let overview = currentEpisode.overview, !overview.isEmpty {
+                                        Text(overview)
+                                            .font(.body)
+                                            .foregroundColor(.white.opacity(0.7))
+                                            .multilineTextAlignment(.center)
+                                            .lineLimit(3)
+                                            .frame(maxWidth: min(geometry.size.width * 0.75, 800))
+                                            .padding(.horizontal, max(30, geometry.size.width * 0.05))
+                                            .padding(.top, 16)
                                     }
-                                    appState.currentView = .qualitySelection
-                                }) {
-                                    HStack(spacing: 12) {
-                                        Image(systemName: "play.fill")
-                                            .font(.system(size: 18, weight: .semibold))
-                                        if mediaItem.type == "series" {
-                                            Text("Watch S\(selectedSeason)E\(selectedEpisode)")
-                                                .font(.system(size: 18, weight: .semibold))
-                                        } else {
-                                            Text("Watch Now")
-                                                .font(.system(size: 18, weight: .semibold))
-                                        }
-                                    }
-                                    .foregroundColor(.white)
-                                    .frame(width: min(max(240, geometry.size.width * 0.3), 350), height: 56)
-                                    .background(
-                                        LinearGradient(
-                                            colors: [Color.blue, Color.blue.opacity(0.8)],
-                                            startPoint: .leading,
-                                            endPoint: .trailing
-                                        )
-                                    )
-                                    .cornerRadius(12)
-                                    .shadow(color: .blue.opacity(0.5), radius: 20, x: 0, y: 10)
                                 }
-                                .buttonStyle(.plain)
-
-                                // Add to Library Button
-                                Button(action: {
-                                    if libraryManager.contains(mediaItem.id) {
-                                        libraryManager.removeFromLibrary(id: mediaItem.id)
-                                    } else {
-                                        libraryManager.addToLibrary(
-                                            item: mediaItem,
-                                            posterURL: metadata?.posterURL,
-                                            year: metadata?.year
-                                        )
-                                    }
-                                }) {
-                                    HStack(spacing: 10) {
-                                        Image(systemName: libraryManager.contains(mediaItem.id) ? "checkmark.circle.fill" : "plus.circle")
-                                            .font(.system(size: 20, weight: .bold))
-                                        Text(libraryManager.contains(mediaItem.id) ? "In Your Library" : "Add to Library")
-                                            .font(.system(size: 15, weight: .bold))
-                                    }
-                                    .foregroundColor(.white)
-                                    .frame(width: min(max(240, geometry.size.width * 0.3), 350), height: 56)
-                                    .background(
-                                        libraryManager.contains(mediaItem.id)
-                                        ? Color.green.opacity(0.8)
-                                        : Color.white.opacity(0.15)
-                                    )
-                                    .cornerRadius(12)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                                    )
-                                }
-                                .buttonStyle(.plain)
+                            } else if isLoading {
+                                // Shimmer/Placeholder for TV controls
+                                ProgressView()
+                                    .padding(.top, 40)
                             }
-                            .padding(.top, 40)
-                            .padding(.bottom, 60)
                         }
-                        .frame(maxWidth: .infinity)
+
+                        // Action Buttons
+                        VStack(spacing: 16) {
+                            // Watch Now Button
+                            Button(action: {
+                                appState.player.selectedMediaItem = mediaItem
+                                if mediaItem.type == "series" {
+                                    appState.selectedSeason = selectedSeason
+                                    appState.selectedEpisode = selectedEpisode
+                                }
+                                appState.currentView = .qualitySelection
+                            }) {
+                                HStack(spacing: 12) {
+                                    Image(systemName: "play.fill")
+                                        .font(.system(size: 18, weight: .semibold))
+                                    if mediaItem.type == "series" {
+                                        Text("Watch S\(selectedSeason)E\(selectedEpisode)")
+                                            .font(.system(size: 18, weight: .semibold))
+                                    } else {
+                                        Text("Watch Now")
+                                            .font(.system(size: 18, weight: .semibold))
+                                    }
+                                }
+                                .foregroundColor(.white)
+                                .frame(width: min(max(240, geometry.size.width * 0.3), 350), height: 56)
+                                .background(
+                                    LinearGradient(
+                                        colors: [Color.blue, Color.blue.opacity(0.8)],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
+                                )
+                                .cornerRadius(12)
+                                .shadow(color: .blue.opacity(0.5), radius: 20, x: 0, y: 10)
+                            }
+                            .buttonStyle(.plain)
+
+                            // Add to Library Button
+                            Button(action: {
+                                if libraryManager.contains(mediaItem.id) {
+                                    libraryManager.removeFromLibrary(id: mediaItem.id)
+                                } else {
+                                    libraryManager.addToLibrary(
+                                        item: mediaItem,
+                                        posterURL: metadata?.posterURL,
+                                        year: metadata?.year
+                                    )
+                                }
+                            }) {
+                                HStack(spacing: 10) {
+                                    Image(systemName: libraryManager.contains(mediaItem.id) ? "checkmark.circle.fill" : "plus.circle")
+                                        .font(.system(size: 20, weight: .bold))
+                                    Text(libraryManager.contains(mediaItem.id) ? "In Your Library" : "Add to Library")
+                                        .font(.system(size: 15, weight: .bold))
+                                }
+                                .foregroundColor(.white)
+                                .frame(width: min(max(240, geometry.size.width * 0.3), 350), height: 56)
+                                .background(
+                                    libraryManager.contains(mediaItem.id)
+                                    ? Color.green.opacity(0.8)
+                                    : Color.white.opacity(0.15)
+                                )
+                                .cornerRadius(12)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                                )
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .padding(.top, 40)
+                        .padding(.bottom, 60)
                     }
+                    .frame(maxWidth: .infinity)
                 }
             }
-            }
+        }
         }
         .task {
             await loadMetadata()

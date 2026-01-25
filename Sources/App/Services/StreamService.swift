@@ -121,7 +121,7 @@ actor StreamService: StreamResolving {
         let blockedExtensions = [".iso", ".exe", ".dll", ".bat", ".cmd", ".msi", ".scr", ".vbs"]
         if let blockedExt = blockedExtensions.first(where: { path.hasSuffix($0) }) {
             print("🚫 StreamService: Blocked restricted extension: \(blockedExt) in \(url)")
-            Task { await SessionRecorder.shared.log(category: .error, message: "Blocked Extension", metadata: ["url": url, "ext": blockedExt]) }
+            Task.detached { await SessionRecorder.shared.log(category: .error, message: "Blocked Extension", metadata: ["url": url, "ext": blockedExt]) }
             return true
         }
 
@@ -129,7 +129,7 @@ actor StreamService: StreamResolving {
         // These indicate Real-Debrid couldn't provide the stream
         if path.contains("/videos/failed_") || path.contains("torrentio.strem.fun/videos/") {
             print("🚫 StreamService: Detected Torrentio error placeholder video: \(url)")
-            Task { await SessionRecorder.shared.log(category: .error, message: "Blocked Torrentio Placeholder", metadata: ["url": url]) }
+            Task.detached { await SessionRecorder.shared.log(category: .error, message: "Blocked Torrentio Placeholder", metadata: ["url": url]) }
             return true
         }
 
@@ -140,15 +140,15 @@ actor StreamService: StreamResolving {
              // We check for specific delimiters usually found in sample filenames
              if path.contains(".sample.") || path.contains("-sample.") || path.contains("_sample.") || path.contains(" sample.") || path.hasSuffix("-sample.mkv") || path.hasSuffix("-sample.mp4") {
                  print("🚫 StreamService: Detected Sample video: \(url)")
-                 Task { await SessionRecorder.shared.log(category: .error, message: "Blocked Sample Video", metadata: ["url": url]) }
-                 return true
-             }
+                  Task.detached { await SessionRecorder.shared.log(category: .error, message: "Blocked Sample Video", metadata: ["url": url]) }
+                  return true
+              }
         }
 
         // Block Trailers
         if path.contains("trailer.") || path.contains("_trailer") || path.contains("-trailer") {
             print("🚫 StreamService: Detected Trailer video: \(url)")
-            Task { await SessionRecorder.shared.log(category: .error, message: "Blocked Trailer Video", metadata: ["url": url]) }
+            Task.detached { await SessionRecorder.shared.log(category: .error, message: "Blocked Trailer Video", metadata: ["url": url]) }
             return true
         }
 

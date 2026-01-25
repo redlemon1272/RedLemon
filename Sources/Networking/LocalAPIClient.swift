@@ -20,7 +20,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
 
     init() {
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 60
+        config.timeoutIntervalForRequest = 15 // Fail fast for metadata
         config.timeoutIntervalForResource = 300
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         config.urlCache = nil

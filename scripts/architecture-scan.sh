@@ -1163,34 +1163,6 @@ if [[ -f "$APP_STATE" ]]; then
     fi
 fi
 
-echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
-echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
-echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"
-
-# Report Errors
-if [[ $ERROR_COUNT -gt 0 ]]; then
-    echo -e "${RED}❌ ERRORS: $ERROR_COUNT${NC}"
-else
-    echo -e "${GREEN}✅ ERRORS: 0${NC}"
-fi
-
-# Report Warnings
-if [[ $WARNING_COUNT -gt 0 ]]; then
-    echo -e "${YELLOW}⚠️  WARNINGS: $WARNING_COUNT${NC}"
-else
-    echo -e "${GREEN}✅ WARNINGS: 0${NC}"
-fi
-
-echo ""
-echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
-
-# Exit Code Logic
-if [[ $ERROR_COUNT -gt 0 ]]; then
-    exit 1 # Block items
-else
-    exit 0 # Warnings don't block yet
-fi
-
 # =============================================================================
 # CHECK 53: Actor Initialization Deadlock (Landmine #119)
 # =============================================================================
@@ -1201,10 +1173,10 @@ print_header "Check 53: Actor Initialization Deadlock (Landmine #119)"
 while IFS=: read -r file line code; do
     if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
 
-    # We are looking for "Task {" inside a file that defines an "actor"
-    # This is a loose check but effective for catching the pattern
-    if grep -q "actor " "$file"; then
-        if [[ "$code" =~ Task[[:space:]]*\{ ]]; then
+    # Trigger: Using Task {} inside a file that defines an 'actor'
+    # Improved check for actor definition, excluding structuredaddTask
+    if grep -qE "^[[:space:]]*(public |private |internal )?actor " "$file"; then
+        if [[ "$code" =~ Task[[:space:]]*\{ ]] && [[ ! "$code" =~ addTask ]]; then
              report "WARNING" "Landmine #119" "Deadlock Risk: Avoid using 'Task {' inside actors for initialization logic. Use 'Task.detached {' to prevent isolation inheritance deadlocks." "$file" "$line" "$code"
         fi
     fi
@@ -1248,3 +1220,50 @@ for view in "${DETAIL_VIEWS[@]}"; do
         fi
     fi
 done
+
+# =============================================================================
+# CHECK 56: Protocol-Based Realtime Sharing (Landmine #122)
+# =============================================================================
+# Trigger: Multiple actors or services creating dedicated SupabaseRealtimeClient instances.
+# Rule: All realtime logic MUST use 'SupabaseClient.shared.realtimeClient'.
+print_header "Check 56: Global Realtime Sharing (Landmine #122)"
+
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+    # Check for direct instantiation of expensive clients
+    if [[ "$code" =~ SupabaseRealtimeClient\( ]]; then
+        # Exclude the shared definition itself
+        if ! grep -q "static let shared" "$file"; then
+             report "ERROR" "Landmine #122" "Resource Risk: Do NOT instantiate 'SupabaseRealtimeClient()'. Use 'SupabaseClient.shared.realtimeClient'." "$file" "$line" "$code"
+        fi
+    fi
+done < <(grep -rn "SupabaseRealtimeClient(" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK")
+
+echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
+echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
+echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"
+
+# Report Errors
+if [[ $ERROR_COUNT -gt 0 ]]; then
+    echo -e "${RED}❌ ERRORS: $ERROR_COUNT${NC}"
+else
+    echo -e "${GREEN}✅ ERRORS: 0${NC}"
+fi
+
+# Report Warnings
+if [[ $WARNING_COUNT -gt 0 ]]; then
+    echo -e "${YELLOW}⚠️  WARNINGS: $WARNING_COUNT${NC}"
+else
+    echo -e "${GREEN}✅ WARNINGS: 0${NC}"
+fi
+
+echo ""
+echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
+
+# Exit Code Logic
+if [[ $ERROR_COUNT -gt 0 ]]; then
+    exit 1 # Block items
+else
+    exit 0 # Warnings don't block yet
+fi

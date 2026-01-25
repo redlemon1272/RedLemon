@@ -114,56 +114,54 @@ class PlayerViewModel: ObservableObject {
         streamError = nil
 
         // Step 0: Clear state IMMEDIATELY to prevent stale UI
-        await MainActor.run {
-            selectedStream = nil // Clear previous stream to prevent stale playback
-            streamQueue = [] // Clear stream queue
-            playbackRetryCount = 0 // Reset retry count
-            userCancelledAutoPlay = false // Reset auto-play cancellation
+        selectedStream = nil // Clear previous stream to prevent stale playback
+        streamQueue = [] // Clear stream queue
+        playbackRetryCount = 0 // Reset retry count
+        userCancelledAutoPlay = false // Reset auto-play cancellation
 
-            // ✅ OPTIMISTIC UPDATE: Set metadata immediately to prevent background flash
-            // This ensures the generic background (from Browse) is shown while fetching full details
-            selectedMetadata = MediaMetadata(
-                id: item.id,
-                type: item.type,
-                title: item.name,
-                year: item.year,
-                posterURL: item.poster,
-                backgroundURL: item.background,
-                logoURL: item.logo,
-                description: item.description,
-                director: nil,
-                cast: [],
-                genres: item.genres ?? [],
-                runtime: item.runtime,
-                imdbRating: Double(item.imdbRating ?? ""),
-                releaseInfo: item.releaseInfo,
-                trailerURL: nil,
-                videos: []
-            )
-            selectedMediaItem = item // Ensure item is set
+        // ✅ OPTIMISTIC UPDATE: Set metadata immediately to prevent background flash
+        // This ensures the generic background (from Browse) is shown while fetching full details
+        selectedMetadata = MediaMetadata(
+            id: item.id,
+            type: item.type,
+            title: item.name,
+            year: item.year,
+            posterURL: item.poster,
+            backgroundURL: item.background,
+            logoURL: item.logo,
+            description: item.description,
+            director: nil,
+            cast: [],
+            genres: item.genres ?? [],
+            runtime: item.runtime,
+            imdbRating: Double(item.imdbRating ?? ""),
+            releaseInfo: nil,
+            trailerURL: nil,
+            videos: []
+        )
+        selectedMediaItem = item // Ensure item is set
 
-            isResolvingStream = true
-            currentWatchMode = watchMode
-            isWatchPartyHost = isHost
-            selectedQuality = quality
+        isResolvingStream = true
+        currentWatchMode = watchMode
+        isWatchPartyHost = isHost
+        selectedQuality = quality
 
-            // CRITICAL FIX: Enforce event playback state to ensure UI correctness
-            isEventPlayback = isEvent
+        // CRITICAL FIX: Enforce event playback state to ensure UI correctness
+        isEventPlayback = isEvent
 
-            // Show player immediately
-            showPlayer = true
-            if let appState = appState {
-                appState.currentView = .player
-            }
+        // Show player immediately
+        showPlayer = true
+        if let appState = appState {
+            appState.currentView = .player
+        }
 
-            // FIX: Enter fullscreen immediately for Watch Party mode
-            // This ensures guests see the full-screen loading overlay with chat (matching host experience)
-            // Previously, enterFullscreen() was only called after stream resolution (line ~548),
-            // causing guests to see windowed mode with background art first.
-            // Host path (navigateToPlayer) already enters fullscreen immediately.
-            if watchMode == .watchParty {
-                enterFullscreen()
-            }
+        // FIX: Enter fullscreen immediately for Watch Party mode
+        // This ensures guests see the full-screen loading overlay with chat (matching host experience)
+        // Previously, enterFullscreen() was only called after stream resolution (line ~548),
+        // causing guests to see windowed mode with background art first.
+        // Host path (navigateToPlayer) already enters fullscreen immediately.
+        if watchMode == .watchParty {
+            enterFullscreen()
         }
 
         do {
@@ -1577,9 +1575,7 @@ class PlayerViewModel: ObservableObject {
     ) async {
         guard let appState = appState else { return }
 
-        await MainActor.run {
-             appState.isLoadingRoom = true // Update AppState UI
-        }
+        self.appState?.isLoadingRoom = true // Update AppState UI
 
         do {
             guard let userId = appState.currentUserId, !appState.currentUsername.isEmpty else {

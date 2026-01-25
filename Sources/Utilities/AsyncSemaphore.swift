@@ -34,7 +34,7 @@ actor AsyncSemaphore {
     /// Execute a closure with a held permit
     func withPermit<T>(_ operation: () async throws -> T) async rethrows -> T {
         await acquire()
-        defer { Task { await release() } }
+        defer { release() }
         return try await operation()
     }
 }

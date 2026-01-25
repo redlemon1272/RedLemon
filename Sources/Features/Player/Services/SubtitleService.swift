@@ -66,7 +66,9 @@ actor MPVSubtitleService: SubtitleService {
     // MARK: - Initialization
     init(mpvController: any MPVController) {
         self.mpvController = mpvController
-        Task { await setupObservers() }
+        Task.detached { [weak self] in
+            await self?.setupObservers()
+        }
     }
     
     deinit {
@@ -78,7 +80,7 @@ actor MPVSubtitleService: SubtitleService {
     private func setupObservers() async {
         guard let mpv = mpvController else { return }
         
-        observers.append(Task { [weak self] in
+        observers.append(Task.detached { [weak self] in
             for await _ in mpv.tracksChangedPublisher.values {
                 await self?.scanEmbeddedTracks(isFastPath: true)
             }

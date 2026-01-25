@@ -30,10 +30,10 @@ actor CacheManager {
 
     /// Initialize cache with fixed conservative limits
     nonisolated func initializeLimits() {
-        Task { @MainActor in
+        Task.detached { @MainActor in
             await CacheManager.shared.setupMemoryPressureMonitoring()
             print("🖥️ CacheManager initialized with fixed conservative limits")
-            print("   Image cache limit: \(maxImageItems) items")
+            print("   Image cache limit: \(CacheManager.shared.maxImageItems) items")
         }
     }
 
@@ -197,8 +197,8 @@ actor CacheManager {
     /// Setup memory pressure monitoring for automatic cache cleanup (Hardware-safe version)
     func setupMemoryPressureMonitoring() {
         // Use a simpler approach to avoid CPU-specific instruction issues
-        Task { @MainActor in
-            await self.periodicMemoryCheck()
+        Task.detached { [weak self] in
+            await self?.periodicMemoryCheck()
         }
         print("🔍 Memory pressure monitoring enabled (safe mode)")
     }

@@ -38,27 +38,15 @@ actor KeychainManager {
     private var cache: [String: String] = [:]
 
     /// Ensures cache is loaded before any access
-    private var initializationTask: Task<Void, Never>?
+    private var isInitialized = false
 
     private init() {}
 
-    private func ensureInitialized() async {
-        // If already initialized, return immediately
-        if initializationTask != nil {
-            await initializationTask?.value
-            return
-        }
-
-        // Create the task. Using Task.detached ensures the task doesn't 
-        // inherit the actor's current isolation state in a way that creates a 
-        // dependency cycle during the await.
-        let task = Task.detached { [weak self] in
-            guard let self = self else { return }
-            await self.loadFromCache()
-        }
-
-        initializationTask = task
-        await task.value
+    /// Ensures credentials are loaded into memory.
+    func ensureInitialized() async {
+        if isInitialized { return }
+        loadFromCacheSync()
+        isInitialized = true
     }
 
     // MARK: - Public API
@@ -299,16 +287,14 @@ actor KeychainManager {
         return redlemonDir.appendingPathComponent("credentials.cache")
     }
 
-    private func loadFromCache() async {
+    private func loadFromCacheSync() {
         let path = getCacheFilePath()
 
-        guard let data = try? Data(contentsOf: path),
-              let json = try? JSONDecoder().decode([String: String].self, from: data) else {
-            return
+        if let data = try? Data(contentsOf: path),
+           let json = try? JSONDecoder().decode([String: String].self, from: data) {
+            self.cache = json
+            NSLog("%@", "📂 Loaded \(cache.count) credential(s) from cache")
         }
-
-        cache = json
-        NSLog("%@", "📂 Loaded \(cache.count) credential(s) from cache")
     }
 
     private func saveToEncryptedCache() async {

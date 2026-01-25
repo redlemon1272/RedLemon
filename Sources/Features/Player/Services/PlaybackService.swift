@@ -63,7 +63,9 @@ actor MPVPlaybackService: PlaybackService {
     // MARK: - Initialization
     init(mpvController: any MPVController) {
         self.mpvController = mpvController
-        Task { await setupObservers() }
+        Task.detached { [weak self] in
+            await self?.setupObservers()
+        }
     }
 
     deinit {
@@ -118,37 +120,37 @@ actor MPVPlaybackService: PlaybackService {
     private func setupObservers() {
         guard let mpv = mpvController else { return }
 
-        observers.append(Task { [weak self] in
+        observers.append(Task.detached { [weak self] in
             for await playing in mpv.isPlayingPublisher.values {
                 await self?.updateIsPlaying(playing)
             }
         })
 
-        observers.append(Task { [weak self] in
+        observers.append(Task.detached { [weak self] in
             for await finished in mpv.playbackFinishedPublisher.values {
                 await self?.updatePlaybackFinished(finished)
             }
         })
 
-        observers.append(Task { [weak self] in
+        observers.append(Task.detached { [weak self] in
             for await time in mpv.currentTimePublisher.values {
                 await self?.updateCurrentTime(time)
             }
         })
 
-        observers.append(Task { [weak self] in
+        observers.append(Task.detached { [weak self] in
             for await dur in mpv.durationPublisher.values {
                 await self?.updateDuration(dur)
             }
         })
 
-        observers.append(Task { [weak self] in
+        observers.append(Task.detached { [weak self] in
             for await buffering in mpv.isBufferingPublisher.values {
                 await self?.updateIsBuffering(buffering)
             }
         })
 
-        observers.append(Task { [weak self] in
+        observers.append(Task.detached { [weak self] in
             for await loaded in mpv.isFileLoadedPublisher.values {
                 await self?.updateIsFileLoaded(loaded)
             }

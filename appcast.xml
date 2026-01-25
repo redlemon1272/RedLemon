@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.148 -->
+        <item>
+            <title>Version 1.0.148</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.148</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 21:28:19 -0500</pubDate>
+            <sparkle:version>Hotfix: Fix startup crash (Illegal Instruction 4). Stability: Prevent LoggingSystem double-initialization.</sparkle:version>
+            <sparkle:shortVersionString>1.0.148</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.148.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="2gDiqDCr8JU6NI0J37v0QomMyEBMxoiVr3hP0u05j6uW1ksUzEi6ztNknwOTc3ej1jXc8o72qVSkbyYZLW4sBw==" length="73831897"
+            />
+        </item>
         <!-- v1.0.147 -->
         <item>
             <title>Version 1.0.147</title>

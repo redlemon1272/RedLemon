@@ -552,7 +552,7 @@ actor StreamResolver {
                     return await self.attachSubtitles(to: streamsToAttach, imdbId: effectiveId, type: type, season: season, episode: episode, name: targetTitle ?? name, year: year != nil ? Int(year!) : nil)
                 }
                 group.addTask {
-                    try await Task.sleep(nanoseconds: 8_000_000_000) // 8s Timeout
+                    try await Task.sleep(nanoseconds: 12_000_000_000) // 12s Timeout
                     throw URLError(.timedOut)
                 }
 

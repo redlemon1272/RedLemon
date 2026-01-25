@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.149 -->
+        <item>
+            <title>Version 1.0.149</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Subtitle Scoring & Sync (Landmine #117)</li><li>Improved Chat UI responsiveness (instant toggle)</li><li>Cleaned up Browse page headers</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 23:58:41 -0500</pubDate>
+            <sparkle:version>149</sparkle:version>
+            <sparkle:shortVersionString>1.0.149</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.149.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="QVpFF6anOJ67N2BCXEs6dxZuYYaMqgzY5pu8U+cr01GeN4P5Yb12t9ZOQYjF/sxt+nawySKaid3ycpxR0eZhCQ==" length="73826686"
+            />
+        </item>
         <!-- v1.0.148 -->
         <item>
             <title>Version 1.0.148</title>

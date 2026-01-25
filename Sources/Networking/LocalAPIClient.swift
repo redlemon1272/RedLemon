@@ -737,7 +737,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
     }
 
 
-    func getSubtitleURL(downloadPath: String, season: Int? = nil, episode: Int? = nil) -> String {
+    func getSubtitleURL(downloadPath: String, season: Int? = nil, episode: Int? = nil, streamFilename: String? = nil) -> String {
         // Encode download path as base64
         let base64 = Data(downloadPath.utf8).base64EncodedString()
 
@@ -749,6 +749,9 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         var queryItems: [String] = []
         if let s = season { queryItems.append("season=\(s)") }
         if let e = episode { queryItems.append("episode=\(e)") }
+        if let filename = streamFilename, let encoded = filename.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            queryItems.append("filename=\(encoded)")
+        }
 
         if !queryItems.isEmpty {
             url += "?" + queryItems.joined(separator: "&")

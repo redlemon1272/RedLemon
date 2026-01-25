@@ -272,7 +272,8 @@ class PlayerViewModel: ObservableObject {
                                 var proxyURL = LocalAPIClient.shared.getSubtitleURL(
                                     downloadPath: sub.url,
                                     season: effectiveSeason,
-                                    episode: effectiveEpisode
+                                    episode: effectiveEpisode,
+                                    streamFilename: streamHint
                                 )
                                 proxyURL += (proxyURL.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
 
@@ -415,7 +416,7 @@ class PlayerViewModel: ObservableObject {
                         let encodedPath = Data(sub.url.utf8).base64EncodedString()
 
                         // Route through local server proxy to handle zip extraction and VTT conversion
-                        let pUrl = LocalAPIClient.shared.getSubtitleURL(downloadPath: sub.url, season: watchPartyRoom.season, episode: watchPartyRoom.episode)
+                        let pUrl = LocalAPIClient.shared.getSubtitleURL(downloadPath: sub.url, season: watchPartyRoom.season, episode: watchPartyRoom.episode, streamFilename: streamHint)
 
                         var proxyURL = pUrl
                         // Safe append

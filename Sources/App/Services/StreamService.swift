@@ -34,13 +34,13 @@ actor StreamService: StreamResolving {
         // 1. Hash Block
         if attemptedHashes[imdbId] == nil { attemptedHashes[imdbId] = [] }
         attemptedHashes[imdbId]?.insert(hash)
-        
+
         // 2. Title Normalization Block
         if let title = title {
             if attemptedTitles[imdbId] == nil { attemptedTitles[imdbId] = [] }
             let normalized = Stream.normalizeTitle(title)
             attemptedTitles[imdbId]?.insert(normalized)
-            
+
             // 3. Release Group Block (Hydra Prevention)
             if let group = extractReleaseGroup(from: title) {
                 if attemptedGroups[imdbId] == nil { attemptedGroups[imdbId] = [] }
@@ -48,17 +48,17 @@ actor StreamService: StreamResolving {
                 print("🧠 StreamService: Marked group '\(group)' as attempted for \(imdbId)")
             }
         }
-        
+
         // 4. Size Block (Identical File Prevention)
         if let size = size, !size.isEmpty && size != "0 GB" {
             if attemptedSizes[imdbId] == nil { attemptedSizes[imdbId] = [] }
             attemptedSizes[imdbId]?.insert(size)
             print("🧠 StreamService: Marked size '\(size)' as blocked for \(imdbId)")
         }
-        
+
         print("🧠 StreamService: Marked hash \(hash.prefix(8)) as attempted for \(imdbId)")
     }
-    
+
     private func extractReleaseGroup(from title: String) -> String? {
         // Sanitize: Take only the first line to strip any appended metadata (newlines, size info, emojis)
         let cleanTitle = title.components(separatedBy: .newlines).first?.trimmingCharacters(in: .whitespacesAndNewlines) ?? title
@@ -66,21 +66,21 @@ actor StreamService: StreamResolving {
         // Normalize dashes
         let normalized = cleanTitle.replacingOccurrences(of: "–", with: "-")
                                    .replacingOccurrences(of: "—", with: "-")
-        
+
         guard let lastComponent = normalized.components(separatedBy: "-").last?.trimmingCharacters(in: .whitespacesAndNewlines) else { return nil }
-        
+
         var cleanGroup = lastComponent
         for ext in [".mkv", ".mp4", ".avi", ".iso"] {
             if cleanGroup.hasSuffix(ext) {
                 cleanGroup = String(cleanGroup.dropLast(ext.count))
             }
         }
-        
+
         cleanGroup = cleanGroup.trimmingCharacters(in: .whitespacesAndNewlines)
-        
+
         let blacklist = ["h264", "x264", "h265", "x265", "hevc", "avc", "aac", "ac3", "dts", "10bit", "hdr", "sdr", "web-dl", "bluray"]
         if blacklist.contains(cleanGroup.lowercased()) { return nil }
-        
+
         if cleanGroup.count >= 2 && cleanGroup.count <= 20 {
              if cleanGroup.range(of: "^[a-zA-Z0-9._]+$", options: .regularExpression) != nil {
                  return cleanGroup.lowercased()
@@ -1041,13 +1041,8 @@ actor StreamService: StreamResolving {
 
                         // Convert raw SubDL URL to proxy URL
                         // Use shared helper for robust URL construction (handles encoding & params)
-                        let url = LocalAPIClient.shared.getSubtitleURL(downloadPath: subtitle.url, season: season, episode: episode)
+                        let url = LocalAPIClient.shared.getSubtitleURL(downloadPath: subtitle.url, season: season, episode: episode, streamFilename: streamFilename)
                         var finalProxyURL = url + (url.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
-
-                        // APPEND filename hint to URL so route can use it
-                        if let hint = streamFilename, let encodedHint = hint.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-                             finalProxyURL += "&filename=\(encodedHint)"
-                        }
 
                         return Subtitle(
                             id: subtitle.id,

@@ -12,9 +12,14 @@ import Vapor
 class HTTPServer {
     let app: Application
 
+    private static var isLoggingInitialized = false
+
     init() throws {
         var env = try Environment.detect()
-        try LoggingSystem.bootstrap(from: &env)
+        if !Self.isLoggingInitialized {
+            try LoggingSystem.bootstrap(from: &env)
+            Self.isLoggingInitialized = true
+        }
 
         app = Application(env)
 

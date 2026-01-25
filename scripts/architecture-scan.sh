@@ -1100,6 +1100,22 @@ if [[ -f "$LOBBY_VM" ]]; then
      echo -e "${GREEN}✅ Playlist sync interlock verified.${NC}"
 fi
 
+# =============================================================================
+# CHECK 50: One-Shot Logger (Landmine #116)
+# =============================================================================
+# Trigger: LoggingSystem.bootstrap called without a guard.
+# Rule: Must use a static guard to prevent double-initialization crash.
+print_header "Check 50: One-Shot Logger (Landmine #116)"
+
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+    # If it calls bootstrap but doesn't have a nearby check for initialization flag
+    if ! grep -q "isLoggingInitialized" "$file"; then
+         report "ERROR" "Landmine #116" "Crash Risk: LoggingSystem.bootstrap called without a guard. Must use a static flag to prevent double-initialization (Illegal Instruction 4)." "$file" "$line" "$code"
+    fi
+done < <(grep -rn "LoggingSystem.bootstrap" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK")
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

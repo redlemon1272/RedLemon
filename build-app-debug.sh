@@ -14,8 +14,8 @@ MACOS_VERSION=$(sw_vers -productVersion)
 XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
 
 # User-configurable versioning
-APP_VERSION="1.0.147"
-APP_BUILD="147"
+APP_VERSION="1.0.148"
+APP_BUILD="Hotfix: Fix startup crash (Illegal Instruction 4). Stability: Prevent LoggingSystem double-initialization."
 
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
 echo "🔧 System: $ARCH_NAME"

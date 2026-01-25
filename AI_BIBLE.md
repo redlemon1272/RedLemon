@@ -56,6 +56,7 @@
 | **Anime: No Streams Found** | Kitsu ID not resolved to IMDB | #40 |
 | **Play-Buffer-Play Flash** | Subtitle track changed during playback | #41 |
 | **Host Stuck Buffering (Audio Plays)** | Recovery logic excludes Watch Party Host | #42 |
+| **Crash (Illegal Instruction: 4)** | Double-bootstrap of LoggingSystem | #116 |
 | **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call OR Real-Debrid IP-locked URL | #43, #44 |
 | **Watch Party Guest: Instant EOF** | Real-Debrid server-side cache (magnet hash level) | #44 |
 | **Server Fail: Torrent not cached** | Heuristic ignored provider fileIdx (Season Pack) | #45 |
@@ -1715,4 +1716,21 @@ if isPlaying && hasCompletedInitialTrackSelection && getCurrentSubtitleTrack() !
 try await self.dataService.updateRoomPlaylist(...)
 try? await Task.sleep(nanoseconds: 800_000_000) // 800ms grace period
 self.isPlaylistSyncing = false
+```
+
+### 6. The One-Shot Logger (Landmine #116)
+**Symptom**: `Illegal Instruction: 4` or `EXC_BAD_INSTRUCTION (SIGILL)` during app startup or after a logout/login cycle.
+**Root Cause**: Calling `LoggingSystem.bootstrap(_:)` more than once. Swift's `swift-log` architecture throws an assertion failure if you attempt to customize the logging backend after it has already been initialized. This often happens if the `HTTPServer` (which initializes logging) is re-instantiated.
+**Mandatory Solution**: Wrap the bootstrap call in a static guard to ensure it only runs once per app execution.
+
+```swift
+// ✅ CORRECT: Static guard for logging initialization
+private static var isLoggingInitialized = false
+
+init() throws {
+    if !Self.isLoggingInitialized {
+        try LoggingSystem.bootstrap(from: &env)
+        Self.isLoggingInitialized = true
+    }
+}
 ```

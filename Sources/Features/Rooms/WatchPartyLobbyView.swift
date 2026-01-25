@@ -331,9 +331,9 @@ struct WatchPartyLobbyView: View {
                                 Spacer()
                             }
 
-                            // Only show participant list for non-event rooms (to avoid clutter in large events)
-                            if room.type == .userRoom {
-                                VStack(spacing: 6) {
+                            // Show participant list for user rooms and events
+                            if room.type == .userRoom || room.type == .event {
+                                LazyVStack(spacing: 6) {
                                     ForEach(viewModel.participants) { participant in
                                     ParticipantRow(
                                             participant: participant,

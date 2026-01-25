@@ -88,26 +88,36 @@ actor MPVSubtitleService: SubtitleService {
     // MARK: - Protocol Implementation
 
     func loadExternalSubtitles(_ items: [(url: String, label: String)]) async {
+        // Deduplicate: Only process items that aren't already in our list
+        let newItems = items.filter { item in
+            !self.subtitles.contains(where: { $0.url == item.url })
+        }
+        
+        // Always store the full list for reference
         self.subtitles = items
+        
         guard let mpv = mpvController else { return }
+        if newItems.isEmpty {
+            LoggingManager.shared.debug(.subtitles, message: "SubtitleService: No new subtitles to load (already in list)")
+            return
+        }
 
         // Logic extracted from MPVPlayerViewModel
-        let areSubtitlesLocal = items.allSatisfy { $0.url.starts(with: "/") }
+        let areNewSubtitlesLocal = newItems.allSatisfy { $0.url.starts(with: "/") }
 
-        if areSubtitlesLocal && !items.isEmpty {
-            LoggingManager.shared.debug(.subtitles, message: "Subtitles already downloaded, loading as additional options...")
-            for (index, subtitle) in items.enumerated() {
-                LoggingManager.shared.debug(.subtitles, message: "Loading external subtitle \(index + 1) (\(subtitle.label)): \(subtitle.url)")
+        if areNewSubtitlesLocal {
+            LoggingManager.shared.debug(.subtitles, message: "Loading \(newItems.count) local subtitles...")
+            for subtitle in newItems {
+                LoggingManager.shared.debug(.subtitles, message: "Loading local external subtitle (\(subtitle.label)): \(subtitle.url)")
                 mpv.loadSubtitle(url: subtitle.url, title: subtitle.label)
             }
             // Update tracks after loading
-            await scanEmbeddedTracks()
-        }
-        if !items.isEmpty {
-            LoggingManager.shared.info(.subtitles, message: "Parallel loading \(items.count) external subtitles...")
+            await scanEmbeddedTracks(isFastPath: true)
+        } else {
+            LoggingManager.shared.info(.subtitles, message: "Parallel loading \(newItems.count) new external subtitles...")
             
             await withTaskGroup(of: Void.self) { group in
-                for subtitle in items {
+                for subtitle in newItems {
                     group.addTask {
                         if let localPath = await self.downloadSubtitle(url: subtitle.url) {
                             LoggingManager.shared.info(.subtitles, message: "Subtitle ready: \(subtitle.label)")
@@ -116,12 +126,14 @@ actor MPVSubtitleService: SubtitleService {
                             await self.scanEmbeddedTracks(isFastPath: true)
                         }
                     }
+                    // Prevent flooding the network/MPV with too many simultaneous loads
+                    try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
                 }
             }
-            
-            // Initial scan after starting all downloads
-            await scanEmbeddedTracks()
         }
+        
+        // Initial scan after starting all downloads
+        await scanEmbeddedTracks(isFastPath: true)
     }
 
     func scanEmbeddedTracks(isFastPath: Bool = false) async {

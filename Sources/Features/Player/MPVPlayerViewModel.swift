@@ -449,6 +449,28 @@ class MPVPlayerViewModel: ObservableObject {
         }
     }
 
+    private func setupAppStateObservers() {
+        guard let appState = appState else { return }
+        
+        // Observe subtitles list changes for the active stream
+        // This enables the "Healing Loop": deep search results appearing while movie is playing
+        appState.player.$selectedStream
+            .compactMap { $0?.subtitles }
+            .removeDuplicates { old, new in
+                old.count == new.count && old.map { $0.url } == new.map { $0.url }
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newSubtitles in
+                guard let self = self else { return }
+                LoggingManager.shared.info(.subtitles, message: "MPVPlayerViewModel: Detected \(newSubtitles.count) subtitles in stream. Syncing to SubtitleService.")
+                Task {
+                    let formatted = newSubtitles.map { (url: $0.url, label: $0.label) }
+                    await self.subtitleService.loadExternalSubtitles(formatted)
+                }
+            }
+            .store(in: &serviceCancellables)
+    }
+
     // Helper to robustly start event playback
     private func attemptEventPlaybackStart() {
         guard let appState = appState else { return }
@@ -545,7 +567,13 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Enhanced timer management for performance
     private var activeTimers: [Timer] = []
-    weak var appState: AppState?
+    weak var appState: AppState? {
+        didSet {
+            if appState != nil {
+                setupAppStateObservers()
+            }
+        }
+    }
 
     // Cleanup state
     var hasCleanedUp: Bool = false

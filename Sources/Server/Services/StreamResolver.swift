@@ -116,7 +116,7 @@ actor StreamResolver {
                 infoHash: verified.hash
             )
 
-            // OPTIMIZATION: Attach subtitles for verified stream (Time-boxed to 8s)
+            // OPTIMIZATION: Attach subtitles for verified stream (Time-boxed to 12s)
             var streamsWithSubtitles: [Stream] = [candidateStream]
             let verifiedStreamsToAttach = [candidateStream]
             do {
@@ -131,7 +131,7 @@ actor StreamResolver {
                         )
                     }
                     group.addTask {
-                        try await Task.sleep(nanoseconds: 8_000_000_000) // 8s Timeout
+                        try await Task.sleep(nanoseconds: 12_000_000_000) // 12s Timeout
                         throw URLError(.timedOut)
                     }
 
@@ -142,7 +142,7 @@ actor StreamResolver {
                     return result
                 }
             } catch {
-                print("⚠️ StreamResolver: Verified stream subtitle attachment timed out after 8s.")
+                print("⚠️ StreamResolver: Verified stream subtitle attachment timed out after 12s.")
             }
 
             let finalStream = streamsWithSubtitles.first ?? candidateStream
@@ -543,7 +543,7 @@ actor StreamResolver {
             print("   📺 Episode filter: \(beforeEpisodeFilter) → \(filteredStreams.count) streams")
         }
 
-        // OPTIMIZATION: Attach subtitles (Time-boxed to 8s to prevent playback delays)
+        // OPTIMIZATION: Attach subtitles (Time-boxed to 12s to prevent playback delays)
         var streamsWithSubtitles = filteredStreams
         let streamsToAttach = filteredStreams // Capture immutable copy for concurrency
         do {
@@ -563,7 +563,7 @@ actor StreamResolver {
                 return result
             }
         } catch {
-            print("⚠️ StreamResolver: Subtitle attachment timed out after 8s. Proceeding without initial subtitles.")
+            print("⚠️ StreamResolver: Subtitle attachment timed out after 12s. Proceeding without initial subtitles.")
         }
 
         // Partition into quality buckets

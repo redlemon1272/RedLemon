@@ -82,7 +82,7 @@ struct BrowseViewContent: View {
                                         onTap: { item in viewModel.selectMedia(item, fromRow: "popular") }
                                     )
                                     .id("popular")
-                                    
+
                                     // Trending section (Hero)
                                     LazyStreamingServiceRow(
                                         title: viewModel.selectedTab == .movies ? "Trending Movies" : "Trending TV Shows",
@@ -103,10 +103,10 @@ struct BrowseViewContent: View {
                                         HStack {
                                             Text("Browse Services")
                                                 .font(.title2.weight(.bold))
-                                            
+
                                             Spacer()
-                                            
-                                            Picker("Service", selection: $viewModel.selectedService) {
+
+                                            Picker("", selection: $viewModel.selectedService) {
                                                 ForEach(viewModel.getStreamingServiceKeys(), id: \.self) { key in
                                                     Text(viewModel.getServiceDisplayName(key)).tag(key)
                                                 }
@@ -128,7 +128,7 @@ struct BrowseViewContent: View {
                                             .frame(height: 400)
                                         } else {
                                             let items = appState.browseCatalogs[viewModel.getStorageKey(viewModel.selectedService)] ?? []
-                                            
+
                                             if items.isEmpty {
                                                 VStack(spacing: 12) {
                                                     Image(systemName: "film")

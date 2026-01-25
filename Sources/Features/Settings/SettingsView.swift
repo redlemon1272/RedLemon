@@ -1185,7 +1185,9 @@ struct SettingsView: View {
             .cornerRadius(16)
             .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
         }
-        .buttonStyle(PlainButtonStyle())
+        .buttonStyle(.plain)
+        .transition(.move(edge: .top).combined(with: .opacity))
+        .animation(.spring(), value: updateManager.updateAvailable)
     }
 
     private var aboutSection: some View {
@@ -1293,7 +1295,7 @@ struct SettingsView: View {
 
                 // Brief delay so user sees the message
                 try? await Task.sleep(nanoseconds: 1_200_000_000)
-                
+
                 await MainActor.run {
                     appState.relaunchApp()
                 }
@@ -1367,7 +1369,7 @@ struct SettingsView: View {
 
             // Brief delay so user sees the message (Bible Landmine #52: no sleep on MainActor)
             try? await Task.sleep(nanoseconds: 1_500_000_000)
-            
+
             await MainActor.run {
                 appState.relaunchApp()
             }

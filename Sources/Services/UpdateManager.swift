@@ -53,18 +53,31 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
     /// Check for updates manually
     @MainActor
     func checkForUpdates() {
-        print("🔍 Manual update check requested...")
+        LoggingManager.shared.info(.general, message: "🔍 Manual update check requested...")
         // Update the timestamp immediately to show user something happened
         self.lastCheckedDate = Date()
-        
+
         // Primary method via controller - Pass 'self' as sender (NSObject)
         // macOS 13+ stricter responder chain often ignores nil senders for IBActions
-        updaterController?.checkForUpdates(self)
-        
+        if let controller = updaterController {
+            controller.checkForUpdates(self)
+        } else {
+             LoggingManager.shared.warn(.general, message: "⚠️ Sparkle controller missing, attempting direct trigger")
+        }
+
         // Fallback: Directly trigger updater if controller is stubborn
         if let updater = updaterController?.updater {
-            print("🚀 Triggering updater directly (fallback)")
-            updater.checkForUpdates()
+            if updater.canCheckForUpdates {
+                LoggingManager.shared.info(.general, message: "🚀 Triggering Sparkle updater directly")
+                updater.checkForUpdates()
+            } else {
+                LoggingManager.shared.warn(.general, message: "⚠️ Sparkle updater cannot check for updates at this time")
+            }
+        }
+
+        // Also trigger our custom check to be sure
+        Task {
+            await checkForUpdatesQuietly()
         }
     }
 
@@ -94,31 +107,65 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
             if let versionRange = xmlString.range(of: #"<sparkle:version>([^<]+)</sparkle:version>"#, options: .regularExpression),
                let latestVersionStr = String(xmlString[versionRange]).components(separatedBy: ">")[1].components(separatedBy: "<").first {
 
-                let currentVersionStr = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "0"
+                let currentVersionStr = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0"
+                let currentBuildStr = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "0"
 
-                print("📦 Current build: \(currentVersionStr), Latest build: \(latestVersionStr)")
+                LoggingManager.shared.info(.general, message: "📦 Version Check - Local: \(currentVersionStr) (\(currentBuildStr)), Remote: \(latestVersionStr)")
 
-                // Convert to Int for robust numeric comparison (build numbers are integers)
-                let currentBuild = Int(currentVersionStr) ?? 0
+                // Robust comparison logic:
+                // 1. If build numbers are available and different, use them (Landmine #30 fallback)
+                // 2. Otherwise use semantic version comparison
+
+                let isNewer: Bool
                 let latestBuild = Int(latestVersionStr) ?? 0
+                let currentBuild = Int(currentBuildStr) ?? 0
 
-                if latestBuild > currentBuild {
-                    print("✅ Update available: Build \(latestBuild)")
+                if latestBuild > 0 && currentBuild > 0 {
+                    isNewer = latestBuild > currentBuild
+                } else {
+                    isNewer = isVersion(latestVersionStr, newerThan: currentVersionStr)
+                }
+
+                if isNewer {
+                    LoggingManager.shared.info(.general, message: "✅ Update available: \(latestVersionStr)")
                     await MainActor.run {
                         self.updateAvailable = true
                         self.lastCheckedDate = Date()
                     }
                 } else {
-                    print("✅ App is up to date (current: \(currentBuild), latest: \(latestBuild))")
+                    LoggingManager.shared.info(.general, message: "✅ App is up to date")
                     await MainActor.run {
-                        self.updateAvailable = false
+                        // CRITICAL: Don't clear updateAvailable if it was already set by a previous check
+                        // This prevents race conditions where a background check finds an update but
+                        // a subsequent silent check (e.g. from Sparkle) clears it.
+                        if !self.updateAvailable {
+                            self.updateAvailable = false
+                        }
                         self.lastCheckedDate = Date()
                     }
                 }
             }
         } catch {
-            print("❌ Failed to check for updates: \(error.localizedDescription)")
+            LoggingManager.shared.error(.general, message: "❌ Failed to check for updates: \(error.localizedDescription)")
         }
+    }
+
+    /// Semantic version comparison helper
+    private func isVersion(_ version1: String, newerThan version2: String) -> Bool {
+        let components1 = version1.split(separator: ".").compactMap { Int($0) }
+        let components2 = version2.split(separator: ".").compactMap { Int($0) }
+
+        let maxLength = max(components1.count, components2.count)
+
+        for i in 0..<maxLength {
+            let v1 = i < components1.count ? components1[i] : 0
+            let v2 = i < components2.count ? components2[i] : 0
+
+            if v1 > v2 { return true }
+            if v1 < v2 { return false }
+        }
+
+        return false
     }
 
     // MARK: - SPUUpdaterDelegate
@@ -144,7 +191,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
 
     /// Called when an update is found
     func updater(_ updater: SPUUpdater, didFindValidUpdate item: SUAppcastItem) {
-        print("📦 Update found: \(item.displayVersionString)")
+        LoggingManager.shared.info(.general, message: "📦 Sparkle found update: \(item.displayVersionString) (\(item.versionString))")
         Task { @MainActor in
             self.updateAvailable = true
             self.lastCheckedDate = Date()
@@ -153,9 +200,14 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
 
     /// Called when no update is found
     func updaterDidNotFindUpdate(_ updater: SPUUpdater) {
-        print("✅ No updates available")
+        LoggingManager.shared.info(.general, message: "✅ Sparkle: No updates available")
         Task { @MainActor in
-            self.updateAvailable = false
+            // CRITICAL PROTECTION (macOS 13+):
+            // If our custom background check already found an update, don't let Sparkle clear it.
+            // Sparkle might fail to find an update due to ad-hoc signing or restricted permissions on macOS 13+.
+            if !self.updateAvailable {
+                self.updateAvailable = false
+            }
             self.lastCheckedDate = Date()
         }
     }

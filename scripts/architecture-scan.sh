@@ -1116,6 +1116,39 @@ while IFS=: read -r file line code; do
     fi
 done < <(grep -rn "LoggingSystem.bootstrap" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK")
 
+# =============================================================================
+# CHECK 51: Subtitle Scoring & Sync (Landmine #117)
+# =============================================================================
+print_header "Check 51: Subtitle Scoring & Sync (Landmine #117)"
+LOBBY_ROUTER="$SOURCES_DIR/Features/Rooms/LobbyEventRouter.swift"
+PLAYER_VM="$SOURCES_DIR/Features/Player/PlayerViewModel.swift"
+SUB_CLIENT="$SOURCES_DIR/Server/Services/SubDLClient.swift"
+
+if [[ -f "$LOBBY_ROUTER" ]]; then
+    # Rule: sourceQuality MUST be synced to targetRoom for guests
+    if ! grep -q "targetRoom.sourceQuality = roomState.sourceQuality" "$LOBBY_ROUTER"; then
+        report "ERROR" "Landmine #117" "Sync Risk: LobbyEventRouter MUST sync sourceQuality to targetRoom for guests to ensure robust subtitle hints." "$LOBBY_ROUTER" "0" "Missing sourceQuality sync"
+    fi
+fi
+
+if [[ -f "$PLAYER_VM" ]]; then
+    # Rule: streamFilename MUST be passed to subtitle search/download
+    if ! grep -q "streamFilename: streamHint" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #117" "Sync Risk: PlayerViewModel MUST pass streamHint as streamFilename to subtitle services." "$PLAYER_VM" "0" "Missing streamFilename parameter"
+    fi
+fi
+
+if [[ -f "$SUB_CLIENT" ]]; then
+    # Rule: Server MUST apply strong mismatch penalty and clean hints
+    if ! grep -q "score -= 300" "$SUB_CLIENT"; then
+        report "ERROR" "Landmine #117" "Scoring Risk: SubDLClient MUST apply a strong penalty (e.g., -300) for source mismatches." "$SUB_CLIENT" "0" "Missing strong mismatch penalty"
+    fi
+    if ! grep -q "replacingOccurrences(of: \"💾\"" "$SUB_CLIENT"; then
+        report "WARNING" "Landmine #117" "Hint Risk: SubDLClient should clean noisy emojis from stream hints." "$SUB_CLIENT" "0" "Missing emoji cleaning"
+    fi
+    echo -e "${GREEN}✅ Subtitle sync and scoring protection verified.${NC}"
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

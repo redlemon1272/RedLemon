@@ -106,6 +106,7 @@
 | **Compiler: Extraneous '}' / Redeclaration** | Partial SwiftUI Body Replacement Error | #108 |
 | **Subtitles Appear Delayed (10s+)** | Sequential loading loop + 5s polling delay | #109 |
 | **Subtitle Download Failed (403/503)** | Missing Browser User-Agent (SubDL CDN) | #110 |
+| **Guest/Host Subtitle Mismatch** | Sync inconsistency or weak scoring (TELESYNC Trap) | #117 |
 
 ## 🚨 Critical Landmines
 
@@ -464,7 +465,7 @@
 106. **Visual Continuity Trap (The "Loading Flicker")**: *(Added v1.0.138)*
     *   **Symptom**: Background art flashes black or appears "flaky" behind the loading/buffering overlay.
     *   **Cause**: The Player ViewModel resets visual properties (`backgroundURL`, `posterURL`) to `nil` at the start of `loadStream` before refetching them. This breaks the "visual chain" from the Browse page.
-    *   **Rule**: **Inherit UI State Sync**. ViewModels MUST copy visual state (backgrounds/logos) from the `AppState` metadata cache *synchronously* during initialization. 
+    *   **Rule**: **Inherit UI State Sync**. ViewModels MUST copy visual state (backgrounds/logos) from the `AppState` metadata cache *synchronously* during initialization.
     *   **Fix**: `MPVPlayerViewModel.swift` - Check `appState.player.selectedMetadata` and populate URLs immediately if the IMDB ID matches.
 
 107. **Metadata Hydration Trap (Detail Views)**: *(Added v1.0.139)*
@@ -1567,7 +1568,7 @@ _ = try await makeRequest(
 ### 1. The Hydra Duplicate Loop (Landmine #105)
 **Symptom**: Clicking "Try Another Stream" re-selects the same problematic file or a file from the same release group (e.g. seeing "FLUX" again and again). This is common for movies where one bad release is mirrored across many torrent sites.
 
-**Root Cause**: 
+**Root Cause**:
 1. **Hash Transparency**: Streams from `DebridSearch` often lack an `infoHash` until resolved. If `PlayerViewModel` only blocks hashes, hashless streams bypass the filter completely.
 2. **The "Hydra" Effect**: One release group (e.g. FLUX) might have 50 different torrents for the same movie. Blocking one by hash or exact title just selects the next one with a slightly different name.
 3. **Dirty Input**: Titles passed from the UI often contain newlines, emojis, or size metadata (e.g. `Movie.FLUX.mkv\n💾 8GB`) which causes simple string matches to fail.
@@ -1599,13 +1600,13 @@ var filtered = streams.filter { stream in
 ### 1. Subtitle Delivery Race (Landmine #109)
 **Symptom**: Subtitles are found quickly by the server, but take 15-20 seconds to appear in the player's menu after the video starts.
 
-**Root Cause**: 
+**Root Cause**:
 1. **Sequential Loading**: The `SubtitleService` originally downloaded external subtitles one-by-one in a `for` loop. If 5 subtitles were found and each took 2s, that's a 10s base delay.
 2. **Polling Latency**: The `scanEmbeddedTracks()` function relied on a fixed 5-second polling loop to detect when MPV finished loading external files. This added another 5s of dead air.
 
 **Mandatory Solution**:
 1. **Parallel Downloads**: Use `withTaskGroup` to download all external subtitles simultaneously.
-2. **Reactive Menu Updates**: Do NOT rely on polling. Observe the MPV `track-list` property and trigger an immediate scan when it changes. 
+2. **Reactive Menu Updates**: Do NOT rely on polling. Observe the MPV `track-list` property and trigger an immediate scan when it changes.
 3. **Internal Observer**: `SubtitleService` must subscribe to `mpv.tracksChangedPublisher` to refresh its `availableTracks` list instantly.
 
 ```swift
@@ -1645,14 +1646,14 @@ request.timeoutInterval = 30
 ### 1. Horizontal Scroll Overdraw (Landmine #111)
 **Symptom**: The Browse page feels "heavy", navigation jitters, and the Swift compiler takes a long time (or fails) on the View body.
 **Root Cause**: **"The Rows of Death"**. Rendering multiple (10+) nested horizontal `NSScrollView` or `ScrollView` instances inside a vertical list forces the system to maintain many off-screen layout contexts. On macOS, this leads to event contention and frame drops.
-**Mandatory Solution**: 
+**Mandatory Solution**:
 1. **The Grid Pivot**: If a page requires more than 3-4 horizontal segments, pivot to a **Single Grid Layout with a Service Selector**.
 2. **Lazy Rendering**: Use `LazyVGrid` with `adaptive` columns for the main content. This limits the active view hierarchy to only what is visible.
 
 ### 2. The Parallel Dispatch Mutation Trap (Landmine #112)
 **Symptom**: Build Error: `main actor-isolated property 'X' can not be mutated from a non-isolated context` when using `async let`.
 **Root Cause**: `async let` closures (e.g. `async let task: Void = { ... }()`) execute in a non-isolated detached context. Even if the parent `init` or method is `@MainActor`, the closure itself is not. Direct mutations of `@Published` properties within these closures will fail.
-**Mandatory Solution**: 
+**Mandatory Solution**:
 1. **Capture Weakly**: Always use `[weak self]` in the closure to prevent retain cycles.
 2. **Local Variables**: Perform fetching/processing into local variables.
 3. **MainActor Commitment**: Use `await MainActor.run { self?.property = localResult }` to commit changes back to the UI state.
@@ -1662,7 +1663,7 @@ request.timeoutInterval = 30
 async let loadHero: Void = { [weak self] in
     let results = try await fetch()
     await MainActor.run { [weak self] in
-        self?.data = results 
+        self?.data = results
     }
 }()
 ```
@@ -1670,7 +1671,7 @@ async let loadHero: Void = { [weak self] in
 ### 3. The Emoji Spacing Bug (Landmine #113)
 **Symptom**: After inserting an emoji into a chat input, subsequent normal text has "huge spaces" between words (e.g., "I    want    to    go").
 **Root Cause**: **Attribute Leakage**. `NSTextView` (and SwiftUI `TextField` on macOS) can "poison" its `typingAttributes` using metrics from the emoji fallback font (Apple Color Emoji). This often includes wide kerning or tracking values that persist even when typing normal characters.
-**Mandatory Solution**: 
+**Mandatory Solution**:
 1. **Disable Rich Text**: Set `textView.isRichText = false` and `textView.importsGraphics = false`.
 2. **Hard Reset Attributes**: Explicitly reset `typingAttributes` and `textStorage` attributes to include `.kern: 0.0`.
 3. **Avoid SwiftUI `TextField(axis: .vertical)`**: On macOS 13+, the vertical auto-growing TextField is prone to this and lacks low-level control. Use a custom `NSTextView` wrapper instead.
@@ -1687,11 +1688,11 @@ textView.typingAttributes = attributes
 
 ### 4. The Subtitle Availability Gap (Landmine #114)
 **Symptom**: Subtitles don't appear in the menu on first load, or they appear in the menu but can't be selected/don't display.
-**Root Cause**: 
+**Root Cause**:
 1. **Concurrency Race**: `Smart Load` timeout (previously 8s) is shorter than proxy download/unzip/VTT conversion time (can be 20s+).
 2. **Encoding Mismatch**: SubDL files are often `Windows-1252` or `Latin-1`. Standard UTF-8 decoding results in empty tracks.
 3. **Selection Guard**: `refreshSubtitleSelection` blocking updates during playback to prevent "flicker" stops late-arriving subs from auto-enabling.
-**Mandatory Solution**: 
+**Mandatory Solution**:
 1. **Extended Timeout**: Use at least 15s in `pollForTracksAndResume` when external subs are expected.
 2. **Robust Decoding**: Attempt multiple encodings in `SubtitleService` (UTF8 -> CP1252 -> Latin1).
 3. **Dynamic Engagement**: Allow `refreshSubtitleSelection` during playback IF no track is currently active (`sid == 0`).
@@ -1706,7 +1707,7 @@ if isPlaying && hasCompletedInitialTrackSelection && getCurrentSubtitleTrack() !
 ### 5. The Playlist Sync Race (Landmine #115)
 **Symptom**: Host switches a playlist item and then immediately clicks "Start". Guests play the *previous* item.
 **Root Cause**: **Causal Inconsistency**. When the host switches items and then starts playback rapidly, guests may receive the "Start" signal and fetch the room state before the previous playlist update has finished propagating across database clusters.
-**Mandatory Solution**: 
+**Mandatory Solution**:
 1. **Host Interlock**: Implement an `isPlaylistSyncing` flag in `LobbyViewModel`.
 2. **Artificial Delay**: Set the flag to `true` when switching items and wait at least **800ms** after the DB update completes before setting it back to `false`.
 3. **UI Blocking**: Disable the "Start Playback" button while `isPlaylistSyncing` is active.
@@ -1732,5 +1733,33 @@ init() throws {
         try LoggingSystem.bootstrap(from: &env)
         Self.isLoggingInitialized = true
     }
+}
+```
+
+## Part 28: Subtitle Reliability & Sync Protocol
+
+### 1. Subtitle Scoring & Sync (The "TELESYNC Trap") (Landmine #117)
+**Symptom**: Guest shows poor quality subtitles (CAM/TS) while Host shows high-quality ones, or Guest shows "No Subtitles" despite Host selection.
+
+**Root Cause**:
+1. **Sync Inconsistency**: Guests originally only received the movie title. Without the full release name (e.g., `Now.You.See.Me.2.2016.1080p.BluRay.x264.DTS-JYK`), the search hint is too weak to find exact release matches.
+2. **Scoring Lenience**: The SubDL scoring was too relaxed regarding quality sources. It would match TELESYNC subtitles to high-quality streams because they both had "1080p", failing to apply a strong penalty for the source mismatch.
+3. **Noisy Hints**: PirateBay and Debrid stream titles often contain emojis (`💾`, `🎬`, `⚡️`) and newlines that break simple string matching on the server.
+
+**Mandatory Solution**:
+1. **Sync Full Context**: `LobbyEventRouter` MUST synchronize the full `source_quality` (Release Name) to the guest's session.
+2. **Aggressive Penalties**: SubDL scoring MUST apply massive penalties (at least **-300**) for source mismatches (e.g., CAM/TS subtitle for a WEBRip stream).
+3. **Hint Cleaning**: The server MUST strip newlines and emojis from stream hints before matching.
+4. **Digital Interoperability**: Treat `webrip`, `web-dl`, and `webdl` as interchangeable to avoid false penalties between similar digital releases.
+
+```swift
+// ✅ CORRECT: Cleaning hints in SubDLClient
+streamFile = streamFile.replacingOccurrences(of: "💾", with: "")
+    .replacingOccurrences(of: "\n", with: " ")
+    .trimmingCharacters(in: .whitespacesAndNewlines)
+
+// ✅ CORRECT: Stricter source penalty
+if subHas && !streamHas {
+    score -= 300 // Strong penalty for mismatch
 }
 ```

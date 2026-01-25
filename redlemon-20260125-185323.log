@@ -1,0 +1,900 @@
+2026-01-25 18:53:31.291 RedLemon[35200:292596] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-25 18:53:31.292 RedLemon[35200:292596] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-25 18:53:31.364 RedLemon[35200:292596] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-25 18:53:31.366 RedLemon[35200:292596] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-25 18:53:31.396 RedLemon[35200:292596] ✅ Playback state reset complete - starting in browse view
+2026-01-25 18:53:31.396 RedLemon[35200:292596] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-25 18:53:31.396 RedLemon[35200:292596] 🧪 Testing Profile: debug
+2026-01-25 18:53:31.403 RedLemon[35200:292652] 📂 Loaded 5 credential(s) from cache
+2026-01-25 18:53:31.406 RedLemon[35200:292596] ✅ Keychain: Found stored username: ursinho
+2026-01-25 18:53:31.406 RedLemon[35200:292596] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-25 18:53:31.406 RedLemon[35200:292655] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-25 18:53:31.972 RedLemon[35200:292657] 📡 SupabaseClient: User lookup response received (427 bytes)
+2026-01-25 18:53:31.985 RedLemon[35200:292657] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-25 18:53:31.985 RedLemon[35200:292657] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-25 18:53:32.074 RedLemon[35200:292596] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-25 18:53:32.074 RedLemon[35200:292596] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-25 18:53:33.318 RedLemon[35200:292596] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-25 18:53:33.325 RedLemon[35200:292596] 🚀 RedLemon: Starting HTTP server...
+2026-01-25 18:53:33.325 RedLemon[35200:292596] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-25 18:53:33.329 RedLemon[35200:292655] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:33.344 RedLemon[35200:292596] ✅ RedLemon: HTTPServer instance created
+2026-01-25 18:53:33.345 RedLemon[35200:292596] ✅ RedLemon: Server marked as ready (Optimistic)
+2026-01-25 18:53:33.345 RedLemon[35200:292657] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates (interest count: 1)
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsView] Loaded 399 movies from config version 1585
+🗓 AppState: Updated schedule epoch to 2026-01-23 22:49:34 +0000
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 482 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0114369/img (143272 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1591095/img (651299 bytes)
+📊 AppState: Polled participant counts - Active: ["tt0114369": 1, "tt1591095": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 482 seconds
+📊 AppState: Polled participant counts - Active: ["tt0114369": 1, "tt1591095": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 482 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1293847/img (1002992 bytes)
+🔌 SocialService: Connecting to global presence via shared client...
+📡 Joined channel: realtime:global-presence (interest count: 1)
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to social realtime channels via shared client...
+📡 Joined channel: realtime:direct_messages (interest count: 1)
+📡 Joined channel: realtime:friendships (interest count: 1)
+✅ SocialService: Connected to social channels
+📈 SocialService: User 795e81d3-8bdd-4403-8423-238c3b93b420 came online
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 46 items to cloud...
+🔄 SocialService: Syncing 46 items to cloud (serial)...
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-25 18:53:33.402 RedLemon[35200:292596] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-25 18:53:33.402 RedLemon[35200:292596] 🏥 [AppState] Starting global provider health check...
+2026-01-25 18:53:33.402 RedLemon[35200:292596] 🔍 Performing startup checks...
+2026-01-25 18:53:33.402 RedLemon[35200:292596] ✅ Username-based authentication ready
+2026-01-25 18:53:33.507 RedLemon[35200:292652] 🔐 Signed request to /check-payment
+2026-01-25 18:53:33.685 RedLemon[35200:292652] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:33.970 RedLemon[35200:292651] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-25 18:53:33.970 RedLemon[35200:292651] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-25 18:53:33.987 RedLemon[35200:292657] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:34.285 RedLemon[35200:292723] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:34.598 RedLemon[35200:292655] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:34.893 RedLemon[35200:292723] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:35.209 RedLemon[35200:292719] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:35.474 RedLemon[35200:292596] ✅ [AppState] Provider health check complete (found 7 services)
+2026-01-25 18:53:35.536 RedLemon[35200:292651] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:35.829 RedLemon[35200:292651] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:36.014 RedLemon[35200:292651] 📝 [APP] 🎟️ Joining event: Se7en (Live: false) ["file": "EventsView.swift", "level": "INFO", "line": "253"]
+2026-01-25 18:53:36.014 RedLemon[35200:292651] 📝 [APP] SessionRecorder initialized
+2026-01-25 18:53:36.128 RedLemon[35200:292651] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:36.235 RedLemon[35200:292651] 📡 StreamService: Fetching metadata for tt0114369...
+2026-01-25 18:53:36.235 RedLemon[35200:292719] 📝 [APP] 🎬 StreamService: Starting resolution for: Se7en ["file": "StreamService.swift", "level": "INFO", "line": "172"]
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ SubDLClient initialized
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt2333784/img (942633 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1622979/img (781556 bytes)
+[2026-01-25T23:53:36Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Se7en (Live: false)
+   Event start time: 2026-01-26 00:01:34 +0000
+   Event duration: 8220.0s
+   Current time: 2026-01-25 23:53:36 +0000
+   Is Live: false
+   Is In Lobby: true
+✅ Event room already exists: event_tt0114369
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY - Re-unlocking for fresh URL 🔑
+   Stored Hash: 6ac48dd99a7ea8e3460120e8371b81592a50a156
+   Cached URL: https://chi3-4.download.real-d...
+[2026-01-25T23:53:36Z] [INFO] [StreamService.swift:172] 🎬 StreamService: Starting resolution for: Se7en
+[ INFO ] GET /api/metadata/meta/movie/tt0114369 [request-id: 82981BEC-D57C-4D40-88A3-0049E8801239]
+2026-01-25 18:53:36.372 RedLemon[35200:292651] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:36.412 RedLemon[35200:292652] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-25 18:53:36.413 RedLemon[35200:292652] ✅ StreamService: Metadata loaded: Se7en
+2026-01-25 18:53:36.413 RedLemon[35200:292652] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-25 18:53:36.413 RedLemon[35200:292652] ⚡️ StreamResolver: Resolving streams for tt0114369 (S0E0)
+2026-01-25 18:53:36.414 RedLemon[35200:292652] 📝 [APP] New Session Started ["app_version": "1.0.155", "build": "155", "session_id": "76C42EBB-8967-456E-8370-117C1B312501", "trigger_source": "manual", "user_id": "656DAA91-33B4-4688-9135-C982EA52D7C9"]
+2026-01-25 18:53:36.414 RedLemon[35200:292652] 📝 [APP] Target Content Set ["imdb_id": "tt0114369"]
+2026-01-25 18:53:36.414 RedLemon[35200:292652] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-25 18:53:36.663 RedLemon[35200:292651]    📅 Filtering by year: 1995
+2026-01-25 18:53:36.673 RedLemon[35200:292655] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:36.787 RedLemon[35200:292655] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-25 18:53:36.787 RedLemon[35200:292655] 🔍 ProviderManager: Fetching streams for tt0114369...
+2026-01-25 18:53:36.789 RedLemon[35200:292651] 🔍 Zilean: Searching via IMDB ID: tt0114369
+2026-01-25 18:53:36.789 RedLemon[35200:292655] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-25 18:53:36.789 RedLemon[35200:292655] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-25 18:53:36.789 RedLemon[35200:292655] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0114369.json...
+2026-01-25 18:53:36.789 RedLemon[35200:292655] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0114369.json
+2026-01-25 18:53:36.789 RedLemon[35200:292719] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-25 18:53:36.789 RedLemon[35200:292719] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22***%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt0114369.json
+2026-01-25 18:53:36.789 RedLemon[35200:292719] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt0114369.json
+2026-01-25 18:53:36.881 RedLemon[35200:292719] 📡 Torrentio: HTTP 200, received 38827 bytes
+2026-01-25 18:53:36.907 RedLemon[35200:292719] ✅ Torrentio: Parsed 77 streams from 77 raw
+2026-01-25 18:53:36.929 RedLemon[35200:292723] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:37.223 RedLemon[35200:292723] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:37.519 RedLemon[35200:292655] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:37.822 RedLemon[35200:292719] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:38.103 RedLemon[35200:292723] ✅ Zilean: Got 115 results
+2026-01-25 18:53:38.126 RedLemon[35200:292723] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:38.413 RedLemon[35200:292651] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-25 18:53:38.424 RedLemon[35200:292651] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:38.714 RedLemon[35200:292719] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:38.861 RedLemon[35200:292655] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:39.114 RedLemon[35200:292651] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:39.422 RedLemon[35200:292719] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:39.727 RedLemon[35200:292719] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:40.027 RedLemon[35200:292719] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:40.336 RedLemon[35200:292656] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:40.630 RedLemon[35200:292719] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:40.934 RedLemon[35200:292656] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:41.232 RedLemon[35200:292656] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:41.534 RedLemon[35200:292655] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:41.837 RedLemon[35200:292719] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:42.134 RedLemon[35200:292652] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:42.427 RedLemon[35200:292652] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:42.650 RedLemon[35200:292652] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:42.951 RedLemon[35200:292652] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:43.242 RedLemon[35200:292652] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:43.540 RedLemon[35200:292655] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:43.837 RedLemon[35200:292656] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:44.084 RedLemon[35200:292719] ⚠️ DebridSearch: Dropping stream with malformed URL (undefined): Se7en 1995 Remastered Edition 1080p BluRay DTS-ES x264-SilverTorrentHD.mkv
+💾 10.99 GB
+2026-01-25 18:53:44.084 RedLemon[35200:292719] ✅ DebridSearch: Parsed 1 streams
+2026-01-25 18:53:44.086 RedLemon[35200:292723] ✅ ProviderManager: Fetched 193 raw, returning 149 unique streams
+2026-01-25 18:53:44.087 RedLemon[35200:292723] 📦 StreamResolver: Received 1 raw streams, bucketing...
+2026-01-25 18:53:44.087 RedLemon[35200:292723] 📝 [RESOLVER] Providers Fetched ["torrentio": "1"]
+2026-01-25 18:53:44.152 RedLemon[35200:292719] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:44.440 RedLemon[35200:292655] 📝 [RESOLVER] Resolution Complete ["1080p": "1", "2160p": "0", "720p": "0", "selected_provider": "torrentio", "selected_title": "Se7en.1995.1080p.BluRay.H264.AAC-RARBG
+👤 1 💾 2.42 GB ⚙️ ThePirateBay"]
+2026-01-25 18:53:44.440 RedLemon[35200:292655] 📝 [RESOLVER] Host Stream Match ["hash": "6ac48dd99a7ea8e3460120e8371b81592a50a156"]
+2026-01-25 18:53:44.441 RedLemon[35200:292723] 📝 [APP] 📦 StreamService: Found 1 total streams to try (across all qualities) ["file": "StreamService.swift", "level": "INFO", "line": "379"]
+💾 Cache SET: Metadata[meta_movie_tt0114369]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 7 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0114369.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+⚠️ Comet: Skipping invalid redirect URL: https://comet.elfhosted.com/playback/yFde4xI2V8hQBXTztJa_7tn...
+✅ Comet: Parsed 0 valid streams
+⚠️ MediaFusion: HTTP 418
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt1591095": 1, "tt0114369": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 472 seconds
+⚡️ StreamResolver: Optimizing for preferred hash: 6ac48dd99a7ea8e3460120e8371b81592a50a156
+   ✅ Found target stream immediately. Discarding everything else.
+📊 StreamResolver: Provider Stats: [torrentio:1]
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt0114369.json
+✅ Metadata fetched from Cinemeta for tt0114369: Se7en (1995)
+🎯 Target title for matching: Se7en
+   📅 Year filter (1995): 1 → 1 streams
+🔍 Searching SubDL: tt0114369 (movie)
+   ℹ️ Fallback Name: Se7en (1995)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+   --- Processing Bucket: 2160p (Input: 0) ---
+   ✅ Bucket 2160p Final Count: 0
+   --- Processing Bucket: 1080p (Input: 1) ---
+   ✅ Bucket 1080p Final Count: 1
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 0) ---
+   ✅ Bucket 480p Final Count: 0
+📦 1080p Primary: Se7en.1995.1080p.BluRay.H264.AAC-RARBG
+👤 1 💾 2.42 GB ⚙️ ThePirateBay
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: 6ac48dd99a7ea8e3460120e8371b81592a50a156
+✅ StreamService: Found requested stream hash! Locking selection.
+[2026-01-25T23:53:44Z] [INFO] [StreamService.swift:379] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+🚫 StreamService: Event Mode detected. Activating STRICT quality and runtime filters.
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Se7en.1995.1080p.BluRay.H264.AAC-RARBG
+👤 1 💾 2.42 GB ⚙️ ThePirateBay
+🔒 StreamService: Has infoHash - forcing proper unlock flow (bypass redirect)
+🔓 StreamService: Unlocking with infoHash: 6ac48dd99a7e...
+[ INFO ] POST /api/streams/unlock [request-id: 03952BD7-5BAE-403B-B10B-3FEAA24AA2F9]
+2026-01-25 18:53:44.448 RedLemon[35200:292723] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:44.451 RedLemon[35200:292655] 🔓 Unlock request: infoHash=6ac48dd99a7e..., fileIdx=0
+2026-01-25 18:53:44.452 RedLemon[35200:292655] ✅ Token found, attempting unlock...
+2026-01-25 18:53:44.761 RedLemon[35200:292655] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:45.063 RedLemon[35200:292723] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:45.356 RedLemon[35200:292723] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:45.647 RedLemon[35200:292656] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:45.944 RedLemon[35200:292656] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:46.187 RedLemon[35200:292652] ✅ Unlocked successfully: Se7en.1995.1080p.BluRay.H264.AAC-RARBG.mp4
+2026-01-25 18:53:46.190 RedLemon[35200:292656] 📝 [RESOLVER] Stream Unlocked ["filename": "Se7en.1995.1080p.BluRay.H264.AAC-RARBG.mp4", "is_generic": "false", "original_title": "Se7en.1995.1080p.BluRay.H264.AAC-RARBG
+👤 1 💾 2.42 GB ⚙️ ThePirateBay", "url_host": "chi9-4.download.real-debrid.com"]
+2026-01-25 18:53:46.191 RedLemon[35200:292656] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles...
+2026-01-25 18:53:46.191 RedLemon[35200:292656] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-25 18:53:46.191 RedLemon[35200:292652] 🔍 DEBUG: Processing subtitle URL: /subtitle/1137328-2323017.zip
+2026-01-25 18:53:46.192 RedLemon[35200:292655] 🔍 DEBUG: Processing subtitle URL: /subtitle/3466874-8389908.zip
+2026-01-25 18:53:46.193 RedLemon[35200:292655] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-25 18:53:46.193 RedLemon[35200:292652] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-25 18:53:46.191 RedLemon[35200:292723] 🔍 DEBUG: Processing subtitle URL: /subtitle/3466875-8389909.zip
+2026-01-25 18:53:46.193 RedLemon[35200:292723] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-25 18:53:46.194 RedLemon[35200:292655] 🔍 DEBUG: Processing subtitle URL: /subtitle/1137327-2658603.zip
+2026-01-25 18:53:46.194 RedLemon[35200:292655] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-25 18:53:46.192 RedLemon[35200:292656] 🔍 DEBUG: Processing subtitle URL: /subtitle/2815526-2795679.zip
+2026-01-25 18:53:46.194 RedLemon[35200:292656] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-25 18:53:46.198 RedLemon[35200:292723] 🔐 Signed request to /rooms
+2026-01-25 18:53:46.242 RedLemon[35200:292723] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:46.347 RedLemon[35200:292723] ✅ Persisted stream selection to room event_tt0114369
+2026-01-25 18:53:46.348 RedLemon[35200:292723] 🔐 Signed request to /room_participants
+2026-01-25 18:53:46.498 RedLemon[35200:292723] 🔐 Signed request to /user_watch_history
+2026-01-25 18:53:46.879 RedLemon[35200:292596] ✅ PlayerVM: currentWatchPartyRoom set to event_tt0114369
+2026-01-25 18:53:47.001 RedLemon[35200:292596] 🔑 Lobby: Updated participantId to actual user ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-25 18:53:47.002 RedLemon[35200:292596] [LOBBY_VIEW] onAppear: shouldAutoJoinLobby=false, room=event_tt0114369, timeUntilStart=467
+2026-01-25 18:53:47.066 RedLemon[35200:292656] 🔐 Signed request to /room_participants
+✅ RD addMagnet: LAMYXVBRXWTYS
+🎬 Movie: Found matching file for title 'Se7en': /Se7en.1995.1080p.BluRay.H264.AAC-RARBG.mp4
+📝 RD: Selecting file ID 3 for torrent LAMYXVBRXWTYS
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/RKZHSIF6WT2U6D48
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Selected stream: Se7en.1995.1080p.BluRay.H264.AAC-RARBG
+👤 1 💾 2.42 GB ⚙️ ThePirateBay
+📊 Stream Size: 2.42 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+   ✅ Fresh URL obtained: https://chi9-4.download.real-debrid.com/...
+   ✅ Database updated with fresh URL
+
+🎭 Upcoming event - position: 0
+   Room createdAt: 2026-01-26 00:01:34 +0000
+   Room state: lobby
+🎭 Upcoming event - going to lobby
+🎭 Lobby: Connecting to room event_tt0114369...
+🚦 Lobby State: connecting
+🔄 Lobby: Fetching fresh room state from Supabase...
+[ INFO ] GET /api/metadata/meta/movie/tt0114369 [request-id: 643F8D98-D35E-4810-AAED-7CFCCAB26471]
+2026-01-25 18:53:47.120 RedLemon[35200:292596] 🔑 Lobby: Updated participantId to actual user ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-25 18:53:47.120 RedLemon[35200:292596] [LOBBY_VIEW] onAppear: shouldAutoJoinLobby=false, room=event_tt0114369, timeUntilStart=467
+2026-01-25 18:53:47.157 RedLemon[35200:292656] 🔐 Signed request to /room_participants
+2026-01-25 18:53:47.878 RedLemon[35200:292723] ❌ [18:53:47.878] [NETWORK] [SupabaseClient.swift:370] Supabase API Error: new row violates row-level security policy (USING expression) for table "room_participants"
+2026-01-25 18:53:47.878 RedLemon[35200:292652] ❌ [18:53:47.878] [NETWORK] [SupabaseClient.swift:370] Supabase API Error: new row violates row-level security policy (USING expression) for table "room_participants"
+2026-01-25 18:53:48.356 RedLemon[35200:292596] ℹ️ Lobby: Join failed but room exists - assuming user already joined
+2026-01-25 18:53:48.356 RedLemon[35200:292596] ℹ️ Lobby: Join failed but room exists - assuming user already joined
+2026-01-25 18:53:48.512 RedLemon[35200:292596] ℹ️ RealtimeChannelManager: Already setup for room event_tt0114369, filtering duplicate setup call.
+2026-01-25 18:53:48.513 RedLemon[35200:292651] 📝 Realtime: Registered observer 'lobby' (Presence: YES, Sync: NO, Status: NO)
+2026-01-25 18:53:48.527 RedLemon[35200:292656] 📝 Realtime: Registered observer 'lobby' (Presence: NO, Sync: YES, Status: NO)
+2026-01-25 18:53:48.532 RedLemon[35200:292656] 📝 Realtime: Registered observer 'lobby' (Presence: NO, Sync: YES, Status: NO)
+2026-01-25 18:53:48.545 RedLemon[35200:292655] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-25 18:53:48.545 RedLemon[35200:292655]    Payload keys: timestamp, position, chatText, senderId, chatUsername, type
+2026-01-25 18:53:48.546 RedLemon[35200:292651] ✅ Realtime: Message broadcast complete
+2026-01-25 18:53:48.582 RedLemon[35200:292596] ⚠️ Lobby: Skipping duplicate LOBBY_JOIN broadcast (last: 0.03735005855560303s ago)
+2026-01-25 18:53:48.583 RedLemon[35200:292656] 🔐 SupabaseClient: Signing Identity Payload: '1769385228656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-25 18:53:48.584 RedLemon[35200:292656] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-25 18:53:48.597 RedLemon[35200:292723] 🔐 SupabaseClient: Signing Identity Payload: '1769385228656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-25 18:53:48.597 RedLemon[35200:292723] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-25 18:53:48.599 RedLemon[35200:292596] ⚠️ Lobby: Failed to poll participants: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://151.243.109.243.nip.io/rest/v1/room_participants?room_id=eq.event_tt0114369&select=*, NSErrorFailingURLKey=https://151.243.109.243.nip.io/rest/v1/room_participants?room_id=eq.event_tt0114369&select=*, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <268B0D88-FF06-45C7-874F-FC20E8D0E356>.<92>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <268B0D88-FF06-45C7-874F-FC20E8D0E356>.<92>, NSLocalizedDescription=cancelled}
+2026-01-25 18:53:48.599 RedLemon[35200:292596] ⚠️ LobbyDatabase: Failed to poll room state: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://151.243.109.243.nip.io/rest/v1/rooms?id=eq.event_tt0114369&select=*, NSErrorFailingURLKey=https://151.243.109.243.nip.io/rest/v1/rooms?id=eq.event_tt0114369&select=*, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <C82BC387-7460-4817-90B5-CFB09F6DDEE7>.<91>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <C82BC387-7460-4817-90B5-CFB09F6DDEE7>.<91>, NSLocalizedDescription=cancelled}
+2026-01-25 18:53:48.679 RedLemon[35200:292656] 📨 Realtime: Received broadcast message
+2026-01-25 18:53:48.679 RedLemon[35200:292656]    Payload keys: chatUsername, timestamp, position, chatText, senderId, type
+2026-01-25 18:53:48.679 RedLemon[35200:292656] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-25 18:53:48.680 RedLemon[35200:292596] 👋 Received: Guest 'ursinho' joined room event_tt0114369
+2026-01-25 18:53:48.875 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:53:48.905 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:53:53.856 RedLemon[35200:292596] [COUNTDOWN] Updated to 460s
+2026-01-25 18:54:03.618 RedLemon[35200:292596] [COUNTDOWN] Updated to 450s
+2026-01-25 18:54:03.756 RedLemon[35200:292655] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-25 18:54:03.760 RedLemon[35200:292596] 🔄 Checking for app updates...
+2026-01-25 18:54:03.765 RedLemon[35200:292723] 🔐 Signed request to /rpc/get_server_time
+2026-01-25 18:54:13.014 RedLemon[35200:292596] [COUNTDOWN] Updated to 440s
+2026-01-25 18:54:13.365 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:54:23.711 RedLemon[35200:292596] [COUNTDOWN] Updated to 430s
+2026-01-25 18:54:24.228 RedLemon[35200:293028] 🔐 SupabaseClient: Signing Identity Payload: '1769385264656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-25 18:54:24.228 RedLemon[35200:293028] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-25 18:54:24.519 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:54:29.044 RedLemon[35200:292657] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-25 18:54:33.247 RedLemon[35200:292596] [COUNTDOWN] Updated to 420s
+2026-01-25 18:54:43.975 RedLemon[35200:292596] [COUNTDOWN] Updated to 410s
+2026-01-25 18:54:48.407 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:54:48.407 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:54:53.536 RedLemon[35200:292596] [COUNTDOWN] Updated to 400s
+2026-01-25 18:54:55.153 RedLemon[35200:292755] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-25 18:54:58.755 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:54:58.789 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:54:58.789 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:54:59.511 RedLemon[35200:292755] 🔐 SupabaseClient: Signing Identity Payload: '1769385299656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-25 18:54:59.511 RedLemon[35200:292755] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-25 18:54:59.734 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:55:00.350 RedLemon[35200:293028] 📨 Realtime: Received broadcast message
+2026-01-25 18:55:00.350 RedLemon[35200:293028]    Payload keys: timestamp, chatText, senderId, chatUsername, type, position
+2026-01-25 18:55:00.351 RedLemon[35200:293028] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-25 18:55:00.351 RedLemon[35200:292596] 👋 Received: Guest 'lemontom' joined room event_tt0114369
+2026-01-25 18:55:00.443 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:55:00.610 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:55:03.267 RedLemon[35200:292596] [COUNTDOWN] Updated to 390s
+2026-01-25 18:55:05.648 RedLemon[35200:292596] 🎭 Lobby: Disconnected from room event_tt0114369
+2026-01-25 18:55:05.649 RedLemon[35200:292596] 🪟 restoreWindowFromLobby() called - no action needed (window stays expanded)
+2026-01-25 18:55:05.827 RedLemon[35200:293028] 🔐 Signed request to /room_participants
+2026-01-25 18:55:05.962 RedLemon[35200:292596] ✅ Left room event_tt0114369 (User: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-25 18:55:07.572 RedLemon[35200:292719] 📝 [APP] 🎟️ Joining event: Se7en (Live: false) ["file": "EventsView.swift", "level": "INFO", "line": "253"]
+2026-01-25 18:55:07.705 RedLemon[35200:292657] 📡 StreamService: Fetching metadata for tt0114369...
+2026-01-25 18:55:07.705 RedLemon[35200:293028] 📝 [APP] 🎬 StreamService: Starting resolution for: Se7en ["file": "StreamService.swift", "level": "INFO", "line": "172"]
+2026-01-25 18:55:07.705 RedLemon[35200:292657] ✅ StreamService: Metadata loaded: Se7en
+2026-01-25 18:55:07.705 RedLemon[35200:292657] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-25 18:55:07.705 RedLemon[35200:292657] ⚡️ StreamResolver: Resolving streams for tt0114369 (S0E0)
+2026-01-25 18:55:07.706 RedLemon[35200:292657] 📝 [APP] New Session Started ["app_version": "1.0.155", "build": "155", "session_id": "931710DA-D1B1-48D7-8DE5-A1B564514873", "trigger_source": "manual", "user_id": "656DAA91-33B4-4688-9135-C982EA52D7C9"]
+2026-01-25 18:55:07.706 RedLemon[35200:292657] 📝 [APP] Target Content Set ["imdb_id": "tt0114369"]
+2026-01-25 18:55:07.706 RedLemon[35200:292657] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-25 18:55:07.833 RedLemon[35200:292755]    📅 Filtering by year: 1995
+2026-01-25 18:55:07.965 RedLemon[35200:292755] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-25 18:55:07.965 RedLemon[35200:292755] 🔍 ProviderManager: Fetching streams for tt0114369...
+2026-01-25 18:55:07.965 RedLemon[35200:292657] 🔍 Zilean: Searching via IMDB ID: tt0114369
+2026-01-25 18:55:07.966 RedLemon[35200:293356] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-25 18:55:07.966 RedLemon[35200:293356] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridProvider%22%3A%22RealDebrid%22,%22DebridApiKey%22%3A%22***%22%7D/stream/movie/tt0114369.json
+2026-01-25 18:55:07.966 RedLemon[35200:293356] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridProvider%22%3A%22RealDebrid%22,%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22%7D/stream/movie/tt0114369.json
+2026-01-25 18:55:07.966 RedLemon[35200:293028] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-25 18:55:07.966 RedLemon[35200:293028] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-25 18:55:07.967 RedLemon[35200:293028] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0114369.json...
+2026-01-25 18:55:07.967 RedLemon[35200:293028] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0114369.json
+2026-01-25 18:55:07.977 RedLemon[35200:293356] 📡 Torrentio: HTTP 200, received 38827 bytes
+2026-01-25 18:55:07.998 RedLemon[35200:293356] ✅ Torrentio: Parsed 77 streams from 77 raw
+2026-01-25 18:55:09.750 RedLemon[35200:293356] ✅ Zilean: Got 115 results
+2026-01-25 18:55:13.414 RedLemon[35200:293028] ⚠️ DebridSearch: Dropping stream with malformed URL (undefined): Se7en 1995 Remastered Edition 1080p BluRay DTS-ES x264-SilverTorrentHD.mkv
+💾 10.99 GB
+2026-01-25 18:55:13.414 RedLemon[35200:293028] ✅ DebridSearch: Parsed 2 streams
+2026-01-25 18:55:13.415 RedLemon[35200:292723] ✅ ProviderManager: Fetched 194 raw, returning 150 unique streams
+2026-01-25 18:55:13.416 RedLemon[35200:292723] 📦 StreamResolver: Received 1 raw streams, bucketing...
+2026-01-25 18:55:13.417 RedLemon[35200:292723] 📝 [RESOLVER] Providers Fetched ["torrentio": "1"]
+2026-01-25 18:55:13.641 RedLemon[35200:293356] 📝 [RESOLVER] Resolution Complete ["1080p": "1", "2160p": "0", "720p": "0", "selected_provider": "torrentio", "selected_title": "Se7en.1995.1080p.BluRay.H264.AAC-RARBG
+👤 1 💾 2.42 GB ⚙️ ThePirateBay"]
+🎭 Lobby: Connecting to room event_tt0114369...
+⚠️ LobbyStateMachine: Invalid transition from connecting to connecting
+📡 SocialService: Updated status - In Lobby: Se7en: Se7en
+📡 SocialService: Updated status - In Lobby: Se7en: Se7en
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ Lobby: Loaded metadata for Se7en
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+⏳ Lobby: Event start time from local room. Time until start: 465.5108699798584
+⏱️ Lobby: Starting Event Countdown Ticker
+🎬 Event room detected - auto-starting playback
+🤖 Lobby: Checking auto-start for system event
+🕐 DEBUG: room.createdAt = 2026-01-26 00:01:34 +0000
+🕐 DEBUG: now = 2026-01-25 23:53:48 +0000
+🕐 DEBUG: timeUntilStart = 465s
+🕐 DEBUG: Event start time is 465s in the future
+🕐 DEBUG: dwellTime = 1s, minDwellTime = 10s
+⏳ Lobby: Event starts in 465s. Waiting...
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+⏳ Lobby: Event start time from local room. Time until start: 465.48730194568634
+🎬 Event room detected - auto-starting playback
+🤖 Lobby: Checking auto-start for system event
+🕐 DEBUG: room.createdAt = 2026-01-26 00:01:34 +0000
+🕐 DEBUG: now = 2026-01-25 23:53:48 +0000
+🕐 DEBUG: timeUntilStart = 465s
+🕐 DEBUG: Event start time is 465s in the future
+🕐 DEBUG: dwellTime = 1s, minDwellTime = 10s
+⏳ Lobby: Event starts in 465s. Waiting...
+🔌 Setting up Realtime channel: watch-party:event_tt0114369
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connected
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt0114369 (interest count: 1)
+📡 Connection state: connected
+✅ Realtime channel setup complete
+ℹ️ RealtimeChannelManager: Already setup for room event_tt0114369, filtering duplicate setup call.
+📡 Connection state: connected
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+✅ Lobby: Connected to Realtime
+⚠️ LobbyStateMachine: Invalid transition from connected to connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+⚠️ Heartbeat failed: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://151.243.109.243.nip.io/rest/v1/rpc/room_heartbeat, NSErrorFailingURLKey=https://151.243.109.243.nip.io/rest/v1/rpc/room_heartbeat, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <C96425B7-8A36-4436-9210-B673637EC313>.<93>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <C96425B7-8A36-4436-9210-B673637EC313>.<93>, NSLocalizedDescription=cancelled}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2, "tt1591095": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 462 seconds
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 452 seconds
+⚠️ LicenseManager: Payment sweep failed (non-fatal): Error Domain=NSURLErrorDomain Code=-1001 "The request timed out." UserInfo={_kCFStreamErrorCodeKey=-2103, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <2589E6F0-8A55-4713-BC8A-F785B7C8693C>.<1>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <2589E6F0-8A55-4713-BC8A-F785B7C8693C>.<1>"
+), NSLocalizedDescription=The request timed out., NSErrorFailingURLStringKey=https://151.243.109.243.nip.io/functions/v1/check-payment, NSErrorFailingURLKey=https://151.243.109.243.nip.io/functions/v1/check-payment, _kCFStreamErrorDomainKey=4}
+👤 LicenseManager: Profile expiry: Optional(2026-02-11 06:00:30 +0000)
+🎉 License updated! Expires: 2026-02-11 06:00:30 +0000
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ TimeService: Synced! Offset: 0.140s (RTT: 291ms)
+   Local:  2026-01-25 23:54:04 +0000
+   Server: 2026-01-25 23:54:04 +0000
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 442 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 432 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 422 seconds
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 412 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0114369": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 402 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 392 seconds
+🛑 LobbyPresence: Polling stopped
+🛑 LobbyDatabase: Polling stopped
+🛑 Lobby: Polling stopped (chat via Realtime only)
+🚦 Lobby State: closed
+📅 EventsView appeared
+🧹 Cleaning up Realtime channel for room: event_tt0114369
+🔄 Untracking presence on realtime:watch-party:event_tt0114369...
+✅ Presence untracked
+🔄 Leaving channel realtime:watch-party:event_tt0114369...
+📡 Left channel: realtime:watch-party:event_tt0114369
+✅ Channel left
+📡 SocialService: Updated status - Browsing Events: 
+📨 Unknown event: phx_close on realtime:watch-party:event_tt0114369
+☠️ LobbyViewModel deinit
+🧹 LobbyViewModel: Triggering detached cleanup task...
+⚠️ Cleanup already in progress, skipping
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+📡 Connection state: disconnected
+✅ Realtime channel cleanup complete
+♻️ RealtimeChannelManager deinitialized
+[2026-01-25T23:55:07Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Se7en (Live: false)
+   Event start time: 2026-01-26 00:01:34 +0000
+   Event duration: 8220.0s
+   Current time: 2026-01-25 23:55:07 +0000
+   Is Live: false
+   Is In Lobby: true
+✅ Event room already exists: event_tt0114369
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY - Re-unlocking for fresh URL 🔑
+   Stored Hash: 6ac48dd99a7ea8e3460120e8371b81592a50a156
+   Cached URL: https://chi3-4.download.real-d...
+[2026-01-25T23:55:07Z] [INFO] [StreamService.swift:172] 🎬 StreamService: Starting resolution for: Se7en
+✅ Cache HIT: Metadata[meta_movie_tt0114369]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🛡️ StreamResolver: Loaded 7 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0114369.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+⚠️ MediaFusion: HTTP 418
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+⚠️ Comet: Skipping invalid redirect URL: https://comet.elfhosted.com/playback/fIQtIJ-gUtB7zzk8_TriWnu...
+✅ Comet: Parsed 0 valid streams
+📊 AppState: Polled participant counts - Active: ["tt0114369": 1]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 382 seconds
+⚡️ StreamResolver: Optimizing for preferred hash: 6ac48dd99a7ea8e3460120e8371b81592a50a156
+   ✅ Found target stream immediately. Discarding everything else.
+📊 StreamResolver: Provider Stats: [torrentio:1]
+✅ Metadata cache hit for tt0114369: Se7en
+🎯 Target title for matching: Se7en
+   📅 Year filter (1995): 1 → 1 streams
+🔍 Searching SubDL: tt0114369 (movie)
+   ℹ️ Fallback Name: Se7en (1995)
+✅ Found 10 subtitles from SubDL (Primary)
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+   --- Processing Bucket: 2160p (Input: 0) ---
+   ✅ Bucket 2160p Final Count: 0
+   --- Processing Bucket: 1080p (Input: 1) ---
+   ✅ Bucket 1080p Final Count: 1
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 0) ---
+   ✅ Bucket 480p Final Count: 0
+📦 1080p Primary: Se7en.1995.1080p.BluRay.H264.AAC-RARBG
+👤 1 💾 2.42 GB ⚙️ ThePirateBay
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: 6ac48dd99a7ea8e3460120e8371b81592a50a156
+✅ St2026-01-25 18:55:13.641 RedLemon[35200:293356] 📝 [RESOLVER] Host Stream Match ["hash": "6ac48dd99a7ea8e3460120e8371b81592a50a156"]
+2026-01-25 18:55:13.642 RedLemon[35200:292755] 📝 [APP] 📦 StreamService: Found 1 total streams to try (across all qualities) ["file": "StreamService.swift", "level": "INFO", "line": "379"]
+reamService: Found requested stream hash! Locking selection.
+[2026-01-25T23:55:13Z] [INFO] [StreamService.swift:379] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+🚫 StreamService: Event Mode detected. Activating STRICT quality and runtime filters.
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Se7en.1995.1080p.BluRay.H264.AAC-RARBG
+👤 1 💾 2.42 GB ⚙️ ThePirateBay
+🔒 StreamService: Has infoHash - forcing proper unlock flow (bypass redirect)
+🔓 StreamService: Unlocking with infoHash: 6ac48dd99a7e...
+[ INFO ] POST /api/streams/unlock [request-id: 7AD34216-8211-4AC7-B886-7C0713F37518]
+2026-01-25 18:55:13.647 RedLemon[35200:292755] 🔓 Unlock request: infoHash=6ac48dd99a7e..., fileIdx=0
+2026-01-25 18:55:13.649 RedLemon[35200:292755] ✅ Token found, attempting unlock...
+2026-01-25 18:55:13.653 RedLemon[35200:292755] ✅ Unlocked successfully: Se7en.1995.1080p.BluRay.H264.AAC-RARBG.mp4
+2026-01-25 18:55:13.656 RedLemon[35200:293356] 📝 [RESOLVER] Stream Unlocked ["filename": "Se7en.1995.1080p.BluRay.H264.AAC-RARBG.mp4", "is_generic": "false", "original_title": "Se7en.1995.1080p.BluRay.H264.AAC-RARBG
+👤 1 💾 2.42 GB ⚙️ ThePirateBay", "url_host": "chi9-4.download.real-debrid.com"]
+2026-01-25 18:55:13.656 RedLemon[35200:293356] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles...
+2026-01-25 18:55:13.656 RedLemon[35200:293356] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-25 18:55:13.657 RedLemon[35200:293356] 🔍 DEBUG: Processing subtitle URL: /subtitle/3466875-8389909.zip
+2026-01-25 18:55:13.657 RedLemon[35200:292755] 🔍 DEBUG: Processing subtitle URL: /subtitle/1137328-2323017.zip
+2026-01-25 18:55:13.657 RedLemon[35200:292723] 🔍 DEBUG: Processing subtitle URL: /subtitle/3466874-8389908.zip
+2026-01-25 18:55:13.657 RedLemon[35200:292719] 🔍 DEBUG: Processing subtitle URL: /subtitle/2815526-2795679.zip
+2026-01-25 18:55:13.657 RedLemon[35200:293356] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-25 18:55:13.657 RedLemon[35200:292755] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-25 18:55:13.657 RedLemon[35200:292723] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-25 18:55:13.657 RedLemon[35200:292719] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-25 18:55:13.657 RedLemon[35200:292723] 🔍 DEBUG: Processing subtitle URL: /subtitle/1137327-2658603.zip
+2026-01-25 18:55:13.657 RedLemon[35200:292723] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-25 18:55:13.659 RedLemon[35200:292719] 🔐 Signed request to /rooms
+2026-01-25 18:55:13.940 RedLemon[35200:292755] ✅ Persisted stream selection to room event_tt0114369
+2026-01-25 18:55:13.942 RedLemon[35200:292755] 🔐 Signed request to /room_participants
+2026-01-25 18:55:14.411 RedLemon[35200:292596] 🔑 Lobby: Updated participantId to actual user ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-25 18:55:14.411 RedLemon[35200:292596] [LOBBY_VIEW] onAppear: shouldAutoJoinLobby=false, room=event_tt0114369, timeUntilStart=379
+2026-01-25 18:55:14.453 RedLemon[35200:292755] 🔐 Signed request to /room_participants
+✅ RD cache hit: 6ac48dd99a7e
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Selected stream: Se7en.1995.1080p.BluRay.H264.AAC-RARBG
+👤 1 💾 2.42 GB ⚙️ ThePirateBay
+📊 Stream Size: 2.42 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+   ✅ Fresh URL obtained: https://chi9-4.download.real-debrid.com/...
+   ✅ Database updated with fresh URL
+
+🎭 Upcoming event - position: 0
+   Room createdAt: 2026-01-26 00:01:34 +0000
+   Room state: lobby
+🎭 Upcoming event - going to lobby
+🎭 Lobby: Connecting to room event_tt0114369...
+🚦 Lobby State: connecting
+🔄 Lobby: Fetching fresh room state from Supabase...
+[ INFO ] GET /api/metadata/meta/movie/tt0114369 [request-id: 5A25E275-A966-44C2-8852-218CB3B268AA]
+2026-01-25 18:55:14.498 RedLemon[35200:292596] 🔑 Lobby: Updated participantId to actual user ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-25 18:55:14.498 RedLemon[35200:292596] [LOBBY_VIEW] onAppear: shouldAutoJoinLobby=false, room=event_tt0114369, timeUntilStart=379
+2026-01-25 18:55:14.532 RedLemon[35200:292755] 🔐 Signed request to /room_participants
+2026-01-25 18:55:14.717 RedLemon[35200:292723] ❌ [18:55:14.717] [NETWORK] [SupabaseClient.swift:370] Supabase API Error: new row violates row-level security policy (USING expression) for table "room_participants"
+2026-01-25 18:55:14.720 RedLemon[35200:293356] ❌ [18:55:14.720] [NETWORK] [SupabaseClient.swift:370] Supabase API Error: new row violates row-level security policy (USING expression) for table "room_participants"
+2026-01-25 18:55:15.433 RedLemon[35200:292596] ℹ️ Lobby: Join failed but room exists - assuming user already joined
+2026-01-25 18:55:15.434 RedLemon[35200:292596] ℹ️ Lobby: Join failed but room exists - assuming user already joined
+2026-01-25 18:55:15.574 RedLemon[35200:292596] ℹ️ RealtimeChannelManager: Already setup for room event_tt0114369, filtering duplicate setup call.
+2026-01-25 18:55:15.574 RedLemon[35200:292755] 📝 Realtime: Registered observer 'lobby' (Presence: YES, Sync: NO, Status: NO)
+2026-01-25 18:55:15.590 RedLemon[35200:292719] 📝 Realtime: Registered observer 'lobby' (Presence: NO, Sync: YES, Status: NO)
+2026-01-25 18:55:15.590 RedLemon[35200:292719] 📝 Realtime: Registered observer 'lobby' (Presence: NO, Sync: YES, Status: NO)
+2026-01-25 18:55:15.604 RedLemon[35200:292596] ⚠️ Lobby: Skipping duplicate LOBBY_JOIN broadcast (last: 4.00543212890625e-05s ago)
+2026-01-25 18:55:15.604 RedLemon[35200:293028] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-25 18:55:15.605 RedLemon[35200:293028]    Payload keys: position, timestamp, chatText, chatUsername, type, senderId
+2026-01-25 18:55:15.605 RedLemon[35200:293028] ✅ Realtime: Message broadcast complete
+2026-01-25 18:55:15.641 RedLemon[35200:293028] 🔐 SupabaseClient: Signing Identity Payload: '1769385315656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-25 18:55:15.642 RedLemon[35200:293028] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-25 18:55:15.653 RedLemon[35200:292723] 🔐 SupabaseClient: Signing Identity Payload: '1769385315656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-25 18:55:15.653 RedLemon[35200:292723] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-25 18:55:15.653 RedLemon[35200:292596] ⚠️ Lobby: Failed to poll participants: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://151.243.109.243.nip.io/rest/v1/room_participants?select=*&room_id=eq.event_tt0114369, NSErrorFailingURLKey=https://151.243.109.243.nip.io/rest/v1/room_participants?select=*&room_id=eq.event_tt0114369, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <499D7775-B9C8-4DFA-8157-8BF2C548F41B>.<268>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <499D7775-B9C8-4DFA-8157-8BF2C548F41B>.<268>, NSLocalizedDescription=cancelled}
+2026-01-25 18:55:15.654 RedLemon[35200:292596] ⚠️ LobbyDatabase: Failed to poll room state: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://151.243.109.243.nip.io/rest/v1/rooms?select=*&id=eq.event_tt0114369, NSErrorFailingURLKey=https://151.243.109.243.nip.io/rest/v1/rooms?select=*&id=eq.event_tt0114369, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <08B1F0DD-4F7F-46F0-BB72-0790CB0A935D>.<269>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <08B1F0DD-4F7F-46F0-BB72-0790CB0A935D>.<269>, NSLocalizedDescription=cancelled}
+2026-01-25 18:55:15.720 RedLemon[35200:293356] 📨 Realtime: Received broadcast message
+2026-01-25 18:55:15.720 RedLemon[35200:293356]    Payload keys: type, chatUsername, senderId, timestamp, position, chatText
+2026-01-25 18:55:15.721 RedLemon[35200:293356] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-25 18:55:15.721 RedLemon[35200:292596] 👋 Received: Guest 'ursinho' joined room event_tt0114369
+2026-01-25 18:55:15.952 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:55:20.685 RedLemon[35200:292755] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-25 18:55:23.146 RedLemon[35200:292596] [COUNTDOWN] Updated to 370s
+2026-01-25 18:55:33.650 RedLemon[35200:292596] [COUNTDOWN] Updated to 360s
+2026-01-25 18:55:35.756 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:55:43.195 RedLemon[35200:292596] [COUNTDOWN] Updated to 350s
+2026-01-25 18:55:46.178 RedLemon[35200:293512] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-25 18:55:51.372 RedLemon[35200:293640] 🔐 SupabaseClient: Signing Identity Payload: '1769385351656daa91-33b4-4688-9135-c982ea52d7c9/rpc/room_heartbeat'
+2026-01-25 18:55:51.373 RedLemon[35200:293640] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-25 18:55:51.726 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:55:53.633 RedLemon[35200:292596] [COUNTDOWN] Updated to 340s
+2026-01-25 18:56:03.155 RedLemon[35200:292596] [COUNTDOWN] Updated to 330s
+2026-01-25 18:56:11.159 RedLemon[35200:292596] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-25 18:56:12.026 RedLemon[35200:293641] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-25 18:56:13.812 RedLemon[35200:292596] [COUNTDOWN] Updated to 320s
+🎭 Lobby: Connecting to room event_tt0114369...
+⚠️ LobbyStateMachine: Invalid transition from connecting to connecting
+📡 SocialService: Updated status - In Lobby: Se7en: Se7en
+📡 SocialService: Updated status - In Lobby: Se7en: Se7en
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ Lobby: Loaded metadata for Se7en
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+⏳ Lobby: Event start time from local room. Time until start: 378.43814504146576
+⏱️ Lobby: Starting Event Countdown Ticker
+🎬 Event room detected - auto-starting playback
+🤖 Lobby: Checking auto-start for system event
+🕐 DEBUG: room.createdAt = 2026-01-26 00:01:34 +0000
+🕐 DEBUG: now = 2026-01-25 23:55:15 +0000
+🕐 DEBUG: timeUntilStart = 378s
+🕐 DEBUG: Event start time is 378s in the future
+🕐 DEBUG: dwellTime = 1s, minDwellTime = 10s
+⏳ Lobby: Event starts in 378s. Waiting...
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+⏳ Lobby: Event start time from local room. Time until start: 378.4257709980011
+🎬 Event room detected - auto-starting playback
+🤖 Lobby: Checking auto-start for system event
+🕐 DEBUG: room.createdAt = 2026-01-26 00:01:34 +0000
+🕐 DEBUG: now = 2026-01-25 23:55:15 +0000
+🕐 DEBUG: timeUntilStart = 378s
+🕐 DEBUG: Event start time is 378s in the future
+🕐 DEBUG: dwellTime = 1s, minDwellTime = 10s
+⏳ Lobby: Event starts in 378s. Waiting...
+🔌 Setting up Realtime channel: watch-party:event_tt0114369
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connected
+📡 Connection state: connecting
+ℹ️ RealtimeChannelManager: Already setup for room event_tt0114369, filtering duplicate setup call.
+📡 Connection state: connected
+📡 Joined channel: realtime:watch-party:event_tt0114369 (interest count: 1)
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+⚠️ LobbyStateMachine: Invalid transition from connected to connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+⚠️ Heartbeat failed: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://151.243.109.243.nip.io/rest/v1/rpc/room_heartbeat, NSErrorFailingURLKey=https://151.243.109.243.nip.io/rest/v1/rpc/room_heartbeat, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <84C44D65-79C5-4556-939A-63D8B4E826E6>.<270>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <84C44D65-79C5-4556-939A-63D8B4E826E6>.<270>, NSLocalizedDescription=cancelled}
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 372 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 362 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 352 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 342 seconds
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 332 seconds
+🔄 Lobby: Fetching fresh room state from Supabase...
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Fetched movie_events version 1585 with 399 movies
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ [EventsConfig] Using cached movie_events config (version 1585, 399 movies)
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+✅ SocialService: Event event_tt0114369 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0114369": 2]
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-26 00:01:34 +0000
+⏰ AppState: Scheduling update in 322 seconds

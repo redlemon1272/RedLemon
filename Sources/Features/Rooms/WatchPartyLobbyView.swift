@@ -14,7 +14,7 @@ struct WatchPartyLobbyView: View {
     @State private var showDescriptionEditor = false
     @State private var editingDescription: String = ""
     @StateObject private var licenseManager = LicenseManager.shared
-    @State private var isChatInputFocused: Bool = false
+    @FocusState private var isChatInputFocused: Bool
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
     init(viewModel: LobbyViewModel) {
@@ -747,24 +747,14 @@ struct WatchPartyLobbyView: View {
                                             }
                                             .buttonStyle(PlainButtonStyle())
 
-                                            ZStack(alignment: .leading) {
-                                                if viewModel.chatInput.isEmpty {
-                                                    Text("Send a message...")
-                                                        .font(.system(size: 13))
-                                                        .foregroundColor(Color.white.opacity(0.5))
-                                                        .padding(.leading, 11) // Align with cursor (6 outer + 5 inner)
-                                                        .allowsHitTesting(false)
-                                                }
-                                                TransparentTextEditor(text: $viewModel.chatInput, onCommit: sendMessage, isFocused: isChatInputFocused)
-                                                    .frame(minHeight: 20)
-                                                    .padding(6)
-                                            }
-                                            .background(Color.white.opacity(0.1))
-                                            .cornerRadius(8)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 8)
-                                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
-                                            )
+                                            TextField("Send a message...", text: $viewModel.chatInput)
+                                                .textFieldStyle(PlainTextFieldStyle())
+                                                .focused($isChatInputFocused)
+                                                .padding(8)
+                                                .background(Color.white.opacity(0.1))
+                                                .cornerRadius(8)
+                                                .foregroundColor(.white)
+                                                .onSubmit(sendMessage)
 
                                             Button(action: sendMessage) {
                                                 Image(systemName: "paperplane.fill")

@@ -3,6 +3,7 @@
 # RedLemon "Magic" Installer
 # Bypasses macOS Quarantine by using curl instead of a browser.
 
+install_redlemon() {
 # 1. Define Variables
 URL="https://151.243.109.243.nip.io/updates/RedLemon-latest.dmg"
 DMG_PATH="/tmp/RedLemon-Installer.dmg"
@@ -60,3 +61,7 @@ open "$DEST_DIR/$APP_NAME"
 
 echo ""
 echo "Enjoy your stream! 🍿"
+}
+
+# Run the installer
+install_redlemon

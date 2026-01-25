@@ -223,6 +223,9 @@ class LobbyPresenceManager: ObservableObject {
                         if let isHost = metadata?["is_host"] as? Bool {
                             strongViewModel.participants[index].isHost = isHost
                         }
+                        if let isPremium = metadata?["is_premium"] as? Bool {
+                            strongViewModel.participants[index].isPremium = isPremium
+                        }
 
                         // If it's a new Realtime connection, we accept it for connection tracking.
                         // Chat Notification is handled by LOBBY_JOIN broadcast to prevent duplicates.
@@ -238,12 +241,14 @@ class LobbyPresenceManager: ObservableObject {
                         if let hostStatus = metadata?["is_host"] as? Bool {
                             isHost = hostStatus
                         }
+                        let isPremium = metadata?["is_premium"] as? Bool ?? false
 
                         let newParticipant = Participant(
                             id: normalizedID,
                             name: username,
                             isHost: isHost,
                             isReady: false,
+                            isPremium: isPremium,
                             joinedAt: Date(),
                             phxRefs: Set([userId]) // Store Connection ID (Map Key)
                         )
@@ -638,6 +643,7 @@ class LobbyPresenceManager: ObservableObject {
                     name: username,
                     isHost: participant.isHost,
                     isReady: isReady,
+                    isPremium: existingLocal?.isPremium ?? false,
                     joinedAt: finalJoinedAt,
                     phxRefs: existingLocal?.phxRefs ?? []
                 )

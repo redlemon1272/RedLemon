@@ -471,8 +471,8 @@ struct WatchPartyLobbyView: View {
                             }
                         } else {
                             // Main Tabs
-                            Button(action: { 
-                                sidebarTab = .chat 
+                            Button(action: {
+                                sidebarTab = .chat
                                 isChatInputFocused = true
                             }) {
                                 VStack(spacing: 4) {
@@ -481,7 +481,7 @@ struct WatchPartyLobbyView: View {
                                         Text("Chat")
                                     }
                                     .foregroundColor(sidebarTab == .chat ? .white : .white.opacity(0.6))
- 
+
                                     // Active Indicator
                                     Rectangle()
                                         .fill(sidebarTab == .chat ? Color.accentColor : Color.clear)
@@ -560,93 +560,23 @@ struct WatchPartyLobbyView: View {
                                         }
 
                                     ForEach(sortedFriends) { friend in
-                                            Button(action: {
+                                        LobbyFriendRow(
+                                            friend: friend,
+                                            isHost: isHost,
+                                            room: room,
+                                            unreadCount: socialService.unreadCounts[friend.id] ?? 0,
+                                            activity: socialService.friendActivity[friend.id],
+                                            isOnline: socialService.onlineUserIds.contains(friend.id),
+                                            onSelect: {
                                                 withAnimation { selectedFriend = friend }
-                                            }) {
-                                                HStack {
-                                                    // Avatar (Existing)
-                                                    ZStack(alignment: .topTrailing) {
-                                                        UserAvatar(
-                                                            username: friend.username,
-                                                            size: 32,
-                                                            isOnline: true,
-                                                            showOnlineIndicator: false
-                                                        )
-
-                                                        if let count = socialService.unreadCounts[friend.id], count > 0 {
-                                                            Circle()
-                                                                .fill(Color.red)
-                                                                .frame(width: 12, height: 12)
-                                                                .overlay(Text("\(count)").font(.system(size: 8)).foregroundColor(.white))
-                                                                .offset(x: 2, y: -2)
-                                                        }
-                                                    }
-
-                                                    VStack(alignment: .leading) {
-                                                        Text(friend.displayName)
-                                                            .foregroundColor(.white)
-                                                            .font(.callout)
-
-                                                        // Status (Check custom status first)
-                                                        if let activity = socialService.friendActivity[friend.id] {
-                                                            if let status = activity.customStatus, !status.isEmpty, status != "online" {
-                                                                Text(status)
-                                                                    .font(.caption2)
-                                                                    .foregroundColor(.orange)
-                                                            } else if let watching = activity.currentlyWatching {
-                                                                Text("Watching \(watching.mediaTitle)")
-                                                                    .font(.caption2)
-                                                                    .foregroundColor(.accentColor)
-                                                            } else if socialService.onlineUserIds.contains(friend.id) {
-                                                                Text("Online")
-                                                                    .font(.caption2)
-                                                                    .foregroundColor(.green)
-                                                            } else {
-                                                                Text("Offline")
-                                                                    .font(.caption2)
-                                                                    .foregroundColor(.gray)
-                                                            }
-                                                        } else if socialService.onlineUserIds.contains(friend.id) {
-                                                            Text("Online")
-                                                                .font(.caption2)
-                                                                .foregroundColor(.green)
-                                                        } else {
-                                                            Text("Offline")
-                                                                .font(.caption2)
-                                                                .foregroundColor(.gray)
-                                                        }
-                                                    }
-
-                                                    Spacer()
-
-                                                    // Invite Button (Only show if room exists)
-                                                    if isHost || room.type == .userRoom {
-                                                        Button(action: {
-                                                            let roomName = room.mediaItem?.name ?? "Watch Party"
-                                                            Task {
-                                                                await socialService.sendInvite(to: friend.id, roomId: room.id, roomName: roomName)
-                                                            }
-                                                        }) {
-                                                            Label("Invite", systemImage: "envelope.fill")
-                                                                .font(.caption2)
-                                                                .padding(.horizontal, 8)
-                                                                .padding(.vertical, 4)
-                                                                .background(Color.white.opacity(0.1))
-                                                                .foregroundColor(.white)
-                                                                .cornerRadius(6)
-                                                        }
-                                                        .buttonStyle(.plain)
-                                                    }
-
-                                                    Image(systemName: "chevron.right")
-                                                        .foregroundColor(.white.opacity(0.3))
-                                                        .font(.caption)
+                                            },
+                                            onInvite: {
+                                                let roomName = room.mediaItem?.name ?? "Watch Party"
+                                                Task {
+                                                    await socialService.sendInvite(to: friend.id, roomId: room.id, roomName: roomName)
                                                 }
-                                                .padding(10)
-                                                .background(Color.white.opacity(0.05))
-                                                .cornerRadius(8)
                                             }
-                                        .buttonStyle(.plain)
+                                        )
                                     }
                                 }
                             }
@@ -1155,9 +1085,17 @@ struct ParticipantRow: View {
             )
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(participant.name)
-                    .foregroundColor(.white)
-                    .font(.subheadline)
+                HStack(spacing: 4) {
+                    Text(participant.name)
+                        .foregroundColor(.white)
+                        .font(.subheadline)
+
+                    if participant.isPremium {
+                        Text("👑")
+                            .font(.system(size: 10))
+                            .help("Premium User")
+                    }
+                }
 
                 if participant.isHost {
                     Text("Host")
@@ -1447,5 +1385,109 @@ struct PlaylistItemRow: View {
         .padding(.vertical, 8)
         .background(isCurrent ? Color.accentColor.opacity(0.2) : Color.white.opacity(0.05))
         .cornerRadius(8)
+    }
+}
+
+// MARK: - Lobby Friend Row
+
+struct LobbyFriendRow: View {
+    let friend: Friend
+    let isHost: Bool
+    let room: WatchPartyRoom
+    let unreadCount: Int
+    let activity: FriendActivity?
+    let isOnline: Bool
+    let onSelect: () -> Void
+    let onInvite: () -> Void
+
+    var body: some View {
+        Button(action: onSelect) {
+            HStack {
+                // Avatar
+                ZStack(alignment: .topTrailing) {
+                    UserAvatar(
+                        username: friend.username,
+                        size: 32,
+                        isOnline: true,
+                        showOnlineIndicator: false
+                    )
+
+                    if unreadCount > 0 {
+                        Circle()
+                            .fill(Color.red)
+                            .frame(width: 12, height: 12)
+                            .overlay(Text("\(unreadCount)").font(.system(size: 8)).foregroundColor(.white))
+                            .offset(x: 2, y: -2)
+                    }
+                }
+
+                VStack(alignment: .leading) {
+                    HStack(spacing: 4) {
+                        Text(friend.displayName)
+                            .foregroundColor(.white)
+                            .font(.callout)
+
+                        if friend.isPremium == true {
+                            Text("👑")
+                                .font(.system(size: 10))
+                                .help("Premium Host")
+                        }
+                    }
+
+                    // Status
+                    if let activity = activity {
+                        if let status = activity.customStatus, !status.isEmpty, status != "online" {
+                            Text(status)
+                                .font(.caption2)
+                                .foregroundColor(.orange)
+                        } else if let watching = activity.currentlyWatching {
+                            Text("Watching \(watching.mediaTitle)")
+                                .font(.caption2)
+                                .foregroundColor(.accentColor)
+                        } else if isOnline {
+                            Text("Online")
+                                .font(.caption2)
+                                .foregroundColor(.green)
+                        } else {
+                            Text("Offline")
+                                .font(.caption2)
+                                .foregroundColor(.gray)
+                        }
+                    } else if isOnline {
+                        Text("Online")
+                            .font(.caption2)
+                            .foregroundColor(.green)
+                    } else {
+                        Text("Offline")
+                            .font(.caption2)
+                            .foregroundColor(.gray)
+                    }
+                }
+
+                Spacer()
+
+                // Invite Button
+                if isHost || room.type == .userRoom {
+                    Button(action: onInvite) {
+                        Label("Invite", systemImage: "envelope.fill")
+                            .font(.caption2)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.white.opacity(0.1))
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                    }
+                    .buttonStyle(.plain)
+                }
+
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.white.opacity(0.3))
+                    .font(.caption)
+            }
+            .padding(10)
+            .background(Color.white.opacity(0.05))
+            .cornerRadius(8)
+        }
+        .buttonStyle(.plain)
     }
 }

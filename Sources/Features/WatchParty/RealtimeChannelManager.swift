@@ -10,16 +10,16 @@ enum RealtimeConnectionState {
 
 /// Protocol for RealtimeChannelManager to enable mocking
 protocol RealtimeService: Actor {
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]?) async throws
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, isPremium: Bool, postgresChanges: [[String: Any]]?) async throws
     func sendSyncMessage(_ message: SyncMessage) async throws
     func disconnect(leaveChannel: Bool, disconnectClient: Bool) async
     func cleanup(leaveChannel: Bool, disconnectClient: Bool) async
     func isRealtimeConnected() async -> Bool
-    
+
     // Multi-Observer Support
     func registerObserver(id: String, onPresence: ((PresenceAction, String, [String: Any]?) -> Void)?, onSync: ((SyncMessage) -> Void)?, onConnectionState: ((RealtimeConnectionState) -> Void)?) async
     func unregisterObserver(id: String) async
-    
+
     // Compatibility (should internally call registerObserver with id "default")
     func setConnectionStateCallback(_ callback: @escaping (RealtimeConnectionState) -> Void)
     func setPresenceCallback(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void)
@@ -84,7 +84,7 @@ actor RealtimeChannelManager: RealtimeService {
 
     // MARK: - Setup
 
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]? = nil) async throws {
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, isPremium: Bool, postgresChanges: [[String: Any]]? = nil) async throws {
         // PREVENT DUPLICATE SETUP:
         // If we represent the SAME room and user, and are already connected, just return.
         if self.roomId?.caseInsensitiveCompare(roomId) == .orderedSame &&
@@ -128,7 +128,8 @@ actor RealtimeChannelManager: RealtimeService {
             "is_host": isHost,
             "joined_at": Date().timeIntervalSince1970,
             "username": username,
-            "user_id": userId
+            "user_id": userId,
+            "is_premium": isPremium
         ])
 
         isConnected = true
@@ -164,7 +165,7 @@ actor RealtimeChannelManager: RealtimeService {
                 await self?.handleConnectionChange(connected)
             }
         }
-        
+
         // CRITICAL FIX: Initial state check to ensure UI sync
         // If the shared client is already connected, callbacks won't fire automatically until a change.
         if await realtimeClient.isSocketConnected {
@@ -248,13 +249,13 @@ actor RealtimeChannelManager: RealtimeService {
             print("⚠️ Realtime: Connection lost. Attempting auto-reconnect in 2s...")
             Task { [weak self] in
                 guard let self = self else { return }
-                
+
                 try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s
-                
+
                 // Check state again
                 let disconnecting = await self.isDisconnecting
                 let alreadyConnected = await self.isConnected
-                
+
                 if !disconnecting && !alreadyConnected {
                     print("🔄 Realtime: Reconnecting now...")
                     do {
@@ -420,7 +421,7 @@ actor RealtimeChannelManager: RealtimeService {
                 } else {
                     print("ℹ️ Keeping channel joined (leaveChannel=false)")
                 }
-                
+
                 // CRITICAL FIX: Flush delay to ensure 'untrack'/'leave' frames are sent
                 try? await Task.sleep(nanoseconds: 200_000_000) // 200ms
             }
@@ -487,7 +488,7 @@ actor RealtimeChannelManager: RealtimeService {
         if let onConnectionState = onConnectionState {
             connectionStateCallbacks[id] = onConnectionState
         }
-        NSLog("📝 Realtime: Registered observer '%@' (Presence: %@, Sync: %@, Status: %@)", 
+        NSLog("📝 Realtime: Registered observer '%@' (Presence: %@, Sync: %@, Status: %@)",
               id, onPresence != nil ? "YES" : "NO", onSync != nil ? "YES" : "NO", onConnectionState != nil ? "YES" : "NO")
     }
 
@@ -507,7 +508,7 @@ actor RealtimeChannelManager: RealtimeService {
     func setPresenceCallback(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void) {
         presenceCallbacks["default"] = callback
     }
-    
+
     deinit {
         print("♻️ RealtimeChannelManager deinitialized")
     }

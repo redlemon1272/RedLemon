@@ -451,7 +451,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     private func setupAppStateObservers() {
         guard let appState = appState else { return }
-        
+
         // Observe subtitles list changes for the active stream
         // This enables the "Healing Loop": deep search results appearing while movie is playing
         appState.player.$selectedStream
@@ -2314,6 +2314,7 @@ extension MPVPlayerViewModel {
                             name: fetchedSupabaseRoom.hostUsername,
                             isHost: true,
                             isReady: true,
+                            isPremium: false,
                             joinedAt: Date(),
                             phxRefs: []
                         )
@@ -2406,6 +2407,7 @@ extension MPVPlayerViewModel {
 
                             let username = metaUsername ?? "User"
                             let isHostVal = metadata?["is_host"] as? Bool ?? false
+                            let isPremiumVal = metadata?["is_premium"] as? Bool ?? false
                             let joinedAtVal = metadata?["joined_at"] as? TimeInterval ?? Date().timeIntervalSince1970
 
                             let newParticipant = Participant(
@@ -2413,6 +2415,7 @@ extension MPVPlayerViewModel {
                                 name: username,
                                 isHost: isHostVal,
                                 isReady: false,
+                                isPremium: isPremiumVal,
                                 joinedAt: Date(timeIntervalSince1970: joinedAtVal),
                                 phxRefs: [userId] // Store Connection ID (Map Key)
                             )
@@ -2449,6 +2452,7 @@ extension MPVPlayerViewModel {
                                     name: self.appState?.currentUsername ?? "Me",
                                     isHost: self.isWatchPartyHost,
                                     isReady: true,
+                                    isPremium: LicenseManager.shared.isPremium,
                                     joinedAt: Date(),
                                     phxRefs: selfRef != nil ? [selfRef!] : []
                                 )
@@ -2592,7 +2596,8 @@ extension MPVPlayerViewModel {
                 roomId: roomId,
                 isHost: isHost,
                 userId: userId,
-                username: username
+                username: username,
+                isPremium: LicenseManager.shared.isPremium
             )
 
             // Register as player observer (Presence is already registered above, but we update it with Sync here)
@@ -2893,6 +2898,7 @@ extension MPVPlayerViewModel {
                         name: name,
                         isHost: p.isHost,
                         isReady: false, // Default to false for DB poll
+                        isPremium: false,
                         joinedAt: p.joinedAt,
                         phxRefs: [] // No ref from DB
                     )

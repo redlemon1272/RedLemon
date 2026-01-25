@@ -4,51 +4,52 @@ import Combine
 @MainActor
 class EventChatService: ObservableObject {
     static let shared = EventChatService()
-    
+
     @Published var messages: [ChatMessage] = []
     @Published var isConnected: Bool = false
     @Published var participantCount: Int = 0
-    
+
     // Reactions
     let reactionTriggers = PassthroughSubject<String, Never>()
     private var reactionTimestamps: [Date] = []
-    
+
     private var realtimeManager: RealtimeChannelManager?
     private var currentEventId: String?
     private var userId: String?
     private var username: String?
-    
+
     private init() {}
-    
+
     func connect(eventId: String, userId: String, username: String) async {
         guard eventId != currentEventId else { return } // Already connected
-        
+
         // Cleanup previous connection
         if let current = currentEventId {
             await disconnect()
         }
-        
+
         self.currentEventId = eventId
         self.userId = userId
         self.username = username
         self.messages = [] // Clear previous chat
-        
+
         LoggingManager.shared.debug(.social, message: "EventChatService: Connecting to event lobby \(eventId)...")
-        
+
         // Initialize Realtime Manager
         // distinct from the Room one to allow side-by-side connections if needed (though usually exclusive)
         let client = SupabaseClient.shared.realtimeClient
         self.realtimeManager = RealtimeChannelManager(realtimeClient: client)
-        
+
         do {
             if let manager = realtimeManager {
                 try await manager.setup(
                     roomId: eventId, // Treating Event ID as a Room ID for chat purposes
                     isHost: false,   // Public events have no "Host" in this context
                     userId: userId,
-                    username: username
+                    username: username,
+                    isPremium: LicenseManager.shared.isPremium
                 )
-                
+
                 await manager.registerObserver(
                     id: "event-chat",
                     onPresence: nil,
@@ -66,20 +67,20 @@ class EventChatService: ObservableObject {
             }
             self.isConnected = true
             LoggingManager.shared.info(.social, message: "EventChatService: Connected!")
-            
+
             // Send join message silently (or visible if desired)
             // let joinMsg = SyncMessage(type: .chat, timestamp: Date().timeIntervalSince1970, isPlaying: nil, senderId: userId, chatText: "LOBBY_JOIN", chatUsername: username)
             // try? await realtimeManager?.sendSyncMessage(joinMsg)
-            
+
         } catch {
             LoggingManager.shared.error(.social, message: "EventChatService: Failed to connect: \(error)")
         }
     }
-    
+
     func disconnect() async {
         guard let _ = currentEventId else { return }
         LoggingManager.shared.debug(.social, message: "EventChatService: Disconnecting...")
-        
+
         await realtimeManager?.disconnect()
         realtimeManager = nil
         currentEventId = nil
@@ -87,14 +88,14 @@ class EventChatService: ObservableObject {
         messages = []
         participantCount = 0
     }
-    
+
     func sendMessage(_ text: String) async {
         guard let userId = userId, let username = username else { return }
-        
+
         // Optimistic update
         let tempId = UUID().uuidString
         let isPremium = LicenseManager.shared.isPremium
-        
+
         let message = ChatMessage(
             id: tempId,
             username: username,
@@ -104,7 +105,7 @@ class EventChatService: ObservableObject {
             isPremium: isPremium
         )
         self.messages.append(message)
-        
+
         // Send via Realtime
         let syncMsg = SyncMessage(
             type: .chat,
@@ -115,7 +116,7 @@ class EventChatService: ObservableObject {
             chatUsername: username,
             isPremium: isPremium
         )
-        
+
         do {
             if let manager = realtimeManager {
                 try await manager.sendSyncMessage(syncMsg)
@@ -125,16 +126,16 @@ class EventChatService: ObservableObject {
             self.messages.removeAll { $0.id == tempId }
         }
     }
-    
+
     func sendReaction(_ emoji: String) {
          // Rate Limiting: Max 5 per 2 seconds, Min 0.15s gap
          let now = Date()
-         
+
          if let last = reactionTimestamps.last, now.timeIntervalSince(last) < 0.15 { return }
-         
+
          reactionTimestamps = reactionTimestamps.filter { now.timeIntervalSince($0) < 2.0 }
          if reactionTimestamps.count >= 5 { return }
-         
+
          reactionTimestamps.append(now)
 
          guard let userId = userId, let username = username else { return }
@@ -158,7 +159,7 @@ class EventChatService: ObservableObject {
              }
          }
      }
-    
+
     // Batching State
     private var pendingChatMessages: [ChatMessage] = []
     private var isFlushingChat: Bool = false
@@ -168,15 +169,15 @@ class EventChatService: ObservableObject {
               let text = message.chatText,
               let username = message.chatUsername,
               message.senderId != self.userId else { return } // Ignore self (handled logically) or non-chat
-        
+
         // Filter system messages
         if text.starts(with: "LOBBY_") { return }
-        
+
         // Block check
         if let senderId = message.senderId, SocialService.shared.blockedUserIds.contains(senderId.lowercased()) {
              return
         }
-        
+
         let chatMessage = ChatMessage(
             id: UUID().uuidString,
             username: username,
@@ -185,7 +186,7 @@ class EventChatService: ObservableObject {
             senderId: message.senderId,
             isPremium: message.isPremium ?? false
         )
-        
+
         // BATCHING LOGIC (Ported from MPVPlayerViewModel)
         pendingChatMessages.append(chatMessage)
 
@@ -194,13 +195,13 @@ class EventChatService: ObservableObject {
             Task { @MainActor [weak self] in
                 try? await Task.sleep(nanoseconds: 200_000_000) // 200ms Buffer
                 guard let self = self else { return }
-                
+
                 if !self.pendingChatMessages.isEmpty {
                     self.messages.append(contentsOf: self.pendingChatMessages)
                     // FORENSIC LOG: Validate batching efficiency
                     LoggingManager.shared.debug(.social, message: "⚖️ [EVENT BATCH] Added \(self.pendingChatMessages.count) messages in single UI update")
                     self.pendingChatMessages.removeAll()
-                    
+
                     // Limit message count
                     if self.messages.count > 100 {
                         self.messages.removeFirst(self.messages.count - 100)
@@ -210,7 +211,7 @@ class EventChatService: ObservableObject {
             }
         }
     }
-    
+
     private func handleReaction(_ message: SyncMessage) {
         guard let emoji = message.chatText, message.senderId != self.userId else { return }
         reactionTriggers.send(emoji)

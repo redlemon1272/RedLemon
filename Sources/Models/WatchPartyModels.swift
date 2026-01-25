@@ -117,6 +117,7 @@ struct Participant: Identifiable {
     var name: String // Display name (e.g., "Guest 1", "Host")
     var isHost: Bool
     var isReady: Bool // Ready to start
+    var isPremium: Bool // Premium user status
     var joinedAt: Date
     var phxRefs: Set<String> // Multiple Phoenix Presence References (Connection IDs)
 
@@ -126,6 +127,7 @@ struct Participant: Identifiable {
             name: "Guest \(number)",
             isHost: false,
             isReady: false,
+            isPremium: false,
             joinedAt: Date(),
             phxRefs: []
         )
@@ -137,6 +139,7 @@ struct Participant: Identifiable {
             name: "Host",
             isHost: true,
             isReady: true, // Host is always ready
+            isPremium: false,
             joinedAt: Date(),
             phxRefs: []
         )

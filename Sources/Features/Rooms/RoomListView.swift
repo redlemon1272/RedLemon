@@ -305,6 +305,7 @@ struct RoomListView: View {
                     name: room.hostUsername,
                     isHost: true,
                     isReady: true,
+                    isPremium: false,
                     joinedAt: room.createdAt,
                     phxRefs: []
                 )
@@ -316,11 +317,12 @@ struct RoomListView: View {
                 }
 
                 // Create host participant from REAL data
-                host = Participant(
+                 host = Participant(
                     id: hostIdString,
                     name: room.hostUsername,
                     isHost: true,
                     isReady: true,
+                    isPremium: false,
                     joinedAt: hostData.joinedAt,
                     phxRefs: []
                 )
@@ -337,6 +339,7 @@ struct RoomListView: View {
                         name: user.username,
                         isHost: participant.isHost,
                         isReady: false,
+                        isPremium: false,
                         joinedAt: participant.joinedAt,
                         phxRefs: []
                     )
@@ -347,6 +350,7 @@ struct RoomListView: View {
                         name: "Unknown User",
                         isHost: participant.isHost,
                         isReady: false,
+                        isPremium: false,
                         joinedAt: participant.joinedAt,
                         phxRefs: []
                     )

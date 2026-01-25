@@ -159,6 +159,7 @@ class LobbyEventRouter: ObservableObject {
                      name: guestUsername,
                      isHost: false,
                      isReady: false,
+                     isPremium: syncMessage.isPremium ?? false,
                      joinedAt: Date(),
                      phxRefs: []
                  )

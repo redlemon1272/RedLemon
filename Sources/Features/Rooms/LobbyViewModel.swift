@@ -185,6 +185,7 @@ class LobbyViewModel: ObservableObject {
                 name: p.name,
                 isHost: p.isHost,
                 isReady: p.isReady,
+                isPremium: p.isPremium,
                 joinedAt: p.joinedAt,
                 phxRefs: []
             )
@@ -348,6 +349,7 @@ class LobbyViewModel: ObservableObject {
                     isHost: isHost,
                     userId: participantId,
                     username: appState?.currentUsername ?? "User",
+                    isPremium: LicenseManager.shared.isPremium,
                     postgresChanges: roomUpdatesConfig
                 )
 
@@ -984,7 +986,7 @@ class LobbyViewModel: ObservableObject {
             kickParticipant(participant)
         } else {
             // Create dummy for signaling (ID is what matters)
-            let dummy = Participant(id: userId, name: "User", isHost: false, isReady: false, joinedAt: Date(), phxRefs: [])
+            let dummy = Participant(id: userId, name: "User", isHost: false, isReady: false, isPremium: false, joinedAt: Date(), phxRefs: [])
             kickParticipant(dummy)
         }
     }
@@ -1007,7 +1009,7 @@ class LobbyViewModel: ObservableObject {
             // Not in list (or event room), but still block via service
             // If we are host, we can still try to send a kick command by ID
             if isHost {
-                 let dummy = Participant(id: userId, name: username ?? "User", isHost: false, isReady: false, joinedAt: Date(), phxRefs: [])
+                 let dummy = Participant(id: userId, name: username ?? "User", isHost: false, isReady: false, isPremium: false, joinedAt: Date(), phxRefs: [])
                  kickParticipant(dummy)
             }
             Task {
@@ -2055,11 +2057,11 @@ class LobbyViewModel: ObservableObject {
                     currentIndex: index
                 )
                 print("✅ Supabase: Room metadata & playlist updated")
-                
+
                 // CRITICAL FIX: Add a small grace period for DB propagation
                 // before releasing the "Start Playback" button for the host.
                 try? await Task.sleep(nanoseconds: 800_000_000) // 800ms
-                
+
                 await MainActor.run {
                     self.isPlaylistSyncing = false
                 }

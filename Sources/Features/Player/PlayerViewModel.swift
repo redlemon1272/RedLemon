@@ -1637,6 +1637,7 @@ class PlayerViewModel: ObservableObject {
                 name: appState.currentUsername,
                 isHost: true,
                 isReady: false,
+                isPremium: LicenseManager.shared.isPremium,
                 joinedAt: Date(),
                 phxRefs: []
             )
@@ -1816,6 +1817,7 @@ class PlayerViewModel: ObservableObject {
                      name: "User", // Placeholder, Lobby will refresh
                      isHost: p.isHost,
                      isReady: false,
+                     isPremium: false,
                      joinedAt: p.joinedAt,
                      phxRefs: []
                 ))

@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.147 -->
+        <item>
+            <title>Version 1.0.147</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Chat UI Regression (Restored classic look)</li><li>Cleaned up Focus logic</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 19:26:52 -0500</pubDate>
+            <sparkle:version>147</sparkle:version>
+            <sparkle:shortVersionString>1.0.147</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.147.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="xD2be/yNAta2TTDzJG4GePEe+gDabWepQaZsL8VRy08ORlspaL2JU9Ocxkwqg6HB/QjRebmziV1VetiSFyMGDA==" length="73880434"
+            />
+        </item>
         <!-- v1.0.146 -->
         <item>
             <title>Version 1.0.146</title>

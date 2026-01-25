@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.150 -->
+        <item>
+            <title>Version 1.0.150</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Docs: Enhanced Open Source Plan with Canary section</li><li>Docs/Security: Refine open source strategy and add leak detector</li><li>Fix: Improved reliability of app restarts after account resets and credential updates</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 25 Jan 2026 01:09:20 -0500</pubDate>
+            <sparkle:version>150</sparkle:version>
+            <sparkle:shortVersionString>1.0.150</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.150.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="fr6vSwcAl05P/gBEqoO92nYbL6w0fcjrimiEbem35I3s8J5PL4MOi7rtP/82XD74EpHRU2QtOE223sPIRfFvAg==" length="73973393"
+            />
+        </item>
         <!-- v1.0.149 -->
         <item>
             <title>Version 1.0.149</title>

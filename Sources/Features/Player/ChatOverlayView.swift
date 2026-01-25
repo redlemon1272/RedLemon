@@ -703,8 +703,8 @@ struct ChatOverlayView: View {
                         // Use TransparentTextEditor for all versions to prevent "The Emoji Spacing Bug"
                         // axis: .vertical in SwiftUI TextField has a known issue with emoji attribute leakage.
                         TransparentTextEditor(
-                            text: $inputText, 
-                            onCommit: sendMessage, 
+                            text: $inputText,
+                            onCommit: sendMessage,
                             isFocused: manualFocus
                         )
                         .frame(minHeight: 20, maxHeight: 120) // Allow growth up to 120px
@@ -753,7 +753,7 @@ struct ChatOverlayView: View {
     private var inputPlaceholder: String {
         switch chatMode {
         case .friends: return "Search friends..."
-        case .room: return isAnnouncementMode ? "Broadcast to Room..." : "Chat (⌘)"
+        case .room: return isAnnouncementMode ? "Broadcast..." : "Chat (⌘)"
         case .event: return "Chat (⌘)"
         case .dm: return "Chat (⌘)"
         }

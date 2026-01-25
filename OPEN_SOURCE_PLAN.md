@@ -200,6 +200,8 @@ RedLemon-Native/
 | `Sources/Features/Lobby/LobbyViewModel.swift` | Presence logic, room state management |
 | `Sources/Features/Social/SocialService.swift` | Presence, friends, activity tracking |
 | `Sources/Features/Events/EventsViewModel.swift` | Event sync, countdown logic |
+| `Sources/Features/Rooms/LobbyPresenceManager.swift` | Heartbeat & Grace period logic (Landmine #100) |
+| `Sources/Features/Admin/AdminRealtimeService.swift` | Internal admin monitoring logic |
 | `Sources/Features/Payments/*.swift` (logic files) | Crypto, HD wallet, payment processing |
 | `Sources/Networking/SupabaseRealtimeClient.swift` | WebSocket implementation, Phoenix protocol |
 | `Sources/Networking/RealtimeChannelManager.swift` | Channel management, reference counting |
@@ -250,13 +252,31 @@ RedLemon-Native/
 ./scripts/sync-to-public.sh
 ```
 
-### The `sync-to-public.sh` Script (To Be Created)
+### The `sync-to-public.sh` Script
 
-This script will:
-1. Create a temporary clone of the public repo
-2. Copy only OPEN files (per this document's inventory)
-3. Generate stub files for CLOSED dependencies
-4. Commit and push to public repo
+This script is the main "Scrubber" tool. It is designed to be run from the root of the **private** repo.
+
+**Functionality:**
+1. **Targeting**: It expects a sibling directory named `../RedLemon-Public` which should be a clone of the public GitHub repo.
+2. **Whitelist Only**: It wipes the target directory (except `.git`) and copies ONLY files explicitly marked as OPEN in the script's whitelist.
+3. **Automated Stubs**: It automatically generates `MPVPlayerViewModel.swift` and `LobbyViewModel.swift` stubs in the target repo so it remains compile-compatible.
+4. **Sanitization**: It recursively searches the target repo for the production server IP (`151.243.109.243`) and replaces it with `redlemon.live.placeholder`.
+
+**Usage:**
+```bash
+# Ensure sibling repo exists
+cd .. && git clone https://github.com/redlemon-app/RedLemon RedLemon-Public
+cd RedLemon-Native
+
+# Run the scrub
+./scripts/sync-to-public.sh
+
+# Review and push
+cd ../RedLemon-Public
+git add .
+git commit -m "Sync: [Message]"
+git push origin main
+```
 
 ### Stub Files for Closed Dependencies
 
@@ -324,6 +344,25 @@ Download the pre-built binary from [releases page]. This includes the closed-sou
 - Public repo gets tagged releases matching private repo
 - Public repo releases contain source code snapshots only
 - DMG downloads link to separate distribution (or GitHub Releases if allowed)
+
+---
+
+## Migration: The GitHub Magic Command
+
+To increase trust and remove dependency on a raw IP address for installation, we will migrate the "Magic Installer" to GitHub.
+
+### 1. The Public URL
+The new installation command will be:
+`curl -sL https://raw.githubusercontent.com/redlemon-app/RedLemon/main/scripts/install.sh | bash`
+
+### 2. The `install.sh` Script (OPEN)
+This script will be moved from the server's `/root/updates/install` to the public repository's `scripts/install.sh`. 
+
+### 3. Verification
+By hosting the install script on GitHub, users can:
+- Inspect exactly what the script does before running it.
+- Verify that the DMG it downloads matches the SHA256 sum in the repo.
+- See the audit history of changes to the installation process.
 
 ---
 

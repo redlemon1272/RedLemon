@@ -747,14 +747,24 @@ struct WatchPartyLobbyView: View {
                                             }
                                             .buttonStyle(PlainButtonStyle())
 
-                                            TextField("Send a message...", text: $viewModel.chatInput)
-                                                .textFieldStyle(PlainTextFieldStyle())
-                                                .focused($isChatInputFocused)
-                                                .padding(8)
-                                                .background(Color.white.opacity(0.1))
-                                                .cornerRadius(8)
-                                                .foregroundColor(.white)
-                                                .onSubmit(sendMessage)
+                                            ZStack(alignment: .leading) {
+                                                if viewModel.chatInput.isEmpty {
+                                                    Text("Send a message...")
+                                                        .font(.system(size: 13))
+                                                        .foregroundColor(Color.white.opacity(0.5))
+                                                        .padding(.leading, 8)
+                                                        .allowsHitTesting(false)
+                                                }
+                                                TransparentTextEditor(text: $viewModel.chatInput, onCommit: sendMessage, isFocused: isChatInputFocused)
+                                                    .frame(minHeight: 20)
+                                                    .padding(6)
+                                            }
+                                            .background(Color.white.opacity(0.1))
+                                            .cornerRadius(8)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                                            )
 
                                             Button(action: sendMessage) {
                                                 Image(systemName: "paperplane.fill")

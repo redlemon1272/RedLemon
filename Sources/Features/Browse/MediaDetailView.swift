@@ -352,8 +352,7 @@ struct MediaDetailView: View {
         print("🔍 Loading metadata for: \(mediaItem.name) (type: \(mediaItem.type), id: \(mediaItem.id))")
 
         do {
-            let client = LocalAPIClient()
-            let meta = try await client.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
+            let meta = try await LocalAPIClient.shared.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
             NSLog("✅ Metadata loaded successfully")
             NSLog("   Type: %@", meta.type)
             NSLog("   Background URL: %@", meta.backgroundURL ?? "nil")

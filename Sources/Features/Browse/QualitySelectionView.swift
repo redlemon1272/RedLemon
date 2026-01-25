@@ -10,7 +10,7 @@ struct QualitySelectionView: View {
     @State private var roomDescription: String = ""
     @State private var isPublicRoom: Bool = true
     @State private var showPremiumSheet: Bool = false
-    @StateObject private var licenseManager = LicenseManager.shared
+    @ObservedObject private var licenseManager = LicenseManager.shared
     
     @State private var metadata: MediaMetadata?
     @State private var isLoading = true
@@ -19,7 +19,9 @@ struct QualitySelectionView: View {
         GeometryReader { geometry in
             ZStack(alignment: .topLeading) {
                 // Blurred background art
-                if let metadata = metadata, let background = metadata.backgroundURL ?? mediaItem.background, let url = URL(string: background) {
+                // Blurred background art - Consolidated to avoid flashing during switch
+                let backgroundPath = metadata?.backgroundURL ?? mediaItem.background
+                if let path = backgroundPath, let url = URL(string: path) {
                     AsyncImage(url: url) { phase in
                         switch phase {
                         case .success(let image):
@@ -30,29 +32,11 @@ struct QualitySelectionView: View {
                                 .blur(radius: 40)
                                 .overlay(Color.black.opacity(0.7))
                                 .clipped()
-                        case .failure(_), .empty:
-                            Color(NSColor.windowBackgroundColor)
-                                .frame(width: geometry.size.width, height: geometry.size.height)
-                        @unknown default:
+                        default:
                             Color(NSColor.windowBackgroundColor)
                                 .frame(width: geometry.size.width, height: geometry.size.height)
                         }
                     }
-                } else if let background = mediaItem.background, let url = URL(string: background) {
-                    // Fallback to mediaItem background if metadata not yet loaded
-                     AsyncImage(url: url) { phase in
-                         if case .success(let image) = phase {
-                             image
-                                 .resizable()
-                                 .aspectRatio(contentMode: .fill)
-                                 .frame(width: geometry.size.width, height: geometry.size.height)
-                                 .blur(radius: 40)
-                                 .overlay(Color.black.opacity(0.7))
-                                 .clipped()
-                         } else {
-                             Color(NSColor.windowBackgroundColor)
-                         }
-                     }
                 } else {
                     Color(NSColor.windowBackgroundColor)
                         .frame(width: geometry.size.width, height: geometry.size.height)
@@ -88,8 +72,8 @@ struct QualitySelectionView: View {
                         // Header
                         VStack(spacing: 8) {
                             // Try to use fetched metadata logo first, then fall back to passed mediaItem logo, then text
-                            if let logoString = metadata?.logoURL ?? mediaItem.logo, 
-                               let url = URL(string: logoString) {
+                            let logoPath = metadata?.logoURL ?? mediaItem.logo
+                            if let logoString = logoPath, let url = URL(string: logoString) {
                                 // Logo Art
                                 AsyncImage(url: url) { phase in
                                     switch phase {
@@ -99,34 +83,20 @@ struct QualitySelectionView: View {
                                             .aspectRatio(contentMode: .fit)
                                             .frame(maxHeight: 120) 
                                             .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
-                                    case .failure(_):
+                                    default:
+                                        // While loading OR on failure, show title text to avoid empty space/flash
                                         Text(mediaItem.name)
                                             .font(.title2.weight(.bold))
                                             .multilineTextAlignment(.center)
                                             .foregroundColor(.white)
-                                    case .empty:
-                                        // While loading the image, show text softly or just space
-                                        Text(mediaItem.name)
-                                            .font(.title2.weight(.bold))
-                                            .multilineTextAlignment(.center)
-                                            .opacity(0.3)
-                                            .foregroundColor(.white)
-                                    @unknown default:
-                                        EmptyView()
                                     }
                                 }
                             } else {
-                                // Plain Text Fallback (or loading state)
-                                if isLoading {
-                                     ProgressView()
-                                        .scaleEffect(0.5)
-                                        .colorScheme(.dark)
-                                } else {
-                                    Text(mediaItem.name)
-                                        .font(.title2.weight(.bold))
-                                        .multilineTextAlignment(.center)
-                                        .foregroundColor(.white)
-                                }
+                                // Plain Text Fallback
+                                Text(mediaItem.name)
+                                    .font(.title2.weight(.bold))
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.white)
                             }
 
                             if let year = mediaItem.year {
@@ -352,20 +322,14 @@ struct QualitySelectionView: View {
         }
     }
 
+    @MainActor
     private func loadMetadata() async {
         isLoading = true
         defer { isLoading = false }
         
-        // If we already have a logo in mediaItem, we might not strictly NEED this, 
-        // but often the list item doesn't have it.
-        if mediaItem.logo != nil { 
-            // We have a logo already? Let's assume passed item is good for now, 
-            // but the user says it's failing. So likely mediaItem.logo is nil.
-        }
-
         do {
-            let client = LocalAPIClient()
-            self.metadata = try await client.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
+            let meta = try await LocalAPIClient.shared.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
+            self.metadata = meta
         } catch {
             print("Failed to load metadata in QualitySelection: \(error)")
         }

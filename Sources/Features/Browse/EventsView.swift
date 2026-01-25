@@ -9,7 +9,7 @@ struct EventsView: View {
         static let shared = NSCache<NSString, NSImage>()
     }
     @ObservedObject private var timeService = TimeService.shared
-    @StateObject internal var apiClient = LocalAPIClient()
+    private let apiClient = LocalAPIClient.shared
 
 
 

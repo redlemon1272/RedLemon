@@ -43,15 +43,18 @@ actor KeychainManager {
     private init() {}
 
     private func ensureInitialized() async {
-        // If already initialized or initializing, just wait for it
-        if let task = initializationTask {
-            await task.value
+        // If already initialized, return immediately
+        if initializationTask != nil {
+            await initializationTask?.value
             return
         }
 
-        // Create the task while isolated on the actor
-        let task = Task {
-            await loadFromCache()
+        // Create the task. Using Task.detached ensures the task doesn't 
+        // inherit the actor's current isolation state in a way that creates a 
+        // dependency cycle during the await.
+        let task = Task.detached { [weak self] in
+            guard let self = self else { return }
+            await self.loadFromCache()
         }
 
         initializationTask = task

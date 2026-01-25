@@ -1190,3 +1190,61 @@ if [[ $ERROR_COUNT -gt 0 ]]; then
 else
     exit 0 # Warnings don't block yet
 fi
+
+# =============================================================================
+# CHECK 53: Actor Initialization Deadlock (Landmine #119)
+# =============================================================================
+# Trigger: Using Task {} inside an actor initialization flow (ensureInitialized).
+# Rule: Must use Task.detached or avoid Task inside actor methods awaited by others.
+print_header "Check 53: Actor Initialization Deadlock (Landmine #119)"
+
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+    # We are looking for "Task {" inside a file that defines an "actor"
+    # This is a loose check but effective for catching the pattern
+    if grep -q "actor " "$file"; then
+        if [[ "$code" =~ Task[[:space:]]*\{ ]]; then
+             report "WARNING" "Landmine #119" "Deadlock Risk: Avoid using 'Task {' inside actors for initialization logic. Use 'Task.detached {' to prevent isolation inheritance deadlocks." "$file" "$line" "$code"
+        fi
+    fi
+done < <(grep -rn "Task[[:space:]]*{" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK")
+
+# =============================================================================
+# CHECK 54: Network Client Singleton (Landmine #120)
+# =============================================================================
+# Trigger: Creating new instances of LocalAPIClient().
+# Rule: Must use LocalAPIClient.shared to prevent resource exhaustion.
+print_header "Check 54: Network Client Singleton (Landmine #120)"
+
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+    # Check for direct instantiation
+    if [[ "$code" =~ LocalAPIClient\(\) ]]; then
+        # Exclude the singleton definition itself
+        if ! grep -q "static let shared" "$file"; then
+             report "ERROR" "Landmine #120" "Resource Risk: Do not instantiate 'LocalAPIClient()'. Use 'LocalAPIClient.shared' to prevent URLSession exhaustion." "$file" "$line" "$code"
+        fi
+    fi
+done < <(grep -rn "LocalAPIClient()" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK")
+
+# =============================================================================
+# CHECK 55: Visual Continuity (Landmine #121)
+# =============================================================================
+# Trigger: Using AsyncImage with placeholder that is just a color/spinner in detail views.
+# Rule: Should use optimistic rendering (passed mediaItem) before loading metadata.
+# This is a semantic check, harder to grep. We check for key phrases.
+print_header "Check 55: Visual Continuity (Landmine #121)"
+# Check Detail Views
+DETAIL_VIEWS=("MediaDetailView.swift" "QualitySelectionView.swift")
+for view in "${DETAIL_VIEWS[@]}"; do
+    FILE_PATH=$(find "$SOURCES_DIR" -name "$view" -print -quit)
+    if [[ -f "$FILE_PATH" ]]; then
+        if grep -q "ProgressView" "$FILE_PATH" && ! grep -q "Text(mediaItem.name)" "$FILE_PATH"; then
+             report "WARNING" "Landmine #121" "UX Risk: $view seems to use ProgressView without optimistic title fallback. Show passed mediaItem content immediately." "$FILE_PATH" "0" "Visual Continuity check"
+        else
+             echo -e "${GREEN}✅ $view passes optimistic rendering check.${NC}"
+        fi
+    fi
+done

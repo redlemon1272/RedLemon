@@ -1784,3 +1784,72 @@ await MainActor.run {
 }
 ```
 ```
+## Part 29: Modern Concurrency & Resource Safety
+
+### 1. Actor Initialization Deadlock (Landmine #119)
+**Symptom**: The app hangs indefinitely on launch or during specific actions (like fetching credentials), often with 0% CPU usage. The stack trace shows an actor waiting on a `Task`.
+**Root Cause**: **Isolation Inheritance**. When you create a `Task { ... }` inside an actor's method (even an `async` one), that Task inherits the actor's isolation context. If the actor then `await`s that Task, it creates a deadlock: the Actor is blocked waiting for the Task, but the Task cannot start because it needs the Actor's lock (which is held by the `await`).
+
+**Mandatory Solution**:
+1.  **Detach the Task**: Use `Task.detached { ... }` to break the isolation inheritance.
+2.  **Capture Self Weakly**: Since it's detached, you must capture `[weak self]` to avoid retain cycles and safely access the actor.
+
+```swift
+// ❌ WRONG: Creates a deadlock
+let task = Task {
+    await self.loadFromCache() // Inherits isolation, waits for lock -> DEADLOCK
+}
+await task.value
+
+// ✅ CORRECT: Detached execution
+let task = Task.detached { [weak self] in
+    guard let self = self else { return }
+    await self.loadFromCache() // Enters actor 'from outside' -> SAFE
+}
+await task.value
+```
+
+### 2. Network Client Resource Exhaustion (Landmine #120)
+**Symptom**: The app becomes unresponsive after navigating between views 5-10 times. Network requests start timing out or failing with "Too many open files" or connection limits.
+**Root Cause**: **Instance Proliferation**. Creating a new instance of a network client (e.g., `LocalAPIClient()`) often initializes a new `URLSession`. `URLSession` is expensive and holds system resources. Creating one for every View struct (which are recreated frequently in SwiftUI) rapidly exhausts system file descriptors and threads.
+
+**Mandatory Solution**:
+1.  **Enforce Singletons**: Always use a shared instance (`.shared`) for stateless API clients.
+2.  **Stateless Clients**: Ensure the client itself doesn't hold request-specific state (like `currentRequest`), allowing it to be safely shared.
+
+```swift
+// ❌ WRONG: Creates a new URLSession every view render
+@StateObject var client = LocalAPIClient()
+
+// ✅ CORRECT: Reuses the system-optimized session
+let client = LocalAPIClient.shared
+```
+
+### 3. Visual Continuity Protocol (Landmine #121)
+**Symptom**: Screens "flash" (white/empty) or content jumps (spinner -> text) during navigation. This creates a "web-app" feel rather than a native feel.
+**Root Cause**: **Pessimistic Rendering**. Waiting for "perfect" data (metadata/high-res images) before showing *anything*. Using `if isLoading { ProgressView() } else { Content() }` causes a layout shift when loading completes.
+
+**Mandatory Solution**:
+1.  **Optimistic Rendering**: Immediately display data passed from the previous screen (e.g., `mediaItem.name`, `mediaItem.poster`) while the high-res metadata loads.
+2.  **Layered Loading**: Place the high-res content *over* or *replace* the low-res content without changing the layout geometry.
+3.  **No Full-Screen Spinners**: Never hide the main content structure behind a spinner for metadata loading. Use skeleton loaders or just show the title text.
+
+```swift
+// ❌ WRONG: Flashy transition
+if isLoading {
+    ProgressView()
+} else {
+    AsyncImage(url: meta.logo)
+}
+
+// ✅ CORRECT: Visual Stability
+ZStack {
+    // Show passed title immediately (always visible or fallback)
+    Text(mediaItem.name)
+    
+    // Fade in logo when ready
+    if let url = meta?.logoURL {
+        AsyncImage(url: url)
+    }
+}
+```

@@ -672,7 +672,7 @@ struct ChatOverlayView: View {
                     // Host Announcement Toggle (Megaphone)
                     if viewModel.isWatchPartyHost && chatMode == .room {
                         Button(action: {
-                            withAnimation { isAnnouncementMode.toggle() }
+                            isAnnouncementMode.toggle()
                         }) {
                             Image(systemName: isAnnouncementMode ? "megaphone.fill" : "megaphone")
                                 .font(.system(size: 16))
@@ -753,7 +753,7 @@ struct ChatOverlayView: View {
     private var inputPlaceholder: String {
         switch chatMode {
         case .friends: return "Search friends..."
-        case .room: return isAnnouncementMode ? "Broadcast..." : "Chat (⌘)"
+        case .room: return isAnnouncementMode ? "Broadcast" : "Chat (⌘)"
         case .event: return "Chat (⌘)"
         case .dm: return "Chat (⌘)"
         }

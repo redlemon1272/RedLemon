@@ -14,7 +14,7 @@ struct WatchPartyLobbyView: View {
     @State private var showDescriptionEditor = false
     @State private var editingDescription: String = ""
     @StateObject private var licenseManager = LicenseManager.shared
-    @FocusState private var isChatInputFocused: Bool
+    @State private var isChatInputFocused: Bool = false
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
     init(viewModel: LobbyViewModel) {
@@ -752,7 +752,7 @@ struct WatchPartyLobbyView: View {
                                                     Text("Send a message...")
                                                         .font(.system(size: 13))
                                                         .foregroundColor(Color.white.opacity(0.5))
-                                                        .padding(.leading, 8)
+                                                        .padding(.leading, 11) // Align with cursor (6 outer + 5 inner)
                                                         .allowsHitTesting(false)
                                                 }
                                                 TransparentTextEditor(text: $viewModel.chatInput, onCommit: sendMessage, isFocused: isChatInputFocused)

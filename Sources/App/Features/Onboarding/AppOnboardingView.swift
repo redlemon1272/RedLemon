@@ -6,22 +6,22 @@ import AppKit
 struct AppOnboardingView: View {
     @EnvironmentObject var appState: AppState
     @Binding var isPresented: Bool
-    
+
     // Page state
     @State private var currentPage = 0
-    
+
     // Username Input State
     @State private var username: String = ""
     @State private var isCheckingUsername: Bool = false
     @State private var usernameError: String? = nil
-    
+
     // API Key State
     @State private var realDebridKey: String = ""
     @State private var subdlKey: String = ""
-    
+
     // Restore State
     @State private var isRestored: Bool = false
-    
+
     // Onboarding Data
     struct OnboardingPage {
         enum PageType {
@@ -36,7 +36,7 @@ struct AppOnboardingView: View {
         let icon: String // SF Symbol
         let color: Color
     }
-    
+
     private let pages: [OnboardingPage] = [
         OnboardingPage(
             type: .standard,
@@ -47,7 +47,7 @@ struct AppOnboardingView: View {
                 "Built-in ultra-fast stream resolver",
                 "Seamless integration with Real-Debrid"
             ],
-            icon: "popcorn.fill", 
+            icon: "popcorn.fill",
             color: .yellow
         ),
         OnboardingPage(
@@ -91,7 +91,7 @@ struct AppOnboardingView: View {
             color: .green
         )
     ]
-    
+
     // Crash prevention: Safe page access
     private var safePage: OnboardingPage {
         if pages.indices.contains(currentPage) {
@@ -99,16 +99,16 @@ struct AppOnboardingView: View {
         }
         return pages[0]
     }
-    
+
     var body: some View {
         ZStack {
             // Background
             Color.black.ignoresSafeArea()
-            
+
             // Subtle gradient background based on current page color
             LinearGradient(
                 gradient: Gradient(colors: [
-                    safePage.color.opacity(0.15), 
+                    safePage.color.opacity(0.15),
                     Color.black
                 ]),
                 startPoint: .topLeading,
@@ -116,7 +116,7 @@ struct AppOnboardingView: View {
             )
             .ignoresSafeArea()
             .animation(.linear(duration: 0.5), value: currentPage)
-            
+
             VStack(spacing: 0) {
                 // Progress Header
                 if !showSuccess {
@@ -131,7 +131,7 @@ struct AppOnboardingView: View {
                     .padding(.top, 30)
                     .padding(.bottom, 20)
                 }
-                
+
                 // Content Area
                 VStack(spacing: 20) {
                     if showSuccess {
@@ -143,11 +143,11 @@ struct AppOnboardingView: View {
                         case .standard:
                             standardPageView(page: safePage)
                                 .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity), removal: .move(edge: .leading).combined(with: .opacity)))
-                                
+
                         case .apiKeys:
                             apiKeyView()
                                 .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity), removal: .move(edge: .leading).combined(with: .opacity)))
-                                
+
                         case .identity:
                             usernameCreationView()
                                 .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity), removal: .move(edge: .leading).combined(with: .opacity)))
@@ -156,9 +156,9 @@ struct AppOnboardingView: View {
                 }
                 .frame(maxWidth: 500)
                 //.id(currentPage) // Force transition (handled within subviews now)
-                
+
                 Spacer()
-                
+
                 // Navigation Footer
                 if !showSuccess {
                     HStack {
@@ -177,9 +177,9 @@ struct AppOnboardingView: View {
                             }
                             .buttonStyle(.plain)
                         }
-                        
+
                         Spacer()
-                        
+
                         // Next Button (Only for first 3 pages)
                         if currentPage < pages.count - 1 {
                             Button(action: {
@@ -214,9 +214,9 @@ struct AppOnboardingView: View {
                 .environmentObject(appState)
         }
     }
-    
+
     // MARK: - Subviews
-    
+
     @ViewBuilder
     private func standardPageView(page: OnboardingPage) -> some View {
         VStack(spacing: 20) {
@@ -234,25 +234,25 @@ struct AppOnboardingView: View {
                         .fill(page.color.opacity(0.1))
                         .frame(width: 120, height: 120)
                         .blur(radius: 20)
-                    
+
                     Image(systemName: page.icon)
                         .font(.system(size: 60))
                         .foregroundStyle(page.color)
                         .shadow(color: page.color.opacity(0.5), radius: 20, x: 0, y: 0)
                 }
             }
-            
+
             // Text Content
             VStack(spacing: 8) {
                 Text(page.title)
                     .font(.system(size: 32, weight: .bold))
                     .foregroundColor(.white)
-                
+
                 Text(page.subtitle)
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(page.color)
             }
-            
+
             // Feature List (More "Occupied" look)
             VStack(alignment: .leading, spacing: 12) {
                 ForEach(page.features, id: \.self) { feature in
@@ -260,7 +260,7 @@ struct AppOnboardingView: View {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(page.color)
                             .font(.system(size: 16))
-                        
+
                         Text(feature)
                             .font(.system(size: 14))
                             .foregroundColor(.white.opacity(0.9))
@@ -275,7 +275,7 @@ struct AppOnboardingView: View {
             .padding(.top, 10)
         }
     }
-    
+
     @ViewBuilder
     private func apiKeyView() -> some View {
         VStack(spacing: 24) {
@@ -284,12 +284,12 @@ struct AppOnboardingView: View {
                 Text("Integrations")
                     .font(.system(size: 28, weight: .bold))
                     .foregroundColor(.white)
-                
+
                 Text("Supercharge your experience with external services.")
                     .font(.body)
                     .foregroundColor(.gray)
             }
-            
+
             // Inputs
             VStack(spacing: 20) {
                 // Real-Debrid
@@ -300,14 +300,14 @@ struct AppOnboardingView: View {
                         Text("Real-Debrid API Private Token")
                             .foregroundColor(.white)
                             .font(.headline)
-                        
+
                         Spacer()
-                        
+
                         Link("Get Key", destination: URL(string: "https://real-debrid.com/apitoken")!)
                             .font(.caption)
                             .foregroundColor(.blue)
                     }
-                    
+
                     SecureField("Paste your API Key", text: $realDebridKey)
                         .textFieldStyle(PlainTextFieldStyle())
                         .padding(12)
@@ -318,7 +318,7 @@ struct AppOnboardingView: View {
                                 .stroke(Color.white.opacity(0.2), lineWidth: 1)
                         )
                 }
-                
+
                 // SubDL
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
@@ -327,14 +327,14 @@ struct AppOnboardingView: View {
                         Text("SubDL API Key")
                             .foregroundColor(.white)
                             .font(.headline)
-                        
+
                         Spacer()
-                        
+
                         Link("Get Key", destination: URL(string: "https://subdl.com/panel/api")!)
                             .font(.caption)
                             .foregroundColor(.blue)
                     }
-                    
+
                     SecureField("Paste your API Key", text: $subdlKey)
                         .textFieldStyle(PlainTextFieldStyle())
                         .padding(12)
@@ -347,23 +347,32 @@ struct AppOnboardingView: View {
                 }
             }
             .padding(.horizontal, 20)
-            
+
             // Restore Button
-            Button(action: { showRestoreSheet = true }) {
-                HStack {
-                    Image(systemName: "arrow.clockwise")
-                    Text("Restore from Backup")
+            VStack(spacing: 12) {
+                Button(action: { showRestoreSheet = true }) {
+                    HStack {
+                        Image(systemName: "arrow.clockwise")
+                        Text("Restore from Backup")
+                    }
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(.white.opacity(0.6))
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 16)
+                    .background(Color.white.opacity(0.05))
+                    .cornerRadius(20)
                 }
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(.white.opacity(0.6))
-                .padding(.vertical, 8)
-                .padding(.horizontal, 16)
-                .background(Color.white.opacity(0.05))
-                .cornerRadius(20)
+                .buttonStyle(.plain)
+
+                Text("Real-Debrid and SubDL keys can also be added or changed in Settings later.")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white.opacity(0.4))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .buttonStyle(.plain)
             .padding(.top, 10)
-            
+
             Spacer()
         }
         .padding(.top, 20)
@@ -374,12 +383,12 @@ struct AppOnboardingView: View {
             UserDefaults.standard.set(newValue, forKey: "subdlApiKey")
         }
     }
-    
+
     @State private var showRestoreSheet = false
     @State private var showSuccess = false
-    
+
     // ...
-    
+
     @ViewBuilder
     private func usernameCreationView() -> some View {
         createFormView
@@ -393,23 +402,23 @@ struct AppOnboardingView: View {
                     .fill(Color.green.opacity(0.1))
                     .frame(width: 100, height: 100)
                     .blur(radius: 20)
-                
+
                 Image(systemName: "person.crop.circle.badge.plus")
                     .font(.system(size: 50))
                     .foregroundStyle(Color.green)
             }
-            
+
             // Header
             VStack(spacing: 8) {
                 Text("Pick Your Identity")
                     .font(.system(size: 28, weight: .bold))
                     .foregroundColor(.white)
-                
+
                 Text("Choose a unique username friends can use to invite you.")
                     .font(.body)
                     .foregroundColor(.gray)
             }
-            
+
             // Input Field
             VStack(spacing: 16) {
                 TextField("Username", text: $username)
@@ -425,13 +434,13 @@ struct AppOnboardingView: View {
                     )
                     .frame(width: 280)
                     .disabled(isCheckingUsername)
-                
+
                 if let error = usernameError {
                     Text(error)
                         .foregroundColor(.red)
                         .font(.callout)
                 }
-                
+
                 // Submit Button
                 Button(action: registerUser) {
                     HStack {
@@ -456,7 +465,7 @@ struct AppOnboardingView: View {
             }
         }
     }
-    
+
 
 
     private func handleRestore() {
@@ -464,11 +473,11 @@ struct AppOnboardingView: View {
         if !appState.currentUsername.isEmpty {
             self.username = appState.currentUsername
             self.isRestored = true
-            
+
             withAnimation(.spring()) {
                 showSuccess = true
             }
-            
+
             // Auto-close onboarding after 2 seconds to confirm and enter the app
             Task { @MainActor in
                 try? await Task.sleep(nanoseconds: 2_500_000_000) // 2.5 seconds
@@ -478,24 +487,24 @@ struct AppOnboardingView: View {
             }
         }
     }
-    
+
     private var successView: some View {
         VStack(spacing: 24) {
              Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 60))
                 .foregroundColor(.green)
                 .padding(.bottom, 10)
-            
+
             VStack(spacing: 8) {
                 Text("Welcome, \(username)!")
                     .font(.largeTitle.bold())
                     .foregroundColor(.white)
-                
+
                 Text("Your identity has been securely created.")
                     .font(.title3)
                     .foregroundColor(.white.opacity(0.7))
             }
-            
+
             VStack(spacing: 16) {
                 if !isRestored {
                     Button(action: backupIdentity) {
@@ -511,7 +520,7 @@ struct AppOnboardingView: View {
                     }
                     .buttonStyle(.plain)
                 }
-                
+
                 Button("Enter RedLemon") {
                     completeOnboarding()
                 }
@@ -519,7 +528,7 @@ struct AppOnboardingView: View {
                 .foregroundColor(.white.opacity(0.8))
                 .buttonStyle(.plain)
                 .padding(.top, 4)
-                
+
                 if !realDebridKey.isEmpty || !subdlKey.isEmpty || isRestored {
                     Text("The app will restart to apply your credentials.")
                         .font(.system(size: 11, weight: .medium))
@@ -530,37 +539,37 @@ struct AppOnboardingView: View {
             .padding(.top, 20)
         }
     }
-    
+
     // MARK: - Actions
-    
+
     private func registerUser() {
         guard username.count >= 3 else {
             usernameError = "Username must be at least 3 characters"
             return
         }
-        
+
         let trimmed = username.trimmingCharacters(in: .whitespaces).lowercased()
-        
+
         // Validation regex
         guard trimmed.range(of: "^[a-z0-9_]+$", options: .regularExpression) != nil else {
             usernameError = "Lowercase letters, numbers, and underscores only."
             return
         }
-        
+
         isCheckingUsername = true
         usernameError = nil
-        
+
         Task {
             do {
                 // 1. Generate Keys & Create User Securely
                 let (privateKey, publicKey) = CryptoManager.shared.generateKeyPair()
                 let user = try await SupabaseClient.shared.registerUserSecure(username: trimmed, publicKey: publicKey)
-                
+
                 // 2. Save Everything Locally
                 try await KeychainManager.shared.saveKeyPair(privateKey: privateKey, publicKey: publicKey)
                 try await KeychainManager.shared.saveUsername(trimmed)
                 try await KeychainManager.shared.save(credential: user.id.uuidString, for: "user_id")
-                
+
                 // Save API Keys if provided
                 if !realDebridKey.isEmpty {
                     try await KeychainManager.shared.save(credential: realDebridKey, for: "realdebrid")
@@ -568,18 +577,18 @@ struct AppOnboardingView: View {
                 if !subdlKey.isEmpty {
                     try await KeychainManager.shared.save(credential: subdlKey, for: "subdl")
                 }
-                
+
                 // 3. Auto-Add Admin Friend (lemontom)
                 if let lemontom = try? await SupabaseClient.shared.getUserByUsername(username: "lemontom") {
                      try? await SupabaseClient.shared.createFriendship(userId1: user.id, userId2: lemontom.id)
                 }
-                
+
                 await MainActor.run {
                     // 4. Update AppState
                     appState.currentUserId = user.id
                     appState.currentUsername = user.username
                     appState.isAdmin = user.isAdmin ?? false
-                    
+
                     // Update auth context for LicenseManager
                     SupabaseClient.shared.auth.currentUser = AuthUser(
                         id: user.id,
@@ -587,18 +596,18 @@ struct AppOnboardingView: View {
                         isAdmin: user.isAdmin ?? false,
                         isPremium: user.isPremium ?? false
                     )
-                    
+
                     // If admin, start the report listener
                     if user.isAdmin == true {
                         Task {
                             await AdminRealtimeService.shared.start()
                         }
                     }
-                    
+
                     isCheckingUsername = false
                     showSuccess = true
                 }
-                
+
                 // 5. Connect Social
                 Task {
                     await SocialService.shared.connect(userId: user.id.uuidString, username: trimmed)
@@ -616,14 +625,14 @@ struct AppOnboardingView: View {
             }
         }
     }
-    
+
     private func backupIdentity() {
         let panel = NSSavePanel()
         panel.allowedContentTypes = [UTType(filenameExtension: "redlemon-key")!]
         panel.nameFieldStringValue = "\(username).redlemon-key"
         panel.canCreateDirectories = true
         panel.isExtensionHidden = false
-        
+
         panel.begin { response in
             if response == .OK, let url = panel.url {
                 Task {
@@ -637,20 +646,20 @@ struct AppOnboardingView: View {
             }
         }
     }
-    
+
     private func completeOnboarding() {
         // Mark onboarding as complete in UserDefaults
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding_v1")
-        
+
         // Dismiss the modal first to show progress
         withAnimation {
             isPresented = false
         }
-        
+
         // Conditional Relaunch: If any API keys were entered OR an account was restored, force a relaunch
         // to ensure the Vapor server and all resolvers pick up the new credentials immediately.
         if !realDebridKey.isEmpty || !subdlKey.isEmpty || isRestored {
-            NSLog("🔄 [Onboarding] Credentials changed (Keys: %@, Restored: %@). Induced mandatory relaunch.", 
+            NSLog("🔄 [Onboarding] Credentials changed (Keys: %@, Restored: %@). Induced mandatory relaunch.",
                   (!realDebridKey.isEmpty || !subdlKey.isEmpty) ? "YES" : "NO",
                   isRestored ? "YES" : "NO")
             // Give a tiny moment for dismissal animation to start

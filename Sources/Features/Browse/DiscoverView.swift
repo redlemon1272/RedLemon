@@ -366,6 +366,7 @@ struct CatalogMeta: Codable {
 // MARK: - Card Component
 struct DiscoverMediaCard: View {
     let item: MediaItem
+    @EnvironmentObject var appState: AppState
     @State private var imageData: Data?
 
     var body: some View {
@@ -390,6 +391,21 @@ struct DiscoverMediaCard: View {
             }
             .task {
                 await loadPoster()
+            }
+            .overlay(alignment: .bottom) {
+                if let progress = appState.watchHistoryProgress[item.id], progress > 0 {
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .fill(Color.black.opacity(0.6))
+                            .frame(height: 6)
+
+                        Rectangle()
+                            .fill(Color.accentColor)
+                            .frame(width: 150 * progress, height: 6)
+                    }
+                    .cornerRadius(3)
+                    .padding([.horizontal, .bottom], 4)
+                }
             }
 
             Text(item.name)

@@ -371,7 +371,12 @@ struct RecentlyWatchedCard: View {
 /// Standard Media Card
 struct MediaCard: View {
     let item: MediaItem
+    @EnvironmentObject var appState: AppState
     @State private var imageData: Data?
+
+    var progress: Double? {
+        appState.watchHistoryProgress[item.id]
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -391,6 +396,24 @@ struct MediaCard: View {
                         .overlay(
                             ProgressView()
                         )
+                }
+
+                // Progress bar overlay
+                if let progress = progress, progress > 0 {
+                    VStack {
+                        Spacer()
+                        ZStack(alignment: .leading) {
+                            Rectangle()
+                                .fill(Color.black.opacity(0.6))
+                                .frame(height: 6)
+
+                            Rectangle()
+                                .fill(Color.accentColor)
+                                .frame(width: 150 * progress, height: 6)
+                        }
+                        .cornerRadius(3)
+                        .padding([.horizontal, .bottom], 4)
+                    }
                 }
 
                 // Rating badge
@@ -472,8 +495,13 @@ struct MediaCard: View {
 /// Optimized MediaCard with memory management and NSCache fast-path
 struct OptimizedMediaCard: View {
     let item: MediaItem
+    @EnvironmentObject var appState: AppState
     @State private var cachedImage: NSImage?
     @State private var imageLoadTask: Task<Void, Never>?
+
+    var progress: Double? {
+        appState.watchHistoryProgress[item.id]
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -494,6 +522,24 @@ struct OptimizedMediaCard: View {
                             ProgressView()
                                 .scaleEffect(0.8)
                         )
+                }
+
+                // Progress bar overlay
+                if let progress = progress, progress > 0 {
+                    VStack {
+                        Spacer()
+                        ZStack(alignment: .leading) {
+                            Rectangle()
+                                .fill(Color.black.opacity(0.6))
+                                .frame(height: 6)
+
+                            Rectangle()
+                                .fill(Color.accentColor)
+                                .frame(width: 150 * progress, height: 6)
+                        }
+                        .cornerRadius(3)
+                        .padding([.horizontal, .bottom], 4)
+                    }
                 }
 
                 // Rating badge

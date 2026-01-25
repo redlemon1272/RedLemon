@@ -2045,6 +2045,9 @@ class PlayerViewModel: ObservableObject {
             UserDefaults.standard.set(data, forKey: "watchHistory")
             lastHistorySaveTime = Date()
             LoggingManager.shared.info(.watchHistory, message: "Saved to watch history: \(mediaItem.name) at \(Int(timestamp))s")
+
+            // Refresh global progress mapping in AppState
+            appState?.updateWatchHistoryMapping()
         }
     }
 
@@ -2154,9 +2157,9 @@ class PlayerViewModel: ObservableObject {
             NSLog("🏥 [PlayerVM] Manual Refresh: No active stream to refresh subtitles for")
             return
         }
-        
+
         NSLog("🏥 [PlayerVM] Manual Refresh: Triggering deep subtitle search for %@", item.name)
-        
+
         do {
             // Build stream hint for better matching
             var streamHint = stream.title
@@ -2166,11 +2169,11 @@ class PlayerViewModel: ObservableObject {
                     streamHint = room.selectedStreamTitle ?? room.sourceQuality ?? stream.title
                 }
             }
-            
+
             // Recalculate season/episode for series
             let season = selectedSeason
             let episode = selectedEpisode
-            
+
             // Use metadata year if available
             let yearValue = selectedMetadata?.year ?? item.year
             let year = yearValue.flatMap { Int($0) }
@@ -2212,13 +2215,13 @@ class PlayerViewModel: ObservableObject {
                 // Add to existing subtitles (deduplicate by URL/ID)
                 var existingSubs = stream.subtitles ?? []
                 let existingIds = Set(existingSubs.map { $0.id })
-                
+
                 let newSubs = externalSubs.filter { !existingIds.contains($0.id) }
-                
+
                 if !newSubs.isEmpty {
                     existingSubs.append(contentsOf: newSubs)
                     stream.subtitles = existingSubs
-                    
+
                     // Update state on Main Actor
                     await MainActor.run {
                         self.selectedStream = stream

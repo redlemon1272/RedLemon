@@ -1762,8 +1762,7 @@ streamFile = streamFile.replacingOccurrences(of: "💾", with: "")
 
 // ✅ CORRECT: Stricter source penalty
 if subHas && !streamHas {
-    score -= 300 // Strong penalty for mismatch
-}
+    score -= 300 // Strong penalty for mismatch}
 
 ### 2. The Subtitle "Healing Loop" (Landmine #118)
 **Symptom**: Movie starts with "No Subtitles" or misses specific release matches because SubDL was slow or "Offline" (timed out) at the exact moment of playback start.
@@ -1846,7 +1845,7 @@ if isLoading {
 ZStack {
     // Show passed title immediately (always visible or fallback)
     Text(mediaItem.name)
-    
+
     // Fade in logo when ready
     if let url = meta?.logoURL {
         AsyncImage(url: url)

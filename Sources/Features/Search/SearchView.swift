@@ -499,10 +499,10 @@ struct SearchView: View {
 
     private func selectMedia(_ item: MediaItem) {
         print("🔍 [DEBUG] selectMedia called for: \(item.name)")
-        
+
         guard !isNavigating else { return }
         isNavigating = true
-        
+
         // Navigate to detail view in main content area
         appState.player.selectedMediaItem = item
         appState.navigateTo(.mediaDetail)  // Use navigateTo for back navigation support
@@ -513,48 +513,66 @@ struct SearchView: View {
 // Search Media Card - based on DiscoverMediaCard from DiscoverView
 struct SearchMediaCard: View {
     let item: MediaItem
+    @EnvironmentObject var appState: AppState
 
     var body: some View {
         VStack(spacing: 12) {  // Increased spacing for clear separation
             // Poster image - clean and separate
-            if let posterURL = item.poster {
-                AsyncImage(url: URL(string: posterURL)) { phase in
-                    switch phase {
-                    case .empty:
-                        Rectangle()
-                            .fill(Color.gray.opacity(0.3))
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .overlay(
-                                ProgressView()
-                            )
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .clipped()
-                    case .failure:
-                        Rectangle()
-                            .fill(Color.gray.opacity(0.3))
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .overlay(
-                                Image(systemName: "photo")
-                                    .foregroundColor(.gray)
-                            )
-                    @unknown default:
-                        EmptyView()
+            ZStack(alignment: .bottom) {
+                if let posterURL = item.poster {
+                    AsyncImage(url: URL(string: posterURL)) { phase in
+                        switch phase {
+                        case .empty:
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.3))
+                                .aspectRatio(2/3, contentMode: .fit)
+                                .overlay(
+                                    ProgressView()
+                                )
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .aspectRatio(2/3, contentMode: .fit)
+                                .clipped()
+                        case .failure:
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.3))
+                                .aspectRatio(2/3, contentMode: .fit)
+                                .overlay(
+                                    Image(systemName: "photo")
+                                        .foregroundColor(.gray)
+                                )
+                        @unknown default:
+                            EmptyView()
+                        }
                     }
-                }
-                .cornerRadius(8)
-            } else {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-                    .aspectRatio(2/3, contentMode: .fit)
                     .cornerRadius(8)
-                    .overlay(
-                        Image(systemName: "photo")
-                            .foregroundColor(.gray)
-                    )
+                } else {
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.3))
+                        .aspectRatio(2/3, contentMode: .fit)
+                        .cornerRadius(8)
+                        .overlay(
+                            Image(systemName: "photo")
+                                .foregroundColor(.gray)
+                        )
+                }
+
+                // Progress bar overlay inside ZStack for stability
+                if let progressValue = appState.watchHistoryProgress[item.id], progressValue > 0 {
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .fill(Color.black.opacity(0.6))
+                            .frame(height: 6)
+
+                        Rectangle()
+                            .fill(Color.accentColor)
+                            .frame(width: 142 * progressValue, height: 6)
+                    }
+                    .cornerRadius(3)
+                    .padding([.horizontal, .bottom], 4)
+                }
             }
 
             // Title text - clearly separated and centered
@@ -573,7 +591,7 @@ struct SearchMediaCard: View {
                     .multilineTextAlignment(.center)
             }
         }
-        .frame(width: 150, height: 260)  // Fixed height AND width to prevent overlap
+        .frame(width: 150)
         .clipped()  // Prevent content from spilling out
     }
 }

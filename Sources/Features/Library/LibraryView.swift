@@ -76,7 +76,7 @@ struct LibraryView: View {
                             Button(action: {
                                 guard !isNavigating else { return }
                                 isNavigating = true
-                                
+
                                 // Navigate to Detail
                                 let mediaItem = MediaItem(
                                     id: item.id,
@@ -120,6 +120,21 @@ struct LibraryView: View {
                                         }
                                     }
                                     .frame(maxWidth: .infinity)
+                                    .overlay(alignment: .bottom) {
+                                        if let progress = appState.watchHistoryProgress[item.id], progress > 0 {
+                                            ZStack(alignment: .leading) {
+                                                Rectangle()
+                                                    .fill(Color.black.opacity(0.6))
+                                                    .frame(height: 6)
+
+                                                Rectangle()
+                                                    .fill(Color.accentColor)
+                                                    .frame(width: 140 * progress, height: 6)
+                                            }
+                                            .cornerRadius(3)
+                                            .padding([.horizontal, .bottom], 4)
+                                        }
+                                    }
                                     // Hover effect handled by ButtonStyle or manually if needed,
                                     // but default PlainButtonStyle is okay for now.
 

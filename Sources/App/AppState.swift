@@ -73,45 +73,48 @@ class AppState: ObservableObject {
                 self?.reportedCount += 1
             }
         }
-        
+
         AdminRealtimeService.shared.onNewFeedback = { [weak self] in
             Task { @MainActor in
                 self?.feedbackCount += 1
             }
         }
-        
+
         AdminRealtimeService.shared.onInitialCounts = { [weak self] rCount, fCount in
             Task { @MainActor in
                 self?.reportedCount = rCount
                 self?.feedbackCount = fCount
             }
         }
+
+        // Initial watch history mapping
+        updateWatchHistoryMapping()
     }
 
     /// Relaunches the application to ensure all service changes and environment variables are fresh.
     func relaunchApp() {
         NSLog("🔄 [AppState] Triggering app relaunch (unified Dock instance)...")
         let bundleURL = Bundle.main.bundleURL
-        
+
         // 🚀 CRITICAL: We avoid '-n' to prevent duplicate icons in the Dock.
-        // Instead, we spawn a background shell process that waits for the current instance 
+        // Instead, we spawn a background shell process that waits for the current instance
         // to terminate before triggering a fresh 'open' command.
         let process = Process() // OK
         process.executableURL = URL(fileURLWithPath: "/bin/sh") // OK
-        
+
         let pid = ProcessInfo.processInfo.processIdentifier
         let escapedPath = bundleURL.path.replacingOccurrences(of: "\"", with: "\\\"")
         // 🚀 Wait for 'this' PID to vanish before calling 'open'
         process.arguments = ["-c", "while kill -0 \(pid) 2>/dev/null; do sleep 0.1; done; open \"\(escapedPath)\""]
-        
+
         do {
             try process.run()
-            
+
             // Terminate immediately so the 'open' command finds the app closed (or closing)
             NSApplication.shared.terminate(nil)
         } catch {
             NSLog("❌ [AppState] Failed to relaunch via shell: %@", error.localizedDescription)
-            
+
             // Final fallback: Try open without delay if shell fails
             let configuration = NSWorkspace.OpenConfiguration()
             NSWorkspace.shared.openApplication(at: bundleURL, configuration: configuration) { _, error in
@@ -252,13 +255,16 @@ class AppState: ObservableObject {
     @Published var isAdmin: Bool = false
     @Published var reportedCount: Int = 0
     @Published var feedbackCount: Int = 0
-    
+
     var totalAdminNotifications: Int {
         isAdmin ? (reportedCount + feedbackCount) : 0
     }
 
     // Message passing (Player -> Lobby)
     @Published var pendingLobbyMessage: String? = nil
+
+    // Watch Progress Persistence (Shared for Media Cards)
+    @Published var watchHistoryProgress: [String: Double] = [:] // id (mediaId_S_E) -> progress (0.0 - 1.0)
 
     // TV Show support (kept here for selection UI)
     @Published var selectedSeason: Int? {
@@ -601,7 +607,7 @@ class AppState: ObservableObject {
                 self.providerHealth = health
                 self.isCheckingProviders = false
                 NSLog("%@", "✅ [AppState] Provider health check complete (found \(health.count) services)")
-                
+
                 // Deep Refresh: If subtitles were missing and user clicks refresh, try to fetch them now
                 if self.player.selectedStream != nil {
                     Task {
@@ -609,6 +615,32 @@ class AppState: ObservableObject {
                     }
                 }
             }
+        }
+    }
+
+    // MARK: - Watch History Sync
+
+    /// Updates the local progress mapping from UserDefaults
+    func updateWatchHistoryMapping() {
+        guard let data = UserDefaults.standard.data(forKey: "watchHistory"),
+              let history = try? JSONDecoder().decode([WatchHistoryItem].self, from: data) else {
+            return
+        }
+
+        var mapping: [String: Double] = [:]
+        // Iterate reversed so that the newest item (first in the history list)
+        // overwrites older ones in the mapping.
+        for item in history.reversed() {
+            // Specific episode/movie: "mediaId_S_E"
+            mapping[item.id] = item.progress
+
+            // General media ID: "mediaId"
+            // This allows looking up progress for a series card in the library
+            mapping[item.mediaItem.id] = item.progress
+        }
+
+        if self.watchHistoryProgress != mapping {
+            self.watchHistoryProgress = mapping
         }
     }
 

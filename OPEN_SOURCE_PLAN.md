@@ -356,7 +356,7 @@ The new installation command will be:
 `curl -sL https://raw.githubusercontent.com/redlemon-app/RedLemon/main/scripts/install.sh | bash`
 
 ### 2. The `install.sh` Script (OPEN)
-This script will be moved from the server's `/root/updates/install` to the public repository's `scripts/install.sh`. 
+This script will be moved from the server's `/root/updates/install` to the public repository's `scripts/install.sh`.
 
 ### 3. Verification
 By hosting the install script on GitHub, users can:
@@ -398,6 +398,13 @@ Create `AI_BIBLE_PUBLIC.md` containing:
 - Deployment process (high-level, no credentials)
 
 The full `AI_BIBLE.md` stays private.
+
+### 2. The Extension Pattern (Mixed Files)
+For files containing both UI state (Open) and sensitive logic (Closed), use Swift Extensions:
+- `Sources/App/AppState.swift` [OPEN]: Contains UI state and global flags.
+- `Sources/App/AppState+Core.swift` [CLOSED]: Contains provider initialization and sensitive session management.
+
+This allows the sync script to copy the main file while leaving the sensitive extension behind, keeping the codebase clean.
 
 ---
 
@@ -462,7 +469,7 @@ RedLemon does not host or distribute any content. The app connects to streaming 
 
 ## License
 
-[License to be determined - likely MIT or Apache 2.0]
+RedLemon is released under the **MIT License**. This provides the community with maximum freedom to use and contribute while protecting the authors from liability. (See [LICENSE](LICENSE) in the public repo).
 
 ## Building from Source
 
@@ -521,8 +528,10 @@ Before making the public repo live:
 - [ ] No credentials in OPEN files
 - [ ] No server IPs in OPEN files
 - [ ] No API keys in OPEN files
-- [ ] AI_BIBLE.md sanitized for public consumption
+- [ ] AI_BIBLE.md sanitized
+- [ ] AI_BIBLE_PUBLIC.md created
 - [ ] Release scripts excluded from public repo
+- [ ] Leak Detector passed (no keys/emails/passwords)
 
 ### Documentation
 - [ ] README.md written and reviewed

@@ -6,7 +6,7 @@
 # Purpose: Synchronizes the private RedLemon-Native repo with the public
 #          GitHub repository by stripping closed-source components and
 #          sanitizing sensitive data.
-# 
+#
 # Follows: OPEN_SOURCE_PLAN.md
 # =============================================================================
 
@@ -119,6 +119,35 @@ grep -r "$SERVER_IP" "$PUBLIC_REPO_DIR" --exclude-dir=".git" -l | while read -r 
     sed -i '' "s/$SERVER_IP/redlemon.live.placeholder/g" "$file"
     echo "   ✅ Sanitized: $(basename "$file")"
 done
+
+# 7. Secret Leak Detector (Landmine Prevention)
+echo -e "${YELLOW}🛡️  Running Secret Leak Detector...${NC}"
+
+# Patterns to look for (Sparkle keys, JWTs, Mnemonic seeds, Server passwords)
+PATTERNS=(
+    "ed25519" # Sparkle/Identity keys
+    "eyJh"    # JWT starts
+    "d5KfXj5aB" # Sparkle Private Key Fragment
+    "supabase_anon_key"
+    "service_role"
+    "password:"
+    "argon2"
+)
+
+LEAK_FOUND=0
+for pattern in "${PATTERNS[@]}"; do
+    FOUND=$(grep -r "$pattern" "$PUBLIC_REPO_DIR" --exclude-dir=".git" --exclude="OPEN_SOURCE_PLAN.md" --exclude="sync-to-public.sh" -l || true)
+    if [ ! -z "$FOUND" ]; then
+        echo -e "${RED}❌ CRITICAL LEAK DETECTED: '$pattern' found in:${NC}"
+        echo "$FOUND"
+        LEAK_FOUND=1
+    fi
+done
+
+if [ $LEAK_FOUND -eq 1 ]; then
+    echo -e "${RED}🛑 Sync ABORTED due to security leaks. Clean the public repo before proceeding.${NC}"
+    exit 1
+fi
 
 # 7. Final Verification
 echo -e "${GREEN}✨ Sync Complete!${NC}"

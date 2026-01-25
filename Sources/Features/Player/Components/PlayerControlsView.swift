@@ -183,7 +183,7 @@ struct PlayerControlsView: View {
                     // Play/Pause button - only for solo or host
                     if !viewModel.isInWatchParty || viewModel.isWatchPartyHost {
                         Button(action: {
-                            viewModel.mpvWrapper.togglePlayPause()
+                            viewModel.togglePlayPause()
                         }) {
                             ZStack {
                                 Circle()

@@ -421,14 +421,19 @@ struct MPVPlayerView: View {
                     return nil // Consume event
                 }
 
-                // Escape key: exit player - DISABLED during watch party playback
-                // Users must use "Exit Room" button instead to prevent accidental exits
-                // if event.keyCode == 53 && event.type == .keyDown {
-                //     Task {
-                //         await exitPlayer()
-                //     }
-                //     return nil // Consume event
-                // }
+                // SPACEBAR: Toggle playback (solo, events, rooms)
+                // keyCode 49 = Spacebar
+                if event.type == .keyDown && event.keyCode == 49 {
+                    // Ignore if currently typing in an editable field
+                    if let firstResponder = NSApp.keyWindow?.firstResponder {
+                        if firstResponder is NSTextView || firstResponder is NSTextField {
+                            return event // Pass through to text field
+                        }
+                    }
+                    
+                    viewModel.togglePlayPause()
+                    return nil // Consume event
+                }
 
                 return event // Pass through if not handled
             }

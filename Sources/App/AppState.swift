@@ -90,35 +90,35 @@ class AppState: ObservableObject {
 
     /// Relaunches the application to ensure all service changes and environment variables are fresh.
     func relaunchApp() {
-        NSLog("🔄 [AppState] Triggering mandatory app relaunch...")
+        NSLog("🔄 [AppState] Triggering app relaunch (unified Dock instance)...")
         let bundleURL = Bundle.main.bundleURL
         
-        // 🚀 CRITICAL: Use /usr/bin/open -n to ensure a fresh, separate instance is spawned.
-        // This is the most reliable way to "relaunch" an app on macOS.
+        // 🚀 CRITICAL: We avoid '-n' to prevent duplicate icons in the Dock.
+        // Instead, we spawn a background shell process that waits for the current instance 
+        // to terminate before triggering a fresh 'open' command.
         let process = Process() // OK
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/open")
-        process.arguments = ["-n", bundleURL.path]
+        process.executableURL = URL(fileURLWithPath: "/bin/sh") // OK
+        
+        let pid = ProcessInfo.processInfo.processIdentifier
+        let escapedPath = bundleURL.path.replacingOccurrences(of: "\"", with: "\\\"")
+        // 🚀 Wait for 'this' PID to vanish before calling 'open'
+        process.arguments = ["-c", "while kill -0 \(pid) 2>/dev/null; do sleep 0.1; done; open \"\(escapedPath)\""]
         
         do {
             try process.run()
             
-            // Give the OS a moment to start the new process before we terminate
-            Task { @MainActor in
-                try? await Task.sleep(nanoseconds: 200_000_000) // 200ms
-                NSApplication.shared.terminate(nil)
-            }
+            // Terminate immediately so the 'open' command finds the app closed (or closing)
+            NSApplication.shared.terminate(nil)
         } catch {
-            NSLog("❌ [AppState] Failed to relaunch via 'open' command: %@", error.localizedDescription)
+            NSLog("❌ [AppState] Failed to relaunch via shell: %@", error.localizedDescription)
             
-            // Fallback to NSWorkspace if Process fails
+            // Final fallback: Try open without delay if shell fails
             let configuration = NSWorkspace.OpenConfiguration()
             NSWorkspace.shared.openApplication(at: bundleURL, configuration: configuration) { _, error in
                 if let error = error {
-                    NSLog("❌ [AppState] NSWorkspace also failed: %@", error.localizedDescription)
+                    NSLog("❌ [AppState] NSWorkspace recovery failed: %@", error.localizedDescription)
                 }
-                Task { @MainActor in
-                    NSApplication.shared.terminate(nil)
-                }
+                NSApplication.shared.terminate(nil)
             }
         }
     }

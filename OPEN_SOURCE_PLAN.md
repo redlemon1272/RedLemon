@@ -28,11 +28,14 @@ RedLemon is adopting a **hybrid open-source model** to build trust with the r/pi
 2. [Directory-by-Directory Breakdown](#directory-by-directory-breakdown)
 3. [File-by-File Inventory](#file-by-file-inventory)
 4. [Git Strategy](#git-strategy)
-5. [Build & Release Changes](#build--release-changes)
-6. [Security Considerations](#security-considerations)
-7. [PR Guidelines](#pr-guidelines)
-8. [Communication Strategy](#communication-strategy)
-9. [Verification Checklist](#verification-checklist)
+5. [Scrubber Defense-in-Depth](#scrubber-defense-in-depth)
+6. [Build & Release Changes](#build--release-changes)
+7. [Binary Verification (Trust Anchor)](#binary-verification-trust-anchor)
+8. [Security Considerations](#security-considerations)
+9. [Transparency Policy](#transparency-policy)
+10. [Auditor's Guide (How to Verify)](#auditors-guide-how-to-verify)
+11. [Communication Strategy](#communication-strategy)
+12. [Verification Checklist](#verification-checklist)
 
 ---
 
@@ -234,8 +237,9 @@ RedLemon-Native/
 **Public Repo:** `github.com/redlemon-app/RedLemon`
 - Contains all OPEN files
 - Has descriptive README
-- Issues enabled for community feedback
-- PRs accepted for non-core features
+- Has descriptive README (Focus on "How to verify")
+- Issues enabled for BUG REPORTS ONLY
+- **Pull Requests DISABLED** - This is a read-only mirror for transparency.
 
 **Private Repo:** Existing `RedLemon-Native`
 - Contains full codebase (OPEN + CLOSED)
@@ -277,6 +281,24 @@ git add .
 git commit -m "Sync: [Message]"
 git push origin main
 ```
+
+---
+
+## Scrubber Defense-in-Depth
+
+To ensure the public repo remains a clean, "Gold Standard" mirror, the `sync-to-public.sh` script must implement **Defense-in-depth** against information leakage.
+
+### The "Triple-Grep" Shield
+The script will run three separate validation passes after copying files but before allowing a commit:
+
+1.  **IP Sanitization**: Grep for the production server IP pattern `151.243.109.X`. If found, the script aborts.
+2.  **Key Pattern Matching**: Grep for patterns like `sk_live`, `Bearer`, and `supabase_key`.
+3.  **Cross-Reference Check**: The script will maintain a `PRIVATE_SENSITIVE_STRINGS` list (e.g., admin email, specific wallet addresses) and scan all files for these strings before completion.
+
+### Stub Verification
+The script will attempt to compile the public repository's UI target automatically. If the public repo doesn't compile due to missing stubs, the sync is marked as **FAILED**.
+
+---
 
 ### Stub Files for Closed Dependencies
 
@@ -347,6 +369,19 @@ Download the pre-built binary from [releases page]. This includes the closed-sou
 
 ---
 
+## Binary Verification (Trust Anchor)
+
+The primary challenge of a hybrid model is proving that the **Closed Source binary** actually contains the **Open Source code**. We solve this through:
+
+### 1. Digital Signatures & Hashes
+Every release includes a `release_package.sha256` file in the public repository. This hash matches the exact DMG provided for download.
+
+### 2. Version Locking
+The public repository is tagged (e.g., `v1.2.3`) simultaneously with the private release. Users can audit the UI branch for that specific version to see exactly what UI and networking code was active in that build.
+
+### 3. Symbolic Mapping (Advanced Verification)
+We provide the `symbols.txt` for the public UI components in each release. This allows technical users to verify that the entry points and networking paths in the binary correspond to the paths in the open-source files.
+
 ## Migration: The GitHub Magic Command
 
 To increase trust and remove dependency on a raw IP address for installation, we will migrate the "Magic Installer" to GitHub.
@@ -363,6 +398,10 @@ By hosting the install script on GitHub, users can:
 - Inspect exactly what the script does before running it.
 - Verify that the DMG it downloads matches the SHA256 sum in the repo.
 - See the audit history of changes to the installation process.
+
+### 4. Binary Hosting Transition
+> [!IMPORTANT]
+> Upon public launch, the `URL` variable inside `scripts/install.sh` MUST be updated to point to the **GitHub Releases** binary (e.g., `https://github.com/redlemon-app/RedLemon/releases/latest/download/RedLemon.dmg`). This removes the final dependency on a raw IP address and centralizes the trust anchor on GitHub.
 
 ---
 
@@ -408,23 +447,36 @@ This allows the sync script to copy the main file while leaving the sensitive ex
 
 ---
 
-## PR Guidelines
+## Transparency Policy
 
-For the public repo, accept PRs that:
-- Fix UI bugs
-- Add localization
-- Improve accessibility
-- Add non-core features (e.g., new settings)
-- Fix build issues
-- Improve documentation
+RedLemon is provided as a **read-only mirror** of our infrastructure and UI code. We do **not** accept external contributions or pull requests.
 
-**Reject PRs that:**
-- Modify stub implementations of closed components
-- Attempt to bypass closed-source logic
-- Add telemetry or data collection
-- Compromise the closed-source architecture
+### Why?
+Our goal is to be the most transparent streaming app in the scene. By open-sourcing the UI and networking layers, we allow experts to verify that we are not:
+1.  Running telemetry or spyware.
+2.  Logging sensitive user data.
+3.  Handling credentials unsafely.
+
+We maintain full control over the codebase to ensure the highest performance and security standards, adhering strictly to our internal AI Bible.
 
 ---
+
+## Auditor's Guide (How to Verify)
+
+For developers and privacy advocates who want to verify our claims, here is the audit checklist:
+
+### 1. Verify "Zero Telemetry"
+- **Scan**: `Sources/App/AppState.swift` and `Sources/Services/LoggingManager.swift`.
+- **Search**: For any `URLSession` or `LocalAPIClient` calls that send data to external domains other than `redlemon.live` (our server) or `supabase.co` (our database).
+- **Proves**: We are not "phoning home" to Google, Meta, or third-party tracking services.
+
+### 2. Verify Credential Safety
+- **Scan**: `Sources/Server/Credentials/KeychainManager.swift`.
+- **Logic**: All API keys and tokens are pulled from the macOS Keychain, never stored in plaintext within the application's local sandbox or `UserDefaults`.
+
+### 3. Verify Networking Transparency
+- **Scan**: `Sources/Networking/SupabaseClient.swift`.
+- **Logic**: Observe that all database interactions use our standard, open-source client.
 
 ## Communication Strategy
 
@@ -495,14 +547,16 @@ I've been building RedLemon, a native macOS streaming app with some features I h
 - Watch parties with real-time sync and shared chat
 - One-click play (aggregates 5+ providers, auto-unlocks via Real-Debrid)
 
-**Open source approach:**
+**Transparency approach:**
 The UI, player wrapper, and infrastructure are open source. The stream resolution engine is closed (that's the secret sauce).
 
-You can inspect the code to verify:
+This is a **read-only mirror** so you can inspect the code to verify:
 - No telemetry
 - No data collection
-- Credentials stored in Keychain
+- Credentials stored in macOS Keychain
 - What the app actually does
+
+We don't accept PRs, but bug reports are welcome.
 
 **Requirements:**
 - macOS 12+
@@ -547,9 +601,8 @@ Before making the public repo live:
 ### Infrastructure
 - [ ] `sync-to-public.sh` script created and tested
 - [ ] GitHub repo created under `redlemon-app` org
-- [ ] Branch protection rules configured
-- [ ] Issue templates created
-- [ ] PR guidelines documented
+- [ ] Pull Requests disabled in repo settings
+- [ ] Issue templates (Bug Report only) created
 
 ### Post-Launch
 - [ ] r/piracy post scheduled

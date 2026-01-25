@@ -6,6 +6,44 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.146 -->
+        <item>
+            <title>Version 1.0.146</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Emoji Spacing in Chat (Landmine #113)</li><li>Fixed Playlist Sync Race Condition (Landmine #115)</li><li>Fixed Update Button responsiveness on macOS 13+</li><li>Increased Browse page item limit</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 19:00:07 -0500</pubDate>
+            <sparkle:version>146</sparkle:version>
+            <sparkle:shortVersionString>1.0.146</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.146.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="DHtNJffKyamL4BzG1EMY1u9ctkC5WGD+luat+wvfX7SqmRwEATrG4VoVLvk5+HEmqZj/Wwdf+QPnfkJoMgozAw==" length="74187610"
+            />
+        </item>
+        <!-- v1.0.145 -->
+        <item>
+            <title>Version 1.0.145</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Increased catalog item limit from 15 to 18 per service for denser content display on modern screens</li><li>Improved layout consistency in Browse tab grid</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 18:52:24 -0500</pubDate>
+            <sparkle:version>145</sparkle:version>
+            <sparkle:shortVersionString>1.0.145</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.145.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="6GIiwB4neP5EcixIinRhm+sBOcwdeKvbQfwiJPgWcKtoiN9JkdXXO6BzOsXdFE0cUSu6KzB2/J7fUOnLvwhYCw==" length="73800071"
+            />
+        </item>
         <!-- v1.0.144 -->
         <item>
             <title>Version 1.0.144</title>

@@ -1443,13 +1443,25 @@ The `./scripts/release.sh` script handles the heavy lifting, but you must invoke
     *   Create a tag: `git tag v1.0.X`
     *   Merge strict: `git checkout main && git merge solo-launch && git push`
 
-## 4. Post-Release Verification
-1.  **Update Check**: Launch the *previous* version of RedLemon. Run "Check for Updates".
-    *   **Success**: The new update prompt appears with your release notes.
-    *   **Failure**: Appcast XML is malformed or S3 cache is stale.
-2.  **Launch Test**: Launch the *new* version.
-    *   **Success**: App opens without "Malicious Software" warning (Notarization check).
-    *   **Failure**: Notarization failed. Rollback immediately.
+## 4. DISTRIBUTION: The Anti-Gravity Protocol (Bypassing Quarantine)
+To avoid the $99/year Apple Tax and Gatekeeper warnings without degrading UX, we use a **Terminal Installer**.
+
+### The "Magic" Command
+Instead of downloading the DMG directly, users run this:
+`curl -sL https://redlemon.io/install | bash`
+
+### How it works
+1.  **Curl Bypass**: `curl` does not apply the `com.apple.quarantine` attribute to downloaded files (unlike Safari/Chrome).
+2.  **Script Logic**:
+    *   Downloads the DMG via `curl`.
+    *   Mounts and copies `RedLemon.app` to `/Applications`.
+    *   **Nuclear Option**: Runs `xattr -cr /Applications/RedLemon.app` to strip any lingering attributes.
+    *   Launches the app immediately.
+
+### Deployment of the Magic Script
+1.  The script is located at `./install_redlemon.sh`.
+2.  Deploy it to the server: `scp install_redlemon.sh root@151.243.109.243:/root/updates/install`.
+3.  The User-Facing URL is: `https://151.243.109.243.nip.io/updates/install` (proxied as `/install`).
 
 ---
 

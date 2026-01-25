@@ -2147,4 +2147,92 @@ class PlayerViewModel: ObservableObject {
             }
         }
     }
+
+    /// Refresh subtitles for the current stream manually (e.g. if SubDL was down during initial play)
+    func manualRefreshSubtitles() async {
+        guard let item = selectedMediaItem, var stream = selectedStream else {
+            NSLog("🏥 [PlayerVM] Manual Refresh: No active stream to refresh subtitles for")
+            return
+        }
+        
+        NSLog("🏥 [PlayerVM] Manual Refresh: Triggering deep subtitle search for %@", item.name)
+        
+        do {
+            // Build stream hint for better matching
+            var streamHint = stream.title
+            if streamHint.lowercased().contains("video.mkv") || streamHint.lowercased().contains("stream.mkv") {
+                // Try to get better info from current room metadata if available
+                if let room = currentWatchPartyRoom {
+                    streamHint = room.selectedStreamTitle ?? room.sourceQuality ?? stream.title
+                }
+            }
+            
+            // Recalculate season/episode for series
+            let season = selectedSeason
+            let episode = selectedEpisode
+            
+            // Use metadata year if available
+            let yearValue = selectedMetadata?.year ?? item.year
+            let year = yearValue.flatMap { Int($0) }
+
+            let subDLSubtitles = try await LocalAPIClient.shared.searchSubtitles(
+                imdbId: item.id,
+                type: item.type,
+                season: season,
+                episode: episode,
+                name: item.name,
+                year: year,
+                streamFilename: streamHint
+            )
+
+            if !subDLSubtitles.isEmpty {
+                NSLog("✅ [PlayerVM] Manual Refresh: Found %d SubDL subtitles", subDLSubtitles.count)
+
+                let externalSubs = subDLSubtitles.map { sub -> Subtitle in
+                    let encodedPath = Data(sub.url.utf8).base64EncodedString()
+                    var proxyURL = LocalAPIClient.shared.getSubtitleURL(
+                        downloadPath: sub.url,
+                        season: season,
+                        episode: episode,
+                        streamFilename: streamHint
+                    )
+                    proxyURL += (proxyURL.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
+
+                    return Subtitle(
+                        id: encodedPath,
+                        url: proxyURL,
+                        lang: sub.language ?? "en",
+                        label: sub.releaseName ?? "English",
+                        srclang: sub.language ?? "en",
+                        kind: "subtitles",
+                        provider: "SubDL"
+                    )
+                }
+
+                // Add to existing subtitles (deduplicate by URL/ID)
+                var existingSubs = stream.subtitles ?? []
+                let existingIds = Set(existingSubs.map { $0.id })
+                
+                let newSubs = externalSubs.filter { !existingIds.contains($0.id) }
+                
+                if !newSubs.isEmpty {
+                    existingSubs.append(contentsOf: newSubs)
+                    stream.subtitles = existingSubs
+                    
+                    // Update state on Main Actor
+                    await MainActor.run {
+                        self.selectedStream = stream
+                        NSLog("✅ [PlayerVM] Manual Refresh: Added %d new subtitles to current stream", newSubs.count)
+                    }
+                } else {
+                     NSLog("ℹ️ [PlayerVM] Manual Refresh: No additional subtitles found (already have %d)", existingSubs.count)
+                }
+            } else {
+                NSLog("⚠️ [PlayerVM] Manual Refresh: No subtitles found for %@", item.name)
+            }
+        } catch {
+            NSLog("❌ [PlayerVM] Manual Refresh: Subtitle search failed: %@", error.localizedDescription)
+        }
+    }
+
 }

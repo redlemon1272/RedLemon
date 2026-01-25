@@ -601,6 +601,13 @@ class AppState: ObservableObject {
                 self.providerHealth = health
                 self.isCheckingProviders = false
                 NSLog("%@", "✅ [AppState] Provider health check complete (found \(health.count) services)")
+                
+                // Deep Refresh: If subtitles were missing and user clicks refresh, try to fetch them now
+                if self.player.selectedStream != nil {
+                    Task {
+                        await self.player.manualRefreshSubtitles()
+                    }
+                }
             }
         }
     }

@@ -106,7 +106,9 @@
 | **Compiler: Extraneous '}' / Redeclaration** | Partial SwiftUI Body Replacement Error | #108 |
 | **Subtitles Appear Delayed (10s+)** | Sequential loading loop + 5s polling delay | #109 |
 | **Subtitle Download Failed (403/503)** | Missing Browser User-Agent (SubDL CDN) | #110 |
+| **Subtitle Availability Gap** | Concurrency race or slow provider response | #114 |
 | **Guest/Host Subtitle Mismatch** | Sync inconsistency or weak scoring (TELESYNC Trap) | #117 |
+| **Missing Subtitles on Start** | Initial API timeout; Service was down during "Smart Load" | #118 |
 
 ## 🚨 Critical Landmines
 
@@ -1762,4 +1764,23 @@ streamFile = streamFile.replacingOccurrences(of: "💾", with: "")
 if subHas && !streamHas {
     score -= 300 // Strong penalty for mismatch
 }
+
+### 2. The Subtitle "Healing Loop" (Landmine #118)
+**Symptom**: Movie starts with "No Subtitles" or misses specific release matches because SubDL was slow or "Offline" (timed out) at the exact moment of playback start.
+**Root Cause**: **Synchronous Dependency**. The initial playback sequence ("Smart Load") allows ~8-12 seconds for subtitles. If SubDL is having a cold start or latency spike, it may fail the initial window but be perfectly ready 5 seconds later. Without a background retry mechanism, the user is "stuck" with no subtitles unless they restart the whole movie.
+**Mandatory Solution**:
+1. **Background Refresh Method**: `PlayerViewModel` MUST implement `manualRefreshSubtitles()` which performs a deep search and injects results into the *active* stream.
+2. **Context-Aware Trigger**: `AppState.checkProviderHealth()` MUST automatically trigger `player.manualRefreshSubtitles()` if it detects a healthy SubDL status while media is playing.
+3. **Deduplication**: The injection logic MUST use a Set or key matching (`id` or `URL`) to prevent duplicate tracks in the player menu.
+4. **No-Stop Injection**: Subtitles MUST be injected into the existing `selectedStream.subtitles` array. SwiftUI's reactivity will update the player menu on-the-fly without interrupting playback.
+
+```swift
+// ✅ CORRECT: Healing Loop Trigger in AppState
+await MainActor.run {
+    self.isCheckingProviders = false
+    if self.player.selectedStream != nil {
+        Task { await self.player.manualRefreshSubtitles() }
+    }
+}
+```
 ```

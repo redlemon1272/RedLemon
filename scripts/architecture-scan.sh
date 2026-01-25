@@ -1148,6 +1148,20 @@ if [[ -f "$SUB_CLIENT" ]]; then
     fi
     echo -e "${GREEN}✅ Subtitle sync and scoring protection verified.${NC}"
 fi
+# =============================================================================
+# CHECK 52: Subtitle Healing Loop (Landmine #118)
+# =============================================================================
+# Trigger: missing background refresh logic for subtitles.
+# Rule: AppState.checkProviderHealth MUST call manualRefreshSubtitles() if playing.
+print_header "Check 52: Subtitle Healing Loop (Landmine #118)"
+APP_STATE="$SOURCES_DIR/App/AppState.swift"
+if [[ -f "$APP_STATE" ]]; then
+    if ! grep -q "manualRefreshSubtitles()" "$APP_STATE"; then
+        report "ERROR" "Landmine #118" "Recovery Risk: AppState.checkProviderHealth MUST trigger player.manualRefreshSubtitles() to recover from initial subtitle fetch failures." "$APP_STATE" "0" "Missing manualRefreshSubtitles() call in health check"
+    else
+        echo -e "${GREEN}✅ Subtitle healing loop verified in AppState.${NC}"
+    fi
+fi
 
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"

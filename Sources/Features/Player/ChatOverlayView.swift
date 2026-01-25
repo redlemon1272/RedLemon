@@ -1177,17 +1177,29 @@ struct ChatOverlayView: View {
             Divider()
 
             if appState.isEventPlayback {
-                // Event mode: just show count since we don't have the full list
-                VStack(spacing: 12) {
-                    Image(systemName: "person.3.fill")
-                        .font(.system(size: 32))
-                        .foregroundColor(.secondary)
-                    Text("\(participantCount) viewer\(participantCount == 1 ? "" : "s") watching")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+                // Event mode: show list if tracking is available
+                if !eventChatService.participants.isEmpty {
+                    ScrollView {
+                        LazyVStack(spacing: 4) {
+                            ForEach(eventChatService.participants, id: \.id) { participant in
+                                participantRow(participant, hostId: "") // No host for public events
+                            }
+                        }
+                        .padding(12)
+                    }
+                    .frame(maxHeight: 300)
+                } else {
+                    VStack(spacing: 12) {
+                        Image(systemName: "person.3.fill")
+                            .font(.system(size: 32))
+                            .foregroundColor(.secondary)
+                        Text("\(participantCount) viewer\(participantCount == 1 ? "" : "s") watching")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 24)
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 24)
             } else if let room = appState.player.currentWatchPartyRoom {
                 // Watch Party mode: show actual participant list
                 ScrollView {
@@ -1212,6 +1224,7 @@ struct ChatOverlayView: View {
     private func participantRow(_ participant: Participant, hostId: String) -> some View {
         let isHost = participant.id.caseInsensitiveCompare(hostId) == .orderedSame
         let isMe = participant.id.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") == .orderedSame
+        let isFriend = socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(participant.id) == .orderedSame })
 
         return HStack(spacing: 6) {
             // Name
@@ -1237,6 +1250,34 @@ struct ChatOverlayView: View {
             }
 
             Spacer()
+
+            if !isMe {
+                Button(action: {
+                    // Close popover before opening menu to avoid UI overlap issues
+                    showParticipantsList = false
+
+                    // Use external event loop to ensure popover closes first
+                    Task { @MainActor in
+                        try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            viewModel.activeChatMenuTarget = MenuTarget(
+                                id: participant.id,
+                                username: participant.name,
+                                isFriend: isFriend,
+                                isHost: viewModel.isWatchPartyHost
+                            )
+                        }
+                    }
+                }) {
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(.primary.opacity(0.6))
+                        .frame(width: 16, height: 16)
+                        .background(Color.primary.opacity(0.1))
+                        .clipShape(Circle())
+                }
+                .buttonStyle(.plain)
+            }
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 6)

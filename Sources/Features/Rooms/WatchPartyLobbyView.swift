@@ -1115,24 +1115,24 @@ struct ParticipantRow: View {
                     .foregroundColor(.green)
             }
 
-            // Only show menu for strangers (not self, not friends)
-            // Check if this participant is the current user or a friend
+            // Menu for everyone except self
             let isCurrentUser = participant.id.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") == .orderedSame
-            let isFriend = socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(participant.id) == .orderedSame })
 
-            // Only show menu if it's a stranger AND (we can add friend OR mute OR kick OR block)
-            if !isCurrentUser && !isFriend && (canAddFriend || canKick || canBlock) {
+            if !isCurrentUser {
                 Menu {
+                    // Add Friend
                     if canAddFriend {
                          Button(action: onAddFriend) {
                             Label("Add Friend", systemImage: "person.badge.plus")
                         }
                     }
 
+                    // Mute Toggle
                     Button(action: onMute) {
                         Label(isMuted ? "Unmute" : "Mute", systemImage: isMuted ? "speaker.wave.2" : "speaker.slash")
                     }
 
+                    // Kick (Host Only)
                     if canKick {
                         Divider()
 
@@ -1141,6 +1141,7 @@ struct ParticipantRow: View {
                         }
                     }
 
+                    // Block (Always available)
                     if canBlock {
                         Button(role: .destructive, action: onBlock) {
                             Label("Block User", systemImage: "slash.circle")
@@ -1148,11 +1149,15 @@ struct ParticipantRow: View {
                     }
 
                 } label: {
-                    Image(systemName: "ellipsis.circle.fill")
-                        .foregroundColor(.white.opacity(0.6))
-                        .font(.system(size: 20))
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(.white.opacity(0.5))
+                        .frame(width: 16, height: 16)
+                        .background(Color.white.opacity(0.1))
+                        .clipShape(Circle())
                 }
                 .menuStyle(BorderlessButtonMenuStyle())
+                .menuIndicator(.hidden)
                 .frame(width: 24, height: 24)
             }
         }

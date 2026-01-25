@@ -8,6 +8,7 @@ class EventChatService: ObservableObject {
     @Published var messages: [ChatMessage] = []
     @Published var isConnected: Bool = false
     @Published var participantCount: Int = 0
+    @Published var participants: [Participant] = []
 
     // Reactions
     let reactionTriggers = PassthroughSubject<String, Never>()
@@ -52,7 +53,11 @@ class EventChatService: ObservableObject {
 
                 await manager.registerObserver(
                     id: "event-chat",
-                    onPresence: nil,
+                    onPresence: { [weak self] action, userId, metadata in
+                        Task { @MainActor [weak self] in
+                            self?.handlePresenceUpdate(action: action, userId: userId, metadata: metadata)
+                        }
+                    },
                     onSync: { [weak self] message in
                         Task { @MainActor [weak self] in
                             if message.type == .reaction {
@@ -86,6 +91,7 @@ class EventChatService: ObservableObject {
         currentEventId = nil
         isConnected = false
         messages = []
+        participants = []
         participantCount = 0
     }
 
@@ -215,5 +221,45 @@ class EventChatService: ObservableObject {
     private func handleReaction(_ message: SyncMessage) {
         guard let emoji = message.chatText, message.senderId != self.userId else { return }
         reactionTriggers.send(emoji)
+    }
+
+    private func handlePresenceUpdate(action: PresenceAction, userId: String, metadata: [String: Any]?) {
+        // Resolve True User ID (Metadata user_id preferred over Presence Ref)
+        let rawId = (metadata?["user_id"] as? String) ?? userId
+        let normalizedID = rawId.lowercased()
+        let username = (metadata?["username"] as? String) ?? "Guest"
+        let isPremium = (metadata?["is_premium"] as? Bool) ?? false
+
+        switch action {
+        case .join:
+            if let index = participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
+                // Update existing
+                participants[index].phxRefs.insert(userId)
+                participants[index].name = username
+                participants[index].isPremium = isPremium
+            } else {
+                // New participant
+                let newP = Participant(
+                    id: normalizedID,
+                    name: username,
+                    isHost: false, // Events don't have "Hosts" in this context
+                    isReady: true,
+                    isPremium: isPremium,
+                    joinedAt: Date(),
+                    phxRefs: Set([userId])
+                )
+                participants.append(newP)
+            }
+        case .leave:
+            if let index = participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
+                participants[index].phxRefs.remove(userId)
+                if participants[index].phxRefs.isEmpty {
+                    participants.remove(at: index)
+                }
+            }
+        }
+
+        // Update total count
+        self.participantCount = participants.count
     }
 }

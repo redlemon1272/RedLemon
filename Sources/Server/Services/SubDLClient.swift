@@ -69,7 +69,7 @@ final class SubDLClient {
         var request = URLRequest(url: url)
         // Add User-Agent to bypass potential Cloudflare blocks
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
-        request.timeoutInterval = 10 
+        request.timeoutInterval = 10
 
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 10
@@ -746,7 +746,7 @@ final class SubDLClient {
         let extractPipe = Pipe()
 
         extractProcess.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
-        
+
         // Escape special characters for unzip command
         // unzip treats [] as wildcards, so we must escape them to match literal filenames
         let escapedTargetFile = targetFile
@@ -940,27 +940,41 @@ final class SubDLClient {
         }
 
         // STREAM-MATCHED SCORING: If we know the stream's filename, match release types
-        if let streamFile = streamFilename?.lowercased() {
-            let sourceTokens = ["webrip", "web-dl", "webdl", "bluray", "bdrip", "brrip", "dvdrip", "hdrip", "remux", "hdtv"]
+        if var streamFile = streamFilename?.lowercased() {
+            // Clean stream filename from newlines, emojis and common search junk
+            streamFile = streamFile.replacingOccurrences(of: "\n", with: " ")
+                .replacingOccurrences(of: "\r", with: " ")
+                .replacingOccurrences(of: "💾", with: "")
+                .replacingOccurrences(of: "🎬", with: "")
+                .replacingOccurrences(of: "⚡️", with: "")
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+
+            // Enhanced Source Tokens (Including low-quality versions for penalty triggers)
+            let sourceTokens = ["webrip", "web-dl", "webdl", "bluray", "bdrip", "brrip", "dvdrip", "hdrip", "remux", "hdtv", "cam", "ts", "telesync", "hdcam"]
             let qualityTokens = ["1080p", "720p", "2160p", "4k", "480p"]
             let releaseGroups = ["yts", "yify", "fgt", "sparks", "rarbg", "tigole", "framestor", "cinema", "ntb", "axxo", "psa"]
 
-            // Source Match (Critical: +500 for match, -200 for mismatch)
-            var hasSourceMatch = false
+            // Source Match (Critical: +500 for match, -300 for mismatch)
             for token in sourceTokens {
                 let streamHas = streamFile.contains(token)
                 let subHas = releaseName.contains(token)
 
                 if streamHas && subHas {
                     score += 500 // Strong match
-                    hasSourceMatch = true
                 } else if subHas && !streamHas {
                     // Subtitle has this source, but stream doesn't - PENALTY
-                    // e.g., REMUX subtitle for non-REMUX stream
-                    score -= 300
+                    // e.g., CAM subtitle for WEBRip stream
+
+                    // Special Case: Allow interchangeable WEB sources
+                    let webSources = ["webrip", "web-dl", "webdl"]
+                    if webSources.contains(token) && webSources.contains(where: { streamFile.contains($0) }) {
+                        score += 200 // Semi-match for digital releases
+                        continue
+                    }
+
+                    score -= 300 // Strong penalty for mismatch
                 } else if streamHas && !subHas {
                     // Stream has this source, subtitle doesn't - mild penalty
-                    // (subtitle might just not mention it)
                     score -= 50
                 }
             }

@@ -463,6 +463,7 @@ class LobbyEventRouter: ObservableObject {
         targetRoom.selectedFileIdx = roomState.fileIdx
         targetRoom.selectedQuality = roomState.quality
         targetRoom.selectedStreamTitle = roomState.sourceQuality // AI_BIBLE #91: Title fallback
+        targetRoom.sourceQuality = roomState.sourceQuality // Explicitly sync to both for safety
 
         // CRITICAL FIX: Sync latest participants for "Silent Join" Fix (Landmine #90)
         // Ensure the Guest's player has the full list of participants so syncExistingParticipantsToChat() works.

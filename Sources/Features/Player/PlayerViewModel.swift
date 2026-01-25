@@ -247,10 +247,15 @@ class PlayerViewModel: ObservableObject {
                         // Build stream hint from room data (RD URLs are truncated)
                         var streamHint = item.name.replacingOccurrences(of: " ", with: ".")
                         if let room = currentWatchPartyRoom {
-                            let sourceQuality = room.sourceQuality ?? ""
+                            let source = (room.selectedStreamTitle ?? room.sourceQuality) ?? ""
                             let quality = room.selectedQuality ?? ""
-                            if !sourceQuality.isEmpty || !quality.isEmpty {
-                                streamHint = "\(item.name.replacingOccurrences(of: " ", with: ".")).\(quality).\(sourceQuality)".lowercased()
+                            if !source.isEmpty || !quality.isEmpty {
+                                // Prioritize full release name (source) if available
+                                if source.count > 15 {
+                                    streamHint = source.lowercased()
+                                } else {
+                                    streamHint = "\(item.name.replacingOccurrences(of: " ", with: ".")).\(quality).\(source)".lowercased()
+                                }
                             }
                         }
 
@@ -388,14 +393,20 @@ class PlayerViewModel: ObservableObject {
                 // Build stream filename for subtitle matching
                 // Real-Debrid URLs are truncated (e.g., /d/xxx/TR), so use room's sourceQuality as hint
                 var streamHint = filename
-                NSLog("%@", "📝 GUEST: Extracted filename='\(filename)' (len=\(filename.count)), sourceQuality=\(watchPartyRoom.sourceQuality ?? "nil"), selectedQuality=\(watchPartyRoom.selectedQuality ?? "nil")")
-                if filename.count < 10 || filename == "Host Stream" {
+                NSLog("%@", "📝 GUEST: Extracted filename='\(filename)' (len=\(filename.count)), sourceQuality=\(watchPartyRoom.sourceQuality ?? "nil"), selectedQuality=\(watchPartyRoom.selectedQuality ?? "nil"), selectedStreamTitle=\(watchPartyRoom.selectedStreamTitle ?? "nil")")
+                if filename.count < 15 || filename == "Host Stream" {
                     // URL filename is truncated, construct from room data
-                    let sourceQuality = watchPartyRoom.sourceQuality ?? ""
+                    let source = (watchPartyRoom.selectedStreamTitle ?? watchPartyRoom.sourceQuality) ?? ""
                     let quality = watchPartyRoom.selectedQuality ?? ""
-                    // Build a release-like string: "Movie.Name.1080p.WEB-DL"
-                    streamHint = "\(item.name.replacingOccurrences(of: " ", with: ".")).\(quality).\(sourceQuality)".lowercased()
-                    NSLog("%@", "📝 GUEST: Using room sourceQuality for subtitle matching: \(streamHint)")
+
+                    // Prioritize full release name (source) if available
+                    if source.count > 15 {
+                        streamHint = source.lowercased()
+                    } else {
+                        // Build a release-like string: "Movie.Name.1080p.WEB-DL"
+                        streamHint = "\(item.name.replacingOccurrences(of: " ", with: ".")).\(quality).\(source)".lowercased()
+                    }
+                    NSLog("%@", "📝 GUEST: Using enhanced stream hint for subtitle matching: \(streamHint)")
                 }
 
                 do {

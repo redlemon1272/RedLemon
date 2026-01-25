@@ -443,11 +443,15 @@ RedLemon is a macOS streaming app with real-time watch parties and 24/7 live eve
 - **Watch Parties** - Host or join, real-time sync, shared chat
 - **One-Click Play** - No torrent hunting, instant playback
 
-## Open Source
+## What's Closed Source?
 
-RedLemon is **mostly open source**. The UI, player integration, and infrastructure are public. The stream resolution engine and watch party sync are closed source.
+RedLemon is **mostly open source**. To maintain a balance between trust and operational sustainability, we use a hybrid model:
 
-**Why?** The stream resolver is our secret sauce. It aggregates 5+ providers, filters bad releases, and auto-unlocks via Real-Debrid. Keeping this closed allows us to maintain the service.
+- **StreamResolver.swift**: Aggregates 5+ providers, handles auto-unlocking, and requires our server-side infrastructure to function.
+- **Watch Party Sync**: The real-time drift correction and presence algorithms are core IP we are still actively iterating on.
+- **Payment Processing**: Contains security best practices and vault integration logic we prefer to keep private for safety.
+
+**Everything else is open.** You can verify for yourself that there is no telemetry, no hidden data collection, and that all credentials are stored safely in the macOS Keychain.
 
 **What you can verify:**
 - No telemetry or data collection

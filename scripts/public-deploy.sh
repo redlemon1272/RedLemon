@@ -31,14 +31,22 @@ else
     git remote set-url origin "https://redlemon1272:$GH_PAT@github.com/redlemon1272/RedLemon.git"
 fi
 
-# 3. Git Ceremony
-echo -e "${BLUE}📦 Committing changes...${NC}"
+# 3. Git Ceremony with Identity Masking
+echo -e "${BLUE}📦 Committing changes as public identity...${NC}"
 git add .
-# We use a generic message to avoid leaking intent
-git commit -m "chore: automated security sync and opsec hardening" || echo "No changes to commit"
+
+# CRITICAL OPSEC: Explicitly override author and committer to prevent private identity leakage
+# We use the GitHub-provided no-reply email for the public owner.
+public_name="RedLemon"
+public_email="redlemon1272@users.noreply.github.com"
+
+git -c user.name="$public_name" \
+    -c user.email="$public_email" \
+    commit --author="$public_name <$public_email>" \
+    -m "chore: automated security sync and opsec hardening" || echo "No changes to commit"
 
 echo -e "${BLUE}📤 Pushing to GitHub...${NC}"
-# Use --force-with-lease for safety, or --force if we strictly own this mirror
+# Use --force to ensure the scrubbed history is the only history available
 git push origin main --force
 
 echo -e "${GREEN}✅ Public Deployment Successful!${NC}"

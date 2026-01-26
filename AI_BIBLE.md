@@ -1993,6 +1993,19 @@ export GH_PAT="github_pat_11BY74BGA0nbkSnH2zmIAS_RmoV1FtJUbG7v8uaaJnGvTb0RNG6Zic
 ./scripts/public-deploy.sh
 ```
 
+**Automated Release Creation**:
+Creating a tag is not enough. You must instantiate a **GitHub Release** object for the download link to appear.
+```bash
+# Create GitHub Release for v1.0.X
+curl -L \
+  -X POST \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer $GH_PAT" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/redlemon1272/RedLemon/releases \
+  -d '{"tag_name":"v1.0.X","target_commitish":"main","name":"v1.0.X","body":"### Release Notes\n* [Note 1]\n* [Note 2]\n\n**Download**: [RedLemon-v1.0.X.dmg](https://151.243.109.243.nip.io/updates/RedLemon-latest.dmg)","draft":false,"prerelease":false,"generate_release_notes":false}'
+```
+
 **Scrubbing Enforcement**:
 The `public-deploy.sh` script (invoking `sync-to-public.sh`) is the **ONLY** way to push to public. It enforces:
 *   Global replacement of `AI_BIBLE` with `Internal Note`.

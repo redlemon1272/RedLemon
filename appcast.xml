@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- vv1.0.74 -->
+        <item>
+            <title>Version v1.0.74</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed 'Ghost Auto-Join' Bug (Landmine #109)</li><li>Security & OpSec Hardening</li><li>Updated Privacy Policy to Hybrid Model</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 26 Jan 2026 18:19:00 -0500</pubDate>
+            <sparkle:version>74</sparkle:version>
+            <sparkle:shortVersionString>v1.0.74</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.74.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="L+oJ7qX8i10aeOFhfETY2JLr1egyq4/VqcRsvGMMSgglioddCz0b7Y4ypdaDyIyfWhNzk6oj7+mFTOxXFU9GCg==" length="74924539"
+            />
+        </item>
         <!-- v1.0.158 -->
         <item>
             <title>Version 1.0.158</title>

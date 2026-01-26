@@ -1968,6 +1968,7 @@ Complete the release across both repositories.
 When drafting release notes or public documentation:
 *   **NO Bible References**: Never mention the AI Bible, Landmines, or internal part numbers.
 *   **No Secret Sauce**: Do not describe the internal mechanics of `StreamResolver` or sync algorithms.
+*   **Identity Masking**: NEVER push to the public repository using a private git identity. All public commits MUST explicitly override the author and email to `RedLemon <redlemon1272@users.noreply.github.com>` via `-c user.name` and `-c user.email` git flags.
 *   **User-Facing Only**: Describe features (e.g., "Improved Watch Party stability") without revealing the "how".
 *   **Privacy First**: Explicitly point users to `LoggingManager.swift` to verify the "Zero Telemetry" claim.
 

@@ -1974,11 +1974,11 @@ To manage the `redlemon1272/RedLemon` public repository, use the automated deplo
 
 **Credential (GH_PAT)**:
 The following token is a "No Expiry" fine-grained PAT with `repo:contents` access for the public RedLemon repo.
-`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`
+`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`
 
 **Automated Deployment Command**:
 ```bash
-export GH_PAT="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"
+export GH_PAT="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"
 ./scripts/public-deploy.sh
 ```
 

@@ -53,11 +53,11 @@ This repository contains the UI scaffolding. You can build it to inspect the cod
 2.  Open `RedLemon.xcodeproj`.
 3.  Build & Run (Cmd+R).
 
-## 🔒 Privacy & Security
-
-*   **Zero Telemetry**: We do not track your usage.
-*   **Local-First**: We prefer local preferences over cloud storage.
-*   **Secure**: All sensitive tokens use Apple's Keychain Services.
+### Privacy & Security
+*   **Privacy-Focused**: Zero advertisement tracking or behavioral analytics.
+*   **Hybrid Cloud**: Watch History and Library are synced securely via Supabase for cross-device continuity.
+*   **Local-First Preferences**: App settings and playback preferences are stored locally on your device.
+*   **Secure Storage**: All sensitive tokens (Real-Debrid, API Keys) are stored in the macOS Keychain.
 
 ## 📄 License
 

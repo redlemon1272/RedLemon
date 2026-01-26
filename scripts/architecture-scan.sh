@@ -1311,6 +1311,23 @@ while IFS= read -r file; do
 done < <(find "$SOURCES_DIR" -name "*.swift")
 
 
+# =============================================================================
+# CHECK 60: Idempotent UI Services (Landmine #123)
+# =============================================================================
+print_header "Check 60: Idempotent UI Services (Landmine #123)"
+
+SUBTITLE_SERVICE="$SOURCES_DIR/Features/Player/Services/SubtitleService.swift"
+if [[ -f "$SUBTITLE_SERVICE" ]]; then
+    # Ensure loadExternalSubtitles contains a check against self.subtitles
+    # We look for the deduplication pattern added in v1.0.158
+    if ! grep -q "self.subtitles.contains" "$SUBTITLE_SERVICE"; then
+        report "ERROR" "Landmine #123" "SubtitleService MUST deduplicate incoming items against 'self.subtitles' to prevent healing loop duplication." "$SUBTITLE_SERVICE" "1" "Check implementation of loadExternalSubtitles"
+    else
+        echo -e "${GREEN}✅ SubtitleService deduplication verified.${NC}"
+    fi
+fi
+
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

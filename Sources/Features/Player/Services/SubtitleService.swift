@@ -90,13 +90,27 @@ actor MPVSubtitleService: SubtitleService {
     // MARK: - Protocol Implementation
 
     func loadExternalSubtitles(_ items: [(url: String, label: String)]) async {
-        // Deduplicate: Only process items that aren't already in our list
-        let newItems = items.filter { item in
+        // 1. Deduplicate the incoming items themselves (unique URLs only)
+        var uniqueIncoming: [(url: String, label: String)] = []
+        var seenUrlsInThisCall = Set<String>()
+        for item in items {
+            if !seenUrlsInThisCall.contains(item.url) {
+                uniqueIncoming.append(item)
+                seenUrlsInThisCall.insert(item.url)
+            }
+        }
+
+        // 2. Filter against already registered subtitles.
+        // We use self.subtitles as the "source of truth" for what's ALREADY in MPV.
+        let newItems = uniqueIncoming.filter { item in
             !self.subtitles.contains(where: { $0.url == item.url })
         }
         
-        // Always store the full list for reference
-        self.subtitles = items
+        // 3. Update the persistent list (append unique new ones)
+        // We SHOULD merge them to allow late arrivals (healing loop)
+        for item in newItems {
+            self.subtitles.append(item)
+        }
         
         guard let mpv = mpvController else { return }
         if newItems.isEmpty {

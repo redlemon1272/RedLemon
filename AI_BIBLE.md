@@ -113,6 +113,7 @@
 | **App Lag/Resource Exhaustion** | New LocalAPIClient() per view | #120 |
 | **UI Flash/Spinners** | Missing Optimistic Rendering | #121 |
 | **Supabase Error: Ext Limit** | Multiple Realtime WebSockets | #122 |
+| **Duplicate Subtitles/Audio** | Redundant Resolution Pulse (Healing Loop) | #123 |
 
 ## 🚨 Critical Landmines
 
@@ -129,6 +130,7 @@
 8.  **Date Decoding**: Postgres timestamps vary. **Rule**: Use `.withFractionalSeconds` and `.withInternetDateTime`.
 9.  **RLS Policies**: Implicit deny. **Rule**: Create `SELECT` policies for public tables.
 10. **Auto-Login**: **Rule**: Call critical connections (`SocialService.connect()`) in `loadStoredUser`, not just `SignUp`.
+11. **Idempotent UI Services (Subtitle/Audio)**: **Rule**: Services receiving external data streams MUST deduplicate by URL/ID internally. Never assume the caller (e.g. `PlayerViewModel`) sends a clean or unique list. This prevents menu duplication during "Healing Loops" (Landmine #123).
 
 ### 11-15: System Stability
 11. **Safe Logging**: **Rule**: Use `NSLog("%@", "Msg: \(url)")`. String interpolation crashes on `%`.
@@ -143,6 +145,7 @@
 18. **Event Truth**: **Rule**: If ID starts with `event_`, it IS an event. Bypass Host Checks.
 19. **Zilean Integrity**: Logs lie. **Rule**: Check Admin Dashboard "Zilean Torrents" count. Static count = Broken Pipeline.
 20. **Timer Bursts**: Synchronized timers cause jitter. **Rule**: Stagger tasks (`Task.sleep` with offsets).
+21. **The "Healing Loop" Trap**: **Rule**: Logic that refreshes `selectedStream` in the background (to add late-arriving subtitles or info) MUST be non-destructive to current playback state. Use `loadExternalSubtitles` for late arrivals instead of re-injecting the whole stream. (Landmine #123).
 
 ### Performance Optimizations
 86. **Browse Page Performance (The "10 Rows of Death")**: *(Added v1.0.126)*

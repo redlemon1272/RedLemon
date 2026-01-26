@@ -6,7 +6,7 @@
 set -e
 
 # Configuration
-DOWNLOAD_URL="https://github.com/redlemon1272/RedLemon/releases/download/v1.0.157/RedLemon-v1.0.157.dmg"
+DOWNLOAD_URL="https://151.243.109.243.nip.io/updates/RedLemon-latest.dmg"
 APP_NAME="RedLemon.app"
 INSTALL_DIR="/Applications"
 TEMP_DMG="/tmp/RedLemon-Installer.dmg"

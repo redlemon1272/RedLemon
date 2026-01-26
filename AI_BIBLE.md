@@ -1920,11 +1920,8 @@ Complete the release across both repositories.
     git add . && git commit -m "Release v[VERSION]" && git push origin [BRANCH]
     ./scripts/merge-and-tag.sh v[VERSION]
     ```
-2.  **Public Repo**:
-    ```bash
-    cd ../RedLemon-Public
-    git add . && git commit -m "Sync: v[VERSION]" && git push origin main
-    ```
+2.  **Public Repo (Automated)**:
+    Follow **Section 19.3** or **19.8**. Running `./scripts/public-deploy.sh` completely replaces the need for manual Git commands in the `RedLemon-Public` folder.
 
 ### 19.5 Step 4: GitHub Release (The Trust Anchor)
 1.  Draft a new release on `redlemon1272/RedLemon`.

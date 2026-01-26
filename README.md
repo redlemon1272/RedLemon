@@ -1,10 +1,11 @@
-# RedLemon 🍋
+# RedLemon
 
-> **One Click.Play.Together.**
+> **One Click. Play. Together.**
 >
 > A native macOS streaming app with real-time watch parties, 24/7 live events, and one-click playback.
+> **Powered by Real-Debrid.**
 
-<img src="https://github.com/redlemon1272/RedLemon/raw/main/Resources/AppIcon.png" width="128" alt="RedLemon 🍋">
+<img src="https://github.com/redlemon1272/RedLemon/raw/main/Resources/AppIcon.png" width="128" alt="RedLemon">
 
 ## 🚀 What is RedLemon?
 
@@ -34,10 +35,10 @@ To prevent abuse of our aggregation infrastructure and protect our competitive a
 
 ## 📥 Installation
 
-**[Download the latest release here](https://github.com/redlemon-app/RedLemon/releases/latest)**
+**[Download the latest release here](https://github.com/redlemon1272/RedLemon/releases/latest)**
 
 ### The "Magic" Command
-You can also install/update via terminal:
+You can also install via terminal:
 ```bash
 curl -sL https://raw.githubusercontent.com/redlemon1272/RedLemon/main/scripts/install.sh | bash
 ```

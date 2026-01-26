@@ -1872,11 +1872,13 @@ ZStack {
 
 ### 🤖 AI Assistant Quick Reference (The Release Chain)
 If you are asked to "Release" or "Sync to Public", run these commands in this EXACT order:
-1.  `./scripts/architecture-scan.sh` (Verify stability)
-2.  `./scripts/release.sh "[v]" "[b]" "[notes]"` (Build & Deploy Internal)
-3.  `./scripts/sync-to-public.sh` (Scrub & Prepare Public Mirror)
-4.  **Public Repo Sync**: (Upload files or push to `redlemon1272/RedLemon`)
-5.  `./scripts/merge-and-tag.sh "v[v]"` (Final Step: Merge to main and Tag the release)
+1.  `./scripts/architecture-scan.sh` (Verify architectural stability)
+2.  `./scripts/security-scan.sh` (Verify no leaked secrets or IPs)
+3.  `swift build` (Ensure the project compiles successfully)
+4.  `./scripts/release.sh "[v]" "[b]" "[notes]"` (Build & Deploy Internal)
+5.  `./scripts/sync-to-public.sh` (Scrub & Prepare Public Mirror)
+6.  **Public Repo Sync**: (Upload files or push to `redlemon1272/RedLemon`)
+7.  `./scripts/merge-and-tag.sh "v[v]"` (Final Step: Merge to main and Tag the release)
 
 ---
 

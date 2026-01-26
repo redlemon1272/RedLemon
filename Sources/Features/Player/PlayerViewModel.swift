@@ -153,6 +153,12 @@ class PlayerViewModel: ObservableObject {
         showPlayer = true
         if let appState = appState {
             appState.currentView = .player
+
+            // CRITICAL FIX: Clear background lobby sessions for solo playback
+                if let zombieVM = appState.activeLobbyViewModel {
+                    NSLog("🧹 PlayerVM: Solo playback started. Clearing active lobby session: %@", zombieVM.room.id)
+                    appState.setActiveLobbyViewModel(nil)
+                }
         }
 
         // FIX: Enter fullscreen immediately for Watch Party mode
@@ -1295,7 +1301,7 @@ class PlayerViewModel: ObservableObject {
 
                     // Clear persistent lobby session
                     if let appState = appState {
-                        appState.activeLobbyViewModel = nil
+                        appState.setActiveLobbyViewModel(nil)
                     }
                 }
 
@@ -1685,11 +1691,9 @@ class PlayerViewModel: ObservableObject {
                     }
                 }
 
-                // CRITICAL FIX: Create persistent Lobby Session
+                // CRITICAL FIX: Create persistent Lobby Session via safe handoff
                 let vm = LobbyViewModel(room: watchPartyRoom, isHost: true)
-                appState.activeLobbyViewModel = vm
-
-                appState.activeLobbyViewModel = vm
+                appState.setActiveLobbyViewModel(vm)
 
                 appState.currentView = .watchPartyLobby
                 appState.isLoadingRoom = false
@@ -1981,9 +1985,9 @@ class PlayerViewModel: ObservableObject {
                         }
                     }
 
-                    // CRITICAL FIX: Create persistent Lobby Session
+                    // CRITICAL FIX: Create persistent Lobby Session via safe handoff
                     let vm = LobbyViewModel(room: watchPartyRoom, isHost: self.isWatchPartyHost)
-                    appState.activeLobbyViewModel = vm
+                    appState.setActiveLobbyViewModel(vm)
 
                     appState.currentView = .watchPartyLobby
                 }
@@ -2046,7 +2050,7 @@ class PlayerViewModel: ObservableObject {
 
             // Refresh global progress mapping in AppState
             appState?.updateWatchHistoryMapping()
-            
+
             // Sync to Cloud
             Task {
                 await SupabaseClient.shared.syncWatchHistoryItem(historyItem)

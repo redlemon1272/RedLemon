@@ -1237,7 +1237,7 @@ if [[ -f "$BUILD_SCRIPT" ]] && [[ -d "$RESOURCES_DIR" ]]; then
 
     while read -r ext; do
         if [[ -z "$ext" ]]; then continue; fi
-        
+
         # Check if build script has a cp command for this extension
         # We look for 'cp.*Resources/.*\.$ext' or 'cp.*Resources/\*'
         # or stricter: 'cp Resources/*.$ext'
@@ -1251,7 +1251,7 @@ if [[ -f "$BUILD_SCRIPT" ]] && [[ -d "$RESOURCES_DIR" ]]; then
     while read -r file; do
         filename=$(basename "$file")
         name_no_ext="${filename%.*}"
-        
+
         # Search for Image("name_no_ext") usage
         VIOLATIONS=$(grep -rn "Image(\"$name_no_ext\")" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK" || true)
         if [[ -n "$VIOLATIONS" ]]; then
@@ -1260,7 +1260,7 @@ if [[ -f "$BUILD_SCRIPT" ]] && [[ -d "$RESOURCES_DIR" ]]; then
              done <<< "$VIOLATIONS"
         fi
     done < <(find "$RESOURCES_DIR" -type f -maxdepth 1 -not -name ".*" -not -name "AppIcon.icns")
-    
+
     echo -e "${GREEN}✅ Resource bundle copying verified.${NC}"
 fi
 
@@ -1279,7 +1279,7 @@ while IFS= read -r file; do
         # Check for non-awaited relaunchApp in a block that likely follows a sync
         # Regex: find relaunchApp() where the preceding lines don't have 'await' for the sync
         # This is hard to do perfectly with grep, but we can look for suspicious patterns.
-        
+
         # Look for Task { ... relaunchApp() } where 'await' might be missing on the sync call
         VIOLATIONS=$(grep -rn "relaunchApp()" "$file" | grep -v "await" | grep -v "// OK" || true)
         if [[ -n "$VIOLATIONS" ]]; then
@@ -1326,6 +1326,25 @@ if [[ -f "$SUBTITLE_SERVICE" ]]; then
         echo -e "${GREEN}✅ SubtitleService deduplication verified.${NC}"
     fi
 fi
+
+
+# =============================================================================
+# CHECK 61: Safe Lobby Handoff (Landmine #125)
+# =============================================================================
+# Trigger: Direct assignment to activeLobbyViewModel outside AppState.
+# Rule: Must use setActiveLobbyViewModel() to ensure cleanup.
+print_header "Check 61: Safe Lobby Handoff (Landmine #125)"
+
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+    # Skip AppState.swift as it's the authority
+    if [[ "$file" == *"AppState.swift"* ]]; then continue; fi
+
+    # Match assignment (=) but not identity comparison (===) or equality (==)
+    if [[ "$code" =~ \.activeLobbyViewModel[[:space:]]*=[^=] ]]; then
+         report "ERROR" "Landmine #125" "Dangerous Handoff: Direct assignment to activeLobbyViewModel. Use setActiveLobbyViewModel() to prevent background zombies." "$file" "$line" "$code"
+    fi
+done < <(grep -rn "\.activeLobbyViewModel[[:space:]]*=" "$SOURCES_DIR" --include="*.swift")
 
 
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"

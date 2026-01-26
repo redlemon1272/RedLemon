@@ -1,0 +1,34 @@
+🍋 Building RedLemon.app (DEBUG mode - faster)...
+🔧 System: x86_64
+🍎 macOS: 12.7.6
+🛠️  Xcode: 14.2
+✅ macOS 12.7.6 - OpenGL should be available
+🔧 Intel Mac detected - using standard libraries
+📁 Ensuring .app bundle structure exists...
+📦 Building Swift executable (debug)...
+🔧 Using architecture-specific flags: --arch x86_64
+[0/1] Planning build
+Building for debugging...
+[1/3] Emitting module RedLemon
+/Users/danielnoble/Desktop/Redlemon/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+[2/3] Compiling RedLemon MPVPlayerViewModel.swift
+/Users/danielnoble/Desktop/Redlemon/Sources/Features/Player/MPVPlayerViewModel.swift:1226:55: warning: left side of nil coalescing operator '??' has non-optional type 'Bool', so the right side is never used
+        NSLog("%@", "[VIDEO_READY] isEvent: \(isEvent ?? false), eventStartTime: \(eventStartTime?.description ?? "nil")")
+                                              ~~~~~~~ ^~~~~~~~
+                                                      
+/Users/danielnoble/Desktop/Redlemon/Sources/Features/Player/MPVPlayerViewModel.swift:2599:35: error: missing argument for parameter 'isPremium' in call
+                username: username
+                                  ^
+                                  , isPremium: <#Bool#>
+/Users/danielnoble/Desktop/Redlemon/Sources/Features/WatchParty/RealtimeChannelManager.swift:87:10: note: 'setup(roomId:isHost:userId:username:isPremium:postgresChanges:)' declared here
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, isPremium: Bool, postgresChanges: [[String: Any]]? = nil) async throws {
+         ^
+/Users/danielnoble/Desktop/Redlemon/Sources/Features/Player/MPVPlayerViewModel.swift:2741:29: warning: result of call to 'run(resultType:body:)' is unused
+            await MainActor.run {
+                            ^   ~
+/Users/danielnoble/Desktop/Redlemon/Sources/Features/Player/MPVPlayerViewModel.swift:2865:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
+            var mergedParticipants = Array(currentMap.values)
+            ~~~~^~~~~~~~~~~~~~~~~~
+            _

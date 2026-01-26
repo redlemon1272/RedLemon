@@ -114,6 +114,7 @@
 | **UI Flash/Spinners** | Missing Optimistic Rendering | #121 |
 | **Supabase Error: Ext Limit** | Multiple Realtime WebSockets | #122 |
 | **Duplicate Subtitles/Audio** | Redundant Resolution Pulse (Healing Loop) | #123 |
+| **Player Hijacked by Past Event** | Orphaned countdown ticker in LobbyVM | #125 |
 
 ## 🚨 Critical Landmines
 
@@ -146,6 +147,7 @@
 19. **Zilean Integrity**: Logs lie. **Rule**: Check Admin Dashboard "Zilean Torrents" count. Static count = Broken Pipeline.
 20. **Timer Bursts**: Synchronized timers cause jitter. **Rule**: Stagger tasks (`Task.sleep` with offsets).
 21. **The "Healing Loop" Trap**: **Rule**: Logic that refreshes `selectedStream` in the background (to add late-arriving subtitles or info) MUST be non-destructive to current playback state. Use `loadExternalSubtitles` for late arrivals instead of re-injecting the whole stream. (Landmine #123).
+22. **The "Activity Shield" Protocol**: **Rule**: Any background task (Task, Timer, or Ticker) that modifies global state or triggers navigation MUST verify it is still the current active instance before acting (e.g. `if appState.activeLobbyViewModel === self`). (Landmine #125).
 
 ### Performance Optimizations
 86. **Browse Page Performance (The "10 Rows of Death")**: *(Added v1.0.126)*
@@ -501,6 +503,15 @@
     *   **Trigger**: Triggering `performFullSync()` inside `AppState.init`.
     *   **Cause**: `AppState` is initialized before `RedLemonApp` finishes `loadStoredUser()`. The sync runs with a `nil` user ID because the Keychain hasn't been read yet.
     *   **Rule**: Never trigger cloud sync in a ViewModel or State `init`. Always defer to `RedLemonApp.task` (after `loadStoredUser`) or a post-authentication hook.
+
+125. **Safe Lobby Handoff & Background Zombies**: *(Added v1.0.141)*
+    *   **Trigger**: User joins a room (Lobby A), then navigates away or joins another room (Lobby B) without an explicit disconnect, while a background timer is running.
+    *   **Symptom**: The "Zombie" Lobby A timer fires later and hijacks the app (e.g. starting a movie or changing views) while the user is busy in Lobby B or a solo movie.
+    *   **Cause**: Direct assignment to `activeLobbyViewModel` in `AppState` fails to decommission the previous object's active background tasks.
+    *   **Rule**: **Mandatory Handoff Helper**.
+        1.  `AppState` MUST use `setActiveLobbyViewModel()` to transition between lobbies. This helper handles the cleanup of the outgoing instance.
+        2.  **Activity Shield**: Background tasks MUST verify `appState.activeLobbyViewModel === self` before modifying state.
+    *   **Automation**: `architecture-scan.sh` (Check 54) flags direct assignment to `activeLobbyViewModel` outside `AppState`.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)
@@ -1963,9 +1974,9 @@ When drafting release notes or public documentation:
 
 ### 19.7 Maintenance & Day-to-Day Development
 To keep development seamless while maintaining the public mirror:
-1.  **Workhorse Repo**: All code, logic, and Bible updates happen EXCLUSIVELY in `RedLemon-Native`. 
+1.  **Workhorse Repo**: All code, logic, and Bible updates happen EXCLUSIVELY in `RedLemon-Native`.
 2.  **Display Repo**: `RedLemon-Public` is a *read-only mirror*. Never write code directly in the public repo.
-3.  **Sync Frequency**: Run `scripts/sync-to-public.sh` during every release or significant UI update. 
+3.  **Sync Frequency**: Run `scripts/sync-to-public.sh` during every release or significant UI update.
 4.  **Issue Triage**: Bug reports from the public repo should be converted into tasks in the private repo.
 5.  **New Files**: Whenever a new `.swift` file is added to the UI, you MUST add its path to the `SAFE_FILES` whitelist in the sync script or it will not appear in the public repo.
 

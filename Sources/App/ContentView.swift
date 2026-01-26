@@ -257,20 +257,16 @@ struct ContentView: View {
                             .environmentObject(appState)
                     } else {
                         // Fallback: Create new VM (should ideally be handled by PlayerViewModel)
-                        let _ = {
-                            let vmId = appState.activeLobbyViewModel?.room.id ?? "nil"
-                            LoggingManager.shared.warn(.watchParty, message: "⚠️ Lobby: Session mismatch (AppState: \(vmId) vs Room: \(room.id)) - Creating fallback VM")
-                        }()
-
                         let isHost = appState.player.isWatchPartyHost
                         let newVM = LobbyViewModel(room: room, isHost: isHost)
-                        // Trigger async update to store it
-                        let _ = Task { @MainActor in
-                            appState.activeLobbyViewModel = newVM
-                        }
+
                         WatchPartyLobbyView(viewModel: newVM)
                             .id("lobby-\(room.id)")
                             .environmentObject(appState)
+                            .onAppear {
+                                NSLog("⚠️ Lobby: Session mismatch - Registering fallback VM via onAppear")
+                                appState.setActiveLobbyViewModel(newVM)
+                            }
                     }
                 } else if appState.isLoadingRoom {
                     ProgressView("Loading room...")

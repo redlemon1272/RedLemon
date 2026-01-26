@@ -89,7 +89,7 @@ class AppState: ObservableObject {
 
         // Initial watch history mapping
         updateWatchHistoryMapping()
-        
+
         // Listen for SyncManager updates
         NotificationCenter.default.publisher(for: NSNotification.Name("WatchHistoryDidUpdate"))
             .receive(on: RunLoop.main)
@@ -227,6 +227,29 @@ class AppState: ObservableObject {
     // Persistent Lobby Session
     // Keeps the LobbyViewModel alive during playback to prevent "Leave/Delete" logic
     @Published var activeLobbyViewModel: LobbyViewModel?
+
+    /// Sets a new active lobby ViewModel, ensuring the previous one is correctly disconnected and cleaned up.
+    /// This prevents "Zombie" lobbies from running background tickers that could hijack the player.
+    func setActiveLobbyViewModel(_ newValue: LobbyViewModel?) {
+        // If it's the same object, do nothing
+        if activeLobbyViewModel === newValue { return }
+
+        // Capture previous to clean up AFTER setting new (prevents recursion)
+        let previousLobby = activeLobbyViewModel
+
+        // Assign the new one (or nil)
+        activeLobbyViewModel = newValue
+
+        // If a previous lobby exists, kill it cleanly
+        if let old = previousLobby {
+            NSLog("🧹 [AppState] Disconnecting previous lobby session: %@", old.room.id)
+            old.initiateLeave() // Triggers stopPolling(), ticker cancellation, and DB cleanup
+        }
+
+        if let newLobby = newValue {
+            NSLog("✨ [AppState] Registered new active lobby: %@", newLobby.room.id)
+        }
+    }
 
     // Dynamic Schedule
     @Published var scheduleEpoch: Date = ScheduleConstants.Epoch
@@ -560,7 +583,7 @@ class AppState: ObservableObject {
                         return nil
                     }
                 }
-                
+
                 var counts: [String: Int] = [:]
                 for await result in group {
                     if let (id, count) = result {
@@ -667,7 +690,7 @@ class AppState: ObservableObject {
 
 
 
-    
+
     // MARK: - Cloud Sync
     // Managed by SyncManager.swift
 }

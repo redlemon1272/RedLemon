@@ -764,12 +764,9 @@ class LobbyViewModel: ObservableObject {
         // Stop polling immediately
         stopPolling()
 
-        // CRITICAL FIX: Clear persistent reference in AppState to allow deinit.
-        // If we don't do this, AppState holds a strong reference, preventing deinit,
-        // and the 'countdownTask' keeps running, eventually hijacking the screen.
+        // CRITICAL FIX: Clear persistent reference via helper to avoid leaks.
         if appState?.activeLobbyViewModel === self {
-            appState?.activeLobbyViewModel = nil
-            NSLog("🧹 Lobby: Cleared persistent activeLobbyViewModel from AppState")
+            appState?.setActiveLobbyViewModel(nil)
         }
 
         stateMachine.transition(to: .closed)
@@ -1434,6 +1431,10 @@ class LobbyViewModel: ObservableObject {
         presenceManager.stopPolling()
         databaseManager.stopPolling()
 
+        // CRITICAL FIX: Cancel background tickers
+        countdownTask?.cancel()
+        countdownTask = nil
+
         print("🛑 Lobby: Polling stopped (chat via Realtime only)")
     }
 
@@ -1680,6 +1681,14 @@ class LobbyViewModel: ObservableObject {
         if let sid = sessionId, sid == self.lastAutoStartedSessionId {
              print("🛑 autoStartSystemEvent: Blocking loop again (Session: \(sid))")
              return
+        }
+
+        // CRITICAL FIX: Ensure ViewModel is still the "active" one in AppState
+        // If the user has navigated away, this VM is a "Zombie" and should not trigger playback.
+        if let activeVM = appState?.activeLobbyViewModel, activeVM !== self {
+            print("🧟 Lobby: ViewModel is a Zombie (navigated away). Blocking auto-start.")
+            stopPolling() // Ensure cleanup
+            return
         }
 
         guard let appState = appState else {

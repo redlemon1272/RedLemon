@@ -1897,14 +1897,21 @@ Execute the release script in the private repository. This builds the full app (
 
 ### 19.3 Step 2: The Scrubber Protocol (Sync to Public)
 Once the internal release is verified, sync the "shell" of the app to the public repository.
-1.  **Ensure Sibling Dir**: `../RedLemon-Public` must exist and be a clone of the public repo.
-2.  **Run Scrubber**: Execute `scripts/sync-to-public.sh`.
+### 19.3 Automated Deployment
+For a one-click release to the public repository, use the master deployment script:
 ```bash
-./scripts/sync-to-public.sh
+export GH_PAT="your_github_token"
+./scripts/public-deploy.sh
 ```
+This script automates:
+1.  **Sanitization**: Runs `sync-to-public.sh`.
+2.  **Authentication**: Injects the GH_PAT into the public repo remote.
+3.  **Synchronization**: Force-pushes the sanitized state to GitHub.
 *   **Logic (Default Deny)**: Only files in the `SAFE_FILES` whitelist are copied.
 *   **Stubs**: Secret ViewModels/Services are replaced with logic-free stubs.
 *   **Sanitization**: All production IPs are replaced with placeholders.
+*   **Credential Scrubbing**: All Supabase/JWT keys (`eyJhbGciOi...`) are replaced with `SUPABASE_ANON_KEY_PLACEHOLDER`.
+*   **Safety Interlocks**: The script MUST abort if it detects patterns like `sk_live`, `Bearer`, `eyJhbGciOi`, or the production IP.
 
 ### 19.4 Step 3: The Git Ceremony
 Complete the release across both repositories.
@@ -1938,3 +1945,23 @@ To keep development seamless while maintaining the public mirror:
 3.  **Sync Frequency**: Run `scripts/sync-to-public.sh` during every release or significant UI update. 
 4.  **Issue Triage**: Bug reports from the public repo should be converted into tasks in the private repo.
 5.  **New Files**: Whenever a new `.swift` file is added to the UI, you MUST add its path to the `SAFE_FILES` whitelist in the sync script or it will not appear in the public repo.
+
+### 19.8 Public Repo Automation & Credentials
+To manage the `redlemon1272/RedLemon` public repository, use the automated deployment system.
+
+**Credential (GH_PAT)**:
+The following token is a "No Expiry" fine-grained PAT with `repo:contents` access for the public RedLemon repo.
+`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`
+
+**Automated Deployment Command**:
+```bash
+export GH_PAT="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"
+./scripts/public-deploy.sh
+```
+
+**Scrubbing Enforcement**:
+The `public-deploy.sh` script (invoking `sync-to-public.sh`) is the **ONLY** way to push to public. It enforces:
+*   Global replacement of `AI_BIBLE` with `Internal Note`.
+*   Global replacement of `Landmine` with `Security Check`.
+*   Sanitization of Supabase keys and IPs.
+*   Replacement of private hero links with local `Resources/` links.

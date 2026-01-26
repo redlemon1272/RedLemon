@@ -230,56 +230,60 @@ RedLemon-Native/
 
 ---
 
-## Git Strategy
+## Git Strategy: The "Default Deny" Protocol
 
-### Repository Structure
+**CRITICAL SAFETY RULE**: The synchronization script uses a **Whitelist-Only (Default Deny)** architecture.
+- We do **NOT** exclude files.
+- We **ONLY** include files explicitly listed.
+- Any file not in the whitelist is **LEFT BEHIND**.
 
-**Public Repo:** `github.com/redlemon-app/RedLemon`
-- Contains all OPEN files
-- Has descriptive README
-- Has descriptive README (Focus on "How to verify")
-- Issues enabled for BUG REPORTS ONLY
-- **Pull Requests DISABLED** - This is a read-only mirror for transparency.
+### 1. The Scrubber Script (`sync-to-public.sh`)
+This script must be located in `RedLemon-Native/scripts/sync-to-public.sh`.
 
-**Private Repo:** Existing `RedLemon-Native`
-- Contains full codebase (OPEN + CLOSED)
-- Contains AI_BIBLE.md
-- Contains release scripts with credentials
+**Workflow:**
+1.  **Clean Slate**: `rm -rf ../RedLemon-Public/*` (Preserve `.git`)
+2.  **Whitelist Copy**: Loop through the `SAFE_FILES` array and copy ONLY those paths.
+3.  **Stub Generation**: Generate empty/dummy files for `CLOSED_FILES` so the project structure remains valid.
+4.  **Sanitization**: Grep the public folder for `151.243.109.243` and sensitive keys. Abort if found.
 
-### Development Workflow
+### 2. Whitelist Inventory
 
+#### 🟢 SAFE FILES (Copy 1:1)
+*   `Sources/App/RedLemonApp.swift`
+*   `Sources/App/AppState.swift`
+*   `Sources/Server/HTTPServer.swift`
+*   `Sources/Server/Credentials/KeychainManager.swift`
+*   `Sources/Networking/SupabaseClient.swift`
+*   `Sources/Shared/` (Recursive)
+*   `Sources/Features/Browse/` (Recursive)
+*   `Sources/Features/Settings/` (Recursive)
+*   `Sources/Features/Onboarding/` (Recursive)
+*   `Sources/Features/Library/` (Recursive)
+*   `Sources/Features/Search/` (Recursive)
+*   `Sources/Features/Player/*.swift` (UI files only)
+*   `Resources/` (Recursive)
+*   `README.md`
+*   `LICENSE`
+
+#### 🔴 CLOSED FILES (Generate Stubs)
+The script must generate a valid Swift file with the same class/struct name but **NO LOGIC**.
+
+*   `Sources/Features/Player/MPVPlayerViewModel.swift` -> `class MPVPlayerViewModel { /* Stubbed */ }`
+*   `Sources/Features/Lobby/LobbyViewModel.swift` -> `class LobbyViewModel { /* Stubbed */ }`
+*   `Sources/Features/Events/EventsViewModel.swift` -> `class EventsViewModel { /* Stubbed */ }`
+*   `Sources/Server/Services/StreamResolver.swift` -> `class StreamResolver { /* Stubbed */ }`
+*   `Sources/Server/Services/ProviderService.swift` -> `class ProviderService { /* Stubbed */ }`
+
+### 3. Execution
 ```bash
-# In private repo (RedLemon-Native)
-# Work as normal on all code
-
-# When preparing to push to public:
-./scripts/sync-to-public.sh
-```
-
-### The `sync-to-public.sh` Script
-
-This script is the main "Scrubber" tool. It is designed to be run from the root of the **private** repo.
-
-**Functionality:**
-1. **Targeting**: It expects a sibling directory named `../RedLemon-Public` which should be a clone of the public GitHub repo.
-2. **Whitelist Only**: It wipes the target directory (except `.git`) and copies ONLY files explicitly marked as OPEN in the script's whitelist.
-3. **Automated Stubs**: It automatically generates `MPVPlayerViewModel.swift` and `LobbyViewModel.swift` stubs in the target repo so it remains compile-compatible.
-4. **Sanitization**: It recursively searches the target repo for the production server IP (`151.243.109.243`) and replaces it with `redlemon.live.placeholder`.
-
-**Usage:**
-```bash
-# Ensure sibling repo exists
-cd .. && git clone https://github.com/redlemon-app/RedLemon RedLemon-Public
-cd RedLemon-Native
-
-# Run the scrub
+# From private repo
 ./scripts/sync-to-public.sh
 
-# Review and push
+# If successful, manually push from public repo
 cd ../RedLemon-Public
 git add .
-git commit -m "Sync: [Message]"
-git push origin main
+git commit -m "Sync: v1.0.X"
+git push
 ```
 
 ---
@@ -429,14 +433,12 @@ For each file marked OPEN:
 - [ ] No wallet/crypto seeds
 
 ### AI_BIBLE.md Handling
+> **CRITICAL**: The `AI_BIBLE.md` contains our internal architecture, credentials, and "Landmine" history. It is for internal development ONLY.
 
-Create `AI_BIBLE_PUBLIC.md` containing:
-- Architecture overview (no credentials)
-- Landmines list (sanitized - no server details)
-- Common patterns (safe concurrency, logging)
-- Deployment process (high-level, no credentials)
+- **Status**: 100% PRIVATE.
+- **Action**: Ensure `sync-to-public.sh` explicitly excludes `AI_BIBLE*.md`.
+- **Rationale**: The public needs to verify *features* (no malware), not inspect our internal development manifesto.
 
-The full `AI_BIBLE.md` stays private.
 
 ### 2. The Extension Pattern (Mixed Files)
 For files containing both UI state (Open) and sensitive logic (Closed), use Swift Extensions:
@@ -586,8 +588,7 @@ Before making the public repo live:
 - [ ] No credentials in OPEN files
 - [ ] No server IPs in OPEN files
 - [ ] No API keys in OPEN files
-- [ ] AI_BIBLE.md sanitized
-- [ ] AI_BIBLE_PUBLIC.md created
+- [ ] AI_BIBLE.md excluded from public repo
 - [ ] Release scripts excluded from public repo
 - [ ] Leak Detector passed (no keys/emails/passwords)
 
@@ -595,8 +596,8 @@ Before making the public repo live:
 - [ ] README.md written and reviewed
 - [ ] BUILDING.md explains hybrid model
 - [ ] LICENSE selected and added
-- [ ] AI_BIBLE_PUBLIC.md created
 - [ ] r/piracy post drafted
+
 
 ### Infrastructure
 - [ ] `sync-to-public.sh` script created and tested

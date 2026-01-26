@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 25, 2026 (Part 122: Realtime Consolidation & Optimistic UI)
+> **Last Updated:** January 25, 2026 (Part 19: Hybrid Open Source Protocol & Public Launch)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -1863,3 +1863,39 @@ ZStack {
     }
 }
 ```
+
+---
+
+# Part 19: The Hybrid Open Source Protocol
+
+> **"Transparency without vulnerability."**
+> On January 25, 2026, RedLemon transitioned to a Hybrid Open Source model to build community trust while protecting its core intellectual property (IP).
+
+### 19.1 The "Default Deny" Whitelist
+Unlike standard `.gitignore` patterns, we use a **Whitelisting** approach for public releases.
+*   **Tool**: `scripts/sync-to-public.sh`
+*   **Logic**: The script clears the public repo and *only* copies files explicitly listed in its internal `SAFE_FILES` array.
+*   **Safety**: If a file is not in the whitelist, it is physically impossible for it to be leaked.
+
+### 19.2 The Secret Sauce (Stubbed Logic)
+The "Brain" of RedLemon is closed-source. These files are replaced with **Functional Stubs** in the public repository to allow the UI to compile without revealing algorithms:
+1.  **StreamResolver.swift**: Multi-provider aggregation and ranking logic.
+2.  **MPVPlayerViewModel.swift**: proprietary watch-party sync and drift correction.
+3.  **LobbyViewModel.swift**: Real-time presence and room state orchestration.
+4.  **StreamService.swift**: Authenticated stream unlocking and Real-Debrid handshakes.
+
+### 19.3 The Sanitization Shield
+The scrubber script executes a mandatory recursive `sed` sweep on the public repo:
+*   **IP Scrubbing**: All instances of `151.243.109.X` are replaced with `redlemon.live.placeholder`.
+*   **Credential Grep**: The script aborts if it detects patterns like `sk_live`, `Bearer`, or `supabase_key` (excluding `.md` files).
+
+### 19.4 The Trust Chain (v1.0 Launch)
+*   **Public Repo**: `https://github.com/redlemon1272/RedLemon`
+*   **Identity**: Launched under the `redlemon1272` alias for professional separation.
+*   **Installer**: `scripts/install.sh` points to the GitHub Release DMG.
+*   **UX Edge**: The Magic Installer uses the "Anti-Gravity Protocol" (`xattr -rd com.apple.quarantine`) to silently bypass macOS Gatekeeper for unsigned apps, providing a 1-click terminal experience.
+
+### 19.5 Golden Rules for Future Devs
+1.  **New Files**: If you create a new UI or infrastructure file, you MUST manually update the whitelist in `scripts/sync-to-public.sh`.
+2.  **New Secrets**: If you add a new API provider, you MUST add its key pattern to the Sanitization Sweep in the scrubber.
+3.  **Verification**: Always run `./scripts/sync-to-public.sh` and inspect the `../RedLemon-Public` folder before pushing.

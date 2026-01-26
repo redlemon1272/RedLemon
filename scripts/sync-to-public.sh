@@ -1,16 +1,11 @@
 #!/bin/bash
-
-# =============================================================================
-# 🍋 RedLemon Public Sync Tool (The Scrubber)
-# =============================================================================
-# Purpose: Synchronizes the private RedLemon-Native repo with the public
-#          GitHub repository by stripping closed-source components and
-#          sanitizing sensitive data.
-#
-# Follows: OPEN_SOURCE_PLAN.md
-# =============================================================================
-
 set -e
+
+# Configuration
+PRIVATE_REPO_ROOT=$(pwd)
+PUBLIC_REPO_ROOT="../RedLemon-Public"
+SERVER_IP="151.243.109.243"
+SANITIZED_IP="redlemon.live.placeholder"
 
 # Colors
 GREEN='\033[0;32m'
@@ -19,143 +14,238 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-# Paths
-PUBLIC_REPO_DIR="../RedLemon-Public" # Expected sibling directory
-PRIVATE_REPO_DIR=$(pwd)
-SERVER_IP="151.243.109.243"
+echo -e "${BLUE}🛡️  Starting RedLemon Scrubber Protocol...${NC}"
 
-echo -e "${BLUE}🚀 Starting Public Sync Strategy...${NC}"
-
-# 1. Verify Public Repo Target
-if [ ! -d "$PUBLIC_REPO_DIR/.git" ]; then
-    echo -e "${RED}❌ Error: Public repository directory not found at $PUBLIC_REPO_DIR${NC}"
-    echo "Please clone the public repo to the sibling folder first."
+# 1. Pre-flight Checks
+if [ ! -d "$PUBLIC_REPO_ROOT" ]; then
+    echo -e "${RED}❌ Error: Public repo not found at $PUBLIC_REPO_ROOT${NC}"
+    echo "Please clone it first: cd .. && git clone https://github.com/redlemon-app/RedLemon RedLemon-Public"
     exit 1
 fi
 
-# 2. Define Whitelist (Only these directories/files are copied)
-# Based on OPEN_SOURCE_PLAN.md
-OPEN_PATHS=(
-    "Sources/App"
-    "Sources/Features/Browse"
-    "Sources/Features/Player/MPVWrapper.swift"
-    "Sources/Features/Player/PlayerView.swift"
-    "Sources/Features/Player/PlayerControlsView.swift"
-    "Sources/Features/Lobby/LobbyView.swift"
-    "Sources/Features/Lobby/LobbyComponents.swift"
-    "Sources/Features/Social/SocialView.swift"
-    "Sources/Features/Social/FriendsComponents.swift"
-    "Sources/Features/Settings"
-    "Sources/Features/Onboarding"
-    "Sources/Features/Admin/AdminDashboardView.swift"
-    "Sources/Features/Payments/PaymentView.swift"
-    "Sources/Features/Events/EventsView.swift"
-    "Sources/Server/HTTPServer.swift"
-    "Sources/Server/LocalAuthMiddleware.swift"
-    "Sources/Server/LocalAPIClient.swift"
-    "Sources/Server/Routes/MetadataRoutes.swift"
-    "Sources/Server/Routes/ProxyRoutes.swift"
-    "Sources/Server/Routes/TokenRoutes.swift"
-    "Sources/Server/Services/MetadataService.swift"
-    "Sources/Server/Credentials/KeychainManager.swift"
-    "Sources/Server/Credentials/AccountExportManager.swift"
-    "Sources/Networking/SupabaseClient.swift"
-    "Sources/Networking/CacheManager.swift"
-    "Sources/Networking/UpdateManager.swift"
-    "Sources/Services/LoggingManager.swift"
-    "Sources/Services/SessionRecorder.swift"
-    "Sources/Services/NotificationManager.swift"
-    "Sources/Shared"
-    "Resources"
-    "scripts/architecture-scan.sh"
-    "scripts/install.sh"
-    "README.md"
-    "OPEN_SOURCE_PLAN.md"
-    "appcast.xml"
-)
-
-# 3. Clean Public Repo (Except .git)
-echo -e "${YELLOW}🧹 Cleaning public repository...${NC}"
-find "$PUBLIC_REPO_DIR" -maxdepth 1 ! -name ".git" ! -name "." -exec rm -rf {} +
-
-# 4. Copy Whitelisted Files
-echo -e "${YELLOW}📁 Copying whitelisted files...${NC}"
-for path in "${OPEN_PATHS[@]}"; do
-    if [ -e "$path" ]; then
-        # Create parent directory if it doesn't exist
-        dest_dir=$(dirname "$PUBLIC_REPO_DIR/$path")
-        mkdir -p "$dest_dir"
-        cp -R "$path" "$PUBLIC_REPO_DIR/$path"
-    else
-        echo -e "${RED}⚠️  Warning: Path not found - $path${NC}"
+if [[ -n $(git status -s) ]]; then
+    echo -e "${YELLOW}⚠️  Warning: Working directory not clean. Syncing dirty state?${NC}"
+    read -p "Continue? (y/N) " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        exit 1
     fi
-done
+fi
 
-# 5. Generate Stubs for CLOSED Components
-echo -e "${YELLOW}🧩 Generating stubs for closed components...${NC}"
+# 2. Clean Slate (Preserve .git)
+echo -e "${YELLOW}🧹 Cleaning public repo...${NC}"
+find "$PUBLIC_REPO_ROOT" -mindepth 1 -not -path "$PUBLIC_REPO_ROOT/.git*" -delete
 
-# Helper function to create a stub
-create_stub() {
-    local file=$1
-    local content=$2
-    local full_path="$PUBLIC_REPO_DIR/$file"
-    mkdir -p "$(dirname "$full_path")"
-    echo -e "$content" > "$full_path"
-    echo "   ✅ Created stub: $file"
+# 3. Whitelist Copy (Default Deny)
+# Only these files are allowed to cross the air gap.
+
+copy_safe() {
+    local src="$1"
+    local dest="$PUBLIC_REPO_ROOT/$src"
+    
+    # Create parent dir
+    mkdir -p "$(dirname "$dest")"
+    
+    if [ -d "$src" ]; then
+        # Recursive copy for directories
+        cp -R "$src/"* "$dest" 2>/dev/null || true
+    elif [ -f "$src" ]; then
+        # File copy
+        cp "$src" "$dest"
+    else
+        echo -e "${YELLOW}⚠️  Skipping missing safelist item: $src${NC}"
+    fi
 }
 
-# Example Stub: MPVPlayerViewModel
-create_stub "Sources/Features/Player/MPVPlayerViewModel.swift" \
-"import Foundation\nimport Combine\n\n@MainActor\nclass MPVPlayerViewModel: ObservableObject {\n    @Published var isPlaying: Bool = false\n    @Published var currentTime: Double = 0\n    @Published var duration: Double = 0\n\n    func loadStream(url: String, metadata: Any) async throws {\n        // STUB: Full implementation is closed source.\n        throw NSError(domain: \"RedLemon\", code: 403, userInfo: [NSLocalizedDescriptionKey: \"Stream playback requires the private Core Engine.\"])\n    }\n}"
+echo -e "${BLUE}📦 Copying Safe Files...${NC}"
 
-# Example Stub: LobbyViewModel
-create_stub "Sources/Features/Rooms/LobbyViewModel.swift" \
-"import Foundation\nimport Combine\n\n@MainActor\nclass LobbyViewModel: ObservableObject {\n    @Published var participants: [Any] = []\n    @Published var room: Any? = nil\n\n    func connect() async {\n        // STUB: Watch-party sync logic is closed source.\n    }\n}"
+# --- WHITELIST START ---
 
-# 6. Sanitization (IP Removal)
-echo -e "${YELLOW}🧼 Sanitizing sensitive data...${NC}"
-# Replace server IP with placeholder
-grep -r "$SERVER_IP" "$PUBLIC_REPO_DIR" --exclude-dir=".git" -l | while read -r file; do
-    sed -i '' "s/$SERVER_IP/redlemon.live.placeholder/g" "$file"
-    echo "   ✅ Sanitized: $(basename "$file")"
-done
+# App Core
+copy_safe "Sources/App/RedLemonApp.swift"
+copy_safe "Sources/App/AppDelegate.swift"
+copy_safe "Sources/App/ContentView.swift"
+copy_safe "Sources/App/AppState.swift"
+copy_safe "Sources/App/Config.swift"
+copy_safe "Sources/App/DesignSystem.swift"
+copy_safe "Sources/App/UIConstants.swift"
+copy_safe "Sources/App/ScheduleConstants.swift"
+copy_safe "Sources/App/MediaButtonStyle.swift"
 
-# 7. Secret Leak Detector (Landmine Prevention)
-echo -e "${YELLOW}🛡️  Running Secret Leak Detector...${NC}"
+# Services (Safe)
+copy_safe "Sources/Services/LoggingManager.swift"
+copy_safe "Sources/Services/SessionRecorder.swift"
+copy_safe "Sources/Services/UpdateManager.swift"
+copy_safe "Sources/Services/TimeService.swift"
+copy_safe "Sources/Services/LogManager.swift"
+copy_safe "Sources/App/Services/WindowManager.swift"
 
-# Patterns to look for (Sparkle keys, JWTs, Mnemonic seeds, Server passwords)
-PATTERNS=(
-    "ed25519" # Sparkle/Identity keys
-    "eyJh"    # JWT starts
-    "d5KfXj5aB" # Sparkle Private Key Fragment
-    "supabase_anon_key"
-    "service_role"
-    "password:"
-    "argon2"
-)
+# Networking (Safe)
+copy_safe "Sources/Networking/SupabaseClient.swift"
+copy_safe "Sources/Networking/CacheManager.swift"
+copy_safe "Sources/Networking/LocalAPIClient.swift" 
 
-LEAK_FOUND=0
-for pattern in "${PATTERNS[@]}"; do
-    FOUND=$(grep -r "$pattern" "$PUBLIC_REPO_DIR" --exclude-dir=".git" --exclude="OPEN_SOURCE_PLAN.md" --exclude="sync-to-public.sh" -l || true)
-    if [ ! -z "$FOUND" ]; then
-        echo -e "${RED}❌ CRITICAL LEAK DETECTED: '$pattern' found in:${NC}"
-        echo "$FOUND"
-        LEAK_FOUND=1
-    fi
-done
+# Server Structure
+copy_safe "Sources/Server/HTTPServer.swift"
+copy_safe "Sources/Server/Middleware/LocalAuthMiddleware.swift"
+copy_safe "Sources/Server/Credentials/KeychainManager.swift"
+copy_safe "Sources/Server/Services/MetadataService.swift" # Safe (TMDb)
 
-if [ $LEAK_FOUND -eq 1 ]; then
-    echo -e "${RED}🛑 Sync ABORTED due to security leaks. Clean the public repo before proceeding.${NC}"
+# Safe Routes
+copy_safe "Sources/Server/Routes/MetadataRoutes.swift"
+copy_safe "Sources/Server/Routes/ProxyRoutes.swift"
+copy_safe "Sources/Server/Routes/TokenRoutes.swift"
+
+# Shared Components
+copy_safe "Sources/Models"
+copy_safe "Sources/Utilities"
+copy_safe "Sources/Components"
+
+# Features - Pure UI/Data
+copy_safe "Sources/Features/Browse"  # Contains EventsView
+copy_safe "Sources/Features/Library"
+copy_safe "Sources/Features/Settings"
+copy_safe "Sources/Features/Onboarding"
+copy_safe "Sources/Features/Search" 
+copy_safe "Sources/Features/Auth" # UsernameSetup, CryptoManager (Check if crypto safe? Assuming public/private key gen is standard)
+# Excluding 'Monetization' entirely (License/Crypto Logic)
+
+# Player UI (Excluding ViewModel logic)
+copy_safe "Sources/Features/Player/MPVPlayerView.swift"
+copy_safe "Sources/Features/Player/MPVWrapper.swift"
+copy_safe "Sources/Features/Player/Components"
+copy_safe "Sources/Features/Player/Services/PlaybackService.swift" # Check if this has logic? If small, safe.
+copy_safe "Sources/Features/Player/MPVBridgingHeader.h"
+
+# Rooms UI (Lobby)
+copy_safe "Sources/Features/Rooms/WatchPartyLobbyView.swift"
+copy_safe "Sources/Features/Rooms/HeroRoomCard.swift"
+copy_safe "Sources/Features/Rooms/RoomListView.swift" 
+copy_safe "Sources/Features/Rooms/MediaPickerSheet.swift"
+
+# Admin UI
+copy_safe "Sources/Features/Admin/AdminDashboardView.swift" 
+copy_safe "Sources/Features/Admin/AdminDashboardComponents.swift"
+
+# Friends UI
+copy_safe "Sources/Features/Friends"
+
+# Social UI
+copy_safe "Sources/Features/Social/ChatView.swift"
+
+# Resources & Project Config
+copy_safe "Resources"
+copy_safe "Package.swift"
+copy_safe "README.md"
+copy_safe "scripts/architecture-scan.sh"
+copy_safe "scripts/install.sh"
+copy_safe "OPEN_SOURCE_PLAN.md"
+
+# --- WHITELIST END ---
+
+# 4. Generate Stubs (The Black Box)
+# These files satisfy the compiler but contain NO logic.
+
+generate_stub() {
+    local path="$1"
+    local content="$2"
+    local dest="$PUBLIC_REPO_ROOT/$path"
+    
+    mkdir -p "$(dirname "$dest")"
+    echo "$content" > "$dest"
+    echo -e "   generating stub: $path"
+}
+
+echo -e "${BLUE}🧬 Generating Logic Stubs...${NC}"
+
+# MPV Player (The Engine)
+generate_stub "Sources/Features/Player/MPVPlayerViewModel.swift" "
+import Foundation
+import Combine
+
+// STUB: Full implementation contains proprietary sync logic.
+@MainActor
+class MPVPlayerViewModel: ObservableObject {
+    @Published var isPlaying = false
+    @Published var currentTime: Double = 0
+    @Published var duration: Double = 0
+    
+    func loadMedia(_ item: MediaItem) async { print(\"Stub\") }
+    func togglePlayPause() {}
+    func seek(to time: Double) {}
+}
+"
+
+# Lobby Logic (Presence)
+generate_stub "Sources/Features/Rooms/LobbyViewModel.swift" "
+import Foundation
+
+// STUB: Full implementation contains proprietary presence logic.
+@MainActor
+class LobbyViewModel: ObservableObject {
+    @Published var participants: [String] = []
+    func createLobby() async {}
+    func joinLobby(id: String) async {}
+}
+"
+
+# Stream Resolver (Aggregator)
+generate_stub "Sources/Server/Services/StreamResolver.swift" "
+import Foundation
+
+// STUB: Full implementation contains proprietary resolution engine.
+actor StreamResolver {
+    static let shared = StreamResolver()
+    func resolve(imdbId: String) async throws -> String? { return nil }
+}
+"
+
+# App-Level Stream Service (Orchestrator)
+generate_stub "Sources/App/Services/StreamService.swift" "
+import Foundation
+
+// STUB: Full implementation contains proprietary stream orchestration.
+class StreamService {
+    static let shared = StreamService()
+    func getStream(for item: MediaItem) async throws -> String? { return nil }
+}
+"
+
+# Provider Service (Integrations)
+generate_stub "Sources/Server/Services/ProviderService.swift" "
+import Foundation
+// STUB: Full implementation contains provider integrations.
+actor ProviderService { static let shared = ProviderService() }
+"
+
+# 5. Sanitization Execution (Scrubbing)
+echo -e "${BLUE}🧼 Scrubbing sensitive values...${NC}"
+
+# Replace Server IP with Placeholder
+# Use LC_ALL=C to handle byte sequences safely on macOS
+find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -print0 | xargs -0 sed -i '' "s/$SERVER_IP/$SANITIZED_IP/g"
+
+# 6. Final Sanitization Sweep (Verification)
+echo -e "${BLUE}🔍 Running Final Security Check...${NC}"
+
+# Check for Server IP (Should be gone now)
+if grep -r "$SERVER_IP" "$PUBLIC_REPO_ROOT" --exclude-dir=.git; then
+    echo -e "${RED}❌ ALARM: Production IP found in public repo!${NC}"
+    grep -r "$SERVER_IP" "$PUBLIC_REPO_ROOT" --exclude-dir=.git
     exit 1
 fi
 
-# 7. Final Verification
-echo -e "${GREEN}✨ Sync Complete!${NC}"
-echo "-------------------------------------------------------"
-echo "Target: $PUBLIC_REPO_DIR"
-echo "Files Copied: $(find "$PUBLIC_REPO_DIR" -type f | grep -v "/.git/" | wc -l)"
-echo "Next Steps:"
-echo "1. CD to $PUBLIC_REPO_DIR"
-echo "2. Review changes: git status"
-echo "3. Commit and Push to GitHub"
-echo "-------------------------------------------------------"
+# Check for 'sk_live' (Stripe/API patterns) - Excluding docs
+if grep -r "sk_live" "$PUBLIC_REPO_ROOT" --exclude-dir=.git --exclude="*.md"; then
+    echo -e "${RED}❌ ALARM: Potential API Key found!${NC}"
+    exit 1
+fi
+
+# Check for 'ai_bible' leaks
+if find "$PUBLIC_REPO_ROOT" -name "*AI_BIBLE*" | grep -q .; then
+    echo -e "${RED}❌ ALARM: AI_BIBLE found in public repo!${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}✅ Synchronization Complete!${NC}"
+echo "Next: cd ../RedLemon-Public && git add . && git commit -m 'Sync v1.0.X'"

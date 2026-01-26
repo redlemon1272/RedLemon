@@ -1,116 +1,67 @@
-# RedLemon
+# RedLemon 🍋
 
-A native macOS media streaming app with watch party features.
+> **Watch Together. It Just Plays.**
+>
+> A native macOS streaming app with real-time watch parties, 24/7 live events, and one-click playback.
 
-**Current Version:** v1.0.157 (build 157)
-**Status:** ✅ Production Ready
+![RedLemon Hero](https://github.com/redlemon-app/RedLemon/raw/main/Resources/Assets.xcassets/AppIcon.appiconset/icon_512x512.png)
 
-## 🚀 For AI Assistants & Developers
+## 🚀 What is RedLemon?
 
-**START HERE:** Read **[INDEX.md](INDEX.md)** for complete documentation navigation.
+RedLemon is a next-generation streaming client built for macOS. It aggregates content into a beautiful, unified interface with a focus on **social watching**.
 
-**Quick Links:**
-- **[HANDOFF.md](HANDOFF.md)** - Current project status (v1.0.8)
-- **[docs/ICP_MAINNET_GUIDE.md](docs/ICP_MAINNET_GUIDE.md)** - Watch party backend guide
-- **[ROADMAP.md](ROADMAP.md)** - Product roadmap
+*   **Live Cinema Events**: Scheduled community screenings where everyone watches synchronized in real-time. (See: `EventsView.swift`)
+*   **Watch Parties**: Create public or private rooms with low-latency sync using a native MPV integration. (See: `MPVWrapper.swift`, `LobbyView.swift`)
+*   **One-Click Play**: Aggregates providers into a single "Play" button. (Powered by the closed-source Stream Resolver).
+*   **Native Performance**: 100% Swift/SwiftUI with Metal-accelerated video playback. Zero Electron/Webview bloat. (See: `RedLemonApp.swift`)
 
-## ✨ Features
+## 🛡️ Hybrid Open Source Model
 
-- 🎬 Browse and search movies/TV shows
-- 📺 Season and episode selection
-- 💬 Automatic subtitle fetching and syncing
-- ⚡ High-performance MPV player with hardware acceleration
-- 🔗 Real-Debrid integration for premium streaming
-- 👥 **Watch Parties** - Synchronized viewing with friends (Supabase-powered)
-- 🔐 **Username System** - Persistent usernames in database
-- 🔄 **Auto-Updates** - Sparkle framework integration
-- 🎯 **4-Character Room Codes** - Easy sharing (e.g., "K7M2")
-- 👤 **MySpace Tom Feature** - Every user gets `lemontom` as first friend
+RedLemon is built on a **Hybrid Open Source** model. We believe in transparency without compromising the operational security of our networks.
 
-## Project Structure
+### What is Open Source? (85%+)
+You can inspect the vast majority of the codebase in this repository, including:
+*   **The Full UI**: Verify that there are no hidden buttons, overlays, or dark patterns.
+*   **Networking Layer**: `SupabaseClient.swift` and `LocalAPIClient.swift` show exactly where your data goes (and doesn't go).
+*   **Telemetry (None)**: You can verify that we do not include Google Analytics, Facebook Pixel, or any third-party trackers.
+*   **Credential Handling**: `KeychainManager.swift` proves your API keys are stored in the macOS Secure Enclave, never in plaintext.
 
-```
-RedLemon-Native/
-├── Sources/
-│   ├── App/                    # Main app and state management
-│   ├── Features/
-│   │   ├── Auth/              # Username-based authentication
-│   │   ├── Browse/            # Media browsing
-│   │   ├── Player/            # MPV video player
-│   │   ├── Rooms/             # Watch party rooms
-│   │   ├── Search/            # Media search
-│   │   └── Settings/          # App settings
-│   ├── Models/                # Data models
-│   ├── Networking/            # API clients (Supabase)
-│   └── Server/                # Backend Vapor server
-└── Frameworks/                # libmpv and Sparkle.framework
-```
+### What is Closed Source? (<15%)
+To prevent abuse of our aggregation infrastructure and protect our competitive algorithms, the following components are **stubbed** in this repo but present in the official binary:
+*   **Stream Resolution Engine**: The logic that aggregates and ranks providers.
+*   **Sync Algorithms**: The drift-correction math for watch parties.
+*   **Payment/Crypto Logic**: Security-critical wallet handling.
 
-## Quick Start
+## 📥 Installation
 
-### 1. Download & Install
-Download the latest DMG from the project distribution folder:
-- Open `RedLemon-Installer.dmg`
-- Drag RedLemon.app to Applications
-- **Important:** To launch for the first time, **Right-Click (Control-Click)** the app in Applications and select **Open**.
-- Click **"Open"** in the confirmation dialog (this bypasses the "Unidentified Developer" warning).
+**[Download the latest release here](https://github.com/redlemon-app/RedLemon/releases/latest)**
 
-### 2. Build from Source (Developers)
+### The "Magic" Command
+You can also install/update via terminal:
 ```bash
-# Build app
-scripts/build-app-debug.sh
-
-# Build DMG
-scripts/build-dmg.sh
-
-# Run app
-open build/RedLemon.app
+curl -sL https://raw.githubusercontent.com/redlemon1272/RedLemon/main/scripts/install.sh | bash
 ```
-### 3. Configure
-- Go to **Settings**
-- Add your RealDebrid API token
-- Create a username (stored in Supabase database)
 
-## Watch Parties
+> **Pro Tip**: Using the command above automatically handles the macOS "Unsigned App" warning for you. If you install manually via DMG, you will need to click **Open Anyway** in **System Settings > Privacy & Security**.
 
-Watch parties allow synchronized viewing with friends:
+## 🛠️ Building From Source
 
-1. **Create a room** from any media detail page
-2. **Share** the 4-character room code (e.g., `K7M2`)
-3. **Watch** together - host controls playback for all guests
+This repository contains the UI scaffolding. You can build it to inspect the code structure, but **playback will not work** without the proprietary plugins found in the official release.
 
-Each guest uses their own RealDebrid key to unlock the same file, ensuring perfect synchronization.
+1.  Clone the repo.
+2.  Open `RedLemon.xcodeproj`.
+3.  Build & Run (Cmd+R).
 
-### MySpace Tom Feature 👤
-Every new user automatically gets `lemontom` as their first friend (inspired by MySpace's Tom Anderson). No friend request needed - instant connection!
+## 🔒 Privacy & Security
 
-## Development
+*   **Zero Telemetry**: We do not track your usage.
+*   **Local-First**: We prefer local preferences over cloud storage.
+*   **Secure**: All sensitive tokens use Apple's Keychain Services.
 
-### Requirements
-- macOS 12.0+
-- Swift 5.9+
-- Xcode Command Line Tools
+## 📄 License
 
-### Architecture
-- **Frontend**: Swift + SwiftUI
-- **Video Player**: libmpv with hardware acceleration
-- **Backend Server**: Vapor (HTTP server for metadata/streaming)
-- **Database**: Supabase PostgreSQL (watch parties, users, friends)
-- **Authentication**: Username-based
-- **Auto-Updates**: Sparkle framework integration
+RedLemon is released under the **MIT License**.
+See [LICENSE](LICENSE) for details.
 
-## Auto-Updates 🔄
-
-RedLemon uses the industry-standard **Sparkle framework** for auto-updates:
-- **Check:** App checks for updates on launch (24hr interval)
-- **Download:** DMG files hosted on production server
-- **Verify:** Code signing validation (ad-hoc for development, Developer ID for production)
-- **Install:** Automatic replacement and relaunch
-
-Appcast feed: `https://151.243.109.243.nip.io/updates/appcast.xml`
-
-
-## License
-
-TBDv2
-
+---
+*Disclaimer: RedLemon is a media aggregation tool. Users are responsible for their own content consumption and must comply with local laws.*

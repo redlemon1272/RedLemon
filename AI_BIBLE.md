@@ -1870,6 +1870,15 @@ ZStack {
 
 > **Mandatory Rule**: All releases MUST follow this strict sequence. Deviating from this protocol risks leaking IP or shipping unstable builds.
 
+### 🤖 AI Assistant Quick Reference (The Release Chain)
+If you are asked to "Release" or "Sync to Public", run these commands in this EXACT order:
+1.  `./scripts/architecture-scan.sh` (Verify stability)
+2.  `./scripts/release.sh "[v]" "[b]" "[notes]"` (Build & Deploy Internal)
+3.  `./scripts/sync-to-public.sh` (Scrub & Prepare Public Mirror)
+4.  Commit & Push to BOTH repos (As detailed in 19.4)
+
+---
+
 ### 19.1 Pre-Flight Verification
 Before starting any release, ensure the environment is clean and verified.
 1.  **Architecture Scan**: Run `scripts/architecture-scan.sh`. Zero failures allowed.

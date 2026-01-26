@@ -80,7 +80,10 @@ struct RedLemonApp: App {
                         // 2. Returning User: Load credentials normally
                         await loadStoredUser()
 
-                        // 3. Username fallback if loading failed
+                        // 3. Perform Cloud Sync after identity is confirmed
+                        await SyncManager.shared.performFullSync()
+
+                        // 4. Username fallback if loading failed
                         if appState.currentUserId == nil { // OK
                             await MainActor.run {
                                 appState.showOnboarding = true

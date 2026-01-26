@@ -89,6 +89,16 @@ class AppState: ObservableObject {
 
         // Initial watch history mapping
         updateWatchHistoryMapping()
+        
+        // Listen for SyncManager updates
+        NotificationCenter.default.publisher(for: NSNotification.Name("WatchHistoryDidUpdate"))
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.updateWatchHistoryMapping()
+            }
+            .store(in: &cancellables)
+
+
     }
 
     /// Relaunches the application to ensure all service changes and environment variables are fresh.
@@ -656,6 +666,10 @@ class AppState: ObservableObject {
     }
 
 
+
+    
+    // MARK: - Cloud Sync
+    // Managed by SyncManager.swift
 }
 
 enum WatchMode {

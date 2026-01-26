@@ -2046,6 +2046,11 @@ class PlayerViewModel: ObservableObject {
 
             // Refresh global progress mapping in AppState
             appState?.updateWatchHistoryMapping()
+            
+            // Sync to Cloud
+            Task {
+                await SupabaseClient.shared.syncWatchHistoryItem(historyItem)
+            }
         }
     }
 

@@ -123,10 +123,12 @@ class AccountExportManager {
              if let encoded = try? JSONEncoder().encode(history) {
                 UserDefaults.standard.set(encoded, forKey: "watchHistory")
             }
+            // Trigger smart sync (Merges backup data with server logic)
+            await SyncManager.shared.performFullSync()
         }
 
         if let library = exportData.libraryItems, !library.isEmpty {
-            LibraryManager.shared.restoreFromBackup(items: library)
+            await LibraryManager.shared.restoreFromBackup(items: library)
         }
 
         // Landmine #88: Proactively set auth context to prevent heartbeat failures

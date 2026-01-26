@@ -66,7 +66,8 @@ class SocialService: ObservableObject {
         await fetchUnreadCounts()
 
         // 6. Sync Watch History
-        await syncLocalHistory()
+        // REPLACED BY: SyncManager.shared.performFullSync() (Global)
+        // await syncLocalHistory()
     }
 
     func disconnect() async {

@@ -15,6 +15,7 @@ struct SettingsView: View {
     @ObservedObject var updateManager: UpdateManager
     @EnvironmentObject var appState: AppState
     @StateObject private var licenseManager = LicenseManager.shared
+    @ObservedObject private var syncManager = SyncManager.shared
 
     // MARK: - App Version
     private var appVersion: String {
@@ -84,18 +85,18 @@ struct SettingsView: View {
                 }
 
                 usernameSection
+                
+                syncSection
 
                 recoveryPhraseSection
 
-                resetSection
-
                 Group {
+                    resetSection // Moved into Group to respect view limit
                     adminSection
-
                     supportSection
-
                     aboutSection
                 }
+
 
                 // Color.clear.frame(height: 40)
             }
@@ -798,6 +799,54 @@ struct SettingsView: View {
                     .buttonStyle(.borderedProminent)
                     .tint(.blue)
                 }
+            }
+            .padding(24)
+            .background(Color(NSColor.controlBackgroundColor))
+            .cornerRadius(16)
+        }
+    }
+
+    private var syncSection: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text("Cloud Sync")
+                .font(.system(size: 28, weight: .semibold))
+            
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Image(systemName: "icloud.and.arrow.down.fill")
+                        .font(.title2)
+                        .foregroundColor(.blue)
+                    Text("Library & History Sync")
+                        .font(.title3.weight(.semibold))
+                    
+                    Spacer()
+                    
+                    if syncManager.isSyncing {
+                        ProgressView()
+                            .scaleEffect(0.8)
+                    } else if let date = syncManager.lastSyncTime {
+                         Text("Last: \(date.formatted(date: .abbreviated, time: .shortened))")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+                Text("Manually sync your library and watch history with the cloud")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                
+                Button(action: {
+                    Task { await syncManager.performFullSync() }
+                }) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                        Text(syncManager.isSyncing ? "Syncing..." : "Sync Now")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 8)
+                }
+                .buttonStyle(.bordered)
+                .disabled(syncManager.isSyncing)
             }
             .padding(24)
             .background(Color(NSColor.controlBackgroundColor))

@@ -3069,3 +3069,183 @@ struct FeedbackReport: Identifiable, Codable {
         case createdAt = "created_at"
     }
 }
+
+// MARK: - Cloud Sync Logic
+
+struct RemoteLibraryItem: Codable {
+    let item_id: String
+    let name: String
+    let type: String
+    let poster_url: String?
+    let year: String?
+    let added_at: Date
+    let media_meta: MediaItem? // JSONB
+}
+
+struct RemoteHistoryItem: Codable {
+    let media_id: String
+    let title: String
+    let media_type: String
+    let poster_url: String?
+    let timestamp: Double?
+    let duration: Double?
+    let progress: Double
+    let season: Int?
+    let episode: Int?
+    let last_watched: Date
+    let media_meta: MediaItem? // JSONB
+}
+
+extension SupabaseClient {
+    
+    // MARK: - Library Sync
+    
+    /// Sync a single library item to the server (Upsert)
+    func syncLibraryItem(_ item: LibraryItem, mediaItem: MediaItem? = nil) async {
+        guard let userId = auth.currentUser?.id else { return }
+        
+        var innerPayload: [String: Any] = [
+            "user_id": userId.uuidString.lowercased(),
+            "item_id": item.id,
+            "name": item.name,
+            "type": item.type,
+            "poster_url": item.posterURL ?? NSNull(),
+            "year": item.year ?? NSNull(),
+            "added_at": SupabaseClient.isoFormatter.string(from: item.dateAdded)
+        ]
+        
+        if let mediaItem = mediaItem,
+           let data = try? JSONEncoder().encode(mediaItem),
+           let json = try? JSONSerialization.jsonObject(with: data) {
+            innerPayload["media_meta"] = json
+        }
+        
+        do {
+            _ = try await makeRequest(
+                path: "/rpc/upsert_library_item",
+                method: "POST",
+                body: ["payload": innerPayload],
+                sign: true
+            )
+        } catch {
+            print("❌ Sync: Failed to sync library item \(item.name): \(error)")
+        }
+    }
+    
+    /// Delete library item from server
+    func deleteLibraryItem(id: String) async {
+        guard let userId = auth.currentUser?.id else { return }
+        
+        do {
+            _ = try await makeRequest(
+                path: "/rpc/delete_user_library_item",
+                method: "POST",
+                body: [
+                    "p_user_id": userId.uuidString.lowercased(),
+                    "p_item_id": id
+                ],
+                sign: true
+            )
+        } catch {
+            print("❌ Sync: Failed to delete library item \(id): \(error)")
+        }
+    }
+    
+    /// Fetch all library items from server
+    func fetchRemoteLibrary() async throws -> [LibraryItem] {
+        guard let userId = auth.currentUser?.id else { return [] }
+        
+        let data = try await makeRequest(
+            path: "/rpc/fetch_user_library",
+            method: "POST",
+            body: ["p_user_id": userId.uuidString.lowercased()],
+            sign: true
+        )
+        
+        let remoteItems = try jsonDecoder.decode([RemoteLibraryItem].self, from: data)
+        
+        return remoteItems.map { remote in
+            LibraryItem(
+                id: remote.item_id,
+                type: remote.type,
+                name: remote.name,
+                posterURL: remote.poster_url,
+                dateAdded: remote.added_at,
+                year: remote.year
+            )
+        }
+    }
+    
+    // MARK: - Watch History Sync
+    
+    /// Sync a single watch history item to server (Upsert)
+    func syncWatchHistoryItem(_ item: WatchHistoryItem) async {
+        guard let userId = auth.currentUser?.id else { return }
+        
+        // Use legacy column names (media_id, title) to match existing table schema
+        var innerPayload: [String: Any] = [
+            "user_id": userId.uuidString.lowercased(),
+            "media_id": item.id,       // Table uses media_id
+            "title": item.mediaItem.name, // Table uses title
+            "media_type": item.mediaItem.type,
+            "poster_url": item.mediaItem.poster ?? NSNull(),
+            "timestamp": item.timestamp,
+            "duration": item.duration,
+            "progress": item.progress,
+            "last_watched": SupabaseClient.isoFormatter.string(from: item.lastWatched)
+        ]
+        
+        // Optional fields
+        if let s = item.season { innerPayload["season"] = s }
+        if let e = item.episode { innerPayload["episode"] = e }
+        
+        // Always sync the full media item metadata for restoration
+        if let data = try? JSONEncoder().encode(item.mediaItem),
+           let json = try? JSONSerialization.jsonObject(with: data) {
+            innerPayload["media_meta"] = json
+        }
+        
+        do {
+            _ = try await makeRequest(
+                path: "/rpc/upsert_watch_history_item",
+                method: "POST",
+                body: ["payload": innerPayload],
+                sign: true
+            )
+        } catch {
+            print("❌ Sync: Failed to sync history for \(item.mediaItem.name): \(error)")
+        }
+    }
+    
+    /// Fetch full watch history from server
+    func fetchRemoteWatchHistory() async throws -> [WatchHistoryItem] {
+        guard let userId = auth.currentUser?.id else { return [] }
+        
+        let data = try await makeRequest(
+            path: "/rpc/fetch_user_watch_history",
+            method: "POST",
+            body: ["p_user_id": userId.uuidString.lowercased()],
+            sign: true
+        )
+        
+        let remoteItems = try jsonDecoder.decode([RemoteHistoryItem].self, from: data)
+        
+        return remoteItems.compactMap { remote -> WatchHistoryItem? in
+            // Must have valid media_meta to reconstruct useful history locally
+            guard let mediaItem = remote.media_meta else {
+                return nil
+            }
+            
+            return WatchHistoryItem(
+                id: remote.media_id, // Map from media_id
+                mediaItem: mediaItem,
+                timestamp: remote.timestamp ?? 0,
+                duration: remote.duration ?? 0,
+                lastWatched: remote.last_watched,
+                quality: nil, 
+                season: remote.season,
+                episode: remote.episode
+            )
+        }
+    }
+}

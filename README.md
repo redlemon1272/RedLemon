@@ -1,6 +1,6 @@
 # RedLemon 🍋
 
-> **Watch Together. It Just Plays.**
+> **One Click.Play.Together.**
 >
 > A native macOS streaming app with real-time watch parties, 24/7 live events, and one-click playback.
 

@@ -1265,6 +1265,52 @@ if [[ -f "$BUILD_SCRIPT" ]] && [[ -d "$RESOURCES_DIR" ]]; then
 fi
 
 
+# =============================================================================
+# CHECK 58: The Restoration Race (Landmine #109)
+# =============================================================================
+# Trigger: relaunchApp() called shortly after a non-awaited sync.
+# Rule: Sync MUST be awaited before relaunching to ensure data is saved to disk.
+print_header "Check 58: Restoration Race (Landmine #109)"
+
+# Heuristic: Check if performFullSync and relaunchApp appear in the same file
+# then verify the relaunchApp is preceded by an 'await' on the same line or line before
+while IFS= read -r file; do
+    if grep -q "performFullSync" "$file" && grep -q "relaunchApp" "$file"; then
+        # Check for non-awaited relaunchApp in a block that likely follows a sync
+        # Regex: find relaunchApp() where the preceding lines don't have 'await' for the sync
+        # This is hard to do perfectly with grep, but we can look for suspicious patterns.
+        
+        # Look for Task { ... relaunchApp() } where 'await' might be missing on the sync call
+        VIOLATIONS=$(grep -rn "relaunchApp()" "$file" | grep -v "await" | grep -v "// OK" || true)
+        if [[ -n "$VIOLATIONS" ]]; then
+             while IFS=: read -r line code; do
+                 # Verify if there is a sync call in the same scope (heuristic)
+                 if grep -q "performFullSync" "$file"; then
+                     report "WARNING" "Landmine #109" "Potential Restoration Race: relaunchApp() detected. Ensure any preceding SyncManager calls are AWAITED to prevent data loss on terminate." "$file" "$line" "$code"
+                 fi
+             done <<< "$VIOLATIONS"
+        fi
+    fi
+done < <(find "$SOURCES_DIR" -name "*.swift")
+
+# =============================================================================
+# CHECK 59: Identity-Aware Startup Sync (Landmine #110)
+# =============================================================================
+# Trigger: performFullSync() inside init().
+# Rule: VM/State init() happens before loadStoredUser() in app startup.
+print_header "Check 59: Startup Sync Identity (Landmine #110)"
+
+while IFS= read -r file; do
+    # Use Perl to match init blocks containing 'performFullSync'
+    if perl -0777 -ne 'exit 0 if /init\s*\((?:[^{}]++|(?0))*\)\s*\{(?:[^{}]++|(?0))*\}/ && $& =~ /performFullSync/ ; exit 1' "$file"; then
+         # Found violation. Get line number of init.
+         LINE=$(grep -n "init" "$file" | head -n 1 | cut -d: -f1)
+         CODE=$(grep -A 2 "init" "$file" | head -3 | xargs)
+         report "ERROR" "Landmine #110" "Identity-Aware Sync Violation: performFullSync() called inside init(). Startup identity may not be loaded yet. Defer sync to app startup task." "$file" "$LINE" "$CODE"
+    fi
+done < <(find "$SOURCES_DIR" -name "*.swift")
+
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

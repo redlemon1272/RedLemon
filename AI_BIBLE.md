@@ -486,6 +486,19 @@
     *   **Cause**: SwiftUI's deeply nested closure syntax (stacks inside stacks) makes it incredibly clumsy for regex/line-based partial replacements. A single missed brace corrupts the entire file structure.
     *   **Rule**: **Atomic Replacement**. When modifying a complex SwiftUI `body`, the AI MUST replace the **ENTIRE** `body` property (or the whole `struct`), never just a sub-section. It is safer to re-print 50 lines than to spend 3 cycles fixing brace mismatches.
 
+109. **The Restoration Race (Sync-before-Relaunch)**: *(Added v1.0.140)*
+    *   **Symptom**: Cloud-only items (like library additions made on another device) vanish after a successful restoration/import.
+    *   **Trigger**: The restoration/import flow triggers a background sync and immediately calls `appState.relaunchApp()`.
+    *   **Cause**: Network requests for cloud sync are asynchronous. If the app process terminates (via relaunch) before the requests finish, data is lost.
+    *   **Rule**: Any flow that modifies account identity or restores backups MUST `await` the full synchronization task before calling `relaunchApp()`.
+    *   **Code**: `await SyncManager.shared.performFullSync()` followed by `appState.relaunchApp()`.
+
+110. **Identity-Aware Startup Sync**: *(Added v1.0.140)*
+    *   **Symptom**: "Unauthorized" or "User ID missing" errors in logs during startup, even for logged-in users.
+    *   **Trigger**: Triggering `performFullSync()` inside `AppState.init`.
+    *   **Cause**: `AppState` is initialized before `RedLemonApp` finishes `loadStoredUser()`. The sync runs with a `nil` user ID because the Keychain hasn't been read yet.
+    *   **Rule**: Never trigger cloud sync in a ViewModel or State `init`. Always defer to `RedLemonApp.task` (after `loadStoredUser`) or a post-authentication hook.
+
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)
 

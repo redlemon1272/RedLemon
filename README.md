@@ -4,7 +4,7 @@
 >
 > A native macOS streaming app with real-time watch parties, 24/7 live events, and one-click playback.
 
-![RedLemon Hero](https://github.com/redlemon-app/RedLemon/raw/main/Resources/Assets.xcassets/AppIcon.appiconset/icon_512x512.png)
+<img src="https://github.com/redlemon1272/RedLemon/raw/main/Resources/AppIcon.png" width="128" alt="RedLemon 🍋">
 
 ## 🚀 What is RedLemon?
 

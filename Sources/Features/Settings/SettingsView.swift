@@ -354,10 +354,14 @@ struct SettingsView: View {
                 .font(.system(size: 28, weight: .semibold))
 
             VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    EthereumLogo()
-                        .fill(Color.blue)
-                        .frame(width: 24, height: 38)
+                HStack(spacing: 12) {
+                    if let ethImage = NSImage(named: "ethereum_logo_v2") {
+                        Image(nsImage: ethImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 32, height: 32)
+                            .cornerRadius(6)
+                    }
                     Text("Host License")
                         .font(.title3.weight(.semibold))
 
@@ -1451,28 +1455,4 @@ struct SettingsView_Previews: PreviewProvider {
     }
 }
 
-/// Official Ethereum Geometry Shape
-struct EthereumLogo: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let width = rect.width
-        let height = rect.height
 
-        // Standard ETH logo silhouette
-        // Top Pyramid
-        path.move(to: CGPoint(x: width * 0.5, y: 0))
-        path.addLine(to: CGPoint(x: width, y: height * 0.61)) // Right
-        path.addLine(to: CGPoint(x: width * 0.5, y: height * 0.72)) // Center Bottom of Top
-        path.addLine(to: CGPoint(x: 0, y: height * 0.61)) // Left
-        path.closeSubpath()
-
-        // Bottom Pyramid
-        path.move(to: CGPoint(x: width * 0.5, y: height * 0.8)) // Start gap down
-        path.addLine(to: CGPoint(x: width, y: height * 0.61)) // Connect to Right Wing
-        path.addLine(to: CGPoint(x: width * 0.5, y: height)) // Bottom Tip
-        path.addLine(to: CGPoint(x: 0, y: height * 0.61)) // Connect to Left Wing
-        path.closeSubpath()
-
-        return path
-    }
-}

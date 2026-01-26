@@ -14,8 +14,8 @@ MACOS_VERSION=$(sw_vers -productVersion)
 XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
 
 # User-configurable versioning
-APP_VERSION="1.0.157"
-APP_BUILD="157"
+APP_VERSION="1.0.158"
+APP_BUILD="158"
 
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
 echo "🔧 System: $ARCH_NAME"
@@ -139,6 +139,12 @@ fi
 if [ -f "Resources/AppIcon.icns" ]; then
     cp "Resources/AppIcon.icns" "$RESOURCES/"
     echo "✅ Copied AppIcon.icns"
+fi
+
+# Copy all PNG resources (including ethereum_logo_v2.png)
+if [ -d "Resources" ]; then
+    cp Resources/*.png "$RESOURCES/" 2>/dev/null || true
+    echo "✅ Copied png resources from Resources/"
 fi
 
 # Fix library paths

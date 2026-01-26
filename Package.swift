@@ -34,6 +34,9 @@ let package = Package(
             ],
             path: "Sources",
             exclude: ["Networking/guestconsolelog.md"],
+            resources: [
+                .process("../Resources")
+            ],
             // Removed cSettings header search path as LibMPV handles it
             swiftSettings: [
                 .unsafeFlags([

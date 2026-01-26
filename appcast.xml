@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.158 -->
+        <item>
+            <title>Version 1.0.158</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Replaced Ethereum icon with high-quality vector image</li><li>Updated settings and payment views with new branding</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 26 Jan 2026 01:41:39 -0500</pubDate>
+            <sparkle:version>158</sparkle:version>
+            <sparkle:shortVersionString>1.0.158</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.158.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ij5IgzrFo1agKUOH6pqq0AQINKYl4XS41AzPhy99kJX9zaTVFFK2LjW8XCWqgQOPnnb6+R/oRNFCgcNDlnL7Bg==" length="75384507"
+            />
+        </item>
         <!-- v1.0.157 -->
         <item>
             <title>Version 1.0.157</title>

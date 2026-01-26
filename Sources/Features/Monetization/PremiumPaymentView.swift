@@ -111,8 +111,16 @@ struct PremiumPaymentView: View {
                                 Task { await loadAddress() }
                             }) {
                                 HStack {
-                                    Image(systemName: chain.icon)
-                                        .foregroundColor(selectedChain == chain ? .white : chain.color)
+                                    if chain == .evm, let ethImage = NSImage(named: "ethereum_logo_v2") {
+                                        Image(nsImage: ethImage)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 20, height: 20)
+                                            .cornerRadius(4)
+                                    } else {
+                                        Image(systemName: chain.icon)
+                                            .foregroundColor(selectedChain == chain ? .white : chain.color)
+                                    }
                                     Text(chain.displayName)
                                         .font(.body.weight(selectedChain == chain ? .medium : .regular))
                                 }

@@ -987,9 +987,7 @@ struct WatchPartyLobbyView: View {
     }
 
     private func leaveLobby() {
-        viewModel.initiateLeave()
-        appState.restoreWindowFromLobby()
-        appState.activeLobbyViewModel = nil // Clear persistent session
+        appState.setActiveLobbyViewModel(nil) // Clear persistent session safely
         appState.currentView = room.type == .event ? .events : .rooms
     }
 

@@ -764,6 +764,14 @@ class LobbyViewModel: ObservableObject {
         // Stop polling immediately
         stopPolling()
 
+        // CRITICAL FIX: Clear persistent reference in AppState to allow deinit.
+        // If we don't do this, AppState holds a strong reference, preventing deinit,
+        // and the 'countdownTask' keeps running, eventually hijacking the screen.
+        if appState?.activeLobbyViewModel === self {
+            appState?.activeLobbyViewModel = nil
+            NSLog("🧹 Lobby: Cleared persistent activeLobbyViewModel from AppState")
+        }
+
         stateMachine.transition(to: .closed)
 
         // Capture values locally (optional but safe)

@@ -1880,6 +1880,15 @@ If you are asked to "Release" or "Sync to Public", run these commands in this EX
 6.  **Public Repo Sync**: (Upload files or push to `redlemon1272/RedLemon`)
 7.  `./scripts/merge-and-tag.sh "v[v]"` (Final Step: Merge to main and Tag the release)
 
+### 🤖 Terminology & Intent (Command Word Safety)
+To prevent accidental public deployments, strict keywords are enforced:
+*   **"PUSH"** = **Private Only**.
+    *   *Action*: `git add` + `git commit` + `git push`.
+    *   *Effect*: Saves code to the private repo (backup). Users see nothing. Public repo untouched.
+*   **"RELEASE" / "SHIP"** = **Public Deployment**.
+    *   *Action*: Full satellite chain (`release.sh` + `sync-to-public.sh`).
+    *   *Effect*: Updates the app for 500+ users and pushes source to GitHub. **Use with caution.**
+
 ---
 
 ### 19.1 Pre-Flight Verification

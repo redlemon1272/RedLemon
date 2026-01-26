@@ -596,8 +596,11 @@ class LobbyPresenceManager: ObservableObject {
 
             for participant in roomParticipants {
                 var username = "User"
+                var fetchedIsPremium: Bool? = nil
+
                 if let user = try? await viewModel.dataService.getUserById(userId: participant.userId) {
                     username = user.username
+                    fetchedIsPremium = user.isPremium
                 }
 
                 // Match DB row to local participant state
@@ -643,7 +646,7 @@ class LobbyPresenceManager: ObservableObject {
                     name: username,
                     isHost: participant.isHost,
                     isReady: isReady,
-                    isPremium: existingLocal?.isPremium ?? false,
+                    isPremium: fetchedIsPremium ?? existingLocal?.isPremium ?? false,
                     joinedAt: finalJoinedAt,
                     phxRefs: existingLocal?.phxRefs ?? []
                 )

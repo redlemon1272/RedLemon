@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 25, 2026 (Part 19: Hybrid Open Source Protocol & Public Launch)
+> **Last Updated:** January 25, 2026 (Part 19: Public Release OpSec)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -1899,3 +1899,8 @@ The scrubber script executes a mandatory recursive `sed` sweep on the public rep
 1.  **New Files**: If you create a new UI or infrastructure file, you MUST manually update the whitelist in `scripts/sync-to-public.sh`.
 2.  **New Secrets**: If you add a new API provider, you MUST add its key pattern to the Sanitization Sweep in the scrubber.
 3.  **Verification**: Always run `./scripts/sync-to-public.sh` and inspect the `../RedLemon-Public` folder before pushing.
+### 19.6 Public Release Notes (OpSec)
+To maintain the "Hybrid" separation and operational security:
+1.  **NO Bible References**: Never mention the "AI Bible", "Landmines", or internal part numbers in `README.md`, GitHub Releases, or `appcast.xml`.
+2.  **No Secret Sauce**: Do not describe the internal mechanics of the `StreamResolver`, `LobbyViewModel` sync algorithms, or provider request patterns.
+3.  **User-Facing Only**: Release notes must focus purely on user-visible features, bug fixes, and performance improvements.

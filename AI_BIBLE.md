@@ -1446,7 +1446,9 @@ The `./scripts/release.sh` script handles the heavy lifting, but you must invoke
 *   **Upload**: The script syncs the `appcast.xml` and `.dmg` to the production server via `rsync`.
 *   **Documentation**:
     *   Update `README.md` with the new Version and Build Number.
-    *   Commit the `appcast.xml` changes.
+*   **Save State**:
+    *   Commit the changes: `git commit -am "chore: release v1.0.X"`
+    *   **Push**: `git push origin <current_branch>`
 
 ## 4. Finalize: Merge & Tag
 *   **Command**: `./scripts/merge-and-tag.sh v1.0.X`

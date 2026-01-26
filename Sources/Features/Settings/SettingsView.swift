@@ -142,7 +142,11 @@ struct SettingsView: View {
                 Task { @MainActor in
                     // Brief delay to allow the sheet dismissal to animate
                     try? await Task.sleep(nanoseconds: 500_000_000)
-                    appState.relaunchApp()
+                    
+                    // Final cloud sync before relaunch to ensure restoration is persistent
+                    await SyncManager.shared.performFullSync()
+                    
+                    appState.relaunchApp() // OK
                 }
             })
             .environmentObject(appState)
@@ -1349,8 +1353,11 @@ struct SettingsView: View {
                 // Brief delay so user sees the message
                 try? await Task.sleep(nanoseconds: 1_200_000_000)
 
+                // Final cloud sync before relaunch to persist credential state
+                await SyncManager.shared.performFullSync()
+
                 await MainActor.run {
-                    appState.relaunchApp()
+                    appState.relaunchApp() // OK
                 }
 
             } catch {
@@ -1424,7 +1431,9 @@ struct SettingsView: View {
             try? await Task.sleep(nanoseconds: 1_500_000_000)
 
             await MainActor.run {
-                appState.relaunchApp()
+                // Resetting data - we skip final sync because we want the cloud to remain 
+                // formatted for future restores, not overwritten with empty state.
+                appState.relaunchApp() // OK
             }
 
         } catch {

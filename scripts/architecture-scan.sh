@@ -1222,23 +1222,48 @@ for view in "${DETAIL_VIEWS[@]}"; do
 done
 
 # =============================================================================
-# CHECK 56: Protocol-Based Realtime Sharing (Landmine #122)
+# CHECK 57: Manual Resource Bundle Guard (Landmine #123)
 # =============================================================================
-# Trigger: Multiple actors or services creating dedicated SupabaseRealtimeClient instances.
-# Rule: All realtime logic MUST use 'SupabaseClient.shared.realtimeClient'.
-print_header "Check 56: Global Realtime Sharing (Landmine #122)"
+# Trigger: New file types in 'Resources/' not handled by 'build-app-debug.sh'.
+# Rule: Build script MUST cp the file extensions found in Resources.
+print_header "Check 57: Manual Resource Bundle Guard (Landmine #123)"
 
-while IFS=: read -r file line code; do
-    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+BUILD_SCRIPT="build-app-debug.sh"
+RESOURCES_DIR="Resources"
 
-    # Check for direct instantiation of expensive clients
-    if [[ "$code" =~ SupabaseRealtimeClient\( ]]; then
-        # Exclude the shared definition itself
-        if ! grep -q "static let shared" "$file"; then
-             report "ERROR" "Landmine #122" "Resource Risk: Do NOT instantiate 'SupabaseRealtimeClient()'. Use 'SupabaseClient.shared.realtimeClient'." "$file" "$line" "$code"
+if [[ -f "$BUILD_SCRIPT" ]] && [[ -d "$RESOURCES_DIR" ]]; then
+    # 1. Find all extensions in Resources (e.g. png, wav, mp3)
+    EXTENSIONS=$(find "$RESOURCES_DIR" -type f -not -name ".*" | sed 's/.*\.//' | sort | uniq)
+
+    while read -r ext; do
+        if [[ -z "$ext" ]]; then continue; fi
+        
+        # Check if build script has a cp command for this extension
+        # We look for 'cp.*Resources/.*\.$ext' or 'cp.*Resources/\*'
+        # or stricter: 'cp Resources/*.$ext'
+        if ! grep -qE "cp.*Resources/.*\.$ext|cp.*Resources/\*" "$BUILD_SCRIPT"; then
+             report "WARNING" "Landmine #123" "Invisible Asset Risk: Resources folder contains '.$ext' files, but '$BUILD_SCRIPT' does not have a specific 'cp' command for them. Verify that these assets are being copied to the bundle." "$BUILD_SCRIPT" "0" "Missing copy for .$ext"
         fi
-    fi
-done < <(grep -rn "SupabaseRealtimeClient(" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK")
+    done <<< "$EXTENSIONS"
+
+    # 2. Check for unsafe Image("string") usage for loose files
+    # We look for Image("filename") where filename exists in Resources/ but not Assets.xcassets
+    while read -r file; do
+        filename=$(basename "$file")
+        name_no_ext="${filename%.*}"
+        
+        # Search for Image("name_no_ext") usage
+        VIOLATIONS=$(grep -rn "Image(\"$name_no_ext\")" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK" || true)
+        if [[ -n "$VIOLATIONS" ]]; then
+             while IFS=: read -r src_file line code; do
+                 report "ERROR" "Landmine #123" "Invisible Asset Risk: Do NOT use Image(\"$name_no_ext\") for loose resources. Use NSImage(named: \"$name_no_ext\") to ensure bundle loading works in custom builds." "$src_file" "$line" "$code"
+             done <<< "$VIOLATIONS"
+        fi
+    done < <(find "$RESOURCES_DIR" -type f -maxdepth 1 -not -name ".*" -not -name "AppIcon.icns")
+    
+    echo -e "${GREEN}✅ Resource bundle copying verified.${NC}"
+fi
+
 
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"

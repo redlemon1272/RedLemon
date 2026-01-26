@@ -1866,41 +1866,63 @@ ZStack {
 
 ---
 
-# Part 19: The Hybrid Open Source Protocol
+# Part 19: The Satellite Release Workflow (Full Protocol)
 
-> **"Transparency without vulnerability."**
-> On January 25, 2026, RedLemon transitioned to a Hybrid Open Source model to build community trust while protecting its core intellectual property (IP).
+> **Mandatory Rule**: All releases MUST follow this strict sequence. Deviating from this protocol risks leaking IP or shipping unstable builds.
 
-### 19.1 The "Default Deny" Whitelist
-Unlike standard `.gitignore` patterns, we use a **Whitelisting** approach for public releases.
-*   **Tool**: `scripts/sync-to-public.sh`
-*   **Logic**: The script clears the public repo and *only* copies files explicitly listed in its internal `SAFE_FILES` array.
-*   **Safety**: If a file is not in the whitelist, it is physically impossible for it to be leaked.
+### 19.1 Pre-Flight Verification
+Before starting any release, ensure the environment is clean and verified.
+1.  **Architecture Scan**: Run `scripts/architecture-scan.sh`. Zero failures allowed.
+2.  **Version Check**: New Build Number must be an integer strictly greater than the one in `README.md`.
+3.  **Clean State**: Check `git status` to ensure no uncommitted local changes exist in the private repo.
 
-### 19.2 The Secret Sauce (Stubbed Logic)
-The "Brain" of RedLemon is closed-source. These files are replaced with **Functional Stubs** in the public repository to allow the UI to compile without revealing algorithms:
-1.  **StreamResolver.swift**: Multi-provider aggregation and ranking logic.
-2.  **MPVPlayerViewModel.swift**: proprietary watch-party sync and drift correction.
-3.  **LobbyViewModel.swift**: Real-time presence and room state orchestration.
-4.  **StreamService.swift**: Authenticated stream unlocking and Real-Debrid handshakes.
+### 19.2 Step 1: The "Dark Build" (Internal Deployment)
+Execute the release script in the private repository. This builds the full app (including secret sauce), signs it, and deploys it to the update server.
+```bash
+./scripts/release.sh "[VERSION]" "[BUILD_NUMBER]" "<li>[Note 1]</li><li>[Note 2]</li>"
+```
+*   **Result**: RedLemon is live on the Sparkle update channel for existing users.
 
-### 19.3 The Sanitization Shield
-The scrubber script executes a mandatory recursive `sed` sweep on the public repo:
-*   **IP Scrubbing**: All instances of `151.243.109.X` are replaced with `redlemon.live.placeholder`.
-*   **Credential Grep**: The script aborts if it detects patterns like `sk_live`, `Bearer`, or `supabase_key` (excluding `.md` files).
+### 19.3 Step 2: The Scrubber Protocol (Sync to Public)
+Once the internal release is verified, sync the "shell" of the app to the public repository.
+1.  **Ensure Sibling Dir**: `../RedLemon-Public` must exist and be a clone of the public repo.
+2.  **Run Scrubber**: Execute `scripts/sync-to-public.sh`.
+```bash
+./scripts/sync-to-public.sh
+```
+*   **Logic (Default Deny)**: Only files in the `SAFE_FILES` whitelist are copied.
+*   **Stubs**: Secret ViewModels/Services are replaced with logic-free stubs.
+*   **Sanitization**: All production IPs are replaced with placeholders.
 
-### 19.4 The Trust Chain (v1.0 Launch)
-*   **Public Repo**: `https://github.com/redlemon1272/RedLemon`
-*   **Identity**: Launched under the `redlemon1272` alias for professional separation.
-*   **Installer**: `scripts/install.sh` points to the GitHub Release DMG.
-*   **UX Edge**: The Magic Installer uses the "Anti-Gravity Protocol" (`xattr -rd com.apple.quarantine`) to silently bypass macOS Gatekeeper for unsigned apps, providing a 1-click terminal experience.
+### 19.4 Step 3: The Git Ceremony
+Complete the release across both repositories.
+1.  **Private Repo**:
+    ```bash
+    git add . && git commit -m "Release v[VERSION]" && git push origin [BRANCH]
+    ./scripts/merge-and-tag.sh v[VERSION]
+    ```
+2.  **Public Repo**:
+    ```bash
+    cd ../RedLemon-Public
+    git add . && git commit -m "Sync: v[VERSION]" && git push origin main
+    ```
 
-### 19.5 Golden Rules for Future Devs
-1.  **New Files**: If you create a new UI or infrastructure file, you MUST manually update the whitelist in `scripts/sync-to-public.sh`.
-2.  **New Secrets**: If you add a new API provider, you MUST add its key pattern to the Sanitization Sweep in the scrubber.
-3.  **Verification**: Always run `./scripts/sync-to-public.sh` and inspect the `../RedLemon-Public` folder before pushing.
-### 19.6 Public Release Notes (OpSec)
-To maintain the "Hybrid" separation and operational security:
-1.  **NO Bible References**: Never mention the "AI Bible", "Landmines", or internal part numbers in `README.md`, GitHub Releases, or `appcast.xml`.
-2.  **No Secret Sauce**: Do not describe the internal mechanics of the `StreamResolver`, `LobbyViewModel` sync algorithms, or provider request patterns.
-3.  **User-Facing Only**: Release notes must focus purely on user-visible features, bug fixes, and performance improvements.
+### 19.5 Step 4: GitHub Release (The Trust Anchor)
+1.  Draft a new release on `redlemon1272/RedLemon`.
+2.  **Upload Binary**: Attach the `RedLemon-v[VERSION].dmg` to the release.
+3.  **Update Installer**: Ensure `scripts/install.sh` in the public repo points to the GitHub DMG download link (this completes the trust chain).
+
+### 19.6 Operational Security (OpSec)
+When drafting release notes or public documentation:
+*   **NO Bible References**: Never mention the AI Bible, Landmines, or internal part numbers.
+*   **No Secret Sauce**: Do not describe the internal mechanics of `StreamResolver` or sync algorithms.
+*   **User-Facing Only**: Describe features (e.g., "Improved Watch Party stability") without revealing the "how".
+*   **Privacy First**: Explicitly point users to `LoggingManager.swift` to verify the "Zero Telemetry" claim.
+
+### 19.7 Maintenance & Day-to-Day Development
+To keep development seamless while maintaining the public mirror:
+1.  **Workhorse Repo**: All code, logic, and Bible updates happen EXCLUSIVELY in `RedLemon-Native`. 
+2.  **Display Repo**: `RedLemon-Public` is a *read-only mirror*. Never write code directly in the public repo.
+3.  **Sync Frequency**: Run `scripts/sync-to-public.sh` during every release or significant UI update. 
+4.  **Issue Triage**: Bug reports from the public repo should be converted into tasks in the private repo.
+5.  **New Files**: Whenever a new `.swift` file is added to the UI, you MUST add its path to the `SAFE_FILES` whitelist in the sync script or it will not appear in the public repo.

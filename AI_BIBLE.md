@@ -1874,9 +1874,9 @@ ZStack {
 If you are asked to "Release" or "Sync to Public", run these commands in this EXACT order:
 1.  `./scripts/architecture-scan.sh` (Verify stability)
 2.  `./scripts/release.sh "[v]" "[b]" "[notes]"` (Build & Deploy Internal)
-3.  `./scripts/merge-and-tag.sh "v[v]"` (Merge to main and Tag the release)
-4.  `./scripts/sync-to-public.sh` (Scrub & Prepare Public Mirror)
-5.  **Git Push**: Commit and push to the public mirror (detailed in 19.4)
+3.  `./scripts/sync-to-public.sh` (Scrub & Prepare Public Mirror)
+4.  **Public Repo Sync**: (Upload files or push to `redlemon1272/RedLemon`)
+5.  `./scripts/merge-and-tag.sh "v[v]"` (Final Step: Merge to main and Tag the release)
 
 ---
 

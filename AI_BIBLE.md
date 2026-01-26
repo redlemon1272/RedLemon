@@ -1447,11 +1447,16 @@ The `./scripts/release.sh` script handles the heavy lifting, but you must invoke
 *   **Documentation**:
     *   Update `README.md` with the new Version and Build Number.
     *   Commit the `appcast.xml` changes.
-*   **Git State**:
-    *   Create a tag: `git tag v1.0.X`
-    *   Merge strict: `git checkout main && git merge solo-launch && git push`
 
-## 4. DISTRIBUTION: The Anti-Gravity Protocol (Bypassing Quarantine)
+## 4. Finalize: Merge & Tag
+*   **Command**: `./scripts/merge-and-tag.sh v1.0.X`
+*   **Action**: This script automatically:
+    1.  Merges the current feature branch into `main`.
+    2.  Tags the release with `v1.0.X`.
+    3.  Pushes both `main` and the tag to origin.
+    4.  Returns to your original branch.
+
+## 5. DISTRIBUTION: The Anti-Gravity Protocol (Bypassing Quarantine)
 To avoid the $99/year Apple Tax and Gatekeeper warnings without degrading UX, we use a **Terminal Installer**.
 
 ### The "Magic" Command

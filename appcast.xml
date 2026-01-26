@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.156 -->
+        <item>
+            <title>Version 1.0.156</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Fetch premium status from DB to ensure consistent display</li><li>Feat: Enable participant list in event lobbies using LazyVStack for performance</li><li>Feat: Add spacebar playback shortcut and improve watch party sync in controls</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 25 Jan 2026 19:27:32 -0500</pubDate>
+            <sparkle:version>156</sparkle:version>
+            <sparkle:shortVersionString>1.0.156</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.156.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="Da8cYx2YS1TE+qTOQASi+ZQOMWyZKF/C9JaoAPZaxzM8mG86QnuzcHdKMVbvQWZbhMhlwjxo1AMJVRhfpk+pBQ==" length="74012978"
+            />
+        </item>
         <!-- v1.0.155 -->
         <item>
             <title>Version 1.0.155</title>

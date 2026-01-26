@@ -1962,3 +1962,24 @@ The `public-deploy.sh` script (invoking `sync-to-public.sh`) is the **ONLY** way
 *   Global replacement of `Landmine` with `Security Check`.
 *   Sanitization of Supabase keys and IPs.
 *   Replacement of private hero links with local `Resources/` links.
+
+---
+
+## Part 30: Resource & Asset Management Protocol
+
+### 1. The "Invisible Asset" Trap (Landmine #123)
+**Symptom**: New images or resources added to the `Resources/` folder do not appear in the built app, despite no compilation errors.
+**Root Cause**: **Manual Bundle Construction**. The project uses `build-app-debug.sh` instead of Xcode's standard build system. This script manually `cp` (copies) specific file types from `Resources/` to the app bundle. If you add a new file type (e.g. `.wav`) or forget to update the script, the file is never copied.
+**Mandatory Solution**:
+1. **Update Build Script**: You MUST add a `cp` command to `build-app-debug.sh` (and `build-dmg.sh` if needed) for any new resource types.
+2. **Use NSImage Loading**: For loose files in `Resources/`, use `NSImage(named: "filename")` instead of `Image("filename")` to robustly locate the bundle resource.
+
+```swift
+// ❌ WRONG: Fails for loose resources in custom builds
+Image("my_new_icon")
+
+// ✅ CORRECT: Robust bundle loading
+if let img = NSImage(named: "my_new_icon") {
+    Image(nsImage: img)
+}
+```

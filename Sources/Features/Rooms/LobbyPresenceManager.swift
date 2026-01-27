@@ -196,8 +196,17 @@ class LobbyPresenceManager: ObservableObject {
                     // We must extract the actual user_id from metadata if available.
                     let metaUserId = metadata?["user_id"] as? String
                     let metaUsername = metadata?["username"] as? String
-                    
-                    let normalizedID = (metaUserId ?? metaUsername ?? userId).lowercased()
+
+                    var normalizedID = (metaUserId ?? metaUsername ?? userId).lowercased()
+
+                    // BIBLE LANDMINE #47 Fix: If metadata is missing (common on sparse .leave events),
+                    // resolve the true stable User ID (UUID) from our connection map.
+                    if metaUserId == nil && metaUsername == nil {
+                        if let resolvedParticipant = strongViewModel.participants.first(where: { $0.phxRefs.contains(userId) }) {
+                            normalizedID = resolvedParticipant.id.lowercased()
+                            NSLog("🛡️ Lobby: Resolved sparse presence Ref %@ to stable ID %@", userId, normalizedID)
+                        }
+                    }
 
                     // Cancel any pending leave task for this user
                     strongSelf.pendingLeaveTasks[normalizedID]?.cancel()
@@ -276,7 +285,16 @@ class LobbyPresenceManager: ObservableObject {
                     let metaUsername = metadata?["username"] as? String
 
                     let leavingPhxRef = userId
-                    let normalizedID = (metaUserId ?? metaUsername ?? userId).lowercased()
+                    var normalizedID = (metaUserId ?? metaUsername ?? userId).lowercased()
+
+                    // BIBLE LANDMINE #47 Fix: If metadata is missing (common on sparse .leave events),
+                    // resolve the true stable User ID (UUID) from our connection map.
+                    if metaUserId == nil && metaUsername == nil {
+                        if let resolvedParticipant = strongViewModel.participants.first(where: { $0.phxRefs.contains(userId) }) {
+                            normalizedID = resolvedParticipant.id.lowercased()
+                            NSLog("🛡️ Lobby: Resolved sparse leave Ref %@ to stable ID %@", leavingPhxRef, normalizedID)
+                        }
+                    }
                     let capturedUsername = metaUsername ?? "User"
 
                     // Defer leave processing to avoid false positives from metadata updates
@@ -285,7 +303,7 @@ class LobbyPresenceManager: ObservableObject {
                         try? await Task.sleep(nanoseconds: 10_000_000_000) // 10s
 
                         guard let strongSelf = self else { return }
-                        
+
                         // Handle task cancellation
                         if Task.isCancelled { return }
                         guard let strongViewModel: LobbyViewModel = strongSelf.viewModel else { return }
@@ -356,10 +374,10 @@ class LobbyPresenceManager: ObservableObject {
                             strongSelf.pendingLeaves.insert(normalizedID)
                             strongSelf.scheduleFlush()
                         }
-                        
+
                         strongSelf.pendingLeaveTasks.removeValue(forKey: normalizedID)
                     }
-                    
+
                     strongSelf.pendingLeaveTasks[normalizedID]?.cancel()
                     strongSelf.pendingLeaveTasks[normalizedID] = task
                 }

@@ -462,23 +462,23 @@ class MPVPlayerViewModel: ObservableObject {
         appState.player.$selectedStream
             .sink { [weak self] newStream in
                 guard let self = self, let stream = newStream else { return }
-                
+
                 let streamId = stream.infoHash ?? stream.url ?? ""
                 let subtitles = stream.subtitles ?? []
-                
+
                 LoggingManager.shared.info(.subtitles, message: "MPVPlayerViewModel: Detected \(subtitles.count) subtitles in stream. Syncing to SubtitleService.")
-                
+
                 Task {
                     // Normalize subtitles
                     let formatted = subtitles.map { (url: $0.url, label: $0.label) }
-                    
+
                     // If this is a DIFFERENT stream than before, clear the service first
                     // We use IMDb ID or stream identifier to detect changes
                     if self.imdbId != streamId {
                          // Only clear if we actually have new subtitles to load or if we are truly switching media
                          // For now, let loadStream handle the hard clear, and we just append here.
                     }
-                    
+
                     await self.subtitleService.loadExternalSubtitles(formatted)
                 }
             }
@@ -2393,7 +2393,17 @@ extension MPVPlayerViewModel {
                     let metaUserId = metadata?["user_id"] as? String
                     let metaUsername = metadata?["username"] as? String
                     // CRITICAL FIX: Normalize UUIDs to lowercase to prevent mismatched keys (Supabase inconsistency)
-                    let actualUserId = (metaUserId ?? metaUsername ?? userId).lowercased()
+                    var actualUserId = (metaUserId ?? metaUsername ?? userId).lowercased()
+
+                    // BIBLE LANDMINE #47 Fix: If metadata is missing (common on sparse .leave events),
+                    // resolve the true stable User ID (UUID) from our connection map.
+                    // This ensures the 10s grace period and ref-counting works correctly.
+                    if metaUserId == nil && metaUsername == nil {
+                        if let resolvedId = self.activeConnectionRefs.first(where: { $0.value.contains(userId) })?.key {
+                            actualUserId = resolvedId
+                            LoggingManager.shared.debug(.watchParty, message: "🛡️ Presence: Resolved sparse event Ref \(userId) to stable ID \(actualUserId)")
+                        }
+                    }
 
                     switch action {
                     case .join:
@@ -2970,7 +2980,7 @@ extension MPVPlayerViewModel {
 
                 // If Offline, clear ghost data
                 self.ghostCandidateStartTimes.removeValue(forKey: id)
-                
+
                 // If Offline and Not in DB: Apply grace period
                 if !isInDB {
                     if let start = self.offlineCandidateStartTimes[id] {
@@ -2985,7 +2995,7 @@ extension MPVPlayerViewModel {
                     }
                     return false // Keep for now (grace period)
                 }
-                
+
                 // If Offline but STILL in DB: Keep (Stale connection, likely reconnecting)
                 self.offlineCandidateStartTimes.removeValue(forKey: id)
                 return false

@@ -127,6 +127,7 @@
 | **Duplicate System Messages** | Rapid UI Transitions / Double onAppear | #132 |
 | **Event Sync Noise** | Non-user seeks shown during events | #133 |
 | **Seek Notification Flood** | Large drift correction triggers spam | #134 |
+| **Scanner Proximity Failure** | Guard too far from trigger | #135 |
 
 ## 🚨 Critical Landmines
 
@@ -2170,3 +2171,12 @@ if let img = NSImage(named: "my_new_icon") {
     - (a) A notification was sent within the last **5.0 seconds**.
     - (b) The new seek position is within **3.0 seconds** of the last announced position (redundant drift correction).
 
+    - (b) The new seek position is within **3.0 seconds** of the last announced position (redundant drift correction).
+
+### 4. Scanner Proximity Failure (Landmine #135)
+**Symptom**: `scripts/architecture-scan.sh` fails with a warning like "Missing !isEventPlayback guard" even though you added `if !isEventPlayback { ... }` nearby.
+**Root Cause**: The scanner uses **regex heuristic checks**, not a full AST parser. It looks for the guard keyword (e.g. `!isEventPlayback`) within a tight proximity window (N lines) of the trigger (e.g. `announcementTriggers.send`). If you place the guard too high up or separate it with empty lines/comments, the scanner cannot "see" it.
+**Mandatory Solution**:
+1. **Tight Clustering**: Logic guards MUST be within **5 lines** of the sensitive call.
+2. **Explicit Comments**: If separation is necessary, use `// OK: Guarded by !isEventPlayback above` to suppress the warning, but PREFER physical proximity.
+3. **Zero Warning Policy**: As of v1.0.163, **0 Warnings** are tolerated in production builds. You must fix proximity issues, not ignore them.

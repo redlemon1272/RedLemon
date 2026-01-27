@@ -174,3 +174,17 @@ echo "Next steps:"
 echo "1. Commit and push appcast.xml to GitHub (for backup)"
 echo "2. Create GitHub Release v${VERSION} manually (optional)"
 echo "---------------------------------------------------"
+
+# 7. Automated Merge & Tag (Chain of Custody)
+echo ""
+echo -e "${BLUE}🔗 Initiating Merge & Tag Protocol...${NC}"
+read -p "Do you want to automatically merge and tag v${VERSION} now? (y/n) " -n 1 -r
+echo ""
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    ./scripts/merge-and-tag.sh "v${VERSION}"
+else
+    echo -e "${YELLOW}⚠️  Skipping Merge & Tag. Don't forget to run it manually!${NC}"
+    echo "   ./scripts/merge-and-tag.sh v${VERSION}"
+fi
+
+echo -e "${GREEN}✅ Release Sequence Complete.${NC}"

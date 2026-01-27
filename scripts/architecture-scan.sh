@@ -1603,8 +1603,15 @@ echo ""
 echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
 
 # Exit Code Logic
-if [[ $ERROR_COUNT -gt 0 ]]; then
-    exit 1 # Block items
+# Exit Code Logic: Zero Warning Policy Enforcement (Landmine #135)
+if [[ $ERROR_COUNT -gt 0 || $WARNING_COUNT -gt 0 ]]; then
+    if [[ $WARNING_COUNT -gt 0 ]]; then
+        echo -e "${RED}❌ FAILED: Zero Warning Policy Violation. All warnings must be resolved or suppressed.${NC}"
+    else
+        echo -e "${RED}❌ FAILED: Blocking issues detected.${NC}"
+    fi
+    exit 1
 else
-    exit 0 # Warnings don't block yet
+    echo -e "${GREEN}✅ PASSED: No blocking issues or warnings found.${NC}"
+    exit 0
 fi

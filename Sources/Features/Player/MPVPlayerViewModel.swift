@@ -1991,7 +1991,7 @@ class MPVPlayerViewModel: ObservableObject {
         LoggingManager.shared.info(.watchParty, message: "Host sending announcement: \(text)")
 
         // 1. Show locally immediately (floating only)
-        announcementTriggers.send(text)
+        announcementTriggers.send(text) // OK: Manual host announcement
 
         // 2. Broadcast via Realtime
         let userInfo = appState?.currentUsername
@@ -3277,7 +3277,7 @@ extension MPVPlayerViewModel {
                 let timeSinceLastSeek = Date().timeIntervalSince(lastSeekNotificationTime ?? .distantPast)
                 let isRedundant = timeSinceLastSeek < 3.0 && abs((lastSeekNotificationPosition ?? 0) - targetPosition) < 5.0
 
-                if !isRedundant && !isEvent {
+                if !isRedundant && appState?.player.isEventPlayback == false {
                     announcementTriggers.send("\(hostName) seeked to \(formatTime(targetPosition))")
                     lastSeekNotificationTime = Date()
                     lastSeekNotificationPosition = targetPosition

@@ -8,7 +8,7 @@ This workflow ensures a safe, verified release of RedLemon. Adhere to it strictl
 
 ## 1. Documentation & Prep
 1.  **AI Bible**: Read **Part 19** of `AI_BIBLE.md` to refresh memory on current Release Rules.
-2.  **Versioning**: 
+2.  **Versioning**:
     - Determine next Version (e.g. `1.1.0`) and Build Number (e.g. `118`).
     - Build Number MUST be strictly greater than the current one in `README.md`.
     - Check the current build number: `grep "Current Version" README.md`
@@ -38,11 +38,19 @@ If the script succeeds (Green "Deployed Successfully" message):
     ```
     *(Note: Do not commit the .dmg itself to git)*
 
+3.  **Create GitHub Release**:
+    - Go to GitHub -> Releases -> Draft a new release.
+    - Tag: `v[VERSION]`.
+    - Title: `v[VERSION]`.
+    - Content: Paste the Release Notes.
+    - **Upload**: `RedLemon-Installer.dmg` (Required).
+
+
 3.  **Tag & Merge**:
     ```bash
     git tag v[VERSION]
     git push origin v[VERSION]
-    
+
     # Merge into main (if on feature branch)
     git checkout main
     git merge [CURRENT_BRANCH]

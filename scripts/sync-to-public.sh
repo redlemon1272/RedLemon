@@ -42,7 +42,7 @@ find "$PUBLIC_REPO_ROOT" -mindepth 1 -not -path "$PUBLIC_REPO_ROOT/.git*" -delet
 copy_safe() {
     local src="$1"
     local dest="$PUBLIC_REPO_ROOT/$src"
-    
+
     if [ -d "$src" ]; then
         # Create destination dir
         mkdir -p "$dest"
@@ -84,7 +84,7 @@ copy_safe "Sources/App/Services/WindowManager.swift"
 # Networking (Safe)
 copy_safe "Sources/Networking/SupabaseClient.swift"
 copy_safe "Sources/Networking/CacheManager.swift"
-copy_safe "Sources/Networking/LocalAPIClient.swift" 
+copy_safe "Sources/Networking/LocalAPIClient.swift"
 
 # Server Structure
 copy_safe "Sources/Server/HTTPServer.swift"
@@ -107,7 +107,7 @@ copy_safe "Sources/Features/Browse"  # Contains EventsView
 copy_safe "Sources/Features/Library"
 copy_safe "Sources/Features/Settings"
 copy_safe "Sources/Features/Onboarding"
-copy_safe "Sources/Features/Search" 
+copy_safe "Sources/Features/Search"
 copy_safe "Sources/Features/Auth" # UsernameSetup, CryptoManager (Check if crypto safe? Assuming public/private key gen is standard)
 # Excluding 'Monetization' entirely (License/Crypto Logic)
 
@@ -121,11 +121,11 @@ copy_safe "Sources/Features/Player/MPVBridgingHeader.h"
 # Rooms UI (Lobby)
 copy_safe "Sources/Features/Rooms/WatchPartyLobbyView.swift"
 copy_safe "Sources/Features/Rooms/HeroRoomCard.swift"
-copy_safe "Sources/Features/Rooms/RoomListView.swift" 
+copy_safe "Sources/Features/Rooms/RoomListView.swift"
 copy_safe "Sources/Features/Rooms/MediaPickerSheet.swift"
 
 # Admin UI
-copy_safe "Sources/Features/Admin/AdminDashboardView.swift" 
+copy_safe "Sources/Features/Admin/AdminDashboardView.swift"
 copy_safe "Sources/Features/Admin/AdminDashboardComponents.swift"
 
 # Friends UI
@@ -141,6 +141,7 @@ copy_safe "README.md"
 copy_safe "scripts/architecture-scan.sh"
 copy_safe "scripts/install.sh"
 copy_safe "OPEN_SOURCE_PLAN.md"
+copy_safe "LICENSE"
 
 # --- WHITELIST END ---
 
@@ -151,7 +152,7 @@ generate_stub() {
     local path="$1"
     local content="$2"
     local dest="$PUBLIC_REPO_ROOT/$path"
-    
+
     mkdir -p "$(dirname "$dest")"
     echo "$content" > "$dest"
     echo -e "   generating stub: $path"
@@ -170,7 +171,7 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var isPlaying = false
     @Published var currentTime: Double = 0
     @Published var duration: Double = 0
-    
+
     func loadMedia(_ item: MediaItem) async { print(\"Stub\") }
     func togglePlayPause() {}
     func seek(to time: Double) {}
@@ -225,7 +226,8 @@ echo -e "${BLUE}🧼 Scrubbing sensitive values...${NC}"
 # Replace Server IP with Placeholder
 # Use LC_ALL=C to handle byte sequences safely on macOS
 # Exclude Resources as it contains binary files
-find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | xargs -0 sed -i '' "s/$SERVER_IP/$SANITIZED_IP/g"
+# Exclude scripts/install.sh as it needs the production IP
+find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -not -path "*/scripts/install.sh" -print0 | xargs -0 sed -i '' "s/$SERVER_IP/$SANITIZED_IP/g"
 
 # Scrub Supabase Anon Key
 # Replaces specific RedLemon JWT sequences with a generic placeholder
@@ -243,10 +245,10 @@ find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*
 # 6. Final Sanitization Sweep (Verification)
 echo -e "${BLUE}🔍 Running Final Security Check...${NC}"
 
-# Check for Server IP (Should be gone now)
-if grep -r "$SERVER_IP" "$PUBLIC_REPO_ROOT" --exclude-dir=.git; then
-    echo -e "${RED}❌ ALARM: Production IP found in public repo!${NC}"
-    grep -r "$SERVER_IP" "$PUBLIC_REPO_ROOT" --exclude-dir=.git
+# Check for Server IP (Should be gone now except in install.sh)
+if grep -r "$SERVER_IP" "$PUBLIC_REPO_ROOT" --exclude-dir=.git --exclude="install.sh"; then
+    echo -e "${RED}❌ ALARM: Production IP found in public repo (outside of installer)!${NC}"
+    grep -r "$SERVER_IP" "$PUBLIC_REPO_ROOT" --exclude-dir=.git --exclude="install.sh"
     exit 1
 fi
 

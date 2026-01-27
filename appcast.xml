@@ -12,7 +12,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fixed Friend History visibility using secure RPC (Landmine #126)</li><li>Smarter show deduplication via Root IMDB ID (Landmine #127)</li><li>Optimized profile performance with 20-item history capping (Landmine #128)</li><li>Full metadata sync for cloud history restoration</li>
+                    <li>Fixed Friend History visibility using secure RPC</li><li>Smarter show deduplication via Root IMDB ID</li><li>Optimized profile performance with 20-item history capping</li><li>Full metadata sync for cloud history restoration</li>
                 </ul>
             ]]></description>
             <pubDate>Mon, 26 Jan 2026 22:57:53 -0500</pubDate>

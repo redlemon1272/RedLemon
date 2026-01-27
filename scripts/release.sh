@@ -68,6 +68,10 @@ if [ -z "$RELEASE_NOTES" ]; then
     RELEASE_NOTES="<li>Production Release v${VERSION}</li>"
 fi
 
+# 🛡️ OpSec: Scrub "Landmine #" mentions from release notes for public consumption
+# Removes "(Landmine #123)" or "Landmine #123"
+RELEASE_NOTES=$(echo "$RELEASE_NOTES" | sed -E 's/ \(Landmine #[0-9]+\)//g' | sed -E 's/Landmine #[0-9]+//g')
+
 echo -e "${BLUE}🚀 Starting Release Flow for v${VERSION} (${BUILD_NUMBER})...${NC}"
 
 # 1. Update Version in build script

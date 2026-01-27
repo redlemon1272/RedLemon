@@ -109,6 +109,7 @@ copy_safe "Sources/Features/Settings"
 copy_safe "Sources/Features/Onboarding"
 copy_safe "Sources/Features/Search"
 copy_safe "Sources/Features/Auth" # UsernameSetup, CryptoManager (Check if crypto safe? Assuming public/private key gen is standard)
+copy_safe "Sources/Features/Sync" # Cloud Sync Logic
 # Excluding 'Monetization' entirely (License/Crypto Logic)
 
 # Player UI (Excluding ViewModel logic)
@@ -131,8 +132,8 @@ copy_safe "Sources/Features/Admin/AdminDashboardComponents.swift"
 # Friends UI
 copy_safe "Sources/Features/Friends"
 
-# Social UI
-copy_safe "Sources/Features/Social/ChatView.swift"
+# Social UI & Services
+copy_safe "Sources/Features/Social"
 
 # Resources & Project Config
 copy_safe "Resources"

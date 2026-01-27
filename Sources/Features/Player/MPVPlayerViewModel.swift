@@ -1388,7 +1388,11 @@ class MPVPlayerViewModel: ObservableObject {
                 } else {
                     // Announce Host Action for Guest
                     let hostName = self.getHostName(for: nil)
-                    self.announcementTriggers.send("\(hostName) seeked to \(self.formatTime(resumeTime))")
+                    let isEvent = self.appState?.player.isEventPlayback == true
+
+                    if !isEvent {
+                        self.announcementTriggers.send("\(hostName) seeked to \(self.formatTime(resumeTime))")
+                    }
                     self.lastSeekNotificationTime = Date()
                     self.lastSeekNotificationPosition = resumeTime
                 }
@@ -3272,13 +3276,18 @@ extension MPVPlayerViewModel {
 
                 // Announce Host Action
                 let hostName = getHostName(for: message.senderId)
+                let isEvent = appState?.player.isEventPlayback == true
 
                 // Suppress redundant notification if we just handled an explicit seek (within 3s and 5s of position)
                 let timeSinceLastSeek = Date().timeIntervalSince(lastSeekNotificationTime ?? .distantPast)
                 let isRedundant = timeSinceLastSeek < 3.0 && abs((lastSeekNotificationPosition ?? 0) - targetPosition) < 5.0
 
-                if !isRedundant {
+                if !isRedundant && !isEvent {
                     announcementTriggers.send("\(hostName) seeked to \(formatTime(targetPosition))")
+                    lastSeekNotificationTime = Date()
+                    lastSeekNotificationPosition = targetPosition
+                } else if !isRedundant {
+                    // Still update tracking even if we skip announcement
                     lastSeekNotificationTime = Date()
                     lastSeekNotificationPosition = targetPosition
                 }
@@ -3327,7 +3336,11 @@ extension MPVPlayerViewModel {
 
             // Announce Host Action
             let hostName = getHostName(for: message.senderId)
-            announcementTriggers.send("\(hostName) seeked to \(formatTime(seekPosition))")
+            let isEvent = appState?.player.isEventPlayback == true
+
+            if !isEvent {
+                announcementTriggers.send("\(hostName) seeked to \(formatTime(seekPosition))")
+            }
 
             await playbackService.seek(to: seekPosition)
             self.lastSeekNotificationTime = Date()

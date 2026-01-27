@@ -137,6 +137,18 @@ class LobbyPresenceManager: ObservableObject {
         }
         isPresenceSetup = true
 
+        // CRITICAL FIX: Initialize connection tracking from existing participants.
+        // This handles VM recreation (Landmine #93) by ensuring the new VM knows
+        // which users are already connected via Realtime.
+        if let viewModel = viewModel {
+            for participant in viewModel.participants {
+                if !participant.phxRefs.isEmpty {
+                    viewModel.connectedUserIds.insert(participant.id.lowercased())
+                    NSLog("🛡️ Lobby Sync: Inherited Realtime connection for user %@", participant.id)
+                }
+            }
+        }
+
         // Handle Postgres Changes (Room Deletion)
         await realtimeManager.setPostgresCallback { [weak self] payload in
             Task { @MainActor [weak self] in

@@ -2289,6 +2289,19 @@ extension MPVPlayerViewModel {
 
         self.currentUserId = userId.lowercased()
 
+        // CRITICAL FIX: Initialize connection tracking from existing participants inherited from Lobby.
+        // This prevents "Guest Left" messages during transition because the Player VM starts
+        // recognizing the Lobby-level Phoenix Refs immediately. (Bible Landmine #47/51)
+        if let existingRoom = appState?.player.currentWatchPartyRoom {
+            for participant in existingRoom.participants {
+                let normalizedPId = participant.id.lowercased()
+                if !participant.phxRefs.isEmpty {
+                    self.activeConnectionRefs[normalizedPId] = participant.phxRefs
+                    LoggingManager.shared.info(.watchParty, message: "🛡️ Transition Sync: Inherited \(participant.phxRefs.count) refs for user \(normalizedPId)")
+                }
+            }
+        }
+
         // Initialize Realtime manager
         self.realtimeManager = RealtimeChannelManager(realtimeClient: RedLemon.SupabaseClient.shared.realtimeClient)
 

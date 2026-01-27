@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 25, 2026 (Part 19: Public Release OpSec)
+> **Last Updated:** January 26, 2026 (Part 21: Social & Cloud Sync)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -115,6 +115,10 @@
 | **Supabase Error: Ext Limit** | Multiple Realtime WebSockets | #122 |
 | **Duplicate Subtitles/Audio** | Redundant Resolution Pulse (Healing Loop) | #123 |
 | **Player Hijacked by Past Event** | Orphaned countdown ticker in LobbyVM | #125 |
+| **Friend Profile Empty** | RLS blocks direct table reads between users | #126 |
+| **Duplicate Show Entries (Social)** | Unique ID used instead of Root IMDB ID | #127 |
+| **Social View Lag/Memory Spike** | Infinite history fetch/render | #128 |
+| **"ursinho" data not showing** | Friend hasn't synced local data to cloud yet | #129 |
 
 ## 🚨 Critical Landmines
 
@@ -512,6 +516,25 @@
         1.  `AppState` MUST use `setActiveLobbyViewModel()` to transition between lobbies. This helper handles the cleanup of the outgoing instance.
         2.  **Activity Shield**: Background tasks MUST verify `appState.activeLobbyViewModel === self` before modifying state.
     *   **Automation**: `architecture-scan.sh` (Check 54) flags direct assignment to `activeLobbyViewModel` outside `AppState`.
+
+126. **Friend Data Visibility (The RLS & RPC Trap)**: *(Added v1.0.142)*
+    *   **Trigger**: A user attempts to view a friend's watch history or library via a direct Supabase table query.
+    *   **Symptom**: The list appears empty result even though the friend has data. No error is thrown.
+    *   **Cause**: Row Level Security (RLS) is typically configured to only allow `auth.uid() = user_id`. PostgREST silently filters out rows that fail RLS, resulting in an empty list for friends.
+    *   **Rule**: **Use Security Definer RPCs**. Cross-user data retrieval MUST use a PostgreSQL function marked as `SECURITY DEFINER`. These bypass RLS while allowing you to control exactly what is exposed via code.
+    *   **Implementation**: Use `/rpc/fetch_user_watch_history` instead of direct table access.
+
+127. **History/Library Spam (Unique ID vs Root ID)**: *(Added v1.0.142)*
+    *   **Trigger**: A friend watches multiple episodes of a show.
+    *   **Symptom**: The friend's "Continue Watching" view shows the same show 5 times for different episodes.
+    *   **Cause**: The unique key for history is `imdbId_S_E`. Deduplicating by the full key allows different episodes of the same show to coexist.
+    *   **Rule**: **Deduplicate by Root ID**. When rendering "Latest Activity" or "Continue Watching" lists, extract the root IMDB ID (e.g., `media_id.components(separatedBy: "_").first`) and use it as the unique key for filtering.
+    *   **Impact**: Shows 1 unique entry per Movie/Show, preserving a clean UI.
+
+128. **Friend History Cap (UI Performance)**: *(Added v1.0.142)*
+    *   **Symptom**: Friend profile scrolling becomes laggy or application memory usage spikes after clicking several friends.
+    *   **Cause**: Fetching and rendering an uncapped history list (hundreds of items) for every friend interaction.
+    *   **Rule**: **Hard Cap Social Lists**. Any list displayed on a friend profile (History/Library) MUST be capped (e.g., `.prefix(20)`) after deduplication. This ensures constant-time rendering and keeps the view punchy.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)
@@ -1508,6 +1531,26 @@ Instead of downloading the DMG directly, users run this:
 ---
 
 ## Part 20: Stability & Polish Protocol (Mac Native)
+...
+
+# Part 21: Social & Cloud Sync Patterns
+
+## Secure Cross-User Data Access
+To protect user privacy while enabling social features, RedLemon uses a "Private-by-Default, Social-by-Exception" architecture.
+
+1.  **Write Operations**: MUST be signed by the user and verified via `verify_user_signature` in the RPC.
+2.  **Private Read**: Standard RLS allows users to see their own data via direct table queries.
+3.  **Social Read**: Accessing a friend's records MUST use dedicated RPCs (`fetch_user_library`, `fetch_user_watch_history`) that bypass RLS using `SECURITY DEFINER`. These RPCs are "relaxed" (no signature required for read-only access) to facilitate seamless profile viewing.
+
+## Cloud Sync Synchronization (SyncManager)
+The `SyncManager` facilitates a "Newest Wins" merge strategy between local `UserDefaults` and the Supabase cloud.
+
+- **Deduplication Key**: Always strip season/episode suffixes for the "Top Level" view.
+- **Sync Trigger**: Full sync happens during app startup (after identity is verified) and after local changes are persisted.
+- **Payload Integrity**: The full `MediaItem` metadata is stored as `JSONB` in the cloud to prevent "Lite Model" hydration issues on secondary devices.
+
+---
+
 
 ### 1. The "Horrific Closing Animation" (Landmine #82)
 **Symptom**: User sees window jitter, layout "jumps", or a flash of the loading screen when exiting solo playback.

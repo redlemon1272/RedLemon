@@ -1347,6 +1347,37 @@ while IFS=: read -r file line code; do
 done < <(grep -rn "\.activeLobbyViewModel[[:space:]]*=" "$SOURCES_DIR" --include="*.swift")
 
 
+# =============================================================================
+# CHECK 62: Social ID Deduplication (Landmine #127)
+# =============================================================================
+# Rule: Deduplicate social lists by Root IMDB ID, not the full session ID.
+print_header "Check 62: Social ID Deduplication (Landmine #127)"
+
+SOCIAL_SERVICE="$SOURCES_DIR/Features/Social/SocialService.swift"
+if [[ -f "$SOCIAL_SERVICE" ]]; then
+    if ! grep -q "components(separatedBy: \"_\").first" "$SOCIAL_SERVICE"; then
+        report "ERROR" "Landmine #127" "Social lists MUST be deduplicated by Root IMDB ID to prevent duplicate show entries. Check 'fetchFriendHistory' implementation." "$SOCIAL_SERVICE" "1" "Missing Root ID extraction"
+    else
+        echo -e "${GREEN}✅ Social ID deduplication verified.${NC}"
+    fi
+fi
+
+
+# =============================================================================
+# CHECK 63: Friend History Capping (Landmine #128)
+# =============================================================================
+# Rule: Hard cap social list fetches at 20 items for performance.
+print_header "Check 63: Social Data Capping (Landmine #128)"
+
+if [[ -f "$SOCIAL_SERVICE" ]]; then
+    if ! grep -q "prefix(20)" "$SOCIAL_SERVICE"; then
+        report "ERROR" "Landmine #128" "Social data fetches MUST be capped (e.g., .prefix(20)) to prevent UI lag and memory issues." "$SOCIAL_SERVICE" "1" "Missing collection prefix"
+    else
+        echo -e "${GREEN}✅ Friend history capping verified.${NC}"
+    fi
+fi
+
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

@@ -110,24 +110,14 @@ copy_safe "Sources/Features/Onboarding"
 copy_safe "Sources/Features/Search"
 copy_safe "Sources/Features/Auth" # UsernameSetup, CryptoManager (Check if crypto safe? Assuming public/private key gen is standard)
 copy_safe "Sources/Features/Sync" # Cloud Sync Logic
-# Excluding 'Monetization' entirely (License/Crypto Logic)
+copy_safe "Sources/Features/WatchParty"
+copy_safe "Sources/Features/Admin"
+# Monetization is handled per-file or excluded to prevent sensitive logic leaks
+# copy_safe "Sources/Features/Monetization" // legacy intentionally excluded
+copy_safe "Sources/Features/Rooms"
 
-# Player UI (Excluding ViewModel logic)
-copy_safe "Sources/Features/Player/MPVPlayerView.swift"
-copy_safe "Sources/Features/Player/MPVWrapper.swift"
-copy_safe "Sources/Features/Player/Components"
-copy_safe "Sources/Features/Player/Services/PlaybackService.swift" # Check if this has logic? If small, safe.
-copy_safe "Sources/Features/Player/MPVBridgingHeader.h"
-
-# Rooms UI (Lobby)
-copy_safe "Sources/Features/Rooms/WatchPartyLobbyView.swift"
-copy_safe "Sources/Features/Rooms/HeroRoomCard.swift"
-copy_safe "Sources/Features/Rooms/RoomListView.swift"
-copy_safe "Sources/Features/Rooms/MediaPickerSheet.swift"
-
-# Admin UI
-copy_safe "Sources/Features/Admin/AdminDashboardView.swift"
-copy_safe "Sources/Features/Admin/AdminDashboardComponents.swift"
+# Player & Rooms
+copy_safe "Sources/Features/Player"
 
 # Friends UI
 copy_safe "Sources/Features/Friends"

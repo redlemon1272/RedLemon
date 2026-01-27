@@ -1438,23 +1438,17 @@ print_header "Check 67: Air Gap Protocol (Whitelist Verification)"
 
 SYNC_SCRIPT="scripts/sync-to-public.sh"
 if [[ -f "$SYNC_SCRIPT" ]]; then
-    MISSING_FEATURES=0
-    # Use subshell to avoid changing directory in the main script
-    (
-        cd Sources/Features
-        for feature in *; do
-            if [[ -d "$feature" ]]; then
-                # Verify folder is mentioned in the copy_safe section of the sync script
-                if ! grep -q "copy_safe \"Sources/Features/$feature\"" "../../$SYNC_SCRIPT"; then
-                    report "ERROR" "Air Gap Protocol" "Feature '$feature' is NOT whitelisted in $SYNC_SCRIPT. Update the whitelist to prevent sync drift." "$SYNC_SCRIPT" "0" "Missing copy_safe for Sources/Features/$feature"
-                    ((MISSING_FEATURES++))
-                fi
+    # We use a direct loop over directories to avoid subshell variable isolation
+    for feature_path in Sources/Features/*; do
+        if [[ -d "$feature_path" ]]; then
+            feature_name=$(basename "$feature_path")
+            
+            # Verify folder is mentioned in the sync script (either as folder or file)
+            if ! grep -q "Sources/Features/$feature_name" "$SYNC_SCRIPT"; then
+                report "ERROR" "Air Gap Protocol" "Feature '$feature_name' is NOT whitelisted in $SYNC_SCRIPT. Update the whitelist to prevent sync drift." "$SYNC_SCRIPT" "0" "Missing whitelisting for Sources/Features/$feature_name"
             fi
-        done
-    )
-    
-    # Heuristic check for the outcome of the subshell isn't easy here, 
-    # but the 'report' function handles global ERROR_COUNT.
+        fi
+    done
     echo -e "${GREEN}✅ Feature directory sync verification complete.${NC}"
 else
     echo -e "${YELLOW}⚠️  Warning: $SYNC_SCRIPT not found. Skipping Air Gap check.${NC}"

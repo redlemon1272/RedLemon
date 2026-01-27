@@ -2186,46 +2186,18 @@ struct ReportedStream: Identifiable, Codable {
         )
     }
 
-    /// Get watch history for a user (e.g. self or friend)
-    func getWatchHistory(userId: UUID) async throws -> [SupabaseWatchHistoryEntry] {
+    /// Get watch history for a user (e.g. self or friend) using secure RPC
+    func getWatchHistory(userId: UUID) async throws -> [RemoteHistoryItem] {
         let data = try await makeRequest(
-            path: "/user_watch_history",
-            query: [
-                "user_id": "eq.\(userId.uuidString)",
-                "select": "*",
-                "order": "last_watched.desc",
-                "limit": "20"
-            ]
+            path: "/rpc/fetch_user_watch_history",
+            method: "POST",
+            body: ["p_user_id": userId.uuidString.lowercased()],
+            sign: true
         )
-        return try jsonDecoder.decode([SupabaseWatchHistoryEntry].self, from: data)
+        return try jsonDecoder.decode([RemoteHistoryItem].self, from: data)
     }
 }
 
-struct SupabaseWatchHistoryEntry: Codable, Identifiable {
-    let id: UUID
-    let userId: UUID
-    let mediaId: String
-    let mediaType: String
-    let title: String
-    let season: Int?
-    let episode: Int?
-    let progress: Double
-    let posterUrl: String?
-    let lastWatched: Date
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case userId = "user_id"
-        case mediaId = "media_id"
-        case mediaType = "media_type"
-        case title
-        case season
-        case episode
-        case progress
-        case posterUrl = "poster_url"
-        case lastWatched = "last_watched"
-    }
-}
 
 struct SupabaseUserID: Codable {
     let id: UUID
@@ -3082,7 +3054,8 @@ struct RemoteLibraryItem: Codable {
     let media_meta: MediaItem? // JSONB
 }
 
-struct RemoteHistoryItem: Codable {
+struct RemoteHistoryItem: Codable, Identifiable {
+    var id: String { media_id }
     let media_id: String
     let title: String
     let media_type: String
@@ -3218,13 +3191,13 @@ extension SupabaseClient {
     }
     
     /// Fetch full watch history from server
-    func fetchRemoteWatchHistory() async throws -> [WatchHistoryItem] {
-        guard let userId = auth.currentUser?.id else { return [] }
+    func fetchRemoteWatchHistory(userId: UUID? = nil) async throws -> [WatchHistoryItem] {
+        guard let targetId = userId ?? auth.currentUser?.id else { return [] }
         
         let data = try await makeRequest(
             path: "/rpc/fetch_user_watch_history",
             method: "POST",
-            body: ["p_user_id": userId.uuidString.lowercased()],
+            body: ["p_user_id": targetId.uuidString.lowercased()],
             sign: true
         )
         

@@ -1031,7 +1031,7 @@ class SocialService: ObservableObject {
         }
     }
 
-    func fetchFriendHistory(friendId: String) async -> [SupabaseWatchHistoryEntry] {
+    func fetchFriendHistory(friendId: String) async -> [RemoteHistoryItem] {
         guard let friendUUID = UUID(uuidString: friendId) else { return [] }
         do {
             let rawHistory = try await client.getWatchHistory(userId: friendUUID)
@@ -1040,10 +1040,8 @@ class SocialService: ObservableObject {
             // Since the API returns sorted by last_watched (desc), the first one we find is the latest.
             var seenMedia = Set<String>()
             return rawHistory.filter { entry in
-                // For shows, mediaId should be the Show ID. For movies, it's the Movie ID.
-                // This ensures "Breaking Bad S02E03" and "Breaking Bad S01E05" don't appear twice.
-                guard !seenMedia.contains(entry.mediaId) else { return false }
-                seenMedia.insert(entry.mediaId)
+                guard !seenMedia.contains(entry.media_id) else { return false }
+                seenMedia.insert(entry.media_id)
                 return true
             }
         } catch {

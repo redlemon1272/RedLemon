@@ -12,7 +12,7 @@ struct FriendProfileView: View {
     @StateObject private var socialService = SocialService.shared
     @EnvironmentObject var appState: AppState // For navigation to media
 
-    @State private var friendHistory: [SupabaseWatchHistoryEntry] = []
+    @State private var friendHistory: [RemoteHistoryItem] = []
     @State private var friendLibrary: [LibraryItem] = []
     @State private var isLoadingHistory = false
     @State private var isLoadingLibrary = false
@@ -393,13 +393,13 @@ struct FriendProfileView: View {
     
     // MARK: - Navigation Actions
     
-    private func playHistoryItem(_ item: SupabaseWatchHistoryEntry) {
-        // Construct MediaItem
-        let mediaItem = MediaItem(
-            id: item.mediaId,
-            type: item.mediaType,
+    private func playHistoryItem(_ item: RemoteHistoryItem) {
+        // Construct MediaItem (Prefer media_meta if sync'd, fallback to flat fields)
+        let mediaItem = item.media_meta ?? MediaItem(
+            id: item.media_id,
+            type: item.media_type,
             name: item.title,
-            poster: item.posterUrl,
+            poster: item.poster_url,
             background: nil,
             logo: nil,
             description: nil,
@@ -412,7 +412,7 @@ struct FriendProfileView: View {
         
         // Prepare Player
         appState.player.selectedMediaItem = mediaItem
-        if let s = item.season, let e = item.episode {
+        if let s = item.season, let e = item.episode, s > 0 {
             appState.player.selectedSeason = s
             appState.player.selectedEpisode = e
         }
@@ -451,12 +451,12 @@ struct FriendProfileView: View {
 // MARK: - Helper Views
 
 struct HistoryItemRow: View {
-    let item: SupabaseWatchHistoryEntry
+    let item: RemoteHistoryItem
 
     var body: some View {
         HStack(spacing: 10) {
             // Poster
-            AsyncImage(url: URL(string: item.posterUrl ?? "")) { image in
+            AsyncImage(url: URL(string: item.poster_url ?? "")) { image in
                 image.resizable()
             } placeholder: {
                 Rectangle().fill(Color.gray.opacity(0.3))
@@ -475,7 +475,7 @@ struct HistoryItemRow: View {
                         .font(.caption2)
                         .foregroundColor(.secondary)
                 } else {
-                    Text(item.mediaType.capitalized) // "Movie" or fallback
+                    Text(item.media_type.capitalized) // "Movie" or fallback
                         .font(.caption2)
                         .foregroundColor(.secondary)
                 }

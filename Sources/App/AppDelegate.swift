@@ -27,6 +27,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func application(_ application: NSApplication, open urls: [URL]) {
         for url in urls {
+            // Security: Basic scheme validation
+            guard url.scheme == "redlemon" else {
+                NSLog("⚠️ AppDelegate: Rejected unknown URL scheme: %@", url.scheme ?? "none")
+                continue
+            }
+            
             NSLog("🔗 AppDelegate received URL: %@", url.absoluteString)
             // URL will be handled by RedLemonApp.handleURL via onOpenURL
         }

@@ -26,10 +26,14 @@ struct Config {
 
     // Metadata endpoints
     static func metadataMovieURL(imdbId: String) -> URL? {
-        URL(string: "\(serverURL)/api/metadata/meta/movie/\(imdbId)")
+        guard var components = URLComponents(string: serverURL) else { return nil }
+        components.path = "/api/metadata/meta/movie/\(imdbId)"
+        return components.url
     }
 
     static func metadataTVURL(imdbId: String, season: Int, episode: Int) -> URL? {
-        URL(string: "\(serverURL)/api/metadata/meta/tv/\(imdbId)/\(season)/\(episode)")
+        guard var components = URLComponents(string: serverURL) else { return nil }
+        components.path = "/api/metadata/meta/tv/\(imdbId)/\(season)/\(episode)"
+        return components.url
     }
 }

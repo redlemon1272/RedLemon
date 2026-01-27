@@ -77,6 +77,10 @@ class AccountExportManager {
 
     /// Save export file to disk
     func saveExportFile(to url: URL) async throws {
+        // Security check: ensure this is a local file URL
+        guard url.isFileURL else {
+            throw NSError(domain: "AccountExport", code: 4, userInfo: [NSLocalizedDescriptionKey: "Invalid file location"])
+        }
         let json = try await generateJSON()
         try json.write(to: url, atomically: true, encoding: .utf8)
     }

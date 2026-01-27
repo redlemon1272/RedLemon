@@ -2061,7 +2061,7 @@ class MPVPlayerViewModel: ObservableObject {
 
         LoggingManager.shared.info(.general, message: "⚠️ FORENSIC: cleanup() called. Reason: \(reason), ReturningToLobby: \(returningToLobby)")
         LoggingManager.shared.info(.general, message: "   Current State - Playing: \(isPlaying), Duration: \(duration), Time: \(currentTime)")
-        print("DEBUG: MPVPlayerViewModel.cleanup called - forcing cleanup. Reason: \(reason)")
+        LoggingManager.shared.debug(.general, message: "MPVPlayerViewModel.cleanup called - forcing cleanup. Reason: \(reason)")
 
         LoggingManager.shared.info(.general, message: "Cleaning up MPV player...")
 

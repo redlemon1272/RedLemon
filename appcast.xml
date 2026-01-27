@@ -31,7 +31,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fixed 'Ghost Auto-Join' Bug (Landmine #109)</li><li>Security & OpSec Hardening (Clean Public Repo)</li><li>Updated Privacy Policy (Hybrid Cloud Model)</li>
+                    <li>Fixed 'Ghost Auto-Join' Bug</li><li>Security & OpSec Hardening (Clean Public Repo)</li><li>Updated Privacy Policy (Hybrid Cloud Model)</li>
                 </ul>
             ]]></description>
             <pubDate>Mon, 26 Jan 2026 18:34:03 -0500</pubDate>
@@ -108,7 +108,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fixed Landmine #119: Actor initialization deadlocks (Task.detached migration)</li><li>Consolidated Realtime Networking: SocialService now uses shared global client</li><li>Reduced Metadata Timeout to 15s (Landmine #120)</li><li>Repaired corrupted MediaDetailView and refined Participant models</li><li>Passed all Landmine Unit Tests and Architecture Scans</li>
+                    <li>Fixed: Actor initialization deadlocks (Task.detached migration)</li><li>Consolidated Realtime Networking: SocialService now uses shared global client</li><li>Reduced Metadata Timeout to 15s</li><li>Repaired corrupted MediaDetailView and refined Participant models</li><li>Passed all Landmine Unit Tests and Architecture Scans</li>
                 </ul>
             ]]></description>
             <pubDate>Sun, 25 Jan 2026 18:17:36 -0500</pubDate>
@@ -146,7 +146,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Implemented Subtitle Healing Loop (Landmine #118)</li><li>Increased subtitle resolution timeout to 12s for better reliability</li><li>Improved background subtitle discovery and auto-injection</li>
+                    <li>Implemented Subtitle Healing Loop</li><li>Increased subtitle resolution timeout to 12s for better reliability</li><li>Improved background subtitle discovery and auto-injection</li>
                 </ul>
             ]]></description>
             <pubDate>Sun, 25 Jan 2026 11:18:16 -0500</pubDate>
@@ -165,7 +165,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Improved app relaunch reliability (fixed duplicate Dock icons)</li><li>Satisfied Landmine #11 security checks in AppState</li><li>Suppressed false positive security warnings for trusted processes</li>
+                    <li>Improved app relaunch reliability (fixed duplicate Dock icons)</li><li>Satisfiedsecurity checks in AppState</li><li>Suppressed false positive security warnings for trusted processes</li>
                 </ul>
             ]]></description>
             <pubDate>Sun, 25 Jan 2026 01:39:09 -0500</pubDate>
@@ -203,7 +203,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fixed Subtitle Scoring & Sync (Landmine #117)</li><li>Improved Chat UI responsiveness (instant toggle)</li><li>Cleaned up Browse page headers</li>
+                    <li>Fixed Subtitle Scoring & Sync</li><li>Improved Chat UI responsiveness (instant toggle)</li><li>Cleaned up Browse page headers</li>
                 </ul>
             ]]></description>
             <pubDate>Sat, 24 Jan 2026 23:58:41 -0500</pubDate>
@@ -260,7 +260,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fixed Emoji Spacing in Chat (Landmine #113)</li><li>Fixed Playlist Sync Race Condition (Landmine #115)</li><li>Fixed Update Button responsiveness on macOS 13+</li><li>Increased Browse page item limit</li>
+                    <li>Fixed Emoji Spacing in Chat</li><li>Fixed Playlist Sync Race Condition</li><li>Fixed Update Button responsiveness on macOS 13+</li><li>Increased Browse page item limit</li>
                 </ul>
             ]]></description>
             <pubDate>Sat, 24 Jan 2026 19:00:07 -0500</pubDate>
@@ -317,7 +317,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Implemented Host Interlock (Landmine #115) to prevent playlist sync race conditions</li><li>Codified Landmines #113 and #114 into Architecture Scanner</li><li>Fixed emoji spacing issues in chat input (Landmine #113)</li><li>Optimized subtitle delivery and robust decoding (Landmine #114)</li><li>Auto-focus chat input field when joining lobby for immediate engagement</li>
+                    <li>Implemented Host Interlock to prevent playlist sync race conditions</li><li>Codified Landmines #113 and #114 into Architecture Scanner</li><li>Fixed emoji spacing issues in chat input</li><li>Optimized subtitle delivery and robust decoding</li><li>Auto-focus chat input field when joining lobby for immediate engagement</li>
                 </ul>
             ]]></description>
             <pubDate>Sat, 24 Jan 2026 18:13:19 -0500</pubDate>
@@ -393,7 +393,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fixed flaky background art by implementing metadata inheritance (handoff logic).</li><li>Expanded background artwork visibility to persist during mid-playback buffering states.</li><li>Updated AI Bible and Architecture Scanner with Landmine #106 (Visual Continuity Trap).</li>
+                    <li>Fixed flaky background art by implementing metadata inheritance (handoff logic).</li><li>Expanded background artwork visibility to persist during mid-playback buffering states.</li><li>Updated AI Bible and Architecture Scanner with(Visual Continuity Trap).</li>
                 </ul>
             ]]></description>
             <pubDate>Fri, 23 Jan 2026 23:24:24 -0500</pubDate>
@@ -431,7 +431,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Implemented Hydra Protocol (Landmine #105) for multi-layered stream exclusion.</li><li>Improved player UI: Fixed cursor visibility and synchronized lobby return transitions.</li><li>Resolved duplicate 'Host returned to lobby' chat notifications (Landmine #95).</li>
+                    <li>Implemented Hydra Protocol for multi-layered stream exclusion.</li><li>Improved player UI: Fixed cursor visibility and synchronized lobby return transitions.</li><li>Resolved duplicate 'Host returned to lobby' chat notifications.</li>
                 </ul>
             ]]></description>
             <pubDate>Fri, 23 Jan 2026 22:42:45 -0500</pubDate>
@@ -526,7 +526,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>security: Enforce Identity Signatures for RLS Compliance (Landmine #103)</li><li>fix: Refactored MediaCard for 2-line title support</li>
+                    <li>security: Enforce Identity Signatures for RLS Compliance</li><li>fix: Refactored MediaCard for 2-line title support</li>
                 </ul>
             ]]></description>
             <pubDate>Thu, 22 Jan 2026 23:41:18 -0500</pubDate>
@@ -545,7 +545,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fixed RLS violation for room participants (Landmine #103)</li><li>Enforced cryptographic signing for guest connections</li>
+                    <li>Fixed RLS violation for room participants</li><li>Enforced cryptographic signing for guest connections</li>
                 </ul>
             ]]></description>
             <pubDate>Thu, 22 Jan 2026 22:18:23 -0500</pubDate>
@@ -602,7 +602,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fix: Event Countdown hidden on Auto-Join (Landmine #93)</li><li>Fix: State Handoff Trap - Participants missing in Player (Landmine #92)</li><li>Fix: Guest/Host Stream Mismatch for DebridSearch (Landmine #91)</li><li>Feat: Gradient User Avatars with geometric patterns</li><li>Perf: Browse page performance optimizations (Landmine #86)</li>
+                    <li>Fix: Event Countdown hidden on Auto-Join</li><li>Fix: State Handoff Trap - Participants missing in Player</li><li>Fix: Guest/Host Stream Mismatch for DebridSearch</li><li>Feat: Gradient User Avatars with geometric patterns</li><li>Perf: Browse page performance optimizations</li>
                 </ul>
             ]]></description>
             <pubDate>Wed, 21 Jan 2026 19:52:01 -0500</pubDate>
@@ -735,7 +735,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fixed 75+ Font Weight Crashes (Landmine #12)</li><li>Added Sleep Assertion Safety (Landmine #56)</li><li>Implemented Automated Regression Prevention System</li><li>Enforced Strict Concurrency on Update & Text Services</li>
+                    <li>Fixed 75+ Font Weight Crashes</li><li>Added Sleep Assertion Safety</li><li>Implemented Automated Regression Prevention System</li><li>Enforced Strict Concurrency on Update & Text Services</li>
                 </ul>
             ]]></description>
             <pubDate>Fri, 16 Jan 2026 22:07:15 -0500</pubDate>
@@ -773,7 +773,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fix: Optimized WebSocket connection logic to prevent double-connection attempts (Landmine #59).</li><li>Fix: Resolved a race condition that caused creating or joining a lobby to display duplicate 'User Joined' messages.</li>
+                    <li>Fix: Optimized WebSocket connection logic to prevent double-connection attempts.</li><li>Fix: Resolved a race condition that caused creating or joining a lobby to display duplicate 'User Joined' messages.</li>
                 </ul>
             ]]></description>
             <pubDate>Fri, 16 Jan 2026 18:32:57 -0500</pubDate>
@@ -792,7 +792,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fix: Resolved a race condition that caused creating or joining a lobby to display duplicate 'User Joined' messages.</li><li>Fix: Optimized WebSocket connection logic to prevent double-connection attempts (Landmine #59).</li>
+                    <li>Fix: Resolved a race condition that caused creating or joining a lobby to display duplicate 'User Joined' messages.</li><li>Fix: Optimized WebSocket connection logic to prevent double-connection attempts.</li>
                 </ul>
             ]]></description>
             <pubDate>Fri, 16 Jan 2026 18:27:21 -0500</pubDate>
@@ -849,7 +849,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <ul><li>Fix: Replace native context menu with custom overlay to eliminate video stutter/frame drops (Landmine #25 Main Thread Block).</li></ul>
+                    <ul><li>Fix: Replace native context menu with custom overlay to eliminate video stutter/frame drops (Main Thread Block).</li></ul>
                 </ul>
             ]]></description>
             <pubDate>Fri, 16 Jan 2026 04:32:20 -0500</pubDate>
@@ -887,7 +887,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fix: Prevent display sleep/screensaver during playback (Landmine #56)</li>
+                    <li>Fix: Prevent display sleep/screensaver during playback</li>
                 </ul>
             ]]></description>
             <pubDate>Fri, 16 Jan 2026 02:49:20 -0500</pubDate>
@@ -925,7 +925,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>fix(payments): Corrected HD wallet derivation path depth (Landmine #52).</li><li>fix(payments): Implemented per-address reconciliation to prevent legacy balance interference (Landmine #53).</li><li>feat(payments): Added new_payment flag to server and enhanced UI confirmation logic (Landmine #54).</li><li>feat(payments): Added EIP-681 compatible URIs for better wallet app support (Landmine #55).</li><li>fix(build): Resolved build failure in LicenseManager.swift due to changed return signature.</li><li>docs: Updated AI Bible with new Payment & HD Wallet safety mandates.</li>
+                    <li>fix(payments): Corrected HD wallet derivation path depth.</li><li>fix(payments): Implemented per-address reconciliation to prevent legacy balance interference.</li><li>feat(payments): Added new_payment flag to server and enhanced UI confirmation logic.</li><li>feat(payments): Added EIP-681 compatible URIs for better wallet app support.</li><li>fix(build): Resolved build failure in LicenseManager.swift due to changed return signature.</li><li>docs: Updated AI Bible with new Payment & HD Wallet safety mandates.</li>
                 </ul>
             ]]></description>
             <pubDate>Fri, 16 Jan 2026 00:48:48 -0500</pubDate>
@@ -963,7 +963,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    - Fix: Resolve 'User Left' regression by preventing Phoenix Ref Collision (Landmine #51).
+                    - Fix: Resolve 'User Left' regression by preventing Phoenix Ref Collision.
 - Fix: Use stable 'phx_ref' for presence tracking to stop offline flickering.
 - Internal: Add architecture scan to prevent future presence regressions.
                 </ul>
@@ -1006,10 +1006,10 @@
                     # Release v1.0.103
 
 ## 🛡️ Architecture & Stability
-- **Fixed Async Scroll Race Conditions (Landmine #48)**: Resolved potential race conditions where auto-scroll commands could fire before content loaded, leading to erratic scroll behavior.
+- **Fixed Async Scroll Race Conditions**: Resolved potential race conditions where auto-scroll commands could fire before content loaded, leading to erratic scroll behavior.
     - Guarded `scrollTo` calls in `ChatView` and `WatchPartyLobbyView`.
     - Validated `FriendProfileView` and `ChatOverlayView` safety.
-- **Scanner Upgrade**: Updated `scripts/architecture-scan.sh` to automatically detect unguarded `proxy.scrollTo` usages (Landmine #48 Check).
+- **Scanner Upgrade**: Updated `scripts/architecture-scan.sh` to automatically detect unguarded `proxy.scrollTo` usages (Check).
                 </ul>
             ]]></description>
             <pubDate>Thu, 15 Jan 2026 07:21:08 -0500</pubDate>
@@ -1085,7 +1085,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fix: Lobby ghost participants and duplicate entries (Ursinho bug)</li><li>Refactor: Critical Fixes for Landmine #37 (ID) and #43 (Async)</li>
+                    <li>Fix: Lobby ghost participants and duplicate entries (Ursinho bug)</li><li>Refactor: Critical Fixes for(ID) and #43 (Async)</li>
                 </ul>
             ]]></description>
             <pubDate>Thu, 15 Jan 2026 01:38:45 -0500</pubDate>
@@ -1104,7 +1104,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>Fixed 119 Unsafe NSLog violations (Landmine #11)</li><li>Fixed Guest Subtitles Regression (Landmine #45)</li><li>Added Architecture Scanner to prevent regressions</li><li>Security Hardening</li>
+                    <li>Fixed 119 Unsafe NSLog violations</li><li>Fixed Guest Subtitles Regression</li><li>Added Architecture Scanner to prevent regressions</li><li>Security Hardening</li>
                 </ul>
             ]]></description>
             <pubDate>Thu, 15 Jan 2026 00:12:03 -0500</pubDate>
@@ -1294,7 +1294,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>feat: Admin Block & Reset (Backend Sync)</li><li>perf: Admin Dashboard List Refactor (Compiler Fix)</li><li>docs: Updated AI Bible (Landmine #6)</li>
+                    <li>feat: Admin Block & Reset (Backend Sync)</li><li>perf: Admin Dashboard List Refactor (Compiler Fix)</li><li>docs: Updated AI Bible</li>
                 </ul>
             ]]></description>
             <pubDate>Wed, 14 Jan 2026 15:23:13 -0500</pubDate>
@@ -1351,7 +1351,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>fix(rd): prioritize provider fileIdx for unlocking to fix uncached season packs (Landmine #45)</li>
+                    <li>fix(rd): prioritize provider fileIdx for unlocking to fix uncached season packs</li>
                 </ul>
             ]]></description>
             <pubDate>Wed, 14 Jan 2026 03:58:17 -0500</pubDate>
@@ -1370,7 +1370,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>fix: Guest watch party EOF - Clear RealDebridClient cache for guests</li><li>docs: Update Landmine #44 with RD cache root cause</li>
+                    <li>fix: Guest watch party EOF - Clear RealDebridClient cache for guests</li><li>docs: Updatewith RD cache root cause</li>
                 </ul>
             ]]></description>
             <pubDate>Wed, 14 Jan 2026 02:53:03 -0500</pubDate>
@@ -1432,7 +1432,7 @@
             <description><![CDATA[
                 <h2>Release Notes</h2>
                 <ul>
-                    <li>fix: restore vertical scrolling on Browse page for macOS 13+</li><li>fix: add filename-based blocking for hashless streams</li><li>fix: use currentStreamHash when saving watch history</li><li>fix: lowercase provider hash before blocked stream check</li><li>fix: lowercase blocked stream hashes for comparison (Landmine #37)</li>
+                    <li>fix: restore vertical scrolling on Browse page for macOS 13+</li><li>fix: add filename-based blocking for hashless streams</li><li>fix: use currentStreamHash when saving watch history</li><li>fix: lowercase provider hash before blocked stream check</li><li>fix: lowercase blocked stream hashes for comparison</li>
                 </ul>
             ]]></description>
             <pubDate>Tue, 13 Jan 2026 23:12:15 -0500</pubDate>
@@ -1454,7 +1454,7 @@
                     <li>fix: add filename-based blocking for hashless streams</li>
 <li>fix: use currentStreamHash when saving watch history</li>
 <li>fix: lowercase provider hash before blocked stream check</li>
-<li>fix: lowercase blocked stream hashes for comparison (Landmine #37)</li>
+<li>fix: lowercase blocked stream hashes for comparison</li>
                 </ul>
             ]]></description>
             <pubDate>Tue, 13 Jan 2026 22:12:59 -0500</pubDate>

@@ -919,7 +919,13 @@ actor StreamService: StreamResolving {
         print("🔓 StreamService: Unlocking with infoHash: \(infoHash.prefix(12))...")
 
         // CRITICAL FIX: Don't default to 0 if fileIdx is nil (Pack support)
-        let unlockURL = URL(string: "\(Config.serverURL)/api/streams/unlock")!
+        let unlockURL: URL
+        if var components = URLComponents(string: Config.serverURL) {
+            components.path = "/api/streams/unlock"
+            unlockURL = components.url ?? URL(string: "\(Config.serverURL)/api/streams/unlock")!
+        } else {
+            unlockURL = URL(string: "\(Config.serverURL)/api/streams/unlock")!
+        }
         var request = URLRequest(url: unlockURL)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

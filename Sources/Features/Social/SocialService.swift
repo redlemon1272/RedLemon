@@ -289,7 +289,18 @@ class SocialService: ObservableObject {
                      print("✅ SocialService: Event \(roomId) is JOINABLE (Live or Next Up) - allowing join")
                      return // Allow join
                 } else {
-                    print("🚫 SocialService: Event \(roomId) is STALE - marking \(userId) as unjoinable")
+                    // NEW: Social Join Fallback
+                    // Even if the event is officially "stale", if the friend is currently in it,
+                    // we allow the join. This adheres to the "friends can always join friends" rule.
+                    print("⚠️ SocialService: Event \(roomId) is STALE on schedule, but user \(userId) is still in it. Checking database...")
+
+                    // Check if room still exists in DB
+                    if let room = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                        print("✅ SocialService: Room \(roomId) still exists for stale event. Allowing social join.")
+                        return
+                    }
+
+                    print("🚫 SocialService: Event \(roomId) is STALE and room is gone - marking \(userId) as unjoinable")
                     markUserAsUnjoinable(userId: userId)
                     return
                 }
@@ -1047,7 +1058,7 @@ class SocialService: ObservableObject {
                 seenMedia.insert(rootId)
                 return true
             }
-            
+
             return Array(deduplicated.prefix(20))
         } catch {
             print("❌ Failed to fetch friend history: \(error)")

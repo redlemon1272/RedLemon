@@ -1776,11 +1776,20 @@ class PlayerViewModel: ObservableObject {
                     // Valid to join (either Live or Next Up)
                     NSLog("✅ PlayerVM: Event %@ is JOINABLE (Live or Next Up)", roomId)
                 } else {
-                    NSLog("🚫 PlayerVM: Blocking join to STALE event room %@.", roomId)
-                    await MainActor.run {
-                        appState.isLoadingRoom = false
+                    // NEW: Relaxed Social Join
+                    // Check if room exists anyway. If it does, a friend might be in it or it was recently active.
+                    // This allows "friends joining friends" even if the card says 'finished'.
+                    NSLog("⚠️ PlayerVM: Event %@ is STALE on schedule. Checking database for active room...", roomId)
+                    let roomState = try await roomManager.getRoomState(roomId: roomId)
+                    if roomState != nil {
+                        NSLog("✅ PlayerVM: Event room %@ still exists. Allowing social join.", roomId)
+                    } else {
+                        NSLog("🚫 PlayerVM: Blocking join to STALE event room %@ (Room not found in DB).", roomId)
+                        await MainActor.run {
+                            appState.isLoadingRoom = false
+                        }
+                        return
                     }
-                    return
                 }
             }
 

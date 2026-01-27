@@ -1581,6 +1581,76 @@ if [[ -f "$PLAYER_VM" ]]; then
 fi
 
 
+# =============================================================================
+# CHECK 75: Social Event Join Fallback (Landmine #136)
+# =============================================================================
+# Trigger: Missing DB fallback in SocialService or PlayerVM for stale events.
+# Rule: Friends can ALWAYS join friends. Must check getRoomState as fallback.
+print_header "Check 75: Social Event Join Fallback (Landmine #136)"
+
+SOCIAL_SERVICE="Sources/Features/Social/SocialService.swift"
+if [[ -f "$SOCIAL_SERVICE" ]]; then
+    if ! grep -q "Social Join Fallback" "$SOCIAL_SERVICE" || ! grep -q "getRoomState.*roomId" "$SOCIAL_SERVICE"; then
+        report "ERROR" "Landmine #136" "Social Join Risk: SocialService MUST allow joining stale event rooms if they still exist in the database (getRoomState fallback)." "$SOCIAL_SERVICE" "0" "Missing social join fallback logic"
+    else
+        echo -e "${GREEN}✅ SocialService has social join fallback logic.${NC}"
+    fi
+fi
+
+PLAYER_VM="Sources/Features/Player/PlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    if ! grep -q "Relaxed Social Join" "$PLAYER_VM" || ! grep -q "getRoomState.*roomId" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #136" "Social Join Risk: PlayerViewModel MUST allow joining stale event rooms if they still exist in the database (getRoomState fallback)." "$PLAYER_VM" "0" "Missing social join fallback logic"
+    else
+        echo -e "${GREEN}✅ PlayerViewModel has social join fallback logic.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 76: JSON-Body Health Verification (Landmine #137)
+# =============================================================================
+# Trigger: checkHealth returning "Online" solely based on HTTP 200.
+# Rule: Must decode JSON body to verify status field for SubDL/RD.
+print_header "Check 76: JSON Health Verification (Landmine #137)"
+
+SUBDL_CLIENT="Sources/Server/Services/SubDLClient.swift"
+if [[ -f "$SUBDL_CLIENT" ]]; then
+    if ! (grep -q "struct HealthResponse: Decodable" "$SUBDL_CLIENT" || grep -q "SubDLResponse" "$SUBDL_CLIENT") || ! grep -q "JSONDecoder().decode" "$SUBDL_CLIENT"; then
+        report "ERROR" "Landmine #137" "Health Check Risk: SubDLClient MUST decode JSON body to verify status. HTTP 200 != Authorized." "$SUBDL_CLIENT" "0" "Missing JSON decoding in checkHealth"
+    else
+        echo -e "${GREEN}✅ SubDLClient performs JSON-aware health checks.${NC}"
+    fi
+fi
+
+RD_CLIENT="Sources/Server/Debrid/RealDebridClient.swift"
+if [[ -f "$RD_CLIENT" ]]; then
+    if ! grep -q "\/user" "$RD_CLIENT" || ! grep -q "Online" "$RD_CLIENT" || ! (grep -q "JSONDecoder().decode" "$RD_CLIENT" || grep -q "getUserInfo" "$RD_CLIENT"); then
+        # Check if it uses /user and decodes to verify status
+        if ! grep -q "\/user" "$RD_CLIENT"; then
+            report "ERROR" "Landmine #137" "Health Check Risk: RealDebridClient MUST verify user account status for health, not just HTTP 200." "$RD_CLIENT" "0" "Missing /user check in checkHealth"
+        else
+            report "ERROR" "Landmine #137" "Health Check Risk: RealDebridClient MUST decode JSON body to verify status. HTTP 200 != Authorized." "$RD_CLIENT" "0" "Missing JSON decoding in checkHealth"
+        fi
+    else
+        echo -e "${GREEN}✅ RealDebridClient performs user-aware health checks.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 77: Fuzzy Year Matching (Landmine #138)
+# =============================================================================
+# Trigger: SubDL search requiring exact year match.
+# Rule: Allow ±1 year and handle trailing dashes in metadata.
+print_header "Check 77: Fuzzy Year Matching (Landmine #138)"
+
+if [[ -f "$SUBDL_CLIENT" ]]; then
+    if ! grep -q "allowedYears" "$SUBDL_CLIENT" && ! grep -q "abs.*1" "$SUBDL_CLIENT"; then
+        report "ERROR" "Landmine #138" "Year Match Risk: SubDLClient MUST allow ±1 year during local result filtering." "$SUBDL_CLIENT" "0" "Missing ±1 year tolerance"
+    else
+        echo -e "${GREEN}✅ SubDLClient uses fuzzy year matching.${NC}"
+    fi
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"
@@ -1598,6 +1668,8 @@ if [[ $WARNING_COUNT -gt 0 ]]; then
 else
     echo -e "${GREEN}✅ WARNINGS: 0${NC}"
 fi
+
+exit $((ERROR_COUNT > 0 ? 1 : 0))
 
 echo ""
 echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."

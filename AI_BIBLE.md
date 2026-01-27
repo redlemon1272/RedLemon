@@ -2180,3 +2180,44 @@ if let img = NSImage(named: "my_new_icon") {
 1. **Tight Clustering**: Logic guards MUST be within **5 lines** of the sensitive call.
 2. **Explicit Comments**: If separation is necessary, use `// OK: Guarded by !isEventPlayback above` to suppress the warning, but PREFER physical proximity.
 3. **Zero Warning Policy**: As of v1.0.163, **0 Warnings** are tolerated in production builds. You must fix proximity issues, not ignore them.
+
+### 6. Social Event Join Fallback (Landmine #136)
+**Symptom**: Users see "Event Finished" or "Lobby Closed" when trying to join a friend who is actually still inside a stale event room.
+**Root Cause**: **Strict Schedule Adherence**. The app originally blocked joining any event that was marked "stale" in the global schedule. However, friends often stay and talk or finish the movie long after the "official" end time.
+**Mandatory Solution**:
+1. **Friends Always Join Friends**: If a join is initiated via the Social/Friends list, the app MUST allow the join even if the event is officially stale, provided the room still exists in the database.
+2. **Database Fallback**: In `SocialService` and `PlayerViewModel`, if an event is stale, you MUST call `getRoomState(roomId:)` as a final check. If the room is returned, the join is permitted.
+3. **Revival**: If a friend is explicitly in a room that just vanished (e.g. host crash), a social join should attempt to "revive" (re-create) the room container.
+
+### 7. JSON-Body Health Verification (Landmine #137)
+**Symptom**: Settings page shows "Online" for a provider (SubDL, Real-Debrid) even though the API key is invalid or the account is expired.
+**Root Cause**: **HTTP 200 Trap**. Many pirate-market APIs (SubDL, RD) return a `200 OK` status code even for 401-style errors, provided the request was "well-formed". They communicate the actual error inside the JSON body (e.g., `{"status": false, "error": "Invalid API Key"}`).
+**Mandatory Solution**:
+1. **Decode to Verify**: Every health check MUST decode the JSON response body.
+2. **Field Check**: For SubDL, check `result.status == true`. For Real-Debrid, fetch the `/user` endpoint and verify the `RDUserInfo` object can be parsed.
+3. **Granular Status**: Return specific UI strings like "Invalid API Key" or "Missing API Key" instead of a binary "Offline".
+
+### 8. Fuzzy Year Matching (Landmine #138)
+**Symptom**: Subtitles for movies like "The Matrix" are found, but "The Matrix (1999)" fails to find any results on SubDL, or it matches a 2021 sequel incorrectly.
+**Root Cause**: **Numeric Fragility**. SubDL API's `film_name` search is extremely sensitive to trailing years and punctuation. Metadata provided by providers often has "noisy" years (e.g., `2024-`) or ±1 year offsets due to regional release differences.
+**Mandatory Solution**:
+1. **Year Tolerance**: When filtering search results locally, allow a **±1 year variance**.
+2. **Trailing Dash Cleanup**: Strip trailing dashes from year metadata before parsing (e.g., `2024-` -> `2024`).
+3. **Numeric Only**: Extract the numeric 4-digit year from the candidate string before comparison.
+
+### 9. The URLSession Caching Trap (Landmine #139)
+**Symptom**: Changing an API token (e.g., Bearer token) and immediately saving appears to work, but the app continues to display data (like "Premium Days") from the OLD token, or reports "Online" for a new invalid token.
+**Root Cause**: **Headers are ignored by Cache**. `URLSession.shared` (and default configurations) caches responses based primarily on the URL string. If an API endpoint (e.g., `api.real-debrid.com/rest/1.0/user`) is identical for all users, `URLCache` will return the cached response from the previous request even if the `Authorization` header has changed, unless the server explicitly sends `Vary: Authorization` (which many don't).
+**Mandatory Solution**:
+1. **Explicit Cache Busting**: For sensitive API calls that depend on auth headers (Health Checks, User Info Profile), you MUST explicitly set `.reloadIgnoringLocalCacheData`.
+2. **Ephemeral Sessions**: Alternatively, use `URLSession(configuration: .ephemeral)` which disables disk caching entirely.
+3. **Applies To**: `checkHealth`, `getUserInfo`, and any "My Library" fetchers that rely on a token-switched context.
+
+```swift
+// ✅ CORRECT: Force fresh request for auth-dependent endpoints
+var request = URLRequest(url: url)
+request.setValue("Bearer \(newToken)", forHTTPHeaderField: "Authorization")
+request.cachePolicy = .reloadIgnoringLocalCacheData
+```
+
+**Testing Tip**: When verifying auth invalidation, do not rely on minor token modifications (e.g., changing 1 character) as some APIs (like Real-Debrid) are lenient with Base64 padding. Always perform **destructive changes** (e.g., deleting the last 5 characters) to guarantee a server-side rejection.

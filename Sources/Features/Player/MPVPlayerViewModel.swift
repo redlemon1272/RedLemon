@@ -3084,6 +3084,10 @@ extension MPVPlayerViewModel {
                 // Normal play sync
                 if !isPlaying {
                     LoggingManager.shared.info(.watchParty, message: "Sync: Playing")
+                    // Announce Host Action
+                    let hostName = getHostName(for: message.senderId)
+                    announcementTriggers.send("\(hostName) resumed playback")
+
                     await playbackService.play()
                     isPlaying = true
                 }
@@ -3267,9 +3271,17 @@ extension MPVPlayerViewModel {
             // "self.isPlaying" is our current local state.
             if remoteIsPlaying && !self.isPlaying {
                 LoggingManager.shared.info(.watchParty, message: "Sync: Resuming playback to match Host")
+                // Announce Host Action
+                let hostName = getHostName(for: message.senderId)
+                announcementTriggers.send("\(hostName) resumed playback")
+
                 await playbackService.play()
             } else if !remoteIsPlaying && self.isPlaying {
                 LoggingManager.shared.info(.watchParty, message: "Sync: Pausing playback to match Host")
+                // Announce Host Action
+                let hostName = getHostName(for: message.senderId)
+                announcementTriggers.send("\(hostName) paused playback")
+
                 await playbackService.pause()
             }
 
@@ -3278,12 +3290,21 @@ extension MPVPlayerViewModel {
         case .pause:
             LoggingManager.shared.info(.watchParty, message: "Host pressed pause")
             if isPlaying {
+                // Announce Host Action
+                let hostName = getHostName(for: message.senderId)
+                announcementTriggers.send("\(hostName) paused playback")
+
                 await playbackService.togglePlayPause()
             }
 
         case .seek:
             let timestamp = message.timestamp
             LoggingManager.shared.info(.watchParty, message: "Host seeked to \(timestamp)s")
+
+            // Announce Host Action
+            let hostName = getHostName(for: message.senderId)
+            announcementTriggers.send("\(hostName) seeked to \(formatTime(timestamp))")
+
             await playbackService.seek(to: timestamp)
 
         case .chat:
@@ -4099,6 +4120,31 @@ extension MPVPlayerViewModel {
         watchHistoryTimer = nil
 
         LoggingManager.shared.debug(.watchHistory, message: "Stopped watch history tracking")
+    }
+
+    // MARK: - Sync Notification Helpers
+
+    private func getHostName(for senderId: String?) -> String {
+        guard let senderId = senderId else { return "The host" }
+        // Find host in participants list
+        if let room = appState?.player.currentWatchPartyRoom,
+           let host = room.participants.first(where: { ($0.id).caseInsensitiveCompare(senderId) == .orderedSame }) {
+            return host.name
+        }
+        return "The host"
+    }
+
+    private func formatTime(_ seconds: Double) -> String {
+        let totalSeconds = Int(seconds)
+        let hours = totalSeconds / 3600
+        let minutes = (totalSeconds % 3600) / 60
+        let secs = totalSeconds % 60
+
+        if hours > 0 {
+            return String(format: "%d:%02d:%02d", hours, minutes, secs)
+        } else {
+            return String(format: "%d:%02d", minutes, secs)
+        }
     }
 }
 

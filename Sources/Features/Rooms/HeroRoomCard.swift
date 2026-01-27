@@ -21,7 +21,7 @@ struct HeroRoomCard: View {
         }) {
             HeroRoomCardContent(room: room, isJoining: isJoining)
         }
-        .buttonStyle(PlainButtonStyle()) // Prevent default button styling
+        .buttonStyle(.scalableMedia)
     }
 }
 
@@ -30,7 +30,7 @@ struct HeroRoomCard: View {
 struct HeroRoomCardContent: View {
     let room: WatchPartyRoom
     let isJoining: Bool
-    
+
     @State private var imageData: Data?
     @State private var loadTask: Task<Void, Never>?
 
@@ -54,7 +54,7 @@ struct HeroRoomCardContent: View {
                 )
                 .frame(height: 280)
                 .frame(maxWidth: .infinity)
-                
+
                 // Overlay: Image (Appears on top when loaded)
                 if let imageData = imageData, let nsImage = NSImage(data: imageData) {
                     Image(nsImage: nsImage)
@@ -156,7 +156,7 @@ struct HeroRoomCardContent: View {
                         .foregroundColor(.white)
                         .lineLimit(2)
                         .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
-                    
+
                     // NEW: Season/Episode Info
                     if let season = room.season, let episode = room.episode {
                         Text("Season \(season), Episode \(episode)")
@@ -226,7 +226,7 @@ struct HeroRoomCardContent: View {
             await loadBackground()
         }
     }
-    
+
     private func loadBackground() async {
         // Prioritize: background -> poster -> room.posterURL
         let possibleUrls = [
@@ -234,10 +234,10 @@ struct HeroRoomCardContent: View {
             room.mediaItem?.poster,
             room.posterURL
         ].compactMap { $0 }.filter { !$0.isEmpty }
-        
+
         guard let urlString = possibleUrls.first, let url = URL(string: urlString) else { return }
         let cacheKey = url.absoluteString
-        
+
         // 1. Check Cache
         if let cached = await CacheManager.shared.getImageData(key: cacheKey) {
             await MainActor.run {
@@ -245,16 +245,16 @@ struct HeroRoomCardContent: View {
             }
             return
         }
-        
+
         // 2. Fetch
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            
+
             // Check cancellation before updating state
             try Task.checkCancellation()
-            
+
             await CacheManager.shared.setImageData(key: cacheKey, value: data)
-            
+
             await MainActor.run {
                 self.imageData = data
             }

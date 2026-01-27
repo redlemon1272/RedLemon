@@ -1039,11 +1039,13 @@ class SocialService: ObservableObject {
             // Deduplicate: Keep only the most recent entry for each media_id (Show/Movie)
             // Since the API returns sorted by last_watched (desc), the first one we find is the latest.
             var seenMedia = Set<String>()
-            return rawHistory.filter { entry in
+            let deduplicated = rawHistory.filter { entry in
                 guard !seenMedia.contains(entry.media_id) else { return false }
                 seenMedia.insert(entry.media_id)
                 return true
             }
+            
+            return Array(deduplicated.prefix(20))
         } catch {
             print("❌ Failed to fetch friend history: \(error)")
             return []

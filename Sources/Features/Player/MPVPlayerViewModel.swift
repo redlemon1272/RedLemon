@@ -2295,16 +2295,18 @@ extension MPVPlayerViewModel {
             LoggingManager.shared.info(.watchParty, message: "Handoff: No active lobby found, creating new Realtime manager")
         }
 
-        // INITIAL STATE SYNC: Populate activeConnectionRefs from existing participants
-        // This prevents "Ghost Left" messages when Lobby connections are swapped for Player connections
-        // because we won't consider a user "new" or "missing" if they were already in the lobby.
-        if let currentRoom = appState?.player.currentWatchPartyRoom {
-            for participant in currentRoom.participants {
-                self.activeConnectionRefs[participant.id.lowercased()] = participant.phxRefs
-                LoggingManager.shared.debug(.watchParty, message: "Initialized activeConnectionRefs for \(participant.id) with \(participant.phxRefs.count) refs")
+        // CRITICAL FIX: Initialize connection tracking from existing participants inherited from Lobby.
+        // This prevents "Guest Left" messages during transition because the Player VM starts
+        // recognizing the Lobby-level Phoenix Refs immediately. (Bible Landmine #47/51)
+        if let existingRoom = appState?.player.currentWatchPartyRoom {
+            for participant in existingRoom.participants {
+                let normalizedPId = participant.id.lowercased()
+                if !participant.phxRefs.isEmpty {
+                    self.activeConnectionRefs[normalizedPId] = participant.phxRefs
+                    LoggingManager.shared.info(.watchParty, message: "🛡️ Transition Sync: Inherited \(participant.phxRefs.count) refs for user \(normalizedPId)")
+                }
             }
         }
-
 
         // But prepare welcome message for when they do open it
         // CRITICAL: Set up presence callback BEFORE setup() so we don't miss any presence events

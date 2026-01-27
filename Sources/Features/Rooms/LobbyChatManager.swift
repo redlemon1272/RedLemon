@@ -53,6 +53,10 @@ class LobbyChatManager: ObservableObject {
     // The handler is responsible for the actual network transmission
     private let sendMessageHandler: (SyncMessage) async throws -> Void
 
+    // Deduplication
+    private var lastSystemMessages: [String: Date] = [:]
+    private let dedupeInterval: TimeInterval = 5.0
+
     init(sendMessageHandler: @escaping (SyncMessage) async throws -> Void) {
         self.sendMessageHandler = sendMessageHandler
     }
@@ -121,12 +125,24 @@ class LobbyChatManager: ObservableObject {
     }
 
     func addSystemMessage(_ type: LobbyMessageType, userName: String, data: [String: String] = [:]) {
+        // CRITICAL FIX: Deduplicate system messages (e.g. "Connected via Realtime")
+        // We hash the type and optional message content to identify duplicates
+        let msgContent = data["message"] ?? ""
+        let dedupeKey = "\(type.rawValue)_\(msgContent)"
+        let now = Date()
+
+        if let lastTime = lastSystemMessages[dedupeKey], now.timeIntervalSince(lastTime) < dedupeInterval {
+            // NSLog("⚠️ ChatManager: Skipping duplicate system message: %@", dedupeKey)
+            return
+        }
+        lastSystemMessages[dedupeKey] = now
+
         let message = LobbyMessage(
             id: UUID().uuidString,
             type: type,
             userId: "system",
             userName: userName,
-            timestamp: Date(),
+            timestamp: now,
             data: data
         )
 

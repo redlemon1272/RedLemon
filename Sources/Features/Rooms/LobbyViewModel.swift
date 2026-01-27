@@ -98,6 +98,7 @@ class LobbyViewModel: ObservableObject {
         }
     }
     @Published var shouldDelayConnectAfterLobbyReturn: Bool = false // Safety flag for race condition on return
+    private var didShowRealtimeWarning: Bool = false // CRITICAL: Prevent duplicate "Connected via Realtime" messages
     // Track unique session (StreamHash + StartTime) to prevent loops
     // Delegated to AppState.player to persist across View recreations (Guest Loop Fix)
     var lastAutoStartedSessionId: String? {
@@ -399,6 +400,24 @@ class LobbyViewModel: ObservableObject {
     }
 
     func connect() {
+        // Prevent multiple connection attempts
+        // CRITICAL FIX (Landmine #58): Set status immediately to .connecting to debounce synchronous double-calls
+        // This prevents the race condition where multiple tasks start before the first state transition completes.
+        if realtimeConnectionStatus == .connecting {
+            print("⚠️ Lobby: Connection already in progress - skipping duplicate connect call")
+
+            // CRITICAL FIX (Landmine #93): Even though we skip the connection attempt,
+            // this ViewModel instance MUST start its own local countdown ticker.
+            // The ticker updates `timeUntilStart` which is instance-local state.
+            // Without this, VM2 created during Double onAppear will show a frozen countdown.
+            if room.type == .event && timeUntilStart > 0 {
+                print("⏱️ Lobby: Connection in progress, but starting local event ticker for THIS ViewModel")
+                startEventCountdownTicker()
+            }
+            return
+        }
+        realtimeConnectionStatus = .connecting
+
         // CRITICAL FIX: Update participantId to actual user ID BEFORE Realtime setup
         // The init() sets a random UUID as a temporary value, but Realtime needs the real user ID
         if !isHost {
@@ -421,29 +440,6 @@ class LobbyViewModel: ObservableObject {
             // Per Bible Rule #13: WebSockets fail on reconnect, don't trust stale state.
             print("🔄 Lobby: Returning from playback - resetting connection status")
             realtimeConnectionStatus = .disconnected
-        }
-
-        // Prevent multiple connection attempts
-        // CRITICAL FIX (v3): Check ACTUAL manager state, not just cached status.
-        // When returning from playback, the player's cleanup() runs async and clears the channel.
-        // But this function may be called BEFORE cleanup finishes, so realtimeConnectionStatus
-        // is stale (.connected) while the channel is actually dead.
-        // Per Bible Rule #13: WebSockets fail on reconnect, don't trust stale state.
-        // CRITICAL FIX: Debounce connection attempts
-        // If we are actively connecting, do NOT perform the "stale check" because isActuallyConnected
-        // will naturally be false during handshake, causing a recursive restart loop (Double Connect).
-        if realtimeConnectionStatus == .connecting {
-            print("⚠️ Lobby: Connection already in progress - skipping duplicate connect call")
-
-            // CRITICAL FIX (Landmine #93): Even though we skip the connection attempt,
-            // this ViewModel instance MUST start its own local countdown ticker.
-            // The ticker updates `timeUntilStart` which is instance-local state.
-            // Without this, VM2 created during Double onAppear will show a frozen countdown.
-            if room.type == .event && timeUntilStart > 0 {
-                print("⏱️ Lobby: Connection in progress, but starting local event ticker for THIS ViewModel")
-                startEventCountdownTicker()
-            }
-            return
         }
 
         // Handle .connected state (Stale Check)
@@ -738,9 +734,13 @@ class LobbyViewModel: ObservableObject {
 
                     if !isHost {
                         NSLog("   Guest could not join room in database, but has Realtime connectivity")
-                        addMessage(.systemInfo, userName: "System", data: [
-                            "message": "Connected via Realtime. Some features may be limited."
-                        ])
+
+                        if !didShowRealtimeWarning {
+                            didShowRealtimeWarning = true
+                            addMessage(.systemInfo, userName: "System", data: [
+                                "message": "Connected via Realtime. Some features may be limited."
+                            ])
+                        }
                     } else {
                         NSLog("   Host will rely on database polling for synchronization")
                         addMessage(.systemInfo, userName: "System", data: [

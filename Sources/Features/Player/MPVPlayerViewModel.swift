@@ -65,6 +65,10 @@ class MPVPlayerViewModel: ObservableObject {
     // This fixes the "Missing Leave" bug where a user leaves via API but the socket disconnect is missed.
     private var ghostCandidateStartTimes: [String: Date] = [:]
 
+    // Failsafe: Track last seek notification to prevent duplicates from drift correction
+    private var lastSeekNotificationTime: Date?
+    private var lastSeekNotificationPosition: Double?
+
 
     init(mpvWrapper: MPVWrapper = MPVWrapper(),
          subtitleService: SubtitleService? = nil,
@@ -1385,6 +1389,8 @@ class MPVPlayerViewModel: ObservableObject {
                     // Announce Host Action for Guest
                     let hostName = self.getHostName(for: nil)
                     self.announcementTriggers.send("\(hostName) seeked to \(self.formatTime(resumeTime))")
+                    self.lastSeekNotificationTime = Date()
+                    self.lastSeekNotificationPosition = resumeTime
                 }
 
                 LoggingManager.shared.info(.videoRendering, message: "Resumed playback after seek to \(Int(resumeTime))s")
@@ -3266,7 +3272,16 @@ extension MPVPlayerViewModel {
 
                 // Announce Host Action
                 let hostName = getHostName(for: message.senderId)
-                announcementTriggers.send("\(hostName) seeked to \(formatTime(targetPosition))")
+
+                // Suppress redundant notification if we just handled an explicit seek (within 3s and 5s of position)
+                let timeSinceLastSeek = Date().timeIntervalSince(lastSeekNotificationTime ?? .distantPast)
+                let isRedundant = timeSinceLastSeek < 3.0 && abs((lastSeekNotificationPosition ?? 0) - targetPosition) < 5.0
+
+                if !isRedundant {
+                    announcementTriggers.send("\(hostName) seeked to \(formatTime(targetPosition))")
+                    lastSeekNotificationTime = Date()
+                    lastSeekNotificationPosition = targetPosition
+                }
 
                 await playbackService.seek(to: targetPosition)
                 // Reset drift history after seek
@@ -3307,14 +3322,16 @@ extension MPVPlayerViewModel {
             }
 
         case .seek:
-            let timestamp = message.timestamp
-            LoggingManager.shared.info(.watchParty, message: "Host seeked to \(timestamp)s")
+            let seekPosition = message.position ?? message.timestamp
+            LoggingManager.shared.info(.watchParty, message: "Host seeked to \(seekPosition)s")
 
             // Announce Host Action
             let hostName = getHostName(for: message.senderId)
-            announcementTriggers.send("\(hostName) seeked to \(formatTime(timestamp))")
+            announcementTriggers.send("\(hostName) seeked to \(formatTime(seekPosition))")
 
-            await playbackService.seek(to: timestamp)
+            await playbackService.seek(to: seekPosition)
+            self.lastSeekNotificationTime = Date()
+            self.lastSeekNotificationPosition = seekPosition
 
         case .chat:
             // Receive chat message from other participants

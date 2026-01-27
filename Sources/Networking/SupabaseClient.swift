@@ -3152,13 +3152,13 @@ extension SupabaseClient {
     }
     
     /// Fetch all library items from server
-    func fetchRemoteLibrary() async throws -> [LibraryItem] {
-        guard let userId = auth.currentUser?.id else { return [] }
+    func fetchRemoteLibrary(userId: UUID? = nil) async throws -> [LibraryItem] {
+        guard let targetId = userId ?? auth.currentUser?.id else { return [] }
         
         let data = try await makeRequest(
             path: "/rpc/fetch_user_library",
             method: "POST",
-            body: ["p_user_id": userId.uuidString.lowercased()],
+            body: ["p_user_id": targetId.uuidString.lowercased()],
             sign: true
         )
         

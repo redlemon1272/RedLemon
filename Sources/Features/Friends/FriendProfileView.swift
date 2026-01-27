@@ -13,7 +13,10 @@ struct FriendProfileView: View {
     @EnvironmentObject var appState: AppState // For navigation to media
 
     @State private var friendHistory: [SupabaseWatchHistoryEntry] = []
+    @State private var friendLibrary: [LibraryItem] = []
     @State private var isLoadingHistory = false
+    @State private var isLoadingLibrary = false
+    @State private var selectedTab = 0 // 0: History, 1: Library
 
     @Environment(\.dismiss) var dismiss
 
@@ -94,6 +97,11 @@ struct FriendProfileView: View {
             isLoadingHistory = true
             friendHistory = await socialService.fetchFriendHistory(friendId: friend.id)
             isLoadingHistory = false
+            
+            // Load library
+            isLoadingLibrary = true
+            friendLibrary = await socialService.fetchFriendLibrary(friendId: friend.id)
+            isLoadingLibrary = false
         }
     }
 
@@ -319,33 +327,124 @@ struct FriendProfileView: View {
     // MARK: - Profile Sidebar (History)
 
     private var profileSidebar: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-
-                // Continue Watching Section
-                VStack(alignment: .leading, spacing: 12) {
-                    Label("Continue Watching", systemImage: "clock")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(.secondary)
-
-                    if isLoadingHistory {
-                        ProgressView()
-                            .scaleEffect(0.8)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    } else if friendHistory.isEmpty {
-                        Text("No recent activity")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .padding(.vertical, 8)
+        VStack(spacing: 0) {
+            // Tab Picker
+            Picker("View", selection: $selectedTab) {
+                Text("History").tag(0)
+                Text("Library").tag(1)
+            }
+            .pickerStyle(.segmented)
+            .padding()
+            
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    
+                    if selectedTab == 0 {
+                        // History Section
+                        VStack(alignment: .leading, spacing: 12) {
+                            if isLoadingHistory {
+                                ProgressView()
+                                    .scaleEffect(0.8)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                            } else if friendHistory.isEmpty {
+                                Text("No recent activity")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                    .padding(.vertical, 8)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                            } else {
+                                ForEach(friendHistory) { item in
+                                    Button(action: { playHistoryItem(item) }) {
+                                        HistoryItemRow(item: item)
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                        }
                     } else {
-                        ForEach(friendHistory) { item in
-                            HistoryItemRow(item: item)
+                        // Library Section
+                        VStack(alignment: .leading, spacing: 12) {
+                            if isLoadingLibrary {
+                                ProgressView()
+                                    .scaleEffect(0.8)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                            } else if friendLibrary.isEmpty {
+                                Text("Library is empty")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                    .padding(.vertical, 8)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                            } else {
+                                ForEach(friendLibrary) { item in
+                                    Button(action: { openLibraryItem(item) }) {
+                                        LibraryItemRow(item: item)
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                            }
                         }
                     }
                 }
+                .padding(.horizontal)
+                .padding(.bottom)
             }
-            .padding()
         }
+    }
+    
+    // MARK: - Navigation Actions
+    
+    private func playHistoryItem(_ item: SupabaseWatchHistoryEntry) {
+        // Construct MediaItem
+        let mediaItem = MediaItem(
+            id: item.mediaId,
+            type: item.mediaType,
+            name: item.title,
+            poster: item.posterUrl,
+            background: nil,
+            logo: nil,
+            description: nil,
+            releaseInfo: nil,
+            year: nil,
+            imdbRating: nil,
+            genres: nil,
+            runtime: nil
+        )
+        
+        // Prepare Player
+        appState.player.selectedMediaItem = mediaItem
+        if let s = item.season, let e = item.episode {
+            appState.player.selectedSeason = s
+            appState.player.selectedEpisode = e
+        }
+        
+        // Navigate
+        appState.navigateTo(.mediaDetail)
+        dismiss()
+    }
+    
+    private func openLibraryItem(_ item: LibraryItem) {
+        // Construct MediaItem
+        let mediaItem = MediaItem(
+            id: item.id,
+            type: item.type,
+            name: item.name,
+            poster: item.posterURL,
+            background: nil,
+            logo: nil,
+            description: nil,
+            releaseInfo: nil,
+            year: item.year,
+            imdbRating: nil,
+            genres: nil,
+            runtime: nil
+        )
+        
+        // Prepare Player/Detail
+        appState.player.selectedMediaItem = mediaItem
+        
+        // Navigate
+        appState.navigateTo(.mediaDetail)
+        dismiss()
     }
 }
 
@@ -401,5 +500,40 @@ struct HistoryItemRow: View {
         .padding(8)
         .background(Color(NSColor.textBackgroundColor))
         .cornerRadius(8)
+    }
+}
+
+struct LibraryItemRow: View {
+    let item: LibraryItem
+
+    var body: some View {
+        HStack(spacing: 10) {
+            // Poster
+            AsyncImage(url: URL(string: item.posterURL ?? "")) { image in
+                image.resizable()
+            } placeholder: {
+                Rectangle().fill(Color.gray.opacity(0.3))
+            }
+            .aspectRatio(2/3, contentMode: .fill)
+            .frame(width: 40, height: 60)
+            .cornerRadius(4)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(item.name)
+                    .font(.callout)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+
+                Text(item.year ?? item.type.capitalized)
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            }
+
+            Spacer()
+        }
+        .padding(8)
+        .background(Color(NSColor.textBackgroundColor))
+        .cornerRadius(8)
+        .contentShape(Rectangle()) // Make entire row tappable
     }
 }

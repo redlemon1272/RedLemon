@@ -1,15 +1,15 @@
 import Foundation
 import Combine
 
-struct LibraryItem: Codable, Identifiable, Hashable {
-    let id: String // IMDB ID
-    let type: String // "movie" or "series"
-    let name: String
-    let posterURL: String?
-    let dateAdded: Date
+public struct LibraryItem: Codable, Identifiable, Hashable {
+    public let id: String // IMDB ID
+    public let type: String // "movie" or "series"
+    public let name: String
+    public let posterURL: String?
+    public let dateAdded: Date
 
     // Additional metadata that might be useful for offline/display without fetching
-    let year: String?
+    public let year: String?
 }
 
 class LibraryManager: ObservableObject {

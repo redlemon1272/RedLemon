@@ -1051,4 +1051,14 @@ class SocialService: ObservableObject {
             return []
         }
     }
+
+    func fetchFriendLibrary(friendId: String) async -> [LibraryItem] {
+        guard let friendUUID = UUID(uuidString: friendId) else { return [] }
+        do {
+            return try await client.fetchRemoteLibrary(userId: friendUUID)
+        } catch {
+            print("❌ Failed to fetch friend library: \(error)")
+            return []
+        }
+    }
 }

@@ -240,35 +240,39 @@ final class SubDLClient {
             print("⚠️ Low subtitle count (\(filteredSubtitles.count)). Attempting supplemental Name Search for '\(name)'...")
 
             // Try identifying the show ID via text search
-            if let alternateId = try await searchByApiName(name: name, year: year, type: subdlType, apiKey: apiKey) {
-                print("✅ Supplemental Search found ID: \(alternateId). Fetching additional subtitles...")
+            do {
+                if let alternateId = try await searchByApiName(name: name, year: year, type: subdlType, apiKey: apiKey) {
+                    print("✅ Supplemental Search found ID: \(alternateId). Fetching additional subtitles...")
 
-                let extraSubtitles = try await fetchByInternalId(sdId: alternateId, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
-                print("📦 Supplemental Fetch returned \(extraSubtitles.count) raw subtitles")
+                    let extraSubtitles = try await fetchByInternalId(sdId: alternateId, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
+                    print("📦 Supplemental Fetch returned \(extraSubtitles.count) raw subtitles")
 
-                let filteredExtras = filterSubtitlesByEpisode(extraSubtitles, season: season, episode: episode)
+                    let filteredExtras = filterSubtitlesByEpisode(extraSubtitles, season: season, episode: episode)
 
-                // Merge uniqueness (by URL and Logic Key)
-                var deduplicatedExtraCount = 0
-                for sub in filteredExtras {
-                    let lang = sub.language?.lowercased() ?? "unknown"
-                    let rel = normalizeReleaseName(sub.releaseName ?? "")
-                    let logicKey = "\(lang)_\(rel)"
+                    // Merge uniqueness (by URL and Logic Key)
+                    var deduplicatedExtraCount = 0
+                    for sub in filteredExtras {
+                        let lang = sub.language?.lowercased() ?? "unknown"
+                        let rel = normalizeReleaseName(sub.releaseName ?? "")
+                        let logicKey = "\(lang)_\(rel)"
 
-                    if !seenUrls.contains(sub.url) && !seenLogicKeys.contains(logicKey) {
-                        filteredSubtitles.append(sub)
-                        seenUrls.insert(sub.url)
-                        seenLogicKeys.insert(logicKey)
-                    } else {
-                        deduplicatedExtraCount += 1
+                        if !seenUrls.contains(sub.url) && !seenLogicKeys.contains(logicKey) {
+                            filteredSubtitles.append(sub)
+                            seenUrls.insert(sub.url)
+                            seenLogicKeys.insert(logicKey)
+                        } else {
+                            deduplicatedExtraCount += 1
+                        }
                     }
+                    if deduplicatedExtraCount > 0 {
+                        print("🧹 SubDL: Deduplicated \(deduplicatedExtraCount) supplemental mirrors")
+                    }
+                    print("🔗 Merged unique subtitles from supplemental search.")
+                } else {
+                    print("⚠️ Supplemental Name Search returned no match.")
                 }
-                if deduplicatedExtraCount > 0 {
-                    print("🧹 SubDL: Deduplicated \(deduplicatedExtraCount) supplemental mirrors")
-                }
-                print("🔗 Merged unique subtitles from supplemental search.")
-            } else {
-                print("⚠️ Supplemental Name Search returned no match.")
+            } catch {
+                LoggingManager.shared.error(.subtitles, message: "⚠️ Supplemental SubDL search failed: \(error.localizedDescription) - proceeding with existing results (\(filteredSubtitles.count))")
             }
         } else {
             let totalLoss = subtitles.count - filteredSubtitles.count

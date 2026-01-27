@@ -194,12 +194,10 @@ class LobbyPresenceManager: ObservableObject {
                     // RESOLVE TRUE USER ID:
                     // The `userId` param here is the Presence Ref (Connection ID), NOT the user's UUID.
                     // We must extract the actual user_id from metadata if available.
-                    var trueUserId = userId
-                    if let metaUserId = metadata?["user_id"] as? String {
-                        trueUserId = metaUserId
-                    }
-
-                    let normalizedID = trueUserId.lowercased()
+                    let metaUserId = metadata?["user_id"] as? String
+                    let metaUsername = metadata?["username"] as? String
+                    
+                    let normalizedID = (metaUserId ?? metaUsername ?? userId).lowercased()
 
                     // Cancel any pending leave task for this user
                     strongSelf.pendingLeaveTasks[normalizedID]?.cancel()
@@ -278,7 +276,7 @@ class LobbyPresenceManager: ObservableObject {
                     let metaUsername = metadata?["username"] as? String
 
                     let leavingPhxRef = userId
-                    let normalizedID = (metaUserId ?? userId).lowercased()
+                    let normalizedID = (metaUserId ?? metaUsername ?? userId).lowercased()
                     let capturedUsername = metaUsername ?? "User"
 
                     // Defer leave processing to avoid false positives from metadata updates

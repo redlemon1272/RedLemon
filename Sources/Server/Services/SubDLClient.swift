@@ -57,7 +57,10 @@ final class SubDLClient {
 
     /// Quick health check - verifies SubDL API is reachable
     /// Uses 3s timeout per Landmine #27 (fail fast on pre-flight checks)
-    func checkHealth(apiKey: String) async -> Bool {
+    func checkHealth(apiKey: String) async -> String {
+        if apiKey.isEmpty { return "Missing API Key" }
+
+        let startTime = Date()
         var components = URLComponents(string: "\(baseURL)/subtitles")!
         components.queryItems = [
             URLQueryItem(name: "api_key", value: apiKey),
@@ -65,9 +68,8 @@ final class SubDLClient {
             URLQueryItem(name: "type", value: "movie")
         ]
 
-        guard let url = components.url else { return false }
+        guard let url = components.url else { return "Offline" }
         var request = URLRequest(url: url)
-        // Add User-Agent to bypass potential Cloudflare blocks
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 10
 
@@ -77,15 +79,33 @@ final class SubDLClient {
         let session = URLSession(configuration: config)
 
         do {
-            let (_, response) = try await session.data(for: request)
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                return true
+            let (data, response) = try await session.data(for: request)
+            let latency = Date().timeIntervalSince(startTime)
+
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    // CRITICAL: SubDL often returns 200 OK even for errors, but with status: false in JSON
+                    if let result = try? JSONDecoder().decode(SubDLResponse.self, from: data) {
+                        if result.status {
+                            return latency > 5.0 ? "Degraded" : "Online"
+                        } else {
+                            // API key is likely invalid or deactivated
+                            print("⚠️ SubDL Health Check: status: false - error: \(result.error ?? "unknown")")
+                            return "Invalid API Key"
+                        }
+                    }
+                    return latency > 5.0 ? "Degraded" : "Online"
+                } else if httpResponse.statusCode == 401 || httpResponse.statusCode == 403 {
+                    return "Invalid API Key"
+                }
             }
         } catch {
             NSLog("%@", "🏥 SubDL health check failed: \(error.localizedDescription)")
         }
-        return false
+        return "Offline"
+
     }
+
 
     /// Search for subtitles by IMDB ID
     /// - Parameters:

@@ -103,7 +103,7 @@ actor RealDebridClient {
 
     /// Quick health check - verifies RD API is reachable
     /// Uses 3s timeout per Landmine #27 (fail fast on pre-flight checks)
-    func checkHealth(token: String) async -> Bool {
+    func checkHealth(token: String) async -> String {
         let url = URL(string: "\(baseURL)/user")!
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -116,14 +116,19 @@ actor RealDebridClient {
 
         do {
             let (_, response) = try await session.data(for: request)
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                return true
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    return "Online"
+                } else if httpResponse.statusCode == 401 || httpResponse.statusCode == 403 {
+                    return "Invalid Token"
+                }
             }
         } catch {
             NSLog("%@", "🏥 RealDebrid health check failed: \(error.localizedDescription)")
         }
-        return false
+        return "Offline"
     }
+
 
     // MARK: - Public API
 

@@ -820,12 +820,12 @@ struct MPVPlayerView: View {
                 } else {
                     HStack(spacing: 6) {
                         Circle()
-                            .fill(subdlStatus == "Online" ? Color.green : Color.red)
+                            .fill(colorForStatus(subdlStatus))
                             .frame(width: 8, height: 8)
 
                         Text(subdlStatus)
-                            .foregroundColor(subdlStatus == "Online" ? .green : .red)
-                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundColor(colorForStatus(subdlStatus))
+                            .font(.system(size: 11, weight: .semibold))
                     }
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
@@ -1430,6 +1430,18 @@ struct MPVPlayerView: View {
     private var hasUnreadMessages: Bool {
         totalUnreadCount > 0
     }
+
+    private func colorForStatus(_ status: String) -> Color {
+        switch status {
+        case "Online": return .green
+        case "Degraded": return .orange
+        case "Missing", "Missing API Key", "Missing Token": return .secondary
+        case "Invalid API Key", "Invalid Token": return .red
+        case "Offline": return .red
+        default: return .secondary
+        }
+    }
+
 }
 
 // MARK: - Mouse Tracking View

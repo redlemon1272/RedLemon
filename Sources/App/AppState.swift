@@ -635,26 +635,28 @@ class AppState: ObservableObject {
             let subdlKey = await KeychainManager.shared.get(service: "subdl")
 
             // Run checks in parallel
-            async let rdHealthTask: Bool = {
+            async let rdHealthTask: String = {
                 if let token = rdToken, !token.isEmpty {
                     return await RealDebridClient.shared.checkHealth(token: token)
                 }
-                return false
+                return "Missing Token"
             }()
 
-            async let subdlHealthTask: Bool = {
+            async let subdlHealthTask: String = {
                 if let key = subdlKey, !key.isEmpty {
                     return await SubDLClient.shared.checkHealth(apiKey: key)
                 }
-                return false
+                return "Missing API Key"
             }()
 
-            let rdHealthy = await rdHealthTask
-            let subdlHealthy = await subdlHealthTask
+            let rdStatus = await rdHealthTask
+            let subdlStatus = await subdlHealthTask
 
             // Add to health dictionary
-            health["realdebrid"] = rdHealthy ? "Online" : "Offline"
-            health["subdl"] = subdlHealthy ? "Online" : "Offline"
+            health["realdebrid"] = rdStatus
+            health["subdl"] = subdlStatus
+
+
 
             await MainActor.run {
                 self.providerHealth = health

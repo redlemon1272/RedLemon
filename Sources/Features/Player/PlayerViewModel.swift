@@ -2292,6 +2292,10 @@ class PlayerViewModel: ObservableObject {
                     // Update state on Main Actor
                     await MainActor.run {
                         self.selectedStream = stream
+                        if var health = self.appState?.providerHealth {
+                            health["subdl"] = "Degraded"
+                            self.appState?.providerHealth = health
+                        }
                         NSLog("✅ [PlayerVM] Manual Refresh: Added %d new subtitles to current stream", newSubs.count)
                     }
                 } else {

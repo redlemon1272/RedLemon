@@ -85,7 +85,7 @@ struct SettingsView: View {
                 }
 
                 usernameSection
-                
+
                 syncSection
 
                 recoveryPhraseSection
@@ -142,10 +142,10 @@ struct SettingsView: View {
                 Task { @MainActor in
                     // Brief delay to allow the sheet dismissal to animate
                     try? await Task.sleep(nanoseconds: 500_000_000)
-                    
+
                     // Final cloud sync before relaunch to ensure restoration is persistent
                     await SyncManager.shared.performFullSync()
-                    
+
                     appState.relaunchApp() // OK
                 }
             })
@@ -199,13 +199,14 @@ struct SettingsView: View {
                     Spacer()
 
                     // Status indicator
+                    let rdStatus = appState.providerHealth["realdebrid"] ?? (realDebridToken.isEmpty ? "Missing Token" : "Online")
                     HStack(spacing: 6) {
                         Circle()
-                            .fill(realDebridToken.isEmpty ? Color.red : Color.green)
+                            .fill(colorForStatus(rdStatus))
                             .frame(width: 10, height: 10)
-                        Text(realDebridToken.isEmpty ? "Not Set" : "Active")
+                        Text(rdStatus)
                             .font(.body)
-                            .foregroundColor(realDebridToken.isEmpty ? .red : .green)
+                            .foregroundColor(colorForStatus(rdStatus))
                     }
                 }
 
@@ -275,13 +276,14 @@ struct SettingsView: View {
                     Spacer()
 
                     // Status indicator
+                    let subdlStatus = appState.providerHealth["subdl"] ?? (subDLApiKey.isEmpty ? "Missing API Key" : "Online")
                     HStack(spacing: 6) {
                         Circle()
-                            .fill(subDLApiKey.isEmpty ? Color.red : Color.green)
+                            .fill(colorForStatus(subdlStatus))
                             .frame(width: 10, height: 10)
-                        Text(subDLApiKey.isEmpty ? "Not Set" : "Active")
+                        Text(subdlStatus)
                             .font(.body)
-                            .foregroundColor(subDLApiKey.isEmpty ? .red : .green)
+                            .foregroundColor(colorForStatus(subdlStatus))
                     }
                 }
 
@@ -814,7 +816,7 @@ struct SettingsView: View {
         VStack(alignment: .leading, spacing: 24) {
             Text("Cloud Sync")
                 .font(.system(size: 28, weight: .semibold))
-            
+
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
                     Image(systemName: "icloud.and.arrow.down.fill")
@@ -822,9 +824,9 @@ struct SettingsView: View {
                         .foregroundColor(.blue)
                     Text("Library & History Sync")
                         .font(.title3.weight(.semibold))
-                    
+
                     Spacer()
-                    
+
                     if syncManager.isSyncing {
                         ProgressView()
                             .scaleEffect(0.8)
@@ -834,11 +836,11 @@ struct SettingsView: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                
+
                 Text("Manually sync your library and watch history with the cloud")
                     .font(.body)
                     .foregroundColor(.secondary)
-                
+
                 Button(action: {
                     Task { await syncManager.performFullSync() }
                 }) {
@@ -1326,21 +1328,22 @@ struct SettingsView: View {
 
         Task {
             do {
-                // Save Real-Debrid token
-                if !realDebridToken.isEmpty {
-                    try await KeychainManager.shared.save(
-                        credential: realDebridToken.trimmingCharacters(in: .whitespacesAndNewlines),
-                        for: "realdebrid"
-                    )
+                // Save or delete Real-Debrid token
+                let trimmedRD = realDebridToken.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !trimmedRD.isEmpty {
+                    try await KeychainManager.shared.save(credential: trimmedRD, for: "realdebrid")
+                } else {
+                    try await KeychainManager.shared.delete(service: "realdebrid")
                 }
 
-                // Save SubDL API key
-                if !subDLApiKey.isEmpty {
-                    try await KeychainManager.shared.save(
-                        credential: subDLApiKey.trimmingCharacters(in: .whitespacesAndNewlines),
-                        for: "subdl"
-                    )
+                // Save or delete SubDL API key
+                let trimmedSubDL = subDLApiKey.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !trimmedSubDL.isEmpty {
+                    try await KeychainManager.shared.save(credential: trimmedSubDL, for: "subdl")
+                } else {
+                    try await KeychainManager.shared.delete(service: "subdl")
                 }
+
 
 
 
@@ -1431,7 +1434,7 @@ struct SettingsView: View {
             try? await Task.sleep(nanoseconds: 1_500_000_000)
 
             await MainActor.run {
-                // Resetting data - we skip final sync because we want the cloud to remain 
+                // Resetting data - we skip final sync because we want the cloud to remain
                 // formatted for future restores, not overwritten with empty state.
                 appState.relaunchApp() // OK
             }
@@ -1481,6 +1484,17 @@ struct SettingsView: View {
             await MainActor.run {
                 copyMessage = "❌ Export failed: \(error.localizedDescription)"
             }
+        }
+    }
+
+    private func colorForStatus(_ status: String) -> Color {
+        switch status {
+        case "Online": return .green
+        case "Degraded": return .orange
+        case "Missing", "Missing API Key", "Missing Token": return .secondary
+        case "Invalid API Key", "Invalid Token": return .red
+        case "Offline": return .red
+        default: return .secondary
         }
     }
 }

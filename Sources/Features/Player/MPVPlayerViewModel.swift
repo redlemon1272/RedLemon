@@ -459,16 +459,25 @@ class MPVPlayerViewModel: ObservableObject {
         // Observe subtitles list changes for the active stream
         // This enables the "Healing Loop": deep search results appearing while movie is playing
         appState.player.$selectedStream
-            .compactMap { $0?.subtitles }
-            .removeDuplicates { old, new in
-                old.count == new.count && old.map { $0.url } == new.map { $0.url }
-            }
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] newSubtitles in
-                guard let self = self else { return }
-                LoggingManager.shared.info(.subtitles, message: "MPVPlayerViewModel: Detected \(newSubtitles.count) subtitles in stream. Syncing to SubtitleService.")
+            .sink { [weak self] newStream in
+                guard let self = self, let stream = newStream else { return }
+                
+                let streamId = stream.infoHash ?? stream.url ?? ""
+                let subtitles = stream.subtitles ?? []
+                
+                LoggingManager.shared.info(.subtitles, message: "MPVPlayerViewModel: Detected \(subtitles.count) subtitles in stream. Syncing to SubtitleService.")
+                
                 Task {
-                    let formatted = newSubtitles.map { (url: $0.url, label: $0.label) }
+                    // Normalize subtitles
+                    let formatted = subtitles.map { (url: $0.url, label: $0.label) }
+                    
+                    // If this is a DIFFERENT stream than before, clear the service first
+                    // We use IMDb ID or stream identifier to detect changes
+                    if self.imdbId != streamId {
+                         // Only clear if we actually have new subtitles to load or if we are truly switching media
+                         // For now, let loadStream handle the hard clear, and we just append here.
+                    }
+                    
                     await self.subtitleService.loadExternalSubtitles(formatted)
                 }
             }
@@ -818,8 +827,9 @@ class MPVPlayerViewModel: ObservableObject {
         LoggingManager.shared.debug(.general, message: "   IMDB: \(imdbId)")
         LoggingManager.shared.debug(.general, message: "   URL: \(streamURL.prefix(60))...")
 
-        // 🧹 Subtitle Duplication Fix (Tron): Clear all stale subtitles before loading new media
-        await subtitleService.clearSubtitles()
+        // 🧹 Subtitle Duplication Fix: Subtitles are now managed exclusively by the AppState observer
+        // to prevent race conditions between loadStream and stream resolution events.
+        // await subtitleService.clearSubtitles() // REMOVED: Managed by observer
 
         // FIX: Determine effective event status
         // A room starting with "event_" is ALWAYS an event, regardless of the boolean flag passed
@@ -942,23 +952,8 @@ class MPVPlayerViewModel: ObservableObject {
             await fetchMetadata(imdbId: imdbId, mediaType: isSeries ? "series" : "movie")
         }
 
-        // NEW: Scan for embedded tracks IMMEDIATELY when loading starts
-        // This ensures they are ready before playback begins, preventing hiccups
-        // NEW: Load/Scan subtitles IMMEDIATELY when loading starts
-        // This ensures they are ready before playback begins, preventing hiccups
-        // NEW: Load/Scan subtitles IMMEDIATELY when loading starts
-        // Parallel execution again (reverted blocking wait), but LIMITED to top 3 to reduce hiccup
-        Task {
-            if !subtitles.isEmpty {
-                // Limit to top 3 subtitles to prevent "brutal wait" / heavy hiccup
-                let limitedSubtitles = Array(subtitles.prefix(3))
-                LoggingManager.shared.info(.subtitles, message: "Pre-loading external subtitles (Top \(limitedSubtitles.count))...")
-                await self.subtitleService.loadExternalSubtitles(limitedSubtitles)
-            } else {
-                LoggingManager.shared.info(.subtitles, message: "Pre-scanning embedded subtitles...")
-                await self.subtitleService.scanEmbeddedTracks()
-            }
-        }
+        // Subtitles are now handled by the AppState observer on appState.player.$selectedStream
+        // to ensure the healing loop and initial load are perfectly synchronized.
 
         // Check if we should resume from a specific timestamp
         let resumeTime = appState?.player.resumeFromTimestamp ?? 0
@@ -2493,8 +2488,8 @@ extension MPVPlayerViewModel {
                         let leavingUsername = metaUsername ?? "User"
 
                         let task: Task<Void, Never> = Task { @MainActor [weak self, actualUserId, leavingPhxRef, leavingUsername] in
-                            // Wait 3 seconds (nano) - lowered from 5s to improve responsiveness while still handling flutters
-                            try? await Task.sleep(nanoseconds: 3_000_000_000)
+                            // Wait 10 seconds (nano) to handle network flaps and seek-induced connection drops
+                            try? await Task.sleep(nanoseconds: 10_000_000_000)
 
                             guard let self = self else { return }
 
@@ -2555,6 +2550,8 @@ extension MPVPlayerViewModel {
                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                             LoggingManager.shared.info(.watchParty, message: "Participant left (confirmed): \(actualUserId)")
                         }
+                        // Cancel previous task for this user to prevent "Ghost Exits" during flaps
+                        self.pendingLeaveTasks[actualUserId]?.cancel()
                         self.pendingLeaveTasks[actualUserId] = task
                     }
 

@@ -1381,6 +1381,10 @@ class MPVPlayerViewModel: ObservableObject {
                         try? await self.realtimeManager?.sendSyncMessage(syncMessage)
                     }
                     LoggingManager.shared.info(.watchParty, message: "Host broadcasting immediate resume seek to \(Int(resumeTime))s")
+                } else {
+                    // Announce Host Action for Guest
+                    let hostName = self.getHostName(for: nil)
+                    self.announcementTriggers.send("\(hostName) seeked to \(self.formatTime(resumeTime))")
                 }
 
                 LoggingManager.shared.info(.videoRendering, message: "Resumed playback after seek to \(Int(resumeTime))s")
@@ -3259,6 +3263,11 @@ extension MPVPlayerViewModel {
                 let targetPosition = predictedHostPosition + seekBufferOffset
 
                 LoggingManager.shared.info(.watchParty, message: "Large drift (\(String(format: "%.1f", absSmoothedDrift))s) - seeking to \(String(format: "%.1f", targetPosition))s (host at \(String(format: "%.1f", predictedHostPosition))s + \(seekBufferOffset)s offset)")
+
+                // Announce Host Action
+                let hostName = getHostName(for: message.senderId)
+                announcementTriggers.send("\(hostName) seeked to \(formatTime(targetPosition))")
+
                 await playbackService.seek(to: targetPosition)
                 // Reset drift history after seek
                 driftHistory.removeAll()

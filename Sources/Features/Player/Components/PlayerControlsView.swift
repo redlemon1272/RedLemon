@@ -119,7 +119,7 @@ struct PlayerControlsView: View {
                                     .onChanged { value in
                                         let progress = max(0, min(1, value.location.x / geometry.size.width))
                                         let seekTime = Double(progress) * viewModel.mpvWrapper.duration
-                                        viewModel.mpvWrapper.seek(to: seekTime)
+                                        viewModel.seek(to: seekTime)
                                     }
                             )
                         }
@@ -200,7 +200,7 @@ struct PlayerControlsView: View {
 
                     // Next Episode Button
                     if !viewModel.isInWatchParty,
-                       let appState = viewModel.appState, 
+                       let appState = viewModel.appState,
                        appState.player.selectedMediaItem?.type == "series" {
                         Button(action: {
                             Task {
@@ -211,7 +211,7 @@ struct PlayerControlsView: View {
                                 Circle()
                                     .fill(Color.white.opacity(0.2))
                                     .frame(width: 40, height: 40)
-                                
+
                                 Image(systemName: "forward.end.fill")
                                     .font(.system(size: 16, weight: .semibold))
                                     .foregroundColor(.white)
@@ -288,7 +288,7 @@ struct PlayerControlsView: View {
 
                         // Event List Button (Movies)
                         EventListButton(showEventListMenu: $showEventListMenu)
-                        
+
                         // Report Stream Button
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.15)) {
@@ -299,7 +299,7 @@ struct PlayerControlsView: View {
                                 Circle()
                                     .fill(showReportSheet ? Color.red.opacity(0.3) : Color.white.opacity(0.2))
                                     .frame(width: 40, height: 40)
-                                
+
                                 Image(systemName: "exclamationmark.triangle.fill")
                                     .font(.system(size: 16))
                                     .foregroundColor(showReportSheet ? .red : .white)
@@ -318,7 +318,7 @@ struct PlayerControlsView: View {
                                 Circle()
                                     .fill(showStreamInfoSheet ? Color.white.opacity(0.3) : Color.white.opacity(0.2))
                                     .frame(width: 40, height: 40)
-                                
+
                                 Image(systemName: "info.circle.fill")
                                     .font(.system(size: 16))
                                     .foregroundColor(.white)

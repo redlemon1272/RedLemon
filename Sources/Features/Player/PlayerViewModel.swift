@@ -1041,10 +1041,16 @@ class PlayerViewModel: ObservableObject {
                 provider: provider
             )
 
-            // 2. Mark hash as attempted locally (session-level exclusion)
-            // This ensures the next resolution for this title avoids this hash.
+            // 2. Mark stream as attempted locally (session-level exclusion)
+            // This ensures the next resolution for this title avoids this specific file.
             if let imdbId = selectedMediaItem?.id {
-                await StreamService.shared.markStreamAsAttempted(imdbId: imdbId, hash: hash)
+                await StreamService.shared.markStreamAsAttempted(
+                    imdbId: imdbId,
+                    hash: hash,
+                    title: filename ?? selectedStream?.title, // Use filename/title fallback
+                    size: selectedStream?.size,
+                    provider: provider
+                )
             }
 
             // 3. Clear room playback state in DB so "Start" button is visible for everyone
@@ -1084,16 +1090,28 @@ class PlayerViewModel: ObservableObject {
     /// Explicitly rejects the current stream (Solo Mode) and tries the next one.
     /// This ensures the rejected hash is recorded in StreamService so it isn't picked up again by emergency resolution.
     func tryAnotherStream() {
-        guard let stream = selectedStream, let hash = stream.infoHash, let imdbId = selectedMediaItem?.id else {
+        guard let imdbId = selectedMediaItem?.id else {
             tryNextStream()
             return
         }
 
-        LoggingManager.shared.info(.videoRendering, message: "PlayerVM: User requested another stream. Excluding current hash: \(hash)")
+        let stream = selectedStream
+        let hash = stream?.infoHash ?? ""
+        let title = stream?.title
+        let size = stream?.size
+        let provider = stream?.provider
+
+        LoggingManager.shared.info(.videoRendering, message: "PlayerVM: User requested another stream. Excluding current file: \(title ?? "unknown")")
 
         Task {
-            // 1. Mark hash as attempted globally for this session
-            await StreamService.shared.markStreamAsAttempted(imdbId: imdbId, hash: hash)
+            // 1. Mark as attempted globally for this session
+            await StreamService.shared.markStreamAsAttempted(
+                imdbId: imdbId,
+                hash: hash,
+                title: title,
+                size: size,
+                provider: provider
+            )
 
             await MainActor.run {
                 // 2. Filter out the blocked hash from the existing queue to avoid retrying it immediately
@@ -1263,23 +1281,22 @@ class PlayerViewModel: ObservableObject {
         exitFullscreen()
 
         // 3. CRITICAL: Exit Stabilization (Landmine #82)
-        // For Solo, Guest, and Event exits, we MUST wait for the OS to start the fullscreen exit animation
-        // before we clear 'showPlayer' or change 'currentView'.
-        // If we don't, the destination view (with Sidebar) tries to layout inside the Fullscreen window,
-        // then is immediately yanked by the window resize. This causes the "horrific" jitter.
-        let shouldDelayExit = !keepRoomState
-        if shouldDelayExit && wasFullscreen {
+        // We MUST wait for the OS to start the fullscreen exit animation before we clear 'showPlayer'.
+        // This is mandatory for all exits from Fullscreen, including Watch Party Failovers.
+        // Failing to do this causes the "Zoomed In UI" bug where the next player instance inherits a fluid window scale.
+        if wasFullscreen {
+            LoggingManager.shared.debug(.videoRendering, message: "PlayerVM: Enforcing window stabilization delay (0.3s)")
             try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s buffer
         }
 
-        // CRITICAL: Lobby State Sync (Keep this before clearing showPlayer)
+        // 4. Lobby State Sync (Keep this before clearing showPlayer)
         if keepRoomState {
              appState?.activeLobbyViewModel?.markPlaybackEnded()
              if isWatchPartyHost && notifyGuests {
                   appState?.activeLobbyViewModel?.announceReturnToLobby()
              }
         }
- else {
+        else {
              if let roomId = currentRoomId {
                  LoggingManager.shared.info(.watchParty, message: "Leaving room: \(roomId)")
              }

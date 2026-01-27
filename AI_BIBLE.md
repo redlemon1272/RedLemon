@@ -121,6 +121,8 @@
 | **"ursinho" data not showing** | Friend hasn't synced local data to cloud yet | #129 |
 | **Sync Script Drift** | Feature missing from public whitelist | #130 |
 | **Release Artifact Mismatch** | Uncommitted changes in build executable | #131 |
+| **Zoomed In UI** | Returning from Fullscreen restart | #82 |
+| **Infinite Retry Loop** | Hashless streams bypass exclusion | #131 |
 
 ## 🚨 Critical Landmines
 
@@ -1573,7 +1575,7 @@ The `SyncManager` facilitates a "Newest Wins" merge strategy between local `User
 1. **Idempotency Guard**: Always `guard showPlayer else { return }` at the top of `exitPlayer` to prevent double-triggers (e.g. from `onDisappear` + click).
 2. **Sequential Transitions**:
    - `exitFullscreen()` MUST be called first.
-   - For **Solo, Guest, and Event** exits, a **0.3s delay** (`Task.sleep`) MUST be injected *after* `exitFullscreen` and *before* setting `showPlayer = false`. This allows the OS window animation to start smoothly before the view hierarchy changes.
+   - For **ALL Fullscreen Exits** (including Watch Party Failovers/Restarts), a **0.3s delay** (`Task.sleep`) MUST be injected *after* `exitFullscreen` and *before* setting `showPlayer = false`. This allows the OS window animation to start smoothly before the view hierarchy changes. Without this, restarting the player immediately on a "fluid" window causes the "Zoomed In" UI bug.
    - Set `isExitingSession = true` in the UI view model to provide a "Closing..." overlay and cinematic (blur/scale) visual during this delay.
    - **Never** call `restoreWindowSize()` if the window was previously in fullscreen; the OS handles the frame restoration. Calling it manually causes a competing animation.
 
@@ -2117,3 +2119,17 @@ if let img = NSImage(named: "my_new_icon") {
     Image(nsImage: img)
 }
 ```
+
+### 2. The Hashless File Trap (Landmine #131)
+**Symptom**: "Try Another Stream" keeps selecting the same bad file repeatedly when using Debrid-only providers (like DebridSearch/DMM) where `infoHash` is often missing.
+**Root Cause**: Reliance on `infoHash` as the sole unique identifier for exclusion. Cached files from DMM often lack a hash in the API response.
+**Mandatory Solution**:
+1. **3-Factor Exclusion**: When `infoHash` is missing/nil, you MUST exclude based on a composite key: `Filename + FileSize + Provider`.
+2. **Explicit Fallback**: The exclusion logic in `StreamService` and `PlayerViewModel` must explicitly check for nil hash and fallback to blocking the specific `stream.title` and `stream.size`.
+
+### 3. Release Integrity Protocol (The "Dirty Repo" Check)
+**Symptom**: Releasing a build that contains uncommitted changes or missing files (like a partially synced feature).
+**Mandatory Protocol**:
+1. **Dirty Repo Check**: The release script MUST fail immediately if `git status --porcelain` is not empty.
+2. **Air Gap Protocol**: The `architecture-scan.sh` script MUST verify that every directory in `Sources/Features` is explicitly whitelisted in `sync-to-public.sh`. Missing entries must trigger a build failure.
+

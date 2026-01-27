@@ -1454,6 +1454,39 @@ else
     echo -e "${YELLOW}⚠️  Warning: $SYNC_SCRIPT not found. Skipping Air Gap check.${NC}"
 fi
 
+# =============================================================================
+# CHECK 68: Exit Stabilization Enforcement (Landmine #82)
+# =============================================================================
+# Trigger: 'exitPlayer' lacking the mandatory unconditional 0.3s delay.
+# Fix: Ensure `Task.sleep` is called if `wasFullscreen` is true.
+print_header "Check 68: Exit Stabilization (Landmine #82)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/PlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    # We check for the specific strict enforcement log message or the structure
+    if ! grep -q "Enforcing window stabilization delay" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #82" "Exit Stabilization: PlayerViewModel.swift MUST enforce a 0.3s delay during exit if wasFullscreen is true." "$PLAYER_VM" "0" "Missing strict 0.3s delay logic"
+    else
+        echo -e "${GREEN}✅ Exit stabilization logic verified.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 69: Hashless Stream Exclusion (Landmine #131)
+# =============================================================================
+# Trigger: 'markStreamAsAttempted' not accepting fallback metadata.
+# Fix: Ensure signature includes title, size, and provider.
+print_header "Check 69: Hashless Stream Exclusion (Landmine #131)"
+
+STREAM_SERVICE="$SOURCES_DIR/App/Services/StreamService.swift"
+if [[ -f "$STREAM_SERVICE" ]]; then
+    if ! grep -q "title: String? = nil, size: String? = nil" "$STREAM_SERVICE"; then
+        report "ERROR" "Landmine #131" "Infinite Retry Loop: StreamService.markStreamAsAttempted MUST accept title/size arguments for hashless files." "$STREAM_SERVICE" "0" "Missing fallback parameters in signature"
+    else
+        echo -e "${GREEN}✅ Hashless stream exclusion signature verified.${NC}"
+    fi
+fi
+
 
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"

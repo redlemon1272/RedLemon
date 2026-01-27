@@ -96,7 +96,7 @@ report_issue() {
 # Check 1: Hardcoded Secrets
 # Look for patterns that suggest hardcoded API keys, tokens, passwords
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[1/18] Checking for hardcoded secrets...${NC}"
+echo -e "${BOLD}[1/19] Checking for hardcoded secrets...${NC}"
 
 # API keys (common patterns)
 while IFS=: read -r file line content; do
@@ -133,7 +133,7 @@ done < <(grep -rn --include="*.swift" -E 'password\s*=\s*"[^"]{4,}"' "$SOURCES_D
 # Check 2: Insecure Logging (AI Bible Landmine #11)
 # NSLog without format specifier can crash if string contains %
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[2/18] Checking for insecure logging (Landmine #11)...${NC}"
+echo -e "${BOLD}[2/19] Checking for insecure logging (Landmine #11)...${NC}"
 
 # Logging sensitive keywords
 while IFS=: read -r file line content; do
@@ -144,7 +144,7 @@ done < <(grep -rn --include="*.swift" -e 'print.*password' -e 'print.*token' -e 
 # -----------------------------------------------------------------------------
 # Check 3: HTTP URLs (should be HTTPS except localhost)
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[3/18] Checking for insecure HTTP URLs...${NC}"
+echo -e "${BOLD}[3/19] Checking for insecure HTTP URLs...${NC}"
 
 while IFS=: read -r file line content; do
     # Skip localhost, 127.0.0.1, and test files
@@ -162,7 +162,7 @@ done < <(grep -rn --include="*.swift" 'http://' "$SOURCES_DIR" 2>/dev/null | gre
 # Check 4: UserDefaults for Sensitive Data
 # Sensitive data should use Keychain, not UserDefaults
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[4/18] Checking for sensitive data in UserDefaults...${NC}"
+echo -e "${BOLD}[4/19] Checking for sensitive data in UserDefaults...${NC}"
 
 while IFS=: read -r file line content; do
     if [[ "$file" == *"Test"* ]]; then continue; fi
@@ -172,7 +172,7 @@ done < <(grep -rn --include="*.swift" -E 'UserDefaults.*\b(token|password|secret
 # -----------------------------------------------------------------------------
 # Check 5: Disabled SSL/TLS Validation
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[5/18] Checking for disabled SSL validation...${NC}"
+echo -e "${BOLD}[5/19] Checking for disabled SSL validation...${NC}"
 
 while IFS=: read -r file line content; do
     report_issue "CRITICAL" "Potentially disabled SSL validation" "$file" "$line" "$content"
@@ -187,7 +187,7 @@ done < <(grep -rn --include="*.swift" 'urlSession.*didReceive.*challenge' "$SOUR
 # Check 6: SQL Injection Risks
 # Look for string interpolation in SQL queries
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[6/18] Checking for SQL injection patterns...${NC}"
+echo -e "${BOLD}[6/19] Checking for SQL injection patterns...${NC}"
 
 while IFS=: read -r file line content; do
     if [[ "$file" == *"Test"* ]]; then continue; fi
@@ -217,7 +217,7 @@ done < <(grep -rn --include="*.swift" 'kSecAttrAccessibleAlways[^U]' "$SOURCES_D
 # Check 8: Force Unwrapping in Critical Code
 # Excessive ! in auth/payment code can cause crashes
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[8/18] Checking for risky force unwrapping in auth code...${NC}"
+echo -e "${BOLD}[8/19] Checking for risky force unwrapping in auth code...${NC}"
 
 # Find files with auth/payment in name and check for excessive force unwraps
 for pattern in "Auth" "Payment" "Keychain" "Token" "Credential"; do
@@ -235,7 +235,7 @@ done
 # Check 9: Cryptographic Issues
 # Weak algorithms, predictable random, etc.
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[9/18] Checking for cryptographic issues...${NC}"
+echo -e "${BOLD}[9/19] Checking for cryptographic issues...${NC}"
 
 # Weak hash algorithms
 while IFS=: read -r file line content; do
@@ -254,7 +254,7 @@ done < <(grep -rn --include="*.swift" 'arc4random' "$SOURCES_DIR" 2>/dev/null ||
 # Check 10: Input Validation
 # Look for URL creation from user input without validation
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[10/18] Checking for input validation issues...${NC}"
+echo -e "${BOLD}[10/19] Checking for input validation issues...${NC}"
 
 # URL from string without validation
 while IFS=: read -r file line content; do
@@ -272,7 +272,7 @@ done < <(grep -rn --include="*.swift" 'URL(string:' "$SOURCES_DIR" 2>/dev/null |
 # Check 11: Path Traversal
 # Look for file operations that could be exploited with ../
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[11/18] Checking for path traversal risks...${NC}"
+echo -e "${BOLD}[11/19] Checking for path traversal risks...${NC}"
 
 # File operations with string interpolation (potential path traversal)
 while IFS=: read -r file line content; do
@@ -293,7 +293,7 @@ done < <(grep -rn --include="*.swift" -e 'write(to:' -e 'write(toFile:' "$SOURCE
 # Check 12: Command Injection
 # Look for Process/shell commands with user input
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[12/18] Checking for command injection risks...${NC}"
+echo -e "${BOLD}[12/19] Checking for command injection risks...${NC}"
 
 # Process with arguments from variables
 while IFS=: read -r file line content; do
@@ -311,7 +311,7 @@ done < <(grep -rn --include="*.swift" -e 'shell(' -e '/bin/sh' -e '/bin/bash' -e
 # Check 13: Debug Code in Production
 # Look for debug-only code that shouldn't be in release
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[13/18] Checking for debug code patterns...${NC}"
+echo -e "${BOLD}[13/19] Checking for debug code patterns...${NC}"
 
 # Debug print statements (common debug patterns)
 while IFS=: read -r file line content; do
@@ -329,7 +329,7 @@ done < <(grep -rn --include="*.swift" -e 'test@' -e 'testuser' -e 'testpassword'
 # Check 14: Force Try in Security-Critical Code
 # try! can crash the app if an error occurs
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[14/18] Checking for try! in security code...${NC}"
+echo -e "${BOLD}[14/19] Checking for try! in security code...${NC}"
 
 # Find try! in files with security-related names
 for file in $(find "$SOURCES_DIR" -name "*.swift" -type f \( -name "*Auth*" -o -name "*Token*" -o -name "*Key*" -o -name "*Credential*" -o -name "*Payment*" -o -name "*Supabase*" \) 2>/dev/null); do
@@ -342,7 +342,7 @@ done
 # Check 15: Deep Link / URL Scheme Handling
 # Ensure URL schemes validate input
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[15/18] Checking for deep link handling...${NC}"
+echo -e "${BOLD}[15/19] Checking for deep link handling...${NC}"
 
 # URL scheme handlers
 while IFS=: read -r file line content; do
@@ -354,7 +354,7 @@ done < <(grep -rn --include="*.swift" -e 'openURL' -e 'handleOpen' -e 'applicati
 # Check 16: Temporary File Security
 # Temp files with sensitive data
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[16/18] Checking for temporary file security...${NC}"
+echo -e "${BOLD}[16/19] Checking for temporary file security...${NC}"
 
 # Writing to /tmp or temporary directories
 while IFS=: read -r file line content; do
@@ -366,7 +366,7 @@ done < <(grep -rn --include="*.swift" -e 'NSTemporaryDirectory' -e '"/tmp/' -e '
 # Check 17: Timing Side-Channel Risks (Paper Finding)
 # Look for early returns in authentication code
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[17/18] Checking for timing side-channel risks...${NC}"
+echo -e "${BOLD}[17/19] Checking for timing side-channel risks...${NC}"
 
 # Find likely auth functions with early returns
 # Note: Complex to do purely in bash, looking for simple patterns
@@ -384,12 +384,26 @@ done < <(find "$SOURCES_DIR" -type f \( -name "*Auth*.swift" -o -name "*Login*.s
 # Check 18: Insecure Deserialization
 # NSKeyedUnarchiver without secure coding
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[18/18] Checking for insecure deserialization...${NC}"
+echo -e "${BOLD}[18/19] Checking for insecure deserialization...${NC}"
 
 while IFS=: read -r file line content; do
     if [[ "$file" == *"Test"* ]]; then continue; fi
     report_issue "CRITICAL" "NSKeyedUnarchiver without secure coding - use unarchivedObject(ofClass:from:)" "$file" "$line" "$content"
 done < <(grep -rn --include="*.swift" 'unarchiveObject(with:' "$SOURCES_DIR" 2>/dev/null || true)
+# -----------------------------------------------------------------------------
+# Check 19: Internal Protocol Leakage
+# Look for "Landmine #" mentions in public-facing files
+# -----------------------------------------------------------------------------
+echo -e "${BOLD}[19/19] Checking for internal landmine leaks...${NC}"
+
+PUBLIC_FILES=("appcast.xml" "README.md" "CHANGELOG.md" "SECURITY.md" "INSTALL.md")
+for pfile in "${PUBLIC_FILES[@]}"; do
+    if [[ -f "$pfile" ]]; then
+        while IFS=: read -r line content; do
+            report_issue "WARNING" "Internal 'Landmine' reference leaked in public file" "$pfile" "$line" "$content"
+        done < <(grep -n "Landmine #" "$pfile" 2>/dev/null || true)
+    fi
+done
 
 # =============================================================================
 # Summary

@@ -1255,7 +1255,7 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 2.  **Architecture Scan**: Run `./scripts/architecture-scan.sh`. Every **ERROR** must be resolved.
 3.  **Whitelist Check**: Observe **Check 67** (Air Gap Protocol) in the scan. New features MUST be in `sync-to-public.sh`.
 4.  **Fetch & Sync**: Run `git fetch origin --tags` and `git pull origin <current_branch>`.
-5.  **Tag Inspection**: Run `git describe --tags --abbrev=0`. 
+5.  **Tag Inspection**: Run `git describe --tags --abbrev=0`.
     - *Rule*: Your release version/build MUST be strictly greater than the latest tag.
 6.  **User Confirmation**: Present the detected changelog and version to the user. **Wait for confirmation.**
 7.  **Atomic Release**: Run `./scripts/release.sh <VERSION> <BUILD> "<li><NOTES></li>"`.
@@ -2048,7 +2048,10 @@ Complete the release across both repositories.
 ### 19.5 Step 4: GitHub Release (The Trust Anchor)
 1.  Draft a new release on `redlemon1272/RedLemon`.
 2.  **Upload Binary**: Attach the `RedLemon-v[VERSION].dmg` to the release.
-3.  **Update Installer**: Ensure `scripts/install.sh` in the public repo points to the GitHub DMG download link (this completes the trust chain).
+3.  **Trust Verification**:
+    - The public `install.sh` points to `https://github.com/redlemon1272/RedLemon/releases/latest/download/RedLemon.dmg`.
+    - This ensures users are downloading the EXACT binary you uploaded to GitHub, verified by GitHub's SSL.
+    - Zero reliance on the private server IP for distribution.
 
 ### 19.6 Operational Security (OpSec)
 When drafting release notes or public documentation:
@@ -2089,7 +2092,7 @@ curl -L \
   -H "Authorization: Bearer $GH_PAT" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/repos/redlemon1272/RedLemon/releases \
-  -d '{"tag_name":"v1.0.X","target_commitish":"main","name":"v1.0.X","body":"### Release Notes\n* [Note 1]\n* [Note 2]\n\n**Download**: [RedLemon-v1.0.X.dmg](https://151.243.109.243.nip.io/updates/RedLemon-latest.dmg)","draft":false,"prerelease":false,"generate_release_notes":false}'
+  -d '{"tag_name":"v1.0.X","target_commitish":"main","name":"v1.0.X","body":"### Release Notes\n* [Note 1]\n* [Note 2]\n\n**Download**: [RedLemon.dmg](https://github.com/redlemon1272/RedLemon/releases/latest/download/RedLemon.dmg)","draft":false,"prerelease":false,"generate_release_notes":false}'
 ```
 
 **Scrubbing Enforcement**:

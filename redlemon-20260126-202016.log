@@ -1,0 +1,165 @@
+2026-01-26 20:20:24.138 RedLemon[27214:226031] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-26 20:20:24.138 RedLemon[27214:226031] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-26 20:20:24.225 RedLemon[27214:226031] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-26 20:20:24.228 RedLemon[27214:226031] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-26 20:20:24.255 RedLemon[27214:226031] ✅ Playback state reset complete - starting in browse view
+2026-01-26 20:20:24.256 RedLemon[27214:226031] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-26 20:20:24.256 RedLemon[27214:226031] 🧪 Testing Profile: debug
+2026-01-26 20:20:24.264 RedLemon[27214:226112] 📂 Loaded 5 credential(s) from cache
+2026-01-26 20:20:24.266 RedLemon[27214:226031] ✅ Keychain: Found stored username: ursinho
+2026-01-26 20:20:24.266 RedLemon[27214:226031] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-26 20:20:24.266 RedLemon[27214:226112] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-26 20:20:24.670 RedLemon[27214:226131] 📡 SupabaseClient: User lookup response received (427 bytes)
+2026-01-26 20:20:24.679 RedLemon[27214:226131] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-26 20:20:24.680 RedLemon[27214:226131] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-26 20:20:24.731 RedLemon[27214:226031] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-26 20:20:24.731 RedLemon[27214:226031] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-26 20:20:25.929 RedLemon[27214:226031] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-26 20:20:25.932 RedLemon[27214:226178] 🔐 Signed request to /rpc/fetch_user_library
+2026-01-26 20:20:25.933 RedLemon[27214:226131] 🔐 Signed request to /rpc/fetch_user_library
+2026-01-26 20:20:26.076 RedLemon[27214:226108] 🔐 Signed request to /rpc/fetch_user_watch_history
+2026-01-26 20:20:26.364 RedLemon[27214:226031] 🚀 RedLemon: Starting HTTP server...
+2026-01-26 20:20:26.364 RedLemon[27214:226031] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-26 20:20:26.380 RedLemon[27214:226031] ✅ RedLemon: HTTPServer instance created
+2026-01-26 20:20:26.380 RedLemon[27214:226031] ✅ RedLemon: Server marked as ready (Optimistic)
+2026-01-26 20:20:26.380 RedLemon[27214:226180] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates (interest count: 1)
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ [EventsConfig] Fetched movie_events version 1586 with 397 movies
+✅ [EventsConfig] Using cached movie_events config (version 1586, 397 movies)
+✅ [EventsView] Loaded 397 movies from config version 1586
+🗓 AppState: Updated schedule epoch to 2026-01-23 22:49:34 +0000
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-27 01:20:34 +0000
+⏰ AppState: Scheduling update in 9 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0384537/img (350830 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0198781/img (668047 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt5052448/img (365815 bytes)
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-27 01:20:34 +0000
+⏰ AppState: Scheduling update in 9 seconds
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-27 01:20:34 +0000
+⏰ AppState: Scheduling update in 9 seconds
+🔌 SocialService: Connecting to global presence via shared client...
+📡 Joined channel: realtime:global-presence (interest count: 1)
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to social realtime channels via shared client...
+📡 Joined channel: realtime:direct_messages (interest count: 1)
+📡 Joined channel: realtime:friendships (interest count: 1)
+✅ SocialService: Connected to social channels
+📬 SocialService: Fetched 0 unread messages
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-26 20:20:26.415 RedLemon[27214:226031] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-26 20:20:26.415 RedLemon[27214:226031] 🏥 [AppState] Starting global provider health check...
+2026-01-26 20:20:26.415 RedLemon[27214:226031] 🔍 Performing startup checks...
+2026-01-26 20:20:26.416 RedLemon[27214:226031] ✅ Username-based authentication ready
+2026-01-26 20:20:26.416 RedLemon[27214:226180] 🔐 Signed request to /check-payment
+2026-01-26 20:20:26.966 RedLemon[27214:226178] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-26 20:20:26.966 RedLemon[27214:226178] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-26 20:20:27.777 RedLemon[27214:226031] ✅ [AppState] Provider health check complete (found 7 services)
+=== AttributeGraph: cycle detected through attribute 369784 ===
+2026-01-26 20:20:31.800 RedLemon[27214:226179] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-26 20:20:32.862 RedLemon[27214:226107] 🔐 Signed request to /rpc/fetch_user_library
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+✅ SubDLClient initialized
+⏰ AppState: Next schedule update set for Event End: 2026-01-27 03:35:34 +0000
+⏰ AppState: Scheduling update in 8099 seconds
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+⏰ AppState: Next schedule update set for Event End: 2026-01-27 03:35:34 +0000
+⏰ AppState: Scheduling update in 8099 seconds
+🔍 Loading metadata for: Talk to Me (type: movie, id: tt10638522)
+[ INFO ] GET /api/metadata/meta/movie/tt10638522 [request-id: 39DCDE21-C1F5-49E6-A107-1715C4BA22B5]
+2026-01-26 20:20:43.488 RedLemon[27214:226131] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-26 20:20:43.489 RedLemon[27214:226031] ✅ Metadata loaded successfully
+2026-01-26 20:20:43.489 RedLemon[27214:226031]    Type: movie
+2026-01-26 20:20:43.489 RedLemon[27214:226031]    Background URL: https://images.metahub.space/background/medium/tt10638522/img
+2026-01-26 20:20:43.489 RedLemon[27214:226031]    Poster URL: https://images.metahub.space/poster/small/tt10638522/img
+2026-01-26 20:20:43.489 RedLemon[27214:226031]    Videos array: 0 episodes
+=== AttributeGraph: cycle detected through attribute 966264 ===
+2026-01-26 20:20:51.375 RedLemon[27214:226131] 🔐 Signed request to /rpc/fetch_user_library
+2026-01-26 20:20:56.599 RedLemon[27214:226031] 🔄 Checking for app updates...
+2026-01-26 20:20:56.601 RedLemon[27214:226181] 🔐 Signed request to /rpc/get_server_time
+2026-01-26 20:20:57.752 RedLemon[27214:226309] 🔐 Signed request to /rpc/user_heartbeat
+💾 Cache SET: Metadata[meta_movie_tt10638522]
+⏰ AppState: Next schedule update set for Event End: 2026-01-27 03:35:34 +0000
+⏰ AppState: Scheduling update in 8089 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-27 03:35:34 +0000
+⏰ AppState: Scheduling update in 8079 seconds
+⚠️ LicenseManager: Payment sweep failed (non-fatal): Error Domain=NSURLErrorDomain Code=-1001 "The request timed out." UserInfo={_kCFStreamErrorCodeKey=-2103, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <F3D9F13F-8A1E-4608-88E0-CB40D6191149>.<1>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <F3D9F13F-8A1E-4608-88E0-CB40D6191149>.<1>"
+), NSLocalizedDescription=The request timed out., NSErrorFailingURLStringKey=https://151.243.109.243.nip.io/functions/v1/check-payment, NSErrorFailingURLKey=https://151.243.109.243.nip.io/functions/v1/check-payment, _kCFStreamErrorDomainKey=4}
+👤 LicenseManager: Profile expiry: Optional(2026-02-11 06:00:30 +0000)
+🎉 License updated! Expires: 2026-02-11 06:00:30 +0000
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.030s (RTT: 131ms)
+   Local:  2026-01-27 01:20:56 +0000
+   Server: 2026-01-27 01:20:56 +0000
+🔍 Loading metadata for: Behind Her Eyes (type: series, id: tt9698442)
+[ INFO ] GET /api/metadata/meta/series/tt9698442 [request-id: 95B94152-7D80-4A41-93FC-05DD0333C6B9]
+2026-01-26 20:21:05.563 RedLemon[27214:226310] 📦 Decoded CinemetaMeta - videos count: 6
+2026-01-26 20:21:05.564 RedLemon[27214:226031] ✅ Metadata loaded successfully
+2026-01-26 20:21:05.564 RedLemon[27214:226031]    Type: series
+2026-01-26 20:21:05.564 RedLemon[27214:226031]    Background URL: https://images.metahub.space/background/medium/tt9698442/img
+2026-01-26 20:21:05.565 RedLemon[27214:226031]    Poster URL: https://images.metahub.space/poster/small/tt9698442/img
+2026-01-26 20:21:05.565 RedLemon[27214:226031]    Videos array: 6 episodes
+2026-01-26 20:21:05.565 RedLemon[27214:226031]    - S1E1: Chance Encounters
+2026-01-26 20:21:05.565 RedLemon[27214:226031]    - S1E2: Lucid Dreaming
+2026-01-26 20:21:05.565 RedLemon[27214:226031]    - S1E3: The First Door
+2026-01-26 20:21:05.565 RedLemon[27214:226031]    - S1E4: Rob
+2026-01-26 20:21:05.566 RedLemon[27214:226031]    - S1E5: The Second Door
+2026-01-26 20:21:05.567 RedLemon[27214:226031] 📺 Found 1 seasons with 6 total episodes
+2026-01-26 20:21:23.973 RedLemon[27214:226310] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-26 20:21:51.548 RedLemon[27214:226614] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-26 20:22:18.899 RedLemon[27214:226704] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-26 20:22:45.215 RedLemon[27214:227023] 🔐 Signed request to /rpc/user_heartbeat
+=== AttributeGraph: cycle detected through attribute 799864 ===
+2026-01-26 20:23:05.564 RedLemon[27214:227153] 🔐 Signed request to /rpc/fetch_user_library
+2026-01-26 20:23:10.475 RedLemon[27214:227155] 🔐 Signed request to /rpc/user_heartbeat
+=== AttributeGraph: cycle detected through attribute 1030264 ===
+2026-01-26 20:23:21.310 RedLemon[27214:227088] 🔐 Signed request to /rpc/fetch_user_library
+=== AttributeGraph: cycle detected through attribute 1030264 ===
+2026-01-26 20:23:34.347 RedLemon[27214:227337] 🔐 Signed request to /rpc/fetch_user_library
+2026-01-26 20:23:36.069 RedLemon[27214:227236] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-26 20:23:46.985 RedLemon[27214:227336] 🎉 RedLemon: Server successfully started on port 47253!

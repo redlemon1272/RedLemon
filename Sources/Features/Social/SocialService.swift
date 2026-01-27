@@ -1040,8 +1040,11 @@ class SocialService: ObservableObject {
             // Since the API returns sorted by last_watched (desc), the first one we find is the latest.
             var seenMedia = Set<String>()
             let deduplicated = rawHistory.filter { entry in
-                guard !seenMedia.contains(entry.media_id) else { return false }
-                seenMedia.insert(entry.media_id)
+                // Deduplicate by Root IMDB ID (e.g. "tt0903747" from "tt0903747_1_2")
+                // This ensures we only see the latest activity for a show/movie.
+                let rootId = entry.media_id.components(separatedBy: "_").first ?? entry.media_id
+                guard !seenMedia.contains(rootId) else { return false }
+                seenMedia.insert(rootId)
                 return true
             }
             

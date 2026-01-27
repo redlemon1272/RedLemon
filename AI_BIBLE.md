@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 26, 2026 (Part 22: Subtitle Hardening)
+> **Last Updated:** January 27, 2026 (Part 23: UI Stabilization & Stream Hardening)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -34,6 +34,7 @@
     - (b) Add the observed symptom to the **Symptom Checker** (Part 1).
     - (c) Add a regression check to `scripts/architecture-scan.sh` (if possible via regex).
     - (d) Update the **Last Updated** date at the top.
+7.  **SwiftUI Atomic Replacement**: When modifying complex SwiftUI bodies (ZStack, Overlay, etc.), assistants MUST replace the **ENTIRE** property or struct. Surgical line-edits on deeply nested SwiftUI blocks often lead to brace-drift and compiler errors.
 
 ---
 
@@ -139,6 +140,9 @@
 8.  **Date Decoding**: Postgres timestamps vary. **Rule**: Use `.withFractionalSeconds` and `.withInternetDateTime`.
 9.  **RLS Policies**: Implicit deny. **Rule**: Create `SELECT` policies for public tables.
 10. **Auto-Login**: **Rule**: Call critical connections (`SocialService.connect()`) in `loadStoredUser`, not just `SignUp`.
+11. **Native Window Stabilization (Landmine #82)**: **Rule**: MacOS window transforms (fullscreen) are asynchronous. NEVER trigger navigation or layout math immediately after a fullscreen toggle. Apply a minimum **0.3s** exit delay and **0.1s** entry delay to allow the Cocoa frame-math to settle.
+12. **Hashless Identity Matching (Landmine #131)**: **Rule**: For streams without infoHashes (DebridSearch/DMM), identity is defined as a 3-factor composite: **Normalized Title + Release Group + Size**. Any exclusion logic MUST check all three to prevent the "Hydra" effect (one bad release group repeatedly winning the resolution race).
+13. **Strict Subtitle Year Matching**: **Rule**: SubDL's "title + year" search is fragile. Always search by **Clean Title** and apply a strict numeric year match locally to the results.
 11. **Idempotent UI Services (Subtitle/Audio)**: **Rule**: Services receiving external data streams MUST deduplicate by URL/ID internally. Never assume the caller (e.g. `PlayerViewModel`) sends a clean or unique list. This prevents menu duplication during "Healing Loops" (Landmine #123).
 
 ### 11-15: System Stability

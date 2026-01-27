@@ -1488,6 +1488,39 @@ if [[ -f "$STREAM_SERVICE" ]]; then
 fi
 
 
+# =============================================================================
+# CHECK 70: Strict Subtitle Year Match (Landmine #131)
+# =============================================================================
+# Trigger: SubDL search failing because year is in the query instead of filter.
+# Rule: Search by Clean Title, filter by year locally.
+print_header "Check 70: Strict Subtitle Year Match (Landmine #131)"
+
+SUBDL_CLIENT="$SOURCES_DIR/Server/Services/SubDLClient.swift"
+if [[ -f "$SUBDL_CLIENT" ]]; then
+    if grep -q "q: params.title" "$SUBDL_CLIENT" && ! grep -q "extractNumericYear" "$SUBDL_CLIENT"; then
+        report "ERROR" "Landmine #131" "Fuzzy Year Risk: SubDLClient MUST extract numeric years for strict local filtering rather than relying on query strings." "$SUBDL_CLIENT" "0" "Missing extractNumericYear usage"
+    else
+        echo -e "${GREEN}✅ SubDLClient uses strict year filtering.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 71: Hashless Composite Identity (Landmine #131)
+# =============================================================================
+# Trigger: StreamResolver only checking excludedHashes.
+# Rule: Must check excludedTitles, excludedGroups, and excludedSizes.
+print_header "Check 71: Hashless Composite Identity (Landmine #131)"
+
+RESOLVER="$SOURCES_DIR/Server/Services/StreamResolver.swift"
+if [[ -f "$RESOLVER" ]]; then
+    if ! grep -q "excludedGroups" "$RESOLVER" || ! grep -q "excludedSizes" "$RESOLVER"; then
+        report "ERROR" "Landmine #131" "Hydra Risk: StreamResolver MUST use composite identity (Title, Group, Size) to block hashless streams." "$RESOLVER" "0" "Missing composite exclusion checks"
+    else
+        echo -e "${GREEN}✅ StreamResolver uses composite identity matching.${NC}"
+    fi
+fi
+
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

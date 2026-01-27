@@ -1442,7 +1442,7 @@ if [[ -f "$SYNC_SCRIPT" ]]; then
     for feature_path in Sources/Features/*; do
         if [[ -d "$feature_path" ]]; then
             feature_name=$(basename "$feature_path")
-            
+
             # Verify folder is mentioned in the sync script (either as folder or file)
             if ! grep -q "Sources/Features/$feature_name" "$SYNC_SCRIPT"; then
                 report "ERROR" "Air Gap Protocol" "Feature '$feature_name' is NOT whitelisted in $SYNC_SCRIPT. Update the whitelist to prevent sync drift." "$SYNC_SCRIPT" "0" "Missing whitelisting for Sources/Features/$feature_name"
@@ -1517,6 +1517,66 @@ if [[ -f "$RESOLVER" ]]; then
         report "ERROR" "Landmine #131" "Hydra Risk: StreamResolver MUST use composite identity (Title, Group, Size) to block hashless streams." "$RESOLVER" "0" "Missing composite exclusion checks"
     else
         echo -e "${GREEN}✅ StreamResolver uses composite identity matching.${NC}"
+    fi
+fi
+
+
+# =============================================================================
+# CHECK 72: System Message Spam (Landmine #132)
+# =============================================================================
+# Trigger: Missing dedup logic in chat manager or view model.
+print_header "Check 72: System Message Spam (Landmine #132)"
+
+CHAT_MANAGER="$SOURCES_DIR/Features/Rooms/LobbyChatManager.swift"
+if [[ -f "$CHAT_MANAGER" ]]; then
+    if ! grep -q "lastSystemMessages" "$CHAT_MANAGER"; then
+        report "ERROR" "Landmine #132" "Spam Risk: LobbyChatManager MUST implement 'lastSystemMessages' deduplication." "$CHAT_MANAGER" "0" "Missing deduplication dictionary"
+    else
+        echo -e "${GREEN}✅ LobbyChatManager has system message deduplication.${NC}"
+    fi
+fi
+
+LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
+if [[ -f "$LOBBY_VM" ]]; then
+    if ! grep -q "didShowRealtimeWarning" "$LOBBY_VM"; then
+        report "ERROR" "Landmine #132" "Spam Risk: LobbyViewModel MUST use 'didShowRealtimeWarning' flag for connection alerts." "$LOBBY_VM" "0" "Missing show-once flag"
+    else
+        echo -e "${GREEN}✅ LobbyViewModel has show-once connection warnings.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 73: Event Sync Noise (Landmine #133)
+# =============================================================================
+# Trigger: Seek notifications firing during event playback.
+print_header "Check 73: Event Sync Noise (Landmine #133)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    # Look for announcementTriggers.send that are NOT guarded by !isEventPlayback
+    # Heuristic: Find send calls, check if the surrounding context lacks isEventPlayback
+    while IFS=: read -r file line code; do
+        if [[ "$code" =~ announcementTriggers\.send ]]; then
+            # Check 5 lines above/below for isEventPlayback
+            CONTEXT=$(sed -n "$((line-5)),$((line+5))p" "$file")
+            if ! echo "$CONTEXT" | grep -q "isEventPlayback"; then
+                 report "WARNING" "Landmine #133" "Event Noise Risk: Seek announcement might be missing '!isEventPlayback' guard." "$file" "$line" "$code"
+            fi
+        fi
+    done < <(grep -rn "announcementTriggers\.send" "$PLAYER_VM" | grep -v "//")
+fi
+
+# =============================================================================
+# CHECK 74: Seek Notification Flood (Landmine #134)
+# =============================================================================
+# Trigger: Missing temporal debouncing on seek notifications.
+print_header "Check 74: Seek Notification Flood (Landmine #134)"
+
+if [[ -f "$PLAYER_VM" ]]; then
+    if ! grep -q "lastSeekNotificationTime" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #134" "Flood Risk: MPVPlayerViewModel MUST implement 'lastSeekNotificationTime' debouncing." "$PLAYER_VM" "0" "Missing temporal debounce"
+    else
+        echo -e "${GREEN}✅ MPVPlayerViewModel has seek notification debouncing.${NC}"
     fi
 fi
 

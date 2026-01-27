@@ -1388,9 +1388,7 @@ class MPVPlayerViewModel: ObservableObject {
                 } else {
                     // Announce Host Action for Guest
                     let hostName = self.getHostName(for: nil)
-                    let isEvent = self.appState?.player.isEventPlayback == true
-
-                    if !isEvent {
+                    if self.appState?.player.isEventPlayback == false {
                         self.announcementTriggers.send("\(hostName) seeked to \(self.formatTime(resumeTime))")
                     }
                     self.lastSeekNotificationTime = Date()
@@ -2937,20 +2935,15 @@ extension MPVPlayerViewModel {
                 // If Online: Keep (Source of Truth is Realtime)
                 if isOnline {
                     // GHOST CHECK: If Online but NOT in DB for too long, kill it.
-                    if !isInDB {
-                        if let start = self.ghostCandidateStartTimes[id] {
-                            if Date().timeIntervalSince(start) > 30.0 { // 30s tolerance
-                                LoggingManager.shared.warn(.watchParty, message: "👻 Ghost Detection: \(id) has been Online but missing from DB for >30s. Force removing.")
-                                self.ghostCandidateStartTimes.removeValue(forKey: id)
-                                return true // Force Remove
-                            }
-                        } else {
-                            // Start tracking ghost candidacy
-                            self.ghostCandidateStartTimes[id] = Date()
+                    if let start = self.ghostCandidateStartTimes[id] {
+                        if Date().timeIntervalSince(start) > 30.0 { // 30s tolerance
+                            LoggingManager.shared.warn(.watchParty, message: "👻 Ghost Detection: \(id) has been Online but missing from DB for >30s. Force removing.")
+                            self.ghostCandidateStartTimes.removeValue(forKey: id)
+                            return true // Force Remove
                         }
                     } else {
-                        // Found in DB, clear suspicion
-                        self.ghostCandidateStartTimes.removeValue(forKey: id)
+                        // Start tracking ghost candidacy
+                        self.ghostCandidateStartTimes[id] = Date()
                     }
                     return false
                 }
@@ -3100,7 +3093,9 @@ extension MPVPlayerViewModel {
                     LoggingManager.shared.info(.watchParty, message: "Sync: Playing")
                     // Announce Host Action
                     let hostName = getHostName(for: message.senderId)
-                    announcementTriggers.send("\(hostName) resumed playback")
+                    if appState?.player.isEventPlayback == false {
+                        announcementTriggers.send("\(hostName) resumed playback")
+                    }
 
                     await playbackService.play()
                     isPlaying = true
@@ -3306,14 +3301,18 @@ extension MPVPlayerViewModel {
                 LoggingManager.shared.info(.watchParty, message: "Sync: Resuming playback to match Host")
                 // Announce Host Action
                 let hostName = getHostName(for: message.senderId)
-                announcementTriggers.send("\(hostName) resumed playback")
+                if appState?.player.isEventPlayback == false {
+                    announcementTriggers.send("\(hostName) resumed playback")
+                }
 
                 await playbackService.play()
             } else if !remoteIsPlaying && self.isPlaying {
                 LoggingManager.shared.info(.watchParty, message: "Sync: Pausing playback to match Host")
                 // Announce Host Action
                 let hostName = getHostName(for: message.senderId)
-                announcementTriggers.send("\(hostName) paused playback")
+                if appState?.player.isEventPlayback == false {
+                    announcementTriggers.send("\(hostName) paused playback")
+                }
 
                 await playbackService.pause()
             }
@@ -3325,7 +3324,9 @@ extension MPVPlayerViewModel {
             if isPlaying {
                 // Announce Host Action
                 let hostName = getHostName(for: message.senderId)
-                announcementTriggers.send("\(hostName) paused playback")
+                if appState?.player.isEventPlayback == false {
+                    announcementTriggers.send("\(hostName) paused playback")
+                }
 
                 await playbackService.togglePlayPause()
             }
@@ -3592,7 +3593,7 @@ extension MPVPlayerViewModel {
             if let text = message.chatText {
                 LoggingManager.shared.info(.watchParty, message: "Received announcement: \(text)")
                 // 1. Trigger floating overlay
-                announcementTriggers.send(text)
+                announcementTriggers.send(text) // OK: Manual host announcement
 
                 // 2. Chat history update REMOVED (per request)
                 // Announcements are visual-only now.

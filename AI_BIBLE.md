@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 27, 2026 (Part 23: UI Stabilization & Stream Hardening)
+> **Last Updated:** January 27, 2026 (Part 24: Release Stabilization & Message Hardening)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -124,6 +124,9 @@
 | **Release Artifact Mismatch** | Uncommitted changes in build executable | #131 |
 | **Zoomed In UI** | Returning from Fullscreen restart | #82 |
 | **Infinite Retry Loop** | Hashless streams bypass exclusion | #131 |
+| **Duplicate System Messages** | Rapid UI Transitions / Double onAppear | #132 |
+| **Event Sync Noise** | Non-user seeks shown during events | #133 |
+| **Seek Notification Flood** | Large drift correction triggers spam | #134 |
 
 ## 🚨 Critical Landmines
 
@@ -2139,4 +2142,31 @@ if let img = NSImage(named: "my_new_icon") {
 **Mandatory Protocol**:
 1. **Dirty Repo Check**: The release script MUST fail immediately if `git status --porcelain` is not empty.
 2. **Air Gap Protocol**: The `architecture-scan.sh` script MUST verify that every directory in `Sources/Features` is explicitly whitelisted in `sync-to-public.sh`. Missing entries must trigger a build failure.
+
+
+## Part 31: Advanced Real-Time Message Governance
+
+### 1. System Message Spam (Landmine #132)
+**Symptom**: "User Joined" or "Connected via Realtime" messages appear multiple times when a user enters the lobby or transitions between views.
+**Root Cause**: SwiftUI `onAppear` can trigger multiple times during rapid navigation or state changes (e.g. `shouldAutoJoinLobby` toggles). This launches parallel `connect()` tasks that each generate a "welcome" message before the connection state has stabilized.
+**Mandatory Solution**:
+1. **Aggressive Connection Debounce**: The `connect()` method MUST set `status = .connecting` at the very first line to prevent parallel tasks.
+2. **Message Manager Deduplication**: The `LobbyChatManager` must implement a **Deduplication Window** (e.g. 5 seconds) for system messages. It should maintain a `lastSystemMessages: [String: Date]` dictionary (keyed by message content/type) and ignore identical messages sent within the window.
+3. **Show-Once Flags**: Critical warnings (like "Connected via Realtime") should use a persistent `didShow` flag in the View Model to ensure they only appear once per app session.
+
+### 2. Event Sync Noise (Landmine #133)
+**Symptom**: Guests in a public event are constantly interrupted by "Host seeked to..." notifications during the automated broadcast synchronization.
+**Root Cause**: Events use a global wall clock. Seeks are often automated corrections (Large Drift) rather than user-initiated actions. These are "noise" in a system event.
+**Mandatory Solution**:
+1. **Announcement Guard**: All seek notification triggers (`announcementTriggers.send(...)`) MUST verify `!isEventPlayback` before firing.
+2. **Preservation**: Keep these notifications active for regular watch party rooms to ensure guest transparency of human host actions.
+
+### 3. Drift Correction Seek Flooding (Landmine #134)
+**Symptom**: During a period of high network jitter, the chat is flooded with "Host seeked to..." messages as the app aggressively corrects drift.
+**Root Cause**: Sudden jumps in host position (drift > 5s) trigger a hard seek and a corresponding notification. In a jittery session, this can happen every few seconds.
+**Mandatory Solution**:
+1. **Temporal Debounce**: Maintain `lastSeekNotificationTime: Date` and `lastSeekNotificationPosition: Double`.
+2. **Suppression Rules**: Do NOT fire a seek announcement if:
+    - (a) A notification was sent within the last **5.0 seconds**.
+    - (b) The new seek position is within **3.0 seconds** of the last announced position (redundant drift correction).
 

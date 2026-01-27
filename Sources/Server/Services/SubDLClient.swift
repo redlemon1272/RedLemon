@@ -12,7 +12,7 @@ import Vapor
 struct SubDLSubtitle: Content {
     let language: String?
     let url: String  // Download path like "/subtitle/3486048-8409061.zip"
-    let releaseName: String?
+    var releaseName: String?
     let author: String?
     let comment: String?
     let season: Int?
@@ -190,6 +190,31 @@ final class SubDLClient {
 
         var filteredSubtitles = filterSubtitlesByEpisode(subtitles, season: season, episode: episode)
 
+        // DEDUPLICATION PROTOCOL: Ensure unique results (Language + ReleaseName)
+        var uniqueSubtitles: [SubDLSubtitle] = []
+        var seenUrls = Set<String>()
+        var seenLogicKeys = Set<String>() // Composite Key: Language_ReleaseName
+
+        let initialFilterCount = filteredSubtitles.count
+        for sub in filteredSubtitles {
+            let lang = sub.language?.lowercased() ?? "unknown"
+            // Bible #105: Aggressive normalization to catch .en.srt vs .srt variants
+            let rel = normalizeReleaseName(sub.releaseName ?? "")
+            let logicKey = "\(lang)_\(rel)"
+
+            // Bible #105: Deduplicate by Logic Key AND URL
+            if !seenUrls.contains(sub.url) && !seenLogicKeys.contains(logicKey) {
+                uniqueSubtitles.append(sub)
+                seenUrls.insert(sub.url)
+                seenLogicKeys.insert(logicKey)
+            }
+        }
+
+        if uniqueSubtitles.count < initialFilterCount {
+            print("🧹 SubDL: Deduplicated \(initialFilterCount - uniqueSubtitles.count) mirrors/identicals")
+        }
+        filteredSubtitles = uniqueSubtitles
+
         // SUPPLEMENTAL SEARCH LOGIC
         // If we have few results (e.g. < 3), try to find the show by Name instead of IMDb ID
         // This handles cases where SubDL has duplicate pages or unlinked content
@@ -205,26 +230,56 @@ final class SubDLClient {
 
                 let filteredExtras = filterSubtitlesByEpisode(extraSubtitles, season: season, episode: episode)
 
-                // Merge uniqueness (by URL)
-                let existingUrls = Set(filteredSubtitles.map { $0.url })
-                var addedCount = 0
+                // Merge uniqueness (by URL and Logic Key)
+                var deduplicatedExtraCount = 0
                 for sub in filteredExtras {
-                    if !existingUrls.contains(sub.url) {
+                    let lang = sub.language?.lowercased() ?? "unknown"
+                    let rel = normalizeReleaseName(sub.releaseName ?? "")
+                    let logicKey = "\(lang)_\(rel)"
+
+                    if !seenUrls.contains(sub.url) && !seenLogicKeys.contains(logicKey) {
                         filteredSubtitles.append(sub)
-                        addedCount += 1
+                        seenUrls.insert(sub.url)
+                        seenLogicKeys.insert(logicKey)
+                    } else {
+                        deduplicatedExtraCount += 1
                     }
                 }
-                print("🔗 Merged \(addedCount) unique subtitles from supplemental search.")
+                if deduplicatedExtraCount > 0 {
+                    print("🧹 SubDL: Deduplicated \(deduplicatedExtraCount) supplemental mirrors")
+                }
+                print("🔗 Merged unique subtitles from supplemental search.")
             } else {
                 print("⚠️ Supplemental Name Search returned no match.")
             }
         } else {
-            if filteredSubtitles.count < subtitles.count {
-                print("🧹 Filtered out \(subtitles.count - filteredSubtitles.count) mismatched episodes")
+            let totalLoss = subtitles.count - filteredSubtitles.count
+            let deduplicationLoss = initialFilterCount - uniqueSubtitles.count
+            let episodeLoss = totalLoss - deduplicationLoss
+
+            if episodeLoss > 0 {
+                print("🧹 Filtered out \(episodeLoss) mismatched episodes")
             }
         }
 
-        let sortedSubtitles = sortSubtitlesByCompatibility(filteredSubtitles, season: season, episode: episode, streamFilename: streamFilename)
+        // ENHANCE LABELS: If release name is missing, append a numeric identifier to prevent UI clashes
+        var labelCounts: [String: Int] = [:]
+        let finalSubtitles = filteredSubtitles.map { sub -> SubDLSubtitle in
+            var mutableSub = sub
+            let baseLabel = sub.releaseName ?? (sub.language ?? "English")
+
+            labelCounts[baseLabel, default: 0] += 1
+            let count = labelCounts[baseLabel]!
+
+            if count > 1 {
+                mutableSub.releaseName = "\(baseLabel) (\(count))"
+            } else if sub.releaseName == nil {
+                mutableSub.releaseName = baseLabel // Ensure it's not nil for the UI
+            }
+            return mutableSub
+        }
+
+        let sortedSubtitles = sortSubtitlesByCompatibility(finalSubtitles, season: season, episode: episode, streamFilename: streamFilename)
 
         return sortedSubtitles
     }
@@ -1004,5 +1059,36 @@ final class SubDLClient {
             let score2 = calculateCompatibilityScore(sub2, season: season, episode: episode, streamFilename: streamFilename)
             return score1 > score2
         }
+    }
+
+    /// Aggressively normalizes release names for deduplication.
+    /// Bible #105: Catch variants like .en.srt vs .srt
+    private func normalizeReleaseName(_ name: String) -> String {
+        var n = name.lowercased()
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: " ", with: ".") // Standardize dots vs spaces
+
+        // Strip common subtitle extensions and language/flavor tags (Bible #105 Hardening)
+        let suffixes = [
+            ".srt", ".ass", ".vtt", ".sub", ".txt",
+            ".en", ".sdh", ".hi", ".forced", ".eng",
+            ".en-us", ".en-uk", ".en-gb", ".en-au",
+            ".en.us", ".en.uk", ".en.gb", ".en.au",
+            ".pt-br", ".esp", ".fre", ".ger", ".ita",
+            ".sdh.en", ".sdh.eng"
+        ]
+
+        var changed = true
+        while changed {
+            changed = false
+            for suffix in suffixes {
+                if n.hasSuffix(suffix) {
+                    n = String(n.dropLast(suffix.count))
+                    changed = true
+                }
+            }
+        }
+
+        return n.trimmingCharacters(in: CharacterSet(charactersIn: "."))
     }
 }

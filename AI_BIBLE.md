@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 26, 2026 (Part 21: Social & Cloud Sync)
+> **Last Updated:** January 26, 2026 (Part 22: Subtitle Hardening)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -1934,6 +1934,34 @@ ZStack {
 }
 ```
 
+
+### 4. Supabase Exhaustion (Landmine #122)
+**Symptom**: App suddenly stops receiving real-time updates (chat, sync) or shows "PostgREST error: connection limit reached."
+**Root Cause**: **WebSocket Proliferation**. Multiple `SupabaseRealtimeClient` or `RealtimeChannelManager` instances created without proper cleanup (`leave()`). Each instance holds a persistent WebSocket.
+**Mandatory Solution**:
+1. **Reference Counted Managers**: Managers MUST be shared singletons or tied strictly to a `NavigationStack` lifecycle.
+2. **Atomic Cleanup**: Always call `manager.cleanup()` in `deinit` or `onDisappear` using the `Task.detached` pattern (Landmine #63).
+
+### 5. The Subtitle Deduplication Hydra (Landmine #123)
+**Symptom**: The subtitle menu shows the same track name multiple times (e.g., "English", "English", "English (SDH)").
+**Root Cause**: **Resolver Pulse Mismatch**. The "Healing Loop" or parallel stream resolutions might return the same subtitle metadata with slightly different internal IDs or regional tags (`.en-US` vs `.en-UK`).
+**Mandatory Solution**:
+1. **Aggressive Normalization**: `SubDLClient.normalizeReleaseName` MUST strip extensions (`.srt`), language tags (`.en`, `.en-US`), and flavors (`.sdh`, `.forced`).
+2. **Composite Deduplication**: Every subtitle collector MUST deduplicate using a composite key: `\(language.lowercased())_\(normalizedReleaseName)`.
+3. **In-Flight Guard**: `SubtitleService` MUST maintain a `loadingUrls` Set to block redundant downloads of the same URL.
+
+### 6. Resolution Cache Protocol (Landmine #124)
+**Symptom**: Slow UI response or "Provider Offline" errors when clicking the same movie twice in rapid succession.
+**Root Cause**: Redundant resolver pings to external APIs (SubDL/RD) causing rate-limiting or race conditions in track attachment.
+**Mandatory Solution**: Implement a **Resolution Cache** with a **5-second TTL**. If the exact item + quality is requested again within 5s, return the previous `StreamResolutionResult` immediately.
+
+### 7. The Activity Shield Protocol (Landmine #125)
+**Symptom**: Navigating from Lobby A to Lobby B causes the Lobby A timer to suddenly "pull" the user back or start media for the wrong room.
+**Root Cause**: Background tasks (Timers/Tasks) surviving across navigation and modifying global state.
+**Mandatory Solution**:
+1. **Mandatory Handoff**: `AppState` MUST use `setActiveLobbyViewModel()` to transition between lobbies. This helper handles the cleanup of the outgoing instance.
+2. **Shield Check**: Every background task modification MUST be guarded by `if appState.activeLobbyViewModel === self { ... }`.
+
 ---
 
 # Part 19: The Satellite Release Workflow (Full Protocol)
@@ -2060,7 +2088,7 @@ The `public-deploy.sh` script (invoking `sync-to-public.sh`) is the **ONLY** way
 
 ## Part 30: Resource & Asset Management Protocol
 
-### 1. The "Invisible Asset" Trap (Landmine #123)
+### 1. The "Invisible Asset" Trap (Landmine #130)
 **Symptom**: New images or resources added to the `Resources/` folder do not appear in the built app, despite no compilation errors.
 **Root Cause**: **Manual Bundle Construction**. The project uses `build-app-debug.sh` instead of Xcode's standard build system. This script manually `cp` (copies) specific file types from `Resources/` to the app bundle. If you add a new file type (e.g. `.wav`) or forget to update the script, the file is never copied.
 **Mandatory Solution**:

@@ -20,6 +20,9 @@ protocol SubtitleService: Actor {
     /// Set subtitle delay/offset in seconds
     func setOffset(_ offset: Double) async
 
+    /// Clear all external and embedded track state
+    func clearSubtitles() async
+
     /// Stream of available tracks for UI binding
     var availableTracksPublisher: AnyPublisher<[SubtitleTrack], Never> { get }
 
@@ -46,6 +49,9 @@ actor MPVSubtitleService: SubtitleService {
 
     @Published var offset: Double = 0.0
 
+    /// Bible #105: Guard against re-entrancy race conditions by tracking in-flight loads.
+    private var loadingUrls: Set<String> = []
+
     // MARK: - Publishers
     var availableTracksPublisher: AnyPublisher<[SubtitleTrack], Never> {
         $availableTracks.eraseToAnyPublisher()
@@ -70,7 +76,7 @@ actor MPVSubtitleService: SubtitleService {
             await self?.setupObservers()
         }
     }
-    
+
     deinit {
         for observer in observers {
             observer.cancel()
@@ -79,7 +85,7 @@ actor MPVSubtitleService: SubtitleService {
 
     private func setupObservers() async {
         guard let mpv = mpvController else { return }
-        
+
         observers.append(Task.detached { [weak self] in
             for await _ in mpv.tracksChangedPublisher.values {
                 await self?.scanEmbeddedTracks(isFastPath: true)
@@ -100,18 +106,42 @@ actor MPVSubtitleService: SubtitleService {
             }
         }
 
-        // 2. Filter against already registered subtitles.
-        // We use self.subtitles as the "source of truth" for what's ALREADY in MPV.
+        // 2. Filter against already registered subtitles and IN-PROGRESS loads.
+        // Bible #105: Also check for identical labels to prevent race condition duplicates.
         let newItems = uniqueIncoming.filter { item in
-            !self.subtitles.contains(where: { $0.url == item.url })
+            let isUrlSeen = self.subtitles.contains(where: { $0.url == item.url })
+            let isUrlLoading = self.loadingUrls.contains(item.url)
+            let isLabelSeen = self.subtitles.contains(where: {
+                $0.label.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) ==
+                item.label.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+            })
+
+            if isUrlSeen || isUrlLoading || isLabelSeen {
+                LoggingManager.shared.debug(.subtitles, message: "SubtitleService: Filtering out seen/loading track: \(item.label)")
+                return false
+            }
+            return true
         }
-        
+
+        // 3. Mark as loading
+        for item in newItems {
+            self.loadingUrls.insert(item.url)
+        }
+
         // 3. Update the persistent list (append unique new ones)
         // We SHOULD merge them to allow late arrivals (healing loop)
         for item in newItems {
             self.subtitles.append(item)
         }
-        
+
+        // 4. Register with MPV
+        defer {
+            // Bible #105: Clean up loading state even on failure
+            for item in newItems {
+                self.loadingUrls.remove(item.url)
+            }
+        }
+
         guard let mpv = mpvController else { return }
         if newItems.isEmpty {
             LoggingManager.shared.debug(.subtitles, message: "SubtitleService: No new subtitles to load (already in list)")
@@ -131,7 +161,7 @@ actor MPVSubtitleService: SubtitleService {
             await scanEmbeddedTracks(isFastPath: true)
         } else {
             LoggingManager.shared.info(.subtitles, message: "Parallel loading \(newItems.count) new external subtitles...")
-            
+
             await withTaskGroup(of: Void.self) { group in
                 for subtitle in newItems {
                     group.addTask {
@@ -147,7 +177,7 @@ actor MPVSubtitleService: SubtitleService {
                 }
             }
         }
-        
+
         // Initial scan after starting all downloads
         await scanEmbeddedTracks(isFastPath: true)
     }
@@ -161,7 +191,7 @@ actor MPVSubtitleService: SubtitleService {
         // FAST PATH: Only check once (used for reactive updates from MPV events or late arrivals)
         let maxAttempts = isFastPath ? 1 : 3
         let sleepInterval: UInt64 = 500_000_000 // 500ms
-        
+
         LoggingManager.shared.debug(.social, message: "SubtitleService: Scanning tracks (FastPath: \(isFastPath))...")
 
         for i in 0..<maxAttempts {
@@ -205,6 +235,15 @@ actor MPVSubtitleService: SubtitleService {
         mpv.setSubtitleOffset(offset)
     }
 
+    func clearSubtitles() async {
+        self.subtitles = []
+        self.loadingUrls = []
+        self.availableTracks = []
+        self.currentTrack = nil
+        self.offset = 0.0
+        print("🧹 SubtitleService: Cleared all subtitles and tracks")
+    }
+
     // MARK: - Private Helpers (Extracted from VM)
 
     nonisolated private func downloadSubtitle(url: String) async -> String? {
@@ -231,9 +270,9 @@ actor MPVSubtitleService: SubtitleService {
                 subtitleText = try extractSRTFromZip(data: data)
             } else {
                 // Robust decoding for non-UTF8 subtitles (common on SubDL)
-                guard let text = decodeRobustly(data: data) else { 
+                guard let text = decodeRobustly(data: data) else {
                     LoggingManager.shared.warn(.subtitles, message: "Could not decode subtitle data with common encodings")
-                    return nil 
+                    return nil
                 }
                 subtitleText = text
             }
@@ -301,17 +340,17 @@ actor MPVSubtitleService: SubtitleService {
 
         var vtt = "WEBVTT\n\n"
         let cues = normalized.components(separatedBy: "\n\n")
-        
+
         for cue in cues {
             let trimmed = cue.trimmingCharacters(in: .whitespacesAndNewlines)
             if trimmed.isEmpty { continue }
-            
+
             var lines = trimmed.components(separatedBy: "\n")
-            
+
             // SRT Heuristic:
             // Line 0: ID (Optional, numeric)
             // Line 1: Timestamp (00:00:20,000 --> 00:00:24,400)
-            
+
             if lines.count >= 2 {
                 if lines[0].contains("-->") {
                     lines[0] = sanitizeSRTTimestamp(lines[0])
@@ -321,7 +360,7 @@ actor MPVSubtitleService: SubtitleService {
             } else if lines.count == 1 && lines[0].contains("-->") {
                  lines[0] = sanitizeSRTTimestamp(lines[0])
             }
-            
+
             vtt += lines.joined(separator: "\n") + "\n\n"
         }
         return vtt
@@ -343,7 +382,7 @@ actor MPVSubtitleService: SubtitleService {
             .macOSRoman,
             .utf16
         ]
-        
+
         for encoding in encodings {
             if let decoded = String(data: data, encoding: encoding) {
                 return decoded

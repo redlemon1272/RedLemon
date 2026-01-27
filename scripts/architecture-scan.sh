@@ -1405,3 +1405,54 @@ if [[ $ERROR_COUNT -gt 0 ]]; then
 else
     exit 0 # Warnings don't block yet
 fi
+
+# =============================================================================
+# CHECK 64: Supabase Exhaustion (Landmine #122)
+# =============================================================================
+# Trigger: Creating multiple RealtimeClient instances without cleanup.
+# Fix: Managers must be singletons.
+print_header "Check 64: Supabase Exhaustion (Landmine #122)"
+
+# Count occurrences of 'SupabaseRealtimeClient('
+CLIENT_COUNT=$(grep -r "SupabaseRealtimeClient(" "$SOURCES_DIR" --include="*.swift" | grep -v "static let shared" | grep -v "//" | wc -l)
+if [[ $CLIENT_COUNT -gt 2 ]]; then
+    # We expect maybe 1-2 legitimate creations (Lobby + Player). More is suspicious.
+    WARNINGS=$(grep -n "SupabaseRealtimeClient(" "$SOURCES_DIR" --include="*.swift" | grep -v "static let shared" | grep -v "//")
+    while IFS=: read -r file line code; do
+        report "WARNING" "Landmine #122" "Potential Leak: Creating a new SupabaseRealtimeClient instance. Ensure this is a singleton or properly cleaned up." "$file" "$line" "$code"
+    done <<< "$WARNINGS"
+else
+    echo -e "${GREEN}✅ Realtime client usage looks safe.${NC}"
+fi
+
+# =============================================================================
+# CHECK 65: Subtitle Deduplication Hydra (Landmine #123)
+# =============================================================================
+# Trigger: Missing normalization or deduplication logic.
+# Fix: normalizeReleaseName used in SubDLClient.
+print_header "Check 65: Subtitle Deduplication (Landmine #123)"
+
+SUBDL_CLIENT="$SOURCES_DIR/Server/Services/SubDLClient.swift"
+if [[ -f "$SUBDL_CLIENT" ]]; then
+    if ! grep -q "normalizeReleaseName" "$SUBDL_CLIENT"; then
+        report "ERROR" "Landmine #123" "Deduplication Risk: SubDLClient MUST use 'normalizeReleaseName' to strip regional tags." "$SUBDL_CLIENT" "0" "Missing normalization function"
+    else
+        echo -e "${GREEN}✅ Subtitle deduplication logic verified.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 66: Resolution Cache Protocol (Landmine #124)
+# =============================================================================
+# Trigger: Missing resolutionCache in StreamService.
+# Fix: resolutionCache dictionary used in resolveStream.
+print_header "Check 66: Resolution Cache (Landmine #124)"
+
+STREAM_SERVICE="$SOURCES_DIR/App/Services/StreamService.swift"
+if [[ -f "$STREAM_SERVICE" ]]; then
+    if ! grep -q "resolutionCache\[cacheKey\]" "$STREAM_SERVICE"; then
+        report "ERROR" "Landmine #124" "Performance Risk: StreamService MUST implement a 'resolutionCache' with TTL to prevent redundant API calls." "$STREAM_SERVICE" "0" "Missing cache check"
+    else
+        echo -e "${GREEN}✅ Resolution cache logic verified.${NC}"
+    fi
+fi

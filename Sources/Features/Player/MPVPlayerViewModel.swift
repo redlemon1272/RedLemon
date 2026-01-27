@@ -814,6 +814,9 @@ class MPVPlayerViewModel: ObservableObject {
         LoggingManager.shared.debug(.general, message: "   IMDB: \(imdbId)")
         LoggingManager.shared.debug(.general, message: "   URL: \(streamURL.prefix(60))...")
 
+        // 🧹 Subtitle Duplication Fix (Tron): Clear all stale subtitles before loading new media
+        await subtitleService.clearSubtitles()
+
         // FIX: Determine effective event status
         // A room starting with "event_" is ALWAYS an event, regardless of the boolean flag passed
         // This fixes the bug where retrying a stream might lose the isEvent flag and treat it as a room

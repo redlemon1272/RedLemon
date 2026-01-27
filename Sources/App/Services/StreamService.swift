@@ -29,6 +29,14 @@ actor StreamService: StreamResolving {
     private var attemptedGroups: [String: Set<String>] = [:]
     private var attemptedSizes: [String: Set<String>] = [:] // New: Track file sizes to block identical files
 
+    // MARK: - Resolution Cache (Landmine #123)
+    private struct CachedResolution {
+        let result: StreamResolutionResult
+        let timestamp: Date
+    }
+    private var resolutionCache: [String: CachedResolution] = [:]
+    private let cacheTTL: TimeInterval = 5.0 // 5 seconds
+
     /// Mark a stream as attempted with full context for robust exclusion
     func markStreamAsAttempted(imdbId: String, hash: String, title: String? = nil, size: String? = nil, provider: String? = nil) {
         // 1. Hash Block
@@ -169,6 +177,14 @@ actor StreamService: StreamResolving {
         filterExtended: Bool = false,
         triggerSource: String = "manual"
     ) async throws -> StreamResolutionResult {
+        let cacheKey = "\(item.id)_\(quality.rawValue)_\(season ?? 0)_\(episode ?? 0)"
+
+        // 0. Check Resolution Cache (Landmine #123)
+        if let cached = resolutionCache[cacheKey], Date().timeIntervalSince(cached.timestamp) < cacheTTL {
+            LogManager.shared.info("🧠 StreamService: Cache HIT for \(item.name) (\(quality.rawValue)). Skipping redundant resolution.")
+            return cached.result
+        }
+
         LogManager.shared.info("🎬 StreamService: Starting resolution for: \(item.name)")
 
         // Step 0: Early validation - Check for Real-Debrid API key
@@ -705,7 +721,10 @@ actor StreamService: StreamResolving {
 
                 print("📦 StreamService: Returning \(candidateStreams.count) candidate streams for fallback")
 
-                return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata, candidateStreams: candidateStreams)
+                let result = StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata, candidateStreams: candidateStreams)
+                // Cache successful results (Landmine #123)
+                resolutionCache[cacheKey] = CachedResolution(result: result, timestamp: Date())
+                return result
             } catch {
                 // Auto-Report Server Errors (5xx) to Admin Dashboard
                 let errorMsg = error.localizedDescription
@@ -748,7 +767,10 @@ actor StreamService: StreamResolving {
                         let candidateStreams = Array(deprioritizedNotTried.dropFirst(index + 1))
                         print("📦 StreamService: Returning \(candidateStreams.count) localized candidate streams for fallback")
 
-                        return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata, candidateStreams: candidateStreams)
+                        let result = StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata, candidateStreams: candidateStreams)
+                        // Cache successful fallback results (Landmine #123)
+                        resolutionCache[cacheKey] = CachedResolution(result: result, timestamp: Date())
+                        return result
                     } catch {
                         LogManager.shared.warning("❌ StreamService: [Localized Fallback \(index + 1)/\(deprioritizedNotTried.count)] Unlock failed for \(stream.title): \(error.localizedDescription)")
                         lastError = error

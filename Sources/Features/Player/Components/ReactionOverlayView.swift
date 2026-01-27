@@ -52,8 +52,8 @@ struct ReactionOverlayView: View {
 
         // print("✨ ReactionOverlay: Adding particle for \(content)")
 
-        // Position announcements centrally when chat is open to prevent clipping
-        let announcementX: CGFloat = viewModel.showChat ? 0.5 : 0.9
+        // Position announcements centrally regardless of chat state
+        let announcementX: CGFloat = 0.5
 
         let newParticle = ReactionParticleModel(
             content: content,

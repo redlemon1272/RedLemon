@@ -1997,10 +1997,10 @@ If you are asked to "Release" or "Sync to Public", run these commands in this EX
 2.  `./scripts/security-scan.sh` (Verify no leaked secrets or IPs)
 3.  `swift build` (Ensure the project compiles successfully)
 4.  `./scripts/release.sh "[v]" "[b]" "[notes]"` (Build & Deploy Internal)
-5.  **GitHub Release**: Create a Release on GitHub and **UPLOAD** the `.dmg`.
-6.  `./scripts/sync-to-public.sh` (Scrub & Prepare Public Mirror)
-7.  **Public Repo Sync**: (Upload files or push to `redlemon1272/RedLemon`)
-8.  `./scripts/merge-and-tag.sh "v[v]"` (Final Step: Merge to main and Tag the release)
+5.  `./scripts/sync-to-public.sh` (Scrub & Prepare Public Mirror)
+6.  **Public Repo Sync**: (Upload files or push to `redlemon1272/RedLemon`)
+7.  `./scripts/merge-and-tag.sh "v[v]"` (Merge to main and Tag)
+8.  **GitHub Release**: Go to GitHub, select tag `v[v]`, and **UPLOAD** the `.dmg`.
 
 ### 🤖 Terminology & Intent (Command Word Safety)
 To prevent accidental public deployments, strict keywords are enforced:
@@ -2026,11 +2026,12 @@ Execute the release script in the private repository. This builds the full app (
 ```
 *   **Result**: RedLemon is live on the Sparkle update channel for existing users.
 
-### 19.2.5 Step 1.5: The GitHub Release (Manual)
-Once the internal release is successful, you MUST verify the artifact availability:
-1.  Go to `https://github.com/orangeapple1272/RedLemon/releases/new`
-2.  Tag version: `v[VERSION]`
-3.  **Upload the DMG**: Locatated at `RedLemon-Installer.dmg`. This is CRITICAL for new users.
+### 19.4 Final Step: The GitHub Release (Manual)
+**AFTER** the merge and tag is complete (Step 7), you MUST verify the artifact availability:
+1.  Go to `https://github.com/orangeapple1272/RedLemon/releases`
+2.  Select the new tag `v[VERSION]`.
+3.  Click "Draft a new release" (or Edit).
+4.  **Upload the DMG**: Located at `RedLemon-Installer.dmg`. This is CRITICAL for new users.
 
 ### 19.3 Step 2: The Scrubber Protocol (Sync to Public)
 Once the internal release is verified, sync the "shell" of the app to the public repository.

@@ -65,6 +65,17 @@ actor StreamService: StreamResolving {
         }
 
         print("🧠 StreamService: Marked hash \(hash.prefix(8)) as attempted for \(imdbId)")
+        
+        // 5. Cache Clearing (Landmine #131 Prevention)
+        // If we just blocked a stream, the current resolution cache for this item is invalid.
+        // We must clear it to ensure the NEXT resolution immediately picks up the exclusion.
+        let keysToRemove = resolutionCache.keys.filter { $0.hasPrefix(imdbId) }
+        for key in keysToRemove {
+            resolutionCache.removeValue(forKey: key)
+        }
+        if !keysToRemove.isEmpty {
+            print("🧠 StreamService: Cleared \(keysToRemove.count) cached resolutions for \(imdbId)")
+        }
     }
 
     private func extractReleaseGroup(from title: String) -> String? {

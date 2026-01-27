@@ -49,6 +49,9 @@ class PlayerViewModel: ObservableObject {
     @Published var selectedSeason: Int?
     @Published var selectedEpisode: Int?
 
+    // Internal state guards
+    private var isExitInProgress = false
+
     // Subtitles
     @Published var hasAutoSelectedSubtitles: Bool = false
 
@@ -1115,7 +1118,14 @@ class PlayerViewModel: ObservableObject {
 
             await MainActor.run {
                 // 2. Filter out the blocked hash from the existing queue to avoid retrying it immediately
-                self.streamQueue.removeAll { $0.infoHash == hash }
+                self.streamQueue.removeAll { s in
+                    if let h = s.infoHash, !h.isEmpty, let targetHash = hash as String?, !targetHash.isEmpty {
+                        return h == targetHash
+                    } else {
+                        // Hashless fallback (3-factor composite matching)
+                        return s.title == title && s.size == size
+                    }
+                }
 
                 // 3. Try next
                 self.tryNextStream()
@@ -1259,16 +1269,28 @@ class PlayerViewModel: ObservableObject {
         if let appState = appState {
             appState.currentView = .player
         }
-        enterFullscreen()
+
+        // CRITICAL: Entry Stabilization
+        // If we just returned from a failover, wait a tiny bit for the lobby window to settle
+        // before slamming it back into fullscreen.
+        Task {
+            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
+            await MainActor.run {
+                enterFullscreen()
+            }
+        }
     }
 
     func exitPlayer(keepRoomState: Bool = false, notifyGuests: Bool = true) async {
-        // 1. Idempotency Check - prevent multiple simultaneous exit calls
+        // 1. Idempotency Check - prevent multiple simultaneous exit calls (Landmine #82)
         // This stops the dual-trigger from MPVPlayerView (onDisappear + manual click)
-        guard showPlayer else {
+        // or concurrent failover triggers.
+        guard showPlayer && !isExitInProgress else {
             LoggingManager.shared.debug(.general, message: "Player already exited/exiting, skipping duplicate call")
             return
         }
+        isExitInProgress = true
+        defer { isExitInProgress = false }
 
         LoggingManager.shared.info(.videoRendering, message: "PlayerVM: exitPlayer called (keepRoomState: \(keepRoomState), notifyGuests: \(notifyGuests))")
 
@@ -1285,8 +1307,8 @@ class PlayerViewModel: ObservableObject {
         // This is mandatory for all exits from Fullscreen, including Watch Party Failovers.
         // Failing to do this causes the "Zoomed In UI" bug where the next player instance inherits a fluid window scale.
         if wasFullscreen {
-            LoggingManager.shared.debug(.videoRendering, message: "PlayerVM: Enforcing window stabilization delay (0.3s)")
-            try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s buffer
+            LoggingManager.shared.debug(.videoRendering, message: "PlayerVM: Enforcing window stabilization delay (0.5s)")
+            try? await Task.sleep(nanoseconds: 500_000_000) // Increased to 0.5s for safety
         }
 
         // 4. Lobby State Sync (Keep this before clearing showPlayer)

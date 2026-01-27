@@ -150,9 +150,7 @@ final class SubDLClient {
             throw Abort(.serviceUnavailable, reason: "SubDL API request failed")
         }
 
-        if let responseString = String(data: data, encoding: .utf8) {
-            // print("📝 SubDL Raw Response: \(responseString)")
-        }
+
 
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
         var subtitles = result.subtitles ?? []
@@ -338,10 +336,16 @@ final class SubDLClient {
             .replacingOccurrences(of: "  ", with: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
 
+        // Include year in search for better accuracy
+        var filmName = sanitizedName
+        if let year = year {
+            filmName += " \(year)"
+        }
+
         var components = URLComponents(string: "\(baseURL)/subtitles")!
         let queryItems = [
             URLQueryItem(name: "api_key", value: apiKey),
-            URLQueryItem(name: "film_name", value: sanitizedName), // Use 'film_name' for text search
+            URLQueryItem(name: "film_name", value: filmName), // Use 'film_name' with year
             URLQueryItem(name: "type", value: type)
         ]
 
@@ -350,7 +354,7 @@ final class SubDLClient {
         components.queryItems = queryItems
         guard let url = components.url else { return nil }
 
-        // print("🔍 Attempting API Name Search: \(sanitizedName)")
+        print("🔍 Attempting API Name Search: \(filmName)")
 
         var request = URLRequest(url: url)
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
@@ -367,51 +371,33 @@ final class SubDLClient {
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
 
         guard let results = result.results, !results.isEmpty else {
-            // print("❌ API Name Search returned no results.")
             return nil
         }
 
-        // print("✅ API Name Search returned \(results.count) candidates.")
-
         // Filter candidates
         for candidate in results {
-            // Check Year (Strongest Signal) - BUT API doesn't return year in 'SubDLResult' explicitly?
-            // Actually SubDLResult has name, sd_id, imdb_id, tmdb_id.
-            // Wait, does 'name' field in result contain the year? e.g. "Jumanji: The Next Level (2019)"
-            // Let's assume it might or might not.
-
-            // 1. Check if candidate name matches our sanitized name (ignoring casing)
-            // Ideally we'd check IMDB ID if we had it, but we failed IMDB ID search.
-
-            // Simple match:
             let candidateName = candidate.name.lowercased()
 
-
-            // Check for Year in candidate name (e.g. "Movie Title (2019)")
-            var yearMatch = false
+            // 1. Strict Year Match (if year is provided)
             if let year = year {
                 if candidateName.contains("\(year)") {
-                    yearMatch = true
+                    return candidate.sd_id
                 }
+                // If the candidate name DOES NOT contain our target year, skip it!
+                // This prevents picking "The Beauty Inside (2018)" when we want "The Beauty (2025)"
+                continue
             }
 
-            // Similarity check
-            // If year matches, we are very confident.
-            if yearMatch {
-                // print("   ✅ Candidate Year Match! ID: \(candidate.sd_id) Name: \(candidate.name)")
-                return candidate.sd_id
-            }
-
-            // If no year in search but name is very close
+            // 2. Similarity check (if no year provided)
             if candidateName.contains(sanitizedName.lowercased()) {
-                 // print("   ⚠️ Candidate Name Match (No Year): ID: \(candidate.sd_id) Name: \(candidate.name)")
                  return candidate.sd_id
             }
         }
 
-        // Fallback: Return first result if list not empty
-        if let first = results.first {
-             // print("⚠️ No exact match logic passed, using first result: ID=\(first.sd_id) Name=\(first.name)")
+        // Final Fallback: If we have results but none matched our year filter, 
+        // DO NOT just pick the first one (it's likely wrong).
+        // Only return the first result if we didn't have a year requirement.
+        if year == nil, let first = results.first {
              return first.sd_id
         }
 

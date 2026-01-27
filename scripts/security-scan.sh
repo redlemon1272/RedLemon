@@ -198,7 +198,7 @@ done < <(grep -rn --include="*.swift" -E '(SELECT|INSERT|UPDATE|DELETE|WHERE).*\
 # Check 7: Keychain Access Level
 # Check for proper keychain accessibility settings
 # -----------------------------------------------------------------------------
-echo -e "${BOLD}[7/18] Checking Keychain access patterns...${NC}"
+echo -e "${BOLD}[7/19] Checking Keychain access patterns...${NC}"
 
 # Look for keychain usage without proper accessibility
 KEYCHAIN_USES=$(grep -rn --include="*.swift" 'SecItemAdd\|SecItemUpdate\|kSecAttr' "$SOURCES_DIR" 2>/dev/null | wc -l)

@@ -29,8 +29,20 @@ actor StreamResolver {
         excludedSizes: Set<String> = [],
         ignoreVerified: Bool = false,
         preferredHash: String? = nil,
-        triggerSource: String? = nil
+        triggerSource: String = "manual"
     ) async throws -> QualityBucketsResponse {
+        // For movies only, pull canonical title to prioritize correct matches
+        let targetTitle: String?
+        if type == "movie" {
+            let metadata = await MetadataService.shared.getMetadata(imdbId: imdbId, type: type)
+            targetTitle = metadata?.title
+            if let title = targetTitle {
+                print("🎯 Target title for matching: \(title)")
+            }
+        } else {
+            targetTitle = nil
+        }
+
         NSLog("%@", "⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
 
         // MARK: - Kitsu → IMDB Resolution
@@ -127,7 +139,9 @@ actor StreamResolver {
                             imdbId: effectiveId,
                             type: type,
                             season: season,
-                            episode: episode
+                            episode: episode,
+                            name: targetTitle ?? name,
+                            year: self.extractNumericYear(year)
                         )
                     }
                     group.addTask {
@@ -192,42 +206,32 @@ actor StreamResolver {
         print("📊 StreamResolver: Provider Stats: [\(providerStats)]")
         await SessionRecorder.shared.log(category: .resolver, message: "Providers Fetched", metadata: providerCounts.mapValues { String($0) })
 
-        // For movies only, pull canonical title to prioritize correct matches
-        let targetTitle: String?
-        if type == "movie" {
-            let metadata = await MetadataService.shared.getMetadata(imdbId: effectiveId, type: type)
-            targetTitle = metadata?.title
-            if let title = targetTitle {
-                print("🎯 Target title for matching: \(title)")
-            }
-        } else {
-            targetTitle = nil
-        }
-
         // OPTIMIZATION: Filter streams FIRST, then attach subtitles to the survivors
         var filteredStreams = rawStreams
 
-        // CRITICAL: Filter Blocked Streams immediately
-        if !blockedHashes.isEmpty || !blockedFilenames.isEmpty {
+        // CRITICAL: Filter Blocked and Excluded Streams
+        let shouldFilter = !blockedHashes.isEmpty || !blockedFilenames.isEmpty || 
+                          !excludedHashes.isEmpty || !excludedTitles.isEmpty || 
+                          !excludedGroups.isEmpty || !excludedSizes.isEmpty
+
+        if shouldFilter {
             let beforeBlockFilter = filteredStreams.count
             filteredStreams = filteredStreams.filter { stream in
-                // First check by hash (most accurate)
+                // 1. Hash-based check (Torrents)
                 if let hash = stream.infoHash?.lowercased() {
                     if blockedHashes.contains(hash) {
                          print("   🛡️ RESOLVER BLOCKING blacklisted stream: \(stream.title) (Hash: \(hash))")
                          return false
                     }
                     if excludedHashes.contains(hash) {
-                        print("   🧠 RESOLVER SKIP - Excluded by Session: \(stream.title) (Hash: \(hash))")
+                        print("   🧠 RESOLVER SKIP - Excluded Hash: \(stream.title) (Hash: \(hash))")
                         return false
                     }
                 }
 
-                // Fallback: Check by filename for hashless streams (DebridSearch)
-                // This ensures blocking works even for pre-resolved direct download URLs
+                // 2. Filename-based check (Global Blacklist)
                 let streamTitle = stream.title.lowercased()
                 for blockedFile in blockedFilenames {
-                    // Remove extension for flexible matching
                     let baseName = blockedFile
                         .replacingOccurrences(of: ".mkv", with: "")
                         .replacingOccurrences(of: ".mp4", with: "")
@@ -238,10 +242,34 @@ actor StreamResolver {
                     }
                 }
 
+                // 3. Title-based check (Session Exclusion)
+                let normalized = Stream.normalizeTitle(stream.title)
+                if excludedTitles.contains(normalized) {
+                    print("   🧠 RESOLVER SKIP - Excluded Title: \(stream.title)")
+                    return false
+                }
+
+                // 4. Release Group-based check (Session Exclusion - Hydra Prevention)
+                // We use the same extract logic as StreamService
+                if let group = extractReleaseGroup(from: stream.title) {
+                    if excludedGroups.contains(group) {
+                        print("   🧠 RESOLVER SKIP - Excluded Group '\(group)': \(stream.title)")
+                        return false
+                    }
+                }
+
+                // 5. Size-based check (Session Exclusion - Identical File Prevention)
+                if let size = stream.size, !size.isEmpty {
+                    if excludedSizes.contains(size) {
+                        print("   🧠 RESOLVER SKIP - Excluded Size '\(size)': \(stream.title)")
+                        return false
+                    }
+                }
+
                 return true
             }
             if filteredStreams.count < beforeBlockFilter {
-                print("   🛡️ RESOLVER FILTERED Blocked Streams: \(beforeBlockFilter) → \(filteredStreams.count) streams")
+                print("   🛡️ RESOLVER FILTERED Blocked/Excluded Streams: \(beforeBlockFilter) → \(filteredStreams.count) streams")
             }
         }
 
@@ -549,7 +577,7 @@ actor StreamResolver {
         do {
             streamsWithSubtitles = try await withThrowingTaskGroup(of: [Stream].self) { group in
                 group.addTask {
-                    return await self.attachSubtitles(to: streamsToAttach, imdbId: effectiveId, type: type, season: season, episode: episode, name: targetTitle ?? name, year: year != nil ? Int(year!) : nil)
+                    return await self.attachSubtitles(to: streamsToAttach, imdbId: effectiveId, type: type, season: season, episode: episode, name: targetTitle ?? name, year: self.extractNumericYear(year))
                 }
                 group.addTask {
                     try await Task.sleep(nanoseconds: 12_000_000_000) // 12s Timeout
@@ -1013,11 +1041,17 @@ actor StreamResolver {
     }
 
     private func parseAllowedYears(_ yearString: String) -> [String] {
-        // Allow Year AND Year + 1 (for physical releases that come out later)
-        if let year = Int(yearString) {
+        if let year = extractNumericYear(yearString) {
              return ["\(year)", "\(year + 1)"]
         }
         return []
+    }
+
+    private func extractNumericYear(_ yearString: String?) -> Int? {
+        guard let yearString = yearString else { return nil }
+        // Strip non-numeric characters (e.g. "2025–" -> "2025")
+        let cleanYear = yearString.filter { "0123456789".contains($0) }
+        return Int(cleanYear)
     }
 
     private func extractYearsFromTitle(_ title: String) -> [String] {
@@ -1204,5 +1238,35 @@ actor StreamResolver {
             .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             // Regex to condense multiple spaces
             .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+    }
+
+    private func extractReleaseGroup(from title: String) -> String? {
+        // Sanitize: Take only the first line to strip any appended metadata (newlines, size info, emojis)
+        let cleanTitle = title.components(separatedBy: .newlines).first?.trimmingCharacters(in: .whitespacesAndNewlines) ?? title
+
+        // Normalize dashes
+        let normalized = cleanTitle.replacingOccurrences(of: "–", with: "-")
+                                   .replacingOccurrences(of: "—", with: "-")
+
+        guard let lastComponent = normalized.components(separatedBy: "-").last?.trimmingCharacters(in: .whitespacesAndNewlines) else { return nil }
+
+        var cleanGroup = lastComponent
+        for ext in [".mkv", ".mp4", ".avi", ".iso"] {
+            if cleanGroup.hasSuffix(ext) {
+                cleanGroup = String(cleanGroup.dropLast(ext.count))
+            }
+        }
+
+        cleanGroup = cleanGroup.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        let blacklist = ["h264", "x264", "h265", "x265", "hevc", "avc", "aac", "ac3", "dts", "10bit", "hdr", "sdr", "web-dl", "bluray"]
+        if blacklist.contains(cleanGroup.lowercased()) { return nil }
+
+        if cleanGroup.count >= 2 && cleanGroup.count <= 20 {
+             if cleanGroup.range(of: "^[a-zA-Z0-9._]+$", options: .regularExpression) != nil {
+                 return cleanGroup.lowercased()
+             }
+        }
+        return nil
     }
 }

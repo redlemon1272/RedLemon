@@ -69,8 +69,8 @@ if [ -z "$RELEASE_NOTES" ]; then
 fi
 
 # 🛡️ OpSec: Scrub "Landmine #" mentions from release notes for public consumption
-# Removes "(Landmine #123)" or "Landmine #123"
-RELEASE_NOTES=$(echo "$RELEASE_NOTES" | sed -E 's/ \(Landmine #[0-9]+\)//g' | sed -E 's/Landmine #[0-9]+//g')
+# Robustly removes "(Landmine #123)", "Landmine #123", or " (Landmine #123)"
+RELEASE_NOTES=$(echo "$RELEASE_NOTES" | sed -E 's/[[:space:]]*\(?Landmine #[0-9]+\)?//g')
 
 echo -e "${BLUE}🚀 Starting Release Flow for v${VERSION} (${BUILD_NUMBER})...${NC}"
 

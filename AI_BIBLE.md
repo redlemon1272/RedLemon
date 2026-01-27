@@ -1247,22 +1247,21 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 4. **Key Verification**: Agents MUST verify presence of Private Sparkle Key in Keychain (`./.build/artifacts/sparkle/bin/sign_update` check) BEFORE starting build.
 
 ## Release Protocol (The "Satellite-First" Standard)
-**Mandatory 10-Step Sequence:**
-1.  **Sync & Tags (Deep Fetch)**: Run `git fetch origin --tags` and `git pull origin <current_branch>`.
-    -   *Why*: Prevents "Ghost Tags" or version collisions from other sessions.
-2.  **Determine High-Water Mark**: Run `git describe --tags --abbrev=0`.
-    -   **Rule**: Your next Version/Build MUST be strictly greater than this value.
-3.  **Architecture Scan**: Run `./scripts/architecture-scan.sh`.
-    -   *Action*: Fix all **ERRORS** before proceeding.
-4.  **User Validation (GATE)**: Ask user to test. **DO NOT PROCEED** without confirmation.
-5.  **Git Push**: Run `git push origin <branch>` to ensure the remote has the latest commits (Changelog relies on this).
-6.  **Generate Notes**: Run `./scripts/get-changelog.sh`. Copy the output.
+**Mandatory 10-Step Sequence for AI Assistants:**
+
+1.  **Pre-Flight Integrity**: Ensure repository is 100% clean (`git status`). **DO NOT** release with uncommitted edits. (Landmine #130).
+2.  **Architecture Scan**: Run `./scripts/architecture-scan.sh`. Every **ERROR** must be resolved.
+3.  **Whitelist Check**: Observe **Check 67** (Air Gap Protocol) in the scan. New features MUST be in `sync-to-public.sh`.
+4.  **Fetch & Sync**: Run `git fetch origin --tags` and `git pull origin <current_branch>`.
+5.  **Tag Inspection**: Run `git describe --tags --abbrev=0`. 
+    - *Rule*: Your release version/build MUST be strictly greater than the latest tag.
+6.  **User Confirmation**: Present the detected changelog and version to the user. **Wait for confirmation.**
 7.  **Atomic Release**: Run `./scripts/release.sh <VERSION> <BUILD> "<li><NOTES></li>"`.
-    -   *Action*: Bumps local files -> Builds -> Signs -> Deploys to Server -> Updates `appcast.xml`.
-8.  **Commit Local State**: `git commit -am "chore: release v<VERSION>"` to capture the auto-updated `appcast.xml` and build numbers.
-9.  **Merge & Tag**: Run `./scripts/merge-and-tag.sh v<VERSION>`.
-    -   *Action*: Merges to `main` -> Tags -> Pushes Main & Tags.
-10. **Verify Public Update**: Run `curl -f https://151.243.109.243.nip.io/updates/appcast.xml` to confirm the update is live for users.
+    - *Note*: This script auto-scrubs internal Landmine references.
+8.  **Commit Artifacts**: Run `git commit -am "chore: release artifacts v<VERSION>"`.
+9.  **Merge & Tag**: (Turbo-ready) Run `./scripts/merge-and-tag.sh v<VERSION>`.
+    - *Action*: This merges your feature/release branch into `main`, tags it, and pushes both.
+10. **Public Mirroring**: Run `./scripts/sync-to-public.sh` and push to the public repository.
 
 ## Anti-Regression Shield (Advisory)
 To prevent reintroducing known bugs ("Landmines"), run the architecture scanner during development:

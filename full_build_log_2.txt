@@ -1,0 +1,92 @@
+🍋 Building RedLemon.app (DEBUG mode - faster)...
+🔧 System: x86_64
+🍎 macOS: 12.7.6
+🛠️  Xcode: 14.2
+✅ macOS 12.7.6 - OpenGL should be available
+🔧 Intel Mac detected - using standard libraries
+📁 Ensuring .app bundle structure exists...
+📦 Building Swift executable (debug)...
+🔧 Using architecture-specific flags: --arch x86_64
+Building for debugging...
+[1/3] Emitting module RedLemon
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^
+[2/3] Compiling RedLemon LobbyPresenceManager.swift
+[3/10] Compiling RedLemon WatchPartyLobbyView.swift
+[4/10] Compiling RedLemon PlayerViewModel.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:98:127: warning: left side of nil coalescing operator '??' has non-optional type 'String', so the right side is never used
+        LoggingManager.shared.info(.watchParty, message: "✅ PlayerVM: Stream pre-loaded successfully: \(result.stream.title ?? "Unknown")")
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:324:17: warning: variable 'validatedHostURL' was never mutated; consider changing to 'let' constant
+            var validatedHostURL: String? = nil
+            ~~~ ^
+            let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:673:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:1155:58: warning: left side of nil coalescing operator '??' has non-optional type 'VideoQuality', so the right side is never used
+                           quality: self.selectedQuality ?? .fullHD,
+                                    ~~~~~~~~~~~~~~~~~~~~ ^~~~~~~~~~
+                                                         
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:1169:63: warning: comparing non-optional value of type 'Stream' to 'nil' always returns false
+                       if self.streamQueue.isEmpty && primary == nil {
+                                                      ~~~~~~~ ^  ~~~
+[5/10] Compiling RedLemon LobbyDatabaseManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:98:127: warning: left side of nil coalescing operator '??' has non-optional type 'String', so the right side is never used
+        LoggingManager.shared.info(.watchParty, message: "✅ PlayerVM: Stream pre-loaded successfully: \(result.stream.title ?? "Unknown")")
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:324:17: warning: variable 'validatedHostURL' was never mutated; consider changing to 'let' constant
+            var validatedHostURL: String? = nil
+            ~~~ ^
+            let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:673:21: warning: variable 'hostStream' was never mutated; consider changing to 'let' constant
+                var hostStream = Stream(
+                ~~~ ^
+                let
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:1155:58: warning: left side of nil coalescing operator '??' has non-optional type 'VideoQuality', so the right side is never used
+                           quality: self.selectedQuality ?? .fullHD,
+                                    ~~~~~~~~~~~~~~~~~~~~ ^~~~~~~~~~
+                                                         
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/PlayerViewModel.swift:1169:63: warning: comparing non-optional value of type 'Stream' to 'nil' always returns false
+                       if self.streamQueue.isEmpty && primary == nil {
+                                                      ~~~~~~~ ^  ~~~
+[6/10] Compiling RedLemon AppState.swift
+[7/10] Compiling RedLemon ContentView.swift
+[8/10] Compiling RedLemon LobbyEventRouter.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyViewModel.swift:1304:56: warning: left side of nil coalescing operator '??' has non-optional type 'String', so the right side is never used
+            NSLog("   - Stream: %@", finalStream.title ?? "unknown")
+                                     ~~~~~~~~~~~~~~~~~ ^~~~~~~~~~~~
+                                                       
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyViewModel.swift:1745:13: warning: initialization of immutable value 'elapsed' was never used; consider replacing with assignment to '_' or removing it
+        let elapsed = now.timeIntervalSince(room.createdAt)
+        ~~~~^~~~~~~
+        _
+[9/10] Compiling RedLemon LobbyViewModel.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyViewModel.swift:1304:56: warning: left side of nil coalescing operator '??' has non-optional type 'String', so the right side is never used
+            NSLog("   - Stream: %@", finalStream.title ?? "unknown")
+                                     ~~~~~~~~~~~~~~~~~ ^~~~~~~~~~~~
+                                                       
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyViewModel.swift:1745:13: warning: initialization of immutable value 'elapsed' was never used; consider replacing with assignment to '_' or removing it
+        let elapsed = now.timeIntervalSince(room.createdAt)
+        ~~~~^~~~~~~
+        _
+[9/10] Linking RedLemon
+Build complete! (24.32s)
+🔧 Copying debug executable...
+✅ Binary updated at 14:42:02
+📚 Copying frameworks...
+📚 Using default frameworks
+✅ libmpv.2.dylib copied
+📦 Copying Sparkle.framework...
+✅ Sparkle.framework copied
+📄 Copying resources...
+✅ Copied AppIcon.icns
+✅ Copied png resources from Resources/
+🔗 Fixing library paths...
+🔏 Code signing app with ad-hoc signature...
+✅ App signed
+🔓 Removing quarantine flag...
+
+✅ RedLemon.app built successfully!
+📍 Location: build/RedLemon.app
+▶️  Run with: open build/RedLemon.app

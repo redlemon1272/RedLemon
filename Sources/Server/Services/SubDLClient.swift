@@ -435,11 +435,45 @@ final class SubDLClient {
                 return candidate.sd_id
             }
 
-            // 3. Similarity check (if no year provided OR year matched but name isn't exact)
-            // Bible #131: Use stricter boundary matching to prevent "The Beauty" matching "The Beauty Inside"
-            let words = sanitizedCandidate.components(separatedBy: .whitespaces)
-            if words.contains(where: { $0 == sanitizedTarget }) || sanitizedCandidate.hasPrefix(sanitizedTarget + " ") {
-                 print("   ✅ Boundary match found: '\(candidate.name)'")
+            // 3. Stricter Similarity check (if no year provided OR year matched but name isn't exact)
+            // Bible #131: Prevent "The Beauty" matching "The Beauty Inside"
+            let candidateWords = sanitizedCandidate.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
+            let targetWords = sanitizedTarget.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
+            
+            // Check if all target words exist in candidate in order
+            var isWordMatch = false
+            if candidateWords.count >= targetWords.count {
+                // Find if target sequence exists
+                for i in 0...(candidateWords.count - targetWords.count) {
+                    let subSection = candidateWords[i..<(i + targetWords.count)].joined(separator: " ")
+                    if subSection == sanitizedTarget {
+                        // We found the name. Now check if the REST of the words are "Noise"
+                        var hasNonNoiseLeftover = false
+                        let noisePatterns = ["s\\d+", "e\\d+", "season", "episode", "20\\d{2}", "19\\d{2}", "web-dl", "bluray", "hdtv", "x264", "x265", "complete", "remux", "dual", "audio", "multi", "subs"]
+                        
+                        for (idx, word) in candidateWords.enumerated() {
+                            if idx >= i && idx < (i + targetWords.count) { continue } // Skip the matched name
+                            
+                            // Check if this word is noise
+                            let isNoise = noisePatterns.contains { pattern in
+                                word.range(of: pattern, options: [.regularExpression, .caseInsensitive]) != nil
+                            }
+                            if !isNoise {
+                                hasNonNoiseLeftover = true
+                                break
+                            }
+                        }
+                        
+                        if !hasNonNoiseLeftover {
+                            isWordMatch = true
+                            break
+                        }
+                    }
+                }
+            }
+
+            if isWordMatch {
+                 print("   ✅ Valid boundary match found: '\(candidate.name)'")
                  return candidate.sd_id
             }
         }

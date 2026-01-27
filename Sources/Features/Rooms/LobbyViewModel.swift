@@ -1409,6 +1409,23 @@ class LobbyViewModel: ObservableObject {
                     self.posterURL = mediaItem.posterURL?.absoluteString
                     self.backdropURL = mediaItem.backgroundURL?.absoluteString
                     self.logoURL = mediaItem.logo
+                    
+                    // CRITICAL FIX: Update the room's media item to include Year and other metadata
+                    // so that subsequent components (like SubtitleService) have accurate info.
+                    if var currentMedia = self.room.mediaItem {
+                        currentMedia.year = mediaItem.year
+                        currentMedia.description = mediaItem.description
+                        currentMedia.genres = mediaItem.genres
+                        currentMedia.runtime = mediaItem.runtime
+                        self.room.mediaItem = currentMedia
+                        
+                        // Also sync to AppState if this is the active room
+                        if var appRoom = self.appState?.player.currentWatchPartyRoom,
+                           appRoom.id == self.room.id {
+                            appRoom.mediaItem = currentMedia
+                            self.appState?.player.currentWatchPartyRoom = appRoom
+                        }
+                    }
                 }
 
                 print("✅ Lobby: Loaded metadata for \(mediaItem.name)")

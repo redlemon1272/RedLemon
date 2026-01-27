@@ -1109,16 +1109,16 @@ struct AllStreamsResponse: Codable {
 struct MediaItem: Identifiable, Codable, Equatable {
     let id: String
     let type: String
-    let name: String
+    var name: String
     let poster: String?
     var background: String?
     let logo: String?
-    let description: String?
+    var description: String?
     let releaseInfo: String?
-    let year: String?
+    var year: String?
     let imdbRating: String?
-    let genres: [String]?
-    let runtime: String?
+    var genres: [String]?
+    var runtime: String?
 
     // SIMPLIFIED hardware-safe initializer - avoid complex property access
     init(id: String, type: String, name: String, poster: String?, background: String?, logo: String?, description: String?, releaseInfo: String?, year: String?, imdbRating: String?, genres: [String]?, runtime: String?) {

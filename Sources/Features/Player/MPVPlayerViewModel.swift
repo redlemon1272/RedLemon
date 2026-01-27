@@ -64,6 +64,7 @@ class MPVPlayerViewModel: ObservableObject {
     // Failsafe: Track "Ghost Candidates" (Users who are Online in Realtime but missing from DB for >30s)
     // This fixes the "Missing Leave" bug where a user leaves via API but the socket disconnect is missed.
     private var ghostCandidateStartTimes: [String: Date] = [:]
+    private var offlineCandidateStartTimes: [String: Date] = [:] // New: Grace period for offline/missing DB
 
     // Failsafe: Track last seek notification to prevent duplicates from drift correction
     private var lastSeekNotificationTime: Date?
@@ -2281,6 +2282,7 @@ extension MPVPlayerViewModel {
         // FIX: Reset tracking
         self.announcedParticipantIds.removeAll()
         self.ghostCandidateStartTimes.removeAll()
+        self.offlineCandidateStartTimes.removeAll()
 
         self.currentUserId = userId.lowercased()
 
@@ -2947,10 +2949,24 @@ extension MPVPlayerViewModel {
 
                 // If Offline, clear ghost data
                 self.ghostCandidateStartTimes.removeValue(forKey: id)
-
-                // If Offline and Not in DB: Remove (Stale)
-                if !isInDB { return true }
-
+                
+                // If Offline and Not in DB: Apply grace period
+                if !isInDB {
+                    if let start = self.offlineCandidateStartTimes[id] {
+                        if Date().timeIntervalSince(start) > 10.0 { // 10s grace
+                            LoggingManager.shared.info(.watchParty, message: "🗑️ Polling: Removing \(id) - confirmed offline and missing from DB for >10s")
+                            self.offlineCandidateStartTimes.removeValue(forKey: id)
+                            return true
+                        }
+                    } else {
+                        // Start tracking candidate for removal
+                        self.offlineCandidateStartTimes[id] = Date()
+                    }
+                    return false // Keep for now (grace period)
+                }
+                
+                // If Offline but STILL in DB: Keep (Stale connection, likely reconnecting)
+                self.offlineCandidateStartTimes.removeValue(forKey: id)
                 return false
             }
 

@@ -2286,8 +2286,25 @@ extension MPVPlayerViewModel {
 
         self.currentUserId = userId.lowercased()
 
-        // Initialize Realtime manager
-        self.realtimeManager = RealtimeChannelManager(realtimeClient: RedLemon.SupabaseClient.shared.realtimeClient)
+        // Initialize Realtime manager (Inherit from Lobby if possible for smooth handoff)
+        if let existingManager = appState?.activeLobbyViewModel?.realtimeManager as? RealtimeChannelManager {
+            self.realtimeManager = existingManager
+            LoggingManager.shared.info(.watchParty, message: "Handoff: Inheriting Realtime manager from Lobby")
+        } else {
+            self.realtimeManager = RealtimeChannelManager(realtimeClient: RedLemon.SupabaseClient.shared.realtimeClient)
+            LoggingManager.shared.info(.watchParty, message: "Handoff: No active lobby found, creating new Realtime manager")
+        }
+
+        // INITIAL STATE SYNC: Populate activeConnectionRefs from existing participants
+        // This prevents "Ghost Left" messages when Lobby connections are swapped for Player connections
+        // because we won't consider a user "new" or "missing" if they were already in the lobby.
+        if let currentRoom = appState?.player.currentWatchPartyRoom {
+            for participant in currentRoom.participants {
+                self.activeConnectionRefs[participant.id.lowercased()] = participant.phxRefs
+                LoggingManager.shared.debug(.watchParty, message: "Initialized activeConnectionRefs for \(participant.id) with \(participant.phxRefs.count) refs")
+            }
+        }
+
 
         // But prepare welcome message for when they do open it
         // CRITICAL: Set up presence callback BEFORE setup() so we don't miss any presence events
@@ -2606,6 +2623,10 @@ extension MPVPlayerViewModel {
         let username = appState?.currentUsername ?? "User"
 
         if let realtimeManager = realtimeManager {
+            // CRITICAL HANDOFF (Landmine #125): Unregister "lobby" observer now that the Player is taking over.
+            // This prevents duplicate presence processing and double-posted system messages.
+            await realtimeManager.unregisterObserver(id: "lobby")
+
             try await realtimeManager.setup(
                 roomId: roomId,
                 isHost: isHost,

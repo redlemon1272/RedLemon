@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.162 -->
+        <item>
+            <title>Version 1.0.162</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed duplicate Connected via Realtime messages in the lobby.</li><li>Suppressed host seeked notifications during public event playback.</li><li>Centered all broadcast and sync notifications in the player overlay.</li><li>Implemented debouncing for seek notifications to prevent drift-correction spam.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 27 Jan 2026 05:50:38 -0500</pubDate>
+            <sparkle:version>162</sparkle:version>
+            <sparkle:shortVersionString>1.0.162</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.162.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="USDh/vELcn9cetn9+j4QUUqNiPfVUmobEqKNDC/qASwXj+NvNRGP8OoQzxdzKbL2ILu90EQ2x5202Lv753MuCQ==" length="75583405"
+            />
+        </item>
         <!-- vv1.0.161 -->
         <item>
             <title>Version v1.0.161</title>

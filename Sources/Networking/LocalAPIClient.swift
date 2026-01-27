@@ -716,7 +716,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         }
 
         var request = URLRequest(url: url)
-        request.timeoutInterval = 10
+        request.timeoutInterval = 30 // Increased for deep searches on SubDL
 
         let (data, response) = try await URLSession.shared.data(for: request)
 

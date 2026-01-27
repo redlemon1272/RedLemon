@@ -379,22 +379,52 @@ final class SubDLClient {
             let candidateName = candidate.name.lowercased()
 
             // 1. Strict Year Match (if year is provided)
-            if let year = year {
-                if candidateName.contains("\(year)") {
-                    return candidate.sd_id
+            // Bible #131: SubDL search is fragile. Apply strict numeric match locally.
+            if let targetYear = year {
+                let foundYear = extractYear(from: candidate.name)
+                let allowedYears = [targetYear, targetYear - 1, targetYear + 1]
+
+                if let fy = foundYear {
+                    if allowedYears.contains(fy) {
+                        print("   ✅ Match found: '\(candidate.name)' (Year \(fy) matched within ±1 variance of \(targetYear))")
+                        return candidate.sd_id
+                    } else {
+                        // Year found but doesn't match! (e.g. found 2018 when we wanted 2025)
+                        // This fixes the "The Beauty Inside" issue when searching for "The Beauty"
+                        continue
+                    }
+                } else {
+                    // No 4-digit year found in candidate name.
+                    // Fall back to simple string contains if the name itself contains our target year.
+                    if allowedYears.contains(where: { candidateName.contains("\($0)") }) {
+                         print("   ✅ Match found: '\(candidate.name)' (String year match within ±1 variance of \(targetYear))")
+                         return candidate.sd_id
+                    }
                 }
-                // If the candidate name DOES NOT contain our target year, skip it!
-                // This prevents picking "The Beauty Inside (2018)" when we want "The Beauty (2025)"
+
+                // If we reach here, we had a year requirement but no match was found.
                 continue
             }
 
-            // 2. Similarity check (if no year provided)
-            if candidateName.contains(sanitizedName.lowercased()) {
+            // 2. Exact Title Match (Highest priority if year matched or not provided)
+            let sanitizedCandidate = candidateName.replacingOccurrences(of: ":", with: "").trimmingCharacters(in: .whitespaces)
+            let sanitizedTarget = sanitizedName.lowercased().replacingOccurrences(of: ":", with: "").trimmingCharacters(in: .whitespaces)
+
+            if sanitizedCandidate == sanitizedTarget {
+                print("   ✅ Exact match found: '\(candidate.name)'")
+                return candidate.sd_id
+            }
+
+            // 3. Similarity check (if no year provided OR year matched but name isn't exact)
+            // Bible #131: Use stricter boundary matching to prevent "The Beauty" matching "The Beauty Inside"
+            let words = sanitizedCandidate.components(separatedBy: .whitespaces)
+            if words.contains(where: { $0 == sanitizedTarget }) || sanitizedCandidate.hasPrefix(sanitizedTarget + " ") {
+                 print("   ✅ Boundary match found: '\(candidate.name)'")
                  return candidate.sd_id
             }
         }
 
-        // Final Fallback: If we have results but none matched our year filter, 
+        // Final Fallback: If we have results but none matched our year filter,
         // DO NOT just pick the first one (it's likely wrong).
         // Only return the first result if we didn't have a year requirement.
         if year == nil, let first = results.first {
@@ -1076,5 +1106,25 @@ final class SubDLClient {
         }
 
         return n.trimmingCharacters(in: CharacterSet(charactersIn: "."))
+    }
+
+    /// Extract a 4-digit year from a string using regex.
+    /// Bible #131: Strict numeric match for results.
+    private func extractYear(from name: String) -> Int? {
+        let pattern = "\\b(19|20)\\d{2}\\b"
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return nil }
+        let nsString = name as NSString
+        let results = regex.matches(in: name, options: [], range: NSRange(location: 0, length: nsString.length))
+
+        for result in results {
+            let yearString = nsString.substring(with: result.range)
+            if let yearVal = Int(yearString) {
+                // Return the first valid looking year
+                if yearVal > 1900 && yearVal < 2100 {
+                    return yearVal
+                }
+            }
+        }
+        return nil
     }
 }

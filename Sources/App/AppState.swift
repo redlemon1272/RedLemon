@@ -276,7 +276,9 @@ class AppState: ObservableObject {
 
     @Published var activeRooms: [WatchPartyRoom] = []  // Track all active rooms locally
     @Published var isLoadingRoom: Bool = false  // Track room loading state
+    @Published var isSearchingSubtitles: Bool = false // SubDL search in progress
     @Published var shouldAutoJoinLobby: Bool = false  // Flag to auto-join lobby for live events
+
     @Published var searchResults: [MediaItem] = []  // Persist search results across navigation
     @Published var lastSearchQuery: String = ""  // Remember last search query
     @Published var isServerReady: Bool = false  // Track if HTTP server is ready to accept requests
@@ -618,6 +620,13 @@ class AppState: ObservableObject {
             // Give system time to settle if called on startup
             try? await Task.sleep(nanoseconds: 500_000_000)
 
+            // Deep Refresh: Trigger immediately in parallel (don't wait for health check)
+            if self.player.selectedStream != nil {
+                Task {
+                    await self.player.manualRefreshSubtitles()
+                }
+            }
+
             // Get provider health
             var health = await ProviderManager.shared.checkAllHealth()
 
@@ -651,14 +660,8 @@ class AppState: ObservableObject {
                 self.providerHealth = health
                 self.isCheckingProviders = false
                 NSLog("%@", "✅ [AppState] Provider health check complete (found \(health.count) services)")
-
-                // Deep Refresh: If subtitles were missing and user clicks refresh, try to fetch them now
-                if self.player.selectedStream != nil {
-                    Task {
-                        await self.player.manualRefreshSubtitles()
-                    }
-                }
             }
+
         }
     }
 

@@ -258,7 +258,7 @@ struct MPVPlayerView: View {
             // Only unhide cursor if not toggled via keyboard (Command key)
             // This prevents the cursor from flashing when using the shortcut
             let isCommandPressed = NSEvent.modifierFlags.contains(.command)
-            
+
             if isOpen && !isCommandPressed {
                 NSCursor.unhide()
                 cursorHideTimer?.invalidate()
@@ -430,7 +430,7 @@ struct MPVPlayerView: View {
                             return event // Pass through to text field
                         }
                     }
-                    
+
                     viewModel.togglePlayPause()
                     return nil // Consume event
                 }
@@ -710,22 +710,22 @@ struct MPVPlayerView: View {
             let message: String = {
                 // Default message
                 var msg = (viewModel.isBuffering && viewModel.mpvWrapper.isFileLoaded) ? "Buffering..." : "Loading stream..."
-                
+
                 // Watch Party Ready Gate Heuristic:
                 // If we are in a watch party, file is loaded, NOT playing, and at the very beginning (time < 2s),
                 // we are likely at the "Ready Gate" waiting for sync.
-                let isAtReadyGate = viewModel.isInWatchParty && 
-                                    viewModel.mpvWrapper.isFileLoaded && 
-                                    !viewModel.isPlaying && 
+                let isAtReadyGate = viewModel.isInWatchParty &&
+                                    viewModel.mpvWrapper.isFileLoaded &&
+                                    !viewModel.isPlaying &&
                                     viewModel.currentTime < 2.0
-                
+
                 if isAtReadyGate {
                     msg = viewModel.isWatchPartyHost ? "Waiting for guests..." : "Waiting for host..."
                 }
-                
+
                 return msg
             }()
-            
+
             LoadingOverlay(streamTitle: viewModel.streamTitle, message: message)
         }
 
@@ -787,11 +787,26 @@ struct MPVPlayerView: View {
             .padding(.horizontal, 24)
             .padding(.top, 20)
 
-            // SubDL Status Check (Added for visibility when subtitles are missing)
+            // SubDL Status Check & Searching Notification
             HStack {
-                Text("SubDL Status:")
-                    .foregroundColor(.secondary)
-                    .font(.system(size: 14))
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("SubDL Status:")
+                        .foregroundColor(.secondary)
+                        .font(.system(size: 14))
+
+                    if appState.isSearchingSubtitles {
+                        HStack(spacing: 8) {
+                            ProgressView()
+                                .controlSize(.small)
+                                .scaleEffect(0.6)
+
+                            Text("Searching for subtitles...")
+                                .font(.system(size: 12, weight: .medium))
+                                .foregroundColor(.blue)
+                        }
+                        .transition(.opacity)
+                    }
+                }
 
                 Spacer()
 
@@ -831,6 +846,7 @@ struct MPVPlayerView: View {
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 4)
+
 
             // Current track info
             if let currentTrack = viewModel.currentSubtitleTrack {
@@ -1326,7 +1342,7 @@ struct MPVPlayerView: View {
                              if viewModel.isWatchPartyHost {
                                  // Watch Party Host Path: Show stable transition state
                                  viewModel.isExitingToLobby = true
-                                 
+
                                  // Block hash and return all to lobby
                                  appState.player.tryAnotherStreamForWatchParty(
                                      hash: viewModel.currentStreamHash ?? streamHash ?? "",
@@ -1347,6 +1363,8 @@ struct MPVPlayerView: View {
             .zIndex(103)
         }
     }
+
+
 
     @ViewBuilder
     private var chatButtonOverlay: some View {

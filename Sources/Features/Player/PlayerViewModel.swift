@@ -2204,7 +2204,19 @@ class PlayerViewModel: ObservableObject {
             return
         }
 
+        // 🔍 Show "Searching for Subtitles..." notification
+        await MainActor.run {
+            self.appState?.isSearchingSubtitles = true
+        }
+
+        defer {
+            Task { @MainActor in
+                self.appState?.isSearchingSubtitles = false
+            }
+        }
+
         NSLog("🏥 [PlayerVM] Manual Refresh: Triggering deep subtitle search for %@", item.name)
+
 
         do {
             // Build stream hint for better matching
@@ -2220,9 +2232,18 @@ class PlayerViewModel: ObservableObject {
             let season = selectedSeason
             let episode = selectedEpisode
 
-            // Use metadata year if available
-            let yearValue = selectedMetadata?.year ?? item.year
-            let year = yearValue.flatMap { Int($0) }
+            // Use metadata year if available (Bible #131: Handle "2025–" and other range formats)
+            let yearStr = selectedMetadata?.year ?? item.year
+            let year: Int? = {
+                guard let str = yearStr, !str.isEmpty else { return nil }
+                // Extract first 4-digit sequence (e.g. "2025–" -> 2025)
+                let pattern = "\\b(19|20)\\d{2}\\b"
+                if let range = str.range(of: pattern, options: .regularExpression),
+                   let val = Int(str[range]) {
+                    return val
+                }
+                return Int(str) // Fallback
+            }()
 
             let subDLSubtitles = try await LocalAPIClient.shared.searchSubtitles(
                 imdbId: item.id,

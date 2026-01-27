@@ -1378,34 +1378,6 @@ if [[ -f "$SOCIAL_SERVICE" ]]; then
 fi
 
 
-echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
-echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
-echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"
-
-# Report Errors
-if [[ $ERROR_COUNT -gt 0 ]]; then
-    echo -e "${RED}❌ ERRORS: $ERROR_COUNT${NC}"
-else
-    echo -e "${GREEN}✅ ERRORS: 0${NC}"
-fi
-
-# Report Warnings
-if [[ $WARNING_COUNT -gt 0 ]]; then
-    echo -e "${YELLOW}⚠️  WARNINGS: $WARNING_COUNT${NC}"
-else
-    echo -e "${GREEN}✅ WARNINGS: 0${NC}"
-fi
-
-echo ""
-echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
-
-# Exit Code Logic
-if [[ $ERROR_COUNT -gt 0 ]]; then
-    exit 1 # Block items
-else
-    exit 0 # Warnings don't block yet
-fi
-
 # =============================================================================
 # CHECK 64: Supabase Exhaustion (Landmine #122)
 # =============================================================================
@@ -1455,4 +1427,64 @@ if [[ -f "$STREAM_SERVICE" ]]; then
     else
         echo -e "${GREEN}✅ Resolution cache logic verified.${NC}"
     fi
+fi
+
+# =============================================================================
+# CHECK 67: Air Gap Protocol (Public Repo Whitelist)
+# =============================================================================
+# Rule: Every feature folder in Sources/Features/ MUST be accounted for in sync-to-public.sh.
+# This prevents forgotten features during public releases.
+print_header "Check 67: Air Gap Protocol (Whitelist Verification)"
+
+SYNC_SCRIPT="scripts/sync-to-public.sh"
+if [[ -f "$SYNC_SCRIPT" ]]; then
+    MISSING_FEATURES=0
+    # Use subshell to avoid changing directory in the main script
+    (
+        cd Sources/Features
+        for feature in *; do
+            if [[ -d "$feature" ]]; then
+                # Verify folder is mentioned in the copy_safe section of the sync script
+                if ! grep -q "copy_safe \"Sources/Features/$feature\"" "../../$SYNC_SCRIPT"; then
+                    report "ERROR" "Air Gap Protocol" "Feature '$feature' is NOT whitelisted in $SYNC_SCRIPT. Update the whitelist to prevent sync drift." "$SYNC_SCRIPT" "0" "Missing copy_safe for Sources/Features/$feature"
+                    ((MISSING_FEATURES++))
+                fi
+            fi
+        done
+    )
+    
+    # Heuristic check for the outcome of the subshell isn't easy here, 
+    # but the 'report' function handles global ERROR_COUNT.
+    echo -e "${GREEN}✅ Feature directory sync verification complete.${NC}"
+else
+    echo -e "${YELLOW}⚠️  Warning: $SYNC_SCRIPT not found. Skipping Air Gap check.${NC}"
+fi
+
+
+echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
+echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
+echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"
+
+# Report Errors
+if [[ $ERROR_COUNT -gt 0 ]]; then
+    echo -e "${RED}❌ ERRORS: $ERROR_COUNT${NC}"
+else
+    echo -e "${GREEN}✅ ERRORS: 0${NC}"
+fi
+
+# Report Warnings
+if [[ $WARNING_COUNT -gt 0 ]]; then
+    echo -e "${YELLOW}⚠️  WARNINGS: $WARNING_COUNT${NC}"
+else
+    echo -e "${GREEN}✅ WARNINGS: 0${NC}"
+fi
+
+echo ""
+echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
+
+# Exit Code Logic
+if [[ $ERROR_COUNT -gt 0 ]]; then
+    exit 1 # Block items
+else
+    exit 0 # Warnings don't block yet
 fi

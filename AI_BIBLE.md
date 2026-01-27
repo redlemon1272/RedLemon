@@ -119,6 +119,8 @@
 | **Duplicate Show Entries (Social)** | Unique ID used instead of Root IMDB ID | #127 |
 | **Social View Lag/Memory Spike** | Infinite history fetch/render | #128 |
 | **"ursinho" data not showing** | Friend hasn't synced local data to cloud yet | #129 |
+| **Sync Script Drift** | Feature missing from public whitelist | #130 |
+| **Release Artifact Mismatch** | Uncommitted changes in build executable | #131 |
 
 ## 🚨 Critical Landmines
 
@@ -535,6 +537,18 @@
     *   **Symptom**: Friend profile scrolling becomes laggy or application memory usage spikes after clicking several friends.
     *   **Cause**: Fetching and rendering an uncapped history list (hundreds of items) for every friend interaction.
     *   **Rule**: **Hard Cap Social Lists**. Any list displayed on a friend profile (History/Library) MUST be capped (e.g., `.prefix(20)`) after deduplication. This ensures constant-time rendering and keeps the view punchy.
+
+129. **Sync Whitelist Drift**: *(Added v1.0.161)*
+    *   **Trigger**: Adding a new feature folder in `Sources/Features` without updating `scripts/sync-to-public.sh`.
+    *   **Symptom**: The feature works in development but is completely missing from the public repository and production builds.
+    *   **Rule**: **Automated Whitelist Scan**. `architecture-scan.sh` MUST verify every folder in `Sources/Features` exists in the sync whitelist.
+    *   **Correction**: Add `copy_safe "Sources/Features/NewFeature"` to the sync script.
+
+130. **Release Integrity Breach**: *(Added v1.0.161)*
+    *   **Trigger**: Modifying code (even "minor" scripts) after the release process has begun.
+    *   **Symptom**: Public/Private repo divergence, or released executable containing code that was never committed.
+    *   **Rule**: **The Clean Slate Protocol**. `release.sh` and `sync-to-public.sh` MUST fail immediately if `git status` is dirty. No overrides allowed.
+    *   **Workflow**: Abort release -> Commit changes -> Restart release.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

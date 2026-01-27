@@ -16,21 +16,21 @@ NC='\033[0m'
 
 echo -e "${BLUE}🛡️  Starting RedLemon Scrubber Protocol...${NC}"
 
-# 1. Pre-flight Checks
+# 1. Pre-flight Checks (The "Clean Slate" Rule)
 if [ ! -d "$PUBLIC_REPO_ROOT" ]; then
     echo -e "${RED}❌ Error: Public repo not found at $PUBLIC_REPO_ROOT${NC}"
-    echo "Please clone it first: cd .. && git clone https://github.com/redlemon-app/RedLemon RedLemon-Public"
     exit 1
 fi
 
-if [[ -n $(git status -s) ]]; then
-    echo -e "${YELLOW}⚠️  Warning: Working directory not clean. Syncing dirty state?${NC}"
-    read -p "Continue? (y/N) " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        exit 1
-    fi
+# AI_BIBLE Rule: NEVER sync from a dirty working directory.
+if [[ -n $(git status --porcelain) ]]; then
+    echo -e "${RED}❌ ERROR: Working directory is DIRTY.${NC}"
+    echo -e "${YELLOW}   Syncing a dirty state to public is a security risk and violates the Satellite Protocol.${NC}"
+    echo -e "${YELLOW}   Commit your changes in the private repo first.${NC}"
+    git status -s
+    exit 1
 fi
+echo -e "${GREEN}✅ Clean Working Directory Verified for Scrubber Protocol.${NC}"
 
 # 2. Clean Slate (Preserve .git)
 echo -e "${YELLOW}🧹 Cleaning public repo...${NC}"

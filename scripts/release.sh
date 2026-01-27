@@ -25,7 +25,17 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# B. Landmine Logic Tests (Optional - may fail in some environments due to libmpv)
+# B. Dirty Repo Check (The "No Uncommitted Edits" Rule)
+echo -e "${YELLOW}   Checking Repository State...${NC}"
+if [[ -n $(git status --porcelain) ]]; then
+    echo -e "${RED}❌ ERROR: Uncommitted changes detected.${NC}"
+    echo -e "${YELLOW}   Editing during a release is forbidden. Commit your changes first.${NC}"
+    git status -s
+    exit 1
+fi
+echo -e "${GREEN}   ✅ Clean Working Directory Verified.${NC}"
+
+# C. Landmine Logic Tests (Optional - may fail in some environments due to libmpv)
 echo -e "${YELLOW}   Running Landmine Logic Tests...${NC}"
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$(pwd)/Frameworks
 if swift test --filter LandmineTests 2>/dev/null; then

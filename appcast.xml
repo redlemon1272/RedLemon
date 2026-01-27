@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.163 -->
+        <item>
+            <title>Version 1.0.163</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Critical fix for duplicate lobby connection messages.</li><li>Suppressed seek notification noise during public events.</li><li>Fixed notification flooding during drift correction.</li><li>Enforced strict Zero Warning Policy for all production builds.</li><li>Centered reaction and sync overlays in the player.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 27 Jan 2026 06:26:17 -0500</pubDate>
+            <sparkle:version>163</sparkle:version>
+            <sparkle:shortVersionString>1.0.163</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.163.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="mIS1ZLdaJ1W3a5vENzQKyZkN2BnlZG6qmSKq3+86jRBETFNNAX/xw3qRKN5YTKtzt4Mnl5tabqnOOopzmLR1Bw==" length="75595503"
+            />
+        </item>
         <!-- v1.0.162 -->
         <item>
             <title>Version 1.0.162</title>

@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.160 -->
+        <item>
+            <title>Version 1.0.160</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Friend History visibility using secure RPC (Landmine #126)</li><li>Smarter show deduplication via Root IMDB ID (Landmine #127)</li><li>Optimized profile performance with 20-item history capping (Landmine #128)</li><li>Full metadata sync for cloud history restoration</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 26 Jan 2026 22:57:53 -0500</pubDate>
+            <sparkle:version>160</sparkle:version>
+            <sparkle:shortVersionString>1.0.160</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.160.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ss80s4oRH3t6JnL+ZjFYs8v++q6DUS/DTvxvc7wL/0cg5YQwcLNt/AwVmputV64ORaUyAHp3oM1KosBKPpeXDQ==" length="75482642"
+            />
+        </item>
         <!-- vv1.0.159 -->
         <item>
             <title>Version v1.0.159</title>

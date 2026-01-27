@@ -158,10 +158,15 @@ class PlayerViewModel: ObservableObject {
             appState.currentView = .player
 
             // CRITICAL FIX: Clear background lobby sessions for solo playback
-                if let zombieVM = appState.activeLobbyViewModel {
+            // For Watch Parties, we MUST preserve the LobbyViewModel so the Player can inherit the Realtime manager.
+            if let zombieVM = appState.activeLobbyViewModel {
+                if watchMode == .solo {
                     NSLog("🧹 PlayerVM: Solo playback started. Clearing active lobby session: %@", zombieVM.room.id)
                     appState.setActiveLobbyViewModel(nil)
+                } else {
+                    NSLog("🤝 PlayerVM: Watch Party playback started. Preserving lobby session for handoff: %@", zombieVM.room.id)
                 }
+            }
         }
 
         // FIX: Enter fullscreen immediately for Watch Party mode

@@ -2288,24 +2288,37 @@ extension MPVPlayerViewModel {
 
         // Initialize Realtime manager (Inherit from Lobby if possible for smooth handoff)
         if let existingManager = appState?.activeLobbyViewModel?.realtimeManager as? RealtimeChannelManager {
+            let capturedRoomId = await existingManager.roomId
             self.realtimeManager = existingManager
-            LoggingManager.shared.info(.watchParty, message: "Handoff: Inheriting Realtime manager from Lobby")
+            LoggingManager.shared.info(.watchParty, message: "🤝 Handoff: Inheriting Realtime manager from Lobby (\(capturedRoomId ?? "unknown"))")
+
+            // CRITICAL: Unregister the lobby observer after handoff.
+            // This ensures only the Player VM processes presence events now that it has taken control.
+            _ = Task {
+                await existingManager.unregisterObserver(id: "lobby")
+                LoggingManager.shared.info(.watchParty, message: "🤝 Handoff: Unregistered 'lobby' observer from shared Realtime manager")
+            }
         } else {
             self.realtimeManager = RealtimeChannelManager(realtimeClient: RedLemon.SupabaseClient.shared.realtimeClient)
-            LoggingManager.shared.info(.watchParty, message: "Handoff: No active lobby found, creating new Realtime manager")
+            LoggingManager.shared.info(.watchParty, message: "🤝 Handoff: No active lobby found, creating new Realtime manager")
         }
 
         // CRITICAL FIX: Initialize connection tracking from existing participants inherited from Lobby.
         // This prevents "Guest Left" messages during transition because the Player VM starts
         // recognizing the Lobby-level Phoenix Refs immediately. (Bible Landmine #47/51)
         if let existingRoom = appState?.player.currentWatchPartyRoom {
+            LoggingManager.shared.info(.watchParty, message: "🛡️ Transition Sync: Processing \(existingRoom.participants.count) participants from AppState")
             for participant in existingRoom.participants {
                 let normalizedPId = participant.id.lowercased()
                 if !participant.phxRefs.isEmpty {
                     self.activeConnectionRefs[normalizedPId] = participant.phxRefs
-                    LoggingManager.shared.info(.watchParty, message: "🛡️ Transition Sync: Inherited \(participant.phxRefs.count) refs for user \(normalizedPId)")
+                    LoggingManager.shared.info(.watchParty, message: "🛡️ Transition Sync: Inherited \(participant.phxRefs.count) refs for user \(normalizedPId) [Refs: \(participant.phxRefs.joined(separator: ", "))]")
+                } else {
+                    LoggingManager.shared.warn(.watchParty, message: "🛡️ Transition Sync: No refs found for participant \(normalizedPId)")
                 }
             }
+        } else {
+             LoggingManager.shared.warn(.watchParty, message: "🛡️ Transition Sync: currentWatchPartyRoom is NIL")
         }
 
         // But prepare welcome message for when they do open it

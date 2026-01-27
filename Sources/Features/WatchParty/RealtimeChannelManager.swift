@@ -15,6 +15,7 @@ protocol RealtimeService: Actor {
     func disconnect(leaveChannel: Bool, disconnectClient: Bool) async
     func cleanup(leaveChannel: Bool, disconnectClient: Bool) async
     func isRealtimeConnected() async -> Bool
+    var roomId: String? { get }
 
     // Multi-Observer Support
     func registerObserver(id: String, onPresence: ((PresenceAction, String, [String: Any]?) -> Void)?, onSync: ((SyncMessage) -> Void)?, onConnectionState: ((RealtimeConnectionState) -> Void)?) async
@@ -44,7 +45,7 @@ actor RealtimeChannelManager: RealtimeService {
     // MARK: - State
     private let eventName = "sync"
     private var isHost: Bool = false
-    private var roomId: String?
+    internal var roomId: String?
     private var userId: String?
 
     // Connection state tracking
@@ -384,6 +385,18 @@ actor RealtimeChannelManager: RealtimeService {
     // MARK: - Cleanup
 
     func cleanup(leaveChannel: Bool = true, disconnectClient: Bool = true) async {
+        // SMART DISCONNECT (v4): Ref-count check via observers
+        // If we still have registered observers (e.g., Lobby just closed but Player has joined),
+        // we MUST NOT leave the channel or disconnect the client.
+        // We only clear our internal handlers.
+        let observerCount = presenceCallbacks.count + syncCallbacks.count + connectionStateCallbacks.count
+
+        if observerCount > 0 && leaveChannel {
+            NSLog("🤝 Realtime: cleanup() for room %@ delayed - active observers remaining: %d (handoff in progress?)",
+                  self.roomId ?? "unknown", observerCount)
+            return
+        }
+
         // Prevent double cleanup or cleanup while already disconnecting
         guard !isDisconnecting else {
             print("⚠️ Cleanup already in progress, skipping")

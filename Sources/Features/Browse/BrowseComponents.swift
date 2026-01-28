@@ -283,14 +283,15 @@ struct WatchModeSelectionView: View {
 /// Card for recently watched items with progress bar
 struct RecentlyWatchedCard: View {
     let historyItem: WatchHistoryItem
-    @State private var imageData: Data?
+    @State private var cachedImage: NSImage?
+    @State private var imageLoadTask: Task<Void, Never>?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             // Poster image with progress overlay
             ZStack(alignment: .bottom) {
-                if let imageData = imageData, let nsImage = NSImage(data: imageData) {
-                    Image(nsImage: nsImage)
+                if let image = cachedImage {
+                    Image(nsImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 150, height: 220)
@@ -302,6 +303,7 @@ struct RecentlyWatchedCard: View {
                         .frame(width: 150, height: 220)
                         .overlay(
                             ProgressView()
+                                .scaleEffect(0.8)
                         )
                 }
 
@@ -332,38 +334,41 @@ struct RecentlyWatchedCard: View {
                 .foregroundColor(.secondary)
         }
         .frame(width: 150)
-        .task {
-            await loadPoster()
+        .onAppear {
+            loadImage()
+        }
+        .onDisappear {
+            imageLoadTask?.cancel()
         }
     }
 
-    private func loadPoster() async {
+    private func loadImage() {
         guard let posterURL = historyItem.mediaItem.posterURL else { return }
         let cacheKey = posterURL.absoluteString
 
-        // Check cache and load image in detached task to avoid actor isolation issues
-        let data: Data? = await Task.detached {
-            // Check cache first
+        if let fastCached = PosterImageCache.get(cacheKey) {
+            self.cachedImage = fastCached
+            return
+        }
+
+        imageLoadTask?.cancel()
+        imageLoadTask = Task {
             if let cachedData = await CacheManager.shared.getImageData(key: cacheKey) {
-                return cachedData
+                if !Task.isCancelled, let img = NSImage(data: cachedData) {
+                    PosterImageCache.set(cacheKey, image: img)
+                    await MainActor.run { self.cachedImage = img }
+                }
+                return
             }
 
             do {
                 let (data, _) = try await URLSession.shared.data(from: posterURL)
-                // Cache
-                await CacheManager.shared.setImageData(key: cacheKey, value: data)
-                return data
-            } catch {
-                print("Failed to load poster: \(error)")
-                return nil
-            }
-        }.value
-
-        // Update UI on main actor
-        if let data = data {
-            await MainActor.run {
-                self.imageData = data
-            }
+                if !Task.isCancelled, let img = NSImage(data: data) {
+                    await CacheManager.shared.setImageData(key: cacheKey, value: data)
+                    PosterImageCache.set(cacheKey, image: img)
+                    await MainActor.run { self.cachedImage = img }
+                }
+            } catch {}
         }
     }
 }
@@ -372,7 +377,8 @@ struct RecentlyWatchedCard: View {
 struct MediaCard: View {
     let item: MediaItem
     @EnvironmentObject var appState: AppState
-    @State private var imageData: Data?
+    @State private var cachedImage: NSImage?
+    @State private var imageLoadTask: Task<Void, Never>?
 
     var progress: Double? {
         appState.watchHistoryProgress[item.id]
@@ -382,8 +388,8 @@ struct MediaCard: View {
         VStack(alignment: .leading, spacing: 8) {
             // Poster image
             ZStack {
-                if let imageData = imageData, let nsImage = NSImage(data: imageData) {
-                    Image(nsImage: nsImage)
+                if let image = cachedImage {
+                    Image(nsImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(height: 220)
@@ -395,6 +401,7 @@ struct MediaCard: View {
                         .frame(height: 220)
                         .overlay(
                             ProgressView()
+                                .scaleEffect(0.8)
                         )
                 }
 
@@ -453,41 +460,41 @@ struct MediaCard: View {
 
         }
         .frame(width: 150)
-        .task {
-            await loadPoster()
+        .onAppear {
+            loadImage()
+        }
+        .onDisappear {
+            imageLoadTask?.cancel()
         }
     }
 
-    private func loadPoster() async {
+    private func loadImage() {
         guard let posterURL = item.posterURL else { return }
-
         let cacheKey = posterURL.absoluteString
 
-        // Check cache and load image in detached task to avoid actor isolation issues
-        let data: Data? = await Task.detached {
-            // Check cache first
+        if let fastCached = PosterImageCache.get(cacheKey) {
+            self.cachedImage = fastCached
+            return
+        }
+
+        imageLoadTask?.cancel()
+        imageLoadTask = Task {
             if let cachedData = await CacheManager.shared.getImageData(key: cacheKey) {
-                return cachedData
+                if !Task.isCancelled, let img = NSImage(data: cachedData) {
+                    PosterImageCache.set(cacheKey, image: img)
+                    await MainActor.run { self.cachedImage = img }
+                }
+                return
             }
 
             do {
                 let (data, _) = try await URLSession.shared.data(from: posterURL)
-
-                // Cache image data
-                await CacheManager.shared.setImageData(key: cacheKey, value: data)
-
-                return data
-            } catch {
-                print("Failed to load poster: \(error)")
-                return nil
-            }
-        }.value
-
-        // Update UI on main actor
-        if let data = data {
-            await MainActor.run {
-                self.imageData = data
-            }
+                if !Task.isCancelled, let img = NSImage(data: data) {
+                    await CacheManager.shared.setImageData(key: cacheKey, value: data)
+                    PosterImageCache.set(cacheKey, image: img)
+                    await MainActor.run { self.cachedImage = img }
+                }
+            } catch {}
         }
     }
 }
@@ -634,16 +641,36 @@ struct OptimizedMediaCard: View {
 struct StreamingServiceRow: View {
     let title: String
     let items: [MediaItem]
+    let isLoading: Bool
     let scrollOffset: Binding<CGFloat>?
     let onTap: (MediaItem) -> Void
 
-    var body: some View {
-        if !items.isEmpty {
-            VStack(alignment: .leading, spacing: 12) {
-                Text(title)
-                    .font(.title2.weight(.bold))
-                    .padding(.horizontal)
+    init(title: String, items: [MediaItem], isLoading: Bool = false, scrollOffset: Binding<CGFloat>? = nil, onTap: @escaping (MediaItem) -> Void) {
+        self.title = title
+        self.items = items
+        self.isLoading = isLoading
+        self.scrollOffset = scrollOffset
+        self.onTap = onTap
+    }
 
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(title)
+                .font(.title2.weight(.bold))
+                .padding(.horizontal)
+
+            if isLoading && items.isEmpty {
+                HStack(spacing: 12) {
+                    ProgressView()
+                        .scaleEffect(0.8)
+                    Text("Loading popular content...")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .frame(height: 240)
+            } else if !items.isEmpty {
                 VersionAwareHorizontalScrollView(scrollOffset: scrollOffset) {
                     LazyHStack(alignment: .top, spacing: 16) {
                         ForEach(items) { item in

@@ -24,9 +24,9 @@ actor CacheManager {
     private let metadataExpiration: TimeInterval = 86400 // 24 hours
     private let imageExpiration: TimeInterval = 86400 // 24 hours
 
-    private let maxCatalogItems = 20
-    private let maxMetadataItems = 50
-    private let maxImageItems = 30
+    private let maxCatalogItems = 100
+    private let maxMetadataItems = 200
+    private let maxImageItems = 1000
 
     /// Initialize cache with fixed conservative limits
     nonisolated func initializeLimits() {
@@ -49,8 +49,6 @@ actor CacheManager {
         for i in 0..<min(removeCount, sortedByAccess.count) {
             cache.removeValue(forKey: sortedByAccess[i].key)
         }
-
-        print("🗑️ Cache evicted \(removeCount) items")
     }
 
     // MARK: - Cached Item Wrapper

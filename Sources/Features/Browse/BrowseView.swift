@@ -78,6 +78,7 @@ struct BrowseViewContent: View {
                                     StreamingServiceRow(
                                         title: viewModel.selectedTab == .movies ? "Popular Movies" : "Popular TV Shows",
                                         items: viewModel.selectedTab == .movies ? appState.popularMovies : appState.popularShows,
+                                        isLoading: viewModel.isPopularLoading,
                                         scrollOffset: nil, // PERF: Don't track scroll during scrolling
                                         onTap: { item in viewModel.selectMedia(item, fromRow: "popular") }
                                     )

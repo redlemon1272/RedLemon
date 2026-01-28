@@ -2571,8 +2571,8 @@ extension MPVPlayerViewModel {
                         let leavingUsername = metaUsername ?? "User"
 
                         let task: Task<Void, Never> = Task { @MainActor [weak self, actualUserId, leavingPhxRef, leavingUsername] in
-                            // Wait 10 seconds (nano) to handle network flaps and seek-induced connection drops
-                            try? await Task.sleep(nanoseconds: 10_000_000_000)
+                            // Wait 2 seconds (nano) to handle network flaps and seek-induced connection drops
+                            try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s (Phase 6 Tuning)
 
                             guard let self = self else { return }
 

@@ -311,8 +311,8 @@ class LobbyPresenceManager: ObservableObject {
 
                     // Defer leave processing to avoid false positives from metadata updates
                     let task: Task<Void, Never> = Task { @MainActor [weak self, leavingPhxRef, normalizedID, capturedUsername] in
-                        // Wait 10 seconds to handle network flaps and seek-induced connection drops
-                        try? await Task.sleep(nanoseconds: 10_000_000_000) // 10s
+                        // Wait 2 seconds to handle network flaps and seek-induced connection drops
+                        try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s (Phase 6 Tuning)
 
                         guard let strongSelf = self else { return }
 

@@ -3039,14 +3039,19 @@ extension MPVPlayerViewModel {
 
                 // If Online: Keep (Source of Truth is Realtime)
                 if isOnline {
+                    if isInDB {
+                        // CRITICAL Phase 5 Fix: Reset ghost timer once they are reliably in DB
+                        self.ghostCandidateStartTimes.removeValue(forKey: id)
+                    }
+
                     // GHOST CHECK: If Online but NOT in DB for too long, kill it.
                     if let start = self.ghostCandidateStartTimes[id] {
                         if Date().timeIntervalSince(start) > 30.0 { // 30s tolerance
                             // CRITICAL FIX: Transition Protection (Bible Landmine #132)
                             // If user is transitioning, give them more time for the DB to catch up.
                             if self.transitioningUserIds.contains(id) {
-                                if let expiry = self.transitionExpiryDate, Date() < expiry {
-                                    // Protect them - they are likely just slow to appear in DB after Lobby->Player handoff
+                                if let expiry = self.transitionExpiryDate, Date() < (expiry + 30.0) {
+                                    // Phase 5: Protect them even more aggressively during transition + 30s grace
                                     return false
                                 }
                             }
@@ -3055,8 +3060,8 @@ extension MPVPlayerViewModel {
                             self.ghostCandidateStartTimes.removeValue(forKey: id)
                             return true // Force Remove
                         }
-                    } else {
-                        // Start tracking ghost candidacy
+                    } else if !isInDB {
+                        // Start tracking ghost candidacy only if NOT in DB
                         self.ghostCandidateStartTimes[id] = Date()
                     }
                     return false
@@ -3071,8 +3076,8 @@ extension MPVPlayerViewModel {
                     // If user is transitioning from Lobby, they might be missing from DB
                     // (Lobby heartbeat stopped, Player heartbeat hasn't started + 10s offset).
                     if self.transitioningUserIds.contains(id) {
-                        if let expiry = self.transitionExpiryDate, Date() < expiry {
-                            // Skip removal - they are still in the transition window
+                        if let expiry = self.transitionExpiryDate, Date() < (expiry + 30.0) {
+                            // Phase 5: Skip removal - they are still in the transition window (+30s grace)
                             NSLog("🛡️ Polling: Protecting %@ - user is in transition window", id)
                             return false
                         } else {

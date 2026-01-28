@@ -1650,6 +1650,46 @@ if [[ -f "$SUBDL_CLIENT" ]]; then
         echo -e "${GREEN}✅ SubDLClient uses fuzzy year matching.${NC}"
     fi
 fi
+# =============================================================================
+# CHECK 65: Dependency Injection Race (Landmine #131)
+# =============================================================================
+# Trigger: Using implicit injection order in .task for MPVPlayerView.
+# Fix: appState must be assigned BEFORE startWatchPartySync.
+print_header "Check 65: Dependency Injection Race (Landmine #131)"
+
+MPV_VIEW="$SOURCES_DIR/Features/Player/MPVPlayerView.swift"
+if [[ -f "$MPV_VIEW" ]]; then
+    # We use awk to find the .task block and ensure assignment happens before sync
+    if ! awk '
+        /.task \{/ { in_task=1; assigned=0; next }
+        in_task && /viewModel.appState = appState/ { assigned=1; next }
+        in_task && /startWatchPartySync/ && !/^[[:space:]]*\/\// {
+            if (assigned == 0) { exit 1 }
+        }
+        in_task && /\}/ { in_task=0 }
+    ' "$MPV_VIEW"; then
+        report "ERROR" "Landmine #131" "Race Condition: 'viewModel.appState = appState' MUST occur BEFORE 'startWatchPartySync' inside '.task'. Implicit injection fails on first load." "$MPV_VIEW" "0" "Incorrect Injection Order"
+    else
+        echo -e "${GREEN}✅ MPVPlayerView dependency injection order verified.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 78: Sticky Ghost Protocol (Landmine #140)
+# =============================================================================
+# Trigger: Transition protection flag never cleared on activity.
+# Rule: transitioningUserIds.remove() MUST be called in handleSyncMessage.
+print_header "Check 78: Sticky Ghost Protocol (Landmine #140)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    if ! grep -q "transitioningUserIds.remove" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #140" "Sticky Ghost Risk: MPVPlayerViewModel MUST clear 'transitioningUserIds' upon confirming user activity (handleSyncMessage)." "$PLAYER_VM" "0" "Missing transitioningUserIds.remove logic"
+    else
+        echo -e "${GREEN}✅ Sticky Ghost protection (transition clearing) verified.${NC}"
+    fi
+fi
+
 
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
@@ -1669,55 +1709,11 @@ else
     echo -e "${GREEN}✅ WARNINGS: 0${NC}"
 fi
 
-exit $((ERROR_COUNT > 0 ? 1 : 0))
-
 echo ""
 echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
 
-# Exit Code Logic
 # Exit Code Logic: Zero Warning Policy Enforcement (Landmine #135)
 if [[ $ERROR_COUNT -gt 0 || $WARNING_COUNT -gt 0 ]]; then
-# =============================================================================
-# CHECK 65: Dependency Injection Race (Landmine #132)
-# =============================================================================
-# Trigger: Using implicit injection order in .task for MPVPlayerView.
-# Fix: appState must be assigned BEFORE startWatchPartySync.
-print_header "Check 65: Dependency Injection Race (Landmine #132)"
-
-MPV_VIEW="$SOURCES_DIR/Features/Player/MPVPlayerView.swift"
-if [[ -f "$MPV_VIEW" ]]; then
-    # We use awk to find the .task block and ensure assignment happens before sync
-    if ! awk '
-        /.task \{/ { in_task=1; assigned=0; next }
-        in_task && /viewModel.appState = appState/ { assigned=1; next }
-        in_task && /startWatchPartySync/ {
-            if (assigned == 0) { exit 1 }
-        }
-        in_task && /\}/ { in_task=0 }
-    ' "$MPV_VIEW"; then
-        report "ERROR" "Landmine #132" "Race Condition: 'viewModel.appState = appState' MUST occur BEFORE 'startWatchPartySync' inside '.task'. Implicit injection fails on first load." "$MPV_VIEW" "0" "Incorrect Injection Order"
-    else
-        echo -e "${GREEN}✅ MPVPlayerView dependency injection order verified.${NC}"
-    fi
-fi
-
->>> Check 54: Ghost Detection Safety (Landmine #132)
-------------------------------------------------------------
-echo "Verifying Ghost Detection safety..."
-# Heuristic: If we see 'ghostCandidateStartTimes' being assigned (starting a timer),
-# we MUST also see 'removeValue' (clearing it) in the same file.
-GHOST_ASSIGNMENTS=$(cat Sources/Features/Player/MPVPlayerViewModel.swift 2>/dev/null | grep "ghostCandidateStartTimes\[.*\] =" || true)
-if [[ -n "$GHOST_ASSIGNMENTS" ]]; then
-    # Check for cleanup
-    if ! grep -q "ghostCandidateStartTimes.removeValue" Sources/Features/Player/MPVPlayerViewModel.swift; then
-        report "ERROR" "GhostLogic" "Ghost Timer started but never cleared (Sticky Ghost Risk - Landmine #132)." "MPVPlayerViewModel.swift" "0" "Check logic"
-    else
-        echo "✅ Ghost timer cleanup detected."
-    fi
-fi
-echo "✅ Ghost detection logic verified."
-
-
     if [[ $WARNING_COUNT -gt 0 ]]; then
         echo -e "${RED}❌ FAILED: Zero Warning Policy Violation. All warnings must be resolved or suppressed.${NC}"
     else

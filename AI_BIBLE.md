@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 27, 2026 (Part 24: Release Stabilization & Message Hardening)
+> **Last Updated:** January 28, 2026 (Part 31: Sticky Ghost Protocol)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -99,7 +99,7 @@
 | **Zero KB Disk Usage** | Edge Function `df` failure / Relative path error | #97 |
 | **Stale User Last Seen** | "12 days ago" for active user | #98 |
 | **Void RPC Build Failure** | type 'Void' cannot conform to 'Decodable' | #99 |
-| **"User Left" at 120s (Watch Party)** | "Inherited Observer" gap + "Sticky Ghost" timer. Shield drop aligns with DB cleanup. | #132 |
+| **"User Left" at 120s (Watch Party)** | "Inherited Observer" gap + "Sticky Ghost" timer. Shield drop aligns with DB cleanup. | #140 |
 | **Guest shows "not connected"** | Realtime setup skipped after DB join fails (RLS, permissions) | #101 |
 | **"403 Forbidden" / RLS Error** | Missing cryptographic signature on DB write | #103 |
 | **Partial Payment Success** | Non-atomic write (Log success, Credit fail) | #104 |
@@ -130,7 +130,7 @@
 | **Event Sync Noise** | Non-user seeks shown during events | #133 |
 | **Seek Notification Flood** | Large drift correction triggers spam | #134 |
 | **Scanner Proximity Failure** | Guard too far from trigger | #135 |
-| **Guest "Left" Immediately** | Call to `sync` runs before `appState` injection | #132 |
+| **Guest Left Immediately** | Call to `sync` runs before `appState` injection | #131 |
 
 ## 🚨 Critical Landmines
 
@@ -2239,3 +2239,11 @@ request.cachePolicy = .reloadIgnoringLocalCacheData
 ```
 
 **Testing Tip**: When verifying auth invalidation, do not rely on minor token modifications (e.g., changing 1 character) as some APIs (like Real-Debrid) are lenient with Base64 padding. Always perform **destructive changes** (e.g., deleting the last 5 characters) to guarantee a server-side rejection.
+
+### 10. The Sticky Ghost Protocol (User Left at 120s) (Landmine #140)
+**Symptom**: Host sees "User Joined", then the user is silent. If the user leaves within 2 minutes, no "User Left" message appears.
+**Root Cause**: **Transition Protection Overshoot**. The logic to ignore "Leave" events during the lobby-to-player transition (to prevent false positives) was hard-coded to a time window (e.g. 120s) without an early exit. It ignored valid leaves if they happened quickly.
+**Mandatory Solution**:
+1. **Activity Confirmation**: The protection flag (`transitioningUserIds`) MUST be cleared immediately upon receiving *any* valid Realtime message (Chat, Ready, Playback, or Reaction) from the user.
+2. **Dynamic Shield**: Do not rely on time alone. Use the first proof-of-life signal to drop the shield.
+3. **Log Visibility**: Log "Removing transition protection" when the shield drops to confirm correct behavior.

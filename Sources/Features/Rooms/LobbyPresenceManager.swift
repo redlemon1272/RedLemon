@@ -642,7 +642,13 @@ class LobbyPresenceManager: ObservableObject {
 
                 if let user = try? await viewModel.dataService.getUserById(userId: participant.userId) {
                     username = user.username
-                    fetchedIsPremium = user.isPremium
+
+                    // Validate premium status against expiration date (Client-Side Trust)
+                    if let expiresAt = user.subscriptionExpiresAt {
+                        fetchedIsPremium = (expiresAt > Date())
+                    } else {
+                        fetchedIsPremium = user.isPremium
+                    }
                 }
 
                 // Match DB row to local participant state

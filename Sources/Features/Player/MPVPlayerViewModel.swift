@@ -2310,6 +2310,10 @@ extension MPVPlayerViewModel {
         // recognizing the Lobby-level Phoenix Refs immediately. (Bible Landmine #47/51)
         if let existingRoom = appState?.player.currentWatchPartyRoom {
             NSLog("🛡️ Transition Sync: Processing %d participants from AppState", existingRoom.participants.count)
+
+            // Bible Landmine #132: Mark existing participants as transitioning
+            // This prevents the host's DB poll from removing them as "Zombies" before they
+            // have a chance to reconnect to the player channel.
             self.transitioningUserIds = Set(existingRoom.participants.map { $0.id.lowercased() })
             self.transitionExpiryDate = Date().addingTimeInterval(60) // 1m window
             NSLog("🛡️ Transition Sync: Marked %d users as transitioning", self.transitioningUserIds.count)
@@ -2332,7 +2336,7 @@ extension MPVPlayerViewModel {
         await realtimeManager?.registerObserver(id: "player", onPresence: { [weak self] (action: PresenceAction, userId: String, metadata: [String: Any]?) in
             _ = Task { @MainActor in
                 guard let self = self else { return }
-                NSLog("👤 Presence Event: action=%@, userId=%@", action.rawValue, userId)
+                NSLog("👤 Presence Event: action=%@, userId=%@", String(describing: action), userId)
 
                 // PERFORMANCE DIAGNOSTIC: Track how long participant updates take
                 let startTime = CACurrentMediaTime()

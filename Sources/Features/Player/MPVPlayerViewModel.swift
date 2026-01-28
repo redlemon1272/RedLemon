@@ -2307,7 +2307,7 @@ extension MPVPlayerViewModel {
         // CRITICAL FIX: Initialize connection tracking from existing participants inherited from Lobby.
         // This prevents "Guest Left" messages during transition because the Player VM starts
         // recognizing the Lobby-level Phoenix Refs immediately. (Bible Landmine #47/51)
-        if let existingRoom = appState?.player.currentWatchPartyRoom {
+        if var existingRoom = appState?.player.currentWatchPartyRoom {
             NSLog("🛡️ Transition Sync: Processing %d participants from AppState", existingRoom.participants.count)
 
             // Bible Landmine #132: Mark existing participants as transitioning
@@ -2317,7 +2317,8 @@ extension MPVPlayerViewModel {
             self.transitionExpiryDate = Date().addingTimeInterval(120) // 2m window (was 1m)
             NSLog("🛡️ Transition Sync: Marked %d users as transitioning (120s window)", self.transitioningUserIds.count)
 
-            for participant in existingRoom.participants {
+            for index in 0..<existingRoom.participants.count {
+                let participant = existingRoom.participants[index]
                 let normalizedPId = participant.id.lowercased()
 
                 // CRITICAL FIX: Preserve already-announced status to prevent join message spam
@@ -2327,9 +2328,17 @@ extension MPVPlayerViewModel {
                     self.activeConnectionRefs[normalizedPId] = participant.phxRefs
                     NSLog("🛡️ Transition Sync: Inherited %d refs and marked announced for user %@", participant.phxRefs.count, normalizedPId)
                 } else {
-                    NSLog("⚠️ Transition Sync: Marked announced but no refs found for participant %@", normalizedPId)
+                    // Phase 4: If they were transitioning, they might have refs in our local map but not the struct
+                    if let localRefs = self.activeConnectionRefs[normalizedPId], !localRefs.isEmpty {
+                        existingRoom.participants[index].phxRefs = localRefs
+                        NSLog("🛡️ Transition Sync: Back-filled %d refs from local map for user %@", localRefs.count, normalizedPId)
+                    } else {
+                        NSLog("⚠️ Transition Sync: Marked announced but no refs found for participant %@", normalizedPId)
+                    }
                 }
             }
+            // Re-assign to ensure AppState is updated (Participant is a struct)
+            self.appState?.player.currentWatchPartyRoom = existingRoom
         } else {
              LoggingManager.shared.warn(.watchParty, message: "🛡️ Transition Sync: currentWatchPartyRoom is NIL")
         }
@@ -3021,7 +3030,11 @@ extension MPVPlayerViewModel {
             // If they HAVE phxRef (online), we KEEP them regardless of DB.
 
             let idsToRemove = currentMap.keys.filter { id in
-                let isOnline = !(currentMap[id]?.phxRefs.isEmpty ?? true)
+                // CRITICAL Phase 4 Fix: Use authoritative local map for Online status.
+                // Relying on Participant.phxRefs is unsafe during transitions because inherited
+                // observers don't trigger new join events to populate the struct.
+                let localRefs = self.activeConnectionRefs[id] ?? []
+                let isOnline = !localRefs.isEmpty
                 let isInDB = dbUserIds.contains(id)
 
                 // If Online: Keep (Source of Truth is Realtime)

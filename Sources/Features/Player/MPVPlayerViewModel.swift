@@ -2178,8 +2178,9 @@ class MPVPlayerViewModel: ObservableObject {
             // Disconnecting the client kills the connection for the LobbyViewModel too.
             // ONLY disconnect if we're NOT returning to lobby, to allow the Lobby connection to persist smoothly.
             if !returningToLobby {
-                await realtimeManager?.disconnect(leaveChannel: true, disconnectClient: false)
+                // CRITICAL FIX: Unregister observer BEFORE disconnect so ref-count drops to zero
                 await realtimeManager?.unregisterObserver(id: "player")
+                await realtimeManager?.disconnect(leaveChannel: true, disconnectClient: false)
                 LoggingManager.shared.info(.watchParty, message: "Realtime manager channel left and observer unregistered")
             } else {
                 await realtimeManager?.unregisterObserver(id: "player")
@@ -2206,6 +2207,7 @@ class MPVPlayerViewModel: ObservableObject {
         if !hasCleanedUp, let manager = realtimeManager {
              Task.detached {
                  LoggingManager.shared.info(.watchParty, message: "MPVPlayerViewModel deinit: Triggering detached cleanup task for Realtime...")
+                 await manager.unregisterObserver(id: "player")
                  await manager.disconnect(leaveChannel: true, disconnectClient: false)
              }
         }

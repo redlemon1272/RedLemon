@@ -289,6 +289,8 @@ class LobbyViewModel: ObservableObject {
         if let manager = realtimeManager, !transitionState.isStarting {
             Task.detached {
                 print("🧹 LobbyViewModel: Triggering detached cleanup task...")
+                await manager.unregisterObserver(id: "lobby")
+                await manager.unregisterObserver(id: "default")
                 await manager.disconnect(leaveChannel: true, disconnectClient: false)
             }
         } else if transitionState.isStarting {
@@ -784,6 +786,9 @@ class LobbyViewModel: ObservableObject {
 
         // Cleanup Realtime subscription to prevent "Zombie" listeners (e.g. Persistent DELETE events)
         Task { [weak self] in
+            // CRITICAL FIX: Unregister observers before disconnect so cleanup logic proceeds
+            await self?.realtimeManager?.unregisterObserver(id: "lobby")
+            await self?.realtimeManager?.unregisterObserver(id: "default")
             await self?.realtimeManager?.disconnect(leaveChannel: true, disconnectClient: false)
         }
 

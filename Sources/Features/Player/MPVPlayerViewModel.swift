@@ -2258,7 +2258,7 @@ struct CinemetaMetadata: Codable {
 extension MPVPlayerViewModel {
     /// Start watch party sync as host or guest
     func startWatchPartySync(roomId: String, isHost: Bool) async throws {
-        LoggingManager.shared.info(.watchParty, message: "Starting watch party: roomId=\(roomId), isHost=\(isHost)")
+        NSLog("🎬 MPVPlayerViewModel: Starting watch party: roomId=\(roomId), isHost=\(isHost)")
 
         self.currentRoomId = roomId
         self.isWatchPartyHost = isHost
@@ -2309,22 +2309,18 @@ extension MPVPlayerViewModel {
         // This prevents "Guest Left" messages during transition because the Player VM starts
         // recognizing the Lobby-level Phoenix Refs immediately. (Bible Landmine #47/51)
         if let existingRoom = appState?.player.currentWatchPartyRoom {
-            LoggingManager.shared.info(.watchParty, message: "🛡️ Transition Sync: Processing \(existingRoom.participants.count) participants from AppState")
-
-            // BIBILE Landmine #132: Mark existing participants as transitioning
-            // This prevents the host's DB poll from removing them as "Zombies" before they
-            // can announce themselves in the Player room.
+            NSLog("🛡️ Transition Sync: Processing %d participants from AppState", existingRoom.participants.count)
             self.transitioningUserIds = Set(existingRoom.participants.map { $0.id.lowercased() })
             self.transitionExpiryDate = Date().addingTimeInterval(60) // 1m window
-            LoggingManager.shared.info(.watchParty, message: "🛡️ Transition Sync: Marked \(self.transitioningUserIds.count) users as transitioning")
+            NSLog("🛡️ Transition Sync: Marked %d users as transitioning", self.transitioningUserIds.count)
 
             for participant in existingRoom.participants {
                 let normalizedPId = participant.id.lowercased()
                 if !participant.phxRefs.isEmpty {
                     self.activeConnectionRefs[normalizedPId] = participant.phxRefs
-                    LoggingManager.shared.info(.watchParty, message: "🛡️ Transition Sync: Inherited \(participant.phxRefs.count) refs for user \(normalizedPId) [Refs: \(participant.phxRefs.joined(separator: ", "))]")
+                    NSLog("🛡️ Transition Sync: Inherited %d refs for user %@", participant.phxRefs.count, normalizedPId)
                 } else {
-                    LoggingManager.shared.warn(.watchParty, message: "🛡️ Transition Sync: No refs found for participant \(normalizedPId)")
+                    NSLog("⚠️ Transition Sync: No refs found for participant %@", normalizedPId)
                 }
             }
         } else {
@@ -2563,7 +2559,7 @@ extension MPVPlayerViewModel {
                                 // 3. Transition Protection (Bible Landmine #132)
                                  if !refs.isEmpty || self.transitioningUserIds.contains(actualUserId.lowercased()) {
                                      if let expiry = self.transitionExpiryDate, Date() < expiry {
-                                         LoggingManager.shared.info(.watchParty, message: "🛡️ Presence: Ignoring leave event for transitioning user: \(actualUserId)")
+                                         NSLog("🛡️ Presence: Ignoring leave event for transitioning user: %@", actualUserId)
                                          self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                          return
                                      }
@@ -3029,7 +3025,7 @@ extension MPVPlayerViewModel {
                     if self.transitioningUserIds.contains(id) {
                         if let expiry = self.transitionExpiryDate, Date() < expiry {
                             // Skip removal - they are still in the transition window
-                            LoggingManager.shared.info(.watchParty, message: "🛡️ Polling: Protecting \(id) - user is in transition window")
+                            NSLog("🛡️ Polling: Protecting %@ - user is in transition window", id)
                             return false
                         } else {
                             // Window expired

@@ -10,25 +10,27 @@
 [0/1] Planning build
 Building for debugging...
 [1/3] Emitting module RedLemon
-/Users/danielnoble/Desktop/Redlemon/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:21:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
 class MPVViewLayer: CAOpenGLLayer {
                     ^
-[2/3] Compiling RedLemon MPVPlayerViewModel.swift
-/Users/danielnoble/Desktop/Redlemon/Sources/Features/Player/MPVPlayerViewModel.swift:1226:55: warning: left side of nil coalescing operator '??' has non-optional type 'Bool', so the right side is never used
-        NSLog("%@", "[VIDEO_READY] isEvent: \(isEvent ?? false), eventStartTime: \(eventStartTime?.description ?? "nil")")
-                                              ~~~~~~~ ^~~~~~~~
-                                                      
-/Users/danielnoble/Desktop/Redlemon/Sources/Features/Player/MPVPlayerViewModel.swift:2599:35: error: missing argument for parameter 'isPremium' in call
-                username: username
-                                  ^
-                                  , isPremium: <#Bool#>
-/Users/danielnoble/Desktop/Redlemon/Sources/Features/WatchParty/RealtimeChannelManager.swift:87:10: note: 'setup(roomId:isHost:userId:username:isPremium:postgresChanges:)' declared here
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, isPremium: Bool, postgresChanges: [[String: Any]]? = nil) async throws {
-         ^
-/Users/danielnoble/Desktop/Redlemon/Sources/Features/Player/MPVPlayerViewModel.swift:2741:29: warning: result of call to 'run(resultType:body:)' is unused
-            await MainActor.run {
-                            ^   ~
-/Users/danielnoble/Desktop/Redlemon/Sources/Features/Player/MPVPlayerViewModel.swift:2865:17: warning: initialization of variable 'mergedParticipants' was never used; consider replacing with assignment to '_' or removing it
-            var mergedParticipants = Array(currentMap.values)
-            ~~~~^~~~~~~~~~~~~~~~~~
-            _
+[2/3] Compiling RedLemon LobbyPresenceManager.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:21: error: value of optional type 'LobbyPresenceManager?' must be unwrapped to refer to member 'pendingLeaveTasks' of wrapped base type 'LobbyPresenceManager'
+                    self.pendingLeaveTasks[normalizedID]?.cancel()
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:21: note: chain the optional using '?' to access member 'pendingLeaveTasks' only for non-'nil' base values
+                    self.pendingLeaveTasks[normalizedID]?.cancel()
+                    ^
+                        ?
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:205:21: note: force-unwrap using '!' to abort execution if the optional value contains 'nil'
+                    self.pendingLeaveTasks[normalizedID]?.cancel()
+                    ^
+                        !
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:189:56: error: type of expression is ambiguous without more context
+                guard let strongViewModel = strongSelf.viewModel else { return }
+                                            ~~~~~~~~~~~^~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:285:32: error: type of expression is ambiguous without more context
+                    let task = Task { @MainActor [weak self, leavingPhxRef, normalizedID, capturedUsername] in
+                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Rooms/LobbyPresenceManager.swift:293:64: error: type of expression is ambiguous without more context
+                        guard let strongViewModel = strongSelf.viewModel else { return }
+                                                    ~~~~~~~~~~~^~~~~~~~~

@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.164 -->
+        <item>
+            <title>Version 1.0.164</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implemented Sticky Ghost Protocol for enhanced social presence reliability</li><li>Fixed delayed User Left notifications</li><li>Optimized presence heartbeat logic</li><li>Hardened MPVPlayerViewModel concurrency</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 28 Jan 2026 00:53:14 -0500</pubDate>
+            <sparkle:version>164</sparkle:version>
+            <sparkle:shortVersionString>1.0.164</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.164.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="uPwGRpmhheJrAhKEmleLkrHqsx7JEsy9CQEcoRQHmET7e0TXS1PpM/rDWO3IqNiW+qA/X4m2xdjcwOk4wTLTBw==" length="75273059"
+            />
+        </item>
         <!-- v1.0.163 -->
         <item>
             <title>Version 1.0.163</title>

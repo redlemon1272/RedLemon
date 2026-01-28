@@ -276,7 +276,9 @@ class AppState: ObservableObject {
 
     @Published var activeRooms: [WatchPartyRoom] = []  // Track all active rooms locally
     @Published var isLoadingRoom: Bool = false  // Track room loading state
+    @Published var isSearchingSubtitles: Bool = false // SubDL search in progress
     @Published var shouldAutoJoinLobby: Bool = false  // Flag to auto-join lobby for live events
+
     @Published var searchResults: [MediaItem] = []  // Persist search results across navigation
     @Published var lastSearchQuery: String = ""  // Remember last search query
     @Published var isServerReady: Bool = false  // Track if HTTP server is ready to accept requests
@@ -618,6 +620,13 @@ class AppState: ObservableObject {
             // Give system time to settle if called on startup
             try? await Task.sleep(nanoseconds: 500_000_000)
 
+            // Deep Refresh: Trigger immediately in parallel (don't wait for health check)
+            if self.player.selectedStream != nil {
+                Task {
+                    await self.player.manualRefreshSubtitles()
+                }
+            }
+
             // Get provider health
             var health = await ProviderManager.shared.checkAllHealth()
 
@@ -626,39 +635,35 @@ class AppState: ObservableObject {
             let subdlKey = await KeychainManager.shared.get(service: "subdl")
 
             // Run checks in parallel
-            async let rdHealthTask: Bool = {
+            async let rdHealthTask: String = {
                 if let token = rdToken, !token.isEmpty {
                     return await RealDebridClient.shared.checkHealth(token: token)
                 }
-                return false
+                return "Missing Token"
             }()
 
-            async let subdlHealthTask: Bool = {
+            async let subdlHealthTask: String = {
                 if let key = subdlKey, !key.isEmpty {
                     return await SubDLClient.shared.checkHealth(apiKey: key)
                 }
-                return false
+                return "Missing API Key"
             }()
 
-            let rdHealthy = await rdHealthTask
-            let subdlHealthy = await subdlHealthTask
+            let rdStatus = await rdHealthTask
+            let subdlStatus = await subdlHealthTask
 
             // Add to health dictionary
-            health["realdebrid"] = rdHealthy ? "Online" : "Offline"
-            health["subdl"] = subdlHealthy ? "Online" : "Offline"
+            health["realdebrid"] = rdStatus
+            health["subdl"] = subdlStatus
+
+
 
             await MainActor.run {
                 self.providerHealth = health
                 self.isCheckingProviders = false
                 NSLog("%@", "✅ [AppState] Provider health check complete (found \(health.count) services)")
-
-                // Deep Refresh: If subtitles were missing and user clicks refresh, try to fetch them now
-                if self.player.selectedStream != nil {
-                    Task {
-                        await self.player.manualRefreshSubtitles()
-                    }
-                }
             }
+
         }
     }
 

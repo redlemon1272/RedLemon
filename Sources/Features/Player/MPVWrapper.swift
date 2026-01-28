@@ -22,20 +22,20 @@ class MPVWrapper: ObservableObject {
     @Published var playbackFinished = false
     @Published var isFileLoaded = false
     @Published var mpvError: String? = nil // Expose critical errors to ViewModel
-    
+
     // Track update notification
     let tracksChanged = PassthroughSubject<Void, Never>()
     @Published var hasCompletedInitialTrackSelection = false // Prevents duplicate re-scans
-    
+
     // Track the current video filename for subtitle matching
     private var currentVideoFilename: String = ""
-    
+
     // Track if we should resume playback after loading (Smart Paused Load)
     private var shouldResumeAfterLoad: Bool = false
-    
+
     // Race Condition Fix: Track expected external subtitles to prevent premature resumption
     private var expectedExternalSubtitles: Int = 0
-    
+
     // Landmine #89 Fix: Track highest position seen during playback.
     // Used for accurate EOF detection when currentTime resets to 0 during edge-case seeks.
     private var lastKnownGoodPosition: Double = 0
@@ -63,8 +63,8 @@ class MPVWrapper: ObservableObject {
         }
 
         LoggingManager.shared.info(.videoRendering, message: "MPV handle created")
-        print("!!! MPVWrapper initialized - Build Version: 2026-01-19-GUEST-CACHE-BYPASS-v1 !!!")
-        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper initialized - Build Version: 2026-01-19-GUEST-CACHE-BYPASS-v1")
+        print("!!! MPVWrapper initialized - Build Version: 2026-01-28-PRESENCE-FIX-v3 !!!")
+        NSLog("🛡️ MPVWrapper: Build Version: 2026-01-28-PRESENCE-FIX-v3")
     }
 
     func setupVideo(in view: NSView) {
@@ -80,14 +80,14 @@ class MPVWrapper: ObservableObject {
         if let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
             let mpvConfigDir = appSupport.appendingPathComponent("RedLemon/mpv")
             try? FileManager.default.createDirectory(at: mpvConfigDir, withIntermediateDirectories: true, attributes: nil)
-            
+
             let configPath = mpvConfigDir.path
             mpv_set_option_string(handle, "config", "yes")
             mpv_set_option_string(handle, "config-dir", configPath)
             mpv_set_option_string(handle, "icc-cache-dir", mpvConfigDir.appendingPathComponent("icc").path)
             mpv_set_option_string(handle, "gpu-shader-cache-dir", mpvConfigDir.appendingPathComponent("shaders").path)
             mpv_set_option_string(handle, "watch-later-directory", mpvConfigDir.appendingPathComponent("watch_later").path)
-            
+
             LoggingManager.shared.debug(.videoRendering, message: "MPV Config Dir set to: \(configPath)")
         }
 
@@ -247,17 +247,17 @@ class MPVWrapper: ObservableObject {
     /// Polls for subtitle tracks to appear, selects default, then resumes if needed
     private func pollForTracksAndResume() async {
         guard let handle = mpvHandle else { return }
-        
+
         LoggingManager.shared.debug(.subtitles, message: "SMART-LOAD: Starting track polling loop...")
         LoggingManager.shared.debug(.subtitles, message: "SMART-LOAD: Expecting \(self.expectedExternalSubtitles) external subtitles to prevent race condition")
-        
+
         // Timeout: allow more time if we are waiting for external subtitles (slow network)
         // 15 seconds for network-bound external subs; 4 seconds for purely local/embedded
         let timeoutDuration: TimeInterval = self.expectedExternalSubtitles > 0 ? 15.0 : 4.0
         let timeout = Date().addingTimeInterval(timeoutDuration)
         var tracksFound = false
         var allExpectedSubsLoaded = false
-        
+
         // 1. Poll loop
         while Date() < timeout {
             // CRITICAL CHECK: Ensure we haven't been deallocated or cancelled
@@ -268,7 +268,7 @@ class MPVWrapper: ObservableObject {
 
             var trackCount: Int64 = 0
             mpv_get_property(safeHandle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
-            
+
             // Count external subtitles
             var externalSubCount = 0
             for i in 0..<Int(trackCount) {
@@ -277,7 +277,7 @@ class MPVWrapper: ObservableObject {
                 mpv_get_property(safeHandle, typeKey, MPV_FORMAT_STRING, &typeStr)
                 let type = typeStr.map({ String(cString: $0) })
                 mpv_free(typeStr)
-                
+
                 if type == "sub" {
                     let externalKey = "track-list/\(i)/external"
                     var isExternal: Int32 = 0
@@ -287,21 +287,21 @@ class MPVWrapper: ObservableObject {
                     }
                 }
             }
-            
+
             // Check if we have enough tracks
             // Condition 1: Basic tracks exist (>2 implies Video + Audio + at least 1 sub/other)
             let basicTracksExist = trackCount > 2
-            
+
             // Condition 2: External subtitles match expectation
             let subsReady = externalSubCount >= self.expectedExternalSubtitles
-            
+
             if basicTracksExist && subsReady {
                 tracksFound = true
                 allExpectedSubsLoaded = true
                 LoggingManager.shared.info(.subtitles, message: "SMART-LOAD: Found \(trackCount) tracks including \(externalSubCount)/\(self.expectedExternalSubtitles) external subs.")
                 break
             }
-            
+
             if basicTracksExist && !subsReady {
                  // Log regularly while waiting for external assets
                  let now = Date().timeIntervalSince1970
@@ -309,16 +309,16 @@ class MPVWrapper: ObservableObject {
                       LoggingManager.shared.debug(.subtitles, message: "SMART-LOAD: Still waiting for external subs... (Found \(externalSubCount)/\(self.expectedExternalSubtitles)) [Elapsed: \(String(format: "%.1f", 15.0 - timeout.timeIntervalSinceNow))s]")
                  }
             }
-            
+
             try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
         }
-        
+
         if allExpectedSubsLoaded {
             LoggingManager.shared.info(.subtitles, message: "SMART-LOAD: All tracks ready! Proceeding to selection.")
         } else {
             LoggingManager.shared.warn(.subtitles, message: "SMART-LOAD: Timed out waiting for tracks. Proceeding best-effort.")
         }
-        
+
         // 2. Select Tracks
         await MainActor.run {
              self.autoSelectEnglishAudio()
@@ -328,10 +328,10 @@ class MPVWrapper: ObservableObject {
              // Mark that initial selection is complete to prevent ViewModel from re-scanning
              self.hasCompletedInitialTrackSelection = true
         }
-        
+
         // Final stabilization delay (short) just to be safe
          try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
-        
+
         // 3. Execute Pending Seek (moved here to happen AFTER tracks ready)
         if let targetTime = self.pendingSeekTime {
              await MainActor.run {
@@ -341,7 +341,7 @@ class MPVWrapper: ObservableObject {
                  self.pendingSeekTime = nil
              }
         }
-        
+
         // 4. Resume Playback if Autoplay was requested
         if self.shouldResumeAfterLoad {
             LoggingManager.shared.debug(.videoRendering, message: "SMART-LOAD: Resuming playback (Autoplay requested)")
@@ -399,24 +399,24 @@ class MPVWrapper: ObservableObject {
         case MPV_EVENT_FILE_LOADED:
             updateDuration()
             isFileLoaded = true
-            
+
             // Check true buffering state immediately (prevents stuck spinner if start_file set it true)
             if let handle = mpvHandle {
                 var isBufferingNow: Int32 = 0
                 mpv_get_property(handle, "paused-for-cache", MPV_FORMAT_FLAG, &isBufferingNow)
                 self.isBuffering = (isBufferingNow != 0)
             }
-            
+
             // Smart Paused Load Strategy:
             // 1. We are currently PAUSED (set by loadVideo).
             // 2. We POLL until tracks appear (handling race condition).
             // 3. We auto-select the best track.
             // 4. We RESUME if requested.
-            
+
             Task {
                 await self.pollForTracksAndResume()
             }
-            
+
             Task { await SessionRecorder.shared.log(category: .player, message: "File Loaded", metadata: ["duration": "\(self.duration)"]) }
         case MPV_EVENT_PLAYBACK_RESTART:
             isBuffering = false
@@ -445,15 +445,15 @@ class MPVWrapper: ObservableObject {
                     // If we receive EOF but are nowhere near the end (e.g. < 95% watched and > 1 min remaining),
                     // this is likely a network drop that MPV misinterpreted as end of stream.
                     // We should treat this as an ERROR to trigger retry/failover, or at minimum NOT exit.
-                    
+
                     // Landmine #89 Fix: Use lastKnownGoodPosition instead of currentTime for EOF check.
-                    // When the user seeks to the very end, MPV's currentTime can reset to 0 before the 
+                    // When the user seeks to the very end, MPV's currentTime can reset to 0 before the
                     // END_FILE event fires. This caused legitimate EOFs to be classified as suspicious.
                     // lastKnownGoodPosition tracks the highest position seen during playback.
                     let effectivePosition = max(currentTime, lastKnownGoodPosition)
                     let timeRemaining = duration - effectivePosition
                     let progress = (duration > 0) ? (effectivePosition / duration) : 0
-                    
+
                     // FORENSIC LOGGING
                     print("!!! MPV EOF DETECTED !!! Duration: \(duration), CurrentTime: \(currentTime), LastKnownGood: \(lastKnownGoodPosition), EffectivePos: \(effectivePosition), TimeRemaining: \(timeRemaining), Progress: \(progress)")
                     LoggingManager.shared.warn(.videoRendering, message: "Forensic EOF Check: Dur=\(duration), Cur=\(currentTime), LastGood=\(lastKnownGoodPosition), Eff=\(effectivePosition), Rem=\(timeRemaining), Prog=\(progress)")
@@ -461,13 +461,13 @@ class MPVWrapper: ObservableObject {
                     if (duration > 30 && progress < 0.1) || (duration > 300 && timeRemaining > 60 && progress < 0.95) {
                         LoggingManager.shared.warn(.videoRendering, message: "MPV: SUSPICIOUS EOF detected! Pos: \(Int(effectivePosition))s / Dur: \(Int(duration))s. Ignoring as False EOF.")
                          Task { await SessionRecorder.shared.log(category: .error, message: "Suspicious EOF (False Positive)", metadata: ["pos": "\(effectivePosition)", "dur": "\(duration)"]) }
-                        
+
                         // Treat as error to prevent exit, but don't set mpvError if it's just a skip-able glitch
                         // Set a specific error string that ViewModel can ignore or handle as 'auto-resume'
                         self.mpvError = "Transient EOF Glitch"
                         return
                     }
-                    
+
                     LoggingManager.shared.debug(.videoRendering, message: "MPV: Playback finished (EOF - reason: \(reason.rawValue))")
                     LoggingManager.shared.debug(.videoRendering, message: "MPV: Setting playbackFinished = true")
                     playbackFinished = true
@@ -476,7 +476,7 @@ class MPVWrapper: ObservableObject {
                 } else {
                     LoggingManager.shared.warn(.videoRendering, message: "MPV: END_FILE event but not EOF (reason: \(reason.rawValue))")
                     Task { await SessionRecorder.shared.log(category: .player, message: "Playback Ended", metadata: ["reason": "\(reason.rawValue)"]) }
-                    
+
                     // CRITICAL: Expose error to ViewModel for immediate failover
                     if reason.rawValue == MPV_END_FILE_REASON_ERROR.rawValue {
                          self.mpvError = "Playback Error (Code: 4)"
@@ -533,7 +533,7 @@ class MPVWrapper: ObservableObject {
             let log = data.assumingMemoryBound(to: mpv_event_log_message.self)
             guard let text = log.pointee.text else { break }
             let message = String(cString: text).trimmingCharacters(in: .whitespacesAndNewlines)
-            
+
             // Filter and route MPV internal logs via LoggingManager
             let lower = message.lowercased()
             if lower.contains("error") || lower.contains("failed") || lower.contains("panic") {
@@ -546,7 +546,7 @@ class MPVWrapper: ObservableObject {
                 // High frequency MPV logs are debug level
                 LoggingManager.shared.debug(.videoRendering, message: "[MPV] \(message)")
             }
-            
+
             // CRITICAL: Catch specific fatal errors that don't trigger END_FILE immediately
             if message.contains("Seek failed") {
                 self.mpvError = "Seek Failed"
@@ -597,7 +597,7 @@ class MPVWrapper: ObservableObject {
         // ✅ Only update if significant change
         guard abs(currentTime - time) >= minTimeChangeThreshold else { return }
         currentTime = time
-        
+
         // Landmine #89 Fix: Track highest position seen (for accurate EOF detection)
         if time > lastKnownGoodPosition {
             lastKnownGoodPosition = time
@@ -621,7 +621,7 @@ class MPVWrapper: ObservableObject {
         } else {
             self.currentVideoFilename = url
         }
-        
+
         self.expectedExternalSubtitles = expectedSubtitleCount
         LoggingManager.shared.info(.subtitles, message: "MPV: Expected external subtitles set to: \(expectedSubtitleCount)")
 
@@ -638,10 +638,10 @@ class MPVWrapper: ObservableObject {
         // SMART PAUSED LOAD:
         // Always load PAUSED initially.
         // If autoplay=true, we set a flag to unpause AFTER tracks are found (in pollForTracksAndResume).
-        
+
         self.shouldResumeAfterLoad = autoplay
         self.hasCompletedInitialTrackSelection = false // Reset for new video
-        
+
         // CRITICAL: Always set pause=yes BEFORE loading
         mpv_set_property_string(handle, "pause", "yes")
 
@@ -664,10 +664,10 @@ class MPVWrapper: ObservableObject {
         }
 
         // Free strings (index 0 and 1)
-        for i in 0..<2 { 
+        for i in 0..<2 {
             if let arg = args[i] { free(UnsafeMutablePointer(mutating: arg)) }
         }
-        
+
         if result >= 0 {
             // Update local state (we are technically paused right now)
              isPlaying = false
@@ -714,7 +714,7 @@ class MPVWrapper: ObservableObject {
 
         if result >= 0 {
             LoggingManager.shared.info(.subtitles, message: "Successfully added external subtitle: \(title)")
-            
+
             // NEW: Refresh selections when a new track arrives late.
             // Since we relaxed the guard in refreshSubtitleSelection, this will now
             // auto-select this track if we are currently sitting at 'Off'.
@@ -749,19 +749,19 @@ class MPVWrapper: ObservableObject {
 
     func seek(to seconds: Double) {
         guard let handle = mpvHandle, isInitialized else { return }
-        
+
         // If file isn't loaded yet, queue the seek
         if !isFileLoaded {
             LoggingManager.shared.debug(.videoRendering, message: "MPV: File not fully loaded yet. Queueing PENDING SEEK to \(String(format: "%.1f", seconds))s")
             pendingSeekTime = seconds
             return
         }
-        
+
         let command = "seek \(seconds) absolute"
-        
+
         // Try immediately
         let result = mpv_command_string(handle, command)
-        
+
         if result >= 0 {
             // Update local state immediately for UI responsiveness
             currentTime = seconds
@@ -769,12 +769,12 @@ class MPVWrapper: ObservableObject {
             pendingSeekTime = nil
         } else {
             LoggingManager.shared.warn(.videoRendering, message: "MPV seek failed: \(result). Retrying in 200ms...")
-            
+
             // Retry once after a short delay (still useful for transient errors)
             Task { @MainActor in
                 try? await Task.sleep(nanoseconds: 200_000_000)
                 guard let handle = self.mpvHandle else { return }
-                
+
                 let retryResult = mpv_command_string(handle, command)
                 if retryResult >= 0 {
                     LoggingManager.shared.debug(.videoRendering, message: "MPV seek retry succeeded")
@@ -1035,16 +1035,16 @@ class MPVWrapper: ObservableObject {
 
     /// Refresh subtitle selection logic (called on file load and after loading external subs)
     /// Public to allow Service to trigger re-evaluation after asynchronous external sub load.
-    /// 
+    ///
     /// ⚠️ AI_BIBLE #41: This MUST NOT be called while video is actively playing.
     /// Changing subtitle tracks during playback causes MPV to rebuffer ("play-buffer-play" flash).
     /// Initial selection happens in pollForTracksAndResume() BEFORE playback starts.
     func refreshSubtitleSelection() {
         guard let handle = mpvHandle, isInitialized else { return }
-        
+
         // DEFENSIVE GUARD: Prevent regression - only change tracks if none are currently active
         // AI_BIBLE #41: Prevents buffer flash when swapping tracks.
-        // FIX: If we have NO subtitles selected (sid == 0), we SHOULD allow the auto-selector to 
+        // FIX: If we have NO subtitles selected (sid == 0), we SHOULD allow the auto-selector to
         // light one up as they arrive late from the network.
         if isPlaying && hasCompletedInitialTrackSelection && getCurrentSubtitleTrack() != 0 {
             LoggingManager.shared.warn(.subtitles, message: "⚠️ BLOCKED: refreshSubtitleSelection called during playback with active track. Ignoring to prevent flash.")
@@ -1104,7 +1104,7 @@ class MPVWrapper: ObservableObject {
             var isDefaultVal: Int64 = 0
             let _ = mpv_get_property(handle, defaultKey, MPV_FORMAT_FLAG, &isDefaultVal)
             let isDefault = isDefaultVal != 0
-            
+
             // NEW: Check hearing-impaired flag
             let hiKey = "track-list/\(i)/hearing-impaired"
             var isHIVal: Int64 = 0
@@ -1169,7 +1169,7 @@ class MPVWrapper: ObservableObject {
         let bestCandidate = candidates.max { a, b in
             var scoreA = 0
             var scoreB = 0
-            
+
             // Helper for logging
             func logScore(_ candidate: SubCandidate, _ score: Int) {
                 // We verify logic correctness via logs
@@ -1178,13 +1178,13 @@ class MPVWrapper: ObservableObject {
             // 1. Prefer Embedded (+3000)
             if !a.isExternal { scoreA += 3000 }
             if !b.isExternal { scoreB += 3000 }
-            
+
             // 2. Release Match (+500 range)
             let releaseScoreA = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: a.title)
             let releaseScoreB = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: b.title)
             scoreA += releaseScoreA
             scoreB += releaseScoreB
-            
+
             // 3. Clean Title Bonus (+600)
             // Fixes issue where "SDH" (Clean) loses to "Nightcrawler... SDH" (Release Match)
             if a.title.count < 20 && (a.title.contains("sdh") || a.title.contains("english") || a.title.contains("en")) { scoreA += 600 }
@@ -1205,7 +1205,7 @@ class MPVWrapper: ObservableObject {
             // 7. Tie-breaker: Prefer later tracks
             if a.id > b.id { scoreA += 1 }
             if b.id > a.id { scoreB += 1 }
-            
+
             // Detailed Logging (only printed when comparing)
             // print("🆚 Compare: [\(a.id)] Score: \(scoreA) vs [\(b.id)] Score: \(scoreB)")
 
@@ -1214,7 +1214,7 @@ class MPVWrapper: ObservableObject {
 
         if let best = bestCandidate {
             LoggingManager.shared.info(.subtitles, message: "Auto-selecting BEST English subtitle: \(best.name) (ID: \(best.id)) [External: \(best.isExternal), Forced: \(best.isForced), Default: \(best.isDefault), HI: \(best.isHearingImpaired)]")
-            
+
             // Log final winning logic
             let matchScore = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: best.title)
             let isClean = best.title.count < 20 && (best.title.contains("sdh") || best.title.contains("english") || best.title.contains("en"))
@@ -1222,7 +1222,7 @@ class MPVWrapper: ObservableObject {
             var finalScore = (best.isExternal ? 0 : 3000) + matchScore + (isClean ? 600 : 0) + (isSDH ? 250 : 0)
             if best.isForced { finalScore -= 50 }
             if best.isDefault { finalScore -= 10 }
-            
+
             LoggingManager.shared.debug(.subtitles, message: "   Final Score: \(finalScore) (Embedded: \(best.isExternal ? 0 : 3000), Match: \(matchScore), Clean: \(isClean ? 600 : 0), SDH: \(isSDH ? 250 : 0))")
 
             var trackId = Int64(best.id)
@@ -1235,20 +1235,20 @@ class MPVWrapper: ObservableObject {
             LoggingManager.shared.info(.subtitles, message: "No suitable English subtitles found")
         }
     }
-    
+
     /// Calculate a matching score between video filename and subtitle name
     /// High score means good release match (e.g. WEBRip to WEBRip)
     private func calculateReleaseMatchScore(videoName: String, subtitleName: String) -> Int {
         let video = videoName.lowercased()
         let sub = subtitleName.lowercased()
         var score = 0
-        
+
         // Tokens to check for matching
         let qualityTokens = ["1080p", "720p", "2160p", "4k", "480p"]
         let sourceTokens = ["webrip", "web-dl", "web", "bluray", "brrip", "bdrip", "dvdrip", "hdrip", "cam", "ts", "tc", "scr", "remux"]
         let codecTokens = ["x264", "h264", "x265", "h265", "hevc", "av1"]
         let groupTokens = ["yts", "rarbg", "galaxy", "psa", "qxr", "tgx"]
-        
+
         // 1. Source Match (Critical for sync) - +500
         for token in sourceTokens {
             if video.contains(token) && sub.contains(token) {
@@ -1264,28 +1264,28 @@ class MPVWrapper: ObservableObject {
                  }
             }
         }
-        
+
         // 2. Quality Match - +100
         for token in qualityTokens {
             if video.contains(token) && sub.contains(token) {
                 score += 100
             }
         }
-        
+
         // 3. Codec Match - +50
         for token in codecTokens {
             if video.contains(token) && sub.contains(token) {
                 score += 50
             }
         }
-        
+
         // 4. Release Group Match - +50
         for token in groupTokens {
             if video.contains(token) && sub.contains(token) {
                 score += 50
             }
         }
-        
+
         return score
     }
 
@@ -1315,11 +1315,11 @@ class MPVWrapper: ObservableObject {
                 // Enable specific subtitle track
                 var trackId = Int64(id)
                 mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)
-                
+
                 // Explicitly enable visibility (in case it was disabled)
                 var visFlag: Int32 = 1
                 mpv_set_property(handle, "sub-visibility", MPV_FORMAT_FLAG, &visFlag)
-                
+
                 LoggingManager.shared.debug(.subtitles, message: "Set subtitle track to: \(id) (async, visibility enabled)")
             }
 
@@ -1527,7 +1527,7 @@ class MPVWrapper: ObservableObject {
             renderContext = nil
             // Clear handle immediately so no other calls can use it
             mpvHandle = nil
-            
+
             // CRITICAL FIX: Free render context BEFORE destroying handle
             // MPV documentation states: "If you used mpv_render_context_create(), you should call mpv_render_context_free() before mpv_destroy()."
             // Failure to do this causes a SIGABRT in mp_clients_destroy (Thread 18 crash).

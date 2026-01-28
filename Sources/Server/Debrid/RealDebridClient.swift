@@ -103,27 +103,42 @@ actor RealDebridClient {
 
     /// Quick health check - verifies RD API is reachable
     /// Uses 3s timeout per Landmine #27 (fail fast on pre-flight checks)
-    func checkHealth(token: String) async -> Bool {
+    func checkHealth(token: String) async -> String {
+        if token.isEmpty { return "Missing API Key" }
+
+        let startTime = Date()
         let url = URL(string: "\(baseURL)/user")!
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        request.timeoutInterval = 3
+        request.cachePolicy = .reloadIgnoringLocalCacheData // CRITICAL: Prevent caching of validation checks
+        request.timeoutInterval = 5
 
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 3
-        config.timeoutIntervalForResource = 3
+        let config = URLSessionConfiguration.ephemeral // CRITICAL: No persistence to fix Landmine #139
+        config.timeoutIntervalForRequest = 5
+        config.timeoutIntervalForResource = 5
         let session = URLSession(configuration: config)
 
         do {
-            let (_, response) = try await session.data(for: request)
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                return true
+            let (data, response) = try await session.data(for: request)
+            let latency = Date().timeIntervalSince(startTime)
+
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    // CRITICAL: RD returns 200 even for some expired states, check user/get data
+                    if let _ = try? JSONDecoder().decode(RDUserInfo.self, from: data) {
+                        return latency > 3.0 ? "Degraded" : "Online"
+                    }
+                    return "Invalid Token"
+                } else if httpResponse.statusCode == 401 || httpResponse.statusCode == 403 {
+                    return "Invalid Token"
+                }
             }
         } catch {
             NSLog("%@", "🏥 RealDebrid health check failed: \(error.localizedDescription)")
         }
-        return false
+        return "Offline"
     }
+
 
     // MARK: - Public API
 
@@ -182,11 +197,18 @@ actor RealDebridClient {
         let url = URL(string: "\(baseURL)/user")!
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.cachePolicy = .reloadIgnoringLocalCacheData // CRITICAL: Ensure fresh data for premium status
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        // Use ephemeral session to prevent persistent caching
+        let config = URLSessionConfiguration.ephemeral
+        let session = URLSession(configuration: config)
+
+        let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-            throw NSError(domain: "RealDebrid", code: (response as? HTTPURLResponse)?.statusCode ?? 0, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch user info"])
+            let code = (response as? HTTPURLResponse)?.statusCode ?? 0
+            NSLog("%@", "❌ [RealDebridClient] getUserInfo failed with status: \(code)")
+            throw NSError(domain: "RealDebrid", code: code, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch user info"])
         }
 
         return try JSONDecoder().decode(RDUserInfo.self, from: data)

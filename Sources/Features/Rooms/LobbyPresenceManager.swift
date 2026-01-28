@@ -11,6 +11,7 @@ class LobbyPresenceManager: ObservableObject {
     private var participantsPollingTask: Task<Void, Never>?
     private var heartbeatTask: Task<Void, Never>? // Replaces 'startHeartbeatLoop' inline task
     private var isPresenceSetup = false // Guard against duplicate observer registration
+    private var pendingLeaveTasks: [String: Task<Void, Never>] = [:] // Deduping leave events
 
     // Return-to-Lobby Transition Tracking
     // When host returns group to lobby, Realtime connections reset. This causes false presence_leave events.
@@ -197,7 +198,7 @@ class LobbyPresenceManager: ObservableObject {
         await realtimeManager.registerObserver(id: "lobby", onPresence: { [weak self] (action: PresenceAction, userId: String, metadata: [String: Any]?) in
             _ = Task { @MainActor [weak self] in
                 guard let strongSelf = self else { return }
-                guard let strongViewModel = strongSelf.viewModel else { return }
+                guard let strongViewModel: LobbyViewModel = strongSelf.viewModel else { return }
 
                 // Update participants list
                 switch action {
@@ -205,12 +206,23 @@ class LobbyPresenceManager: ObservableObject {
                     // RESOLVE TRUE USER ID:
                     // The `userId` param here is the Presence Ref (Connection ID), NOT the user's UUID.
                     // We must extract the actual user_id from metadata if available.
-                    var trueUserId = userId
-                    if let metaUserId = metadata?["user_id"] as? String {
-                        trueUserId = metaUserId
+                    let metaUserId = metadata?["user_id"] as? String
+                    let metaUsername = metadata?["username"] as? String
+
+                    var normalizedID = (metaUserId ?? metaUsername ?? userId).lowercased()
+
+                    // BIBLE LANDMINE #47 Fix: If metadata is missing (common on sparse .leave events),
+                    // resolve the true stable User ID (UUID) from our connection map.
+                    if metaUserId == nil && metaUsername == nil {
+                        if let resolvedParticipant = strongViewModel.participants.first(where: { $0.phxRefs.contains(userId) }) {
+                            normalizedID = resolvedParticipant.id.lowercased()
+                            NSLog("🛡️ Lobby: Resolved sparse presence Ref %@ to stable ID %@", userId, normalizedID)
+                        }
                     }
 
-                    let normalizedID = trueUserId.lowercased()
+                    // Cancel any pending leave task for this user
+                    strongSelf.pendingLeaveTasks[normalizedID]?.cancel()
+                    strongSelf.pendingLeaveTasks.removeValue(forKey: normalizedID)
 
                     // Determine if we should show a notification (New Connection)
                     // We use `connectedUserIds` to track distinct active sessions
@@ -285,15 +297,28 @@ class LobbyPresenceManager: ObservableObject {
                     let metaUsername = metadata?["username"] as? String
 
                     let leavingPhxRef = userId
-                    let normalizedID = (metaUserId ?? userId).lowercased()
+                    var normalizedID = (metaUserId ?? metaUsername ?? userId).lowercased()
+
+                    // BIBLE LANDMINE #47 Fix: If metadata is missing (common on sparse .leave events),
+                    // resolve the true stable User ID (UUID) from our connection map.
+                    if metaUserId == nil && metaUsername == nil {
+                        if let resolvedParticipant = strongViewModel.participants.first(where: { $0.phxRefs.contains(userId) }) {
+                            normalizedID = resolvedParticipant.id.lowercased()
+                            NSLog("🛡️ Lobby: Resolved sparse leave Ref %@ to stable ID %@", leavingPhxRef, normalizedID)
+                        }
+                    }
                     let capturedUsername = metaUsername ?? "User"
 
                     // Defer leave processing to avoid false positives from metadata updates
-                    _ = Task { @MainActor [weak self, leavingPhxRef, normalizedID, capturedUsername] in
-                        try? await Task.sleep(nanoseconds: 3_000_000_000) // 3s
+                    let task: Task<Void, Never> = Task { @MainActor [weak self, leavingPhxRef, normalizedID, capturedUsername] in
+                        // Wait 2 seconds to handle network flaps and seek-induced connection drops
+                        try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s (Phase 6 Tuning)
 
                         guard let strongSelf = self else { return }
-                        guard let strongViewModel = strongSelf.viewModel else { return }
+
+                        // Handle task cancellation
+                        if Task.isCancelled { return }
+                        guard let strongViewModel: LobbyViewModel = strongSelf.viewModel else { return }
 
                         // CRITICAL FIX (Landmine #93): Suppress false 'User Left' from VM recreation
                         // During Double onAppear, VM1 deinits and triggers a presence leave.
@@ -361,7 +386,12 @@ class LobbyPresenceManager: ObservableObject {
                             strongSelf.pendingLeaves.insert(normalizedID)
                             strongSelf.scheduleFlush()
                         }
+
+                        strongSelf.pendingLeaveTasks.removeValue(forKey: normalizedID)
                     }
+
+                    strongSelf.pendingLeaveTasks[normalizedID]?.cancel()
+                    strongSelf.pendingLeaveTasks[normalizedID] = task
                 }
             }
         }, onSync: nil, onConnectionState: nil)

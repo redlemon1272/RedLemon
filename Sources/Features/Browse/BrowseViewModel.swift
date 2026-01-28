@@ -15,6 +15,7 @@ class BrowseViewModel: ObservableObject {
     // Grid optimization: Track selected service for the main grid
     @Published var selectedService: String = "netflix" 
     @Published var isServiceLoading = false
+    @Published var isPopularLoading = false
     
     // Performance optimization states
     @Published var isStabilizing = false
@@ -29,10 +30,17 @@ class BrowseViewModel: ObservableObject {
     // Optimization: Removed @Published to prevent whole-page re-renders on row visibility changes
     var visibleRowKeys: Set<String> = []
     
+    @Published var isInitialLoad = true
+    
     init(appState: AppState) {
         self.appState = appState
         // Restore tab selection from AppState
         self.selectedTab = MediaType.from(index: appState.browseSelectedTab)
+        
+        // If we already have content in AppState, it's not the initial load
+        if !appState.popularMovies.isEmpty || !appState.popularShows.isEmpty {
+            self.isInitialLoad = false
+        }
     }
     
     var filteredHistoryItems: [WatchHistoryItem] {
@@ -101,7 +109,7 @@ class BrowseViewModel: ObservableObject {
         
         tabSwitchTask?.cancel()
         tabSwitchTask = Task {
-            try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s debounce
+            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s debounce
             guard !Task.isCancelled else { return }
             
             await loadContent()
@@ -125,11 +133,10 @@ class BrowseViewModel: ObservableObject {
     }
     
     func loadContent() async {
-        let shouldShowLoader = (selectedTab == .movies && appState.popularMovies.isEmpty) ||
-                               (selectedTab == .shows && appState.popularShows.isEmpty)
-        
-        if shouldShowLoader {
+        // Only show full-screen loader if this is the first execution and we have no content
+        if isInitialLoad {
             isLoading = true
+            isInitialLoad = false
         }
         errorMessage = nil
         
@@ -139,16 +146,20 @@ class BrowseViewModel: ObservableObject {
             do {
                 if await selectedTab == .movies {
                     if await appState.popularMovies.isEmpty {
+                        await MainActor.run { self.isPopularLoading = true }
                         let movies = try await apiClient.fetchPopularMovies()
                         await MainActor.run { [weak self] in
                             self?.appState.popularMovies = movies
+                            self?.isPopularLoading = false
                         }
                     }
                 } else if await selectedTab == .shows {
                     if await appState.popularShows.isEmpty {
+                        await MainActor.run { self.isPopularLoading = true }
                         let shows = try await apiClient.fetchPopularShows()
                         await MainActor.run { [weak self] in
                             self?.appState.popularShows = shows
+                            self?.isPopularLoading = false
                         }
                     }
                 }
@@ -444,7 +455,7 @@ class BrowseViewModel: ObservableObject {
             return false
         }
         
-        try? await Task.sleep(nanoseconds: 200_000_000) // 0.2s initial delay
+        try? await Task.sleep(nanoseconds: 50_000_000) // 0.05s initial delay
         
         let trendingCatalog = appState.browseCatalogs[getStorageKey("trending")]
         if trendingCatalog == nil || trendingCatalog?.isEmpty == true {
@@ -455,7 +466,7 @@ class BrowseViewModel: ObservableObject {
         for (index, serviceKey) in visibleFirst.enumerated() {
             // Stagger: 150ms between each, increases for non-visible rows
             let isVisible = visibleRowKeys.contains(serviceKey)
-            let delay: UInt64 = isVisible ? 100_000_000 : UInt64(150_000_000 + (index * 50_000_000))
+            let delay: UInt64 = isVisible ? 30_000_000 : UInt64(100_000_000 + (index * 30_000_000))
             if index > 0 { try? await Task.sleep(nanoseconds: delay) }
             await loadCatalogIfNeeded(key: serviceKey)
         }

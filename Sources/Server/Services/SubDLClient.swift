@@ -57,7 +57,10 @@ final class SubDLClient {
 
     /// Quick health check - verifies SubDL API is reachable
     /// Uses 3s timeout per Landmine #27 (fail fast on pre-flight checks)
-    func checkHealth(apiKey: String) async -> Bool {
+    func checkHealth(apiKey: String) async -> String {
+        if apiKey.isEmpty { return "Missing API Key" }
+
+        let startTime = Date()
         var components = URLComponents(string: "\(baseURL)/subtitles")!
         components.queryItems = [
             URLQueryItem(name: "api_key", value: apiKey),
@@ -65,9 +68,8 @@ final class SubDLClient {
             URLQueryItem(name: "type", value: "movie")
         ]
 
-        guard let url = components.url else { return false }
+        guard let url = components.url else { return "Offline" }
         var request = URLRequest(url: url)
-        // Add User-Agent to bypass potential Cloudflare blocks
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 10
 
@@ -77,15 +79,33 @@ final class SubDLClient {
         let session = URLSession(configuration: config)
 
         do {
-            let (_, response) = try await session.data(for: request)
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                return true
+            let (data, response) = try await session.data(for: request)
+            let latency = Date().timeIntervalSince(startTime)
+
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    // CRITICAL: SubDL often returns 200 OK even for errors, but with status: false in JSON
+                    if let result = try? JSONDecoder().decode(SubDLResponse.self, from: data) {
+                        if result.status {
+                            return latency > 5.0 ? "Degraded" : "Online"
+                        } else {
+                            // API key is likely invalid or deactivated
+                            print("⚠️ SubDL Health Check: status: false - error: \(result.error ?? "unknown")")
+                            return "Invalid API Key"
+                        }
+                    }
+                    return latency > 5.0 ? "Degraded" : "Online"
+                } else if httpResponse.statusCode == 401 || httpResponse.statusCode == 403 {
+                    return "Invalid API Key"
+                }
             }
         } catch {
             NSLog("%@", "🏥 SubDL health check failed: \(error.localizedDescription)")
         }
-        return false
+        return "Offline"
+
     }
+
 
     /// Search for subtitles by IMDB ID
     /// - Parameters:
@@ -220,35 +240,39 @@ final class SubDLClient {
             print("⚠️ Low subtitle count (\(filteredSubtitles.count)). Attempting supplemental Name Search for '\(name)'...")
 
             // Try identifying the show ID via text search
-            if let alternateId = try await searchByApiName(name: name, year: year, type: subdlType, apiKey: apiKey) {
-                print("✅ Supplemental Search found ID: \(alternateId). Fetching additional subtitles...")
+            do {
+                if let alternateId = try await searchByApiName(name: name, year: year, type: subdlType, apiKey: apiKey) {
+                    print("✅ Supplemental Search found ID: \(alternateId). Fetching additional subtitles...")
 
-                let extraSubtitles = try await fetchByInternalId(sdId: alternateId, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
-                print("📦 Supplemental Fetch returned \(extraSubtitles.count) raw subtitles")
+                    let extraSubtitles = try await fetchByInternalId(sdId: alternateId, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
+                    print("📦 Supplemental Fetch returned \(extraSubtitles.count) raw subtitles")
 
-                let filteredExtras = filterSubtitlesByEpisode(extraSubtitles, season: season, episode: episode)
+                    let filteredExtras = filterSubtitlesByEpisode(extraSubtitles, season: season, episode: episode)
 
-                // Merge uniqueness (by URL and Logic Key)
-                var deduplicatedExtraCount = 0
-                for sub in filteredExtras {
-                    let lang = sub.language?.lowercased() ?? "unknown"
-                    let rel = normalizeReleaseName(sub.releaseName ?? "")
-                    let logicKey = "\(lang)_\(rel)"
+                    // Merge uniqueness (by URL and Logic Key)
+                    var deduplicatedExtraCount = 0
+                    for sub in filteredExtras {
+                        let lang = sub.language?.lowercased() ?? "unknown"
+                        let rel = normalizeReleaseName(sub.releaseName ?? "")
+                        let logicKey = "\(lang)_\(rel)"
 
-                    if !seenUrls.contains(sub.url) && !seenLogicKeys.contains(logicKey) {
-                        filteredSubtitles.append(sub)
-                        seenUrls.insert(sub.url)
-                        seenLogicKeys.insert(logicKey)
-                    } else {
-                        deduplicatedExtraCount += 1
+                        if !seenUrls.contains(sub.url) && !seenLogicKeys.contains(logicKey) {
+                            filteredSubtitles.append(sub)
+                            seenUrls.insert(sub.url)
+                            seenLogicKeys.insert(logicKey)
+                        } else {
+                            deduplicatedExtraCount += 1
+                        }
                     }
+                    if deduplicatedExtraCount > 0 {
+                        print("🧹 SubDL: Deduplicated \(deduplicatedExtraCount) supplemental mirrors")
+                    }
+                    print("🔗 Merged unique subtitles from supplemental search.")
+                } else {
+                    print("⚠️ Supplemental Name Search returned no match.")
                 }
-                if deduplicatedExtraCount > 0 {
-                    print("🧹 SubDL: Deduplicated \(deduplicatedExtraCount) supplemental mirrors")
-                }
-                print("🔗 Merged unique subtitles from supplemental search.")
-            } else {
-                print("⚠️ Supplemental Name Search returned no match.")
+            } catch {
+                LoggingManager.shared.error(.subtitles, message: "⚠️ Supplemental SubDL search failed: \(error.localizedDescription) - proceeding with existing results (\(filteredSubtitles.count))")
             }
         } else {
             let totalLoss = subtitles.count - filteredSubtitles.count
@@ -379,22 +403,86 @@ final class SubDLClient {
             let candidateName = candidate.name.lowercased()
 
             // 1. Strict Year Match (if year is provided)
-            if let year = year {
-                if candidateName.contains("\(year)") {
-                    return candidate.sd_id
+            // Bible #131: SubDL search is fragile. Apply strict numeric match locally.
+            if let targetYear = year {
+                let foundYear = extractYear(from: candidate.name)
+                let allowedYears = [targetYear, targetYear - 1, targetYear + 1]
+
+                if let fy = foundYear {
+                    if allowedYears.contains(fy) {
+                        print("   ✅ Match found: '\(candidate.name)' (Year \(fy) matched within ±1 variance of \(targetYear))")
+                        return candidate.sd_id
+                    } else {
+                        // Year found but doesn't match! (e.g. found 2018 when we wanted 2025)
+                        // This fixes the "The Beauty Inside" issue when searching for "The Beauty"
+                        continue
+                    }
+                } else {
+                    // No 4-digit year found in candidate name.
+                    // Fall back to simple string contains if the name itself contains our target year.
+                    if allowedYears.contains(where: { candidateName.contains("\($0)") }) {
+                         print("   ✅ Match found: '\(candidate.name)' (String year match within ±1 variance of \(targetYear))")
+                         return candidate.sd_id
+                    }
                 }
-                // If the candidate name DOES NOT contain our target year, skip it!
-                // This prevents picking "The Beauty Inside (2018)" when we want "The Beauty (2025)"
+
+                // If we reach here, we had a year requirement but no match was found.
                 continue
             }
 
-            // 2. Similarity check (if no year provided)
-            if candidateName.contains(sanitizedName.lowercased()) {
+            // 2. Exact Title Match (Highest priority if year matched or not provided)
+            let sanitizedCandidate = candidateName.replacingOccurrences(of: ":", with: "").trimmingCharacters(in: .whitespaces)
+            let sanitizedTarget = sanitizedName.lowercased().replacingOccurrences(of: ":", with: "").trimmingCharacters(in: .whitespaces)
+
+            if sanitizedCandidate == sanitizedTarget {
+                print("   ✅ Exact match found: '\(candidate.name)'")
+                return candidate.sd_id
+            }
+
+            // 3. Stricter Similarity check (if no year provided OR year matched but name isn't exact)
+            // Bible #131: Prevent "The Beauty" matching "The Beauty Inside"
+            let candidateWords = sanitizedCandidate.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
+            let targetWords = sanitizedTarget.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
+            
+            // Check if all target words exist in candidate in order
+            var isWordMatch = false
+            if candidateWords.count >= targetWords.count {
+                // Find if target sequence exists
+                for i in 0...(candidateWords.count - targetWords.count) {
+                    let subSection = candidateWords[i..<(i + targetWords.count)].joined(separator: " ")
+                    if subSection == sanitizedTarget {
+                        // We found the name. Now check if the REST of the words are "Noise"
+                        var hasNonNoiseLeftover = false
+                        let noisePatterns = ["s\\d+", "e\\d+", "season", "episode", "20\\d{2}", "19\\d{2}", "web-dl", "bluray", "hdtv", "x264", "x265", "complete", "remux", "dual", "audio", "multi", "subs"]
+                        
+                        for (idx, word) in candidateWords.enumerated() {
+                            if idx >= i && idx < (i + targetWords.count) { continue } // Skip the matched name
+                            
+                            // Check if this word is noise
+                            let isNoise = noisePatterns.contains { pattern in
+                                word.range(of: pattern, options: [.regularExpression, .caseInsensitive]) != nil
+                            }
+                            if !isNoise {
+                                hasNonNoiseLeftover = true
+                                break
+                            }
+                        }
+                        
+                        if !hasNonNoiseLeftover {
+                            isWordMatch = true
+                            break
+                        }
+                    }
+                }
+            }
+
+            if isWordMatch {
+                 print("   ✅ Valid boundary match found: '\(candidate.name)'")
                  return candidate.sd_id
             }
         }
 
-        // Final Fallback: If we have results but none matched our year filter, 
+        // Final Fallback: If we have results but none matched our year filter,
         // DO NOT just pick the first one (it's likely wrong).
         // Only return the first result if we didn't have a year requirement.
         if year == nil, let first = results.first {
@@ -1076,5 +1164,25 @@ final class SubDLClient {
         }
 
         return n.trimmingCharacters(in: CharacterSet(charactersIn: "."))
+    }
+
+    /// Extract a 4-digit year from a string using regex.
+    /// Bible #131: Strict numeric match for results.
+    private func extractYear(from name: String) -> Int? {
+        let pattern = "\\b(19|20)\\d{2}\\b"
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return nil }
+        let nsString = name as NSString
+        let results = regex.matches(in: name, options: [], range: NSRange(location: 0, length: nsString.length))
+
+        for result in results {
+            let yearString = nsString.substring(with: result.range)
+            if let yearVal = Int(yearString) {
+                // Return the first valid looking year
+                if yearVal > 1900 && yearVal < 2100 {
+                    return yearVal
+                }
+            }
+        }
+        return nil
     }
 }

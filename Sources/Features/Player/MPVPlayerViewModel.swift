@@ -60,10 +60,13 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Failsafe: Track announced participants to prevent "Double Join" messages (History + Realtime race)
     private var announcedParticipantIds: Set<String> = []
+    private var transitioningUserIds: Set<String> = [] // BIBILE Landmine #132: Track users moving from Lobby
+    private var transitionExpiryDate: Date?
 
     // Failsafe: Track "Ghost Candidates" (Users who are Online in Realtime but missing from DB for >30s)
     // This fixes the "Missing Leave" bug where a user leaves via API but the socket disconnect is missed.
     private var ghostCandidateStartTimes: [String: Date] = [:]
+    private var offlineCandidateStartTimes: [String: Date] = [:] // New: Grace period for offline/missing DB
 
     // Failsafe: Track last seek notification to prevent duplicates from drift correction
     private var lastSeekNotificationTime: Date?
@@ -459,16 +462,25 @@ class MPVPlayerViewModel: ObservableObject {
         // Observe subtitles list changes for the active stream
         // This enables the "Healing Loop": deep search results appearing while movie is playing
         appState.player.$selectedStream
-            .compactMap { $0?.subtitles }
-            .removeDuplicates { old, new in
-                old.count == new.count && old.map { $0.url } == new.map { $0.url }
-            }
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] newSubtitles in
-                guard let self = self else { return }
-                LoggingManager.shared.info(.subtitles, message: "MPVPlayerViewModel: Detected \(newSubtitles.count) subtitles in stream. Syncing to SubtitleService.")
+            .sink { [weak self] newStream in
+                guard let self = self, let stream = newStream else { return }
+
+                let streamId = stream.infoHash ?? stream.url ?? ""
+                let subtitles = stream.subtitles ?? []
+
+                LoggingManager.shared.info(.subtitles, message: "MPVPlayerViewModel: Detected \(subtitles.count) subtitles in stream. Syncing to SubtitleService.")
+
                 Task {
-                    let formatted = newSubtitles.map { (url: $0.url, label: $0.label) }
+                    // Normalize subtitles
+                    let formatted = subtitles.map { (url: $0.url, label: $0.label) }
+
+                    // If this is a DIFFERENT stream than before, clear the service first
+                    // We use IMDb ID or stream identifier to detect changes
+                    if self.imdbId != streamId {
+                         // Only clear if we actually have new subtitles to load or if we are truly switching media
+                         // For now, let loadStream handle the hard clear, and we just append here.
+                    }
+
                     await self.subtitleService.loadExternalSubtitles(formatted)
                 }
             }
@@ -818,8 +830,9 @@ class MPVPlayerViewModel: ObservableObject {
         LoggingManager.shared.debug(.general, message: "   IMDB: \(imdbId)")
         LoggingManager.shared.debug(.general, message: "   URL: \(streamURL.prefix(60))...")
 
-        // 🧹 Subtitle Duplication Fix (Tron): Clear all stale subtitles before loading new media
-        await subtitleService.clearSubtitles()
+        // 🧹 Subtitle Duplication Fix: Subtitles are now managed exclusively by the AppState observer
+        // to prevent race conditions between loadStream and stream resolution events.
+        // await subtitleService.clearSubtitles() // REMOVED: Managed by observer
 
         // FIX: Determine effective event status
         // A room starting with "event_" is ALWAYS an event, regardless of the boolean flag passed
@@ -942,23 +955,8 @@ class MPVPlayerViewModel: ObservableObject {
             await fetchMetadata(imdbId: imdbId, mediaType: isSeries ? "series" : "movie")
         }
 
-        // NEW: Scan for embedded tracks IMMEDIATELY when loading starts
-        // This ensures they are ready before playback begins, preventing hiccups
-        // NEW: Load/Scan subtitles IMMEDIATELY when loading starts
-        // This ensures they are ready before playback begins, preventing hiccups
-        // NEW: Load/Scan subtitles IMMEDIATELY when loading starts
-        // Parallel execution again (reverted blocking wait), but LIMITED to top 3 to reduce hiccup
-        Task {
-            if !subtitles.isEmpty {
-                // Limit to top 3 subtitles to prevent "brutal wait" / heavy hiccup
-                let limitedSubtitles = Array(subtitles.prefix(3))
-                LoggingManager.shared.info(.subtitles, message: "Pre-loading external subtitles (Top \(limitedSubtitles.count))...")
-                await self.subtitleService.loadExternalSubtitles(limitedSubtitles)
-            } else {
-                LoggingManager.shared.info(.subtitles, message: "Pre-scanning embedded subtitles...")
-                await self.subtitleService.scanEmbeddedTracks()
-            }
-        }
+        // Subtitles are now handled by the AppState observer on appState.player.$selectedStream
+        // to ensure the healing loop and initial load are perfectly synchronized.
 
         // Check if we should resume from a specific timestamp
         let resumeTime = appState?.player.resumeFromTimestamp ?? 0
@@ -2049,6 +2047,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     /// Adds a local system message to the chat (not broadcasted)
     private func addSystemMessage(_ text: String) {
+        NSLog("💬 PLAYER SYSTEM MESSAGE: %@", text)
         let message = ChatMessage(
             id: UUID().uuidString,
             username: "System",
@@ -2179,8 +2178,9 @@ class MPVPlayerViewModel: ObservableObject {
             // Disconnecting the client kills the connection for the LobbyViewModel too.
             // ONLY disconnect if we're NOT returning to lobby, to allow the Lobby connection to persist smoothly.
             if !returningToLobby {
-                await realtimeManager?.disconnect(leaveChannel: true, disconnectClient: false)
+                // CRITICAL FIX: Unregister observer BEFORE disconnect so ref-count drops to zero
                 await realtimeManager?.unregisterObserver(id: "player")
+                await realtimeManager?.disconnect(leaveChannel: true, disconnectClient: false)
                 LoggingManager.shared.info(.watchParty, message: "Realtime manager channel left and observer unregistered")
             } else {
                 await realtimeManager?.unregisterObserver(id: "player")
@@ -2192,7 +2192,6 @@ class MPVPlayerViewModel: ObservableObject {
         LoggingManager.shared.info(.videoRendering, message: "Stopping MPV playback...")
         mpvWrapper.pause() // Ensure paused state before hard stop
         mpvWrapper.stop()
-
         // CRITICAL FIX: Manually destroy MPV instance.
         // This ensures the underlying libmpv instance and render context are freed
         // even if this ViewModel is retained by a lingering closure or cycle.
@@ -2208,6 +2207,7 @@ class MPVPlayerViewModel: ObservableObject {
         if !hasCleanedUp, let manager = realtimeManager {
              Task.detached {
                  LoggingManager.shared.info(.watchParty, message: "MPVPlayerViewModel deinit: Triggering detached cleanup task for Realtime...")
+                 await manager.unregisterObserver(id: "player")
                  await manager.disconnect(leaveChannel: true, disconnectClient: false)
              }
         }
@@ -2260,7 +2260,7 @@ struct CinemetaMetadata: Codable {
 extension MPVPlayerViewModel {
     /// Start watch party sync as host or guest
     func startWatchPartySync(roomId: String, isHost: Bool) async throws {
-        LoggingManager.shared.info(.watchParty, message: "Starting watch party: roomId=\(roomId), isHost=\(isHost)")
+        NSLog("%@", "🎬 MPVPlayerViewModel: Starting watch party: roomId=\(roomId), isHost=\(isHost)")
 
         self.currentRoomId = roomId
         self.isWatchPartyHost = isHost
@@ -2284,32 +2284,73 @@ extension MPVPlayerViewModel {
         self.readyGuestIds.removeAll()
         self.readySignalsSentCount = 0
         // FIX: Reset tracking
-        self.announcedParticipantIds.removeAll()
         self.ghostCandidateStartTimes.removeAll()
+        self.offlineCandidateStartTimes.removeAll()
 
         self.currentUserId = userId.lowercased()
+
+        // Initialize Realtime manager (Inherit from Lobby if possible for smooth handoff)
+        if let existingManager = appState?.activeLobbyViewModel?.realtimeManager as? RealtimeChannelManager {
+            let capturedRoomId = await existingManager.roomId
+            self.realtimeManager = existingManager
+            LoggingManager.shared.info(.watchParty, message: "🤝 Handoff: Inheriting Realtime manager from Lobby (\(capturedRoomId ?? "unknown"))")
+
+            // CRITICAL: Unregister the lobby observer after handoff.
+            // This ensures only the Player VM processes presence events now that it has taken control.
+            _ = Task {
+                await existingManager.unregisterObserver(id: "lobby")
+                LoggingManager.shared.info(.watchParty, message: "🤝 Handoff: Unregistered 'lobby' observer from shared Realtime manager")
+            }
+        } else {
+            self.realtimeManager = RealtimeChannelManager(realtimeClient: RedLemon.SupabaseClient.shared.realtimeClient)
+            LoggingManager.shared.info(.watchParty, message: "🤝 Handoff: No active lobby found, creating new Realtime manager")
+        }
 
         // CRITICAL FIX: Initialize connection tracking from existing participants inherited from Lobby.
         // This prevents "Guest Left" messages during transition because the Player VM starts
         // recognizing the Lobby-level Phoenix Refs immediately. (Bible Landmine #47/51)
-        if let existingRoom = appState?.player.currentWatchPartyRoom {
-            for participant in existingRoom.participants {
+        if var existingRoom = appState?.player.currentWatchPartyRoom {
+            NSLog("🛡️ Transition Sync: Processing %d participants from AppState", existingRoom.participants.count)
+
+            // Bible Landmine #132: Mark existing participants as transitioning
+            // This prevents the host's DB poll from removing them as "Zombies" before they
+            // have a chance to reconnect to the player channel.
+            self.transitioningUserIds = Set(existingRoom.participants.map { $0.id.lowercased() })
+            self.transitionExpiryDate = Date().addingTimeInterval(120) // 2m window (was 1m)
+            NSLog("🛡️ Transition Sync: Marked %d users as transitioning (120s window)", self.transitioningUserIds.count)
+
+            for index in 0..<existingRoom.participants.count {
+                let participant = existingRoom.participants[index]
                 let normalizedPId = participant.id.lowercased()
+
+                // CRITICAL FIX: Preserve already-announced status to prevent join message spam
+                self.announcedParticipantIds.insert(normalizedPId)
+
                 if !participant.phxRefs.isEmpty {
                     self.activeConnectionRefs[normalizedPId] = participant.phxRefs
-                    LoggingManager.shared.info(.watchParty, message: "🛡️ Transition Sync: Inherited \(participant.phxRefs.count) refs for user \(normalizedPId)")
+                    NSLog("🛡️ Transition Sync: Inherited %d refs and marked announced for user %@", participant.phxRefs.count, normalizedPId)
+                } else {
+                    // Phase 4: If they were transitioning, they might have refs in our local map but not the struct
+                    if let localRefs = self.activeConnectionRefs[normalizedPId], !localRefs.isEmpty {
+                        existingRoom.participants[index].phxRefs = localRefs
+                        NSLog("🛡️ Transition Sync: Back-filled %d refs from local map for user %@", localRefs.count, normalizedPId)
+                    } else {
+                        NSLog("⚠️ Transition Sync: Marked announced but no refs found for participant %@", normalizedPId)
+                    }
                 }
             }
+            // Re-assign to ensure AppState is updated (Participant is a struct)
+            self.appState?.player.currentWatchPartyRoom = existingRoom
+        } else {
+             LoggingManager.shared.warn(.watchParty, message: "🛡️ Transition Sync: currentWatchPartyRoom is NIL")
         }
-
-        // Initialize Realtime manager
-        self.realtimeManager = RealtimeChannelManager(realtimeClient: RedLemon.SupabaseClient.shared.realtimeClient)
 
         // But prepare welcome message for when they do open it
         // CRITICAL: Set up presence callback BEFORE setup() so we don't miss any presence events
         await realtimeManager?.registerObserver(id: "player", onPresence: { [weak self] (action: PresenceAction, userId: String, metadata: [String: Any]?) in
             _ = Task { @MainActor in
                 guard let self = self else { return }
+                NSLog("👤 Presence Event: action=%@, userId=%@", String(describing: action), userId)
 
                 // PERFORMANCE DIAGNOSTIC: Track how long participant updates take
                 let startTime = CACurrentMediaTime()
@@ -2392,7 +2433,17 @@ extension MPVPlayerViewModel {
                     let metaUserId = metadata?["user_id"] as? String
                     let metaUsername = metadata?["username"] as? String
                     // CRITICAL FIX: Normalize UUIDs to lowercase to prevent mismatched keys (Supabase inconsistency)
-                    let actualUserId = (metaUserId ?? metaUsername ?? userId).lowercased()
+                    var actualUserId = (metaUserId ?? metaUsername ?? userId).lowercased()
+
+                    // BIBLE LANDMINE #47 Fix: If metadata is missing (common on sparse .leave events),
+                    // resolve the true stable User ID (UUID) from our connection map.
+                    // This ensures the 10s grace period and ref-counting works correctly.
+                    if metaUserId == nil && metaUsername == nil {
+                        if let resolvedId = self.activeConnectionRefs.first(where: { $0.value.contains(userId) })?.key {
+                            actualUserId = resolvedId
+                            LoggingManager.shared.debug(.watchParty, message: "🛡️ Presence: Resolved sparse event Ref \(userId) to stable ID \(actualUserId)")
+                        }
+                    }
 
                     switch action {
                     case .join:
@@ -2418,13 +2469,21 @@ extension MPVPlayerViewModel {
                             self.activeConnectionRefs[actualUserId, default: []].insert(userId) // Track officially
                             LoggingManager.shared.info(.watchParty, message: "Updated existing participant \(actualUserId) with Ref: \(userId) (Total Refs: \(updatedParticipants[index].phxRefs.count))")
 
-                            // If upgrading from DB-only (Offline) to Realtime (Online), announce it
-                            if wasOffline && actualUserId != self.currentUserId {
-                                if !self.announcedParticipantIds.contains(actualUserId) {
-                                    self.addSystemMessage("\(updatedParticipants[index].name) joined")
-                                    self.announcedParticipantIds.insert(actualUserId)
-                                }
-                            }
+                             // If upgrading from DB-only (Offline) to Realtime (Online), announce it
+                             if wasOffline && actualUserId != self.currentUserId {
+                                 if !self.announcedParticipantIds.contains(actualUserId) {
+                                     NSLog("👤 Presence: Announcing JOIN for guest: %@", actualUserId)
+                                     self.addSystemMessage("\(updatedParticipants[index].name) joined")
+                                     self.announcedParticipantIds.insert(actualUserId)
+                                 }
+                             }
+
+                            // CRITICAL FIX: DO NOT remove from transitioning set here.
+                            // The 120s window (Landmine #132) must be a HARD SHIELD to absorb DB polling lag.
+                            /* if self.transitioningUserIds.contains(actualUserId.lowercased()) {
+                                 NSLog("🛡️ Transition Sync: User %@ successfully reconnected to Realtime - clearing protection", actualUserId)
+                                 self.transitioningUserIds.remove(actualUserId.lowercased())
+                             } */
 
                             if let name = metaUsername {
                                 updatedParticipants[index].name = name
@@ -2453,10 +2512,18 @@ extension MPVPlayerViewModel {
                             // 💬 System Message: Join
                             if actualUserId != self.currentUserId {
                                 if !self.announcedParticipantIds.contains(actualUserId) {
+                                    NSLog("👤 Presence: Announcing JOIN for guest: %@", actualUserId)
                                     self.addSystemMessage("\(username) joined")
                                     self.announcedParticipantIds.insert(actualUserId)
                                 }
                             }
+
+                            // CRITICAL FIX: DO NOT remove from transitioning set here.
+                            // The 120s window (Landmine #132) must be a HARD SHIELD to absorb DB polling lag.
+                            /* if self.transitioningUserIds.contains(actualUserId.lowercased()) {
+                                NSLog("🛡️ Transition Sync: User %@ (new) successfully joined Realtime - clearing protection", actualUserId)
+                                self.transitioningUserIds.remove(actualUserId.lowercased())
+                            } */
                         }
 
                         // ENSURE SELF IS IN LIST
@@ -2506,8 +2573,8 @@ extension MPVPlayerViewModel {
                         let leavingUsername = metaUsername ?? "User"
 
                         let task: Task<Void, Never> = Task { @MainActor [weak self, actualUserId, leavingPhxRef, leavingUsername] in
-                            // Wait 3 seconds (nano) - lowered from 5s to improve responsiveness while still handling flutters
-                            try? await Task.sleep(nanoseconds: 3_000_000_000)
+                            // Wait 2 seconds (nano) to handle network flaps and seek-induced connection drops
+                            try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s (Phase 6 Tuning)
 
                             guard let self = self else { return }
 
@@ -2524,6 +2591,15 @@ extension MPVPlayerViewModel {
                                 self.activeConnectionRefs[actualUserId] = refs
 
                                 // 2. Bible Landmine #51: Only consider Offline when count hits Zero
+                                // 3. Transition Protection (Bible Landmine #132)
+                                 if !refs.isEmpty || self.transitioningUserIds.contains(actualUserId.lowercased()) {
+                                     if let expiry = self.transitionExpiryDate, Date() < expiry {
+                                         NSLog("🛡️ Presence: Ignoring leave event for transitioning user: %@", actualUserId)
+                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                         return
+                                     }
+                                 }
+
                                 if !refs.isEmpty {
                                     LoggingManager.shared.info(.watchParty, message: "🛡️ Ignoring leave for \(actualUserId) - User still has \(refs.count) active connections")
                                     self.pendingLeaveTasks.removeValue(forKey: actualUserId)
@@ -2544,8 +2620,9 @@ extension MPVPlayerViewModel {
                                     currentParticipants.remove(at: index)
                                     self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
 
-                                    // 💬 System Message: Leave (Only for others)
+                                     // 💬 System Message: Leave (Only for others)
                                     if actualUserId != self.currentUserId {
+                                        NSLog("👤 Presence: Announcing LEAVE for guest: %@", actualUserId)
                                         self.addSystemMessage("\(name) left")
                                         self.announcedParticipantIds.remove(actualUserId) // FIX: Allow re-announce on return
                                     }
@@ -2568,6 +2645,8 @@ extension MPVPlayerViewModel {
                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                             LoggingManager.shared.info(.watchParty, message: "Participant left (confirmed): \(actualUserId)")
                         }
+                        // Cancel previous task for this user to prevent "Ghost Exits" during flaps
+                        self.pendingLeaveTasks[actualUserId]?.cancel()
                         self.pendingLeaveTasks[actualUserId] = task
                     }
 
@@ -2577,6 +2656,13 @@ extension MPVPlayerViewModel {
 
                     for p in updatedParticipants {
                         let normalizedId = p.id.lowercased()
+
+                        // CRITICAL FIX: DO NOT clear transition status based on phx_ref presence here.
+                        // The User Room transition window must remain active for its full duration.
+                        /* if !p.phxRefs.isEmpty {
+                            self.transitioningUserIds.remove(normalizedId)
+                        } */
+
                         if let existing = uniqueParticipants[normalizedId] {
                             // Merge logic: Keep the one with phxRefs, or the newer one
                             if existing.phxRefs.isEmpty && !p.phxRefs.isEmpty {
@@ -2620,6 +2706,10 @@ extension MPVPlayerViewModel {
         let username = appState?.currentUsername ?? "User"
 
         if let realtimeManager = realtimeManager {
+            // CRITICAL HANDOFF (Landmine #125): Unregister "lobby" observer now that the Player is taking over.
+            // This prevents duplicate presence processing and double-posted system messages.
+            await realtimeManager.unregisterObserver(id: "lobby")
+
             try await realtimeManager.setup(
                 roomId: roomId,
                 isHost: isHost,
@@ -2825,8 +2915,8 @@ extension MPVPlayerViewModel {
     private func startPlaybackHeartbeat() {
         playbackHeartbeatTask?.cancel()
         playbackHeartbeatTask = Task { [weak self] in
-            // OPTIMIZATION: Initial delay to stagger from WebSocket heartbeat (30s)
-            try? await Task.sleep(nanoseconds: 10_000_000_000) // 10s initial offset
+            // CRITICAL FIX: Reduce initial delay to 1s to fill the gap after Lobby heartbeat stops.
+            try? await Task.sleep(nanoseconds: 1_000_000_000) // 1s initial offset
             while !Task.isCancelled {
                 guard let self = self,
                       let roomId = self.currentRoomId,
@@ -2942,20 +3032,38 @@ extension MPVPlayerViewModel {
             // If they HAVE phxRef (online), we KEEP them regardless of DB.
 
             let idsToRemove = currentMap.keys.filter { id in
-                let isOnline = !(currentMap[id]?.phxRefs.isEmpty ?? true)
+                // CRITICAL Phase 4 Fix: Use authoritative local map for Online status.
+                // Relying on Participant.phxRefs is unsafe during transitions because inherited
+                // observers don't trigger new join events to populate the struct.
+                let localRefs = self.activeConnectionRefs[id] ?? []
+                let isOnline = !localRefs.isEmpty
                 let isInDB = dbUserIds.contains(id)
 
                 // If Online: Keep (Source of Truth is Realtime)
                 if isOnline {
+                    if isInDB {
+                        // CRITICAL Phase 5 Fix: Reset ghost timer once they are reliably in DB
+                        self.ghostCandidateStartTimes.removeValue(forKey: id)
+                    }
+
                     // GHOST CHECK: If Online but NOT in DB for too long, kill it.
                     if let start = self.ghostCandidateStartTimes[id] {
                         if Date().timeIntervalSince(start) > 30.0 { // 30s tolerance
+                            // CRITICAL FIX: Transition Protection (Bible Landmine #132)
+                            // If user is transitioning, give them more time for the DB to catch up.
+                            if self.transitioningUserIds.contains(id) {
+                                if let expiry = self.transitionExpiryDate, Date() < (expiry + 30.0) {
+                                    // Phase 5: Protect them even more aggressively during transition + 30s grace
+                                    return false
+                                }
+                            }
+
                             LoggingManager.shared.warn(.watchParty, message: "👻 Ghost Detection: \(id) has been Online but missing from DB for >30s. Force removing.")
                             self.ghostCandidateStartTimes.removeValue(forKey: id)
                             return true // Force Remove
                         }
-                    } else {
-                        // Start tracking ghost candidacy
+                    } else if !isInDB {
+                        // Start tracking ghost candidacy only if NOT in DB
                         self.ghostCandidateStartTimes[id] = Date()
                     }
                     return false
@@ -2964,9 +3072,41 @@ extension MPVPlayerViewModel {
                 // If Offline, clear ghost data
                 self.ghostCandidateStartTimes.removeValue(forKey: id)
 
-                // If Offline and Not in DB: Remove (Stale)
-                if !isInDB { return true }
+                // If Offline and Not in DB: Apply grace period
+                if !isInDB {
+                    // CRITICAL FIX: Transition Protection (Bible Landmine #132)
+                    // If user is transitioning from Lobby, they might be missing from DB
+                    // (Lobby heartbeat stopped, Player heartbeat hasn't started + 10s offset).
+                    if self.transitioningUserIds.contains(id) {
+                        if let expiry = self.transitionExpiryDate, Date() < (expiry + 30.0) {
+                            // Phase 5: Skip removal - they are still in the transition window (+30s grace)
+                            NSLog("🛡️ Polling: Protecting %@ - user is in transition window", id)
+                            return false
+                        } else {
+                            // Window expired
+                            self.transitioningUserIds.remove(id)
+                        }
+                    }
 
+                    if let start = self.offlineCandidateStartTimes[id] {
+                        if Date().timeIntervalSince(start) > 10.0 { // 10s grace
+                            LoggingManager.shared.info(.watchParty, message: "🗑️ Polling: Removing \(id) - confirmed offline and missing from DB for >10s")
+                            self.offlineCandidateStartTimes.removeValue(forKey: id)
+                            return true
+                        }
+                    } else {
+                        // Start tracking candidate for removal
+                        self.offlineCandidateStartTimes[id] = Date()
+                    }
+                    return false // Keep for now (grace period)
+                }
+
+                // If Offline but STILL in DB: Keep (Stale connection, likely reconnecting)
+                self.offlineCandidateStartTimes.removeValue(forKey: id)
+                // Bible Landmine #132: DO NOT clear transition status here.
+                // A user might be in the DB from the Lobby state, but their Lobby heartbeat
+                // is about to stop. We must keep them protected until they join Player Realtime.
+                // self.transitioningUserIds.remove(id)
                 return false
             }
 
@@ -2977,7 +3117,10 @@ extension MPVPlayerViewModel {
                     let name = currentMap[id]?.name ?? "Someone"
                     // Check if they were "Joined" (Announced) before removing
                     if self.announcedParticipantIds.contains(id) {
-                         self.addSystemMessage("\(name) left") // Fallback leave message
+                         // CRITICAL FIX: Only announce for OTHER users, not self.
+                         if id != self.currentUserId {
+                             self.addSystemMessage("\(name) left") // Fallback leave message
+                         }
                          self.announcedParticipantIds.remove(id)
                     }
                     currentMap.removeValue(forKey: id)
@@ -3051,6 +3194,17 @@ extension MPVPlayerViewModel {
     private func handleSyncMessage(_ message: SyncMessage) async {
         // DEBUG: Log ALL incoming messages before any filtering
         LoggingManager.shared.debug(.watchParty, message: "Received sync message - type: \(message.type), sender: \(message.senderId ?? "unknown")")
+
+        // CRITICAL FIX: User confirmed in Player - Remove from transition protection
+        // This ensures that if they leave shortly after joining (within the 120s window),
+        // we honor the leave event instead of ignoring it as a "transition artifact".
+        if let rawSenderId = message.senderId {
+            let senderId = rawSenderId.lowercased()
+            if transitioningUserIds.contains(senderId) {
+                NSLog("%@", "🛡️ Presence: User \(senderId) confirmed in Player via \(message.type) - Removing transition protection")
+                transitioningUserIds.remove(senderId)
+            }
+        }
 
         // Host is authoritative for playback, but should still receive chat messages, READY signals, and REACTIONS
         if isWatchPartyHost && message.type != .chat && message.type != .ready && message.type != .reaction {

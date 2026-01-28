@@ -158,10 +158,15 @@ class PlayerViewModel: ObservableObject {
             appState.currentView = .player
 
             // CRITICAL FIX: Clear background lobby sessions for solo playback
-                if let zombieVM = appState.activeLobbyViewModel {
+            // For Watch Parties, we MUST preserve the LobbyViewModel so the Player can inherit the Realtime manager.
+            if let zombieVM = appState.activeLobbyViewModel {
+                if watchMode == .solo {
                     NSLog("🧹 PlayerVM: Solo playback started. Clearing active lobby session: %@", zombieVM.room.id)
                     appState.setActiveLobbyViewModel(nil)
+                } else {
+                    NSLog("🤝 PlayerVM: Watch Party playback started. Preserving lobby session for handoff: %@", zombieVM.room.id)
                 }
+            }
         }
 
         // FIX: Enter fullscreen immediately for Watch Party mode
@@ -1776,11 +1781,20 @@ class PlayerViewModel: ObservableObject {
                     // Valid to join (either Live or Next Up)
                     NSLog("✅ PlayerVM: Event %@ is JOINABLE (Live or Next Up)", roomId)
                 } else {
-                    NSLog("🚫 PlayerVM: Blocking join to STALE event room %@.", roomId)
-                    await MainActor.run {
-                        appState.isLoadingRoom = false
+                    // NEW: Relaxed Social Join
+                    // Check if room exists anyway. If it does, a friend might be in it or it was recently active.
+                    // This allows "friends joining friends" even if the card says 'finished'.
+                    NSLog("⚠️ PlayerVM: Event %@ is STALE on schedule. Checking database for active room...", roomId)
+                    let roomState = try await roomManager.getRoomState(roomId: roomId)
+                    if roomState != nil {
+                        NSLog("✅ PlayerVM: Event room %@ still exists. Allowing social join.", roomId)
+                    } else {
+                        NSLog("🚫 PlayerVM: Blocking join to STALE event room %@ (Room not found in DB).", roomId)
+                        await MainActor.run {
+                            appState.isLoadingRoom = false
+                        }
+                        return
                     }
-                    return
                 }
             }
 
@@ -2204,7 +2218,19 @@ class PlayerViewModel: ObservableObject {
             return
         }
 
+        // 🔍 Show "Searching for Subtitles..." notification
+        await MainActor.run {
+            self.appState?.isSearchingSubtitles = true
+        }
+
+        defer {
+            Task { @MainActor in
+                self.appState?.isSearchingSubtitles = false
+            }
+        }
+
         NSLog("🏥 [PlayerVM] Manual Refresh: Triggering deep subtitle search for %@", item.name)
+
 
         do {
             // Build stream hint for better matching
@@ -2220,9 +2246,18 @@ class PlayerViewModel: ObservableObject {
             let season = selectedSeason
             let episode = selectedEpisode
 
-            // Use metadata year if available
-            let yearValue = selectedMetadata?.year ?? item.year
-            let year = yearValue.flatMap { Int($0) }
+            // Use metadata year if available (Bible #131: Handle "2025–" and other range formats)
+            let yearStr = selectedMetadata?.year ?? item.year
+            let year: Int? = {
+                guard let str = yearStr, !str.isEmpty else { return nil }
+                // Extract first 4-digit sequence (e.g. "2025–" -> 2025)
+                let pattern = "\\b(19|20)\\d{2}\\b"
+                if let range = str.range(of: pattern, options: .regularExpression),
+                   let val = Int(str[range]) {
+                    return val
+                }
+                return Int(str) // Fallback
+            }()
 
             let subDLSubtitles = try await LocalAPIClient.shared.searchSubtitles(
                 imdbId: item.id,
@@ -2271,6 +2306,10 @@ class PlayerViewModel: ObservableObject {
                     // Update state on Main Actor
                     await MainActor.run {
                         self.selectedStream = stream
+                        if var health = self.appState?.providerHealth {
+                            health["subdl"] = "Degraded"
+                            self.appState?.providerHealth = health
+                        }
                         NSLog("✅ [PlayerVM] Manual Refresh: Added %d new subtitles to current stream", newSubs.count)
                     }
                 } else {

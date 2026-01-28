@@ -251,14 +251,14 @@ actor KeychainManager {
     private func deleteFromKeychain(service: String) throws {
         // Delete all versions (synced and local)
         let versions = [true, false]
-        
+
         for isSync in versions {
             var query: [String: Any] = [
                 kSecClass as String: kSecClassGenericPassword,
                 kSecAttrService as String: Self.serviceName,
                 kSecAttrAccount as String: service
             ]
-            
+
             if isSync {
                 query[kSecAttrSynchronizable as String] = true
             } else {
@@ -268,7 +268,7 @@ actor KeychainManager {
                 // Let's try explicit first.
                 query[kSecAttrSynchronizable as String] = false
             }
-            
+
             SecItemDelete(query as CFDictionary)
         }
 
@@ -304,6 +304,10 @@ actor KeychainManager {
             return
         }
 
-        try? data.write(to: path)
+        do {
+            try data.write(to: path)
+        } catch {
+            NSLog("%@", "❌ [KeychainManager] Failed to write credentials cache: \(error.localizedDescription)")
+        }
     }
 }

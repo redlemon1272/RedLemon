@@ -1581,6 +1581,116 @@ if [[ -f "$PLAYER_VM" ]]; then
 fi
 
 
+# =============================================================================
+# CHECK 75: Social Event Join Fallback (Landmine #136)
+# =============================================================================
+# Trigger: Missing DB fallback in SocialService or PlayerVM for stale events.
+# Rule: Friends can ALWAYS join friends. Must check getRoomState as fallback.
+print_header "Check 75: Social Event Join Fallback (Landmine #136)"
+
+SOCIAL_SERVICE="Sources/Features/Social/SocialService.swift"
+if [[ -f "$SOCIAL_SERVICE" ]]; then
+    if ! grep -q "Social Join Fallback" "$SOCIAL_SERVICE" || ! grep -q "getRoomState.*roomId" "$SOCIAL_SERVICE"; then
+        report "ERROR" "Landmine #136" "Social Join Risk: SocialService MUST allow joining stale event rooms if they still exist in the database (getRoomState fallback)." "$SOCIAL_SERVICE" "0" "Missing social join fallback logic"
+    else
+        echo -e "${GREEN}✅ SocialService has social join fallback logic.${NC}"
+    fi
+fi
+
+PLAYER_VM="Sources/Features/Player/PlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    if ! grep -q "Relaxed Social Join" "$PLAYER_VM" || ! grep -q "getRoomState.*roomId" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #136" "Social Join Risk: PlayerViewModel MUST allow joining stale event rooms if they still exist in the database (getRoomState fallback)." "$PLAYER_VM" "0" "Missing social join fallback logic"
+    else
+        echo -e "${GREEN}✅ PlayerViewModel has social join fallback logic.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 76: JSON-Body Health Verification (Landmine #137)
+# =============================================================================
+# Trigger: checkHealth returning "Online" solely based on HTTP 200.
+# Rule: Must decode JSON body to verify status field for SubDL/RD.
+print_header "Check 76: JSON Health Verification (Landmine #137)"
+
+SUBDL_CLIENT="Sources/Server/Services/SubDLClient.swift"
+if [[ -f "$SUBDL_CLIENT" ]]; then
+    if ! (grep -q "struct HealthResponse: Decodable" "$SUBDL_CLIENT" || grep -q "SubDLResponse" "$SUBDL_CLIENT") || ! grep -q "JSONDecoder().decode" "$SUBDL_CLIENT"; then
+        report "ERROR" "Landmine #137" "Health Check Risk: SubDLClient MUST decode JSON body to verify status. HTTP 200 != Authorized." "$SUBDL_CLIENT" "0" "Missing JSON decoding in checkHealth"
+    else
+        echo -e "${GREEN}✅ SubDLClient performs JSON-aware health checks.${NC}"
+    fi
+fi
+
+RD_CLIENT="Sources/Server/Debrid/RealDebridClient.swift"
+if [[ -f "$RD_CLIENT" ]]; then
+    if ! grep -q "\/user" "$RD_CLIENT" || ! grep -q "Online" "$RD_CLIENT" || ! (grep -q "JSONDecoder().decode" "$RD_CLIENT" || grep -q "getUserInfo" "$RD_CLIENT"); then
+        # Check if it uses /user and decodes to verify status
+        if ! grep -q "\/user" "$RD_CLIENT"; then
+            report "ERROR" "Landmine #137" "Health Check Risk: RealDebridClient MUST verify user account status for health, not just HTTP 200." "$RD_CLIENT" "0" "Missing /user check in checkHealth"
+        else
+            report "ERROR" "Landmine #137" "Health Check Risk: RealDebridClient MUST decode JSON body to verify status. HTTP 200 != Authorized." "$RD_CLIENT" "0" "Missing JSON decoding in checkHealth"
+        fi
+    else
+        echo -e "${GREEN}✅ RealDebridClient performs user-aware health checks.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 77: Fuzzy Year Matching (Landmine #138)
+# =============================================================================
+# Trigger: SubDL search requiring exact year match.
+# Rule: Allow ±1 year and handle trailing dashes in metadata.
+print_header "Check 77: Fuzzy Year Matching (Landmine #138)"
+
+if [[ -f "$SUBDL_CLIENT" ]]; then
+    if ! grep -q "allowedYears" "$SUBDL_CLIENT" && ! grep -q "abs.*1" "$SUBDL_CLIENT"; then
+        report "ERROR" "Landmine #138" "Year Match Risk: SubDLClient MUST allow ±1 year during local result filtering." "$SUBDL_CLIENT" "0" "Missing ±1 year tolerance"
+    else
+        echo -e "${GREEN}✅ SubDLClient uses fuzzy year matching.${NC}"
+    fi
+fi
+# =============================================================================
+# CHECK 65: Dependency Injection Race (Landmine #131)
+# =============================================================================
+# Trigger: Using implicit injection order in .task for MPVPlayerView.
+# Fix: appState must be assigned BEFORE startWatchPartySync.
+print_header "Check 65: Dependency Injection Race (Landmine #131)"
+
+MPV_VIEW="$SOURCES_DIR/Features/Player/MPVPlayerView.swift"
+if [[ -f "$MPV_VIEW" ]]; then
+    # We use awk to find the .task block and ensure assignment happens before sync
+    if ! awk '
+        /.task \{/ { in_task=1; assigned=0; next }
+        in_task && /viewModel.appState = appState/ { assigned=1; next }
+        in_task && /startWatchPartySync/ && !/^[[:space:]]*\/\// {
+            if (assigned == 0) { exit 1 }
+        }
+        in_task && /\}/ { in_task=0 }
+    ' "$MPV_VIEW"; then
+        report "ERROR" "Landmine #131" "Race Condition: 'viewModel.appState = appState' MUST occur BEFORE 'startWatchPartySync' inside '.task'. Implicit injection fails on first load." "$MPV_VIEW" "0" "Incorrect Injection Order"
+    else
+        echo -e "${GREEN}✅ MPVPlayerView dependency injection order verified.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 78: Sticky Ghost Protocol (Landmine #140)
+# =============================================================================
+# Trigger: Transition protection flag never cleared on activity.
+# Rule: transitioningUserIds.remove() MUST be called in handleSyncMessage.
+print_header "Check 78: Sticky Ghost Protocol (Landmine #140)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    if ! grep -q "transitioningUserIds.remove" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #140" "Sticky Ghost Risk: MPVPlayerViewModel MUST clear 'transitioningUserIds' upon confirming user activity (handleSyncMessage)." "$PLAYER_VM" "0" "Missing transitioningUserIds.remove logic"
+    else
+        echo -e "${GREEN}✅ Sticky Ghost protection (transition clearing) verified.${NC}"
+    fi
+fi
+
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"
@@ -1602,7 +1712,6 @@ fi
 echo ""
 echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
 
-# Exit Code Logic
 # Exit Code Logic: Zero Warning Policy Enforcement (Landmine #135)
 if [[ $ERROR_COUNT -gt 0 || $WARNING_COUNT -gt 0 ]]; then
     if [[ $WARNING_COUNT -gt 0 ]]; then
@@ -1615,3 +1724,4 @@ else
     echo -e "${GREEN}✅ PASSED: No blocking issues or warnings found.${NC}"
     exit 0
 fi
+

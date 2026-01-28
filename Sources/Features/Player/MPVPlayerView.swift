@@ -450,6 +450,10 @@ struct MPVPlayerView: View {
         .task {
             LoggingManager.shared.debug(.videoRendering, message: "MPVPlayerView .task starting")
 
+            // CRITICAL FIX: Inject appState immediately to ensure ViewModel has access to global state
+            // Must be done BEFORE startWatchPartySync to allow inheriting the active lobby session.
+            viewModel.appState = appState
+
             // CRITICAL: Start watch party sync BEFORE loading stream
             // This ensures isInWatchParty is set when video loads, activating the ready gate
             if appState.player.currentWatchMode == .watchParty, let roomId = appState.player.currentRoomId {
@@ -462,9 +466,6 @@ struct MPVPlayerView: View {
                     LoggingManager.shared.error(.watchParty, message: "Failed to start watch party sync: \(error.localizedDescription)")
                 }
             }
-
-            // CRITICAL: Inject appState immediately to ensure ViewModel has access to global state
-            viewModel.appState = appState
 
             // Now load stream with watch party mode properly set
             LoggingManager.shared.debug(.videoRendering, message: "About to call loadStream - isInWatchParty: \(viewModel.isInWatchParty)")

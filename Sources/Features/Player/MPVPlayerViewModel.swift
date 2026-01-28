@@ -2047,6 +2047,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     /// Adds a local system message to the chat (not broadcasted)
     private func addSystemMessage(_ text: String) {
+        NSLog("💬 PLAYER SYSTEM MESSAGE: %@", text)
         let message = ChatMessage(
             id: UUID().uuidString,
             username: "System",
@@ -2190,7 +2191,6 @@ class MPVPlayerViewModel: ObservableObject {
         LoggingManager.shared.info(.videoRendering, message: "Stopping MPV playback...")
         mpvWrapper.pause() // Ensure paused state before hard stop
         mpvWrapper.stop()
-
         // CRITICAL FIX: Manually destroy MPV instance.
         // This ensures the underlying libmpv instance and render context are freed
         // even if this ViewModel is retained by a lingering closure or cycle.
@@ -2332,6 +2332,7 @@ extension MPVPlayerViewModel {
         await realtimeManager?.registerObserver(id: "player", onPresence: { [weak self] (action: PresenceAction, userId: String, metadata: [String: Any]?) in
             _ = Task { @MainActor in
                 guard let self = self else { return }
+                NSLog("👤 Presence Event: action=%@, userId=%@", action.rawValue, userId)
 
                 // PERFORMANCE DIAGNOSTIC: Track how long participant updates take
                 let startTime = CACurrentMediaTime()
@@ -2453,6 +2454,7 @@ extension MPVPlayerViewModel {
                             // If upgrading from DB-only (Offline) to Realtime (Online), announce it
                             if wasOffline && actualUserId != self.currentUserId {
                                 if !self.announcedParticipantIds.contains(actualUserId) {
+                                    NSLog("👤 Presence: Announcing JOIN for guest: %@", actualUserId)
                                     self.addSystemMessage("\(updatedParticipants[index].name) joined")
                                     self.announcedParticipantIds.insert(actualUserId)
                                 }
@@ -2485,6 +2487,7 @@ extension MPVPlayerViewModel {
                             // 💬 System Message: Join
                             if actualUserId != self.currentUserId {
                                 if !self.announcedParticipantIds.contains(actualUserId) {
+                                    NSLog("👤 Presence: Announcing JOIN for guest: %@", actualUserId)
                                     self.addSystemMessage("\(username) joined")
                                     self.announcedParticipantIds.insert(actualUserId)
                                 }
@@ -2585,8 +2588,9 @@ extension MPVPlayerViewModel {
                                     currentParticipants.remove(at: index)
                                     self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
 
-                                    // 💬 System Message: Leave (Only for others)
+                                     // 💬 System Message: Leave (Only for others)
                                     if actualUserId != self.currentUserId {
+                                        NSLog("👤 Presence: Announcing LEAVE for guest: %@", actualUserId)
                                         self.addSystemMessage("\(name) left")
                                         self.announcedParticipantIds.remove(actualUserId) // FIX: Allow re-announce on return
                                     }

@@ -63,8 +63,8 @@ class MPVWrapper: ObservableObject {
         }
 
         LoggingManager.shared.info(.videoRendering, message: "MPV handle created")
-        print("!!! MPVWrapper initialized - Build Version: 2026-01-28-PRESENCE-FIX-v1 !!!")
-        NSLog("🛡️ MPVWrapper: Build Version: 2026-01-28-PRESENCE-FIX-v1")
+        print("!!! MPVWrapper initialized - Build Version: 2026-01-28-PRESENCE-FIX-v2 !!!")
+        NSLog("🛡️ MPVWrapper: Build Version: 2026-01-28-PRESENCE-FIX-v2")
     }
 
     func setupVideo(in view: NSView) {

@@ -612,10 +612,12 @@ class LobbyEventRouter: ObservableObject {
             return
         }
 
-        // Use the stream hash that was synced in handleGuestStartLogic
+        // Use the stream hash and title that was synced in handleLobbyPreparePlayback
         let preferredHash = appState.player.currentWatchPartyRoom?.selectedStreamHash
+        let preferredTitle = appState.player.currentWatchPartyRoom?.selectedStreamTitle
+        let preferredProvider = appState.player.currentWatchPartyRoom?.selectedProvider ?? appState.player.currentWatchPartyRoom?.sourceQuality
 
-        logging("🎬 Guest: Launching player for %@ (Synced Start)", mediaItem.name)
+        logging("🎬 Guest: Launching player for %@ (Synced Start: Hash=%@, Title=%@, Provider=%@)", mediaItem.name, preferredHash ?? "nil", preferredTitle ?? "nil", preferredProvider ?? "nil")
 
         await appState.player.playMedia(
             mediaItem,
@@ -625,7 +627,9 @@ class LobbyEventRouter: ObservableObject {
             isHost: false,
             isEvent: false,
             triggerSource: "watch_party_sync_signal",
-            preferredStreamHash: preferredHash
+            preferredStreamHash: preferredHash,
+            preferredStreamTitle: preferredTitle,
+            preferredStreamProvider: preferredProvider
         )
     }
 
@@ -648,16 +652,36 @@ class LobbyEventRouter: ObservableObject {
         NSLog("🎬 Guest: Received PREPARE signal: %@", chatText)
         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host is preparing playback..."])
 
-        // 1. Extract Hash/FileIdx from Payload (Fast Path)
-        // Payload: LOBBY_PREPARE_PLAYBACK|<Hash>|<FileIdx>
+        // 1. Extract Metadata from Payload (Fast Path)
+        // Payload: LOBBY_PREPARE_PLAYBACK|<Hash>|<FileIdx>|<Title>|<Quality>|<Size>|<Provider>
         var targetHash: String?
+        var targetTitle: String?
+        var targetQuality: String?
+        var targetSize: String?
+        var targetProvider: String?
         // var targetFileIdx: Int? // Unused for resolution, used for validation if needed
 
         let parts = chatText.components(separatedBy: "|")
         if parts.count >= 2 {
             targetHash = parts[1]
-            if targetHash?.isEmpty == true { targetHash = nil } // Handle empty string
+            if targetHash?.isEmpty == true { targetHash = nil }
             NSLog("✅ Guest: Extracted Hash from Payload: %@", targetHash ?? "nil")
+        }
+        
+        if parts.count >= 4 {
+            targetTitle = parts[3]
+            targetQuality = parts[4]
+            if targetTitle?.isEmpty == true { targetTitle = nil }
+            if targetQuality?.isEmpty == true { targetQuality = nil }
+            NSLog("✅ Guest: Extracted Title fallback: %@ (%@)", targetTitle ?? "nil", targetQuality ?? "nil")
+        }
+        
+        if parts.count >= 7 {
+            targetSize = parts[5]
+            targetProvider = parts[6]
+            if targetSize?.isEmpty == true { targetSize = nil }
+            if targetProvider?.isEmpty == true { targetProvider = nil }
+            NSLog("✅ Guest: Extracted Identity info: Size=%@, Provider=%@", targetSize ?? "nil", targetProvider ?? "nil")
         }
 
         // 2. Fetch fresh room state (Fallback / Hydration)
@@ -675,17 +699,18 @@ class LobbyEventRouter: ObservableObject {
         // 4. Preload Stream
         // Priority: Payload Hash > DB Hash > Unlocked URL (Direct) > Best Match (Double Fallback)
         let effectiveHash = targetHash ?? roomState.streamHash
+        let effectiveTitle = targetTitle ?? roomState.sourceQuality // sourceQuality often holds title if hash is nil
+        let effectiveProvider = targetProvider ?? (effectiveHash == nil ? "debrid" : nil)
 
-        // FIX (v1.0.80): Removed v1.0.77 code that used host's unlocked URL directly.
-        // Real-Debrid URLs are IP-locked to the user who unlocked them.
-        // Guests MUST unlock their own stream, even if no hash is available.
-        // If no hash is available and guest can't resolve, playback will fail gracefully.
-        //
-        // Previous v1.0.77 behavior caused immediate EOF because the guest's IP didn't match
-        // the IP that unlocked the URL (the host's IP).
-        if effectiveHash == nil {
-            NSLog("⚠️ Guest: No stream hash available. Guests cannot use host's URL (IP-locked). Will attempt fresh resolution.")
-            // Don't use host's URL - force fresh resolution which may find the same content
+        // Sync to Player State for playMedia() to inherit later
+        if var room = viewModel.appState?.player.currentWatchPartyRoom {
+            room.selectedStreamHash = effectiveHash
+            room.selectedStreamTitle = targetTitle
+            room.selectedQuality = targetQuality
+            room.selectedProvider = targetProvider
+            room.sourceQuality = targetTitle // Fallback for legacy UI
+            viewModel.appState?.player.currentWatchPartyRoom = room
+            NSLog("✅ Guest: Synced host metadata to Room State: Hash=%@, Title=%@, Provider=%@", effectiveHash ?? "nil", targetTitle ?? "nil", targetProvider ?? "nil")
         }
 
         do {
@@ -700,7 +725,9 @@ class LobbyEventRouter: ObservableObject {
                 quality: .fullHD,
                 streamHash: effectiveHash,
                 season: roomState.season,
-                episode: roomState.episode
+                episode: roomState.episode,
+                preferredTitle: effectiveTitle,
+                preferredProvider: effectiveProvider
             )
 
             // DEBUG: Log the URL that was preloaded

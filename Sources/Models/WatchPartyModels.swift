@@ -72,6 +72,7 @@ struct WatchPartyRoom: Identifiable {
     var selectedFileIdx: Int? // Host's selected file index
     var selectedQuality: String? // Host's selected quality
     var selectedStreamTitle: String? // AI_BIBLE #91: Host's stream title for fallback matching when hash is nil
+    var selectedProvider: String? // Host's selected provider (for targeted resolution)
     var unlockedStreamURL: String? // Host's unlocked stream URL
     var subtitleUrl: String? = nil // Host's selected subtitle URL
 

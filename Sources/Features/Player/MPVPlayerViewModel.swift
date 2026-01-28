@@ -60,6 +60,8 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Failsafe: Track announced participants to prevent "Double Join" messages (History + Realtime race)
     private var announcedParticipantIds: Set<String> = []
+    private var transitioningUserIds: Set<String> = [] // BIBILE Landmine #132: Track users moving from Lobby
+    private var transitionExpiryDate: Date?
 
     // Failsafe: Track "Ghost Candidates" (Users who are Online in Realtime but missing from DB for >30s)
     // This fixes the "Missing Leave" bug where a user leaves via API but the socket disconnect is missed.
@@ -2308,6 +2310,14 @@ extension MPVPlayerViewModel {
         // recognizing the Lobby-level Phoenix Refs immediately. (Bible Landmine #47/51)
         if let existingRoom = appState?.player.currentWatchPartyRoom {
             LoggingManager.shared.info(.watchParty, message: "🛡️ Transition Sync: Processing \(existingRoom.participants.count) participants from AppState")
+
+            // BIBILE Landmine #132: Mark existing participants as transitioning
+            // This prevents the host's DB poll from removing them as "Zombies" before they
+            // can announce themselves in the Player room.
+            self.transitioningUserIds = Set(existingRoom.participants.map { $0.id.lowercased() })
+            self.transitionExpiryDate = Date().addingTimeInterval(60) // 1m window
+            LoggingManager.shared.info(.watchParty, message: "🛡️ Transition Sync: Marked \(self.transitioningUserIds.count) users as transitioning")
+
             for participant in existingRoom.participants {
                 let normalizedPId = participant.id.lowercased()
                 if !participant.phxRefs.isEmpty {
@@ -2550,6 +2560,15 @@ extension MPVPlayerViewModel {
                                 self.activeConnectionRefs[actualUserId] = refs
 
                                 // 2. Bible Landmine #51: Only consider Offline when count hits Zero
+                                // 3. Transition Protection (Bible Landmine #132)
+                                if !refs.isEmpty || self.transitioningUserIds.contains(actualUserId.lowercased()) {
+                                    if let expiry = self.transitionExpiryDate, Date() < expiry {
+                                        LoggingManager.shared.info(.watchParty, message: "🛡️ Ignoring leave for \(actualUserId) - User still transitioning or has active connections")
+                                        self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                        return
+                                    }
+                                }
+
                                 if !refs.isEmpty {
                                     LoggingManager.shared.info(.watchParty, message: "🛡️ Ignoring leave for \(actualUserId) - User still has \(refs.count) active connections")
                                     self.pendingLeaveTasks.removeValue(forKey: actualUserId)
@@ -2605,6 +2624,12 @@ extension MPVPlayerViewModel {
 
                     for p in updatedParticipants {
                         let normalizedId = p.id.lowercased()
+
+                        // If we see a user active in Realtime, clear their transition status
+                        if !p.phxRefs.isEmpty {
+                            self.transitioningUserIds.remove(normalizedId)
+                        }
+
                         if let existing = uniqueParticipants[normalizedId] {
                             // Merge logic: Keep the one with phxRefs, or the newer one
                             if existing.phxRefs.isEmpty && !p.phxRefs.isEmpty {
@@ -2998,6 +3023,19 @@ extension MPVPlayerViewModel {
 
                 // If Offline and Not in DB: Apply grace period
                 if !isInDB {
+                    // CRITICAL FIX: Transition Protection (Bible Landmine #132)
+                    // If user is transitioning from Lobby, they might be missing from DB
+                    // (Lobby heartbeat stopped, Player heartbeat hasn't started + 10s offset).
+                    if self.transitioningUserIds.contains(id) {
+                        if let expiry = self.transitionExpiryDate, Date() < expiry {
+                            // Skip removal - they are still in the transition window
+                            return false
+                        } else {
+                            // Window expired
+                            self.transitioningUserIds.remove(id)
+                        }
+                    }
+
                     if let start = self.offlineCandidateStartTimes[id] {
                         if Date().timeIntervalSince(start) > 10.0 { // 10s grace
                             LoggingManager.shared.info(.watchParty, message: "🗑️ Polling: Removing \(id) - confirmed offline and missing from DB for >10s")
@@ -3013,6 +3051,8 @@ extension MPVPlayerViewModel {
 
                 // If Offline but STILL in DB: Keep (Stale connection, likely reconnecting)
                 self.offlineCandidateStartTimes.removeValue(forKey: id)
+                // Also clear transition status since they are confirmed in DB
+                self.transitioningUserIds.remove(id)
                 return false
             }
 

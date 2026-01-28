@@ -10,12 +10,13 @@
 
 
 # ⚡️ THE SURVIVAL GUIDE (Start Here)
-> **The 80/20 Rule: 80% of crashes come from ignoring these 3 rules.**
+> **The 80/20 Rule: 80% of crashes come from ignoring these 4 rules.**
 
-1.  **Read Landmines #1, #25, & #35**:
+1.  **Read Landmines #1, #25, #35, & #132**:
     *   **#1 (The God Class)**: `MPVPlayerViewModel` is fragile. Touch it with fear.
     *   **#25 (MainActor)**: NEVER use `DispatchQueue.main.async`. Use `Task { @MainActor }`.
     *   **#35 (Ghost Streams)**: DB state MUST be cleared when Host leaves.
+    *   **#132 (Inherited Observers)**: Transitions MUST explicitly back-fill Realtime state (phxRef) and use authoritative polling, or users vanish at 120s.
 2.  **Copy-Paste Patterns**: Use **Part 1.5** for Concurrency and Logging. Do not invent your own.
 3.  **Debug via Symptoms**: Use the **Symptom Checker** below to find the specific Landmine.
 
@@ -98,6 +99,7 @@
 | **Zero KB Disk Usage** | Edge Function `df` failure / Relative path error | #97 |
 | **Stale User Last Seen** | "12 days ago" for active user | #98 |
 | **Void RPC Build Failure** | type 'Void' cannot conform to 'Decodable' | #99 |
+| **"User Left" at 120s (Watch Party)** | "Inherited Observer" gap + "Sticky Ghost" timer. Shield drop aligns with DB cleanup. | #132 |
 | **Guest shows "not connected"** | Realtime setup skipped after DB join fails (RLS, permissions) | #101 |
 | **"403 Forbidden" / RLS Error** | Missing cryptographic signature on DB write | #103 |
 | **Partial Payment Success** | Non-atomic write (Log success, Credit fail) | #104 |

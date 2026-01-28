@@ -1701,6 +1701,23 @@ if [[ -f "$MPV_VIEW" ]]; then
     fi
 fi
 
+>>> Check 54: Ghost Detection Safety (Landmine #132)
+------------------------------------------------------------
+echo "Verifying Ghost Detection safety..."
+# Heuristic: If we see 'ghostCandidateStartTimes' being assigned (starting a timer),
+# we MUST also see 'removeValue' (clearing it) in the same file.
+GHOST_ASSIGNMENTS=$(cat Sources/Features/Player/MPVPlayerViewModel.swift 2>/dev/null | grep "ghostCandidateStartTimes\[.*\] =" || true)
+if [[ -n "$GHOST_ASSIGNMENTS" ]]; then
+    # Check for cleanup
+    if ! grep -q "ghostCandidateStartTimes.removeValue" Sources/Features/Player/MPVPlayerViewModel.swift; then
+        report "ERROR" "GhostLogic" "Ghost Timer started but never cleared (Sticky Ghost Risk - Landmine #132)." "MPVPlayerViewModel.swift" "0" "Check logic"
+    else
+        echo "✅ Ghost timer cleanup detected."
+    fi
+fi
+echo "✅ Ghost detection logic verified."
+
+
     if [[ $WARNING_COUNT -gt 0 ]]; then
         echo -e "${RED}❌ FAILED: Zero Warning Policy Violation. All warnings must be resolved or suppressed.${NC}"
     else
@@ -1711,3 +1728,4 @@ else
     echo -e "${GREEN}✅ PASSED: No blocking issues or warnings found.${NC}"
     exit 0
 fi
+

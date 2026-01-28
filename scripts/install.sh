@@ -23,7 +23,7 @@ echo "--------------------------------"
 
 # 1. Download
 echo -e "${BLUE}⬇️  Downloading latest version...${NC}"
-curl -L -o "$TEMP_DMG" "$DOWNLOAD_URL" --progress-bar
+curl -f -L -o "$TEMP_DMG" "$DOWNLOAD_URL" --progress-bar
 
 # 2. Mount
 echo -e "${BLUE}💿 Mounting disk image...${NC}"

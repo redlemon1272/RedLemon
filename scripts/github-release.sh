@@ -53,7 +53,7 @@ curl -L -s -X POST \
   -H "Authorization: Bearer $GH_PAT" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   -H "Content-Type: application/octet-stream" \
-  "$UPLOAD_URL?name=$(basename "$DMG_PATH")" \
+  "$UPLOAD_URL?name=RedLemon.dmg" \
   --data-binary "@$DMG_PATH"
 
 echo "✅ GitHub Release $VERSION and Asset Uploaded Successfully!"

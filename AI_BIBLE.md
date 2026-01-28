@@ -1293,6 +1293,7 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 2. **Initialization**: `SPUStandardUpdaterController` MUST use `startingUpdater: true`.
 3. **Forcing**: Use `sparkle:criticalUpdate="true"` for mandatory fixes.
 4. **Key Verification**: Agents MUST verify presence of Private Sparkle Key in Keychain (`./.build/artifacts/sparkle/bin/sign_update` check) BEFORE starting build.
+5. **Identity Firewall**: The `sync-to-public.sh` script MUST enforce the `redlemon1272` identity. Never manually commit to the public repo; let the script handle the "masking" to prevent private email leaks.
 
 ## Release Protocol (The "Satellite-First" Standard)
 **Mandatory 10-Step Sequence for AI Assistants:**
@@ -1310,6 +1311,7 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 9.  **Merge & Tag**: (Turbo-ready) Run `./scripts/merge-and-tag.sh v<VERSION>`.
     - *Action*: This merges your feature/release branch into `main`, tags it, and pushes both.
 10. **Public Mirroring**: Run `./scripts/sync-to-public.sh` and push to the public repository.
+    - *Protection*: This script automatically enforces the `redlemon1272` identity for the public history.
 
 ## Anti-Regression Shield (Advisory)
 To prevent reintroducing known bugs ("Landmines"), run the architecture scanner during development:

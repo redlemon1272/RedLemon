@@ -2258,7 +2258,7 @@ struct CinemetaMetadata: Codable {
 extension MPVPlayerViewModel {
     /// Start watch party sync as host or guest
     func startWatchPartySync(roomId: String, isHost: Bool) async throws {
-        NSLog("🎬 MPVPlayerViewModel: Starting watch party: roomId=\(roomId), isHost=\(isHost)")
+        NSLog("%@", "🎬 MPVPlayerViewModel: Starting watch party: roomId=\(roomId), isHost=\(isHost)")
 
         self.currentRoomId = roomId
         self.isWatchPartyHost = isHost
@@ -2467,11 +2467,12 @@ extension MPVPlayerViewModel {
                                  }
                              }
 
-                             // CRITICAL FIX: Only remove from transitioning set when TRULY back in Realtime
-                             if self.transitioningUserIds.contains(actualUserId.lowercased()) {
+                            // CRITICAL FIX: DO NOT remove from transitioning set here.
+                            // The 120s window (Landmine #132) must be a HARD SHIELD to absorb DB polling lag.
+                            /* if self.transitioningUserIds.contains(actualUserId.lowercased()) {
                                  NSLog("🛡️ Transition Sync: User %@ successfully reconnected to Realtime - clearing protection", actualUserId)
                                  self.transitioningUserIds.remove(actualUserId.lowercased())
-                             }
+                             } */
 
                             if let name = metaUsername {
                                 updatedParticipants[index].name = name
@@ -2506,11 +2507,12 @@ extension MPVPlayerViewModel {
                                 }
                             }
 
-                            // CRITICAL FIX: Only remove from transitioning set when TRULY back in Realtime
-                            if self.transitioningUserIds.contains(actualUserId.lowercased()) {
+                            // CRITICAL FIX: DO NOT remove from transitioning set here.
+                            // The 120s window (Landmine #132) must be a HARD SHIELD to absorb DB polling lag.
+                            /* if self.transitioningUserIds.contains(actualUserId.lowercased()) {
                                 NSLog("🛡️ Transition Sync: User %@ (new) successfully joined Realtime - clearing protection", actualUserId)
                                 self.transitioningUserIds.remove(actualUserId.lowercased())
-                            }
+                            } */
                         }
 
                         // ENSURE SELF IS IN LIST
@@ -2644,10 +2646,11 @@ extension MPVPlayerViewModel {
                     for p in updatedParticipants {
                         let normalizedId = p.id.lowercased()
 
-                        // If we see a user active in Realtime, clear their transition status
-                        if !p.phxRefs.isEmpty {
+                        // CRITICAL FIX: DO NOT clear transition status based on phx_ref presence here.
+                        // The User Room transition window must remain active for its full duration.
+                        /* if !p.phxRefs.isEmpty {
                             self.transitioningUserIds.remove(normalizedId)
-                        }
+                        } */
 
                         if let existing = uniqueParticipants[normalizedId] {
                             // Merge logic: Keep the one with phxRefs, or the newer one
@@ -2901,8 +2904,8 @@ extension MPVPlayerViewModel {
     private func startPlaybackHeartbeat() {
         playbackHeartbeatTask?.cancel()
         playbackHeartbeatTask = Task { [weak self] in
-            // OPTIMIZATION: Initial delay to stagger from WebSocket heartbeat (30s)
-            try? await Task.sleep(nanoseconds: 10_000_000_000) // 10s initial offset
+            // CRITICAL FIX: Reduce initial delay to 1s to fill the gap after Lobby heartbeat stops.
+            try? await Task.sleep(nanoseconds: 1_000_000_000) // 1s initial offset
             while !Task.isCancelled {
                 guard let self = self,
                       let roomId = self.currentRoomId,

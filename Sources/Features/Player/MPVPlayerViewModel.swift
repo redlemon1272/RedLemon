@@ -2282,7 +2282,6 @@ extension MPVPlayerViewModel {
         self.readyGuestIds.removeAll()
         self.readySignalsSentCount = 0
         // FIX: Reset tracking
-        self.announcedParticipantIds.removeAll()
         self.ghostCandidateStartTimes.removeAll()
         self.offlineCandidateStartTimes.removeAll()
 
@@ -2315,16 +2314,20 @@ extension MPVPlayerViewModel {
             // This prevents the host's DB poll from removing them as "Zombies" before they
             // have a chance to reconnect to the player channel.
             self.transitioningUserIds = Set(existingRoom.participants.map { $0.id.lowercased() })
-            self.transitionExpiryDate = Date().addingTimeInterval(60) // 1m window
-            NSLog("🛡️ Transition Sync: Marked %d users as transitioning", self.transitioningUserIds.count)
+            self.transitionExpiryDate = Date().addingTimeInterval(120) // 2m window (was 1m)
+            NSLog("🛡️ Transition Sync: Marked %d users as transitioning (120s window)", self.transitioningUserIds.count)
 
             for participant in existingRoom.participants {
                 let normalizedPId = participant.id.lowercased()
+
+                // CRITICAL FIX: Preserve already-announced status to prevent join message spam
+                self.announcedParticipantIds.insert(normalizedPId)
+
                 if !participant.phxRefs.isEmpty {
                     self.activeConnectionRefs[normalizedPId] = participant.phxRefs
-                    NSLog("🛡️ Transition Sync: Inherited %d refs for user %@", participant.phxRefs.count, normalizedPId)
+                    NSLog("🛡️ Transition Sync: Inherited %d refs and marked announced for user %@", participant.phxRefs.count, normalizedPId)
                 } else {
-                    NSLog("⚠️ Transition Sync: No refs found for participant %@", normalizedPId)
+                    NSLog("⚠️ Transition Sync: Marked announced but no refs found for participant %@", normalizedPId)
                 }
             }
         } else {
@@ -2455,14 +2458,20 @@ extension MPVPlayerViewModel {
                             self.activeConnectionRefs[actualUserId, default: []].insert(userId) // Track officially
                             LoggingManager.shared.info(.watchParty, message: "Updated existing participant \(actualUserId) with Ref: \(userId) (Total Refs: \(updatedParticipants[index].phxRefs.count))")
 
-                            // If upgrading from DB-only (Offline) to Realtime (Online), announce it
-                            if wasOffline && actualUserId != self.currentUserId {
-                                if !self.announcedParticipantIds.contains(actualUserId) {
-                                    NSLog("👤 Presence: Announcing JOIN for guest: %@", actualUserId)
-                                    self.addSystemMessage("\(updatedParticipants[index].name) joined")
-                                    self.announcedParticipantIds.insert(actualUserId)
-                                }
-                            }
+                             // If upgrading from DB-only (Offline) to Realtime (Online), announce it
+                             if wasOffline && actualUserId != self.currentUserId {
+                                 if !self.announcedParticipantIds.contains(actualUserId) {
+                                     NSLog("👤 Presence: Announcing JOIN for guest: %@", actualUserId)
+                                     self.addSystemMessage("\(updatedParticipants[index].name) joined")
+                                     self.announcedParticipantIds.insert(actualUserId)
+                                 }
+                             }
+
+                             // CRITICAL FIX: Only remove from transitioning set when TRULY back in Realtime
+                             if self.transitioningUserIds.contains(actualUserId.lowercased()) {
+                                 NSLog("🛡️ Transition Sync: User %@ successfully reconnected to Realtime - clearing protection", actualUserId)
+                                 self.transitioningUserIds.remove(actualUserId.lowercased())
+                             }
 
                             if let name = metaUsername {
                                 updatedParticipants[index].name = name
@@ -2495,6 +2504,12 @@ extension MPVPlayerViewModel {
                                     self.addSystemMessage("\(username) joined")
                                     self.announcedParticipantIds.insert(actualUserId)
                                 }
+                            }
+
+                            // CRITICAL FIX: Only remove from transitioning set when TRULY back in Realtime
+                            if self.transitioningUserIds.contains(actualUserId.lowercased()) {
+                                NSLog("🛡️ Transition Sync: User %@ (new) successfully joined Realtime - clearing protection", actualUserId)
+                                self.transitioningUserIds.remove(actualUserId.lowercased())
                             }
                         }
 
@@ -3056,8 +3071,10 @@ extension MPVPlayerViewModel {
 
                 // If Offline but STILL in DB: Keep (Stale connection, likely reconnecting)
                 self.offlineCandidateStartTimes.removeValue(forKey: id)
-                // Also clear transition status since they are confirmed in DB
-                self.transitioningUserIds.remove(id)
+                // Bible Landmine #132: DO NOT clear transition status here.
+                // A user might be in the DB from the Lobby state, but their Lobby heartbeat
+                // is about to stop. We must keep them protected until they join Player Realtime.
+                // self.transitioningUserIds.remove(id)
                 return false
             }
 

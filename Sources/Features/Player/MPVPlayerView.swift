@@ -433,6 +433,18 @@ struct MPVPlayerView: View {
                         }
                     }
 
+                    // 1. Block for all Events (System Hosted)
+                    if appState.player.isEventPlayback {
+                        LoggingManager.shared.debug(.videoRendering, message: "Ignored Spacebar (Event Playback Restricted)")
+                        return nil // Consume event silently
+                    }
+
+                    // 2. Block for Watch Party Guests (Host Only)
+                    if appState.player.currentWatchMode == .watchParty && !appState.player.isWatchPartyHost {
+                        LoggingManager.shared.debug(.videoRendering, message: "Ignored Spacebar (Guest Restricted)")
+                        return nil // Consume event silently
+                    }
+
                     viewModel.togglePlayPause()
                     return nil // Consume event
                 }

@@ -128,6 +128,7 @@
 | **Event Sync Noise** | Non-user seeks shown during events | #133 |
 | **Seek Notification Flood** | Large drift correction triggers spam | #134 |
 | **Scanner Proximity Failure** | Guard too far from trigger | #135 |
+| **Guest "Left" Immediately** | Call to `sync` runs before `appState` injection | #132 |
 
 ## 🚨 Critical Landmines
 
@@ -559,6 +560,13 @@
     *   **Symptom**: Public/Private repo divergence, or released executable containing code that was never committed.
     *   **Rule**: **The Clean Slate Protocol**. `release.sh` and `sync-to-public.sh` MUST fail immediately if `git status` is dirty. No overrides allowed.
     *   **Workflow**: Abort release -> Commit changes -> Restart release.
+
+131. **Safe Dependency Injection (The ".task" Race Condition)**: *(Added v1.0.162)*
+    *   **Trigger**: Relying on external property injection (e.g., `viewModel.appState = appState`) happening implicitly before async code in `.task` executes.
+    *   **Symptom**: "Guest Left" messages appear immediately after joining watch party because the ViewModel failed to inherit the active session (due to nil `appState`) and created a fresh connection.
+    *   **Cause**: SwiftUI's `.task` modifier runs asynchronously relative to the view body re-evaluation. If injection happens in `.onAppear` or later in the body, the `.task` block might execute first with nil dependencies.
+    *   **Rule**: **Inject First, Then Act**. Any dependency assignment (like `viewModel.appState = ...`) MUST happen at the very top of the `.task` block OR in the `init` method. Never assume `.onAppear` runs before `.task`.
+    *   **Fix**: Moved assignment to top of `.task` in `MPVPlayerView.swift`.
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

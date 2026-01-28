@@ -1677,6 +1677,30 @@ echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// leg
 # Exit Code Logic
 # Exit Code Logic: Zero Warning Policy Enforcement (Landmine #135)
 if [[ $ERROR_COUNT -gt 0 || $WARNING_COUNT -gt 0 ]]; then
+# =============================================================================
+# CHECK 65: Dependency Injection Race (Landmine #132)
+# =============================================================================
+# Trigger: Using implicit injection order in .task for MPVPlayerView.
+# Fix: appState must be assigned BEFORE startWatchPartySync.
+print_header "Check 65: Dependency Injection Race (Landmine #132)"
+
+MPV_VIEW="$SOURCES_DIR/Features/Player/MPVPlayerView.swift"
+if [[ -f "$MPV_VIEW" ]]; then
+    # We use awk to find the .task block and ensure assignment happens before sync
+    if ! awk '
+        /.task \{/ { in_task=1; assigned=0; next }
+        in_task && /viewModel.appState = appState/ { assigned=1; next }
+        in_task && /startWatchPartySync/ {
+            if (assigned == 0) { exit 1 }
+        }
+        in_task && /\}/ { in_task=0 }
+    ' "$MPV_VIEW"; then
+        report "ERROR" "Landmine #132" "Race Condition: 'viewModel.appState = appState' MUST occur BEFORE 'startWatchPartySync' inside '.task'. Implicit injection fails on first load." "$MPV_VIEW" "0" "Incorrect Injection Order"
+    else
+        echo -e "${GREEN}✅ MPVPlayerView dependency injection order verified.${NC}"
+    fi
+fi
+
     if [[ $WARNING_COUNT -gt 0 ]]; then
         echo -e "${RED}❌ FAILED: Zero Warning Policy Violation. All warnings must be resolved or suppressed.${NC}"
     else

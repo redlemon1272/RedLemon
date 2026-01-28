@@ -772,7 +772,7 @@ struct MPVPlayerView: View {
 
 
     private var fullSubtitleMenu: some View {
-        VStack(spacing: 16) {
+        VStack(alignment: .leading, spacing: 16) {
             // Header
             HStack {
                 Text("Subtitle Configuration")
@@ -1004,12 +1004,14 @@ struct MPVPlayerView: View {
                         Spacer()
                     }
                 }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 12)
             }
-            .padding(.horizontal, 24)
+            .frame(width: 550, alignment: .leading)
 
             // Warning message if sync issues detected
             if viewModel.showSubtitleSyncPanel {
-                HStack {
+                HStack(spacing: 12) {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundColor(.orange)
                         .font(.system(size: 18))
@@ -1018,19 +1020,22 @@ struct MPVPlayerView: View {
                         .foregroundColor(.primary.opacity(0.9))
                         .font(.system(size: 13))
                         .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     Spacer()
                 }
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 16)
                 .padding(.vertical, 12)
+                .frame(width: 502) // 550 - 48 (horizontal padding)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.orange.opacity(0.15))
                 )
+                .padding(.horizontal, 24)
             }
         }
+        .frame(width: 550, alignment: .leading)
         .padding(.bottom, 24)
-        .frame(maxWidth: 600)
         .background(.regularMaterial)
         .cornerRadius(16)
         .shadow(radius: 20)
@@ -1061,7 +1066,7 @@ struct MPVPlayerView: View {
     }
 
     private var fullAudioMenu: some View {
-        VStack(spacing: 16) {
+        VStack(alignment: .leading, spacing: 16) {
             // Header
             HStack {
                 Text("Audio Configuration")
@@ -1148,8 +1153,8 @@ struct MPVPlayerView: View {
             // For now, consistent spacing with subtitle menu
             Spacer().frame(height: 10)
         }
+        .frame(width: 450, alignment: .leading)
         .padding(.bottom, 24)
-        .frame(width: 450)
         .background(.regularMaterial)
         .cornerRadius(16)
         .shadow(radius: 20)
@@ -1279,14 +1284,16 @@ struct MPVPlayerView: View {
             VStack {
                 Spacer()
                 HStack {
-                    if let room = appState.player.currentWatchPartyRoom {
-                        PlaylistModalView(
-                            room: room,
-                            isHost: appState.player.isWatchPartyHost,
-                            showPlaylistMenu: $showPlaylistMenu
-                        )
-                        .padding(.leading, 150)
-                        .padding(.bottom, 80)
+                    Group {
+                        if let room = appState.player.currentWatchPartyRoom {
+                            PlaylistModalView(
+                                room: room,
+                                isHost: appState.player.isWatchPartyHost,
+                                showPlaylistMenu: $showPlaylistMenu
+                            )
+                            .padding(.leading, 150)
+                            .padding(.bottom, 80)
+                        }
                     }
                     Spacer()
                 }

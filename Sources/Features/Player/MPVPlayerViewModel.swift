@@ -3029,6 +3029,15 @@ extension MPVPlayerViewModel {
                     // GHOST CHECK: If Online but NOT in DB for too long, kill it.
                     if let start = self.ghostCandidateStartTimes[id] {
                         if Date().timeIntervalSince(start) > 30.0 { // 30s tolerance
+                            // CRITICAL FIX: Transition Protection (Bible Landmine #132)
+                            // If user is transitioning, give them more time for the DB to catch up.
+                            if self.transitioningUserIds.contains(id) {
+                                if let expiry = self.transitionExpiryDate, Date() < expiry {
+                                    // Protect them - they are likely just slow to appear in DB after Lobby->Player handoff
+                                    return false
+                                }
+                            }
+
                             LoggingManager.shared.warn(.watchParty, message: "👻 Ghost Detection: \(id) has been Online but missing from DB for >30s. Force removing.")
                             self.ghostCandidateStartTimes.removeValue(forKey: id)
                             return true // Force Remove
@@ -3088,7 +3097,10 @@ extension MPVPlayerViewModel {
                     let name = currentMap[id]?.name ?? "Someone"
                     // Check if they were "Joined" (Announced) before removing
                     if self.announcedParticipantIds.contains(id) {
-                         self.addSystemMessage("\(name) left") // Fallback leave message
+                         // CRITICAL FIX: Only announce for OTHER users, not self.
+                         if id != self.currentUserId {
+                             self.addSystemMessage("\(name) left") // Fallback leave message
+                         }
                          self.announcedParticipantIds.remove(id)
                     }
                     currentMap.removeValue(forKey: id)

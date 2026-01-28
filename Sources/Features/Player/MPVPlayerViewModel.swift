@@ -3195,6 +3195,17 @@ extension MPVPlayerViewModel {
         // DEBUG: Log ALL incoming messages before any filtering
         LoggingManager.shared.debug(.watchParty, message: "Received sync message - type: \(message.type), sender: \(message.senderId ?? "unknown")")
 
+        // CRITICAL FIX: User confirmed in Player - Remove from transition protection
+        // This ensures that if they leave shortly after joining (within the 120s window),
+        // we honor the leave event instead of ignoring it as a "transition artifact".
+        if let rawSenderId = message.senderId {
+            let senderId = rawSenderId.lowercased()
+            if transitioningUserIds.contains(senderId) {
+                NSLog("%@", "🛡️ Presence: User \(senderId) confirmed in Player via \(message.type) - Removing transition protection")
+                transitioningUserIds.remove(senderId)
+            }
+        }
+
         // Host is authoritative for playback, but should still receive chat messages, READY signals, and REACTIONS
         if isWatchPartyHost && message.type != .chat && message.type != .ready && message.type != .reaction {
             LoggingManager.shared.debug(.watchParty, message: "Host filtering out message type: \(message.type)")

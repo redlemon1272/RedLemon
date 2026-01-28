@@ -2008,9 +2008,9 @@ If you are asked to "Release" or "Sync to Public", run these commands in this EX
 3.  `swift build` (Ensure the project compiles successfully)
 4.  `./scripts/release.sh "[v]" "[b]" "[notes]"` (Build & Deploy Internal)
 5.  `./scripts/sync-to-public.sh` (Scrub & Prepare Public Mirror)
-6.  **Public Repo Sync**: (Upload files or push to `redlemon1272/RedLemon`)
+6.  `./scripts/sync-to-public.sh` (Scrub & Prepare Public Mirror)
 7.  `./scripts/merge-and-tag.sh "v[v]"` (Merge to main and Tag)
-8.  **GitHub Release**: Go to GitHub, select tag `v[v]`, and **UPLOAD** the `.dmg`.
+8.  `./scripts/github-release.sh "v[v]" "RedLemon-Installer.dmg" "[notes]"` (Final Artifact Upload)
 
 ### 🤖 Terminology & Intent (Command Word Safety)
 To prevent accidental public deployments, strict keywords are enforced:
@@ -2036,48 +2036,16 @@ Execute the release script in the private repository. This builds the full app (
 ```
 *   **Result**: RedLemon is live on the Sparkle update channel for existing users.
 
-### 19.4 Final Step: The GitHub Release (Manual)
-**AFTER** the merge and tag is complete (Step 7), you MUST verify the artifact availability:
-1.  Go to `https://github.com/orangeapple1272/RedLemon/releases`
-2.  Select the new tag `v[VERSION]`.
-3.  Click "Draft a new release" (or Edit).
-4.  **Upload the DMG**: Located at `RedLemon-Installer.dmg`. This is CRITICAL for new users.
-
-### 19.3 Step 2: The Scrubber Protocol (Sync to Public)
-Once the internal release is verified, sync the "shell" of the app to the public repository.
-### 19.3 Automated Deployment
-For a one-click release to the public repository, use the master deployment script:
+### 19.4 Step 4: The Public Distribution (GitHub Release)
+**Mandatory Enforcement**: Once the tag is pushed and the public repo is synced, you MUST instantiate the GitHub Release object. This is no longer optional or manual.
 ```bash
-export GH_PAT="your_github_token"
-./scripts/public-deploy.sh
+# Automated release and DMG upload
+export GH_PAT="[BIBLE_PAT]"
+./scripts/github-release.sh "v[VERSION]" "RedLemon-Installer.dmg" "### Release Notes\n* [Notes]"
 ```
-This script automates:
-1.  **Sanitization**: Runs `sync-to-public.sh`.
-2.  **Authentication**: Injects the GH_PAT into the public repo remote.
-3.  **Synchronization**: Force-pushes the sanitized state to GitHub.
-*   **Logic (Default Deny)**: Only files in the `SAFE_FILES` whitelist are copied.
-*   **Stubs**: Secret ViewModels/Services are replaced with logic-free stubs.
-*   **Sanitization**: All production IPs are replaced with placeholders.
-*   **Credential Scrubbing**: All Supabase/JWT keys (`eyJhbGciOi...`) are replaced with `SUPABASE_ANON_KEY_PLACEHOLDER`.
-*   **Safety Interlocks**: The script MUST abort if it detects patterns like `sk_live`, `Bearer`, `eyJhbGciOi`, or the production IP.
-
-### 19.4 Step 3: The Git Ceremony
-Complete the release across both repositories.
-1.  **Private Repo**:
-    ```bash
-    git add . && git commit -m "Release v[VERSION]" && git push origin [BRANCH]
-    ./scripts/merge-and-tag.sh v[VERSION]
-    ```
-2.  **Public Repo (Automated)**:
-    Follow **Section 19.3** or **19.8**. Running `./scripts/public-deploy.sh` completely replaces the need for manual Git commands in the `RedLemon-Public` folder.
-
-### 19.5 Step 4: GitHub Release (The Trust Anchor)
-1.  Draft a new release on `redlemon1272/RedLemon`.
-2.  **Upload Binary**: Attach the `RedLemon-v[VERSION].dmg` to the release.
-3.  **Trust Verification**:
+*   **Trust Verification**:
     - The public `install.sh` points to `https://github.com/redlemon1272/RedLemon/releases/latest/download/RedLemon.dmg`.
     - This ensures users are downloading the EXACT binary you uploaded to GitHub, verified by GitHub's SSL.
-    - Zero reliance on the private server IP for distribution.
 
 ### 19.6 Operational Security (OpSec)
 When drafting release notes or public documentation:
@@ -2095,7 +2063,16 @@ To keep development seamless while maintaining the public mirror:
 4.  **Issue Triage**: Bug reports from the public repo should be converted into tasks in the private repo.
 5.  **New Files**: Whenever a new `.swift` file is added to the UI, you MUST add its path to the `SAFE_FILES` whitelist in the sync script or it will not appear in the public repo.
 
-### 19.8 Public Repo Automation & Credentials
+### 19.8 The Conflict Deadlock Interlock (Hard Protocol)
+**Mandatory Enforcement for AI Assistants**:
+1.  **Stop Condition**: If `./scripts/merge-and-tag.sh` or any command in the release sequence fails with a code (e.g., Git Conflict), you **MUST STOP IMMEDIATELY**.
+2.  **No Surgical Repairs**: Performing `replace_file_content` or any manual line-edits to resolve conflicts during a release state is **STRICTLY FORBIDDEN**.
+3.  **Rationale**: A release is a "Perfect State" build. Manual edits introduced by an AI during a merge are not subject to the full review cycle and can bypass the "Satellite-First" integrity checks.
+4.  **Action**: Report the conflict to the USER. Provide the `git status` output and wait for the USER to manually resolve the conflict or authorize a specifically named resolution.
+
+---
+
+### 19.9 Public Repo Automation & Credentials
 To manage the `redlemon1272/RedLemon` public repository, use the automated deployment system.
 
 **Credential (GH_PAT)**:
@@ -2129,6 +2106,8 @@ The `public-deploy.sh` script (invoking `sync-to-public.sh`) is the **ONLY** way
 *   Replacement of private hero links with local `Resources/` links.
 
 ---
+
+
 
 ## Part 30: Resource & Asset Management Protocol
 

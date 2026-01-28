@@ -183,11 +183,11 @@ done < <(grep -rnE "$HIGH_RISK_VARS" "$SOURCES_DIR" --include="*.swift" | grep "
 
 
 # =============================================================================
-# CHECK 11: Phoenix Ref Collision (Landmine #51)
+# CHECK 7: Phoenix Ref Collision (Landmine #51)
 # =============================================================================
 # Trigger: Passing 'key' (UserId) to handlers causes flapping on metadata updates.
 # Rule: Must use 'phx_ref' as the unique session ID.
-print_header "Check 11: Phoenix Ref Collision (Landmine #51)"
+print_header "Check 7: Phoenix Ref Collision (Landmine #51)"
 
 REALTIME_CLIENT="$SOURCES_DIR/Networking/SupabaseRealtimeClient.swift"
 if [[ -f "$REALTIME_CLIENT" ]]; then
@@ -254,10 +254,10 @@ done < <(grep -rn "NSViewRepresentable" "$SOURCES_DIR" --include="*.swift" | gre
 
 
 # =============================================================================
-# CHECK 12: Native Context Menus (Landmine #57)
+# CHECK 11: Native Context Menus (Landmine #57)
 # =============================================================================
 # Native NSMenu logic blocks the main thread during video playback.
-print_header "Check 12: Native Context Menus (Landmine #57)"
+print_header "Check 11: Native Context Menus (Landmine #57)"
 
 PLAYER_DIR="$SOURCES_DIR/Features/Player"
 if [[ -d "$PLAYER_DIR" ]]; then
@@ -274,10 +274,10 @@ if [[ -d "$PLAYER_DIR" ]]; then
 fi
 
 # =============================================================================
-# CHECK 13: Shared Service State Initialization (The "Dead Callback" Trap) - Landmine #62
+# CHECK 12: Shared Service State Initialization (The "Dead Callback" Trap) - Landmine #62
 # =============================================================================
 # Trigger: Subscribing to onConnectionChange without checking initial state with isSocketConnected.
-print_header "Check 13: Shared Service Initial State (Landmine #62)"
+print_header "Check 12: Shared Service Initial State (Landmine #62)"
 
 REALTIME_MANAGER="$SOURCES_DIR/Features/Watchparty/RealtimeChannelManager.swift"
 if [[ -f "$REALTIME_MANAGER" ]]; then
@@ -290,11 +290,11 @@ fi
 
 
 # =============================================================================
-# CHECK 14: Realtime Topic Scoping (Landmine #60)
+# CHECK 13: Realtime Topic Scoping (Landmine #60)
 # =============================================================================
 # Trigger: Using global handlers instead of topic-scoped handlers.
 # Rule: onBroadcast, onPresence, onPostgresChange must use 'topic:' parameter.
-print_header "Check 14: Realtime Topic Scoping (Landmine #60)"
+print_header "Check 13: Realtime Topic Scoping (Landmine #60)"
 
 REALTIME_CLIENT="$SOURCES_DIR/Networking/SupabaseRealtimeClient.swift"
 if [[ -f "$REALTIME_CLIENT" ]]; then
@@ -325,10 +325,10 @@ if [[ -f "$REALTIME_CLIENT" ]]; then
 fi
 
 # =============================================================================
-# CHECK 15: Idempotent Join (Landmine #61)
+# CHECK 14: Idempotent Join (Landmine #61)
 # =============================================================================
 # Trigger: joinRoom logic that lacks duplicate key handling.
-print_header "Check 15: Idempotent Join (Landmine #61)"
+print_header "Check 14: Idempotent Join (Landmine #61)"
 
 LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
 if [[ -f "$LOBBY_VM" ]]; then
@@ -338,11 +338,11 @@ if [[ -f "$LOBBY_VM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 16: Sleep Assertion Safety (Landmine #56)
+# CHECK 15: Sleep Assertion Safety (Landmine #56)
 # =============================================================================
 # Trigger: preventing system sleep but NOT display sleep, causing black screen with audio.
 # Rule: Must use .userInitiated AND .idleSystemSleepDisabled AND .idleDisplaySleepDisabled
-print_header "Check 16: Sleep Assertion Safety (Landmine #56)"
+print_header "Check 15: Sleep Assertion Safety (Landmine #56)"
 
 while IFS=: read -r file line code; do
    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
@@ -359,10 +359,10 @@ while IFS=: read -r file line code; do
 done < <(grep -rn "idleSystemSleepDisabled" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
 
 # =============================================================================
-# CHECK 17: Safe Modifiers (Landmine #12)
+# CHECK 16: Safe Modifiers (Landmine #12)
 # =============================================================================
 # Trigger: Using .fontWeight() (macOS 13+) instead of .font(.system(weight:)) (macOS 12 safe)
-print_header "Check 17: Safe Modifiers (Landmine #12)"
+print_header "Check 16: Safe Modifiers (Landmine #12)"
 
 while IFS=: read -r file line code; do
    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
@@ -373,9 +373,9 @@ while IFS=: read -r file line code; do
 done < <(grep -rn "\.fontWeight(" "$SOURCES_DIR" --include="*.swift" | grep -v "//")
 
 # =============================================================================
-# CHECK 18: Deinit Cleanup Trap (Landmine #63)
+# CHECK 17: Deinit Cleanup Trap (Landmine #63)
 # =============================================================================
-print_header "Check 18: Deinit Cleanup Trap (Landmine #63)"
+print_header "Check 17: Deinit Cleanup Trap (Landmine #63)"
 
 while IFS= read -r file; do
     if [[ "$file" == *"Tests"* ]]; then continue; fi
@@ -393,10 +393,10 @@ done < <(find "$SOURCES_DIR" -name "*.swift")
 
 
 # =============================================================================
-# CHECK 19: Real-Debrid Fake Endpoint (Landmine #44)
+# CHECK 18: Real-Debrid Fake Endpoint (Landmine #44)
 # =============================================================================
 # Trigger: Reference to non-existent '/unrestrict/magnet' endpoint in code or comments.
-print_header "Check 19: Real-Debrid Fake Endpoint (Landmine #44)"
+print_header "Check 18: Real-Debrid Fake Endpoint (Landmine #44)"
 
 # Note: We do NOT skip comments here because "poison hints" in comments are dangerous too.
 while IFS=: read -r file line code; do
@@ -404,10 +404,10 @@ while IFS=: read -r file line code; do
 done < <(grep -rn "/unrestrict/magnet" "$SOURCES_DIR" --include="*.swift")
 
 # =============================================================================
-# CHECK 20: Player Stranding (Explicit Navigation) - Landmine #62
+# CHECK 19: Player Stranding (Explicit Navigation) - Landmine #62
 # =============================================================================
 # Trigger: exitPlayer logic that doesn't set currentView.
-print_header "Check 20: Player Stranding (Landmine #62)"
+print_header "Check 19: Player Stranding (Landmine #62)"
 
 PLAYER_VM="$SOURCES_DIR/Features/Player/PlayerViewModel.swift"
 if [[ -f "$PLAYER_VM" ]]; then
@@ -419,10 +419,10 @@ if [[ -f "$PLAYER_VM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 21: Auto-Start Loop (Ready Reset) - Landmine #63
+# CHECK 20: Auto-Start Loop (Ready Reset) - Landmine #63
 # =============================================================================
 # Trigger: markPlaybackEnded logic that misses resetting isReady or canAutoJoin.
-print_header "Check 21: Auto-Start Loop (Landmine #63)"
+print_header "Check 20: Auto-Start Loop (Landmine #63)"
 
 LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
 if [[ -f "$LOBBY_VM" ]]; then
@@ -434,10 +434,10 @@ if [[ -f "$LOBBY_VM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 22: Guest Join Visibility (Landmine #65)
+# CHECK 21: Guest Join Visibility (Landmine #65)
 # =============================================================================
 # Trigger: LobbyEventRouter missing system message logic for guests.
-print_header "Check 22: Guest Join Visibility (Landmine #65)"
+print_header "Check 21: Guest Join Visibility (Landmine #65)"
 
 ROUTER="$SOURCES_DIR/Features/Rooms/LobbyEventRouter.swift"
 if [[ -f "$ROUTER" ]]; then
@@ -449,10 +449,10 @@ if [[ -f "$ROUTER" ]]; then
 fi
 
 # =============================================================================
-# CHECK 23: Provider Connectivity Guardrails (Landmine #83)
+# CHECK 22: Provider Connectivity Guardrails (Landmine #83)
 # =============================================================================
 # Trigger: URLRequest to providers missing User-Agent or having < 5s timeout.
-print_header "Check 23: Provider Connectivity (Landmine #83)"
+print_header "Check 22: Provider Connectivity (Landmine #83)"
 
 SERVICES_DIR="$SOURCES_DIR/Server/Services"
 if [[ -d "$SERVICES_DIR" ]]; then
@@ -476,12 +476,12 @@ if [[ -d "$SERVICES_DIR" ]]; then
 fi
 
 # =============================================================================
-# CHECK 24: Event Loop Trap (Three-Fold Event Failure) - Landmine #84
+# CHECK 23: Event Loop Trap (Three-Fold Event Failure) - Landmine #84
 # =============================================================================
 # Trigger: (1) Events treated as Watch Party guests in stream validation,
 #          (2) Event start time overwritten by database sync,
 #          (3) EOF handler using wrong time reference.
-print_header "Check 24: Event Loop Trap (Landmine #84)"
+print_header "Check 23: Event Loop Trap (Landmine #84)"
 
 PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
 LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
@@ -522,11 +522,11 @@ if [[ -f "$PLAYER_VM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 25: Friend Request ID Usage (Landmine #84)
+# CHECK 24: Friend Request ID Usage (Landmine #84)
 # =============================================================================
 # Trigger: AddFriendSheet callback using sendRequest(username:) instead of sendRequest(toUserId:)
 # Risk: Re-searching by username picks the first alphabetical match, not the selected user.
-print_header "Check 25: Friend Request ID (Landmine #84)"
+print_header "Check 24: Friend Request ID (Landmine #84)"
 
 FRIENDS_VIEW="$SOURCES_DIR/Features/Friends/FriendsView.swift"
 if [[ -f "$FRIENDS_VIEW" ]]; then
@@ -541,12 +541,12 @@ if [[ -f "$FRIENDS_VIEW" ]]; then
 fi
 
 # =============================================================================
-# CHECK 26: Localized Fallback (Landmine #85)
+# CHECK 25: Localized Fallback (Landmine #85)
 # =============================================================================
 # Trigger: All "clean" English streams are fake (.iso files), but legitimate
 #          localized streams exist and weren't tried.
 # Fix: StreamService MUST attempt deprioritizedStreams as last resort.
-print_header "Check 26: Localized Fallback (Landmine #85)"
+print_header "Check 25: Localized Fallback (Landmine #85)"
 
 STREAM_SERVICE="$SOURCES_DIR/App/Services/StreamService.swift"
 if [[ -f "$STREAM_SERVICE" ]]; then
@@ -559,11 +559,11 @@ if [[ -f "$STREAM_SERVICE" ]]; then
 fi
 
 # =============================================================================
-# CHECK 27: Browse Performance Optimizations (Landmine #86)
+# CHECK 26: Browse Performance Optimizations (Landmine #86)
 # =============================================================================
 # Trigger: Browse page loading 10+ catalogs + 100+ images simultaneously.
 # Fix: Staggered fetches, NSCache fast-path.
-print_header "Check 27: Browse Performance (Landmine #86)"
+print_header "Check 26: Browse Performance (Landmine #86)"
 
 BROWSE_COMPONENTS="$SOURCES_DIR/Features/Browse/BrowseComponents.swift"
 
@@ -582,11 +582,11 @@ if [[ $PERF_ISSUES -eq 0 ]]; then
 fi
 
 # =============================================================================
-# CHECK 28: Sheet Dismissal Safety (Landmine #87)
+# CHECK 27: Sheet Dismissal Safety (Landmine #87)
 # =============================================================================
 # Trigger: View transition while a sheet is still active.
 # Fix: dismiss() before appState.currentView update.
-print_header "Check 28: Sheet Dismissal Safety (Landmine #87)"
+print_header "Check 27: Sheet Dismissal Safety (Landmine #87)"
 
 TRANSITION_ISSUES=0
 
@@ -606,11 +606,11 @@ if [[ -f "$BROWSE_COMPONENTS" ]]; then
 fi
 
 # =============================================================================
-# CHECK 29: Auth Context Fallback (Landmine #88)
+# CHECK 28: Auth Context Fallback (Landmine #88)
 # =============================================================================
 # New users may have auth.currentUser nil during signing. The fallback
 # reconstructs from Keychain to prevent heartbeat failures.
-print_header "Check 29: Auth Context Fallback (Landmine #88)"
+print_header "Check 28: Auth Context Fallback (Landmine #88)"
 
 SUPABASE_CLIENT="$SOURCES_DIR/Networking/SupabaseClient.swift"
 if [[ -f "$SUPABASE_CLIENT" ]]; then
@@ -624,10 +624,10 @@ if [[ -f "$SUPABASE_CLIENT" ]]; then
 fi
 
 # =============================================================================
-# CHECK 30: False EOF Loop (Landmine #89)
+# CHECK 29: False EOF Loop (Landmine #89)
 # =============================================================================
 # Trigger: Missing lastKnownGoodPosition tracking or usage in EOF detection.
-print_header "Check 30: False EOF Loop (Landmine #89)"
+print_header "Check 29: False EOF Loop (Landmine #89)"
 
 MPV_WRAPPER="$SOURCES_DIR/Features/Player/MPVWrapper.swift"
 if [[ -f "$MPV_WRAPPER" ]]; then
@@ -654,11 +654,11 @@ if [[ -f "$MPV_WRAPPER" ]]; then
 fi
 
 # =============================================================================
-# CHECK 31: Guest/Host Stream Sync (Landmine #91)
+# CHECK 30: Guest/Host Stream Sync (Landmine #91)
 # =============================================================================
 # Trigger: DebridSearch returns nil infoHash, Guest falls to independent resolution.
 # Fix: updateRoomStream MUST persist source_quality (filename) as fallback.
-print_header "Check 31: Guest/Host Stream Sync (Landmine #91)"
+print_header "Check 30: Guest/Host Stream Sync (Landmine #91)"
 
 SUPABASE_CLIENT="$SOURCES_DIR/Networking/SupabaseClient.swift"
 PLAYER_VM="$SOURCES_DIR/Features/Player/PlayerViewModel.swift"
@@ -694,10 +694,10 @@ if [[ $SYNC_ISSUES -eq 0 ]]; then
 fi
 
 # =============================================================================
-# CHECK 32: State Handoff Guard (Landmine #92)
+# CHECK 31: State Handoff Guard (Landmine #92)
 # =============================================================================
 # Trigger: LobbyViewModel or LobbyEventRouter fails to sync participants to AppState/TargetRoom.
-print_header "Check 32: State Handoff Guard (Landmine #92)"
+print_header "Check 31: State Handoff Guard (Landmine #92)"
 
 LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
 if [[ -f "$LOBBY_VM" ]]; then
@@ -720,10 +720,10 @@ fi
 # =============================================================================
 
 # =============================================================================
-# CHECK 33: VM Recreation Guard (Landmine #93)
+# CHECK 32: VM Recreation Guard (Landmine #93)
 # =============================================================================
 # Trigger: LobbyViewModel relies only on connect() for timer init, which fails on VM recreation.
-print_header "Check 33: VM Recreation Guard (Landmine #93)"
+print_header "Check 32: VM Recreation Guard (Landmine #93)"
 
 LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
 if [[ -f "$LOBBY_VM" ]]; then
@@ -745,10 +745,10 @@ fi
 # =============================================================================
 
 # =============================================================================
-# CHECK 34: Multi-Season Pack Guard (Landmine #94)
+# CHECK 33: Multi-Season Pack Guard (Landmine #94)
 # =============================================================================
 # Trigger: Episode-only pattern "e\(episodeStr)" matches wrong season in multi-season packs.
-print_header "Check 34: Multi-Season Pack Guard (Landmine #94)"
+print_header "Check 33: Multi-Season Pack Guard (Landmine #94)"
 
 RD_CLIENT="$SOURCES_DIR/Server/Debrid/RealDebridClient.swift"
 if [[ -f "$RD_CLIENT" ]]; then
@@ -764,11 +764,11 @@ fi
 
 
 # =============================================================================
-# CHECK 35: Broadcast Self-Echo Guard (Landmine #95)
+# CHECK 34: Broadcast Self-Echo Guard (Landmine #95)
 # =============================================================================
 # Trigger: Host processes their own "Room Closed" or "Link Update" broadcast.
 # Rule: Broadcast handlers MUST check `if senderId != currentUserId`.
-print_header "Check 35: Broadcast Self-Echo Guard (Landmine #95)"
+print_header "Check 34: Broadcast Self-Echo Guard (Landmine #95)"
 
 LOBBY_ROUTER="$SOURCES_DIR/Features/Rooms/LobbyEventRouter.swift"
 if [[ -f "$LOBBY_ROUTER" ]]; then
@@ -782,11 +782,11 @@ if [[ -f "$LOBBY_ROUTER" ]]; then
 fi
 
 # =============================================================================
-# CHECK 36: Re-Join State Clearing (Landmine #96)
+# CHECK 35: Re-Join State Clearing (Landmine #96)
 # =============================================================================
 # Trigger: Deduplication state (announcedParticipantIds) never cleared on leave.
 # Fix: stated.remove(id) in leave handler.
-print_header "Check 36: Re-Join State Clearing (Landmine #96)"
+print_header "Check 35: Re-Join State Clearing (Landmine #96)"
 
 PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
 if [[ -f "$PLAYER_VM" ]]; then
@@ -800,12 +800,11 @@ if [[ -f "$PLAYER_VM" ]]; then
     fi
 fi
 
+
 # =============================================================================
-# CHECK 37: Restricted Edge Function Subprocesses (Landmine #97)
+# CHECK 36: Restricted Edge Function Subprocesses (Landmine #97)
 # =============================================================================
-# Trigger: Using Deno.Command, which is blocked by Supabase Edge Runtime.
-# Rule: Use host-side scripts and absolute paths for system stats.
-print_header "Check 37: Edge Function Subprocesses (Landmine #97)"
+print_header "Check 36: Edge Function Subprocesses (Landmine #97)"
 
 FUNCTIONS_DIR="supabase/functions"
 if [[ -d "$FUNCTIONS_DIR" ]]; then
@@ -820,11 +819,11 @@ if [[ -d "$FUNCTIONS_DIR" ]]; then
 fi
 
 # =============================================================================
-# CHECK 38: Heartbeat Global Tracking (Landmine #98)
+# CHECK 37: Heartbeat Global Tracking (Landmine #98)
 # =============================================================================
 # Trigger: 'heartbeat' function in SQL without updating public.users.last_seen.
 # Rule: All heartbeats must update global last_seen to avoid stale dashboard data.
-print_header "Check 38: Heartbeat Global Tracking (Landmine #98)"
+print_header "Check 37: Heartbeat Global Tracking (Landmine #98)"
 
 MIGRATIONS_DIR="supabase/migrations"
 if [[ -d "$MIGRATIONS_DIR" ]]; then
@@ -844,11 +843,11 @@ if [[ -d "$MIGRATIONS_DIR" ]]; then
 fi
 
 # =============================================================================
-# CHECK 39: Void RPC Trap (Landmine #99)
+# CHECK 38: Void RPC Trap (Landmine #99)
 # =============================================================================
 # Trigger: Using Void/() with generic rpc<T>.
 # Rule: Swift's Void cannot conform to Decodable. Use dedicated helpers.
-print_header "Check 39: Void RPC Trap (Landmine #99)"
+print_header "Check 38: Void RPC Trap (Landmine #99)"
 # Detect pattern where developer tries to use Void with generic rpc<T>
 grep -rnE "let _: (Void|\(\)) = try await .*rpc\(" "Sources" | while read -r line; do
     file=$(echo "$line" | cut -d: -f1)
@@ -862,11 +861,11 @@ done
 
 
 # =============================================================================
-# CHECK 40: Event Heartbeat Latency Grace Period (Landmine #100)
+# CHECK 39: Event Heartbeat Latency Grace Period (Landmine #100)
 # =============================================================================
 # Trigger: Using a grace period < 90s for events, causing eviction during RLS latency spikes.
 # Rule: Must use at least 90.0 seconds for .event type rooms.
-print_header "Check 40: Event Heartbeat Latency (Landmine #100)"
+print_header "Check 39: Event Heartbeat Latency (Landmine #100)"
 
 LOBBY_PM="$SOURCES_DIR/Features/Rooms/LobbyPresenceManager.swift"
 if [[ -f "$LOBBY_PM" ]]; then
@@ -887,11 +886,11 @@ if [[ -f "$LOBBY_PM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 41: Realtime Decoupling (Landmine #101)
+# CHECK 40: Realtime Decoupling (Landmine #101)
 # =============================================================================
 # Trigger: DB join failure causes Realtime to NOT be set up, leaving guests "not connected".
 # Rule: setupRealtimeSubscription MUST be called even when DB operations fail.
-print_header "Check 41: Realtime Decoupling (Landmine #101)"
+print_header "Check 40: Realtime Decoupling (Landmine #101)"
 
 LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
 if [[ -f "$LOBBY_VM" ]]; then
@@ -907,11 +906,11 @@ if [[ -f "$LOBBY_VM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 42: Signed Database Writes (Landmine #103)
+# CHECK 41: Signed Database Writes (Landmine #103)
 # =============================================================================
 # Trigger: Write operations (POST, PATCH, DELETE) without sign: true.
 # Rule: RLS policies require cryptographic identity proof for all mutations.
-print_header "Check 42: Signed Database Writes (Landmine #103)"
+print_header "Check 41: Signed Database Writes (Landmine #103)"
 
 SUPABASE_CLIENT="$SOURCES_DIR/Networking/SupabaseClient.swift"
 if [[ -f "$SUPABASE_CLIENT" ]]; then
@@ -949,11 +948,11 @@ if [[ -f "$SUPABASE_CLIENT" ]]; then
 fi
 
 # =============================================================================
-# CHECK 43: Title/Group Stream Exclusion (Landmine #105)
+# CHECK 42: Title/Group Stream Exclusion (Landmine #105)
 # =============================================================================
 # Trigger: StreamResolver missing excludedTitles/excludedGroups parameters or checks.
 # Rule: Must support title/group-based exclusion to prevent duplicate bad releases (Hydra).
-print_header "Check 43: Hydra Prevention Protocol (Landmine #105)"
+print_header "Check 42: Hydra Prevention Protocol (Landmine #105)"
 
 RESOLVER="$SOURCES_DIR/Server/Services/StreamResolver.swift"
 if [[ -f "$RESOLVER" ]]; then
@@ -977,11 +976,11 @@ if [[ -f "$SERVICE" ]]; then
 fi
 
 # =============================================================================
-# CHECK 44: Visual Continuity (Landmine #106)
+# CHECK 43: Visual Continuity (Landmine #106)
 # =============================================================================
 # Trigger: Redundant state reset in loadStream causes black flicker.
 # Fix: Inherit background art from AppState.
-print_header "Check 44: Visual Continuity (Landmine #106)"
+print_header "Check 43: Visual Continuity (Landmine #106)"
 
 PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
 if [[ -f "$PLAYER_VM" ]]; then
@@ -993,11 +992,11 @@ if [[ -f "$PLAYER_VM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 45: Reactive Subtitle Scanning (Landmine #109)
+# CHECK 44: Reactive Subtitle Scanning (Landmine #109)
 # =============================================================================
 # Trigger: Relying on polling instead of MPV events for subtitle tracks.
 # Rule: MPVWrapper must observe 'track-list', SubtitleService must use tracksChangedPublisher.
-print_header "Check 45: Subtitle Latency Guard (Landmine #109)"
+print_header "Check 44: Subtitle Latency Guard (Landmine #109)"
 
 MPV_WRAPPER="$SOURCES_DIR/Features/Player/MPVWrapper.swift"
 if [[ -f "$MPV_WRAPPER" ]]; then
@@ -1023,11 +1022,11 @@ if [[ -f "$SUB_SERVICE" ]]; then
 fi
 
 # =============================================================================
-# CHECK 46: SubDL CDN Headers (Landmine #110)
+# CHECK 45: SubDL CDN Headers (Landmine #110)
 # =============================================================================
 # Trigger: SubDL downloads missing User-Agent or having generic User-Agent.
 # Rule: Must use a browser-like User-Agent and a 30s timeout.
-print_header "Check 46: SubDL CDN Reliability (Landmine #110)"
+print_header "Check 45: SubDL CDN Reliability (Landmine #110)"
 
 SUBDL_CLIENT="$SOURCES_DIR/Server/Services/SubDLClient.swift"
 if [[ -f "$SUBDL_CLIENT" ]]; then
@@ -1041,9 +1040,9 @@ if [[ -f "$SUBDL_CLIENT" ]]; then
 fi
 
 # =============================================================================
-# CHECK 47: Emoji Spacing Guard (Landmine #113)
+# CHECK 46: Emoji Spacing Guard (Landmine #113)
 # =============================================================================
-print_header "Check 47: Emoji Spacing Guard (Landmine #113)"
+print_header "Check 46: Emoji Spacing Guard (Landmine #113)"
 CHAT_VIEW="$SOURCES_DIR/Features/Player/ChatOverlayView.swift"
 if [[ -f "$CHAT_VIEW" ]]; then
     # Rule: Chat input MUST NOT use SwiftUI axis: .vertical on macOS (causes emoji spacing poisoning)
@@ -1059,9 +1058,9 @@ if [[ -f "$CHAT_VIEW" ]]; then
 fi
 
 # =============================================================================
-# CHECK 48: Subtitle Decoding & Selection Guard (Landmine #114)
+# CHECK 47: Subtitle Decoding & Selection Guard (Landmine #114)
 # =============================================================================
-print_header "Check 48: Subtitle Decoding & Selection Guard (Landmine #114)"
+print_header "Check 47: Subtitle Decoding & Selection Guard (Landmine #114)"
 MPV_WRAPPER="$SOURCES_DIR/Features/Player/MPVWrapper.swift"
 SUB_SERVICE="$SOURCES_DIR/Features/Player/Services/SubtitleService.swift"
 
@@ -1085,9 +1084,9 @@ if [[ -f "$SUB_SERVICE" ]]; then
 fi
 
 # =============================================================================
-# CHECK 49: Playlist Sync Interlock (Landmine #115)
+# CHECK 48: Playlist Sync Interlock (Landmine #115)
 # =============================================================================
-print_header "Check 49: Playlist Sync Interlock (Landmine #115)"
+print_header "Check 48: Playlist Sync Interlock (Landmine #115)"
 LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
 if [[ -f "$LOBBY_VM" ]]; then
     # Rule: playItem(at:) must use isPlaylistSyncing and Task.sleep(800ms+)
@@ -1101,11 +1100,11 @@ if [[ -f "$LOBBY_VM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 50: One-Shot Logger (Landmine #116)
+# CHECK 49: One-Shot Logger (Landmine #116)
 # =============================================================================
 # Trigger: LoggingSystem.bootstrap called without a guard.
 # Rule: Must use a static guard to prevent double-initialization crash.
-print_header "Check 50: One-Shot Logger (Landmine #116)"
+print_header "Check 49: One-Shot Logger (Landmine #116)"
 
 while IFS=: read -r file line code; do
     if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
@@ -1117,9 +1116,9 @@ while IFS=: read -r file line code; do
 done < <(grep -rn "LoggingSystem.bootstrap" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK")
 
 # =============================================================================
-# CHECK 51: Subtitle Scoring & Sync (Landmine #117)
+# CHECK 50: Subtitle Scoring & Sync (Landmine #117)
 # =============================================================================
-print_header "Check 51: Subtitle Scoring & Sync (Landmine #117)"
+print_header "Check 50: Subtitle Scoring & Sync (Landmine #117)"
 LOBBY_ROUTER="$SOURCES_DIR/Features/Rooms/LobbyEventRouter.swift"
 PLAYER_VM="$SOURCES_DIR/Features/Player/PlayerViewModel.swift"
 SUB_CLIENT="$SOURCES_DIR/Server/Services/SubDLClient.swift"
@@ -1149,11 +1148,11 @@ if [[ -f "$SUB_CLIENT" ]]; then
     echo -e "${GREEN}✅ Subtitle sync and scoring protection verified.${NC}"
 fi
 # =============================================================================
-# CHECK 52: Subtitle Healing Loop (Landmine #118)
+# CHECK 51: Subtitle Healing Loop (Landmine #118)
 # =============================================================================
 # Trigger: missing background refresh logic for subtitles.
 # Rule: AppState.checkProviderHealth MUST call manualRefreshSubtitles() if playing.
-print_header "Check 52: Subtitle Healing Loop (Landmine #118)"
+print_header "Check 51: Subtitle Healing Loop (Landmine #118)"
 APP_STATE="$SOURCES_DIR/App/AppState.swift"
 if [[ -f "$APP_STATE" ]]; then
     if ! grep -q "manualRefreshSubtitles()" "$APP_STATE"; then
@@ -1164,11 +1163,11 @@ if [[ -f "$APP_STATE" ]]; then
 fi
 
 # =============================================================================
-# CHECK 53: Actor Initialization Deadlock (Landmine #119)
+# CHECK 52: Actor Initialization Deadlock (Landmine #119)
 # =============================================================================
 # Trigger: Using Task {} inside an actor initialization flow (ensureInitialized).
 # Rule: Must use Task.detached or avoid Task inside actor methods awaited by others.
-print_header "Check 53: Actor Initialization Deadlock (Landmine #119)"
+print_header "Check 52: Actor Initialization Deadlock (Landmine #119)"
 
 while IFS=: read -r file line code; do
     if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
@@ -1183,11 +1182,11 @@ while IFS=: read -r file line code; do
 done < <(grep -rn "Task[[:space:]]*{" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK")
 
 # =============================================================================
-# CHECK 54: Network Client Singleton (Landmine #120)
+# CHECK 53: Network Client Singleton (Landmine #120)
 # =============================================================================
 # Trigger: Creating new instances of LocalAPIClient().
 # Rule: Must use LocalAPIClient.shared to prevent resource exhaustion.
-print_header "Check 54: Network Client Singleton (Landmine #120)"
+print_header "Check 53: Network Client Singleton (Landmine #120)"
 
 while IFS=: read -r file line code; do
     if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
@@ -1202,12 +1201,12 @@ while IFS=: read -r file line code; do
 done < <(grep -rn "LocalAPIClient()" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK")
 
 # =============================================================================
-# CHECK 55: Visual Continuity (Landmine #121)
+# CHECK 54: Visual Continuity (Landmine #121)
 # =============================================================================
 # Trigger: Using AsyncImage with placeholder that is just a color/spinner in detail views.
 # Rule: Should use optimistic rendering (passed mediaItem) before loading metadata.
 # This is a semantic check, harder to grep. We check for key phrases.
-print_header "Check 55: Visual Continuity (Landmine #121)"
+print_header "Check 54: Visual Continuity (Landmine #121)"
 # Check Detail Views
 DETAIL_VIEWS=("MediaDetailView.swift" "QualitySelectionView.swift")
 for view in "${DETAIL_VIEWS[@]}"; do
@@ -1222,11 +1221,11 @@ for view in "${DETAIL_VIEWS[@]}"; do
 done
 
 # =============================================================================
-# CHECK 57: Manual Resource Bundle Guard (Landmine #123)
+# CHECK 55: Manual Resource Bundle Guard (Landmine #123)
 # =============================================================================
 # Trigger: New file types in 'Resources/' not handled by 'build-app-debug.sh'.
 # Rule: Build script MUST cp the file extensions found in Resources.
-print_header "Check 57: Manual Resource Bundle Guard (Landmine #123)"
+print_header "Check 55: Manual Resource Bundle Guard (Landmine #123)"
 
 BUILD_SCRIPT="build-app-debug.sh"
 RESOURCES_DIR="Resources"
@@ -1266,11 +1265,11 @@ fi
 
 
 # =============================================================================
-# CHECK 58: The Restoration Race (Landmine #109)
+# CHECK 56: The Restoration Race (Landmine #109)
 # =============================================================================
 # Trigger: relaunchApp() called shortly after a non-awaited sync.
 # Rule: Sync MUST be awaited before relaunching to ensure data is saved to disk.
-print_header "Check 58: Restoration Race (Landmine #109)"
+print_header "Check 56: Restoration Race (Landmine #109)"
 
 # Heuristic: Check if performFullSync and relaunchApp appear in the same file
 # then verify the relaunchApp is preceded by an 'await' on the same line or line before
@@ -1294,11 +1293,11 @@ while IFS= read -r file; do
 done < <(find "$SOURCES_DIR" -name "*.swift")
 
 # =============================================================================
-# CHECK 59: Identity-Aware Startup Sync (Landmine #110)
+# CHECK 57: Identity-Aware Startup Sync (Landmine #110)
 # =============================================================================
 # Trigger: performFullSync() inside init().
 # Rule: VM/State init() happens before loadStoredUser() in app startup.
-print_header "Check 59: Startup Sync Identity (Landmine #110)"
+print_header "Check 57: Startup Sync Identity (Landmine #110)"
 
 while IFS= read -r file; do
     # Use Perl to match init blocks containing 'performFullSync'
@@ -1312,9 +1311,9 @@ done < <(find "$SOURCES_DIR" -name "*.swift")
 
 
 # =============================================================================
-# CHECK 60: Idempotent UI Services (Landmine #123)
+# CHECK 58: Idempotent UI Services (Landmine #123)
 # =============================================================================
-print_header "Check 60: Idempotent UI Services (Landmine #123)"
+print_header "Check 58: Idempotent UI Services (Landmine #123)"
 
 SUBTITLE_SERVICE="$SOURCES_DIR/Features/Player/Services/SubtitleService.swift"
 if [[ -f "$SUBTITLE_SERVICE" ]]; then
@@ -1329,11 +1328,11 @@ fi
 
 
 # =============================================================================
-# CHECK 61: Safe Lobby Handoff (Landmine #125)
+# CHECK 59: Safe Lobby Handoff (Landmine #125)
 # =============================================================================
 # Trigger: Direct assignment to activeLobbyViewModel outside AppState.
 # Rule: Must use setActiveLobbyViewModel() to ensure cleanup.
-print_header "Check 61: Safe Lobby Handoff (Landmine #125)"
+print_header "Check 59: Safe Lobby Handoff (Landmine #125)"
 
 while IFS=: read -r file line code; do
     if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
@@ -1348,10 +1347,10 @@ done < <(grep -rn "\.activeLobbyViewModel[[:space:]]*=" "$SOURCES_DIR" --include
 
 
 # =============================================================================
-# CHECK 62: Social ID Deduplication (Landmine #127)
+# CHECK 60: Social ID Deduplication (Landmine #127)
 # =============================================================================
 # Rule: Deduplicate social lists by Root IMDB ID, not the full session ID.
-print_header "Check 62: Social ID Deduplication (Landmine #127)"
+print_header "Check 60: Social ID Deduplication (Landmine #127)"
 
 SOCIAL_SERVICE="$SOURCES_DIR/Features/Social/SocialService.swift"
 if [[ -f "$SOCIAL_SERVICE" ]]; then
@@ -1364,10 +1363,10 @@ fi
 
 
 # =============================================================================
-# CHECK 63: Friend History Capping (Landmine #128)
+# CHECK 61: Friend History Capping (Landmine #128)
 # =============================================================================
 # Rule: Hard cap social list fetches at 20 items for performance.
-print_header "Check 63: Social Data Capping (Landmine #128)"
+print_header "Check 61: Social Data Capping (Landmine #128)"
 
 if [[ -f "$SOCIAL_SERVICE" ]]; then
     if ! grep -q "prefix(20)" "$SOCIAL_SERVICE"; then
@@ -1379,11 +1378,11 @@ fi
 
 
 # =============================================================================
-# CHECK 64: Supabase Exhaustion (Landmine #122)
+# CHECK 62: Supabase Exhaustion (Landmine #122)
 # =============================================================================
 # Trigger: Creating multiple RealtimeClient instances without cleanup.
 # Fix: Managers must be singletons.
-print_header "Check 64: Supabase Exhaustion (Landmine #122)"
+print_header "Check 62: Supabase Exhaustion (Landmine #122)"
 
 # Count occurrences of 'SupabaseRealtimeClient('
 CLIENT_COUNT=$(grep -r "SupabaseRealtimeClient(" "$SOURCES_DIR" --include="*.swift" | grep -v "static let shared" | grep -v "//" | wc -l)
@@ -1398,11 +1397,11 @@ else
 fi
 
 # =============================================================================
-# CHECK 65: Subtitle Deduplication Hydra (Landmine #123)
+# CHECK 63: Subtitle Deduplication Hydra (Landmine #123)
 # =============================================================================
 # Trigger: Missing normalization or deduplication logic.
 # Fix: normalizeReleaseName used in SubDLClient.
-print_header "Check 65: Subtitle Deduplication (Landmine #123)"
+print_header "Check 63: Subtitle Deduplication (Landmine #123)"
 
 SUBDL_CLIENT="$SOURCES_DIR/Server/Services/SubDLClient.swift"
 if [[ -f "$SUBDL_CLIENT" ]]; then
@@ -1414,11 +1413,11 @@ if [[ -f "$SUBDL_CLIENT" ]]; then
 fi
 
 # =============================================================================
-# CHECK 66: Resolution Cache Protocol (Landmine #124)
+# CHECK 64: Resolution Cache Protocol (Landmine #124)
 # =============================================================================
 # Trigger: Missing resolutionCache in StreamService.
 # Fix: resolutionCache dictionary used in resolveStream.
-print_header "Check 66: Resolution Cache (Landmine #124)"
+print_header "Check 64: Resolution Cache (Landmine #124)"
 
 STREAM_SERVICE="$SOURCES_DIR/App/Services/StreamService.swift"
 if [[ -f "$STREAM_SERVICE" ]]; then
@@ -1430,11 +1429,11 @@ if [[ -f "$STREAM_SERVICE" ]]; then
 fi
 
 # =============================================================================
-# CHECK 67: Air Gap Protocol (Public Repo Whitelist)
+# CHECK 65: Air Gap Protocol (Public Repo Whitelist)
 # =============================================================================
 # Rule: Every feature folder in Sources/Features/ MUST be accounted for in sync-to-public.sh.
 # This prevents forgotten features during public releases.
-print_header "Check 67: Air Gap Protocol (Whitelist Verification)"
+print_header "Check 65: Air Gap Protocol (Whitelist Verification)"
 
 SYNC_SCRIPT="scripts/sync-to-public.sh"
 if [[ -f "$SYNC_SCRIPT" ]]; then
@@ -1455,11 +1454,11 @@ else
 fi
 
 # =============================================================================
-# CHECK 68: Exit Stabilization Enforcement (Landmine #82)
+# CHECK 66: Exit Stabilization Enforcement (Landmine #82)
 # =============================================================================
 # Trigger: 'exitPlayer' lacking the mandatory unconditional 0.3s delay.
 # Fix: Ensure `Task.sleep` is called if `wasFullscreen` is true.
-print_header "Check 68: Exit Stabilization (Landmine #82)"
+print_header "Check 66: Exit Stabilization (Landmine #82)"
 
 PLAYER_VM="$SOURCES_DIR/Features/Player/PlayerViewModel.swift"
 if [[ -f "$PLAYER_VM" ]]; then
@@ -1472,11 +1471,11 @@ if [[ -f "$PLAYER_VM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 69: Hashless Stream Exclusion (Landmine #131)
+# CHECK 67: Hashless Stream Exclusion (Landmine #131)
 # =============================================================================
 # Trigger: 'markStreamAsAttempted' not accepting fallback metadata.
 # Fix: Ensure signature includes title, size, and provider.
-print_header "Check 69: Hashless Stream Exclusion (Landmine #131)"
+print_header "Check 67: Hashless Stream Exclusion (Landmine #131)"
 
 STREAM_SERVICE="$SOURCES_DIR/App/Services/StreamService.swift"
 if [[ -f "$STREAM_SERVICE" ]]; then
@@ -1489,11 +1488,11 @@ fi
 
 
 # =============================================================================
-# CHECK 70: Strict Subtitle Year Match (Landmine #131)
+# CHECK 68: Strict Subtitle Year Match (Landmine #131)
 # =============================================================================
 # Trigger: SubDL search failing because year is in the query instead of filter.
 # Rule: Search by Clean Title, filter by year locally.
-print_header "Check 70: Strict Subtitle Year Match (Landmine #131)"
+print_header "Check 68: Strict Subtitle Year Match (Landmine #131)"
 
 SUBDL_CLIENT="$SOURCES_DIR/Server/Services/SubDLClient.swift"
 if [[ -f "$SUBDL_CLIENT" ]]; then
@@ -1505,11 +1504,11 @@ if [[ -f "$SUBDL_CLIENT" ]]; then
 fi
 
 # =============================================================================
-# CHECK 71: Hashless Composite Identity (Landmine #131)
+# CHECK 69: Hashless Composite Identity (Landmine #131)
 # =============================================================================
 # Trigger: StreamResolver only checking excludedHashes.
 # Rule: Must check excludedTitles, excludedGroups, and excludedSizes.
-print_header "Check 71: Hashless Composite Identity (Landmine #131)"
+print_header "Check 69: Hashless Composite Identity (Landmine #131)"
 
 RESOLVER="$SOURCES_DIR/Server/Services/StreamResolver.swift"
 if [[ -f "$RESOLVER" ]]; then
@@ -1522,10 +1521,10 @@ fi
 
 
 # =============================================================================
-# CHECK 72: System Message Spam (Landmine #132)
+# CHECK 70: System Message Spam (Landmine #132)
 # =============================================================================
 # Trigger: Missing dedup logic in chat manager or view model.
-print_header "Check 72: System Message Spam (Landmine #132)"
+print_header "Check 70: System Message Spam (Landmine #132)"
 
 CHAT_MANAGER="$SOURCES_DIR/Features/Rooms/LobbyChatManager.swift"
 if [[ -f "$CHAT_MANAGER" ]]; then
@@ -1546,10 +1545,10 @@ if [[ -f "$LOBBY_VM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 73: Event Sync Noise (Landmine #133)
+# CHECK 71: Event Sync Noise (Landmine #133)
 # =============================================================================
 # Trigger: Seek notifications firing during event playback.
-print_header "Check 73: Event Sync Noise (Landmine #133)"
+print_header "Check 71: Event Sync Noise (Landmine #133)"
 
 PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
 if [[ -f "$PLAYER_VM" ]]; then
@@ -1567,10 +1566,10 @@ if [[ -f "$PLAYER_VM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 74: Seek Notification Flood (Landmine #134)
+# CHECK 72: Seek Notification Flood (Landmine #134)
 # =============================================================================
 # Trigger: Missing temporal debouncing on seek notifications.
-print_header "Check 74: Seek Notification Flood (Landmine #134)"
+print_header "Check 72: Seek Notification Flood (Landmine #134)"
 
 if [[ -f "$PLAYER_VM" ]]; then
     if ! grep -q "lastSeekNotificationTime" "$PLAYER_VM"; then
@@ -1582,11 +1581,11 @@ fi
 
 
 # =============================================================================
-# CHECK 75: Social Event Join Fallback (Landmine #136)
+# CHECK 73: Social Event Join Fallback (Landmine #136)
 # =============================================================================
 # Trigger: Missing DB fallback in SocialService or PlayerVM for stale events.
 # Rule: Friends can ALWAYS join friends. Must check getRoomState as fallback.
-print_header "Check 75: Social Event Join Fallback (Landmine #136)"
+print_header "Check 73: Social Event Join Fallback (Landmine #136)"
 
 SOCIAL_SERVICE="Sources/Features/Social/SocialService.swift"
 if [[ -f "$SOCIAL_SERVICE" ]]; then
@@ -1607,11 +1606,11 @@ if [[ -f "$PLAYER_VM" ]]; then
 fi
 
 # =============================================================================
-# CHECK 76: JSON-Body Health Verification (Landmine #137)
+# CHECK 74: JSON-Body Health Verification (Landmine #137)
 # =============================================================================
 # Trigger: checkHealth returning "Online" solely based on HTTP 200.
 # Rule: Must decode JSON body to verify status field for SubDL/RD.
-print_header "Check 76: JSON Health Verification (Landmine #137)"
+print_header "Check 74: JSON Health Verification (Landmine #137)"
 
 SUBDL_CLIENT="Sources/Server/Services/SubDLClient.swift"
 if [[ -f "$SUBDL_CLIENT" ]]; then
@@ -1637,11 +1636,11 @@ if [[ -f "$RD_CLIENT" ]]; then
 fi
 
 # =============================================================================
-# CHECK 77: Fuzzy Year Matching (Landmine #138)
+# CHECK 75: Fuzzy Year Matching (Landmine #138)
 # =============================================================================
 # Trigger: SubDL search requiring exact year match.
 # Rule: Allow ±1 year and handle trailing dashes in metadata.
-print_header "Check 77: Fuzzy Year Matching (Landmine #138)"
+print_header "Check 75: Fuzzy Year Matching (Landmine #138)"
 
 if [[ -f "$SUBDL_CLIENT" ]]; then
     if ! grep -q "allowedYears" "$SUBDL_CLIENT" && ! grep -q "abs.*1" "$SUBDL_CLIENT"; then
@@ -1651,11 +1650,11 @@ if [[ -f "$SUBDL_CLIENT" ]]; then
     fi
 fi
 # =============================================================================
-# CHECK 65: Dependency Injection Race (Landmine #131)
+# CHECK 76: Dependency Injection Race (Landmine #131)
 # =============================================================================
 # Trigger: Using implicit injection order in .task for MPVPlayerView.
 # Fix: appState must be assigned BEFORE startWatchPartySync.
-print_header "Check 65: Dependency Injection Race (Landmine #131)"
+print_header "Check 76: Dependency Injection Race (Landmine #131)"
 
 MPV_VIEW="$SOURCES_DIR/Features/Player/MPVPlayerView.swift"
 if [[ -f "$MPV_VIEW" ]]; then
@@ -1675,11 +1674,11 @@ if [[ -f "$MPV_VIEW" ]]; then
 fi
 
 # =============================================================================
-# CHECK 78: Sticky Ghost Protocol (Landmine #140)
+# CHECK 77: Sticky Ghost Protocol (Landmine #140)
 # =============================================================================
 # Trigger: Transition protection flag never cleared on activity.
 # Rule: transitioningUserIds.remove() MUST be called in handleSyncMessage.
-print_header "Check 78: Sticky Ghost Protocol (Landmine #140)"
+print_header "Check 77: Sticky Ghost Protocol (Landmine #140)"
 
 PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
 if [[ -f "$PLAYER_VM" ]]; then
@@ -1687,6 +1686,39 @@ if [[ -f "$PLAYER_VM" ]]; then
         report "ERROR" "Landmine #140" "Sticky Ghost Risk: MPVPlayerViewModel MUST clear 'transitioningUserIds' upon confirming user activity (handleSyncMessage)." "$PLAYER_VM" "0" "Missing transitioningUserIds.remove logic"
     else
         echo -e "${GREEN}✅ Sticky Ghost protection (transition clearing) verified.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 78: Watch Party Sync Payload (Landmine #142)
+# =============================================================================
+# Trigger: Handshake signal missing Provider or Size metadata.
+# Rule: Payload must match: LOBBY_PREPARE_PLAYBACK|<Hash>|<FileIdx>|<Title>|<Quality>|<Size>|<Provider>
+print_header "Check 78: Watch Party Sync Payload (Landmine #142)"
+
+LOBBY_VM="$SOURCES_DIR/Features/Rooms/LobbyViewModel.swift"
+if [[ -f "$LOBBY_VM" ]]; then
+    VIOLATION=$(grep "LOBBY_PREPARE_PLAYBACK" "$LOBBY_VM" | grep -vE "\|.*\|.*\|.*\|.*\|.*\|" || true)
+    if [[ -n "$VIOLATION" ]]; then
+        LINE=$(grep -n "LOBBY_PREPARE_PLAYBACK" "$LOBBY_VM" | head -n 1 | cut -d: -f1)
+        report "ERROR" "Landmine #142" "Stale Handshake Payload: LOBAY_PREPARE_PLAYBACK must include Provider/Size metadata." "$LOBBY_VM" "$LINE" "$VIOLATION"
+    else
+        echo -e "${GREEN}✅ LobbyViewModel sends enriched synchronization payload.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 79: RD IP-Lock Bypass (Landmine #141)
+# =============================================================================
+# Trigger: Guest resolution path missing clearCache call.
+print_header "Check 79: RD IP-Lock Bypass (Landmine #141)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/PlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    if ! grep -q "RealDebridClient.shared.clearCache" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #141" "IP-Lock Risk: Missing 'clearCache' for guests." "$PLAYER_VM" "0" "Missing RealDebridClient.clearCache call"
+    else
+        echo -e "${GREEN}✅ PlayerViewModel includes Real-Debrid cache clearing for guests.${NC}"
     fi
 fi
 

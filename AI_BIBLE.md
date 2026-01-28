@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 28, 2026 (Part 31: Sticky Ghost Protocol)
+> **Last Updated:** January 28, 2026 (Part 31: Watch Party Sync Optimization)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -59,8 +59,8 @@
 | **Play-Buffer-Play Flash** | Subtitle track changed during playback | #41 |
 | **Host Stuck Buffering (Audio Plays)** | Recovery logic excludes Watch Party Host | #42 |
 | **Crash (Illegal Instruction: 4)** | Double-bootstrap of LoggingSystem | #116 |
-| **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call OR Real-Debrid IP-locked URL | #43, #44 |
-| **Watch Party Guest: Instant EOF** | Real-Debrid server-side cache (magnet hash level) | #44 |
+| **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call OR Real-Debrid IP-locked URL | #43, #44, #141 |
+| **Watch Party Guest: Instant EOF** | Real-Debrid server-side cache (magnet hash level) | #44, #141 |
 | **Server Fail: Torrent not cached** | Heuristic ignored provider fileIdx (Season Pack) | #45 |
 | **Player Start -> Immediate Fail** | Fake 'Direct' URL (Comet Error Stream) | #46 |
 | **Ghost Participant (Lobby)** | User list doesn't update / 'Left' msg missing | #47 |
@@ -86,7 +86,8 @@
 | **Event: Stuck at 0:00 / Black Screen** | Stream validation seeking to 0 (Watch Party logic on Events) | #84 |
 | **Event: Auto-Starts Early (Countdown Bypass)** | Database createdAt (room creation) vs eventStartTime mismatch | #84 |
 | **Event: Infinite Loop (No Auto-Exit)** | EOF handler using wrong time reference (user join vs event start) | #84 |
-| **Guest plays different file than Host** | DebridSearch has nil infoHash; Guest falls to independent resolution | #91 |
+| **Guest plays different file than Host** | DebridSearch has nil infoHash; Guest falls to independent resolution | #91, #141 |
+| **Slow Guest Sync (10-20s Delay)** | Full provider scrape instead of targeted sync | #142 |
 | **"No Valid Streams" (All .iso files)** | Fake torrents block legitimate localized streams | #85 |
 | **Browse Page Slow/Laggy** | All catalogs + images loading simultaneously | #86 |
 | **App Freeze on Watch Party (Browse)** | Sheet dismissal race condition / root unmount | #87 |
@@ -2226,3 +2227,19 @@ request.cachePolicy = .reloadIgnoringLocalCacheData
 1. **Activity Confirmation**: The protection flag (`transitioningUserIds`) MUST be cleared immediately upon receiving *any* valid Realtime message (Chat, Ready, Playback, or Reaction) from the user.
 2. **Dynamic Shield**: Do not rely on time alone. Use the first proof-of-life signal to drop the shield.
 3. **Log Visibility**: Log "Removing transition protection" when the shield drops to confirm correct behavior.
+
+### 11. The Real-Debrid Guest IP-Lock Trap (Landmine #141)
+**Symptom**: Watch Party guests experience instantaneous "EOF" or "Premature End of File" upon starting playback, while the host plays perfectly.
+**Root Cause**: **Inter-IP Magnet Pollution**. Real-Debrid generates stream URLs based on the IP address that first "unlocks" or "links" the magnet. If the Host's URL is shared, it fails for guests (Direct IP-Lock). Furthermore, even if the guest resolves the same hash, if the debrid service has the magnet "cached" for the host's IP, it may serve a poisoned link or a 403.
+**Mandatory Solution**:
+1. **Cache Purge**: Guests MUST call `RealDebridClient.shared.clearCache(forHash:)` before resolving/unlocking. This forces the debrid service to purge any previous session state for that magnet.
+2. **Force Fresh**: Use `forceFresh: true` (or equivalent) in the `unlock` call to ensure a new link is generated specifically for the guest's IP.
+3. **Title Fallback**: If the `infoHash` is stable but resolution fails, guests MUST fall back to matching the Host's `selectedStreamTitle` against all available provider results using `Stream.normalizeTitle()`.
+
+### 12. Targeted Provider Synchronization (Landmine #142)
+**Symptom**: Watch Party synchronization takes 10-20 seconds for guests while "Resolving Streams", causing them to miss the start of the movie.
+**Root Cause**: **Exhaustive Scrapping**. Guests were performing a full scrape of all 15+ providers to find a matching stream. This is redundant if the Host has already identified a working source.
+**Mandatory Solution**:
+1. **Handshake Enrichment**: The `LOBBY_PREPARE_PLAYBACK` signal MUST include the `provider` name (e.g., `Torrentio`, `DebridSearch`).
+2. **Targeted Fetching**: Guests MUST pass the `preferredProvider` to `ProviderManager.shared.fetchStreams(providerNames: [...])`. This reduces API traffic to a single request, cutting sync time to **<2 seconds**.
+3. **Protocol Consistency**: The `StreamResolving` protocol MUST include `preferredProvider` to ensure this optimization is propagated through the `PlayerViewModel` and emergency resolution loops.

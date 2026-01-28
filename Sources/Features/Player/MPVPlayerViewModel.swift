@@ -2561,13 +2561,13 @@ extension MPVPlayerViewModel {
 
                                 // 2. Bible Landmine #51: Only consider Offline when count hits Zero
                                 // 3. Transition Protection (Bible Landmine #132)
-                                if !refs.isEmpty || self.transitioningUserIds.contains(actualUserId.lowercased()) {
-                                    if let expiry = self.transitionExpiryDate, Date() < expiry {
-                                        LoggingManager.shared.info(.watchParty, message: "🛡️ Ignoring leave for \(actualUserId) - User still transitioning or has active connections")
-                                        self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                        return
-                                    }
-                                }
+                                 if !refs.isEmpty || self.transitioningUserIds.contains(actualUserId.lowercased()) {
+                                     if let expiry = self.transitionExpiryDate, Date() < expiry {
+                                         LoggingManager.shared.info(.watchParty, message: "🛡️ Presence: Ignoring leave event for transitioning user: \(actualUserId)")
+                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                         return
+                                     }
+                                 }
 
                                 if !refs.isEmpty {
                                     LoggingManager.shared.info(.watchParty, message: "🛡️ Ignoring leave for \(actualUserId) - User still has \(refs.count) active connections")
@@ -3029,6 +3029,7 @@ extension MPVPlayerViewModel {
                     if self.transitioningUserIds.contains(id) {
                         if let expiry = self.transitionExpiryDate, Date() < expiry {
                             // Skip removal - they are still in the transition window
+                            LoggingManager.shared.info(.watchParty, message: "🛡️ Polling: Protecting \(id) - user is in transition window")
                             return false
                         } else {
                             // Window expired

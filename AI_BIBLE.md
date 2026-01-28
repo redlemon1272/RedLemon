@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 28, 2026 (Part 31: Watch Party Sync Optimization)
+> **Last Updated:** January 28, 2026 (Part 32: Seamless Player UI & Transitions)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -132,6 +132,9 @@
 | **Seek Notification Flood** | Large drift correction triggers spam | #134 |
 | **Scanner Proximity Failure** | Guard too far from trigger | #135 |
 | **Guest Left Immediately** | Call to `sync` runs before `appState` injection | #131 |
+| **Player Overlays Off-center** | `ignoresSafeArea()` on background or ZStack alignment | #143 |
+| **Video Freeze/Stretch on Switch** | Persistent mpv decoder state / dynamic aspect ratio | #144 |
+| **Playback "Skip" after Sync** | Overlay cleared before snap-seek finished | #145 |
 
 ## 🚨 Critical Landmines
 
@@ -570,6 +573,28 @@
     *   **Cause**: SwiftUI's `.task` modifier runs asynchronously relative to the view body re-evaluation. If injection happens in `.onAppear` or later in the body, the `.task` block might execute first with nil dependencies.
     *   **Rule**: **Inject First, Then Act**. Any dependency assignment (like `viewModel.appState = ...`) MUST happen at the very top of the `.task` block OR in the `init` method. Never assume `.onAppear` runs before `.task`.
     *   **Fix**: Moved assignment to top of `.task` in `MPVPlayerView.swift`.
+
+143. **Deterministic Player Geometry**: *(Added v1.0.165)*
+    *   **Symptom**: The entire player container "jumps" horizontally when toggling chat or when loading overlays appear/disappear.
+    *   **Cause**: SwiftUI's ZStack/HStack alignment logic recalculates the center point of the container when its children change their size or safe area properties.
+    *   **Rule**: **Lock the Frame**. The player container MUST use a fixed `.frame(width:height:)` derived from a `GeometryReader` rather than relying on flexible spacers or automatic sizing. Use `.alignment(.center)` on the frame to anchor content. (Landmine #143).
+    *   **Avoid**: `.ignoresSafeArea()` on full-screen overlays inside the player; it breaks the container's layout boundary.
+
+144. **Visual Continuous-Track Protocol (Smooth Transitions)**: *(Added v1.0.165)*
+    *   **Symptom**: Swapping audio/subtitle tracks causes a brief "frozen and stretched" frame of video while the decoder resets.
+    *   **Cause**: `libmpv` provides the previous frame during decoder re-initialization. If the aspect ratio or window size has shifted, this frame stretches.
+    *   **Rule**: **Hide the Glitch**.
+        1.  Immediately set video `opacity = 0` when track selection begins (`isLoading = true`).
+        2.  Show a high-quality transition overlay (e.g., "Syncing track...").
+        3.  Only reveal video (`opacity = 1`) after `onFileLoaded` or once the synchronization seek has completed.
+
+145. **The "Seek-Shield" Strategy (Hiding Catch-up Jumps)**: *(Added v1.0.165)*
+    *   **Symptom**: Video resumes after a sync, but then "skips" forward shortly after, appearing non-seamless.
+    *   **Cause**: In Events/Watch Parties, the app performs a snap-seek to catch up with the host/clock. If the loading overlay is cleared *before* the seek completes, the user sees the video jump.
+    *   **Rule**: **Finalize Under the Hood**.
+        1.  Trigger the catch-up seek while `isLoading` is still `true`.
+        2.  Use a `finalizeTrackSwitch()` helper that holds `isLoading` for an extra **300-500ms** after the seek is launched.
+        3.  This shields the visual "pop" of the video, making the transition feel perfectly seamless. (Landmine #145).
 
 ## 🪦 Resolved Landmines (Archived)
 *   ~~#XX: Old Issue~~ - (Example placeholder)

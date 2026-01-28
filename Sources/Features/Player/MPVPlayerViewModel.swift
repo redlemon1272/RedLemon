@@ -653,11 +653,11 @@ class MPVPlayerViewModel: ObservableObject {
     private var hasHandledNextEpisodePrompt: Bool = false // Prevent reappearing
     @Published var showPoster: Bool = true  // Show during loading
     @Published var isVideoTitleVisible: Bool = false
-
-    // UI Enhancements
     @Published var syncStatus: String? = nil
+
     @Published var isBuffering: Bool = false
     @Published var isSeeking: Bool = false
+    private var trackSwitchSafetyTimer: Timer?
     @Published var isExitingSession: Bool = false {
         didSet {
             if isExitingSession {
@@ -750,7 +750,8 @@ class MPVPlayerViewModel: ObservableObject {
     private var lastAccumulatorUpdate: Date = Date()
 
     // MARK: - Phantom Sync & Snap-Seek State
-    private var isSwitchingTracks: Bool = false
+    var isSwitchingTracks: Bool = false
+    @Published var isSwitchingTracksRecently: Bool = false
     private var trackSwitchStartTime: Date?
     private var trackSwitchStartPos: Double = 0
 
@@ -1613,61 +1614,72 @@ class MPVPlayerViewModel: ObservableObject {
     private func completeTrackSwitch() {
         LoggingManager.shared.info(.watchParty, message: "Completing track switch (Snap-Seek)...")
 
-        // Reset state immediately to avoid re-triggering
-        isSwitchingTracks = false
-
         let switchDuration = Date().timeIntervalSince(trackSwitchStartTime ?? Date())
         LoggingManager.shared.debug(.watchParty, message: "Switch took: \(Int(switchDuration * 1000))ms")
 
-        // 1. HOST LOGIC: Phantom Sync
+        // 1. Calculate Target Time
+        var targetTime: Double?
+
+        // HOST LOGIC: Phantom Sync
         if isWatchPartyHost {
-            let targetTime = trackSwitchStartPos + switchDuration
-            LoggingManager.shared.info(.watchParty, message: "Host: Phantom Sync - seeking to \(String(format: "%.3f", targetTime))s (skipped stalling period)")
-
-            // Seek to where we would have been
-            Task { @MainActor in
-                await playbackService.seek(to: targetTime)
-                // Resume sync broadcasts if we paused them (optional implementation detail, but here we just seek)
-            }
+            targetTime = trackSwitchStartPos + switchDuration
+            LoggingManager.shared.info(.watchParty, message: "Host: Phantom Sync - seeking to \(String(format: "%.3f", targetTime ?? 0))s")
         }
-
-        // 2. GUEST LOGIC: Snap-Seek Catch-up
+        // GUEST LOGIC: Snap-Seek Catch-up
         else if isInWatchParty {
-             // CRITICAL FIX: System Event (Live) - Sync to Wall Clock
-             // System events don't have a host broadcasting position, so getInterpolatedPosition() returns 0.
              if let eventStart = appState?.player.eventStartTime {
                  let elapsed = Date().timeIntervalSince(eventStart)
-                 LoggingManager.shared.info(.watchParty, message: "Event Mode: Snap-Seek to Wall Clock time: \(elapsed)s (Switch Duration: \(Int(switchDuration * 1000))ms)")
+                 targetTime = max(0, elapsed)
+                 LoggingManager.shared.info(.watchParty, message: "Event Mode: Snap-Seek to Wall Clock time: \(targetTime ?? 0)s")
+             } else if let manager = realtimeManager {
+                 // Use a task to get interpolated position before clearing UI
+                 Task {
+                     let remotePos = await manager.getInterpolatedPosition()
+                     let drift = abs(remotePos - self.currentTime)
+                     if drift > 0.1 {
+                         LoggingManager.shared.info(.watchParty, message: "Executing Snap-Seek to Host time: \(remotePos)s")
+                         await playbackService.seek(to: remotePos)
+                     }
 
-                 // Seek to exact live edge
-                 Task { @MainActor in
-                     await playbackService.seek(to: max(0, elapsed))
+                     // Finalize UI after seek trigger
+                     await MainActor.run { finalizeTrackSwitch() }
                  }
-                 return
+                 return // Exit early, task will handle finalization
              }
-
-             // Calculate where the host is NOW
-            if let manager = realtimeManager {
-                Task {
-                    let remotePos = await manager.getInterpolatedPosition()
-                    let drift = abs(remotePos - self.currentTime)
-
-                    LoggingManager.shared.debug(.watchParty, message: "Guest: Snap-Seek - Host is at \(String(format: "%.3f", remotePos))s (Drift: \(Int(drift * 1000))ms)")
-
-                    // Always snap if drift is significant (> 100ms)
-                    if drift > 0.1 {
-                        LoggingManager.shared.info(.watchParty, message: "Executing Snap-Seek to Host time")
-                        await playbackService.seek(to: remotePos)
-                    } else {
-                        LoggingManager.shared.debug(.watchParty, message: "Drift is negligible, skipping snap")
-                    }
-                }
-            }
         }
 
-        // Clear buffering state manually since we consumed the event
-        self.isBuffering = false
-        self.isLoading = false
+        // 2. Perform Seek if needed
+        if let target = targetTime {
+            Task { @MainActor in
+                await playbackService.seek(to: target)
+                finalizeTrackSwitch()
+            }
+        } else {
+            // No seek needed (Solo play)
+            finalizeTrackSwitch()
+        }
+    }
+
+    @MainActor
+    private func finalizeTrackSwitch() {
+        // Reset state immediately to avoid re-triggering
+        isSwitchingTracks = false
+
+        // Temporal Guard to prevent "Buffering Flash"
+        isSwitchingTracksRecently = true
+
+        // NEW: Hold the overlay for a split second to cover the seek landing
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 500_000_000) // 500ms extra cover
+            self.isLoading = false
+            self.showPoster = false
+
+            try? await Task.sleep(nanoseconds: 1_500_000_000) // Remaining 1.5s for temporal guard
+            self.isSwitchingTracksRecently = false
+        }
+
+        trackSwitchSafetyTimer?.invalidate()
+        trackSwitchSafetyTimer = nil
     }
 
     // MARK: - Auto-Play Control
@@ -1686,11 +1698,23 @@ class MPVPlayerViewModel: ObservableObject {
     // MARK: - Track Selection
 
     func setAudioTrack(_ track: AudioTrack) {
-        if isInWatchParty {
-            LoggingManager.shared.info(.watchParty, message: "Switching audio track in Watch Party Mode...")
-            isSwitchingTracks = true
-            trackSwitchStartTime = Date()
-            trackSwitchStartPos = currentTime
+        LoggingManager.shared.info(.videoRendering, message: "Switching audio track...")
+        self.isLoading = true
+        self.showPoster = false
+        isSwitchingTracks = true
+        trackSwitchStartTime = Date()
+        trackSwitchStartPos = currentTime
+
+        // Safety timeout to prevent getting stuck in track switching state
+        trackSwitchSafetyTimer?.invalidate()
+        trackSwitchSafetyTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                if self?.isSwitchingTracks == true {
+                    LoggingManager.shared.warn(.videoRendering, message: "Track switch safety timeout triggered - clearing isSwitchingTracks")
+                    self?.isSwitchingTracks = false
+                    self?.trackSwitchSafetyTimer = nil
+                }
+            }
         }
 
         mpvWrapper.setAudioTrack(track.id)
@@ -1705,11 +1729,25 @@ class MPVPlayerViewModel: ObservableObject {
         // External tracks don't cause stalling, so simpler is better
         let isEmbedded = availableSubtitleTracks.first(where: { $0.id == trackId })?.isExternal == false
 
-        if isInWatchParty && isEmbedded {
-             LoggingManager.shared.info(.watchParty, message: "Switching embedded subtitle track in Watch Party Mode...")
+        if isEmbedded {
+             LoggingManager.shared.info(.videoRendering, message: "Switching embedded subtitle track...")
+             self.isLoading = true
+             self.showPoster = false
              isSwitchingTracks = true
              trackSwitchStartTime = Date()
              trackSwitchStartPos = currentTime
+
+             // Safety timeout to prevent getting stuck in track switching state
+             trackSwitchSafetyTimer?.invalidate()
+             trackSwitchSafetyTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] _ in
+                 Task { @MainActor [weak self] in
+                     if self?.isSwitchingTracks == true {
+                         LoggingManager.shared.warn(.videoRendering, message: "Track switch safety timeout triggered - clearing isSwitchingTracks")
+                         self?.isSwitchingTracks = false
+                         self?.trackSwitchSafetyTimer = nil
+                     }
+                 }
+             }
         }
 
         Task {

@@ -1722,6 +1722,38 @@ if [[ -f "$PLAYER_VM" ]]; then
     fi
 fi
 
+# =============================================================================
+# CHECK 80: Deterministic Player Alignment (Landmine #143)
+# =============================================================================
+# Trigger: Player container using .leading alignment instead of .center.
+# Rule: Must use alignment: .center for overlays to remain centered with chat open.
+print_header "Check 80: Deterministic Player Alignment (Landmine #143)"
+
+PLAYER_VIEW="$SOURCES_DIR/Features/Player/MPVPlayerView.swift"
+if [[ -f "$PLAYER_VIEW" ]]; then
+    if ! grep -q "alignment: .center" "$PLAYER_VIEW"; then
+        report "ERROR" "Landmine #143" "Centering Risk: MPVPlayerView container should use alignment: .center to ensure overlays stay centered when chat is open." "$PLAYER_VIEW" "0" "Missing .center alignment"
+    else
+        echo -e "${GREEN}✅ MPVPlayerView uses deterministic .center alignment.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 81: Seek-Shield Strategy (Landmine #145)
+# =============================================================================
+# Trigger: completeTrackSwitch clearing isLoading immediately instead of helper.
+# Rule: Use finalizeTrackSwitch to hide snap-seek jumps.
+print_header "Check 81: Seek-Shield Strategy (Landmine #145)"
+
+PLAYER_VM_2="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
+if [[ -f "$PLAYER_VM_2" ]]; then
+    if ! grep -q "finalizeTrackSwitch()" "$PLAYER_VM_2"; then
+        report "ERROR" "Landmine #145" "Seamlessness Risk: MPVPlayerViewModel missing finalizeTrackSwitch() helper. Necessary for hiding catch-up jumps under the overlay." "$PLAYER_VM_2" "0" "Missing finalizeTrackSwitch helper"
+    else
+        echo -e "${GREEN}✅ MPVPlayerViewModel uses Seek-Shield strategy.${NC}"
+    fi
+fi
+
 
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"

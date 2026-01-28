@@ -16,7 +16,6 @@ struct LoadingOverlay: View {
             // Premium glassmorphic background
             Rectangle()
                 .fill(.ultraThinMaterial)
-                .ignoresSafeArea()
 
             VStack(spacing: 24) {
                 // Enhanced spinner with subtle glow

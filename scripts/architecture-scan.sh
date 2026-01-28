@@ -1755,6 +1755,23 @@ if [[ -f "$PLAYER_VM_2" ]]; then
 fi
 
 
+# =============================================================================
+# CHECK 82: Premium Validation (Stale Crown)
+# =============================================================================
+# Trigger: Client trusting is_premium boolean instead of validating expiration date.
+# Rule: LobbyPresenceManager MUST check subscriptionExpiresAt > Date().
+print_header "Check 82: Premium Validation (Stale Crown)"
+
+LOBBY_PRESENCE="$SOURCES_DIR/Features/Rooms/LobbyPresenceManager.swift"
+if [[ -f "$LOBBY_PRESENCE" ]]; then
+    # Look for the fix: fetchedIsPremium = (expiresAt > Date())
+    if ! grep -q "expiresAt > Date()" "$LOBBY_PRESENCE"; then
+        report "ERROR" "Stale Crown Risk" "LobbyPresenceManager MUST validate 'subscriptionExpiresAt > Date()' to prevent stale premium crowns. Do not trust 'isPremium' boolean alone." "$LOBBY_PRESENCE" "0" "Missing expiration date check"
+    else
+        echo -e "${GREEN}✅ LobbyPresenceManager correctly validates premium expiration dates.${NC}"
+    fi
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"
@@ -1776,7 +1793,10 @@ fi
 echo ""
 echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
 
-# Exit Code Logic: Zero Warning Policy Enforcement (Landmine #135)
+
+
+# Exit Code Logic
+
 if [[ $ERROR_COUNT -gt 0 || $WARNING_COUNT -gt 0 ]]; then
     if [[ $WARNING_COUNT -gt 0 ]]; then
         echo -e "${RED}❌ FAILED: Zero Warning Policy Violation. All warnings must be resolved or suppressed.${NC}"

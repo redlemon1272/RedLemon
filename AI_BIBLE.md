@@ -135,6 +135,7 @@
 | **Player Overlays Off-center** | `ignoresSafeArea()` on background or ZStack alignment | #143 |
 | **Video Freeze/Stretch on Switch** | Persistent mpv decoder state / dynamic aspect ratio | #144 |
 | **Playback "Skip" after Sync** | Overlay cleared before snap-seek finished | #145 |
+| **Stale Premium Crown** | Client trusting DB flag vs Expiration Date | **Rule**: Validate `expires_at > Now` client-side |
 
 ## 🚨 Critical Landmines
 
@@ -798,6 +799,7 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 **Critical:** `LicenseManager.refreshSubscription()` relies on a **HYBRID** check:
 1.  **Edge Function** (`check-payment`): Detects *new* incoming crypto transactions.
 2.  **Database Profile** (`users.subscription_expires_at`): Persists valid subscriptions and Admin Grants.
+3.  **Client-Side Validation** (`LobbyPresenceManager`): **Rule**: Always validate specific expiration dates (`expires_at > Now`). Do NOT trust `is_premium` booleans from the database blindly, as they may be stale due to background job latency. Trust Time, Not Flags.
 **Rule:** Always check BOTH. The latest date wins. Never rely solely on the edge function, or Admin Grants will be ignored.
 
 ## Payment Stacking & Prestige (Prestige Emojis)

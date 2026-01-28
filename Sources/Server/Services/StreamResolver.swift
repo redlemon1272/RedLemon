@@ -31,23 +31,7 @@ actor StreamResolver {
         preferredHash: String? = nil,
         triggerSource: String = "manual"
     ) async throws -> QualityBucketsResponse {
-        // For movies only, pull canonical title to prioritize correct matches
-        let targetTitle: String?
-        if type == "movie" {
-            let metadata = await MetadataService.shared.getMetadata(imdbId: imdbId, type: type)
-            targetTitle = metadata?.title
-            if let title = targetTitle {
-                print("🎯 Target title for matching: \(title)")
-            }
-        } else {
-            targetTitle = nil
-        }
-
-        NSLog("%@", "⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
-
         // MARK: - Kitsu → IMDB Resolution
-        // Most stream providers (Torrentio, Zilean, DebridSearch) require IMDB IDs.
-        // If we receive a Kitsu ID, try to resolve it to an IMDB ID first.
         let effectiveId: String
         if imdbId.hasPrefix("kitsu:") {
             if let resolvedImdb = await MetadataService.shared.resolveKitsuToImdb(kitsuId: imdbId) {
@@ -55,7 +39,6 @@ actor StreamResolver {
                 effectiveId = resolvedImdb
             } else {
                 NSLog("%@", "⚠️ Could not resolve Kitsu→IMDB, using original ID: \(imdbId)")
-                // Continue with Kitsu ID - some providers (Comet, MediaFusion) may still work
                 effectiveId = imdbId
             }
         } else {
@@ -65,6 +48,13 @@ actor StreamResolver {
         let userId = await KeychainManager.shared.get(service: "user_id")
         await SessionRecorder.shared.startNewSession(imdbId: effectiveId, userId: userId, triggerSource: triggerSource)
         await SessionRecorder.shared.log(category: .resolver, message: "Started Resolution", metadata: ["type": type, "season": "\(season ?? 0)", "episode": "\(episode ?? 0)"])
+
+        // Pull canonical title to prioritize correct matches
+        let metadata = await MetadataService.shared.getMetadata(imdbId: effectiveId, type: type)
+        let targetTitle = metadata?.title
+        if let title = targetTitle {
+            print("🎯 Target title for matching: \(title)")
+        }
 
         // Fetch Blacklisted Streams (Parallel)
         // We fetch this fresh every time to ensure blocks are immediate
@@ -363,13 +353,9 @@ actor StreamResolver {
         let targetLower = targetTitle?.lowercased() ?? ""
 
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = getExtendedSearchText(for: stream)
-
-            // Check for terms with delimiters to avoid false positives (e.g. "teasers" -> "teaser" is okay, but "sample" in "example" is not)
-            // Actually "example" doesn't contain "sample".
-            // But strict delimiters are safer.
-            // Terms to check strictly: "sample", "trailer", "teaser", "bonus"
-            // Terms to check loosely: "featurette", "making of", "deleted scenes"
+            let rawTitleLower = getExtendedSearchText(for: stream)
+            // Normalize dots/underscores to spaces for keyword matching
+            let titleLower = rawTitleLower.replacingOccurrences(of: ".", with: " ").replacingOccurrences(of: "_", with: " ")
 
             let isSample = sampleTerms.contains { term in
                 // Optimization: Ignore if term is in the official title (e.g. "Sample People", "Trailer Park Boys")
@@ -380,12 +366,11 @@ actor StreamResolver {
                 if term == "featurette" || term == "making of" || term == "deleted scenes" {
                     return titleLower.contains(term)
                 }
-                // For short words, use delimiters
+
+                // For short words, use delimiters (now easier since dots are spaces)
                 return titleLower.contains(" \(term) ") ||
-                       titleLower.contains(".\(term).") ||
                        titleLower.contains("-\(term)-") ||
                        titleLower.hasSuffix("-\(term)") ||
-                       titleLower.hasSuffix(".\(term)") ||
                        titleLower.hasSuffix(" \(term)") ||
                        titleLower == term
             }
@@ -404,7 +389,8 @@ actor StreamResolver {
         let beforeBadGroupFilter = filteredStreams.count
         let badGroups = ["tamilmv", "1tamilmv", "tamilrockers", "le-production", "le production", "rgzsrutracker"]
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = getExtendedSearchText(for: stream)
+            let rawTitleLower = getExtendedSearchText(for: stream)
+            let titleLower = rawTitleLower.replacingOccurrences(of: ".", with: " ").replacingOccurrences(of: "_", with: " ")
             let isBadGroup = badGroups.contains { group in
                 // Optimization: Ignore if group name is in the official title
                 if !targetLower.isEmpty && targetLower.contains(group) {
@@ -413,7 +399,7 @@ actor StreamResolver {
 
                 // Use strict delimiters for "le production" to prevent "Simple Production" matches
                 if group == "le production" || group == "le-production" {
-                     return titleLower.contains(" le production ") || titleLower.contains(".le.production.") || titleLower.contains("-le-production-")
+                     return titleLower.contains(" le production ") || titleLower.contains("-le-production-")
                 }
 
                 return titleLower.contains(group)
@@ -431,7 +417,8 @@ actor StreamResolver {
         let beforeSpamFilter = filteredStreams.count
         let spamTerms = ["1xbet", "casino", "winline", "azino", "bet", "vavada", "joycasino", "parimatch", "mostbet", "melbet"]
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = getExtendedSearchText(for: stream)
+            let rawTitleLower = getExtendedSearchText(for: stream)
+            let titleLower = rawTitleLower.replacingOccurrences(of: ".", with: " ").replacingOccurrences(of: "_", with: " ")
              // Use strict delimiters for "bet" to avoid false positives (e.g. "Better call saul")
             let isSpam = spamTerms.contains { term in
                 // Optimization: Ignore if term is in the official title (e.g. "Casino Royale", "The Bet")
@@ -440,7 +427,7 @@ actor StreamResolver {
                 }
 
                 if term == "bet" {
-                     return titleLower.contains(".bet.") || titleLower.contains(" bet ") || titleLower.contains("-bet-")
+                     return titleLower.contains(" bet ") || titleLower.contains("-bet-")
                 }
                 return titleLower.contains(term)
             }
@@ -457,7 +444,8 @@ actor StreamResolver {
         let beforeMpeg2Filter = filteredStreams.count
         let mpeg2Terms = ["mpeg-2", "mpeg2", "dvd5", "dvd9"]
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = getExtendedSearchText(for: stream)
+            let rawTitleLower = getExtendedSearchText(for: stream)
+            let titleLower = rawTitleLower.replacingOccurrences(of: ".", with: " ").replacingOccurrences(of: "_", with: " ")
             let isMpeg2 = mpeg2Terms.contains { term in
                 titleLower.contains(term)
             }
@@ -478,10 +466,12 @@ actor StreamResolver {
         let threeDFormats = ["sbs", "hsbs", "h-sbs", "half-sbs", "tab", "htab", "half-tab"]
 
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = getExtendedSearchText(for: stream)
+            let rawTitleLower = getExtendedSearchText(for: stream)
+            // Normalize dots/underscores to spaces for keyword matching
+            let titleLower = rawTitleLower.replacingOccurrences(of: ".", with: " ").replacingOccurrences(of: "_", with: " ")
 
             // Check implicit 3D ("3d" surrounded by delimiters)
-            if titleLower.contains(".3d.") || titleLower.contains(" 3d ") || titleLower.contains("-3d-") || titleLower.hasSuffix(".3d") || titleLower.hasSuffix(" 3d") {
+            if titleLower.contains(" 3d ") || titleLower.contains("-3d-") || titleLower.hasSuffix(" 3d") {
                  print("   🚫 RESOLVER BLOCKING 3D (Strict): \(stream.title)")
                  return false
             }
@@ -500,6 +490,28 @@ actor StreamResolver {
         }
         if filteredStreams.count < before3DFilter {
             print("   🚫 RESOLVER FILTERED 3D: \(before3DFilter) → \(filteredStreams.count) streams")
+        }
+
+        // CRITICAL: Filter Spin-offs (e.g. Pillow Talk, Superfan)
+        let beforeSpinOffFilter = filteredStreams.count
+        let spinOffKeywords = ["pillow talk", "superfan", "inside the", "after party", "the aftershow"]
+
+        filteredStreams = filteredStreams.filter { stream in
+            let rawTitleLower = getExtendedSearchText(for: stream)
+            // Normalize dots/underscores to spaces for keyword matching
+            let titleLower = rawTitleLower.replacingOccurrences(of: ".", with: " ").replacingOccurrences(of: "_", with: " ")
+            let targetLower = targetTitle?.lowercased() ?? ""
+
+            for kw in spinOffKeywords {
+                if titleLower.contains(kw) && !targetLower.contains(kw) {
+                    print("   🚫 RESOLVER BLOCKING Spin-off (\(kw)): \(stream.title)")
+                    return false
+                }
+            }
+            return true
+        }
+        if filteredStreams.count < beforeSpinOffFilter {
+            print("   🚫 RESOLVER FILTERED Spin-offs: \(beforeSpinOffFilter) → \(filteredStreams.count) streams")
         }
 
         // CRITICAL: Filter by AUDIO LANGUAGE - English/Multi preferred
@@ -1228,6 +1240,7 @@ actor StreamResolver {
 
     private func cleanTitleForMatching(_ text: String) -> String {
         return text.lowercased()
+            .folding(options: .diacriticInsensitive, locale: .current)
             // Replace dots/underscores with spaces
             .replacingOccurrences(of: ".", with: " ")
             .replacingOccurrences(of: "_", with: " ")

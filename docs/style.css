@@ -97,13 +97,13 @@ nav {
 
 /* Hero */
 .hero {
-    min-height: 70vh;
+    min-height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 8rem 2rem 4rem;
+    padding: 6rem 2rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -115,12 +115,14 @@ nav {
     line-height: 1.1;
 }
 
-.hero p {
+.hero p.hero-text {
     font-size: 1.4rem;
     color: var(--text-secondary);
     max-width: 800px;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     font-weight: 300;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cta-group {
@@ -151,7 +153,7 @@ nav {
 
 /* Features */
 .features {
-    padding: 6rem 2rem;
+    padding: 2rem 2rem 6rem;
     max-width: 1200px;
     margin: 0 auto;
 }

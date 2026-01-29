@@ -10,11 +10,6 @@
 
 RedLemon is a next-generation streaming client built for macOS. It aggregates content into a beautiful, unified interface with a focus on **social watching**.
 
-*   **Live Cinema Events**: Scheduled community screenings where everyone watches synchronized in real-time. (See: `EventsView.swift`)
-*   **Watch Parties**: Create public or private rooms with low-latency sync using a native MPV integration. (See: `MPVWrapper.swift`, `LobbyView.swift`)
-*   **One-Click Play**: Intelligently selects from available sources for instant playback. (Optimized for debrid-backed streaming).
-*   **Native Performance**: 100% Swift/SwiftUI with Metal-accelerated video playback. Zero Electron/Webview bloat. (See: `RedLemonApp.swift`)
-
 ## 🛡️ Hybrid Open Source Model
 
 **Current Version:** v1.0.169 (build 169)

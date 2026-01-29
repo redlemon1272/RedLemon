@@ -25,7 +25,8 @@ struct WatchPartyLobbyView: View {
     @ObservedObject private var socialService = SocialService.shared
     @State private var sidebarTab: SidebarTab = .chat
     @State private var selectedFriend: Friend? = nil // For DM view
-    @State private var showScrollHint: Bool = true
+    @AppStorage("hasSeenLobbyScrollHint") private var hasSeenScrollHint: Bool = false
+    @State private var showScrollHint: Bool = false
     @State private var scrollBounceOffset: CGFloat = 0
 
     enum SidebarTab {
@@ -57,6 +58,11 @@ struct WatchPartyLobbyView: View {
             }
         }
         .onAppear {
+            if !hasSeenScrollHint {
+                withAnimation(Animation.easeInOut.delay(1.0)) {
+                    showScrollHint = true
+                }
+            }
             viewModel.appState = appState  // Set weak reference
             viewModel.connect()
 
@@ -427,6 +433,7 @@ struct WatchPartyLobbyView: View {
                     DragGesture().onChanged { _ in
                         if showScrollHint {
                             withAnimation { showScrollHint = false }
+                            hasSeenScrollHint = true
                         }
                     }
                 )
@@ -465,10 +472,12 @@ struct WatchPartyLobbyView: View {
                                 withAnimation {
                                     showScrollHint = false
                                 }
+                                hasSeenScrollHint = true
                             }
                         }
                         .onTapGesture {
                             withAnimation { showScrollHint = false }
+                            hasSeenScrollHint = true
                         }
                     }
                 }

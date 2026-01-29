@@ -85,6 +85,16 @@ nav {
     color: #000 !important;
 }
 
+.nav-link-secondary {
+    color: var(--text-secondary) !important;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.nav-link-secondary:hover {
+    color: var(--text-primary) !important;
+}
+
 /* Hero */
 .hero {
     min-height: 70vh;
@@ -219,8 +229,8 @@ nav {
 
 .terminal-guide {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 4rem;
+    grid-template-columns: 0.8fr 2.2fr;
+    gap: 3rem;
     text-align: left;
     align-items: center;
 }
@@ -281,7 +291,25 @@ kbd {
     padding: 0.8rem 1rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
+}
+
+.terminal-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-copy {
+    padding: 0.3rem 0.6rem !important;
+    font-size: 0.75rem !important;
+    border-radius: 6px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.header-copy:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
 }
 
 .dots {
@@ -303,17 +331,19 @@ kbd {
 }
 
 .command-content {
-    padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+    padding: 2.5rem 2rem;
+    text-align: left;
+    overflow-x: auto;
 }
 
 code {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--accent-lemon);
+    white-space: pre-wrap;
+    word-break: break-all;
+    display: block;
+    line-height: 1.5;
 }
 
 .copy-btn {

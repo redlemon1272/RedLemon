@@ -361,15 +361,14 @@ final class SubDLClient {
             .trimmingCharacters(in: .whitespacesAndNewlines)
 
         // Include year in search for better accuracy
-        var filmName = sanitizedName
-        if let year = year {
-            filmName += " \(year)"
-        }
+        // Bible #131: SubDL search is fragile with years. Send ONLY the name to the API.
+        // We will filter by year locally on the results.
+        let filmName = sanitizedName
 
         var components = URLComponents(string: "\(baseURL)/subtitles")!
         let queryItems = [
             URLQueryItem(name: "api_key", value: apiKey),
-            URLQueryItem(name: "film_name", value: filmName), // Use 'film_name' with year
+            URLQueryItem(name: "film_name", value: filmName), // Use 'film_name' without year
             URLQueryItem(name: "type", value: type)
         ]
 
@@ -378,7 +377,7 @@ final class SubDLClient {
         components.queryItems = queryItems
         guard let url = components.url else { return nil }
 
-        print("🔍 Attempting API Name Search: \(filmName)")
+        print("🔍 Attempting API Name Search (Query): \(filmName)")
 
         var request = URLRequest(url: url)
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
@@ -395,96 +394,77 @@ final class SubDLClient {
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
 
         guard let results = result.results, !results.isEmpty else {
+            print("⚠️ API Name Search returned 0 candidates for: \(filmName)")
             return nil
         }
+
+        print("📦 API Name Search returned \(results.count) candidates. Filtering locally...")
+
+        var bestMatch: (sd_id: Int, priority: Int)? = nil
 
         // Filter candidates
         for candidate in results {
             let candidateName = candidate.name.lowercased()
-
-            // 1. Strict Year Match (if year is provided)
-            // Bible #131: SubDL search is fragile. Apply strict numeric match locally.
-            if let targetYear = year {
-                let foundYear = extractYear(from: candidate.name)
-                let allowedYears = [targetYear, targetYear - 1, targetYear + 1]
-
-                if let fy = foundYear {
-                    if allowedYears.contains(fy) {
-                        print("   ✅ Match found: '\(candidate.name)' (Year \(fy) matched within ±1 variance of \(targetYear))")
-                        return candidate.sd_id
-                    } else {
-                        // Year found but doesn't match! (e.g. found 2018 when we wanted 2025)
-                        // This fixes the "The Beauty Inside" issue when searching for "The Beauty"
-                        continue
-                    }
-                } else {
-                    // No 4-digit year found in candidate name.
-                    // Fall back to simple string contains if the name itself contains our target year.
-                    if allowedYears.contains(where: { candidateName.contains("\($0)") }) {
-                         print("   ✅ Match found: '\(candidate.name)' (String year match within ±1 variance of \(targetYear))")
-                         return candidate.sd_id
-                    }
-                }
-
-                // If we reach here, we had a year requirement but no match was found.
-                continue
-            }
-
-            // 2. Exact Title Match (Highest priority if year matched or not provided)
             let sanitizedCandidate = candidateName.replacingOccurrences(of: ":", with: "").trimmingCharacters(in: .whitespaces)
             let sanitizedTarget = sanitizedName.lowercased().replacingOccurrences(of: ":", with: "").trimmingCharacters(in: .whitespaces)
 
-            if sanitizedCandidate == sanitizedTarget {
-                print("   ✅ Exact match found: '\(candidate.name)'")
-                return candidate.sd_id
+            // Extract years for comparison
+            let foundCandidateYear = extractYear(from: candidate.name)
+            let targetYear = year
+
+            // LOGIC GATE 1: Strict Year Conflict (Bible #131)
+            // If the candidate HAS a year, and it doesn't match our target (±1 variance), we REJECT it immediately.
+            if let ty = targetYear, let cy = foundCandidateYear {
+                let allowedYears = [ty, ty - 1, ty + 1]
+                if !allowedYears.contains(cy) {
+                    print("   ⛔️ Rejecting '\(candidate.name)': Year mismatch (\(cy) vs target \(ty))")
+                    continue
+                }
             }
 
-            // 3. Stricter Similarity check (if no year provided OR year matched but name isn't exact)
-            // Bible #131: Prevent "The Beauty" matching "The Beauty Inside"
-            let candidateWords = sanitizedCandidate.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
-            let targetWords = sanitizedTarget.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
-            
-            // Check if all target words exist in candidate in order
-            var isWordMatch = false
-            if candidateWords.count >= targetWords.count {
-                // Find if target sequence exists
-                for i in 0...(candidateWords.count - targetWords.count) {
-                    let subSection = candidateWords[i..<(i + targetWords.count)].joined(separator: " ")
-                    if subSection == sanitizedTarget {
-                        // We found the name. Now check if the REST of the words are "Noise"
-                        var hasNonNoiseLeftover = false
-                        let noisePatterns = ["s\\d+", "e\\d+", "season", "episode", "20\\d{2}", "19\\d{2}", "web-dl", "bluray", "hdtv", "x264", "x265", "complete", "remux", "dual", "audio", "multi", "subs"]
-                        
-                        for (idx, word) in candidateWords.enumerated() {
-                            if idx >= i && idx < (i + targetWords.count) { continue } // Skip the matched name
-                            
-                            // Check if this word is noise
-                            let isNoise = noisePatterns.contains { pattern in
-                                word.range(of: pattern, options: [.regularExpression, .caseInsensitive]) != nil
-                            }
-                            if !isNoise {
-                                hasNonNoiseLeftover = true
-                                break
-                            }
-                        }
-                        
-                        if !hasNonNoiseLeftover {
-                            isWordMatch = true
-                            break
-                        }
+            var currentPriority = 0
+
+            // LOGIC GATE 2: Exact Name Match (Priority 3)
+            if sanitizedCandidate == sanitizedTarget {
+                print("   ✅ Exact match candidate: '\(candidate.name)' (Priority 3)")
+                currentPriority = 3
+            } else {
+                // LOGIC GATE 3: Alternative Title / Parentheses Match (Bible #131) (Priority 2)
+                let candidateBody = candidateName.components(separatedBy: "(").first?.trimmingCharacters(in: .whitespaces) ?? candidateName
+                let sanitizedCandidateBody = candidateBody.replacingOccurrences(of: ":", with: "").trimmingCharacters(in: .whitespaces)
+
+                if sanitizedCandidateBody == sanitizedTarget {
+                    print("   ✅ Primary title match candidate: '\(candidate.name)' (Priority 2)")
+                    currentPriority = 2
+                }
+                // LOGIC GATE 4: Lenient "Contains" match (Priority 1)
+                else if sanitizedCandidate.contains(sanitizedTarget) {
+                    // Check if we have a Year Anchor or no year conflict was possible
+                    if foundCandidateYear != nil || targetYear == nil {
+                        print("   ✅ Lenient match candidate: '\(candidate.name)' (Priority 1)")
+                        currentPriority = 1
+                    } else {
+                        print("   ⚠️ Lenient match (Missing Year metadata): '\(candidate.name)'. Trusting name match (Priority 1).")
+                        currentPriority = 1
                     }
                 }
             }
 
-            if isWordMatch {
-                 print("   ✅ Valid boundary match found: '\(candidate.name)'")
-                 return candidate.sd_id
+            // Update best match if this one is better than what we have
+            if currentPriority > (bestMatch?.priority ?? 0) {
+                bestMatch = (candidate.sd_id, currentPriority)
+
+                // Shortcut: If we found an Exact match (P3), we can stop
+                if currentPriority == 3 { break }
             }
         }
 
-        // Final Fallback: If we have results but none matched our year filter,
-        // DO NOT just pick the first one (it's likely wrong).
-        // Only return the first result if we didn't have a year requirement.
+        if let best = bestMatch {
+            print("   🎯 Selected Best Candidate ID: \(best.sd_id) (Priority \(best.priority))")
+            return best.sd_id
+        }
+
+        // Final Fallback: If year is nil, return first result
         if year == nil, let first = results.first {
              return first.sd_id
         }
@@ -832,7 +812,6 @@ final class SubDLClient {
 
              // Reuse the scoring logic (but adapting it for simpler filenames inside zip)
              // We create dummy SubDLSubtitle objects to reuse 'calculateCompatibilityScore'
-
              let scoredFiles = subtitleFiles.map { file -> (String, Int) in
                  let dummySub = SubDLSubtitle(
                      language: "en", // assumed

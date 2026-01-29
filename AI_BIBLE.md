@@ -135,6 +135,7 @@
 | **Playback "Skip" after Sync** | Overlay cleared before snap-seek finished | #145 |
 | **Stale Premium Crown** | Client trusting DB flag vs Expiration Date | #146 |
 | **Silent Scroll Abandonment** | Users unaware of participants/playlist list | #147 |
+| **Subtitle Search: 0 results for major movie** | SubDL record lacks IMDb ID; Search fragile with Year | #138 |
 
 ## 🚨 Critical Landmines
 
@@ -153,7 +154,7 @@
 10. **Auto-Login**: **Rule**: Call critical connections (`SocialService.connect()`) in `loadStoredUser`, not just `SignUp`.
 11. **Native Window Stabilization (Landmine #82)**: **Rule**: MacOS window transforms (fullscreen) are asynchronous. NEVER trigger navigation or layout math immediately after a fullscreen toggle. Apply a minimum **0.3s** exit delay and **0.1s** entry delay to allow the Cocoa frame-math to settle.
 12. **Hashless Identity Matching (Landmine #131)**: **Rule**: For streams without infoHashes (DebridSearch/DMM), identity is defined as a 3-factor composite: **Normalized Title + Release Group + Size**. Any exclusion logic MUST check all three to prevent the "Hydra" effect (one bad release group repeatedly winning the resolution race).
-13. **Strict Subtitle Year Matching**: **Rule**: SubDL's "title + year" search is fragile. Always search by **Clean Title** and apply a strict numeric year match locally to the results.
+13. **Strict Subtitle Year Matching**: **Rule**: SubDL's "title + year" search is fragile. Always search by **Clean Title**. Apply a **Conflict-Only** local filter: Reject if BOTH target/candidate have years that mismatch (±1 variance); but ACCEPT if the candidate lacks year metadata entirely but the name match is strong.
 11. **Idempotent UI Services (Subtitle/Audio)**: **Rule**: Services receiving external data streams MUST deduplicate by URL/ID internally. Never assume the caller (e.g. `PlayerViewModel`) sends a clean or unique list. This prevents menu duplication during "Healing Loops" (Landmine #123).
 
 ### 11-15: System Stability
@@ -2234,11 +2235,13 @@ if let img = NSImage(named: "my_new_icon") {
 
 ### 8. Fuzzy Year Matching (Landmine #138)
 **Symptom**: Subtitles for movies like "The Matrix" are found, but "The Matrix (1999)" fails to find any results on SubDL, or it matches a 2021 sequel incorrectly.
-**Root Cause**: **Numeric Fragility**. SubDL API's `film_name` search is extremely sensitive to trailing years and punctuation. Metadata provided by providers often has "noisy" years (e.g., `2024-`) or ±1 year offsets due to regional release differences.
+**Root Cause**: **Numeric Fragility**. SubDL API's `film_name` search is extremely sensitive to trailing years and punctuation. Metadata provided by providers often has "noisy" years (e.g., `2024-`) or ±1 year offsets due to regional release differences. Furthermore, many international entries lack year metadata entirely.
 **Mandatory Solution**:
 1. **Year Tolerance**: When filtering search results locally, allow a **±1 year variance**.
-2. **Trailing Dash Cleanup**: Strip trailing dashes from year metadata before parsing (e.g., `2024-` -> `2024`).
-3. **Numeric Only**: Extract the numeric 4-digit year from the candidate string before comparison.
+2. **Conflict-Only Rejection**: Only reject based on year if the candidate *has* a year string that disagrees with the target. If the candidate has no year, trust the name match.
+3. **Parentheses Normalization**: Split candidate titles by `(` and check the primary body (the part before brackets). This bypasses SubDL's habit of appending international titles in parentheses (e.g., `Kung Fu Hustle (Kong fu / 功夫)`).
+4. **Numeric Only**: Extract the numeric 4-digit year from the candidate string before comparison.
+5. **Priority-Based Ranking**: Collect all candidates and rank by confidence (Exact > Primary Title Match > Contains substring). This prevents a popular partial match (like "The Beauty Inside") from shadowing an exact match (like "The Beauty").
 
 ### 9. The URLSession Caching Trap (Landmine #139)
 **Symptom**: Changing an API token (e.g., Bearer token) and immediately saving appears to work, but the app continues to display data (like "Premium Days") from the OLD token, or reports "Online" for a new invalid token.
@@ -2283,7 +2286,7 @@ request.cachePolicy = .reloadIgnoringLocalCacheData
 
 ### 13. The Stale Premium Flag Trap (Landmine #146)
 **Symptom**: A user who recently canceled their subscription or had it expire still displays the "Crown Emoji" (👑) in chat or the lobby, even after a restart or re-join.
-**Root Cause**: **Flag-Based Invalidation Failure**. Relying on binary boolean flags like `isPremium` is dangerous because flags often persist in local caches (AppState, LicenseManager, Presence Metadata) after the underlying subscription has expired. 
+**Root Cause**: **Flag-Based Invalidation Failure**. Relying on binary boolean flags like `isPremium` is dangerous because flags often persist in local caches (AppState, LicenseManager, Presence Metadata) after the underlying subscription has expired.
 **Mandatory Solution**:
 1. **Timestamp Authority**: The `subscriptionExpiresAt` timestamp is the ONLY source of truth.
 2. **Dynamic Validation**: Use the `isReallyPremium` computed property (available on `Friend`, `Participant`, and `ChatMessage`) which performs a real-time comparison: `expiryDate > Date()`.

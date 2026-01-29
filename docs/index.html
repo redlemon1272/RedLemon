@@ -26,6 +26,7 @@
             </div>
             <div class="nav-links">
                 <a href="#features">Features</a>
+                <a href="https://github.com/redlemon1272/RedLemon" class="nav-link-secondary">View Source</a>
                 <a href="#install" class="nav-btn">Download</a>
             </div>
         </div>
@@ -37,10 +38,6 @@
             <p>The ultimate native macOS streaming experience. Aggregated content, low-latency watch parties, and zero
                 telemetry. Built for the social era.</p>
 
-            <div class="cta-group">
-                <a href="#install" class="btn-primary">Get Started</a>
-                <a href="https://github.com/redlemon1272/RedLemon" class="btn-secondary">View Source</a>
-            </div>
         </div>
     </header>
 
@@ -53,13 +50,13 @@
         <div class="feature-grid">
             <div class="feature-card">
                 <div class="icon-box">🎬</div>
-                <h3>Live Cinema</h3>
-                <p>Join scheduled community screenings where everything stays perfectly in sync.</p>
+                <h3>24/7 Live Cinema</h3>
+                <p>Join continuous community screenings where everything stays perfectly in sync.</p>
             </div>
             <div class="feature-card">
                 <div class="icon-box">🍿</div>
                 <h3>Watch Parties</h3>
-                <p>Create private rooms for friends with low-latency sync and native chat.</p>
+                <p>Create private or public rooms with low-latency sync and native chat.</p>
             </div>
             <div class="feature-card">
                 <div class="icon-box">🛡️</div>
@@ -73,7 +70,7 @@
         <div class="glass-container">
             <div class="install-header">
                 <h2>The Faster Way to Play.</h2>
-                <p>Apple makes manual installation hard. Our terminal installer makes it easy, secure, and bypasses the
+                <p>Our terminal installer makes it easy, secure, and bypasses the
                     "Quarantine" lock automatically.</p>
             </div>
 
@@ -90,7 +87,7 @@
                         <div class="step-num">2</div>
                         <div class="step-text">
                             <strong>Paste & Run</strong>
-                            <p>Copy the command below and paste it into the window.</p>
+                            <p>Copy the command, paste it into the window, and hit <kbd>Enter</kbd>.</p>
                         </div>
                     </div>
                     <div class="step">
@@ -104,19 +101,20 @@
 
                 <div class="command-box">
                     <div class="terminal-header">
-                        <div class="dots"><span></span><span></span><span></span></div>
-                        <span class="terminal-title">Install RedLemon</span>
-                    </div>
-                    <div class="command-content">
-                        <code
-                            id="installCommand">curl -sL https://raw.githubusercontent.com/redlemon1272/RedLemon/main/scripts/install.sh | bash</code>
-                        <button class="copy-btn" onclick="copyCommand()">
-                            <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
+                        <div class="terminal-left">
+                            <div class="dots"><span></span><span></span><span></span></div>
+                            <span class="terminal-title">Install RedLemon</span>
+                        </div>
+                        <button class="copy-btn header-copy" onclick="copyCommand()">
+                            <svg class="copy-icon" viewBox="0 0 24 24" width="14" height="14">
                                 <path fill="currentColor"
                                     d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1M19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5M19 21H8V7H19V21Z" />
                             </svg>
                             <span id="copyText">Copy</span>
                         </button>
+                    </div>
+                    <div class="command-content">
+                        <code id="installCommand">curl -sL https://raw.githubusercontent.com/redlemon1272/RedLemon/main/scripts/install.sh | bash</code>
                     </div>
                 </div>
             </div>
@@ -128,7 +126,7 @@
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2026 RedLemon Streaming. Released under MIT.</p>
+            <p>&copy; 2026 RedLemon. Released under MIT.</p>
             <div class="social-links">
                 <a href="https://github.com/redlemon1272/RedLemon/discussions">Community</a>
                 <a href="https://github.com/redlemon1272/RedLemon">GitHub</a>

@@ -324,13 +324,19 @@ struct WatchPartyLobbyView: View {
 
                             // Participants header (Always show count)
                             HStack {
-                                Image(systemName: "person.2.fill")
-                                    .foregroundColor(.white.opacity(0.7))
-                                Text("Participants (\(viewModel.participants.count)/\(room.maxParticipants))")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
+                Image(systemName: "person.2.fill")
+                    .foregroundColor(.white.opacity(0.7))
+                if room.type == .event {
+                    Text("Participants (\(viewModel.participants.count))")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                } else {
+                    Text("Participants (\(viewModel.participants.count)/\(room.maxParticipants))")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                }
 
-                                if room.readyCount > 0 && room.readyCount < viewModel.participants.count {
+                if room.readyCount > 0 && room.readyCount < viewModel.participants.count {
                                     Text("• \(room.readyCount) ready")
                                         .font(.caption)
                                         .foregroundColor(.green)

@@ -507,7 +507,7 @@ struct RoomListView: View {
         // 1. Try local list first (fast path)
         if let room = appState.activeRooms.first(where: { $0.id.caseInsensitiveCompare(code) == .orderedSame }) {
             // Capacity Check
-            if room.participantCount >= room.maxParticipants {
+            if room.type != .event && room.participantCount >= room.maxParticipants {
                 NSAlert.showAlert(title: "Room Full", message: "This watch party is currently at capacity (\(room.participantCount)/\(room.maxParticipants)).", style: .warning)
                 return
             }
@@ -524,7 +524,7 @@ struct RoomListView: View {
                 print("🔍 Looking up room by code on Supabase: \(code)")
                 if let supabaseRoom = try await SupabaseClient.shared.getRoomState(roomId: code) {
                     // Capacity Check (Server Side)
-                    if supabaseRoom.participantsCount >= supabaseRoom.maxParticipants {
+                    if supabaseRoom.type != .event && supabaseRoom.participantsCount >= supabaseRoom.maxParticipants {
                          await MainActor.run {
                              isLoading = false
                              NSAlert.showAlert(title: "Room Full", message: "This watch party is currently at capacity (\(supabaseRoom.participantsCount)/\(supabaseRoom.maxParticipants)).", style: .warning)

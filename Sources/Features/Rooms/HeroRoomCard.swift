@@ -7,7 +7,7 @@ struct HeroRoomCard: View {
     @State private var isJoining = false
 
     private var isFull: Bool {
-        room.participantCount >= room.maxParticipants
+        room.type != .event && room.participantCount >= room.maxParticipants
     }
 
     var body: some View {
@@ -133,8 +133,13 @@ struct HeroRoomCardContent: View {
                         Image(systemName: isFull ? "person.3.fill" : "person.2.fill")
                             .font(.system(size: 10))
 
-                        Text("\(room.participantCount)/\(room.maxParticipants)")
-                            .font(.system(size: 11, weight: .bold))
+                        if room.type == .event {
+                            Text("\(room.participantCount)")
+                                .font(.system(size: 11, weight: .bold))
+                        } else {
+                            Text("\(room.participantCount)/\(room.maxParticipants)")
+                                .font(.system(size: 11, weight: .bold))
+                        }
                     }
                     .foregroundColor(isFull ? .yellow : .white)
                     .padding(.horizontal, 8)

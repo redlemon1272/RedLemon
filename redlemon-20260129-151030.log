@@ -1,0 +1,576 @@
+2026-01-29 15:10:30.732 RedLemon[44169:236402] 🪟 Set initial window to expanded size: (0.0, 121.0, 1280.0, 654.0)
+2026-01-29 15:10:30.732 RedLemon[44169:236402] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-29 15:10:30.792 RedLemon[44169:236402] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-29 15:10:30.797 RedLemon[44169:236402] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-29 15:10:30.826 RedLemon[44169:236402] ✅ Playback state reset complete - starting in browse view
+2026-01-29 15:10:30.826 RedLemon[44169:236402] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-29 15:10:30.826 RedLemon[44169:236402] 🧪 Testing Profile: debug
+2026-01-29 15:10:30.829 RedLemon[44169:236426] 📂 Loaded 5 credential(s) from cache
+2026-01-29 15:10:30.830 RedLemon[44169:236402] ✅ Keychain: Found stored username: lemontom
+2026-01-29 15:10:30.830 RedLemon[44169:236402] 🔍 Supabase: Looking up user 'lemontom' in database...
+2026-01-29 15:10:30.830 RedLemon[44169:236426] 🔍 SupabaseClient: Looking up user by username 'lemontom'
+2026-01-29 15:10:32.509 RedLemon[44169:236451] 📡 SupabaseClient: User lookup response received (427 bytes)
+2026-01-29 15:10:32.522 RedLemon[44169:236451] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-29 15:10:32.522 RedLemon[44169:236451] 👤 SupabaseClient: Found user - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-29 15:10:32.683 RedLemon[44169:236402] ✅ AUTH SUCCESS: User authenticated - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-29 15:10:32.683 RedLemon[44169:236402] 🎯 AppState: currentUsername=lemontom, currentUserId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-29 15:10:32.687 RedLemon[44169:236402] 🛡️ AdminRealtimeService: Starting authenticated listeners...
+2026-01-29 15:10:32.691 RedLemon[44169:236402] ✅ AdminRealtimeService: Subscribed to reported_streams, feedback_reports, and broadcast alerts via shared client
+2026-01-29 15:10:33.018 RedLemon[44169:236402] 📊 AdminRealtimeService: Initial sync complete. Reports: 0, Feedback: 0
+2026-01-29 15:10:33.880 RedLemon[44169:236402] 🏁 AUTH COMPLETE: Final state - username=lemontom, userId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-29 15:10:33.884 RedLemon[44169:236517] 🔐 Signed request to /rpc/fetch_user_library
+2026-01-29 15:10:33.884 RedLemon[44169:236426] 🔐 Signed request to /rpc/fetch_user_library
+2026-01-29 15:10:34.265 RedLemon[44169:236517] 🔐 Signed request to /rpc/fetch_user_watch_history
+2026-01-29 15:10:34.797 RedLemon[44169:236406] 📝 [APP] 🎟️ Joining event: Kung Fu Hustle (Live: true) ["file": "EventsView.swift", "level": "INFO", "line": "253"]
+2026-01-29 15:10:34.799 RedLemon[44169:236426] 📝 [APP] SessionRecorder initialized
+2026-01-29 15:10:34.937 RedLemon[44169:236406] 📡 StreamService: Fetching metadata for tt0373074...
+2026-01-29 15:10:34.938 RedLemon[44169:236409] 📝 [APP] 🎬 StreamService: Starting resolution for: Kung Fu Hustle ["file": "StreamService.swift", "level": "INFO", "line": "200"]
+2026-01-29 15:10:35.200 RedLemon[44169:236402] 🚀 RedLemon: Starting HTTP server...
+2026-01-29 15:10:35.200 RedLemon[44169:236402] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/RedLemon-Native
+2026-01-29 15:10:35.214 RedLemon[44169:236402] ✅ RedLemon: HTTPServer instance created
+2026-01-29 15:10:35.215 RedLemon[44169:236402] ✅ RedLemon: Server marked as ready (Optimistic)
+2026-01-29 15:10:35.215 RedLemon[44169:236426] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 1000 items
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+📡 Joined channel: realtime:events_config_updates (interest count: 1)
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📡 Joined channel: realtime:reported_streams (interest count: 1)
+📡 Joined channel: realtime:feedback_reports (interest count: 1)
+📡 Joined channel: realtime:admin:alerts (interest count: 1)
+❌ Realtime System Error (realtime:reported_streams): Unable to subscribe to changes with given parameters. Please check Realtime is enabled for the given connect parameters: [schema: public, table: reported_streams, filters: []]
+❌ Realtime System Error (realtime:feedback_reports): Unable to subscribe to changes with given parameters. Please check Realtime is enabled for the given connect parameters: [schema: public, table: feedback_reports, filters: []]
+✅ [EventsConfig] Fetched movie_events version 1587 with 396 movies
+✅ [EventsConfig] Using cached movie_events config (version 1587, 396 movies)
+✅ [EventsView] Loaded 396 movies from config version 1587
+🗓 AppState: Updated schedule epoch to 2026-01-23 22:49:34 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-29 21:53:34 +0000
+⏰ AppState: Scheduling update in 6181 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0373074/img (360512 bytes)
+⏰ AppState: Next schedule update set for Event End: 2026-01-29 21:53:34 +0000
+⏰ AppState: Scheduling update in 6181 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-01-29 21:53:34 +0000
+⏰ AppState: Scheduling update in 6181 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1657507/img (1003081 bytes)
+🔌 SocialService: Connecting to global presence via shared client...
+📡 Joined channel: realtime:global-presence (interest count: 1)
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to social realtime channels via shared client...
+📡 Joined channel: realtime:direct_messages (interest count: 1)
+📡 Joined channel: realtime:friendships (interest count: 1)
+✅ SocialService: Connected to social channels
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📬 SocialService: Fetched 0 unread messages
+[2026-01-29T20:10:34Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Kung Fu Hustle (Live: true)
+   Event start time: 2026-01-29 20:04:34 +0000
+   Event duration: 6540.0s
+   Current time: 2026-01-29 20:10:34 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt0373074
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY - Re-unlocking for fresh URL 🔑
+   Stored Hash: 283d5a4a8dae5e5993f9f8f11f760461f54dfbed
+   Cached URL: https://chi5-4.download.real-d...
+[2026-01-29T20:10:34Z] [INFO] [StreamService.swift:200] 🎬 StreamService: Starting resolution for: Kung Fu Hustle
+🔍 [DEBUG] Network attempt 1 failed: Error Domain=NSURLErrorDomain Code=-1004 "Could not connect to the server." UserInfo={_kCFStreamErrorCodeKey=61, NSUnderlyingError=0x7f85064c9810 {Error Domain=kCFErrorDomainCFNetwork Code=-1004 "(null)" UserInfo={_NSURLErrorNWPathKey=satisfied (Path is satisfied), viable, interface: lo0, _kCFStreamErrorCodeKey=61, _kCFStreamErrorDomainKey=1}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <26F98DF1-3050-41C7-9F55-21308CADAF36>.<1>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <26F98DF1-3050-41C7-9F55-21308CADAF36>.<1>"
+), NSLocalizedDescription=Could not connect to the server., NSErrorFailingURLStringKey=http://127.0.0.1:47253/api/metadata/meta/movie/tt0373074, NSErrorFailingURLKey=http://127.0.0.1:47253/api/metadata/meta/movie/tt0373074, _kCFStreamErrorDomainKey=1}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-29 15:10:35.249 RedLemon[44169:236402] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-29 15:10:35.249 RedLemon[44169:236402] 🏥 [AppState] Starting global provider health check...
+2026-01-29 15:10:35.249 RedLemon[44169:236402] 🔍 Performing startup checks...
+2026-01-29 15:10:35.249 RedLemon[44169:236402] ✅ Username-based authentication ready
+2026-01-29 15:10:35.252 RedLemon[44169:236408] 🔐 Signed request to /check-payment
+2026-01-29 15:10:35.785 RedLemon[44169:236408] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-29 15:10:35.785 RedLemon[44169:236408] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-01-29 15:10:36.810 RedLemon[44169:236402] 🔄 Checking for app updates...
+2026-01-29 15:10:36.811 RedLemon[44169:236409] 🔐 Signed request to /rpc/get_server_time
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+✅ SubDLClient initialized
+👤 LicenseManager: Profile expiry: Optional(2126-03-25 17:23:32 +0000)
+🎉 License updated! Expires: 2126-03-25 17:23:32 +0000
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.264s (RTT: 136ms)
+   Local:  2026-01-29 20:10:36 +0000
+   Server: 2026-01-29 20:10:37 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+🔍 [DEBUG] Network attempt 2/5 for tt0373074
+[ INFO ] GET /api/metadata/meta/movie/tt0373074 [request-id: 9558D6A1-5812-4688-805B-002F13877CD6]
+2026-01-29 15:10:37.200 RedLemon[44169:236409] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-29 15:10:37.200 RedLemon[44169:236409] ✅ StreamService: Metadata loaded: Kung Fu Hustle
+2026-01-29 15:10:37.200 RedLemon[44169:236409] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-29 15:10:37.200 RedLemon[44169:236409] 📝 [APP] New Session Started ["app_version": "1.0.167", "build": "167", "session_id": "CCB317B0-EA53-4E77-8124-399B29C74A4A", "trigger_source": "manual", "user_id": "96E01CDB-36C0-4228-A6E4-A29A3C66BC8E"]
+2026-01-29 15:10:37.201 RedLemon[44169:236409] 📝 [APP] Target Content Set ["imdb_id": "tt0373074"]
+2026-01-29 15:10:37.201 RedLemon[44169:236409] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-29 15:10:37.342 RedLemon[44169:236426]    📅 Filtering by year: 2004
+2026-01-29 15:10:37.480 RedLemon[44169:236426] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-29 15:10:37.481 RedLemon[44169:236426] 🔍 ProviderManager: Fetching streams for tt0373074...
+2026-01-29 15:10:37.482 RedLemon[44169:236408] 🔍 Zilean: Searching via IMDB ID: tt0373074
+2026-01-29 15:10:37.482 RedLemon[44169:236517] ✨ Torrentio: Using Auto-Generated Config (RealDebrid)
+2026-01-29 15:10:37.482 RedLemon[44169:236426] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-29 15:10:37.482 RedLemon[44169:236517] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-29 15:10:37.482 RedLemon[44169:236426] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22***%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt0373074.json
+2026-01-29 15:10:37.482 RedLemon[44169:236517] 🔗 Torrentio URL (length: 119): https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0373074.json...
+2026-01-29 15:10:37.482 RedLemon[44169:236426] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/%7B%22DebridApiKey%22%3A%22K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA%22,%22DebridProvider%22%3A%22RealDebrid%22%7D/stream/movie/tt0373074.json
+2026-01-29 15:10:37.482 RedLemon[44169:236517] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid=K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0373074.json
+2026-01-29 15:10:37.490 RedLemon[44169:236409] 📡 Torrentio: HTTP 200, received 12986 bytes
+2026-01-29 15:10:37.501 RedLemon[44169:236409] ✅ Torrentio: Parsed 25 streams from 25 raw
+2026-01-29 15:10:38.626 RedLemon[44169:236517] ✅ Zilean: Got 28 results
+2026-01-29 15:10:39.209 RedLemon[44169:236406] 🔐 Signed request to /rpc/user_heartbeat
+2026-01-29 15:10:40.290 RedLemon[44169:236402] ✅ [AppState] Provider health check complete (found 7 services)
+2026-01-29 15:10:42.131 RedLemon[44169:236517] ✅ DebridSearch: Parsed 1 streams
+2026-01-29 15:10:42.132 RedLemon[44169:236517] ✅ ProviderManager: Fetched 54 raw, returning 43 unique streams
+2026-01-29 15:10:42.132 RedLemon[44169:236517] 📦 StreamResolver: Received 1 raw streams, bucketing...
+2026-01-29 15:10:42.133 RedLemon[44169:236517] 📝 [RESOLVER] Providers Fetched ["torrentio": "1"]
+2026-01-29 15:10:48.787 RedLemon[44169:236517] 📝 [RESOLVER] Resolution Complete ["1080p": "1", "2160p": "0", "720p": "0", "selected_provider": "torrentio", "selected_title": "Kung Fu Hustle (2004) 1080p x264 DD5.1 EN NL Subs [Asian Torrenz
+👤 136 💾 1.62 GB ⚙️ ThePirateBay
+🇬🇧 / 🇳🇱"]
+2026-01-29 15:10:48.788 RedLemon[44169:236517] 📝 [RESOLVER] Host Stream Match ["hash": "283d5a4a8dae5e5993f9f8f11f760461f54dfbed"]
+2026-01-29 15:10:48.789 RedLemon[44169:236451] 📝 [APP] 📦 StreamService: Found 1 total streams to try (across all qualities) ["file": "StreamService.swift", "level": "INFO", "line": "409"]
+💾 Cache SET: Metadata[meta_movie_tt0373074]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt0373074.json
+✅ Metadata fetched from Cinemeta for tt0373074: Kung Fu Hustle (2004)
+🎯 Target title for matching: Kung Fu Hustle
+🛡️ StreamResolver: Loaded 8 blocked streams from blacklist
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0373074.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjpmYWxzZSwiZGVi...
+⚠️ MediaFusion: HTTP 418
+✅ Comet: Got 1 streams
+🔍 Comet: Parsing 1 streams...
+⚠️ Comet: Skipping invalid redirect URL: https://comet.elfhosted.com/playback/5dFiSkGg3TOSbKISZi5bQ3X...
+✅ Comet: Parsed 0 valid streams
+⚡️ StreamResolver: Optimizing for preferred hash: 283d5a4a8dae5e5993f9f8f11f760461f54dfbed
+   ✅ Found target stream immediately. Discarding everything else.
+📊 StreamResolver: Provider Stats: [torrentio:1]
+   📅 Year filter (2004): 1 → 1 streams
+🔍 Searching SubDL: tt0373074 (movie)
+   ℹ️ Fallback Name: Kung Fu Hustle (2004)
+⏰ AppState: Next schedule update set for Event End: 2026-01-29 21:53:34 +0000
+⏰ AppState: Scheduling update in 6171 seconds
+❌ SubDL API Error: can't find movie or tv
+⚠️ IMDB ID failed. Attempting API Name Search for 'Kung Fu Hustle'...
+🔍 Attempting API Name Search: Kung Fu Hustle 2004
+✅ Found 0 subtitles from SubDL (Primary)
+⚠️ Low subtitle count (0). Attempting supplemental Name Search for 'Kung Fu Hustle'...
+🔍 Attempting API Name Search: Kung Fu Hustle 2004
+⚠️ Supplemental Name Search returned no match.
+   --- Processing Bucket: 2160p (Input: 0) ---
+   ✅ Bucket 2160p Final Count: 0
+   --- Processing Bucket: 1080p (Input: 1) ---
+   ✅ Bucket 1080p Final Count: 1
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 0) ---
+   ✅ Bucket 480p Final Count: 0
+📦 1080p Primary: Kung Fu Hustle (2004) 1080p x264 DD5.1 EN NL Subs [Asian Torrenz
+👤 136 💾 1.62 GB ⚙️ ThePirateBay
+🇬🇧 / 🇳🇱
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: 283d5a4a8dae5e5993f9f8f11f760461f54dfbed
+✅ StreamService: Found requested stream hash! Locking selection.
+[2026-01-29T20:10:48Z] [INFO] [StreamService.swift:409] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+🚫 StreamService: Event Mode detected. Activating STRICT quality and runtime filters.
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Kung Fu Hustle (2004) 1080p x264 DD5.1 EN NL Subs [Asian Torrenz
+👤 136 💾 1.62 GB ⚙️ ThePirateBay
+🇬🇧 / 🇳🇱
+🔒 StreamService: Has infoHash - forcing proper unlock flow (bypass redirect)
+🔓 StreamService: Unlocking with infoHash: 283d5a4a8dae...
+[ INFO ] POST /api/streams/unlock [request-id: C043A674-9EFF-4195-B476-A5D3840637F0]
+2026-01-29 15:10:48.797 RedLemon[44169:236517] 🔓 Unlock request: infoHash=283d5a4a8dae..., fileIdx=0
+2026-01-29 15:10:48.797 RedLemon[44169:236517] ✅ Token found, attempting unlock...
+2026-01-29 15:10:51.040 RedLemon[44169:236451] ✅ Unlocked successfully: Kung Fu Hustle 2004 1080p x264.mkv
+2026-01-29 15:10:51.042 RedLemon[44169:236451] 📝 [RESOLVER] Stream Unlocked ["filename": "Kung Fu Hustle 2004 1080p x264.mkv", "is_generic": "false", "original_title": "Kung Fu Hustle (2004) 1080p x264 DD5.1 EN NL Subs [Asian Torrenz
+👤 136 💾 1.62 GB ⚙️ ThePirateBay
+🇬🇧 / 🇳🇱", "url_host": "chi9-4.download.real-debrid.com"]
+2026-01-29 15:10:51.044 RedLemon[44169:236451] 🔐 Signed request to /rooms
+2026-01-29 15:10:51.447 RedLemon[44169:236408] ✅ Persisted stream selection to room event_tt0373074
+2026-01-29 15:10:51.451 RedLemon[44169:236409] 🔐 Signed request to /room_participants
+2026-01-29 15:10:51.962 RedLemon[44169:236402] ✅ PlayerVM: currentWatchPartyRoom set to event_tt0373074
+2026-01-29 15:10:52.093 RedLemon[44169:236402] 📡 Fetching metadata for tt0373074...
+2026-01-29 15:10:52.352 RedLemon[44169:236762] 📝 [APP] 🧠 StreamService: Cache HIT for Kung Fu Hustle (1080p). Skipping redundant resolution. ["file": "StreamService.swift", "level": "INFO", "line": "196"]
+2026-01-29 15:10:52.391 RedLemon[44169:236402] 🛡️ MPVWrapper: Build Version: 2026-01-28-PRESENCE-FIX-v3
+2026-01-29 15:10:52.523 RedLemon[44169:236402] ✅ Stream ready, starting playback...
+2026-01-29 15:10:52.571 RedLemon[44169:236402] 🎬 MPVPlayerViewModel: Starting watch party: roomId=event_tt0373074, isHost=false
+2026-01-29 15:10:52.572 RedLemon[44169:236402] 🛡️ Transition Sync: Processing 0 participants from AppState
+2026-01-29 15:10:52.572 RedLemon[44169:236402] 🛡️ Transition Sync: Marked 0 users as transitioning (120s window)
+2026-01-29 15:10:52.573 RedLemon[44169:236451] 📝 Realtime: Registered observer 'player' (Presence: YES, Sync: NO, Status: NO)
+2026-01-29 15:10:52.624 RedLemon[44169:236762] 📝 Realtime: Unregistered observer 'lobby'
+2026-01-29 15:10:52.649 RedLemon[44169:236451] 📝 [PLAYER] Resumed
+2026-01-29 15:10:52.652 RedLemon[44169:236409] 📝 Realtime: Registered observer 'player' (Presence: NO, Sync: YES, Status: NO)
+2026-01-29 15:10:52.671 RedLemon[44169:236451] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi9-4.download.real-debrid.com/d/MU6V2Y7AFIIJQ45/Kung%20Fu%20Hustle%202004%201080p%20x264.mkv"]
+2026-01-29 15:10:52.821 RedLemon[44169:236451] 📝 [PLAYER] Load Video (Event) ["url": "https://chi9-4.download.real-debrid.com/d/MU6V2Y7AFIIJQ45/Kung%20Fu%20Hustle%202004%201080p%20x264.mkv"]
+2026-01-29 15:10:52.822 RedLemon[44169:236402] 👤 Presence Event: action=join, userId=GI9MpamgerevVr8B
+2026-01-29 15:10:52.919 RedLemon[44169:236408] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-29 15:10:52.920 RedLemon[44169:236408] 📝 [PLAYER] Buffering Started
+2026-01-29 15:10:53.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isEventPlayback: true
+2026-01-29 15:10:53.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isLoading: true, isResolvingStream: false
+2026-01-29 15:10:53.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] playbackFinished: false, isPlaying: false
+2026-01-29 15:10:53.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Position: 0.0s / Duration: 0.0s
+2026-01-29 15:10:53.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] BLOCKED: isLoading=true or isResolvingStream=false
+2026-01-29 15:10:53.678 RedLemon[44169:236517] 🔐 SupabaseClient: Signing Identity Payload: '176971745396e01cdb-36c0-4228-a6e4-a29a3c66bc8e/rpc/room_heartbeat'
+2026-01-29 15:10:53.678 RedLemon[44169:236517] 🔐 Signed request to /rpc/room_heartbeat
+2026-01-29 15:10:54.492 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isEventPlayback: true
+2026-01-29 15:10:54.492 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isLoading: true, isResolvingStream: false
+2026-01-29 15:10:54.492 RedLemon[44169:236402] [AUTO_EXIT_CHECK] playbackFinished: false, isPlaying: false
+2026-01-29 15:10:54.492 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Position: 0.0s / Duration: 0.0s
+2026-01-29 15:10:54.492 RedLemon[44169:236402] [AUTO_EXIT_CHECK] BLOCKED: isLoading=true or isResolvingStream=false
+2026-01-29 15:10:55.005 RedLemon[44169:236409] 📝 [PLAYER] File Loaded ["duration": "5966.002"]
+2026-01-29 15:10:55.492 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isEventPlayback: true
+2026-01-29 15:10:55.492 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isLoading: true, isResolvingStream: false
+2026-01-29 15:10:55.492 RedLemon[44169:236402] [AUTO_EXIT_CHECK] playbackFinished: false, isPlaying: false
+2026-01-29 15:10:55.492 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Position: 381.14611995220184s / Duration: 5966.002s
+2026-01-29 15:10:55.492 RedLemon[44169:236402] [AUTO_EXIT_CHECK] BLOCKED: isLoading=true or isResolvingStream=false
+2026-01-29 15:10:55.756 RedLemon[44169:236402] [VIDEO_READY] isEvent: true, eventStartTime: 2026-01-29 20:04:34 +0000
+2026-01-29 15:10:55.757 RedLemon[44169:236402] [VIDEO_READY] Event seek check - elapsed: 381s, seekTime: 381s, drift: 0.61s
+2026-01-29 15:10:55.763 RedLemon[44169:236426] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-29 15:10:56.490 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isEventPlayback: true
+2026-01-29 15:10:56.490 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isLoading: true, isResolvingStream: false
+2026-01-29 15:10:56.490 RedLemon[44169:236402] [AUTO_EXIT_CHECK] playbackFinished: false, isPlaying: true
+2026-01-29 15:10:56.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Position: 381.14611995220184s / Duration: 5966.002s
+2026-01-29 15:10:56.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] BLOCKED: isLoading=true or isResolvingStream=false
+2026-01-29 15:10:57.555 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isEventPlayback: true
+2026-01-29 15:10:57.555 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isLoading: false, isResolvingStream: false
+2026-01-29 15:10:57.555 RedLemon[44169:236402] [AUTO_EXIT_CHECK] playbackFinished: false, isPlaying: true
+2026-01-29 15:10:57.555 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Position: 382.173s / Duration: 5966.002s
+2026-01-29 15:10:57.555 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Checking EOF conditions...
+2026-01-29 15:10:57.555 RedLemon[44169:236402] [AUTO_EXIT_CHECK] No exit condition met - continuing to monitor...
+2026-01-29 15:10:58.509 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isEventPlayback: true
+2026-01-29 15:10:58.509 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isLoading: false, isResolvingStream: false
+2026-01-29 15:10:58.510 RedLemon[44169:236402] [AUTO_EXIT_CHECK] playbackFinished: false, isPlaying: true
+2026-01-29 15:10:58.510 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Position: 383.049s / Duration: 5966.002s
+2026-01-29 15:10:58.510 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Checking EOF conditions...
+2026-01-29 15:10:58.510 RedLemon[44169:236402] [AUTO_EXIT_CHECK] No exit condition met - continuing to monitor...
+2026-01-29 15:10:59.516 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isEventPlayback: true
+2026-01-29 15:10:59.516 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isLoading: false, isResolvingStream: false
+2026-01-29 15:10:59.516 RedLemon[44169:236402] [AUTO_EXIT_CHECK] playbackFinished: false, isPlaying: true
+2026-01-29 15:10:59.516 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Position: 383.92499999999995s / Duration: 5966.002s
+2026-01-29 15:10:59.516 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Checking EOF conditions...
+2026-01-29 15:10:59.516 RedLemon[44169:236402] [AUTO_EXIT_CHECK] No exit condition met - continuing to monitor...
+2026-01-29 15:11:00.517 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isEventPlayback: true
+2026-01-29 15:11:00.517 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isLoading: false, isResolvingStream: false
+2026-01-29 15:11:00.517 RedLemon[44169:236402] [AUTO_EXIT_CHECK] playbackFinished: false, isPlaying: true
+2026-01-29 15:11:00.517 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Position: 384.75899999999996s / Duration: 5966.002s
+2026-01-29 15:11:00.517 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Checking EOF conditions...
+2026-01-29 15:11:00.517 RedLemon[44169:236402] [AUTO_EXIT_CHECK] No exit condition met - continuing to monitor...
+2026-01-29 15:11:01.511 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isEventPlayback: true
+2026-01-29 15:11:01.511 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isLoading: false, isResolvingStream: false
+2026-01-29 15:11:01.511 RedLemon[44169:236402] [AUTO_EXIT_CHECK] playbackFinished: false, isPlaying: true
+2026-01-29 15:11:01.511 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Position: 385.969s / Duration: 5966.002s
+2026-01-29 15:11:01.511 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Checking EOF conditions...
+2026-01-29 15:11:01.511 RedLemon[44169:236402] [AUTO_EXIT_CHECK] No exit condition met - continuing to monitor...
+2026-01-29 15:11:02.524 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isEventPlayback: true
+2026-01-29 15:11:02.524 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isLoading: false, isResolvingStream: false
+2026-01-29 15:11:02.524 RedLemon[44169:236402] [AUTO_EXIT_CHECK] playbackFinished: false, isPlaying: true
+2026-01-29 15:11:02.524 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Position: 387.137s / Duration: 5966.002s
+2026-01-29 15:11:02.524 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Checking EOF conditions...
+2026-01-29 15:11:02.524 RedLemon[44169:236402] [AUTO_EXIT_CHECK] No exit condition met - continuing to monitor...
+2026-01-29 15:11:03.218 RedLemon[44169:236762] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-29 15:11:03.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isEventPlayback: true
+2026-01-29 15:11:03.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] isLoading: false, isResolvingStream: false
+2026-01-29 15:11:03.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] playbackFinished: false, isPlaying: false
+2026-01-29 15:11:03.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Position: 387.721s / Duration: 5966.002s
+2026-01-29 15:11:03.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] Checking EOF conditions...
+2026-01-29 15:11:03.491 RedLemon[44169:236402] [AUTO_EXIT_CHECK] No exit condition met - continuing to monitor...
+2026-01-29 15:11:03.697 RedLemon[44169:236402] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-01-29 15:11:04.245 RedLemon[44169:236408] 🔐 Signed request to /room_participants
+2026-01-29 15:11:04.452 RedLemon[44169:236408] 📝 Realtime: Unregistered observer 'player'
+2026-01-29 15:11:04.570 RedLemon[44169:237058] 🔐 Signed request to /rpc/user_heartbeat
+✅ RD addMagnet: 4TQTDTYUVOTF2
+🎬 Movie: Found matching file for title 'Kung Fu Hustle': /Kung Fu Hustle 2004 1080p x264.mkv
+📝 RD: Selecting file ID 1 for torrent 4TQTDTYUVOTF2
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/7DR3KRUKTMRAAF81
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Selected stream: Kung Fu Hustle (2004) 1080p x264 DD5.1 EN NL Subs [Asian Torrenz
+👤 136 💾 1.62 GB ⚙️ ThePirateBay
+🇬🇧 / 🇳🇱
+📊 Stream Size: 1.62 GB
+📦 StreamService: Returning 0 candidate streams for fallback
+   ✅ Fresh URL obtained: https://chi9-4.download.real-debrid.com/...
+   ✅ Database updated with fresh URL
+
+🎬 Live event - calculating position: 378.22605991363525 seconds
+   Event start time: 2026-01-29 20:04:34 +0000
+   Current time: 2026-01-29 20:10:52 +0000
+   Room createdAt: 2026-01-29 20:04:34 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 378.22605991363525
+🎬 Live event - starting playback immediately (no lobby)
+✅ Cache HIT: Metadata[meta_movie_tt0373074]
+[2026-01-29T20:10:52Z] [INFO] [StreamService.swift:196] 🧠 StreamService: Cache HIT for Kung Fu Hustle (1080p). Skipping redundant resolution.
+!!! MPVWrapper initialized - Build Version: 2026-01-28-PRESENCE-FIX-v3 !!!
+🔌 Setting up Realtime channel: watch-party:event_tt0373074
+   Role: Guest
+   User ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+📡 Connection state: connected
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt0373074 (interest count: 1)
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Cache HIT: Metadata[meta_movie_tt0373074]
+📡 SocialService: Updated status - online: Kung Fu Hustle
+⏰ AppState: Next schedule update set for Event End: 2026-01-29 21:53:34 +0000
+⏰ AppState: Scheduling update in 6161 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1587 with 396 movies
+✅ [EventsConfig] Using cached movie_events config (version 1587, 396 movies)
+✅ SocialService: Event event_tt0373074 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0373074": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-29 21:53:34 +0000
+⏰ AppState: Scheduling update in 6161 seconds
+✅ [EventsConfig] Fetched movie_events version 1587 with 396 movies
+✅ [EventsConfig] Using cached movie_events config (version 1587, 396 movies)
+✅ SocialService: Event event_tt0373074 is JOINABLE (Live or Next Up) - allowing join
+📊 AppState: Polled participant counts - Active: ["tt0373074": 1]
+⏰ AppState: Next schedule update set for Event End: 2026-01-29 21:53:34 +0000
+⏰ AppState: Scheduling update in 6151 seconds
+📅 EventsView appeared
+📡 SocialService: Updated status - Browsing Events: 
+📡 SocialService: Updated status - Browsing: 
+🧹 Cleaning up Realtime channel for room: event_tt0373074
+🔄 Untracking presence on realtime:watch-party:event_tt0373074...
+✅ Presence untracked
+🔄 Leaving channel realtime:watch-party:event_tt0373074...
+📡 Left channel: realtime:watch-party:event_tt0373074
+✅ Channel left
+📨 Unknown event: phx_close on realtime:watch-party:event_tt0373074
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+📡 Connection state: disconnected
+✅ Realtime channel cleanup complete
+♻️ RealtimeChannelManager deinitialized
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1323594/img (25230 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26581740/img (17276 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3235888/img (6840 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0859163/img (26844 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1228705/img (31722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1872181/img (41021 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0472043/img (25271 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10954984/img (21420 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12593682/img (42301 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1396484/img (14825 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1727776/img (36000 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt7784604/img (17464 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31036941/img (43052 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0480687/img (34336 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt9764362/img (18952 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0373074/img (31751 bytes)
+📡 SocialService: Updated status - Browsing: 
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: C46B9D71-5986-4CDF-B568-E966BD1EEE2C]
+2026-01-29 15:11:07.665 RedLemon[44169:236402] 📡 Fetching metadata for tt0480687...
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (18 items)
+💾 Cache SET: Catalog[popular_movies_fixed] (18 items)
+💾 Cache SET: Catalog[catalog_movie_top.json] (18 items)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt34610311/img (30787 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt23172090/img (39824 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29780866/img (35175 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (53296 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30254719/img (39370 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt27543632/img (31446 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (46393 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (45682 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32001482/img (29669 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31227572/img (24034 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt13186306/img (30978 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31193180/img (27098 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32642706/img (22671 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt23572848/img (30026 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4712810/img (37396 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12300742/img (13162 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (19894 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32642706/img (22671 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31193180/img (27098 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt27847051/img (13836 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt16311594/img (10204 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29768334/img (28877 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31923069/img (16983 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10548174/img (34529 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31050594/img (30111 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1312221/img (23730 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt27714581/img (30242 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29567915/img (28516 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14142060/img (29910 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14107334/img (38222 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt22740896/img (31424 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt33479805/img (35005 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+[ INFO ] GET /api/metadata/meta/movie/tt0480687 [request-id: 1E7C14AF-7628-458B-B4E2-1973F0079512]
+2026-01-29 15:11:10.104 RedLemon[44169:237058] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-29 15:11:10.144 RedLemon[44169:236761] ✅ StreamService: Using provided metadata: Hall Pass
+2026-01-29 15:11:10.144 RedLemon[44169:237058] 📝 [APP] 🎬 StreamService: Starting resolution for: Hall Pass ["file": "StreamService.swift", "level": "INFO", "line": "200"]
+2026-01-29 15:11:10.144 RedLemon[44169:236761] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-29 15:11:10.145 RedLemon[44169:236761] 📝 [APP] New Session Started ["app_version": "1.0.167", "build": "167", "session_id": "4BCA4B50-932B-4B7F-8EF7-4C07D954C57E", "trigger_source": "manual", "user_id": "96E01CDB-36C0-4228-A6E4-A29A3C66BC8E"]
+2026-01-29 15:11:10.145 RedLemon[44169:236761] 📝 [APP] Target Content Set ["imdb_id": "tt0480687"]
+2026-01-29 15:11:10.145 RedLemon[44169:236761] 📝 [RESOLVER] Started Resolution ["episode": "0", "season": "0", "type": "movie"]
+2026-01-29 15:11:10.284 RedLemon[44169:236408]    📅 Filtering by year: 2011
+2026-01-29 15:11:10.493 RedLemon[44169:236761] 📝 [RESOLVER] Found Verified Stream ["hash": "8def6e7d4180dab0cb77174bca8868c67adc08e8", "vote_count": "12"]
+💾 Cache SET: Metadata[meta_movie_tt0480687]
+[2026-01-29T20:11:10Z] [INFO] [StreamService.swift:200] 🎬 StreamService: Starting resolution for: Hall Pass
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt0480687.json
+✅ Metadata fetched from Cinemeta for tt0480687: Hall Pass (2011)
+🎯 Target title for matching: Hall Pass
+🛡️ StreamResolver: Loaded 8 blocked streams from blacklist
+⚡️ StreamResolver: Found Community Verified stream with 12 votes!
+   ℹ️ Hash: 8def6e7d4180dab0cb77174bca8868c67adc08e8
+   ℹ️ Last Verified: 2026-01-29 18:29:50 +0000
+🔍 Searching SubDL: tt0480687 (movie)
+   ℹ️ Fallback Name: Hall Pass (2011)
+⏰ AppState: Next schedule update set for Event End: 2026-01-29 21:53:34 +0000
+⏰ AppState: Scheduling update in 6141 seconds
+✅ Found 10 subtitles from SubDL (Primary)
+🧹 SubDL: Deduplicated 2 mirrors/identicals
+✅ StreamResolver: Processed subtitles for 1 streams (Attached to 1)
+⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.
+⚡️ StreamService: Testing verified stream viability...
+🔓 StreamService: Unlocking with infoHash: 8def6e7d4180...
+[ INFO ] POST /api/streams/unlock [request-id: DBCF8DB9-D8E0-4934-8BED-FAE171550297]
+2026-01-29 15:11:14.290 RedLemon[44169:237057] 🔓 Unlock request: infoHash=8def6e7d4180..., fileIdx=0
+2026-01-29 15:11:14.290 RedLemon[44169:237057] ✅ Token found, attempting unlock...
+2026-01-29 15:11:16.534 RedLemon[44169:236426] ✅ Unlocked successfully: Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4
+2026-01-29 15:11:16.538 RedLemon[44169:236426] 📝 [RESOLVER] Stream Unlocked ["filename": "Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4", "is_generic": "false", "original_title": "Community Verified Stream (1080p)", "url_host": "chi9-4.download.real-debrid.com"]
+2026-01-29 15:11:16.538 RedLemon[44169:236426] 📥 StreamService: Pre-downloading 5 (capped from 8) subtitles...
+2026-01-29 15:11:16.538 RedLemon[44169:236426] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-29 15:11:16.538 RedLemon[44169:237057] 🔍 DEBUG: Processing subtitle URL: /subtitle/628606-441925.zip
+2026-01-29 15:11:16.538 RedLemon[44169:237058] 🔍 DEBUG: Processing subtitle URL: /subtitle/3536921-8458847.zip
+2026-01-29 15:11:16.538 RedLemon[44169:236426] 🔍 DEBUG: Processing subtitle URL: /subtitle/628616-547834.zip
+2026-01-29 15:11:16.538 RedLemon[44169:236409] 🔍 DEBUG: Processing subtitle URL: /subtitle/628612-615054.zip
+2026-01-29 15:11:16.538 RedLemon[44169:237057] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-29 15:11:16.538 RedLemon[44169:236409] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-29 15:11:16.538 RedLemon[44169:237058] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-29 15:11:16.538 RedLemon[44169:236426] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-29 15:11:16.539 RedLemon[44169:237057] 🔍 DEBUG: Processing subtitle URL: /subtitle/628617-1460940.zip
+2026-01-29 15:11:16.539 RedLemon[44169:237057] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-29 15:11:16.557 RedLemon[44169:236402] 🛡️ MPVWrapper: Build Version: 2026-01-28-PRESENCE-FIX-v3
+2026-01-29 15:11:16.609 RedLemon[44169:236402] ✅ Stream ready, starting playback...
+2026-01-29 15:11:16.670 RedLemon[44169:236402] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+✅ RD addMagnet: BDAYLORLEY5W2
+🎬 Movie: Found matching file for title 'Hall Pass': /Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4
+📝 RD: Selecting file ID 1 for torrent BDAYLORLEY5W2
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/WGL2LQ6QNUFPM65B
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Verified stream is VIABLE. Returning immediately.
+!!! MPVWrapper initialized - Build Version: 2026-01-28-PRESENCE-FIX-v3 !!!
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYwNi00NDE5MjUuemlw [request-id: 1EE4FDB7-C811-48F6-B28D-AE28737BCA20]
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628606-441925.zip
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYxNi01NDc4MzQuemlw [request-id: A96F67D9-0694-4005-9A50-E50720E99B30]
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628616-547834.zip
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYxMi02MTUwNTQuemlw [request-id: 3C7727DF-1798-4DE2-8882-7D562329024B]
+2026-01-29 15:11:16.977 RedLemon[44169:236426] 📝 [PLAYER] Load Video (Smart) ["url": "https://chi9-4.download.real-debrid.com/d/TA73H4SZ3KHFY23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4"]
+2026-01-29 15:11:16.979 RedLemon[44169:236426] 📝 [PLAYER] Load Video (Solo) ["url": "https://chi9-4.download.real-debrid.com/d/TA73H4SZ3KHFY23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4"]
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628612-615054.zip
+✅ Cache HIT: Metadata[meta_movie_tt0480687]
+📡 SocialService: Updated status - online: Hall Pass
+⏰ AppState: Next schedule update set for Event End: 2026-01-29 21:53:34 +0000
+⏰ AppState: Scheduling update in 6137 seconds
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MzY5MjEtODQ1ODg0Ny56aXA= [request-id: 2EA624C5-59D3-4C4F-BF7F-E651C620AE73]
+2026-01-29 15:11:17.031 RedLemon[44169:236408] 📝 [PLAYER] Playback State Changed ["state": "Paused"]
+2026-01-29 15:11:17.031 RedLemon[44169:236408] 📝 [PLAYER] Buffering Started
+📄 Subtitle request: L3N1YnRpdGxlLzM1MzY5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3536921-8458847.zip
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYxNy0xNDYwOTQwLnppcA== [request-id: A0E2166B-572C-4DEC-8256-687244D3352D]
+2026-01-29 15:11:20.728 RedLemon[44169:236409] 📝 [PLAYER] File Loaded ["duration": "6694.773166666667"]
+2026-01-29 15:11:20.839 RedLemon[44169:236402] [VIDEO_READY] isEvent: false, eventStartTime: nil
+2026-01-29 15:11:20.842 RedLemon[44169:237115] 📝 [PLAYER] Playback State Changed ["state": "Playing"]
+2026-01-29 15:11:30.244 RedLemon[44169:237267] 🔐 Signed request to /rpc/user_heartbeat
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628617-1460940.zip
+✅ Download complete: 63169 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (520): Hall.Pass.2011.720p.BluRay.x264-Felony-[ subtitle-English ][ www.napisy.jcom.pl ].srt
+📦 Extracting specific file: Hall.Pass.2011.720p.BluRay.x264-Felony-\[ subtitle-English \]\[ www.napisy.jcom.pl \].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+✅ Download complete: 57355 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+⚠️ No strong compatibility match (Best: 0 for Hall.Pass.2011.BrRip.720p.x264.YIFY.srt)
+⚠️ No specific match found, using first file: Hall.Pass.2011.BrRip.720p.x264.YIFY.srt
+📦 Extracting specific file: Hall.Pass.2011.BrRip.720p.x264.YIFY.srt
+✅ Extraction successful
+✅ Download complete: 58560 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+⚠️ No strong compatibility match (Best: 0 for EN Ori (SDH Removed).srt)
+⚠️ No specific match found, using first file: EN Ori (SDH Removed).srt
+✅ Download complete: 59659 bytes
+📦 Detected ZIP archive, extracting...
+📦 Extracting specific file: EN Ori (SDH Removed).srt
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (620): D:/Server/htdocs/_subdl_tmp/sub_6949c9b121cc6_Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt
+📦 Extracting specific file: D:/Server/htdocs/_subdl_tmp/sub_6949c9b121cc6_Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+✅ Extraction successful
+✅ Download complete: 68030 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Calculating compatibility scores for 1 files...
+✅ Selected best match by compatibility score (620): Hall Pass 1080p BluRay x264.srt
+📦 Extracting specific file: Hall Pass 1080p BluRay x264.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+✅ Subtitle downloaded and converted to VTT
+✅ Subtitle downloaded and converted to VTT
+⏰ AppState: Next schedule update set for Event End: 2026-01-29 21:53:34 +0000
+⏰ AppState: Scheduling update in 6131 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1587 with 396 movies
+✅ [EventsConfig] Using cached movie_events config (version 1587, 396 movies)
+⏰ AppState: Next schedule update set for Event End: 2026-01-29 21:53:34 +0000
+⏰ AppState: Scheduling update in 6121 seconds

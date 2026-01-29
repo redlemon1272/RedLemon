@@ -129,6 +129,7 @@ copy_safe "Sources/Features/Social"
 copy_safe "Resources"
 copy_safe "Package.swift"
 copy_safe "README.md"
+copy_safe "docs"
 copy_safe "scripts/architecture-scan.sh"
 copy_safe "scripts/install.sh"
 copy_safe "OPEN_SOURCE_PLAN.md"
@@ -218,20 +219,20 @@ echo -e "${BLUE}🧼 Scrubbing sensitive values...${NC}"
 # Use LC_ALL=C to handle byte sequences safely on macOS
 # Exclude Resources as it contains binary files
 # Exclude scripts/install.sh as it needs the production IP
-find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -not -path "*/scripts/install.sh" -print0 | xargs -0 sed -i '' "s/$SERVER_IP/$SANITIZED_IP/g"
+find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -not -path "*/scripts/install.sh" -print0 | LC_ALL=C xargs -0 sed -i '' "s/$SERVER_IP/$SANITIZED_IP/g"
 
 # Scrub Supabase Anon Key
 # Replaces specific RedLemon JWT sequences with a generic placeholder
-find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | xargs -0 sed -i '' "s/eyJhbGciOi.*/SUPABASE_ANON_KEY_PLACEHOLDER\"/g"
+find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | LC_ALL=C xargs -0 sed -i '' "s/eyJhbGciOi.*/SUPABASE_ANON_KEY_PLACEHOLDER\"/g"
 
 # OpSec Scrubbing: Remove internal document references (AI Bible, Landmines)
 # We replace internal jargon with professional equivalents throughout the entire codebase
 # Note: Using multiple passes to ensure we catch all casing variations (AI_BIBLE, AI Bible, Landmine, LANDMINE)
-find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | xargs -0 sed -i '' -E "s/AI_BIBLE/Internal Note/gI"
-find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | xargs -0 sed -i '' -E "s/AI Bible/Internal Note/gI"
-find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | xargs -0 sed -i '' -E "s/Landmine/Security Check/gI"
-find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | xargs -0 sed -i '' -E "s/AI_BIBLE.md/Internal Docs/gI"
-find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | xargs -0 sed -i '' -E "s/Bible/Documentation/gI"
+find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | LC_ALL=C xargs -0 sed -i '' -E "s/AI_BIBLE/Internal Note/gI"
+find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | LC_ALL=C xargs -0 sed -i '' -E "s/AI Bible/Internal Note/gI"
+find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | LC_ALL=C xargs -0 sed -i '' -E "s/Landmine/Security Check/gI"
+find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | LC_ALL=C xargs -0 sed -i '' -E "s/AI_BIBLE.md/Internal Docs/gI"
+find "$PUBLIC_REPO_ROOT" -type f -not -path "*/.git/*" -not -path "*/Resources/*" -print0 | LC_ALL=C xargs -0 sed -i '' -E "s/Bible/Documentation/gI"
 
 # 6. Final Sanitization Sweep (Verification)
 echo -e "${BLUE}🔍 Running Final Security Check...${NC}"

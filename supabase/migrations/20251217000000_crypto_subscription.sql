@@ -44,9 +44,9 @@ BEGIN
     RETURN NEW; -- Premium user, allow
   END IF;
 
-  -- Check active rooms (created in last 72h). 
+  -- Check active rooms (created in last 24h). 
   -- Note: We count rooms created recently as "active". OLD rooms don't count against limit.
-  IF (SELECT COUNT(*) FROM rooms WHERE host_user_id = auth.uid() AND created_at > NOW() - INTERVAL '72 hours') >= 1 THEN
+  IF (SELECT COUNT(*) FROM rooms WHERE host_user_id = auth.uid() AND created_at > NOW() - INTERVAL '24 hours') >= 1 THEN
     RAISE EXCEPTION 'Free Tier Limit: You can only host 1 active room at a time.';
   END IF;
 
@@ -71,8 +71,8 @@ DROP POLICY IF EXISTS "Public can view active rooms" ON rooms;
 CREATE POLICY "Public can view active rooms"
 ON rooms FOR SELECT
 USING (
-  -- Room is recent ( < 72h )
-  (created_at > NOW() - INTERVAL '72 hours') 
+  -- Room is recent ( < 24h )
+  (created_at > NOW() - INTERVAL '24 hours') 
   OR 
   -- OR Host is Premium
   ((SELECT subscription_expires_at FROM users WHERE id = host_user_id) > NOW())

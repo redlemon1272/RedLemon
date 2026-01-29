@@ -66,15 +66,15 @@ BEGIN
     END IF;
 
     -- User is FREE: Check Limits using the persistent history table
-    -- Count room creation events (not rooms) in the last 72 hours
+    -- Count room creation events (not rooms) in the last 24 hours
     SELECT COUNT(*) INTO room_count
     FROM public.room_creation_history
     WHERE user_id = host_id
-      AND created_at > (NOW() - INTERVAL '72 hours');
+      AND created_at > (NOW() - INTERVAL '24 hours');
 
-    -- If user has created 1 or more rooms in the last 72h, BLOCK.
+    -- If user has created 1 or more rooms in the last 24h, BLOCK.
     IF room_count >= 1 THEN
-        RAISE EXCEPTION 'Free User Limit Reached: You can only host 1 room every 72 hours. Upgrade to Premium for unlimited hosting.';
+        RAISE EXCEPTION 'Free User Limit Reached: You can only host 1 room every 24 hours. Upgrade to Premium for unlimited hosting.';
     END IF;
 
     -- Allow creation and log to history
@@ -96,7 +96,7 @@ CREATE OR REPLACE FUNCTION public.cleanup_old_room_history()
 RETURNS void AS $$
 BEGIN
     DELETE FROM public.room_creation_history
-    WHERE created_at < NOW() - INTERVAL '7 days';
+    WHERE created_at < NOW() - INTERVAL '1 days';
 END;
 $$ LANGUAGE plpgsql;
 

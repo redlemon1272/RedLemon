@@ -1,5 +1,5 @@
 -- Full Reset for 'ursinho' (Hosting + Payment)
--- 1. Clears active rooms (resets "1 room per 72h" limit if based on active rooms)
+-- 1. Clears active rooms (resets "1 room per 24h" limit if based on active rooms)
 -- 2. Clears room history (if tracks historical limit)
 -- 3. Wipes payment data (fresh start for payment test)
 -- 4. Revokes premium

@@ -180,7 +180,7 @@ struct QualitySelectionView: View {
                                             Image(systemName: "exclamationmark.triangle.fill")
                                                 .foregroundColor(.orange)
                                             VStack(alignment: .leading, spacing: 2) {
-                                                Text("Free users can host 1 room every 168 hours (7 days)")
+                                                Text("Free users can host 1 room every 24 hours (1 day)")
                                                     .font(.caption)
                                                     .foregroundColor(.white.opacity(0.7))
                                                     .fixedSize(horizontal: false, vertical: true)
@@ -293,9 +293,9 @@ struct QualitySelectionView: View {
             if let serverMessage = appState.player.premiumLimitMessage {
                 Text(serverMessage)
             } else if licenseManager.timeUntilNextFreeRoom > 0 {
-                Text("You have reached the free hosting limit (1 room / 72h). Next available slot: \(licenseManager.formattedCooldownTime). Upgrade to Premium for unlimited hosting!")
+                Text("You have reached the free hosting limit (1 room / 24h). Next available slot: \(licenseManager.formattedCooldownTime). Upgrade to Premium for unlimited hosting!")
             } else {
-                Text("Free users can only host one watch party every 72 hours. Upgrade now for unlimited hosting!")
+                Text("Free users can only host one watch party every 24 hours. Upgrade now for unlimited hosting!")
             }
         }
         .onAppear {

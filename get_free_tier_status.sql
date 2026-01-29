@@ -28,10 +28,10 @@ BEGIN
     SELECT COUNT(*), MAX(created_at) INTO room_count, last_creation
     FROM public.room_creation_history
     WHERE user_id = target_user_id
-      AND created_at > (NOW() - INTERVAL '72 hours');
+      AND created_at > (NOW() - INTERVAL '24 hours');
 
     IF room_count >= 1 THEN
-        remaining_interval := (last_creation + INTERVAL '72 hours') - NOW();
+        remaining_interval := (last_creation + INTERVAL '24 hours') - NOW();
         remaining_seconds := FLOOR(EXTRACT(EPOCH FROM remaining_interval));
         
         IF remaining_seconds < 0 THEN remaining_seconds := 0; END IF;

@@ -6,17 +6,17 @@
 -- Strategy: Keep only recent/active data, aggressively clean old records
 
 -- ============================================
--- 1. CHAT MESSAGES - Keep only 7 days (biggest space consumer)
+-- 1. CHAT MESSAGES - Keep only 1 days (biggest space consumer)
 -- ============================================
 
--- Delete chat messages older than 7 days
+-- Delete chat messages older than 1 days
 CREATE OR REPLACE FUNCTION cleanup_old_chat_messages()
 RETURNS void AS $$
 BEGIN
   DELETE FROM chat_messages
-  WHERE created_at < NOW() - INTERVAL '7 days';
+  WHERE created_at < NOW() - INTERVAL '1 days';
 
-  RAISE NOTICE 'Cleaned up chat messages older than 7 days';
+  RAISE NOTICE 'Cleaned up chat messages older than 1 days';
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
@@ -121,9 +121,9 @@ SELECT cron.schedule(
 CREATE OR REPLACE FUNCTION cleanup_friend_requests()
 RETURNS void AS $$
 BEGIN
-  -- Delete rejected requests older than 7 days
+  -- Delete rejected requests older than 1 days
   DELETE FROM friend_requests
-  WHERE status = 'rejected' AND created_at < NOW() - INTERVAL '7 days';
+  WHERE status = 'rejected' AND created_at < NOW() - INTERVAL '1 days';
 
   -- Delete pending requests older than 30 days (expired)
   DELETE FROM friend_requests
@@ -190,7 +190,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 -- RETENTION POLICY SUMMARY
 -- ============================================
 
--- Chat Messages:      7 days     (cleaned every 6 hours)
+-- Chat Messages:      1 days     (cleaned every 6 hours)
 -- Rooms:              12-24 hours (cleaned hourly)
 -- WebRTC Signals:     30 minutes  (cleaned every 15 min)
 -- Watch History:      30 days     (cleaned daily)

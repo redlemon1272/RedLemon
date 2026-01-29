@@ -432,7 +432,7 @@ struct SettingsView: View {
                         .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
                         .cornerRadius(8)
 
-                        Text("Or unlock unlimited hosting with a one-time payment")
+                        Text("Or host unlimited watch parties by supporting the project")
                             .font(.caption)
                             .foregroundColor(.secondary)
 
@@ -440,9 +440,9 @@ struct SettingsView: View {
                             showPaymentGate = true
                         }) {
                             HStack(spacing: 8) {
-                                Image(systemName: "lock.open.fill")
+                                Image(systemName: "heart.fill")
                                     .font(.body)
-                                Text("Unlock Host License")
+                                Text("Support RedLemon")
                                     .font(.body.weight(.medium))
                             }
                             .padding(.vertical, 10)

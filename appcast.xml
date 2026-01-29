@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.167 -->
+        <item>
+            <title>Version 1.0.167</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Optimized premium payment dismissal animation</li><li>Improved account restoration reliability and speed</li><li>Fixed identity race condition during restoration</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 29 Jan 2026 14:17:09 -0500</pubDate>
+            <sparkle:version>167</sparkle:version>
+            <sparkle:shortVersionString>1.0.167</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.167.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="+mD/Su2DZt9Bu3C9uFjLXYzRKfAYhWqr/FcaUPRVi7Djyxc2JZagPeyxxXhTPxrDycg05OhQAcnJSZvWAkJbBw==" length="75209875"
+            />
+        </item>
         <!-- vv1.0.166 -->
         <item>
             <title>Version v1.0.166</title>

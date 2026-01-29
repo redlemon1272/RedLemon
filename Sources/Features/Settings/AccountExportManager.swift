@@ -122,21 +122,8 @@ class AccountExportManager {
             try await KeychainManager.shared.save(credential: subdlKey, for: "subdl")
         }
 
-        // Restore Watch History
-        if let history = exportData.playbackHistory, !history.isEmpty {
-             if let encoded = try? JSONEncoder().encode(history) {
-                UserDefaults.standard.set(encoded, forKey: "watchHistory")
-            }
-            // Trigger smart sync (Merges backup data with server logic)
-            await SyncManager.shared.performFullSync()
-        }
-
-        if let library = exportData.libraryItems, !library.isEmpty {
-            await LibraryManager.shared.restoreFromBackup(items: library)
-        }
-
         // Landmine #88: Proactively set auth context to prevent heartbeat failures
-        // The Keychain fallback in makeRequest() will catch this too, but it's better to set it here.
+        // We do this BEFORE sync to ensure signed requests use the restored identity
         if let userId = UUID(uuidString: exportData.userId) {
             SupabaseClient.shared.auth.currentUser = AuthUser(
                 id: userId,
@@ -145,6 +132,20 @@ class AccountExportManager {
                 isPremium: false
             )
             NSLog("✅ AccountImport: Set auth.currentUser for '%@'", exportData.username)
+        }
+
+        // Restore Watch History
+        if let history = exportData.playbackHistory, !history.isEmpty {
+             if let encoded = try? JSONEncoder().encode(history) {
+                UserDefaults.standard.set(encoded, forKey: "watchHistory")
+            }
+            // Trigger smart sync (Merges backup data with server logic)
+            // This is now safe because the auth context has been updated
+            await SyncManager.shared.performFullSync()
+        }
+
+        if let library = exportData.libraryItems, !library.isEmpty {
+            await LibraryManager.shared.restoreFromBackup(items: library)
         }
 
         return exportData

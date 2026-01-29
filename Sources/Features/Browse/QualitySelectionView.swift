@@ -225,7 +225,7 @@ struct QualitySelectionView: View {
                                             .cornerRadius(8)
                                             .frame(width: 300)
 
-                                        Toggle("Public Room (Visible in Browse)", isOn: $isPublicRoom)
+                                        Toggle("Public (Visible in Rooms)", isOn: $isPublicRoom)
                                             .toggleStyle(SwitchToggleStyle(tint: .accentColor))
                                             .foregroundColor(.white)
                                     }

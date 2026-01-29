@@ -58,7 +58,7 @@ struct PremiumPaymentView: View {
 
 
 
-                        Text("Unlock premium to host unlimited watch parties.")
+                        Text("Support RedLemon and host unlimited watch parties.")
                             .font(.body)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -454,7 +454,7 @@ struct SuccessView: View {
                 .foregroundColor(.green)
                 .padding()
 
-            Text("Premium Unlocked!")
+            Text("Support Confirmed!")
                 .font(.largeTitle)
                 .bold()
 

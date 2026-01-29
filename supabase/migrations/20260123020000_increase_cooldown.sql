@@ -1,6 +1,6 @@
 -- Migration: Decrease Free Tier Cooldown to 1 Day (24 Hours)
 -- Date: 2026-01-29
--- Description: Updates the room creation limit from 24 hours to 24 hours (1 day).
+-- Description: Updates the room creation limit from 168 hours to 24 hours (1 day).
 --              Also updates the history cleanup policy to retain data for 2 days.
 
 -- 1. Update the limit enforcement trigger function
@@ -31,6 +31,10 @@ BEGIN
     WHERE id = host_id;
 
     -- Check if Premium is Active
+    -- Premium is valid if:
+    --   1. is_premium is TRUE and NO expiration date is set (Admin/Lifetime), OR
+    --   2. premium_until is set AND in the future, OR
+    --   3. subscription_expires_at is set AND in the future
     IF (is_user_premium IS TRUE AND user_premium_until IS NULL AND user_subscription_expires IS NULL)
        OR (user_premium_until IS NOT NULL AND user_premium_until > NOW())
        OR (user_subscription_expires IS NOT NULL AND user_subscription_expires > NOW()) THEN
@@ -79,7 +83,12 @@ BEGIN
     FROM public.users
     WHERE id = target_user_id;
 
-    IF (is_user_premium IS TRUE)
+    -- Check if Premium is Active
+    -- Premium is valid if:
+    --   1. is_premium is TRUE and NO expiration date is set (Admin/Lifetime), OR
+    --   2. premium_until is set AND in the future, OR
+    --   3. subscription_expires_at is set AND in the future
+    IF (is_user_premium IS TRUE AND user_premium_until IS NULL AND user_subscription_expires IS NULL)
        OR (user_premium_until IS NOT NULL AND user_premium_until > NOW())
        OR (user_subscription_expires IS NOT NULL AND user_subscription_expires > NOW()) THEN
         RETURN jsonb_build_object('remaining_seconds', 0, 'is_locked', false);

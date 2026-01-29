@@ -145,6 +145,8 @@ RedLemon-Native/
 - ✅ **Security Hardening**: Enforced cryptographic signatures for all database write operations to comply with strict RLS policies.
 - ✅ **Lobby Stability**: Decoupled Realtime and Database connection layers to prevent "all-or-nothing" failures in the Lobby.
 - ✅ **Event Improvements**: Fixed event countdowns, auto-start loops, and event-specific heartbeat grace periods (90s).
+- ✅ **Monetization Strategy Hardening**: Implemented a robust 24-hour hosting limit for free users using a persistent `room_creation_history` table. Hardened premium status logic to strictly enforce expiration dates even if `is_premium` flag is true.
+- ✅ **Grace Period Protection**: Added clock-drift protection to the 10-minute refund grace period for hosting credits.
 
 ### **Current Focus**
 - ✅ Payment System Reliability
@@ -163,5 +165,5 @@ RedLemon-Native/
 
 ---
 
-**Last Updated:** January 23, 2026
+**Last Updated:** January 29, 2026
 **Status:** Hardening Phase (Production Ready)

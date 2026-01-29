@@ -32,7 +32,7 @@ BEGIN
     WHERE id = host_id;
 
     -- Check if Premium is Active
-    IF (is_user_premium IS TRUE) 
+    IF (is_user_premium IS TRUE AND user_premium_until IS NULL AND user_subscription_expires IS NULL) 
        OR (user_premium_until IS NOT NULL AND user_premium_until > NOW())
        OR (user_subscription_expires IS NOT NULL AND user_subscription_expires > NOW()) THEN
         -- User is Premium: Allow creation, log to history

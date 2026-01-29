@@ -107,4 +107,4 @@ GRANT SELECT, INSERT ON public.room_creation_history TO anon;
 COMMENT ON TABLE public.room_creation_history IS 
     'Persistent log of room creation events for enforcing free user limits. 
      Rooms are ephemeral (deleted on host departure), but this table persists 
-     to track the 72-hour creation limit for free users.';
+     to track the 24-hour creation limit for free users.';

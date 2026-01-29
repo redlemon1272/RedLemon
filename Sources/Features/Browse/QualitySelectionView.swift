@@ -81,7 +81,7 @@ struct QualitySelectionView: View {
                                         image
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(maxHeight: 120) 
+                                            .frame(maxWidth: 400, maxHeight: 120) 
                                             .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
                                     default:
                                         // While loading OR on failure, show title text to avoid empty space/flash
@@ -99,11 +99,7 @@ struct QualitySelectionView: View {
                                     .foregroundColor(.white)
                             }
 
-                            if let year = mediaItem.year {
-                                Text(year)
-                                    .font(.subheadline)
-                                    .foregroundColor(.white.opacity(0.7))
-                            }
+
                         }
                         .padding(.top, 20)
 

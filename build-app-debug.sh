@@ -14,8 +14,8 @@ MACOS_VERSION=$(sw_vers -productVersion)
 XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
 
 # User-configurable versioning
-APP_VERSION="v1.0.166"
-APP_BUILD="166"
+APP_VERSION="1.0.167"
+APP_BUILD="167"
 
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
 echo "🔧 System: $ARCH_NAME"

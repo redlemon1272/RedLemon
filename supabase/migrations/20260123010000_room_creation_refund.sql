@@ -1,7 +1,7 @@
 -- Migration: User Room Creation Refund (Grace Period)
 -- Date: 2026-01-23
--- Description: Automatically refunds the 72-hour hosting credit if a user room
---              is deleted within 30 minutes of creation (handles technical failures).
+-- Description: Automatically refunds the 24-hour hosting credit if a user room
+--              is deleted within 10 minutes of creation (handles technical failures).
 
 -- 1. Create the refund function
 CREATE OR REPLACE FUNCTION public.maybe_refund_room_creation()
@@ -15,7 +15,8 @@ BEGIN
     -- GRACE PERIOD: 10 minutes
     -- Logic: If the room is deleted within 10 minutes of its creation,
     -- we assume a technical failure or setup issue occurred and refund the credit.
-    IF (NOW() - OLD.created_at) < INTERVAL '10 minutes' THEN
+    -- FIXED: Ensure duration is positive to prevent clock-drift bypass (where Future Time results in negative duration)
+    IF (NOW() - OLD.created_at) < INTERVAL '10 minutes' AND (NOW() - OLD.created_at) > INTERVAL '0 seconds' THEN
         -- Delete the corresponding history record to restore the user's credit
         DELETE FROM public.room_creation_history
         WHERE user_id = OLD.host_user_id
@@ -41,4 +42,4 @@ EXECUTE FUNCTION public.maybe_refund_room_creation();
 -- 3. Documentation
 COMMENT ON FUNCTION public.maybe_refund_room_creation() IS
     'Automatically restores a free user''s hosting credit if their room is closed within 10 minutes.
-     This ensures connectivity issues or playback errors don''t waste their once-per-30-day/72-hour attempt.';
+     This ensures connectivity issues or playback errors don''t waste their once-per-24-hour attempt.';

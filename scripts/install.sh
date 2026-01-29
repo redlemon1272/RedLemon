@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# RedLemon Magic Installer
+# RedLemon Bootstrap Installer
 # Installs the latest version of RedLemon directly from the official source.
 
 set -e
@@ -43,8 +43,8 @@ echo -e "${BLUE}🧹 Cleaning up...${NC}"
 hdiutil detach "$MOUNT_POINT" -quiet
 rm "$TEMP_DMG"
 
-# 5. Quarantine Bypass (Critical for UX)
-echo -e "${BLUE}🔓 Applying Anti-Gravity Protocol...${NC}"
+# 5. Authorize Application (Gatekeeper Bypass)
+echo -e "${BLUE}🔓 Authorizing Application...${NC}"
 xattr -rd com.apple.quarantine "$INSTALL_DIR/$APP_NAME" 2>/dev/null || true
 
 echo -e "${GREEN}✅ Installed Successfully!${NC}"

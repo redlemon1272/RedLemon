@@ -1,6 +1,6 @@
 -- Migration: Implement Subscription Logic and Room Creation Limits
 -- Date: 2025-12-17
--- Description: Re-enables room creation limits with strict 1 room per 72h policy for free users, 
+-- Description: Re-enables room creation limits with strict 1 room per 24h policy for free users, 
 --              and ensures the users table has the necessary columns for premium subscription tracking.
 
 -- 1. Ensure 'premium_until' column exists in public.users
@@ -52,15 +52,15 @@ BEGIN
     END IF;
 
     -- User is FREE: Check Limits
-    -- Count rooms created by this user in the last 72 hours
+    -- Count rooms created by this user in the last 24 hours
     SELECT COUNT(*) INTO room_count
     FROM public.rooms
     WHERE host_user_id = host_id
-      AND created_at > (NOW() - INTERVAL '72 hours');
+      AND created_at > (NOW() - INTERVAL '24 hours');
 
-    -- If user has created 1 or more rooms in the last 72h, BLOCK.
+    -- If user has created 1 or more rooms in the last 24h, BLOCK.
     IF room_count >= 1 THEN
-        RAISE EXCEPTION 'Free User Limit Reached: You can only host 1 room every 72 hours. Upgrade to Premium for unlimited hosting.';
+        RAISE EXCEPTION 'Free User Limit Reached: You can only host 1 room every 24 hours. Upgrade to Premium for unlimited hosting.';
     END IF;
 
     RETURN NEW;

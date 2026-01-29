@@ -1800,14 +1800,14 @@ class PlayerViewModel: ObservableObject {
                 NSLog("❌ Failed to create room: %@", String(describing: error))
                 let msg = "\(error)"
                 // Handle various limit error formats (Postgres P0001 or standard API error)
-                if msg.contains("Limit Reached") || msg.contains("P0001") || msg.contains("one room every 72 hours") {
+                if msg.contains("Limit Reached") || msg.contains("P0001") || msg.contains("one room every 24 hours") {
                     // Refresh limit status so UI shows correct time
                     await LicenseManager.shared.checkHostingLimit()
 
                     await MainActor.run {
                         appState.isLoadingRoom = false
                         // Extract the user-friendly message if possible, otherwise use the full error
-                        // The backend sends: "Free User Limit Reached: You can host 1 item every 72 hours. Unlock in X hours Y minutes."
+                        // The backend sends: "Free User Limit Reached: You can host 1 item every 24 hours. Unlock in X hours Y minutes."
                         // This usually comes in error.localizedDescription or within the userMessage wrapper.
                         self.premiumLimitMessage = error.localizedDescription
                         self.showPremiumLimitAlert = true

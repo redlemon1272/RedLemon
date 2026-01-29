@@ -32,7 +32,7 @@ BEGIN
     WHERE id = host_id;
 
     -- Check if Premium is Active
-    IF (is_user_premium IS TRUE) 
+    IF (is_user_premium IS TRUE AND user_premium_until IS NULL AND user_subscription_expires IS NULL) 
        OR (user_premium_until IS NOT NULL AND user_premium_until > NOW())
        OR (user_subscription_expires IS NOT NULL AND user_subscription_expires > NOW()) THEN
         -- User is Premium: Allow creation, log to history
@@ -44,9 +44,9 @@ BEGIN
     SELECT COUNT(*) INTO room_count
     FROM public.room_creation_history
     WHERE user_id = host_id
-      AND created_at > (NOW() - INTERVAL '72 hours');
+      AND created_at > (NOW() - INTERVAL '24 hours');
 
-    -- If user has created 1 or more rooms in the last 72h, BLOCK.
+    -- If user has created 1 or more rooms in the last 24h, BLOCK.
     IF room_count >= 1 THEN
         -- Calculate remaining time
         SELECT created_at INTO last_creation
@@ -54,13 +54,13 @@ BEGIN
         WHERE user_id = host_id
         ORDER BY created_at DESC LIMIT 1;
         
-        remaining_interval := (last_creation + INTERVAL '72 hours') - NOW();
+        remaining_interval := (last_creation + INTERVAL '24 hours') - NOW();
         
         -- Round to nearest minute for cleaner display
         remaining_text := EXTRACT(HOUR FROM remaining_interval) || ' hours ' || 
                           EXTRACT(MINUTE FROM remaining_interval) || ' minutes';
 
-        RAISE EXCEPTION 'Free User Limit Reached: You can host 1 item every 72 hours. Unlock in %.', remaining_text;
+        RAISE EXCEPTION 'Free User Limit Reached: You can host 1 item every 24 hours. Unlock in %.', remaining_text;
     END IF;
 
     -- Allow creation and log to history

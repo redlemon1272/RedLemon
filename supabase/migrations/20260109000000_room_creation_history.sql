@@ -54,10 +54,10 @@ BEGIN
 
     -- Check if Premium is Active
     -- Premium is valid if:
-    --   1. is_premium is TRUE, OR
+    --   1. is_premium is TRUE and NO expiration date is set (Admin/Lifetime), OR
     --   2. premium_until is set AND in the future, OR
-    --   3. subscription_expires_at is set AND in the future (crypto payments)
-    IF (is_user_premium IS TRUE) 
+    --   3. subscription_expires_at is set AND in the future
+    IF (is_user_premium IS TRUE AND user_premium_until IS NULL AND user_subscription_expires IS NULL) 
        OR (user_premium_until IS NOT NULL AND user_premium_until > NOW())
        OR (user_subscription_expires IS NOT NULL AND user_subscription_expires > NOW()) THEN
         -- User is Premium: Allow creation, log to history
@@ -66,15 +66,15 @@ BEGIN
     END IF;
 
     -- User is FREE: Check Limits using the persistent history table
-    -- Count room creation events (not rooms) in the last 72 hours
+    -- Count room creation events (not rooms) in the last 24 hours
     SELECT COUNT(*) INTO room_count
     FROM public.room_creation_history
     WHERE user_id = host_id
-      AND created_at > (NOW() - INTERVAL '72 hours');
+      AND created_at > (NOW() - INTERVAL '24 hours');
 
-    -- If user has created 1 or more rooms in the last 72h, BLOCK.
+    -- If user has created 1 or more rooms in the last 24h, BLOCK.
     IF room_count >= 1 THEN
-        RAISE EXCEPTION 'Free User Limit Reached: You can only host 1 room every 72 hours. Upgrade to Premium for unlimited hosting.';
+        RAISE EXCEPTION 'Free User Limit Reached: You can only host 1 room every 24 hours. Upgrade to Premium for unlimited hosting.';
     END IF;
 
     -- Allow creation and log to history
@@ -96,7 +96,7 @@ CREATE OR REPLACE FUNCTION public.cleanup_old_room_history()
 RETURNS void AS $$
 BEGIN
     DELETE FROM public.room_creation_history
-    WHERE created_at < NOW() - INTERVAL '7 days';
+    WHERE created_at < NOW() - INTERVAL '1 days';
 END;
 $$ LANGUAGE plpgsql;
 
@@ -107,4 +107,4 @@ GRANT SELECT, INSERT ON public.room_creation_history TO anon;
 COMMENT ON TABLE public.room_creation_history IS 
     'Persistent log of room creation events for enforcing free user limits. 
      Rooms are ephemeral (deleted on host departure), but this table persists 
-     to track the 72-hour creation limit for free users.';
+     to track the 24-hour creation limit for free users.';

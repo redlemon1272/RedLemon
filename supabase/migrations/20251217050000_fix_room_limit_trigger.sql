@@ -20,9 +20,9 @@ BEGIN
     RETURN NEW; -- Premium user, allow
   END IF;
 
-  -- Check active rooms (created in last 72h). 
+  -- Check active rooms (created in last 24h). 
   -- Use target_user_id!
-  IF (SELECT COUNT(*) FROM rooms WHERE host_user_id = target_user_id AND created_at > NOW() - INTERVAL '72 hours') >= 1 THEN
+  IF (SELECT COUNT(*) FROM rooms WHERE host_user_id = target_user_id AND created_at > NOW() - INTERVAL '24 hours') >= 1 THEN
     RAISE EXCEPTION 'Free Tier Limit: You can only host 1 active room at a time.';
   END IF;
 

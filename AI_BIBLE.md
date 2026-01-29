@@ -1421,7 +1421,7 @@ Logs must be "Forensically Complete" - a silent narrative that explains "Who, Wh
 Tracks when users create watch party rooms to enforce limits.
 
 ### Limit Rules
-- **Free Users**: 1 room per 168 hours (7 days)
+- **Free Users**: 1 room per 24 hours (1 day)
     - *Refund Grace Period*: If a room is closed within 10 minutes, the credit is automatically refunded (to handle setup/technical issues).
 - **Premium Users**: Unlimited
 

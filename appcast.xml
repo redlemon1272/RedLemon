@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.165 -->
+        <item>
+            <title>Version 1.0.165</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Cinematic UI overhaul: Re-engineered MediaDetail and QualitySelection with larger typography.</li><li>Room Capacity Limits: Added 25-user limit for Watch Parties with server-side enforcement.</li><li>Security Hardening: Time-based Premium validation and hardened expiration checks.</li><li>Seek-Shield Strategy: Debounced seek notifications to prevent chat spam.</li><li>Lobby Discovery: Added delayed scroll hint for UI discoverability.</li><li>Stability: Fixed presence flapping and stabilized logo scaling.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 29 Jan 2026 01:02:48 -0500</pubDate>
+            <sparkle:version>165</sparkle:version>
+            <sparkle:shortVersionString>1.0.165</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.165.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="fQO0rvlx8+x3xLZJ77rhaEN7rwfj/T7RT8Oq64Jp6X0Ub8rpjJKklbL3SsWy102eGTdrNlFBDClpZx5rW8N/BQ==" length="75398081"
+            />
+        </item>
         <!-- v1.0.164 -->
         <item>
             <title>Version 1.0.164</title>

@@ -132,10 +132,9 @@
 | **Seek Notification Flood** | Large drift correction triggers spam | #134 |
 | **Scanner Proximity Failure** | Guard too far from trigger | #135 |
 | **Guest Left Immediately** | Call to `sync` runs before `appState` injection | #131 |
-| **Player Overlays Off-center** | `ignoresSafeArea()` on background or ZStack alignment | #143 |
-| **Video Freeze/Stretch on Switch** | Persistent mpv decoder state / dynamic aspect ratio | #144 |
 | **Playback "Skip" after Sync** | Overlay cleared before snap-seek finished | #145 |
-| **Stale Premium Crown** | Client trusting DB flag vs Expiration Date | **Rule**: Validate `expires_at > Now` client-side |
+| **Stale Premium Crown** | Client trusting DB flag vs Expiration Date | #146 |
+| **Silent Scroll Abandonment** | Users unaware of participants/playlist list | #147 |
 
 ## 🚨 Critical Landmines
 
@@ -597,8 +596,17 @@
         2.  Use a `finalizeTrackSwitch()` helper that holds `isLoading` for an extra **300-500ms** after the seek is launched.
         3.  This shields the visual "pop" of the video, making the transition feel perfectly seamless. (Landmine #145).
 
-## 🪦 Resolved Landmines (Archived)
-*   ~~#XX: Old Issue~~ - (Example placeholder)
+146. **Authoritative Premium Validation (Trust Time, Not Flags)**: *(Added v1.0.165)*
+    *   **Symptom**: User displays the "Crown Emoji" (👑) even after their subscription has expired.
+    *   **Cause**: Relying on binary boolean flags like `isPremium` which are prone to stale caches.
+    *   **Rule**: **Timestamp Authority**. Always validate specific expiration dates (e.g., `Friend.isReallyPremium` helper checking `expires_at > Now`). (Landmine #146).
+
+147. **The "Interference-Free" Scroll Hint Pattern**: *(Added v1.0.165)*
+    *   **Symptom**: Users don't realize a view is scrollable, but adding a banner blocks interaction or feels cluttered.
+    *   **Rule**: **Smart Discovery**.
+        1. Use a pulsing chevron + text overlay.
+        2. Set `.allowsHitTesting(false)` on the overlay so it doesn't hijack scroll/click gestures.
+        3. Use a `.simultaneousGesture(DragGesture())` on the ScrollView to dissolve the tip instantly upon interaction. (Landmine #147).
 
 ## 🏗️ Architecture Map
 | Component | Responsibility |
@@ -2273,7 +2281,7 @@ request.cachePolicy = .reloadIgnoringLocalCacheData
 2. **Targeted Fetching**: Guests MUST pass the `preferredProvider` to `ProviderManager.shared.fetchStreams(providerNames: [...])`. This reduces API traffic to a single request, cutting sync time to **<2 seconds**.
 3. **Protocol Consistency**: The `StreamResolving` protocol MUST include `preferredProvider` to ensure this optimization is propagated through the `PlayerViewModel` and emergency resolution loops.
 
-### 13. The Stale Premium Flag Trap (Landmine #143)
+### 13. The Stale Premium Flag Trap (Landmine #146)
 **Symptom**: A user who recently canceled their subscription or had it expire still displays the "Crown Emoji" (👑) in chat or the lobby, even after a restart or re-join.
 **Root Cause**: **Flag-Based Invalidation Failure**. Relying on binary boolean flags like `isPremium` is dangerous because flags often persist in local caches (AppState, LicenseManager, Presence Metadata) after the underlying subscription has expired. 
 **Mandatory Solution**:

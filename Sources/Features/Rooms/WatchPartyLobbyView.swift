@@ -25,6 +25,8 @@ struct WatchPartyLobbyView: View {
     @ObservedObject private var socialService = SocialService.shared
     @State private var sidebarTab: SidebarTab = .chat
     @State private var selectedFriend: Friend? = nil // For DM view
+    @State private var showScrollHint: Bool = true
+    @State private var scrollBounceOffset: CGFloat = 0
 
     enum SidebarTab {
         case chat
@@ -421,6 +423,55 @@ struct WatchPartyLobbyView: View {
                         }
                     } // End content VStack
                 } // End ScrollView
+                .simultaneousGesture(
+                    DragGesture().onChanged { _ in
+                        if showScrollHint {
+                            withAnimation { showScrollHint = false }
+                        }
+                    }
+                )
+                .overlay(alignment: .bottom) {
+                    if showScrollHint {
+                        VStack(spacing: 4) {
+                            Text("Scroll down to see the participants and playlist")
+                                .font(.system(size: 11, weight: .bold))
+                                .foregroundColor(.white.opacity(0.8))
+                                .shadow(radius: 2)
+
+                            Image(systemName: "chevron.compact.down")
+                                .font(.system(size: 26, weight: .bold))
+                                .foregroundColor(.accentColor)
+                                .shadow(radius: 4)
+                                .offset(y: scrollBounceOffset)
+                        }
+                        .padding(.top, 40)
+                        .padding(.bottom, 120) // Lower than 180, but still above the action bar zone
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            LinearGradient(
+                                colors: [.clear, .black.opacity(0.8), .clear],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                        .allowsHitTesting(false) // Don't block scroll/click gestures
+                        .transition(.opacity)
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                                scrollBounceOffset = 6
+                            }
+                            Task {
+                                try? await Task.sleep(nanoseconds: 8_000_000_000) // 8s
+                                withAnimation {
+                                    showScrollHint = false
+                                }
+                            }
+                        }
+                        .onTapGesture {
+                            withAnimation { showScrollHint = false }
+                        }
+                    }
+                }
 
                 Spacer()
 

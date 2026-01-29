@@ -1756,16 +1756,16 @@ fi
 
 
 # =============================================================================
-# CHECK 82: Premium Validation (Stale Crown) (Landmine #143)
+# CHECK 82: Premium Validation (Stale Crown) (Landmine #146)
 # =============================================================================
 # Rule: Use 'isReallyPremium' instead of 'isPremium' for reliable UI crowns.
-print_header "Check 82: Premium Validation (Landmine #143)"
+print_header "Check 82: Premium Validation (Landmine #146)"
 
 # 1. Check LobbyPresenceManager for explicit logic
 LOBBY_PRESENCE="$SOURCES_DIR/Features/Rooms/LobbyPresenceManager.swift"
 if [[ -f "$LOBBY_PRESENCE" ]]; then
     if ! grep -q "expiresAt > Date()" "$LOBBY_PRESENCE"; then
-        report "ERROR" "Landmine #143" "LobbyPresenceManager MUST validate 'subscriptionExpiresAt > Date()' to prevent stale premium crowns." "$LOBBY_PRESENCE" "0" "Missing expiration date check"
+        report "ERROR" "Landmine #146" "LobbyPresenceManager MUST validate 'subscriptionExpiresAt > Date()' to prevent stale premium crowns." "$LOBBY_PRESENCE" "0" "Missing expiration date check"
     else
         echo -e "${GREEN}✅ LobbyPresenceManager correctly validates premium expiration dates.${NC}"
     fi
@@ -1783,7 +1783,7 @@ while IFS=: read -r file line code; do
         # Check if it's a declaration, assignment, or parameter (usually safe)
         if [[ "$code" =~ "var isPremium" ]] || [[ "$code" =~ "let isPremium" ]] || [[ "$code" =~ "case isPremium" ]] || [[ "$code" =~ "isPremium:" ]] || [[ "$code" =~ "= isPremium" ]] || [[ "$code" =~ "== rhs.isPremium" ]]; then continue; fi
         
-        report "WARNING" "Landmine #143" "Potential Stale Crown: Using '.isPremium' instead of '.isReallyPremium'. Booleans can be stale, timestamps are authoritative." "$file" "$line" "$code"
+        report "WARNING" "Landmine #146" "Potential Stale Crown: Using '.isPremium' instead of '.isReallyPremium'. Booleans can be stale, timestamps are authoritative." "$file" "$line" "$code"
     fi
 done < <(grep -rnE "\.isPremium" "$SOURCES_DIR" --include="*.swift" | grep -v "//" | grep -vE "(var|let|case|isPremium:|= isPremium|==)")
 

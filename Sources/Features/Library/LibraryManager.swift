@@ -132,26 +132,24 @@ class LibraryManager: ObservableObject {
                     LoggingManager.shared.debug(.general, message: "Sync: Merged \(remoteItems.count) items from server")
                 }
                 
-                // 3. Push Local -> Remote (Background)
+                // 3. Push Local -> Remote (Parallel)
                 // Do this *after* updating UI to be snappy
                 Task {
-                    for item in localOnly {
-                        // We don't have the full MediaItem here easily if it wasn't valid!
-                        // But wait, LibraryItem doesn't store MediaItem.
-                        // We can construct a partial/stub MediaItem or update the API to be lenient?
-                        // SupabaseClient.syncLibraryItem requires MediaItem for the 'media_meta' JSONB.
-                        // Without it, the row will have empty meta. That's acceptable for legacy items.
-                        
-                        // Construct minimal metadata from LibraryItem
-                        let stubMedia = MediaItem(
-                            id: item.id,
-                            type: item.type,
-                            name: item.name,
-                            poster: item.posterURL,
-                            background: nil, logo: nil, description: nil, releaseInfo: nil, year: item.year, imdbRating: nil, genres: nil, runtime: nil
-                        )
-                        
-                        await SupabaseClient.shared.syncLibraryItem(item, mediaItem: stubMedia)
+                    await withTaskGroup(of: Void.self) { group in
+                        for item in localOnly {
+                            group.addTask {
+                                // Construct minimal metadata from LibraryItem
+                                let stubMedia = MediaItem(
+                                    id: item.id,
+                                    type: item.type,
+                                    name: item.name,
+                                    poster: item.posterURL,
+                                    background: nil, logo: nil, description: nil, releaseInfo: nil, year: item.year, imdbRating: nil, genres: nil, runtime: nil
+                                )
+                                
+                                await SupabaseClient.shared.syncLibraryItem(item, mediaItem: stubMedia)
+                            }
+                        }
                     }
                 }
             }

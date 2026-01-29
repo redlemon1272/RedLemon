@@ -88,9 +88,14 @@ class SyncManager: ObservableObject {
 
             // F. Push Local Changes to Cloud
             if !pushQueue.isEmpty {
-                LoggingManager.shared.debug(.watchHistory, message: "Sync: Pushing \(pushQueue.count) newer/missing items to cloud")
-                for item in pushQueue {
-                    await SupabaseClient.shared.syncWatchHistoryItem(item)
+                LoggingManager.shared.debug(.watchHistory, message: "Sync: Pushing \(pushQueue.count) newer/missing items to cloud in parallel")
+                
+                await withTaskGroup(of: Void.self) { group in
+                    for item in pushQueue {
+                        group.addTask {
+                            await SupabaseClient.shared.syncWatchHistoryItem(item)
+                        }
+                    }
                 }
             }
 

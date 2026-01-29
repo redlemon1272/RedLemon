@@ -18,6 +18,9 @@ struct PremiumPaymentView: View {
     @State private var exchangeRates: (btc: Double, eth: Double)?
     @State private var freeLimitSeconds: TimeInterval?
     @State private var initialExpiry: Date?
+    @State private var qrCodeImage: NSImage?
+    @State private var isDismissing = false
+    private static let ciContext = CIContext()
 
     enum Chain: String, CaseIterable, Identifiable {
         case evm = "evm"
@@ -47,8 +50,15 @@ struct PremiumPaymentView: View {
         ZStack {
             Color(NSColor.windowBackgroundColor).edgesIgnoringSafeArea(.all)
 
-            if showSuccess {
-                SuccessView(dismiss: { dismiss() })
+            if isDismissing {
+                // The Nuclear Option: Show absolutely nothing but the background 
+                // during dismissal to guarantee 60fps snappy animation.
+                Color.clear 
+            } else if showSuccess {
+                SuccessView(dismiss: {
+                    isDismissing = true
+                    dismiss()
+                })
             } else {
                 VStack(spacing: 0) {
                     ScrollView {
@@ -187,11 +197,16 @@ struct PremiumPaymentView: View {
                                     }
                                 }()
 
-                                Image(nsImage: generateQRCode(for: address, amountUSD: usdAmount))
-                                    .interpolation(.none)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 160, height: 160)
+                                if let qr = qrCodeImage {
+                                    Image(nsImage: qr)
+                                        .interpolation(.none)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 160, height: 160)
+                                } else {
+                                    ProgressView()
+                                        .frame(width: 160, height: 160)
+                                }
                             }
 
                             // Address Text & Copy
@@ -262,6 +277,7 @@ struct PremiumPaymentView: View {
                 Divider()
                 HStack {
                     Button("Cancel") {
+                        isDismissing = true
                         stopPolling()
                         dismiss()
                     }
@@ -285,7 +301,11 @@ struct PremiumPaymentView: View {
         }
         .frame(width: 480, height: 580)
         .overlay(
-            Button(action: { dismiss() }) {
+            Button(action: { 
+                isDismissing = true
+                stopPolling()
+                dismiss() 
+            }) {
                 Image(systemName: "xmark.circle.fill")
                 .font(.system(size: 24))
                 .foregroundColor(.secondary.opacity(0.8))
@@ -306,6 +326,12 @@ struct PremiumPaymentView: View {
                 await fetchRates()
                 await checkLimit()
             }
+        }
+        .onChange(of: selectedPlan) { _ in
+            updateQRCode()
+        }
+        .onChange(of: assignedAddress) { _ in
+            updateQRCode()
         }
         .onDisappear {
             stopPolling()
@@ -345,11 +371,13 @@ struct PremiumPaymentView: View {
     }
 
     private func checkPayment(manual: Bool = false) async {
-        if isCheckingPayment { return }
+        if isCheckingPayment || isDismissing { return }
         isCheckingPayment = true
 
         do {
             let (isPremium, newExpiry, isNewPayment) = try await SupabaseClient.shared.checkPaymentStatus()
+            
+            if isDismissing { return } // Escape early if user closed while waiting for network
 
             // Update LicenseManager silently
             if isPremium {
@@ -412,20 +440,29 @@ struct PremiumPaymentView: View {
         return String(format: "%.4f ETH", amount)
     }
 
-    private func generateQRCode(for address: String, amountUSD: Double) -> NSImage {
-        let uri = formatPaymentURI(address: address, amountUSD: amountUSD)
+    private func updateQRCode() {
+        guard let address = assignedAddress else { return }
+        
+        let usdAmount: Double = {
+            switch selectedPlan {
+            case "$4": return 4.0
+            case "$7": return 7.0
+            case "$10": return 10.0
+            default: return 4.0
+            }
+        }()
+        
+        let uri = formatPaymentURI(address: address, amountUSD: usdAmount)
         LogManager.shared.debug("📱 Generating QR for URI: \(uri)")
 
-        let context = CIContext()
         let filter = CIFilter.qrCodeGenerator()
         filter.message = Data(uri.utf8)
 
         if let outputImage = filter.outputImage {
-            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
-                return NSImage(cgImage: cgimg, size: NSSize(width: cgimg.width, height: cgimg.height))
+            if let cgimg = Self.ciContext.createCGImage(outputImage, from: outputImage.extent) {
+                qrCodeImage = NSImage(cgImage: cgimg, size: NSSize(width: cgimg.width, height: cgimg.height))
             }
         }
-        return NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: nil) ?? NSImage()
     }
 
     private func formatPaymentURI(address: String, amountUSD: Double) -> String {
@@ -472,10 +509,9 @@ struct SuccessView: View {
             .foregroundColor(.white)
             .cornerRadius(10)
             .padding(.top, 20)
-            .buttonStyle(.plain) // Remove system styles completely
+            .buttonStyle(.plain) 
         }
         .padding()
-        .transition(.scale)
     }
 }
 

@@ -896,7 +896,10 @@ struct ChatOverlayView: View {
                             .cornerRadius(4)
                     }
 
-                    if isPremium {
+                    // Prioritize DB-verified premium status for friends
+                    let effectivePremium = friends.first(where: { $0.id.caseInsensitiveCompare(uid) == .orderedSame })?.isPremium ?? isPremium
+
+                    if effectivePremium {
                         Text("👑")
                             .font(.system(size: 10))
                             .help("Premium User")
@@ -1388,8 +1391,9 @@ struct FriendRowButton: View {
                                 .foregroundColor(.white)
                                 .font(.body)
 
-                            // Premium Host Badge
-                            if friend.isPremium == true {
+                            // Premium Host Badge (Prioritize DB-verified status)
+                            let isPremium = friend.isPremium ?? (activity?.isPremium ?? false)
+                            if isPremium {
                                 Text("👑")
                                     .font(.system(size: 12))
                                     .help("Premium Host")

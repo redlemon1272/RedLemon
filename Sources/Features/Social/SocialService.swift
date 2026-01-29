@@ -236,13 +236,9 @@ class SocialService: ObservableObject {
             isPremium: newestMetadata["is_premium"] as? Bool
         )
 
-        // SYNC: Update the persistent Friend object in self.friends
-        if let premium = activity.isPremium,
-           let index = friends.firstIndex(where: { $0.id == normalizedUserId }) {
-            if friends[index].isPremium != premium {
-                friends[index].isPremium = premium
-            }
-        }
+        // NOTE: We do NOT sync premium status from Presence back to the Friend object.
+        // Presence metadata can be spoofed or stale. We trust the DB status loaded in loadFriends().
+        // See: Fixing Premium Host Display (Jan 2026)
 
         // Parse metadata
         // Check for specific watching status

@@ -15,7 +15,8 @@ BEGIN
     -- GRACE PERIOD: 10 minutes
     -- Logic: If the room is deleted within 10 minutes of its creation,
     -- we assume a technical failure or setup issue occurred and refund the credit.
-    IF (NOW() - OLD.created_at) < INTERVAL '10 minutes' THEN
+    -- FIXED: Ensure duration is positive to prevent clock-drift bypass (where Future Time results in negative duration)
+    IF (NOW() - OLD.created_at) < INTERVAL '10 minutes' AND (NOW() - OLD.created_at) > INTERVAL '0 seconds' THEN
         -- Delete the corresponding history record to restore the user's credit
         DELETE FROM public.room_creation_history
         WHERE user_id = OLD.host_user_id

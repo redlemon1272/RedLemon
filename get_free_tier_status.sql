@@ -18,7 +18,7 @@ BEGIN
     FROM public.users
     WHERE id = target_user_id;
 
-    IF (is_user_premium IS TRUE) 
+    IF (is_user_premium IS TRUE AND user_premium_until IS NULL AND user_subscription_expires IS NULL) 
        OR (user_premium_until IS NOT NULL AND user_premium_until > NOW())
        OR (user_subscription_expires IS NOT NULL AND user_subscription_expires > NOW()) THEN
         RETURN jsonb_build_object('remaining_seconds', 0, 'is_locked', false);

@@ -228,7 +228,7 @@ echo -e "${GREEN}✅ Internal Deployment Successful!${NC}"
 
 # 7. Automated Code Ceremony
 echo -e "${BLUE}📦 Committing Release Artifacts...${NC}"
-git add build-app-debug.sh README.md appcast.xml
+git add build-app-debug.sh README.md appcast.xml RedLemon-Installer.sha256
 git commit -m "chore: release artifacts v${VERSION} (build ${BUILD_NUMBER})"
 
 # 8. Automated Public Sync

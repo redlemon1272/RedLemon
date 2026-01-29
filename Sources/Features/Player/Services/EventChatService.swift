@@ -48,7 +48,8 @@ class EventChatService: ObservableObject {
                     isHost: false,   // Public events have no "Host" in this context
                     userId: userId,
                     username: username,
-                    isPremium: LicenseManager.shared.isPremium
+                    isPremium: LicenseManager.shared.isPremium,
+                    subscriptionExpiresAt: LicenseManager.shared.subscriptionExpiresAt
                 )
 
                 await manager.registerObserver(
@@ -108,7 +109,8 @@ class EventChatService: ObservableObject {
             text: text,
             timestamp: Date(),
             senderId: userId,
-            isPremium: isPremium
+            isPremium: isPremium,
+            subscriptionExpiresAt: Date(timeIntervalSince1970: LicenseManager.shared.subscriptionExpiresAt)
         )
         self.messages.append(message)
 
@@ -120,7 +122,8 @@ class EventChatService: ObservableObject {
             senderId: userId,
             chatText: text,
             chatUsername: username,
-            isPremium: isPremium
+            isPremium: isPremium,
+            subscriptionExpiresAt: LicenseManager.shared.subscriptionExpiresAt
         )
 
         do {
@@ -190,7 +193,8 @@ class EventChatService: ObservableObject {
             text: text,
             timestamp: Date(timeIntervalSince1970: message.timestamp),
             senderId: message.senderId,
-            isPremium: message.isPremium ?? false
+            isPremium: message.isPremium ?? false,
+            subscriptionExpiresAt: message.subscriptionExpiresAt.flatMap { Date(timeIntervalSince1970: $0) }
         )
 
         // BATCHING LOGIC (Ported from MPVPlayerViewModel)
@@ -229,6 +233,8 @@ class EventChatService: ObservableObject {
         let normalizedID = rawId.lowercased()
         let username = (metadata?["username"] as? String) ?? "Guest"
         let isPremium = (metadata?["is_premium"] as? Bool) ?? false
+        let expiryInterval = metadata?["subscription_expires_at"] as? TimeInterval
+        let subscriptionExpiresAt = expiryInterval.flatMap { Date(timeIntervalSince1970: $0) }
 
         switch action {
         case .join:
@@ -237,6 +243,7 @@ class EventChatService: ObservableObject {
                 participants[index].phxRefs.insert(userId)
                 participants[index].name = username
                 participants[index].isPremium = isPremium
+                participants[index].subscriptionExpiresAt = subscriptionExpiresAt
             } else {
                 // New participant
                 let newP = Participant(
@@ -245,6 +252,7 @@ class EventChatService: ObservableObject {
                     isHost: false, // Events don't have "Hosts" in this context
                     isReady: true,
                     isPremium: isPremium,
+                    subscriptionExpiresAt: subscriptionExpiresAt,
                     joinedAt: Date(),
                     phxRefs: Set([userId])
                 )

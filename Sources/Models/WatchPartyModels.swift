@@ -119,8 +119,17 @@ struct Participant: Identifiable {
     var isHost: Bool
     var isReady: Bool // Ready to start
     var isPremium: Bool // Premium user status
+    var subscriptionExpiresAt: Date? // ✅ New: Trust Time, Not Flags (Landmine #138)
     var joinedAt: Date
     var phxRefs: Set<String> // Multiple Phoenix Presence References (Connection IDs)
+
+    // Helper to check if user is actually premium
+    var isReallyPremium: Bool {
+        if let expiry = subscriptionExpiresAt {
+            return expiry > Date()
+        }
+        return isPremium
+    }
 
     static func guest(number: Int) -> Participant {
         Participant(
@@ -129,6 +138,7 @@ struct Participant: Identifiable {
             isHost: false,
             isReady: false,
             isPremium: false,
+            subscriptionExpiresAt: nil,
             joinedAt: Date(),
             phxRefs: []
         )
@@ -141,6 +151,7 @@ struct Participant: Identifiable {
             isHost: true,
             isReady: true, // Host is always ready
             isPremium: false,
+            subscriptionExpiresAt: nil,
             joinedAt: Date(),
             phxRefs: []
         )
@@ -283,6 +294,7 @@ struct SyncMessage: Codable {
     let quality: String?  // Selected stream quality
     let unlockedURL: String?  // Unlocked stream URL
     let isPremium: Bool? // Premium User Status (Crown)
+    let subscriptionExpiresAt: TimeInterval? // ✅ New: Trust Time, Not Flags (Landmine #138)
 
 
     init(
@@ -297,7 +309,8 @@ struct SyncMessage: Codable {
         fileIdx: Int? = nil,
         quality: String? = nil,
         unlockedURL: String? = nil,
-        isPremium: Bool? = nil
+        isPremium: Bool? = nil,
+        subscriptionExpiresAt: TimeInterval? = nil
     ) {
         self.type = type
         self.timestamp = timestamp
@@ -311,7 +324,7 @@ struct SyncMessage: Codable {
         self.quality = quality
         self.unlockedURL = unlockedURL
         self.isPremium = isPremium
-
+        self.subscriptionExpiresAt = subscriptionExpiresAt
     }
 
     var dictionary: [String: Any]? {

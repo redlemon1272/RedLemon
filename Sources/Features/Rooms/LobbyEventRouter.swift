@@ -58,7 +58,8 @@ class LobbyEventRouter: ObservableObject {
             currentUserId: viewModel.participantId,
             mutedUserIds: viewModel.mutedUserIds,
             blockedUserIds: SocialService.shared.blockedUserIds,
-            isPremium: syncMessage.isPremium ?? false
+            isPremium: syncMessage.isPremium ?? false,
+            subscriptionExpiresAt: syncMessage.subscriptionExpiresAt
         )
     }
 
@@ -154,15 +155,16 @@ class LobbyEventRouter: ObservableObject {
                  NSLog("👋 Host received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
                  NSLog("   Guest ID: %@, Total participants: %d", guestId, viewModel.participants.count + 1)
 
-                 let guest = Participant(
-                     id: guestId,
-                     name: guestUsername,
-                     isHost: false,
-                     isReady: false,
-                     isPremium: syncMessage.isPremium ?? false,
-                     joinedAt: Date(),
-                     phxRefs: []
-                 )
+                  let guest = Participant(
+                      id: guestId,
+                      name: guestUsername,
+                      isHost: false,
+                      isReady: false,
+                      isPremium: syncMessage.isPremium ?? false,
+                      subscriptionExpiresAt: syncMessage.subscriptionExpiresAt.flatMap { Date(timeIntervalSince1970: $0) },
+                      joinedAt: Date(),
+                      phxRefs: []
+                  )
                  viewModel.participants.append(guest)
              }
 

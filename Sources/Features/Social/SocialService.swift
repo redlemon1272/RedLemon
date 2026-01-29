@@ -106,7 +106,8 @@ class SocialService: ObservableObject {
                 "username": username,
                 "status": "online",
                 "last_seen": SocialService.isoFormatter.string(from: Date()),
-                "is_premium": LicenseManager.shared.isPremium
+                "is_premium": LicenseManager.shared.isPremium,
+                "subscription_expires_at": SocialService.isoFormatter.string(from: Date(timeIntervalSince1970: LicenseManager.shared.subscriptionExpiresAt))
             ]
             self.currentMetadata = initialMeta
             try await realtimeClient.track(topic: "global-presence", userId: userId, metadata: initialMeta)
@@ -127,7 +128,8 @@ class SocialService: ObservableObject {
             "username": username,
             "status": status ?? "online",
             "last_seen": SocialService.isoFormatter.string(from: Date()),
-            "is_premium": LicenseManager.shared.isPremium
+            "is_premium": LicenseManager.shared.isPremium,
+            "subscription_expires_at": SocialService.isoFormatter.string(from: Date(timeIntervalSince1970: LicenseManager.shared.subscriptionExpiresAt))
         ]
 
         if let title = mediaTitle {
@@ -233,7 +235,8 @@ class SocialService: ObservableObject {
             currentlyWatching: nil,
             lastSeen: Date(),
             customStatus: nil,
-            isPremium: newestMetadata["is_premium"] as? Bool
+            isPremium: newestMetadata["is_premium"] as? Bool,
+            subscriptionExpiresAt: (newestMetadata["subscription_expires_at"] as? String).flatMap { SocialService.isoFormatter.date(from: $0) }
         )
 
         // NOTE: We do NOT sync premium status from Presence back to the Friend object.
@@ -442,6 +445,7 @@ class SocialService: ObservableObject {
         var metadata = currentMetadata
         metadata["last_seen"] = SocialService.isoFormatter.string(from: Date())
         metadata["is_premium"] = LicenseManager.shared.isPremium
+        metadata["subscription_expires_at"] = SocialService.isoFormatter.string(from: Date(timeIntervalSince1970: LicenseManager.shared.subscriptionExpiresAt))
         currentMetadata = metadata
 
         do {
@@ -468,23 +472,14 @@ class SocialService: ObservableObject {
             // 1. Get Friends
             let supabaseFriends = try await client.getFriends(userId: userId)
             self.friends = supabaseFriends.map { user in
-                // Check if premium (either isPremium flag or valid subscription)
-                let hasPremium: Bool
-                if let isPremium = user.isPremium, isPremium {
-                    hasPremium = true
-                } else if let expiresAt = user.subscriptionExpiresAt, expiresAt > Date() {
-                    hasPremium = true
-                } else {
-                    hasPremium = false
-                }
-
                 return Friend(
                     id: user.id.uuidString.lowercased(),
                     username: user.username,
                     addedDate: Date(),
                     isFavorite: self.isFavorite(user.id.uuidString.lowercased()),
                     status: .accepted,
-                    isPremium: hasPremium
+                    isPremium: user.isPremium,
+                    subscriptionExpiresAt: user.subscriptionExpiresAt
                 )
             }
 

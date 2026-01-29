@@ -1756,21 +1756,36 @@ fi
 
 
 # =============================================================================
-# CHECK 82: Premium Validation (Stale Crown)
+# CHECK 82: Premium Validation (Stale Crown) (Landmine #143)
 # =============================================================================
-# Trigger: Client trusting is_premium boolean instead of validating expiration date.
-# Rule: LobbyPresenceManager MUST check subscriptionExpiresAt > Date().
-print_header "Check 82: Premium Validation (Stale Crown)"
+# Rule: Use 'isReallyPremium' instead of 'isPremium' for reliable UI crowns.
+print_header "Check 82: Premium Validation (Landmine #143)"
 
+# 1. Check LobbyPresenceManager for explicit logic
 LOBBY_PRESENCE="$SOURCES_DIR/Features/Rooms/LobbyPresenceManager.swift"
 if [[ -f "$LOBBY_PRESENCE" ]]; then
-    # Look for the fix: fetchedIsPremium = (expiresAt > Date())
     if ! grep -q "expiresAt > Date()" "$LOBBY_PRESENCE"; then
-        report "ERROR" "Stale Crown Risk" "LobbyPresenceManager MUST validate 'subscriptionExpiresAt > Date()' to prevent stale premium crowns. Do not trust 'isPremium' boolean alone." "$LOBBY_PRESENCE" "0" "Missing expiration date check"
+        report "ERROR" "Landmine #143" "LobbyPresenceManager MUST validate 'subscriptionExpiresAt > Date()' to prevent stale premium crowns." "$LOBBY_PRESENCE" "0" "Missing expiration date check"
     else
         echo -e "${GREEN}✅ LobbyPresenceManager correctly validates premium expiration dates.${NC}"
     fi
 fi
+
+# 2. Check UI files for direct isPremium usage (High False Positive Risk, so we target specific patterns)
+# Pattern: [friend|participant|activity].isPremium (without ?? or Logic that uses Really)
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+    # Exclude source of truth and specific admin/settings files
+    if [[ "$file" == *"LicenseManager.swift" ]] || [[ "$file" == *"SocialService.swift" ]] || [[ "$file" == *"SettingsView.swift" ]] || [[ "$file" == *"SupabaseClient.swift" ]]; then continue; fi
+
+    # Look for .isPremium in a conditional or Text
+    if [[ "$code" =~ \.isPremium ]] && [[ ! "$code" =~ isReallyPremium ]] && [[ ! "$code" =~ [lL]icenseManager ]]; then
+        # Check if it's a declaration, assignment, or parameter (usually safe)
+        if [[ "$code" =~ "var isPremium" ]] || [[ "$code" =~ "let isPremium" ]] || [[ "$code" =~ "case isPremium" ]] || [[ "$code" =~ "isPremium:" ]] || [[ "$code" =~ "= isPremium" ]] || [[ "$code" =~ "== rhs.isPremium" ]]; then continue; fi
+        
+        report "WARNING" "Landmine #143" "Potential Stale Crown: Using '.isPremium' instead of '.isReallyPremium'. Booleans can be stale, timestamps are authoritative." "$file" "$line" "$code"
+    fi
+done < <(grep -rnE "\.isPremium" "$SOURCES_DIR" --include="*.swift" | grep -v "//" | grep -vE "(var|let|case|isPremium:|= isPremium|==)")
 
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"

@@ -870,8 +870,9 @@ struct WatchPartyLobbyView: View {
                                 .cornerRadius(4)
                         }
 
-                        // Prestige Badge
-                        if chatMsg.isPremium {
+                        // Prestige Badge (Check Expiration! Landmine #138)
+                        let isReallyPremium = socialService.friends.first(where: { $0.id.caseInsensitiveCompare(chatMsg.senderId ?? "") == .orderedSame })?.isReallyPremium ?? chatMsg.isReallyPremium
+                        if isReallyPremium {
                             Text("👑")
                                 .font(.system(size: 10))
                                 .help("Premium User")
@@ -1088,7 +1089,8 @@ struct ParticipantRow: View {
                         .foregroundColor(.white)
                         .font(.subheadline)
 
-                    if participant.isPremium {
+                    // Prestige Badge (Check Expiration! Landmine #138)
+                    if participant.isReallyPremium {
                         Text("👑")
                             .font(.system(size: 10))
                             .help("Premium User")
@@ -1430,7 +1432,7 @@ struct LobbyFriendRow: View {
                             .foregroundColor(.white)
                             .font(.callout)
 
-                        if friend.isPremium == true {
+                        if friend.isReallyPremium || (activity?.isReallyPremium ?? false) {
                             Text("👑")
                                 .font(.system(size: 10))
                                 .help("Premium Host")

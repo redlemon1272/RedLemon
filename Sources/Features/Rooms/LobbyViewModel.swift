@@ -187,6 +187,7 @@ class LobbyViewModel: ObservableObject {
                 isHost: p.isHost,
                 isReady: p.isReady,
                 isPremium: p.isPremium,
+                subscriptionExpiresAt: nil, // Will be updated via presence/DB
                 joinedAt: p.joinedAt,
                 phxRefs: []
             )
@@ -357,6 +358,7 @@ class LobbyViewModel: ObservableObject {
                     userId: participantId,
                     username: appState?.currentUsername ?? "User",
                     isPremium: LicenseManager.shared.isPremium,
+                    subscriptionExpiresAt: LicenseManager.shared.subscriptionExpiresAt,
                     postgresChanges: roomUpdatesConfig
                 )
 
@@ -680,7 +682,8 @@ class LobbyViewModel: ObservableObject {
                              isPlaying: nil,
                              senderId: self.participantId,
                              chatText: "LOBBY_JOIN",
-                             chatUsername: guestName
+                             chatUsername: guestName,
+                             subscriptionExpiresAt: LicenseManager.shared.subscriptionExpiresAt
                          )
                          if let manager = realtimeManager {
                              try? await manager.sendSyncMessage(joinMsg)

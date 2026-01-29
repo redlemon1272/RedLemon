@@ -10,7 +10,7 @@ enum RealtimeConnectionState {
 
 /// Protocol for RealtimeChannelManager to enable mocking
 protocol RealtimeService: Actor {
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, isPremium: Bool, postgresChanges: [[String: Any]]?) async throws
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, isPremium: Bool, subscriptionExpiresAt: TimeInterval?, postgresChanges: [[String: Any]]?) async throws
     func sendSyncMessage(_ message: SyncMessage) async throws
     func disconnect(leaveChannel: Bool, disconnectClient: Bool) async
     func cleanup(leaveChannel: Bool, disconnectClient: Bool) async
@@ -85,7 +85,7 @@ actor RealtimeChannelManager: RealtimeService {
 
     // MARK: - Setup
 
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, isPremium: Bool, postgresChanges: [[String: Any]]? = nil) async throws {
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, isPremium: Bool, subscriptionExpiresAt: TimeInterval?, postgresChanges: [[String: Any]]? = nil) async throws {
         // PREVENT DUPLICATE SETUP:
         // If we represent the SAME room and user, and are already connected, just return.
         if self.roomId?.caseInsensitiveCompare(roomId) == .orderedSame &&
@@ -130,7 +130,8 @@ actor RealtimeChannelManager: RealtimeService {
             "joined_at": Date().timeIntervalSince1970,
             "username": username,
             "user_id": userId,
-            "is_premium": isPremium
+            "is_premium": isPremium,
+            "subscription_expires_at": subscriptionExpiresAt as Any
         ])
 
         isConnected = true

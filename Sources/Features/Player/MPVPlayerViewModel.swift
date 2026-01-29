@@ -1934,7 +1934,8 @@ class MPVPlayerViewModel: ObservableObject {
             text: text,
             timestamp: Date(),
             senderId: userId.uuidString,
-            isPremium: LicenseManager.shared.isPremium
+            isPremium: LicenseManager.shared.isPremium,
+            subscriptionExpiresAt: Date(timeIntervalSince1970: LicenseManager.shared.subscriptionExpiresAt)
         )
 
         messages.append(message) // OK - Optimistic local update (single message)
@@ -1959,7 +1960,8 @@ class MPVPlayerViewModel: ObservableObject {
                     senderId: userId.uuidString,
                     chatText: text,
                     chatUsername: username,
-                    isPremium: LicenseManager.shared.isPremium
+                    isPremium: LicenseManager.shared.isPremium,
+                    subscriptionExpiresAt: LicenseManager.shared.subscriptionExpiresAt
                 )
 
                 do {
@@ -2268,6 +2270,15 @@ struct ChatMessage: Identifiable {
     var isSystem: Bool = false
     var senderId: String? = nil
     var isPremium: Bool = false
+    var subscriptionExpiresAt: Date? = nil // ✅ New: Trust Time, Not Flags (Landmine #138)
+
+    // Check if truly premium (for non-friends)
+    var isReallyPremium: Bool {
+        if let expiry = subscriptionExpiresAt {
+            return expiry > Date()
+        }
+        return isPremium
+    }
 }
 
 
@@ -2753,7 +2764,8 @@ extension MPVPlayerViewModel {
                 isHost: isHost,
                 userId: userId,
                 username: username,
-                isPremium: LicenseManager.shared.isPremium
+                isPremium: LicenseManager.shared.isPremium,
+                subscriptionExpiresAt: LicenseManager.shared.subscriptionExpiresAt
             )
 
             // Register as player observer (Presence is already registered above, but we update it with Sync here)
@@ -3630,7 +3642,8 @@ extension MPVPlayerViewModel {
                     text: displayText,
                     timestamp: Date(timeIntervalSince1970: message.timestamp),
                     senderId: message.senderId,
-                    isPremium: message.isPremium ?? false
+                    isPremium: message.isPremium ?? false,
+                    subscriptionExpiresAt: message.subscriptionExpiresAt.flatMap { Date(timeIntervalSince1970: $0) }
                 )
                 // Batch chat updates to avoid UI thrashing
                 await MainActor.run {

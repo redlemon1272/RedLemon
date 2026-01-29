@@ -122,9 +122,8 @@ struct FriendProfileView: View {
                     Text(friend.username)
                         .font(.headline)
 
-                    // Prestige Badge
-                    if friend.isPremium == true {
-                        // Fallback: Legacy Premium Badge
+                    // Prestige Badge (Check Expiration! Landmine #138)
+                    if friend.isReallyPremium {
                         Text("👑")
                             .font(.system(size: 12))
                             .help("Premium User")

@@ -250,6 +250,9 @@ class LobbyPresenceManager: ObservableObject {
                         if let isPremium = metadata?["is_premium"] as? Bool {
                             strongViewModel.participants[index].isPremium = isPremium
                         }
+                        if let expiryInterval = metadata?["subscription_expires_at"] as? TimeInterval {
+                            strongViewModel.participants[index].subscriptionExpiresAt = Date(timeIntervalSince1970: expiryInterval)
+                        }
 
                         // If it's a new Realtime connection, we accept it for connection tracking.
                         // Chat Notification is handled by LOBBY_JOIN broadcast to prevent duplicates.
@@ -266,6 +269,8 @@ class LobbyPresenceManager: ObservableObject {
                             isHost = hostStatus
                         }
                         let isPremium = metadata?["is_premium"] as? Bool ?? false
+                        let expiryInterval = metadata?["subscription_expires_at"] as? TimeInterval
+                        let subscriptionExpiresAt = expiryInterval.flatMap { Date(timeIntervalSince1970: $0) }
 
                         let newParticipant = Participant(
                             id: normalizedID,
@@ -273,6 +278,7 @@ class LobbyPresenceManager: ObservableObject {
                             isHost: isHost,
                             isReady: false,
                             isPremium: isPremium,
+                            subscriptionExpiresAt: subscriptionExpiresAt,
                             joinedAt: Date(),
                             phxRefs: Set([userId]) // Store Connection ID (Map Key)
                         )
@@ -640,14 +646,16 @@ class LobbyPresenceManager: ObservableObject {
                 var username = "User"
                 var fetchedIsPremium: Bool? = nil
 
+                var fetchedSubscriptionExpiresAt: Date? = nil
                 if let user = try? await viewModel.dataService.getUserById(userId: participant.userId) {
                     username = user.username
+                    fetchedSubscriptionExpiresAt = user.subscriptionExpiresAt
 
                     // Validate premium status against expiration date (Client-Side Trust)
                     if let expiresAt = user.subscriptionExpiresAt {
                         fetchedIsPremium = (expiresAt > Date())
                     } else {
-                        fetchedIsPremium = user.isPremium
+                        fetchedIsPremium = user.isPremium // OK
                     }
                 }
 
@@ -695,6 +703,7 @@ class LobbyPresenceManager: ObservableObject {
                     isHost: participant.isHost,
                     isReady: isReady,
                     isPremium: fetchedIsPremium ?? existingLocal?.isPremium ?? false,
+                    subscriptionExpiresAt: fetchedSubscriptionExpiresAt ?? existingLocal?.subscriptionExpiresAt,
                     joinedAt: finalJoinedAt,
                     phxRefs: existingLocal?.phxRefs ?? []
                 )

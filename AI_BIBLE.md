@@ -2272,3 +2272,19 @@ request.cachePolicy = .reloadIgnoringLocalCacheData
 1. **Handshake Enrichment**: The `LOBBY_PREPARE_PLAYBACK` signal MUST include the `provider` name (e.g., `Torrentio`, `DebridSearch`).
 2. **Targeted Fetching**: Guests MUST pass the `preferredProvider` to `ProviderManager.shared.fetchStreams(providerNames: [...])`. This reduces API traffic to a single request, cutting sync time to **<2 seconds**.
 3. **Protocol Consistency**: The `StreamResolving` protocol MUST include `preferredProvider` to ensure this optimization is propagated through the `PlayerViewModel` and emergency resolution loops.
+
+### 13. The Stale Premium Flag Trap (Landmine #143)
+**Symptom**: A user who recently canceled their subscription or had it expire still displays the "Crown Emoji" (👑) in chat or the lobby, even after a restart or re-join.
+**Root Cause**: **Flag-Based Invalidation Failure**. Relying on binary boolean flags like `isPremium` is dangerous because flags often persist in local caches (AppState, LicenseManager, Presence Metadata) after the underlying subscription has expired. 
+**Mandatory Solution**:
+1. **Timestamp Authority**: The `subscriptionExpiresAt` timestamp is the ONLY source of truth.
+2. **Dynamic Validation**: Use the `isReallyPremium` computed property (available on `Friend`, `Participant`, and `ChatMessage`) which performs a real-time comparison: `expiryDate > Date()`.
+3. **Metadata Synchronization**: Presence metadata and `SyncMessage` MUST include `subscription_expires_at` (TimeInterval) so that other participants can perform their own local validation.
+4. **UI Pattern**: UI components MUST check `isReallyPremium` rather than `isPremium`.
+
+```swift
+// ✅ CORRECT: Verify timestamp, don't trust the flag
+if participant.isReallyPremium {
+    Text("👑")
+}
+```

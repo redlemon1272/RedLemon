@@ -380,6 +380,7 @@ struct RoomListView: View {
             posterURL: room.posterUrl,
             participants: [validatedHost] + guests,
             participantCount: room.participantsCount,  // Use DB-managed count
+            maxParticipants: room.maxParticipants,
             state: room.isPlaying ? .playing : .lobby,
             createdAt: room.createdAt,
             lastActivity: room.lastActivity,
@@ -505,6 +506,11 @@ struct RoomListView: View {
 
         // 1. Try local list first (fast path)
         if let room = appState.activeRooms.first(where: { $0.id.caseInsensitiveCompare(code) == .orderedSame }) {
+            // Capacity Check
+            if room.participantCount >= room.maxParticipants {
+                NSAlert.showAlert(title: "Room Full", message: "This watch party is currently at capacity (\(room.participantCount)/\(room.maxParticipants)).", style: .warning)
+                return
+            }
             Task {
                 await joinRoom(room: room)
             }
@@ -517,6 +523,15 @@ struct RoomListView: View {
             do {
                 print("🔍 Looking up room by code on Supabase: \(code)")
                 if let supabaseRoom = try await SupabaseClient.shared.getRoomState(roomId: code) {
+                    // Capacity Check (Server Side)
+                    if supabaseRoom.participantsCount >= supabaseRoom.maxParticipants {
+                         await MainActor.run {
+                             isLoading = false
+                             NSAlert.showAlert(title: "Room Full", message: "This watch party is currently at capacity (\(supabaseRoom.participantsCount)/\(supabaseRoom.maxParticipants)).", style: .warning)
+                         }
+                         return
+                    }
+
                     // Convert to WatchPartyRoom
                     if let watchPartyRoom = await convertSupabaseRoomToWatchPartyRoom(supabaseRoom) {
                         await MainActor.run {
@@ -865,7 +880,6 @@ struct JoinRoomDialog: View {
             TextField("Room Code (e.g., A3H9)", text: $roomCodeInput)
                 .font(.system(.title3, design: .monospaced))
                 .textFieldStyle(.roundedBorder)
-                .textCase(.uppercase)
                 .padding(.horizontal)
                 .onSubmit {
                     if !roomCodeInput.isEmpty {

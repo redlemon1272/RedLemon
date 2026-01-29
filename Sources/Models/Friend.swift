@@ -13,8 +13,16 @@ struct Friend: Codable, Identifiable, Equatable {
     let addedDate: Date
     var isFavorite: Bool
     var status: FriendStatus
-    var isPremium: Bool? // Premium hosting status (nil = unknown, true = has hosting, false = free user)
+    var isPremium: Bool? // Premium hosting status (Legacy boolean)
+    var subscriptionExpiresAt: Date? // ✅ New: Trust Time, Not Flags (Landmine #138)
 
+    // Helper to check if user is actually premium
+    var isReallyPremium: Bool {
+        if let expiry = subscriptionExpiresAt {
+            return expiry > Date()
+        }
+        return isPremium ?? false
+    }
 
     enum FriendStatus: String, Codable {
         case pending // Friend request sent, awaiting acceptance
@@ -60,8 +68,17 @@ struct FriendActivity: Identifiable, Codable {
     // If currentlyWatching is nil, this string is shown.
     var customStatus: String? = nil
     var isPremium: Bool? = nil
+    var subscriptionExpiresAt: Date? = nil // ✅ New: For presence verification
 
-    
+    // Helper to check if user is actually premium
+    var isReallyPremium: Bool {
+        if let expiry = subscriptionExpiresAt {
+            return expiry > Date()
+        }
+        return isPremium ?? false
+    }
+
+
     struct WatchingInfo: Codable, Equatable {
         let mediaTitle: String
         let mediaType: String // "movie" or "series"

@@ -11,7 +11,7 @@ struct StreamResolutionResult {
 
 /// Protocol for resolving and unlocking streams
 protocol StreamResolving {
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, preferredTitle: String?, filterExtended: Bool, triggerSource: String) async throws -> StreamResolutionResult
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, preferredTitle: String?, preferredProvider: String?, filterExtended: Bool, triggerSource: String) async throws -> StreamResolutionResult
     func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?, bypassTorrentCache: Bool?) async throws -> Stream
 }
 
@@ -184,7 +184,8 @@ actor StreamService: StreamResolving {
         episode: Int? = nil,
         metadata: MediaMetadata? = nil,
         preferredInfoHash: String? = nil,
-        preferredTitle: String? = nil, // AI_BIBLE #91: Fallback for title matching when hash is nil
+        preferredTitle: String? = nil,
+        preferredProvider: String? = nil,
         filterExtended: Bool = false,
         triggerSource: String = "manual"
     ) async throws -> StreamResolutionResult {
@@ -255,6 +256,8 @@ actor StreamService: StreamResolving {
             excludedSizes: excludedSizes,
             ignoreVerified: false,
             preferredHash: preferredInfoHash,
+            preferredTitle: preferredTitle,
+            preferredProvider: preferredProvider,
             triggerSource: triggerSource
         )
 

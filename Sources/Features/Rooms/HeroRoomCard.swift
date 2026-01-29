@@ -6,9 +6,13 @@ struct HeroRoomCard: View {
     let onJoin: () async -> Void
     @State private var isJoining = false
 
+    private var isFull: Bool {
+        room.participantCount >= room.maxParticipants
+    }
+
     var body: some View {
         Button(action: {
-            guard !isJoining else { return }
+            guard !isJoining && !isFull else { return }
             isJoining = true
             Task {
                 // Slight delay to ensure "Joining" state renders
@@ -19,9 +23,10 @@ struct HeroRoomCard: View {
                 }
             }
         }) {
-            HeroRoomCardContent(room: room, isJoining: isJoining)
+            HeroRoomCardContent(room: room, isJoining: isJoining, isFull: isFull)
         }
         .buttonStyle(.scalableMedia)
+        .disabled(isFull)
     }
 }
 
@@ -30,6 +35,7 @@ struct HeroRoomCard: View {
 struct HeroRoomCardContent: View {
     let room: WatchPartyRoom
     let isJoining: Bool
+    let isFull: Bool
 
     @State private var imageData: Data?
     @State private var loadTask: Task<Void, Never>?
@@ -124,16 +130,21 @@ struct HeroRoomCardContent: View {
                     Spacer()
 
                     HStack(spacing: 4) {
-                        Image(systemName: "person.2.fill")
+                        Image(systemName: isFull ? "person.3.fill" : "person.2.fill")
                             .font(.system(size: 10))
-                        Text("\(room.participantCount)")
+
+                        Text("\(room.participantCount)/\(room.maxParticipants)")
                             .font(.system(size: 11, weight: .bold))
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(isFull ? .yellow : .white)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 5)
-                    .background(Material.thinMaterial)
+                    .background(isFull ? AnyView(Color.black.opacity(0.8)) : AnyView(Color.clear.background(Material.thinMaterial)))
                     .clipShape(Capsule())
+                    .overlay(
+                        Capsule()
+                            .stroke(isFull ? Color.yellow.opacity(0.5) : Color.clear, lineWidth: 1)
+                    )
                 }
                 .padding(16)
 
@@ -205,13 +216,25 @@ struct HeroRoomCardContent: View {
             }
 
             // LAYER 4: Loading State (Safe Mode: No Spinner/Anim)
-            if isJoining {
+            if isJoining || isFull {
                 ZStack {
-                    Color.black.opacity(0.6)
+                    Color.black.opacity(isFull ? 0.4 : 0.6)
                     VStack(spacing: 8) {
-                        Text("Joining...")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(.white)
+                        if isFull {
+                            Image(systemName: "lock.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(.yellow)
+                            Text("ROOM FULL")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.white)
+                            Text("\(room.participantCount) / \(room.maxParticipants) members")
+                                .font(.system(size: 12))
+                                .foregroundColor(.white.opacity(0.8))
+                        } else {
+                            Text("Joining...")
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundColor(.white)
+                        }
                     }
                 }
                 .allowsHitTesting(false)

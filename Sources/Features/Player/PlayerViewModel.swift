@@ -64,7 +64,7 @@ class PlayerViewModel: ObservableObject {
     // Pre-resolved stream for Watch Party Optimization
     var preResolvedStream: Stream?
 
-    func preloadStream(mediaItem: MediaItem, quality: VideoQuality, streamHash: String?, season: Int?, episode: Int?) async throws {
+    func preloadStream(mediaItem: MediaItem, quality: VideoQuality, streamHash: String?, season: Int?, episode: Int?, preferredTitle: String? = nil, preferredProvider: String? = nil) async throws {
         // Run on main actor to update published properties if needed,
         // though we are mostly updating internal state here.
         await MainActor.run {
@@ -74,12 +74,46 @@ class PlayerViewModel: ObservableObject {
             Task { @MainActor in self.isResolvingStream = false }
         }
 
-        LoggingManager.shared.info(.watchParty, message: "⚡️ PlayerVM: Pre-loading stream for hash: \(streamHash ?? "nil")")
+        LoggingManager.shared.info(.watchParty, message: "⚡️ PlayerVM: Pre-loading stream for hash: \(streamHash ?? "nil") (Title: \(preferredTitle ?? "nil"))")
 
-        // Fetch metadata
+        // Step 1: Fetch metadata
         let metadata = try await metadataProvider.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
 
-        // Resolve using hash
+        // Step 2: GUEST DIRECT UNLOCK OPTIMIZATION (v1.0.83)
+        // If we have a preferredStreamHash from the host, skip full resolution and unlock directly.
+        // This saves 8-10 seconds by avoiding redundant provider queries.
+        if let directHash = streamHash, !directHash.isEmpty {
+            NSLog("🚀 PlayerVM: Preload - Using DIRECT UNLOCK path (Guest Optimization)")
+
+            // Clear RD cache for this hash to ensure a fresh link (IP-lock prevention)
+            await RealDebridClient.shared.clearCache(forHash: directHash)
+
+            let syntheticStream = Stream(
+                title: preferredTitle ?? "Shared Stream (Direct)",
+                provider: preferredProvider ?? "direct",
+                infoHash: directHash
+            )
+
+            do {
+                let unlockedStream = try await streamResolver.unlockStream(
+                    stream: syntheticStream,
+                    item: mediaItem,
+                    season: season,
+                    episode: episode,
+                    bypassTorrentCache: true // Force fresh for Guest
+                )
+
+                await MainActor.run {
+                    self.preResolvedStream = unlockedStream
+                }
+                LoggingManager.shared.info(.watchParty, message: "✅ PlayerVM: Direct unlock PRELOAD succeeded! URL: \(String(unlockedStream.url?.prefix(60) ?? "nil"))")
+                return // SUCCESS
+            } catch {
+                NSLog("⚠️ PlayerVM: Preload direct unlock failed (%@), falling back to full resolution...", error.localizedDescription)
+            }
+        }
+
+        // Step 3: Fallback - Resolve using metadata
         let result = try await streamResolver.resolveStream(
             item: mediaItem,
             quality: quality,
@@ -87,7 +121,8 @@ class PlayerViewModel: ObservableObject {
             episode: episode,
             metadata: metadata,
             preferredInfoHash: streamHash,
-            preferredTitle: nil,
+            preferredTitle: preferredTitle,
+            preferredProvider: preferredProvider,
             filterExtended: false,
             triggerSource: "preload"
         )
@@ -95,7 +130,7 @@ class PlayerViewModel: ObservableObject {
         await MainActor.run {
             self.preResolvedStream = result.stream
         }
-        LoggingManager.shared.info(.watchParty, message: "✅ PlayerVM: Stream pre-loaded successfully: \(result.stream.title ?? "Unknown")")
+        LoggingManager.shared.info(.watchParty, message: "✅ PlayerVM: Stream pre-loaded successfully via resolution: \(result.stream.title)")
     }
 
     // Weak reference to AppState for navigation callbacks
@@ -113,7 +148,18 @@ class PlayerViewModel: ObservableObject {
 
     // MARK: - Playback Logic
 
-    func playMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false, isEvent: Bool = false, triggerSource: String = "manual", preferredStreamHash: String? = nil) async {
+    func playMedia(
+        _ item: MediaItem,
+        quality: VideoQuality,
+        watchMode: WatchMode = .solo,
+        roomId: String? = nil,
+        isHost: Bool = false,
+        isEvent: Bool = false,
+        triggerSource: String = "manual",
+        preferredStreamHash: String? = nil,
+        preferredStreamTitle: String? = nil,
+        preferredStreamProvider: String? = nil
+    ) async {
         streamError = nil
 
         // Step 0: Clear state IMMEDIATELY to prevent stale UI
@@ -479,6 +525,7 @@ class PlayerViewModel: ObservableObject {
                      metadata: metadata,
                      preferredInfoHash: hostStreamHash,
                      preferredTitle: nil, // Have hash, don't need title fallback
+                     preferredProvider: preferredStreamProvider, // Optimization
                      filterExtended: false,
                      triggerSource: triggerSource
                  )
@@ -504,6 +551,7 @@ class PlayerViewModel: ObservableObject {
                      metadata: metadata,
                      preferredInfoHash: nil, // No hash available
                      preferredTitle: hostStreamTitle, // Use title for matching
+                     preferredProvider: preferredStreamProvider, // Targeted search
                      filterExtended: false,
                      triggerSource: triggerSource
                  )
@@ -533,8 +581,9 @@ class PlayerViewModel: ObservableObject {
                             season: effectiveSeason, // Use effective variables
                             episode: effectiveEpisode, // Use effective variables
                             metadata: metadata,
-                            preferredInfoHash: nil,
-                            preferredTitle: nil,
+                            preferredInfoHash: preferredStreamHash,
+                            preferredTitle: preferredStreamTitle,
+                            preferredProvider: preferredStreamProvider,
                             filterExtended: false,
                             triggerSource: triggerSource
                         )
@@ -698,6 +747,7 @@ class PlayerViewModel: ObservableObject {
                     metadata: metadata,
                     preferredInfoHash: nil,
                     preferredTitle: nil,
+                    preferredProvider: nil,
                     filterExtended: false,
                     triggerSource: "preload"
                 )
@@ -742,8 +792,8 @@ class PlayerViewModel: ObservableObject {
     }
 
     // Resolve and persist stream BEFORE starting watch party
-    func resolveAndPersistForWatchParty(mediaItem: MediaItem, quality: VideoQuality, roomId: String, season: Int? = nil, episode: Int? = nil) async throws -> Stream {
-        LoggingManager.shared.info(.watchParty, message: "Resolving & Persisting stream for Watch Party Room: \(roomId)")
+    func resolveAndPersistForWatchParty(mediaItem: MediaItem, quality: VideoQuality, roomId: String, season: Int? = nil, episode: Int? = nil, preferredTitle: String? = nil, preferredProvider: String? = nil) async throws -> Stream {
+        LoggingManager.shared.info(.watchParty, message: "Resolving & Persisting stream for Watch Party Room: \(roomId) (Preferred Title: \(preferredTitle ?? "nil"))")
 
         await MainActor.run {
             self.isResolvingStream = true
@@ -782,8 +832,9 @@ class PlayerViewModel: ObservableObject {
                     season: targetSeason,
                     episode: targetEpisode,
                     metadata: metadata,
-                    preferredInfoHash: nil,
-                    preferredTitle: nil,
+                    preferredInfoHash: nil, // We resolve fresh to find candidate pool
+                    preferredTitle: preferredTitle,
+                    preferredProvider: preferredProvider,
                     filterExtended: false,
                     triggerSource: "watch_party_resolve"
                 )
@@ -1163,6 +1214,7 @@ class PlayerViewModel: ObservableObject {
                            metadata: self.selectedMetadata ?? nil,
                            preferredInfoHash: nil, // Don't force the failed hash
                            preferredTitle: nil,
+                           preferredProvider: nil,
                            filterExtended: false,
                            triggerSource: "emergency_resolve"
                        )
@@ -1701,6 +1753,7 @@ class PlayerViewModel: ObservableObject {
                 posterURL: room.posterUrl,
                 participants: [hostParticipant],
                 participantCount: 1,  // Host only at creation
+                maxParticipants: 25,
                 state: .lobby,
                 createdAt: room.createdAt,
                 lastActivity: room.createdAt,
@@ -1896,6 +1949,7 @@ class PlayerViewModel: ObservableObject {
                 posterURL: room.posterUrl,
                 participants: participantList,
                 participantCount: room.participantsCount,  // Use DB-managed count
+                maxParticipants: room.maxParticipants,
                 state: .lobby,
                 createdAt: room.createdAt,
                 lastActivity: room.createdAt,

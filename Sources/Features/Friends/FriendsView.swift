@@ -440,7 +440,8 @@ struct FriendRow: View {
                     Text(friend.username)
                         .font(.headline)
 
-                    if activity?.isPremium == true || friend.isPremium == true {
+                    // Prioritize DB-verified premium status for friends (Check Expiration! Landmine #138)
+                    if friend.isReallyPremium || (activity?.isReallyPremium ?? false) {
                         Text("👑")
                             .font(.system(size: 12))
                             .help("Premium Host")

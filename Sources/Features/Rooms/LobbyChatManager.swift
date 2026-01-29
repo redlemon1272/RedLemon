@@ -73,7 +73,13 @@ class LobbyChatManager: ObservableObject {
         let isPremium = LicenseManager.shared.isPremium
 
         // Add message locally for instant feedback (optimistic UI)
-        addLocalMessage(username: username, text: trimmed, senderId: senderId, isPremium: isPremium)
+        addLocalMessage(
+            username: username,
+            text: trimmed,
+            senderId: senderId,
+            isPremium: isPremium,
+            subscriptionExpiresAt: Date(timeIntervalSince1970: LicenseManager.shared.subscriptionExpiresAt)
+        )
 
         // Construct SyncMessage
         let syncMsg = SyncMessage(
@@ -83,7 +89,8 @@ class LobbyChatManager: ObservableObject {
             senderId: senderId,
             chatText: trimmed,
             chatUsername: username,
-            isPremium: isPremium
+            isPremium: isPremium,
+            subscriptionExpiresAt: LicenseManager.shared.subscriptionExpiresAt
         )
 
         // Delegate actual sending to the owner
@@ -95,7 +102,7 @@ class LobbyChatManager: ObservableObject {
         }
     }
 
-    func handleIncomingChat(chatText: String, senderId: String?, username: String?, timestamp: TimeInterval, currentUserId: String, mutedUserIds: Set<String>, blockedUserIds: Set<String>, isPremium: Bool) {
+    func handleIncomingChat(chatText: String, senderId: String?, username: String?, timestamp: TimeInterval, currentUserId: String, mutedUserIds: Set<String>, blockedUserIds: Set<String>, isPremium: Bool, subscriptionExpiresAt: TimeInterval? = nil) {
         guard let validSenderId = senderId else { return }
 
         // Block check
@@ -117,7 +124,8 @@ class LobbyChatManager: ObservableObject {
             timestamp: Date(timeIntervalSince1970: timestamp),
             isSystem: false,
             senderId: validSenderId,
-            isPremium: isPremium
+            isPremium: isPremium,
+            subscriptionExpiresAt: subscriptionExpiresAt.flatMap { Date(timeIntervalSince1970: $0) }
         )
 
         addChatMessage(chatMessage)
@@ -165,7 +173,7 @@ class LobbyChatManager: ObservableObject {
     }
 
     // Helper to add a local optimistic message
-    public func addLocalMessage(username: String, text: String, senderId: String? = nil, isPremium: Bool = false) {
+    public func addLocalMessage(username: String, text: String, senderId: String? = nil, isPremium: Bool = false, subscriptionExpiresAt: Date? = nil) {
         let msg = ChatMessage(
             id: UUID().uuidString,
             username: username,
@@ -173,7 +181,8 @@ class LobbyChatManager: ObservableObject {
             timestamp: Date(),
             isSystem: false,
             senderId: senderId,
-            isPremium: isPremium
+            isPremium: isPremium,
+            subscriptionExpiresAt: subscriptionExpiresAt
         )
         addChatMessage(msg)
     }

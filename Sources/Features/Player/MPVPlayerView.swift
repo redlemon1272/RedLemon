@@ -185,7 +185,7 @@ struct MPVPlayerView: View {
                     }
 
                     // Player controls (bottom bar)
-                    if showControls && !viewModel.isLoading {
+                    if showControls {
                         PlayerControlsView(
                             viewModel: viewModel,
                             streamQuality: streamQuality,
@@ -205,7 +205,9 @@ struct MPVPlayerView: View {
                     // Extracted menus (Shields, Subtitles, Playlist, Chat Toggle)
                     menus
             }
-            .frame(width: viewModel.showChat ? geometry.size.width * 0.8 : geometry.size.width)
+            .frame(width: viewModel.showChat ? geometry.size.width * 0.8 : geometry.size.width,
+                   height: geometry.size.height,
+                   alignment: .center)
             .clipped() // Fix: Ensure content doesn't overflow when chat is open
 
             // Chat overlay (Pop in/out)
@@ -429,6 +431,18 @@ struct MPVPlayerView: View {
                         if firstResponder is NSTextView || firstResponder is NSTextField {
                             return event // Pass through to text field
                         }
+                    }
+
+                    // 1. Block for all Events (System Hosted)
+                    if appState.player.isEventPlayback {
+                        LoggingManager.shared.debug(.videoRendering, message: "Ignored Spacebar (Event Playback Restricted)")
+                        return nil // Consume event silently
+                    }
+
+                    // 2. Block for Watch Party Guests (Host Only)
+                    if appState.player.currentWatchMode == .watchParty && !appState.player.isWatchPartyHost {
+                        LoggingManager.shared.debug(.videoRendering, message: "Ignored Spacebar (Guest Restricted)")
+                        return nil // Consume event silently
                     }
 
                     viewModel.togglePlayPause()
@@ -709,6 +723,10 @@ struct MPVPlayerView: View {
             LoadingOverlay(streamTitle: "", message: "Closing...")
         } else if viewModel.isLoading {
             let message: String = {
+                if viewModel.isSwitchingTracks || viewModel.isSwitchingTracksRecently {
+                    return "Syncing track..."
+                }
+
                 // Default message
                 var msg = (viewModel.isBuffering && viewModel.mpvWrapper.isFileLoaded) ? "Buffering..." : "Loading stream..."
 
@@ -728,6 +746,8 @@ struct MPVPlayerView: View {
             }()
 
             LoadingOverlay(streamTitle: viewModel.streamTitle, message: message)
+                .transition(.opacity.animation(.easeInOut(duration: 0.3)))
+                .zIndex(140)
         }
 
         // Waiting for guests overlay (Post-Load Ready Gate)
@@ -772,7 +792,7 @@ struct MPVPlayerView: View {
 
 
     private var fullSubtitleMenu: some View {
-        VStack(spacing: 16) {
+        VStack(alignment: .leading, spacing: 16) {
             // Header
             HStack {
                 Text("Subtitle Configuration")
@@ -878,9 +898,7 @@ struct MPVPlayerView: View {
                             // Available tracks (MPVWrapper already provides "Off" when needed)
                             ForEach(viewModel.availableSubtitleTracks, id: \.id) { track in
                                 Button(action: {
-                                    viewModel.mpvWrapper.setSubtitleTrack(track.id) {
-                                        viewModel.updateSubtitleTracks()
-                                    }
+                                    viewModel.selectSubtitleTrack(track.id)
                                 }) {
                                     HStack {
                                         Text(track.displayName)
@@ -1004,12 +1022,14 @@ struct MPVPlayerView: View {
                         Spacer()
                     }
                 }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 12)
             }
-            .padding(.horizontal, 24)
+            .frame(width: 550, alignment: .leading)
 
             // Warning message if sync issues detected
             if viewModel.showSubtitleSyncPanel {
-                HStack {
+                HStack(spacing: 12) {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .foregroundColor(.orange)
                         .font(.system(size: 18))
@@ -1018,19 +1038,22 @@ struct MPVPlayerView: View {
                         .foregroundColor(.primary.opacity(0.9))
                         .font(.system(size: 13))
                         .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     Spacer()
                 }
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 16)
                 .padding(.vertical, 12)
+                .frame(width: 502) // 550 - 48 (horizontal padding)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.orange.opacity(0.15))
                 )
+                .padding(.horizontal, 24)
             }
         }
+        .frame(width: 550)
         .padding(.bottom, 24)
-        .frame(maxWidth: 600)
         .background(.regularMaterial)
         .cornerRadius(16)
         .shadow(radius: 20)
@@ -1061,7 +1084,7 @@ struct MPVPlayerView: View {
     }
 
     private var fullAudioMenu: some View {
-        VStack(spacing: 16) {
+        VStack(alignment: .leading, spacing: 16) {
             // Header
             HStack {
                 Text("Audio Configuration")
@@ -1134,7 +1157,6 @@ struct MPVPlayerView: View {
                         .padding(.horizontal, 8)
                     }
                     .frame(height: 140)
-                    .id(UUID()) // Force redraw if list changes
                 }
                 .padding(.horizontal, 24)
             } else {
@@ -1148,8 +1170,8 @@ struct MPVPlayerView: View {
             // For now, consistent spacing with subtitle menu
             Spacer().frame(height: 10)
         }
+        .frame(width: 450, alignment: .leading)
         .padding(.bottom, 24)
-        .frame(width: 450)
         .background(.regularMaterial)
         .cornerRadius(16)
         .shadow(radius: 20)
@@ -1246,68 +1268,46 @@ struct MPVPlayerView: View {
     private var menuOverlays: some View {
         // Subtitle Menu (Bottom Left)
         if showSubtitleMenu {
-            VStack {
-                Spacer()
-                HStack {
-                    fullSubtitleMenu
-                        .padding(.leading, 50)
-                        .padding(.bottom, 80)
-                    Spacer()
-                }
-            }
-            .transition(.opacity.combined(with: .move(edge: .bottom)))
-            .zIndex(102)
+            fullSubtitleMenu
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                .offset(x: 50, y: -80)
+                .transition(.opacity.combined(with: .move(edge: .bottom)))
+                .zIndex(102)
         }
 
         // Audio Menu (Bottom Left next to subtitle)
         if showAudioMenu {
-            VStack {
-                Spacer()
-                HStack {
-                    fullAudioMenu
-                        .padding(.leading, 100)
-                        .padding(.bottom, 80)
-                    Spacer()
-                }
-            }
-            .transition(.opacity.combined(with: .move(edge: .bottom)))
-            .zIndex(102)
+            fullAudioMenu
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                .offset(x: 100, y: -80)
+                .transition(.opacity.combined(with: .move(edge: .bottom)))
+                .zIndex(102)
         }
 
         // Playlist Menu (Bottom Left)
         if showPlaylistMenu {
-            VStack {
-                Spacer()
-                HStack {
-                    if let room = appState.player.currentWatchPartyRoom {
-                        PlaylistModalView(
-                            room: room,
-                            isHost: appState.player.isWatchPartyHost,
-                            showPlaylistMenu: $showPlaylistMenu
-                        )
-                        .padding(.leading, 150)
-                        .padding(.bottom, 80)
-                    }
-                    Spacer()
+            Group {
+                if let room = appState.player.currentWatchPartyRoom {
+                    PlaylistModalView(
+                        room: room,
+                        isHost: appState.player.isWatchPartyHost,
+                        showPlaylistMenu: $showPlaylistMenu
+                    )
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+            .offset(x: 150, y: -80)
             .transition(.opacity.combined(with: .move(edge: .bottom)))
             .zIndex(102)
         }
 
         // Event List Menu (Bottom Left)
         if showEventListMenu {
-            VStack {
-                Spacer()
-                HStack {
-                    EventListModalView(
-                        showEventListMenu: $showEventListMenu
-                    )
-                    .padding(.leading, 200)
-                    .padding(.bottom, 80)
-                    Spacer()
-                }
-            }
+            EventListModalView(
+                showEventListMenu: $showEventListMenu
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+            .offset(x: 200, y: -80)
             .transition(.opacity.combined(with: .move(edge: .bottom)))
             .zIndex(102)
         }

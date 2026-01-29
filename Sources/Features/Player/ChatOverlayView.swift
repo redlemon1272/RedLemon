@@ -415,7 +415,7 @@ struct ChatOverlayView: View {
                                 userId: message.senderId,
                                 isSystem: message.isSystem,
                                 isHost: false,
-                                isPremium: message.isPremium,
+                                isPremium: message.isReallyPremium,
                                 isSenderHost: false,
                                 timestamp: message.timestamp.toMessageTime(),
                                 currentUserId: appState.currentUserId?.uuidString,
@@ -488,7 +488,7 @@ struct ChatOverlayView: View {
                 userId: message.senderId,
                 isSystem: message.isSystem,
                 isHost: viewModel.isWatchPartyHost,
-                isPremium: message.isPremium,
+                isPremium: message.isReallyPremium,
                 isSenderHost: isSenderHost,
                 timestamp: message.timestamp.toMessageTime(),
                 currentUserId: appState.currentUserId?.uuidString,
@@ -896,7 +896,12 @@ struct ChatOverlayView: View {
                             .cornerRadius(4)
                     }
 
-                    if isPremium {
+                    // Prioritize DB-verified premium status for friends (Check Expiration! Landmine #138)
+                    // We check friends first because they are our "source of truth" locally.
+                    // If not a friend, we use the isPremium flag which was pre-validated as isReallyPremium by the sender/service.
+                    let effectivePremium = friends.first(where: { $0.id.caseInsensitiveCompare(uid) == .orderedSame })?.isReallyPremium ?? isPremium
+
+                    if effectivePremium {
                         Text("👑")
                             .font(.system(size: 10))
                             .help("Premium User")
@@ -1388,8 +1393,9 @@ struct FriendRowButton: View {
                                 .foregroundColor(.white)
                                 .font(.body)
 
-                            // Premium Host Badge
-                            if friend.isPremium == true {
+                            // Premium Host Badge (Prioritize DB-verified status - Landmine #138)
+                            let isPremium = friend.isReallyPremium || (activity?.subscriptionExpiresAt.flatMap({ $0 > Date() }) ?? activity?.isPremium ?? false)
+                            if isPremium {
                                 Text("👑")
                                     .font(.system(size: 12))
                                     .help("Premium Host")

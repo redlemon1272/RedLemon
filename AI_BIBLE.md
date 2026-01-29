@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 28, 2026 (Part 31: Sticky Ghost Protocol)
+> **Last Updated:** January 28, 2026 (Part 32: Seamless Player UI & Transitions)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -59,8 +59,8 @@
 | **Play-Buffer-Play Flash** | Subtitle track changed during playback | #41 |
 | **Host Stuck Buffering (Audio Plays)** | Recovery logic excludes Watch Party Host | #42 |
 | **Crash (Illegal Instruction: 4)** | Double-bootstrap of LoggingSystem | #116 |
-| **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call OR Real-Debrid IP-locked URL | #43, #44 |
-| **Watch Party Guest: Instant EOF** | Real-Debrid server-side cache (magnet hash level) | #44 |
+| **Guest Playback EOF / Wrong Stream** | Optional chaining silently skipped async call OR Real-Debrid IP-locked URL | #43, #44, #141 |
+| **Watch Party Guest: Instant EOF** | Real-Debrid server-side cache (magnet hash level) | #44, #141 |
 | **Server Fail: Torrent not cached** | Heuristic ignored provider fileIdx (Season Pack) | #45 |
 | **Player Start -> Immediate Fail** | Fake 'Direct' URL (Comet Error Stream) | #46 |
 | **Ghost Participant (Lobby)** | User list doesn't update / 'Left' msg missing | #47 |
@@ -86,7 +86,8 @@
 | **Event: Stuck at 0:00 / Black Screen** | Stream validation seeking to 0 (Watch Party logic on Events) | #84 |
 | **Event: Auto-Starts Early (Countdown Bypass)** | Database createdAt (room creation) vs eventStartTime mismatch | #84 |
 | **Event: Infinite Loop (No Auto-Exit)** | EOF handler using wrong time reference (user join vs event start) | #84 |
-| **Guest plays different file than Host** | DebridSearch has nil infoHash; Guest falls to independent resolution | #91 |
+| **Guest plays different file than Host** | DebridSearch has nil infoHash; Guest falls to independent resolution | #91, #141 |
+| **Slow Guest Sync (10-20s Delay)** | Full provider scrape instead of targeted sync | #142 |
 | **"No Valid Streams" (All .iso files)** | Fake torrents block legitimate localized streams | #85 |
 | **Browse Page Slow/Laggy** | All catalogs + images loading simultaneously | #86 |
 | **App Freeze on Watch Party (Browse)** | Sheet dismissal race condition / root unmount | #87 |
@@ -131,6 +132,9 @@
 | **Seek Notification Flood** | Large drift correction triggers spam | #134 |
 | **Scanner Proximity Failure** | Guard too far from trigger | #135 |
 | **Guest Left Immediately** | Call to `sync` runs before `appState` injection | #131 |
+| **Playback "Skip" after Sync** | Overlay cleared before snap-seek finished | #145 |
+| **Stale Premium Crown** | Client trusting DB flag vs Expiration Date | #146 |
+| **Silent Scroll Abandonment** | Users unaware of participants/playlist list | #147 |
 
 ## 🚨 Critical Landmines
 
@@ -570,8 +574,39 @@
     *   **Rule**: **Inject First, Then Act**. Any dependency assignment (like `viewModel.appState = ...`) MUST happen at the very top of the `.task` block OR in the `init` method. Never assume `.onAppear` runs before `.task`.
     *   **Fix**: Moved assignment to top of `.task` in `MPVPlayerView.swift`.
 
-## 🪦 Resolved Landmines (Archived)
-*   ~~#XX: Old Issue~~ - (Example placeholder)
+143. **Deterministic Player Geometry**: *(Added v1.0.165)*
+    *   **Symptom**: The entire player container "jumps" horizontally when toggling chat or when loading overlays appear/disappear.
+    *   **Cause**: SwiftUI's ZStack/HStack alignment logic recalculates the center point of the container when its children change their size or safe area properties.
+    *   **Rule**: **Lock the Frame**. The player container MUST use a fixed `.frame(width:height:)` derived from a `GeometryReader` rather than relying on flexible spacers or automatic sizing. Use `.alignment(.center)` on the frame to anchor content. (Landmine #143).
+    *   **Avoid**: `.ignoresSafeArea()` on full-screen overlays inside the player; it breaks the container's layout boundary.
+
+144. **Visual Continuous-Track Protocol (Smooth Transitions)**: *(Added v1.0.165)*
+    *   **Symptom**: Swapping audio/subtitle tracks causes a brief "frozen and stretched" frame of video while the decoder resets.
+    *   **Cause**: `libmpv` provides the previous frame during decoder re-initialization. If the aspect ratio or window size has shifted, this frame stretches.
+    *   **Rule**: **Hide the Glitch**.
+        1.  Immediately set video `opacity = 0` when track selection begins (`isLoading = true`).
+        2.  Show a high-quality transition overlay (e.g., "Syncing track...").
+        3.  Only reveal video (`opacity = 1`) after `onFileLoaded` or once the synchronization seek has completed.
+
+145. **The "Seek-Shield" Strategy (Hiding Catch-up Jumps)**: *(Added v1.0.165)*
+    *   **Symptom**: Video resumes after a sync, but then "skips" forward shortly after, appearing non-seamless.
+    *   **Cause**: In Events/Watch Parties, the app performs a snap-seek to catch up with the host/clock. If the loading overlay is cleared *before* the seek completes, the user sees the video jump.
+    *   **Rule**: **Finalize Under the Hood**.
+        1.  Trigger the catch-up seek while `isLoading` is still `true`.
+        2.  Use a `finalizeTrackSwitch()` helper that holds `isLoading` for an extra **300-500ms** after the seek is launched.
+        3.  This shields the visual "pop" of the video, making the transition feel perfectly seamless. (Landmine #145).
+
+146. **Authoritative Premium Validation (Trust Time, Not Flags)**: *(Added v1.0.165)*
+    *   **Symptom**: User displays the "Crown Emoji" (👑) even after their subscription has expired.
+    *   **Cause**: Relying on binary boolean flags like `isPremium` which are prone to stale caches.
+    *   **Rule**: **Timestamp Authority**. Always validate specific expiration dates (e.g., `Friend.isReallyPremium` helper checking `expires_at > Now`). (Landmine #146).
+
+147. **The "Interference-Free" Scroll Hint Pattern**: *(Added v1.0.165)*
+    *   **Symptom**: Users don't realize a view is scrollable, but adding a banner blocks interaction or feels cluttered.
+    *   **Rule**: **Smart Discovery**.
+        1. Use a pulsing chevron + text overlay.
+        2. Set `.allowsHitTesting(false)` on the overlay so it doesn't hijack scroll/click gestures.
+        3. Use a `.simultaneousGesture(DragGesture())` on the ScrollView to dissolve the tip instantly upon interaction. (Landmine #147).
 
 ## 🏗️ Architecture Map
 | Component | Responsibility |
@@ -772,6 +807,7 @@ Non-custodial, multi-chain crypto payment gateway using HD Wallet architecture.
 **Critical:** `LicenseManager.refreshSubscription()` relies on a **HYBRID** check:
 1.  **Edge Function** (`check-payment`): Detects *new* incoming crypto transactions.
 2.  **Database Profile** (`users.subscription_expires_at`): Persists valid subscriptions and Admin Grants.
+3.  **Client-Side Validation** (`LobbyPresenceManager`): **Rule**: Always validate specific expiration dates (`expires_at > Now`). Do NOT trust `is_premium` booleans from the database blindly, as they may be stale due to background job latency. Trust Time, Not Flags.
 **Rule:** Always check BOTH. The latest date wins. Never rely solely on the edge function, or Admin Grants will be ignored.
 
 ## Payment Stacking & Prestige (Prestige Emojis)
@@ -1265,6 +1301,7 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 2. **Initialization**: `SPUStandardUpdaterController` MUST use `startingUpdater: true`.
 3. **Forcing**: Use `sparkle:criticalUpdate="true"` for mandatory fixes.
 4. **Key Verification**: Agents MUST verify presence of Private Sparkle Key in Keychain (`./.build/artifacts/sparkle/bin/sign_update` check) BEFORE starting build.
+5. **Identity Firewall**: The `sync-to-public.sh` script MUST enforce the `redlemon1272` identity. Never manually commit to the public repo; let the script handle the "masking" to prevent private email leaks.
 
 ## Release Protocol (The "Satellite-First" Standard)
 **Mandatory 10-Step Sequence for AI Assistants:**
@@ -1282,6 +1319,7 @@ When showing "Join Friend" buttons, `validateRoomJoinability()` checks if the ro
 9.  **Merge & Tag**: (Turbo-ready) Run `./scripts/merge-and-tag.sh v<VERSION>`.
     - *Action*: This merges your feature/release branch into `main`, tags it, and pushes both.
 10. **Public Mirroring**: Run `./scripts/sync-to-public.sh` and push to the public repository.
+    - *Protection*: This script automatically enforces the `redlemon1272` identity for the public history.
 
 ## Anti-Regression Shield (Advisory)
 To prevent reintroducing known bugs ("Landmines"), run the architecture scanner during development:
@@ -2008,9 +2046,9 @@ If you are asked to "Release" or "Sync to Public", run these commands in this EX
 3.  `swift build` (Ensure the project compiles successfully)
 4.  `./scripts/release.sh "[v]" "[b]" "[notes]"` (Build & Deploy Internal)
 5.  `./scripts/sync-to-public.sh` (Scrub & Prepare Public Mirror)
-6.  **Public Repo Sync**: (Upload files or push to `redlemon1272/RedLemon`)
+6.  `./scripts/sync-to-public.sh` (Scrub & Prepare Public Mirror)
 7.  `./scripts/merge-and-tag.sh "v[v]"` (Merge to main and Tag)
-8.  **GitHub Release**: Go to GitHub, select tag `v[v]`, and **UPLOAD** the `.dmg`.
+8.  `./scripts/github-release.sh "v[v]" "RedLemon-Installer.dmg" "[notes]"` (Final Artifact Upload)
 
 ### 🤖 Terminology & Intent (Command Word Safety)
 To prevent accidental public deployments, strict keywords are enforced:
@@ -2036,48 +2074,16 @@ Execute the release script in the private repository. This builds the full app (
 ```
 *   **Result**: RedLemon is live on the Sparkle update channel for existing users.
 
-### 19.4 Final Step: The GitHub Release (Manual)
-**AFTER** the merge and tag is complete (Step 7), you MUST verify the artifact availability:
-1.  Go to `https://github.com/orangeapple1272/RedLemon/releases`
-2.  Select the new tag `v[VERSION]`.
-3.  Click "Draft a new release" (or Edit).
-4.  **Upload the DMG**: Located at `RedLemon-Installer.dmg`. This is CRITICAL for new users.
-
-### 19.3 Step 2: The Scrubber Protocol (Sync to Public)
-Once the internal release is verified, sync the "shell" of the app to the public repository.
-### 19.3 Automated Deployment
-For a one-click release to the public repository, use the master deployment script:
+### 19.4 Step 4: The Public Distribution (GitHub Release)
+**Mandatory Enforcement**: Once the tag is pushed and the public repo is synced, you MUST instantiate the GitHub Release object. This is no longer optional or manual.
 ```bash
-export GH_PAT="your_github_token"
-./scripts/public-deploy.sh
+# Automated release and DMG upload
+export GH_PAT="[BIBLE_PAT]"
+./scripts/github-release.sh "v[VERSION]" "RedLemon-Installer.dmg" "### Release Notes\n* [Notes]"
 ```
-This script automates:
-1.  **Sanitization**: Runs `sync-to-public.sh`.
-2.  **Authentication**: Injects the GH_PAT into the public repo remote.
-3.  **Synchronization**: Force-pushes the sanitized state to GitHub.
-*   **Logic (Default Deny)**: Only files in the `SAFE_FILES` whitelist are copied.
-*   **Stubs**: Secret ViewModels/Services are replaced with logic-free stubs.
-*   **Sanitization**: All production IPs are replaced with placeholders.
-*   **Credential Scrubbing**: All Supabase/JWT keys (`eyJhbGciOi...`) are replaced with `SUPABASE_ANON_KEY_PLACEHOLDER`.
-*   **Safety Interlocks**: The script MUST abort if it detects patterns like `sk_live`, `Bearer`, `eyJhbGciOi`, or the production IP.
-
-### 19.4 Step 3: The Git Ceremony
-Complete the release across both repositories.
-1.  **Private Repo**:
-    ```bash
-    git add . && git commit -m "Release v[VERSION]" && git push origin [BRANCH]
-    ./scripts/merge-and-tag.sh v[VERSION]
-    ```
-2.  **Public Repo (Automated)**:
-    Follow **Section 19.3** or **19.8**. Running `./scripts/public-deploy.sh` completely replaces the need for manual Git commands in the `RedLemon-Public` folder.
-
-### 19.5 Step 4: GitHub Release (The Trust Anchor)
-1.  Draft a new release on `redlemon1272/RedLemon`.
-2.  **Upload Binary**: Attach the `RedLemon-v[VERSION].dmg` to the release.
-3.  **Trust Verification**:
+*   **Trust Verification**:
     - The public `install.sh` points to `https://github.com/redlemon1272/RedLemon/releases/latest/download/RedLemon.dmg`.
     - This ensures users are downloading the EXACT binary you uploaded to GitHub, verified by GitHub's SSL.
-    - Zero reliance on the private server IP for distribution.
 
 ### 19.6 Operational Security (OpSec)
 When drafting release notes or public documentation:
@@ -2095,7 +2101,16 @@ To keep development seamless while maintaining the public mirror:
 4.  **Issue Triage**: Bug reports from the public repo should be converted into tasks in the private repo.
 5.  **New Files**: Whenever a new `.swift` file is added to the UI, you MUST add its path to the `SAFE_FILES` whitelist in the sync script or it will not appear in the public repo.
 
-### 19.8 Public Repo Automation & Credentials
+### 19.8 The Conflict Deadlock Interlock (Hard Protocol)
+**Mandatory Enforcement for AI Assistants**:
+1.  **Stop Condition**: If `./scripts/merge-and-tag.sh` or any command in the release sequence fails with a code (e.g., Git Conflict), you **MUST STOP IMMEDIATELY**.
+2.  **No Surgical Repairs**: Performing `replace_file_content` or any manual line-edits to resolve conflicts during a release state is **STRICTLY FORBIDDEN**.
+3.  **Rationale**: A release is a "Perfect State" build. Manual edits introduced by an AI during a merge are not subject to the full review cycle and can bypass the "Satellite-First" integrity checks.
+4.  **Action**: Report the conflict to the USER. Provide the `git status` output and wait for the USER to manually resolve the conflict or authorize a specifically named resolution.
+
+---
+
+### 19.9 Public Repo Automation & Credentials
 To manage the `redlemon1272/RedLemon` public repository, use the automated deployment system.
 
 **Credential (GH_PAT)**:
@@ -2129,6 +2144,8 @@ The `public-deploy.sh` script (invoking `sync-to-public.sh`) is the **ONLY** way
 *   Replacement of private hero links with local `Resources/` links.
 
 ---
+
+
 
 ## Part 30: Resource & Asset Management Protocol
 
@@ -2247,3 +2264,35 @@ request.cachePolicy = .reloadIgnoringLocalCacheData
 1. **Activity Confirmation**: The protection flag (`transitioningUserIds`) MUST be cleared immediately upon receiving *any* valid Realtime message (Chat, Ready, Playback, or Reaction) from the user.
 2. **Dynamic Shield**: Do not rely on time alone. Use the first proof-of-life signal to drop the shield.
 3. **Log Visibility**: Log "Removing transition protection" when the shield drops to confirm correct behavior.
+
+### 11. The Real-Debrid Guest IP-Lock Trap (Landmine #141)
+**Symptom**: Watch Party guests experience instantaneous "EOF" or "Premature End of File" upon starting playback, while the host plays perfectly.
+**Root Cause**: **Inter-IP Magnet Pollution**. Real-Debrid generates stream URLs based on the IP address that first "unlocks" or "links" the magnet. If the Host's URL is shared, it fails for guests (Direct IP-Lock). Furthermore, even if the guest resolves the same hash, if the debrid service has the magnet "cached" for the host's IP, it may serve a poisoned link or a 403.
+**Mandatory Solution**:
+1. **Cache Purge**: Guests MUST call `RealDebridClient.shared.clearCache(forHash:)` before resolving/unlocking. This forces the debrid service to purge any previous session state for that magnet.
+2. **Force Fresh**: Use `forceFresh: true` (or equivalent) in the `unlock` call to ensure a new link is generated specifically for the guest's IP.
+3. **Title Fallback**: If the `infoHash` is stable but resolution fails, guests MUST fall back to matching the Host's `selectedStreamTitle` against all available provider results using `Stream.normalizeTitle()`.
+
+### 12. Targeted Provider Synchronization (Landmine #142)
+**Symptom**: Watch Party synchronization takes 10-20 seconds for guests while "Resolving Streams", causing them to miss the start of the movie.
+**Root Cause**: **Exhaustive Scrapping**. Guests were performing a full scrape of all 15+ providers to find a matching stream. This is redundant if the Host has already identified a working source.
+**Mandatory Solution**:
+1. **Handshake Enrichment**: The `LOBBY_PREPARE_PLAYBACK` signal MUST include the `provider` name (e.g., `Torrentio`, `DebridSearch`).
+2. **Targeted Fetching**: Guests MUST pass the `preferredProvider` to `ProviderManager.shared.fetchStreams(providerNames: [...])`. This reduces API traffic to a single request, cutting sync time to **<2 seconds**.
+3. **Protocol Consistency**: The `StreamResolving` protocol MUST include `preferredProvider` to ensure this optimization is propagated through the `PlayerViewModel` and emergency resolution loops.
+
+### 13. The Stale Premium Flag Trap (Landmine #146)
+**Symptom**: A user who recently canceled their subscription or had it expire still displays the "Crown Emoji" (👑) in chat or the lobby, even after a restart or re-join.
+**Root Cause**: **Flag-Based Invalidation Failure**. Relying on binary boolean flags like `isPremium` is dangerous because flags often persist in local caches (AppState, LicenseManager, Presence Metadata) after the underlying subscription has expired. 
+**Mandatory Solution**:
+1. **Timestamp Authority**: The `subscriptionExpiresAt` timestamp is the ONLY source of truth.
+2. **Dynamic Validation**: Use the `isReallyPremium` computed property (available on `Friend`, `Participant`, and `ChatMessage`) which performs a real-time comparison: `expiryDate > Date()`.
+3. **Metadata Synchronization**: Presence metadata and `SyncMessage` MUST include `subscription_expires_at` (TimeInterval) so that other participants can perform their own local validation.
+4. **UI Pattern**: UI components MUST check `isReallyPremium` rather than `isPremium`.
+
+```swift
+// ✅ CORRECT: Verify timestamp, don't trust the flag
+if participant.isReallyPremium {
+    Text("👑")
+}
+```

@@ -76,8 +76,8 @@ struct MediaDetailView: View {
                                         image
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(maxWidth: min(geometry.size.width * 0.7, 700), maxHeight: 150)
-                                            .shadow(color: .black.opacity(0.8), radius: 20, x: 0, y: 10)
+                                            .frame(maxWidth: min(geometry.size.width * 0.8, 850), maxHeight: 220)
+                                            .shadow(color: .black.opacity(0.8), radius: 30, x: 0, y: 15)
                                     default:
                                         Text(mediaItem.name)
                                             .font(.system(size: 56, weight: .bold))
@@ -107,7 +107,7 @@ struct MediaDetailView: View {
                                     Image(systemName: "star.fill")
                                         .foregroundColor(.yellow)
                                     Text(String(format: "%.1f", imdbRating))
-                                        .font(.title2.weight(.medium))
+                                        .font(.system(size: 28, weight: .bold))
                                         .foregroundColor(.white.opacity(0.9))
                                 }
                             }
@@ -123,13 +123,14 @@ struct MediaDetailView: View {
                         // Synopsis
                         if let description = metadata?.description {
                             Text(description)
-                                .font(.title3)
+                                .font(.title2)
+                                .lineSpacing(6)
                                 .foregroundColor(.white.opacity(0.85))
                                 .multilineTextAlignment(.center)
-                                .lineLimit(6)
-                                .frame(maxWidth: min(geometry.size.width * 0.8, 900))
+                                .lineLimit(10)
+                                .frame(maxWidth: min(geometry.size.width * 0.85, 1100))
                                 .padding(.horizontal, max(30, geometry.size.width * 0.05))
-                                .padding(.top, 24)
+                                .padding(.top, 40)
                         } else if isLoading {
                              // Minimal placeholder to maintain layout
                              Color.clear.frame(height: 100)
@@ -276,7 +277,7 @@ struct MediaDetailView: View {
                                     }
                                 }
                                 .foregroundColor(.white)
-                                .frame(width: min(max(240, geometry.size.width * 0.3), 350), height: 56)
+                                .frame(width: min(max(300, geometry.size.width * 0.4), 450), height: 72)
                                 .background(
                                     LinearGradient(
                                         colors: [Color.blue, Color.blue.opacity(0.8)],
@@ -284,8 +285,8 @@ struct MediaDetailView: View {
                                         endPoint: .trailing
                                     )
                                 )
-                                .cornerRadius(12)
-                                .shadow(color: .blue.opacity(0.5), radius: 20, x: 0, y: 10)
+                                .cornerRadius(16)
+                                .shadow(color: .blue.opacity(0.5), radius: 25, x: 0, y: 12)
                             }
                             .buttonStyle(.plain)
 
@@ -301,23 +302,23 @@ struct MediaDetailView: View {
                                     )
                                 }
                             }) {
-                                HStack(spacing: 10) {
+                                HStack(spacing: 12) {
                                     Image(systemName: libraryManager.contains(mediaItem.id) ? "checkmark.circle.fill" : "plus.circle")
-                                        .font(.system(size: 20, weight: .bold))
+                                        .font(.system(size: 22, weight: .bold))
                                     Text(libraryManager.contains(mediaItem.id) ? "In Your Library" : "Add to Library")
-                                        .font(.system(size: 15, weight: .bold))
+                                        .font(.system(size: 18, weight: .bold))
                                 }
                                 .foregroundColor(.white)
-                                .frame(width: min(max(240, geometry.size.width * 0.3), 350), height: 56)
+                                .frame(width: min(max(300, geometry.size.width * 0.4), 450), height: 72)
                                 .background(
                                     libraryManager.contains(mediaItem.id)
                                     ? Color.green.opacity(0.8)
-                                    : Color.white.opacity(0.15)
+                                    : Color.white.opacity(0.12)
                                 )
-                                .cornerRadius(12)
+                                .cornerRadius(16)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(Color.white.opacity(0.3), lineWidth: 1.5)
                                 )
                             }
                             .buttonStyle(.plain)

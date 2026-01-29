@@ -187,6 +187,7 @@ class LobbyViewModel: ObservableObject {
                 isHost: p.isHost,
                 isReady: p.isReady,
                 isPremium: p.isPremium,
+                subscriptionExpiresAt: nil, // Will be updated via presence/DB
                 joinedAt: p.joinedAt,
                 phxRefs: []
             )
@@ -357,6 +358,7 @@ class LobbyViewModel: ObservableObject {
                     userId: participantId,
                     username: appState?.currentUsername ?? "User",
                     isPremium: LicenseManager.shared.isPremium,
+                    subscriptionExpiresAt: LicenseManager.shared.subscriptionExpiresAt,
                     postgresChanges: roomUpdatesConfig
                 )
 
@@ -680,7 +682,8 @@ class LobbyViewModel: ObservableObject {
                              isPlaying: nil,
                              senderId: self.participantId,
                              chatText: "LOBBY_JOIN",
-                             chatUsername: guestName
+                             chatUsername: guestName,
+                             subscriptionExpiresAt: LicenseManager.shared.subscriptionExpiresAt
                          )
                          if let manager = realtimeManager {
                              try? await manager.sendSyncMessage(joinMsg)
@@ -1157,9 +1160,11 @@ class LobbyViewModel: ObservableObject {
         if !guests.isEmpty && room.type == .userRoom { // Only for user rooms, maintain fast start for events
              NSLog("⏳ Host: Initiating handshake for %d guests...", guests.count)
 
-             // 1. Send PREPARE signal (with Hash/FileIdx payload)
-             // Payload format: LOBBY_PREPARE_PLAYBACK|<Hash>|<FileIdx>
-             let payload = "LOBBY_PREPARE_PLAYBACK|\(preResolvedStream?.infoHash ?? "")|\(preResolvedStream?.fileIdx ?? 0)"
+             // 1. Send PREPARE signal (with rich metadata fallback)
+             // Payload format: LOBBY_PREPARE_PLAYBACK|<Hash>|<FileIdx>|<Title>|<Quality>|<Size>|<Provider>
+             let payload = "LOBBY_PREPARE_PLAYBACK|\(preResolvedStream?.infoHash ?? "")|\(preResolvedStream?.fileIdx ?? 0)|\(preResolvedStream?.title ?? "")|\(preResolvedStream?.quality ?? "")|\(preResolvedStream?.size ?? "")|\(preResolvedStream?.provider ?? "")"
+
+             NSLog("🎬 Host: Broadcasting PREPARE signal: %@", payload)
 
              Task { [weak self] in
                  guard let self = self else { return }

@@ -18,7 +18,7 @@ RedLemon is a next-generation streaming client built for macOS. It aggregates co
 
 ## 🛡️ Hybrid Open Source Model
 
-**Current Version:** v1.0.164 (build 164)
+**Current Version:** v1.0.165 (build 165)
 
 RedLemon is built on a **Hybrid Open Source** model. We believe in transparency without compromising the operational security of our networks.
 

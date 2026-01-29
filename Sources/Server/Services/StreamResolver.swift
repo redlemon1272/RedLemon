@@ -29,6 +29,8 @@ actor StreamResolver {
         excludedSizes: Set<String> = [],
         ignoreVerified: Bool = false,
         preferredHash: String? = nil,
+        preferredTitle: String? = nil,
+        preferredProvider: String? = nil,
         triggerSource: String = "manual"
     ) async throws -> QualityBucketsResponse {
         // MARK: - Kitsu → IMDB Resolution
@@ -167,11 +169,13 @@ actor StreamResolver {
 
         // Fetch streams if not verified
         NSLog("📦 StreamResolver: Fetching streams from ProviderManager...")
+        let providersToUse = preferredProvider.map { [$0] }
         let streams = try await ProviderManager.shared.fetchStreams(
             imdbId: effectiveId,
             type: type,
             season: season,
-            episode: episode
+            episode: episode,
+            providerNames: providersToUse
         )
 
         // OPTIMIZATION: If preferredHash is set (Sync Mode), filter immediately to avoid processing/subtitling 100+ streams
@@ -183,6 +187,15 @@ actor StreamResolver {
                 rawStreams = [match]
             } else {
                 print("   ⚠️ Target hash not found in provider results. Falling back to full resolution.")
+            }
+        } else if let targetTitle = preferredTitle, !targetTitle.isEmpty {
+            // New fallback optimization for hashless streams (v1.0.84)
+            print("⚡️ StreamResolver: Optimizing for preferred title: \(targetTitle)")
+            // Perform loose match (normalization)
+            let normalizedTarget = Stream.normalizeTitle(targetTitle)
+            if let match = streams.first(where: { Stream.normalizeTitle($0.title) == normalizedTarget }) {
+                 print("   ✅ Found target title match immediately. Discarding everything else.")
+                 rawStreams = [match]
             }
         }
 

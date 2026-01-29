@@ -34,7 +34,15 @@ git pull origin $TARGET_BRANCH
 
 # Merge
 echo "🔀 Merging $BRANCH_TO_MERGE into $TARGET_BRANCH..."
-git merge $BRANCH_TO_MERGE --no-edit
+if ! git merge $BRANCH_TO_MERGE --no-edit; then
+    echo "--------------------------------------------------------"
+    echo "❌ CRITICAL ERROR: MERGE CONFLICT DETECTED"
+    echo "⚠️  AI ASSISTANT WARNING: Bible Rule 19.8 enforced."
+    echo "🛑 STOP IMMEDIATELY. DO NOT attempt to resolve conflict markers."
+    echo "🛑 Manual USER intervention required."
+    echo "--------------------------------------------------------"
+    exit 1
+fi
 
 # Tag
 echo "🏷️ Tagging $VERSION..."

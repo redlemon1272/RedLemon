@@ -12,6 +12,7 @@
 | **Zero KB Disk Usage** | Deno Edge Function limitation. | **Landmine #97**: Don't use `df` command. |
 | **UI Freeze on Menu Open** | Native Menu blocking main thread. | **Landmine #57**: Use SwiftUI Overlay instead. |
 | **Scroll Stutter on macOS 15** | Scroll event swallowing. | **Landmine #49**: Subclass NSScrollView. |
+| **Crown Emoji (👑) won't go away** | Relying on stale boolean flags. | **Landmine #143**: Use `isReallyPremium` (Time-based). |
 
 ## 🛠 Usage
 1. Match the symptom to the table above.

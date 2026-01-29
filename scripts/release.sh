@@ -53,7 +53,57 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo -e "${GREEN}✅ All Systems Green. Proceeding to Release.${NC}"
+# D. GitHub Authentication Check
+if [ -z "$GH_PAT" ]; then
+    echo -e "${RED}❌ ERROR: GH_PAT environment variable not set.${NC}"
+    echo "GitHub Release automation requires a PAT. Please export GH_PAT=\"...\""
+    exit 1
+fi
+
+# E. Pre-Merge Conflict Check (Seamlessness Interlock)
+echo -e "${YELLOW}   Checking for potential merge conflicts with 'main'...${NC}"
+git fetch origin main:main || true
+if ! git merge-tree $(git merge-base HEAD main) main HEAD > /dev/null; then
+     echo -e "${RED}❌ CRITICAL ERROR: Merge conflict with 'main' detected!${NC}"
+     echo -e "${YELLOW}   You MUST resolve conflicts manually before starting a release.${NC}"
+     echo "   Run: git merge main"
+     exit 1
+fi
+echo -e "${GREEN}   ✅ No conflicts with 'main' detected.${NC}"
+
+# F. Tag Collision Check
+echo -e "${YELLOW}   Checking for Tag Collision ($VERSION)...${NC}"
+if git ls-remote --tags origin | grep -q "refs/tags/$VERSION$"; then
+    echo -e "${RED}❌ ERROR: Tag $VERSION already exists on origin!${NC}"
+    echo "You must increment the version before releasing."
+    exit 1
+fi
+echo -e "${GREEN}   ✅ Version $VERSION is available.${NC}"
+
+# G. Schema Integrity Check
+./scripts/verify-schema.sh
+
+echo -e "${GREEN}✅ All Systems Green. Proceeding to Golden Release Flow.${NC}"
+
+# --- ATOMIC ROLLBACK CONFIGURATION ---
+function cleanup_on_failure {
+    echo -e "\n${RED}💣 CRITICAL FAILURE DETECTED! Initiating Atomic Rollback...${NC}"
+    
+    # 1. Revert local git commit if made (Step 7)
+    if [ "$(git log -1 --pretty=%B)" == "chore: release artifacts v${VERSION} (build ${BUILD_NUMBER})" ]; then
+        echo -e "${YELLOW}   ⏪ Reverting local artifacts commit...${NC}"
+        git reset --soft HEAD~1
+        git restore --staged build-app-debug.sh README.md appcast.xml
+    fi
+
+    # 2. Cleanup partial server files if possible (OpSec)
+    echo -e "${YELLOW}   🗑️  Cleaning up partial artifacts...${NC}"
+    rm -f new_item.xml
+    
+    echo -e "${RED}❌ Rollback Complete. The repository and server are in a safe (pre-release) state.${NC}"
+}
+trap cleanup_on_failure ERR
+# ------------------------------------
 
 # 0. Safety Check: Verify Version Increment
 CURRENT_BUILD=$(grep "Current Version:\*\*" README.md | sed -E 's/.*build ([0-9]+).*/\1/')
@@ -63,14 +113,14 @@ if [ ! -z "$CURRENT_BUILD" ] && [ "$BUILD_NUMBER" -le "$CURRENT_BUILD" ]; then
     exit 1
 fi
 
-RELEASE_NOTES=$3
-if [ -z "$RELEASE_NOTES" ]; then
-    RELEASE_NOTES="<li>Production Release v${VERSION}</li>"
+RAW_RELEASE_NOTES=$3
+if [ -z "$RAW_RELEASE_NOTES" ]; then
+    RAW_RELEASE_NOTES="<li>Production Release v${VERSION}</li>"
 fi
 
 # 🛡️ OpSec: Scrub "Landmine #" mentions from release notes for public consumption
 # Robustly removes "(Landmine #123)", "Landmine #123", or " (Landmine #123)"
-RELEASE_NOTES=$(echo "$RELEASE_NOTES" | sed -E 's/[[:space:]]*\(?Landmine #[0-9]+\)?//g')
+RELEASE_NOTES=$(echo "$RAW_RELEASE_NOTES" | sed -E 's/[[:space:]]*\(?Landmine #[0-9]+\)?//g')
 
 echo -e "${BLUE}🚀 Starting Release Flow for v${VERSION} (${BUILD_NUMBER})...${NC}"
 
@@ -91,7 +141,7 @@ echo -e "${YELLOW}🔨 Building App (Headless)...${NC}"
 echo -e "${YELLOW}📦 Packaging DMG...${NC}"
 ./build-dmg.sh
 
-# 4. Sign Update
+# 4. Sign & Audit
 DMG_PATH="RedLemon-Installer.dmg"
 SIGN_TOOL="./.build/artifacts/sparkle/bin/sign_update"
 
@@ -113,6 +163,15 @@ if [ -z "$SIGNATURE" ]; then
     echo -e "${RED}❌ Failed to sign update. Make sure the private key is in your Keychain.${NC}"
     exit 1
 fi
+
+# --- GOLDEN AUDIT: Signature Verification ---
+echo -e "${YELLOW}🔍 Auditing Signature Integrity...${NC}"
+# Mount DMG to check the internal .app
+hdiutil attach "$DMG_PATH" -mountpoint ./tmp_mount -quiet
+codesign --verify --deep --strict --verbose=2 ./tmp_mount/RedLemon.app
+hdiutil detach ./tmp_mount -quiet
+echo -e "${GREEN}✅ Signature Audit Passed.${NC}"
+# --------------------------------------------
 
 DMG_SIZE=$(stat -f%z "$DMG_PATH")
 DATE=$(date +"%a, %d %b %Y %H:%M:%S %z")
@@ -165,26 +224,31 @@ echo -e "${YELLOW}🔗 Updating 'latest' symlink on server...${NC}"
 ./remote_exec.sh "cd /root/updates && ln -sf RedLemon-v${VERSION}.dmg RedLemon-latest.dmg"
 
 echo ""
-echo -e "${GREEN}✅ Release v${VERSION} (${BUILD_NUMBER}) Deployed Successfully!${NC}"
+echo -e "${GREEN}✅ Internal Deployment Successful!${NC}"
+
+# 7. Automated Code Ceremony
+echo -e "${BLUE}📦 Committing Release Artifacts...${NC}"
+git add build-app-debug.sh README.md appcast.xml RedLemon-Installer.sha256
+git commit -m "chore: release artifacts v${VERSION} (build ${BUILD_NUMBER})"
+
+# 8. Automated Public Sync
+echo -e "${BLUE}🛡️  Syncing Public Mirror...${NC}"
+./scripts/public-deploy.sh
+
+# 9. Automated Merge & Tag
+echo -e "${BLUE}🔗 Finalizing Git Ceremony (Merge & Tag)...${NC}"
+./scripts/merge-and-tag.sh "v${VERSION}"
+
+# 10. Automated GitHub Release Asset Upload
+echo -e "${BLUE}📡 Creating GitHub Release & Uploading DMG...${NC}"
+./scripts/github-release.sh "v${VERSION}" "$DMG_PATH" "### Release Notes\n<ul>${RELEASE_NOTES}</ul>"
+
+# DISABLE TRAP: Release is successful
+trap - ERR
+
+echo ""
+echo -e "${GREEN}🏆 GOLDEN STANDARD RELEASE COMPLETE: v${VERSION} (${BUILD_NUMBER})${NC}"
 echo "---------------------------------------------------"
 echo "Public Update URL: https://151.243.109.243.nip.io/updates/appcast.xml"
-echo "Latest Download URL: https://151.243.109.243.nip.io/updates/RedLemon-latest.dmg"
+echo "GitHub Release:    https://github.com/redlemon1272/RedLemon/releases/tag/v${VERSION}"
 echo "---------------------------------------------------"
-echo "Next steps:"
-echo "1. Commit and push appcast.xml to GitHub (for backup)"
-echo "2. Create GitHub Release v${VERSION} manually (optional)"
-echo "---------------------------------------------------"
-
-# 7. Automated Merge & Tag (Chain of Custody)
-echo ""
-echo -e "${BLUE}🔗 Initiating Merge & Tag Protocol...${NC}"
-read -p "Do you want to automatically merge and tag v${VERSION} now? (y/n) " -n 1 -r
-echo ""
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    ./scripts/merge-and-tag.sh "v${VERSION}"
-else
-    echo -e "${YELLOW}⚠️  Skipping Merge & Tag. Don't forget to run it manually!${NC}"
-    echo "   ./scripts/merge-and-tag.sh v${VERSION}"
-fi
-
-echo -e "${GREEN}✅ Release Sequence Complete.${NC}"

@@ -261,5 +261,16 @@ if find "$PUBLIC_REPO_ROOT" -name "*AI_BIBLE*" | grep -q .; then
     exit 1
 fi
 
+# 7. Identity Enforcement (The Mask)
+echo -e "${BLUE}🎭 Enforcing Public Identity...${NC}"
+if [ -d "$PUBLIC_REPO_ROOT/.git" ]; then
+    (
+        cd "$PUBLIC_REPO_ROOT"
+        git config user.name "redlemon1272"
+        git config user.email "redlemon1272@users.noreply.github.com"
+        echo -e "   ✅ Identity set to: redlemon1272 <redlemon1272@users.noreply.github.com>"
+    )
+fi
+
 echo -e "${GREEN}✅ Synchronization Complete!${NC}"
 echo "Next: cd ../RedLemon-Public && git add . && git commit -m 'Sync v1.0.X'"

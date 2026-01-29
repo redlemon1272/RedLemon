@@ -11,7 +11,7 @@ struct QualitySelectionView: View {
     @State private var isPublicRoom: Bool = true
     @State private var showPremiumSheet: Bool = false
     @ObservedObject private var licenseManager = LicenseManager.shared
-    
+
     @State private var metadata: MediaMetadata?
     @State private var isLoading = true
 
@@ -67,8 +67,9 @@ struct QualitySelectionView: View {
                     }
                     .background(Color.clear) // Transparent background for toolbar
 
-                    // Content - No ScrollView, everything fits
-                    VStack(spacing: 0) {
+                    // Content - Using ScrollView to prevent compression of logo art
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 0) {
                         // Header
                         VStack(spacing: 8) {
                             // Try to use fetched metadata logo first, then fall back to passed mediaItem logo, then text
@@ -81,8 +82,8 @@ struct QualitySelectionView: View {
                                         image
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(maxHeight: 120) 
-                                            .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
+                                            .frame(maxWidth: min(geometry.size.width * 0.8, 850), maxHeight: 220)
+                                            .shadow(color: .black.opacity(0.8), radius: 30, x: 0, y: 15)
                                     default:
                                         // While loading OR on failure, show title text to avoid empty space/flash
                                         Text(mediaItem.name)
@@ -99,37 +100,29 @@ struct QualitySelectionView: View {
                                     .foregroundColor(.white)
                             }
 
-                            if let year = mediaItem.year {
-                                Text(year)
-                                    .font(.subheadline)
-                                    .foregroundColor(.white.opacity(0.7))
-                            }
-                        }
-                        .padding(.top, 20)
 
-                        Spacer()
+                        }
+                        .padding(.top, 40) // Balanced padding for big logo
 
                         // Main content - Centered Watch Mode
                         VStack(alignment: .center, spacing: 24) {
                             // Watch Mode Selection
                             VStack(alignment: .center, spacing: 16) {
-                                Text("Watch Mode")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
 
-                                HStack(spacing: 24) {
+
+                                HStack(spacing: 40) {
                                     Button(action: {
                                         watchMode = .solo
                                     }) {
                                         WatchModeButton(
                                             title: "Watch Solo",
                                             icon: "person.fill",
-                                            description: "Private room",
+                                            description: "Private cinematic experience",
                                             isSelected: watchMode == .solo
                                         )
                                     }
                                     .buttonStyle(.plain)
-                                    .frame(width: 180, height: 120)
+                                    .frame(width: 280, height: 320)
 
                                     Button(action: {
                                         watchMode = .watchParty
@@ -137,12 +130,12 @@ struct QualitySelectionView: View {
                                         WatchModeButton(
                                             title: "Watch Party",
                                             icon: "person.3.fill",
-                                            description: "Invite friends",
+                                            description: "Invite friends and sync playback",
                                             isSelected: watchMode == .watchParty
                                         )
                                     }
                                     .buttonStyle(.plain)
-                                    .frame(width: 180, height: 120)
+                                    .frame(width: 280, height: 320)
                                 }
 
                                 // Free user warning when Watch Party is selected
@@ -242,8 +235,8 @@ struct QualitySelectionView: View {
                             }
                         }
                         .padding(.horizontal, 40)
-
-                        Spacer()
+                        .padding(.top, 40)
+                        .padding(.bottom, 20)
 
                         // Action Buttons - Use white text and transparent backgrounds for harmony
                         VStack(spacing: 12) {
@@ -260,11 +253,12 @@ struct QualitySelectionView: View {
                                         Text(watchMode == .watchParty ? "Create Room" : "Start Watching")
                                             .font(.body.weight(.semibold))
                                     }
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 14)
+                                    .frame(maxWidth: 600)
+                                    .padding(.vertical, 20)
                                     .background(Color.accentColor)
                                     .foregroundColor(.white)
-                                    .cornerRadius(10)
+                                    .cornerRadius(16)
+                                    .shadow(color: .accentColor.opacity(0.4), radius: 20, x: 0, y: 10)
                                 }
                                 .buttonStyle(.plain)
 
@@ -278,13 +272,13 @@ struct QualitySelectionView: View {
                             }
                         }
                         .padding(.horizontal, 40)
-                        .padding(.bottom, 30)
-                        
+                        .padding(.bottom, 60)
                     }
                 }
             }
         }
-        .sheet(isPresented: $showPremiumSheet) {
+    }
+    .sheet(isPresented: $showPremiumSheet) {
             PremiumPaymentView()
         }
         .alert("Hosting Limit Reached", isPresented: Binding(
@@ -309,7 +303,7 @@ struct QualitySelectionView: View {
             Task {
                 await licenseManager.checkHostingLimit()
             }
-            
+
             // Load metadata to ensure we have the logo
             Task {
                 await loadMetadata()
@@ -326,7 +320,7 @@ struct QualitySelectionView: View {
     private func loadMetadata() async {
         isLoading = true
         defer { isLoading = false }
-        
+
         do {
             let meta = try await LocalAPIClient.shared.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
             self.metadata = meta
@@ -366,27 +360,43 @@ struct WatchModeButton: View {
     let isSelected: Bool
 
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 20) {
             Image(systemName: icon)
-                .font(.system(size: 32))
-                .foregroundColor(isSelected ? .accentColor : .secondary)
+                .font(.system(size: 64))
+                .foregroundColor(isSelected ? .accentColor : .white.opacity(0.4))
+                .shadow(color: isSelected ? .accentColor.opacity(0.5) : .clear, radius: 10)
 
-            Text(title)
-                .font(.headline)
+            VStack(spacing: 8) {
+                Text(title)
+                    .font(.title2.weight(.bold))
+                    .foregroundColor(.white)
 
-            Text(description)
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
+                Text(description)
+                    .font(.body)
+                    .foregroundColor(.white.opacity(0.6))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 10)
+            }
         }
-        .padding()
-        .frame(maxWidth: .infinity, minHeight: 120)
-        .background(isSelected ? Color.accentColor.opacity(0.1) : Color.clear)
-        .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(isSelected ? Color.accentColor : Color.secondary.opacity(0.3), lineWidth: 2)
+        .padding(30)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(
+            ZStack {
+                if isSelected {
+                    Color.accentColor.opacity(0.15)
+                    RoundedRectangle(cornerRadius: 24)
+                        .stroke(Color.accentColor, lineWidth: 4)
+                        .shadow(color: .accentColor.opacity(0.3), radius: 15)
+                } else {
+                    Color.white.opacity(0.05)
+                    RoundedRectangle(cornerRadius: 24)
+                        .stroke(Color.white.opacity(0.1), lineWidth: 2)
+                }
+            }
         )
+        .cornerRadius(24)
+        .scaleEffect(isSelected ? 1.02 : 1.0)
+        .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
         .contentShape(Rectangle()) // Hit testing for entire area
     }
 }

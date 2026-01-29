@@ -51,6 +51,7 @@ struct WatchPartyRoom: Identifiable {
     var posterURL: String? // Poster art for the media
     var participants: [Participant]
     var participantCount: Int  // DB-managed count (source of truth for display)
+    var maxParticipants: Int   // Maximum allowed participants
     var state: RoomState
     var createdAt: Date
     var lastActivity: Date

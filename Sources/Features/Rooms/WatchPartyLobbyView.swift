@@ -326,7 +326,7 @@ struct WatchPartyLobbyView: View {
                             HStack {
                                 Image(systemName: "person.2.fill")
                                     .foregroundColor(.white.opacity(0.7))
-                                Text("Participants (\(viewModel.participants.count))")
+                                Text("Participants (\(viewModel.participants.count)/\(room.maxParticipants))")
                                     .font(.headline)
                                     .foregroundColor(.white)
 

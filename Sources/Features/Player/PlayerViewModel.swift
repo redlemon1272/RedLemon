@@ -84,10 +84,10 @@ class PlayerViewModel: ObservableObject {
         // This saves 8-10 seconds by avoiding redundant provider queries.
         if let directHash = streamHash, !directHash.isEmpty {
             NSLog("🚀 PlayerVM: Preload - Using DIRECT UNLOCK path (Guest Optimization)")
-            
+
             // Clear RD cache for this hash to ensure a fresh link (IP-lock prevention)
             await RealDebridClient.shared.clearCache(forHash: directHash)
-            
+
             let syntheticStream = Stream(
                 title: preferredTitle ?? "Shared Stream (Direct)",
                 provider: preferredProvider ?? "direct",
@@ -102,7 +102,7 @@ class PlayerViewModel: ObservableObject {
                     episode: episode,
                     bypassTorrentCache: true // Force fresh for Guest
                 )
-                
+
                 await MainActor.run {
                     self.preResolvedStream = unlockedStream
                 }
@@ -1753,6 +1753,7 @@ class PlayerViewModel: ObservableObject {
                 posterURL: room.posterUrl,
                 participants: [hostParticipant],
                 participantCount: 1,  // Host only at creation
+                maxParticipants: 25,
                 state: .lobby,
                 createdAt: room.createdAt,
                 lastActivity: room.createdAt,
@@ -1948,6 +1949,7 @@ class PlayerViewModel: ObservableObject {
                 posterURL: room.posterUrl,
                 participants: participantList,
                 participantCount: room.participantsCount,  // Use DB-managed count
+                maxParticipants: room.maxParticipants,
                 state: .lobby,
                 createdAt: room.createdAt,
                 lastActivity: room.createdAt,

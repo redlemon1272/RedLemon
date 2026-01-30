@@ -14,8 +14,8 @@ MACOS_VERSION=$(sw_vers -productVersion)
 XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
 
 # User-configurable versioning
-APP_VERSION="1.0.172"
-APP_BUILD="172"
+APP_VERSION="1.0.173"
+APP_BUILD="173"
 
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
 echo "🔧 System: $ARCH_NAME"
@@ -69,45 +69,36 @@ RESOURCES="$CONTENTS/Resources"
 echo "📁 Ensuring .app bundle structure exists..."
 mkdir -p "$MACOS" "$FRAMEWORKS" "$RESOURCES"
 
-# Build the project
-echo "📦 Building Swift executable (debug)..."
+# Build the project for both architectures (Universal 2)
+echo "📦 Building Swift executable (Universal 2)..."
 CONFIG_FLAGS="-c debug -Xswiftc -DDEBUG"
-if [ "$ARCH_NAME" == "arm64" ]; then
-    echo "🔧 Using architecture-specific flags: --arch arm64"
-    swift build $CONFIG_FLAGS --arch arm64
-elif [ "$ARCH_NAME" == "x86_64" ]; then
-    echo "🔧 Using architecture-specific flags: --arch x86_64"
-    swift build $CONFIG_FLAGS --arch x86_64
-else
-    # Universal build not supported by swift build directly easily without lipo
-    # Fallback to current arch
-    swift build $CONFIG_FLAGS
-fi
 
-# Copy executable (debug) - ALWAYS overwrite
-echo "🔧 Copying debug executable..."
-if [[ -n "$SWIFT_BUILD_FLAGS" ]]; then
-    BIN_PATH=$(swift build $SWIFT_BUILD_FLAGS --show-bin-path)
-else
-    BIN_PATH=$(swift build --show-bin-path)
-fi
-cp -f "$BIN_PATH/RedLemon" "$MACOS/"
-echo "✅ Binary updated at $(date '+%H:%M:%S')"
+echo "   🔨 Compiling for arm64 (Silicon)..."
+swift build $CONFIG_FLAGS --arch arm64
+
+echo "   🔨 Compiling for x86_64 (Intel)..."
+swift build $CONFIG_FLAGS --arch x86_64
+
+# Combine binaries using lipo
+echo "🔗 Merging binaries into Universal executable..."
+BIN_ARM64=$(swift build $CONFIG_FLAGS --arch arm64 --show-bin-path)/RedLemon
+BIN_X86_64=$(swift build $CONFIG_FLAGS --arch x86_64 --show-bin-path)/RedLemon
+
+lipo -create -output "$MACOS/RedLemon" "$BIN_ARM64" "$BIN_X86_64"
+
+echo "✅ Universal binary created at $(date '+%H:%M:%S')"
+# Verify universal status
+lipo -info "$MACOS/RedLemon"
 
 # Copy frameworks
 echo "📚 Copying frameworks..."
 
-# Copy architecture-specific frameworks if they exist
-if [[ "$ARCH_NAME" == "arm64" && -d "Frameworks/arm64" ]]; then
-    echo "🍎 Using Apple Silicon optimized frameworks"
-    cp Frameworks/arm64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
-elif [[ "$ARCH_NAME" == "x86_64" && -d "Frameworks/x86_64" ]]; then
-    echo "🖥️  Using Intel optimized frameworks"
-    cp Frameworks/x86_64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
-else
-    echo "📚 Using default frameworks"
-    cp Frameworks/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
-fi
+# For Universal builds, we copy standard frameworks and let macOS handle the rest
+# Note: In a production release, you'd want universal dylibs as well.
+# For now, we prioritize the primary architecture of the builder.
+cp Frameworks/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
+cp Frameworks/arm64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
+cp Frameworks/x86_64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
 
 # Ensure libmpv is copied regardless of architecture (critical dependency)
 if [[ -f "Frameworks/libmpv.2.dylib" ]]; then

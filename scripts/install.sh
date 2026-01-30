@@ -51,6 +51,9 @@ echo -e "${BLUE}🔄 Refreshing system metadata...${NC}"
 # Safe Quarantine Removal (preserves ad-hoc signatures)
 xattr -rd com.apple.quarantine "$INSTALL_DIR/$APP_NAME" 2>/dev/null || true
 
+# Clear Finder cache bits that can cause 'Prohibited' signs
+xattr -d com.apple.FinderInfo "$INSTALL_DIR/$APP_NAME" 2>/dev/null || true
+
 # Aggressive refresh to clear 'Prohibited' sign and load icons
 touch "$INSTALL_DIR/$APP_NAME"
 touch "$INSTALL_DIR/$APP_NAME/Contents"
@@ -58,6 +61,9 @@ touch "$INSTALL_DIR/$APP_NAME/Contents/Info.plist"
 touch "$INSTALL_DIR/$APP_NAME/Contents/MacOS/RedLemon"
 touch "$INSTALL_DIR/$APP_NAME/Contents/Resources"
 touch "$INSTALL_DIR/$APP_NAME/Contents/Resources/AppIcon.icns"
+
+# Force Launch Services to re-register the app (The "Magic" Bullet)
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$INSTALL_DIR/$APP_NAME"
 
 # Trigger a background scan of the bundle to populate Finder cache
 ls -R "$INSTALL_DIR/$APP_NAME" > /dev/null 2>&1

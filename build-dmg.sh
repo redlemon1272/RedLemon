@@ -65,9 +65,9 @@ rm -f "${CHECKSUMS_FILE}"
 log_info "Creating DMG structure..."
 mkdir -p "${DMG_DIR}"
 
-# Copy app to DMG directory
+# Copy app to DMG directory using ditto to preserve metadata and resource forks
 log_info "Copying ${APP_NAME}.app (this may take a moment)..."
-cp -R "${BUILD_DIR}/${APP_NAME}.app" "${DMG_DIR}/"
+ditto "${BUILD_DIR}/${APP_NAME}.app" "${DMG_DIR}/${APP_NAME}.app"
 
 # Verify copy succeeded
 if [ ! -d "${DMG_DIR}/${APP_NAME}.app" ]; then

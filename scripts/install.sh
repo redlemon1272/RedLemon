@@ -36,7 +36,20 @@ if [ -d "$INSTALL_DIR/$APP_NAME" ]; then
     rm -rf "$INSTALL_DIR/$APP_NAME"
 fi
 
-cp -R "$MOUNT_POINT/$APP_NAME" "$INSTALL_DIR/"
+# Use ditto to preserve extended attributes and resource forks (crucial for icons/Gatekeeper)
+ditto "$MOUNT_POINT/$APP_NAME" "$INSTALL_DIR/$APP_NAME"
+
+# 4. Force Finder Refresh (The "Clinical" Detail)
+echo -e "${BLUE}🔄 Refreshing system metadata...${NC}"
+# Touching the bundle and its inner Info.plist often clears the 'Prohibited' sign instantly
+touch "$INSTALL_DIR/$APP_NAME"
+touch "$INSTALL_DIR/$APP_NAME/Contents/Info.plist"
+
+# Trigger a background scan of the bundle to populate Finder cache
+ls -R "$INSTALL_DIR/$APP_NAME" > /dev/null 2>&1
+
+# Update shared caches
+/usr/bin/touch "$INSTALL_DIR/$APP_NAME"
 
 # 4. Cleanup
 echo -e "${BLUE}🧹 Cleaning up...${NC}"

@@ -174,6 +174,12 @@ cat > "$CONTENTS/Info.plist" << PLIST
     <string>AppIcon</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
+    <key>CFBundleSupportedPlatforms</key>
+    <array>
+        <string>MacOSX</string>
+    </array>
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright © 2026 RedLemon. All rights reserved.</string>
     <key>LSMinimumSystemVersion</key>
     <string>12.0</string>
     <key>NSHighResolutionCapable</key>

@@ -162,6 +162,9 @@ struct SettingsView: View {
         .sheet(isPresented: $showFeedbackSheet) {
             FeedbackView(isPresented: $showFeedbackSheet)
         }
+        .sheet(isPresented: $showAdminDashboard) {
+            AdminDashboardView()
+        }
     }
 
     // MARK: - Sections
@@ -1070,29 +1073,51 @@ struct SettingsView: View {
 
     private var supportSection: some View {
         VStack(alignment: .leading, spacing: 24) {
-            Text("Support & Feedback")
+            Text("Support & Community")
                 .font(.system(size: 28, weight: .semibold))
 
-            VStack(alignment: .leading, spacing: 12) {
-                // Send Feedback Button
-                Button(action: { showFeedbackSheet = true }) {
-                    HStack {
-                        Image(systemName: "envelope.fill")
-                            .font(.title2)
-                            .foregroundColor(.blue)
-                        Text("Send Feedback")
-                            .font(.title3.weight(.semibold))
-                            .foregroundColor(.primary)
-                        Spacer()
-                        Image(systemName: "chevron.right")
+            HStack(spacing: 16) {
+                // Join Subreddit Button
+                Button(action: {
+                    if let url = URL(string: "https://www.reddit.com/r/redlemonapp/") {
+                        NSWorkspace.shared.open(url)
+                    }
+                }) {
+                    VStack(spacing: 8) {
+                        Image(systemName: "bubble.left.and.bubble.right.fill")
+                            .font(.title)
+                            .foregroundColor(.orange)
+                        Text("Join r/redlemonapp")
+                            .font(.headline)
+                        Text("Community & Help")
+                            .font(.caption)
                             .foregroundColor(.secondary)
                     }
-                    .padding(24)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 20)
                     .background(Color(NSColor.controlBackgroundColor))
-                    .cornerRadius(16)
+                    .cornerRadius(12)
                 }
-                .buttonStyle(PlainButtonStyle())
+                .buttonStyle(.plain)
 
+                // Send Feedback Button
+                Button(action: { showFeedbackSheet = true }) {
+                    VStack(spacing: 8) {
+                        Image(systemName: "envelope.fill")
+                            .font(.title)
+                            .foregroundColor(.blue)
+                        Text("Send Feedback")
+                            .font(.headline)
+                        Text("Bugs & Technical")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 20)
+                    .background(Color(NSColor.controlBackgroundColor))
+                    .cornerRadius(12)
+                }
+                .buttonStyle(.plain)
             }
         }
     }

@@ -137,6 +137,7 @@ copy_safe "docs/assets"
 copy_safe "scripts/architecture-scan.sh"
 copy_safe "scripts/install.sh"
 copy_safe "OPEN_SOURCE_PLAN.md"
+copy_safe "SECURITY.md"
 copy_safe "LICENSE"
 
 # --- WHITELIST END ---
@@ -214,6 +215,61 @@ generate_stub "Sources/Server/Services/ProviderService.swift" "
 import Foundation
 // STUB: Full implementation contains provider integrations.
 actor ProviderService { static let shared = ProviderService() }
+"
+
+# Premium Payment View (UI stub to fix build errors)
+generate_stub "Sources/Features/Monetization/PremiumPaymentView.swift" "
+import SwiftUI
+struct PremiumPaymentView: View {
+    @Environment(\\.dismiss) var dismiss
+    var body: some View {
+        VStack(spacing: 20) {
+            Text(\"Premium Hosting License\")
+                .font(.title)
+            Text(\"This feature is available in the official binary.\")
+                .foregroundColor(.secondary)
+            Button(\"Close\") { dismiss() }
+                .buttonStyle(.borderedProminent)
+        }
+        .frame(width: 400, height: 300)
+    }
+}
+"
+
+# Admin Views (Security stubs)
+generate_stub "Sources/Features/Admin/AdminServerView.swift" "
+import SwiftUI
+struct AdminServerView: View {
+    var body: some View {
+        VStack {
+            Image(systemName: \"lock.shield.fill\")
+                .font(.system(size: 64))
+                .foregroundColor(.orange)
+            Text(\"Admin Panel Restricted\")
+                .font(.title)
+            Text(\"Server management logic is omitted from the public repository.\")
+                .foregroundColor(.secondary)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+"
+
+generate_stub "Sources/Features/Admin/AdminDashboardView.swift" "
+import SwiftUI
+struct AdminDashboardView: View {
+    @Environment(\\.dismiss) var dismiss
+    var body: some View {
+        VStack {
+            Text(\"Developer Dashboard\")
+                .font(.title)
+            Text(\"Administrative tools are not included in the source distribution.\")
+                .foregroundColor(.secondary)
+            Button(\"Close\") { dismiss() }
+        }
+        .frame(width: 500, height: 400)
+    }
+}
 "
 
 # 5. Sanitization Execution (Scrubbing)

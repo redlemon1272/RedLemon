@@ -6,9 +6,10 @@
 
 <img src="https://github.com/redlemon1272/RedLemon/raw/main/Resources/AppIcon.png" width="128" alt="RedLemon">
 
-## 🚀 What is RedLemon?
-
 RedLemon is a next-generation streaming client built for macOS. It aggregates content into a beautiful, unified interface with a focus on **social watching**.
+
+### 💬 Join the Community
+Join our official subreddit for feature requests, support, and community watch parties: **[r/redlemonapp](https://www.reddit.com/r/redlemonapp/)**
 
 ## 🛡️ Hybrid Open Source Model
 

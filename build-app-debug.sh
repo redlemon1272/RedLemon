@@ -14,8 +14,8 @@ MACOS_VERSION=$(sw_vers -productVersion)
 XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
 
 # User-configurable versioning
-APP_VERSION="1.0.173"
-APP_BUILD="173"
+APP_VERSION="1.0.174"
+APP_BUILD="174"
 
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
 echo "🔧 System: $ARCH_NAME"
@@ -70,6 +70,9 @@ echo "📁 Ensuring .app bundle structure exists..."
 mkdir -p "$MACOS" "$FRAMEWORKS" "$RESOURCES"
 
 # Build the project for both architectures (Universal 2)
+echo "🧹 Cleaning previous build artifacts..."
+swift package clean
+
 echo "📦 Building Swift executable (Universal 2)..."
 CONFIG_FLAGS="-c debug -Xswiftc -DDEBUG"
 

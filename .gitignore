@@ -11,7 +11,7 @@ Icon
 /.build
 /Packages
 /*.xcodeproj
-xcuserdata/
+userdata/
 DerivedData/
 .swiftpm/config/registries.json
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
@@ -49,6 +49,7 @@ icp-backend/*.log
 /tmp/
 *.tmp
 nohup.out
+/redlemon-*.log
 
 # Python
 __pycache__/
@@ -75,6 +76,17 @@ ENV/
 .vscode/
 !.vscode/settings.json
 .idea/
+
+# Internal Documentation (Added to prevent leaks)
+AI_BIBLE.md
+REDDIT_LAUNCH_PLAN.md
+docs/SelfHosted_Manual.md
+docs/archive/
+docs/migrations/
+TEST_PLAN.md
+REDLEMON_STABILITY_FIXES_HANDOFF.md
+REDLEMON_WATCHPARTY_COMPLETE_HANDOFF.md
+Sources/Networking/guestconsolelog.md
 
 *.dylib
 .modulecache/

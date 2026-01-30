@@ -48,13 +48,16 @@ ditto "$MOUNT_POINT/$APP_NAME" "$INSTALL_DIR/$APP_NAME"
 
 # 4. Force Finder Refresh & Metadata Cleanup (The "Clinical" Detail)
 echo -e "${BLUE}🔄 Refreshing system metadata...${NC}"
-# Clearing ALL extended attributes is the nuclear fix for 'Prohibited' signs
-xattr -cr "$INSTALL_DIR/$APP_NAME"
+# Safe Quarantine Removal (preserves ad-hoc signatures)
+xattr -rd com.apple.quarantine "$INSTALL_DIR/$APP_NAME" 2>/dev/null || true
 
-# Touching the bundle and its inner Info.plist clears the 'Prohibited' sign instantly
+# Aggressive refresh to clear 'Prohibited' sign and load icons
 touch "$INSTALL_DIR/$APP_NAME"
+touch "$INSTALL_DIR/$APP_NAME/Contents"
 touch "$INSTALL_DIR/$APP_NAME/Contents/Info.plist"
 touch "$INSTALL_DIR/$APP_NAME/Contents/MacOS/RedLemon"
+touch "$INSTALL_DIR/$APP_NAME/Contents/Resources"
+touch "$INSTALL_DIR/$APP_NAME/Contents/Resources/AppIcon.icns"
 
 # Trigger a background scan of the bundle to populate Finder cache
 ls -R "$INSTALL_DIR/$APP_NAME" > /dev/null 2>&1

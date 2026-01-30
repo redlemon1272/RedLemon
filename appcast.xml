@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.177 -->
+        <item>
+            <title>Version 1.0.177</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Remove prohibited symbol on Intel Macs via metadata refresh.</li><li>Fix: Universal sudo-less installation for Silicon and non-admin users.</li><li>Maintenance: Synchronized bootstrap and magic installers.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 17:13:46 -0500</pubDate>
+            <sparkle:version>177</sparkle:version>
+            <sparkle:shortVersionString>1.0.177</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.177.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="jFWWm1jV3dBTTIKavrzuIyowIuErtif3y+eAVXxnLnGuVSD70uvKerR1cJkNxgU2BvL+RsNE1dB4Aq5WXQMzDA==" length="75553887"
+            />
+        </item>
         <!-- v1.0.176 -->
         <item>
             <title>Version 1.0.176</title>

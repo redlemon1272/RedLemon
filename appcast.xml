@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.170 -->
+        <item>
+            <title>Version 1.0.170</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Security: Rotated backend authentication keys. This update is required to reconnect to the production server.</li><li>Account Restoration: If prompted with the Welcome screen, your credentials remain safe in your macOS Keychain. Simply re-enter your username or use the Restore function.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 11:11:37 -0500</pubDate>
+            <sparkle:version>170</sparkle:version>
+            <sparkle:shortVersionString>1.0.170</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.170.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="MfK3GtfsLULNgI3X/Dnn+Xw5lC6Wp3ShQf8MYcEWyJAWa3JldeAj3PFXbug4sLrfPj/v3bpoWY2JvOxcVh+MBg==" length="75560267"
+            />
+        </item>
         <!-- v1.0.169 -->
         <item>
             <title>Version 1.0.169</title>

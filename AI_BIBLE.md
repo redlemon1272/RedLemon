@@ -1079,15 +1079,15 @@ caddy-proxy          caddy:2-alpine         HTTPS/SSL Proxy
 > These keys control collected funds. Store offline (paper/metal backup).
 
 **Seed Phrase:**
-`moment absent unfair song unusual neck panther asset clock conduct doll voice`
+`either access boy color rice recipe express photo round enforce debris pill`
 
 **Derivation Paths:**
 - **BTC**: `m/84'/0'/0'` (Native Segwit) - *Currently Inactive/Hidden in UI*
 - **EVM**: `m/44'/60'/0'` (Standard BIP44) - *Active (Ethereum, Base, etc)*
 
 **XPUBs (Server Config):**
-- **XPUB_BTC**: `xpub6CNJnaQ1bu7oLQH4g8ZGSJUbVtRLqu3ikYm9PhiFohEb9LdFCsz4QTK1aWob5nR1P7uzDmRR7GKm5aJvKgzrrWmh6CahF95K5Vtb3TgzLoq`
-- **XPUB_EVM**: `xpub6CUocXeQEa3MZ7QWXn4uwjcaXS2y84MAN1KTQRq9TscPvJk5kMj4fSKYxNC1ooyAf9ysT15cwJW3UP6HEcCPUKVu67wwoKqsyJNAeWQ6i1y`
+- **XPUB_BTC**: `zpub6qvU5Y4rYoTKDoLj1fAQTsrBditGKgoLLLv16fMbLYKj1QknC4GLF5soMczZunRLLPhKaynHpcmvSdgxFEMoghYLz1wXRgAQ769Ybfs6Cco`
+- **XPUB_EVM**: `xpub6BqjrMFArT9RBmm23oKgaCjq8fYZ4QJEjTvsSFW4WJB6fiSby8aSEJnuNV15yndiQkZ9DLukx6DVRaraApmBok9XqGnDy7fWAmBeAJeZ4ug`
 
 ---
 
@@ -2316,3 +2316,13 @@ if participant.isReallyPremium {
 2. **Zero-Warning Policy**: Releases MUST have 0 errors and 0 warnings. No exceptions.
 3. **Regex Heuristics**: Understand that the scanner uses regex. Keep your guards within 5 lines of the calls they protect (Proximity Rule).
 4. **The "Truth" File**: The scan rules are defined in `scripts/architecture-scan.sh`. Update them as new "Landmines" are discovered.
+
+### 16. The Air-Gap Guardrail (Landmine #152)
+**Symptom**: Private documentation (Manuals), Wallet Seeds, XPUBs, or Production IPs are accidentally committed to the public mirror.
+**Root Cause**: **Human Error or Sync Script Misconfiguration**. It only takes one `cp -R docs/*` to leak the entire production manual.
+**Mandatory Solution**:
+1. **Strict Whitelist (Default Deny)**: `sync-to-public.sh` MUST only copy explicitly safe files. Never copy entire directories except `Resources`, `Sources/Models`, etc.
+2. **Post-Sync Audit**: The `architecture-scan.sh` script (Check 86) MANDATORILY audits the `../RedLemon-Public` directory after every sync.
+3. **Regex Sentinel**: The scanner detects 12-word seed patterns, 100+ character XPUBs, and the Production IP.
+4. **Scrubbing Verification**: Ensure all internal jargon (`AI_BIBLE`, `Landmine`) is replaced by the scrubber.
+5. **Zero-Leak Policy**: If `architecture-scan.sh` detects a leak in the public repo, the RELEASE is blocked. No exceptions.

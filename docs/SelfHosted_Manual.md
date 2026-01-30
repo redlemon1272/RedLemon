@@ -239,15 +239,15 @@ SELECT cron.schedule(
 > Store it safely offline (Paper/Metal backup). The server only needs the XPUBs (Public Keys) to generate addresses; it does NOT need the Private Key or Seed Phrase.
 
 **Seed Phrase (Mnemonic):**
-`moment absent unfair song unusual neck panther asset clock conduct doll voice`
+`either access boy color rice recipe express photo round enforce debris pill`
 
 **Derivation Paths:**
 *   **BTC:** `m/84'/0'/0'` (Native Segwit / BIP84)
 *   **EVM (ETH/Base):** `m/44'/60'/0'` (Standard BIP44)
 
 **Extended Public Keys (XPUBs) - Injected into Server:**
-*   **XPUB_BTC:** `xpub6CNJnaQ1bu7oLQH4g8ZGSJUbVtRLqu3ikYm9PhiFohEb9LdFCsz4QTK1aWob5nR1P7uzDmRR7GKm5aJvKgzrrWmh6CahF95K5Vtb3TgzLoq`
-*   **XPUB_EVM:** `xpub6CUocXeQEa3MZ7QWXn4uwjcaXS2y84MAN1KTQRq9TscPvJk5kMj4fSKYxNC1ooyAf9ysT15cwJW3UP6HEcCPUKVu67wwoKqsyJNAeWQ6i1y`
+*   **XPUB_BTC:** `zpub6qvU5Y4rYoTKDoLj1fAQTsrBditGKgoLLLv16fMbLYKj1QknC4GLF5soMczZunRLLPhKaynHpcmvSdgxFEMoghYLz1wXRgAQ769Ybfs6Cco`
+*   **XPUB_EVM:** `xpub6BqjrMFArT9RBmm23oKgaCjq8fYZ4QJEjTvsSFW4WJB6fiSby8aSEJnuNV15yndiQkZ9DLukx6DVRaraApmBok9XqGnDy7fWAmBeAJeZ4ug`
 
 **Usage:**
 *   **Importing to Wallet:** Use the Seed Phrase in MetaMask, electrum, or Ledger to access funds.

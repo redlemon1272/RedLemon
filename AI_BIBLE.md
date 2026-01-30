@@ -2328,7 +2328,7 @@ if participant.isReallyPremium {
 5. **Zero-Leak Policy**: If `architecture-scan.sh` detects a leak in the public repo, the RELEASE is blocked. No exceptions.
 
 ### 17. The Zombie Wallet Trap (Landmine #153)
-**Symptom**: User funds continue to arrive at an OLD address even after you have rotated the XPUBs on the server.
+**Symptom**: User funds continue to arrive at an OLD address even after **changing wallets** or rotating XPUBs on the server.
 **Root Cause**: **Database Persistence**. The `payment_pools` table stores the link between a `user_id` and an `address`. If you rotate the XPUB in the engine but don't CLEAR the table, the server will keep serving the cached address from the old wallet.
 **Mandatory Solution**:
 1. **The Flush Rule**: Every wallet rotation MUST be accompanied by a database flush: `DELETE FROM payment_pools;`. 

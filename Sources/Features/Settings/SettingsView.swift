@@ -163,7 +163,7 @@ struct SettingsView: View {
             FeedbackView(isPresented: $showFeedbackSheet)
         }
         .sheet(isPresented: $showAdminDashboard) {
-            AdminDashboardView()
+            AdminDashboardView(isPresented: $showAdminDashboard)
         }
     }
 

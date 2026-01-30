@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.178 -->
+        <item>
+            <title>Version 1.0.178</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Critical Fix: Deployed true Universal 2 binary (arm64 + x86_64) for Silicon compatibility.</li><li>Fix: Safer metadata refresh in installers to preserve ad-hoc signatures.</li><li>Fix: Aggressive Finder metadata refresh to remove prohibited signal and restore dock icon.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 17:58:38 -0500</pubDate>
+            <sparkle:version>178</sparkle:version>
+            <sparkle:shortVersionString>1.0.178</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.178.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ZIo9E4OqxVhP9aZ2yDMP7kFbbgVeIBh4zCivLZ13eKNu5EsjEIrvhaVa4GW9IfgeXHEAMbetzTIssZfIquo/DQ==" length="98579741"
+            />
+        </item>
         <!-- v1.0.177 -->
         <item>
             <title>Version 1.0.177</title>

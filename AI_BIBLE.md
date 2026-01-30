@@ -1103,6 +1103,10 @@ In `RedLemonApp.swift`, use command line args:
 - `-user-profile host`
 - `-user-profile guest`
 
+## Contact Support
+**Email:** `redlemon1272@proton.me`
+**Proton ID:** `nInzen-vampym-9desve`
+
 ---
 
 ---

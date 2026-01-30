@@ -2335,3 +2335,29 @@ if participant.isReallyPremium {
 2. **The Deep Recycle Rule**: Standard `docker compose restart` often fails to re-read updated `.env` files into Deno runtimes. Always use `docker compose down && docker compose up -d` for wallet changes.
 3. **Automated Protocol**: Use `./scripts/rotate-wallet.sh` to ensure the correct sequence (ENV Update -> Down -> Up -> Table Flush).
 4. **Verification**: After rotation, trigger an `assign-address` call via curl/app to verify the derived address matches the new mnemonic's expected Index 0.
+
+#### Automated Rotation Script (`scripts/rotate-wallet.sh`)
+```bash
+#!/bin/bash
+# 🍋 RedLemon Wallet Rotation Protocol (Emergency & Routine)
+# Automates the safe transition to a new wallet.
+set -e
+
+NEW_BTC_XPUB=$1
+NEW_EVM_XPUB=$2
+NEW_EVM_XPRV=$3
+
+# 1. Update Remote .env
+./remote_exec.sh "sed -i 's/^XPUB_BTC=.*/XPUB_BTC=$NEW_BTC_XPUB/' /root/supabase/docker/.env && \
+                  sed -i 's/^XPUB_EVM=.*/XPUB_EVM=$NEW_EVM_XPUB/' /root/supabase/docker/.env && \
+                  sed -i 's/^XPRV_EVM=.*/XPRV_EVM=$NEW_EVM_XPRV/' /root/supabase/docker/.env"
+
+# 2. Deep Recycle Containers (Flush ENV)
+./remote_exec.sh "cd /root/supabase/docker && docker compose down && docker compose up -d"
+
+# 3. Flush Zombie Pools (Prevent Landmine #153)
+./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"\
+    UPDATE key_derivation_indices SET next_index = 0; \
+    DELETE FROM payment_pools; \
+    ANALYZE payment_pools;\""
+```

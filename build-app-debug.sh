@@ -14,8 +14,8 @@ MACOS_VERSION=$(sw_vers -productVersion)
 XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
 
 # User-configurable versioning
-APP_VERSION="1.0.171"
-APP_BUILD="171"
+APP_VERSION="1.0.172"
+APP_BUILD="172"
 
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
 echo "🔧 System: $ARCH_NAME"
@@ -174,6 +174,12 @@ cat > "$CONTENTS/Info.plist" << PLIST
     <string>AppIcon</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
+    <key>CFBundleSupportedPlatforms</key>
+    <array>
+        <string>MacOSX</string>
+    </array>
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright © 2026 RedLemon. All rights reserved.</string>
     <key>LSMinimumSystemVersion</key>
     <string>12.0</string>
     <key>NSHighResolutionCapable</key>

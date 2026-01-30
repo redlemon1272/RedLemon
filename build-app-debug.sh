@@ -172,6 +172,8 @@ cat > "$CONTENTS/Info.plist" << PLIST
     <string>${APP_BUILD}</string>
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
     <key>LSMinimumSystemVersion</key>
     <string>12.0</string>
     <key>NSHighResolutionCapable</key>
@@ -203,6 +205,10 @@ cat > "$CONTENTS/Info.plist" << PLIST
 </dict>
 </plist>
 PLIST
+
+# Fix Permissions (Safety Protocol)
+chmod -R 755 "$APP_DIR"
+chmod +x "$MACOS/RedLemon"
 
 # Ad-hoc code signing (required for Sparkle to work, even in development)
 # This uses a self-signed signature that macOS will accept for local testing

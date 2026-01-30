@@ -40,7 +40,7 @@ echo -e "${BLUE}💿 Mounting Disk Image...${NC}"
 hdiutil attach "$DMG_PATH" -mountpoint "$MOUNT_POINT" -quiet -nobrowse
 
 # 4. Install
-echo -e "${BLUE}📦 Installing to /Applications...${NC}"
+echo -e "${BLUE}📦 Installing to $DEST_DIR...${NC}"
 
 # Remove existing app if present
 if [ -d "$DEST_DIR/$APP_NAME" ]; then
@@ -48,14 +48,21 @@ if [ -d "$DEST_DIR/$APP_NAME" ]; then
     rm -rf "$DEST_DIR/$APP_NAME"
 fi
 
-# Copy new app
-cp -R "$MOUNT_POINT/$APP_NAME" "$DEST_DIR/"
+# Use ditto to preserve extended attributes and resource forks
+ditto "$MOUNT_POINT/$APP_NAME" "$DEST_DIR/$APP_NAME"
 
-# 5. NUCLEAR OPTION: Remove Quarantine Attributes
-# This is technically redundant because curl doesn't set them,
-# but we do it to be absolutely certain.
-echo -e "${BLUE}🛡️  Removing Quarantine Attributes...${NC}"
+# 5. Force Finder Refresh & Metadata Cleanup
+echo -e "${BLUE}🔄 Refreshing system metadata...${NC}"
+# Clearing ALL extended attributes is the nuclear fix for 'Prohibited' signs
 xattr -cr "$DEST_DIR/$APP_NAME"
+
+# Touching the bundle and its inner Info.plist clears the 'Prohibited' sign instantly
+touch "$DEST_DIR/$APP_NAME"
+touch "$DEST_DIR/$APP_NAME/Contents/Info.plist"
+touch "$DEST_DIR/$APP_NAME/Contents/MacOS/RedLemon"
+
+# Trigger a background scan of the bundle to populate Finder cache
+ls -R "$DEST_DIR/$APP_NAME" > /dev/null 2>&1
 
 # 6. Cleanup
 echo -e "${BLUE}🧹 Cleaning up...${NC}"

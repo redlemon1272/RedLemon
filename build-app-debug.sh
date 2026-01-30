@@ -110,6 +110,8 @@ fi
 
 # Copy Sparkle framework
 echo "📦 Copying Sparkle.framework..."
+# Use the Intel bin path to find Sparkle (it's copied to common Frameworks anyway)
+BIN_PATH=$(swift build $CONFIG_FLAGS --arch x86_64 --show-bin-path)
 if [ -d "$BIN_PATH/Sparkle.framework" ]; then
     rm -rf "$FRAMEWORKS/Sparkle.framework"
     cp -R "$BIN_PATH/Sparkle.framework" "$FRAMEWORKS/"

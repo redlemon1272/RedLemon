@@ -388,7 +388,7 @@ struct SettingsView: View {
                     }
                 }
 
-                Text("Host License allows you to create and host watch parties with friends")
+                Text("Host license allows you to create and host watch parties (Rooms)")
                     .font(.body)
                     .foregroundColor(.secondary)
 

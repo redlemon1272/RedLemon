@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.175 -->
+        <item>
+            <title>Version 1.0.175</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Architecture: Finalized Universal 2 binary with native support for both Intel and Apple Silicon Macs.</li><li>Performance: Optimized build process for faster launch times on all platforms.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 12:47:58 -0500</pubDate>
+            <sparkle:version>175</sparkle:version>
+            <sparkle:shortVersionString>1.0.175</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.175.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="FaFlhMGPleDWyyaizlA6n567AJtuqrhG5r4Vua6Bu5MHaIysL8lKY18jAjqks62qXFDlNzi3jBlzIbg+IggtAA==" length="98593438"
+            />
+        </item>
         <!-- v1.0.173 -->
         <item>
             <title>Version 1.0.173</title>

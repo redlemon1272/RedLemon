@@ -14,8 +14,8 @@ MACOS_VERSION=$(sw_vers -productVersion)
 XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
 
 # User-configurable versioning
-APP_VERSION="1.0.177"
-APP_BUILD="177"
+APP_VERSION="1.0.178"
+APP_BUILD="178"
 
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
 echo "🔧 System: $ARCH_NAME"
@@ -73,24 +73,19 @@ mkdir -p "$MACOS" "$FRAMEWORKS" "$RESOURCES"
 echo "🧹 Cleaning previous build artifacts..."
 swift package clean
 
-echo "📦 Building Swift executable (Native $ARCH_NAME)..."
+echo "📦 Building Swift executable (Universal 2: arm64 + x86_64)..."
 CONFIG_FLAGS="-c debug -Xswiftc -DDEBUG"
 
-if [[ "$ARCH_NAME" == "arm64" ]]; then
-    echo "   🔨 Compiling for arm64 (Silicon)..."
-    swift build $CONFIG_FLAGS --arch arm64
-    BIN_PATH=$(swift build $CONFIG_FLAGS --arch arm64 --show-bin-path)/RedLemon
-elif [[ "$ARCH_NAME" == "x86_64" ]]; then
-    echo "   🔨 Compiling for x86_64 (Intel)..."
-    swift build $CONFIG_FLAGS --arch x86_64
-    BIN_PATH=$(swift build $CONFIG_FLAGS --arch x86_64 --show-bin-path)/RedLemon
-else
-    echo "❌ Unsupported architecture: $ARCH_NAME"
-    exit 1
-fi
+echo "   🔨 Compiling for arm64 (Silicon)..."
+swift build $CONFIG_FLAGS --arch arm64
+BIN_ARM64=$(swift build $CONFIG_FLAGS --arch arm64 --show-bin-path)/RedLemon
 
-echo "🔗 Installing binary..."
-cp "$BIN_PATH" "$MACOS/RedLemon"
+echo "   🔨 Compiling for x86_64 (Intel)..."
+swift build $CONFIG_FLAGS --arch x86_64
+BIN_X86_64=$(swift build $CONFIG_FLAGS --arch x86_64 --show-bin-path)/RedLemon
+
+echo "🔗 Creating Universal Binary..."
+lipo -create -output "$MACOS/RedLemon" "$BIN_ARM64" "$BIN_X86_64"
 
 # Skipped Universal Lipo for local debug build
 # lipo -create -output "$MACOS/RedLemon" "$BIN_ARM64" "$BIN_X86_64"
@@ -102,12 +97,15 @@ lipo -info "$MACOS/RedLemon"
 # Copy frameworks
 echo "📚 Copying frameworks..."
 
-# For Universal builds, we copy standard frameworks and let macOS handle the rest
-# Note: In a production release, you'd want universal dylibs as well.
-# For now, we prioritize the primary architecture of the builder.
+# For Universal builds, we copy both arm64 and x86_64 dylibs.
+# We place them in the common Frameworks folder, and lipo/loader handles selecting the right ones.
+mkdir -p "$FRAMEWORKS"
 cp Frameworks/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
 cp Frameworks/arm64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
 cp Frameworks/x86_64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
+
+# Note: In a production release, you should ideally lipo the dylibs themselves.
+# For now, we ensure both sets are present.
 
 # Ensure libmpv is copied regardless of architecture (critical dependency)
 if [[ -f "Frameworks/libmpv.2.dylib" ]]; then

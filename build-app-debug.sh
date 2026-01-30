@@ -14,8 +14,8 @@ MACOS_VERSION=$(sw_vers -productVersion)
 XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
 
 # User-configurable versioning
-APP_VERSION="1.0.173"
-APP_BUILD="173"
+APP_VERSION="1.0.175"
+APP_BUILD="175"
 
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
 echo "🔧 System: $ARCH_NAME"
@@ -70,6 +70,9 @@ echo "📁 Ensuring .app bundle structure exists..."
 mkdir -p "$MACOS" "$FRAMEWORKS" "$RESOURCES"
 
 # Build the project for both architectures (Universal 2)
+echo "🧹 Cleaning previous build artifacts..."
+swift package clean
+
 echo "📦 Building Swift executable (Universal 2)..."
 CONFIG_FLAGS="-c debug -Xswiftc -DDEBUG"
 
@@ -110,6 +113,8 @@ fi
 
 # Copy Sparkle framework
 echo "📦 Copying Sparkle.framework..."
+# Use the Intel bin path to find Sparkle (it's copied to common Frameworks anyway)
+BIN_PATH=$(swift build $CONFIG_FLAGS --arch x86_64 --show-bin-path)
 if [ -d "$BIN_PATH/Sparkle.framework" ]; then
     rm -rf "$FRAMEWORKS/Sparkle.framework"
     cp -R "$BIN_PATH/Sparkle.framework" "$FRAMEWORKS/"

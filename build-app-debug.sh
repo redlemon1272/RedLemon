@@ -14,8 +14,8 @@ MACOS_VERSION=$(sw_vers -productVersion)
 XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
 
 # User-configurable versioning
-APP_VERSION="1.0.175"
-APP_BUILD="175"
+APP_VERSION="1.0.176"
+APP_BUILD="176"
 
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
 echo "🔧 System: $ARCH_NAME"
@@ -73,21 +73,27 @@ mkdir -p "$MACOS" "$FRAMEWORKS" "$RESOURCES"
 echo "🧹 Cleaning previous build artifacts..."
 swift package clean
 
-echo "📦 Building Swift executable (Universal 2)..."
+echo "📦 Building Swift executable (Native $ARCH_NAME)..."
 CONFIG_FLAGS="-c debug -Xswiftc -DDEBUG"
 
-echo "   🔨 Compiling for arm64 (Silicon)..."
-swift build $CONFIG_FLAGS --arch arm64
+if [[ "$ARCH_NAME" == "arm64" ]]; then
+    echo "   🔨 Compiling for arm64 (Silicon)..."
+    swift build $CONFIG_FLAGS --arch arm64
+    BIN_PATH=$(swift build $CONFIG_FLAGS --arch arm64 --show-bin-path)/RedLemon
+elif [[ "$ARCH_NAME" == "x86_64" ]]; then
+    echo "   🔨 Compiling for x86_64 (Intel)..."
+    swift build $CONFIG_FLAGS --arch x86_64
+    BIN_PATH=$(swift build $CONFIG_FLAGS --arch x86_64 --show-bin-path)/RedLemon
+else
+    echo "❌ Unsupported architecture: $ARCH_NAME"
+    exit 1
+fi
 
-echo "   🔨 Compiling for x86_64 (Intel)..."
-swift build $CONFIG_FLAGS --arch x86_64
+echo "🔗 Installing binary..."
+cp "$BIN_PATH" "$MACOS/RedLemon"
 
-# Combine binaries using lipo
-echo "🔗 Merging binaries into Universal executable..."
-BIN_ARM64=$(swift build $CONFIG_FLAGS --arch arm64 --show-bin-path)/RedLemon
-BIN_X86_64=$(swift build $CONFIG_FLAGS --arch x86_64 --show-bin-path)/RedLemon
-
-lipo -create -output "$MACOS/RedLemon" "$BIN_ARM64" "$BIN_X86_64"
+# Skipped Universal Lipo for local debug build
+# lipo -create -output "$MACOS/RedLemon" "$BIN_ARM64" "$BIN_X86_64"
 
 echo "✅ Universal binary created at $(date '+%H:%M:%S')"
 # Verify universal status

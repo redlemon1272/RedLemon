@@ -9,7 +9,14 @@ URL="https://151.243.109.243.nip.io/updates/RedLemon-latest.dmg"
 DMG_PATH="/tmp/RedLemon-Installer.dmg"
 MOUNT_POINT="/tmp/RedLemon-Mount"
 APP_NAME="RedLemon.app"
-DEST_DIR="/Applications"
+
+# Determine Destination (User-specific fallback for Silicon/Read-only perms)
+if [ -w "/Applications" ]; then
+    DEST_DIR="/Applications"
+else
+    DEST_DIR="$HOME/Applications"
+    mkdir -p "$DEST_DIR"
+fi
 
 # Colors
 GREEN='\033[0;32m'
@@ -45,7 +52,7 @@ fi
 cp -R "$MOUNT_POINT/$APP_NAME" "$DEST_DIR/"
 
 # 5. NUCLEAR OPTION: Remove Quarantine Attributes
-# This is technically redundant because curl doesn't set them, 
+# This is technically redundant because curl doesn't set them,
 # but we do it to be absolutely certain.
 echo -e "${BLUE}🛡️  Removing Quarantine Attributes...${NC}"
 xattr -cr "$DEST_DIR/$APP_NAME"

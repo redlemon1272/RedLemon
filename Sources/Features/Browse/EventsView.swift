@@ -42,18 +42,16 @@ struct EventsView: View {
                             // On 1440px screen: 600px height
                             let heroHeight = max(550, totalWidth / 2.4)
 
-                            // Grid Item Height Calculation
-                            // mimic LazyVGrid's adaptive logic to find item width
-                            let minItemWidth: CGFloat = 500
+                            // Force 2-Column Grid Item Height Calculation
                             let spacing: CGFloat = 20
                             let availableGridWidth = totalWidth - horizontalPadding
-
-                            // Calculate column count (at least 1)
-                            let columnCount = max(1, floor((availableGridWidth + spacing) / (minItemWidth + spacing)))
-
+                            
+                            // Fixed 2 columns
+                            let columnCount: CGFloat = 2
+                            
                             // Calculate actual item width
                             let itemWidth = (availableGridWidth - (spacing * (columnCount - 1))) / columnCount
-
+                            
                             // Target 2:1 aspect ratio for grid items
                             let gridItemHeight = itemWidth / 2.0
 
@@ -69,7 +67,7 @@ struct EventsView: View {
                                             // Hero Card Phase
                                             let _ = lastUpdate
                                             let isLobbyOverride = (heroEvent.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
-
+                                            
                                             HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, lastUpdate: lastUpdate, height: heroHeight) {
                                                 await joinEvent(heroEvent)
                                             }
@@ -77,21 +75,24 @@ struct EventsView: View {
                                             .id(heroEvent.id) // FORCE STATE RESET: Ensures background image updates when event changes
                                         }
                                     }
-
+                                    
                                     // 2. Upcoming Events Grid
                                     if appState.eventsSchedule.count > 1 {
                                         VStack(alignment: .leading, spacing: 16) {
                                             Text("Upcoming Events")
                                                 .font(.title2.weight(.bold))
-
+                                                
                                                 .foregroundColor(.primary)
                                                 .padding(.horizontal, 4)
-
-                                            // Increased minimum to 500 to ensure items fill the row on large screens (prevents empty 5th column gap)
-                                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 500), spacing: 20)], spacing: 20) {
+                                            
+                                            // Fixed 2-column layout (Flexible width, side-by-side)
+                                            LazyVGrid(columns: [
+                                                GridItem(.flexible(), spacing: 20),
+                                                GridItem(.flexible(), spacing: 20)
+                                            ], spacing: 20) {
                                                 ForEach(appState.eventsSchedule.dropFirst()) { event in
                                                     let isLobbyOverride = (event.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
-
+                                                    
                                                     HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, lastUpdate: lastUpdate, height: gridItemHeight) {
                                                         await joinEvent(event)
                                                     }

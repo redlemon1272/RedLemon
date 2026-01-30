@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.176 -->
+        <item>
+            <title>Version 1.0.176</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Feature: Improve terminal installer for Apple Silicon Macs (fixed Permission Denied errors).</li><li>Feature: Support for Sudo-less installation to ~/Applications.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 16:42:02 -0500</pubDate>
+            <sparkle:version>176</sparkle:version>
+            <sparkle:shortVersionString>1.0.176</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.176.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="SyKrtuei34Jdxg/qFTap+I2Y+XbSf+wukXTbSLuHR13J0cVfSzXLmoZOP9hWlkxz+NxtbXYBweYRSaLkP2QkAQ==" length="75671413"
+            />
+        </item>
         <!-- v1.0.175 -->
         <item>
             <title>Version 1.0.175</title>

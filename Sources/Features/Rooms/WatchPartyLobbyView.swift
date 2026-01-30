@@ -29,6 +29,11 @@ struct WatchPartyLobbyView: View {
     @State private var showScrollHint: Bool = false
     @State private var scrollBounceOffset: CGFloat = 0
 
+    // Host Hint State
+    @AppStorage("hasSeenPublicHostHint") private var hasSeenPublicHostHint: Bool = false
+    @AppStorage("hasSeenPrivateHostHint") private var hasSeenPrivateHostHint: Bool = false
+    @State private var showHostStartHint: Bool = false
+
     enum SidebarTab {
         case chat
         case friends
@@ -107,6 +112,14 @@ struct WatchPartyLobbyView: View {
                 appState.shouldAutoJoinLobby = false
             } else {
                 NSLog("%@", "[LOBBY_VIEW] onAppear: shouldAutoJoinLobby=false, room=\(room.id), timeUntilStart=\(Int(viewModel.timeUntilStart))")
+            }
+
+            // Host Hint Logic (All User Rooms)
+            let hasSeenRelevantHint = room.isPublic ? hasSeenPublicHostHint : hasSeenPrivateHostHint
+            if isHost && room.type == .userRoom && !hasSeenRelevantHint {
+                withAnimation(Animation.easeInOut.delay(1.5)) {
+                    showHostStartHint = true
+                }
             }
         }
     }
@@ -773,6 +786,12 @@ struct WatchPartyLobbyView: View {
 
                             // Host controls
                         Button(action: {
+                            // Dismiss hint
+                            if showHostStartHint {
+                                withAnimation { showHostStartHint = false }
+                                if room.isPublic { hasSeenPublicHostHint = true }
+                                else { hasSeenPrivateHostHint = true }
+                            }
                             startMovie()
                         }) {
                             HStack {
@@ -792,6 +811,55 @@ struct WatchPartyLobbyView: View {
                         }
                         .buttonStyle(.plain)
                         .disabled(viewModel.isStarting || viewModel.isPlaylistSyncing)
+                        .overlay(alignment: .top) {
+                            if showHostStartHint {
+                                // Simple tooltip bubble
+                                VStack(alignment: .leading, spacing: 8) {
+                                    HStack(spacing: 8) {
+                                        Image(systemName: "lightbulb.fill")
+                                            .foregroundColor(.yellow)
+                                        Text("Friendly Tip")
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                        Spacer()
+                                        Button(action: {
+                                            withAnimation { showHostStartHint = false }
+                                            if room.isPublic { hasSeenPublicHostHint = true }
+                                            else { hasSeenPrivateHostHint = true }
+                                        }) {
+                                            Image(systemName: "xmark")
+                                                .font(.caption)
+                                                .foregroundColor(.white.opacity(0.7))
+                                        }
+                                        .buttonStyle(.plain)
+                                    }
+                                    
+                                    if room.isPublic {
+                                        Text("You can start playback alone! Others can drop in and out from the Rooms page at any time.")
+                                            .font(.caption)
+                                            .foregroundColor(.white.opacity(0.9))
+                                            .fixedSize(horizontal: false, vertical: true)
+                                    } else {
+                                        Text("You can start playback alone! Share your Room Code so friends can jump in.")
+                                            .font(.caption)
+                                            .foregroundColor(.white.opacity(0.9))
+                                            .fixedSize(horizontal: false, vertical: true)
+                                    }
+                                }
+                                .padding(12)
+                                .background(Color.blue.opacity(0.95))
+                                .cornerRadius(12)
+                                .shadow(radius: 10)
+                                .frame(width: 280)
+                                .offset(y: -110) // Float nicely above the button
+                                .transition(.opacity.combined(with: .move(edge: .bottom)))
+                                .onTapGesture {
+                                    withAnimation { showHostStartHint = false }
+                                    if room.isPublic { hasSeenPublicHostHint = true }
+                                    else { hasSeenPrivateHostHint = true }
+                                }
+                            }
+                        }
 
                         if viewModel.isResolvingStream {
                             HStack {

@@ -38,14 +38,14 @@ ssh root@151.243.109.243
 These keys are hardcoded in your app and server. If you change them, you must update both.
 
 *   **ANON_KEY (Public):**
-    `eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJyb2xlIjogImFub24iLCAiaXNzIjogInN1cGFiYXNlIiwgImlhdCI6IDE3Njc2NTAwMzIsICJleHAiOiAyMDgzMDEwMDMyfQ.zY-FKTBjIi4dvhR7En5i5ULALx9QM_2O4QWMbedkBus`
+    `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzY5NzgzNDkyLCJleHAiOjIwODUxNDM0OTJ9.n-lTY3pLyNnNOggkn1EF41N0KeibKUuiR0AC2SKuUV0`
 
 *   **SERVICE_ROLE_KEY (Secret - Admin API):**
     `REMOVED (Security: Used on Server-Side Only)`
 
 
 *   **JWT Secret (For Token Generation):**
-    `0c759034b5faeabea30200006df6cfed979ea6a95891a33080fb0d8677e671de`
+    `be8213a48846bcb78111f51e66198d4ff85841be55271840fa0a12b5d0e15d54`
 
 ---
 

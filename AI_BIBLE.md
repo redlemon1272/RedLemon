@@ -852,8 +852,8 @@ ssh root@151.243.109.243
 | **Database** | Port 5432 | postgres / `6be071e915e2f9246408639def0a07bd` |
 
 ### API Keys
-- **ANON_KEY**: `eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJyb2xlIjogImFub24iLCAiaXNzIjogInN1cGFiYXNlIiwgImlhdCI6IDE3Njc2NTAwMzIsICJleHAiOiAyMDgzMDEwMDMyfQ.zY-FKTBjIi4dvhR7En5i5ULALx9QM_2O4QWMbedkBus`
-- **JWT Secret**: `0c759034b5faeabea30200006df6cfed979ea6a95891a33080fb0d8677e671de`
+- **ANON_KEY**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzY5NzgzNDkyLCJleHAiOjIwODUxNDM0OTJ9.n-lTY3pLyNnNOggkn1EF41N0KeibKUuiR0AC2SKuUV0`
+- **JWT Secret**: `be8213a48846bcb78111f51e66198d4ff85841be55271840fa0a12b5d0e15d54`
 
 ## Maintenance Commands
 
@@ -2304,7 +2304,7 @@ if participant.isReallyPremium {
 **Symptom**: Automated release scripts fail with 401/403 errors, or GitHub rejects pushes to the public mirror.
 **Root Cause**: **Token Expiration or Leak**. The `sync-to-public.sh` script relies on a valid PAT for push access. If the token expires or is refreshed on GitHub without being updated locally, the release pipeline breaks.
 **Mandatory Solution**:
-1. **Current PAT Storage**: The valid PAT MUST be stored in the local git config of the public repo mirror. For reference, the current token is: `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`
+1. **Current PAT Storage**: The valid PAT MUST be stored in the local git config of the public repo mirror. For reference, the current token is: `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`
 2. **Confidentiality**: This token is for PRIVATE use in the development environment. It MUST NOT be committed to `Package.swift`, `Config.swift`, or any public-facing file.
 3. **Rotation**: When rotating, update the remote with: `git remote set-url origin https://redlemon1272:NEW_PAT@github.com/redlemon1272/RedLemon.git`.
 

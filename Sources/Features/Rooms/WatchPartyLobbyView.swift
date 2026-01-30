@@ -30,7 +30,8 @@ struct WatchPartyLobbyView: View {
     @State private var scrollBounceOffset: CGFloat = 0
 
     // Host Hint State
-    @AppStorage("hasSeenHostStartHint") private var hasSeenHostStartHint: Bool = false
+    @AppStorage("hasSeenPublicHostHint") private var hasSeenPublicHostHint: Bool = false
+    @AppStorage("hasSeenPrivateHostHint") private var hasSeenPrivateHostHint: Bool = false
     @State private var showHostStartHint: Bool = false
 
     enum SidebarTab {
@@ -114,7 +115,8 @@ struct WatchPartyLobbyView: View {
             }
 
             // Host Hint Logic (All User Rooms)
-            if isHost && room.type == .userRoom && !hasSeenHostStartHint {
+            let hasSeenRelevantHint = room.isPublic ? hasSeenPublicHostHint : hasSeenPrivateHostHint
+            if isHost && room.type == .userRoom && !hasSeenRelevantHint {
                 withAnimation(Animation.easeInOut.delay(1.5)) {
                     showHostStartHint = true
                 }
@@ -787,7 +789,8 @@ struct WatchPartyLobbyView: View {
                             // Dismiss hint
                             if showHostStartHint {
                                 withAnimation { showHostStartHint = false }
-                                hasSeenHostStartHint = true
+                                if room.isPublic { hasSeenPublicHostHint = true }
+                                else { hasSeenPrivateHostHint = true }
                             }
                             startMovie()
                         }) {
@@ -821,7 +824,8 @@ struct WatchPartyLobbyView: View {
                                         Spacer()
                                         Button(action: {
                                             withAnimation { showHostStartHint = false }
-                                            hasSeenHostStartHint = true
+                                            if room.isPublic { hasSeenPublicHostHint = true }
+                                            else { hasSeenPrivateHostHint = true }
                                         }) {
                                             Image(systemName: "xmark")
                                                 .font(.caption)
@@ -851,7 +855,8 @@ struct WatchPartyLobbyView: View {
                                 .transition(.opacity.combined(with: .move(edge: .bottom)))
                                 .onTapGesture {
                                     withAnimation { showHostStartHint = false }
-                                    hasSeenHostStartHint = true
+                                    if room.isPublic { hasSeenPublicHostHint = true }
+                                    else { hasSeenPrivateHostHint = true }
                                 }
                             }
                         }

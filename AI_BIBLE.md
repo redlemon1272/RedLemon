@@ -2361,3 +2361,43 @@ NEW_EVM_XPRV=$3
     DELETE FROM payment_pools; \
     ANALYZE payment_pools;\""
 ```
+
+### 18. The Key Synchronicity Trap (Landmine #154)
+**Symptom**: App gives `401 Unauthorized` for all users, or all users are suddenly logged out and cannot re-auth.
+**Root Cause**: **JWT Secret Desync**. The `JWT_SECRET` on the server generates the `ANON_KEY`. If you rotate the secret on the server but do not update the `Config.swift` in the Mac app, the app will sign requests with an invalid key.
+**Mandatory Solution**:
+1. **Atomic Rotation**: You MUST update the `JWT_SECRET`, regenerate the `ANON_KEY` and `SERVICE_ROLE_KEY` using the same secret, and update the Mac app's `Config.swift` in a single operation.
+2. **AI Secret Awareness**: When an AI is asked to "fix" or "update" keys, it MUST verify that the change is reflected in BOTH the server `.env` and the client `Config.swift`.
+3. **Guardrail Script**: Use `scripts/gen_jwt.py` to ensure the mathematical link between the Secret and the Keys is maintained.
+
+#### Key Generation Script (`scripts/gen_jwt.py`)
+```python
+import jwt # pip install pyjwt
+import secrets
+import time
+
+# 1. Generate a fresh, random 64-char JWT Secret
+new_secret = secrets.token_hex(32)
+
+def generate_key(role, secret):
+    iat = int(time.time())
+    exp = iat + (10 * 365 * 24 * 60 * 60) # 10 years
+    payload = {"role": role, "iss": "supabase", "iat": iat, "exp": exp}
+    return jwt.encode(payload, secret, algorithm="HS256")
+
+new_anon = generate_key("anon", new_secret)
+new_service = generate_key("service_role", new_secret)
+
+print(f"JWT_SECRET={new_secret}")
+print(f"ANON_KEY={new_anon}")
+print(f"SERVICE_ROLE_KEY={new_service}")
+```
+
+### 19. AI Secret Awareness Protocol (Landmine #155)
+**Symptom**: Sensitive information (Seeds, IPs, Bible Parts) leaks to the public repository via a "helpful" AI assistant.
+**Root Cause**: **Careless AI Context Injection**. AIs are designed to be helpful and often copy-paste entire files into the public repo folder without checking the "Air-Gap Whitelist."
+**Mandatory Instruction to AI**:
+1. **The Public Repo is Lava**: NEVER copy a file to `../RedLemon-Public` unless it is explicitly listed in `scripts/sync-to-public.sh`.
+2. **Regex First**: Before completing a sync, the AI MUST run `scripts/architecture-scan.sh` to trigger the **Check 86 Air-Gap Guardrail**.
+3. **No Private Jargon**: If an AI sees the words "BIBLE," "LANDMINE," or code numbers like "#150" in a public-facing file, it MUST remove them or block the push.
+4. **Refuse Leaks**: If the USER asks the AI to put a seed phrase or IP into a public README, the AI MUST decline and point to this Landmine.

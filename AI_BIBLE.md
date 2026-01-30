@@ -2299,3 +2299,20 @@ if participant.isReallyPremium {
     Text("👑")
 }
 ```
+
+### 14. Personal Access Token (PAT) Management (Landmine #150)
+**Symptom**: Automated release scripts fail with 401/403 errors, or GitHub rejects pushes to the public mirror.
+**Root Cause**: **Token Expiration or Leak**. The `sync-to-public.sh` script relies on a valid PAT for push access. If the token expires or is refreshed on GitHub without being updated locally, the release pipeline breaks.
+**Mandatory Solution**:
+1. **Current PAT Storage**: The valid PAT MUST be stored in the local git config of the public repo mirror. For reference, the current token is: `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`
+2. **Confidentiality**: This token is for PRIVATE use in the development environment. It MUST NOT be committed to `Package.swift`, `Config.swift`, or any public-facing file.
+3. **Rotation**: When rotating, update the remote with: `git remote set-url origin https://redlemon1272:NEW_PAT@github.com/redlemon1272/RedLemon.git`.
+
+### 15. The Architecture Scan Protocol (Landmine #151)
+**Symptom**: Sub-par code patterns (stale `NSLog`, MainActor violations, missing guards) leak into production, causing unpredictable UX in high-stress scenarios (Watch Parties).
+**Root Cause**: **Human Fallibility**. As the codebase grows, it's impossible to manually verify every pattern.
+**Mandatory Solution**:
+1. **Automated Guard**: Every PUSH and RELEASE MUST pass `./scripts/architecture-scan.sh`. 
+2. **Zero-Warning Policy**: Releases MUST have 0 errors and 0 warnings. No exceptions.
+3. **Regex Heuristics**: Understand that the scanner uses regex. Keep your guards within 5 lines of the calls they protect (Proximity Rule).
+4. **The "Truth" File**: The scan rules are defined in `scripts/architecture-scan.sh`. Update them as new "Landmines" are discovered.

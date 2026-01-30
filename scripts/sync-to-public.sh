@@ -129,7 +129,11 @@ copy_safe "Sources/Features/Social"
 copy_safe "Resources"
 copy_safe "Package.swift"
 copy_safe "README.md"
-copy_safe "docs"
+# Docs (Strict Whitelist - Public Site Only)
+# CRITICAL: Do NOT copy the entire docs folder. Specific files only.
+copy_safe "docs/index.html"
+copy_safe "docs/style.css"
+copy_safe "docs/assets"
 copy_safe "scripts/architecture-scan.sh"
 copy_safe "scripts/install.sh"
 copy_safe "OPEN_SOURCE_PLAN.md"

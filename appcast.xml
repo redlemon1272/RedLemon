@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.171 -->
+        <item>
+            <title>Version 1.0.171</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>UX: Fixed missing Dock icon and 'Prohibited' symbol issues on Intel Macs.</li><li>Security: Hardened App Bundle permissions and Info.plist structure.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 11:38:36 -0500</pubDate>
+            <sparkle:version>171</sparkle:version>
+            <sparkle:shortVersionString>1.0.171</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.171.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="00bPD6yEj77q+qKkvj99Ya/YsK5ciuuBpgs7Y6F1CI5fCm9jpzjdm5r9pVc7oFZuKHWVWQ16XXIcR7Y541LcAQ==" length="75700798"
+            />
+        </item>
         <!-- v1.0.170 -->
         <item>
             <title>Version 1.0.170</title>

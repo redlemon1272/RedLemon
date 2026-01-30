@@ -2326,3 +2326,12 @@ if participant.isReallyPremium {
 3. **Regex Sentinel**: The scanner detects 12-word seed patterns, 100+ character XPUBs, and the Production IP.
 4. **Scrubbing Verification**: Ensure all internal jargon (`AI_BIBLE`, `Landmine`) is replaced by the scrubber.
 5. **Zero-Leak Policy**: If `architecture-scan.sh` detects a leak in the public repo, the RELEASE is blocked. No exceptions.
+
+### 17. The Zombie Wallet Trap (Landmine #153)
+**Symptom**: User funds continue to arrive at an OLD address even after you have rotated the XPUBs on the server.
+**Root Cause**: **Database Persistence**. The `payment_pools` table stores the link between a `user_id` and an `address`. If you rotate the XPUB in the engine but don't CLEAR the table, the server will keep serving the cached address from the old wallet.
+**Mandatory Solution**:
+1. **The Flush Rule**: Every wallet rotation MUST be accompanied by a database flush: `DELETE FROM payment_pools;`. 
+2. **The Deep Recycle Rule**: Standard `docker compose restart` often fails to re-read updated `.env` files into Deno runtimes. Always use `docker compose down && docker compose up -d` for wallet changes.
+3. **Automated Protocol**: Use `./scripts/rotate-wallet.sh` to ensure the correct sequence (ENV Update -> Down -> Up -> Table Flush).
+4. **Verification**: After rotation, trigger an `assign-address` call via curl/app to verify the derived address matches the new mnemonic's expected Index 0.

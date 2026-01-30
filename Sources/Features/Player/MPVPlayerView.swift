@@ -180,8 +180,19 @@ struct MPVPlayerView: View {
                             }
                             Spacer()
                         }
-                        .zIndex(101)
-                        .transition(.opacity)
+                        .zIndex(100)
+                    }
+
+                    // Subtle Guest Notifications (Top-right, ONLY when chat is closed)
+                    if !viewModel.showChat {
+                        VStack {
+                            HStack {
+                                Spacer()
+                                GuestNotificationOverlay(viewModel: viewModel)
+                            }
+                            Spacer()
+                        }
+                        .zIndex(201) // Above ReactionOverlay (200)
                     }
 
                     // Player controls (bottom bar)

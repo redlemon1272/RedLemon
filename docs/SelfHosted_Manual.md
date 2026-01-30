@@ -38,14 +38,14 @@ ssh root@151.243.109.243
 These keys are hardcoded in your app and server. If you change them, you must update both.
 
 *   **ANON_KEY (Public):**
-    `eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJyb2xlIjogImFub24iLCAiaXNzIjogInN1cGFiYXNlIiwgImlhdCI6IDE3Njc2NTAwMzIsICJleHAiOiAyMDgzMDEwMDMyfQ.zY-FKTBjIi4dvhR7En5i5ULALx9QM_2O4QWMbedkBus`
+    `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzY5NzgzNDkyLCJleHAiOjIwODUxNDM0OTJ9.n-lTY3pLyNnNOggkn1EF41N0KeibKUuiR0AC2SKuUV0`
 
 *   **SERVICE_ROLE_KEY (Secret - Admin API):**
     `REMOVED (Security: Used on Server-Side Only)`
 
 
 *   **JWT Secret (For Token Generation):**
-    `0c759034b5faeabea30200006df6cfed979ea6a95891a33080fb0d8677e671de`
+    `be8213a48846bcb78111f51e66198d4ff85841be55271840fa0a12b5d0e15d54`
 
 ---
 
@@ -239,15 +239,15 @@ SELECT cron.schedule(
 > Store it safely offline (Paper/Metal backup). The server only needs the XPUBs (Public Keys) to generate addresses; it does NOT need the Private Key or Seed Phrase.
 
 **Seed Phrase (Mnemonic):**
-`moment absent unfair song unusual neck panther asset clock conduct doll voice`
+`either access boy color rice recipe express photo round enforce debris pill`
 
 **Derivation Paths:**
 *   **BTC:** `m/84'/0'/0'` (Native Segwit / BIP84)
 *   **EVM (ETH/Base):** `m/44'/60'/0'` (Standard BIP44)
 
 **Extended Public Keys (XPUBs) - Injected into Server:**
-*   **XPUB_BTC:** `xpub6CNJnaQ1bu7oLQH4g8ZGSJUbVtRLqu3ikYm9PhiFohEb9LdFCsz4QTK1aWob5nR1P7uzDmRR7GKm5aJvKgzrrWmh6CahF95K5Vtb3TgzLoq`
-*   **XPUB_EVM:** `xpub6CUocXeQEa3MZ7QWXn4uwjcaXS2y84MAN1KTQRq9TscPvJk5kMj4fSKYxNC1ooyAf9ysT15cwJW3UP6HEcCPUKVu67wwoKqsyJNAeWQ6i1y`
+*   **XPUB_BTC:** `zpub6qvU5Y4rYoTKDoLj1fAQTsrBditGKgoLLLv16fMbLYKj1QknC4GLF5soMczZunRLLPhKaynHpcmvSdgxFEMoghYLz1wXRgAQ769Ybfs6Cco`
+*   **XPUB_EVM:** `xpub6BqjrMFArT9RBmm23oKgaCjq8fYZ4QJEjTvsSFW4WJB6fiSby8aSEJnuNV15yndiQkZ9DLukx6DVRaraApmBok9XqGnDy7fWAmBeAJeZ4ug`
 
 **Usage:**
 *   **Importing to Wallet:** Use the Seed Phrase in MetaMask, electrum, or Ledger to access funds.

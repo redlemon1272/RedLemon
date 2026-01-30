@@ -852,8 +852,8 @@ ssh root@151.243.109.243
 | **Database** | Port 5432 | postgres / `6be071e915e2f9246408639def0a07bd` |
 
 ### API Keys
-- **ANON_KEY**: `eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJyb2xlIjogImFub24iLCAiaXNzIjogInN1cGFiYXNlIiwgImlhdCI6IDE3Njc2NTAwMzIsICJleHAiOiAyMDgzMDEwMDMyfQ.zY-FKTBjIi4dvhR7En5i5ULALx9QM_2O4QWMbedkBus`
-- **JWT Secret**: `0c759034b5faeabea30200006df6cfed979ea6a95891a33080fb0d8677e671de`
+- **ANON_KEY**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzY5NzgzNDkyLCJleHAiOjIwODUxNDM0OTJ9.n-lTY3pLyNnNOggkn1EF41N0KeibKUuiR0AC2SKuUV0`
+- **JWT Secret**: `be8213a48846bcb78111f51e66198d4ff85841be55271840fa0a12b5d0e15d54`
 
 ## Maintenance Commands
 
@@ -1079,15 +1079,15 @@ caddy-proxy          caddy:2-alpine         HTTPS/SSL Proxy
 > These keys control collected funds. Store offline (paper/metal backup).
 
 **Seed Phrase:**
-`moment absent unfair song unusual neck panther asset clock conduct doll voice`
+`either access boy color rice recipe express photo round enforce debris pill`
 
 **Derivation Paths:**
 - **BTC**: `m/84'/0'/0'` (Native Segwit) - *Currently Inactive/Hidden in UI*
 - **EVM**: `m/44'/60'/0'` (Standard BIP44) - *Active (Ethereum, Base, etc)*
 
 **XPUBs (Server Config):**
-- **XPUB_BTC**: `xpub6CNJnaQ1bu7oLQH4g8ZGSJUbVtRLqu3ikYm9PhiFohEb9LdFCsz4QTK1aWob5nR1P7uzDmRR7GKm5aJvKgzrrWmh6CahF95K5Vtb3TgzLoq`
-- **XPUB_EVM**: `xpub6CUocXeQEa3MZ7QWXn4uwjcaXS2y84MAN1KTQRq9TscPvJk5kMj4fSKYxNC1ooyAf9ysT15cwJW3UP6HEcCPUKVu67wwoKqsyJNAeWQ6i1y`
+- **XPUB_BTC**: `zpub6qvU5Y4rYoTKDoLj1fAQTsrBditGKgoLLLv16fMbLYKj1QknC4GLF5soMczZunRLLPhKaynHpcmvSdgxFEMoghYLz1wXRgAQ769Ybfs6Cco`
+- **XPUB_EVM**: `xpub6BqjrMFArT9RBmm23oKgaCjq8fYZ4QJEjTvsSFW4WJB6fiSby8aSEJnuNV15yndiQkZ9DLukx6DVRaraApmBok9XqGnDy7fWAmBeAJeZ4ug`
 
 ---
 
@@ -2116,11 +2116,11 @@ To manage the `redlemon1272/RedLemon` public repository, use the automated deplo
 
 **Credential (GH_PAT)**:
 The following token is a "No Expiry" fine-grained PAT with `repo:contents` access for the public RedLemon repo.
-`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`
+`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`
 
 **Automated Deployment Command**:
 ```bash
-export GH_PAT="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"
+export GH_PAT="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"
 ./scripts/public-deploy.sh
 ```
 
@@ -2299,3 +2299,105 @@ if participant.isReallyPremium {
     Text("👑")
 }
 ```
+
+### 14. Personal Access Token (PAT) Management (Landmine #150)
+**Symptom**: Automated release scripts fail with 401/403 errors, or GitHub rejects pushes to the public mirror.
+**Root Cause**: **Token Expiration or Leak**. The `sync-to-public.sh` script relies on a valid PAT for push access. If the token expires or is refreshed on GitHub without being updated locally, the release pipeline breaks.
+**Mandatory Solution**:
+1. **Current PAT Storage**: The valid PAT MUST be stored in the local git config of the public repo mirror. For reference, the current token is: `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`
+2. **Confidentiality**: This token is for PRIVATE use in the development environment. It MUST NOT be committed to `Package.swift`, `Config.swift`, or any public-facing file.
+3. **Rotation**: When rotating, update the remote with: `git remote set-url origin https://redlemon1272:NEW_PAT@github.com/redlemon1272/RedLemon.git`.
+
+### 15. The Architecture Scan Protocol (Landmine #151)
+**Symptom**: Sub-par code patterns (stale `NSLog`, MainActor violations, missing guards) leak into production, causing unpredictable UX in high-stress scenarios (Watch Parties).
+**Root Cause**: **Human Fallibility**. As the codebase grows, it's impossible to manually verify every pattern.
+**Mandatory Solution**:
+1. **Automated Guard**: Every PUSH and RELEASE MUST pass `./scripts/architecture-scan.sh`. 
+2. **Zero-Warning Policy**: Releases MUST have 0 errors and 0 warnings. No exceptions.
+3. **Regex Heuristics**: Understand that the scanner uses regex. Keep your guards within 5 lines of the calls they protect (Proximity Rule).
+4. **The "Truth" File**: The scan rules are defined in `scripts/architecture-scan.sh`. Update them as new "Landmines" are discovered.
+
+### 16. The Air-Gap Guardrail (Landmine #152)
+**Symptom**: Private documentation (Manuals), Wallet Seeds, XPUBs, or Production IPs are accidentally committed to the public mirror.
+**Root Cause**: **Human Error or Sync Script Misconfiguration**. It only takes one `cp -R docs/*` to leak the entire production manual.
+**Mandatory Solution**:
+1. **Strict Whitelist (Default Deny)**: `sync-to-public.sh` MUST only copy explicitly safe files. Never copy entire directories except `Resources`, `Sources/Models`, etc.
+2. **Post-Sync Audit**: The `architecture-scan.sh` script (Check 86) MANDATORILY audits the `../RedLemon-Public` directory after every sync.
+3. **Regex Sentinel**: The scanner detects 12-word seed patterns, 100+ character XPUBs, and the Production IP.
+4. **Scrubbing Verification**: Ensure all internal jargon (`AI_BIBLE`, `Landmine`) is replaced by the scrubber.
+5. **Zero-Leak Policy**: If `architecture-scan.sh` detects a leak in the public repo, the RELEASE is blocked. No exceptions.
+
+### 17. The Zombie Wallet Trap (Landmine #153)
+**Symptom**: User funds continue to arrive at an OLD address even after **changing wallets** or rotating XPUBs on the server.
+**Root Cause**: **Database Persistence**. The `payment_pools` table stores the link between a `user_id` and an `address`. If you rotate the XPUB in the engine but don't CLEAR the table, the server will keep serving the cached address from the old wallet.
+**Mandatory Solution**:
+1. **The Flush Rule**: Every wallet rotation MUST be accompanied by a database flush: `DELETE FROM payment_pools;`. 
+2. **The Deep Recycle Rule**: Standard `docker compose restart` often fails to re-read updated `.env` files into Deno runtimes. Always use `docker compose down && docker compose up -d` for wallet changes.
+3. **Automated Protocol**: Use `./scripts/rotate-wallet.sh` to ensure the correct sequence (ENV Update -> Down -> Up -> Table Flush).
+4. **Verification**: After rotation, trigger an `assign-address` call via curl/app to verify the derived address matches the new mnemonic's expected Index 0.
+
+#### Automated Rotation Script (`scripts/rotate-wallet.sh`)
+```bash
+#!/bin/bash
+# 🍋 RedLemon Wallet Rotation Protocol (Emergency & Routine)
+# Automates the safe transition to a new wallet.
+set -e
+
+NEW_BTC_XPUB=$1
+NEW_EVM_XPUB=$2
+NEW_EVM_XPRV=$3
+
+# 1. Update Remote .env
+./remote_exec.sh "sed -i 's/^XPUB_BTC=.*/XPUB_BTC=$NEW_BTC_XPUB/' /root/supabase/docker/.env && \
+                  sed -i 's/^XPUB_EVM=.*/XPUB_EVM=$NEW_EVM_XPUB/' /root/supabase/docker/.env && \
+                  sed -i 's/^XPRV_EVM=.*/XPRV_EVM=$NEW_EVM_XPRV/' /root/supabase/docker/.env"
+
+# 2. Deep Recycle Containers (Flush ENV)
+./remote_exec.sh "cd /root/supabase/docker && docker compose down && docker compose up -d"
+
+# 3. Flush Zombie Pools (Prevent Landmine #153)
+./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"\
+    UPDATE key_derivation_indices SET next_index = 0; \
+    DELETE FROM payment_pools; \
+    ANALYZE payment_pools;\""
+```
+
+### 18. The Key Synchronicity Trap (Landmine #154)
+**Symptom**: App gives `401 Unauthorized` for all users, or all users are suddenly logged out and cannot re-auth.
+**Root Cause**: **JWT Secret Desync**. The `JWT_SECRET` on the server generates the `ANON_KEY`. If you rotate the secret on the server but do not update the `Config.swift` in the Mac app, the app will sign requests with an invalid key.
+**Mandatory Solution**:
+1. **Atomic Rotation**: You MUST update the `JWT_SECRET`, regenerate the `ANON_KEY` and `SERVICE_ROLE_KEY` using the same secret, and update the Mac app's `Config.swift` in a single operation.
+2. **AI Secret Awareness**: When an AI is asked to "fix" or "update" keys, it MUST verify that the change is reflected in BOTH the server `.env` and the client `Config.swift`.
+3. **Guardrail Script**: Use `scripts/gen_jwt.py` to ensure the mathematical link between the Secret and the Keys is maintained.
+
+#### Key Generation Script (`scripts/gen_jwt.py`)
+```python
+import jwt # pip install pyjwt
+import secrets
+import time
+
+# 1. Generate a fresh, random 64-char JWT Secret
+new_secret = secrets.token_hex(32)
+
+def generate_key(role, secret):
+    iat = int(time.time())
+    exp = iat + (10 * 365 * 24 * 60 * 60) # 10 years
+    payload = {"role": role, "iss": "supabase", "iat": iat, "exp": exp}
+    return jwt.encode(payload, secret, algorithm="HS256")
+
+new_anon = generate_key("anon", new_secret)
+new_service = generate_key("service_role", new_secret)
+
+print(f"JWT_SECRET={new_secret}")
+print(f"ANON_KEY={new_anon}")
+print(f"SERVICE_ROLE_KEY={new_service}")
+```
+
+### 19. AI Secret Awareness Protocol (Landmine #155)
+**Symptom**: Sensitive information (Seeds, IPs, Bible Parts) leaks to the public repository via a "helpful" AI assistant.
+**Root Cause**: **Careless AI Context Injection**. AIs are designed to be helpful and often copy-paste entire files into the public repo folder without checking the "Air-Gap Whitelist."
+**Mandatory Instruction to AI**:
+1. **The Public Repo is Lava**: NEVER copy a file to `../RedLemon-Public` unless it is explicitly listed in `scripts/sync-to-public.sh`.
+2. **Regex First**: Before completing a sync, the AI MUST run `scripts/architecture-scan.sh` to trigger the **Check 86 Air-Gap Guardrail**.
+3. **No Private Jargon**: If an AI sees the words "BIBLE," "LANDMINE," or code numbers like "#150" in a public-facing file, it MUST remove them or block the push.
+4. **Refuse Leaks**: If the USER asks the AI to put a seed phrase or IP into a public README, the AI MUST decline and point to this Landmine.

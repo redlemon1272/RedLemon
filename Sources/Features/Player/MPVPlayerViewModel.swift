@@ -701,6 +701,7 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var showSettings: Bool = false
     @Published var isAnimatingChatToggle: Bool = false
     @Published var messages: [ChatMessage] = []
+    @Published var guestNotifications: [GuestNotification] = []
 
     // Reactions
     @Published var areReactionsEnabled: Bool = true
@@ -2098,6 +2099,25 @@ class MPVPlayerViewModel: ObservableObject {
         Task { @MainActor in
             self.messages.append(message) // OK - Single system message
             self.trimChatMessages()
+
+            // ✅ Enhancement: If chat is CLOSED, show a subtle notification overlay
+            if !self.showChat {
+                self.addGuestNotification(text)
+            }
+        }
+    }
+
+    /// Adds a subtle notification to the top-right overlay when chat is closed
+    private func addGuestNotification(_ text: String) {
+        let notification = GuestNotification(text: text)
+        self.guestNotifications.append(notification)
+
+        // Auto-dismiss after 5 seconds
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 5_000_000_000)
+            withAnimation(.easeInOut) {
+                self.guestNotifications.removeAll(where: { $0.id == notification.id })
+            }
         }
     }
 
@@ -2279,6 +2299,12 @@ struct ChatMessage: Identifiable {
         }
         return isPremium
     }
+}
+
+struct GuestNotification: Identifiable {
+    let id = UUID()
+    let text: String
+    let timestamp = Date()
 }
 
 

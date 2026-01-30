@@ -1787,6 +1787,122 @@ while IFS=: read -r file line code; do
     fi
 done < <(grep -rnE "\.isPremium" "$SOURCES_DIR" --include="*.swift" | grep -v "//" | grep -vE "(var|let|case|isPremium:|= isPremium|==)")
 
+# =============================================================================
+# CHECK 83: Hardcoded GitHub Secrets (Landmine #150)
+# =============================================================================
+# Trigger: 'github_pat_' string found in Source files.
+# Rule: Never hardcode Personal Access Tokens in the application source.
+print_header "Check 83: Hardcoded GitHub Secrets (Landmine #150)"
+
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+    report "ERROR" "Landmine #150" "Hardcoded GitHub PAT detected. Secrets MUST stay in the AI Bible or environment variables." "$file" "$line" "$code"
+done < <(grep -rn "github_pat_" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK")
+
+# =============================================================================
+# CHECK 84: Wallet Seed Phrases (Landmine #152)
+# =============================================================================
+# Trigger: 12-word mnemonic pattern found.
+# Rule: Never allow wallet seeds to be committed to any file.
+print_header "Check 84: Wallet Seed Phrases (Landmine #152)"
+
+# Pattern for 12 lowercase words (approximate BIP39 format)
+# Strictly words of 3-10 chars, strictly spaces, exactly 12 or 24.
+SEED_PATTERN="\b[a-z]{3,10}\b( \b[a-z]{3,10}\b){11,}"
+
+while read -r entry; do
+    file=$(echo "$entry" | cut -d: -f1)
+    line=$(echo "$entry" | cut -d: -f2)
+    code=$(echo "$entry" | cut -d: -f3-)
+
+    if [[ "$file" == *"AI_BIBLE.md"* ]] || [[ "$file" == *"docs/SelfHosted_Manual.md"* ]]; then
+        # These are ALLOWED in the PRIVATE repo, but we will check PUBLIC repo separately.
+        continue
+    fi
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+    # Filter out sentences that just happen to be long (heuristic: seeds usually don't have periods/commas)
+    if [[ "$code" =~ [\.,\!\?\;\:] ]]; then continue; fi
+
+    report "ERROR" "Landmine #152" "Potential wallet seed phrase detected! Move to a secure vault." "$file" "$line" "$code"
+done < <(grep -rnE "$SEED_PATTERN" "$SOURCES_DIR" "$SCRIPTS_DIR" --include="*.swift" --include="*.sh" 2>/dev/null || true)
+
+# =============================================================================
+# CHECK 85: Extended Public Keys (XPUBs) (Landmine #152)
+# =============================================================================
+# Trigger: 'xpub' followed by base58 characters.
+# Rule: XPUBs are public-ish but shouldn't leak in app source.
+print_header "Check 85: Extended Public Keys (XPUBs)"
+
+while read -r entry; do
+    file=$(echo "$entry" | cut -d: -f1)
+    line=$(echo "$entry" | cut -d: -f2)
+    code=$(echo "$entry" | cut -d: -f3-)
+
+    if [[ "$file" == *"AI_BIBLE.md"* ]] || [[ "$file" == *"docs/SelfHosted_Manual.md"* ]]; then continue; fi
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+    report "ERROR" "Landmine #152" "XPUB detected. Store these in server-side environment variables or AI Bible only." "$file" "$line" "$code"
+done < <(grep -rnE "xpub[a-zA-Z0-9]{100,}" "$SOURCES_DIR" --include="*.swift" 2>/dev/null || true)
+
+# =============================================================================
+# CHECK 86: Public Sync Integrity (The "Air-Gap" Guardrail)
+# =============================================================================
+# Trigger: Sensitive patterns found in the PUBLIC_REPO_ROOT.
+# Rule: The public repository MUST be 100% free of internal jargon, IPs, and secrets.
+print_header "Check 86: Public Sync Integrity (Air-Gap Guardrail)"
+
+PUBLIC_REPO_ROOT="../RedLemon-Public"
+if [ -d "$PUBLIC_REPO_ROOT" ]; then
+    echo -e "${BLUE}🔍 Auditing public mirror at $PUBLIC_REPO_ROOT...${NC}"
+    
+    # 1. Check for AI_BIBLE or internal mentions
+    while read -r entry; do
+        file=$(echo "$entry" | cut -d: -f1)
+        line=$(echo "$entry" | cut -d: -f2)
+        code=$(echo "$entry" | cut -d: -f3-)
+        report "ERROR" "Air-Gap Failure" "Internal jargon 'AI_BIBLE' leaked into public repository!" "$file" "$line" "$code"
+    done < <(grep -rn "AI_BIBLE" "$PUBLIC_REPO_ROOT" --exclude-dir=".git" 2>/dev/null || true)
+
+    # 2. Check for Production IP
+    PRODUCTION_IP="151.243.109.243"
+    while read -r entry; do
+        file=$(echo "$entry" | cut -d: -f1)
+        line=$(echo "$entry" | cut -d: -f2)
+        code=$(echo "$entry" | cut -d: -f3-)
+        
+        if [[ "$file" == *"scripts/install.sh"* ]]; then continue; fi # Installer needs the IP
+        report "ERROR" "Air-Gap Failure" "Production IP leaked into public repository!" "$file" "$line" "$code"
+    done < <(grep -rn "$PRODUCTION_IP" "$PUBLIC_REPO_ROOT" --exclude-dir=".git" 2>/dev/null || true)
+
+    # 3. Check for Seed Phrases in public repo
+    while read -r entry; do
+        file=$(echo "$entry" | cut -d: -f1)
+        line=$(echo "$entry" | cut -d: -f2)
+        code=$(echo "$entry" | cut -d: -f3-)
+        
+        # Exclude common sentences matching the pattern in public repo too
+        if [[ "$code" =~ [\.,\!\?\;\:] ]]; then continue; fi
+        
+        report "ERROR" "Air-Gap Failure" "CRITICAL: Wallet seed phrase leaked into public repository!" "$file" "$line" "$code"
+    done < <(grep -rnE "$SEED_PATTERN" "$PUBLIC_REPO_ROOT" --exclude-dir=".git" 2>/dev/null || true)
+
+    # 4. Check for XPUBs in public repo
+    while read -r entry; do
+        file=$(echo "$entry" | cut -d: -f1)
+        line=$(echo "$entry" | cut -d: -f2)
+        code=$(echo "$entry" | cut -d: -f3-)
+        report "ERROR" "Air-Gap Failure" "CRITICAL: XPUB leaked into public repository!" "$file" "$line" "$code"
+    done < <(grep -rnE "xpub[a-zA-Z0-9]{100,}" "$PUBLIC_REPO_ROOT" --exclude-dir=".git" 2>/dev/null || true)
+    
+    # 5. Check for any documentation leaks (Manuals)
+    if [ -f "$PUBLIC_REPO_ROOT/docs/SelfHosted_Manual.md" ]; then
+        report "ERROR" "Air-Gap Failure" "Private documentation 'SelfHosted_Manual.md' leaked into public repository!" "$PUBLIC_REPO_ROOT/docs/SelfHosted_Manual.md" "1" "FILE EXISTS"
+    fi
+else
+    echo -e "${YELLOW}⚠️  Skipping Public Sync Integrity check (Repo not found at $PUBLIC_REPO_ROOT).${NC}"
+fi
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

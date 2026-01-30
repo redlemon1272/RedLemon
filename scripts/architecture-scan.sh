@@ -1787,6 +1787,19 @@ while IFS=: read -r file line code; do
     fi
 done < <(grep -rnE "\.isPremium" "$SOURCES_DIR" --include="*.swift" | grep -v "//" | grep -vE "(var|let|case|isPremium:|= isPremium|==)")
 
+# =============================================================================
+# CHECK 83: Hardcoded GitHub Secrets (Landmine #150)
+# =============================================================================
+# Trigger: 'github_pat_' string found in Source files.
+# Rule: Never hardcode Personal Access Tokens in the application source.
+print_header "Check 83: Hardcoded GitHub Secrets (Landmine #150)"
+
+while IFS=: read -r file line code; do
+    if [[ "$code" =~ ^[[:space:]]*// ]]; then continue; fi
+
+    report "ERROR" "Landmine #150" "Hardcoded GitHub PAT detected. Secrets MUST stay in the AI Bible or environment variables." "$file" "$line" "$code"
+done < <(grep -rn "github_pat_" "$SOURCES_DIR" --include="*.swift" | grep -v "// OK")
+
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"
 echo -e "${BOLD}════════════════════════════════════════════════════════════════${NC}"

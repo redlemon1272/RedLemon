@@ -185,11 +185,15 @@ class MPVPlayerViewModel: ObservableObject {
                     if isPlaying {
                         self.lastPlaybackResumeTime = Date()
 
-                        // CRITICAL FIX: Dismiss "Waiting for Guests" and Background Art when playback ACTUALLY starts.
-                        // This corresponds to the changes in startSynchronizedPlayback where we removed the premature dismissal.
-                        if self.showWaitingForGuests {
-                             LoggingManager.shared.info(.watchParty, message: "Playback started - dismissing Waiting Gate UI")
-                             self.showWaitingForGuests = false
+                        // CRITICAL FIX: Final cleanup when playback ACTUALLY starts.
+                        // This ensures the background art (showPoster) lingers until the first frame renders.
+                        withAnimation(.easeOut(duration: 0.5)) {
+                             if self.showWaitingForGuests {
+                                 LoggingManager.shared.info(.watchParty, message: "Playback started - dismissing Waiting Gate UI")
+                                 self.showWaitingForGuests = false
+                             }
+                             self.showPoster = false
+                             self.isLoading = false
                         }
                     }
 
@@ -4118,25 +4122,20 @@ extension MPVPlayerViewModel {
 
     private func startSynchronizedPlayback() {
         LoggingManager.shared.info(.watchParty, message: "Host: Initiating synchronized start")
-        // CRITICAL FIX: Don't hide waiting UI yet. Wait for playback state binding to do it.
-        // This prevents the black screen gap between "Start" click and MPV actually rendering frames.
-        // showWaitingForGuests = false
+        // Restore immediate dismissal of the text overlay for "Perfect" Host feedback.
+        // The background art (showPoster) will remain visible until the isPlaying sink triggers.
+        self.showWaitingForGuests = false
 
         // CRITICAL FIX: Host Background Art Linger
         // Explicitly clear the initial lock for the Host immediately when starting playback.
-        // Guests rely on the incoming Sync Message to trigger this, but the Host ignores their own echo.
-        // Without this, the Host waits for the 5s failsafe timer to clear the poster.
         if isRefiningInitialSeek {
              LoggingManager.shared.debug(.watchParty, message: "Host: Releasing initial seek lock (Starting Playback)")
              isRefiningInitialSeek = false
-             // withAnimation(.easeOut(duration: 0.5)) {
-             //     self.showPoster = false
-             //     self.isLoading = false
-             // }
         }
         // mpvWrapper.play() - Removed
         Task { await playbackService.play() }
-        isPlaying = true
+        // isPlaying = true // REMOVED: Wait for real signal to prevent "too quick" removal of art
+
 
         // FORCE PLAY SAFETY NET: Retrigger play if still at 0.0 after 1.5s
         // This fixes the "Black Screen at 0:00" issue where the initial command is missed

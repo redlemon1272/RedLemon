@@ -186,14 +186,17 @@ class MPVPlayerViewModel: ObservableObject {
                         self.lastPlaybackResumeTime = Date()
 
                         // CRITICAL FIX: Persistent Background Art
-                        // Dismiss the art/loading states only when playback DEFINITIVELY starts.
-                        // This prevents the black screen gap.
-                        withAnimation(.easeOut(duration: 0.5)) {
-                             self.showPoster = false
-                             self.isLoading = false
-                             if self.showWaitingForGuests {
-                                 self.showWaitingForGuests = false
-                             }
+                        // For the Host, we hide when playback starts (user-accepted timing).
+                        // For Guests, we ONLY hide if we aren't currently in the "Refining Initial Seek" phase.
+                        // This prevents the "Black Screen" gap for Guests during the initial load.
+                        if self.isWatchPartyHost || !self.isRefiningInitialSeek {
+                            withAnimation(.easeOut(duration: 0.5)) {
+                                 self.showPoster = false
+                                 self.isLoading = false
+                                 if self.showWaitingForGuests {
+                                     self.showWaitingForGuests = false
+                                 }
+                            }
                         }
                     }
 
@@ -254,10 +257,9 @@ class MPVPlayerViewModel: ObservableObject {
 
                     // CRITICAL FIX: Playback Progress Recovery
                     // If time is advancing but UI thinks we are buffering, force clear the buffering state.
-                    // This handles cases where MPV misses the "buffering end" event (e.g. paused-for-cache glitch).
-                    // NOTE: Also applies to Watch Party HOST (who doesn't receive sync messages to clear state).
-                    // Guests are excluded - they wait for sync message to reveal video (prevents frame 0 flash).
-                    if (self.isBuffering || self.isLoading) && self.mpvWrapper.isPlaying && (!self.isInWatchParty || self.isWatchPartyHost) {
+                    // This handles cases where MPV misses the "buffering end" event.
+                    // Logic: Trigger if we are the Host OR if the Guest has finished their initial sync lock.
+                    if (self.isBuffering || self.isLoading) && self.mpvWrapper.isPlaying && (self.isWatchPartyHost || !self.isRefiningInitialSeek) {
                          LoggingManager.shared.info(.videoRendering, message: "Time advancing (time: \(time)) while buffering - Forcing UI unlock")
                          self.isBuffering = false
                          // Also clear the "Refining Initial Seek" lock if it's stuck
@@ -3404,7 +3406,7 @@ extension MPVPlayerViewModel {
             if remoteIsPlaying && (showWaitingForGuests || showPoster) {
                 LoggingManager.shared.info(.watchParty, message: "Received playback state (playing) - Dismissing waiting text")
                 // Immediate feedback: Hide text overlay. 
-                // Art (showPoster) will be cleaned up by isPlaying sink.
+                // Art (showPoster) will stay until the refinement block (Guest) or sink (Host).
                 showWaitingForGuests = false 
                 readySignalsSentCount = 0 // Reset timeout counter
 
@@ -3412,11 +3414,8 @@ extension MPVPlayerViewModel {
                 readyLoopTimer?.invalidate()
                 readyLoopTimer = nil
                 
-                // CRITICAL FIX: Ensure poster is hidden if host is playing
-                withAnimation {
-                    self.showPoster = false
-                    self.isLoading = false
-                }
+                // CRITICAL FIX: DO NOT force isLoading = false here for Guests. 
+                // This was causing the "Black Screen" because it hid the poster before video was buffered.
             }
 
             // Update network latency estimate

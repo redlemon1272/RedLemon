@@ -94,21 +94,25 @@ class MPVWrapper: ObservableObject {
         // Use libmpv render API with optimized settings for Intel Macs
         mpv_set_option_string(handle, "vo", "libmpv")
 
-        // Hardware decoding - Enable for smooth x265 playback
-        mpv_set_option_string(handle, "hwdec", "auto")
-
-        // Explicit VideoToolbox support for macOS (better for Intel Macs)
-        mpv_set_option_string(handle, "hwdec-codecs", "all")
-
-        // OpenGL for better compatibility with older Intel graphics
-        mpv_set_option_string(handle, "gpu-api", "opengl")
-        mpv_set_option_string(handle, "gpu-hwdec-interop", "auto")
-
-        // No audio display
-        mpv_set_option_string(handle, "audio-display", "no")
-
-        // Performance - Reduced buffers for lower memory usage
-        // Performance - Increased buffers for 4K streaming
+        // Hardware decoding strategy
+        #if arch(arm64)
+            // Apple Silicon (M1/M2/M3)
+            // Fix: Force Software Decoding. The CPU is fast enough for 4K+, and this bypasses 
+            // the 3-4s latency of VideoToolbox hardware synchronization on resume.
+            mpv_set_option_string(handle, "hwdec", "no")
+            mpv_set_option_string(handle, "vd-lavc-dr", "no")
+        #else
+            // Intel Macs (x86_64)
+            // Continue using Hardware Acceleration (Auto) as they benefit more from it
+            // and don't exhibit the startup lag.
+            mpv_set_option_string(handle, "hwdec", "auto")
+            
+            // Explicit VideoToolbox support for macOS (better for Intel Macs)
+            mpv_set_option_string(handle, "hwdec-codecs", "all")
+            
+            // Direct Rendering helps Intel iGPUs
+            mpv_set_option_string(handle, "vd-lavc-dr", "yes")
+        #endif
         mpv_set_option_string(handle, "cache-secs", "60")  // Allow up to 60s of buffer
         mpv_set_option_string(handle, "demuxer-max-bytes", "500M")  // 500MB buffer for high-bitrate streams
 

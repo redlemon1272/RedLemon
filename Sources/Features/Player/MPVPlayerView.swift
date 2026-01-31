@@ -162,9 +162,10 @@ struct MPVPlayerView: View {
 
                     // MPV video output - IINA-style CAOpenGLLayer
                     MPVLayerVideoView(wrapper: viewModel.mpvWrapper)
-                        .opacity(viewModel.isLoading ? 0 : (viewModel.isExitingSession || viewModel.isExitingToLobby ? 0.4 : 1))
+                        .opacity((viewModel.isLoading || viewModel.showPoster || viewModel.showWaitingForGuests) ? 0 : (viewModel.isExitingSession || viewModel.isExitingToLobby ? 0.4 : 1))
                         .blur(radius: viewModel.isExitingSession || viewModel.isExitingToLobby ? 20 : 0)
                         .scaleEffect(viewModel.isExitingSession || viewModel.isExitingToLobby ? 1.05 : 1)
+                        .animation(.easeInOut(duration: 0.5), value: (viewModel.isLoading || viewModel.showPoster || viewModel.showWaitingForGuests))
                         .animation(.easeInOut(duration: 0.4), value: viewModel.isExitingSession || viewModel.isExitingToLobby)
                         .contentShape(Rectangle()) // Capture all clicks in this area
                         .onTapGesture {

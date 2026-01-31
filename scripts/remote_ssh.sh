@@ -1,7 +1,7 @@
 #!/usr/bin/expect -f
 
 set timeout 300
-set password "123Scarface123!"
+set password "4Y76HBYs^OxSQNbIbbfA7C0d"
 set cmd [lindex $argv 0]
 set host "151.243.109.243"
 

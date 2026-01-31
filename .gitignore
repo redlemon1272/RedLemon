@@ -77,15 +77,7 @@ ENV/
 !.vscode/settings.json
 .idea/
 
-# Internal Documentation (Added to prevent leaks)
-AI_BIBLE.md
-REDDIT_LAUNCH_PLAN.md
-docs/SelfHosted_Manual.md
-docs/archive/
-docs/migrations/
-TEST_PLAN.md
-REDLEMON_STABILITY_FIXES_HANDOFF.md
-REDLEMON_WATCHPARTY_COMPLETE_HANDOFF.md
+# Trash and logs
 Sources/Networking/guestconsolelog.md
 
 *.dylib

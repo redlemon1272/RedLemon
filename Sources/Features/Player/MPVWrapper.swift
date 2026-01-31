@@ -15,7 +15,7 @@ import LibMPV
 /// Small MPV wrapper that manages an embedded mpv instance and its render context.
 /// Thread-safe container for MPV handles to allow background rendering access
 /// without violating MainActor isolation of the parent wrapper.
-final class MPVHandleState {
+final class MPVHandleState: @unchecked Sendable {
     let lock = NSRecursiveLock()
     var handle: OpaquePointer?
     var renderContext: OpaquePointer?
@@ -1516,18 +1516,13 @@ class MPVWrapper: ObservableObject {
 
     /// Manually destroy the MPV instance and release resources.
     /// Call this when the wrapper is no longer needed, especially if the owner might be retained.
-    /// Manually destroy the MPV instance and release resources.
-    /// Call this when the wrapper is no longer needed, especially if the owner might be retained.
     nonisolated func destroy() {
         print("MPVWrapper: destroy() called - cleaning up...")
 
-        // 1. Cancel timers and polling (MainActor isolated)
-        Task { @MainActor in
-            self.timeUpdateTask?.cancel()
-            self.timeUpdateTask = nil
-            self.eventPollingTask?.cancel()
-            self.eventPollingTask = nil
-        }
+        // Note: Tasks (timeUpdateTask, eventPollingTask) use [weak self] and will 
+        // terminate naturally when this instance is deallocated. 
+        // We cannot explicitly cancel them here via Task { @MainActor } because 
+        // capturing 'self' during deinit triggers a fatal error (resurrection).
 
         // 2. Safely capture and clear handle/context
         let (handleToDestroy, contextToFree) = state.lock.withLock {

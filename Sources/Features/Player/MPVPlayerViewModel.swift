@@ -1207,9 +1207,20 @@ class MPVPlayerViewModel: ObservableObject {
             }
         } else {
             // Normal behavior
-            withAnimation(.easeOut(duration: 0.5)) {
-                self.showPoster = false
-                self.isLoading = false
+            // CRITICAL FIX: For Watch Party Guests, DO NOT hide poster here.
+            // We must wait for the Host's PLAY signal or PLAYBACK_STATE update.
+            // This preserves the "Ready Gate" visual (background art) during the initial wait.
+            if isInWatchParty {
+                // CRITICAL FIX (All Users): Keep poster up for Watch Parties (Host & Guest)
+                // - Guests: await Host PLAY signal
+                // - Host: await "Start Movie" button press (Waiting for Guests)
+                // This preserves the "Ready Gate" visual and prevents 0:00 flash.
+                LoggingManager.shared.info(.watchParty, message: "Video ready (Watch Party) - Keeping poster up until playback starts")
+            } else {
+                withAnimation(.easeOut(duration: 0.5)) {
+                    self.showPoster = false
+                    self.isLoading = false
+                }
             }
         }
 
@@ -1437,6 +1448,12 @@ class MPVPlayerViewModel: ObservableObject {
 
             // Mark local action to prevent echo
             markLocalAction()
+
+            // Force UI update immediately (Host Start)
+            withAnimation {
+                self.showPoster = false
+                self.isLoading = false
+            }
 
             // Play immediately
             Task { @MainActor in
@@ -3333,17 +3350,25 @@ extension MPVPlayerViewModel {
                 readyLoopTimer = nil
             } else {
                 // Normal play sync
-                if !isPlaying {
-                    LoggingManager.shared.info(.watchParty, message: "Sync: Playing")
-                    // Announce Host Action
-                    let hostName = getHostName(for: message.senderId)
-                    if appState?.player.isEventPlayback == false {
-                        announcementTriggers.send("\(hostName) resumed playback")
-                    }
-
-                    await playbackService.play()
-                    isPlaying = true
+                // CRITICAL FIX: Always enforce play if Host says play.
+                // Checking `if !isPlaying` caused a 2s stagger if local state was slightly out of sync.
+                // MPV's play command is idempotent, so calling it when already playing is safe and fixes the lag.
+                LoggingManager.shared.info(.watchParty, message: "Sync: Received Play command - Enforcing Playback")
+                
+                // Announce Host Action
+                let hostName = getHostName(for: message.senderId)
+                if appState?.player.isEventPlayback == false && !isPlaying {
+                    announcementTriggers.send("\(hostName) resumed playback")
                 }
+
+                // Force UI update immediately
+                withAnimation {
+                    self.showPoster = false
+                    self.isLoading = false
+                }
+
+                await playbackService.play()
+                isPlaying = true
             }
 
 
@@ -3364,14 +3389,20 @@ extension MPVPlayerViewModel {
 
             // FIX: Ensure waiting overlay is dismissed if host is playing
             // This handles cases where the initial .play command was missed
-            if remoteIsPlaying && showWaitingForGuests {
-                LoggingManager.shared.info(.watchParty, message: "Received playback state (playing) - Dismissing waiting overlay")
+            if remoteIsPlaying && (showWaitingForGuests || showPoster) {
+                LoggingManager.shared.info(.watchParty, message: "Received playback state (playing) - Dismissing waiting overlay/poster")
                 showWaitingForGuests = false
                 readySignalsSentCount = 0 // Reset timeout counter
 
                 // Stop Ready Loop
                 readyLoopTimer?.invalidate()
                 readyLoopTimer = nil
+                
+                // CRITICAL FIX: Ensure poster is hidden if host is playing
+                withAnimation {
+                    self.showPoster = false
+                    self.isLoading = false
+                }
             }
 
             // Update network latency estimate

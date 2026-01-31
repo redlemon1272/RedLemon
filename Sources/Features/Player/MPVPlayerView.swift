@@ -157,7 +157,7 @@ struct MPVPlayerView: View {
                             }
                         }
                         .opacity((viewModel.showPoster || viewModel.isLoading || viewModel.showWaitingForGuests) ? 1.0 : 0.0)
-                        .animation(.easeOut(duration: 0.5), value: viewModel.showPoster)
+                        .animation(.easeOut(duration: 0.5), value: (viewModel.showPoster || viewModel.isLoading || viewModel.showWaitingForGuests))
                     }
 
                     // MPV video output - IINA-style CAOpenGLLayer
@@ -739,7 +739,7 @@ struct MPVPlayerView: View {
             LoadingOverlay(streamTitle: "", message: "Returning to Lobby...")
         } else if viewModel.isExitingSession {
             LoadingOverlay(streamTitle: "", message: "Closing...")
-        } else if viewModel.isLoading || viewModel.showWaitingForGuests {
+        } else if viewModel.isLoading {
             let message: String = {
                 if viewModel.isSwitchingTracks || viewModel.isSwitchingTracksRecently {
                     return "Syncing track..."
@@ -749,13 +749,12 @@ struct MPVPlayerView: View {
                 var msg = (viewModel.isBuffering && viewModel.mpvWrapper.isFileLoaded) ? "Buffering..." : "Loading stream..."
 
                 // Watch Party Ready Gate Heuristic:
-                // If we are in a watch party, NOT playing, and at the very beginning (time < 2s),
-                // OR if the explicit showWaitingForGuests flag is set,
-                // we are at the "Ready Gate" waiting for sync.
-                let isAtReadyGate = (viewModel.isInWatchParty &&
-                                     !viewModel.isPlaying &&
-                                     viewModel.currentTime < 2.0) || 
-                                     viewModel.showWaitingForGuests
+                // If we are in a watch party, file is loaded, NOT playing, and at the very beginning (time < 2s),
+                // we are likely at the "Ready Gate" waiting for sync.
+                let isAtReadyGate = viewModel.isInWatchParty &&
+                                    viewModel.mpvWrapper.isFileLoaded &&
+                                    !viewModel.isPlaying &&
+                                    viewModel.currentTime < 2.0
 
                 if isAtReadyGate {
                     msg = viewModel.isWatchPartyHost ? "Waiting for guests..." : "Waiting for host..."
@@ -767,6 +766,12 @@ struct MPVPlayerView: View {
             LoadingOverlay(streamTitle: viewModel.streamTitle, message: message)
                 .transition(.opacity.animation(.easeInOut(duration: 0.3)))
                 .zIndex(140)
+        }
+
+        // Waiting for guests overlay (Post-Load Ready Gate)
+        if viewModel.showWaitingForGuests {
+             WaitingGateView(isHost: viewModel.isWatchPartyHost, streamTitle: viewModel.streamTitle)
+                .zIndex(100)
         }
 
         // Next Episode Prompt

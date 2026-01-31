@@ -69,43 +69,52 @@ RESOURCES="$CONTENTS/Resources"
 echo "📁 Ensuring .app bundle structure exists..."
 mkdir -p "$MACOS" "$FRAMEWORKS" "$RESOURCES"
 
-# Build the project for both architectures (Universal 2)
+# Build the project for NATIVE architecture (Faster, no Lipo)
 echo "🧹 Cleaning previous build artifacts..."
 swift package clean
 
-echo "📦 Building Swift executable (Universal 2: arm64 + x86_64)..."
+echo "📦 Building Swift executable (Native: $ARCH_NAME)..."
 CONFIG_FLAGS="-c debug -Xswiftc -DDEBUG"
 
-echo "   🔨 Compiling for arm64 (Silicon)..."
-swift build $CONFIG_FLAGS --arch arm64
-BIN_ARM64=$(swift build $CONFIG_FLAGS --arch arm64 --show-bin-path)/RedLemon
+if [[ "$ARCH_NAME" == "arm64" ]]; then
+    echo "   🔨 Compiling for arm64 (Silicon)..."
+    swift build $CONFIG_FLAGS --arch arm64
+    BIN_PATH=$(swift build $CONFIG_FLAGS --arch arm64 --show-bin-path)
+    cp "$BIN_PATH/RedLemon" "$MACOS/RedLemon"
+    
+    # Store bin path for Sparkle copy later
+    CURRENT_BIN_PATH="$BIN_PATH"
+    
+elif [[ "$ARCH_NAME" == "x86_64" ]]; then
+    echo "   🔨 Compiling for x86_64 (Intel)..."
+    swift build $CONFIG_FLAGS --arch x86_64
+    BIN_PATH=$(swift build $CONFIG_FLAGS --arch x86_64 --show-bin-path)
+    cp "$BIN_PATH/RedLemon" "$MACOS/RedLemon"
+    
+     # Store bin path for Sparkle copy later
+    CURRENT_BIN_PATH="$BIN_PATH"
+else
+    echo "❌ Unsupported architecture: $ARCH_NAME"
+    exit 1
+fi
 
-echo "   🔨 Compiling for x86_64 (Intel)..."
-swift build $CONFIG_FLAGS --arch x86_64
-BIN_X86_64=$(swift build $CONFIG_FLAGS --arch x86_64 --show-bin-path)/RedLemon
+echo "✅ Native binary created at $(date '+%H:%M:%S')"
 
-echo "🔗 Creating Universal Binary..."
-lipo -create -output "$MACOS/RedLemon" "$BIN_ARM64" "$BIN_X86_64"
-
-# Skipped Universal Lipo for local debug build
-# lipo -create -output "$MACOS/RedLemon" "$BIN_ARM64" "$BIN_X86_64"
-
-echo "✅ Universal binary created at $(date '+%H:%M:%S')"
-# Verify universal status
-lipo -info "$MACOS/RedLemon"
-
-# Copy frameworks
+# Copy frameworks (Architecture Specific)
 echo "📚 Copying frameworks..."
-
-# For Universal builds, we copy both arm64 and x86_64 dylibs.
-# We place them in the common Frameworks folder, and lipo/loader handles selecting the right ones.
 mkdir -p "$FRAMEWORKS"
-cp Frameworks/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
-cp Frameworks/arm64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
-cp Frameworks/x86_64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
 
-# Note: In a production release, you should ideally lipo the dylibs themselves.
-# For now, we ensure both sets are present.
+# Copy common frameworks first (if any)
+cp Frameworks/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
+
+# Copy architecture-specific frameworks (Overwriting common if needed)
+if [[ "$ARCH_NAME" == "arm64" ]]; then
+    echo "   📚 Copying arm64 libraries..."
+    cp Frameworks/arm64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
+elif [[ "$ARCH_NAME" == "x86_64" ]]; then
+     echo "   📚 Copying x86_64 libraries..."
+    cp Frameworks/x86_64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
+fi
 
 # Ensure libmpv is copied regardless of architecture (critical dependency)
 if [[ -f "Frameworks/libmpv.2.dylib" ]]; then
@@ -117,14 +126,13 @@ fi
 
 # Copy Sparkle framework
 echo "📦 Copying Sparkle.framework..."
-# Use the Intel bin path to find Sparkle (it's copied to common Frameworks anyway)
-BIN_PATH=$(swift build $CONFIG_FLAGS --arch x86_64 --show-bin-path)
-if [ -d "$BIN_PATH/Sparkle.framework" ]; then
+# Use the current bin path to find Sparkle
+if [ -d "$CURRENT_BIN_PATH/Sparkle.framework" ]; then
     rm -rf "$FRAMEWORKS/Sparkle.framework"
-    cp -R "$BIN_PATH/Sparkle.framework" "$FRAMEWORKS/"
+    cp -R "$CURRENT_BIN_PATH/Sparkle.framework" "$FRAMEWORKS/"
     echo "✅ Sparkle.framework copied"
 else
-    echo "⚠️  Sparkle.framework not found in $BIN_PATH"
+    echo "⚠️  Sparkle.framework not found in $CURRENT_BIN_PATH"
 fi
 
 # Copy resources (internet-identity.html)

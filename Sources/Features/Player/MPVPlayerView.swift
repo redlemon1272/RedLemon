@@ -60,7 +60,7 @@ class KeyCaptureView: NSView {
 // MARK: - Player View
 
 struct MPVPlayerView: View {
-    @StateObject private var viewModel = MPVPlayerViewModel()
+    @StateObject private var viewModel = MPVPlayerViewModel(mpvWrapper: MPVWrapper())
     @EnvironmentObject var appState: AppState
     // Needed for DM indicator
     @EnvironmentObject var socialService: SocialService
@@ -167,7 +167,6 @@ struct MPVPlayerView: View {
                     // Overlays (Loading, Waiting, Logo)
                     overlays
 
-                    // Floating Reactions (Always visible, even if chat is closed)
                     ReactionOverlayView(viewModel: viewModel)
                         .zIndex(200) // Below controls (99) but above video
 

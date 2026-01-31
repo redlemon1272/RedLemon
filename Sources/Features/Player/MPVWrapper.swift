@@ -13,6 +13,17 @@ import MetalKit
 import LibMPV
 
 /// Small MPV wrapper that manages an embedded mpv instance and its render context.
+/// Thread-safe container for MPV handles to allow background rendering access
+/// without violating MainActor isolation of the parent wrapper.
+final class MPVHandleState {
+    let lock = NSRecursiveLock()
+    var handle: OpaquePointer?
+    var renderContext: OpaquePointer?
+    var openGLContext: CGLContextObj?
+}
+
+
+@MainActor
 class MPVWrapper: ObservableObject {
     @Published var isPlaying = false
     @Published var currentTime: Double = 0
@@ -40,9 +51,14 @@ class MPVWrapper: ObservableObject {
     // Used for accurate EOF detection when currentTime resets to 0 during edge-case seeks.
     private var lastKnownGoodPosition: Double = 0
 
-    internal var mpvHandle: OpaquePointer?
-    internal var renderContext: OpaquePointer?  // MPV render context (thread-safe per MPV docs)
-    private var openGLContext: CGLContextObj?  // OpenGL context for locking (IINA pattern)
+    // Thread-safe handle state
+    private let state = MPVHandleState()
+
+    // nonisolated thread-safe access for rendering paths (CAOpenGLLayer / CVDisplayLink)
+    internal nonisolated var mpvHandle: OpaquePointer? { state.lock.withLock { state.handle } }
+    internal nonisolated var renderContext: OpaquePointer? { state.lock.withLock { state.renderContext } }
+    private nonisolated var openGLContext: CGLContextObj? { state.lock.withLock { state.openGLContext } }
+    
     private var isInitialized = false
     private var eventPollingTask: Task<Void, Never>?
     private var timeUpdateTask: Task<Void, Never>?
@@ -55,9 +71,13 @@ class MPVWrapper: ObservableObject {
 
     init() {
         LoggingManager.shared.info(.videoRendering, message: "MPVWrapper: Creating embedded MPV with render context...")
-        mpvHandle = mpv_create()
+        // Initialize handle in state
+        let handle = mpv_create()
+        state.lock.withLock {
+            state.handle = handle
+        }
 
-        guard mpvHandle != nil else {
+        guard handle != nil else {
             LoggingManager.shared.error(.videoRendering, message: "Failed to create MPV handle")
             return
         }
@@ -185,6 +205,7 @@ class MPVWrapper: ObservableObject {
     // MARK: - Render Context Setup (IINA Implementation)
 
     internal func createRenderContext(with layer: MPVViewLayer) {
+        // Use the thread-safe computed property getter
         guard let handle = mpvHandle else { return }
 
         LoggingManager.shared.debug(.videoRendering, message: "🎬 Creating MPV render context with OpenGL (IINA method)...")
@@ -213,13 +234,15 @@ class MPVWrapper: ObservableObject {
                     return
                 }
 
-                self.renderContext = renderCtx
-
-                // Store the current OpenGL context for later locking
-                self.openGLContext = CGLGetCurrentContext()
+                // Write to state using the lock
+                state.lock.withLock {
+                    state.renderContext = renderCtx
+                    state.openGLContext = CGLGetCurrentContext()
+                }
 
                 // Set IINA's update callback with the layer as context
                 let layerPtr = Unmanaged.passUnretained(layer).toOpaque()
+                // Retrieve using safe getter inside the setup scope
                 mpv_render_context_set_update_callback(renderCtx, mpvUpdateCallback, layerPtr)
 
                 LoggingManager.shared.debug(.videoRendering, message: "Render context created successfully (IINA method)")
@@ -358,19 +381,26 @@ class MPVWrapper: ObservableObject {
 
     // MARK: - Smart Event Polling (Playback-Aware)
 
-    private func pollEvents() async {
-        guard let handle = mpvHandle else { return }
+    nonisolated private func pollEvents() async {
+        guard let handle = state.lock.withLock({ state.handle }) else { return }
 
+        // We run until cancelled.
+        // NOTE: mpv_wait_event is blocking. We rely on mpv_wakeup() in destroy() to unblock this.
         while !Task.isCancelled {
-            // Adaptive timeout based on playback state
-            let timeout = isPlaying ? 0.5 : 0.1
+            // Adaptive timeout: 0.5s if playing (less churning), 0.1s if paused (snappy response)
+            let playing = await MainActor.run { self.isPlaying }
+            let timeout = playing ? 0.5 : 0.1
+            
             let event = mpv_wait_event(handle, timeout)
             guard let eventPtr = event else { continue }
-
-            // Check cancellation after each event
-            if Task.isCancelled { break }
+            
+            if Task.isCancelled || state.lock.withLock({ state.handle }) == nil { 
+                break 
+            }
 
             let eventId = eventPtr.pointee.event_id
+            if eventId == MPV_EVENT_SHUTDOWN { break }
+
             await MainActor.run { self.handleMPVEvent(eventId: eventId, eventPtr: eventPtr) }
         }
 
@@ -1039,200 +1069,178 @@ class MPVWrapper: ObservableObject {
     /// ⚠️ AI_BIBLE #41: This MUST NOT be called while video is actively playing.
     /// Changing subtitle tracks during playback causes MPV to rebuffer ("play-buffer-play" flash).
     /// Initial selection happens in pollForTracksAndResume() BEFORE playback starts.
-    func refreshSubtitleSelection() {
-        guard let handle = mpvHandle, isInitialized else { return }
+    @MainActor func refreshSubtitleSelection() {
+        guard let _ = mpvHandle, isInitialized else { return }
 
-        // DEFENSIVE GUARD: Prevent regression - only change tracks if none are currently active
-        // AI_BIBLE #41: Prevents buffer flash when swapping tracks.
-        // FIX: If we have NO subtitles selected (sid == 0), we SHOULD allow the auto-selector to
-        // light one up as they arrive late from the network.
-        if isPlaying && hasCompletedInitialTrackSelection && getCurrentSubtitleTrack() != 0 {
-            LoggingManager.shared.warn(.subtitles, message: "⚠️ BLOCKED: refreshSubtitleSelection called during playback with active track. Ignoring to prevent flash.")
-            return
-        }
+        // Wrap async operations in a Task since this method must be synchronous (protocol compliance)
+        Task { @MainActor [weak self] in
+            guard let self = self else { return }
 
-        LoggingManager.shared.debug(.subtitles, message: "AUTO-SELECT: Starting subtitle scan & selection refresh")
-
-        var trackCount: Int64 = 0
-        mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
-        LoggingManager.shared.debug(.subtitles, message: "AUTO-SELECT: Found \(trackCount) total tracks")
-
-        struct SubCandidate {
-            let id: Int
-            let name: String
-            let isExternal: Bool
-            let isForced: Bool
-            let isDefault: Bool
-            let title: String
-            let isHearingImpaired: Bool
-        }
-
-        var candidates: [SubCandidate] = []
-
-        // Scan all subtitle tracks
-        for i in 0..<Int(trackCount) {
-            // Check if it's a subtitle track
-            let typeKey = "track-list/\(i)/type"
-            var typeStr: UnsafeMutablePointer<CChar>?
-            guard mpv_get_property(handle, typeKey, MPV_FORMAT_STRING, &typeStr) >= 0,
-                  let type = typeStr.map({ String(cString: $0) }),
-                  type == "sub" else {
-                mpv_free(typeStr)
-                continue
+            // DEFENSIVE GUARD: Prevent regression - only change tracks if none are currently active
+            // AI_BIBLE #41: Prevents buffer flash when swapping tracks.
+            // FIX: If we have NO subtitles selected (sid == 0), we SHOULD allow the auto-selector to
+            // light one up as they arrive late from the network.
+            let currentSub = await self.getCurrentSubtitleTrack()
+            if self.isPlaying && self.hasCompletedInitialTrackSelection && currentSub != 0 {
+                LoggingManager.shared.warn(.subtitles, message: "⚠️ BLOCKED: refreshSubtitleSelection called during playback with active track. Ignoring to prevent flash.")
+                return
             }
-            mpv_free(typeStr)
+            
+            // Re-acquire handle safely inside the task
+            guard let safeHandle = self.mpvHandle else { return }
 
-            // Get track ID
-            let idKey = "track-list/\(i)/id"
-            var trackId: Int64 = 0
-            guard mpv_get_property(handle, idKey, MPV_FORMAT_INT64, &trackId) >= 0, trackId != 0 else {
-                continue
+            LoggingManager.shared.debug(.subtitles, message: "AUTO-SELECT: Starting subtitle scan & selection refresh")
+
+            var trackCount: Int64 = 0
+            mpv_get_property(safeHandle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
+            LoggingManager.shared.debug(.subtitles, message: "AUTO-SELECT: Found \(trackCount) total tracks")
+
+            struct SubCandidate {
+                let id: Int
+                let name: String
+                let isExternal: Bool
+                let isForced: Bool
+                let isDefault: Bool
+                let title: String
+                let isHearingImpaired: Bool
             }
+            
+            var candidates: [SubCandidate] = []
 
-            // Check properties
-            let externalKey = "track-list/\(i)/external"
-            var isExternalVal: Int64 = 0
-            let _ = mpv_get_property(handle, externalKey, MPV_FORMAT_FLAG, &isExternalVal)
-            let isExternal = isExternalVal != 0
+            for i in 0..<Int(trackCount) {
+                // Check if it's a subtitle track
+                let typeKey = "track-list/\(i)/type"
+                var typeStr: UnsafeMutablePointer<CChar>?
+                let typeResult = mpv_get_property(safeHandle, typeKey, MPV_FORMAT_STRING, &typeStr)
+                
+                if typeResult >= 0, let type = typeStr.map({ String(cString: $0) }), type == "sub" {
+                    mpv_free(typeStr)
 
-            let forcedKey = "track-list/\(i)/forced"
-            var isForcedVal: Int64 = 0
-            let _ = mpv_get_property(handle, forcedKey, MPV_FORMAT_FLAG, &isForcedVal)
-            let isForced = isForcedVal != 0
+                    // Get track ID
+                    let idKey = "track-list/\(i)/id"
+                    var trackId: Int64 = 0
+                    guard mpv_get_property(safeHandle, idKey, MPV_FORMAT_INT64, &trackId) >= 0, trackId != 0 else {
+                        continue
+                    }
 
-            let defaultKey = "track-list/\(i)/default"
-            var isDefaultVal: Int64 = 0
-            let _ = mpv_get_property(handle, defaultKey, MPV_FORMAT_FLAG, &isDefaultVal)
-            let isDefault = isDefaultVal != 0
+                    // Check properties
+                    let externalKey = "track-list/\(i)/external"
+                    var isExternalVal: Int64 = 0
+                    let _ = mpv_get_property(safeHandle, externalKey, MPV_FORMAT_FLAG, &isExternalVal)
+                    let isExternal = isExternalVal != 0
 
-            // NEW: Check hearing-impaired flag
-            let hiKey = "track-list/\(i)/hearing-impaired"
-            var isHIVal: Int64 = 0
-            let _ = mpv_get_property(handle, hiKey, MPV_FORMAT_FLAG, &isHIVal)
-            let isHI = isHIVal != 0
+                    let forcedKey = "track-list/\(i)/forced"
+                    var isForcedVal: Int64 = 0
+                    let _ = mpv_get_property(safeHandle, forcedKey, MPV_FORMAT_FLAG, &isForcedVal)
+                    let isForced = isForcedVal != 0
 
-            // Get language & title
-            let langKey = "track-list/\(i)/lang"
-            var langStr: UnsafeMutablePointer<CChar>?
-            let lang = (mpv_get_property(handle, langKey, MPV_FORMAT_STRING, &langStr) >= 0)
-                ? langStr.map { String(cString: $0) }
-                : nil
-            mpv_free(langStr)
+                    let defaultKey = "track-list/\(i)/default"
+                    var isDefaultVal: Int64 = 0
+                    let _ = mpv_get_property(safeHandle, defaultKey, MPV_FORMAT_FLAG, &isDefaultVal)
+                    let isDefault = isDefaultVal != 0
 
-            let titleKey = "track-list/\(i)/title"
-            var titleStr: UnsafeMutablePointer<CChar>?
-            let title = (mpv_get_property(handle, titleKey, MPV_FORMAT_STRING, &titleStr) >= 0)
-                ? titleStr.map { String(cString: $0) }
-                : nil
-            mpv_free(titleStr)
+                    let hiKey = "track-list/\(i)/hearing-impaired"
+                    var isHIVal: Int64 = 0
+                    let _ = mpv_get_property(safeHandle, hiKey, MPV_FORMAT_FLAG, &isHIVal)
+                    let isHI = isHIVal != 0
 
-            // Check if English
-            let langLower = lang?.lowercased() ?? ""
-            let titleLower = title?.lowercased() ?? ""
-            let isEnglish = langLower.hasPrefix("en") || langLower.contains("eng") || titleLower.contains("english")
+                    // Get language & title
+                    let langKey = "track-list/\(i)/lang"
+                    var langStr: UnsafeMutablePointer<CChar>?
+                    let lang = (mpv_get_property(safeHandle, langKey, MPV_FORMAT_STRING, &langStr) >= 0)
+                        ? langStr.map { String(cString: $0) }
+                        : nil
+                    mpv_free(langStr)
 
-            if isEnglish {
-                let displayName = title ?? lang ?? "Track \(trackId)"
-                LoggingManager.shared.debug(.subtitles, message: "AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")', forced: \(isForced), default: \(isDefault), HI: \(isHI), Ext: \(isExternal)")
+                    let titleKey = "track-list/\(i)/title"
+                    var titleStr: UnsafeMutablePointer<CChar>?
+                    let title = (mpv_get_property(safeHandle, titleKey, MPV_FORMAT_STRING, &titleStr) >= 0)
+                        ? titleStr.map { String(cString: $0) }
+                        : nil
+                    mpv_free(titleStr)
 
-                // Filter out known bad patterns
-                let isPartialSub = titleLower.contains("valyrian") ||
-                                   titleLower.contains("foreign") ||
-                                   titleLower.contains("parts") ||
-                                   titleLower.contains("commentary")
+                    // Check if English
+                    let langLower = lang?.lowercased() ?? ""
+                    let titleLower = title?.lowercased() ?? ""
+                    let isEnglish = langLower.hasPrefix("en") || langLower.contains("eng") || titleLower.contains("english")
 
-                if !isPartialSub {
-                    candidates.append(SubCandidate(
-                        id: Int(trackId),
-                        name: displayName,
-                        isExternal: isExternal,
-                        isForced: isForced,
-                        isDefault: isDefault,
-                        title: titleLower,
-                        isHearingImpaired: isHI
-                    ))
+                    if isEnglish {
+                        let displayName = title ?? lang ?? "Track \(trackId)"
+                        LoggingManager.shared.debug(.subtitles, message: "AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")', forced: \(isForced), default: \(isDefault), HI: \(isHI), Ext: \(isExternal)")
+
+                        // Filter out known bad patterns
+                        let isPartialSub = titleLower.contains("valyrian") ||
+                                           titleLower.contains("foreign") ||
+                                           titleLower.contains("parts") ||
+                                           titleLower.contains("commentary")
+
+                        if !isPartialSub {
+                            candidates.append(SubCandidate(
+                                id: Int(trackId),
+                                name: displayName,
+                                isExternal: isExternal,
+                                isForced: isForced,
+                                isDefault: isDefault,
+                                title: titleLower,
+                                isHearingImpaired: isHI
+                            ))
+                        } else {
+                            LoggingManager.shared.debug(.subtitles, message: "Ignoring partial/commentary subtitle: \(displayName)")
+                        }
+                    }
                 } else {
-                    LoggingManager.shared.debug(.subtitles, message: "Ignoring partial/commentary subtitle: \(displayName)")
+                    mpv_free(typeStr)
                 }
             }
-        }
 
-        // Scoring:
-        // +3000 for Embedded (vs External)
-        // +500 for Release Match (WEBRip vs BluRay)
-        // +250 for SDH/CC/HI (Increased to beat Forced/Default penalties and slight release match disadvantage)
-        // +600 for CLEAN TITLE if short (<20) and matching lang (SDH/English) -> Neutralizes Release Match bias against clean titles
-        // -50 for Forced
-        // -10 for Default
-        // +1 for Higher ID
+            // Scoring Logic
+            let bestCandidate = candidates.max { a, b in
+                var scoreA = 0
+                var scoreB = 0
 
-        let bestCandidate = candidates.max { a, b in
-            var scoreA = 0
-            var scoreB = 0
+                // 1. Prefer Embedded (+3000)
+                if !a.isExternal { scoreA += 3000 }
+                if !b.isExternal { scoreB += 3000 }
 
-            // Helper for logging
-            func logScore(_ candidate: SubCandidate, _ score: Int) {
-                // We verify logic correctness via logs
+                // 2. Release Match (+500 range)
+                let releaseScoreA = self.calculateReleaseMatchScore(videoName: self.currentVideoFilename, subtitleName: a.title)
+                let releaseScoreB = self.calculateReleaseMatchScore(videoName: self.currentVideoFilename, subtitleName: b.title)
+                scoreA += releaseScoreA
+                scoreB += releaseScoreB
+
+                // 3. Clean Title Bonus (+600)
+                if a.title.count < 20 && (a.title.contains("sdh") || a.title.contains("english") || a.title.contains("en")) { scoreA += 600 }
+                if b.title.count < 20 && (b.title.contains("sdh") || b.title.contains("english") || b.title.contains("en")) { scoreB += 600 }
+
+                // 4. Prefer SDH/CC/HI (+250)
+                if a.isHearingImpaired || a.title.contains("sdh") || a.title.contains("cc") { scoreA += 250 }
+                if b.isHearingImpaired || b.title.contains("sdh") || b.title.contains("cc") { scoreB += 250 }
+
+                // 5. Avoid Forced
+                if a.isForced { scoreA -= 50 }
+                if b.isForced { scoreB -= 50 }
+
+                // 6. Avoid Default
+                if a.isDefault { scoreA -= 10 }
+                if b.isDefault { scoreB -= 10 }
+
+                // 7. Tie-breaker: Prefer later tracks
+                if a.id > b.id { scoreA += 1 }
+                if b.id > a.id { scoreB += 1 }
+
+                return scoreA < scoreB
             }
 
-            // 1. Prefer Embedded (+3000)
-            if !a.isExternal { scoreA += 3000 }
-            if !b.isExternal { scoreB += 3000 }
-
-            // 2. Release Match (+500 range)
-            let releaseScoreA = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: a.title)
-            let releaseScoreB = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: b.title)
-            scoreA += releaseScoreA
-            scoreB += releaseScoreB
-
-            // 3. Clean Title Bonus (+600)
-            // Fixes issue where "SDH" (Clean) loses to "Nightcrawler... SDH" (Release Match)
-            if a.title.count < 20 && (a.title.contains("sdh") || a.title.contains("english") || a.title.contains("en")) { scoreA += 600 }
-            if b.title.count < 20 && (b.title.contains("sdh") || b.title.contains("english") || b.title.contains("en")) { scoreB += 600 }
-
-            // 4. Prefer SDH/CC/HI (+250)
-            if a.isHearingImpaired || a.title.contains("sdh") || a.title.contains("cc") { scoreA += 250 }
-            if b.isHearingImpaired || b.title.contains("sdh") || b.title.contains("cc") { scoreB += 250 }
-
-            // 5. Avoid Forced
-            if a.isForced { scoreA -= 50 }
-            if b.isForced { scoreB -= 50 }
-
-            // 6. Avoid Default
-            if a.isDefault { scoreA -= 10 }
-            if b.isDefault { scoreB -= 10 }
-
-            // 7. Tie-breaker: Prefer later tracks
-            if a.id > b.id { scoreA += 1 }
-            if b.id > a.id { scoreB += 1 }
-
-            // Detailed Logging (only printed when comparing)
-            // print("🆚 Compare: [\(a.id)] Score: \(scoreA) vs [\(b.id)] Score: \(scoreB)")
-
-            return scoreA < scoreB
-        }
-
-        if let best = bestCandidate {
-            LoggingManager.shared.info(.subtitles, message: "Auto-selecting BEST English subtitle: \(best.name) (ID: \(best.id)) [External: \(best.isExternal), Forced: \(best.isForced), Default: \(best.isDefault), HI: \(best.isHearingImpaired)]")
-
-            // Log final winning logic
-            let matchScore = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: best.title)
-            let isClean = best.title.count < 20 && (best.title.contains("sdh") || best.title.contains("english") || best.title.contains("en"))
-            let isSDH = best.isHearingImpaired || best.title.contains("sdh") || best.title.contains("cc")
-            var finalScore = (best.isExternal ? 0 : 3000) + matchScore + (isClean ? 600 : 0) + (isSDH ? 250 : 0)
-            if best.isForced { finalScore -= 50 }
-            if best.isDefault { finalScore -= 10 }
-
-            LoggingManager.shared.debug(.subtitles, message: "   Final Score: \(finalScore) (Embedded: \(best.isExternal ? 0 : 3000), Match: \(matchScore), Clean: \(isClean ? 600 : 0), SDH: \(isSDH ? 250 : 0))")
-
-            var trackId = Int64(best.id)
-            mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)
-
-            // Enable subtitle visibility
-            var visFlag: Int32 = 1
-            mpv_set_property(handle, "sub-visibility", MPV_FORMAT_FLAG, &visFlag)
-        } else {
-            LoggingManager.shared.info(.subtitles, message: "No suitable English subtitles found")
+            if let best = bestCandidate {
+                LoggingManager.shared.info(.subtitles, message: "Auto-selecting BEST English subtitle: \(best.name) (ID: \(best.id))")
+                var tid = Int64(best.id)
+                mpv_set_property(safeHandle, "sid", MPV_FORMAT_INT64, &tid)
+            } else {
+                LoggingManager.shared.debug(.subtitles, message: "No suitable subtitles found to auto-select.")
+            }
+            
+            // Mark initial selection as complete
+            self.hasCompletedInitialTrackSelection = true
         }
     }
 
@@ -1461,28 +1469,29 @@ class MPVWrapper: ObservableObject {
     }
 
     /// Safe cleanup - must be called from the OpenGL thread
-    func destroyRenderContext() {
+    /// Safe cleanup - must be called from the OpenGL thread
+    nonisolated func destroyRenderContext() {
         guard let context = renderContext else { return }
         LoggingManager.shared.debug(.videoRendering, message: "Freeing render context on OpenGL thread...")
         mpv_render_context_free(context)
-        renderContext = nil
+        state.lock.withLock { state.renderContext = nil }
     }
 
     // MARK: - Render Context Methods
 
     /// Check if MPV has a frame ready to render (IINA implementation)
-    func shouldRenderUpdateFrame() -> Bool {
+    nonisolated func shouldRenderUpdateFrame() -> Bool {
         guard let context = renderContext else { return false }
         let flags = mpv_render_context_update(context)
         return (flags & UInt64(MPV_RENDER_UPDATE_FRAME.rawValue)) != 0
     }
 
-    func checkForRenderUpdate() -> UInt64 {
+    nonisolated func checkForRenderUpdate() -> UInt64 {
         guard let context = renderContext else { return 0 }
         return mpv_render_context_update(context)
     }
 
-    func render(fbo: Int32, width: Int32, height: Int32) {
+    nonisolated func render(fbo: Int32, width: Int32, height: Int32) {
         guard let context = renderContext else { return }
         var flip: CInt = 1
         var fboData = mpv_opengl_fbo(fbo: fbo, w: width, h: height, internal_format: 0)
@@ -1498,7 +1507,7 @@ class MPVWrapper: ObservableObject {
         }
     }
 
-    func reportSwap() {
+    nonisolated func reportSwap() {
         guard let context = renderContext else { return }
         mpv_render_context_report_swap(context)
     }
@@ -1507,57 +1516,51 @@ class MPVWrapper: ObservableObject {
 
     /// Manually destroy the MPV instance and release resources.
     /// Call this when the wrapper is no longer needed, especially if the owner might be retained.
-    func destroy() {
-        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper destroy() called - cleaning up...")
+    /// Manually destroy the MPV instance and release resources.
+    /// Call this when the wrapper is no longer needed, especially if the owner might be retained.
+    nonisolated func destroy() {
+        print("MPVWrapper: destroy() called - cleaning up...")
 
-        // Cancel event polling FIRST with immediate effect
-        eventPollingTask?.cancel()
-        eventPollingTask = nil
-
-        // Cancel time update timer
-        timeUpdateTask?.cancel()
-        timeUpdateTask = nil
-
-        // Clean up MPV resources
-        if let handle = mpvHandle {
-            // Capture render context
-            let contextToFree = renderContext
-
-            // Explicitly clear render context pointer to prevent any further access from potential render callbacks
-            renderContext = nil
-            // Clear handle immediately so no other calls can use it
-            mpvHandle = nil
-
-            // CRITICAL FIX: Free render context BEFORE destroying handle
-            // MPV documentation states: "If you used mpv_render_context_create(), you should call mpv_render_context_free() before mpv_destroy()."
-            // Failure to do this causes a SIGABRT in mp_clients_destroy (Thread 18 crash).
-            if let context = contextToFree {
-                LoggingManager.shared.debug(.videoRendering, message: "Freeing render context...")
-                mpv_render_context_free(context)
-            }
-
-            let wasInitialized = isInitialized
-
-            // CRITICAL: Destroy MPV on background thread to prevent blocking Main Thread
-            // mpv_terminate_destroy can take significant time (flushing caches, closing streams)
-            // which causes "spinning beach ball" freezes if run on Main Thread.
-            Task.detached(priority: .background) {
-                if wasInitialized {
-                    LoggingManager.shared.debug(.videoRendering, message: "Terminating MPV instance (background)...")
-                    mpv_terminate_destroy(handle)
-                } else {
-                    LoggingManager.shared.debug(.videoRendering, message: "Destroying MPV instance (background)...")
-                    mpv_destroy(handle)
-                }
-                LoggingManager.shared.info(.videoRendering, message: "MPV instance destroyed")
-            }
+        // 1. Cancel timers and polling (MainActor isolated)
+        Task { @MainActor in
+            self.timeUpdateTask?.cancel()
+            self.timeUpdateTask = nil
+            self.eventPollingTask?.cancel()
+            self.eventPollingTask = nil
         }
 
-        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper cleanup complete")
+        // 2. Safely capture and clear handle/context
+        let (handleToDestroy, contextToFree) = state.lock.withLock {
+            let h = state.handle
+            let c = state.renderContext
+            state.handle = nil
+            state.renderContext = nil
+            return (h, c)
+        }
+
+        // 3. Destroy render context first
+        if let context = contextToFree {
+            print("MPVWrapper: Freeing render context...")
+             mpv_render_context_free(context)
+        }
+
+        // 4. Destroy MPV instance
+        if let handle = handleToDestroy {
+             mpv_wakeup(handle)
+             
+             Task.detached(priority: .background) {
+                 print("MPVWrapper: Terminating MPV instance (background)...")
+                 mpv_terminate_destroy(handle)
+                 print("MPVWrapper: MPV instance destroyed")
+             }
+        }
+        
+        print("MPVWrapper: cleanup complete")
     }
 
     deinit {
-        LoggingManager.shared.debug(.videoRendering, message: "MPVWrapper deinit")
+        // LoggingManager might be unsafe here if deinit is called from background
+        print("MPVWrapper: deinit")
         destroy()
     }
 }

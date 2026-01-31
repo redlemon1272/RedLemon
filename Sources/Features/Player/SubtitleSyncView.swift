@@ -253,7 +253,7 @@ struct SubtitleSyncView_Previews: PreviewProvider {
             VStack {
                 Spacer()
 
-                SubtitleSyncView(viewModel: MPVPlayerViewModel())
+                SubtitleSyncView(viewModel: MPVPlayerViewModel(mpvWrapper: MPVWrapper()))
                     .padding()
 
                 Spacer()

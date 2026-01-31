@@ -73,7 +73,7 @@ class MPVPlayerViewModel: ObservableObject {
     private var lastSeekNotificationPosition: Double?
 
 
-    init(mpvWrapper: MPVWrapper = MPVWrapper(),
+    init(mpvWrapper: MPVWrapper,
          subtitleService: SubtitleService? = nil,
          playbackService: PlaybackService? = nil) {
         self.mpvWrapper = mpvWrapper

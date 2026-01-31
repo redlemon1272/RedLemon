@@ -129,8 +129,8 @@ struct MPVPlayerView: View {
                     // Background layer (always black)
                     Color.black
 
-                    // Poster/Background art (during loading or buffering)
-                    if (viewModel.showPoster || viewModel.isLoading), let backgroundURL = viewModel.backgroundURL {
+                    // Poster/Background art (during loading or buffering or waiting for guests)
+                    if (viewModel.showPoster || viewModel.isLoading || viewModel.showWaitingForGuests), let backgroundURL = viewModel.backgroundURL {
                         AsyncImage(url: URL(string: backgroundURL)) { phase in
                             switch phase {
                             case .success(let image):
@@ -762,7 +762,7 @@ struct MPVPlayerView: View {
 
         // Waiting for guests overlay (Post-Load Ready Gate)
         if viewModel.showWaitingForGuests {
-             WaitingGateView(isHost: viewModel.isWatchPartyHost)
+             WaitingGateView(isHost: viewModel.isWatchPartyHost, streamTitle: viewModel.streamTitle)
                 .zIndex(100)
         }
 

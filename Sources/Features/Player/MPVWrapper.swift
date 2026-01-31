@@ -133,8 +133,8 @@ class MPVWrapper: ObservableObject {
         mpv_set_option_string(handle, "demuxer-max-bytes", "500M")  // 500MB buffer for high-bitrate streams
 
         // Anti-Stutter: Wait for buffer to fill before resuming
-        // This prevents the "play-buffer-play-buffer" loop by forcing a 5s buffer fill
-        mpv_set_option_string(handle, "cache-pause-wait", "5")
+        // Reduced from 5s to 1s to fix "Resume Delay" on Apple Silicon (5s latency on unpause)
+        mpv_set_option_string(handle, "cache-pause-wait", "1")
         mpv_set_option_string(handle, "vd-lavc-threads", "4")
 
         // Audio buffering for watch party sync (prevents crackling during speed changes)

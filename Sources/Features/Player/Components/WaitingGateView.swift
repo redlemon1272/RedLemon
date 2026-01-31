@@ -9,20 +9,13 @@ import SwiftUI
 
 struct WaitingGateView: View {
     let isHost: Bool
+    let streamTitle: String
 
     var body: some View {
-        VStack(spacing: 20) {
-            Spacer()
-
-
-
-
-
-            Spacer()
-            Spacer()
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black.opacity(0.4))
+        LoadingOverlay(
+            streamTitle: streamTitle,
+            message: isHost ? "Waiting for guests..." : "Waiting for host..."
+        )
         .transition(.opacity)
     }
 }

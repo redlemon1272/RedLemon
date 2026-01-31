@@ -2405,3 +2405,47 @@ print(f"SERVICE_ROLE_KEY={new_service}")
 2. **Regex First**: Before completing a sync, the AI MUST run `scripts/architecture-scan.sh` to trigger the **Check 86 Air-Gap Guardrail**.
 3. **No Private Jargon**: If an AI sees the words "BIBLE," "LANDMINE," or code numbers like "#150" in a public-facing file, it MUST remove them or block the push.
 4. **Refuse Leaks**: If the USER asks the AI to put a seed phrase or IP into a public README, the AI MUST decline and point to this Landmine.
+
+# Part 29: Emergency Protocols (God Mode)
+
+## 1. The Red Button Protocol (Credential Leak)
+**Trigger**: You suspect ANY sensitive key (Server Password, Database Pass, JWT Secret, Wallet Mnemonic) has been leaked.
+**Action**: Execute the **God Mode Rotation Kit** immediately.
+
+### Execution
+1.  **Navigate**: `cd scripts/emergency_kit`
+2.  **Run**: `python3 rotate_god_mode.py`
+3.  **Input**: You will need the **CURRENT** SSH Root Password to authenticate initially.
+4.  **Confirm**: The script will pause and display the **NEW SECRETS**. You MUST type "SAVED" to confirm you have backed them up offline.
+
+### What It Does (Atomic Rotation)
+The script performs a 7-step atomic rotation of the entire infrastructure:
+1.  **Wallet**: Generates a NEW BIP39 Seed Phrase + HD Keys (BTC & EVM).
+2.  **SSH**: Generates a new 24-char mixed root password.
+3.  **Database**: Generates new passwords for Postgres & Supabase Dashboard.
+4.  **JWT**: Generates a new 64-char Hex Secret + Anon/Service tokens (valid 10 years).
+5.  **Docs**: Automatically updates `AI_BIBLE.md` (Private Repo) with the new secrets.
+6.  **Code**: Updates `Config.swift` with the new Anon Key.
+7.  **Server**: SSHs into Production, updates `.env`, flushes payment pools (Zombie Protection), restarts Docker, and updates DB User Passwords.
+
+> [!CAUTION]
+> **Post-Rotation Checklist**:
+> 1.  **Re-Build App**: You MUST build and release a new version of the macOS App immediately, as the old app will fail to connect (Invalid Anon Key).
+> 2.  **Sync Private Repo**: Commit the updated `AI_BIBLE.md` to the private repo immediately.
+> 3.  **Destroy Old Backups**: Any old backups of the Bible or Env files are now toxic waste. Delete them.
+
+## 2. The Identity Scrub Protocol (OrangeApple Leak)
+**Trigger**: The Public Repo shows "orangeapple1272" or other private emails in the commit history.
+**Action**: Enforce Identity Rewrite.
+
+### Execution
+Run the following inside `../RedLemon-Public`:
+```bash
+git filter-branch --env-filter '
+    export GIT_AUTHOR_NAME="redlemon1272"
+    export GIT_AUTHOR_EMAIL="redlemon1272@users.noreply.github.com"
+    export GIT_COMMITTER_NAME="redlemon1272"
+    export GIT_COMMITTER_EMAIL="redlemon1272@users.noreply.github.com"
+' --tag-name-filter cat -- --all
+git push -f origin main
+```

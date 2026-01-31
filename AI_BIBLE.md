@@ -2434,13 +2434,18 @@ The script performs a 7-step atomic rotation of the entire infrastructure:
 > 2.  **Sync Private Repo**: Commit the updated `AI_BIBLE.md` to the private repo immediately.
 > 3.  **Destroy Old Backups**: Any old backups of the Bible or Env files are now toxic waste. Delete them.
 
-### 20. Intel Mac "Prohibited" Sign & Bundle Integrity (Landmine #156)
-**Symptom**: App appears with a "prohibited" symbol (circle with slash) on Intel Macs, or icons fail to load, even if the binary is Universal 2.
-**Root Cause**: **Metadata Corruption**. macOS Launch Services (LS) or Finder holds stale cache/quarantine metadata from previous failed builds or ad-hoc signature attempts.
+### 20. Multi-Arch Bundle Integrity: Intel & Silicon (Landmine #156)
+**Symptom**:
+- **Intel**: App appears with a "prohibited" symbol (circle with slash), or icons fail to load.
+- **Silicon**: App fails to launch with "App is damaged" or permission errors, even if built as Universal 2.
+**Root Cause**:
+- **Intel**: Metadata corruption in Launch Services (LS) or toxic `FinderInfo` cache bits.
+- **Silicon**: Strict Gatekeeper quarantine flags and architectural mismatch (arm64 missing).
 **Mandatory Instruction to AI**:
-1. **LS Magic Bullet**: Every installer script MUST include `/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f [AppPath]` to force a database refresh.
-2. **FinderInfo Purge**: MUST run `xattr -d com.apple.FinderInfo [AppPath]` to clear "toxic" Finder bits that cause the prohibited sign.
-3. **Architecture Scan**: Releases MUST pass `lipo -info` verification to ensure `x86_64` and `arm64` are both present.
+1. **LS Magic Bullet (Intel)**: Every installer script MUST include `/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f [AppPath]` to force a database refresh.
+2. **FinderInfo Purge (Intel)**: MUST run `xattr -d com.apple.FinderInfo [AppPath]` to clear the "toxic" bits causing the prohibited sign.
+3. **Safe Quarantine Removal (Silicon)**: MUST use `xattr -rd com.apple.quarantine [AppPath]` to strip Gatekeeper flags without breaking ad-hoc signatures.
+4. **Universal 2 enforcement**: All builds MUST use `lipo` to merge `x86_64` and `arm64`. Architecture scan MUST verify both exist via `lipo -info`.
 
 ## 2. The Identity Scrub Protocol (OrangeApple Leak)
 **Trigger**: The Public Repo shows "orangeapple1272" or other private emails in the commit history.

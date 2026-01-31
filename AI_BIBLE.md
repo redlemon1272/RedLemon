@@ -2316,7 +2316,7 @@ if participant.isReallyPremium {
 **Symptom**: Sub-par code patterns (stale `NSLog`, MainActor violations, missing guards) leak into production, causing unpredictable UX in high-stress scenarios (Watch Parties).
 **Root Cause**: **Human Fallibility**. As the codebase grows, it's impossible to manually verify every pattern.
 **Mandatory Solution**:
-1. **Automated Guard**: Every PUSH and RELEASE MUST pass `./scripts/architecture-scan.sh`. 
+1. **Automated Guard**: Every PUSH and RELEASE MUST pass `./scripts/architecture-scan.sh`.
 2. **Zero-Warning Policy**: Releases MUST have 0 errors and 0 warnings. No exceptions.
 3. **Regex Heuristics**: Understand that the scanner uses regex. Keep your guards within 5 lines of the calls they protect (Proximity Rule).
 4. **The "Truth" File**: The scan rules are defined in `scripts/architecture-scan.sh`. Update them as new "Landmines" are discovered.
@@ -2335,7 +2335,7 @@ if participant.isReallyPremium {
 **Symptom**: User funds continue to arrive at an OLD address even after **changing wallets** or rotating XPUBs on the server.
 **Root Cause**: **Database Persistence**. The `payment_pools` table stores the link between a `user_id` and an `address`. If you rotate the XPUB in the engine but don't CLEAR the table, the server will keep serving the cached address from the old wallet.
 **Mandatory Solution**:
-1. **The Flush Rule**: Every wallet rotation MUST be accompanied by a database flush: `DELETE FROM payment_pools;`. 
+1. **The Flush Rule**: Every wallet rotation MUST be accompanied by a database flush: `DELETE FROM payment_pools;`.
 2. **The Deep Recycle Rule**: Standard `docker compose restart` often fails to re-read updated `.env` files into Deno runtimes. Always use `docker compose down && docker compose up -d` for wallet changes.
 3. **Automated Protocol**: Use `./scripts/rotate-wallet.sh` to ensure the correct sequence (ENV Update -> Down -> Up -> Table Flush).
 4. **Verification**: After rotation, trigger an `assign-address` call via curl/app to verify the derived address matches the new mnemonic's expected Index 0.
@@ -2433,6 +2433,14 @@ The script performs a 7-step atomic rotation of the entire infrastructure:
 > 1.  **Re-Build App**: You MUST build and release a new version of the macOS App immediately, as the old app will fail to connect (Invalid Anon Key).
 > 2.  **Sync Private Repo**: Commit the updated `AI_BIBLE.md` to the private repo immediately.
 > 3.  **Destroy Old Backups**: Any old backups of the Bible or Env files are now toxic waste. Delete them.
+
+### 20. Intel Mac "Prohibited" Sign & Bundle Integrity (Landmine #156)
+**Symptom**: App appears with a "prohibited" symbol (circle with slash) on Intel Macs, or icons fail to load, even if the binary is Universal 2.
+**Root Cause**: **Metadata Corruption**. macOS Launch Services (LS) or Finder holds stale cache/quarantine metadata from previous failed builds or ad-hoc signature attempts.
+**Mandatory Instruction to AI**:
+1. **LS Magic Bullet**: Every installer script MUST include `/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f [AppPath]` to force a database refresh.
+2. **FinderInfo Purge**: MUST run `xattr -d com.apple.FinderInfo [AppPath]` to clear "toxic" Finder bits that cause the prohibited sign.
+3. **Architecture Scan**: Releases MUST pass `lipo -info` verification to ensure `x86_64` and `arm64` are both present.
 
 ## 2. The Identity Scrub Protocol (OrangeApple Leak)
 **Trigger**: The Public Repo shows "orangeapple1272" or other private emails in the commit history.

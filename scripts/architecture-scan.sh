@@ -1782,7 +1782,7 @@ while IFS=: read -r file line code; do
     if [[ "$code" =~ \.isPremium ]] && [[ ! "$code" =~ isReallyPremium ]] && [[ ! "$code" =~ [lL]icenseManager ]]; then
         # Check if it's a declaration, assignment, or parameter (usually safe)
         if [[ "$code" =~ "var isPremium" ]] || [[ "$code" =~ "let isPremium" ]] || [[ "$code" =~ "case isPremium" ]] || [[ "$code" =~ "isPremium:" ]] || [[ "$code" =~ "= isPremium" ]] || [[ "$code" =~ "== rhs.isPremium" ]]; then continue; fi
-        
+
         report "WARNING" "Landmine #146" "Potential Stale Crown: Using '.isPremium' instead of '.isReallyPremium'. Booleans can be stale, timestamps are authoritative." "$file" "$line" "$code"
     fi
 done < <(grep -rnE "\.isPremium" "$SOURCES_DIR" --include="*.swift" | grep -v "//" | grep -vE "(var|let|case|isPremium:|= isPremium|==)")
@@ -1855,7 +1855,7 @@ print_header "Check 86: Public Sync Integrity (Air-Gap Guardrail)"
 PUBLIC_REPO_ROOT="../RedLemon-Public"
 if [ -d "$PUBLIC_REPO_ROOT" ]; then
     echo -e "${BLUE}🔍 Auditing public mirror at $PUBLIC_REPO_ROOT...${NC}"
-    
+
     # 1. Check for AI_BIBLE or internal mentions
     while read -r entry; do
         file=$(echo "$entry" | cut -d: -f1)
@@ -1870,7 +1870,7 @@ if [ -d "$PUBLIC_REPO_ROOT" ]; then
         file=$(echo "$entry" | cut -d: -f1)
         line=$(echo "$entry" | cut -d: -f2)
         code=$(echo "$entry" | cut -d: -f3-)
-        
+
         if [[ "$file" == *"scripts/install.sh"* ]]; then continue; fi # Installer needs the IP
         report "ERROR" "Air-Gap Failure" "Production IP leaked into public repository!" "$file" "$line" "$code"
     done < <(grep -rn "$PRODUCTION_IP" "$PUBLIC_REPO_ROOT" --exclude-dir=".git" 2>/dev/null || true)
@@ -1880,10 +1880,10 @@ if [ -d "$PUBLIC_REPO_ROOT" ]; then
         file=$(echo "$entry" | cut -d: -f1)
         line=$(echo "$entry" | cut -d: -f2)
         code=$(echo "$entry" | cut -d: -f3-)
-        
+
         # Exclude common sentences matching the pattern in public repo too
         if [[ "$code" =~ [\.,\!\?\;\:] ]]; then continue; fi
-        
+
         report "ERROR" "Air-Gap Failure" "CRITICAL: Wallet seed phrase leaked into public repository!" "$file" "$line" "$code"
     done < <(grep -rnE "$SEED_PATTERN" "$PUBLIC_REPO_ROOT" --exclude-dir=".git" 2>/dev/null || true)
 
@@ -1894,7 +1894,7 @@ if [ -d "$PUBLIC_REPO_ROOT" ]; then
         code=$(echo "$entry" | cut -d: -f3-)
         report "ERROR" "Air-Gap Failure" "CRITICAL: XPUB leaked into public repository!" "$file" "$line" "$code"
     done < <(grep -rnE "xpub[a-zA-Z0-9]{100,}" "$PUBLIC_REPO_ROOT" --exclude-dir=".git" 2>/dev/null || true)
-    
+
     # 5. Check for any documentation leaks (Manuals)
     if [ -f "$PUBLIC_REPO_ROOT/docs/SelfHosted_Manual.md" ]; then
         report "ERROR" "Air-Gap Failure" "Private documentation 'SelfHosted_Manual.md' leaked into public repository!" "$PUBLIC_REPO_ROOT/docs/SelfHosted_Manual.md" "1" "FILE EXISTS"
@@ -1902,6 +1902,28 @@ if [ -d "$PUBLIC_REPO_ROOT" ]; then
 else
     echo -e "${YELLOW}⚠️  Skipping Public Sync Integrity check (Repo not found at $PUBLIC_REPO_ROOT).${NC}"
 fi
+
+# =============================================================================
+# CHECK 36: Intel Bundle Integrity & Installer Hygiene (Landmine #156)
+# =============================================================================
+# Trigger: Installer scripts missing lsregister or FinderInfo cleanup.
+# Risk: Stale metadata causes 'prohibited' sign on Intel Macs.
+print_header "Check 36: Intel Bundle Integrity (Landmine #156)"
+
+INSTALLERS=("scripts/install.sh" "install_redlemon.sh")
+
+for INSTALLER in "${INSTALLERS[@]}"; do
+    if [[ -f "$INSTALLER" ]]; then
+        # Check 1: lsregister
+        if ! grep -q "lsregister" "$INSTALLER"; then
+             report "ERROR" "Landmine #156" "Missing 'lsregister' refresh in installer. This causes Intel 'prohibited' sign regressions." "$INSTALLER" "0" "Missing lsregister call"
+        fi
+        # Check 2: FinderInfo
+        if ! grep -q "FinderInfo" "$INSTALLER"; then
+             report "WARNING" "Landmine #156" "Missing 'FinderInfo' xattr cleanup. Stale Finder bits can block bundle execution on Intel." "$INSTALLER" "0" "Missing xattr -d com.apple.FinderInfo"
+        fi
+    fi
+done
 
 echo -e "\n${BOLD}════════════════════════════════════════════════════════════════${NC}"
 echo -e "${BOLD}                     SCAN COMPLETE                              ${NC}"

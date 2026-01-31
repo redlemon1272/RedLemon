@@ -33,6 +33,7 @@ let package = Package(
                 .product(name: "NIOHTTP2", package: "swift-nio-http2")
             ],
             path: "Sources",
+            exclude: ["Networking/guestconsolelog.md"],
             resources: [
                 .process("../Resources")
             ],

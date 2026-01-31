@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.180 -->
+        <item>
+            <title>Version 1.0.180</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Apple Silicon playback latency (reduced buffer wait for faster resume)</li><li>Optimized Direct Rendering for reduced CPU usage</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 21:31:18 -0500</pubDate>
+            <sparkle:version>180</sparkle:version>
+            <sparkle:shortVersionString>1.0.180</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.180.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="y+gAnYY0VcULiuSAuPgyWfgI0zUwd+w9nGltMTQhhjD8eVbaohHiXgVRsnCh4IRV79F40bGmMwvWvE5rxZEcCA==" length="98923668"
+            />
+        </item>
         <!-- v1.0.179 -->
         <item>
             <title>Version 1.0.179</title>

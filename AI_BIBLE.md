@@ -2462,3 +2462,17 @@ git filter-branch --env-filter '
 ' --tag-name-filter cat -- --all
 git push -f origin main
 ```
+
+# Part 30: CI/CD Credentials
+
+## GitHub Personal Access Token (PAT)
+**Purpose**: Authenticate automated release scripts to upload assets to GitHub Releases.
+**Scope**: `repo` (Full Control), `workflow`.
+**User**: redlemon1272
+
+```bash
+export GH_PAT="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"
+```
+
+> [!WARNING]
+> This token has **Full Repo Access**. Keep it inside this Private Repo ONLY.

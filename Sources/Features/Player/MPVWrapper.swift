@@ -112,9 +112,14 @@ class MPVWrapper: ObservableObject {
         mpv_set_option_string(handle, "cache-secs", "60")  // Allow up to 60s of buffer
         mpv_set_option_string(handle, "demuxer-max-bytes", "500M")  // 500MB buffer for high-bitrate streams
 
-        // Anti-Stutter: Wait for buffer to fill before resuming
-        // This prevents the "play-buffer-play-buffer" loop by forcing a 5s buffer fill
-        mpv_set_option_string(handle, "cache-pause-wait", "5")
+        // Anti-Stutter: Reduced wait time for snappier resume on Apple Silicon
+        // "1" ensures meaningful buffer but avoids the 4-5s "freeze" lag on resume
+        mpv_set_option_string(handle, "cache-pause-wait", "1")
+        
+        // Direct Rendering (Zero Copy) - Critical for Silicon Latency
+        // Bypasses extra memory copies during decoding
+        mpv_set_option_string(handle, "vd-lavc-dr", "yes")
+
         mpv_set_option_string(handle, "vd-lavc-threads", "4")
 
         // Audio buffering for watch party sync (prevents crackling during speed changes)
@@ -140,6 +145,9 @@ class MPVWrapper: ObservableObject {
         // Language preferences: English audio and subtitles by default
         mpv_set_option_string(handle, "alang", "eng,en,english")
         mpv_set_option_string(handle, "slang", "eng,en,english")
+        
+        // Optimizing initial cache for instant start (ignoring wait if enough is buffered)
+        mpv_set_option_string(handle, "cache-pause-initial", "yes")
 
         // Network: Fail faster on bad streams (default is often too long)
         mpv_set_option_string(handle, "network-timeout", "15")

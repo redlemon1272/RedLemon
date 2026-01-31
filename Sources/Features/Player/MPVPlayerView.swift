@@ -130,25 +130,33 @@ struct MPVPlayerView: View {
                     Color.black
 
                     // Poster/Background art (during loading or buffering or waiting for guests)
-                    if (viewModel.showPoster || viewModel.isLoading || viewModel.showWaitingForGuests), let backgroundURL = viewModel.backgroundURL {
-                        AsyncImage(url: URL(string: backgroundURL)) { phase in
-                            switch phase {
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                    .clipped()
-                                    .transition(.opacity)
-                            case .failure:
-                                placeholderBackground
-                            case .empty:
-                                placeholderBackground
-                            @unknown default:
+                    if (viewModel.showPoster || viewModel.isLoading || viewModel.showWaitingForGuests) {
+                        let backgroundURL = viewModel.backgroundURL ?? viewModel.posterURL ?? ""
+                        Group {
+                            if !backgroundURL.isEmpty {
+                                AsyncImage(url: URL(string: backgroundURL)) { phase in
+                                    switch phase {
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                            .clipped()
+                                            .transition(.opacity)
+                                            .id(backgroundURL)
+                                    case .failure:
+                                        placeholderBackground
+                                    case .empty:
+                                        placeholderBackground
+                                    @unknown default:
+                                        placeholderBackground
+                                    }
+                                }
+                            } else {
                                 placeholderBackground
                             }
                         }
-                        .opacity(viewModel.showPoster ? 1 : 0)
+                        .opacity((viewModel.showPoster || viewModel.isLoading || viewModel.showWaitingForGuests) ? 1.0 : 0.0)
                         .animation(.easeOut(duration: 0.5), value: viewModel.showPoster)
                     }
 
@@ -731,7 +739,7 @@ struct MPVPlayerView: View {
             LoadingOverlay(streamTitle: "", message: "Returning to Lobby...")
         } else if viewModel.isExitingSession {
             LoadingOverlay(streamTitle: "", message: "Closing...")
-        } else if viewModel.isLoading {
+        } else if viewModel.isLoading || viewModel.showWaitingForGuests {
             let message: String = {
                 if viewModel.isSwitchingTracks || viewModel.isSwitchingTracksRecently {
                     return "Syncing track..."
@@ -741,12 +749,13 @@ struct MPVPlayerView: View {
                 var msg = (viewModel.isBuffering && viewModel.mpvWrapper.isFileLoaded) ? "Buffering..." : "Loading stream..."
 
                 // Watch Party Ready Gate Heuristic:
-                // If we are in a watch party, file is loaded, NOT playing, and at the very beginning (time < 2s),
-                // we are likely at the "Ready Gate" waiting for sync.
-                let isAtReadyGate = viewModel.isInWatchParty &&
-                                    viewModel.mpvWrapper.isFileLoaded &&
-                                    !viewModel.isPlaying &&
-                                    viewModel.currentTime < 2.0
+                // If we are in a watch party, NOT playing, and at the very beginning (time < 2s),
+                // OR if the explicit showWaitingForGuests flag is set,
+                // we are at the "Ready Gate" waiting for sync.
+                let isAtReadyGate = (viewModel.isInWatchParty &&
+                                     !viewModel.isPlaying &&
+                                     viewModel.currentTime < 2.0) || 
+                                     viewModel.showWaitingForGuests
 
                 if isAtReadyGate {
                     msg = viewModel.isWatchPartyHost ? "Waiting for guests..." : "Waiting for host..."
@@ -758,12 +767,6 @@ struct MPVPlayerView: View {
             LoadingOverlay(streamTitle: viewModel.streamTitle, message: message)
                 .transition(.opacity.animation(.easeInOut(duration: 0.3)))
                 .zIndex(140)
-        }
-
-        // Waiting for guests overlay (Post-Load Ready Gate)
-        if viewModel.showWaitingForGuests {
-             WaitingGateView(isHost: viewModel.isWatchPartyHost, streamTitle: viewModel.streamTitle)
-                .zIndex(100)
         }
 
         // Next Episode Prompt

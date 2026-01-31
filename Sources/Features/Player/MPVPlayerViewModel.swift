@@ -184,6 +184,13 @@ class MPVPlayerViewModel: ObservableObject {
                     // Landmine #44: Track resume time
                     if isPlaying {
                         self.lastPlaybackResumeTime = Date()
+
+                        // CRITICAL FIX: Dismiss "Waiting for Guests" and Background Art when playback ACTUALLY starts.
+                        // This corresponds to the changes in startSynchronizedPlayback where we removed the premature dismissal.
+                        if self.showWaitingForGuests {
+                             LoggingManager.shared.info(.watchParty, message: "Playback started - dismissing Waiting Gate UI")
+                             self.showWaitingForGuests = false
+                        }
                     }
 
                     if isPlaying && self.isLoading {
@@ -3340,7 +3347,8 @@ extension MPVPlayerViewModel {
             // Handle Play signal (Start of movie or manual resume)
             if showWaitingForGuests {
                 LoggingManager.shared.info(.watchParty, message: "Received PLAY signal - All guests ready! Starting playback.")
-                showWaitingForGuests = false
+                // CRITICAL FIX: Don't hide overlay yet. Wait for isPlaying binding.
+                // showWaitingForGuests = false
                 readySignalsSentCount = 0 // Reset timeout counter
                 await playbackService.play()
                 isPlaying = true
@@ -3391,7 +3399,8 @@ extension MPVPlayerViewModel {
             // This handles cases where the initial .play command was missed
             if remoteIsPlaying && (showWaitingForGuests || showPoster) {
                 LoggingManager.shared.info(.watchParty, message: "Received playback state (playing) - Dismissing waiting overlay/poster")
-                showWaitingForGuests = false
+                // CRITICAL FIX: Don't hide overlay yet. Wait for isPlaying.
+                // showWaitingForGuests = false
                 readySignalsSentCount = 0 // Reset timeout counter
 
                 // Stop Ready Loop
@@ -4109,7 +4118,9 @@ extension MPVPlayerViewModel {
 
     private func startSynchronizedPlayback() {
         LoggingManager.shared.info(.watchParty, message: "Host: Initiating synchronized start")
-        showWaitingForGuests = false
+        // CRITICAL FIX: Don't hide waiting UI yet. Wait for playback state binding to do it.
+        // This prevents the black screen gap between "Start" click and MPV actually rendering frames.
+        // showWaitingForGuests = false
 
         // CRITICAL FIX: Host Background Art Linger
         // Explicitly clear the initial lock for the Host immediately when starting playback.
@@ -4118,10 +4129,10 @@ extension MPVPlayerViewModel {
         if isRefiningInitialSeek {
              LoggingManager.shared.debug(.watchParty, message: "Host: Releasing initial seek lock (Starting Playback)")
              isRefiningInitialSeek = false
-             withAnimation(.easeOut(duration: 0.5)) {
-                 self.showPoster = false
-                 self.isLoading = false
-             }
+             // withAnimation(.easeOut(duration: 0.5)) {
+             //     self.showPoster = false
+             //     self.isLoading = false
+             // }
         }
         // mpvWrapper.play() - Removed
         Task { await playbackService.play() }

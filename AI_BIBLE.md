@@ -2151,11 +2151,11 @@ To manage the `redlemon1272/RedLemon` public repository, use the automated deplo
 
 **Credential (GH_PAT)**:
 The following token is a "No Expiry" fine-grained PAT with `repo:contents` access for the public RedLemon repo.
-`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`
+`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`
 
 **Automated Deployment Command**:
 ```bash
-export GH_PAT="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"
+export GH_PAT="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"
 ./scripts/public-deploy.sh
 ```
 
@@ -2339,7 +2339,7 @@ if participant.isReallyPremium {
 **Symptom**: Automated release scripts fail with 401/403 errors, or GitHub rejects pushes to the public mirror.
 **Root Cause**: **Token Expiration or Leak**. The `sync-to-public.sh` script relies on a valid PAT for push access. If the token expires or is refreshed on GitHub without being updated locally, the release pipeline breaks.
 **Mandatory Solution**:
-1. **Current PAT Storage**: The valid PAT MUST be stored in the local git config of the public repo mirror. For reference, the current token is: `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`
+1. **Current PAT Storage**: The valid PAT MUST be stored in the local git config of the public repo mirror. For reference, the current token is: `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`
 2. **Confidentiality**: This token is for PRIVATE use in the development environment. It MUST NOT be committed to `Package.swift`, `Config.swift`, or any public-facing file.
 3. **Rotation**: When rotating, update the remote with: `git remote set-url origin https://redlemon1272:NEW_PAT@github.com/redlemon1272/RedLemon.git`.
 
@@ -2502,7 +2502,7 @@ git push -f origin main
 **User**: redlemon1272
 
 ```bash
-export GH_PAT="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"
+export GH_PAT="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"
 ```
 
 > [!WARNING]

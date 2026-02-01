@@ -1756,9 +1756,9 @@ class MPVPlayerViewModel: ObservableObject {
     /// Select subtitle track by ID
     /// - Parameter trackId: Track ID (0 = off, or valid track ID)
     func selectSubtitleTrack(_ trackId: Int) {
-        // Only apply special sync logic for EMBEDDED tracks
+        // Only apply special sync logic for EMBEDDED tracks (excluding "Off" = 0)
         // External tracks don't cause stalling, so simpler is better
-        let isEmbedded = availableSubtitleTracks.first(where: { $0.id == trackId })?.isExternal == false
+        let isEmbedded = trackId != 0 && availableSubtitleTracks.first(where: { $0.id == trackId })?.isExternal == false
 
         if isEmbedded {
              LoggingManager.shared.info(.videoRendering, message: "Switching embedded subtitle track...")

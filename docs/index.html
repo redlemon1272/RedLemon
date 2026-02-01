@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedLemon | One Click. Play. Together.</title>
+    <meta name="description"
+        content="A next-generation native macOS streaming client with real-time watch parties and one-click playback.">
+
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">
+                <img src="assets/icon.png" alt="RedLemon Icon">
+                <span><span class="brand-red">Red</span><span class="brand-lemon">Lemon</span></span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="https://github.com/redlemon1272/RedLemon" class="nav-link-secondary">View Source</a>
+                <a href="#install" class="nav-btn">Download</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>One Click. <span class="brand-red">Play.</span> <span class="brand-lemon">Together.</span></h1>
+            <p class="hero-text">The ultimate native macOS streaming experience. Aggregated content, low-latency watch parties, and zero
+                telemetry. Built for the social era.</p>
+
+        </div>
+    </header>
+
+    <section id="features" class="features">
+        <div class="section-header">
+            <h2>Native Power.</h2>
+            <p>100% Swift, Metal-accelerated, and optimized for your Mac.</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon-box">🎬</div>
+                <h3>24/7 Live Cinema</h3>
+                <p>Join continuous community screenings where everything stays perfectly in sync.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box">🍿</div>
+                <h3>Watch Parties</h3>
+                <p>Create private or public rooms with low-latency sync and native chat.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box">🛡️</div>
+                <h3>Zero Telemetry</h3>
+                <p>No trackers. No data mining. Your library and keys stay in your KeyChain.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="install" class="install-section">
+        <div class="glass-container">
+            <div class="install-header">
+                <h2>The Faster Way to Play.</h2>
+                <p>Our terminal installer makes it easy, secure, and bypasses the
+                    "Quarantine" lock automatically.</p>
+            </div>
+
+            <div class="terminal-guide">
+                <div class="guide-steps">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            <strong>Open Terminal</strong>
+                            <p>Press <kbd>⌘</kbd> + <kbd>Space</kbd> and type "Terminal", then hit Enter.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-text">
+                            <strong>Paste & Run</strong>
+                            <p>Copy the command, paste it into the window, and hit <kbd>Enter</kbd>.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-text">
+                            <strong>One Click. Play.</strong>
+                            <p>RedLemon is now in your Applications folder and ready to go.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="command-box">
+                    <div class="terminal-header">
+                        <div class="terminal-left">
+                            <div class="dots"><span></span><span></span><span></span></div>
+                            <span class="terminal-title">Install RedLemon</span>
+                        </div>
+                        <button class="copy-btn header-copy" onclick="copyCommand()">
+                            <svg class="copy-icon" viewBox="0 0 24 24" width="14" height="14">
+                                <path fill="currentColor"
+                                    d="M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1M19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5M19 21H8V7H19V21Z" />
+                            </svg>
+                            <span id="copyText">Copy</span>
+                        </button>
+                    </div>
+                    <div class="command-content">
+                        <code id="installCommand">curl -sL https://raw.githubusercontent.com/redlemon1272/RedLemon/main/scripts/install.sh | bash</code>
+                    </div>
+                </div>
+            </div>
+
+            <p class="manual-link">Prefer the old way? <a
+                    href="https://github.com/redlemon1272/RedLemon/releases/latest">Download the DMG</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 RedLemon. Released under MIT.</p>
+            <div class="social-links">
+                <a href="https://github.com/redlemon1272/RedLemon/discussions">Community</a>
+                <a href="https://github.com/redlemon1272/RedLemon">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function copyCommand() {
+            const command = document.getElementById('installCommand').innerText;
+            navigator.clipboard.writeText(command);
+
+            const copyText = document.getElementById('copyText');
+            copyText.innerText = 'Copied!';
+            setTimeout(() => {
+                copyText.innerText = 'Copy';
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>

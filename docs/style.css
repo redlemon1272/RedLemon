@@ -1,0 +1,411 @@
+:root {
+    --bg-color: #000000;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent-red: #ff3b30;
+    --accent-lemon: #ffcc00;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Brand Colors: Yellow Red, Red Lemon */
+.brand-red {
+    color: var(--accent-lemon);
+}
+
+/* Yellow */
+.brand-lemon {
+    color: var(--accent-red);
+}
+
+/* Red */
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 1.2rem 0;
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 800;
+    font-size: 1.4rem;
+}
+
+.logo img {
+    height: 32px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-btn {
+    background: white;
+    padding: 0.6rem 1.4rem;
+    border-radius: 12px;
+    color: #000 !important;
+}
+
+.nav-link-secondary {
+    color: var(--text-secondary) !important;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.nav-link-secondary:hover {
+    color: var(--text-primary) !important;
+}
+
+/* Hero */
+.hero {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.hero p.hero-text {
+    font-size: 1.4rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-group {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.btn-primary {
+    background: white;
+    color: #000;
+    text-decoration: none;
+    padding: 1rem 2.5rem;
+    border-radius: 16px;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.btn-secondary {
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 1rem 2.5rem;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: 1px solid var(--glass-border);
+}
+
+/* Features */
+.features {
+    padding: 2rem 2rem 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.section-header h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 3rem 2rem;
+    border-radius: 32px;
+}
+
+.icon-box {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+}
+
+/* Install Section */
+.install-section {
+    padding: 6rem 2rem;
+}
+
+.glass-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 48px;
+    padding: 5rem 3rem;
+    text-align: center;
+}
+
+.install-header h2 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.install-header p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 4rem;
+}
+
+.terminal-guide {
+    display: grid;
+    grid-template-columns: 0.8fr 2.2fr;
+    gap: 3rem;
+    text-align: left;
+    align-items: center;
+}
+
+.guide-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.step-num {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #000;
+    flex-shrink: 0;
+}
+
+.step-text strong {
+    font-size: 1.1rem;
+}
+
+.step-text p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+kbd {
+    background: #333;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    border-bottom: 2px solid #000;
+}
+
+/* Command Box */
+.command-box {
+    background: #000;
+    border: 1px solid #333;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.terminal-header {
+    background: #1a1a1a;
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.terminal-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-copy {
+    padding: 0.3rem 0.6rem !important;
+    font-size: 0.75rem !important;
+    border-radius: 6px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.header-copy:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.dots {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #444;
+}
+
+.terminal-title {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.command-content {
+    padding: 2.5rem 2rem;
+    text-align: left;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    color: var(--accent-lemon);
+    white-space: pre-wrap;
+    word-break: break-all;
+    display: block;
+    line-height: 1.5;
+}
+
+.copy-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.manual-link {
+    margin-top: 4rem;
+    color: var(--text-secondary);
+}
+
+.manual-link a {
+    color: var(--text-primary);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    padding: 4rem 2rem;
+    border-top: 1px solid var(--glass-border);
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-secondary);
+}
+
+.social-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.social-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    .terminal-guide {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+}

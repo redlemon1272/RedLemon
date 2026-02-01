@@ -176,9 +176,14 @@ class LobbyEventRouter: ObservableObject {
         }
 
         // 3. Add system message (Host and Guests)
-        // Filter out self-echo to prevent duplicates
-        if normalizedId.caseInsensitiveCompare(viewModel.participantId) != .orderedSame {
-            viewModel.chatManager.addSystemMessage(.userJoined, userName: guestUsername)
+        if viewModel.isHost {
+             // Host: Ensure guest joining is logged in chat
+             viewModel.chatManager.addSystemMessage(.userJoined, userName: guestUsername)
+        } else {
+             // Guest: Ensure other guests joining are logged (Filter out self-echo to prevent duplicates)
+             if normalizedId.caseInsensitiveCompare(viewModel.participantId) != .orderedSame {
+                 viewModel.chatManager.addSystemMessage(.userJoined, userName: guestUsername)
+             }
         }
 
         // 4. Host-only logic: Sync to AppState and broadcast votes

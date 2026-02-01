@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.185 -->
+        <item>
+            <title>Version 1.0.185</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed 'Update Checker Failed' error in installer</li><li>Fixed missing version metadata in app bundle</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 01 Feb 2026 17:52:58 -0500</pubDate>
+            <sparkle:version>185</sparkle:version>
+            <sparkle:shortVersionString>1.0.185</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.185.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="AEzEza+j9C++iUFmZSiHgOiSlGk6m7s8HqxAiNE/1OLIuSo5tmFG4G7Wh6MbqLyRXDfHemO3eMcqL9FVa50NBQ==" length="75235151"
+            />
+        </item>
         <!-- v1.0.184 -->
         <item>
             <title>Version 1.0.184</title>

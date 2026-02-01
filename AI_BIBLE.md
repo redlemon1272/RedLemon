@@ -572,6 +572,10 @@
     *   **Rule**: **The Clean Slate Protocol**. `release.sh` and `sync-to-public.sh` MUST fail immediately if `git status` is dirty. No overrides allowed.
     *   **Workflow**: Abort release -> Commit changes -> Restart release.
 
+46. **MPV Negative State Management ("The Off Switch Rule")**: *(Added v1.0.184)*
+    *   **Trigger**: User turns off subtitles or disables a track, but the UI flashes a loading spinner or background art.
+    *   **Rule**: "Negative" state transitions (turning something *off*, e.g., `trackId == 0`) are often instantaneous engine operations that do not require a decoder reset. Bypass "Heavy Switch" logic (spinners, posters) for these specific negative values to ensure a seamless UI experience. Treat "Switching to X" and "Switching to None" as distinct workflows.
+
 131. **Safe Dependency Injection (The ".task" Race Condition)**: *(Added v1.0.162)*
     *   **Trigger**: Relying on external property injection (e.g., `viewModel.appState = appState`) happening implicitly before async code in `.task` executes.
     *   **Symptom**: "Guest Left" messages appear immediately after joining watch party because the ViewModel failed to inherit the active session (due to nil `appState`) and created a fresh connection.

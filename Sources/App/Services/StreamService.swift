@@ -683,6 +683,22 @@ actor StreamService: StreamResolving {
         }
         }
 
+        // Step 4.5: Preliminary Malware/Fake Filter (Title based)
+        // This prevents wasting time/API calls on obvious fakes before unlocking.
+        let malwareFiltered = finalStreams.filter { stream in
+            let titleLower = stream.title.lowercased()
+            let blockedExtensions = [".iso", ".exe", ".dll", ".zip", ".msi", ".bat", ".cmd", ".vbs"]
+            if let blockedExt = blockedExtensions.first(where: { titleLower.contains($0) }) {
+                print("🚫 StreamService: Title-based malware/fake filter blocked (\(blockedExt)): \(stream.title)")
+                return false
+            }
+            return true
+        }
+
+        if !malwareFiltered.isEmpty {
+            finalStreams = malwareFiltered
+        }
+
         // Step 5: Try to unlock streams
         var lastError: Error?
 

@@ -142,64 +142,60 @@ class LobbyEventRouter: ObservableObject {
     private func handleLobbyJoin(_ syncMessage: SyncMessage) async {
         guard let viewModel = viewModel else { return }
 
-        if viewModel.isHost {
-             let guestUsername = syncMessage.chatUsername ?? "Guest"
-             let guestId = syncMessage.senderId ?? UUID().uuidString
+        let guestUsername = syncMessage.chatUsername ?? "Guest"
+        let guestId = syncMessage.senderId ?? UUID().uuidString
+        let normalizedId = guestId.lowercased()
 
-             // Check if participant already exists to prevent duplicates
-             if let index = viewModel.participants.firstIndex(where: { $0.id.caseInsensitiveCompare(guestId) == .orderedSame }) {
-                 NSLog("ℹ️ Guest '%@' re-joined (Already in list at index %d)", guestUsername, index)
-                 // Update any stale data if needed
-                 viewModel.participants[index].name = guestUsername
-             } else {
-                 NSLog("👋 Host received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
+        // CRITICAL FIX: Trust LOBBY_JOIN as a source of truth for both Hosts and Guests
+        // This ensures all participants see the new joiner even if Realtime presence is flaky.
+        
+        // 1. Mark as connected in ViewModel (Protects from Ghost Protection eviction)
+        viewModel.connectedUserIds.insert(normalizedId)
+
+        // 2. Add to participant list if missing
+        if let index = viewModel.participants.firstIndex(where: { $0.id.caseInsensitiveCompare(normalizedId) == .orderedSame }) {
+             NSLog("ℹ️ Participant '%@' re-joined (Already in list at index %d)", guestUsername, index)
+             viewModel.participants[index].name = guestUsername
+        } else {
+             NSLog("👋 Received LOBBY_JOIN: '%@' joined room %@", guestUsername, viewModel.room.id)
+             if viewModel.isHost {
                  NSLog("   Guest ID: %@, Total participants: %d", guestId, viewModel.participants.count + 1)
-
-                  let guest = Participant(
-                      id: guestId,
-                      name: guestUsername,
-                      isHost: false,
-                      isReady: false,
-                      isPremium: syncMessage.isPremium ?? false,
-                      subscriptionExpiresAt: syncMessage.subscriptionExpiresAt.flatMap { Date(timeIntervalSince1970: $0) },
-                      joinedAt: Date(),
-                      phxRefs: []
-                  )
-                 viewModel.participants.append(guest)
              }
 
-             // Presence callback handles this already, BUT it may suppress the message if the user is reconnecting (flapping).
-             // We explicitly add the message here on LOBBY_JOIN to ensure the intent is logged in chat.
-             viewModel.chatManager.addSystemMessage(.userJoined, userName: guestUsername)
+             let participant = Participant(
+                 id: normalizedId,
+                 name: guestUsername,
+                 isHost: false, // LOBBY_JOIN is always from a guest-role broadcast
+                 isReady: false,
+                 isPremium: syncMessage.isPremium ?? false,
+                 subscriptionExpiresAt: syncMessage.subscriptionExpiresAt.flatMap { Date(timeIntervalSince1970: $0) },
+                 joinedAt: Date(),
+                 phxRefs: []
+             )
+             viewModel.participants.append(participant)
+        }
 
+        // 3. Add system message (Host and Guests)
+        // Filter out self-echo to prevent duplicates
+        if normalizedId.caseInsensitiveCompare(viewModel.participantId) != .orderedSame {
+            viewModel.chatManager.addSystemMessage(.userJoined, userName: guestUsername)
+        }
+
+        // 4. Host-only logic: Sync to AppState and broadcast votes
+        if viewModel.isHost {
              // Log updated room status
              let readyCount = viewModel.participants.filter { $0.isReady }.count
              NSLog("👥 Room status after join: %d participants, %d ready", viewModel.participants.count, readyCount)
 
-             // VOTE SYNC: Re-broadcast host's current vote so late joiners see it
-             // (AI Bible Landmine #13: ephemeral state must be re-synced on join)
+             // VOTE SYNC: Re-broadcast host's current vote
              await broadcastCurrentVotes()
 
-             // CRITICAL FIX (Landmine #90): Sync participants to AppState immediately
-             // This ensures that if the host transitions to Player, the AppState has the guest list.
-             // Without this, MPVPlayerViewModel initializes with EMPTY participants (Silent Join).
+             // Sync participants to AppState (Landmine #90)
              await MainActor.run {
                  viewModel.appState?.player.currentWatchPartyRoom?.participants = viewModel.participants
                  NSLog("✅ Lobby: Synced participants to AppState (Count: %d)", viewModel.participants.count)
              }
-         } else {
-             // Non-host received guest join notification
-             let guestUsername = syncMessage.chatUsername ?? "Guest"
-             let guestId = syncMessage.senderId ?? ""
-
-             NSLog("👋 Received: Guest '%@' joined room %@", guestUsername, viewModel.room.id)
-
-             // Fix for Guests in Event Rooms: Add system message to chat
-             // Filter out self-echo to prevent duplicates since sender adds locally (Landmine #61)
-             if guestId.caseInsensitiveCompare(viewModel.participantId) != .orderedSame {
-                 viewModel.chatManager.addSystemMessage(.userJoined, userName: guestUsername)
-             }
-         }
+        }
     }
 
     /// Re-broadcasts host's current vote so late joiners can sync up

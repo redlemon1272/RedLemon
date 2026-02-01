@@ -685,7 +685,15 @@ class LobbyPresenceManager: ObservableObject {
                 let isTrackingInRealtime = viewModel.connectedUserIds.contains(participant.userId.uuidString.lowercased())
 
                 if isRealtimeActive && !isTrackingInRealtime && !participant.isHost {
-                    // Skip stale row - user left Realtime but DB row is still lingering.
+                    // CRITICAL FIX: Grace period for LOBBY_JOIN broadcast
+                    // If the user literally just joined via LOBBY_JOIN (which inserts into connectedUserIds),
+                    // but the Presence update from Supabase hasn't reached us yet, they will have NO phx_refs.
+                    // However, they ARE in connectedUserIds.
+                    
+                    // The check above (isTrackingInRealtime) already uses connectedUserIds!
+                    // So if LOBBY_JOIN correctly inserts into connectedUserIds, they pass this check.
+                    
+                    // Skip stale row - user left Realtime but DB row is still lingering (35s TTL).
                     continue
                 }
 

@@ -14,6 +14,12 @@ NC='\033[0m'
 
 VERSION=$1
 BUILD_NUMBER=$2
+
+if [ -z "$VERSION" ] || [ -z "$BUILD_NUMBER" ]; then
+    echo -e "${RED}❌ CORRUPT INPUT: Version and Build Number are required.${NC}"
+    echo "Usage: ./scripts/release.sh <version> <build_number>"
+    exit 1
+fi
 # 0. Pre-Flight Checks (The "Satellite" Protocol)
 echo -e "${BLUE}🛡️  Running Pre-Flight Checks...${NC}"
 

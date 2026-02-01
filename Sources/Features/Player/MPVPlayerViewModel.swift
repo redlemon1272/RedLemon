@@ -1762,8 +1762,8 @@ class MPVPlayerViewModel: ObservableObject {
 
         if isEmbedded {
              LoggingManager.shared.info(.videoRendering, message: "Switching embedded subtitle track...")
-             self.isLoading = true
-             self.showPoster = false
+             // self.isLoading = true  // Disabled: Caused UI flashing (Landmine #46)
+             // self.showPoster = false // Disabled: Caused UI flashing
              isSwitchingTracks = true
              trackSwitchStartTime = Date()
              trackSwitchStartPos = currentTime

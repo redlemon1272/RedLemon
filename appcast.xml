@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.183 -->
+        <item>
+            <title>Version 1.0.183</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Improve lobby synchronization by trusting join broadcasts</li><li>Added ghost protection grace period for new participants</li><li>Implemented malware/fake stream filtering for restricted extensions</li><li>Refined stream resolution fallback logic</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 31 Jan 2026 20:41:56 -0500</pubDate>
+            <sparkle:version>183</sparkle:version>
+            <sparkle:shortVersionString>1.0.183</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.183.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="sjMuXi0a51DlZqRy0DuUESiMaVuaEE//0/0uQo/IKf3NpyT2W/EEy+ycSYAaH+txn5pEy6BUmL+tRvtlSb6uCA==" length="75585576"
+            />
+        </item>
         <!-- vv1.0.182 -->
         <item>
             <title>Version v1.0.182</title>

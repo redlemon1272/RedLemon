@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.184 -->
+        <item>
+            <title>Version 1.0.184</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed background art flashing when disabling subtitles</li><li>Reverted aggressive smooth-switching UI for embedded tracks</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 31 Jan 2026 22:35:27 -0500</pubDate>
+            <sparkle:version>184</sparkle:version>
+            <sparkle:shortVersionString>1.0.184</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.184.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="5Tk7q0XkAl1zJ5sYEoe/AytWRI4YTz7PSidYFO0Z6RyfJrEQW69IOzrw5V2kvIT5F8/v1V8Fc238+OmZguZvCA==" length="75473927"
+            />
+        </item>
         <!-- v1.0.183 -->
         <item>
             <title>Version 1.0.183</title>

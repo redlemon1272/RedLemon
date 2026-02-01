@@ -2507,3 +2507,118 @@ export GH_PAT="github_pat_11BY74BGA07DmoM9DwxVAE_qIZBb58tNyIYGJ3KH943sEnNHPs9aim
 
 > [!WARNING]
 > This token has **Full Repo Access**. Keep it inside this Private Repo ONLY.
+
+# Part 32: Self-Hosted Infrastructure & Payment Protocol
+
+> **Note**: This section contains the complete "Self-Hosted Manual" for managing the backend server. It is essential for verifying payments, checking logs, and diagnosing server-side issues.
+
+## 1. Server Access (AnonVM)
+
+| Service | Detail |
+| :--- | :--- |
+| **IP Address** | `151.243.109.243` |
+| **SSH User** | `root` |
+| **SSH Password** | `4Y76HBYs^OxSQNbIbbfA7C0d` |
+| **OS** | Ubuntu 24.04 LTS |
+| **Location** | AnonVM (Netherlands) |
+
+**To Connect:**
+```bash
+ssh root@151.243.109.243
+# Enter password: 4Y76HBYs^OxSQNbIbbfA7C0d
+```
+
+---
+
+## 2. Supabase Access
+
+| Component | URL / Value | Credentials |
+| :--- | :--- | :--- |
+| **Dashboard** | `http://151.243.109.243:3000` | User: `admin`<br>Pass: `Vs8HAoo@Rp33rjKFX6xaOe6k` |
+| **API (Kong)** | `https://151.243.109.243.nip.io` | (Protected by Anon Key) |
+| **Database** | Port `5432` (Direct) | User: `postgres`<br>Pass: `uzCXxI6gs7I6tRXMCKJdCzh8` |
+
+### API Keys (Permanent)
+These keys are hardcoded in your app and server. If you change them, you must update both.
+
+*   **ANON_KEY (Public):**
+    `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzY5NzgzNDkyLCJleHAiOjIwODUxNDM0OTJ9.n-lTY3pLyNnNOggkn1EF41N0KeibKUuiR0AC2SKuUV0`
+
+*   **JWT Secret (For Token Generation):**
+    `2f838bcacafbdd44a8c777572a5d908ece3a42998d4199abc44d2dd9400b8783`
+
+---
+
+## 3. Maintenance Commands
+
+Run these as `root` on the server:
+
+**Restart Everything:**
+```bash
+cd /root/supabase/docker
+docker compose restart
+```
+
+**Check Logs (Edge Functions):**
+```bash
+cd /root/supabase/docker
+docker compose logs -f --tail 100 supabase-edge-functions
+```
+
+**Check Database Directly:**
+```bash
+docker exec -it supabase-db psql -U postgres
+```
+
+---
+
+## 4. Automated Payment Protocol (The "Sweeper" & "Checker")
+
+> **CRITICAL ARCHITECTURE NOTE:**
+> Licensing (`check-payment`) and Sweeping (`sweep-payments`) are **COMPLETELY DECOUPLED**.
+> 1. **Check Only Licensing**: The user ONLY gets a license if they create a fresh poll via the client app (every 10s).
+> 2. **Sufficient Amount**: The logic for granting the license lives EXCLUSIVELY in `/root/supabase/docker/volumes/functions/check-payment/index.ts`.
+>    - **Threshold**: **$4.00 USD**. Anything less is rejected as "Insufficient".
+> 3. **Sweep Only Funds**: The server sweeps ANY amount > **0.0005 ETH** (~$1.50) daily (9:10 AM UTC). It does NOT grant licenses.
+>    - **Result**: If a user pays $3.99, their money is swept to you, but they get NOTHING. (Manual support required).
+
+### Verification Queries (The Truth)
+To distinguish between "They Paid" and "They Got Licensed", run these specific queries:
+
+**1. Did they get a License?** (Check `payment_transactions` for credited purchases)
+```sql
+SELECT * FROM payment_transactions ORDER BY created_at DESC LIMIT 5;
+```
+
+**2. Did we receive the money?** (Check `payment_sweeps` for raw blockchain movement)
+```sql
+SELECT * FROM payment_sweeps ORDER BY created_at DESC LIMIT 5;
+```
+
+**3. Is the Sweeper Running?** (Check Cron Schedule)
+```sql
+SELECT jobname, schedule, command FROM cron.job;
+```
+
+### Edge Function Locations
+- **Sweep Logic**: `/root/supabase/docker/volumes/functions/sweep-payments/index.ts`
+- **Check Logic**: `/root/supabase/docker/volumes/functions/check-payment/index.ts`
+
+---
+
+## 5. Production Wallet Secrets
+> [!CAUTION]
+> **CRITICAL SECURITY INFORMATION**
+> These keys control the funds collected by the application.
+> **DO NOT SHARE THIS SEED PHRASE.**
+
+**Seed Phrase (Mnemonic):**
+`motion stand mad bullet ozone rifle rare noise pear diary aware act`
+
+**Derivation Paths:**
+*   **BTC:** `m/84'/0'/0'` (Native Segwit / BIP84)
+*   **EVM (ETH/Base):** `m/44'/60'/0'` (Standard BIP44)
+
+**Extended Public Keys (XPUBs) - Injected into Server:**
+*   **XPUB_BTC:** `zpub6rDR8D6hCAkPJ3EC2VzfJRueE3neHxXcniQnxrfAN4iNoQEwbeB4R5Buwom5wuDVHFTKm6ZxPhQ1x3DQ3hXAbXT7fgcXAvnU9sYe5ruGh2M`
+*   **XPUB_EVM:** `xpub6DW9AXdpfsUqgRwufdH8FQSqnfeyathnpiWbcHyAMrrJPNqiaMxY2EsHMAXj2oyXbEej24kNPF8YDTuuQUEAK1Lo9PjzzjQ85jPsbcMDjzt`

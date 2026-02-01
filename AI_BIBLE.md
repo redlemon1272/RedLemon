@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 31, 2026 (Part 33: "Perfect" Ready Gate & Silicon Latency)
+> **Last Updated:** January 31, 2026 (Part 33: "Perfect" Ready Gate)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -136,7 +136,6 @@
 | **Stale Premium Crown** | Client trusting DB flag vs Expiration Date | #146 |
 | **Silent Scroll Abandonment** | Users unaware of participants/playlist list | #147 |
 | **Subtitle Search: 0 results for major movie** | SubDL record lacks IMDb ID; Search fragile with Year | #138 |
-| **MPV Latency (Apple Silicon)** | `cache-pause-wait` / `audio-wait-for-video` defaults | #148 |
 | **Black Screen Flash (Player Start)** | Background Art cleared before engine confirms playback | #149 |
 | **Guest Black Screen (Handshake)** | Host sync clearing UI while Guest is still buffering | #150 |
 | **Art Disappearing (Guest Wait)** | Video layer covering background art from behind | #151 |
@@ -613,14 +612,6 @@
         1. Use a pulsing chevron + text overlay.
         2. Set `.allowsHitTesting(false)` on the overlay so it doesn't hijack scroll/click gestures.
         3. Use a `.simultaneousGesture(DragGesture())` on the ScrollView to dissolve the tip instantly upon interaction. (Landmine #147).
-
-148. **MPV Playback Resume Latency (Apple Silicon)**: *(Added v1.0.180)*
-    *   **Symptom**: Resuming playback after a pause or a "Ready Gate" wait takes 1.5s - 2.5s on Apple Silicon Macs, appearing laggy or out-of-sync.
-    *   **Cause**: MPV's default `cache-pause-wait` property is tuned for high-latency streams, but causes unnecessary delay on local fiber/low-latency decoders. Combined with `audio-wait-for-video`, the engine stutters during the resume.
-    *   **Rule**: **Zero Latency Resume**.
-        1. Set `cache-pause-wait = "0"` in `MPVWrapper.swift`.
-        2. Set `audio-wait-for-video = "no"` in `MPVWrapper.swift`.
-        3. This ensures the "Play" signal translates to immediate visual feedback. (Landmine #148).
 
 149. **Persistent Background Art (The "Ready Gate" Strategy)**: *(Added v1.0.181)*
     *   **Symptom**: Player flashes a black screen for a split second (or longer) between the "Waiting for guests" state and the movie starting.

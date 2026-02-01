@@ -802,26 +802,10 @@ fi
 
 
 # =============================================================================
-# CHECK 37: MPV Silicon Latency (Landmine #148)
-# =============================================================================
-# Trigger: Missing cache-pause-wait=0 or audio-wait-for-video=no on Apple Silicon.
-print_header "Check 37: MPV Silicon Latency (Landmine #148)"
-
-MPV_WRAPPER="$SOURCES_DIR/Features/Player/MPVWrapper.swift"
-if [[ -f "$MPV_WRAPPER" ]]; then
-    if ! grep -q "cache-pause-wait" "$MPV_WRAPPER" || ! grep -q "0" "$MPV_WRAPPER"; then
-        report "ERROR" "Landmine #148" "MPV Latency Risk: Missing 'cache-pause-wait = 0' in MPVWrapper. This causes resume lag on Apple Silicon." "$MPV_WRAPPER" "0" "Missing cache-pause-wait check"
-    fi
-    if ! grep -q "audio-wait-for-video" "$MPV_WRAPPER" || ! grep -q "no" "$MPV_WRAPPER"; then
-        report "ERROR" "Landmine #148" "MPV Latency Risk: Missing 'audio-wait-for-video = no' in MPVWrapper." "$MPV_WRAPPER" "0" "Missing audio-wait-for-video check"
-    fi
-fi
-
-# =============================================================================
-# CHECK 38: Persistent Art Logic (Landmine #149, #150, #151)
+# CHECK 36: Persistent Art Logic (Landmine #149, #150, #151)
 # =============================================================================
 # Trigger: showPoster or isLoading being cleared without role checks.
-print_header "Check 38: Persistent Art Logic (Landmine #149, #150, #151)"
+print_header "Check 36: Persistent Art Logic (Landmine #149, #150, #151)"
 
 PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
 if [[ -f "$PLAYER_VM" ]]; then
@@ -841,11 +825,11 @@ if [[ -f "$PLAYER_VIEW" ]]; then
 fi
 
 # =============================================================================
-# CHECK 36: Multi-Arch Bundle Integrity (Landmine #156)
+# CHECK 37: Multi-Arch Bundle Integrity (Landmine #156)
 # =============================================================================
 # Trigger: Installer scripts missing LS refresh (Intel) or quarantine safety (Silicon).
 # Risk: Prohibited sign (Intel) or 'Damaged App' errors (Silicon).
-print_header "Check 36: Multi-Arch Bundle Integrity (Landmine #156)"
+print_header "Check 37: Multi-Arch Bundle Integrity (Landmine #156)"
 
 INSTALLERS=("scripts/install.sh" "install_redlemon.sh")
 

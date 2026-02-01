@@ -802,6 +802,45 @@ fi
 
 
 # =============================================================================
+# CHECK 37: MPV Silicon Latency (Landmine #148)
+# =============================================================================
+# Trigger: Missing cache-pause-wait=0 or audio-wait-for-video=no on Apple Silicon.
+print_header "Check 37: MPV Silicon Latency (Landmine #148)"
+
+MPV_WRAPPER="$SOURCES_DIR/Features/Player/MPVWrapper.swift"
+if [[ -f "$MPV_WRAPPER" ]]; then
+    if ! grep -q "cache-pause-wait" "$MPV_WRAPPER" || ! grep -q "0" "$MPV_WRAPPER"; then
+        report "ERROR" "Landmine #148" "MPV Latency Risk: Missing 'cache-pause-wait = 0' in MPVWrapper. This causes resume lag on Apple Silicon." "$MPV_WRAPPER" "0" "Missing cache-pause-wait check"
+    fi
+    if ! grep -q "audio-wait-for-video" "$MPV_WRAPPER" || ! grep -q "no" "$MPV_WRAPPER"; then
+        report "ERROR" "Landmine #148" "MPV Latency Risk: Missing 'audio-wait-for-video = no' in MPVWrapper." "$MPV_WRAPPER" "0" "Missing audio-wait-for-video check"
+    fi
+fi
+
+# =============================================================================
+# CHECK 38: Persistent Art Logic (Landmine #149, #150, #151)
+# =============================================================================
+# Trigger: showPoster or isLoading being cleared without role checks.
+print_header "Check 38: Persistent Art Logic (Landmine #149, #150, #151)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    # Check for isWatchPartyHost or isRefiningInitialSeek in isPlayingPub sink
+    if ! grep -q "isWatchPartyHost" "$PLAYER_VM" || ! grep -q "isRefiningInitialSeek" "$PLAYER_VM"; then
+        report "WARNING" "Landmine #150" "Art Persistence Risk: isPlaying sink MUST check roles/seek-status before clearing showPoster. Guests need protection during handshake." "$PLAYER_VM" "0" "Missing role-aware UI cleanup"
+    fi
+fi
+
+PLAYER_VIEW="$SOURCES_DIR/Features/Player/MPVPlayerView.swift"
+if [[ -f "$PLAYER_VIEW" ]]; then
+    # Check if MPVLayerVideoView opacity is conditional and hides when loading/poster/waiting
+    # We look for the existence of the complex ternary that hides the layer during transitions
+    if ! grep -q "isLoading || viewModel.showPoster || viewModel.showWaitingForGuests) ? 0" "$PLAYER_VIEW"; then
+        report "ERROR" "Landmine #151" "Visual Layer Risk: MPVLayerVideoView MUST be hidden (opacity 0) while loading/poster/waiting states are active to prevent black screen peek-through." "$PLAYER_VIEW" "0" "Missing conditional opacity for video layer"
+    fi
+fi
+
+# =============================================================================
 # CHECK 36: Multi-Arch Bundle Integrity (Landmine #156)
 # =============================================================================
 # Trigger: Installer scripts missing LS refresh (Intel) or quarantine safety (Silicon).

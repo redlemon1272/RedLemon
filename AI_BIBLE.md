@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 28, 2026 (Part 32: Seamless Player UI & Transitions)
+> **Last Updated:** January 31, 2026 (Part 33: "Perfect" Ready Gate & Silicon Latency)
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -136,6 +136,11 @@
 | **Stale Premium Crown** | Client trusting DB flag vs Expiration Date | #146 |
 | **Silent Scroll Abandonment** | Users unaware of participants/playlist list | #147 |
 | **Subtitle Search: 0 results for major movie** | SubDL record lacks IMDb ID; Search fragile with Year | #138 |
+| **MPV Latency (Apple Silicon)** | `cache-pause-wait` / `audio-wait-for-video` defaults | #148 |
+| **Black Screen Flash (Player Start)** | Background Art cleared before engine confirms playback | #149 |
+| **Guest Black Screen (Handshake)** | Host sync clearing UI while Guest is still buffering | #150 |
+| **Art Disappearing (Guest Wait)** | Video layer covering background art from behind | #151 |
+| **"User Join" Message Echo** | Missing self-sender filter in broadcast handler | #95 |
 
 ## 🚨 Critical Landmines
 
@@ -608,6 +613,37 @@
         1. Use a pulsing chevron + text overlay.
         2. Set `.allowsHitTesting(false)` on the overlay so it doesn't hijack scroll/click gestures.
         3. Use a `.simultaneousGesture(DragGesture())` on the ScrollView to dissolve the tip instantly upon interaction. (Landmine #147).
+
+148. **MPV Playback Resume Latency (Apple Silicon)**: *(Added v1.0.180)*
+    *   **Symptom**: Resuming playback after a pause or a "Ready Gate" wait takes 1.5s - 2.5s on Apple Silicon Macs, appearing laggy or out-of-sync.
+    *   **Cause**: MPV's default `cache-pause-wait` property is tuned for high-latency streams, but causes unnecessary delay on local fiber/low-latency decoders. Combined with `audio-wait-for-video`, the engine stutters during the resume.
+    *   **Rule**: **Zero Latency Resume**.
+        1. Set `cache-pause-wait = "0"` in `MPVWrapper.swift`.
+        2. Set `audio-wait-for-video = "no"` in `MPVWrapper.swift`.
+        3. This ensures the "Play" signal translates to immediate visual feedback. (Landmine #148).
+
+149. **Persistent Background Art (The "Ready Gate" Strategy)**: *(Added v1.0.181)*
+    *   **Symptom**: Player flashes a black screen for a split second (or longer) between the "Waiting for guests" state and the movie starting.
+    *   **Cause**: Hiding the background art (`showPoster`) as soon as the "Play" button is clicked is too early. The MPV engine needs several hundred milliseconds to fill the video buffer and render the first frame.
+    *   **Rule**: **Engine-Confirmed Cleanup**.
+        1. Keep `showPoster = true` through the handshake.
+        2. ONLY dismiss the art and loading spinner inside the `isPlaying` sink—**after** the engine confirms a state change to "Playing".
+        3. Use a 0.5s fade-out animation to blend the art into the video. (Landmine #149).
+
+150. **Guest Handshake Protection (Refining Initial Seek)**: *(Added v1.0.181)*
+    *   **Symptom**: Guest sees a black screen while the Host is already playing.
+    *   **Cause**: The Guest receives the Host's "Playing" signal and attempts to clean up the UI, but the Guest's local player is still performing a blind-seek or buffering to match the Host's position.
+    *   **Rule**: **Shield the Handshake**.
+        1. Guests MUST use `isRefiningInitialSeek = true` during the initial load.
+        2. The `isPlaying` and `currentTime` sinks MUST ignore cleanup requests for Guests while this flag is active.
+        3. Only clear the UI once the Guest's local video is definitively synced and rendering. (Landmine #150).
+
+151. **Visual Layer Ordering (The "Peek-Through" Fix)**: *(Added v1.0.181)*
+    *   **Symptom**: Guest background art disappears or looks "faded" during the "Waiting for host" message.
+    *   **Cause**: The `MPVLayerVideoView` (even when showing black/nothing) occupies the same Z-space as the background art. If the video layer is opaque, it covers the art.
+    *   **Rule**: **Hide the Engine**.
+        1. The video layer (`MPVLayerVideoView`) MUST have `opacity = 0` whenever `isLoading`, `showPoster`, or `showWaitingForGuests` is true.
+        2. This ensures the high-resolution background art is the only thing visible until the very moment playback is confirmed. (Landmine #151).
 
 ## 🏗️ Architecture Map
 | Component | Responsibility |

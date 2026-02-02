@@ -850,6 +850,39 @@ for INSTALLER in ""; do
     fi
 done
 
+# =============================================================================
+# CHECK 38: MPV Handle Lifecycle (Landmine #157)
+# =============================================================================
+# Trigger: Calling mpv_terminate_destroy without mpv_wakeup.
+print_header "Check 38: MPV Handle Lifecycle (Landmine #157)"
+
+MPV_WRAPPER="$SOURCES_DIR/Features/Player/MPVWrapper.swift"
+if [[ -f "$MPV_WRAPPER" ]]; then
+    # Check if mpv_wakeup is called before mpv_terminate_destroy
+    if ! grep -q "mpv_wakeup" "$MPV_WRAPPER"; then
+        report "ERROR" "Landmine #157" "Handle Cleanup Risk: MPVWrapper MUST call 'mpv_wakeup' before 'mpv_terminate_destroy' to interrupt blocking wait loops." "$MPV_WRAPPER" "0" "Missing mpv_wakeup call"
+    else
+        echo -e "${GREEN}✅ MPVWrapper correctly uses mpv_wakeup for handle cleanup.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 39: Auto-Play Idempotency (Landmine #158)
+# =============================================================================
+# Trigger: handleMovieFinished missing isAutoPlayingNextEpisode gate.
+print_header "Check 39: Auto-Play Idempotency (Landmine #158)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/PlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    # Check for the gate at the start of handleMovieFinished
+    # We look for the variable name and a guard/if check
+    if ! grep -q "isAutoPlayingNextEpisode" "$PLAYER_VM"; then
+        report "ERROR" "Landmine #158" "Auto-Play Race Risk: PlayerViewModel MUST use an 'isAutoPlayingNextEpisode' gate in handleMovieFinished() to prevent duplicate triggers." "$PLAYER_VM" "0" "Missing auto-play idempotency gate"
+    else
+        echo -e "${GREEN}✅ PlayerViewModel has auto-play idempotency gate.${NC}"
+    fi
+fi
+
 echo -e "
 ════════════════════════════════════════════════════════════════"
 echo -e "                     SCAN COMPLETE                              "

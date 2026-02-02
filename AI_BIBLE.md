@@ -2622,3 +2622,28 @@ SELECT jobname, schedule, command FROM cron.job;
 **Extended Public Keys (XPUBs) - Injected into Server:**
 *   **XPUB_BTC:** `zpub6rDR8D6hCAkPJ3EC2VzfJRueE3neHxXcniQnxrfAN4iNoQEwbeB4R5Buwom5wuDVHFTKm6ZxPhQ1x3DQ3hXAbXT7fgcXAvnU9sYe5ruGh2M`
 *   **XPUB_EVM:** `xpub6DW9AXdpfsUqgRwufdH8FQSqnfeyathnpiWbcHyAMrrJPNqiaMxY2EsHMAXj2oyXbEej24kNPF8YDTuuQUEAK1Lo9PjzzjQ85jPsbcMDjzt`
+2626:
+2627: ---
+2628:
+2629: ### 21. The MPV Handle Ghost (Landmine #157)
+2630: **Symptom**: `EXC_BAD_ACCESS` (SIGSEGV) in `mpv_wait_event` when exiting the player or experiencing a "No Streams Found" error.
+2631: **Root Cause**: **Handle Lifecycle Race**. A background polling loop (event loop) calls `mpv_wait_event` using a handle that is simultaneously being nullified or destroyed by the main actor during cleanup. `mpv_wait_event` is a blocking call that may hang or crash if the underlying memory is freed while it's waiting for an event.
+2632:
+2633: **Mandatory Solution**:
+2634: 1.  **Thread-Safe Lock**: Use `NSRecursiveLock` to wrap all handle access (creation, polling, and destruction).
+2635: 2.  **Order of Operations**:
+2636:     - Grab the lock.
+2637:     - Capture the handle.
+2638:     - Nullify the `state.handle` and `state.renderContext` property **BEFORE** calling the C-level destruction.
+2639:     - Call `mpv_wakeup(handle)` to immediately interrupt any active `mpv_wait_event` call.
+2640:     - Release the lock.
+2641: 3.  **Deferred Destruction**: Defer the final `mpv_terminate_destroy(handle)` (e.g., `Task.detached { Task.sleep(50ms); mpv_terminate_destroy(handle) }`). This allows the polling thread to re-acquire the lock, see that the handle property is now `nil`, and exit cleanly before the C-object is actually freed.
+2642:
+2643: ### 22. The Finish Trigger Race (Landmine #158)
+2644: **Symptom**: Auto-play skips an episode (e.g., S08E07 jumps to S08E09).
+2645: **Root Cause**: **Double Signal Injection**. Both a native MPV EOF event (detected via `onChange`) and a redundant 1-second periodic timer (fallback check) trigger `handleMovieFinished()` at the same time. Because resolution has a small delay (sleep for UX), the first trigger hasn't yet entered the "Resolving" state when the second trigger arrives, causing the episode index to be incremented twice.
+2646:
+2647: **Mandatory Solution**:
+2648: 1.  **Immediate Idempotency**: `handleMovieFinished()` MUST check an immediate private boolean gate (e.g., `isAutoPlayingNextEpisode`) at the very first line.
+2649: 2.  **Tight Guarding**: The gate must be set `true` **before** the UX delay (sleep).
+2650: 3.  **Reset Mechanism**: Reset the gate in `playMedia()` and `exitPlayer()` to allow subsequent transitions.

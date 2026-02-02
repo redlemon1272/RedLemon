@@ -598,10 +598,9 @@ struct MPVPlayerView: View {
         NSLog("%@", "[AUTO_EXIT_CHECK] playbackFinished: \(viewModel.playbackFinished), isPlaying: \(viewModel.isPlaying)")
         NSLog("%@", "[AUTO_EXIT_CHECK] Position: \(viewModel.currentTime)s / Duration: \(viewModel.duration)s")
 
-        // CRITICAL FIX: Don't trigger auto-exit if we are already resolving a new stream or starting a transition
         // This prevents the Guest from being kicked back to the lobby when the host switches items (previous item EOF)
-        guard !appState.player.isResolvingStream && !viewModel.isLoading else {
-            NSLog("%@", "[AUTO_EXIT_CHECK] BLOCKED: isLoading=\(viewModel.isLoading) or isResolvingStream=\(appState.player.isResolvingStream)")
+        guard !appState.player.isResolvingStream && !viewModel.isLoading && !viewModel.isExitingSession else {
+            NSLog("%@", "[AUTO_EXIT_CHECK] BLOCKED: isLoading=\(viewModel.isLoading), isResolvingStream=\(appState.player.isResolvingStream), isExitingSession=\(viewModel.isExitingSession)")
             return
         }
 

@@ -48,6 +48,7 @@ final class AppStateTests: XCTestCase {
             quality: .fullHD, sourceQuality: nil, description: nil, posterURL: nil,
             participants: [],
             participantCount: 0,
+            maxParticipants: 10,
             state: .playing,
             createdAt: Date(), lastActivity: Date(),
             playlist: nil, currentPlaylistIndex: 0,

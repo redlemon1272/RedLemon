@@ -3,6 +3,7 @@ import Foundation
 
 /// Mock implementation of RealtimeService for unit testing
 actor MockRealtimeManager: RealtimeService {
+    var roomId: String? = nil
     var isConnected: Bool = false
     var syncCallback: ((SyncMessage) -> Void)?
     var connectionStateCallback: ((RealtimeConnectionState) -> Void)?
@@ -11,7 +12,8 @@ actor MockRealtimeManager: RealtimeService {
     // Test verification properties
     var sentMessages: [SyncMessage] = []
 
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, isPremium: Bool, postgresChanges: [[String: Any]]? = nil) async throws {
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, isPremium: Bool, subscriptionExpiresAt: TimeInterval?, postgresChanges: [[String: Any]]? = nil) async throws {
+        self.roomId = roomId
         self.isConnected = true
         connectionStateCallback?(.connected)
     }
@@ -146,7 +148,7 @@ class MockStreamResolver: StreamResolving {
     var resolvedStream: RedLemon.Stream?
     var unlockedStream: RedLemon.Stream?
 
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, preferredTitle: String?, filterExtended: Bool, triggerSource: String = "test") async throws -> StreamResolutionResult {
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, preferredTitle: String?, preferredProvider: String?, filterExtended: Bool, triggerSource: String = "test") async throws -> StreamResolutionResult {
         let stream = resolvedStream ?? RedLemon.Stream(
             url: "https://example.com/stream",
             title: "Mock Stream",

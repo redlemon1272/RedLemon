@@ -12,7 +12,7 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-VERSION=$1
+VERSION=${1#v}
 BUILD_NUMBER=$2
 
 if [ -z "$VERSION" ] || [ -z "$BUILD_NUMBER" ]; then

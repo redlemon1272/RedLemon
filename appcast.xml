@@ -6,7 +6,7 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
-        <!-- vv1.0.186 -->
+        <!-- v1.0.186 -->
         <item>
             <title>Version v1.0.186</title>
             <description><![CDATA[
@@ -20,7 +20,7 @@
             <sparkle:shortVersionString>v1.0.186</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.186.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.186.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="NNgQPaNytIm2Dqk7LGYSC7tEUVgaWHoO41w8ftAy7aTan33wMz28adCwcRfQ2dUdSJlcOoeol3Bhh6YQR6/ECA==" length="75308353"
             />

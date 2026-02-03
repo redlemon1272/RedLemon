@@ -19,9 +19,12 @@ class AppState: ObservableObject {
     }
     @Published var activeAlert: AppAlert?
 
-    // Schedule Update State
+    // Context-Aware Notifications State
     @Published var showScheduleUpdatePrompt: Bool = false
-    @Published var hasPendingScheduleUpdate: Bool = false  // Deferred notification for users in playback
+    @Published var hasPendingScheduleUpdate: Bool = false
+
+    @Published var hasPendingHostingGrant: Bool = false
+    @Published var pendingHostingDays: Int = 0
 
     // Optimization: Flag to signal BrowseView to defer heavy rendering when returning from player
     @Published var isReturningFromPlayer = false
@@ -98,15 +101,12 @@ class AppState: ObservableObject {
             }
             .store(in: &cancellables)
 
-        // Setup Hosting Grant Notifications
+        // Setup Hosting Grant Notifications (Context-Aware)
         NotificationCenter.default.publisher(for: Notification.Name("HostingStatusGranted"))
             .receive(on: RunLoop.main)
             .sink { [weak self] notification in
                 let days = notification.userInfo?["days"] as? Int ?? 30
-                self?.activeAlert = AppAlert(
-                    title: "🎉 Hosting Granted!",
-                    message: "An administrator has granted you \(days) days of hosting privileges."
-                )
+                self?.handleHostingGrant(days: days)
             }
             .store(in: &cancellables)
 
@@ -161,17 +161,28 @@ class AppState: ObservableObject {
     // MARK: - Context-Aware Schedule Notifications
 
     /// Handle schedule update notification based on user's current context
-    /// - Users in playback: defer notification until they exit
-    /// - All other users: show immediately
     private func handleScheduleUpdate() {
         if isUserInPlayback() {
-            // Defer notification - will be shown when playback ends
             hasPendingScheduleUpdate = true
             NSLog("%@", "🔔 [AppState] Schedule update received but user is in playback. Deferring notification.")
         } else {
-            // Show immediately
             showScheduleUpdatePrompt = true
             NSLog("%@", "🔔 [AppState] Schedule update received. Showing notification immediately.")
+        }
+    }
+
+    /// Handle hosting grant notification based on context
+    private func handleHostingGrant(days: Int) {
+        if isUserInPlayback() {
+            hasPendingHostingGrant = true
+            pendingHostingDays = days
+            NSLog("%@", "🎁 [AppState] Hosting grant received but user is in playback. Deferring notification.")
+        } else {
+            activeAlert = AppAlert(
+                title: "🎉 Hosting Granted!",
+                message: "An administrator has granted you \(days) days of hosting privileges."
+            )
+            NSLog("%@", "🎁 [AppState] Hosting grant received. Showing alert immediately.")
         }
     }
 
@@ -180,12 +191,28 @@ class AppState: ObservableObject {
         return currentView == .player
     }
 
-    /// Called when user exits playback - check for pending updates
-    func checkPendingScheduleUpdate() {
+    /// Called when user exits playback - check for pending notifications
+    func checkPendingNotifications() {
         if hasPendingScheduleUpdate {
             hasPendingScheduleUpdate = false
             showScheduleUpdatePrompt = true
             NSLog("%@", "🔔 [AppState] Playback ended. Showing deferred schedule update notification.")
+        }
+
+        if hasPendingHostingGrant {
+            let days = pendingHostingDays
+            hasPendingHostingGrant = false
+
+            Task {
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                await MainActor.run {
+                    self.activeAlert = AppAlert(
+                        title: "🎉 Hosting Granted!",
+                        message: "An administrator has granted you \(days) days of hosting privileges."
+                    )
+                    NSLog("%@", "🎁 [AppState] Playback ended. Showing deferred hosting grant alert.")
+                }
+            }
         }
     }
 

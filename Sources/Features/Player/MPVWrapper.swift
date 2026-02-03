@@ -58,7 +58,7 @@ class MPVWrapper: ObservableObject {
     internal nonisolated var mpvHandle: OpaquePointer? { state.lock.withLock { state.handle } }
     internal nonisolated var renderContext: OpaquePointer? { state.lock.withLock { state.renderContext } }
     private nonisolated var openGLContext: CGLContextObj? { state.lock.withLock { state.openGLContext } }
-    
+
     private var isInitialized = false
     private var eventPollingTask: Task<Void, Never>?
     private var timeUpdateTask: Task<Void, Never>?
@@ -384,28 +384,49 @@ class MPVWrapper: ObservableObject {
 
     nonisolated private func pollEvents() async {
         guard let handle = state.lock.withLock({ state.handle }) else { return }
+        // Internal Note #1: Initial guard is fine, but we MUST re-acquire and check INSIDE the loop.
+        guard let _ = state.lock.withLock({ state.handle }) else { return }
 
-        // We run until cancelled.
-        // NOTE: mpv_wait_event is blocking. We rely on mpv_wakeup() in destroy() to unblock this.
+        LoggingManager.shared.debug(.videoRendering, message: "MPV: Event polling task started")
+
         while !Task.isCancelled {
+            // CRITICAL FIX: Re-acquire handle from state lock for EVERY iteration.
+            // This ensures we are NOT using a stale handle captured at the start of the task.
+            guard let handle = state.lock.withLock({ state.handle }) else {
+                LoggingManager.shared.debug(.videoRendering, message: "MPV: Polling loop exited - handle is nil")
+                break
+            }
+
             // Adaptive timeout: 0.5s if playing (less churning), 0.1s if paused (snappy response)
             let playing = await MainActor.run { self.isPlaying }
             let timeout = playing ? 0.5 : 0.1
-            
+
+            // mpv_wait_event is blocking. If destroy() is called, mpv_wakeup() will cause this to return.
             let event = mpv_wait_event(handle, timeout)
-            guard let eventPtr = event else { continue }
-            
-            if Task.isCancelled || state.lock.withLock({ state.handle }) == nil { 
-                break 
+
+            // CRITICAL FIX: Immediately after wakeup/timeout, check for cancellation OR handle nullification.
+            // If destroy() was called, state.handle will be nil.
+            if Task.isCancelled || state.lock.withLock({ state.handle }) == nil {
+                LoggingManager.shared.debug(.videoRendering, message: "MPV: Polling loop interrupted during wait - exiting")
+                break
             }
 
-            let eventId = eventPtr.pointee.event_id
-            if eventId == MPV_EVENT_SHUTDOWN { break }
+            guard let eventPtr = event else { continue }
 
-            await MainActor.run { self.handleMPVEvent(eventId: eventId, eventPtr: eventPtr) }
+            let eventId = eventPtr.pointee.event_id
+            if eventId == MPV_EVENT_SHUTDOWN {
+                LoggingManager.shared.debug(.videoRendering, message: "MPV: Shutdown event received")
+                break
+            }
+
+            // Sync back to MainActor for event handling
+            await MainActor.run { [weak self] in
+                guard let self = self else { return }
+                self.handleMPVEvent(eventId: eventId, eventPtr: eventPtr)
+            }
         }
 
-        LoggingManager.shared.debug(.videoRendering, message: "Event polling task cancelled cleanly")
+        LoggingManager.shared.debug(.videoRendering, message: "MPV: Event polling task finished cleanly")
     }
 
     private func handleMPVEvent(eventId: mpv_event_id, eventPtr: UnsafePointer<mpv_event>) {
@@ -1086,7 +1107,7 @@ class MPVWrapper: ObservableObject {
                 LoggingManager.shared.warn(.subtitles, message: "⚠️ BLOCKED: refreshSubtitleSelection called during playback with active track. Ignoring to prevent flash.")
                 return
             }
-            
+
             // Re-acquire handle safely inside the task
             guard let safeHandle = self.mpvHandle else { return }
 
@@ -1105,7 +1126,7 @@ class MPVWrapper: ObservableObject {
                 let title: String
                 let isHearingImpaired: Bool
             }
-            
+
             var candidates: [SubCandidate] = []
 
             for i in 0..<Int(trackCount) {
@@ -1113,7 +1134,7 @@ class MPVWrapper: ObservableObject {
                 let typeKey = "track-list/\(i)/type"
                 var typeStr: UnsafeMutablePointer<CChar>?
                 let typeResult = mpv_get_property(safeHandle, typeKey, MPV_FORMAT_STRING, &typeStr)
-                
+
                 if typeResult >= 0, let type = typeStr.map({ String(cString: $0) }), type == "sub" {
                     mpv_free(typeStr)
 
@@ -1239,7 +1260,7 @@ class MPVWrapper: ObservableObject {
             } else {
                 LoggingManager.shared.debug(.subtitles, message: "No suitable subtitles found to auto-select.")
             }
-            
+
             // Mark initial selection as complete
             self.hasCompletedInitialTrackSelection = true
         }
@@ -1520,37 +1541,43 @@ class MPVWrapper: ObservableObject {
     nonisolated func destroy() {
         print("MPVWrapper: destroy() called - cleaning up...")
 
-        // Note: Tasks (timeUpdateTask, eventPollingTask) use [weak self] and will 
-        // terminate naturally when this instance is deallocated. 
-        // We cannot explicitly cancel them here via Task { @MainActor } because 
-        // capturing 'self' during deinit triggers a fatal error (resurrection).
-
-        // 2. Safely capture and clear handle/context
+        // 1. Sync lock to invalidate handle and capture it for terminal destruction
         let (handleToDestroy, contextToFree) = state.lock.withLock {
             let h = state.handle
             let c = state.renderContext
+
+            // CRITICAL: Set to nil immediately. This causes pollEvents() to exit its loop.
             state.handle = nil
             state.renderContext = nil
+
             return (h, c)
         }
 
-        // 3. Destroy render context first
-        if let context = contextToFree {
-            print("MPVWrapper: Freeing render context...")
-             mpv_render_context_free(context)
+        // 2. Wake up the event polling loop if it's currently blocked in mpv_wait_event
+        if let handle = handleToDestroy {
+            print("MPV: Sending wakeup signal to interrupt pollEvents...")
+            mpv_wakeup(handle)
         }
 
-        // 4. Destroy MPV instance
+        // 3. Destroy render context
+        if let context = contextToFree {
+            print("MPVWrapper: Freeing render context...")
+            mpv_render_context_free(context)
+        }
+
+        // 4. Destroy MPV instance on background thread to prevent deadlocks
         if let handle = handleToDestroy {
-             mpv_wakeup(handle)
-             
              Task.detached(priority: .background) {
+                 // SMALL DELAY: Give the polling task a tiny window to react to wakeup and exit its loop
+                 // before we pull the rug out with mpv_terminate_destroy.
+                 try? await Task.sleep(nanoseconds: 50_000_000) // 50ms
+
                  print("MPVWrapper: Terminating MPV instance (background)...")
                  mpv_terminate_destroy(handle)
                  print("MPVWrapper: MPV instance destroyed")
              }
         }
-        
+
         print("MPVWrapper: cleanup complete")
     }
 

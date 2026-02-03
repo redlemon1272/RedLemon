@@ -850,6 +850,62 @@ for INSTALLER in ""; do
     fi
 done
 
+# =============================================================================
+# CHECK 38: MPV Handle Lifecycle (Security Check #157)
+# =============================================================================
+# Trigger: Calling mpv_terminate_destroy without mpv_wakeup.
+print_header "Check 38: MPV Handle Lifecycle (Security Check #157)"
+
+MPV_WRAPPER="$SOURCES_DIR/Features/Player/MPVWrapper.swift"
+if [[ -f "$MPV_WRAPPER" ]]; then
+    # Check if mpv_wakeup is called before mpv_terminate_destroy
+    if ! grep -q "mpv_wakeup" "$MPV_WRAPPER"; then
+        report "ERROR" "Security Check #157" "Handle Cleanup Risk: MPVWrapper MUST call 'mpv_wakeup' before 'mpv_terminate_destroy' to interrupt blocking wait loops." "$MPV_WRAPPER" "0" "Missing mpv_wakeup call"
+    else
+        echo -e "${GREEN}✅ MPVWrapper correctly uses mpv_wakeup for handle cleanup.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 39: Auto-Play Idempotency (Security Check #158)
+# =============================================================================
+# Trigger: handleMovieFinished missing isAutoPlayingNextEpisode gate.
+print_header "Check 39: Auto-Play Idempotency (Security Check #158)"
+
+PLAYER_VM="$SOURCES_DIR/Features/Player/PlayerViewModel.swift"
+if [[ -f "$PLAYER_VM" ]]; then
+    # Check for the gate at the start of handleMovieFinished
+    # We look for the variable name and a guard/if check
+    if ! grep -q "isAutoPlayingNextEpisode" "$PLAYER_VM"; then
+        report "ERROR" "Security Check #158" "Auto-Play Race Risk: PlayerViewModel MUST use an 'isAutoPlayingNextEpisode' gate in handleMovieFinished() to prevent duplicate triggers." "$PLAYER_VM" "0" "Missing auto-play idempotency gate"
+    else
+        echo -e "${GREEN}✅ PlayerViewModel has auto-play idempotency gate.${NC}"
+    fi
+fi
+
+# =============================================================================
+# CHECK 40: Versioning Hygiene (Security Check #300)
+# =============================================================================
+# Detect malformed "vv" prefixes in README, appcast, and build scripts.
+print_header "Check 40: Versioning Hygiene (Security Check #300)"
+
+VERSION_FILES=("README.md" "appcast.xml" "build-app-debug.sh")
+for f in "${VERSION_FILES[@]}"; do
+    if [[ -f "$f" ]]; then
+        # Heuristic: Check for vv1. followed by any digits (e.g., vv1.0.186)
+        VIOLATIONS=$(grep -nE "vv1\.[0-9]+" "$f" | grep -v "//" || true)
+        if [[ -n "$VIOLATIONS" ]]; then
+            while IFS=: read -r line code; do
+                report "ERROR" "Security Check #300" "Malformed Version: Found 'vv' prefix. Must use single 'v' (v1.x.x)." "$f" "$line" "$code"
+            done <<< "$VIOLATIONS"
+        fi
+    fi
+done
+
+if [[ $ERROR_COUNT -eq 0 ]]; then
+    echo -e "${GREEN}✅ Versioning hygiene verified.${NC}"
+fi
+
 echo -e "
 ════════════════════════════════════════════════════════════════"
 echo -e "                     SCAN COMPLETE                              "

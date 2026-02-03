@@ -61,6 +61,9 @@ class PlayerViewModel: ObservableObject {
     @Published var playbackEndedTimestamp: Date? = nil // Persist end time to prevent grace period loops
     @Published var lastLobbyJoinBroadcast: Date? = nil // CRITICAL FIX (Security Check #93): Dedupe join broadcasts during VM recreation
 
+    // Auto-Play Idempotency Gate
+    private var isAutoPlayingNextEpisode = false
+
     // Pre-resolved stream for Watch Party Optimization
     var preResolvedStream: Stream?
 
@@ -167,6 +170,7 @@ class PlayerViewModel: ObservableObject {
         streamQueue = [] // Clear stream queue
         playbackRetryCount = 0 // Reset retry count
         userCancelledAutoPlay = false // Reset auto-play cancellation
+        isAutoPlayingNextEpisode = false // Reset auto-play gate
 
         // ✅ OPTIMISTIC UPDATE: Set metadata immediately to prevent background flash
         // This ensures the generic background (from Browse) is shown while fetching full details
@@ -1347,6 +1351,7 @@ class PlayerViewModel: ObservableObject {
             return
         }
         isExitInProgress = true
+        isAutoPlayingNextEpisode = false // Reset gate on exit
         defer { isExitInProgress = false }
 
         LoggingManager.shared.info(.videoRendering, message: "PlayerVM: exitPlayer called (keepRoomState: \(keepRoomState), notifyGuests: \(notifyGuests))")
@@ -1441,6 +1446,12 @@ class PlayerViewModel: ObservableObject {
     func handleMovieFinished() async {
         LoggingManager.shared.debug(.videoRendering, message: "PlayerVM.handleMovieFinished() called")
 
+        // Idempotency Check: Prevent multiple simultaneous auto-play triggers (e.g., EOF + Timer)
+        guard !isAutoPlayingNextEpisode else {
+            LoggingManager.shared.debug(.videoRendering, message: "PlayerVM: Auto-play already in progress, skipping duplicate call")
+            return
+        }
+
         // Auto-play next episode logic
         if let item = selectedMediaItem, item.type == "series",
            let meta = selectedMetadata, let videos = meta.videos {
@@ -1473,6 +1484,8 @@ class PlayerViewModel: ObservableObject {
 
                     // Add a small delay for better UX
                     try? await Task.sleep(nanoseconds: 1_000_000_000)
+
+                    isAutoPlayingNextEpisode = true // Lock the gate
                     await playNextEpisode()
                     return
                 }

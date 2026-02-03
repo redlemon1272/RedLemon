@@ -208,6 +208,11 @@ struct RedLemonApp: App {
                         userId: user.id.uuidString,
                         username: username
                     )
+
+                    // 🔐 Start Realtime Listeners (Profile Updates/Grants)
+                    await MainActor.run {
+                        appState.startRealtimeSystems()
+                    }
                 } else {
                     NSLog("⚠️  DB LOOKUP FAILED: Username '%@' not found in database", username)
                     NSLog("   Clearing stored credentials so user can create a new one")

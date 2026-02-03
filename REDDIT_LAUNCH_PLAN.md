@@ -1,7 +1,7 @@
 # 🍋 RedLemon Reddit Launch Strategy
 
-> **Target Date:** Wednesday, 11:45 AM Eastern Time
-> **Objective:** Convert `r/piracy` skeptics into active users and seed the `r/redlemonapp` community.
+> **Target Date:** Wednesday (Tomorrow) 11:45 AM ET (except r/selfhosted)
+> **Objective:** Convert `r/piracy` skeptics and `r/macapps` enthusiasts into active users.
 
 ---
 
@@ -26,6 +26,9 @@ Before posting on the big subs, the home subreddit must look "alive."
 ## 2. The Main Event: `r/piracy`
 This is the highest-risk, highest-reward post.
 
+> [!IMPORTANT]
+> **Compliance:** You MUST message [modmail](https://www.reddit.com/message/compose?to=%2Fr%2FPiracy&subject=Self+Promotion+Post) for approval before posting. Frame it as "sharing a free, native tool for the community."
+
 ### The Pitch
 *   **Title:** [Project] RedLemon: A Native macOS Streaming App for Real-Debrid with Built-in Watch Parties (100% Native, UI Open Source)
 *   **Body Structure:**
@@ -48,11 +51,12 @@ This is the highest-risk, highest-reward post.
 ## 3. The Satellite Subs (Niche Cross-Posting)
 Wait 2-4 hours after the `r/piracy` post to cross-post to:
 
-| Subreddit | Angle |
+| Subreddit | Entry Strategy & Rules |
 | :--- | :--- |
-| `r/macapps` | Focus on the **Native SwiftUI** design and Apple Silicon performance. |
-| `r/RealDebrid` | Focus on how it handles **metadata and library sync** natively. |
-| `r/selfhosted` | Focus on the **Caddy/Supabase** side (keep it developer-focused). |
+| **r/macapps** | Use **ABC Format**. Title must start with `[OS]`. Disclose you are the dev in comments. (Max 1x per 30 days). |
+| **r/RealDebrid** | Post as a "Free Community Tool." Do NOT emphasize the premium features; focus on the free events/joining. |
+| **r/PiracyBackup** | **GREAT TARGET.** Use the "DesktopTelly" style: Clear title with "Debrid Support," bulleted features, and Discord/GitHub links. |
+| **r/selfhosted** | **WAIT UNTIL FRIDAY.** Only allowed during "Vibe Code Friday." Focus on the Caddy/Supabase infrastructure. |
 
 ---
 
@@ -67,3 +71,25 @@ Wait 2-4 hours after the `r/piracy` post to cross-post to:
 *   **The Subreddit:** [r/redlemonapp](https://www.reddit.com/r/redlemonapp/)
 *   **The GitHub:** [redlemon1272/RedLemon](https://github.com/redlemon1272/RedLemon)
 *   **Voice/Tone:** Technical, honest, direct, and slightly premium. We aren't "begging" for users; we are providing a high-end tool.
+
+---
+
+## 6. Modmail Template (For r/piracy)
+
+**Subject:** Request to share a native macOS project (RedLemon)
+
+**Message:** 
+
+ Hi Mods,
+
+I’ve built a native macOS app called RedLemon that handles Real-Debrid streaming and synchronized watch parties. I wanted to share it with the community because there doesn't seem to be existing tools that allow debrid backed "drop in, drop out" watch parties.
+
+The UI is open source and it focuses heavily on privacy (Keychain for keys, zero telemetry). There is a free tier that allows anyone to join parties and host one watch party per day. 
+
+Would it be okay to share a launch post with the community?
+
+https://www.reddit.com/r/redlemonapp/comments/1qv2jdp/release_redlemon_a_native_macos_watch_party/ 
+
+the link above shows what i would ultimately post, if granted permission to do so.
+
+Cheers!

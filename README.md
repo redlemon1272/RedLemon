@@ -35,13 +35,20 @@ To prevent abuse of our aggregation infrastructure and protect our proprietary a
 **[Download the latest release here](https://github.com/redlemon1272/RedLemon/releases/latest)**
 
 ### Command-Line Installer (Recommended)
-You can install RedLemon via a single command. This method is recommended as it automatically handles the macOS gatekeeper permissions for you:
-```bash
-curl -sL https://raw.githubusercontent.com/redlemon1272/RedLemon/main/scripts/install.sh | bash
-```
 
-> **Why use the terminal command?**
-> The installer downloads the binary, moves it to your `/Applications` folder, and removes the "Quarantine" flag. If you install manually via DMG, you will need to manually authorize the app in **System Settings > Privacy & Security**.
+**Step-by-step for beginners:**
+
+1. Press **⌘ + Space** to open Spotlight Search
+2. Type **Terminal** and press **Enter**
+3. Copy this command:
+   ```bash
+   curl -sL https://raw.githubusercontent.com/redlemon1272/RedLemon/main/scripts/install.sh | bash
+   ```
+4. Paste it into Terminal (**⌘ + V**) and press **Enter**
+5. Wait ~30 seconds — RedLemon will install to your Applications folder and open it automatically
+
+> **Why use the terminal?**
+> This method handles macOS security permissions automatically. If you download the DMG manually instead, you'll need to right-click → Open the first time, then authorize in **System Settings → Privacy & Security**.
 
 ## 🛠️ Building From Source
 
@@ -56,6 +63,20 @@ This repository contains the UI scaffolding. You can build it to inspect the cod
 *   **Hybrid Cloud**: Watch History and Library are synced securely via Supabase for cross-device continuity.
 *   **Local-First Preferences**: App settings and playback preferences are stored locally on your device.
 *   **Secure Storage**: All sensitive tokens (Real-Debrid, API Keys) are stored in the macOS Keychain.
+
+## 🔒 Security & Verification
+
+**For the security-conscious:**
+
+| Concern | How to Verify |
+|---------|---------------|
+| **Install script safety** | Read [`scripts/install.sh`](scripts/install.sh) before running - it's 79 lines of simple bash |
+| **Network activity** | Monitor with [Little Snitch](https://www.obdev.at/products/littlesnitch/) - the app only connects to Real-Debrid, our sync server, and metadata sources (TMDB/Trakt) |
+| **Binary integrity** | Verify the DMG: `shasum -a 256 RedLemon.dmg` |
+| **Resource usage** | Check Activity Monitor - typical usage is ~200MB RAM |
+| **No phone-home** | Grep the source for `analytics`, `telemetry`, `tracking` - you'll find nothing |
+
+The app is **sandboxed** and cannot access files outside its container without explicit user permission.
 
 ## 📄 License
 

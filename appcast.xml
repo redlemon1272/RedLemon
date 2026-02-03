@@ -101,7 +101,7 @@
                 sparkle:edSignature="sjMuXi0a51DlZqRy0DuUESiMaVuaEE//0/0uQo/IKf3NpyT2W/EEy+ycSYAaH+txn5pEy6BUmL+tRvtlSb6uCA==" length="75585576"
             />
         </item>
-        <!-- vv1.0.182 -->
+        <!-- v1.0.182 -->
         <item>
             <title>Version v1.0.182</title>
             <description><![CDATA[
@@ -115,7 +115,7 @@
             <sparkle:shortVersionString>v1.0.182</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.182.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.182.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="OWS+vSPuZ2UI2ga1qpLtJ8J7hYW9QDeDzZgj8/EHxvIFHDuU/1QoWUnVujcrU1ry/3Becd1WAsw28HUF2cIDDw==" length="99089852"
             />
@@ -348,7 +348,7 @@
                 sparkle:edSignature="+mD/Su2DZt9Bu3C9uFjLXYzRKfAYhWqr/FcaUPRVi7Djyxc2JZagPeyxxXhTPxrDycg05OhQAcnJSZvWAkJbBw==" length="75209875"
             />
         </item>
-        <!-- vv1.0.166 -->
+        <!-- v1.0.166 -->
         <item>
             <title>Version v1.0.166</title>
             <description><![CDATA[
@@ -362,7 +362,7 @@
             <sparkle:shortVersionString>v1.0.166</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.166.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.166.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="2ukikqqY0g1gBEDHhojHEy6gpYkuyQ2o2rkJdct31R74DlBS31+m7CQy8KQy8vb8/JMfWrI7vtuj4A1Ey1yNAQ==" length="75376685"
             />
@@ -443,7 +443,7 @@
                 sparkle:edSignature="USDh/vELcn9cetn9+j4QUUqNiPfVUmobEqKNDC/qASwXj+NvNRGP8OoQzxdzKbL2ILu90EQ2x5202Lv753MuCQ==" length="75583405"
             />
         </item>
-        <!-- vv1.0.161 -->
+        <!-- v1.0.161 -->
         <item>
             <title>Version v1.0.161</title>
             <description><![CDATA[
@@ -457,7 +457,7 @@
             <sparkle:shortVersionString>v1.0.161</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.161.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.161.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="MfO7DZ2VcitdheuJERY5PGVJwe7/ShZHQ8itPZacIUk5oaW1P/iMHksOCFRXOpPg1TmDpu26SZmXWnW9KIIICA==" length="75737139"
             />
@@ -481,7 +481,7 @@
                 sparkle:edSignature="ss80s4oRH3t6JnL+ZjFYs8v++q6DUS/DTvxvc7wL/0cg5YQwcLNt/AwVmputV64ORaUyAHp3oM1KosBKPpeXDQ==" length="75482642"
             />
         </item>
-        <!-- vv1.0.159 -->
+        <!-- v1.0.159 -->
         <item>
             <title>Version v1.0.159</title>
             <description><![CDATA[
@@ -495,7 +495,7 @@
             <sparkle:shortVersionString>v1.0.159</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.159.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.159.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="gDmLoeoaENq9d1nLteBPpdiSun3SnIx1OawjIQMko7WdARcjKAdyGWqhwmGQYMfMGZgSZSrHocbJdIkN9kNmAQ==" length="74910747"
             />
@@ -843,7 +843,7 @@
                 sparkle:edSignature="ouUN1PAN8ZDA8/sufXlCauMLK2bmauU7hgX4JxY+E5lQgk+ZI3U/4UpCslAh4Y5ZgDV7mgHaR7XTrNTSOyIMCA==" length="73419559"
             />
         </item>
-        <!-- vv1.0.139 -->
+        <!-- v1.0.139 -->
         <item>
             <title>Version v1.0.139</title>
             <description><![CDATA[
@@ -857,12 +857,12 @@
             <sparkle:shortVersionString>v1.0.139</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.139.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.139.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="iaVkhG9ED+tlZ7+uGB+U/hDhK1ZkeviEyfMez0QZD3jdZd6SYgHvJWP+akviSak1/eQslBOa75KT6SlM/2YSDw==" length="73557542"
             />
         </item>
-        <!-- vv1.0.138 -->
+        <!-- v1.0.138 -->
         <item>
             <title>Version v1.0.138</title>
             <description><![CDATA[
@@ -876,12 +876,12 @@
             <sparkle:shortVersionString>v1.0.138</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.138.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.138.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="qTffD+5MiLpbsv7tmEurPRsHf8NxF8z6Jj8h5b5DUvfIpQucfDN6K5VVohjXnlMx4XxIuw+VlW9jyKjMXTYnCA==" length="73444705"
             />
         </item>
-        <!-- vv1.0.137 -->
+        <!-- v1.0.137 -->
         <item>
             <title>Version v1.0.137</title>
             <description><![CDATA[
@@ -895,7 +895,7 @@
             <sparkle:shortVersionString>v1.0.137</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.137.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.137.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="8emjyPetLg+vp1sQUrw/jPxm913g4UjACBobK/CqauwZiQNiwvBUH5PbE1vAHgDWkCZH5625Iwk33iflE3QCAA==" length="73462789"
             />
@@ -1128,7 +1128,7 @@
                 sparkle:edSignature="Zbc6LIOOMsJBShQhCRWuuS/voSZGBZ7N38LhUx9bNlKr1NmzhxgRANRzj7XIUOjN4HN2KX01KDWQGDfQP6ITDQ==" length="73505570"
             />
         </item>
-        <!-- vv1.0.121 -->
+        <!-- v1.0.121 -->
         <item>
             <title>Version v1.0.121</title>
             <description><![CDATA[
@@ -1142,7 +1142,7 @@
             <sparkle:shortVersionString>v1.0.121</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.121.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.121.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="+2KBV3vqpMyCuAdOf5K2pDcfoYiYPF/bepMbLV1NdT8hAW9wQ3BxHUgK4hZ+A/Fo7qg5IeaSiynA0WsOVEd9Cw==" length="72919790"
             />
@@ -1166,7 +1166,7 @@
                 sparkle:edSignature="MYzTZsnu735xIwpkNA01HQFg66Ucu4BKubhrRP2rMh2S0OkNjz/T4vGDOdWRiYkKLzepbFh0AV5hJ7j6S22PBQ==" length="73038477"
             />
         </item>
-        <!-- vv1.0.119 -->
+        <!-- v1.0.119 -->
         <item>
             <title>Version v1.0.119</title>
             <description><![CDATA[
@@ -1180,7 +1180,7 @@
             <sparkle:shortVersionString>v1.0.119</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.119.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.119.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="6cknyXQPW54whQAoDuD7kNQ4LRMhYrSbGWvKXEqDBdvjC4jc8R3XZvQgGFhZ1efbXr2Qp8zZtAryenahnxvpBg==" length="73045314"
             />
@@ -1478,7 +1478,7 @@
                 sparkle:edSignature="CBBZk6KdYzDqro1w3Wtf7gzAPBVJuslmpooRnu53CLVn0T6uLZijS3MVP8fWwCV/x/uNTJf6uSoueUBXFQVNCg==" length="73315066"
             />
         </item>
-        <!-- vv1.0.101 -->
+        <!-- v1.0.101 -->
         <item>
             <title>Version v1.0.101</title>
             <description><![CDATA[
@@ -1492,7 +1492,7 @@
             <sparkle:shortVersionString>v1.0.101</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.101.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.101.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="wgiRWiHUaRHTGhJpFEHSMRyw53wlDckEzx9Jc/RbRRX+CHBB2/gM08yOQ/JlSrRD3v8X99fshPzQ7Z6hEU0dDA==" length="72988909"
             />
@@ -2067,7 +2067,7 @@
                 sparkle:edSignature="TSzQbgAJsg5rU5STQwqIE6lEI2zfUh+aTy/6bIaCAmSwXi605FsijUg8C5wUoC8jzNMjfDW3UiZaDDdpCk2lAw==" length="72265619"
             />
         </item>
-        <!-- vv1.0.70 -->
+        <!-- v1.0.70 -->
         <item>
             <title>Version v1.0.70</title>
             <description><![CDATA[
@@ -2081,7 +2081,7 @@
             <sparkle:shortVersionString>v1.0.70</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://151.243.109.243.nip.io/updates/RedLemon-vv1.0.70.dmg"
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.70.dmg"
                 type="application/octet-stream"
                 sparkle:edSignature="scH+VvWXip6CwW7uh/AU5Ej7sAYLezQ7JjIt1abTbXNw51JJXleDHJxBfztyx4IYT9tssNoDOGxOW0ClRZdDCA==" length="72252446"
             />

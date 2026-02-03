@@ -883,6 +883,29 @@ if [[ -f "$PLAYER_VM" ]]; then
     fi
 fi
 
+# =============================================================================
+# CHECK 40: Versioning Hygiene (Landmine #300)
+# =============================================================================
+# Detect malformed "vv" prefixes in README, appcast, and build scripts.
+print_header "Check 40: Versioning Hygiene (Landmine #300)"
+
+VERSION_FILES=("README.md" "appcast.xml" "build-app-debug.sh")
+for f in "${VERSION_FILES[@]}"; do
+    if [[ -f "$f" ]]; then
+        # Heuristic: Check for vv1. followed by any digits (e.g., vv1.0.186)
+        VIOLATIONS=$(grep -nE "vv1\.[0-9]+" "$f" | grep -v "//" || true)
+        if [[ -n "$VIOLATIONS" ]]; then
+            while IFS=: read -r line code; do
+                report "ERROR" "Landmine #300" "Malformed Version: Found 'vv' prefix. Must use single 'v' (v1.x.x)." "$f" "$line" "$code"
+            done <<< "$VIOLATIONS"
+        fi
+    fi
+done
+
+if [[ $ERROR_COUNT -eq 0 ]]; then
+    echo -e "${GREEN}✅ Versioning hygiene verified.${NC}"
+fi
+
 echo -e "
 ════════════════════════════════════════════════════════════════"
 echo -e "                     SCAN COMPLETE                              "

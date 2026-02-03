@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** January 31, 2026 (Part 33: "Perfect" Ready Gate)
+> **Last Updated:** February 2, 2026 (Part 34: "V-Prefix Hygiene")
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -139,6 +139,7 @@
 | **Black Screen Flash (Player Start)** | Background Art cleared before engine confirms playback | #149 |
 | **Guest Black Screen (Handshake)** | Host sync clearing UI while Guest is still buffering | #150 |
 | **Art Disappearing (Guest Wait)** | Video layer covering background art from behind | #151 |
+| **Updates Not Appearing** | malformed versioning ("vv1.0.x") prevents Sparkle matching | #300 |
 | **"User Join" Message Echo** | Missing self-sender filter in broadcast handler | #95 |
 
 ## 🚨 Critical Landmines
@@ -639,6 +640,12 @@
     *   **Rule**: **Hide the Engine**.
         1. The video layer (`MPVLayerVideoView`) MUST have `opacity = 0` whenever `isLoading`, `showPoster`, or `showWaitingForGuests` is true.
         2. This ensures the high-resolution background art is the only thing visible until the very moment playback is confirmed. (Landmine #151).
+
+152. **V-Prefix Hygiene (The "Double-V" Trap)**: *(Added v1.0.187)*
+    *   **Symptom**: New updates exist on server but app shows "Up to Date" or fails to parse download URL.
+    *   **Cause**: Redundant "v" prefixes in `release.sh` or `appcast.xml` (e.g., `vv1.0.186`). Sparkle's version comparison fails when strings don't match the expected prefix format.
+    *   **Rule**: Standardize on **single "v" prefix** (`v1.0.x`) for ALL public-facing versioning (README, appcast, DMG filename).
+    *   **Automation**: `architecture-scan.sh` (Check 40) enforces this across the codebase.
 
 ## 🏗️ Architecture Map
 | Component | Responsibility |

@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.187 -->
+        <item>
+            <title>Version 1.0.187</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Bug fix: Resolve versioning inconsistency in release infrastructure</li><li>Stability Improvements</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 02 Feb 2026 19:05:52 -0500</pubDate>
+            <sparkle:version>187</sparkle:version>
+            <sparkle:shortVersionString>1.0.187</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.187.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="zSs0hLcNDEQ+4zzDWex4K5gFSgU/1kjYkwTy1kM94Mzfh1Q//oZhO024XfX+NPVXpSfOKIgUgKj3Ij+r6X3eAg==" length="75644710"
+            />
+        </item>
         <!-- v1.0.186 -->
         <item>
             <title>Version v1.0.186</title>

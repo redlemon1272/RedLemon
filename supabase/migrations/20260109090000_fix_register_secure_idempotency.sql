@@ -11,16 +11,31 @@ SECURITY DEFINER
 AS $$
 DECLARE
     v_user_id uuid;
+    v_existing_pubkey text;
 BEGIN
-    -- Use UPSERT logic to allow updating public key for an existing username
-    -- In a production environment, this should be gated by auth.uid() or another proof of ownership.
-    -- For this context, we allow the update to enable the client's self-healing Key Repair logic.
+    -- 1. Check if user already exists
+    SELECT id, public_key INTO v_user_id, v_existing_pubkey
+    FROM public.users
+    WHERE username = p_username;
+
+    IF v_user_id IS NOT NULL THEN
+        -- 2. If it's the SAME public key, it's an idempotent re-registration (Self-Healing)
+        IF v_existing_pubkey = p_public_key THEN
+            UPDATE public.users SET last_seen = now() WHERE id = v_user_id;
+            RETURN json_build_object(
+                'id', v_user_id,
+                'username', p_username,
+                'status', 're-authenticated'
+            );
+        ELSE
+            -- 3. DIFFERENT public key = Unauthorized takeover attempt
+            RAISE EXCEPTION 'Username already taken: %', p_username;
+        END IF;
+    END IF;
+
+    -- 4. New Registration
     INSERT INTO public.users (username, public_key)
     VALUES (p_username, p_public_key)
-    ON CONFLICT (username) 
-    DO UPDATE SET 
-        public_key = EXCLUDED.public_key,
-        last_seen = now()
     RETURNING id INTO v_user_id;
     
     RETURN json_build_object(

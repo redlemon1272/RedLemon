@@ -604,6 +604,9 @@ struct AppOnboardingView: View {
                         }
                     }
 
+                    // 🔐 Start Realtime Listeners (Profile Updates/Grants)
+                    appState.startRealtimeSystems()
+
                     isCheckingUsername = false
                     showSuccess = true
                 }

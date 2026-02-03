@@ -98,7 +98,29 @@ class AppState: ObservableObject {
             }
             .store(in: &cancellables)
 
+        // Setup Hosting Grant Notifications
+        NotificationCenter.default.publisher(for: Notification.Name("HostingStatusGranted"))
+            .receive(on: RunLoop.main)
+            .sink { [weak self] notification in
+                let days = notification.userInfo?["days"] as? Int ?? 30
+                self?.activeAlert = AppAlert(
+                    title: "🎉 Hosting Granted!",
+                    message: "An administrator has granted you \(days) days of hosting privileges."
+                )
+            }
+            .store(in: &cancellables)
 
+        // Initialize Realtime Listeners
+        startRealtimeSystems()
+    }
+
+    /// Safely starts realtime listeners for user profile (admin grants)
+    /// Can be called multiple times; it will only start once auth is available and not already started.
+    func startRealtimeSystems() {
+        Task {
+            await ProfileRealtimeService.shared.start()
+            LicenseManager.shared.setupRealtimeSubscription()
+        }
     }
 
     /// Relaunches the application to ensure all service changes and environment variables are fresh.

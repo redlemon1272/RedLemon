@@ -1,0 +1,235 @@
+2026-02-02 20:01:21.271 RedLemon[47650:333422] 🪟 Set initial window to expanded size: (0.0, 121.0, 1280.0, 654.0)
+2026-02-02 20:01:21.271 RedLemon[47650:333422] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-02-02 20:01:21.330 RedLemon[47650:333422] 🔄 Resetting playback state to prevent auto-selection...
+2026-02-02 20:01:21.335 RedLemon[47650:333422] ⚠️ PlayerVM: currentWatchPartyRoom set to NIL. Stack Trace unavailable, but check recent logs.
+2026-02-02 20:01:21.365 RedLemon[47650:333422] ✅ Playback state reset complete - starting in browse view
+2026-02-02 20:01:21.365 RedLemon[47650:333422] 🔐 APP STARTUP: Loading stored user credentials...
+2026-02-02 20:01:21.365 RedLemon[47650:333422] 🧪 Testing Profile: debug
+2026-02-02 20:01:21.368 RedLemon[47650:333426] 📂 Loaded 5 credential(s) from cache
+2026-02-02 20:01:21.368 RedLemon[47650:333422] ✅ Keychain: Found stored username: lemontom
+2026-02-02 20:01:21.369 RedLemon[47650:333422] 🔍 Supabase: Looking up user 'lemontom' in database...
+2026-02-02 20:01:21.369 RedLemon[47650:333426] 🔍 SupabaseClient: Looking up user by username 'lemontom'
+2026-02-02 20:01:21.961 RedLemon[47650:333430] 📡 SupabaseClient: User lookup response received (426 bytes)
+2026-02-02 20:01:21.967 RedLemon[47650:333430] ✅ SupabaseClient: Decoded 1 users from response
+2026-02-02 20:01:21.967 RedLemon[47650:333430] 👤 SupabaseClient: Found user - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-02-02 20:01:22.038 RedLemon[47650:333422] ✅ AUTH SUCCESS: User authenticated - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-02-02 20:01:22.038 RedLemon[47650:333422] 🎯 AppState: currentUsername=lemontom, currentUserId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-02-02 20:01:22.041 RedLemon[47650:333422] 🛡️ AdminRealtimeService: Starting authenticated listeners...
+2026-02-02 20:01:22.043 RedLemon[47650:333422] ✅ AdminRealtimeService: Subscribed to reported_streams, feedback_reports, and broadcast alerts via shared client
+2026-02-02 20:01:22.433 RedLemon[47650:333422] 📊 AdminRealtimeService: Initial sync complete. Reports: 0, Feedback: 0
+2026-02-02 20:01:23.393 RedLemon[47650:333422] 🏁 AUTH COMPLETE: Final state - username=lemontom, userId=96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-02-02 20:01:23.396 RedLemon[47650:333426] 🔐 Signed request to /rpc/fetch_user_library
+2026-02-02 20:01:23.396 RedLemon[47650:333483] 🔐 Signed request to /rpc/fetch_user_library
+2026-02-02 20:01:23.603 RedLemon[47650:333483] 🔐 Signed request to /rpc/fetch_user_watch_history
+2026-02-02 20:01:24.167 RedLemon[47650:333422] 🚀 RedLemon: Starting HTTP server...
+2026-02-02 20:01:24.167 RedLemon[47650:333422] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/RedLemon-Native
+2026-02-02 20:01:24.183 RedLemon[47650:333422] ✅ RedLemon: HTTPServer instance created
+2026-02-02 20:01:24.184 RedLemon[47650:333483] 📡 RedLemon: Server starting on port 47253...
+2026-02-02 20:01:24.184 RedLemon[47650:333422] ✅ RedLemon: Server marked as ready (Optimistic)
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+✅ Sparkle configured (seamless mode)
+   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml
+   Can check: true
+📅 EventsView appeared
+⚠️ ProfileRealtimeService: No logged in user to subscribe to.
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 1000 items
+📡 Sparkle requesting feed URL: https://151.243.109.243.nip.io/updates/appcast.xml
+📡 Joined channel: realtime:events_config_updates (interest count: 1)
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📡 Joined channel: realtime:reported_streams (interest count: 1)
+📡 Joined channel: realtime:feedback_reports (interest count: 1)
+📡 Joined channel: realtime:admin:alerts (interest count: 1)
+❌ Realtime System Error (realtime:reported_streams): Unable to subscribe to changes with given parameters. Please check Realtime is enabled for the given connect parameters: [schema: public, table: reported_streams, filters: []]
+❌ Realtime System Error (realtime:feedback_reports): Unable to subscribe to changes with given parameters. Please check Realtime is enabled for the given connect parameters: [schema: public, table: feedback_reports, filters: []]
+✅ [EventsConfig] Fetched movie_events version 1594 with 388 movies
+✅ [EventsConfig] Using cached movie_events config (version 1594, 388 movies)
+✅ [EventsView] Loaded 388 movies from config version 1594
+🗓 AppState: Updated schedule epoch to 2026-02-03 00:13:49 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3747 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt3501632/img (956349 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt4627382/img (607400 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt33244668/img (998660 bytes)
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3747 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3747 seconds
+🔌 SocialService: Connecting to global presence via shared client...
+📡 Joined channel: realtime:global-presence (interest count: 1)
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to social realtime channels via shared client...
+📡 Joined channel: realtime:direct_messages (interest count: 1)
+📡 Joined channel: realtime:friendships (interest count: 1)
+✅ SocialService: Connected to social channels
+📬 SocialService: Fetched 0 unread messages
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-02-02 20:01:24.245 RedLemon[47650:333422] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-02-02 20:01:24.245 RedLemon[47650:333422] 🏥 [AppState] Starting global provider health check...
+2026-02-02 20:01:24.245 RedLemon[47650:333422] 🔍 Performing startup checks...
+2026-02-02 20:01:24.245 RedLemon[47650:333422] ✅ Username-based authentication ready
+2026-02-02 20:01:24.246 RedLemon[47650:333483] 🔐 Signed request to /check-payment
+2026-02-02 20:01:24.759 RedLemon[47650:333429] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-02-02 20:01:24.759 RedLemon[47650:333429] 🔗 Torrentio URL (length: 55): https://torrentio.strem.fun/stream/movie/tt0133093.json...
+2026-02-02 20:01:24.909 RedLemon[47650:333422] 🔄 Checking for app updates...
+2026-02-02 20:01:24.909 RedLemon[47650:333429] 🔐 Signed request to /rpc/get_server_time
+2026-02-02 20:01:25.679 RedLemon[47650:333422] ✅ [AppState] Provider health check complete (found 7 services)
+2026-02-02 20:01:28.662 RedLemon[47650:333428] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:01:56.158 RedLemon[47650:333611] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:02:22.373 RedLemon[47650:333931] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:02:49.909 RedLemon[47650:334117] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:03:15.121 RedLemon[47650:334119] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:03:42.511 RedLemon[47650:334155] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:04:10.139 RedLemon[47650:334642] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:04:37.688 RedLemon[47650:334855] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:05:03.832 RedLemon[47650:334921] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:05:31.158 RedLemon[47650:335334] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:05:58.600 RedLemon[47650:335335] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:06:25.733 RedLemon[47650:335481] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:06:30.280 RedLemon[47650:335782] 🔐 Signed request to /rpc/get_user_payment_history
+2026-02-02 20:06:44.197 RedLemon[47650:335782] 🔐 Signed request to /rpc/get_server_time
+2026-02-02 20:06:44.197 RedLemon[47650:335578] 🔐 Signed request to /rpc/get_content_popularity
+2026-02-02 20:06:44.197 RedLemon[47650:336133] 🔐 Signed request to /rpc/get_app_version_stats
+2026-02-02 20:06:52.505 RedLemon[47650:335481] 🔐 Signed request to /rpc/user_heartbeat
+2026-02-02 20:07:07.000 RedLemon[47650:336247] 🔐 Signed request to /rpc/admin_grant_premium
+2026-02-02 20:07:18.747 RedLemon[47650:336313] 🔐 Signed request to /rpc/user_heartbeat
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Starting hybrid license check...
+👤 LicenseManager: Profile expiry: Optional(2126-03-25 17:23:32 +0000)
+🎉 License updated! Expires: 2126-03-25 17:23:32 +0000
+🔍 Silent update check (custom implementation)...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.349s (RTT: 123ms)
+   Local:  2026-02-03 01:01:25 +0000
+   Server: 2026-02-03 01:01:25 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+✅ SubDLClient initialized
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3736 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3726 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3716 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3706 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3696 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1594 with 388 movies
+✅ [EventsConfig] Using cached movie_events config (version 1594, 388 movies)
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3686 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3676 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3666 seconds
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3656 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3646 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3637 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1594 with 388 movies
+✅ [EventsConfig] Using cached movie_events config (version 1594, 388 movies)
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3626 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3616 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3606 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3596 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3586 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3576 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1594 with 388 movies
+✅ [EventsConfig] Using cached movie_events config (version 1594, 388 movies)
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3566 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3556 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3546 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3536 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3526 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3516 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1594 with 388 movies
+✅ [EventsConfig] Using cached movie_events config (version 1594, 388 movies)
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3506 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3496 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3486 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3476 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3466 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3456 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1594 with 388 movies
+✅ [EventsConfig] Using cached movie_events config (version 1594, 388 movies)
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3447 seconds
+🎉 License updated! Expires: 2126-03-25 17:23:32 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3436 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3426 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3416 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3406 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3396 seconds
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1594 with 388 movies
+✅ [EventsConfig] Using cached movie_events config (version 1594, 388 movies)
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3386 seconds
+⏰ AppState: Next schedule update set for Event End: 2026-02-03 02:03:49 +0000
+⏰ AppState: Scheduling update in 3376 seconds
+📉 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 went offline (No active refs)

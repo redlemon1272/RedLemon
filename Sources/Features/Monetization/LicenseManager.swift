@@ -25,16 +25,49 @@ class LicenseManager: ObservableObject {
 
     /// Setup realtime subscription for license updates
     func setupRealtimeSubscription() {
-        // TODO: Implement realtime subscription when needed
+        // Use ProfileRealtimeService to listen for live profile updates (Admin grants)
+        ProfileRealtimeService.shared.onProfileUpdate = { [weak self] payload in
+            guard let self = self else { return }
+
+            print("📡 LicenseManager: Received Realtime profile update. Refreshing...")
+
+            // We could parse the payload here for efficiency, but calling refreshSubscription
+            // ensures we have the full, valid server state after any change.
+            Task {
+                await self.refreshSubscription()
+            }
+        }
     }
 
     /// Refresh license status from server
     func refreshLicense(premium: Bool, expiresAt: Date?) {
+        let oldExpiresAt = self.subscriptionExpiresAt
+        let now = Date().timeIntervalSince1970
+
         self.objectWillChange.send() // Force UI update
 
         if let date = expiresAt {
-            self.subscriptionExpiresAt = date.timeIntervalSince1970
+            let newExpiresAt = date.timeIntervalSince1970
+            self.subscriptionExpiresAt = newExpiresAt
             print("🎉 License updated! Expires: \(date)")
+
+            // 🛡️ DETECT HOSTING GRANT
+            // Notification conditions:
+            // 1. User was inactive (or empty) and is now active
+            let wasInactive = oldExpiresAt < now
+            let isNowActive = newExpiresAt > now
+
+            if wasInactive && isNowActive {
+                let delta = newExpiresAt - max(oldExpiresAt, now)
+                let days = Int(round(delta / (24 * 3600)))
+
+                print("📣 LicenseManager: Detected hosting grant (\(days) days). Posting notification.")
+                NotificationCenter.default.post(
+                    name: NSNotification.Name("HostingStatusGranted"),
+                    object: nil,
+                    userInfo: ["days": days]
+                )
+            }
         } else if premium {
              // Fallback if no date returned but premium is true (Legacy/Safety)
              // Give 30 days if undefined? Or just set far future?
@@ -157,15 +190,15 @@ class LicenseManager: ObservableObject {
     func checkHostingLimit() async {
         // Prevent concurrent or too-frequent checks
         if isCheckingLimit { return }
-        
+
         let now = Date()
         let timeSinceLastCheck = now.timeIntervalSince(lastLimitCheck)
-        
+
         // Debounce: don't check more than once per minute unless we think we're ready
         if timeSinceLastCheck < 60 && timeUntilNextFreeRoom > 0 {
             return
         }
-        
+
         isCheckingLimit = true
         lastLimitCheck = now
         defer { isCheckingLimit = false }

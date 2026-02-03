@@ -55,8 +55,7 @@ To prevent abuse of our aggregation infrastructure and protect our proprietary a
 This repository contains the UI scaffolding. You can build it to inspect the code structure, but **playback will not work** without the proprietary plugins found in the official release.
 
 1.  Clone the repo.
-2.  Open `RedLemon.xcodeproj`.
-3.  Build & Run (Cmd+R).
+2.  Run `swift build` in Terminal.
 
 ### Privacy & Security
 *   **Privacy-Focused**: Zero advertisement tracking or behavioral analytics.
@@ -70,13 +69,10 @@ This repository contains the UI scaffolding. You can build it to inspect the cod
 
 | Concern | How to Verify |
 |---------|---------------|
-| **Install script safety** | Read [`scripts/install.sh`](scripts/install.sh) before running - it's 79 lines of simple bash |
-| **Network activity** | Monitor with [Little Snitch](https://www.obdev.at/products/littlesnitch/) - the app only connects to Real-Debrid, our sync server, and metadata sources (TMDB/Trakt) |
+| **Install script safety** | Read [`scripts/install.sh`](scripts/install.sh) before running - it's simple bash that downloads, copies, and clears Gatekeeper flags |
+| **Network activity** | Monitor with [Little Snitch](https://www.obdev.at/products/littlesnitch/) - the app only connects to Real-Debrid, our sync server, and TMDB for images/metadata |
 | **Binary integrity** | Verify the DMG: `shasum -a 256 RedLemon.dmg` |
-| **Resource usage** | Check Activity Monitor - typical usage is ~200MB RAM |
 | **No phone-home** | Grep the source for `analytics`, `telemetry`, `tracking` - you'll find nothing |
-
-The app is **sandboxed** and cannot access files outside its container without explicit user permission.
 
 ## 📄 License
 

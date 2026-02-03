@@ -1438,8 +1438,8 @@ class PlayerViewModel: ObservableObject {
                 WindowManager.shared.restoreWindowSize()
             }
 
-            // Check for deferred schedule update notification
-            appState?.checkPendingScheduleUpdate()
+            // Check for deferred notifications (schedule updates, hosting grants, etc.)
+            appState?.checkPendingNotifications()
         }
     }
 

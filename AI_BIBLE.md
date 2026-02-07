@@ -1,6 +1,6 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** February 2, 2026 (Part 34: "V-Prefix Hygiene")
+> **Last Updated:** February 6, 2026 (Part 35: "Race Conditions in Task Cleanup")
 > **Platform:** macOS (Native App)
 
 > [!IMPORTANT]
@@ -141,6 +141,8 @@
 | **Art Disappearing (Guest Wait)** | Video layer covering background art from behind | #151 |
 | **Updates Not Appearing** | malformed versioning ("vv1.0.x") prevents Sparkle matching | #300 |
 | **"User Join" Message Echo** | Missing self-sender filter in broadcast handler | #95 |
+| **Watch History Not Saved (TV Shows)** | Race condition: appState becomes nil before Task executes | #159 |
+| **"Continue Watching" Items Trade Places** | Dictionary values don't guarantee order | #160 |
 
 ## 🚨 Critical Landmines
 
@@ -2654,3 +2656,52 @@ SELECT jobname, schedule, command FROM cron.job;
 2648: 1.  **Immediate Idempotency**: `handleMovieFinished()` MUST check an immediate private boolean gate (e.g., `isAutoPlayingNextEpisode`) at the very first line.
 2649: 2.  **Tight Guarding**: The gate must be set `true` **before** the UX delay (sleep).
 2650: 3.  **Reset Mechanism**: Reset the gate in `playMedia()` and `exitPlayer()` to allow subsequent transitions.
+
+### 23. Race Condition in Async Task Cleanup (Landmine #159)
+**Symptom**: Watch history not saved for TV shows when navigating away from player quickly.
+**Root Cause**: **Async Task Race**. When `MPVPlayerViewModel` is deallocated during navigation (e.g., user clicks "Library" while playback is starting), `appState` becomes `nil` before the background `saveWatchHistory()` Task executes. The Task captures `self` weakly but accesses `appState` asynchronously, causing the save to fail silently.
+
+**Mandatory Solution**:
+1. **Local Capture**: Store critical values locally in `loadStream()` **before** any async work begins:
+   ```swift
+   self.currentMediaItem = appState?.player.selectedMediaItem
+   if let qualityEnum = appState?.player.selectedQuality {
+       self.currentQuality = qualityEnum.rawValue
+   }
+   ```
+2. **Use Local Values**: In `saveWatchHistory()`, use the locally captured values instead of accessing `appState`:
+   ```swift
+   Task {
+       guard let mediaItem = self.currentMediaItem else { return }
+       Task { @MainActor in
+           appState?.player.saveToWatchHistory(
+               mediaItem: mediaItem,
+               season: self.currentSeason,
+               episode: self.currentEpisode,
+               quality: self.currentQuality,
+               timestamp: currentTime,
+               duration: duration
+           )
+       }
+   }
+   ```
+
+### 24. Dictionary Ordering in SwiftUI (Landmine #160)
+**Symptom**: "Continue watching" items trade places continuously when switching between Movies/TV Shows tabs, or when the view re-renders.
+**Root Cause**: **Non-Deterministic Dictionary Ordering**. Swift dictionaries don't guarantee iteration order. Using `Array(latestBySeries.values)` in computed properties returns items in non-deterministic order, causing UI items to appear to "trade places" when SwiftUI re-evaluates the computed property.
+
+**Mandatory Solution**:
+1. **Explicit Sorting**: Always sort the result array by a stable key (e.g., `lastWatched`):
+   ```swift
+   return latestBySeries.values.sorted { $0.lastWatched > $1.lastWatched }
+   ```
+2. **Most Recent Selection**: When filtering TV show episodes to show only the most recent per series, compare `lastWatched` dates instead of using first-encountered:
+   ```swift
+   if let existing = latestBySeries[seriesId] {
+       if item.lastWatched > existing.lastWatched {
+           latestBySeries[seriesId] = item
+       }
+   } else {
+       latestBySeries[seriesId] = item
+   }
+   ```

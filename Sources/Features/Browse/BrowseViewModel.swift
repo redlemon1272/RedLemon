@@ -44,9 +44,29 @@ class BrowseViewModel: ObservableObject {
     }
     
     var filteredHistoryItems: [WatchHistoryItem] {
-        recentlyWatched.filter { item in
+        let filtered = recentlyWatched.filter { item in
             selectedTab == .movies ? item.mediaItem.type == "movie" : item.mediaItem.type == "series"
         }
+
+        // For TV shows, only show the most recently watched episode per series
+        if selectedTab == .shows {
+            var latestBySeries: [String: WatchHistoryItem] = [:]
+            for item in filtered {
+                let seriesId = item.mediaItem.id
+                // Keep the most recently watched episode for each series
+                if let existing = latestBySeries[seriesId] {
+                    if item.lastWatched > existing.lastWatched {
+                        latestBySeries[seriesId] = item
+                    }
+                } else {
+                    latestBySeries[seriesId] = item
+                }
+            }
+            // Sort by lastWatched to ensure stable ordering
+            return latestBySeries.values.sorted { $0.lastWatched > $1.lastWatched }
+        }
+
+        return filtered
     }
     
     func onAppear() {

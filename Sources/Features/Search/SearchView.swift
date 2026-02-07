@@ -560,7 +560,7 @@ struct SearchMediaCard: View {
                 }
 
                 // Progress bar overlay inside ZStack for stability
-                if let progressValue = appState.watchHistoryProgress[item.id], progressValue > 0, item.type == "movie" {
+                if let progressValue = appState.watchHistoryProgress[item.id], progressValue > 0 {
                     ZStack(alignment: .leading) {
                         Rectangle()
                             .fill(Color.black.opacity(0.6))

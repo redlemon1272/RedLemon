@@ -2178,6 +2178,66 @@ class PlayerViewModel: ObservableObject {
         }
     }
 
+    // New overload with explicit parameters to prevent race condition during cleanup
+    func saveToWatchHistory(
+        mediaItem: MediaItem,
+        season: Int?,
+        episode: Int?,
+        quality: String,
+        timestamp: Double,
+        duration: Double,
+        force: Bool = false
+    ) {
+        // Throttle saving to once every 60 seconds unless forced
+        let timeSinceLastSave = Date().timeIntervalSince(lastHistorySaveTime)
+        if !force && timeSinceLastSave < 60.0 {
+            return
+        }
+
+        // Load existing history
+        var history: [WatchHistoryItem] = []
+        if let data = UserDefaults.standard.data(forKey: "watchHistory"),
+           let decoded = try? JSONDecoder().decode([WatchHistoryItem].self, from: data) {
+            history = decoded
+        }
+
+        // Create new history item
+        let historyItem = WatchHistoryItem(
+            id: "\(mediaItem.id)_\(season ?? 0)_\(episode ?? 0)",
+            mediaItem: mediaItem,
+            timestamp: timestamp,
+            duration: duration,
+            lastWatched: Date(),
+            quality: quality,
+            season: season,
+            episode: episode
+        )
+
+        // Remove if already exists (to move to front)
+        history.removeAll { $0.id == historyItem.id }
+
+        // Add to front
+        history.insert(historyItem, at: 0)
+
+        // Keep only last 50 items
+        history = Array(history.prefix(50))
+
+        // Save to UserDefaults
+        if let data = try? JSONEncoder().encode(history) {
+            UserDefaults.standard.set(data, forKey: "watchHistory")
+            lastHistorySaveTime = Date()
+            LoggingManager.shared.info(.watchHistory, message: "Saved to watch history: \(mediaItem.name) at \(Int(timestamp))s")
+
+            // Refresh global progress mapping in AppState
+            appState?.updateWatchHistoryMapping()
+
+            // Sync to Cloud
+            Task {
+                await SupabaseClient.shared.syncWatchHistoryItem(historyItem)
+            }
+        }
+    }
+
     // MARK: - Window Management
 
     private func enterFullscreen() {

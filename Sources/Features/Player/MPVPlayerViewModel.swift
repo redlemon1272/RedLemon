@@ -756,6 +756,8 @@ class MPVPlayerViewModel: ObservableObject {
     private var currentSourceQuality: String? // NEW: Track source type (CAM, WEB-DL, etc.)
     private var currentSeason: Int? // NEW: Explicitly track season
     private var currentEpisode: Int? // NEW: Explicitly track episode
+    private var currentMediaItem: MediaItem? // NEW: Store media item locally to prevent race condition
+    private var currentQuality: String = "fullHD" // NEW: Store quality locally
     private var hasVotedForStream: Bool = false
 
     // Accumulator for ACTUAL playback time (to prevent seek abuse)
@@ -886,6 +888,14 @@ class MPVPlayerViewModel: ObservableObject {
         self.currentSeason = season
         self.currentEpisode = episode
         self.hasVotedForStream = false // Reset vote state for new stream
+
+        // Capture media item and quality locally to prevent race condition during cleanup
+        self.currentMediaItem = appState?.player.selectedMediaItem
+        if let qualityEnum = appState?.player.selectedQuality {
+            self.currentQuality = qualityEnum.rawValue
+        } else if let qualityStr = quality {
+            self.currentQuality = qualityStr
+        }
 
         // Broadcast watching status
         Task {
@@ -4433,8 +4443,20 @@ extension MPVPlayerViewModel {
         }
 
         Task {
-            appState?.player.saveToWatchHistory(timestamp: currentTime, duration: duration, force: force)
-            // Calculate remaining time
+            // Use locally stored values to prevent race condition during cleanup
+            guard let mediaItem = self.currentMediaItem else { return }
+
+            Task { @MainActor in
+                appState?.player.saveToWatchHistory(
+                    mediaItem: mediaItem,
+                    season: self.currentSeason,
+                    episode: self.currentEpisode,
+                    quality: self.currentQuality,
+                    timestamp: currentTime,
+                    duration: duration,
+                    force: force
+                )
+            }
         }
     }
 

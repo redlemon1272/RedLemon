@@ -106,6 +106,8 @@ mkdir -p "$FRAMEWORKS"
 
 # Copy common frameworks first (if any)
 cp Frameworks/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
+# Copy mpv dependencies from dylibs folder
+cp Frameworks/dylibs/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
 
 # Copy architecture-specific frameworks (Overwriting common if needed)
 if [[ "$ARCH_NAME" == "arm64" ]]; then

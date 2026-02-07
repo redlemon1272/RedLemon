@@ -406,7 +406,7 @@ struct MediaCard: View {
                 }
 
                 // Progress bar overlay
-                if let progress = progress, progress > 0, item.type == "movie" {
+                if let progress = progress, progress > 0 {
                     VStack {
                         Spacer()
                         ZStack(alignment: .leading) {
@@ -532,7 +532,7 @@ struct OptimizedMediaCard: View {
                 }
 
                 // Progress bar overlay
-                if let progress = progress, progress > 0, item.type == "movie" {
+                if let progress = progress, progress > 0 {
                     VStack {
                         Spacer()
                         ZStack(alignment: .leading) {

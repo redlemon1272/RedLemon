@@ -929,6 +929,46 @@ echo ""
 echo -e "💡 To suppress a violation, append ${BOLD}// OK${NC} or ${BOLD}// legacy${NC} to the line."
 
 
+# =============================================================================
+# CHECK 41: Race Condition in Async Task Cleanup (Security Check #159)
+# =============================================================================
+# Trigger: MPVPlayerViewModel doesn't capture values locally before async Task.
+print_header "Check 41: Race Condition in Async Task Cleanup (Security Check #159)"
+
+MPV_PLAYER_VM="$SOURCES_DIR/Features/Player/MPVPlayerViewModel.swift"
+if [[ -f "$MPV_PLAYER_VM" ]]; then
+    # Check for local capture of media item and quality
+    if ! grep -q "currentMediaItem = appState?.player.selectedMediaItem" "$MPV_PLAYER_VM"; then
+        report "ERROR" "Security Check #159" "Race Condition Risk: MPVPlayerViewModel MUST capture 'selectedMediaItem' locally in loadStream() before async Task executes. Use 'self.currentMediaItem = appState?.player.selectedMediaItem'." "$MPV_PLAYER_VM" "0" "Missing local capture of selectedMediaItem"
+    else
+        echo -e "${GREEN}✅ MPVPlayerViewModel captures mediaItem locally to prevent race condition.${NC}"
+    fi
+
+    # Check for local capture of quality
+    if ! grep -q "currentQuality = qualityEnum.rawValue" "$MPV_PLAYER_VM" && ! grep -q "currentQuality = qualityStr" "$MPV_PLAYER_VM"; then
+        report "WARNING" "Security Check #159" "Race Condition Risk: MPVPlayerViewModel should capture quality locally. Use 'self.currentQuality = qualityEnum.rawValue'." "$MPV_PLAYER_VM" "0" "Missing local capture of quality"
+    fi
+fi
+
+# =============================================================================
+# CHECK 42: Dictionary Ordering in SwiftUI (Security Check #160)
+# =============================================================================
+# Trigger: Using Array(dict.values) without explicit sorting.
+print_header "Check 42: Dictionary Ordering in SwiftUI (Security Check #160)"
+
+BROWSE_VM="$SOURCES_DIR/Features/Browse/BrowseViewModel.swift"
+if [[ -f "$BROWSE_VM" ]]; then
+    # Look for the pattern: Array(dictionary.values) or similar
+    # The fix should include .sorted { $0.lastWatched > $1.lastWatched }
+    if grep -q "latestBySeries.values" "$BROWSE_VM"; then
+        if ! grep -q "latestBySeries.values.sorted" "$BROWSE_VM"; then
+            report "ERROR" "Security Check #160" "Dictionary Ordering Risk: filteredHistoryItems uses dictionary values without explicit sorting. MUST add '.sorted { \$0.lastWatched > \$1.lastWatched }' to prevent UI items from trading places." "$BROWSE_VM" "0" "Missing explicit sort on dictionary values"
+        else
+            echo -e "${GREEN}✅ BrowseViewModel correctly sorts dictionary values for stable ordering.${NC}"
+        fi
+    fi
+fi
+
 
 # Exit Code Logic
 

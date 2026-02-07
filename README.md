@@ -13,7 +13,7 @@ Join our official subreddit for feature requests, support, and community watch p
 
 ## 🛡️ Hybrid Open Source Model
 
-**Current Version:** v1.0.189 (build 189)
+**Current Version:** v1.0.190 (build 190)
 
 RedLemon is built on a **Hybrid Open Source** model. We believe in transparency without compromising the operational integrity of our service.
 
@@ -35,27 +35,44 @@ To prevent abuse of our aggregation infrastructure and protect our proprietary a
 **[Download the latest release here](https://github.com/redlemon1272/RedLemon/releases/latest)**
 
 ### Command-Line Installer (Recommended)
-You can install RedLemon via a single command. This method is recommended as it automatically handles the macOS gatekeeper permissions for you:
-```bash
-curl -sL https://raw.githubusercontent.com/redlemon1272/RedLemon/main/scripts/install.sh | bash
-```
 
-> **Why use the terminal command?**
-> The installer downloads the binary, moves it to your `/Applications` folder, and removes the "Quarantine" flag. If you install manually via DMG, you will need to manually authorize the app in **System Settings > Privacy & Security**.
+**Step-by-step for beginners:**
+
+1. Press **⌘ + Space** to open Spotlight Search
+2. Type **Terminal** and press **Enter**
+3. Copy this command:
+   ```bash
+   curl -sL https://raw.githubusercontent.com/redlemon1272/RedLemon/main/scripts/install.sh | bash
+   ```
+4. Paste it into Terminal (**⌘ + V**) and press **Enter**
+5. Wait ~30 seconds — RedLemon will install to your Applications folder and open it automatically
+
+> **Why use the terminal?**
+> This method handles macOS security permissions automatically. If you download the DMG manually instead, you'll need to right-click → Open the first time, then authorize in **System Settings → Privacy & Security**.
 
 ## 🛠️ Building From Source
 
 This repository contains the UI scaffolding. You can build it to inspect the code structure, but **playback will not work** without the proprietary plugins found in the official release.
 
 1.  Clone the repo.
-2.  Open `RedLemon.xcodeproj`.
-3.  Build & Run (Cmd+R).
+2.  Run `swift build` in Terminal.
 
 ### Privacy & Security
 *   **Privacy-Focused**: Zero advertisement tracking or behavioral analytics.
 *   **Hybrid Cloud**: Watch History and Library are synced securely via Supabase for cross-device continuity.
 *   **Local-First Preferences**: App settings and playback preferences are stored locally on your device.
 *   **Secure Storage**: All sensitive tokens (Real-Debrid, API Keys) are stored in the macOS Keychain.
+
+## 🔒 Security & Verification
+
+**For the security-conscious:**
+
+| Concern | How to Verify |
+|---------|---------------|
+| **Install script safety** | Read [`scripts/install.sh`](scripts/install.sh) before running - it's simple bash that downloads, copies, and clears Gatekeeper flags |
+| **Network activity** | Monitor with [Little Snitch](https://www.obdev.at/products/littlesnitch/) - the app only connects to Real-Debrid, our sync server, and TMDB for images/metadata |
+| **Binary integrity** | Verify the DMG: `shasum -a 256 RedLemon.dmg` |
+| **No phone-home** | Grep the source for `analytics`, `telemetry`, `tracking` - you'll find nothing |
 
 ## 📄 License
 

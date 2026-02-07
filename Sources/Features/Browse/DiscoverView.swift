@@ -393,7 +393,7 @@ struct DiscoverMediaCard: View {
                 await loadPoster()
             }
             .overlay(alignment: .bottom) {
-                if let progress = appState.watchHistoryProgress[item.id], progress > 0, item.type == "movie" {
+                if let progress = appState.watchHistoryProgress[item.id], progress > 0 {
                     ZStack(alignment: .leading) {
                         Rectangle()
                             .fill(Color.black.opacity(0.6))

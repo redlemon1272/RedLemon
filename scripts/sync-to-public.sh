@@ -134,7 +134,7 @@ copy_safe "README.md"
 copy_safe "docs/index.html"
 copy_safe "docs/style.css"
 copy_safe "docs/assets"
-copy_safe "scripts/architecture-scan.sh"
+
 copy_safe "scripts/install.sh"
 copy_safe "OPEN_SOURCE_PLAN.md"
 copy_safe "SECURITY.md"

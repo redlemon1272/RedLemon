@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.0.190 -->
+        <item>
+            <title>Version 1.0.190</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed TV show continue watching tracking - now properly saves timestamps for TV episodes</li><li>Bundled MPV dependencies to fix app launch crashes</li><li>Fixed continue watching items trading places bug - now shows only the most recent episode per series with stable ordering</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 06 Feb 2026 20:55:37 -0500</pubDate>
+            <sparkle:version>190</sparkle:version>
+            <sparkle:shortVersionString>1.0.190</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.190.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="FRIe7ep+95lWYa4758AFna2kba5pkSvBA1h/T353cXYTkSPfhUh/RkcOXTGaU3clY3wU1zd2uTDvJrDoc0yCAg==" length="75601021"
+            />
+        </item>
         <!-- v1.0.189 -->
         <item>
             <title>Version 1.0.189</title>

@@ -85,3 +85,7 @@ Sources/Networking/guestconsolelog.md
 *.bak
 dump.sql
 functions.zip
+RedLemon-Public/
+RedLemon Admin Users/
+RedLemon reddit post/
+RedLemon-ServerBackup/

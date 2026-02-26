@@ -1,7 +1,14 @@
 # RedLemon AI Bible
 > **THE ULTIMATE CONTEXT DOCUMENT**
-> **Last Updated:** February 6, 2026 (Part 35: "Race Conditions in Task Cleanup")
+> **Last Updated:** February 26, 2026 (Part 4: "Supabase Cloud Migration - Zilean Removed, Payments Disabled")
 > **Platform:** macOS (Native App)
+
+> [!NOTE]
+> **MIGRATION STATUS:** Migrated from self-hosted Supabase (Ubuntu server) to Supabase Cloud Free Tier.
+> - **Zilean provider removed** (4 remaining providers: Torrentio, Comet, MediaFusion, DebridSearch)
+> - **Crypto payments disabled** (all users now premium, `isMonetizationEnabled = false`)
+> - **No server SSH access** (use Supabase Dashboard)
+> - See `MIGRATION_TO_SUPABASE_CLOUD.md` for details
 
 > [!IMPORTANT]
 > **Mandatory AI Instruction:**
@@ -868,105 +875,176 @@ const newExpiry = new Date(currentExpiry.getTime() + (daysToAdd * 24 * 60 * 60 *
 
 ---
 
-# Part 4: Server Infrastructure
+# Part 4: Cloud Infrastructure (Supabase Cloud)
 
-## Server Access
+## Supabase Cloud Access
 
-| Service | Detail |
+| Component | Location |
 | :--- | :--- |
-| **IP Address** | `151.243.109.243` |
-| **SSH User** | `root` |
-| **SSH Password** | `4Y76HBYs^OxSQNbIbbfA7C0d` |
-| **OS** | Ubuntu 24.04 LTS |
+| **Dashboard** | https://supabase.com/dashboard |
+| **Project URL** | `https://YOUR_PROJECT_ID.supabase.co` (update in `Config.swift`) |
+| **SQL Editor** | Dashboard > SQL Editor |
+| **Database** | Dashboard > Editor > Database |
+| **Realtime** | Dashboard > Realtime |
+| **Edge Functions** | Dashboard > Edge Functions |
 
-```bash
-ssh root@151.243.109.243
+## Configuration
+
+Update `Sources/App/Config.swift` with your Supabase Cloud project credentials:
+
+```swift
+static let supabaseURL = "https://YOUR_PROJECT_ID.supabase.co"
+static let supabaseAnonKey = "YOUR_ANON_KEY_HERE"
 ```
 
-## Supabase Access
+Get these values from: **Dashboard > Project Settings > API**
 
-| Component | URL | Credentials |
-| :--- | :--- | :--- |
-| **Dashboard** | `http://151.243.109.243:3000` | admin / `Vs8HAoo@Rp33rjKFX6xaOe6k` |
-| **API** | `https://151.243.109.243.nip.io` | (Anon Key protected) |
-| **Database** | Port 5432 | postgres / `uzCXxI6gs7I6tRXMCKJdCzh8` |
+## Database Management
 
-### API Keys
-- **ANON_KEY**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzY5NzgzNDkyLCJleHAiOjIwODUxNDM0OTJ9.n-lTY3pLyNnNOggkn1EF41N0KeibKUuiR0AC2SKuUV0`
-- **JWT Secret**: `2f838bcacafbdd44a8c777572a5d908ece3a42998d4199abc44d2dd9400b8783`
+### Running SQL Queries
+1. Go to Supabase Dashboard
+2. Navigate to **SQL Editor**
+3. Create new query
+4. Write and execute SQL
 
-## Maintenance Commands
+### Common Queries
 
-```bash
-# Restart everything
-cd /root/supabase/docker && docker compose restart
+```sql
+-- Check user count
+SELECT COUNT(*) FROM users;
 
-# Check logs
-docker compose logs -f --tail 100
+-- Check active rooms
+SELECT COUNT(*) FROM rooms WHERE is_playing = true;
 
-# Database shell
-docker exec -it supabase-db psql -U postgres
+-- Check premium users
+SELECT username, subscription_expires_at FROM users WHERE is_premium = true;
 ```
 
-## Zilean Maintenance (Native Service)
-- **Start/Restart**: `screen -dmS zilean /root/start_zilean.sh`
-- **Logs**: `tail -f /root/zilean_bin/zilean_session.log`
-- **Console**: `screen -r zilean` (Ctrl+A, D to detach)
-- **Database Check**: `./remote_exec.sh "PGPASSWORD=zilean psql -h localhost -p 5433 -U zilean -d zilean -c \"SELECT count(*) FROM \\\"Torrents\\\";\""`
-- **Janitor Logs**: `./remote_exec.sh "docker exec supabase-db psql -U postgres -d postgres -c \"SELECT * FROM system_job_logs ORDER BY created_at DESC LIMIT 5;\""`
-- **Dashboard Visibility**: The Admin Dashboard (Overview & Server tabs) provides high-level visibility into Zilean's count and last maintenance run.
+### Database Migrations
 
-## Self-Hosting Service Checklist (Lessons Learned)
-0.  **Feasibility Check**: Is the source code public?
-    -   *Lesson*: **Torrentio is Closed Source/Proprietary** and cannot be self-hosted. We rely on the public API (`torrentio.strem.fun`).
-    -   *Risk Mitigation*: We implemented **Provider Redundancy** (Comet, MediaFusion, Zilean, DebridSearch). If Torrentio fails or rate-limits, `StreamResolver` falls back to these alternatives. Zilean is our self-hosted safety net.
-    -   *Action*: Search for "open source alternative" (e.g., **Comet** or **MediaFusion** instead of Torrentio).
-1.  **Runtime Autonomy**: Native services (outside Docker) require manual dependency management.
-    -   *Lesson*: Zilean needed .NET 9.0 AND specific Python libraries (`rank-torrent-name`) installed system-wide.
-    -   *Action*: Check `.runtimeconfig.json` and `requirements.txt` immediately.
-2.  **Output Persistence**: Native binaries write to `stdout`, which vanishes in `screen`.
-    -   *Action*: Always modify start scripts to redirect: `> app.log 2>&1`.
-3.  **Data Verification**: Services can be "Healthy" (HTTP 200) but empty.
-    -   *Action*: Verify specific tables (`ParsedPages`, `Torrents`) to confirm *logic* execution.
+**For Supabase Cloud**, use the Supabase CLI:
 
-## Daily Schedule (UTC)
-
-| Time | Job |
-|------|-----|
-| 9:00 AM | Database backup |
-| 9:10 AM | Payment sweep |
-| 9:20 AM | Zilean Maintenance (Janitor) |
-
-## Database Migrations
-
-> [!IMPORTANT]
-> **DO NOT USE CLI:** `supabase db push` will fail (403 Forbidden). You MUST use the manual protocol below.
-
-**Step 1: Copy file to server**
 ```bash
-expect -c 'spawn scp supabase/migrations/YOUR_MIGRATION.sql root@151.243.109.243:/tmp/migration.sql; expect "password:"; send "4Y76HBYs^OxSQNbIbbfA7C0d\r"; expect eof'
+# Install CLI if needed
+brew install supabase/tap/supabase
+
+# Link to your project
+supabase link --project-ref YOUR_PROJECT_ID
+
+# Push migrations
+supabase db push
+
+# Or open SQL Editor in Dashboard and paste migration SQL directly
 ```
 
-**Step 2: Execute on database**
+## Edge Functions
+
+### Deployment
 ```bash
-./remote_exec.sh "cat /tmp/migration.sql | docker exec -i supabase-db psql -U postgres postgres"
+# Deploy all functions
+supabase functions deploy --project-ref YOUR_PROJECT_ID
+
+# Deploy specific function
+supabase functions deploy my-function --project-ref YOUR_PROJECT_ID
 ```
 
-**One-liner SQL queries:**
+### Logs
+View in: **Dashboard > Edge Functions > [select function] > Logs**
+
+### Environment Variables
+Set in: **Dashboard > Edge Functions > [select function] > Secrets**
+
+## Realtime Monitoring
+
+View in: **Dashboard > Realtime > Channels**
+
+Shows:
+- Active connections
+- Message throughput
+- Errors
+
+## Backup & Recovery
+
+### Automated Backups
+Supabase Cloud provides:
+- **Daily backups** (7-day retention on Pro, 24 hours on Free)
+- **Point-in-time recovery** (Pro only)
+
+### Manual Export
 ```bash
-./remote_exec.sh "docker exec supabase-db psql -U postgres postgres -c \"SELECT * FROM users LIMIT 5;\""
+# Via CLI
+supabase db dump --project-ref YOUR_PROJECT_ID > backup.sql
+
+# Or use Dashboard > Database > Backups > Export
 ```
 
-## Edge Function Deployment
-**Protocol:** The `supabase functions deploy` CLI command works LOCALLY but fails relative to the production server. Use this manual update method:
-
-**1. Copy Source to Server Volume**
+### Manual Import
 ```bash
-expect -c 'spawn scp supabase/functions/[FUNCTION_NAME]/index.ts root@151.243.109.243:/root/supabase/docker/volumes/functions/[FUNCTION_NAME]/index.ts; expect "password:"; send "4Y76HBYs^OxSQNbIbbfA7C0d\r"; expect eof'
+# Via CLI
+supabase db dump --project-ref YOUR_PROJECT_ID < backup.sql
+
+# Or use Dashboard > SQL Editor (for smaller datasets)
 ```
 
-**2. Restart Functions Container (Hot Reload)**
-```bash
+## Monitoring
+
+### Metrics Dashboard
+**Dashboard > Project Settings > Metrics**
+
+Shows:
+- Database size
+- Request count
+- Response times
+- Error rates
+
+### Logs
+**Dashboard > Logs**
+
+Filter by:
+- Database
+- API
+- Auth
+- Realtime
+- Edge Functions
+
+## Free Tier Limits
+
+| Resource | Limit |
+|----------|-------|
+| Database | 500MB |
+| File Storage | 1GB |
+| Bandwidth | 1GB/month |
+| Edge Function requests | 500K/month |
+| Realtime connections | 200 |
+| Auth users | Unlimited |
+
+> [!TIP]
+> Monitor usage in Dashboard > Settings > Billing to avoid overages.
+
+---
+
+## Historical Note (Self-Hosted Archive)
+
+The following information is preserved for historical reference only. RedLemon no longer self-hosts.
+
+### Previous Self-Hosted Setup (DEPRECATED)
+
+- **Server**: Ubuntu 24.04 at `151.243.109.243`
+- **Zilean**: Self-hosted .NET service (removed 2026-02-26)
+- **Caddy Proxy**: Custom SSL termination (replaced by Supabase Cloud)
+- **Custom Cron Jobs**: Payment sweeps, Zilean maintenance (payments now disabled)
+
+### Provider Changes
+
+| Provider | Status | Notes |
+|----------|--------|-------|
+| Torrentio | ✅ Active | Public API |
+| Comet | ✅ Active | Public API |
+| **Zilean** | ❌ **Removed** | Was self-hosted, now removed |
+| MediaFusion | ✅ Active | Public API |
+| DebridSearch | ✅ Active | Direct RD library search |
+
+The app now uses 4 providers instead of 5. The remaining providers provide sufficient coverage for stream resolution.
 ./remote_exec.sh "cd /root/supabase/docker && docker compose restart functions"
 ```
 

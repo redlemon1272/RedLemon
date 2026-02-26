@@ -18,8 +18,7 @@ struct AdminDashboardView: View {
     @State private var versionStats: [AppVersionStat] = []
     @State private var contentStats: [ContentPopularityStat] = []
     @State private var userCount: Int = 0
-    @State private var zileanCount: Int = 0
-    @State private var zileanLastUpdate: Date?
+    // Note: Zilean state removed - migrated to Supabase Cloud
     @State private var systemLatency: Double = 0
     @State private var isLoadingOverview = false
     
@@ -84,11 +83,9 @@ struct AdminDashboardView: View {
                             
                             AdminOverviewView(
                                 userCount: userCount,
-                                zileanCount: zileanCount,
                                 systemLatency: systemLatency,
                                 versionStats: versionStats,
                                 contentStats: contentStats,
-                                zileanLastUpdate: zileanLastUpdate,
                                 onRefresh: loadOverviewData
                             )
                             .onAppear(perform: loadOverviewData)
@@ -100,14 +97,12 @@ struct AdminDashboardView: View {
                     }
                 case .users:
                     AdminUsersView()
-                case .payments:
-                    AdminPaymentsView()
+                // Note: Payments view removed - monetization disabled
                 case .events:
                     AdminEventsView()
                 case .content:
                     VerifiedStreamsView(isEmbedded: true)
-                case .server:
-                    AdminServerView()
+                // Note: Server view removed - no longer self-hosted
                 case .logs:
                     AdminLogsView()
                 }
@@ -122,16 +117,13 @@ struct AdminDashboardView: View {
         isLoadingOverview = true
         Task {
             async let count = SupabaseClient.shared.getUserCount()
-            async let zStatus = SupabaseClient.shared.getZileanStatus()
+            // Note: Zilean status fetch removed - migrated to Supabase Cloud
             async let latency = SupabaseClient.shared.checkHealth()
             async let versions = SupabaseClient.shared.getAppVersionStats()
             async let content = SupabaseClient.shared.getContentPopularity()
-            
+
             do {
                 userCount = try await count
-                let status = try await zStatus
-                zileanCount = status.count
-                zileanLastUpdate = status.lastUpdate
                 systemLatency = try await latency
                 versionStats = try await versions
                 contentStats = try await content

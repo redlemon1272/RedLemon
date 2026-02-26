@@ -10,7 +10,7 @@ import Vapor
 
 /// Provider service protocol
 protocol ProviderService {
-    /// Provider name (torrentio, comet, zilean, jackettio, mediafusion)
+    /// Provider name (torrentio, comet, mediafusion, debridsearch)
     var name: String { get }
     
     /// Fetch streams for IMDB ID
@@ -55,35 +55,31 @@ extension ProviderService {
 struct ProviderConfig {
     let torrentio: TorrentioConfig?
     let comet: CometConfig?
-    let zilean: ZileanConfig?
+    // Note: Zilean removed - migrated from self-hosted to Supabase Cloud
     let jackettio: JackettioConfig?
     let mediafusion: MediaFusionConfig?
     let debridsearch: DebridSearchConfig?
-    
+
     struct TorrentioConfig {
         let rdConfig: String  // "realdebrid" or empty
     }
-    
+
     struct CometConfig {
         let indexers: [String]
         let debridService: String
         let debridApiKey: String
     }
-    
-    struct ZileanConfig {
-        let url: String
-    }
-    
+
     struct JackettioConfig {
         let serverUrl: String
         let apiKey: String
         let indexers: [String]
     }
-    
+
     struct MediaFusionConfig {
         let config: String  // Encrypted config string
     }
-    
+
     struct DebridSearchConfig {
         let debridProvider: String  // "RealDebrid", "AllDebrid", "DebridLink", "Premiumize", "TorBox"
         let debridApiKey: String

@@ -8,10 +8,11 @@ class LicenseManager: ObservableObject {
 
     // MARK: - Feature Flag
     // ⚠️ MASTER SWITCH: Set to true to enable the payment wall
+    // NOTE: Monetization disabled - migrated to Supabase Cloud (no self-hosted server)
     #if DEBUG
-    @Published var isMonetizationEnabled: Bool = true
+    @Published var isMonetizationEnabled: Bool = false
     #else
-    @Published var isMonetizationEnabled: Bool = true // Enabled for Beta testing
+    @Published var isMonetizationEnabled: Bool = false // Disabled - no payment system on cloud
     #endif
 
     // MARK: - License State

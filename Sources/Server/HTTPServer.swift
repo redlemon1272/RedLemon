@@ -78,20 +78,19 @@ class HTTPServer {
         // Providers now fetch credentials dynamically from KeychainManager on each request.
         // This ensures that if the user restores an account or updates keys,
         // the providers pick up the changes immediately without restart.
-        
+        // Note: Zilean removed - migrated from self-hosted to Supabase Cloud
+
         let torrentio = TorrentioService()
         let comet = CometService()
-        let zilean = ZileanService()
         let mediafusion = MediaFusionService()
         let debridSearch = DebridSearchService()
 
         await ProviderManager.shared.register(provider: torrentio)
         await ProviderManager.shared.register(provider: comet)
-        await ProviderManager.shared.register(provider: zilean)
         await ProviderManager.shared.register(provider: mediafusion)
         await ProviderManager.shared.register(provider: debridSearch)
 
-        print("✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch")
+        print("✅ Providers initialized: torrentio, comet, mediafusion, debridsearch")
     }
 
     func routes(_ app: Application) throws {
@@ -118,8 +117,8 @@ class HTTPServer {
                 "service": "RedLemon",
                 "port": port,
                 "version": "1.0.14",
-                "phase": "Foundation + Credentials + RealDebrid + All Providers",
-                "providers": ["torrentio", "comet", "zilean", "mediafusion", "debridsearch"],
+                "phase": "Foundation + Credentials + RealDebrid + Cloud Providers",
+                "providers": ["torrentio", "comet", "mediafusion", "debridsearch"],
                 "endpoints": [
                     "GET  /health",
                     "GET  /status",

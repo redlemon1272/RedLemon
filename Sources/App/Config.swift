@@ -16,8 +16,8 @@ struct Config {
     // Supabase configuration
     // IMPORTANT: These are PUBLIC anon keys - safe to share
     // Never commit service_role keys or database passwords
-    static let supabaseURL = "https://151.243.109.243.nip.io"
-    static let supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzY5ODE0MjU0LCJleHAiOjIwODUxNzQyNTR9.MP75UxvySt8VuObAfOz4MbNGlZM6KikShq8FnyM5Q1U"
+    static let supabaseURL = "https://mzikqgrjkbxjudjdxnue.supabase.co"
+    static let supabaseAnonKey = "sb_publishable_HckzsCEfTGz42mvQinw_hw_PIweG3sB"
 
 
     // Local Server Security

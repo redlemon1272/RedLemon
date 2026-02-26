@@ -4,22 +4,20 @@ import SwiftUI
 enum AdminCategory: String, CaseIterable, Identifiable {
     case overview = "Overview"
     case users = "Users"
-    case payments = "Payments"
+    // Note: Payments tab removed - monetization disabled on Supabase Cloud
     case events = "Events"
     case content = "Content"
-    case server = "Server"
+    // Note: Server tab removed - no longer self-hosted
     case logs = "Logs"
-    
+
     var id: String { rawValue }
-    
+
     var icon: String {
         switch self {
         case .overview: return "chart.bar.fill"
         case .users: return "person.2.fill"
-        case .payments: return "dollarsign.circle.fill"
         case .events: return "play.tv.fill"
         case .content: return "film.fill"
-        case .server: return "server.rack"
         case .logs: return "list.bullet.rectangle.portrait"
         }
     }
@@ -28,11 +26,10 @@ enum AdminCategory: String, CaseIterable, Identifiable {
 // MARK: - Admin Overview View
 struct AdminOverviewView: View {
     let userCount: Int
-    let zileanCount: Int
     let systemLatency: Double
     let versionStats: [AppVersionStat]
     let contentStats: [ContentPopularityStat]
-    let zileanLastUpdate: Date?
+    // Note: Zilean fields removed - migrated to Supabase Cloud
     var onRefresh: (() -> Void)?
     
     var body: some View {
@@ -58,13 +55,7 @@ struct AdminOverviewView: View {
                     
                     HStack(spacing: 16) {
                         StatusCard(title: "Users", value: "\(userCount)", icon: "person.2.fill", color: .blue)
-                        StatusCard(
-                            title: "Zilean Torrents",
-                            value: "\(zileanCount.formatted())",
-                            icon: "magnifyingglass.circle.fill",
-                            color: .purple,
-                            subtitle: zileanLastUpdate.map { "Updated \($0.timeAgoDisplay())" }
-                        )
+                        // Note: Zilean status card removed - migrated to Supabase Cloud
                         StatusCard(title: "Latency", value: String(format: "%.0f ms", systemLatency), icon: "network", color: systemLatency > 500 ? .orange : .green)
                     }
                 }

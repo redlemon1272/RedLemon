@@ -45,7 +45,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
             updater.automaticallyDownloadsUpdates = true
 
             print("✅ Sparkle configured (seamless mode)")
-            print("   Appcast URL: https://151.243.109.243.nip.io/updates/appcast.xml")
+            print("   Feed URL: https://github.com/redlemon1272/RedLemon/releases.atom")
             print("   Can check: \(canCheckForUpdates)")
         }
     }
@@ -91,7 +91,8 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
 
     /// Custom silent update check that doesn't use Sparkle's UI
     private func checkForUpdatesQuietly() async {
-        guard let feedURL = URL(string: "https://151.243.109.243.nip.io/updates/appcast.xml") else {
+        // Use GitHub Releases atom feed
+        guard let feedURL = URL(string: "https://github.com/redlemon1272/RedLemon/releases.atom") else {
             print("❌ Invalid feed URL")
             return
         }
@@ -172,7 +173,8 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
 
     /// Provide the feed URL (can also be set in Info.plist as SUFeedURL)
     func feedURLString(for updater: SPUUpdater) -> String? {
-        let feedURL = "https://151.243.109.243.nip.io/updates/appcast.xml"
+        // Use GitHub Releases atom feed for Sparkle
+        let feedURL = "https://github.com/redlemon1272/RedLemon/releases.atom"
         print("📡 Sparkle requesting feed URL: \(feedURL)")
         return feedURL
     }

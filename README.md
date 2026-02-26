@@ -13,7 +13,7 @@ Join our official subreddit for feature requests, support, and community watch p
 
 ## 🛡️ Hybrid Open Source Model
 
-**Current Version:** v1.0.190 (build 190)
+**Current Version:** v1.1.0 (build 191)
 
 RedLemon is built on a **Hybrid Open Source** model. We believe in transparency without compromising the operational integrity of our service.
 

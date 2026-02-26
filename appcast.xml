@@ -6,6 +6,25 @@
         <description>RedLemon App Updates</description>
         <language>en</language>
         <!-- v1.0.60 -->
+        <!-- v1.1.0 -->
+        <item>
+            <title>Version 1.1.0</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Migrated to Supabase Cloud (no server needed)</li><li>Removed Zilean provider</li><li>Disabled crypto payments (all users now premium)</li><li>Database: Supabase Cloud Free Tier</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 26 Feb 2026 13:12:15 -0500</pubDate>
+            <sparkle:version>191</sparkle:version>
+            <sparkle:shortVersionString>1.1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.1.0.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="bM1bBr4swf+BfdAGsu0hOJgsAPElqSXbpAfz28vyaTD6pHkxPGV2iOvSVD613rA5bMf7o1OOnnJaMX/Wj4bvBA==" length="75535909"
+            />
+        </item>
         <!-- v1.0.190 -->
         <item>
             <title>Version 1.0.190</title>

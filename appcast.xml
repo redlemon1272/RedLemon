@@ -1,0 +1,2515 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+    <channel>
+        <title>RedLemon</title>
+        <link>https://github.com/redlemon1272/RedLemon/releases.atom</link>
+        <description>RedLemon App Updates</description>
+        <language>en</language>
+        <!-- v1.0.60 -->
+        <!-- v1.1.2 -->
+        <item>
+            <title>Version 1.1.2</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed video playback resume timing bug when loading from continue watching</li><li>Fixed background thread metadata fetch crash on macOS 12</li><li>Show relative 'Last seen' status for offline friends</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 26 May 2026 15:07:28 -0400</pubDate>
+            <sparkle:version>193</sparkle:version>
+            <sparkle:shortVersionString>1.1.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/redlemon1272/RedLemon/releases/download/v1.1.2/RedLemon-v1.1.2.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="7jTm8fkScLeLSMy1i8HwROhYPW+eyXU/aQC/njHieKzZYU5AUv/Azr3j0RJAwOWxg00z6ZNJQCnl5xOc9MFZBQ==" length="75760944"
+            />
+        </item>
+        <!-- v1.1.1 -->
+        <item>
+            <title>Version 1.1.1</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Sparkle updates now use GitHub (no server needed)</li><li>Fixed duplicate users in database</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 26 Feb 2026 19:16:38 -0500</pubDate>
+            <sparkle:version>192</sparkle:version>
+            <sparkle:shortVersionString>1.1.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/redlemon1272/RedLemon/releases/download/v1.1.1/RedLemon-v1.1.1.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="bs0IUCHq7BLeLdtbI0tKzqSCG01n7G9Dd01x83069nXS576HNHNFLVEuanwXV6zZ55bGJ/x6r7zsKQm6UBSZAg==" length="75294520"
+            />
+        </item>
+        <!-- v1.1.0 -->
+        <item>
+            <title>Version 1.1.0</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Migrated to Supabase Cloud (no server needed)</li><li>Removed Zilean provider</li><li>Disabled crypto payments (all users now premium)</li><li>Database: Supabase Cloud Free Tier</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 26 Feb 2026 13:12:15 -0500</pubDate>
+            <sparkle:version>191</sparkle:version>
+            <sparkle:shortVersionString>1.1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/redlemon1272/RedLemon/releases/download/v1.1.0/RedLemon-v1.1.0.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="bM1bBr4swf+BfdAGsu0hOJgsAPElqSXbpAfz28vyaTD6pHkxPGV2iOvSVD613rA5bMf7o1OOnnJaMX/Wj4bvBA==" length="75535909"
+            />
+        </item>
+        <!-- v1.0.190 -->
+        <item>
+            <title>Version 1.0.190</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed TV show continue watching tracking - now properly saves timestamps for TV episodes</li><li>Bundled MPV dependencies to fix app launch crashes</li><li>Fixed continue watching items trading places bug - now shows only the most recent episode per series with stable ordering</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 06 Feb 2026 20:55:37 -0500</pubDate>
+            <sparkle:version>190</sparkle:version>
+            <sparkle:shortVersionString>1.0.190</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.190.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="FRIe7ep+95lWYa4758AFna2kba5pkSvBA1h/T353cXYTkSPfhUh/RkcOXTGaU3clY3wU1zd2uTDvJrDoc0yCAg==" length="75601021"
+            />
+        </item>
+        <!-- v1.0.189 -->
+        <item>
+            <title>Version 1.0.189</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implements deferred hosting grant and schedule update notifications during playback (UX optimization)</li><li>Finalized versioning hygiene</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 02 Feb 2026 22:26:04 -0500</pubDate>
+            <sparkle:version>189</sparkle:version>
+            <sparkle:shortVersionString>1.0.189</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.189.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="00bPLKmDQpcNHFeI7tXT0jI5PJM3TY/odS2M4obSDUca58+wlDUiTQMqKu9LSDFp6FQ4m3Hwn28YeijbBFzUAQ==" length="75776926"
+            />
+        </item>
+        <!-- v1.0.188 -->
+        <item>
+            <title>Version 1.0.188</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Standardized versioning hygiene</li><li>Added regression check for malformed 'vv' prefixes</li><li>Purged legacy version comments</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 02 Feb 2026 21:20:45 -0500</pubDate>
+            <sparkle:version>188</sparkle:version>
+            <sparkle:shortVersionString>1.0.188</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.188.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="1THEOdPgZOGUUTxQFfxvu2LFEDzyIvSQnTLSMq0Dk5iOxjOBRGyl3Dh3MIichZO/Lj1LqVt85M4SCha6DkSsCw==" length="75522715"
+            />
+        </item>
+        <!-- v1.0.187 -->
+        <item>
+            <title>Version 1.0.187</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Bug fix: Resolve versioning inconsistency in release infrastructure</li><li>Stability Improvements</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 02 Feb 2026 19:05:52 -0500</pubDate>
+            <sparkle:version>187</sparkle:version>
+            <sparkle:shortVersionString>1.0.187</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.187.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="zSs0hLcNDEQ+4zzDWex4K5gFSgU/1kjYkwTy1kM94Mzfh1Q//oZhO024XfX+NPVXpSfOKIgUgKj3Ij+r6X3eAg==" length="75644710"
+            />
+        </item>
+        <!-- v1.0.186 -->
+        <item>
+            <title>Version v1.0.186</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix MPV crash</li><li>Fix auto-play episode skip</li><li>Update architecture scanner and stability protocols</li><li>Hardened release validation and sanitized build scripts</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 02 Feb 2026 18:42:14 -0500</pubDate>
+            <sparkle:version>186</sparkle:version>
+            <sparkle:shortVersionString>v1.0.186</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.186.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="NNgQPaNytIm2Dqk7LGYSC7tEUVgaWHoO41w8ftAy7aTan33wMz28adCwcRfQ2dUdSJlcOoeol3Bhh6YQR6/ECA==" length="75308353"
+            />
+        </item>
+        <!-- v1.0.185 -->
+        <item>
+            <title>Version 1.0.185</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed 'Update Checker Failed' error in installer</li><li>Fixed missing version metadata in app bundle</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 01 Feb 2026 17:52:58 -0500</pubDate>
+            <sparkle:version>185</sparkle:version>
+            <sparkle:shortVersionString>1.0.185</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.185.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="AEzEza+j9C++iUFmZSiHgOiSlGk6m7s8HqxAiNE/1OLIuSo5tmFG4G7Wh6MbqLyRXDfHemO3eMcqL9FVa50NBQ==" length="75235151"
+            />
+        </item>
+        <!-- v1.0.184 -->
+        <item>
+            <title>Version 1.0.184</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed background art flashing when disabling subtitles</li><li>Reverted aggressive smooth-switching UI for embedded tracks</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 31 Jan 2026 22:35:27 -0500</pubDate>
+            <sparkle:version>184</sparkle:version>
+            <sparkle:shortVersionString>1.0.184</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.184.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="5Tk7q0XkAl1zJ5sYEoe/AytWRI4YTz7PSidYFO0Z6RyfJrEQW69IOzrw5V2kvIT5F8/v1V8Fc238+OmZguZvCA==" length="75473927"
+            />
+        </item>
+        <!-- v1.0.183 -->
+        <item>
+            <title>Version 1.0.183</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Improve lobby synchronization by trusting join broadcasts</li><li>Added ghost protection grace period for new participants</li><li>Implemented malware/fake stream filtering for restricted extensions</li><li>Refined stream resolution fallback logic</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 31 Jan 2026 20:41:56 -0500</pubDate>
+            <sparkle:version>183</sparkle:version>
+            <sparkle:shortVersionString>1.0.183</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.183.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="sjMuXi0a51DlZqRy0DuUESiMaVuaEE//0/0uQo/IKf3NpyT2W/EEy+ycSYAaH+txn5pEy6BUmL+tRvtlSb6uCA==" length="75585576"
+            />
+        </item>
+        <!-- v1.0.182 -->
+        <item>
+            <title>Version v1.0.182</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li><b>Rollback Release:</b> Restored codebase to stable v1.0.179 state.</li><li><b>Fix:</b> Resolved stability issues introduced in build 180/181.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 23:08:08 -0500</pubDate>
+            <sparkle:version>182</sparkle:version>
+            <sparkle:shortVersionString>v1.0.182</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.182.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="OWS+vSPuZ2UI2ga1qpLtJ8J7hYW9QDeDzZgj8/EHxvIFHDuU/1QoWUnVujcrU1ry/3Becd1WAsw28HUF2cIDDw==" length="99089852"
+            />
+        </item>
+        <!-- v1.0.179 -->
+        <item>
+            <title>Version 1.0.179</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed 'Prohibited' sign on Intel Macs via lsregister and FinderInfo cleanup</li><li>Synchronized Universal 2 bundle metadata refresh</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 19:59:05 -0500</pubDate>
+            <sparkle:version>179</sparkle:version>
+            <sparkle:shortVersionString>1.0.179</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.179.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="uUqP0k5673HnqqMjOBAmSufcFElgfCcvpdiSzYN5dPgGx5MZwIysbkfu13RK8COYwXookOI35GFaCxzCguOkCg==" length="98685380"
+            />
+        </item>
+        <!-- v1.0.178 -->
+        <item>
+            <title>Version 1.0.178</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Critical Fix: Deployed true Universal 2 binary (arm64 + x86_64) for Silicon compatibility.</li><li>Fix: Safer metadata refresh in installers to preserve ad-hoc signatures.</li><li>Fix: Aggressive Finder metadata refresh to remove prohibited signal and restore dock icon.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 17:58:38 -0500</pubDate>
+            <sparkle:version>178</sparkle:version>
+            <sparkle:shortVersionString>1.0.178</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.178.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ZIo9E4OqxVhP9aZ2yDMP7kFbbgVeIBh4zCivLZ13eKNu5EsjEIrvhaVa4GW9IfgeXHEAMbetzTIssZfIquo/DQ==" length="98579741"
+            />
+        </item>
+        <!-- v1.0.177 -->
+        <item>
+            <title>Version 1.0.177</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Remove prohibited symbol on Intel Macs via metadata refresh.</li><li>Fix: Universal sudo-less installation for Silicon and non-admin users.</li><li>Maintenance: Synchronized bootstrap and magic installers.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 17:13:46 -0500</pubDate>
+            <sparkle:version>177</sparkle:version>
+            <sparkle:shortVersionString>1.0.177</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.177.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="jFWWm1jV3dBTTIKavrzuIyowIuErtif3y+eAVXxnLnGuVSD70uvKerR1cJkNxgU2BvL+RsNE1dB4Aq5WXQMzDA==" length="75553887"
+            />
+        </item>
+        <!-- v1.0.176 -->
+        <item>
+            <title>Version 1.0.176</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Feature: Improve terminal installer for Apple Silicon Macs (fixed Permission Denied errors).</li><li>Feature: Support for Sudo-less installation to ~/Applications.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 16:42:02 -0500</pubDate>
+            <sparkle:version>176</sparkle:version>
+            <sparkle:shortVersionString>1.0.176</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.176.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="SyKrtuei34Jdxg/qFTap+I2Y+XbSf+wukXTbSLuHR13J0cVfSzXLmoZOP9hWlkxz+NxtbXYBweYRSaLkP2QkAQ==" length="75671413"
+            />
+        </item>
+        <!-- v1.0.175 -->
+        <item>
+            <title>Version 1.0.175</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Architecture: Finalized Universal 2 binary with native support for both Intel and Apple Silicon Macs.</li><li>Performance: Optimized build process for faster launch times on all platforms.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 12:47:58 -0500</pubDate>
+            <sparkle:version>175</sparkle:version>
+            <sparkle:shortVersionString>1.0.175</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.175.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="FaFlhMGPleDWyyaizlA6n567AJtuqrhG5r4Vua6Bu5MHaIysL8lKY18jAjqks62qXFDlNzi3jBlzIbg+IggtAA==" length="98593438"
+            />
+        </item>
+        <!-- v1.0.173 -->
+        <item>
+            <title>Version 1.0.173</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Architecture: Built as a Universal 2 binary. Native performance on both Intel and Apple Silicon (M1/M2/M3) Macs.</li><li>UX: Eliminated the 'Prohibited' sign and Dock icon issues for all users.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 12:17:26 -0500</pubDate>
+            <sparkle:version>173</sparkle:version>
+            <sparkle:shortVersionString>1.0.173</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.173.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="R0LnNakmzh8eJ0ndlXVwDj1zyZyM/4M2gVwVPiZyfjqMCvPESt2qenXNCImJiP4G5OluEEZlNTCYtZF00M7RBA==" length="98612551"
+            />
+        </item>
+        <!-- v1.0.172 -->
+        <item>
+            <title>Version 1.0.172</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Polish: Fixed the 'Prohibited' sign and missing Dock icon issues in the Applications folder.</li><li>Installer: Improved metadata preservation during installation for a more professional UX.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 11:53:28 -0500</pubDate>
+            <sparkle:version>172</sparkle:version>
+            <sparkle:shortVersionString>1.0.172</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.172.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="6CPFohdgNG/8daOCk2lv2G2YwG1xVqjVK2MCeXLACSjVwkV+2ePbmEG54fV3HfXL9wMvsQJQ/yVuRhR4D9TgDw==" length="75700782"
+            />
+        </item>
+        <!-- v1.0.171 -->
+        <item>
+            <title>Version 1.0.171</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>UX: Fixed missing Dock icon and 'Prohibited' symbol issues on Intel Macs.</li><li>Security: Hardened App Bundle permissions and Info.plist structure.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 11:38:36 -0500</pubDate>
+            <sparkle:version>171</sparkle:version>
+            <sparkle:shortVersionString>1.0.171</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.171.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="00bPD6yEj77q+qKkvj99Ya/YsK5ciuuBpgs7Y6F1CI5fCm9jpzjdm5r9pVc7oFZuKHWVWQ16XXIcR7Y541LcAQ==" length="75700798"
+            />
+        </item>
+        <!-- v1.0.170 -->
+        <item>
+            <title>Version 1.0.170</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Security: Rotated backend authentication keys. This update is required to reconnect to the production server.</li><li>Account Restoration: If prompted with the Welcome screen, your credentials remain safe in your macOS Keychain. Simply re-enter your username or use the Restore function.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 30 Jan 2026 11:11:37 -0500</pubDate>
+            <sparkle:version>170</sparkle:version>
+            <sparkle:shortVersionString>1.0.170</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.170.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="MfK3GtfsLULNgI3X/Dnn+Xw5lC6Wp3ShQf8MYcEWyJAWa3JldeAj3PFXbug4sLrfPj/v3bpoWY2JvOxcVh+MBg==" length="75560267"
+            />
+        </item>
+        <!-- v1.0.169 -->
+        <item>
+            <title>Version 1.0.169</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Increased participant cap for events to 5000</li><li>Hidden participant cap on event cards and lobby UI</li><li>Bypassed capacity checks for joining events by code</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 29 Jan 2026 17:18:25 -0500</pubDate>
+            <sparkle:version>169</sparkle:version>
+            <sparkle:shortVersionString>1.0.169</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.169.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="E70NrWy3LjzI3Ee72IC32bRWxqTKrYdY5QfWZO1DOCtBUbnLM7weODFJLj9nQqrEw5I/kqDV6/YsI3VhElVmDA==" length="75414596"
+            />
+        </item>
+        <!-- v1.0.168 -->
+        <item>
+            <title>Version 1.0.168</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Refined Subtitle Matching (Priority-Based Ranking)</li><li>Improved SubDL Year/Parentheses Handling</li><li>Documentation UI Improvements</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 29 Jan 2026 16:56:55 -0500</pubDate>
+            <sparkle:version>168</sparkle:version>
+            <sparkle:shortVersionString>1.0.168</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.168.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="a720naXF4Us/GCUgkWywCpiiKRdbzdCRdFKhdTHTEtWJNkogv/3GGkBzal1QoJaejcRQzQ5VpGOgy1ulJDRfDA==" length="75257455"
+            />
+        </item>
+        <!-- v1.0.167 -->
+        <item>
+            <title>Version 1.0.167</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Optimized premium payment dismissal animation</li><li>Improved account restoration reliability and speed</li><li>Fixed identity race condition during restoration</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 29 Jan 2026 14:17:09 -0500</pubDate>
+            <sparkle:version>167</sparkle:version>
+            <sparkle:shortVersionString>1.0.167</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.167.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="+mD/Su2DZt9Bu3C9uFjLXYzRKfAYhWqr/FcaUPRVi7Djyxc2JZagPeyxxXhTPxrDycg05OhQAcnJSZvWAkJbBw==" length="75209875"
+            />
+        </item>
+        <!-- v1.0.166 -->
+        <item>
+            <title>Version v1.0.166</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Hardened monetization strategy and fixed premium 'Expired' bypass</li><li>Pivoted monetization model to habit-based 24h cooldown</li><li>Refined README and install script optics</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 29 Jan 2026 03:33:56 -0500</pubDate>
+            <sparkle:version>166</sparkle:version>
+            <sparkle:shortVersionString>v1.0.166</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.166.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="2ukikqqY0g1gBEDHhojHEy6gpYkuyQ2o2rkJdct31R74DlBS31+m7CQy8KQy8vb8/JMfWrI7vtuj4A1Ey1yNAQ==" length="75376685"
+            />
+        </item>
+        <!-- v1.0.165 -->
+        <item>
+            <title>Version 1.0.165</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Cinematic UI overhaul: Re-engineered MediaDetail and QualitySelection with larger typography.</li><li>Room Capacity Limits: Added 25-user limit for Watch Parties with server-side enforcement.</li><li>Security Hardening: Time-based Premium validation and hardened expiration checks.</li><li>Seek-Shield Strategy: Debounced seek notifications to prevent chat spam.</li><li>Lobby Discovery: Added delayed scroll hint for UI discoverability.</li><li>Stability: Fixed presence flapping and stabilized logo scaling.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 29 Jan 2026 01:02:48 -0500</pubDate>
+            <sparkle:version>165</sparkle:version>
+            <sparkle:shortVersionString>1.0.165</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.165.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="fQO0rvlx8+x3xLZJ77rhaEN7rwfj/T7RT8Oq64Jp6X0Ub8rpjJKklbL3SsWy102eGTdrNlFBDClpZx5rW8N/BQ==" length="75398081"
+            />
+        </item>
+        <!-- v1.0.164 -->
+        <item>
+            <title>Version 1.0.164</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implemented Sticky Ghost Protocol for enhanced social presence reliability</li><li>Fixed delayed User Left notifications</li><li>Optimized presence heartbeat logic</li><li>Hardened MPVPlayerViewModel concurrency</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 28 Jan 2026 00:53:14 -0500</pubDate>
+            <sparkle:version>164</sparkle:version>
+            <sparkle:shortVersionString>1.0.164</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.164.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="uPwGRpmhheJrAhKEmleLkrHqsx7JEsy9CQEcoRQHmET7e0TXS1PpM/rDWO3IqNiW+qA/X4m2xdjcwOk4wTLTBw==" length="75273059"
+            />
+        </item>
+        <!-- v1.0.163 -->
+        <item>
+            <title>Version 1.0.163</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Critical fix for duplicate lobby connection messages.</li><li>Suppressed seek notification noise during public events.</li><li>Fixed notification flooding during drift correction.</li><li>Enforced strict Zero Warning Policy for all production builds.</li><li>Centered reaction and sync overlays in the player.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 27 Jan 2026 06:26:17 -0500</pubDate>
+            <sparkle:version>163</sparkle:version>
+            <sparkle:shortVersionString>1.0.163</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.163.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="mIS1ZLdaJ1W3a5vENzQKyZkN2BnlZG6qmSKq3+86jRBETFNNAX/xw3qRKN5YTKtzt4Mnl5tabqnOOopzmLR1Bw==" length="75595503"
+            />
+        </item>
+        <!-- v1.0.162 -->
+        <item>
+            <title>Version 1.0.162</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed duplicate Connected via Realtime messages in the lobby.</li><li>Suppressed host seeked notifications during public event playback.</li><li>Centered all broadcast and sync notifications in the player overlay.</li><li>Implemented debouncing for seek notifications to prevent drift-correction spam.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 27 Jan 2026 05:50:38 -0500</pubDate>
+            <sparkle:version>162</sparkle:version>
+            <sparkle:shortVersionString>1.0.162</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.162.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="USDh/vELcn9cetn9+j4QUUqNiPfVUmobEqKNDC/qASwXj+NvNRGP8OoQzxdzKbL2ILu90EQ2x5202Lv753MuCQ==" length="75583405"
+            />
+        </item>
+        <!-- v1.0.161 -->
+        <item>
+            <title>Version v1.0.161</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Resolved Zoomed UI bugs</li><li>Enhanced subtitle reliability and Year matching</li><li>Scrubbed legacy internal references and hardened security</li><li>Finalized open source plan and installer</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 27 Jan 2026 03:11:34 -0500</pubDate>
+            <sparkle:version>161</sparkle:version>
+            <sparkle:shortVersionString>v1.0.161</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.161.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="MfO7DZ2VcitdheuJERY5PGVJwe7/ShZHQ8itPZacIUk5oaW1P/iMHksOCFRXOpPg1TmDpu26SZmXWnW9KIIICA==" length="75737139"
+            />
+        </item>
+        <!-- v1.0.160 -->
+        <item>
+            <title>Version 1.0.160</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Friend History visibility using secure RPC</li><li>Smarter show deduplication via Root IMDB ID</li><li>Optimized profile performance with 20-item history capping</li><li>Full metadata sync for cloud history restoration</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 26 Jan 2026 22:57:53 -0500</pubDate>
+            <sparkle:version>160</sparkle:version>
+            <sparkle:shortVersionString>1.0.160</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.160.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ss80s4oRH3t6JnL+ZjFYs8v++q6DUS/DTvxvc7wL/0cg5YQwcLNt/AwVmputV64ORaUyAHp3oM1KosBKPpeXDQ==" length="75482642"
+            />
+        </item>
+        <!-- v1.0.159 -->
+        <item>
+            <title>Version v1.0.159</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed 'Ghost Auto-Join' Bug</li><li>Security & OpSec Hardening (Clean Public Repo)</li><li>Updated Privacy Policy (Hybrid Cloud Model)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 26 Jan 2026 18:34:03 -0500</pubDate>
+            <sparkle:version>159</sparkle:version>
+            <sparkle:shortVersionString>v1.0.159</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.159.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="gDmLoeoaENq9d1nLteBPpdiSun3SnIx1OawjIQMko7WdARcjKAdyGWqhwmGQYMfMGZgSZSrHocbJdIkN9kNmAQ==" length="74910747"
+            />
+        </item>
+
+        <!-- v1.0.158 -->
+        <item>
+            <title>Version 1.0.158</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Replaced Ethereum icon with high-quality vector image</li><li>Updated settings and payment views with new branding</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 26 Jan 2026 01:41:39 -0500</pubDate>
+            <sparkle:version>158</sparkle:version>
+            <sparkle:shortVersionString>1.0.158</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.158.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ij5IgzrFo1agKUOH6pqq0AQINKYl4XS41AzPhy99kJX9zaTVFFK2LjW8XCWqgQOPnnb6+R/oRNFCgcNDlnL7Bg==" length="75384507"
+            />
+        </item>
+        <!-- v1.0.157 -->
+        <item>
+            <title>Version 1.0.157</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Feat: Hide progress bar for TV shows in library, discover, and search views, keeping it only for movies</li><li>Docs: Updated release protocol in AI_BIBLE.md to include explicit commit/push step</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 25 Jan 2026 19:47:54 -0500</pubDate>
+            <sparkle:version>157</sparkle:version>
+            <sparkle:shortVersionString>1.0.157</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.157.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="OK9LmBpHzAdJZx+BwOSt536dwt095oA/ETE2QNmwmogcFPsCcpdzKJm5A7wktn1plWfpdjcConVdvVZb3qFqCA==" length="73725141"
+            />
+        </item>
+        <!-- v1.0.156 -->
+        <item>
+            <title>Version 1.0.156</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Fetch premium status from DB to ensure consistent display</li><li>Feat: Enable participant list in event lobbies using LazyVStack for performance</li><li>Feat: Add spacebar playback shortcut and improve watch party sync in controls</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 25 Jan 2026 19:27:32 -0500</pubDate>
+            <sparkle:version>156</sparkle:version>
+            <sparkle:shortVersionString>1.0.156</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.156.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="Da8cYx2YS1TE+qTOQASi+ZQOMWyZKF/C9JaoAPZaxzM8mG86QnuzcHdKMVbvQWZbhMhlwjxo1AMJVRhfpk+pBQ==" length="74012978"
+            />
+        </item>
+        <!-- v1.0.155 -->
+        <item>
+            <title>Version 1.0.155</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed: Actor initialization deadlocks (Task.detached migration)</li><li>Consolidated Realtime Networking: SocialService now uses shared global client</li><li>Reduced Metadata Timeout to 15s</li><li>Repaired corrupted MediaDetailView and refined Participant models</li><li>Passed all Landmine Unit Tests and Architecture Scans</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 25 Jan 2026 18:17:36 -0500</pubDate>
+            <sparkle:version>155</sparkle:version>
+            <sparkle:shortVersionString>1.0.155</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.155.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="6DWgqsG08v2EKtO319tJU/h7TTNC+oQnhYuqJt1L47t8RTiuwEUnAtkOpQFoMhwsg+dPw/DqdVWwI4sBgWiNDQ==" length="74104146"
+            />
+        </item>
+        <!-- v1.0.154 -->
+        <item>
+            <title>Version 1.0.154</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed update banner on macOS 13+</li><li>Added semantic version comparison</li><li>Improved UI animations for updates</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 25 Jan 2026 14:14:53 -0500</pubDate>
+            <sparkle:version>154</sparkle:version>
+            <sparkle:shortVersionString>1.0.154</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.154.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="I1LguHX+HnnLCvG3OJeAROpwsMZdVtWI0AKuiM3wflPgvldIQxZ4a+qFdywMFICnA7rjFoY3ltbbSz7498mBDQ==" length="73998999"
+            />
+        </item>
+        <!-- v1.0.153 -->
+        <item>
+            <title>Version 1.0.153</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implemented Subtitle Healing Loop</li><li>Increased subtitle resolution timeout to 12s for better reliability</li><li>Improved background subtitle discovery and auto-injection</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 25 Jan 2026 11:18:16 -0500</pubDate>
+            <sparkle:version>153</sparkle:version>
+            <sparkle:shortVersionString>1.0.153</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.153.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="6jJ+ZxCgE1Vo8ZFhC2qTQwYEKmRHM0VcfW4qx6UvAbvRJ8p9+EBR/2kFnM/hJaTVNUV+XVKnHl1Az+vXQDgaCQ==" length="74171606"
+            />
+        </item>
+        <!-- v1.0.152 -->
+        <item>
+            <title>Version 1.0.152</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Improved app relaunch reliability (fixed duplicate Dock icons)</li><li>Satisfiedsecurity checks in AppState</li><li>Suppressed false positive security warnings for trusted processes</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 25 Jan 2026 01:39:09 -0500</pubDate>
+            <sparkle:version>152</sparkle:version>
+            <sparkle:shortVersionString>1.0.152</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.152.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="gmfONN8Ft3U9csu8GsgH/3Cl45cPM0zw2FxRIKhBNnCgSbPt1nb1S4SNCqVcJQhwIYAcoGu45JxquF7eCmlnAA==" length="74044568"
+            />
+        </item>
+        <!-- v1.0.150 -->
+        <item>
+            <title>Version 1.0.150</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Docs: Enhanced Open Source Plan with Canary section</li><li>Docs/Security: Refine open source strategy and add leak detector</li><li>Fix: Improved reliability of app restarts after account resets and credential updates</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 25 Jan 2026 01:09:20 -0500</pubDate>
+            <sparkle:version>150</sparkle:version>
+            <sparkle:shortVersionString>1.0.150</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.150.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="fr6vSwcAl05P/gBEqoO92nYbL6w0fcjrimiEbem35I3s8J5PL4MOi7rtP/82XD74EpHRU2QtOE223sPIRfFvAg==" length="73973393"
+            />
+        </item>
+        <!-- v1.0.149 -->
+        <item>
+            <title>Version 1.0.149</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Subtitle Scoring & Sync</li><li>Improved Chat UI responsiveness (instant toggle)</li><li>Cleaned up Browse page headers</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 23:58:41 -0500</pubDate>
+            <sparkle:version>149</sparkle:version>
+            <sparkle:shortVersionString>1.0.149</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.149.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="QVpFF6anOJ67N2BCXEs6dxZuYYaMqgzY5pu8U+cr01GeN4P5Yb12t9ZOQYjF/sxt+nawySKaid3ycpxR0eZhCQ==" length="73826686"
+            />
+        </item>
+        <!-- v1.0.148 -->
+        <item>
+            <title>Version 1.0.148</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.148</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 21:45:00 -0500</pubDate>
+            <sparkle:version>148</sparkle:version>
+            <sparkle:shortVersionString>1.0.148</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.148.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="fOyBBF71KR7MWKoOrHWtd8DWheuh53i8iUoPJvACGPxuFGrjn7XQWlXkjFrhbILsyLTSPwSGzmRVvJYPDwZaAg==" length="74021266"
+            />
+        </item>
+        <!-- v1.0.147 -->
+        <item>
+            <title>Version 1.0.147</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Chat UI Regression (Restored classic look)</li><li>Cleaned up Focus logic</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 19:26:52 -0500</pubDate>
+            <sparkle:version>147</sparkle:version>
+            <sparkle:shortVersionString>1.0.147</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.147.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="xD2be/yNAta2TTDzJG4GePEe+gDabWepQaZsL8VRy08ORlspaL2JU9Ocxkwqg6HB/QjRebmziV1VetiSFyMGDA==" length="73880434"
+            />
+        </item>
+        <!-- v1.0.146 -->
+        <item>
+            <title>Version 1.0.146</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Emoji Spacing in Chat</li><li>Fixed Playlist Sync Race Condition</li><li>Fixed Update Button responsiveness on macOS 13+</li><li>Increased Browse page item limit</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 19:00:07 -0500</pubDate>
+            <sparkle:version>146</sparkle:version>
+            <sparkle:shortVersionString>1.0.146</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.146.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="DHtNJffKyamL4BzG1EMY1u9ctkC5WGD+luat+wvfX7SqmRwEATrG4VoVLvk5+HEmqZj/Wwdf+QPnfkJoMgozAw==" length="74187610"
+            />
+        </item>
+        <!-- v1.0.145 -->
+        <item>
+            <title>Version 1.0.145</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Increased catalog item limit from 15 to 18 per service for denser content display on modern screens</li><li>Improved layout consistency in Browse tab grid</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 18:52:24 -0500</pubDate>
+            <sparkle:version>145</sparkle:version>
+            <sparkle:shortVersionString>1.0.145</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.145.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="6GIiwB4neP5EcixIinRhm+sBOcwdeKvbQfwiJPgWcKtoiN9JkdXXO6BzOsXdFE0cUSu6KzB2/J7fUOnLvwhYCw==" length="73800071"
+            />
+        </item>
+        <!-- v1.0.144 -->
+        <item>
+            <title>Version 1.0.144</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed 'Check for Updates' button unresponsiveness on macOS 13+</li><li>Optimized update check routing for modern macOS safety</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 18:29:19 -0500</pubDate>
+            <sparkle:version>144</sparkle:version>
+            <sparkle:shortVersionString>1.0.144</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.144.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="Xg8d46B6cvNlyMmRtqk4oN18vDKeoE4gKxti8xSrphyotoX1d+/BGgam6/f49gUKzGzQXKMj/scHH3nMOmbMBA==" length="74118763"
+            />
+        </item>
+        <!-- v1.0.143 -->
+        <item>
+            <title>Version 1.0.143</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implemented Host Interlock to prevent playlist sync race conditions</li><li>Codified Landmines #113 and #114 into Architecture Scanner</li><li>Fixed emoji spacing issues in chat input</li><li>Optimized subtitle delivery and robust decoding</li><li>Auto-focus chat input field when joining lobby for immediate engagement</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 18:13:19 -0500</pubDate>
+            <sparkle:version>143</sparkle:version>
+            <sparkle:shortVersionString>1.0.143</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.143.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="K2xbILKL/9uE2dwQ0VX/Rh1uTlKptuUJMOuA+QahvEftLlXY8MClofMr+Ibc6I/mjunC38UIr0gK6UTvBe0jAg==" length="74009019"
+            />
+        </item>
+        <!-- v1.0.142 -->
+        <item>
+            <title>Version 1.0.142</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Parallelized external subtitle downloads for 300% faster delivery</li><li>Added reactive subtitle track scanning for instant UI updates</li><li>Improved SubDL CDN reliability with browser-like headers and 30s timeout</li><li>Fixed building of RedLemonTests/LandmineTests</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 16:37:37 -0500</pubDate>
+            <sparkle:version>142</sparkle:version>
+            <sparkle:shortVersionString>1.0.142</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.142.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="UadCPkXZgVPjYIE7Gb8C5Ua+mvTvohzUiTBh8CxkXkvGv8p83642CFze+ER2Rs1cyjs2qYWBQnCU5SZLO8fNCw==" length="74095831"
+            />
+        </item>
+        <!-- v1.0.141 -->
+        <item>
+            <title>Version 1.0.141</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>[UI] Quality Selection: Added immersive background art and high-res logos.</li><li>[UI] Quality Selection: Fixed button labels and clarified free-tier warnings.</li><li>[Doc] Bible: Added Landmines #107 and #108.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 14:20:39 -0500</pubDate>
+            <sparkle:version>141</sparkle:version>
+            <sparkle:shortVersionString>1.0.141</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.141.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="Q3PMuAjOA0R1mAUjxT9zdIUb1yFtegctKvH4mYdF0j70t87eYXxV5Fdbsy4Cr7gSMqLbKRiD0Tg5nxLgjDdZCQ==" length="74139258"
+            />
+        </item>
+        <!-- v1.0.140 -->
+        <item>
+            <title>Version 1.0.140</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>GUI: Watch Party 'Ready Gate' now explicitly shows 'Waiting for guests...' or 'Waiting for host...' instead of 'Buffering...' to provide better clarity during synchronization.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 24 Jan 2026 12:33:42 -0500</pubDate>
+            <sparkle:version>140</sparkle:version>
+            <sparkle:shortVersionString>1.0.140</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.140.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ouUN1PAN8ZDA8/sufXlCauMLK2bmauU7hgX4JxY+E5lQgk+ZI3U/4UpCslAh4Y5ZgDV7mgHaR7XTrNTSOyIMCA==" length="73419559"
+            />
+        </item>
+        <!-- v1.0.139 -->
+        <item>
+            <title>Version v1.0.139</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed flaky background art by implementing metadata inheritance (handoff logic).</li><li>Expanded background artwork visibility to persist during mid-playback buffering states.</li><li>Updated AI Bible and Architecture Scanner with(Visual Continuity Trap).</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 23:24:24 -0500</pubDate>
+            <sparkle:version>139</sparkle:version>
+            <sparkle:shortVersionString>v1.0.139</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.139.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="iaVkhG9ED+tlZ7+uGB+U/hDhK1ZkeviEyfMez0QZD3jdZd6SYgHvJWP+akviSak1/eQslBOa75KT6SlM/2YSDw==" length="73557542"
+            />
+        </item>
+        <!-- v1.0.138 -->
+        <item>
+            <title>Version v1.0.138</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed flaky background art by implementing metadata inheritance (handoff logic).</li><li>Expanded background artwork visibility to persist during mid-playback buffering states.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 23:11:02 -0500</pubDate>
+            <sparkle:version>138</sparkle:version>
+            <sparkle:shortVersionString>v1.0.138</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.138.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="qTffD+5MiLpbsv7tmEurPRsHf8NxF8z6Jj8h5b5DUvfIpQucfDN6K5VVohjXnlMx4XxIuw+VlW9jyKjMXTYnCA==" length="73444705"
+            />
+        </item>
+        <!-- v1.0.137 -->
+        <item>
+            <title>Version v1.0.137</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implemented Hydra Protocol for multi-layered stream exclusion.</li><li>Improved player UI: Fixed cursor visibility and synchronized lobby return transitions.</li><li>Resolved duplicate 'Host returned to lobby' chat notifications.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 22:42:45 -0500</pubDate>
+            <sparkle:version>137</sparkle:version>
+            <sparkle:shortVersionString>v1.0.137</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.137.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="8emjyPetLg+vp1sQUrw/jPxm913g4UjACBobK/CqauwZiQNiwvBUH5PbE1vAHgDWkCZH5625Iwk33iflE3QCAA==" length="73462789"
+            />
+        </item>
+        <!-- v1.0.136 -->
+        <item>
+            <title>Version 1.0.136</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implemented mandatory app relaunch protocol for API keys and account restoration.</li><li>Added user-facing notices for app restarts triggered by onboarding or settings changes.</li><li>Fixed spurious 'Schedule Updated' notifications on first launch or data reset.</li><li>Improved onboarding flow with immediate modal dismissal and conditional relaunch.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 18:21:01 -0500</pubDate>
+            <sparkle:version>136</sparkle:version>
+            <sparkle:shortVersionString>1.0.136</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.136.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="sicmmBWH1UzUzmfTgGiptfTTdKh7pxr6WD8G2KTl59D9YQHPiIdEyUzkTV6oEkm4kqGiNNtNodPWeBCIR0SdCg==" length="73506731"
+            />
+        </item>
+        <!-- v1.0.135 -->
+        <item>
+            <title>Version 1.0.135</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: Increase Free Tier Cooldown to 168h</li><li>fix: Player UI and Stream Retry logic</li><li>feat: 'Try Another Stream' for Watch Parties</li><li>fix: Atomic payment RPCs and RLS signature enforcement</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 16:52:23 -0500</pubDate>
+            <sparkle:version>135</sparkle:version>
+            <sparkle:shortVersionString>1.0.135</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.135.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ih1OwOmteDjDs3CFRtnQ2pVCkzMC9ujJz51t5ZKxAvd5m+4dII9OqzHvLAaz4Aqx7K+entDrb6dIH5dEqNOUDg==" length="73517920"
+            />
+        </item>
+        <!-- v1.0.131 -->
+        <item>
+            <title>Version 1.0.131</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Improved Browse Layout (2-line titles + Year)</li><li>New Vector Ethereum Icon in Settings</li><li>UI Polish & Spacing Fixes</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 01:36:30 -0500</pubDate>
+            <sparkle:version>131</sparkle:version>
+            <sparkle:shortVersionString>1.0.131</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.131.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="9Pd9TSnGX9e3gQ95ysy0d2U5CRYWLyV5jIiALKEFn2UAYpJn9AKl9MABHoPR2x+fIHRvMp5i2f0JlW2Lb2UvCg==" length="73385365"
+            />
+        </item>
+        <!-- v1.0.130 -->
+        <item>
+            <title>Version 1.0.130</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix: Improved date decoding for microsecond precision (Fixes Ghost Revocation)</li><li>chore: Hardened database premium sync and revocation logic</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 23 Jan 2026 00:27:50 -0500</pubDate>
+            <sparkle:version>130</sparkle:version>
+            <sparkle:shortVersionString>1.0.130</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.130.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="fxlgMWCUZ3U9M+7p4NBdbl6wsLo8de8aBW0VTkdXZjy1QagX+E7s5BcnvD8rO8OXH3zZToVl3Q/JD7yRifkVBw==" length="73888032"
+            />
+        </item>
+        <!-- v1.0.129 -->
+        <item>
+            <title>Version 1.0.129</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>security: Enforce Identity Signatures for RLS Compliance</li><li>fix: Refactored MediaCard for 2-line title support</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 22 Jan 2026 23:41:18 -0500</pubDate>
+            <sparkle:version>129</sparkle:version>
+            <sparkle:shortVersionString>1.0.129</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.129.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="fSuPAFymQvXrvyXlVhLYBwN6Jk0esrajRV47IlsHr7WsCXkucU4+EJFSfwL+XhhhqKIH+5CJbuudyKMIIwEECw==" length="73582065"
+            />
+        </item>
+        <!-- v1.0.128 -->
+        <item>
+            <title>Version 1.0.128</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed RLS violation for room participants</li><li>Enforced cryptographic signing for guest connections</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 22 Jan 2026 22:18:23 -0500</pubDate>
+            <sparkle:version>128</sparkle:version>
+            <sparkle:shortVersionString>1.0.128</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.128.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="3l8U835Pa+avOIERA+VxyLY2+OlcBgekxuRIT56tCEeLV3c7e7B++Mz+XB5E8vQQKvonIMbbMCLTuWUNS1UMCA==" length="73598677"
+            />
+        </item>
+        <!-- v1.0.127 -->
+        <item>
+            <title>Version 1.0.127</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Implement Watch Party Room Privacy Toggle (Host-only)</li><li>Added Privacy Lock/Unlock button in Lobby</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 22 Jan 2026 21:40:13 -0500</pubDate>
+            <sparkle:version>127</sparkle:version>
+            <sparkle:shortVersionString>1.0.127</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.127.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="zBbINIWwEqm9SGoPiWxZTO1gTGYpkUze3JtDa4zV4CD+LcYaCkprORXDtiLp52OlKu9piBiJBfp7peh8KV6sBg==" length="73519932"
+            />
+        </item>
+        <!-- v1.0.126 -->
+        <item>
+            <title>Version 1.0.126</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Navigation: Guests are now correctly redirected to the Rooms list instead of Browse when exiting a Watch Party.</li><li>Presence: Improved stability for room participants using UPSERT operations and robust transition tracking.</li><li>Admin Dashboard: Added real-time monitoring of active Watch Party rooms to the dashboard.</li><li>Realtime: Hardened connection handling by decoupling from init cycles and using consistent user identities.</li><li>Stability: Extended grace periods for event heartbeats and DB polling.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 22 Jan 2026 17:29:07 -0500</pubDate>
+            <sparkle:version>126</sparkle:version>
+            <sparkle:shortVersionString>1.0.126</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.126.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="oJzEfKlWfT1dQT3x5r2zLORQml0CeozywRKuT5dZV6c++GPwdRMrXYmGb9BHMjvhJBw/T+dHro5C1EPtAXNpDw==" length="73734835"
+            />
+        </item>
+        <!-- v1.0.125 -->
+        <item>
+            <title>Version 1.0.125</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Event Countdown hidden on Auto-Join</li><li>Fix: State Handoff Trap - Participants missing in Player</li><li>Fix: Guest/Host Stream Mismatch for DebridSearch</li><li>Feat: Gradient User Avatars with geometric patterns</li><li>Perf: Browse page performance optimizations</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 21 Jan 2026 19:52:01 -0500</pubDate>
+            <sparkle:version>125</sparkle:version>
+            <sparkle:shortVersionString>1.0.125</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.125.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="stLVWk+ZGYKtrDx90pJkOoyPmwczTr4pWQpzNoPg0tjxXXaPh29oiTig4fuMN/aw/IXFloko7m4sj3EnjGMYAw==" length="73770568"
+            />
+        </item>
+        <!-- v1.0.124 -->
+        <item>
+            <title>Version 1.0.124</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Watch Party Sync & Playback Flow</li><li>Resolved Supabase Realtime RLS errors (Authorization headers)</li><li>Fixed Guest navigation back to Lobby after playback ends</li><li>Prevented Guest auto-start loop in Watch Parties</li><li>Resolved several compiler warnings and stability issues</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 19 Jan 2026 23:15:52 -0500</pubDate>
+            <sparkle:version>124</sparkle:version>
+            <sparkle:shortVersionString>1.0.124</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.124.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="d+yuX2ZJZ87uihjDq8HPgJc3bjZcsaRmAXgiTh+PSmF6sAKaDp1cCiS2iwVUe7p6LVuM1l6pKrhGU0QAVdMCBw==" length="73597286"
+            />
+        </item>
+        <!-- v1.0.123 -->
+        <item>
+            <title>Version 1.0.123</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Admin Notification Badges (Instant responsiveness via broadcast)</li><li>Refactored Admin Realtime Service for improved reliability</li><li>Added event-specific filtering to Realtime Client</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 18 Jan 2026 23:03:55 -0500</pubDate>
+            <sparkle:version>123</sparkle:version>
+            <sparkle:shortVersionString>1.0.123</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.123.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="hhu8CQTqeOJHl6+RQcUbXgNUBxW5FysDDN86EC4DKykw25VtQfRc9HDY/+GhPQ/DuNazMUyZnnBy/PFEHSM9Bg==" length="73515197"
+            />
+        </item>
+        <!-- v1.0.122 -->
+        <item>
+            <title>Version 1.0.122</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Added participant list to chat overlay header</li><li>Click person icon to view room/event participants</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 18 Jan 2026 18:13:16 -0500</pubDate>
+            <sparkle:version>122</sparkle:version>
+            <sparkle:shortVersionString>1.0.122</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.122.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="Zbc6LIOOMsJBShQhCRWuuS/voSZGBZ7N38LhUx9bNlKr1NmzhxgRANRzj7XIUOjN4HN2KX01KDWQGDfQP6ITDQ==" length="73505570"
+            />
+        </item>
+        <!-- v1.0.121 -->
+        <item>
+            <title>Version v1.0.121</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix: remove host startup delay in watch party (resolves jump-ahead sync issue)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 18 Jan 2026 14:28:14 -0500</pubDate>
+            <sparkle:version>121</sparkle:version>
+            <sparkle:shortVersionString>v1.0.121</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.121.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="+2KBV3vqpMyCuAdOf5K2pDcfoYiYPF/bepMbLV1NdT8hAW9wQ3BxHUgK4hZ+A/Fo7qg5IeaSiynA0WsOVEd9Cw==" length="72919790"
+            />
+        </item>
+        <!-- v1.0.120 -->
+        <item>
+            <title>Version 1.0.120</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Moved Join with Code button to top</li><li>Fixed participant count polling</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 18 Jan 2026 01:13:29 -0500</pubDate>
+            <sparkle:version>120</sparkle:version>
+            <sparkle:shortVersionString>1.0.120</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.120.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="MYzTZsnu735xIwpkNA01HQFg66Ucu4BKubhrRP2rMh2S0OkNjz/T4vGDOdWRiYkKLzepbFh0AV5hJ7j6S22PBQ==" length="73038477"
+            />
+        </item>
+        <!-- v1.0.119 -->
+        <item>
+            <title>Version v1.0.119</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: Robust click handling to prevent accidental double-clicks.</li><li>UI: Polished waiting gates and exit transitions.</li><li>Performance: Optimized exit animations and stabilization logic.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sat, 17 Jan 2026 01:36:47 -0500</pubDate>
+            <sparkle:version>119</sparkle:version>
+            <sparkle:shortVersionString>v1.0.119</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.119.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="6cknyXQPW54whQAoDuD7kNQ4LRMhYrSbGWvKXEqDBdvjC4jc8R3XZvQgGFhZ1efbXr2Qp8zZtAryenahnxvpBg==" length="73045314"
+            />
+        </item>
+        <!-- v1.0.118 -->
+        <item>
+            <title>Version 1.0.118</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed 75+ Font Weight Crashes</li><li>Added Sleep Assertion Safety</li><li>Implemented Automated Regression Prevention System</li><li>Enforced Strict Concurrency on Update & Text Services</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 22:07:15 -0500</pubDate>
+            <sparkle:version>118</sparkle:version>
+            <sparkle:shortVersionString>1.0.118</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.118.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="LUZIcWH2bZQuWbdy5ZTZS7qr5UFA9FfYbHRRr7GC7UDNWz+BO5ytfVTq8NRESBB5+C5mPZzD2b67OoFBYNy4AQ==" length="73316766"
+            />
+        </item>
+        <!-- v1.0.117 -->
+        <item>
+            <title>Version 1.0.117</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Refactored Realtime Client for generic channel support</li><li>Fixed 'Not Connected' state when returning to Lobby</li><li>Fixed 'Duplicate Key' errors on room re-entry</li><li>Improved Watch Party connection stability</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 20:51:44 -0500</pubDate>
+            <sparkle:version>117</sparkle:version>
+            <sparkle:shortVersionString>1.0.117</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.117.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="shp1QZYBplCN4gGmPuAcNKbIij3drY0wf37jM6C8BpO+uX+/fLpZQi7s6bxmpUSRRANftlYX17aB5uAiOadXBQ==" length="73339552"
+            />
+        </item>
+        <!-- v1.0.116 -->
+        <item>
+            <title>Version 1.0.116</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Optimized WebSocket connection logic to prevent double-connection attempts.</li><li>Fix: Resolved a race condition that caused creating or joining a lobby to display duplicate 'User Joined' messages.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 18:32:57 -0500</pubDate>
+            <sparkle:version>116</sparkle:version>
+            <sparkle:shortVersionString>1.0.116</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.116.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="67jMuG22pOrG8aspVT9JG3btZc/kMAmNVFc4Ei8scJFE7WmpltdPQd8VRNGBO7a8qYQl5OZU6MAKZliVr6D2BQ==" length="73336605"
+            />
+        </item>
+        <!-- v1.0.115 -->
+        <item>
+            <title>Version 1.0.115</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Resolved a race condition that caused creating or joining a lobby to display duplicate 'User Joined' messages.</li><li>Fix: Optimized WebSocket connection logic to prevent double-connection attempts.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 18:27:21 -0500</pubDate>
+            <sparkle:version>115</sparkle:version>
+            <sparkle:shortVersionString>1.0.115</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.115.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="68ULmZkGpye3DJ7FL3xdUoULTHduaip64Lo0se6GDNr9L/3oJUFb2cPp0BVPEbuDv73GWuGJuvJh7tA7ugf5Cw==" length="73357753"
+            />
+        </item>
+        <!-- v1.0.114 -->
+        <item>
+            <title>Version 1.0.114</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat(player): Implement chat tab persistence (restores active tab/DM on toggle)</li><li>fix(build): Fix visibility build error</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 16:08:03 -0500</pubDate>
+            <sparkle:version>114</sparkle:version>
+            <sparkle:shortVersionString>1.0.114</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.114.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="XbEuw5VzZi4GP/uiAPyF7VDSfSFWMJ8NkULtQOmpmLhrs8A+n1f5JFphnXs27TqGNhpIOJo1H12Rfzn1hEGhBQ==" length="73516259"
+            />
+        </item>
+        <!-- v1.0.113 -->
+        <item>
+            <title>Version 1.0.113</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix(performance): optimize user join lag with presence buffering and UI struct extraction</li><li>docs: verify cleanliness via architecture scanner</li><li>fix: replace native context menu with custom overlay to eliminate stutter</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 05:27:03 -0500</pubDate>
+            <sparkle:version>113</sparkle:version>
+            <sparkle:shortVersionString>1.0.113</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.113.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="JgrV22okxMkffpTeiSbx60zKVdJH4m3Mq4bjNK72HlXMcAWhv5rRx3gGtTr7N7rlU44OBDzlp1vuSFd7Ex77Aw==" length="73353116"
+            />
+        </item>
+        <!-- v1.0.112 -->
+        <item>
+            <title>Version 1.0.112</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <ul><li>Fix: Replace native context menu with custom overlay to eliminate video stutter/frame drops (Main Thread Block).</li></ul>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 04:32:20 -0500</pubDate>
+            <sparkle:version>112</sparkle:version>
+            <sparkle:shortVersionString>1.0.112</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.112.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="/vRqtr2QhXnGvfQYjDhzTtMjYYQcDiIz9RdMORUqEc5VVUmeSmgcF3mg4GvT13MRZAzsabcxntNsnksoG89ZCg==" length="72972513"
+            />
+        </item>
+        <!-- v1.0.111 -->
+        <item>
+            <title>Version 1.0.111</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Feat: Local Library feature - save movies and shows locally</li><li>Feat: Watch Party Integration - hosts can pick from Library</li><li>Fix: Library navigation back button behavior</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 03:49:13 -0500</pubDate>
+            <sparkle:version>111</sparkle:version>
+            <sparkle:shortVersionString>1.0.111</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.111.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="taKfBZX84r+czLr0K07hIiL05c7vCWS84TG7pvnbOBTq5czQJYFema0lnnKUCzbu5hVLWTJHoMjzMF7B7Zm3AQ==" length="72820256"
+            />
+        </item>
+        <!-- v1.0.110 -->
+        <item>
+            <title>Version 1.0.110</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Prevent display sleep/screensaver during playback</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 02:49:20 -0500</pubDate>
+            <sparkle:version>110</sparkle:version>
+            <sparkle:shortVersionString>1.0.110</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.110.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="+BKi0HRHuFovc5nPfe2NDCitT3zh+QikYrp124WNwpJhsj+/mzWYOdfryITonPyeT/9dAO9EeigNp7ZZjAviDw==" length="72985816"
+            />
+        </item>
+        <!-- v1.0.109 -->
+        <item>
+            <title>Version 1.0.109</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: show premium hosting remaining days in Admin user list</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 02:22:32 -0500</pubDate>
+            <sparkle:version>109</sparkle:version>
+            <sparkle:shortVersionString>1.0.109</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.109.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="qh0/Y2jW0u0nPrl0MTs+tPy2K1WVo+uztrDJtZXwKrWZlvJgmQtV5eb11fTMoxJ6NRaPcRvMXzej/osRB3RCDg==" length="72790104"
+            />
+        </item>
+        <!-- v1.0.108 -->
+        <item>
+            <title>Version 1.0.108</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix(payments): Corrected HD wallet derivation path depth.</li><li>fix(payments): Implemented per-address reconciliation to prevent legacy balance interference.</li><li>feat(payments): Added new_payment flag to server and enhanced UI confirmation logic.</li><li>feat(payments): Added EIP-681 compatible URIs for better wallet app support.</li><li>fix(build): Resolved build failure in LicenseManager.swift due to changed return signature.</li><li>docs: Updated AI Bible with new Payment & HD Wallet safety mandates.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 16 Jan 2026 00:48:48 -0500</pubDate>
+            <sparkle:version>108</sparkle:version>
+            <sparkle:shortVersionString>1.0.108</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.108.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="7H2da6fCUj0yzMjF3D8IxaJ3klQwNAb1WYGOyqYDLNnAGSEmd2tQ/4TXAeBFf4XtayynENXWYB+ygSQqNRMJBA==" length="72674796"
+            />
+        </item>
+        <!-- v1.0.107 -->
+        <item>
+            <title>Version 1.0.107</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.107</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 23:11:53 -0500</pubDate>
+            <sparkle:version>107</sparkle:version>
+            <sparkle:shortVersionString>1.0.107</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.107.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="He664L2BjaDpIYJhLXL8yPcSBsd4u9nIwBQEodIIOjTQ7wmmLNjsbQxzI00YFf7s2sMiB4HShVTwwoNSaP4PDQ==" length="72875509"
+            />
+        </item>
+        <!-- v1.0.105 -->
+        <item>
+            <title>Version 1.0.105</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    - Fix: Resolve 'User Left' regression by preventing Phoenix Ref Collision.
+- Fix: Use stable 'phx_ref' for presence tracking to stop offline flickering.
+- Internal: Add architecture scan to prevent future presence regressions.
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 16:21:04 -0500</pubDate>
+            <sparkle:version>105</sparkle:version>
+            <sparkle:shortVersionString>1.0.105</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.105.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="pcrLOtyLtcgWRKy+SO91lIsrVPueFGqcIqNn6Og99XEgdi1GZYIjY0/WX+s/mQHep7CXo118t/F5Hz+Ey2FlCg==" length="72817692"
+            />
+        </item>
+        <!-- v1.0.104 -->
+        <item>
+            <title>Version 1.0.104</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <ul><li>Fix: Resolve critical room creation timeout (Race Condition) detected by users</li><li>UI: Add air dates & 'Unreleased' badge to episodes</li><li>UI: Hide unavailable providers (Discovery+) in Movies tab</li><li>Perf: Fix scroll sluggishness & architecture warnings</li><li>Feat: Persist Browse page content & scroll position</li></ul>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 15:12:41 -0500</pubDate>
+            <sparkle:version>104</sparkle:version>
+            <sparkle:shortVersionString>1.0.104</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.104.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="6pCeHM5MT6vJ7kEk9DJScAXEhNmg6qA8P7R6b/KAW6D/zFKA5JtRtX04TDgm6cOrF0KmjdzJdQYFlwyg9VThBQ==" length="72901094"
+            />
+        </item>
+        <!-- v1.0.103 -->
+        <item>
+            <title>Version 1.0.103</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    # Release v1.0.103
+
+## 🛡️ Architecture & Stability
+- **Fixed Async Scroll Race Conditions**: Resolved potential race conditions where auto-scroll commands could fire before content loaded, leading to erratic scroll behavior.
+    - Guarded `scrollTo` calls in `ChatView` and `WatchPartyLobbyView`.
+    - Validated `FriendProfileView` and `ChatOverlayView` safety.
+- **Scanner Upgrade**: Updated `scripts/architecture-scan.sh` to automatically detect unguarded `proxy.scrollTo` usages (Check).
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 07:21:08 -0500</pubDate>
+            <sparkle:version>103</sparkle:version>
+            <sparkle:shortVersionString>1.0.103</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.103.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="CBBZk6KdYzDqro1w3Wtf7gzAPBVJuslmpooRnu53CLVn0T6uLZijS3MVP8fWwCV/x/uNTJf6uSoueUBXFQVNCg==" length="73315066"
+            />
+        </item>
+        <!-- v1.0.101 -->
+        <item>
+            <title>Version v1.0.101</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix browse scroll restoration and optimize performance</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 07:00:55 -0500</pubDate>
+            <sparkle:version>101</sparkle:version>
+            <sparkle:shortVersionString>v1.0.101</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.101.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="wgiRWiHUaRHTGhJpFEHSMRyw53wlDckEzx9Jc/RbRRX+CHBB2/gM08yOQ/JlSrRD3v8X99fshPzQ7Z6hEU0dDA==" length="72988909"
+            />
+        </item>
+        <!-- v1.0.100 -->
+        <item>
+            <title>Version 1.0.100</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Guest watch party now enters fullscreen immediately (matching host experience)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 05:07:54 -0500</pubDate>
+            <sparkle:version>100</sparkle:version>
+            <sparkle:shortVersionString>1.0.100</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.100.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="DnkCsHL8jvsbhblf1WrHvt3QtHTDyMcI9R6HbF+J5SgGZt4cJsOZSG+FENApT+1UWQQ4XTKJO+EodB2rKKX4Dg==" length="72511985"
+            />
+        </item>
+        <!-- v1.0.99 -->
+        <item>
+            <title>Version 1.0.99</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Synchronized Realtime Presence handling to use stable Phoenix map keys. Fixed ghost participants and missing leave messages.</li><li>Fix: Resolved Ghost Participant issue by filtering stale DB heartbeats when Realtime is active</li><li>Security: Resolved critical security warnings and enhanced suppression support in scanner</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 02:51:04 -0500</pubDate>
+            <sparkle:version>99</sparkle:version>
+            <sparkle:shortVersionString>1.0.99</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.99.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="SRlYrb4Zt335jSFcMvzjrPr51ewQVFXfPnwSRGthxqNejAXob7oce1xTIeO2ARJQHDON9X240lCW4ZGID0SUBQ==" length="73057276"
+            />
+        </item>
+        <!-- v1.0.98 -->
+        <item>
+            <title>Version 1.0.98</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Lobby ghost participants and duplicate entries (Ursinho bug)</li><li>Refactor: Critical Fixes for(ID) and #43 (Async)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 01:38:45 -0500</pubDate>
+            <sparkle:version>98</sparkle:version>
+            <sparkle:shortVersionString>1.0.98</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.98.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="KAQLTM/cvpjSSc626EGGsOKdzbogd0iGFEgpvbV3Cvp7KOPY/wDw9ud8vFRIEcmP3vLa1CRS49CrSGYpSz+uBg==" length="72664817"
+            />
+        </item>
+        <!-- v1.0.97 -->
+        <item>
+            <title>Version 1.0.97</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed 119 Unsafe NSLog violations</li><li>Fixed Guest Subtitles Regression</li><li>Added Architecture Scanner to prevent regressions</li><li>Security Hardening</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 15 Jan 2026 00:12:03 -0500</pubDate>
+            <sparkle:version>97</sparkle:version>
+            <sparkle:shortVersionString>1.0.97</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.97.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="wacWpFPBqXPpVDvocTaugD0diSAt9JgnJJdk2e/FOI30i6MRyJVyc2/26QLw2GXhAekGMRUeq3CxrUUUH5YCBw==" length="72777322"
+            />
+        </item>
+        <!-- v1.0.96 -->
+        <item>
+            <title>Version 1.0.96</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li><b>Security:</b> Added comprehensive vulnerability scanner and hardened API safety.</li><li><b>Security:</b> Improved temporary file cleanup for subtitles.</li><li><b>Protocol:</b> Updated release process to include mandatory security checks.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 21:43:36 -0500</pubDate>
+            <sparkle:version>96</sparkle:version>
+            <sparkle:shortVersionString>1.0.96</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.96.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ZfY6lFo6ujYnRZQk3lWUOpj+geh+rEAEDcVB4oYuKiW6jqa/RxUACDbIqiAwb2CMzJsuc8+ZWK0KgVrCjU9gCA==" length="72681093"
+            />
+        </item>
+        <!-- v1.0.95 -->
+        <item>
+            <title>Version 1.0.95</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li><strong>Performance:</strong> Smoother scrolling on Browse page for all macOS versions.</li><li><strong>Note:</strong> macOS 26 scroll fix from v1.0.94 is preserved.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 21:10:27 -0500</pubDate>
+            <sparkle:version>95</sparkle:version>
+            <sparkle:shortVersionString>1.0.95</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.95.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ddN52tl3tJKi9UMRYpyZqKwfSOiqdvKBOrqBAW+CLYPR6RCJCO+S6jIpa8z+NT/CDBeq5ctF5uSm8NPZXq7fCw==" length="72527480"
+            />
+        </item>
+        <!-- v1.0.94 -->
+        <item>
+            <title>Version 1.0.94</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li><strong>Fix (macOS 26):</strong> Fixed Browse page vertical scrolling using custom NSScrollView that properly forwards scroll events.</li><li><strong>Fix (Live Events):</strong> Eliminated lag spike when users join events.</li><li><strong>Fix:</strong> Resolved merge conflicts with VersionAwareHorizontalScrollView.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 20:33:34 -0500</pubDate>
+            <sparkle:version>94</sparkle:version>
+            <sparkle:shortVersionString>1.0.94</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.94.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="2OYmuY3ssOUZAvvbOY/oyu0qy4plp19VTWwmLRSM/G06np1qYSGnrD8BIM2BTirb7J5ybAhqdIAk8Zn1rq20BQ==" length="72497593"
+            />
+        </item>
+        <!-- v1.0.93 -->
+        <item>
+            <title>Version 1.0.93</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: restore horizontal scrolling for macOS 26 (Option C)</li><li>fix: prevent clipping of poster art in browse rows</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 19:51:07 -0500</pubDate>
+            <sparkle:version>93</sparkle:version>
+            <sparkle:shortVersionString>1.0.93</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.93.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="9wb4+/Hh1Gr7177NeWw4MapbZrpEEfXj78+P4Ydf33pT7nDOr5OLBZLl53dpT7k7GyjumzSyPTLZWtSqd/FmBQ==" length="72352075"
+            />
+        </item>
+        <!-- v1.0.92 -->
+        <item>
+            <title>Version 1.0.92</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: convert browse to grid layout (max 14 items) for macos 26 compatibility</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 19:36:32 -0500</pubDate>
+            <sparkle:version>92</sparkle:version>
+            <sparkle:shortVersionString>1.0.92</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.92.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="I5UVwF/pZsHBNkTLDqzOjexQs5Kj2K3ALo2LlFhVUFbATbnYqyC3iQR2+5dOdXY/v/+cWeSo9/3miPthzzS/Dg==" length="72587342"
+            />
+        </item>
+        <!-- v1.0.91 -->
+        <item>
+            <title>Version 1.0.91</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>debug: add scroll event logging for macOS 26 diagnosis</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 18:47:16 -0500</pubDate>
+            <sparkle:version>91</sparkle:version>
+            <sparkle:shortVersionString>1.0.91</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.91.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="9r0x/b2PoHz3B7sgrfmaVWLO0DEPcrffU7szVaTlGJl6P5KaP7ijmLOANGoXPjzHQSA8P1ofxjB6Wdt/E9BKAg==" length="72805590"
+            />
+        </item>
+        <!-- v1.0.89 -->
+        <item>
+            <title>Version 1.0.89</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Scroll compatibility for macOS 15+</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 18:25:39 -0500</pubDate>
+            <sparkle:version>89</sparkle:version>
+            <sparkle:shortVersionString>1.0.89</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.89.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="MvRHhCrL2QyiF0r16BEUSp+P/6C2fT3555D4U7KQXlsT8q22zI7GyxWcsx3741rPXaZzkjQk5si5ivf9+fUvDQ==" length="72817033"
+            />
+        </item>
+        <!-- v1.0.88 -->
+        <item>
+            <title>Version 1.0.88</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Guest immediate playback for Watch Parties (Direct Unlock optimization) - saves 8-10s</li><li>Fix: Prevent IP-Lock errors by forcing fresh Real-Debrid links for guests</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 17:53:19 -0500</pubDate>
+            <sparkle:version>88</sparkle:version>
+            <sparkle:shortVersionString>1.0.88</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.88.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="d1vhxYe8iWTq8cfvoEEvmmzxxud7nZZd9NnMNY25lD1qLVJixHcQDGn9ZtScTFD3Ln6S2Z/gVxEwkY/ziQrXAg==" length="72429260"
+            />
+        </item>
+        <!-- v1.0.87 -->
+        <item>
+            <title>Version 1.0.87</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>chore: add application log file (2026-01-14 16:16)</li><li>fix: update MPVWrapper and add crash report documentation</li><li>chore: update lobby event router</li><li>chore: add application log file (2026-01-14 15:43)</li><li>chore: update lobby event router and view model</li><li>chore: Update installer checksum</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 16:52:39 -0500</pubDate>
+            <sparkle:version>87</sparkle:version>
+            <sparkle:shortVersionString>1.0.87</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.87.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="EIdmqx4tgjHSV3xoI8YrPQMOXb7hmwCh5XQIwZBeMBOIXeZsG7zBfsQKHn6FxkZIfAYxMiSqcR8SNz9xVCwxCQ==" length="72727904"
+            />
+        </item>
+        <!-- v1.0.86 -->
+        <item>
+            <title>Version 1.0.86</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: Admin Block & Reset (Backend Sync)</li><li>perf: Admin Dashboard List Refactor (Compiler Fix)</li><li>docs: Updated AI Bible</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 15:23:13 -0500</pubDate>
+            <sparkle:version>86</sparkle:version>
+            <sparkle:shortVersionString>1.0.86</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.86.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="VUNheFPGWHsoh1YstkLcx1716eqIsWbnOhLFYYu36xoTWxxDgcfApWXWgBcYs2ktlSaoNRLzTV1PFdEoDNv4Bg==" length="72532952"
+            />
+        </item>
+        <!-- v1.0.85 -->
+        <item>
+            <title>Version 1.0.85</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed critical playback issue where specific files (e.g. some Web-DLs with embedded fonts) would fail and fallback to lower quality streams in the Release app.</li><li>Optimized MPV configuration to ensure correct font and cache permissions in sandboxed environments.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 05:14:11 -0500</pubDate>
+            <sparkle:version>85</sparkle:version>
+            <sparkle:shortVersionString>1.0.85</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.85.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="kJ3bl/PZf3h/G5lT3et2/27Av/nj8TR98hUWPFPMglS/PuGzlmse/oovhiSIZ8m4hez7jXrK2jHNmwnvyFhlBg==" length="72789974"
+            />
+        </item>
+        <!-- v1.0.84 -->
+        <item>
+            <title>Version 1.0.84</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix(Comet): Block invalid error URLs (Landmine 46) & unblock trusted streams</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 04:21:18 -0500</pubDate>
+            <sparkle:version>84</sparkle:version>
+            <sparkle:shortVersionString>1.0.84</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.84.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="yrTBqZO2zP6VVoAAFq9m3zwpy26NlHNSJ0+dK9oXYLQN8BoqGLheYcX7gUjWieEqMfxqG9GDXJMRe7YvYBPxAw==" length="72931437"
+            />
+        </item>
+        <!-- v1.0.83 -->
+        <item>
+            <title>Version 1.0.83</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix(rd): prioritize provider fileIdx for unlocking to fix uncached season packs</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 03:58:17 -0500</pubDate>
+            <sparkle:version>83</sparkle:version>
+            <sparkle:shortVersionString>1.0.83</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.83.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="5v2Wib7mh9gM7cv8dmglBV9CyBYiDPzTQ/9lC/CE6SyLlGcdgXQ0Fa0ajzrNI42cii1vhU3xh2MXdX92PouWBQ==" length="72817902"
+            />
+        </item>
+        <!-- v1.0.82 -->
+        <item>
+            <title>Version 1.0.82</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix: Guest watch party EOF - Clear RealDebridClient cache for guests</li><li>docs: Updatewith RD cache root cause</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 02:53:03 -0500</pubDate>
+            <sparkle:version>82</sparkle:version>
+            <sparkle:shortVersionString>1.0.82</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.82.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="9q0xQoUE/tTfFwNoVFkRy+YY4vGPl59iGWYO7XpWgVZTG/OXoxqSq5D2DjdtYumzuA/C7AZHMn3ZjD9weF0CAA==" length="72986273"
+            />
+        </item>
+        <!-- v1.0.81 -->
+        <item>
+            <title>Version 1.0.81</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li><strong>Fix (macOS 26):</strong> Fixed Browse page vertical scrolling issues on newer macOS versions.</li><li><strong>Fix (Watch Party):</strong> Resolved guest playback EOF error by enforcing unique stream resolution.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 01:45:14 -0500</pubDate>
+            <sparkle:version>81</sparkle:version>
+            <sparkle:shortVersionString>1.0.81</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.81.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="atBQTnWHiRkQ02GVujtwnc+SNhbDfdBMMs9i3Z8THTdquPz2gWOxOGviY0iVR16JJ4xDOS+Gk0awUhC13NmnBw==" length="72896927"
+            />
+        </item>
+        <!-- v1.0.80 -->
+        <item>
+            <title>Version 1.0.80</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>docs: update AI_BIBLE with latest landmines and patterns</li>
+<li>chore: update view models for lobby and player features</li>
+<li>chore: update lobby feature components</li>
+<li>chore: update StreamService</li>
+<li>fix: restore vertical scrolling on Browse page for macOS 13+</li>
+<li>fix: move onAppear inside ScrollViewReader scope</li>
+                </ul>
+            ]]></description>
+            <pubDate>Wed, 14 Jan 2026 01:30:38 -0500</pubDate>
+            <sparkle:version>80</sparkle:version>
+            <sparkle:shortVersionString>1.0.80</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.80.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="TCjzeC6xqQKNXhSCNUmMk/Zc6tM+SmbdRiFbQGoe0RmjMliFmvdRq3fm2JVNz14uVvtCtnxbGUu3ZLiXobH7AQ==" length="72955089"
+            />
+        </item>
+        <!-- v1.0.79 -->
+        <item>
+            <title>Version 1.0.79</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix: restore vertical scrolling on Browse page for macOS 13+</li><li>fix: add filename-based blocking for hashless streams</li><li>fix: use currentStreamHash when saving watch history</li><li>fix: lowercase provider hash before blocked stream check</li><li>fix: lowercase blocked stream hashes for comparison</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 23:12:15 -0500</pubDate>
+            <sparkle:version>79</sparkle:version>
+            <sparkle:shortVersionString>1.0.79</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.79.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="KdBXS54TGfgkLJaItPIC+ZmciNUjB3MkDWo3mHvsq7KDB2vmZUAwdRtS2cERtt/WDqPvt1AdG5KIVRJF8DvwBQ==" length="72840629"
+            />
+        </item>
+        <!-- v1.0.78 -->
+        <item>
+            <title>Version 1.0.78</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix: add filename-based blocking for hashless streams</li>
+<li>fix: use currentStreamHash when saving watch history</li>
+<li>fix: lowercase provider hash before blocked stream check</li>
+<li>fix: lowercase blocked stream hashes for comparison</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 22:12:59 -0500</pubDate>
+            <sparkle:version>78</sparkle:version>
+            <sparkle:shortVersionString>1.0.78</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.78.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="z9maaKN05KUTWFS1Hh9NTqtQIBZPa1d7XP5v9qPBvOfvzC057/FwhS1a9blUKlzMSVB6iQTIGbWd7S9lyLPUDA==" length="72868524"
+            />
+        </item>
+        <!-- v1.0.77 -->
+        <item>
+            <title>Version 1.0.77</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>chore: update MPV player view model</li>
+<li>chore: add application log file</li>
+<li>fix: use host's unlocked URL when stream hash is unavailable</li>
+<li>refactor: move watch party ready gate reset to sync initialization</li>
+<li>fix: reset watch party ready gate state between stream sessions</li>
+<li>fix: free render context before destroying MPV handle to prevent crash</li>
+<li>fix: prevent event guests from being kicked to lobby during host transitions</li>
+<li>fix: add explicit MPV instance destruction to prevent resource leaks</li>
+<li>fix: clear ghost streams on host exit to prevent guests from loading stale content</li>
+<li>feat: optimize guest handshake with hash payload transmission</li>
+<li>feat: add stream preloading and guest handshake for watch party</li>
+<li>fix: disable host URL reuse for watch party guests (RealDebrid IP locking)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 20:53:34 -0500</pubDate>
+            <sparkle:version>77</sparkle:version>
+            <sparkle:shortVersionString>1.0.77</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.77.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="6KvGRd/pi6zA42GrymB2K1vha0UNGQRZWq6XDN5/u1wbhgV/1cxfywcpeglwadxnoszmCkQTQJn+JQRG02K5AA==" length="72839537"
+            />
+        </item>
+        <!-- v1.0.76 -->
+        <item>
+            <title>Version 1.0.76</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fixed Anime Streaming (Kitsu IDs)</li><li>Fixed Playback Stutter (Subtitle Buffering)</li><li>Added defensive guards against regression</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 16:10:42 -0500</pubDate>
+            <sparkle:version>76</sparkle:version>
+            <sparkle:shortVersionString>1.0.76</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.76.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="YaY37R4WE6I499bUDna7PvkiSP4o1Fel7TZQc9M7r+O6PuUBnGlHzNu6clgL52UouduKwBu9eHfpYEMjGXUGDg==" length="72883327"
+            />
+        </item>
+        <!-- v1.0.75 -->
+        <item>
+            <title>Version 1.0.75</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Security: Fix 'Blocked User' persistence bug & harden blocking logic.</li><li>Security: Enforce cryptographic signatures on all sensitive API calls.</li><li>Video Player: Fix playback for files with spaces/special characters.</li><li>Performance: Improve Friends List rendering.</li><li>Stability: Fix 'Ghost Stream' issues and enforce strict concurrency checks.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 14:04:14 -0500</pubDate>
+            <sparkle:version>75</sparkle:version>
+            <sparkle:shortVersionString>1.0.75</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.75.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="ttNZO5S77tuwBq3HBoIZ/GdrtF90qYzpsvIw4DdntB/vZcsXyOWnBPCjboWbixWXNi/hAWmWSf8uuu2pNxbOBA==" length="72881178"
+            />
+        </item>
+        <!-- v1.0.74 -->
+        <item>
+            <title>Version 1.0.74</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>feat: Smart Crash Reporting & Admin Log Fixes</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 02:47:25 -0500</pubDate>
+            <sparkle:version>74</sparkle:version>
+            <sparkle:shortVersionString>1.0.74</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.74.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="6/X2T3f+puaX5phOvuOECQDYC5i8n4FxSwpdvryDcQBGjOoWz1/4bUCkBi94KVD+uBAPUyeL5gbRoh00BRuiDw==" length="72189370"
+            />
+        </item>
+        <!-- v1.0.73 -->
+        <item>
+            <title>Version 1.0.73</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Fix: Watch Party ready gate now reliably shows 'Waiting for guests' for hosts</li><li>Fix: Broadcast announcements position correctly when chat panel is open</li><li>Fix: Announcement pill now hugs text content (no more oversized bubbles)</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 13 Jan 2026 00:42:11 -0500</pubDate>
+            <sparkle:version>73</sparkle:version>
+            <sparkle:shortVersionString>1.0.73</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.73.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="7kbARoWyHgDMk3HUW3vv+YW9qHU6uJDWU5oMfWYTahRU3ugSuOOOPXMxeLmcnRbyJAFtHu1KbTzoaMGKtqJbDw==" length="72525847"
+            />
+        </item>
+        <!-- v1.0.72 -->
+        <item>
+            <title>Version 1.0.72</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>fix(chat): Make player chat input box compact with proper height constraints</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 22:40:23 -0500</pubDate>
+            <sparkle:version>72</sparkle:version>
+            <sparkle:shortVersionString>1.0.72</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.72.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="RyQGFwjrhW6vYNACGMxtvW85RXE2Y9KuVuPabP3UwhGTKMOzctvdQ4OfEHZIW6wIs6WNRiBbzfVGCpDgGW3aAw==" length="72621922"
+            />
+        </item>
+        <!-- v1.0.71 -->
+        <item>
+            <title>Version 1.0.71</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <ul><li>Fix: Solo buffering loop and Stream Resolution timeouts</li></ul>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 19:54:20 -0500</pubDate>
+            <sparkle:version>71</sparkle:version>
+            <sparkle:shortVersionString>1.0.71</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.71.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="TSzQbgAJsg5rU5STQwqIE6lEI2zfUh+aTy/6bIaCAmSwXi605FsijUg8C5wUoC8jzNMjfDW3UiZaDDdpCk2lAw==" length="72265619"
+            />
+        </item>
+        <!-- v1.0.70 -->
+        <item>
+            <title>Version v1.0.70</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Forensic Logging: Added explicit causality tracking (manual vs auto-join) to logs.</li><li>Watch Party: Fixed 'Ghost Session' race condition where guests would endlessly restart previous movies.</li><li>Reliability: Added emergency resolution fallback trigger source.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 18:07:08 -0500</pubDate>
+            <sparkle:version>70</sparkle:version>
+            <sparkle:shortVersionString>v1.0.70</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.70.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="scH+VvWXip6CwW7uh/AU5Ej7sAYLezQ7JjIt1abTbXNw51JJXleDHJxBfztyx4IYT9tssNoDOGxOW0ClRZdDCA==" length="72252446"
+            />
+        </item>
+        <!-- v1.0.69 -->
+        <item>
+            <title>Version 1.0.69</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li><b>Forensic Logging</b>: Crystal clear debug logs for every session.</li><li><b>Session Mirroring</b>: Critical events now visible in Console.app.</li><li><b>Provider Breakdown</b>: Detailed stats on source resolution.</li><li><b>Playback Fixes</b>: Improved buffering logic and state tracking.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 17:11:24 -0500</pubDate>
+            <sparkle:version>69</sparkle:version>
+            <sparkle:shortVersionString>1.0.69</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.69.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="T5GZ/VNruxmTesOF82/TR8qqu5D9v8zQn6ddhKzsFm6LRKtN0q631liY36JNxicz05+mprNzMeVqp4cwAqvSBg==" length="72264086"
+            />
+        </item>
+        <!-- v1.0.68 -->
+        <item>
+            <title>Version 1.0.68</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li><strong>Chat Colors:</strong> Fixed Host appearing blue. Host is now Gold/Lemon (DesignSystem.Colors.accent).</li>
+                    <li><strong>Guest Colors:</strong> Guests now have unique deterministic colors based on username.</li>
+                    <li><strong>Fix:</strong> Case-insensitive Host ID check to prevent host-as-guest bugs.</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 10:40:30 -0500</pubDate>
+            <sparkle:version>68</sparkle:version>
+            <sparkle:shortVersionString>1.0.68</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.68.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="d0HafB11cjzSUj5cw15OuecQhlfGqQctPr0v+kA8bdjNOMAbKpySugrNgks7xuVH9+C8I4Z8g28LW+jyI45NCw==" length="72648259"
+            />
+        </item>
+        <!-- v1.0.67 -->
+        <item>
+            <title>Version 1.0.67</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.67</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 10:36:50 -0500</pubDate>
+            <sparkle:version>67</sparkle:version>
+            <sparkle:shortVersionString>1.0.67</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.67.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="Ru76q/RT6IcOrlAIZGtHuNpcDiJ80k75bpZxIg72FL3iu8UtuGoPrU5grkgizCUrQBdfgBnh+xqNqxCqOG/SAQ==" length="72737630"
+            />
+        </item>
+        <!-- v1.0.66 -->
+        <item>
+            <title>Version 1.0.66</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.66</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 10:33:24 -0500</pubDate>
+            <sparkle:version>66</sparkle:version>
+            <sparkle:shortVersionString>1.0.66</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.66.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="Qy0OO1Rqh0PyRO2P48cCse+MEpxkF3pay+C8CEWCtYSLhOecF5BN0irJWgb8A1fYsItDX9krIRwA3kGVeWfNDg==" length="72633043"
+            />
+        </item>
+        <!-- v1.0.67 -->
+        <item>
+            <title>Version 1.0.67</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.67</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 02:18:03 -0500</pubDate>
+            <sparkle:version>67</sparkle:version>
+            <sparkle:shortVersionString>1.0.67</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.67.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="2vsRZeH+YC26xHgO6/vC0/J/SSoYzNJfHvvsLFw8KwNJRWL+R7j997NEihmtN1h3cdlwp3KCnK+qbfuJq7t8Cg==" length="72672210"
+            />
+        </item>
+        <!-- v1.0.66 -->
+        <item>
+            <title>Version 1.0.66</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.66</li>
+                </ul>
+            ]]></description>
+            <pubDate>Mon, 12 Jan 2026 00:52:03 -0500</pubDate>
+            <sparkle:version>66</sparkle:version>
+            <sparkle:shortVersionString>1.0.66</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.66.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="xy09z7OgPpn6LOhhY9qlfNc9WCAr+fJDEfYBsb9LTcgYyBnQfDu4BJRaBkhRKoWJmCJ+3ihVpjtC9TeOkJ6VCQ==" length="72625464"
+            />
+        </item>
+        <!-- v1.0.65 -->
+        <item>
+            <title>Version 1.0.65</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.65</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 11 Jan 2026 22:30:18 -0500</pubDate>
+            <sparkle:version>65</sparkle:version>
+            <sparkle:shortVersionString>1.0.65</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.65.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="mzLhJrBzGNs1czQ0PlkaH5TlhQHd6BQQgrM3pJYy3gqSEKhOW0DAuzyzrRRI6eDi0qqSvWogvQWjEZ+POMjODA==" length="72687466"
+            />
+        </item>
+        <!-- v1.0.64 -->
+        <item>
+            <title>Version 1.0.64</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.64</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 11 Jan 2026 22:26:14 -0500</pubDate>
+            <sparkle:version>64</sparkle:version>
+            <sparkle:shortVersionString>1.0.64</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.64.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="oGDFHiJh+TbVOqEZ2MBfdDF6q3Z89F2mYDa/Jj7ZyeZhIMgnMAAN35/FUEn9wMo8Cnhgsyxu7ySO62iizRGnAQ==" length="72635012"
+            />
+        </item>
+        <!-- v1.0.63 -->
+        <item>
+            <title>Version 1.0.63</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.63</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 11 Jan 2026 22:13:50 -0500</pubDate>
+            <sparkle:version>63</sparkle:version>
+            <sparkle:shortVersionString>1.0.63</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.63.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="2GphzJUVVqP6ibMLWfbl5+uwcOLL6azSENmka47HMy9TCtFSkyw0fj8bZ1120dBl8vGiOAOZ8KrsFtJvr/DJCg==" length="72809194"
+            />
+        </item>
+        <!-- v1.0.62 -->
+        <item>
+            <title>Version 1.0.62</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.62</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 11 Jan 2026 17:07:18 -0500</pubDate>
+            <sparkle:version>62</sparkle:version>
+            <sparkle:shortVersionString>1.0.62</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.62.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="4Y4caxRpi0Y76BkYL04z+Vihvjti+dE0Av98mu8o17toq0OMFuYNztCllGJvQimR/JnW40i7/R2YlyZ8WqRhAQ==" length="72334756"
+            />
+        </item>
+        <!-- v1.0.61 -->
+        <item>
+            <title>Version 1.0.61</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.61</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 11 Jan 2026 16:46:30 -0500</pubDate>
+            <sparkle:version>61</sparkle:version>
+            <sparkle:shortVersionString>1.0.61</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.61.dmg"
+                type="application/octet-stream"
+                sparkle:edSignature="STKhye4LiiSVtb/GFTMoHkmqUVkPiwJEVjSAhiRboEgkLMLOX1+A+/ewquInRWA1DIZolGbiqtyy1B3YX4bjCA==" length="72365272"
+                sparkle:criticalUpdate="true"
+            />
+        </item>
+        <item>
+            <title>Version 1.0.60</title>
+            <pubDate>Sun, 11 Jan 2026 16:35:50 -0500</pubDate>
+            <sparkle:version>60</sparkle:version>
+            <sparkle:shortVersionString>1.0.60</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://151.243.109.243.nip.io/updates/RedLemon-Installer.dmg" length="72389756" type="application/octet-stream" sparkle:edSignature="sfAqP6fCr5CKQDlDl7F+N/msqK0at5TIvB57DaG7EtTXZBrbg2uQA0sEUbDEST6KkFpTyhx+5RTRx4bS3yXTAQ=="/>
+        </item>
+        <!-- v1.0.59 -->
+        <item>
+            <title>Version 1.0.59</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.59</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 11 Jan 2026 14:31:42 -0500</pubDate>
+            <sparkle:version>1.0.59</sparkle:version>
+            <sparkle:shortVersionString>1.0.59</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.59.dmg" type="application/octet-stream" sparkle:edSignature="5qNineo9WtVHLA8PQt5a5VxcRnA6siilsRFDN4UGEBomAVhv5el6zZrhrOGOoR/ik1UTesLwNI+a0K1sP8KaBA==" length="72046889"/>
+        </item>
+        <!-- v1.0.58 -->
+        <item>
+            <title>Version 1.0.58</title>
+            <description><![CDATA[
+                <h2>Release Notes</h2>
+                <ul>
+                    <li>Production Release v1.0.58</li>
+                </ul>
+            ]]></description>
+            <pubDate>Sun, 11 Jan 2026 14:09:08 -0500</pubDate>
+            <sparkle:version>1.0.58</sparkle:version>
+            <sparkle:shortVersionString>1.0.58</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://151.243.109.243.nip.io/updates/RedLemon-v1.0.58.dmg" type="application/octet-stream" sparkle:edSignature="aTUljkDIvSJMSymDs/c6/dUeAZvYGpBityjhEbbI5YaYBGxHvI6hAvnYostL1RW/PYUotqvO8cMHIN3r5SF7DQ==" length="72414058"/>
+        </item>
+        <!-- v1.0.57 -->
+        <!-- v1.0.56 -->
+        <!-- v1.0.16 -->
+        <!-- v1.0.8 -->
+        <item>
+            <title>Version 1.0.8</title>
+            <description><![CDATA[
+                <h2>WebRTC Timeout & UX Improvements</h2>
+                <ul>
+                    <li><strong>Smart Timeouts:</strong> Implemented intelligent timeout logic - 15s when no guests, 45s when guests are present</li>
+                    <li><strong>Guest Detection:</strong> Added participant count awareness to avoid unnecessary waiting</li>
+                    <li><strong>Connection Status:</strong> Real-time WebRTC connection status indicators in the UI</li>
+                    <li><strong>Graceful Recovery:</strong> Added WebRTC signaling restart capability for failed connections</li>
+                    <li><strong>Enhanced Logging:</strong> Improved progress tracking and error messaging throughout signaling flow</li>
+                    <li><strong>User Feedback:</strong> Clear system messages for connection issues, timeouts, and recovery options</li>
+                    <li><strong>Host Detection:</strong> Guests now detect if host leaves the room and fail fast appropriately</li>
+                </ul>
+            ]]></description>
+            <pubDate>Tue, 10 Nov 2025 01:00:00 -0800</pubDate>
+            <sparkle:version>1.0.8</sparkle:version>
+            <sparkle:shortVersionString>1.0.8</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/orangeapple1272/Redlemon/releases/download/v1.0.8/RedLemon-Installer.dmg" length="85548727" type="application/octet-stream"/>
+        </item>
+        <!-- v1.0.5 -->
+        <item>
+            <title>Version 1.0.5</title>
+            <description><![CDATA[
+                <h2>Critical Watch Party Fixes</h2>
+                <ul>
+                    <li><strong>Database Polling:</strong> Participants sync every 2 seconds</li>
+                    <li><strong>Chat Persistence:</strong> Messages saved to database, sync every 1.5 seconds</li>
+                    <li><strong>RLS Policies:</strong> Fixed database write permissions</li>
+                    <li><strong>Room Auto-Delete:</strong> Rooms properly clean up when host exits</li>
+                    <li><strong>User Search:</strong> Can now search for users by username</li>
+                    <li><strong>Reliability:</strong> Watch parties work even if WebRTC fails</li>
+                </ul>
+            ]]></description>
+            <pubDate>Fri, 08 Nov 2025 18:30:00 -0800</pubDate>
+            <sparkle:version>1.0.5</sparkle:version>
+            <sparkle:shortVersionString>1.0.5</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/orangeapple1272/Redlemon/releases/download/v1.0.5/RedLemon-Installer.dmg" length="88572053" type="application/octet-stream"/>
+        </item>
+        <!-- v1.0.4 -->
+        <item>
+            <title>Version 1.0.4</title>
+            <description><![CDATA[
+                <h2>Initial Beta Release</h2>
+                <ul>
+                    <li>Watch party functionality</li>
+                    <li>Real-Debrid integration</li>
+                    <li>Friends system</li>
+                </ul>
+            ]]></description>
+            <pubDate>Thu, 07 Nov 2025 12:00:00 -0800</pubDate>
+            <sparkle:version>1.0.4</sparkle:version>
+            <sparkle:shortVersionString>1.0.4</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/orangeapple1272/Redlemon/releases/download/v1.0.4/RedLemon-Installer.dmg" length="85000000" type="application/octet-stream"/>
+        </item>
+    </channel>
+</rss>

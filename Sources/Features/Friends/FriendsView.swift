@@ -440,7 +440,7 @@ struct FriendRow: View {
                     Text(friend.username)
                         .font(.headline)
 
-                    // Prioritize DB-verified premium status for friends (Check Expiration! Security Check #138)
+                    // Prioritize DB-verified premium status for friends (Check Expiration! Landmine #138)
                     if friend.isReallyPremium || (activity?.isReallyPremium ?? false) {
                         Text("👑")
                             .font(.system(size: 12))
@@ -475,12 +475,17 @@ struct FriendRow: View {
                                 .foregroundColor(.secondary)
                         }
                     } else {
-                        Text(friend.truncatedPrincipal)
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                        HStack(spacing: 4) {
+                            Circle()
+                                .fill(Color.green)
+                                .frame(width: 8, height: 8)
+                            Text("Online")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 } else {
-                    Text(friend.truncatedPrincipal)
+                    Text("Last seen: \(friend.lastSeen, style: .relative) ago")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }

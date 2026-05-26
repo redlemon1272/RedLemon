@@ -49,7 +49,7 @@ actor MPVSubtitleService: SubtitleService {
 
     @Published var offset: Double = 0.0
 
-    /// Documentation #105: Guard against re-entrancy race conditions by tracking in-flight loads.
+    /// Bible #105: Guard against re-entrancy race conditions by tracking in-flight loads.
     private var loadingUrls: Set<String> = []
 
     // MARK: - Publishers
@@ -107,7 +107,7 @@ actor MPVSubtitleService: SubtitleService {
         }
 
         // 2. Filter against already registered subtitles and IN-PROGRESS loads.
-        // Documentation #105: Also check for identical labels to prevent race condition duplicates.
+        // Bible #105: Also check for identical labels to prevent race condition duplicates.
         let newItems = uniqueIncoming.filter { item in
             let isUrlSeen = self.subtitles.contains(where: { $0.url == item.url })
             let isUrlLoading = self.loadingUrls.contains(item.url)
@@ -136,7 +136,7 @@ actor MPVSubtitleService: SubtitleService {
 
         // 4. Register with MPV
         defer {
-            // Documentation #105: Clean up loading state even on failure
+            // Bible #105: Clean up loading state even on failure
             for item in newItems {
                 self.loadingUrls.remove(item.url)
             }

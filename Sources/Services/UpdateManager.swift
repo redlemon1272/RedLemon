@@ -45,7 +45,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
             updater.automaticallyDownloadsUpdates = true
 
             print("✅ Sparkle configured (seamless mode)")
-            print("   Appcast URL: https://redlemon.live.placeholder.nip.io/updates/appcast.xml")
+            print("   Feed URL: https://raw.githubusercontent.com/redlemon1272/RedLemon/main/appcast.xml")
             print("   Can check: \(canCheckForUpdates)")
         }
     }
@@ -91,7 +91,8 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
 
     /// Custom silent update check that doesn't use Sparkle's UI
     private func checkForUpdatesQuietly() async {
-        guard let feedURL = URL(string: "https://redlemon.live.placeholder.nip.io/updates/appcast.xml") else {
+        // Use GitHub-hosted appcast.xml
+        guard let feedURL = URL(string: "https://raw.githubusercontent.com/redlemon1272/RedLemon/main/appcast.xml") else {
             print("❌ Invalid feed URL")
             return
         }
@@ -113,7 +114,7 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
                 LoggingManager.shared.info(.general, message: "📦 Version Check - Local: \(currentVersionStr) (\(currentBuildStr)), Remote: \(latestVersionStr)")
 
                 // Robust comparison logic:
-                // 1. If build numbers are available and different, use them (Security Check #30 fallback)
+                // 1. If build numbers are available and different, use them (Landmine #30 fallback)
                 // 2. Otherwise use semantic version comparison
 
                 let isNewer: Bool
@@ -172,7 +173,8 @@ class UpdateManager: NSObject, ObservableObject, SPUUpdaterDelegate {
 
     /// Provide the feed URL (can also be set in Info.plist as SUFeedURL)
     func feedURLString(for updater: SPUUpdater) -> String? {
-        let feedURL = "https://redlemon.live.placeholder.nip.io/updates/appcast.xml"
+        // Use GitHub-hosted appcast.xml
+        let feedURL = "https://raw.githubusercontent.com/redlemon1272/RedLemon/main/appcast.xml"
         print("📡 Sparkle requesting feed URL: \(feedURL)")
         return feedURL
     }

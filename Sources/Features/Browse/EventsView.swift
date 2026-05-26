@@ -321,8 +321,57 @@ struct EventsView: View {
                         print("   ✅ Database updated with fresh URL\n")
                     } catch {
                         print("   ⚠️ Re-unlock failed: \(error.localizedDescription)")
-                        print("   ⚠️ Falling back to cached URL (may be stale)\n")
-                        // Keep using the cached selectedUnlockedURL as fallback
+                        
+                        // REPAIR SYSTEM: If this is an event/system room and the stored stream is invalid/blocked,
+                        // resolve a fresh working stream, exclude the bad hash, and update the room state in DB.
+                        print("   🔧 System Event Repair: Attempting to resolve a fresh working stream...")
+                        do {
+                            // Mark the bad hash as attempted/failed so it gets excluded in the next resolve
+                            await StreamService.shared.markStreamAsAttempted(imdbId: event.mediaItem.id, hash: hash)
+                            
+                            let repairResult = try await StreamService.shared.resolveStream(
+                                item: event.mediaItem,
+                                quality: .fullHD,
+                                season: nil,
+                                episode: nil,
+                                preferredInfoHash: nil, // Do not force the bad hash
+                                filterExtended: true
+                            )
+                            
+                            var selectedStream = repairResult.stream
+                            var finalUnlockedURL = repairResult.stream.url
+                            if selectedStream.infoHash == nil || selectedStream.infoHash?.isEmpty == true {
+                                if let torrentStream = repairResult.candidateStreams.first(where: { $0.infoHash != nil && !$0.infoHash!.isEmpty }) {
+                                    print("   🔧 System Event Repair: Selected stream had no hash. Swapping to first candidate with hash: \(torrentStream.title)")
+                                    selectedStream = torrentStream
+                                    let unlocked = try await StreamService.shared.unlockStream(
+                                        stream: torrentStream,
+                                        item: event.mediaItem,
+                                        season: nil,
+                                        episode: nil
+                                    )
+                                    finalUnlockedURL = unlocked.url
+                                }
+                            }
+                            
+                            selectedStreamHash = selectedStream.infoHash
+                            selectedUnlockedURL = finalUnlockedURL
+                            selectedQuality = "1080p"
+                            selectedFileIdx = selectedStream.fileIdx
+                            
+                            // Update room state in database with the new working stream
+                            try await SupabaseClient.shared.updateRoomStream(
+                                roomId: roomId,
+                                streamHash: selectedStreamHash,
+                                fileIdx: selectedFileIdx,
+                                quality: selectedQuality,
+                                unlockedUrl: selectedUnlockedURL
+                            )
+                            print("   ✅ System Event Repair: Room successfully updated with new stream hash: \(selectedStreamHash ?? "nil")")
+                        } catch {
+                            print("   ❌ System Event Repair failed: \(error.localizedDescription)")
+                            // Fallback to cached URL as a last-ditch effort
+                        }
                     }
                 } else if let url = selectedUnlockedURL, !url.isEmpty {
                     // NEW: Trust the URL if it exists, even if hash is missing (e.g. Debrid direct links)
@@ -333,8 +382,7 @@ struct EventsView: View {
                     print("   🔗 Locking to server-provided unlocked URL\n")
                 } else {
                     // REPAIR: Room exists but has no stream_hash OR URL - resolve and persist
-                    print("⚠️ Room exists but has no stream_hash - repairing...")
-                    do {
+                                 do {
                         let result = try await StreamService.shared.resolveStream(
                             item: event.mediaItem,
                             quality: .fullHD, // Enforce 1080p for events
@@ -343,11 +391,28 @@ struct EventsView: View {
                             preferredInfoHash: nil,
                             filterExtended: true
                         )
-                        selectedStreamHash = result.stream.infoHash
-                        selectedUnlockedURL = result.stream.url
+                        
+                        var selectedStream = result.stream
+                        var finalUnlockedURL = result.stream.url
+                        if selectedStream.infoHash == nil || selectedStream.infoHash?.isEmpty == true {
+                            if let torrentStream = result.candidateStreams.first(where: { $0.infoHash != nil && !$0.infoHash!.isEmpty }) {
+                                print("   ⚠️ Room exists but has no stream_hash: Selected stream had no hash. Swapping to candidate with hash: \(torrentStream.title)")
+                                selectedStream = torrentStream
+                                let unlocked = try await StreamService.shared.unlockStream(
+                                    stream: torrentStream,
+                                    item: event.mediaItem,
+                                    season: nil,
+                                    episode: nil
+                                )
+                                finalUnlockedURL = unlocked.url
+                            }
+                        }
+                        
+                        selectedStreamHash = selectedStream.infoHash
+                        selectedUnlockedURL = finalUnlockedURL
                         selectedQuality = "1080p"
-                        selectedFileIdx = result.stream.fileIdx
-
+                        selectedFileIdx = selectedStream.fileIdx
+ 
                         // Persist to database
                         try await SupabaseClient.shared.updateRoomStream(
                             roomId: roomId,
@@ -387,9 +452,26 @@ struct EventsView: View {
                         preferredInfoHash: nil,
                         filterExtended: true // Filter extended cuts for schedule accuracy
                     )
-                    initialStreamHash = result.stream.infoHash
-                    initialUnlockedUrl = result.stream.url
-                    initialStreamTitle = result.stream.title
+                    
+                    var seedStream = result.stream
+                    var seedUnlockedUrl = result.stream.url
+                    if seedStream.infoHash == nil || seedStream.infoHash?.isEmpty == true {
+                        if let torrentStream = result.candidateStreams.first(where: { $0.infoHash != nil && !$0.infoHash!.isEmpty }) {
+                            print("   🔧 System Event Creation: Selected stream had no hash. Swapping to candidate with hash: \(torrentStream.title)")
+                            seedStream = torrentStream
+                            let unlocked = try await StreamService.shared.unlockStream(
+                                stream: torrentStream,
+                                item: event.mediaItem,
+                                season: nil,
+                                episode: nil
+                            )
+                            seedUnlockedUrl = unlocked.url
+                        }
+                    }
+                    
+                    initialStreamHash = seedStream.infoHash
+                    initialUnlockedUrl = seedUnlockedUrl
+                    initialStreamTitle = seedStream.title
 
                     // NEW: Pick the first best subtitle to seed the room
                     if let subs = result.stream.subtitles, !subs.isEmpty {
@@ -431,7 +513,7 @@ struct EventsView: View {
                     isPublic: true,
                     unlockedStreamUrl: initialUnlockedUrl,
                     subtitleUrl: initialSubtitleUrl,
-                    sourceQuality: initialStreamTitle, // Internal Note #91: persist title for fallback
+                    sourceQuality: initialStreamTitle, // AI_BIBLE #91: persist title for fallback
                     createdAt: event.startTime
                 )
                 // Join the room we just created
@@ -461,7 +543,7 @@ struct EventsView: View {
                 print("⚠️ Race condition detected: Room created by another user while joining. Retrying as guest...")
 
                 // 1. Fetch the room AND wait for stream details (winner may still be resolving)
-                // Per Internal Note: Stream resolution can take 10-15s, so we need longer retries
+                // Per AI_BIBLE: Stream resolution can take 10-15s, so we need longer retries
                 var roomState: SupabaseRoom? = nil
                 for i in 1...10 {
                     if let state = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {

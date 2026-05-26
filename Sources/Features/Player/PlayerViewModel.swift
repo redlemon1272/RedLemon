@@ -59,7 +59,7 @@ class PlayerViewModel: ObservableObject {
     @Published var userCancelledAutoPlay: Bool = false
     @Published var lastAutoStartedSessionId: String? = nil // Persist auto-start session ID (Guest Loop Fix)
     @Published var playbackEndedTimestamp: Date? = nil // Persist end time to prevent grace period loops
-    @Published var lastLobbyJoinBroadcast: Date? = nil // CRITICAL FIX (Security Check #93): Dedupe join broadcasts during VM recreation
+    @Published var lastLobbyJoinBroadcast: Date? = nil // CRITICAL FIX (Landmine #93): Dedupe join broadcasts during VM recreation
 
     // Auto-Play Idempotency Gate
     private var isAutoPlayingNextEpisode = false
@@ -271,7 +271,7 @@ class PlayerViewModel: ObservableObject {
             // GUEST DIRECT UNLOCK OPTIMIZATION (v1.0.83)
             // If we have a preferredStreamHash from the host, skip full resolution and unlock directly.
             // This saves 8-10 seconds by avoiding redundant provider queries.
-            // Documentation Security Check #44 compliance: We still get a fresh RD URL (IP-locked to guest),
+            // Bible Landmine #44 compliance: We still get a fresh RD URL (IP-locked to guest),
             // we just skip the stream discovery phase since we already know the exact hash.
             if let directHash = preferredStreamHash, !directHash.isEmpty, !isHost, watchMode == .watchParty {
                 NSLog("🚀 PlayerVM: Using DIRECT UNLOCK path (Guest Optimization)")
@@ -291,7 +291,7 @@ class PlayerViewModel: ObservableObject {
                 )
 
                 do {
-                    // CRITICAL UPDATE (Security Check #44): We generally cannot bypass RD's server-side cache.
+                    // CRITICAL UPDATE (Landmine #44): We generally cannot bypass RD's server-side cache.
                     // The "magnet unrestrict" endpoint does not exist.
                     var unlockedStream = try await streamResolver.unlockStream(
                         stream: syntheticStream,
@@ -302,7 +302,7 @@ class PlayerViewModel: ObservableObject {
                     )
                     NSLog("✅ PlayerVM: Direct unlock succeeded! URL: %@", String(unlockedStream.url?.prefix(60) ?? "nil"))
 
-                    // FIX: Fetch SubDL subtitles for direct unlock path (Security Check #45)
+                    // FIX: Fetch SubDL subtitles for direct unlock path (Landmine #45)
                     // The direct unlock optimization bypasses resolveStream() where subtitles are normally attached.
                     // We need to fetch them separately to ensure guests see SubDL subtitles in the menu.
                     do {
@@ -386,7 +386,7 @@ class PlayerViewModel: ObservableObject {
                (roomId == nil || watchPartyRoom.id.caseInsensitiveCompare(roomId ?? "") == .orderedSame), // OK
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
 
-                // Quick HEAD request to validate URL (Documentation #27: 3s timeout)
+                // Quick HEAD request to validate URL (Bible #27: 3s timeout)
                 NSLog("%@", "🔍 GUEST: Validating host's stream URL...")
                 var urlValid = false
                 if let url = URL(string: hostUnlockedURL) {
@@ -537,7 +537,7 @@ class PlayerViewModel: ObservableObject {
                  resolvedMetadata = result.metadata
                  Task { @MainActor in self.streamQueue = result.candidateStreams }
 
-            // Internal Note #91: Title-based fallback when hash is nil (DebridSearch streams)
+            // AI_BIBLE #91: Title-based fallback when hash is nil (DebridSearch streams)
             } else if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
                       (roomId == nil || watchPartyRoom.id.caseInsensitiveCompare(roomId ?? "") == .orderedSame), // OK
                       watchPartyRoom.selectedStreamHash == nil,
@@ -916,7 +916,7 @@ class PlayerViewModel: ObservableObject {
                 room.selectedStreamHash = finalStream.infoHash
                 room.selectedFileIdx = finalStream.fileIdx
                 room.selectedQuality = finalStream.quality
-                room.selectedStreamTitle = finalStream.title // Internal Note #91: Fallback for title matching
+                room.selectedStreamTitle = finalStream.title // AI_BIBLE #91: Fallback for title matching
                 room.unlockedStreamURL = finalStream.url
                 self.currentWatchPartyRoom = room
             }
@@ -928,7 +928,7 @@ class PlayerViewModel: ObservableObject {
             fileIdx: finalStream.fileIdx,
             quality: finalStream.quality,
             unlockedUrl: finalStream.url,
-            sourceQuality: finalStream.title, // Internal Note #91: Fallback for Guest matching when hash is nil
+            sourceQuality: finalStream.title, // AI_BIBLE #91: Fallback for Guest matching when hash is nil
             resetPlayback: true // RESET STATE: Ensure room is paused/lobby for new media
         )
 
@@ -1014,7 +1014,7 @@ class PlayerViewModel: ObservableObject {
                             fileIdx: unlockedStream.fileIdx,
                             quality: unlockedStream.quality,
                             unlockedUrl: unlockedStream.url,
-                            sourceQuality: unlockedStream.title, // Internal Note #91
+                            sourceQuality: unlockedStream.title, // AI_BIBLE #91
                             resetPlayback: true // RESET STATE: Manual stream change implies new session start
                         )
                     } catch {
@@ -1057,7 +1057,7 @@ class PlayerViewModel: ObservableObject {
             }
         }
 
-        // CRITICAL FIX (Security Check #44): Premature EOF Logic (Purge Retry)
+        // CRITICAL FIX (Landmine #44): Premature EOF Logic (Purge Retry)
         if error == "PREMATURE_EOF" {
             LoggingManager.shared.error(.videoRendering, message: "PlayerVM: Handling PREMATURE_EOF - Triggering PURGE retry.")
 
@@ -1305,7 +1305,7 @@ class PlayerViewModel: ObservableObject {
                                     fileIdx: unlockedStream.fileIdx,
                                     quality: unlockedStream.quality,
                                     unlockedUrl: unlockedStream.url,
-                                    sourceQuality: unlockedStream.title, // Internal Note #91
+                                    sourceQuality: unlockedStream.title, // AI_BIBLE #91
                                     resetPlayback: true // RESET STATE: Failover needs to sync guests to new file
                                 )
                                 LoggingManager.shared.info(.watchParty, message: "Watch Party Failover: Room updated successfully")
@@ -1343,7 +1343,7 @@ class PlayerViewModel: ObservableObject {
     }
 
     func exitPlayer(keepRoomState: Bool = false, notifyGuests: Bool = true) async {
-        // 1. Idempotency Check - prevent multiple simultaneous exit calls (Security Check #82)
+        // 1. Idempotency Check - prevent multiple simultaneous exit calls (Landmine #82)
         // This stops the dual-trigger from MPVPlayerView (onDisappear + manual click)
         // or concurrent failover triggers.
         guard showPlayer && !isExitInProgress else {
@@ -1364,7 +1364,7 @@ class PlayerViewModel: ObservableObject {
         // 2. Start window transition IMMEDIATELY
         exitFullscreen()
 
-        // 3. CRITICAL: Exit Stabilization (Security Check #82)
+        // 3. CRITICAL: Exit Stabilization (Landmine #82)
         // We MUST wait for the OS to start the fullscreen exit animation before we clear 'showPlayer'.
         // This is mandatory for all exits from Fullscreen, including Watch Party Failovers.
         // Failing to do this causes the "Zoomed In UI" bug where the next player instance inherits a fluid window scale.
@@ -2373,7 +2373,7 @@ class PlayerViewModel: ObservableObject {
             let season = selectedSeason
             let episode = selectedEpisode
 
-            // Use metadata year if available (Documentation #131: Handle "2025–" and other range formats)
+            // Use metadata year if available (Bible #131: Handle "2025–" and other range formats)
             let yearStr = selectedMetadata?.year ?? item.year
             let year: Int? = {
                 guard let str = yearStr, !str.isEmpty else { return nil }

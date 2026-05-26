@@ -47,7 +47,7 @@ class MPVWrapper: ObservableObject {
     // Race Condition Fix: Track expected external subtitles to prevent premature resumption
     private var expectedExternalSubtitles: Int = 0
 
-    // Security Check #89 Fix: Track highest position seen during playback.
+    // Landmine #89 Fix: Track highest position seen during playback.
     // Used for accurate EOF detection when currentTime resets to 0 during edge-case seeks.
     private var lastKnownGoodPosition: Double = 0
 
@@ -384,7 +384,7 @@ class MPVWrapper: ObservableObject {
 
     nonisolated private func pollEvents() async {
         guard let handle = state.lock.withLock({ state.handle }) else { return }
-        // Internal Note #1: Initial guard is fine, but we MUST re-acquire and check INSIDE the loop.
+        // AI_BIBLE #1: Initial guard is fine, but we MUST re-acquire and check INSIDE the loop.
         guard let _ = state.lock.withLock({ state.handle }) else { return }
 
         LoggingManager.shared.debug(.videoRendering, message: "MPV: Event polling task started")
@@ -498,7 +498,7 @@ class MPVWrapper: ObservableObject {
                     // this is likely a network drop that MPV misinterpreted as end of stream.
                     // We should treat this as an ERROR to trigger retry/failover, or at minimum NOT exit.
 
-                    // Security Check #89 Fix: Use lastKnownGoodPosition instead of currentTime for EOF check.
+                    // Landmine #89 Fix: Use lastKnownGoodPosition instead of currentTime for EOF check.
                     // When the user seeks to the very end, MPV's currentTime can reset to 0 before the
                     // END_FILE event fires. This caused legitimate EOFs to be classified as suspicious.
                     // lastKnownGoodPosition tracks the highest position seen during playback.
@@ -650,7 +650,7 @@ class MPVWrapper: ObservableObject {
         guard abs(currentTime - time) >= minTimeChangeThreshold else { return }
         currentTime = time
 
-        // Security Check #89 Fix: Track highest position seen (for accurate EOF detection)
+        // Landmine #89 Fix: Track highest position seen (for accurate EOF detection)
         if time > lastKnownGoodPosition {
             lastKnownGoodPosition = time
         }
@@ -1088,7 +1088,7 @@ class MPVWrapper: ObservableObject {
     /// Refresh subtitle selection logic (called on file load and after loading external subs)
     /// Public to allow Service to trigger re-evaluation after asynchronous external sub load.
     ///
-    /// ⚠️ Internal Note #41: This MUST NOT be called while video is actively playing.
+    /// ⚠️ AI_BIBLE #41: This MUST NOT be called while video is actively playing.
     /// Changing subtitle tracks during playback causes MPV to rebuffer ("play-buffer-play" flash).
     /// Initial selection happens in pollForTracksAndResume() BEFORE playback starts.
     @MainActor func refreshSubtitleSelection() {
@@ -1099,7 +1099,7 @@ class MPVWrapper: ObservableObject {
             guard let self = self else { return }
 
             // DEFENSIVE GUARD: Prevent regression - only change tracks if none are currently active
-            // Internal Note #41: Prevents buffer flash when swapping tracks.
+            // AI_BIBLE #41: Prevents buffer flash when swapping tracks.
             // FIX: If we have NO subtitles selected (sid == 0), we SHOULD allow the auto-selector to
             // light one up as they arrive late from the network.
             let currentSub = await self.getCurrentSubtitleTrack()

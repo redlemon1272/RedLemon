@@ -72,7 +72,7 @@ struct WatchPartyRoom: Identifiable {
     var selectedStreamHash: String? // Host's selected stream infoHash
     var selectedFileIdx: Int? // Host's selected file index
     var selectedQuality: String? // Host's selected quality
-    var selectedStreamTitle: String? // Internal Note #91: Host's stream title for fallback matching when hash is nil
+    var selectedStreamTitle: String? // AI_BIBLE #91: Host's stream title for fallback matching when hash is nil
     var selectedProvider: String? // Host's selected provider (for targeted resolution)
     var unlockedStreamURL: String? // Host's unlocked stream URL
     var subtitleUrl: String? = nil // Host's selected subtitle URL
@@ -120,7 +120,7 @@ struct Participant: Identifiable {
     var isHost: Bool
     var isReady: Bool // Ready to start
     var isPremium: Bool // Premium user status
-    var subscriptionExpiresAt: Date? // ✅ New: Trust Time, Not Flags (Security Check #138)
+    var subscriptionExpiresAt: Date? // ✅ New: Trust Time, Not Flags (Landmine #138)
     var joinedAt: Date
     var phxRefs: Set<String> // Multiple Phoenix Presence References (Connection IDs)
 
@@ -295,7 +295,7 @@ struct SyncMessage: Codable {
     let quality: String?  // Selected stream quality
     let unlockedURL: String?  // Unlocked stream URL
     let isPremium: Bool? // Premium User Status (Crown)
-    let subscriptionExpiresAt: TimeInterval? // ✅ New: Trust Time, Not Flags (Security Check #138)
+    let subscriptionExpiresAt: TimeInterval? // ✅ New: Trust Time, Not Flags (Landmine #138)
 
 
     init(

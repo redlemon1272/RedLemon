@@ -335,7 +335,7 @@ struct DiscoverView: View {
 
     private func selectMedia(_ item: MediaItem) {
         // Navigate to detail view in main content area (same as BrowseView)
-        // CRITICAL: Must be synchronous to prevent Security Check #24 race conditions
+        // CRITICAL: Must be synchronous to prevent Landmine #24 race conditions
 
         guard !isNavigating else { return }
         isNavigating = true

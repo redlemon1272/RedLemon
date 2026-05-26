@@ -68,7 +68,7 @@ struct ScheduleManagementView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            // Header (extracted to fix compiler timeout - Documentation Security Check #6)
+            // Header (extracted to fix compiler timeout - Bible Landmine #6)
             scheduleHeaderView
 
             // Controls & Stats
@@ -347,7 +347,7 @@ struct ScheduleManagementView: View {
         }
     }
 
-    // MARK: - Extracted Views (Documentation Security Check #6: SwiftUI Compiler Timeouts)
+    // MARK: - Extracted Views (Bible Landmine #6: SwiftUI Compiler Timeouts)
 
     @ViewBuilder
     private var scheduleHeaderView: some View {

@@ -195,7 +195,7 @@ class LobbyEventRouter: ObservableObject {
              // VOTE SYNC: Re-broadcast host's current vote
              await broadcastCurrentVotes()
 
-             // Sync participants to AppState (Security Check #90)
+             // Sync participants to AppState (Landmine #90)
              await MainActor.run {
                  viewModel.appState?.player.currentWatchPartyRoom?.participants = viewModel.participants
                  NSLog("✅ Lobby: Synced participants to AppState (Count: %d)", viewModel.participants.count)
@@ -363,7 +363,7 @@ class LobbyEventRouter: ObservableObject {
 
         NSLog("🎬 Guest: Received LOBBY_RETURN signal from Host")
 
-        // FIX: Ignore Self-Echo (Security Check #95) - Don't process return signal from self
+        // FIX: Ignore Self-Echo (Landmine #95) - Don't process return signal from self
         if let senderId = syncMessage.senderId, senderId.caseInsensitiveCompare(viewModel.participantId) == .orderedSame {
              NSLog("🛡️ Ignoring LOBBY_RETURN from self (Self-Echo)")
              return
@@ -466,10 +466,10 @@ class LobbyEventRouter: ObservableObject {
         targetRoom.selectedStreamHash = roomState.streamHash
         targetRoom.selectedFileIdx = roomState.fileIdx
         targetRoom.selectedQuality = roomState.quality
-        targetRoom.selectedStreamTitle = roomState.sourceQuality // Internal Note #91: Title fallback
+        targetRoom.selectedStreamTitle = roomState.sourceQuality // AI_BIBLE #91: Title fallback
         targetRoom.sourceQuality = roomState.sourceQuality // Explicitly sync to both for safety
 
-        // CRITICAL FIX: Sync latest participants for "Silent Join" Fix (Security Check #90)
+        // CRITICAL FIX: Sync latest participants for "Silent Join" Fix (Landmine #90)
         // Ensure the Guest's player has the full list of participants so syncExistingParticipantsToChat() works.
         targetRoom.participants = viewModel.participants
 

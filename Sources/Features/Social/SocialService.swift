@@ -479,7 +479,8 @@ class SocialService: ObservableObject {
                     isFavorite: self.isFavorite(user.id.uuidString.lowercased()),
                     status: .accepted,
                     isPremium: user.isPremium,
-                    subscriptionExpiresAt: user.subscriptionExpiresAt
+                    subscriptionExpiresAt: user.subscriptionExpiresAt,
+                    lastSeen: user.lastSeen
                 )
             }
 

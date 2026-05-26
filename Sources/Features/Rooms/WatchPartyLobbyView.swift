@@ -1004,7 +1004,7 @@ struct WatchPartyLobbyView: View {
                                 .cornerRadius(4)
                         }
 
-                        // Prestige Badge (Check Expiration! Security Check #138)
+                        // Prestige Badge (Check Expiration! Landmine #138)
                         let isReallyPremium = socialService.friends.first(where: { $0.id.caseInsensitiveCompare(chatMsg.senderId ?? "") == .orderedSame })?.isReallyPremium ?? chatMsg.isReallyPremium
                         if isReallyPremium {
                             Text("👑")
@@ -1223,7 +1223,7 @@ struct ParticipantRow: View {
                         .foregroundColor(.white)
                         .font(.subheadline)
 
-                    // Prestige Badge (Check Expiration! Security Check #138)
+                    // Prestige Badge (Check Expiration! Landmine #138)
                     if participant.isReallyPremium {
                         Text("👑")
                             .font(.system(size: 10))

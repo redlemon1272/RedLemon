@@ -103,7 +103,7 @@ class LoggingManager: ObservableObject {
         let timestamp = DateFormatter.logTimestamp.string(from: Date())
         let formattedMessage = "\(level.emoji) [\(timestamp)] [\(category.rawValue.uppercased())] [\(filename):\(line)] \(message)"
 
-        // 🚨 Documentation Security Check #11: Always use %@ specifier to prevent crashes from '%' in URLs/JSON
+        // 🚨 BIBLE LANDMINE #11: Always use %@ specifier to prevent crashes from '%' in URLs/JSON
         NSLog("%@", formattedMessage)
     }
 

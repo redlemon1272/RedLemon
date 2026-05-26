@@ -122,7 +122,7 @@ class AccountExportManager {
             try await KeychainManager.shared.save(credential: subdlKey, for: "subdl")
         }
 
-        // Security Check #88: Proactively set auth context to prevent heartbeat failures
+        // Landmine #88: Proactively set auth context to prevent heartbeat failures
         // We do this BEFORE sync to ensure signed requests use the restored identity
         if let userId = UUID(uuidString: exportData.userId) {
             SupabaseClient.shared.auth.currentUser = AuthUser(

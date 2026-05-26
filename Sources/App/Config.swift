@@ -16,8 +16,8 @@ struct Config {
     // Supabase configuration
     // IMPORTANT: These are PUBLIC anon keys - safe to share
     // Never commit service_role keys or database passwords
-    static let supabaseURL = "https://redlemon.live.placeholder.nip.io"
-    static let supabaseAnonKey = "SUPABASE_ANON_KEY_PLACEHOLDER"
+    static let supabaseURL = "https://mzikqgrjkbxjudjdxnue.supabase.co"
+    static let supabaseAnonKey = "sb_publishable_HckzsCEfTGz42mvQinw_hw_PIweG3sB"
 
 
     // Local Server Security

@@ -14,7 +14,8 @@ struct Friend: Codable, Identifiable, Equatable {
     var isFavorite: Bool
     var status: FriendStatus
     var isPremium: Bool? // Premium hosting status (Legacy boolean)
-    var subscriptionExpiresAt: Date? // ✅ New: Trust Time, Not Flags (Security Check #138)
+    var subscriptionExpiresAt: Date? // ✅ New: Trust Time, Not Flags (Landmine #138)
+    let lastSeen: Date
 
     // Helper to check if user is actually premium
     var isReallyPremium: Bool {

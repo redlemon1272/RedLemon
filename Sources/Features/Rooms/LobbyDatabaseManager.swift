@@ -161,7 +161,7 @@ class LobbyDatabaseManager: ObservableObject {
         // CRITICAL FIX: Race Condition Checks
 
         // 1. Check if we just finished playback (grace period)
-        // Internal Note: Bypass for events to ensure seamless progression
+        // AI_BIBLE: Bypass for events to ensure seamless progression
         if viewModel.room.type != .event,
            let endedAt = viewModel.playbackEndedTimestamp,
            Date().timeIntervalSince(endedAt) < 5 {
@@ -181,7 +181,7 @@ class LobbyDatabaseManager: ObservableObject {
 
         // 2. Causality Check (The Reference Fix)
         // If we have a record of when we LAST finished playback, verify the DB signal is NEWER.
-        // Internal Note: Bypass for events
+        // AI_BIBLE: Bypass for events
         if viewModel.room.type != .event, let endedAt = viewModel.playbackEndedTimestamp {
             // CRITICAL FIX: Add 3s buffer. Updates happening *during* teardown (like "Host returned to lobby")
             // might have a slightly later timestamp but are part of the 'end' event, not a new 'start'.
@@ -200,7 +200,7 @@ class LobbyDatabaseManager: ObservableObject {
         }
 
         // 4. Safety delay check (prevent immediate auto-join)
-        // Internal Note: Bypass for events
+        // AI_BIBLE: Bypass for events
         guard viewModel.room.type == .event || viewModel.canAutoJoin else {
             NSLog("🛡️ Guest: Suppressing auto-join (safety delay active)")
             return
@@ -282,7 +282,7 @@ class LobbyDatabaseManager: ObservableObject {
                 currentRoom.selectedStreamHash = roomState.streamHash
                 currentRoom.selectedFileIdx = roomState.fileIdx
                 currentRoom.selectedQuality = roomState.quality
-                currentRoom.selectedStreamTitle = roomState.sourceQuality // Internal Note #91: Title fallback
+                currentRoom.selectedStreamTitle = roomState.sourceQuality // AI_BIBLE #91: Title fallback
                 currentRoom.unlockedStreamURL = roomState.unlockedStreamUrl
 
                 appState.player.currentWatchPartyRoom = currentRoom

@@ -106,7 +106,7 @@ struct SettingsView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.clear)
         .task {
-            // Run network calls in parallel for faster loading (Documentation: avoid sequential awaits)
+            // Run network calls in parallel for faster loading (Bible: avoid sequential awaits)
             async let credentialsTask: () = loadCredentials()
             async let hostingLimitTask: () = licenseManager.checkHostingLimit()
             async let licenseSyncTask: () = syncLicenseStatus()
@@ -1455,7 +1455,7 @@ struct SettingsView: View {
                 appState.currentUserId = nil
             }
 
-            // Brief delay so user sees the message (Documentation Security Check #52: no sleep on MainActor)
+            // Brief delay so user sees the message (Bible Landmine #52: no sleep on MainActor)
             try? await Task.sleep(nanoseconds: 1_500_000_000)
 
             await MainActor.run {

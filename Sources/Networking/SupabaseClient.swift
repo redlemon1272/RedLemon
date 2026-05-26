@@ -274,7 +274,7 @@ class SupabaseClient: RoomManager, UserManager {
                     // 🛡️ SECURITY: Identity Proof (Timestamp + UserID + Path)
                     // This prevents replay attacks across users
                     //
-                    // Security Check #88: New users created during onboarding may have auth.currentUser
+                    // LANDMINE #88: New users created during onboarding may have auth.currentUser
                     // still nil when heartbeat fires. This fallback reconstructs it from Keychain.
                     var effectiveUserId = auth.currentUser?.id
 
@@ -808,7 +808,7 @@ class SupabaseClient: RoomManager, UserManager {
         description: String? = nil,
         playlist: [PlaylistItem]? = nil,
         subtitleUrl: String? = nil,
-        sourceQuality: String? = nil, // Internal Note #91: Filename fallback for events
+        sourceQuality: String? = nil, // AI_BIBLE #91: Filename fallback for events
         createdAt: Date? = nil
     ) async throws -> SupabaseRoom {
         NSLog("%@", "🎬 SupabaseClient: createRoom called for id: \(id) - ENTRY")
@@ -996,7 +996,7 @@ class SupabaseClient: RoomManager, UserManager {
             "last_activity": ISO8601DateFormatter().string(from: Date())
         ]
 
-        // Security Check #35: Explicitly nil query-able stream properties to prevent Ghost Streams
+        // Landmine #35: Explicitly nil query-able stream properties to prevent Ghost Streams
         if shouldClearStream {
             body["stream_hash"] = NSNull()
             body["unlocked_stream_url"] = NSNull()
@@ -1062,14 +1062,14 @@ class SupabaseClient: RoomManager, UserManager {
     }
 
     /// Update room stream selection (Host only)
-    /// Internal Note #91: sourceQuality is critical for Guest matching when infoHash is nil (DebridSearch)
+    /// AI_BIBLE #91: sourceQuality is critical for Guest matching when infoHash is nil (DebridSearch)
     func updateRoomStream(
         roomId: String,
         streamHash: String?,
         fileIdx: Int?,
         quality: String?,
         unlockedUrl: String?,
-        sourceQuality: String? = nil, // Internal Note #91: Filename fallback when hash is nil
+        sourceQuality: String? = nil, // AI_BIBLE #91: Filename fallback when hash is nil
         resetPlayback: Bool = false
     ) async throws {
         var body: [String: Any] = [
@@ -1086,7 +1086,7 @@ class SupabaseClient: RoomManager, UserManager {
         if let fileIdx = fileIdx { body["selected_file_idx"] = fileIdx }
         if let quality = quality { body["selected_quality"] = quality }
         if let unlockedUrl = unlockedUrl { body["unlocked_stream_url"] = unlockedUrl }
-        // Internal Note #91: Always persist source_quality for Guest fallback matching
+        // AI_BIBLE #91: Always persist source_quality for Guest fallback matching
         if let sourceQuality = sourceQuality { body["source_quality"] = sourceQuality }
 
         _ = try await makeRequest(
@@ -2367,7 +2367,7 @@ struct SupabaseRoom: Codable {
     let episode: Int?  // Episode number for TV shows
     let fileIdx: Int? // Selected file index
     let quality: String? // Selected quality
-    let sourceQuality: String? // Internal Note #91: Stream title for fallback matching when hash is nil
+    let sourceQuality: String? // AI_BIBLE #91: Stream title for fallback matching when hash is nil
     let unlockedStreamUrl: String? // Unlocked stream URL
     let playlist: [PlaylistItem]? // List of items to play
     let currentPlaylistIndex: Int? // Current index in playlist
@@ -2393,7 +2393,7 @@ struct SupabaseRoom: Codable {
         case episode
         case fileIdx = "selected_file_idx"
         case quality = "selected_quality"
-        case sourceQuality = "source_quality" // Internal Note #91
+        case sourceQuality = "source_quality" // AI_BIBLE #91
         case unlockedStreamUrl = "unlocked_stream_url"
         case playlist
         case currentPlaylistIndex = "current_playlist_index"
@@ -2707,7 +2707,7 @@ extension SupabaseClient {
 
     func sendFriendRequest(from senderId: UUID, to receiverId: UUID) async throws {
         // Check if there's any existing friendship between these two users
-        // Use URLComponents to properly encode the complex OR query (Security Check #84)
+        // Use URLComponents to properly encode the complex OR query (Landmine #84)
         let senderIdStr = senderId.uuidString.lowercased()
         let receiverIdStr = receiverId.uuidString.lowercased()
 

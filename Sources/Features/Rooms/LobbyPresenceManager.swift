@@ -51,7 +51,7 @@ class LobbyPresenceManager: ObservableObject {
         return transitioningUsers.contains(userId.lowercased())
     }
 
-    // MARK: - Update Buffering (Security Check #50 Defense)
+    // MARK: - Update Buffering (Landmine #50 Defense)
     private var pendingJoins: [Participant] = []
     private var pendingLeaves: Set<String> = []
     private var flushTask: Task<Void, Never>?
@@ -139,7 +139,7 @@ class LobbyPresenceManager: ObservableObject {
         isPresenceSetup = true
 
         // CRITICAL FIX: Initialize connection tracking from existing participants.
-        // This handles VM recreation (Security Check #93) by ensuring the new VM knows
+        // This handles VM recreation (Landmine #93) by ensuring the new VM knows
         // which users are already connected via Realtime.
         if let viewModel = viewModel {
             for participant in viewModel.participants {
@@ -211,7 +211,7 @@ class LobbyPresenceManager: ObservableObject {
 
                     var normalizedID = (metaUserId ?? metaUsername ?? userId).lowercased()
 
-                    // Documentation Security Check #47 Fix: If metadata is missing (common on sparse .leave events),
+                    // BIBLE LANDMINE #47 Fix: If metadata is missing (common on sparse .leave events),
                     // resolve the true stable User ID (UUID) from our connection map.
                     if metaUserId == nil && metaUsername == nil {
                         if let resolvedParticipant = strongViewModel.participants.first(where: { $0.phxRefs.contains(userId) }) {
@@ -305,7 +305,7 @@ class LobbyPresenceManager: ObservableObject {
                     let leavingPhxRef = userId
                     var normalizedID = (metaUserId ?? metaUsername ?? userId).lowercased()
 
-                    // Documentation Security Check #47 Fix: If metadata is missing (common on sparse .leave events),
+                    // BIBLE LANDMINE #47 Fix: If metadata is missing (common on sparse .leave events),
                     // resolve the true stable User ID (UUID) from our connection map.
                     if metaUserId == nil && metaUsername == nil {
                         if let resolvedParticipant = strongViewModel.participants.first(where: { $0.phxRefs.contains(userId) }) {
@@ -326,7 +326,7 @@ class LobbyPresenceManager: ObservableObject {
                         if Task.isCancelled { return }
                         guard let strongViewModel: LobbyViewModel = strongSelf.viewModel else { return }
 
-                        // CRITICAL FIX (Security Check #93): Suppress false 'User Left' from VM recreation
+                        // CRITICAL FIX (Landmine #93): Suppress false 'User Left' from VM recreation
                         // During Double onAppear, VM1 deinits and triggers a presence leave.
                         // 3 seconds later, this code runs - but by then, VM2 is connected and the user never actually left.
                         // Check if they recently broadcast LOBBY_JOIN (within 5s). If so, this leave is a false positive.
@@ -338,7 +338,7 @@ class LobbyPresenceManager: ObservableObject {
 
                         // 1. Check against active participants list
                         if let index = strongViewModel.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
-                            // Security Check #51: Only consider user Offline when their ref count drops to zero
+                            // Landmine #51: Only consider user Offline when their ref count drops to zero
                             strongViewModel.participants[index].phxRefs.remove(leavingPhxRef)
 
                             if strongViewModel.participants[index].phxRefs.isEmpty {
@@ -504,7 +504,7 @@ class LobbyPresenceManager: ObservableObject {
         let action = isVoting ? "voted for" : "unvoted from"
         NSLog("👍 Lobby: %@ %@ playlist item %@", currentUsername, action, String(itemId.prefix(8)))
 
-        // Local Echo (Security Check #61)
+        // Local Echo (Landmine #61)
         viewModel.chatManager.addSystemMessage(isVoting ? .userVoted : .userUnvoted, userName: currentUsername, data: ["title": itemTitle])
 
         // Broadcast via Realtime
@@ -717,6 +717,25 @@ class LobbyPresenceManager: ObservableObject {
                 )
                 dbParticipants.append(p)
             }
+
+            // CRITICAL FIX: Deduplicate DB participants by case-insensitive ID
+            // This handles duplicate database rows caused by UUID case sensitivity issues
+            // (e.g., "96E01CDB..." vs "96e01cdb..." treated as different when room_id is TEXT type)
+            // Keep the most recent entry (highest joinedAt) for each user.
+            var seenIds: [String: Participant] = [:] // Lowercased ID -> Participant
+
+            for participant in dbParticipants {
+                let normalizedId = participant.id.lowercased()
+                if let existing = seenIds[normalizedId] {
+                    // Keep the one with the more recent joinedAt timestamp
+                    if participant.joinedAt > existing.joinedAt {
+                        seenIds[normalizedId] = participant
+                    }
+                } else {
+                    seenIds[normalizedId] = participant
+                }
+            }
+            dbParticipants = Array(seenIds.values)
 
             // MERGE LOGIC: Combine DB participants with recent local joiners (Grace Period)
             // This prevents the polling loop from deleting a user who just joined via Realtime

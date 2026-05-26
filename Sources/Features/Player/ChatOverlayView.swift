@@ -692,7 +692,7 @@ struct ChatOverlayView: View {
                         .padding(.bottom, 5)
                 }
 
-                // Unified Input Field (Using optimized TransparentTextEditor to fix Security Check #113)
+                // Unified Input Field (Using optimized TransparentTextEditor to fix Landmine #113)
                 Group {
                     if chatMode == .friends {
                         TextField("", text: $friendsVM.searchText)
@@ -896,7 +896,7 @@ struct ChatOverlayView: View {
                             .cornerRadius(4)
                     }
 
-                    // Prioritize DB-verified premium status for friends (Check Expiration! Security Check #138)
+                    // Prioritize DB-verified premium status for friends (Check Expiration! Landmine #138)
                     // We check friends first because they are our "source of truth" locally.
                     // If not a friend, we use the isPremium flag which was pre-validated as isReallyPremium by the sender/service.
                     let effectivePremium = friends.first(where: { $0.id.caseInsensitiveCompare(uid) == .orderedSame })?.isReallyPremium ?? isPremium
@@ -1393,7 +1393,7 @@ struct FriendRowButton: View {
                                 .foregroundColor(.white)
                                 .font(.body)
 
-                            // Premium Host Badge (Prioritize DB-verified status - Security Check #138)
+                            // Premium Host Badge (Prioritize DB-verified status - Landmine #138)
                             let isPremium = friend.isReallyPremium || (activity?.subscriptionExpiresAt.flatMap({ $0 > Date() }) ?? activity?.isPremium ?? false)
                             if isPremium {
                                 Text("👑")
@@ -1418,7 +1418,7 @@ struct FriendRowButton: View {
                                     .font(.caption)
                                     .foregroundColor(.green)
                             } else {
-                                Text("Offline")
+                                Text("Last seen: \(friend.lastSeen, style: .relative) ago")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
@@ -1427,7 +1427,7 @@ struct FriendRowButton: View {
                                  .font(.caption)
                                  .foregroundColor(.green)
                          } else {
-                             Text("Offline")
+                             Text("Last seen: \(friend.lastSeen, style: .relative) ago")
                                  .font(.caption)
                                  .foregroundColor(.secondary)
                          }

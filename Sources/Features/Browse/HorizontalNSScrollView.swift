@@ -30,7 +30,7 @@ struct VersionAwareHorizontalScrollView<Content: View>: View {
 /// A custom horizontal scroll view backed by AppKit's NSScrollView.
 /// Used to resolve nested scroll behavior issues on macOS 15+ where
 /// SwiftUI's native ScrollView consumes vertical scroll events.
-private struct HorizontalNSScrollView<Content: View>: NSViewRepresentable { // OK: Security Check #49 checked (CustomNSScrollView implements scrollWheel)
+private struct HorizontalNSScrollView<Content: View>: NSViewRepresentable { // OK: Landmine #49 checked (CustomNSScrollView implements scrollWheel)
     let content: Content
     let scrollOffset: Binding<CGFloat>?
 

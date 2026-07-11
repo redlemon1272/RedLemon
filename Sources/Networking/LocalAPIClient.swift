@@ -1237,6 +1237,8 @@ enum APIError: LocalizedError {
     case invalidStream  // URL resolved to non-video file (e.g., .iso, .exe)
     case serverError(statusCode: Int)
     case networkError(Error)
+    case contentRemoved
+    case rateLimited
 
     var errorDescription: String? {
         switch self {
@@ -1252,6 +1254,10 @@ enum APIError: LocalizedError {
             return "Server error with status code: \(statusCode)"
         case .networkError(let error):
             return "Network error: \(error.localizedDescription)"
+        case .contentRemoved:
+            return "Content removed due to copyright (DMCA)"
+        case .rateLimited:
+            return "Rate limited by provider"
         }
     }
 }
